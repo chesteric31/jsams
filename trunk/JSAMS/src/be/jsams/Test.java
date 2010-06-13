@@ -1,8 +1,7 @@
 package be.jsams;
 
-import java.sql.Timestamp;
 import java.text.ParseException;
-import java.util.Date;
+import java.util.List;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -12,13 +11,21 @@ import be.jsams.server.service.PersonService;
 public class Test {
 
 	public static void main(String[] args) throws ParseException {
-		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("ApplicationContext.xml");
-		Person newPerson = new Person();
-		newPerson.setName("BAUER");
-		Timestamp timestamp = new Timestamp(new Date().getTime());
-		newPerson.setCreationDate(timestamp);
-		PersonService personService = (PersonService) context.getBean("personService");
-		personService.persist(newPerson);
+		ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(
+				"ApplicationContext.xml");
+		PersonService personService = (PersonService) context
+				.getBean("personService");
+		// Person newPerson = new Person();
+		// newPerson.setName("BAUER");
+		// Timestamp timestamp = new Timestamp(new Date().getTime());
+		// newPerson.setCreationDate(timestamp);
+		// personService.add(newPerson);
+		List<Person> persons = personService.findByName("BAUER");
+
+		for (Person person : persons) {
+			personService.remove(person);
+		}
+
 		// - Chargement et compilation du rapport
 		// try {
 		// JasperDesign jasperDesign = JRXmlLoader.load("reports\\BTS.jrxml");
