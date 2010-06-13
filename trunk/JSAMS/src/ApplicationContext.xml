@@ -53,14 +53,16 @@
 		<property name="transactionAttributes">
 			<props>
 				<prop key="find*">PROPAGATION_REQUIRED,readOnly,-Exception</prop>
-				<prop key="merge*">PROPAGATION_REQUIRED,-Exception</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-Exception</prop>
 				<prop key="remove*">PROPAGATION_REQUIRED,-Exception</prop>
-				<prop key="persist*">PROPAGATION_REQUIRED,-Exception</prop>
+				<prop key="add*">PROPAGATION_REQUIRED,-Exception</prop>
 			</props>
 		</property>
 	</bean>
 
-	<bean id="personDao" class="be.jsams.server.dao.impl.PersonDaoImpl" />
+	<bean id="personDao" class="be.jsams.server.dao.impl.PersonDaoImpl">
+		<constructor-arg value="be.jsams.server.model.Person" />
+	</bean>
 	<bean id="personServiceTarget" class="be.jsams.server.service.impl.PersonServiceImpl">
 		<property name="personDao" ref="personDao" />
 	</bean>
