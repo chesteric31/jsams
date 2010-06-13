@@ -8,8 +8,6 @@ import be.jsams.server.service.PersonService;
 
 public class PersonServiceImpl implements PersonService {
 
-//	private final Log LOGGER = LogFactory.getLog(this.getClass());
-
 	private PersonDao personDao;
 
 	public PersonDao getPersonDao() {
@@ -31,18 +29,18 @@ public class PersonServiceImpl implements PersonService {
 	}
 
 	@Override
-	public Person findByName(String name) {
+	public List<Person> findByName(String name) {
 		return personDao.findByName(name);
 	}
 
 	@Override
-	public Person merge(Person person) {
-		return personDao.merge(person);
+	public void update(Person person) {
+		personDao.update(person);
 	}
 
 	@Override
-	public void persist(Person person) {
-		personDao.persist(person);
+	public void add(Person person) {
+		personDao.add(person);
 	}
 
 	@Override
