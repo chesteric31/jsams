@@ -1,10 +1,11 @@
 package be.jsams.server.service;
 
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.assertTrue;
 
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -18,7 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import be.jsams.server.model.Person;
 
 @ContextConfiguration("classpath:ApplicationContext.xml")
-@TransactionConfiguration(transactionManager = "txManager", defaultRollback = false)
+@TransactionConfiguration(transactionManager = "txManager", defaultRollback = true)
 @Transactional
 public class PersonServiceTest extends
 		AbstractTransactionalJUnit4SpringContextTests {
@@ -26,53 +27,60 @@ public class PersonServiceTest extends
 	@Autowired
 	private PersonService personService;
 
+	Person newPerson = null;
+
 	@Before
 	public void setUp() throws Exception {
-		// ClassPathXmlApplicationContext context = new
-		// ClassPathXmlApplicationContext(
-		// "ApplicationContext.xml");
-		// personService = (PersonService) context.getBean("personService");
-	}
-
-	@Test
-	@Rollback
-	public void testPersist() {
-		Person newPerson = new Person();
-		newPerson.setName("Y");
+		newPerson = new Person();
+		newPerson.setName("NAME");
 		Timestamp timestamp = new Timestamp(new Date().getTime());
 		newPerson.setCreationDate(timestamp);
-		personService.persist(newPerson);
-		assertNotNull(personService.findByName("Y"));
 	}
 
 	@Test
-	public void testRemovePerson() {
-		fail("Not yet implemented");
+	public void testPersist() {
+		personService.add(newPerson);
+		assertNotNull(personService.findByName("NAME"));
 	}
 
 	@Test
-	public void testRemoveLong() {
-		fail("Not yet implemented");
+	@Rollback(value = false)
+	public void testRemove() {
+		personService.add(newPerson);
+		personService.remove(newPerson);
+		List<Person> persons = personService.findByName("NAME");
+		assertTrue(persons == null || persons.isEmpty());
 	}
 
 	@Test
-	public void testMerge() {
-		fail("Not yet implemented");
+	public void testUpdate() {
+		personService.add(newPerson);
+		newPerson.setName("NOM");
+		personService.update(newPerson);
+		List<Person> persons = personService.findByName("NOM");
+		assertTrue(persons != null && !persons.isEmpty());
 	}
 
 	@Test
 	public void testFindById() {
-		fail("Not yet implemented");
+		personService.add(newPerson);
+		Long id = newPerson.getId();
+		Person person = personService.findById(id);
+		assertNotNull(person);
 	}
 
 	@Test
 	public void testFindByName() {
-		fail("Not yet implemented");
+		personService.add(newPerson);
+		List<Person> persons = personService.findByName("NAME");
+		assertTrue(persons != null && !persons.isEmpty());
 	}
 
 	@Test
 	public void testFindAll() {
-		fail("Not yet implemented");
+		personService.add(newPerson);
+		List<Person> persons = personService.findAll();
+		assertTrue(persons != null && !persons.isEmpty());
 	}
 
 }
