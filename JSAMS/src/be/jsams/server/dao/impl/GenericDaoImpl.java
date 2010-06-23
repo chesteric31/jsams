@@ -32,7 +32,6 @@ public class GenericDaoImpl<T> implements GenericDao<T> {
 		this.entityManager = entityManager;
 	}
 
-	@Override
 	public void add(T newInstance) {
 		try {
 			entityManager.persist(newInstance);
@@ -41,11 +40,11 @@ public class GenericDaoImpl<T> implements GenericDao<T> {
 		}
 	}
 
-	@Override
 	public List<T> findAll() {
 		List<T> ts = null;
 		try {
-			Query query = entityManager.createQuery("FROM " + type.getSimpleName());
+			Query query = entityManager.createQuery("FROM "
+					+ type.getSimpleName());
 			ts = query.getResultList();
 		} catch (RuntimeException re) {
 			LOGGER.error(re);
@@ -53,7 +52,6 @@ public class GenericDaoImpl<T> implements GenericDao<T> {
 		return ts;
 	}
 
-	@Override
 	public T findById(Long id) {
 		T t = null;
 		try {
@@ -64,7 +62,6 @@ public class GenericDaoImpl<T> implements GenericDao<T> {
 		return t;
 	}
 
-	@Override
 	public void remove(T persistentObject) {
 		try {
 			// Merge necessary for the detached object
@@ -75,7 +72,6 @@ public class GenericDaoImpl<T> implements GenericDao<T> {
 		}
 	}
 
-	@Override
 	public void update(T transientObject) {
 		try {
 			entityManager.merge(transientObject);
@@ -84,7 +80,6 @@ public class GenericDaoImpl<T> implements GenericDao<T> {
 		}
 	}
 
-	@Override
 	public void remove(Long id) {
 		this.remove(this.findById(id));
 	}
