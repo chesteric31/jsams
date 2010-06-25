@@ -1,40 +1,22 @@
 package be.jsams.server.model;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "Person")
-public class Person implements Serializable {
+@Table(name = "PERSON")
+public class Person extends AbstractIdentity {
 
-	/**
-	 * Serial Version UID
-	 */
-	private static final long serialVersionUID = -706452966890883576L;
-	private Long id;
 	private String name;
 	private Date creationDate;
 
 	public Person() {
-		super();	
-	}
-
-	@Id
-	@GeneratedValue
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
+		super();
 	}
 
 	@Column(name = "NAME")
@@ -57,7 +39,7 @@ public class Person implements Serializable {
 	}
 
 	public String toString() {
-		return id + " " + name + " " + creationDate;
+		return getId() + " " + name + " " + creationDate;
 	}
 
 }
