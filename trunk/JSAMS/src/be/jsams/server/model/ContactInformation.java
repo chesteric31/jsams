@@ -1,11 +1,9 @@
 package be.jsams.server.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.Embeddable;
 
-@Entity
-@Table(name = "CONTACT_INFORMATION")
-public class ContactInformation extends AbstractIdentity {
+@Embeddable
+public class ContactInformation {
 
 	private String phone;
 	private String fax;
@@ -58,8 +56,7 @@ public class ContactInformation extends AbstractIdentity {
 	}
 
 	public String toString() {
-		return getId() + " " + phone + " " + fax + " " + gsm + " " + email
-				+ " " + website;
+		return phone + " " + fax + " " + gsm + " " + email + " " + website;
 	}
 
 }
