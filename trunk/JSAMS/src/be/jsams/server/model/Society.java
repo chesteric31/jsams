@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
@@ -61,8 +62,7 @@ public class Society extends AbstractIdentity {
 		this.responsible = responsible;
 	}
 
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "FK_ADDRESS")
+	@Embedded
 	public Address getAddress() {
 		return address;
 	}
@@ -81,14 +81,17 @@ public class Society extends AbstractIdentity {
 		this.legalForm = legalForm;
 	}
 
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "FK_CONTACT_INFORMATION")
+	@Embedded
 	public ContactInformation getContactInformation() {
 		return contactInformation;
 	}
 
 	public void setContactInformation(ContactInformation contactInformation) {
 		this.contactInformation = contactInformation;
+	}
+	
+	public String toString() {
+		return getId() + " " + activity + " " + label;
 	}
 
 }
