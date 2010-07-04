@@ -1,12 +1,10 @@
 package be.jsams.server.model;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.Embeddable;
 
-@Entity
-@Table(name = "ADDRESS")
-public class Address extends AbstractIdentity {
+@Embeddable
+public class Address {
 
 	private String street;
 	private String number;
@@ -74,8 +72,8 @@ public class Address extends AbstractIdentity {
 	}
 
 	public String toString() {
-		return getId() + " " + street + " " + number + " " + zipCode + " "
-				+ box + " " + city + " " + country;
+		return street + " " + number + " " + zipCode + " " + box + " " + city
+				+ " " + country;
 	}
 
 }
