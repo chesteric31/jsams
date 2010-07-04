@@ -4,20 +4,8 @@ import java.util.List;
 
 import be.jsams.server.model.Person;
 
-public interface PersonService {
-
-	public void add(Person person);
-
-	public void remove(Person person);
-
-	public void remove(Long id);
-
-	public void update(Person person);
-
-	public Person findById(Long id);
+public interface PersonService extends GenericService<Person> {
 
 	public List<Person> findByName(String name);
-
-	public List<Person> findAll();
 
 }
