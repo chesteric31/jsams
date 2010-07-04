@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
@@ -68,6 +67,16 @@
 	</bean>
 	<bean id="personService" parent="baseTransactionProxy">
 		<property name="target" ref="personServiceTarget" />
+	</bean>
+
+	<bean id="societyDao" class="be.jsams.server.dao.impl.SocietyDaoImpl">
+		<constructor-arg value="be.jsams.server.model.Society" />
+	</bean>
+	<bean id="societyServiceTarget" class="be.jsams.server.service.impl.SocietyServiceImpl">
+		<property name="societyDao" ref="societyDao" />
+	</bean>
+	<bean id="societyService" parent="baseTransactionProxy">
+		<property name="target" ref="societyServiceTarget" />
 	</bean>
 
 </beans>
