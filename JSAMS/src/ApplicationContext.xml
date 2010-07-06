@@ -72,8 +72,12 @@
 	<bean id="societyDao" class="be.jsams.server.dao.impl.SocietyDaoImpl">
 		<constructor-arg value="be.jsams.server.model.Society" />
 	</bean>
+	<bean id="legalFormDao" class="be.jsams.server.dao.impl.LegalFormDaoImpl">
+		<constructor-arg value="be.jsams.server.model.LegalForm" />
+	</bean>
 	<bean id="societyServiceTarget" class="be.jsams.server.service.impl.SocietyServiceImpl">
 		<property name="societyDao" ref="societyDao" />
+		<property name="legalFormDao" ref="legalFormDao" />
 	</bean>
 	<bean id="societyService" parent="baseTransactionProxy">
 		<property name="target" ref="societyServiceTarget" />
