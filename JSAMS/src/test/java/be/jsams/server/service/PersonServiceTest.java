@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import be.jsams.server.model.Person;
 
-@ContextConfiguration("classpath:ApplicationContext.xml")
+@ContextConfiguration(locations = "classpath:ApplicationContext.xml")
 @TransactionConfiguration(transactionManager = "txManager", defaultRollback = true)
 @Transactional
 public class PersonServiceTest extends
