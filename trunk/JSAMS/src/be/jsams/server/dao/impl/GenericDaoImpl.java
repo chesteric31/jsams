@@ -10,8 +10,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import be.jsams.server.dao.GenericDao;
+import be.jsams.server.model.AbstractIdentity;
 
-public class GenericDaoImpl<T> implements GenericDao<T> {
+public class GenericDaoImpl<T extends AbstractIdentity> implements GenericDao<T> {
 
 	private final Log LOGGER = LogFactory.getLog(this.getClass());
 
