@@ -34,15 +34,15 @@ public class PersonServiceImpl implements PersonService {
 		personDao.update(person);
 	}
 
-	public void add(Person person) {
+	public void create(Person person) {
 		personDao.add(person);
 	}
 
-	public void remove(Person person) {
+	public void delete(Person person) {
 		personDao.remove(person);
 	}
 
-	public void remove(Long id) {
+	public void delete(Long id) {
 		personDao.remove(id);
 	}
 
