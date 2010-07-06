@@ -39,22 +39,22 @@ public class PersonServiceTest extends
 
 	@Test
 	public void testPersist() {
-		personService.add(newPerson);
+		personService.create(newPerson);
 		assertNotNull(personService.findByName("NAME"));
 	}
 
 	@Test
 	@Rollback(value = false)
 	public void testRemove() {
-		personService.add(newPerson);
-		personService.remove(newPerson);
+		personService.create(newPerson);
+		personService.delete(newPerson);
 		List<Person> persons = personService.findByName("NAME");
 		assertTrue(persons == null || persons.isEmpty());
 	}
 
 	@Test
 	public void testUpdate() {
-		personService.add(newPerson);
+		personService.create(newPerson);
 		newPerson.setName("NOM");
 		personService.update(newPerson);
 		List<Person> persons = personService.findByName("NOM");
@@ -63,7 +63,7 @@ public class PersonServiceTest extends
 
 	@Test
 	public void testFindById() {
-		personService.add(newPerson);
+		personService.create(newPerson);
 		Long id = newPerson.getId();
 		Person person = personService.findById(id);
 		assertNotNull(person);
@@ -71,14 +71,14 @@ public class PersonServiceTest extends
 
 	@Test
 	public void testFindByName() {
-		personService.add(newPerson);
+		personService.create(newPerson);
 		List<Person> persons = personService.findByName("NAME");
 		assertTrue(persons != null && !persons.isEmpty());
 	}
 
 	@Test
 	public void testFindAll() {
-		personService.add(newPerson);
+		personService.create(newPerson);
 		List<Person> persons = personService.findAll();
 		assertTrue(persons != null && !persons.isEmpty());
 	}
