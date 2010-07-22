@@ -41,5 +41,14 @@
 	<classpathentry kind="lib" path="lib/Spring/org.springframework.test-3.0.2.RELEASE.jar"/>
 	<classpathentry kind="lib" path="lib/Spring/org.springframework.transaction-3.0.2.RELEASE.jar"/>
 	<classpathentry kind="lib" path="lib/MySQL/mysql-connector-java-5.1.12-bin.jar"/>
+	<classpathentry kind="lib" path="lib/forms.jar" sourcepath="lib/forms-src.zip">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/C:/Documents%20and%20Settings/ebinard/workspace-jsams/JSAMS/lib/forms-javadoc.zip!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Tools/sts/sts-2.3.2.RELEASE/plugins/org.eclipse.swt.win32.win32.x86_3.5.2.v3557f.jar"/>
+	<classpathentry kind="lib" path="lib/appFramework-1.0.jar"/>
+	<classpathentry kind="lib" path="lib/jnlp.jar"/>
+	<classpathentry kind="lib" path="lib/swing-layout-1.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

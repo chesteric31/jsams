@@ -83,4 +83,6 @@
 		<property name="target" ref="societyServiceTarget" />
 	</bean>
 
+	<import resource="i18nApplicationContext.xml" />
+
 </beans>
