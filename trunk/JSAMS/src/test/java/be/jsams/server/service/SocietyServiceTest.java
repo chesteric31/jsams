@@ -9,6 +9,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
@@ -20,13 +21,14 @@ import be.jsams.server.model.ContactInformation;
 import be.jsams.server.model.LegalForm;
 import be.jsams.server.model.Society;
 
-@ContextConfiguration("classpath:ApplicationContext.xml")
+@ContextConfiguration(locations = "classpath:ApplicationContext.xml")
 @TransactionConfiguration(transactionManager = "txManager", defaultRollback = true)
 @Transactional
 public class SocietyServiceTest extends
 		AbstractTransactionalJUnit4SpringContextTests {
 
 	@Autowired
+	@Qualifier(value = "societyService")
 	private SocietyService societyService;
 
 	private Society newSociety = null;
@@ -40,7 +42,7 @@ public class SocietyServiceTest extends
 		form.setLabel("Form");
 		societyService.createLegalForm(form);
 		newSociety.setLegalForm(form);
-		
+
 		Address societyAddress = new Address();
 		societyAddress.setCity("Brussels");
 		societyAddress.setCountry("Belgium");
@@ -48,13 +50,13 @@ public class SocietyServiceTest extends
 		societyAddress.setStreet("Rue Neuve");
 		societyAddress.setZipCode(1000);
 		newSociety.setAddress(societyAddress);
-		
+
 		ContactInformation societyContactInformation = new ContactInformation();
 		societyContactInformation.setEmail("x.x@x.com");
 		societyContactInformation.setGsm("+32499555444");
 		societyContactInformation.setPhone("+322123456");
 		newSociety.setContactInformation(societyContactInformation);
-		
+
 		String activity = "Activity";
 		newSociety.setActivity(activity);
 		newSociety.setCapital(new BigDecimal(100.00D));
