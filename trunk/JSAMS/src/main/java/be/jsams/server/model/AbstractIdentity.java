@@ -4,6 +4,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
+/**
+ * Super class for Identity interface.
+ * 
+ * 
+ * @author chesteric31
+ * @version $Revision:$ $Date:$ $Author:$
+ */
 @MappedSuperclass
 public class AbstractIdentity implements Identity {
 
