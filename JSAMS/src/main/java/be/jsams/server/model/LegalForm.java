@@ -4,6 +4,13 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+/**
+ * Legal form entity.
+ * 
+ * 
+ * @author chesteric31
+ * @version $Revision:$ $Date:$ $Author:$
+ */
 @Entity
 @Table(name = "LEGAL_FORM")
 public class LegalForm extends AbstractIdentity {
