@@ -5,6 +5,15 @@
   <version>0.0.1-SNAPSHOT</version>
   <name>JSAMS</name>
   <description>Java Simplified Accounting Management System</description>
+  <build>
+  	<plugins>
+  		<plugin>
+  			<groupId>org.apache.maven.plugins</groupId>
+  			<artifactId>maven-resources-plugin</artifactId>
+  			<version>2.4.2</version>
+  		</plugin>
+  	</plugins>
+  </build>
   <dependencies>
   	<dependency>
   		<groupId>mysql</groupId>
