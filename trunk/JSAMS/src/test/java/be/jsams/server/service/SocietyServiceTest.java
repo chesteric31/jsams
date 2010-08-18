@@ -71,7 +71,7 @@ public class SocietyServiceTest extends
 	}
 
 	@Test
-	@Rollback(value = false)
+//	@Rollback(value = false)
 	public void testRemove() {
 		societyService.create(newSociety);
 		societyService.delete(newSociety);
