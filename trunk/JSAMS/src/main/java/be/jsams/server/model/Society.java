@@ -10,6 +10,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+/**
+ * Society entity.
+ * 
+ * 
+ * @author chesteric31
+ * @version $Revision:$ $Date:$ $Author:$
+ */
 @Entity
 @Table(name = "SOCIETY")
 public class Society extends AbstractIdentity {
@@ -89,9 +96,12 @@ public class Society extends AbstractIdentity {
 	public void setContactInformation(ContactInformation contactInformation) {
 		this.contactInformation = contactInformation;
 	}
-	
+
 	public String toString() {
-		return getId() + " " + activity + " " + label;
+		return "Id: " + getId() + " Activity: " + activity + " Label: " + label
+				+ " Responsible: " + responsible + " Address: " + address
+				+ " Capital: " + capital + " Contact: " + contactInformation
+				+ " Legal Form: " + legalForm;
 	}
 
 }
