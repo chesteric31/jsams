@@ -9,6 +9,7 @@ import be.jsams.client.i18n.I18nManager;
 
 import com.lowagie.text.DocumentException;
 
+@Deprecated
 public class Test {
 
 	public static void main(String[] args) throws ParseException,
@@ -65,7 +66,7 @@ public class Test {
 		// "rundll32 url.dll,FileProtocolHandler file.pdf");
 
 		I18nManager manager = (I18nManager) context.getBean("i18nManager");
-		String title = manager.translate("title", new Object[] {});
+		String title = manager.translate("application.title");
 		System.out.println(title);
 
 	}
