@@ -6,6 +6,13 @@ import org.apache.commons.logging.LogFactory;
 import be.jsams.server.dao.LegalFormDao;
 import be.jsams.server.model.LegalForm;
 
+/**
+ * Legal Form DAO implementation.
+ * 
+ * 
+ * @author chesteric31
+ * @version $Revision:$ $Date:$ $Author:$
+ */
 public class LegalFormDaoImpl extends GenericDaoImpl<LegalForm> implements
 		LegalFormDao {
 
