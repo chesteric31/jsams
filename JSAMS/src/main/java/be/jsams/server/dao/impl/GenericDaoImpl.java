@@ -12,7 +12,17 @@ import org.apache.commons.logging.LogFactory;
 import be.jsams.server.dao.GenericDao;
 import be.jsams.server.model.AbstractIdentity;
 
-public class GenericDaoImpl<T extends AbstractIdentity> implements GenericDao<T> {
+/**
+ * Generic DAO class implementation.
+ * 
+ * @param <T>
+ *            the model
+ * 
+ * @author chesteric31
+ * @version $Revision:$ $Date:$ $Author:$
+ */
+public class GenericDaoImpl<T extends AbstractIdentity> implements
+		GenericDao<T> {
 
 	private final Log LOGGER = LogFactory.getLog(this.getClass());
 
@@ -61,6 +71,10 @@ public class GenericDaoImpl<T extends AbstractIdentity> implements GenericDao<T>
 			LOGGER.error(re);
 		}
 		return t;
+	}
+
+	public void flush() {
+		entityManager.flush();
 	}
 
 	public void remove(T persistentObject) {
