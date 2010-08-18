@@ -3,6 +3,13 @@ package be.jsams.server.model;
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
+/**
+ * Address information embed object.
+ * 
+ * 
+ * @author chesteric31
+ * @version $Revision:$ $Date:$ $Author:$
+ */
 @Embeddable
 public class Address {
 
