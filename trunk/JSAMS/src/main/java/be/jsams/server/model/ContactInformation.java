@@ -1,20 +1,30 @@
 package be.jsams.server.model;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
+/**
+ * Contact information embed object.
+ * 
+ * 
+ * @author chesteric31
+ * @version $Revision:$ $Date:$ $Author:$
+ */
 @Embeddable
 public class ContactInformation {
 
 	private String phone;
 	private String fax;
-	private String gsm;
+	private String mobile;
 	private String email;
 	private String website;
+	private byte logo;
 
 	public ContactInformation() {
 		super();
 	}
 
+	@Column(name = "PHONE")
 	public String getPhone() {
 		return phone;
 	}
@@ -23,6 +33,7 @@ public class ContactInformation {
 		this.phone = phone;
 	}
 
+	@Column(name = "FAX")
 	public String getFax() {
 		return fax;
 	}
@@ -31,14 +42,16 @@ public class ContactInformation {
 		this.fax = fax;
 	}
 
-	public String getGsm() {
-		return gsm;
+	@Column(name = "MOBILE")
+	public String getMobile() {
+		return mobile;
 	}
 
-	public void setGsm(String gsm) {
-		this.gsm = gsm;
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
 	}
 
+	@Column(name = "EMAIL")
 	public String getEmail() {
 		return email;
 	}
@@ -47,6 +60,7 @@ public class ContactInformation {
 		this.email = email;
 	}
 
+	@Column(name = "WEBSITE")
 	public String getWebsite() {
 		return website;
 	}
@@ -55,8 +69,17 @@ public class ContactInformation {
 		this.website = website;
 	}
 
+	@Column(name = "LOGO")
+	public byte getLogo() {
+		return logo;
+	}
+
+	public void setLogo(byte logo) {
+		this.logo = logo;
+	}
+
 	public String toString() {
-		return phone + " " + fax + " " + gsm + " " + email + " " + website;
+		return phone + " " + fax + " " + mobile + " " + email + " " + website;
 	}
 
 }
