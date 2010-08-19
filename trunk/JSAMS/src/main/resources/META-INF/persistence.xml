@@ -9,6 +9,8 @@
 		<class>be.jsams.server.model.Person</class>
 		<class>be.jsams.server.model.Society</class>
 		<class>be.jsams.server.model.LegalForm</class>
+		<class>be.jsams.server.model.ContactInformation</class>
+		<class>be.jsams.server.model.Address</class>
 		<exclude-unlisted-classes />
 		<properties>
 			<property name="hibernate.hbm2ddl.auto" value="create" />
