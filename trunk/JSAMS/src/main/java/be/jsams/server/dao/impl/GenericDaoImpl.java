@@ -24,7 +24,7 @@ import be.jsams.server.model.AbstractIdentity;
 public class GenericDaoImpl<T extends AbstractIdentity> implements
 		GenericDao<T> {
 
-	private final Log LOGGER = LogFactory.getLog(this.getClass());
+	protected final Log LOGGER = LogFactory.getLog(this.getClass());
 
 	@PersistenceContext
 	private EntityManager entityManager;
