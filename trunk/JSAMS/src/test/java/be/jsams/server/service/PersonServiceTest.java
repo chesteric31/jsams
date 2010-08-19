@@ -29,7 +29,7 @@ public class PersonServiceTest extends
 	@Qualifier(value = "personService")
 	private PersonService personService;
 
-	Person newPerson = null;
+	private Person newPerson = null;
 
 	@Before
 	public void setUp() throws Exception {
