@@ -4,9 +4,9 @@ import java.math.BigDecimal;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -69,7 +69,8 @@ public class Society extends AbstractIdentity {
 		this.responsible = responsible;
 	}
 
-	@Embedded
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "FK_ADDRESS")
 	public Address getAddress() {
 		return address;
 	}
@@ -88,7 +89,8 @@ public class Society extends AbstractIdentity {
 		this.legalForm = legalForm;
 	}
 
-	@Embedded
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "FK_CONTACT_INFORMATION")
 	public ContactInformation getContactInformation() {
 		return contactInformation;
 	}
