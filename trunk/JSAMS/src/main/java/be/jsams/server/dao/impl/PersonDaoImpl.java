@@ -4,15 +4,10 @@ import java.util.List;
 
 import javax.persistence.Query;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import be.jsams.server.dao.PersonDao;
 import be.jsams.server.model.Person;
 
 public class PersonDaoImpl extends GenericDaoImpl<Person> implements PersonDao {
-
-	private final Log LOGGER = LogFactory.getLog(this.getClass());
 
 	public PersonDaoImpl(Class<Person> type) {
 		super(type);
@@ -26,7 +21,7 @@ public class PersonDaoImpl extends GenericDaoImpl<Person> implements PersonDao {
 			query.setParameter("name", name);
 			persons = query.getResultList();
 		} catch (RuntimeException re) {
-			LOGGER.error(re);
+			super.LOGGER.error(re);
 		}
 		return persons;
 	}
