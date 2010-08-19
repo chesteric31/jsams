@@ -12,6 +12,14 @@
   			<artifactId>maven-resources-plugin</artifactId>
   			<version>2.4.2</version>
   		</plugin>
+  		<plugin>
+  			<groupId>org.apache.maven.plugins</groupId>
+  			<artifactId>maven-compiler-plugin</artifactId>      
+  			<configuration>
+        		<source>1.5</source>
+        		<target>1.5</target>
+      		</configuration>
+  		</plugin>
   	</plugins>
   </build>
   <dependencies>
@@ -27,8 +35,8 @@
   	</dependency>
   	<dependency>
   		<groupId>org.hibernate</groupId>
-  		<artifactId>hibernate</artifactId>
-  		<version>3.2.7.ga</version>
+  		<artifactId>hibernate-core</artifactId>
+  		<version>3.3.2.GA</version>
   	</dependency>
   	<dependency>
   		<groupId>com.lowagie</groupId>
@@ -43,7 +51,7 @@
   	<dependency>
   		<groupId>junit</groupId>
   		<artifactId>junit</artifactId>
-  		<version>4.8.1</version>
+  		<version>4.4</version>
   	</dependency>
   	<dependency>
   		<groupId>javax.persistence</groupId>
@@ -58,11 +66,11 @@
   	<dependency>
   		<groupId>org.hibernate</groupId>
   		<artifactId>hibernate-entitymanager</artifactId>
-  		<version>3.4.0.GA</version>
+  		<version>3.3.2.GA</version>
   	</dependency>
   	<dependency>
   		<groupId>org.slf4j</groupId>
-  		<artifactId>slf4j-api</artifactId>
+  		<artifactId>slf4j-log4j12</artifactId>
   		<version>1.6.1</version>
   	</dependency>
   </dependencies>
