@@ -7,9 +7,9 @@ import javax.persistence.MappedSuperclass;
 /**
  * Super class for Identity interface.
  * 
- * 
+ *
  * @author chesteric31
- * @version $Revision:$ $Date:$ $Author:$
+ * @version $Rev$ $Date$
  */
 @MappedSuperclass
 public class AbstractIdentity implements Identity {
