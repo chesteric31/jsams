@@ -40,7 +40,6 @@ public class SocietyServiceTest extends
 
 		LegalForm form = new LegalForm();
 		form.setLabel("Form");
-		societyService.createLegalForm(form);
 		newSociety.setLegalForm(form);
 
 		Address societyAddress = new Address();
