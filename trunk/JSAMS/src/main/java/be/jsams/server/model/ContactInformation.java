@@ -1,24 +1,26 @@
 package be.jsams.server.model;
 
 import javax.persistence.Column;
-import javax.persistence.Embeddable;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 /**
- * Contact information embed object.
+ * Contact information entity object.
  * 
  * 
  * @author chesteric31
  * @version $Revision:$ $Date:$ $Author:$
  */
-@Embeddable
-public class ContactInformation {
+@Entity
+@Table(name = "CONTACT_INFORMATION")
+public class ContactInformation extends AbstractIdentity {
 
 	private String phone;
 	private String fax;
 	private String mobile;
 	private String email;
 	private String website;
-	private byte logo;
+	private byte[] logo;
 
 	public ContactInformation() {
 		super();
@@ -70,11 +72,11 @@ public class ContactInformation {
 	}
 
 	@Column(name = "LOGO")
-	public byte getLogo() {
+	public byte[] getLogo() {
 		return logo;
 	}
 
-	public void setLogo(byte logo) {
+	public void setLogo(byte[] logo) {
 		this.logo = logo;
 	}
 

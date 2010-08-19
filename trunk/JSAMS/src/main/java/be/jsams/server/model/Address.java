@@ -1,17 +1,19 @@
 package be.jsams.server.model;
 
 import javax.persistence.Column;
-import javax.persistence.Embeddable;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 /**
- * Address information embed object.
+ * Address information entity object.
  * 
  * 
  * @author chesteric31
  * @version $Revision:$ $Date:$ $Author:$
  */
-@Embeddable
-public class Address {
+@Entity
+@Table(name = "ADDRESS")
+public class Address extends AbstractIdentity {
 
 	private String street;
 	private String number;
