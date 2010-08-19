@@ -17,7 +17,7 @@ public class Address extends AbstractIdentity {
 
 	private String street;
 	private String number;
-	private Integer zipCode;
+	private int zipCode;
 	private String box;
 	private String city;
 	private String country;
@@ -45,11 +45,11 @@ public class Address extends AbstractIdentity {
 	}
 
 	@Column(name = "ZIP_CODE")
-	public Integer getZipCode() {
+	public int getZipCode() {
 		return zipCode;
 	}
 
-	public void setZipCode(Integer zipCode) {
+	public void setZipCode(int zipCode) {
 		this.zipCode = zipCode;
 	}
 
