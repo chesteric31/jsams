@@ -53,7 +53,7 @@ public class SocietyServiceTest extends
 
 		ContactInformation societyContactInformation = new ContactInformation();
 		societyContactInformation.setEmail("x.x@x.com");
-		societyContactInformation.setGsm("+32499555444");
+		societyContactInformation.setMobile("+32499555444");
 		societyContactInformation.setPhone("+322123456");
 		newSociety.setContactInformation(societyContactInformation);
 
@@ -71,7 +71,7 @@ public class SocietyServiceTest extends
 	}
 
 	@Test
-//	@Rollback(value = false)
+	@Rollback(value = false)
 	public void testRemove() {
 		societyService.create(newSociety);
 		societyService.delete(newSociety);
