@@ -7,10 +7,19 @@
 	<persistence-unit name="springUnit" transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<class>be.jsams.server.model.Person</class>
-		<class>be.jsams.server.model.Society</class>
-		<class>be.jsams.server.model.LegalForm</class>
-		<class>be.jsams.server.model.ContactInformation</class>
+		
 		<class>be.jsams.server.model.Address</class>
+		<class>be.jsams.server.model.Civility</class>
+		<class>be.jsams.server.model.Contact</class>
+		<class>be.jsams.server.model.ContactInformation</class>
+		<class>be.jsams.server.model.Customer</class>
+		<class>be.jsams.server.model.Estimate</class>
+		<class>be.jsams.server.model.EstimateDetail</class>
+		<class>be.jsams.server.model.LegalForm</class>
+		<class>be.jsams.server.model.PaymentMode</class>
+		<class>be.jsams.server.model.Product</class>
+		<class>be.jsams.server.model.ProductCategory</class>
+		<class>be.jsams.server.model.Society</class>
 		<exclude-unlisted-classes />
 		<properties>
 			<property name="hibernate.hbm2ddl.auto" value="create" />
