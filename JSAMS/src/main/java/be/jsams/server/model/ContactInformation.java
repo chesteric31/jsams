@@ -1,12 +1,13 @@
 package be.jsams.server.model;
 
+import java.util.Arrays;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
 /**
  * Contact information entity object.
- * 
  *
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
@@ -80,8 +81,11 @@ public class ContactInformation extends AbstractIdentity {
 		this.logo = logo;
 	}
 
+	@Override
 	public String toString() {
-		return phone + " " + fax + " " + mobile + " " + email + " " + website;
+		return "ContactInformation [email=" + email + ", fax=" + fax
+				+ ", logo=" + Arrays.toString(logo) + ", mobile=" + mobile
+				+ ", phone=" + phone + ", website=" + website + "]";
 	}
 
 }
