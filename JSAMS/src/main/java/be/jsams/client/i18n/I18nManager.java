@@ -5,6 +5,13 @@ import java.util.Locale;
 import org.springframework.context.MessageSource;
 import org.springframework.context.MessageSourceAware;
 
+/**
+ * Responsible for handling all i18n related tasks.
+ * 
+ *
+ * @author chesteric31
+ * @version $Rev$ $Date::                  $ $Author$
+ */
 public class I18nManager implements MessageSourceAware {
 
 	private MessageSource messageSource;

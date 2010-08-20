@@ -3,11 +3,11 @@ package be.jsams.server.dao;
 import be.jsams.server.model.Address;
 
 /**
- * Address DAO.
+ * Address DAO interface.
  * 
  *
  * @author chesteric31
- * @version $Revision:$ $Date:$ $Author:$
+ * @version $Rev$ $Date::                  $ $Author$
  */
 public interface AddressDao extends GenericDao<Address> {
 

@@ -6,9 +6,9 @@ import be.jsams.server.model.Society;
 /**
  * Society DAO implementation.
  * 
- * 
+ *
  * @author chesteric31
- * @version $Revision:$ $Date:$ $Author:$
+ * @version $Rev$ $Date::                  $ $Author$
  */
 public class SocietyDaoImpl extends GenericDaoImpl<Society> implements
 		SocietyDao {

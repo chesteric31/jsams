@@ -4,10 +4,10 @@ import java.util.List;
 
 /**
  * Generic DAO interface.
- * @param <T> the model
+ * @param <T>
  *
  * @author chesteric31
- * @version $Revision:$ $Date:$ $Author:$
+ * @version $Rev$ $Date::                  $ $Author$
  */
 public interface GenericDao<T> {
 	

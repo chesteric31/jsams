@@ -8,6 +8,13 @@ import be.jsams.server.model.LegalForm;
 import be.jsams.server.model.Society;
 import be.jsams.server.service.SocietyService;
 
+/**
+ * Society service implementation.
+ * 
+ *
+ * @author chesteric31
+ * @version $Rev$ $Date::                  $ $Author$
+ */
 public class SocietyServiceImpl implements SocietyService {
 
 	private SocietyDao societyDao;

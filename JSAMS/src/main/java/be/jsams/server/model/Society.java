@@ -11,11 +11,11 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
- * Society entity.
+ * Society entity object.
  * 
- * 
+ *
  * @author chesteric31
- * @version $Revision:$ $Date:$ $Author:$
+ * @version $Rev$ $Date::                  $ $Author$
  */
 @Entity
 @Table(name = "SOCIETY")

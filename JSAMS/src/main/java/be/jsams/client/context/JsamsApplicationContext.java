@@ -7,9 +7,9 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * anywhere in this project. As a side-job, it provides caching for business
  * objects that are frequently used.
  * 
- * 
+ *
  * @author chesteric31
- * @version $Revision:$ $Date:$ $Author:$
+ * @version $Rev$ $Date::                  $ $Author$
  */
 public class JsamsApplicationContext {
 

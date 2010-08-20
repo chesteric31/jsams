@@ -21,6 +21,13 @@ import be.jsams.server.model.ContactInformation;
 import be.jsams.server.model.LegalForm;
 import be.jsams.server.model.Society;
 
+/**
+ * Test class for {@link SocietyService}.
+ * 
+ *
+ * @author chesteric31
+ * @version $Rev$ $Date::                  $ $Author$
+ */
 @ContextConfiguration(locations = "classpath:ApplicationContext.xml")
 @TransactionConfiguration(transactionManager = "txManager", defaultRollback = true)
 @Transactional
