@@ -12,7 +12,6 @@ import javax.persistence.Table;
 
 /**
  * Society entity object.
- * 
  *
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
@@ -25,9 +24,11 @@ public class Society extends AbstractIdentity {
 	private BigDecimal capital;
 	private String activity;
 	private String responsible;
+	
 	private Address address;
 	private LegalForm legalForm;
 	private ContactInformation contactInformation;
+	private Civility civility;
 
 	public Society() {
 		super();
@@ -69,7 +70,7 @@ public class Society extends AbstractIdentity {
 		this.responsible = responsible;
 	}
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "FK_ADDRESS")
 	public Address getAddress() {
 		return address;
@@ -98,12 +99,24 @@ public class Society extends AbstractIdentity {
 	public void setContactInformation(ContactInformation contactInformation) {
 		this.contactInformation = contactInformation;
 	}
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "FK_CIVILITY")
+	public Civility getCivility() {
+		return civility;
+	}
 
+	public void setCivility(Civility civility) {
+		this.civility = civility;
+	}
+
+	@Override
 	public String toString() {
-		return "Id: " + getId() + " Activity: " + activity + " Label: " + label
-				+ " Responsible: " + responsible + " Address: " + address
-				+ " Capital: " + capital + " Contact: " + contactInformation
-				+ " Legal Form: " + legalForm;
+		return "Society [activity=" + activity + ", address=" + address
+				+ ", capital=" + capital + ", civility=" + civility
+				+ ", contactInformation=" + contactInformation + ", label="
+				+ label + ", legalForm=" + legalForm + ", responsible="
+				+ responsible + "]";
 	}
 
 }
