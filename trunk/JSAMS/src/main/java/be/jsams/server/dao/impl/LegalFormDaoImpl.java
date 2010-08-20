@@ -6,9 +6,9 @@ import be.jsams.server.model.LegalForm;
 /**
  * Legal Form DAO implementation.
  * 
- * 
+ *
  * @author chesteric31
- * @version $Revision:$ $Date:$ $Author:$
+ * @version $Rev$ $Date::                  $ $Author$
  */
 public class LegalFormDaoImpl extends GenericDaoImpl<LegalForm> implements
 		LegalFormDao {

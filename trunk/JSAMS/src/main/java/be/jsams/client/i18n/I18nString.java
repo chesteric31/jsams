@@ -3,9 +3,9 @@ package be.jsams.client.i18n;
 /**
  * An i18n String / message.
  * 
- * 
+ *
  * @author chesteric31
- * @version $Revision:$ $Date:$ $Author:$
+ * @version $Rev$ $Date::                  $ $Author$
  */
 public class I18nString {
 

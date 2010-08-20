@@ -5,7 +5,7 @@ package be.jsams.server.model;
  * 
  *
  * @author chesteric31
- * @version $Revision:$ $Date:$ $Author:$
+ * @version $Rev$ $Date::                  $ $Author$
  */
 public interface Identity {
 

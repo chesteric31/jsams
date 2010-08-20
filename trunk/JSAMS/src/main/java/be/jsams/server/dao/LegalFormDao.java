@@ -3,11 +3,11 @@ package be.jsams.server.dao;
 import be.jsams.server.model.LegalForm;
 
 /**
- * Legal Form DAO.
+ * Legal Form DAO interface.
  * 
  *
  * @author chesteric31
- * @version $Revision:$ $Date:$ $Author:$
+ * @version $Rev$ $Date::                  $ $Author$
  */
 public interface LegalFormDao extends GenericDao<LegalForm> {
 

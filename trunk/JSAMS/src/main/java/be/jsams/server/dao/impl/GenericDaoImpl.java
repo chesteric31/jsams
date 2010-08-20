@@ -14,12 +14,10 @@ import be.jsams.server.model.AbstractIdentity;
 
 /**
  * Generic DAO class implementation.
- * 
  * @param <T>
- *            the model
- * 
+ *
  * @author chesteric31
- * @version $Revision:$ $Date:$ $Author:$
+ * @version $Rev$ $Date::                  $ $Author$
  */
 public class GenericDaoImpl<T extends AbstractIdentity> implements
 		GenericDao<T> {

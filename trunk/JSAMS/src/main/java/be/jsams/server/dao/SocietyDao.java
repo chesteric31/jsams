@@ -7,7 +7,7 @@ import be.jsams.server.model.Society;
  * 
  *
  * @author chesteric31
- * @version $Revision:$ $Date:$ $Author:$
+ * @version $Rev$ $Date::                  $ $Author$
  */
 public interface SocietyDao extends GenericDao<Society> {
 

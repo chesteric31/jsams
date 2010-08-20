@@ -8,9 +8,9 @@ import be.jsams.client.desktop.JsamsDesktop;
 /**
  * Startup class for the Jsams Application.
  * 
- * 
+ *
  * @author chesteric31
- * @version $Revision:$ $Date:$ $Author:$
+ * @version $Rev$ $Date::                  $ $Author$
  */
 public class JsamsStart {
 

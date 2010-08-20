@@ -7,9 +7,9 @@ import javax.persistence.Table;
 /**
  * Contact information entity object.
  * 
- * 
+ *
  * @author chesteric31
- * @version $Revision:$ $Date:$ $Author:$
+ * @version $Rev$ $Date::                  $ $Author$
  */
 @Entity
 @Table(name = "CONTACT_INFORMATION")

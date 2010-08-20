@@ -5,6 +5,13 @@ import java.util.List;
 import be.jsams.server.model.LegalForm;
 import be.jsams.server.model.Society;
 
+/**
+ * Society Service interface.
+ * 
+ *
+ * @author chesteric31
+ * @version $Rev$ $Date::                  $ $Author$
+ */
 public interface SocietyService {
 
 	public void create(Society society);
