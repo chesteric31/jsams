@@ -5,6 +5,8 @@ import java.math.BigDecimal;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -17,6 +19,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "ESTIMATE_DETAIL")
+@IdClass(value = EstimateDetailPK.class)
 public class EstimateDetail extends AbstractIdentity {
 
 	private int quantity;
@@ -69,6 +72,7 @@ public class EstimateDetail extends AbstractIdentity {
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "FK_ESTIMATE")
+	@Id
 	public Estimate getEstimate() {
 		return estimate;
 	}
