@@ -6,7 +6,6 @@ import javax.persistence.MappedSuperclass;
 
 /**
  * Super class for Identity interface.
- * 
  *
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$

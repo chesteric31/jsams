@@ -6,7 +6,6 @@ import javax.persistence.Table;
 
 /**
  * Address information entity object.
- * 
  *
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
@@ -80,9 +79,11 @@ public class Address extends AbstractIdentity {
 		this.country = country;
 	}
 
+	@Override
 	public String toString() {
-		return street + " " + number + " " + zipCode + " " + box + " " + city
-				+ " " + country;
+		return "Address [box=" + box + ", city=" + city + ", country="
+				+ country + ", number=" + number + ", street=" + street
+				+ ", zipCode=" + zipCode + "]";
 	}
 
 }
