@@ -7,7 +7,6 @@ import javax.persistence.Table;
 /**
  * Legal form entity object.
  * 
- *
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
@@ -30,7 +29,9 @@ public class LegalForm extends AbstractIdentity {
 		this.label = label;
 	}
 
+	@Override
 	public String toString() {
-		return getId() + " " + label;
+		return "LegalForm [label=" + label + "]";
 	}
+
 }

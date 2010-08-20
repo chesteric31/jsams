@@ -38,8 +38,9 @@ public class Person extends AbstractIdentity {
 		this.creationDate = creationDate;
 	}
 
+	@Override
 	public String toString() {
-		return getId() + " " + name + " " + creationDate;
+		return "Person [creationDate=" + creationDate + ", name=" + name + "]";
 	}
 
 }
