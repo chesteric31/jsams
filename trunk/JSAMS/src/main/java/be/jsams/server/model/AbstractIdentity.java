@@ -9,7 +9,7 @@ import javax.persistence.MappedSuperclass;
  * 
  *
  * @author chesteric31
- * @version $Rev$ $Date::                  $
+ * @version $Rev$ $Date::                  $ $Author$
  */
 @MappedSuperclass
 public class AbstractIdentity implements Identity {
