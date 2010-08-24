@@ -22,6 +22,10 @@ import javax.persistence.Table;
 @Table(name = "CUSTOMER")
 public class Customer extends AbstractIdentity {
 
+	/**
+	 * Serial Version UID
+	 */
+	private static final long serialVersionUID = 81052360779940712L;
 	private String name;
 	private String vatNumber;
 	private BigDecimal defaultDiscountRate;
@@ -166,9 +170,7 @@ public class Customer extends AbstractIdentity {
 	}
 	
 	@ManyToMany
-	@JoinTable(name = "CUSTOMER_CONTACT",
-			joinColumns = { @JoinColumn(name = "FK_CUSTOMER", referencedColumnName = "FK_CUSTOMER") },
-			inverseJoinColumns = { @JoinColumn(name = "FK_CONTACT", referencedColumnName = "FK_CONTACT") })
+	@JoinTable(name = "CUSTOMER_CONTACT", joinColumns = { @JoinColumn(name = "FK_CUSTOMER") }, inverseJoinColumns = { @JoinColumn(name = "FK_CONTACT") })
 	public List<Contact> getContacts() {
 		return contacts;
 	}

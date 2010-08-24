@@ -14,6 +14,10 @@ import javax.persistence.Table;
 @Table(name = "CIVILITY")
 public class Civility extends AbstractIdentity {
 
+	/**
+	 * Serial Version UID
+	 */
+	private static final long serialVersionUID = -7268110575101379157L;
 	private String label;
 
 	public Civility() {

@@ -14,6 +14,10 @@ import javax.persistence.Table;
 @Table(name = "PAYMENT_MODE")
 public class PaymentMode extends AbstractIdentity {
 
+	/**
+	 * Serial Version UID
+	 */
+	private static final long serialVersionUID = -9072503968708609612L;
 	private String label;
 
 	public PaymentMode() {
