@@ -19,6 +19,10 @@ import javax.persistence.Table;
 @Table(name = "PRODUCT")
 public class Product extends AbstractIdentity {
 
+	/**
+	 * Serial Version UID
+	 */
+	private static final long serialVersionUID = -6479784842022897090L;
 	private String label;
 	private BigDecimal price;
 	private int quantityStock;

@@ -12,6 +12,10 @@ import javax.persistence.TemporalType;
 @Table(name = "PERSON")
 public class Person extends AbstractIdentity {
 
+	/**
+	 * Serial Version UID
+	 */
+	private static final long serialVersionUID = 4809775998917867L;
 	private String name;
 	private Date creationDate;
 

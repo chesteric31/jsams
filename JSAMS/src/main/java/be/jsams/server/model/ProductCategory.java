@@ -14,6 +14,10 @@ import javax.persistence.Table;
 @Table(name = "PRODUCT_CATEGORY")
 public class ProductCategory extends AbstractIdentity {
 
+	/**
+	 * Serial Version UID
+	 */
+	private static final long serialVersionUID = -5602936385893795004L;
 	private String label;
 
 	public ProductCategory() {

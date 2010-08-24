@@ -20,6 +20,10 @@ import javax.persistence.Table;
 @Table(name = "SOCIETY")
 public class Society extends AbstractIdentity {
 
+	/**
+	 * Serial Version UID
+	 */
+	private static final long serialVersionUID = -8541820243148400802L;
 	private String label;
 	private BigDecimal capital;
 	private String activity;

@@ -14,6 +14,10 @@ import javax.persistence.Table;
 @Table(name = "ADDRESS")
 public class Address extends AbstractIdentity {
 
+	/**
+	 * Serial Version UID
+	 */
+	private static final long serialVersionUID = -2640100748737181266L;
 	private String street;
 	private String number;
 	private int zipCode;
