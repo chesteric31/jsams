@@ -80,8 +80,10 @@ public class SocietyServiceTest extends
 	@Rollback(value = false)
 	public void testRemove() {
 		societyService.create(newSociety);
-		societyService.delete(newSociety);
 		List<Society> societies = societyService.findAll();
+		assertTrue(societies != null && !societies.isEmpty());
+		societyService.delete(newSociety);
+		societies = societyService.findAll();
 		assertTrue(societies == null || societies.isEmpty());
 	}
 
@@ -91,7 +93,7 @@ public class SocietyServiceTest extends
 		newSociety.setLabel("Updated Label");
 		societyService.update(newSociety);
 		Society foundSociety = societyService.findById(newSociety.getId());
-		assertNotNull(foundSociety);
+		assertTrue(foundSociety.getLabel().equalsIgnoreCase("Updated Label"));
 	}
 
 	@Test
