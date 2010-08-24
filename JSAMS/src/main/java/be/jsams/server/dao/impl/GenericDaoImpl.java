@@ -19,7 +19,7 @@ import be.jsams.server.model.AbstractIdentity;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class GenericDaoImpl<T extends AbstractIdentity> implements
+public class GenericDaoImpl<T> implements
 		GenericDao<T> {
 
 	protected final Log LOGGER = LogFactory.getLog(this.getClass());
