@@ -2,12 +2,14 @@ package be.jsams.server.model;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -27,13 +29,14 @@ public class Estimate extends AbstractIdentity {
 	 */
 	private static final long serialVersionUID = 4590224667073848578L;
 	private Date creationDate;
-	private boolean transferred;
 	private String remark;
 	private BigDecimal discountRate;
 
 	private Contact contact;
 	private Customer customer;
 	private Address billingAddress;
+
+	private List<EstimateDetail> details;
 
 	public Estimate() {
 		super();
@@ -47,15 +50,6 @@ public class Estimate extends AbstractIdentity {
 
 	public void setCreationDate(Date creationDate) {
 		this.creationDate = creationDate;
-	}
-
-	@Column(name = "TRANSFERRED")
-	public boolean isTransferred() {
-		return transferred;
-	}
-
-	public void setTransferred(boolean transferred) {
-		this.transferred = transferred;
 	}
 
 	@Column(name = "REMARK")
@@ -76,7 +70,7 @@ public class Estimate extends AbstractIdentity {
 		this.discountRate = discountRate;
 	}
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "FK_CONTACT")
 	public Contact getContact() {
 		return contact;
@@ -86,7 +80,7 @@ public class Estimate extends AbstractIdentity {
 		this.contact = contact;
 	}
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "FK_CUSTOMER")
 	public Customer getCustomer() {
 		return customer;
@@ -96,7 +90,7 @@ public class Estimate extends AbstractIdentity {
 		this.customer = customer;
 	}
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "FK_ADDRESS_BILLING")
 	public Address getBillingAddress() {
 		return billingAddress;
@@ -106,12 +100,21 @@ public class Estimate extends AbstractIdentity {
 		this.billingAddress = billingAddress;
 	}
 
+	@OneToMany(mappedBy = "estimate")
+	public List<EstimateDetail> getDetails() {
+		return details;
+	}
+
+	public void setDetails(List<EstimateDetail> details) {
+		this.details = details;
+	}
+
 	@Override
 	public String toString() {
 		return "Estimate [billingAddress=" + billingAddress + ", contact="
 				+ contact + ", creationDate=" + creationDate + ", customer="
 				+ customer + ", discountRate=" + discountRate + ", remark="
-				+ remark + ", transferred=" + transferred + "]";
+				+ remark + "]";
 	}
 
 }
