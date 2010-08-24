@@ -10,6 +10,8 @@
 		
 		<class>be.jsams.server.model.Address</class>
 		<class>be.jsams.server.model.Civility</class>
+		<class>be.jsams.server.model.Command</class>
+		<class>be.jsams.server.model.CommandDetail</class>
 		<class>be.jsams.server.model.Contact</class>
 		<class>be.jsams.server.model.ContactInformation</class>
 		<class>be.jsams.server.model.Customer</class>
