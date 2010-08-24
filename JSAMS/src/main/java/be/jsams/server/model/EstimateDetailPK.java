@@ -1,54 +1,46 @@
 package be.jsams.server.model;
 
+import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 /**
- * Estimate detail primary key formed by Estimate Id and Estimate Detail Id.
+ * The primary key class for the ESTIMATE_DETAIL database table.
+ * 
  *
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
 @Embeddable
-public class EstimateDetailPK {
+public class EstimateDetailPK implements Serializable {
 
-	private Long estimateId;
-	private Long estimateDetailId;
-	
+	/**
+	 * Serial Version UID
+	 */
+	private static final long serialVersionUID = -8029041188018490218L;
+	private Long estimateFK;
+	private Long id;
+
 	public EstimateDetailPK() {
 		super();
 	}
-	
-	public EstimateDetailPK(Long estimateId, Long estimateDetailId) {
-		this.estimateId = estimateId;
-		this.estimateDetailId = estimateDetailId;
+
+	@Column(name = "ID")
+	public Long getId() {
+		return this.id;
 	}
 
-	public Long getEstimateId() {
-		return estimateId;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
-	public void setEstimateId(Long estimateId) {
-		this.estimateId = estimateId;
+	@Column(name = "FK_ESTIMATE")
+	public Long getEstimateFK() {
+		return estimateFK;
 	}
 
-	public Long getEstimateDetailId() {
-		return estimateDetailId;
-	}
-
-	public void setEstimateDetailId(Long estimateDetailId) {
-		this.estimateDetailId = estimateDetailId;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime
-				* result
-				+ ((estimateDetailId == null) ? 0 : estimateDetailId.hashCode());
-		result = prime * result
-				+ ((estimateId == null) ? 0 : estimateId.hashCode());
-		return result;
+	public void setEstimateFK(Long estimateFK) {
+		this.estimateFK = estimateFK;
 	}
 
 	@Override
@@ -60,21 +52,31 @@ public class EstimateDetailPK {
 		if (getClass() != obj.getClass())
 			return false;
 		EstimateDetailPK other = (EstimateDetailPK) obj;
-		if (estimateDetailId == null) {
-			if (other.estimateDetailId != null) {
+		if (id == null) {
+			if (other.id != null) {
 				return false;
 			}
-		} else if (!estimateDetailId.equals(other.estimateDetailId)) {
+		} else if (!id.equals(other.id)) {
 			return false;
 		}
-		if (estimateId == null) {
-			if (other.estimateId != null) {
+		if (estimateFK == null) {
+			if (other.estimateFK != null) {
 				return false;
 			}
-		} else if (!estimateId.equals(other.estimateId)) {
+		} else if (!estimateFK.equals(other.estimateFK)) {
 			return false;
 		}
 		return true;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result
+				+ ((estimateFK == null) ? 0 : estimateFK.hashCode());
+		return result;
 	}
 	
 }
