@@ -7,9 +7,8 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -31,6 +30,7 @@ public class EstimateDetail implements Serializable {
 	private BigDecimal price;
 	private BigDecimal vatApplicable;
 	private BigDecimal discountRate;
+	private boolean transferred;
 	
 	private Estimate estimate;
 	private Product product;
@@ -84,9 +84,8 @@ public class EstimateDetail implements Serializable {
 		this.discountRate = discountRate;
 	}
 
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "FK_ESTIMATE")
-	@Id
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "FK_ESTIMATE", insertable = false, updatable = false)
 	public Estimate getEstimate() {
 		return estimate;
 	}
@@ -95,7 +94,7 @@ public class EstimateDetail implements Serializable {
 		this.estimate = estimate;
 	}
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "FK_PRODUCT")
 	public Product getProduct() {
 		return product;
@@ -105,12 +104,21 @@ public class EstimateDetail implements Serializable {
 		this.product = product;
 	}
 
+	@Column(name = "TRANSFERRED")
+	public boolean isTransferred() {
+		return transferred;
+	}
+
+	public void setTransferred(boolean transferred) {
+		this.transferred = transferred;
+	}
+
 	@Override
 	public String toString() {
 		return "EstimateDetail [discountRate=" + discountRate + ", estimate="
-				+ estimate + ", price=" + price + ", product=" + product
-				+ ", quantity=" + quantity + ", vatApplicable=" + vatApplicable
-				+ "]";
+				+ estimate + ", id=" + id + ", price=" + price + ", product="
+				+ product + ", quantity=" + quantity + ", transferred="
+				+ transferred + ", vatApplicable=" + vatApplicable + "]";
 	}
-
+	
 }
