@@ -16,6 +16,10 @@ import javax.persistence.Table;
 @Table(name = "CONTACT_INFORMATION")
 public class ContactInformation extends AbstractIdentity {
 
+	/**
+	 * Serial Version UID
+	 */
+	private static final long serialVersionUID = -893878683374179228L;
 	private String phone;
 	private String fax;
 	private String mobile;
