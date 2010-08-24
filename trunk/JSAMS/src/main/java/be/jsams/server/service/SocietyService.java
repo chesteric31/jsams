@@ -6,7 +6,7 @@ import be.jsams.server.model.LegalForm;
 import be.jsams.server.model.Society;
 
 /**
- * Society Service interface.
+ * Society service interface.
  * 
  *
  * @author chesteric31
