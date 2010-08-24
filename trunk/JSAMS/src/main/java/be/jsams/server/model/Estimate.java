@@ -22,6 +22,10 @@ import javax.persistence.TemporalType;
 @Table(name = "ESTIMATE")
 public class Estimate extends AbstractIdentity {
 
+	/**
+	 * Serial Version UID
+	 */
+	private static final long serialVersionUID = 4590224667073848578L;
 	private Date creationDate;
 	private boolean transferred;
 	private String remark;
