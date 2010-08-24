@@ -1,12 +1,13 @@
 package be.jsams.server.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -19,9 +20,13 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "ESTIMATE_DETAIL")
-@IdClass(value = EstimateDetailPK.class)
-public class EstimateDetail extends AbstractIdentity {
-
+public class EstimateDetail implements Serializable {
+	
+	/**
+	 * Serial Version UID
+	 */
+	private static final long serialVersionUID = -389048976022120236L;
+	private EstimateDetailPK id;
 	private int quantity;
 	private BigDecimal price;
 	private BigDecimal vatApplicable;
@@ -32,6 +37,15 @@ public class EstimateDetail extends AbstractIdentity {
 
 	public EstimateDetail() {
 		super();
+	}
+
+	@EmbeddedId
+	public EstimateDetailPK getId() {
+		return this.id;
+	}
+
+	public void setId(EstimateDetailPK id) {
+		this.id = id;
 	}
 
 	@Column(name = "QUANTITY")
