@@ -12,10 +12,10 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
+import be.jsams.server.dao.AbstractJUnitTestClass;
 import be.jsams.server.model.Address;
 import be.jsams.server.model.Civility;
 import be.jsams.server.model.Command;
@@ -36,8 +36,7 @@ import be.jsams.server.model.ProductCategory;
 @ContextConfiguration(locations = "classpath:ApplicationContext.xml")
 @TransactionConfiguration(transactionManager = "txManager", defaultRollback = true)
 @Transactional
-public class CommandServiceTest extends
-		AbstractTransactionalJUnit4SpringContextTests {
+public class CommandServiceTest extends AbstractJUnitTestClass {
 
 	@Autowired
 	@Qualifier(value = "commandService")
