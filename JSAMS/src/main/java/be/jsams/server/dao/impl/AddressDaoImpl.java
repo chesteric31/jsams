@@ -4,7 +4,7 @@ import be.jsams.server.dao.AddressDao;
 import be.jsams.server.model.Address;
 
 /**
- * Addres DAO implementation.
+ * Address DAO implementation.
  * 
  *
  * @author chesteric31
@@ -15,4 +15,5 @@ public class AddressDaoImpl extends GenericDaoImpl<Address> implements AddressDa
 	public AddressDaoImpl(Class<Address> type) {
 		super(type);
 	}
+	
 }
