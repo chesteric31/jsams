@@ -3,9 +3,9 @@ package be.jsams.server.model;
 import java.math.BigDecimal;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -119,7 +119,7 @@ public class Customer extends AbstractIdentity {
 		this.description = description;
 	}
 
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "FK_ADDRESS_DELIVERY")
 	public Address getDeliveryAddress() {
 		return deliveryAddress;
@@ -129,7 +129,7 @@ public class Customer extends AbstractIdentity {
 		this.deliveryAddress = deliveryAddress;
 	}
 
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "FK_ADDRESS_BILLING")
 	public Address getBillingAddress() {
 		return billingAddress;
@@ -139,7 +139,7 @@ public class Customer extends AbstractIdentity {
 		this.billingAddress = billingAddress;
 	}
 
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "FK_PAYMENT_MODE")
 	public PaymentMode getPaymentMode() {
 		return paymentMode;
@@ -149,7 +149,7 @@ public class Customer extends AbstractIdentity {
 		this.paymentMode = paymentMode;
 	}
 
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "FK_CONTACT_INFORMATION")
 	public ContactInformation getContactInformation() {
 		return contactInformation;
@@ -159,7 +159,7 @@ public class Customer extends AbstractIdentity {
 		this.contactInformation = contactInformation;
 	}
 
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "FK_CIVILITY")
 	public Civility getCivility() {
 		return civility;
