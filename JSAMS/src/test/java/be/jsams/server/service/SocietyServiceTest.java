@@ -70,15 +70,15 @@ public class SocietyServiceTest extends
 	}
 
 	@Test
-	public void testPersist() {
+	public void testCreate() {
 		societyService.create(newSociety);
-		List<Society> societies = societyService.findAll();
-		assertNotNull(societies);
+		Society society = societyService.findById(newSociety.getId());
+		assertNotNull(society);
 	}
 
 	@Test
 	@Rollback(value = false)
-	public void testRemove() {
+	public void testDelete() {
 		societyService.create(newSociety);
 		List<Society> societies = societyService.findAll();
 		assertTrue(societies != null && !societies.isEmpty());
