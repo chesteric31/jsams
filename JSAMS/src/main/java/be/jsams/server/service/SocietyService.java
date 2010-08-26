@@ -7,7 +7,6 @@ import be.jsams.server.model.Society;
 
 /**
  * Society service interface.
- * 
  *
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
