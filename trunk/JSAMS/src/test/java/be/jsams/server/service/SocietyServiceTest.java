@@ -12,10 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
+import be.jsams.server.dao.AbstractJUnitTestClass;
 import be.jsams.server.model.Address;
 import be.jsams.server.model.ContactInformation;
 import be.jsams.server.model.LegalForm;
@@ -24,15 +24,14 @@ import be.jsams.server.model.Society;
 /**
  * Test class for {@link SocietyService}.
  * 
- *
+ * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
 @ContextConfiguration(locations = "classpath:ApplicationContext.xml")
 @TransactionConfiguration(transactionManager = "txManager", defaultRollback = true)
 @Transactional
-public class SocietyServiceTest extends
-		AbstractTransactionalJUnit4SpringContextTests {
+public class SocietyServiceTest extends AbstractJUnitTestClass {
 
 	@Autowired
 	@Qualifier(value = "societyService")
