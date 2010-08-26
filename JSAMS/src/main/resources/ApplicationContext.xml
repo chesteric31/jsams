@@ -80,7 +80,43 @@
 	<bean id="societyService" parent="baseTransactionProxy">
 		<property name="target" ref="societyServiceTarget" />
 	</bean>
+	
+	<bean id="commandDao" class="be.jsams.server.dao.impl.CommandDaoImpl">
+		<constructor-arg value="be.jsams.server.model.Command" />
+	</bean>
+	<bean id="commandDetailDao" class="be.jsams.server.dao.impl.CommandDetailDaoImpl">
+		<constructor-arg value="be.jsams.server.model.CommandDetail" />
+	</bean>
+	<bean id="commandServiceTarget" class="be.jsams.server.service.impl.CommandServiceImpl">
+		<property name="commandDao" ref="commandDao" />
+		<property name="commandDetailDao" ref="commandDetailDao" />
+	</bean>
+	<bean id="commandService" parent="baseTransactionProxy">
+		<property name="target" ref="commandServiceTarget" />
+	</bean>
 
+	<bean id="addressDao" class="be.jsams.server.dao.impl.AddressDaoImpl">
+		<constructor-arg value="be.jsams.server.model.Address" />
+	</bean>
+	<bean id="civilityDao" class="be.jsams.server.dao.impl.CivilityDaoImpl">
+		<constructor-arg value="be.jsams.server.model.Address" />
+	</bean>
+	<bean id="contactDao" class="be.jsams.server.dao.impl.ContactDaoImpl">
+		<constructor-arg value="be.jsams.server.model.Contact" />
+	</bean>
+	<bean id="customerDao" class="be.jsams.server.dao.impl.CustomerDaoImpl">
+		<constructor-arg value="be.jsams.server.model.Customer" />
+	</bean>
+	<bean id="paymentModeDao" class="be.jsams.server.dao.impl.PaymentModeDaoImpl">
+		<constructor-arg value="be.jsams.server.model.PaymentMode" />
+	</bean>
+	<bean id="productCategoryDao" class="be.jsams.server.dao.impl.ProductCategoryDaoImpl">
+		<constructor-arg value="be.jsams.server.model.ProductCategory" />
+	</bean>
+	<bean id="productDao" class="be.jsams.server.dao.impl.ProductDaoImpl">
+		<constructor-arg value="be.jsams.server.model.Product" />
+	</bean>
+	
 	<import resource="i18nApplicationContext.xml" />
 
 </beans>
