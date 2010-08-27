@@ -104,6 +104,7 @@ public class CommandServiceTest extends AbstractJUnitTestClass {
 		book.setPrice(new BigDecimal(35.95));
 		book.setQuantityStock(15);
 		book.setReorderLevel(10);
+		book.setVatApplicable(new BigDecimal(6.00));
 		
 		CommandDetail detail = new CommandDetail();
 		detail.setCommand(newCommand);
