@@ -1,11 +1,9 @@
 package be.jsams.server.model;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -19,13 +17,12 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "ESTIMATE_DETAIL")
-public class EstimateDetail implements Serializable {
+public class EstimateDetail extends AbstractIdentity {
 	
 	/**
 	 * Serial Version UID
 	 */
 	private static final long serialVersionUID = -389048976022120236L;
-	private EstimateDetailPK id;
 	private int quantity;
 	private BigDecimal price;
 	private BigDecimal vatApplicable;
@@ -37,15 +34,6 @@ public class EstimateDetail implements Serializable {
 
 	public EstimateDetail() {
 		super();
-	}
-
-	@EmbeddedId
-	public EstimateDetailPK getId() {
-		return this.id;
-	}
-
-	public void setId(EstimateDetailPK id) {
-		this.id = id;
 	}
 
 	@Column(name = "QUANTITY")
@@ -85,7 +73,7 @@ public class EstimateDetail implements Serializable {
 	}
 
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "FK_ESTIMATE", insertable = false, updatable = false)
+	@JoinColumn(name = "FK_ESTIMATE")
 	public Estimate getEstimate() {
 		return estimate;
 	}
@@ -116,9 +104,9 @@ public class EstimateDetail implements Serializable {
 	@Override
 	public String toString() {
 		return "EstimateDetail [discountRate=" + discountRate + ", estimate="
-				+ estimate + ", id=" + id + ", price=" + price + ", product="
-				+ product + ", quantity=" + quantity + ", transferred="
-				+ transferred + ", vatApplicable=" + vatApplicable + "]";
+				+ estimate + ", price=" + price + ", product=" + product
+				+ ", quantity=" + quantity + ", transferred=" + transferred
+				+ ", vatApplicable=" + vatApplicable + "]";
 	}
-	
+
 }

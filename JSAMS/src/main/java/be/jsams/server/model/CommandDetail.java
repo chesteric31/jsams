@@ -1,11 +1,9 @@
 package be.jsams.server.model;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -19,13 +17,12 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "COMMAND_DETAIL")
-public class CommandDetail implements Serializable {
+public class CommandDetail extends AbstractIdentity {
 
 	/**
 	 * Serial Version UID
 	 */
 	private static final long serialVersionUID = 3749700047686967069L;
-	private CommandDetailPK id;
 	private int quantity;
 	private BigDecimal price;
 	private BigDecimal vatApplicable;
@@ -37,15 +34,6 @@ public class CommandDetail implements Serializable {
 
 	public CommandDetail() {
 		super();
-	}
-
-	@EmbeddedId
-	public CommandDetailPK getId() {
-		return id;
-	}
-
-	public void setId(CommandDetailPK id) {
-		this.id = id;
 	}
 
 	@Column(name = "QUANTITY")
@@ -94,7 +82,7 @@ public class CommandDetail implements Serializable {
 	}
 
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "FK_COMMAND", insertable = false, updatable = false)
+	@JoinColumn(name = "FK_COMMAND")
 	public Command getCommand() {
 		return command;
 	}
@@ -115,11 +103,10 @@ public class CommandDetail implements Serializable {
 
 	@Override
 	public String toString() {
-		return "CommandeDetail [command=" + command + ", discountRate="
-				+ discountRate + ", id=" + id + ", price=" + price
-				+ ", product=" + product + ", quantity=" + quantity
-				+ ", transferred=" + transferred + ", vatApplicable="
-				+ vatApplicable + "]";
+		return "CommandDetail [command=" + command + ", discountRate="
+				+ discountRate + ", price=" + price + ", product=" + product
+				+ ", quantity=" + quantity + ", transferred=" + transferred
+				+ ", vatApplicable=" + vatApplicable + "]";
 	}
 
 }
