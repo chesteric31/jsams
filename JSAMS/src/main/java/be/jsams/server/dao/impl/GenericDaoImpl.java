@@ -10,7 +10,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import be.jsams.server.dao.GenericDao;
-import be.jsams.server.model.AbstractIdentity;
 
 /**
  * Generic DAO class implementation.
@@ -78,8 +77,8 @@ public class GenericDaoImpl<T> implements
 	public void remove(T persistentObject) {
 		try {
 			// Merge necessary for the detached object
-			T object = entityManager.merge(persistentObject);
-			entityManager.remove(object);
+//			T object = entityManager.merge(persistentObject);
+			entityManager.remove(persistentObject);
 		} catch (RuntimeException re) {
 			LOGGER.error(re);
 		}
