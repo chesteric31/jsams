@@ -49,6 +49,27 @@ public class AddressDaoImplTest extends AbstractJUnitTestClass {
 		dao.add(address);
 		assertNull(address.getId());
 	}
+	
+	@Test
+	public void testAddNullCountry() {
+		address.setCountry(null);
+		dao.add(address);
+		assertNull(address.getId());
+	}
+
+	@Test
+	public void testAddNullNumber() {
+		address.setNumber(null);
+		dao.add(address);
+		assertNull(address.getId());
+	}
+
+	@Test
+	public void testAddNullStreet() {
+		address.setStreet(null);
+		dao.add(address);
+		assertNull(address.getId());
+	}
 
 	@Test
 	public void testFindAll() {
