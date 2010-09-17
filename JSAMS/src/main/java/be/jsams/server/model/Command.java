@@ -16,7 +16,6 @@ import javax.persistence.TemporalType;
 
 /**
  * Command entity object.
- * 
  *
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
