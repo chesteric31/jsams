@@ -3,7 +3,6 @@ package be.jsams.client.i18n;
 import java.util.Locale;
 
 import org.springframework.context.MessageSource;
-import org.springframework.context.MessageSourceAware;
 
 /**
  * Responsible for handling all i18n related tasks.
@@ -12,9 +11,7 @@ import org.springframework.context.MessageSourceAware;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class I18nManager implements MessageSourceAware {
-
-	private MessageSource messageSource;
+public class I18nManager {
 
 	/**
 	 * Empty string.
@@ -47,15 +44,7 @@ public class I18nManager implements MessageSourceAware {
 	public void setLocale(Locale locale) {
 		this.locale = locale;
 	}
-
-	public void setMessageSource(MessageSource messageSource) {
-		this.messageSource = messageSource;
-	}
 	
-	public MessageSource getMessageSource() {
-		return messageSource;
-	}
-
 	public String translate(I18nString i18nString) {
 		return translate(i18nString, locale);
 	}
@@ -81,6 +70,7 @@ public class I18nManager implements MessageSourceAware {
 		if (key.equals(EMPTY_STRING)) {
 			translation = EMPTY_STRING;
 		} else {
+			MessageSource messageSource = I18nApplicationContext.getMessageSource();
 			translation = messageSource.getMessage(key, arguments, locale);
 		}
 		return translation;
