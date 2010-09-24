@@ -49,7 +49,12 @@ public class SocietyServiceImpl implements SocietyService {
 	}
 
 	public void create(Society society) {
-		societyDao.add(society);
+		List<Society> societies = societyDao.findAll();
+		if (societies == null || societies.isEmpty()) {
+			societyDao.add(society);
+		} else {
+			throw new RuntimeException("Cannot create more than one society.");
+		}
 	}
 
 	public void delete(Society society) {
