@@ -1,0 +1,38 @@
+package be.jsams.client.i18n;
+
+import org.springframework.context.MessageSource;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+/**
+ * Application context for I18n.
+ *
+ * @author chesteric31
+ * @version $Rev$ $Date::                  $ $Author$
+ */
+public class I18nApplicationContext {
+
+	/**
+	 * Classpath resource containing the configuration file.
+	 */
+	public static final String CONFIG = "i18nApplicationContext.xml";
+
+	/**
+	 * The application context.
+	 */
+	private static ClassPathXmlApplicationContext context;
+
+	/**
+	 *  @return the message source
+	 */
+	public static MessageSource getMessageSource() {
+		return context;
+	}
+	
+	/**
+	 * @param context the context to set
+	 */
+	public static void setContext(ClassPathXmlApplicationContext context) {
+		I18nApplicationContext.context = context;
+	}
+	
+}
