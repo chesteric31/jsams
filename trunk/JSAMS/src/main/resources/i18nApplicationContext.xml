@@ -12,8 +12,4 @@
 		</property>
 	</bean>
 
-	<bean id="i18nManager" class="be.jsams.client.i18n.I18nManager">
-		<property name="messageSource" ref="messageSource" />
-	</bean>
-
 </beans>
