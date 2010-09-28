@@ -28,6 +28,7 @@ public class Society extends AbstractIdentity {
 	private BigDecimal capital;
 	private String activity;
 	private String responsible;
+	private String vatNumber;
 	
 	private Address address;
 	private LegalForm legalForm;
@@ -72,6 +73,15 @@ public class Society extends AbstractIdentity {
 
 	public void setResponsible(String responsible) {
 		this.responsible = responsible;
+	}
+	
+	@Column(name = "VAT_NUMBER")
+	public String getVatNumber() {
+		return vatNumber;
+	}
+
+	public void setVatNumber(String vatNumber) {
+		this.vatNumber = vatNumber;
 	}
 
 	@OneToOne(cascade = CascadeType.ALL)
@@ -120,7 +130,7 @@ public class Society extends AbstractIdentity {
 				+ ", capital=" + capital + ", civility=" + civility
 				+ ", contactInformation=" + contactInformation + ", label="
 				+ label + ", legalForm=" + legalForm + ", responsible="
-				+ responsible + "]";
+				+ responsible + ", vatNumber=" + vatNumber + "]";
 	}
 
 }
