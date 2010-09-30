@@ -3,55 +3,63 @@ package be.jsams.client.desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JSeparator;
-import javax.swing.UIManager;
 
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.i18n.JsamsI18nResource;
+import be.jsams.client.society.SocietyEditFrame;
+import be.jsams.client.swing.component.JsamsFrame;
+import be.jsams.client.swing.component.JsamsMenu;
+import be.jsams.client.swing.component.JsamsMenuItem;
 
 /**
- * 
+ * Jsams Main frame that contains all the components.
  *
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class JsamsMainFrame extends JFrame {
+public class JsamsMainFrame extends JsamsFrame {
 
 	/**
 	 * Serial Version UID
 	 */
 	private static final long serialVersionUID = 8570689474653666931L;
-	private JsamsMenuItem helpMenuItem;
+	private JMenuBar mainMenuBar;
+	private JsamsMenu fileMenu;
+	private JsamsMenu editMenu;
+	private JsamsMenu salesMenu;
 	private JsamsMenu helpMenu;
-	private JSeparator helpSeparator;
+	private JsamsMenuItem helpMenuItem;
 	private JsamsMenuItem pasteMenuItem;
 	private JsamsMenuItem aboutMenuItem;
 	private JsamsMenuItem copyMenuItem;
 	private JsamsMenuItem cutMenuItem;
-	private JsamsMenu editMenu;
 	private JsamsMenuItem exitMenuItem;
-	private JSeparator firstFileSeparator;
-	private JSeparator secondFileSeparator;
 	private JsamsMenuItem societyParametersMenuItem;
 	private JsamsMenuItem printerParametersMenuItem;
-	private JsamsMenu fileMenu;
-	private JMenuBar mainMenuBar;
+	private JsamsMenuItem estimateMenuItem;
+	private JsamsMenuItem commandMenuItem;
+	private JsamsMenuItem deliveryOrderMenuItem;
+	private JsamsMenuItem billMenuItem;
+	private JsamsMenuItem creditNoteMenuItem;
+	private JSeparator firstFileSeparator;
+	private JSeparator secondFileSeparator;
+	private JSeparator helpSeparator;
 
-	public JsamsMainFrame() {
-		super();
+	public JsamsMainFrame(final I18nString title) {
+		super(title);
 		initComponents();
 	}
 	
 	private void initComponents() {
 		try {
-			setNativeLookAndFeel();
 			mainMenuBar = new JMenuBar();
 			setJMenuBar(mainMenuBar);
 			fileMenu = new JsamsMenu(JsamsI18nResource.MENU_FILE);
 			mainMenuBar.add(fileMenu);
 			societyParametersMenuItem = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_SOCIETY_PARAMETERS);
+			societyParametersMenuItem.addActionListener(societyEditListener(this));
 			fileMenu.add(societyParametersMenuItem);
 			firstFileSeparator = new JSeparator();
 			fileMenu.add(firstFileSeparator);
@@ -70,6 +78,18 @@ public class JsamsMainFrame extends JFrame {
 			editMenu.add(copyMenuItem);
 			pasteMenuItem = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_PASTE);
 			editMenu.add(pasteMenuItem);
+			salesMenu = new JsamsMenu(JsamsI18nResource.MENU_SALES);
+			estimateMenuItem = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_ESTIMATE);
+			commandMenuItem = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_COMMAND);
+			deliveryOrderMenuItem = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_DELIVERY_ORDER);
+			billMenuItem = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_BILL);
+			creditNoteMenuItem = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_CREDIT_NOTE);
+			salesMenu.add(estimateMenuItem);
+			salesMenu.add(commandMenuItem);
+			salesMenu.add(deliveryOrderMenuItem);
+			salesMenu.add(billMenuItem);
+			salesMenu.add(creditNoteMenuItem);
+			mainMenuBar.add(salesMenu);
 			helpMenu = new JsamsMenu(JsamsI18nResource.MENU_HELP);
 			mainMenuBar.add(helpMenu);
 			helpMenuItem = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_HELP);
@@ -84,15 +104,6 @@ public class JsamsMainFrame extends JFrame {
 		}
 	}
 	
-	/**
-	 * Sets the main title of the frame.
-	 * 
-	 * @param title the {@link I18nString} title
-	 */
-	protected void setMainTitle(final I18nString title) {
-		setTitle(title.getTranslation());
-	}
-	
 	private ActionListener exitListener() {
 		ActionListener listener = new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
@@ -101,13 +112,16 @@ public class JsamsMainFrame extends JFrame {
 		};
 		return listener;
 	}
-	
-	private void setNativeLookAndFeel() {
-		try {
-			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+
+	private ActionListener societyEditListener(final JsamsMainFrame mainFrame) {
+		ActionListener listener = new ActionListener() {
+			public void actionPerformed(ActionEvent event) {
+				new SocietyEditFrame(JsamsI18nResource.TITLE_EDIT_SOCIETY_PARAMETERS, mainFrame);
+			}
+		};
+		return listener;
 	}
 	
+	
 }
+

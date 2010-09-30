@@ -19,7 +19,7 @@ import be.jsams.client.i18n.JsamsI18nResource;
  */
 public class JsamsDesktop {
 
-	private final JsamsMainFrame frame = new JsamsMainFrame();
+	private final JsamsMainFrame frame = new JsamsMainFrame(JsamsI18nResource.APPLICATION_TITLE);
 
 	protected static JsamsDesktop instance = null;
 
@@ -31,7 +31,6 @@ public class JsamsDesktop {
 				stopNow();
 			}
 		});
-		setMainWindowTitle(title);
 		initComponents();
 	}
 
@@ -59,16 +58,6 @@ public class JsamsDesktop {
 	 */
 	public JsamsMainFrame getMainWindow() {
 		return frame;
-	}
-
-	/**
-	 * Sets the title in the title bar of the main window.
-	 * 
-	 * @param title
-	 *            a translatable title.
-	 */
-	public void setMainWindowTitle(final I18nString title) {
-		frame.setMainTitle(title);
 	}
 
 	/**
