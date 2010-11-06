@@ -101,8 +101,8 @@
 	<bean id="civilityDao" class="be.jsams.server.dao.impl.CivilityDaoImpl">
 		<constructor-arg value="be.jsams.server.model.Address" />
 	</bean>
-	<bean id="contactDao" class="be.jsams.server.dao.impl.ContactDaoImpl">
-		<constructor-arg value="be.jsams.server.model.Contact" />
+	<bean id="agentDao" class="be.jsams.server.dao.impl.AgentDaoImpl">
+		<constructor-arg value="be.jsams.server.model.Agent" />
 	</bean>
 	<bean id="customerDao" class="be.jsams.server.dao.impl.CustomerDaoImpl">
 		<constructor-arg value="be.jsams.server.model.Customer" />
