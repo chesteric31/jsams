@@ -12,7 +12,7 @@
 		<class>be.jsams.server.model.Civility</class>
 		<class>be.jsams.server.model.Command</class>
 		<class>be.jsams.server.model.CommandDetail</class>
-		<class>be.jsams.server.model.Contact</class>
+		<class>be.jsams.server.model.Agent</class>
 		<class>be.jsams.server.model.ContactInformation</class>
 		<class>be.jsams.server.model.Customer</class>
 		<class>be.jsams.server.model.Estimate</class>
