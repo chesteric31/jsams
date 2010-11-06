@@ -32,7 +32,7 @@ public class Command extends AbstractIdentity {
 	private String remark;
 	private BigDecimal discountRate;
 	
-	private Contact contact;
+	private Agent agent;
 	private Customer customer;
 	private Address billingAddress;
 	private Address deliveryAddress;
@@ -72,13 +72,13 @@ public class Command extends AbstractIdentity {
 	}
 
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "FK_CONTACT")
-	public Contact getContact() {
-		return contact;
+	@JoinColumn(name = "FK_AGENT")
+	public Agent getAgent() {
+		return agent;
 	}
 
-	public void setContact(Contact contact) {
-		this.contact = contact;
+	public void setAgent(Agent agent) {
+		this.agent = agent;
 	}
 
 	@ManyToOne(cascade = CascadeType.ALL)
@@ -122,10 +122,11 @@ public class Command extends AbstractIdentity {
 
 	@Override
 	public String toString() {
-		return "Command [billingAddress=" + billingAddress + ", contact="
-				+ contact + ", creationDate=" + creationDate + ", customer="
-				+ customer + ", deliveryAddress=" + deliveryAddress
-				+ ", discountRate=" + discountRate + ", remark=" + remark + "]";
+		return "Command [agent=" + agent + ", billingAddress=" + billingAddress
+				+ ", creationDate=" + creationDate + ", customer=" + customer
+				+ ", deliveryAddress=" + deliveryAddress + ", details="
+				+ details + ", discountRate=" + discountRate + ", remark="
+				+ remark + "]";
 	}
 
 }
