@@ -1,6 +1,6 @@
 package be.jsams.server.dao;
 
-import be.jsams.server.model.Contact;
+import be.jsams.server.model.Agent;
 
 /**
  * Contact DAO interface.
@@ -8,6 +8,6 @@ import be.jsams.server.model.Contact;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public interface ContactDao extends GenericDao<Contact> {
+public interface AgentDao extends GenericDao<Agent> {
 
 }
