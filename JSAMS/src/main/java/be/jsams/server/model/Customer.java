@@ -1,14 +1,12 @@
 package be.jsams.server.model;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -41,7 +39,7 @@ public class Customer extends AbstractIdentity {
 	private ContactInformation contactInformation;
 	private Civility civility;
 	
-	private List<Contact> contacts;
+	private Agent agent;
 	
 	public Customer() {
 		super();
@@ -169,27 +167,26 @@ public class Customer extends AbstractIdentity {
 		this.civility = civility;
 	}
 	
-	@ManyToMany
-	@JoinTable(name = "CUSTOMER_CONTACT", joinColumns = { @JoinColumn(name = "FK_CUSTOMER") }, inverseJoinColumns = { @JoinColumn(name = "FK_CONTACT") })
-	public List<Contact> getContacts() {
-		return contacts;
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "FK_AGENT")
+	public Agent getAgent() {
+		return agent;
 	}
 
-	public void setContacts(List<Contact> contacts) {
-		this.contacts = contacts;
+	public void setAgent(Agent agent) {
+		this.agent = agent;
 	}
 
 	@Override
 	public String toString() {
-		return "Customer [bank1=" + bank1 + ", bank2=" + bank2
-				+ ", billingAddress=" + billingAddress + ", civility="
+		return "Customer [agent=" + agent + ", bank1=" + bank1 + ", bank2="
+				+ bank2 + ", billingAddress=" + billingAddress + ", civility="
 				+ civility + ", contactInformation=" + contactInformation
-				+ ", contacts=" + contacts + ", creditLimit=" + creditLimit
-				+ ", defaultDiscountRate=" + defaultDiscountRate
-				+ ", deliveryAddress=" + deliveryAddress + ", description="
-				+ description + ", name=" + name + ", paymentMode="
-				+ paymentMode + ", vatApplicable=" + vatApplicable
-				+ ", vatNumber=" + vatNumber + "]";
+				+ ", creditLimit=" + creditLimit + ", defaultDiscountRate="
+				+ defaultDiscountRate + ", deliveryAddress=" + deliveryAddress
+				+ ", description=" + description + ", name=" + name
+				+ ", paymentMode=" + paymentMode + ", vatApplicable="
+				+ vatApplicable + ", vatNumber=" + vatNumber + "]";
 	}
-	
+
 }

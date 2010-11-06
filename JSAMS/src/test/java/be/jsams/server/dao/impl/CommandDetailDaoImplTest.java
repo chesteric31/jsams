@@ -12,10 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import be.jsams.server.dao.AbstractJUnitTestClass;
 import be.jsams.server.dao.CommandDetailDao;
 import be.jsams.server.model.Address;
+import be.jsams.server.model.Agent;
 import be.jsams.server.model.Civility;
 import be.jsams.server.model.Command;
 import be.jsams.server.model.CommandDetail;
-import be.jsams.server.model.Contact;
 import be.jsams.server.model.ContactInformation;
 import be.jsams.server.model.Customer;
 import be.jsams.server.model.PaymentMode;
@@ -49,11 +49,11 @@ public class CommandDetailDaoImplTest extends AbstractJUnitTestClass {
 		
 		newCommand.setBillingAddress(billingAddress);
 		
-		Contact contact = new Contact();
-		contact.setFunction("Saler");
-		contact.setName("John Doe");
+		Agent agent = new Agent();
+		agent.setFunction("Saler");
+		agent.setName("John Doe");
 		
-		newCommand.setContact(contact);
+		newCommand.setAgent(agent);
 		
 		newCommand.setCreationDate(new Date());
 		

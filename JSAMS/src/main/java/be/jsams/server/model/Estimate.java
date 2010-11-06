@@ -32,7 +32,7 @@ public class Estimate extends AbstractIdentity {
 	private String remark;
 	private BigDecimal discountRate;
 
-	private Contact contact;
+	private Agent agent;
 	private Customer customer;
 	private Address billingAddress;
 
@@ -71,13 +71,13 @@ public class Estimate extends AbstractIdentity {
 	}
 
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "FK_CONTACT")
-	public Contact getContact() {
-		return contact;
+	@JoinColumn(name = "FK_AGENT")
+	public Agent getAgent() {
+		return agent;
 	}
 
-	public void setContact(Contact contact) {
-		this.contact = contact;
+	public void setAgent(Agent agent) {
+		this.agent = agent;
 	}
 
 	@ManyToOne(cascade = CascadeType.ALL)
@@ -111,10 +111,10 @@ public class Estimate extends AbstractIdentity {
 
 	@Override
 	public String toString() {
-		return "Estimate [billingAddress=" + billingAddress + ", contact="
-				+ contact + ", creationDate=" + creationDate + ", customer="
-				+ customer + ", discountRate=" + discountRate + ", remark="
-				+ remark + "]";
+		return "Estimate [agent=" + agent + ", billingAddress="
+				+ billingAddress + ", creationDate=" + creationDate
+				+ ", customer=" + customer + ", details=" + details
+				+ ", discountRate=" + discountRate + ", remark=" + remark + "]";
 	}
 
 }

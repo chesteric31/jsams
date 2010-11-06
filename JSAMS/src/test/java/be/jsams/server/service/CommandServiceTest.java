@@ -17,10 +17,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import be.jsams.server.dao.AbstractJUnitTestClass;
 import be.jsams.server.model.Address;
+import be.jsams.server.model.Agent;
 import be.jsams.server.model.Civility;
 import be.jsams.server.model.Command;
 import be.jsams.server.model.CommandDetail;
-import be.jsams.server.model.Contact;
 import be.jsams.server.model.ContactInformation;
 import be.jsams.server.model.Customer;
 import be.jsams.server.model.PaymentMode;
@@ -57,11 +57,11 @@ public class CommandServiceTest extends AbstractJUnitTestClass {
 		
 		newCommand.setBillingAddress(billingAddress);
 		
-		Contact contact = new Contact();
+		Agent contact = new Agent();
 		contact.setFunction("Saler");
 		contact.setName("John Doe");
 		
-		newCommand.setContact(contact);
+		newCommand.setAgent(contact);
 		
 		newCommand.setCreationDate(new Date());
 		
