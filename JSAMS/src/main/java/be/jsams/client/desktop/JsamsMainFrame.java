@@ -8,7 +8,6 @@ import javax.swing.JSeparator;
 
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.i18n.JsamsI18nResource;
-import be.jsams.client.society.SocietyEditFrame;
 import be.jsams.client.swing.component.JsamsFrame;
 import be.jsams.client.swing.component.JsamsMenu;
 import be.jsams.client.swing.component.JsamsMenuItem;
@@ -53,9 +52,9 @@ public class JsamsMainFrame extends JsamsFrame {
 	}
 	
 	private void initComponents() {
+		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		try {
 			mainMenuBar = new JMenuBar();
-			setJMenuBar(mainMenuBar);
 			fileMenu = new JsamsMenu(JsamsI18nResource.MENU_FILE);
 			mainMenuBar.add(fileMenu);
 			societyParametersMenuItem = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_SOCIETY_PARAMETERS);
@@ -98,7 +97,7 @@ public class JsamsMainFrame extends JsamsFrame {
 			helpMenu.add(helpSeparator);
 			aboutMenuItem = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_ABOUT);
 			helpMenu.add(aboutMenuItem);
-			
+			setJMenuBar(mainMenuBar);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -116,12 +115,10 @@ public class JsamsMainFrame extends JsamsFrame {
 	private ActionListener societyEditListener(final JsamsMainFrame mainFrame) {
 		ActionListener listener = new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				new SocietyEditFrame(JsamsI18nResource.TITLE_EDIT_SOCIETY_PARAMETERS, mainFrame);
+//				new SocietyEditFrame(JsamsI18nResource.TITLE_EDIT_SOCIETY_PARAMETERS, mainFrame);
 			}
 		};
 		return listener;
 	}
-	
-	
-}
 
+}
