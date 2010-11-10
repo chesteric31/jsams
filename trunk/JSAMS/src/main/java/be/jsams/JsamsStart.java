@@ -5,7 +5,6 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.client.i18n.I18nApplicationContext;
-import be.jsams.client.i18n.I18nString;
 
 /**
  * Startup class for the Jsams Application.
@@ -31,8 +30,7 @@ public class JsamsStart {
         I18nApplicationContext.setContext(
                 new ClassPathXmlApplicationContext(I18nApplicationContext.CONFIG));
 		
-		I18nString title = new I18nString("application.title");
-		JsamsDesktop application = new JsamsDesktop(title);
+		JsamsDesktop application = new JsamsDesktop();
 		application.start();
 	}
 
