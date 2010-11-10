@@ -19,11 +19,19 @@ import be.jsams.client.i18n.JsamsI18nResource;
  */
 public class JsamsDesktop {
 
-	private final JsamsMainFrame frame = new JsamsMainFrame(JsamsI18nResource.APPLICATION_TITLE);
+	private String currentSociety = "";
+
+	private I18nString title = new I18nString("title.application",
+			new Object[] { currentSociety });
+
+	private final JsamsMainFrame frame = new JsamsMainFrame(title);
+
+	private ChooseSocietyFrame chooseSocietyFrame = new ChooseSocietyFrame(
+			JsamsI18nResource.TITLE_CHOOSE_SOCIETY);
 
 	protected static JsamsDesktop instance = null;
 
-	public JsamsDesktop(final I18nString title) {
+	public JsamsDesktop() {
 		instance = this;
 
 		getMainWindow().addWindowListener(new WindowAdapter() {
@@ -39,15 +47,16 @@ public class JsamsDesktop {
 	 */
 	private void initComponents() {
 		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-		screen = new Dimension((int) screen.getWidth(), (int) screen
+		Dimension center = new Dimension((int) screen.getWidth(), (int) screen
 				.getHeight());
 
-		getMainWindow().setSize(screen);
+		getMainWindow().setSize(center);
 		getMainWindow().setExtendedState(JFrame.MAXIMIZED_BOTH);
 	}
 
 	public void start() {
 		frame.setVisible(true);
+		chooseSocietyFrame.setVisible(true);
 	}
 
 	/**
@@ -64,11 +73,22 @@ public class JsamsDesktop {
 	 * Exits the application after having shown a confirmation dialog.
 	 */
 	public void stopNow() {
-		int confirm = JOptionPane.showConfirmDialog(getMainWindow(), JsamsI18nResource.EXIT_APPLICATION_CONFIRMATION);
+		int confirm = JOptionPane.showConfirmDialog(getMainWindow(),
+				JsamsI18nResource.EXIT_APPLICATION_CONFIRMATION);
 		if (confirm == 0) {
 			frame.dispose();
 			System.exit(0);
 		}
+	}
+
+	public String getCurrentSociety() {
+		return currentSociety;
+	}
+
+	public void setCurrentSociety(String currentSociety) {
+		this.currentSociety = currentSociety;
+		title.setArguments(new Object[] { this.currentSociety });
+		this.frame.setTitle(title);
 	}
 
 }
