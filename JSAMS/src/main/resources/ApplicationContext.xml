@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
@@ -75,12 +74,17 @@
 	</bean>
 	<bean id="societyServiceTarget" class="be.jsams.server.service.impl.SocietyServiceImpl">
 		<property name="societyDao" ref="societyDao" />
-		<property name="legalFormDao" ref="legalFormDao" />
 	</bean>
 	<bean id="societyService" parent="baseTransactionProxy">
 		<property name="target" ref="societyServiceTarget" />
 	</bean>
-	
+	<bean id="legalFormServiceTarget" class="be.jsams.server.service.impl.LegalFormServiceImpl">
+		<property name="legalFormDao" ref="legalFormDao" />
+	</bean>
+	<bean id="legalFormService" parent="baseTransactionProxy">
+		<property name="target" ref="legalFormServiceTarget" />
+	</bean>
+
 	<bean id="commandDao" class="be.jsams.server.dao.impl.CommandDaoImpl">
 		<constructor-arg value="be.jsams.server.model.Command" />
 	</bean>
@@ -116,7 +120,7 @@
 	<bean id="productDao" class="be.jsams.server.dao.impl.ProductDaoImpl">
 		<constructor-arg value="be.jsams.server.model.Product" />
 	</bean>
-	
+
 	<import resource="i18nApplicationContext.xml" />
 
 </beans>
