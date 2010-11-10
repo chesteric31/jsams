@@ -2,7 +2,6 @@ package be.jsams.server.service;
 
 import java.util.List;
 
-import be.jsams.server.model.LegalForm;
 import be.jsams.server.model.Society;
 
 /**
@@ -25,6 +24,4 @@ public interface SocietyService {
 
 	public List<Society> findAll();
 	
-	public void createLegalForm(LegalForm legalForm);
-
 }
