@@ -11,6 +11,12 @@ import be.jsams.client.i18n.JsamsI18nResource;
 
 import com.jgoodies.forms.factories.ButtonBarFactory;
 
+/**
+ * Custom {@link JPanel} with OK, Cancel and Reset buttons.
+ *
+ * @author chesteric31
+ * @version $Rev$ $Date::                  $ $Author$
+ */
 public class JsamsOkCancelResetButtonPanel extends JPanel {
 
 	private static final int DEFAULT_V_GAP = 10;
