@@ -8,9 +8,9 @@ import be.jsams.server.service.LegalFormService;
 
 /**
  * Legal form service implementation.
- * 
+ *
  * @author chesteric31
- * @version $Rev$ $Date:: $ $Author$
+ * @version $Rev$ $Date::                  $ $Author$
  */
 public class LegalFormServiceImpl implements LegalFormService {
 
