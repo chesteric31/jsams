@@ -2,23 +2,19 @@ package be.jsams.server.service.impl;
 
 import java.util.List;
 
-import be.jsams.server.dao.LegalFormDao;
 import be.jsams.server.dao.SocietyDao;
-import be.jsams.server.model.LegalForm;
 import be.jsams.server.model.Society;
 import be.jsams.server.service.SocietyService;
 
 /**
  * Society service implementation.
  * 
- *
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
 public class SocietyServiceImpl implements SocietyService {
 
 	private SocietyDao societyDao;
-	private LegalFormDao legalFormDao;
 
 	public SocietyDao getSocietyDao() {
 		return societyDao;
@@ -26,14 +22,6 @@ public class SocietyServiceImpl implements SocietyService {
 
 	public void setSocietyDao(SocietyDao societyDao) {
 		this.societyDao = societyDao;
-	}
-
-	public LegalFormDao getLegalFormDao() {
-		return legalFormDao;
-	}
-
-	public void setLegalFormDao(LegalFormDao legalFormDao) {
-		this.legalFormDao = legalFormDao;
 	}
 
 	public List<Society> findAll() {
@@ -49,12 +37,7 @@ public class SocietyServiceImpl implements SocietyService {
 	}
 
 	public void create(Society society) {
-		List<Society> societies = societyDao.findAll();
-		if (societies == null || societies.isEmpty()) {
-			societyDao.add(society);
-		} else {
-			throw new RuntimeException("Cannot create more than one society.");
-		}
+		societyDao.add(society);
 	}
 
 	public void delete(Society society) {
@@ -63,10 +46,6 @@ public class SocietyServiceImpl implements SocietyService {
 
 	public void delete(Long id) {
 		societyDao.remove(id);
-	}
-
-	public void createLegalForm(LegalForm legalForm) {
-		legalFormDao.add(legalForm);
 	}
 
 }
