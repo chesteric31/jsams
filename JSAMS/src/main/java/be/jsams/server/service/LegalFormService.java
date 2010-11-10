@@ -6,10 +6,9 @@ import be.jsams.server.model.LegalForm;
 
 /**
  * Legal form interface.
- * 
- * 
+ *
  * @author chesteric31
- * @version $Rev$ $Date:: $ $Author$
+ * @version $Rev$ $Date::                  $ $Author$
  */
 public interface LegalFormService {
 
