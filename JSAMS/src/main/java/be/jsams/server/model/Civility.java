@@ -19,6 +19,8 @@ public class Civility extends AbstractIdentity {
 	 */
 	private static final long serialVersionUID = -7268110575101379157L;
 	private String label;
+	private String labelFr;
+	private String labelNl;
 
 	public Civility() {
 		super();
@@ -33,9 +35,28 @@ public class Civility extends AbstractIdentity {
 		this.label = label;
 	}
 
+	@Column(name = "LABEL_FR")
+	public String getLabelFr() {
+		return labelFr;
+	}
+
+	public void setLabelFr(String labelFr) {
+		this.labelFr = labelFr;
+	}
+
+	@Column(name = "LABEL_NL")
+	public String getLabelNl() {
+		return labelNl;
+	}
+
+	public void setLabelNl(String labelNl) {
+		this.labelNl = labelNl;
+	}
+
 	@Override
 	public String toString() {
-		return "Civility [label=" + label + "]";
+		return "Civility [label=" + label + ", labelFr=" + labelFr
+				+ ", labelNl=" + labelNl + "]";
 	}
-	
+
 }
