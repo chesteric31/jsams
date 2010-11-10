@@ -34,7 +34,7 @@ public class JsamsFrame extends JFrame {
 	 * @param title
 	 *            the {@link I18nString} title
 	 */
-	protected void setTitle(final I18nString title) {
+	public void setTitle(final I18nString title) {
 		setTitle(title.getTranslation());
 	}
 
