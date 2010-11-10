@@ -22,6 +22,12 @@ import be.jsams.server.model.Society;
 import com.jgoodies.forms.builder.DefaultFormBuilder;
 import com.jgoodies.forms.layout.FormLayout;
 
+/**
+ * Choose society {@link JsamsFrame}.
+ *
+ * @author chesteric31
+ * @version $Rev$ $Date::                  $ $Author$
+ */
 public class ChooseSocietyFrame extends JsamsFrame {
 
 	/**

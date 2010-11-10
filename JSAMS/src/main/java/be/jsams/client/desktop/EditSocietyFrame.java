@@ -24,6 +24,12 @@ import be.jsams.server.model.LegalForm;
 import com.jgoodies.forms.builder.DefaultFormBuilder;
 import com.jgoodies.forms.layout.FormLayout;
 
+/**
+ * Edit society {@link JsamsFrame}.
+ *
+ * @author chesteric31
+ * @version $Rev$ $Date::                  $ $Author$
+ */
 public class EditSocietyFrame extends JsamsFrame {
 
 	private static final int MAX_COLUMN_SPAN = 9;
