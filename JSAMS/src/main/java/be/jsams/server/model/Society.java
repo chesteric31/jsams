@@ -33,7 +33,6 @@ public class Society extends AbstractIdentity {
 	private Address address;
 	private LegalForm legalForm;
 	private ContactInformation contactInformation;
-	private Civility civility;
 
 	public Society() {
 		super();
@@ -113,24 +112,14 @@ public class Society extends AbstractIdentity {
 	public void setContactInformation(ContactInformation contactInformation) {
 		this.contactInformation = contactInformation;
 	}
-	
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "FK_CIVILITY")
-	public Civility getCivility() {
-		return civility;
-	}
-
-	public void setCivility(Civility civility) {
-		this.civility = civility;
-	}
 
 	@Override
 	public String toString() {
 		return "Society [activity=" + activity + ", address=" + address
-				+ ", capital=" + capital + ", civility=" + civility
-				+ ", contactInformation=" + contactInformation + ", label="
-				+ label + ", legalForm=" + legalForm + ", responsible="
-				+ responsible + ", vatNumber=" + vatNumber + "]";
+				+ ", capital=" + capital + ", contactInformation="
+				+ contactInformation + ", label=" + label + ", legalForm="
+				+ legalForm + ", responsible=" + responsible + ", vatNumber="
+				+ vatNumber + "]";
 	}
-
+	
 }
