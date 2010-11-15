@@ -40,6 +40,9 @@ public class JsamsI18nResource {
 	public static final I18nString MENU_ITEM_EXIT_APPLICATION = new I18nString(
 			"menu.item.exit");
 
+	public static final I18nString MENU_ITEM_CANCEL = new I18nString(
+			"menu.item.cancel");
+
 	public static final I18nString MENU_ITEM_CUT = new I18nString(
 			"menu.item.cut");
 
@@ -48,6 +51,15 @@ public class JsamsI18nResource {
 
 	public static final I18nString MENU_ITEM_PASTE = new I18nString(
 			"menu.item.paste");
+
+	public static final I18nString MENU_ITEM_REFRESH = new I18nString(
+			"menu.item.refresh");
+
+	public static final I18nString MENU_ITEM_CLOSE_WINDOW = new I18nString(
+			"menu.item.close_window");
+
+	public static final I18nString MENU_ITEM_CLOSE_ALL_WINDOWS = new I18nString(
+			"menu.item.close_all_windows");
 
 	public static final I18nString MENU_ITEM_HELP = new I18nString(
 			"menu.item.help");
@@ -103,8 +115,7 @@ public class JsamsI18nResource {
 	public static final I18nString PANEL_CONTACT_INFORMATIONS_TITLE = new I18nString(
 			"panel.contact_informations.title");
 
-	public static final I18nString BUTTON_RESET = new I18nString(
-			"button.reset");
+	public static final I18nString BUTTON_RESET = new I18nString("button.reset");
 
 	public static final I18nString TITLE_EDIT_SOCIETY = new I18nString(
 			"title.edit.society");
@@ -140,4 +151,44 @@ public class JsamsI18nResource {
 	public static final I18nString LABEL_VAT_NUMBER = new I18nString(
 			"label.vat_number");
 
+	public static final I18nString MENU_ITEM_CLOSE = new I18nString(
+			"menu.item.close");
+
+	public static final I18nString MENU_ITEM_CREATE_DOCUMENTS = new I18nString(
+			"menu.item.create_documents");
+
+	public static final I18nString MENU_MANAGEMENT = new I18nString(
+			"menu.management");
+
+	public static final I18nString MENU_ITEM_CUSTOMERS = new I18nString(
+			"menu.item.customers");
+
+	public static final I18nString MENU_ITEM_PRODUCTS_CATEGORY = new I18nString(
+			"menu.item.products_category");
+
+	public static final I18nString MENU_ITEM_PRODUCTS = new I18nString(
+			"menu.item.products");
+
+	public static final I18nString MENU_ITEM_LIST_DOCUMENTS = new I18nString(
+			"menu.item.list_documents");
+
+	public static final I18nString MENU_ITEM_NEW = new I18nString(
+			"menu.item.new");
+
+	public static final I18nString MENU_ITEM_OPEN = new I18nString(
+			"menu.item.open");
+
+	public static final I18nString MENU_ITEM_NEXT = new I18nString(
+			"menu.item.next");
+
+	public static final I18nString MENU_ITEM_PREVIOUS = new I18nString(
+			"menu.item.previous");
+
+	public static final I18nString MENU_ITEM_SELECT_ALL = new I18nString(
+			"menu.item.select_all");
+
+	public static final I18nString MENU_ITEM_TRANSFER_DOCUMENTS = new I18nString(
+			"menu.item.transfer_documents");
+	
+	public static final I18nString MENU_WINDOWS = new I18nString("menu.windows");
 }
