@@ -4,28 +4,34 @@ import javax.swing.JFrame;
 import javax.swing.UIManager;
 
 import be.jsams.client.i18n.I18nString;
+import be.jsams.client.swing.utils.IconUtil;
 
 /**
  * Generic {@link JFrame} for Jsams application.
- *
+ * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
 public class JsamsFrame extends JFrame {
 
 	/**
-	 * Serial Version
+	 * Serial Version UID
 	 */
 	private static final long serialVersionUID = 5732252811794674139L;
-	
+
 	public JsamsFrame() {
 		super();
 		setNativeLookAndFeel();
 	}
-	
+
 	public JsamsFrame(final I18nString title) {
 		this();
 		setTitle(title);
+	}
+
+	public JsamsFrame(final I18nString title, final String iconFileName) {
+		this(title);
+		setIconImage(IconUtil.buildIcon(iconFileName));
 	}
 
 	/**
@@ -48,4 +54,5 @@ public class JsamsFrame extends JFrame {
 			e.printStackTrace();
 		}
 	}
+	
 }
