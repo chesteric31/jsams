@@ -45,6 +45,7 @@
   <classpathentry kind="var" path="M2_REPO/org/springframework/spring-orm/3.0.3.RELEASE/spring-orm-3.0.3.RELEASE.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/springframework/spring-test/3.0.3.RELEASE/spring-test-3.0.3.RELEASE.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/springframework/spring-tx/3.0.3.RELEASE/spring-tx-3.0.3.RELEASE.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/freedesktop/tango/tango-icon-theme/0.8.90/tango-icon-theme-0.8.90.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/jgoodies/validation/2.0.1/validation-2.0.1.jar"/>
   <classpathentry kind="var" path="M2_REPO/xml-apis/xml-apis/1.0.b2/xml-apis-1.0.b2.jar"/>
   <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
