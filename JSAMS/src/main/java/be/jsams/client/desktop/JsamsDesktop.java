@@ -5,11 +5,11 @@ import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.i18n.JsamsI18nResource;
+import be.jsams.server.model.Society;
 
 /**
  * Jsams desktop.
@@ -19,22 +19,30 @@ import be.jsams.client.i18n.JsamsI18nResource;
  */
 public class JsamsDesktop {
 
-	private String currentSociety = "";
+	/**
+	 * Serial Version UID
+	 */
+	private static final long serialVersionUID = 4428593979427620070L;
 
-	private I18nString title = new I18nString("title.application",
-			new Object[] { currentSociety });
+	private Society currentSociety = null;
+
+	private I18nString title = new I18nString("title.application_no_arguments");
 
 	private final JsamsMainFrame frame = new JsamsMainFrame(title);
+
+	protected static JsamsDesktop instance = null;
 
 	private ChooseSocietyFrame chooseSocietyFrame = new ChooseSocietyFrame(
 			JsamsI18nResource.TITLE_CHOOSE_SOCIETY);
 
-	protected static JsamsDesktop instance = null;
+	public static final Dimension screen = Toolkit.getDefaultToolkit()
+			.getScreenSize();
+	public static final Dimension center = new Dimension((int) screen
+			.getWidth(), (int) screen.getHeight());
 
 	public JsamsDesktop() {
 		instance = this;
-
-		getMainWindow().addWindowListener(new WindowAdapter() {
+		frame.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent we) {
 				stopNow();
 			}
@@ -46,16 +54,14 @@ public class JsamsDesktop {
 	 * Initializes the window.
 	 */
 	private void initComponents() {
-		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-		Dimension center = new Dimension((int) screen.getWidth(), (int) screen
-				.getHeight());
-
-		getMainWindow().setSize(center);
-		getMainWindow().setExtendedState(JFrame.MAXIMIZED_BOTH);
 	}
 
 	public void start() {
 		frame.setVisible(true);
+		chooseSocietyFrame.setBounds(screen.width / 2
+				- chooseSocietyFrame.getWidth() / 2, screen.height / 2
+				- chooseSocietyFrame.getHeight() / 2, chooseSocietyFrame
+				.getWidth(), chooseSocietyFrame.getHeight());
 		chooseSocietyFrame.setVisible(true);
 	}
 
@@ -81,14 +87,15 @@ public class JsamsDesktop {
 		}
 	}
 
-	public String getCurrentSociety() {
+	public Society getCurrentSociety() {
 		return currentSociety;
 	}
 
-	public void setCurrentSociety(String currentSociety) {
+	public void setCurrentSociety(Society currentSociety) {
 		this.currentSociety = currentSociety;
-		title.setArguments(new Object[] { this.currentSociety });
-		this.frame.setTitle(title);
+		I18nString newTitle = new I18nString("title.application",
+				new Object[] { this.currentSociety.getLabel() });
+		frame.setTitle(newTitle);
 	}
 
 }

@@ -24,7 +24,7 @@ import com.jgoodies.forms.layout.FormLayout;
 
 /**
  * Choose society {@link JsamsFrame}.
- *
+ * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
@@ -34,6 +34,10 @@ public class ChooseSocietyFrame extends JsamsFrame {
 	 * Serial Version UID
 	 */
 	private static final long serialVersionUID = 237617341189579756L;
+
+	private JComboBox comboBox = null;
+
+	private JsamsButton buttonOk = null;
 
 	public ChooseSocietyFrame(final I18nString title) {
 		super(title);
@@ -50,8 +54,8 @@ public class ChooseSocietyFrame extends JsamsFrame {
 		builder.appendSeparator();
 		List<Society> allSocieties = JsamsApplicationContext
 				.getSocietyService().findAll();
-		final JComboBox combobox = new JComboBox(allSocieties.toArray());
-		combobox.setRenderer(new ListCellRenderer() {
+		comboBox = new JComboBox(allSocieties.toArray());
+		comboBox.setRenderer(new ListCellRenderer() {
 
 			protected DefaultListCellRenderer defaultRenderer = new DefaultListCellRenderer();
 
@@ -73,9 +77,60 @@ public class ChooseSocietyFrame extends JsamsFrame {
 			}
 		});
 		builder.append(JsamsI18nResource.LABEL_CHOOSE_SOCIETY_AVAILABLES
-				.getTranslation(), combobox);
+				.getTranslation(), comboBox);
+		JsamsButton buttonNewSociety = buildButtonNewSociety();
+		builder.append(buttonNewSociety);
+		builder.nextLine();
+		builder.appendSeparator();
+		builder.nextLine();
+		buttonOk = buildButtonOk();
+		JsamsButton cancelButton = buildButtonCancel();
+		builder.append(buttonOk, cancelButton);
+		JPanel panel = builder.getPanel();
+
+		add(panel);
+		pack();
+		setResizable(false);
+	}
+
+	private JsamsButton buildButtonOk() {
+		JsamsButton buttonOk = new JsamsButton(JsamsI18nResource.BUTTON_OK);
+		if (comboBox.getModel().getSize() == 0) {
+			buttonOk.setEnabled(false);
+		}
+		buttonOk.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				Object selectedItem = comboBox.getSelectedItem();
+				if (comboBox.getSelectedIndex() > -1 && selectedItem != null) {
+					JsamsDesktop jsamsDesktop = JsamsDesktop.instance;
+					jsamsDesktop
+							.setCurrentSociety(((Society) selectedItem));
+					jsamsDesktop.getMainWindow().setEnabled(true);
+					dispose();
+				}
+			}
+		});
+		return buttonOk;
+	}
+
+	private JsamsButton buildButtonCancel() {
+		JsamsButton buttonCancel = new JsamsButton(
+				JsamsI18nResource.BUTTON_CANCEL);
+		buttonCancel.addActionListener(new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				JsamsDesktop.instance.getMainWindow().setEnabled(true);
+				dispose();
+			}
+		});
+		return buttonCancel;
+	}
+
+	private JsamsButton buildButtonNewSociety() {
 		JsamsButton buttonNewSociety = new JsamsButton(
-				JsamsI18nResource.BUTTON_CHOOSE_SOCIETIES_NEW);
+				JsamsI18nResource.BUTTON_CHOOSE_SOCIETIES_NEW,
+				"org/freedesktop/tango/16x16/actions/folder-new.png");
 		buttonNewSociety.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
@@ -83,34 +138,6 @@ public class ChooseSocietyFrame extends JsamsFrame {
 				new EditSocietyFrame();
 			}
 		});
-		builder.append(buttonNewSociety);
-		builder.nextLine();
-		builder.appendSeparator();
-		builder.nextLine();
-		JsamsButton buttonOk = new JsamsButton(JsamsI18nResource.BUTTON_OK);
-		buttonOk.addActionListener(new ActionListener() {
-
-			public void actionPerformed(ActionEvent e) {
-				if (combobox.getSelectedIndex() > -1) {
-					JsamsDesktop.instance.setCurrentSociety(((Society) combobox
-							.getSelectedItem()).getLabel());
-					dispose();
-				}
-			}
-		});
-		JsamsButton cancelButton = new JsamsButton(
-				JsamsI18nResource.BUTTON_CANCEL);
-		cancelButton.addActionListener(new ActionListener() {
-
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-			}
-		});
-		builder.append(buttonOk, cancelButton);
-		JPanel panel = builder.getPanel();
-
-		add(panel);
-		pack();
-		setLocationRelativeTo(null);
+		return buttonNewSociety;
 	}
 }
