@@ -113,5 +113,10 @@
   		<artifactId>forms</artifactId>
   		<version>1.2.1</version>
   	</dependency>
+  	<dependency>
+  		<groupId>org.freedesktop.tango</groupId>
+  		<artifactId>tango-icon-theme</artifactId>
+  		<version>0.8.90</version>
+  	</dependency>
   </dependencies>
 </project>
