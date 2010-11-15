@@ -2,7 +2,6 @@ package be.jsams.client.desktop;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
-import java.util.LinkedList;
 import java.util.List;
 
 import javax.swing.DefaultListCellRenderer;
@@ -26,7 +25,7 @@ import com.jgoodies.forms.layout.FormLayout;
 
 /**
  * Edit society {@link JsamsFrame}.
- *
+ * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
@@ -37,6 +36,40 @@ public class EditSocietyFrame extends JsamsFrame {
 	private static final int MAX_CHARACTERS = 50;
 
 	private LegalFormDao legalFormDao;
+
+	public JTextField textFieldName = new JTextField(MAX_CHARACTERS);
+
+	public JTextField textFieldStreet = new JTextField(MAX_CHARACTERS);
+
+	public JTextField textFieldNumber = new JTextField(10);
+
+	public JTextField textFieldBox = new JTextField(10);
+
+	public JTextField textFieldZipCode = new JTextField(10);
+
+	public JTextField textFieldCity = new JTextField(MAX_CHARACTERS);
+
+	public JTextField textFieldCountry = new JTextField(MAX_CHARACTERS);
+	
+	public JTextField textFieldPhone = new JTextField(MAX_CHARACTERS);
+
+	public JTextField textFieldFax = new JTextField(MAX_CHARACTERS);
+
+	public JTextField textFieldMobile = new JTextField(MAX_CHARACTERS);
+	
+	public JTextField textFieldEmail = new JTextField(MAX_CHARACTERS);
+
+	public JTextField textFieldWebsite = new JTextField(MAX_CHARACTERS);
+	
+	public JComboBox comboBoxLegalForm;
+
+	public JTextField textFieldCapital = new JTextField(MAX_CHARACTERS);
+
+	public JTextField textFieldActivity = new JTextField(MAX_CHARACTERS);
+
+	public JTextField textFieldResponsible = new JTextField(MAX_CHARACTERS);
+
+	public JTextField textFieldVatNumber = new JTextField(MAX_CHARACTERS);
 
 	/**
 	 * Serial Version UID
@@ -64,71 +97,67 @@ public class EditSocietyFrame extends JsamsFrame {
 		DefaultFormBuilder builder = new DefaultFormBuilder(layoutAddress);
 		builder.setDefaultDialogBorder();
 		builder.append(JsamsI18nResource.LABEL_NAME.getTranslation(),
-				new JTextField(MAX_CHARACTERS), MAX_COLUMN_SPAN);
+				textFieldName, MAX_COLUMN_SPAN);
 		builder.nextLine();
 		builder.appendSeparator(JsamsI18nResource.LABEL_ADDRESS
 				.getTranslation());
 		builder.append(JsamsI18nResource.LABEL_STREET.getTranslation(),
-				new JTextField(MAX_CHARACTERS), MAX_COLUMN_SPAN);
+				textFieldStreet, MAX_COLUMN_SPAN);
 		builder.nextLine();
 		builder.append(JsamsI18nResource.LABEL_NUMBER.getTranslation(),
-				new JTextField(10));
+				textFieldNumber);
 		builder.append(JsamsI18nResource.LABEL_BOX.getTranslation(),
-				new JTextField(10), 1);
+				textFieldBox, 1);
 		builder.append(JsamsI18nResource.LABEL_ZIP_CODE.getTranslation(),
-				new JTextField(10), 1);
+				textFieldZipCode, 1);
 		builder.append(JsamsI18nResource.LABEL_CITY.getTranslation(),
-				new JTextField(MAX_CHARACTERS), MAX_COLUMN_SPAN);
+				textFieldCity, MAX_COLUMN_SPAN);
 		builder.append(JsamsI18nResource.LABEL_COUNTRY.getTranslation(),
-				new JTextField(MAX_CHARACTERS), MAX_COLUMN_SPAN);
+				textFieldCountry, MAX_COLUMN_SPAN);
 		builder.nextLine();
 
 		builder.appendSeparator(JsamsI18nResource.LABEL_CONTACT_INFORMATIONS
 				.getTranslation());
 		builder.append(JsamsI18nResource.LABEL_PHONE.getTranslation(),
-				new JTextField(MAX_CHARACTERS), MAX_COLUMN_SPAN);
+				textFieldPhone, MAX_COLUMN_SPAN);
 		builder.nextLine();
 		builder.append(JsamsI18nResource.LABEL_FAX.getTranslation(),
-				new JTextField(MAX_CHARACTERS), MAX_COLUMN_SPAN);
+				textFieldFax, MAX_COLUMN_SPAN);
 		builder.nextLine();
 		builder.append(JsamsI18nResource.LABEL_MOBILE.getTranslation(),
-				new JTextField(MAX_CHARACTERS), MAX_COLUMN_SPAN);
+				textFieldMobile, MAX_COLUMN_SPAN);
 		builder.nextLine();
 		builder.append(JsamsI18nResource.LABEL_EMAIL.getTranslation(),
-				new JTextField(MAX_CHARACTERS), MAX_COLUMN_SPAN);
+				textFieldEmail, MAX_COLUMN_SPAN);
 		builder.nextLine();
 		builder.append(JsamsI18nResource.LABEL_WEBSITE.getTranslation(),
-				new JTextField(MAX_CHARACTERS), MAX_COLUMN_SPAN);
+				textFieldWebsite, MAX_COLUMN_SPAN);
 		builder.nextLine();
 		builder.appendSeparator(JsamsI18nResource.LABEL_MISC.getTranslation());
 		List<LegalForm> allLegalForms = JsamsApplicationContext
 				.getLegalFormService().findAll();
-		LinkedList<LegalForm> list = new LinkedList<LegalForm>();
-		list.addFirst(null);
-		list.addAll(allLegalForms);
-		final JComboBox comboBox = new JComboBox(list.toArray());
-		comboBox.setRenderer(new ListCellRenderer() {
+		allLegalForms.add(0, null);
+		comboBoxLegalForm = new JComboBox(allLegalForms.toArray());
+		comboBoxLegalForm.setRenderer(new ListCellRenderer() {
 
 			protected DefaultListCellRenderer defaultRenderer = new DefaultListCellRenderer();
 
 			public Component getListCellRendererComponent(JList list,
 					Object value, int index, boolean isSelected,
 					boolean cellHasFocus) {
-				String theText = null;
+				String theText = " ";
 
 				JLabel renderer = (JLabel) defaultRenderer
 						.getListCellRendererComponent(list, value, index,
 								isSelected, cellHasFocus);
 				if (value instanceof LegalForm) {
 					if (UserContext.isFrench()) {
-						theText= ((LegalForm) value).getLabelFr();
+						theText = ((LegalForm) value).getLabelFr();
 					} else if (UserContext.isDutch()) {
-						theText= ((LegalForm) value).getLabelNl();
+						theText = ((LegalForm) value).getLabelNl();
 					} else {
-						theText= ((LegalForm) value).getLabel();
+						theText = ((LegalForm) value).getLabel();
 					}
-				} else {
-					theText = "";
 				}
 				renderer.setText(theText);
 				return renderer;
@@ -136,29 +165,31 @@ public class EditSocietyFrame extends JsamsFrame {
 		});
 
 		builder.append(JsamsI18nResource.LABEL_LEGAL_FORM.getTranslation(),
-				comboBox, MAX_COLUMN_SPAN);
+				comboBoxLegalForm, MAX_COLUMN_SPAN);
 		builder.nextLine();
 		builder.append(JsamsI18nResource.LABEL_CAPITAL.getTranslation(),
-				new JTextField(MAX_CHARACTERS), MAX_COLUMN_SPAN);
+				textFieldCapital, MAX_COLUMN_SPAN);
 		builder.nextLine();
 		builder.append(JsamsI18nResource.LABEL_ACTIVITY.getTranslation(),
-				new JTextField(MAX_CHARACTERS), MAX_COLUMN_SPAN);
+				textFieldActivity, MAX_COLUMN_SPAN);
 		builder.nextLine();
 		builder.append(JsamsI18nResource.LABEL_RESPONSIBLE.getTranslation(),
-				new JTextField(MAX_CHARACTERS), MAX_COLUMN_SPAN);
+				textFieldResponsible, MAX_COLUMN_SPAN);
 		builder.nextLine();
 		builder.append(JsamsI18nResource.LABEL_VAT_NUMBER.getTranslation(),
-				new JTextField(MAX_CHARACTERS), MAX_COLUMN_SPAN);
+				textFieldVatNumber, MAX_COLUMN_SPAN);
 		builder.nextLine();
 
 		JPanel mainPanel = new JPanel();
 		mainPanel.setLayout(new BorderLayout());
 		mainPanel.add(builder.getPanel(), BorderLayout.CENTER);
-		mainPanel.add(new JsamsOkCancelResetButtonPanel(), BorderLayout.SOUTH);
+		mainPanel.add(new JsamsOkCancelResetButtonPanel(this),
+				BorderLayout.SOUTH);
 		add(mainPanel);
 		pack();
 		setLocationRelativeTo(null);
 		setVisible(true);
+		setResizable(false);
 	}
 
 }
