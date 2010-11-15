@@ -1,8 +1,10 @@
 package be.jsams.client.swing.component;
 
+import javax.swing.ImageIcon;
 import javax.swing.JMenu;
 
 import be.jsams.client.i18n.I18nString;
+import be.jsams.client.swing.utils.IconUtil;
 
 /**
  * Menu with internationalization.
@@ -24,5 +26,12 @@ public class JsamsMenu extends JMenu {
 	public JsamsMenu(final I18nString text) {
 		super(text.getTranslation());
 	}
+
+	public JsamsMenu(final I18nString text, final String iconFileName) {
+		this(text);
+		ImageIcon defaultIcon = new ImageIcon(IconUtil.buildIcon(iconFileName));
+		setIcon(defaultIcon);
+	}
+
 
 }
