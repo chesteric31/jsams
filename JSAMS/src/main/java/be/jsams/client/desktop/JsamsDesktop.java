@@ -28,12 +28,11 @@ public class JsamsDesktop {
 
 	private I18nString title = new I18nString("title.application_no_arguments");
 
-	private final JsamsMainFrame frame = new JsamsMainFrame(title);
+	private JsamsMainFrame frame = null;
 
 	protected static JsamsDesktop instance = null;
 
-	private ChooseSocietyFrame chooseSocietyFrame = new ChooseSocietyFrame(
-			JsamsI18nResource.TITLE_CHOOSE_SOCIETY);
+	private ChooseSocietyFrame chooseSocietyFrame = null;
 
 	public static final Dimension screen = Toolkit.getDefaultToolkit()
 			.getScreenSize();
@@ -42,11 +41,6 @@ public class JsamsDesktop {
 
 	public JsamsDesktop() {
 		instance = this;
-		frame.addWindowListener(new WindowAdapter() {
-			public void windowClosing(WindowEvent we) {
-				stopNow();
-			}
-		});
 		initComponents();
 	}
 
@@ -54,6 +48,14 @@ public class JsamsDesktop {
 	 * Initializes the window.
 	 */
 	private void initComponents() {
+		frame = new JsamsMainFrame(title);
+		chooseSocietyFrame = new ChooseSocietyFrame(
+				JsamsI18nResource.TITLE_CHOOSE_SOCIETY);
+		frame.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent we) {
+				stopNow();
+			}
+		});
 	}
 
 	public void start() {
