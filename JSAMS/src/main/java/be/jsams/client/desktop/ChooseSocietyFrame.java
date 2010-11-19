@@ -140,4 +140,5 @@ public class ChooseSocietyFrame extends JsamsFrame {
 		});
 		return buttonNewSociety;
 	}
+	
 }
