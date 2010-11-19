@@ -1,11 +1,14 @@
 package be.jsams.client.desktop;
 
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JSeparator;
+import javax.swing.KeyStroke;
 
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.i18n.JsamsI18nResource;
@@ -76,6 +79,8 @@ public class JsamsMainFrame extends JsamsFrame {
 	private JsamsMenu helpMenu;
 	private JsamsMenuItem helpMI;
 	private JsamsMenuItem aboutMI;
+	
+	private JsamsStatusBar statusBar;
 
 	public JsamsMainFrame(final I18nString title) {
 		super(title, TITLE_ICON_PREFIX + "categories/applications-office.png");
@@ -91,9 +96,11 @@ public class JsamsMainFrame extends JsamsFrame {
 			fileMenu = new JsamsMenu(JsamsI18nResource.MENU_FILE);
 			newMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_NEW,
 					MENU_ICON_PREFIX + "actions/folder-new.png");
+			newMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, KeyEvent.CTRL_MASK));
 			fileMenu.add(newMI);
 			openMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_OPEN,
 					MENU_ICON_PREFIX + "actions/document-open.png");
+			openMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, KeyEvent.CTRL_MASK));
 			fileMenu.add(openMI);
 			closeMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_CLOSE,
 					MENU_ICON_PREFIX + "status/folder-visiting.png");
@@ -119,25 +126,31 @@ public class JsamsMainFrame extends JsamsFrame {
 			editMenu = new JsamsMenu(JsamsI18nResource.MENU_EDIT);
 			cancelMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_CANCEL,
 					MENU_ICON_PREFIX + "actions/edit-undo.png");
+			cancelMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, KeyEvent.CTRL_MASK));
 			editMenu.add(cancelMI);
 			editMenu.add(separators[2]);
 			cutMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_CUT,
 					MENU_ICON_PREFIX + "actions/edit-cut.png");
+			cutMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X, KeyEvent.CTRL_MASK));
 			editMenu.add(cutMI);
 			copyMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_COPY,
 					MENU_ICON_PREFIX + "actions/edit-copy.png");
+			copyMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, KeyEvent.CTRL_MASK));
 			editMenu.add(copyMI);
 			pasteMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_PASTE,
 					MENU_ICON_PREFIX + "actions/edit-paste.png");
+			pasteMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V, KeyEvent.CTRL_MASK));
 			editMenu.add(pasteMI);
 			editMenu.add(separators[3]);
 			selectAllMI = new JsamsMenuItem(
 					JsamsI18nResource.MENU_ITEM_SELECT_ALL, MENU_ICON_PREFIX
 							+ "actions/edit-select-all.png");
+			selectAllMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, KeyEvent.CTRL_MASK));
 			editMenu.add(selectAllMI);
 			editMenu.add(separators[4]);
 			refreshMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_REFRESH,
 					MENU_ICON_PREFIX + "actions/view-refresh.png");
+			refreshMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, KeyEvent.CTRL_MASK));
 			editMenu.add(refreshMI);
 			mainMenuBar.add(editMenu);
 
@@ -210,6 +223,9 @@ public class JsamsMainFrame extends JsamsFrame {
 			mainMenuBar.add(helpMenu);
 
 			setJMenuBar(mainMenuBar);
+			
+			statusBar = new JsamsStatusBar();
+			add(statusBar, BorderLayout.SOUTH);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -231,6 +247,10 @@ public class JsamsMainFrame extends JsamsFrame {
 			}
 		};
 		return listener;
+	}
+
+	public JsamsStatusBar getStatusBar() {
+		return statusBar;
 	}
 
 }
