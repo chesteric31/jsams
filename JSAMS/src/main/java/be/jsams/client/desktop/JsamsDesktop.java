@@ -96,7 +96,7 @@ public class JsamsDesktop {
 	public void setCurrentSociety(Society currentSociety) {
 		this.currentSociety = currentSociety;
 		I18nString newTitle = new I18nString("title.application",
-				new Object[] { this.currentSociety.getLabel() });
+				new Object[] { this.currentSociety.getName() });
 		frame.setTitle(newTitle);
 	}
 

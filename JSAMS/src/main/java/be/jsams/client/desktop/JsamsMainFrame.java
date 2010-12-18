@@ -101,6 +101,7 @@ public class JsamsMainFrame extends JsamsFrame {
 			openMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_OPEN,
 					MENU_ICON_PREFIX + "actions/document-open.png");
 			openMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, KeyEvent.CTRL_MASK));
+			openMI.addActionListener(chooseSocietyListener(this));
 			fileMenu.add(openMI);
 			closeMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_CLOSE,
 					MENU_ICON_PREFIX + "status/folder-visiting.png");
@@ -109,7 +110,7 @@ public class JsamsMainFrame extends JsamsFrame {
 			societyParametersMI = new JsamsMenuItem(
 					JsamsI18nResource.MENU_ITEM_SOCIETY_PARAMETERS,
 					MENU_ICON_PREFIX + "actions/document-properties.png");
-			societyParametersMI.addActionListener(societyEditListener(this));
+			societyParametersMI.addActionListener(editSocietyListener(this));
 			fileMenu.add(societyParametersMI);
 			printerParametersMI = new JsamsMenuItem(
 					JsamsI18nResource.MENU_ITEM_PRINTER_PARAMETERS,
@@ -240,10 +241,19 @@ public class JsamsMainFrame extends JsamsFrame {
 		return listener;
 	}
 
-	private ActionListener societyEditListener(final JsamsMainFrame mainFrame) {
+	private ActionListener editSocietyListener(final JsamsMainFrame mainFrame) {
 		ActionListener listener = new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				new EditSocietyFrame();
+				new EditSocietyFrame(JsamsI18nResource.TITLE_EDIT_SOCIETY);
+			}
+		};
+		return listener;
+	}
+	
+	private ActionListener chooseSocietyListener(final JsamsMainFrame mainFrame) {
+		ActionListener listener = new ActionListener() {
+			public void actionPerformed(ActionEvent event) {
+				new ChooseSocietyFrame(JsamsI18nResource.TITLE_CHOOSE_SOCIETY);
 			}
 		};
 		return listener;
@@ -252,5 +262,4 @@ public class JsamsMainFrame extends JsamsFrame {
 	public JsamsStatusBar getStatusBar() {
 		return statusBar;
 	}
-
 }
