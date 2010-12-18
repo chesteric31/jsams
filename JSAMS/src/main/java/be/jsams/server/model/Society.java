@@ -12,7 +12,7 @@ import javax.persistence.Table;
 
 /**
  * Society entity object.
- *
+ * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
@@ -24,12 +24,12 @@ public class Society extends AbstractIdentity {
 	 * Serial Version UID
 	 */
 	private static final long serialVersionUID = -8541820243148400802L;
-	private String label;
+	private String name;
 	private BigDecimal capital;
 	private String activity;
 	private String responsible;
 	private String vatNumber;
-	
+
 	private Address address;
 	private LegalForm legalForm;
 	private ContactInformation contactInformation;
@@ -39,12 +39,12 @@ public class Society extends AbstractIdentity {
 	}
 
 	@Column(name = "LABEL")
-	public String getLabel() {
-		return label;
+	public String getName() {
+		return name;
 	}
 
-	public void setLabel(String label) {
-		this.label = label;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	@Column(name = "CAPITAL")
@@ -73,7 +73,7 @@ public class Society extends AbstractIdentity {
 	public void setResponsible(String responsible) {
 		this.responsible = responsible;
 	}
-	
+
 	@Column(name = "VAT_NUMBER")
 	public String getVatNumber() {
 		return vatNumber;
@@ -93,7 +93,7 @@ public class Society extends AbstractIdentity {
 		this.address = address;
 	}
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.REFRESH)
 	@JoinColumn(name = "FK_LEGAL_FORM")
 	public LegalForm getLegalForm() {
 		return legalForm;
@@ -117,9 +117,9 @@ public class Society extends AbstractIdentity {
 	public String toString() {
 		return "Society [activity=" + activity + ", address=" + address
 				+ ", capital=" + capital + ", contactInformation="
-				+ contactInformation + ", label=" + label + ", legalForm="
+				+ contactInformation + ", name=" + name + ", legalForm="
 				+ legalForm + ", responsible=" + responsible + ", vatNumber="
 				+ vatNumber + "]";
 	}
-	
+
 }
