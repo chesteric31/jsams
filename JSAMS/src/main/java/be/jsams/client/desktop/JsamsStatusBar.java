@@ -1,6 +1,5 @@
 package be.jsams.client.desktop;
 
-import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -11,7 +10,6 @@ import java.awt.GridLayout;
 
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
@@ -202,14 +200,6 @@ public class JsamsStatusBar extends JPanel {
 			validate();
 			repaint();
 		}
-	}
-
-	public static void main(String[] args) {
-		JFrame f = new JFrame();
-		f.add(new JsamsStatusBar(), BorderLayout.SOUTH);
-		f.pack();
-		f.setVisible(true);
-		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
 }
