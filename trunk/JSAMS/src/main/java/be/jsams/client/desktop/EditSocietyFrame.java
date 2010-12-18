@@ -1,24 +1,25 @@
 package be.jsams.client.desktop;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
+import java.lang.reflect.Field;
+import java.math.BigDecimal;
 import java.util.List;
 
-import javax.swing.DefaultListCellRenderer;
 import javax.swing.JComboBox;
-import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.ListCellRenderer;
 
 import be.jsams.client.context.JsamsApplicationContext;
+import be.jsams.client.i18n.I18nString;
 import be.jsams.client.i18n.JsamsI18nResource;
-import be.jsams.client.i18n.UserContext;
+import be.jsams.client.renderer.LegalFormComboBoxRenderer;
+import be.jsams.client.swing.component.JsamsButtonsFrame;
 import be.jsams.client.swing.component.JsamsFrame;
-import be.jsams.client.swing.component.JsamsOkCancelResetButtonPanel;
 import be.jsams.server.dao.LegalFormDao;
+import be.jsams.server.model.Address;
+import be.jsams.server.model.ContactInformation;
 import be.jsams.server.model.LegalForm;
+import be.jsams.server.model.Society;
 
 import com.jgoodies.forms.builder.DefaultFormBuilder;
 import com.jgoodies.forms.layout.FormLayout;
@@ -29,11 +30,18 @@ import com.jgoodies.forms.layout.FormLayout;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class EditSocietyFrame extends JsamsFrame {
+public class EditSocietyFrame extends JsamsButtonsFrame {
+
+	/**
+	 * Serial Version UID
+	 */
+	private static final long serialVersionUID = 4225744372592399187L;
 
 	private static final int MAX_COLUMN_SPAN = 9;
 
 	private static final int MAX_CHARACTERS = 50;
+
+	private static final int MAX_NUMBERS = 10;
 
 	private LegalFormDao legalFormDao;
 
@@ -41,26 +49,26 @@ public class EditSocietyFrame extends JsamsFrame {
 
 	public JTextField textFieldStreet = new JTextField(MAX_CHARACTERS);
 
-	public JTextField textFieldNumber = new JTextField(10);
+	public JTextField textFieldNumber = new JTextField(MAX_NUMBERS);
 
-	public JTextField textFieldBox = new JTextField(10);
+	public JTextField textFieldBox = new JTextField(MAX_NUMBERS);
 
-	public JTextField textFieldZipCode = new JTextField(10);
+	public JTextField textFieldZipCode = new JTextField(MAX_NUMBERS);
 
 	public JTextField textFieldCity = new JTextField(MAX_CHARACTERS);
 
 	public JTextField textFieldCountry = new JTextField(MAX_CHARACTERS);
-	
+
 	public JTextField textFieldPhone = new JTextField(MAX_CHARACTERS);
 
 	public JTextField textFieldFax = new JTextField(MAX_CHARACTERS);
 
 	public JTextField textFieldMobile = new JTextField(MAX_CHARACTERS);
-	
+
 	public JTextField textFieldEmail = new JTextField(MAX_CHARACTERS);
 
 	public JTextField textFieldWebsite = new JTextField(MAX_CHARACTERS);
-	
+
 	public JComboBox comboBoxLegalForm;
 
 	public JTextField textFieldCapital = new JTextField(MAX_CHARACTERS);
@@ -71,13 +79,8 @@ public class EditSocietyFrame extends JsamsFrame {
 
 	public JTextField textFieldVatNumber = new JTextField(MAX_CHARACTERS);
 
-	/**
-	 * Serial Version UID
-	 */
-	private static final long serialVersionUID = 4225744372592399187L;
-
-	public EditSocietyFrame() {
-		super();
+	public EditSocietyFrame(final I18nString title) {
+		super(title);
 		initComponents();
 	}
 
@@ -91,6 +94,7 @@ public class EditSocietyFrame extends JsamsFrame {
 
 	private void initComponents() {
 		setTitle(JsamsI18nResource.TITLE_EDIT_SOCIETY);
+		fillData();
 		FormLayout layoutAddress = new FormLayout(
 				"right:p, 3dlu, 50dlu, 3dlu, right:p, 3dlu, 50dlu, 3dlu, right:p, 3dlu, 50dlu",
 				"p");
@@ -134,35 +138,6 @@ public class EditSocietyFrame extends JsamsFrame {
 				textFieldWebsite, MAX_COLUMN_SPAN);
 		builder.nextLine();
 		builder.appendSeparator(JsamsI18nResource.LABEL_MISC.getTranslation());
-		List<LegalForm> allLegalForms = JsamsApplicationContext
-				.getLegalFormService().findAll();
-		allLegalForms.add(0, null);
-		comboBoxLegalForm = new JComboBox(allLegalForms.toArray());
-		comboBoxLegalForm.setRenderer(new ListCellRenderer() {
-
-			protected DefaultListCellRenderer defaultRenderer = new DefaultListCellRenderer();
-
-			public Component getListCellRendererComponent(JList list,
-					Object value, int index, boolean isSelected,
-					boolean cellHasFocus) {
-				String theText = " ";
-
-				JLabel renderer = (JLabel) defaultRenderer
-						.getListCellRendererComponent(list, value, index,
-								isSelected, cellHasFocus);
-				if (value instanceof LegalForm) {
-					if (UserContext.isFrench()) {
-						theText = ((LegalForm) value).getLabelFr();
-					} else if (UserContext.isDutch()) {
-						theText = ((LegalForm) value).getLabelNl();
-					} else {
-						theText = ((LegalForm) value).getLabel();
-					}
-				}
-				renderer.setText(theText);
-				return renderer;
-			}
-		});
 
 		builder.append(JsamsI18nResource.LABEL_LEGAL_FORM.getTranslation(),
 				comboBoxLegalForm, MAX_COLUMN_SPAN);
@@ -183,13 +158,110 @@ public class EditSocietyFrame extends JsamsFrame {
 		JPanel mainPanel = new JPanel();
 		mainPanel.setLayout(new BorderLayout());
 		mainPanel.add(builder.getPanel(), BorderLayout.CENTER);
-		mainPanel.add(new JsamsOkCancelResetButtonPanel(this),
-				BorderLayout.SOUTH);
 		add(mainPanel);
 		pack();
 		setLocationRelativeTo(null);
 		setVisible(true);
 		setResizable(false);
+	}
+
+	@Override
+	protected void performCancel() {
+		this.dispose();
+	}
+
+	@Override
+	protected void performOk() {
+		Society society = JsamsDesktop.instance.getCurrentSociety();
+		if (society == null) {
+			// Create new one
+			Society newSociety = new Society();
+			newSociety.setActivity(textFieldActivity.getText());
+			Address address = new Address();
+			address.setBox(textFieldBox.getText());
+			address.setCity(textFieldCity.getText());
+			address.setCountry(textFieldCountry.getText());
+			address.setNumber(textFieldNumber.getText());
+			address.setStreet(textFieldStreet.getText());
+			address.setZipCode(Integer.parseInt(textFieldZipCode.getText()));
+			newSociety.setAddress(address);
+			newSociety.setCapital(new BigDecimal(textFieldCapital.getText()));
+			ContactInformation contactInformation = new ContactInformation();
+			contactInformation.setEmail(textFieldEmail.getText());
+			contactInformation.setFax(textFieldFax.getText());
+			contactInformation.setMobile(textFieldMobile.getText());
+			contactInformation.setPhone(textFieldPhone.getText());
+			contactInformation.setWebsite(textFieldWebsite.getText());
+			newSociety.setContactInformation(contactInformation);
+			newSociety.setLegalForm((LegalForm) comboBoxLegalForm.getSelectedItem());
+			newSociety.setName(textFieldName.getText());
+			newSociety.setResponsible(textFieldResponsible.getText());
+			newSociety.setVatNumber(textFieldVatNumber.getText());
+			JsamsApplicationContext.getSocietyService().create(newSociety);
+		} else {
+			// Update the current society
+		}
+		dispose();
+	}
+
+	@Override
+	protected void performReset() {
+		Class<?> clazz = this.getClass();
+		Field[] fields = clazz.getFields();
+		for (Field field : fields) {
+			try {
+				Object value = field.get(this);
+				if (value instanceof JTextField) {
+					((JTextField) value).setText(null);
+				} else if (value instanceof JComboBox) {
+					((JComboBox) value).setSelectedIndex(0);
+				}
+			} catch (IllegalArgumentException e1) {
+				e1.printStackTrace();
+			} catch (IllegalAccessException e1) {
+				e1.printStackTrace();
+			}
+		}
+	}
+
+	private void fillData() {
+		List<LegalForm> allLegalForms = JsamsApplicationContext
+				.getLegalFormService().findAll();
+		comboBoxLegalForm = new JComboBox(allLegalForms.toArray());
+		Society currentSociety = JsamsDesktop.instance.getCurrentSociety();
+		if (currentSociety != null) {
+			Society society = JsamsApplicationContext.getSocietyService()
+					.findById(currentSociety.getId());
+			fillAddress(society);
+			fillContactInformation(society);
+			comboBoxLegalForm.setSelectedItem(society.getLegalForm());
+			System.out.println(comboBoxLegalForm.getSelectedItem());
+			textFieldActivity.setText(society.getActivity());
+			textFieldCapital.setText(society.getCapital().toPlainString());
+			textFieldName.setText(society.getName());
+			textFieldResponsible.setText(society.getResponsible());
+			textFieldVatNumber.setText(society.getVatNumber());
+		}
+		comboBoxLegalForm.setRenderer(new LegalFormComboBoxRenderer());
+	}
+
+	private void fillAddress(final Society society) {
+		Address address = society.getAddress();
+		textFieldBox.setText(address.getBox());
+		textFieldCity.setText(address.getCity());
+		textFieldCountry.setText(address.getCountry());
+		textFieldNumber.setText(address.getNumber());
+		textFieldStreet.setText(address.getStreet());
+		textFieldZipCode.setText(Integer.toString(address.getZipCode()));
+	}
+
+	private void fillContactInformation(final Society society) {
+		ContactInformation information = society.getContactInformation();
+		textFieldEmail.setText(information.getEmail());
+		textFieldFax.setText(information.getFax());
+		textFieldMobile.setText(information.getMobile());
+		textFieldPhone.setText(information.getPhone());
+		textFieldWebsite.setText(information.getWebsite());
 	}
 
 }

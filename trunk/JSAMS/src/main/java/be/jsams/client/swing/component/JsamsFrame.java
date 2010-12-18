@@ -12,7 +12,7 @@ import be.jsams.client.swing.utils.IconUtil;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class JsamsFrame extends JFrame {
+public abstract class JsamsFrame extends JFrame {
 
 	/**
 	 * Serial Version UID
@@ -54,5 +54,5 @@ public class JsamsFrame extends JFrame {
 			e.printStackTrace();
 		}
 	}
-	
+
 }
