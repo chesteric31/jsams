@@ -13,13 +13,13 @@ import be.jsams.server.dao.GenericDao;
 
 /**
  * Generic DAO class implementation.
+ * 
  * @param <T>
- *
+ * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class GenericDaoImpl<T> implements
-		GenericDao<T> {
+public class GenericDaoImpl<T> implements GenericDao<T> {
 
 	protected final Log LOGGER = LogFactory.getLog(this.getClass());
 
@@ -48,6 +48,7 @@ public class GenericDaoImpl<T> implements
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<T> findAll() {
 		List<T> ts = null;
 		try {
@@ -77,7 +78,7 @@ public class GenericDaoImpl<T> implements
 	public void remove(T persistentObject) {
 		try {
 			// Merge necessary for the detached object
-//			T object = entityManager.merge(persistentObject);
+			// T object = entityManager.merge(persistentObject);
 			entityManager.remove(persistentObject);
 		} catch (RuntimeException re) {
 			LOGGER.error(re);
