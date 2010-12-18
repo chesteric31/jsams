@@ -3,14 +3,11 @@ package be.jsams.client.swing.component;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.lang.reflect.Field;
 
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
-import javax.swing.JTextField;
 
 import be.jsams.client.i18n.JsamsI18nResource;
 
@@ -21,34 +18,40 @@ import com.jgoodies.forms.factories.ButtonBarFactory;
  * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
- * @param <P>
- *            a extension of {@link JsamsFrame}, a parent frame
  */
-public class JsamsOkCancelResetButtonPanel extends JPanel {
+public class JsamsButtonsPanel extends JPanel {
 
 	private static final int DEFAULT_V_GAP = 10;
 
-	private JsamsFrame parent;
+	private JsamsButtonsFrame parent;
+
+	JsamsButton buttonOk = null;
+	JsamsButton buttonCancel = null;
+	JsamsButton buttonReset = null;
 
 	/**
 	 * Serial Version UID
 	 */
 	private static final long serialVersionUID = 8542255661439665645L;
 
-	public JsamsOkCancelResetButtonPanel() {
+
+	public JsamsButtonsPanel(final JsamsButtonsFrame parent, final boolean okToAdd,
+			final boolean cancelToAdd, final boolean resetToAdd) {
 		super();
+		this.parent = parent;
+		if (okToAdd) {
+			buttonOk = buildButtonOk();
+		}
+		if (cancelToAdd) {
+			buttonCancel = buildButtonCancel();
+		}
+		if (resetToAdd) {
+			buttonReset = buildButtonReset();
+		}
 		initComponents();
 	}
 
-	public JsamsOkCancelResetButtonPanel(JsamsFrame parent) {
-		this();
-		this.parent = parent;
-	}
-
 	private void initComponents() {
-		JsamsButton buttonOk = buildButtonOk();
-		JsamsButton buttonCancel = buildButtonCancel();
-		JsamsButton buttonReset = buildButtonReset();
 		BorderLayout buttonsLayout = new BorderLayout();
 		buttonsLayout.setVgap(DEFAULT_V_GAP);
 		this.setLayout(buttonsLayout);
@@ -62,6 +65,11 @@ public class JsamsOkCancelResetButtonPanel extends JPanel {
 
 	private JsamsButton buildButtonOk() {
 		JsamsButton buttonOk = new JsamsButton(JsamsI18nResource.BUTTON_OK);
+		buttonOk.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				parent.performOk();
+			}
+		});
 		return buttonOk;
 	}
 
@@ -70,8 +78,7 @@ public class JsamsOkCancelResetButtonPanel extends JPanel {
 				JsamsI18nResource.BUTTON_CANCEL);
 		buttonCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// close the parent frame
-				parent.dispose();
+				parent.performCancel();
 			}
 		});
 		return buttonCancel;
@@ -82,22 +89,7 @@ public class JsamsOkCancelResetButtonPanel extends JPanel {
 				JsamsI18nResource.BUTTON_RESET);
 		buttonReset.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Class<?> clazz = parent.getClass();
-				Field[] fields = clazz.getFields();
-				for (Field field : fields) {
-					try {
-						Object value = field.get(parent);
-						if (value instanceof JTextField) {
-							((JTextField) value).setText(null);
-						} else if (value instanceof JComboBox) {
-							((JComboBox) value).setSelectedIndex(0);
-						}
-					} catch (IllegalArgumentException e1) {
-						e1.printStackTrace();
-					} catch (IllegalAccessException e1) {
-						e1.printStackTrace();
-					}
-				}
+				parent.performReset();
 			}
 		});
 		return buttonReset;
