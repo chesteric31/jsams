@@ -42,7 +42,7 @@ public class SocietyServiceTest extends AbstractJUnitTestClass {
 	@Before
 	public void setUp() throws Exception {
 		newSociety = new Society();
-		newSociety.setLabel("LABEL");
+		newSociety.setName("LABEL");
 
 		LegalForm form = new LegalForm();
 		form.setLabel("Form");
@@ -89,10 +89,10 @@ public class SocietyServiceTest extends AbstractJUnitTestClass {
 	@Test
 	public void testUpdate() {
 		societyService.create(newSociety);
-		newSociety.setLabel("Updated Label");
+		newSociety.setName("Updated Label");
 		societyService.update(newSociety);
 		Society foundSociety = societyService.findById(newSociety.getId());
-		assertTrue(foundSociety.getLabel().equalsIgnoreCase("Updated Label"));
+		assertTrue(foundSociety.getName().equalsIgnoreCase("Updated Label"));
 	}
 
 	@Test
