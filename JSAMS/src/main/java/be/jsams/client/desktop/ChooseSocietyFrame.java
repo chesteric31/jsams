@@ -123,7 +123,7 @@ public class ChooseSocietyFrame extends JsamsButtonsFrame {
 
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				new EditSocietyFrame(JsamsI18nResource.TITLE_EDIT_SOCIETY);
+				new EditSocietyFrame(JsamsI18nResource.TITLE_EDIT_SOCIETY, null);
 			}
 		});
 		return buttonNewSociety;

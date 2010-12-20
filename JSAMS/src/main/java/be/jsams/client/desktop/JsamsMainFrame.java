@@ -79,7 +79,7 @@ public class JsamsMainFrame extends JsamsFrame {
 	private JsamsMenu helpMenu;
 	private JsamsMenuItem helpMI;
 	private JsamsMenuItem aboutMI;
-	
+
 	private JsamsStatusBar statusBar;
 
 	public JsamsMainFrame(final I18nString title) {
@@ -96,11 +96,13 @@ public class JsamsMainFrame extends JsamsFrame {
 			fileMenu = new JsamsMenu(JsamsI18nResource.MENU_FILE);
 			newMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_NEW,
 					MENU_ICON_PREFIX + "actions/folder-new.png");
-			newMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, KeyEvent.CTRL_MASK));
+			newMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N,
+					KeyEvent.CTRL_MASK));
 			fileMenu.add(newMI);
 			openMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_OPEN,
 					MENU_ICON_PREFIX + "actions/document-open.png");
-			openMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, KeyEvent.CTRL_MASK));
+			openMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O,
+					KeyEvent.CTRL_MASK));
 			openMI.addActionListener(chooseSocietyListener(this));
 			fileMenu.add(openMI);
 			closeMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_CLOSE,
@@ -127,31 +129,37 @@ public class JsamsMainFrame extends JsamsFrame {
 			editMenu = new JsamsMenu(JsamsI18nResource.MENU_EDIT);
 			cancelMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_CANCEL,
 					MENU_ICON_PREFIX + "actions/edit-undo.png");
-			cancelMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z, KeyEvent.CTRL_MASK));
+			cancelMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z,
+					KeyEvent.CTRL_MASK));
 			editMenu.add(cancelMI);
 			editMenu.add(separators[2]);
 			cutMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_CUT,
 					MENU_ICON_PREFIX + "actions/edit-cut.png");
-			cutMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X, KeyEvent.CTRL_MASK));
+			cutMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X,
+					KeyEvent.CTRL_MASK));
 			editMenu.add(cutMI);
 			copyMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_COPY,
 					MENU_ICON_PREFIX + "actions/edit-copy.png");
-			copyMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C, KeyEvent.CTRL_MASK));
+			copyMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C,
+					KeyEvent.CTRL_MASK));
 			editMenu.add(copyMI);
 			pasteMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_PASTE,
 					MENU_ICON_PREFIX + "actions/edit-paste.png");
-			pasteMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V, KeyEvent.CTRL_MASK));
+			pasteMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V,
+					KeyEvent.CTRL_MASK));
 			editMenu.add(pasteMI);
 			editMenu.add(separators[3]);
 			selectAllMI = new JsamsMenuItem(
 					JsamsI18nResource.MENU_ITEM_SELECT_ALL, MENU_ICON_PREFIX
 							+ "actions/edit-select-all.png");
-			selectAllMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, KeyEvent.CTRL_MASK));
+			selectAllMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A,
+					KeyEvent.CTRL_MASK));
 			editMenu.add(selectAllMI);
 			editMenu.add(separators[4]);
 			refreshMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_REFRESH,
 					MENU_ICON_PREFIX + "actions/view-refresh.png");
-			refreshMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, KeyEvent.CTRL_MASK));
+			refreshMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R,
+					KeyEvent.CTRL_MASK));
 			editMenu.add(refreshMI);
 			mainMenuBar.add(editMenu);
 
@@ -224,7 +232,7 @@ public class JsamsMainFrame extends JsamsFrame {
 			mainMenuBar.add(helpMenu);
 
 			setJMenuBar(mainMenuBar);
-			
+
 			statusBar = new JsamsStatusBar();
 			add(statusBar, BorderLayout.SOUTH);
 		} catch (Exception e) {
@@ -244,12 +252,13 @@ public class JsamsMainFrame extends JsamsFrame {
 	private ActionListener editSocietyListener(final JsamsMainFrame mainFrame) {
 		ActionListener listener = new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				new EditSocietyFrame(JsamsI18nResource.TITLE_EDIT_SOCIETY);
+				new EditSocietyFrame(JsamsI18nResource.TITLE_EDIT_SOCIETY,
+						JsamsDesktop.instance.getCurrentSociety());
 			}
 		};
 		return listener;
 	}
-	
+
 	private ActionListener chooseSocietyListener(final JsamsMainFrame mainFrame) {
 		ActionListener listener = new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
