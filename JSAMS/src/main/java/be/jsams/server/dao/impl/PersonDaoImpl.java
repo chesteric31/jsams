@@ -13,6 +13,7 @@ public class PersonDaoImpl extends GenericDaoImpl<Person> implements PersonDao {
 		super(type);
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Person> findByName(String name) {
 		List<Person> persons = null;
 		try {
