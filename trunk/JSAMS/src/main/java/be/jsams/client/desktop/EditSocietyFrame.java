@@ -79,9 +79,20 @@ public class EditSocietyFrame extends JsamsButtonsFrame {
 
 	public JTextField textFieldVatNumber = new JTextField(MAX_CHARACTERS);
 
-	public EditSocietyFrame(final I18nString title) {
+	private Society model;
+
+	public EditSocietyFrame(final I18nString title, Society model) {
 		super(title);
+		this.model = model;
 		initComponents();
+	}
+
+	public Society getModel() {
+		return model;
+	}
+
+	public void setModel(Society model) {
+		this.model = model;
 	}
 
 	public LegalFormDao getLegalFormDao() {
@@ -172,8 +183,7 @@ public class EditSocietyFrame extends JsamsButtonsFrame {
 
 	@Override
 	protected void performOk() {
-		Society society = JsamsDesktop.instance.getCurrentSociety();
-		if (society == null) {
+		if (getModel() == null) {
 			// Create new one
 			Society newSociety = new Society();
 			newSociety.setActivity(textFieldActivity.getText());
@@ -193,7 +203,8 @@ public class EditSocietyFrame extends JsamsButtonsFrame {
 			contactInformation.setPhone(textFieldPhone.getText());
 			contactInformation.setWebsite(textFieldWebsite.getText());
 			newSociety.setContactInformation(contactInformation);
-			newSociety.setLegalForm((LegalForm) comboBoxLegalForm.getSelectedItem());
+			newSociety.setLegalForm((LegalForm) comboBoxLegalForm
+					.getSelectedItem());
 			newSociety.setName(textFieldName.getText());
 			newSociety.setResponsible(textFieldResponsible.getText());
 			newSociety.setVatNumber(textFieldVatNumber.getText());
@@ -228,10 +239,9 @@ public class EditSocietyFrame extends JsamsButtonsFrame {
 		List<LegalForm> allLegalForms = JsamsApplicationContext
 				.getLegalFormService().findAll();
 		comboBoxLegalForm = new JComboBox(allLegalForms.toArray());
-		Society currentSociety = JsamsDesktop.instance.getCurrentSociety();
-		if (currentSociety != null) {
+		if (getModel() != null) {
 			Society society = JsamsApplicationContext.getSocietyService()
-					.findById(currentSociety.getId());
+					.findById(getModel().getId());
 			fillAddress(society);
 			fillContactInformation(society);
 			comboBoxLegalForm.setSelectedItem(society.getLegalForm());
