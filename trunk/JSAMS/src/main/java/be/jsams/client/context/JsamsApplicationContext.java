@@ -22,7 +22,7 @@ public class JsamsApplicationContext {
 
 	private static ClassPathXmlApplicationContext context;
 
-	public static void setContext(ClassPathXmlApplicationContext context) {
+	public static void setContext(final ClassPathXmlApplicationContext context) {
 		JsamsApplicationContext.context = context;
 	}
 
