@@ -5,7 +5,7 @@ import java.awt.FlowLayout;
 import javax.swing.JPanel;
 
 import be.jsams.client.i18n.JsamsI18nResource;
-import be.jsams.client.swing.listener.NewCustomerListener;
+import be.jsams.client.swing.action.NewCustomerAction;
 
 /**
  * 
@@ -34,7 +34,7 @@ public class JsamsShortcutToolBar extends JPanel {
 	private void initComponents() {
 		JPanel panel = new JPanel(new FlowLayout());
 		newCustomerButton = new JsamsButton(JsamsI18nResource.BUTTON_NEW_CUSTOMER);
-		newCustomerButton.addActionListener(new NewCustomerListener());
+		newCustomerButton.addActionListener(new NewCustomerAction());
 		newEstimateButton = new JsamsButton(JsamsI18nResource.BUTTON_NEW_ESTIMATE);
 		newBillButton = new JsamsButton(JsamsI18nResource.BUTTON_NEW_BILL);
 		newProductButton = new JsamsButton(JsamsI18nResource.BUTTON_NEW_PRODUCT);
