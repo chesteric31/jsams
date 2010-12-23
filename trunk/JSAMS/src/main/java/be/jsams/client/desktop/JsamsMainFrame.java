@@ -15,6 +15,7 @@ import javax.swing.KeyStroke;
 
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.i18n.JsamsI18nResource;
+import be.jsams.client.swing.component.JsamsCloseableTabbedPane;
 import be.jsams.client.swing.component.JsamsFrame;
 import be.jsams.client.swing.component.JsamsMenu;
 import be.jsams.client.swing.component.JsamsMenuItem;
@@ -85,8 +86,11 @@ public class JsamsMainFrame extends JsamsFrame {
 	private JsamsShortcutToolBar shortcutToolBar;
 	private JsamsStatusBar statusBar;
 
+	private JsamsCloseableTabbedPane tabbedPane;
+
 	public JsamsMainFrame(final I18nString title) {
-		super(title, IconUtil.TITLE_ICON_PREFIX + "categories/applications-office.png");
+		super(title, IconUtil.TITLE_ICON_PREFIX
+				+ "categories/applications-office.png");
 		setSize(JsamsDesktop.CENTER);
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		initComponents();
@@ -101,13 +105,13 @@ public class JsamsMainFrame extends JsamsFrame {
 					IconUtil.MENU_ICON_PREFIX + "actions/folder-new.png");
 			newMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N,
 					KeyEvent.CTRL_MASK));
-			newMI.addActionListener(newSocietyListener(this));
+			newMI.addActionListener(newSocietyListener());
 			fileMenu.add(newMI);
 			openMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_OPEN,
 					IconUtil.MENU_ICON_PREFIX + "actions/document-open.png");
 			openMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O,
 					KeyEvent.CTRL_MASK));
-			openMI.addActionListener(chooseSocietyListener(this));
+			openMI.addActionListener(chooseSocietyListener());
 			fileMenu.add(openMI);
 			closeMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_CLOSE,
 					IconUtil.MENU_ICON_PREFIX + "status/folder-visiting.png");
@@ -115,8 +119,9 @@ public class JsamsMainFrame extends JsamsFrame {
 			fileMenu.add(separators[0]);
 			societyParametersMI = new JsamsMenuItem(
 					JsamsI18nResource.MENU_ITEM_SOCIETY_PARAMETERS,
-					IconUtil.MENU_ICON_PREFIX + "actions/document-properties.png");
-			societyParametersMI.addActionListener(editSocietyListener(this));
+					IconUtil.MENU_ICON_PREFIX
+							+ "actions/document-properties.png");
+			societyParametersMI.addActionListener(editSocietyListener());
 			fileMenu.add(societyParametersMI);
 			printerParametersMI = new JsamsMenuItem(
 					JsamsI18nResource.MENU_ITEM_PRINTER_PARAMETERS,
@@ -154,8 +159,8 @@ public class JsamsMainFrame extends JsamsFrame {
 			editMenu.add(pasteMI);
 			editMenu.add(separators[3]);
 			selectAllMI = new JsamsMenuItem(
-					JsamsI18nResource.MENU_ITEM_SELECT_ALL, IconUtil.MENU_ICON_PREFIX
-							+ "actions/edit-select-all.png");
+					JsamsI18nResource.MENU_ITEM_SELECT_ALL,
+					IconUtil.MENU_ICON_PREFIX + "actions/edit-select-all.png");
 			selectAllMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A,
 					KeyEvent.CTRL_MASK));
 			editMenu.add(selectAllMI);
@@ -169,8 +174,8 @@ public class JsamsMainFrame extends JsamsFrame {
 
 			managementMenu = new JsamsMenu(JsamsI18nResource.MENU_MANAGEMENT);
 			customersMI = new JsamsMenuItem(
-					JsamsI18nResource.MENU_ITEM_CUSTOMERS, IconUtil.MENU_ICON_PREFIX
-							+ "apps/system-users.png");
+					JsamsI18nResource.MENU_ITEM_CUSTOMERS,
+					IconUtil.MENU_ICON_PREFIX + "apps/system-users.png");
 			managementMenu.add(customersMI);
 			managementMenu.add(separators[5]);
 			productsCategoryMI = new JsamsMenuItem(
@@ -187,7 +192,8 @@ public class JsamsMainFrame extends JsamsFrame {
 			salesMenu.add(createDocumentsMI);
 			transferDocumentsMI = new JsamsMenuItem(
 					JsamsI18nResource.MENU_ITEM_TRANSFER_DOCUMENTS,
-					IconUtil.MENU_ICON_PREFIX + "actions/media-seek-forward.png");
+					IconUtil.MENU_ICON_PREFIX
+							+ "actions/media-seek-forward.png");
 			salesMenu.add(transferDocumentsMI);
 			salesMenu.add(separators[6]);
 			listDocumentsMI = new JsamsMenuItem(
@@ -220,8 +226,8 @@ public class JsamsMainFrame extends JsamsFrame {
 					IconUtil.MENU_ICON_PREFIX + "actions/go-next.png");
 			windowsMenu.add(nextMI);
 			previousMI = new JsamsMenuItem(
-					JsamsI18nResource.MENU_ITEM_PREVIOUS, IconUtil.MENU_ICON_PREFIX
-							+ "actions/go-previous.png");
+					JsamsI18nResource.MENU_ITEM_PREVIOUS,
+					IconUtil.MENU_ICON_PREFIX + "actions/go-previous.png");
 			windowsMenu.add(previousMI);
 			mainMenuBar.add(windowsMenu);
 
@@ -231,12 +237,13 @@ public class JsamsMainFrame extends JsamsFrame {
 			helpMenu.add(helpMI);
 			helpMenu.add(separators[9]);
 			aboutMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_ABOUT,
-					IconUtil.MENU_ICON_PREFIX + "categories/applications-office.png");
+					IconUtil.MENU_ICON_PREFIX
+							+ "categories/applications-office.png");
 			helpMenu.add(aboutMI);
 			mainMenuBar.add(helpMenu);
 
 			setJMenuBar(mainMenuBar);
-			
+
 			JPanel panel = new JPanel();
 			panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
 			panel.setBorder(BorderFactory.createEtchedBorder());
@@ -245,6 +252,13 @@ public class JsamsMainFrame extends JsamsFrame {
 			panel.add(shortcutToolBar);
 			panel.add(statusBar);
 			add(panel, BorderLayout.SOUTH);
+
+			tabbedPane = new JsamsCloseableTabbedPane();
+
+			// only for test the following line
+			tabbedPane.addTab(JsamsI18nResource.PANEL_GENERAL, new JPanel());
+
+			getContentPane().add(tabbedPane, BorderLayout.NORTH);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -259,7 +273,7 @@ public class JsamsMainFrame extends JsamsFrame {
 		return listener;
 	}
 
-	private ActionListener editSocietyListener(final JsamsMainFrame mainFrame) {
+	private ActionListener editSocietyListener() {
 		ActionListener listener = new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				new EditSocietyFrame(JsamsI18nResource.TITLE_EDIT_SOCIETY,
@@ -269,7 +283,7 @@ public class JsamsMainFrame extends JsamsFrame {
 		return listener;
 	}
 
-	private ActionListener newSocietyListener(final JsamsMainFrame mainFrame) {
+	private ActionListener newSocietyListener() {
 		ActionListener listener = new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				new EditSocietyFrame(JsamsI18nResource.TITLE_EDIT_SOCIETY, null);
@@ -278,7 +292,7 @@ public class JsamsMainFrame extends JsamsFrame {
 		return listener;
 	}
 
-	private ActionListener chooseSocietyListener(final JsamsMainFrame mainFrame) {
+	private ActionListener chooseSocietyListener() {
 		ActionListener listener = new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				new ChooseSocietyFrame(JsamsI18nResource.TITLE_CHOOSE_SOCIETY);
