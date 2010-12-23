@@ -9,7 +9,7 @@ import be.jsams.client.i18n.I18nApplicationContext;
 /**
  * Startup class for the Jsams Application.
  * 
- *
+ * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
@@ -27,9 +27,9 @@ public class JsamsStart {
 		System.setProperty("application.context", JSAMS_APPLICATION_CONTEXT);
 		JsamsApplicationContext.setContext(new ClassPathXmlApplicationContext(
 				JsamsApplicationContext.CONFIG));
-        I18nApplicationContext.setContext(
-                new ClassPathXmlApplicationContext(I18nApplicationContext.CONFIG));
-		
+		I18nApplicationContext.setContext(new ClassPathXmlApplicationContext(
+				I18nApplicationContext.CONFIG));
+
 		JsamsDesktop application = new JsamsDesktop();
 		application.start();
 	}
