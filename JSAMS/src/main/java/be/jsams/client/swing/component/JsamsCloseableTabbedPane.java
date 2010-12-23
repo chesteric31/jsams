@@ -15,7 +15,7 @@ import be.jsams.client.swing.utils.IconUtil;
  * 
  * 
  * @author chesteric31
- * @version $Rev$ $Date:: $ $Author$
+ * @version $Rev$ $Date::   $Author$
  */
 public class JsamsCloseableTabbedPane extends JTabbedPane {
 
@@ -24,7 +24,7 @@ public class JsamsCloseableTabbedPane extends JTabbedPane {
 	 */
 	private static final long serialVersionUID = -5934631016465665535L;
 
-	public JsamsCloseableTabbedPane(final I18nString title) {
+	public JsamsCloseableTabbedPane() {
 		super();
 	}
 
