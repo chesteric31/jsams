@@ -2,7 +2,10 @@ package be.jsams.client.context;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import be.jsams.server.service.LegalFormService;
+import be.jsams.server.dao.CivilityDao;
+import be.jsams.server.dao.LegalFormDao;
+import be.jsams.server.dao.PaymentModeDao;
+import be.jsams.server.service.CustomerService;
 import be.jsams.server.service.SocietyService;
 
 /**
@@ -27,8 +30,20 @@ public class JsamsApplicationContext {
 		return (SocietyService) context.getBean("societyService");
 	}
 
-	public static LegalFormService getLegalFormService() {
-		return (LegalFormService) context.getBean("legalFormService");
+	public static LegalFormDao getLegalFormDao() {
+		return (LegalFormDao) context.getBean("legalFormDao");
+	}
+	
+	public static CivilityDao getCivilityDao() {
+		return (CivilityDao) context.getBean("civilityDao");
+	}
+	
+	public static PaymentModeDao getPaymentModeDao() {
+		return (PaymentModeDao) context.getBean("paymentModeDao");
+	}
+
+	public static CustomerService getCustomerService() {
+		return (CustomerService) context.getBean("customerService");
 	}
 
 }
