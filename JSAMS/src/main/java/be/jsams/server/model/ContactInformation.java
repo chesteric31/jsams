@@ -107,40 +107,54 @@ public class ContactInformation extends AbstractIdentity {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-//		if (!super.equals(obj))
+		}
+//		if (!super.equals(obj)) {
 //			return false;
-		if (getClass() != obj.getClass())
+//		}
+		if (!(obj instanceof ContactInformation)) {
 			return false;
+		}
 		ContactInformation other = (ContactInformation) obj;
 		if (email == null) {
-			if (other.email != null)
+			if (other.email != null) {
 				return false;
-		} else if (!email.equals(other.email))
+			}
+		} else if (!email.equals(other.email)) {
 			return false;
+		}
 		if (fax == null) {
-			if (other.fax != null)
+			if (other.fax != null) {
 				return false;
-		} else if (!fax.equals(other.fax))
+			}
+		} else if (!fax.equals(other.fax)) {
 			return false;
-		if (!Arrays.equals(logo, other.logo))
+		}
+		if (!Arrays.equals(logo, other.logo)) {
 			return false;
+		}
 		if (mobile == null) {
-			if (other.mobile != null)
+			if (other.mobile != null) {
 				return false;
-		} else if (!mobile.equals(other.mobile))
+			}
+		} else if (!mobile.equals(other.mobile)) {
 			return false;
+		}
 		if (phone == null) {
-			if (other.phone != null)
+			if (other.phone != null) {
 				return false;
-		} else if (!phone.equals(other.phone))
+			}
+		} else if (!phone.equals(other.phone)) {
 			return false;
+		}
 		if (website == null) {
-			if (other.website != null)
+			if (other.website != null) {
 				return false;
-		} else if (!website.equals(other.website))
+			}
+		} else if (!website.equals(other.website)) {
 			return false;
+		}
 		return true;
 	}
 

@@ -71,28 +71,37 @@ public class PaymentMode extends AbstractIdentity {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-//		if (!super.equals(obj))
+		}
+//		if (!super.equals(obj)) {
 //			return false;
-		if (getClass() != obj.getClass())
+//		}
+		if (!(obj instanceof PaymentMode)) {
 			return false;
+		}
 		PaymentMode other = (PaymentMode) obj;
 		if (label == null) {
-			if (other.label != null)
+			if (other.label != null) {
 				return false;
-		} else if (!label.equals(other.label))
+			}
+		} else if (!label.equals(other.label)) {
 			return false;
+		}
 		if (labelFr == null) {
-			if (other.labelFr != null)
+			if (other.labelFr != null) {
 				return false;
-		} else if (!labelFr.equals(other.labelFr))
+			}
+		} else if (!labelFr.equals(other.labelFr)) {
 			return false;
+		}
 		if (labelNl == null) {
-			if (other.labelNl != null)
+			if (other.labelNl != null) {
 				return false;
-		} else if (!labelNl.equals(other.labelNl))
+			}
+		} else if (!labelNl.equals(other.labelNl)) {
 			return false;
+		}
 		return true;
 	}
 
