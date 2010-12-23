@@ -28,9 +28,11 @@ public class JsamsButton extends JButton {
 	}
 
 	public JsamsButton(final I18nString text, final String iconFileName) {
-		this(text);
-		ImageIcon defaultIcon = new ImageIcon(IconUtil.buildIcon(iconFileName));
-		setIcon(defaultIcon);
+		super(text.getTranslation(), new ImageIcon(IconUtil.buildIcon(iconFileName)));
+	}
+
+	public JsamsButton(final String iconFileName) {
+		super(new ImageIcon(IconUtil.buildIcon(iconFileName)));
 	}
 
 }
