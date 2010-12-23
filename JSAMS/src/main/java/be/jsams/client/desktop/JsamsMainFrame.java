@@ -5,8 +5,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
+import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.KeyStroke;
 
@@ -15,6 +18,8 @@ import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.swing.component.JsamsFrame;
 import be.jsams.client.swing.component.JsamsMenu;
 import be.jsams.client.swing.component.JsamsMenuItem;
+import be.jsams.client.swing.component.JsamsShortcutToolBar;
+import be.jsams.client.swing.component.JsamsStatusBar;
 
 /**
  * {@link JsamsMainFrame} that contains all the components.
@@ -80,6 +85,7 @@ public class JsamsMainFrame extends JsamsFrame {
 	private JsamsMenuItem helpMI;
 	private JsamsMenuItem aboutMI;
 
+	private JsamsShortcutToolBar shortcutToolBar;
 	private JsamsStatusBar statusBar;
 
 	public JsamsMainFrame(final I18nString title) {
@@ -98,6 +104,7 @@ public class JsamsMainFrame extends JsamsFrame {
 					MENU_ICON_PREFIX + "actions/folder-new.png");
 			newMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N,
 					KeyEvent.CTRL_MASK));
+			newMI.addActionListener(newSocietyListener(this));
 			fileMenu.add(newMI);
 			openMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_OPEN,
 					MENU_ICON_PREFIX + "actions/document-open.png");
@@ -232,9 +239,15 @@ public class JsamsMainFrame extends JsamsFrame {
 			mainMenuBar.add(helpMenu);
 
 			setJMenuBar(mainMenuBar);
-
+			
+			JPanel panel = new JPanel();
+			panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
+			panel.setBorder(BorderFactory.createEtchedBorder());
+			shortcutToolBar = new JsamsShortcutToolBar();
 			statusBar = new JsamsStatusBar();
-			add(statusBar, BorderLayout.SOUTH);
+			panel.add(shortcutToolBar);
+			panel.add(statusBar);
+			add(panel, BorderLayout.SOUTH);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -254,6 +267,15 @@ public class JsamsMainFrame extends JsamsFrame {
 			public void actionPerformed(ActionEvent event) {
 				new EditSocietyFrame(JsamsI18nResource.TITLE_EDIT_SOCIETY,
 						JsamsDesktop.instance.getCurrentSociety());
+			}
+		};
+		return listener;
+	}
+
+	private ActionListener newSocietyListener(final JsamsMainFrame mainFrame) {
+		ActionListener listener = new ActionListener() {
+			public void actionPerformed(ActionEvent event) {
+				new EditSocietyFrame(JsamsI18nResource.TITLE_EDIT_SOCIETY, null);
 			}
 		};
 		return listener;

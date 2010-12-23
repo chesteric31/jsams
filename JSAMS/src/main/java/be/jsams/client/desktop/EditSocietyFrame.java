@@ -7,15 +7,13 @@ import java.util.List;
 
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.i18n.JsamsI18nResource;
-import be.jsams.client.renderer.LegalFormComboBoxRenderer;
+import be.jsams.client.renderer.GenericComboBoxRenderer;
 import be.jsams.client.swing.component.JsamsButtonsFrame;
-import be.jsams.client.swing.component.JsamsFrame;
-import be.jsams.server.dao.LegalFormDao;
+import be.jsams.client.swing.component.JsamsTextField;
 import be.jsams.server.model.Address;
 import be.jsams.server.model.ContactInformation;
 import be.jsams.server.model.LegalForm;
@@ -25,7 +23,7 @@ import com.jgoodies.forms.builder.DefaultFormBuilder;
 import com.jgoodies.forms.layout.FormLayout;
 
 /**
- * Edit society {@link JsamsFrame}.
+ * Edit society {@link JsamsButtonsFrame}, to create or update a Society object.
  * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
@@ -37,47 +35,61 @@ public class EditSocietyFrame extends JsamsButtonsFrame {
 	 */
 	private static final long serialVersionUID = 4225744372592399187L;
 
-	private static final int MAX_COLUMN_SPAN = 9;
+	private static final int DEFAULT_COLUMN_SPAN = 9;
 
 	private static final int MAX_CHARACTERS = 50;
 
 	private static final int MAX_NUMBERS = 10;
 
-	private LegalFormDao legalFormDao;
+	public JsamsTextField textFieldName = new JsamsTextField(MAX_CHARACTERS,
+			JsamsI18nResource.LABEL_NAME);
 
-	public JTextField textFieldName = new JTextField(MAX_CHARACTERS);
+	public JsamsTextField textFieldStreet = new JsamsTextField(MAX_CHARACTERS,
+			JsamsI18nResource.LABEL_STREET);
 
-	public JTextField textFieldStreet = new JTextField(MAX_CHARACTERS);
+	public JsamsTextField textFieldNumber = new JsamsTextField(MAX_NUMBERS,
+			JsamsI18nResource.LABEL_NUMBER);
 
-	public JTextField textFieldNumber = new JTextField(MAX_NUMBERS);
+	public JsamsTextField textFieldBox = new JsamsTextField(MAX_NUMBERS,
+			JsamsI18nResource.LABEL_BOX);
 
-	public JTextField textFieldBox = new JTextField(MAX_NUMBERS);
+	public JsamsTextField textFieldZipCode = new JsamsTextField(MAX_NUMBERS,
+			JsamsI18nResource.LABEL_ZIP_CODE);
 
-	public JTextField textFieldZipCode = new JTextField(MAX_NUMBERS);
+	public JsamsTextField textFieldCity = new JsamsTextField(MAX_CHARACTERS,
+			JsamsI18nResource.LABEL_CITY);
 
-	public JTextField textFieldCity = new JTextField(MAX_CHARACTERS);
+	public JsamsTextField textFieldCountry = new JsamsTextField(MAX_CHARACTERS,
+			JsamsI18nResource.LABEL_COUNTRY);
 
-	public JTextField textFieldCountry = new JTextField(MAX_CHARACTERS);
+	public JsamsTextField textFieldPhone = new JsamsTextField(MAX_CHARACTERS,
+			JsamsI18nResource.LABEL_PHONE);
 
-	public JTextField textFieldPhone = new JTextField(MAX_CHARACTERS);
+	public JsamsTextField textFieldFax = new JsamsTextField(MAX_CHARACTERS,
+			JsamsI18nResource.LABEL_FAX);
 
-	public JTextField textFieldFax = new JTextField(MAX_CHARACTERS);
+	public JsamsTextField textFieldMobile = new JsamsTextField(MAX_CHARACTERS,
+			JsamsI18nResource.LABEL_MOBILE);
 
-	public JTextField textFieldMobile = new JTextField(MAX_CHARACTERS);
+	public JsamsTextField textFieldEmail = new JsamsTextField(MAX_CHARACTERS,
+			JsamsI18nResource.LABEL_EMAIL);
 
-	public JTextField textFieldEmail = new JTextField(MAX_CHARACTERS);
-
-	public JTextField textFieldWebsite = new JTextField(MAX_CHARACTERS);
+	public JsamsTextField textFieldWebsite = new JsamsTextField(MAX_CHARACTERS,
+			JsamsI18nResource.LABEL_WEBSITE);
 
 	public JComboBox comboBoxLegalForm;
 
-	public JTextField textFieldCapital = new JTextField(MAX_CHARACTERS);
+	public JsamsTextField textFieldCapital = new JsamsTextField(MAX_CHARACTERS,
+			JsamsI18nResource.LABEL_CAPITAL);
 
-	public JTextField textFieldActivity = new JTextField(MAX_CHARACTERS);
+	public JsamsTextField textFieldActivity = new JsamsTextField(
+			MAX_CHARACTERS, JsamsI18nResource.LABEL_ACTIVITY);
 
-	public JTextField textFieldResponsible = new JTextField(MAX_CHARACTERS);
+	public JsamsTextField textFieldResponsible = new JsamsTextField(
+			MAX_CHARACTERS, JsamsI18nResource.LABEL_RESPONSIBLE);
 
-	public JTextField textFieldVatNumber = new JTextField(MAX_CHARACTERS);
+	public JsamsTextField textFieldVatNumber = new JsamsTextField(
+			MAX_CHARACTERS, JsamsI18nResource.LABEL_VAT_NUMBER);
 
 	private Society model;
 
@@ -95,75 +107,64 @@ public class EditSocietyFrame extends JsamsButtonsFrame {
 		this.model = model;
 	}
 
-	public LegalFormDao getLegalFormDao() {
-		return legalFormDao;
-	}
-
-	public void setLegalFormDao(LegalFormDao legalFormDao) {
-		this.legalFormDao = legalFormDao;
-	}
-
 	private void initComponents() {
 		setTitle(JsamsI18nResource.TITLE_EDIT_SOCIETY);
 		fillData();
-		FormLayout layoutAddress = new FormLayout(
+		FormLayout layout = new FormLayout(
 				"right:p, 3dlu, 50dlu, 3dlu, right:p, 3dlu, 50dlu, 3dlu, right:p, 3dlu, 50dlu",
 				"p");
-		DefaultFormBuilder builder = new DefaultFormBuilder(layoutAddress);
+		DefaultFormBuilder builder = new DefaultFormBuilder(layout);
 		builder.setDefaultDialogBorder();
-		builder.append(JsamsI18nResource.LABEL_NAME.getTranslation(),
-				textFieldName, MAX_COLUMN_SPAN);
+		builder.append(textFieldName.getLabel(), textFieldName,
+				DEFAULT_COLUMN_SPAN);
 		builder.nextLine();
 		builder.appendSeparator(JsamsI18nResource.LABEL_ADDRESS
 				.getTranslation());
-		builder.append(JsamsI18nResource.LABEL_STREET.getTranslation(),
-				textFieldStreet, MAX_COLUMN_SPAN);
+		builder.append(textFieldStreet.getLabel(), textFieldStreet,
+				DEFAULT_COLUMN_SPAN);
 		builder.nextLine();
-		builder.append(JsamsI18nResource.LABEL_NUMBER.getTranslation(),
-				textFieldNumber);
-		builder.append(JsamsI18nResource.LABEL_BOX.getTranslation(),
-				textFieldBox, 1);
-		builder.append(JsamsI18nResource.LABEL_ZIP_CODE.getTranslation(),
-				textFieldZipCode, 1);
-		builder.append(JsamsI18nResource.LABEL_CITY.getTranslation(),
-				textFieldCity, MAX_COLUMN_SPAN);
-		builder.append(JsamsI18nResource.LABEL_COUNTRY.getTranslation(),
-				textFieldCountry, MAX_COLUMN_SPAN);
+		builder.append(textFieldNumber.getLabel(), textFieldNumber, 1);
+		builder.append(textFieldBox.getLabel(), textFieldBox, 1);
+		builder.append(textFieldZipCode.getLabel(), textFieldZipCode, 1);
+		builder.append(textFieldCity.getLabel(), textFieldCity,
+				DEFAULT_COLUMN_SPAN);
+		builder.append(textFieldCountry.getLabel(), textFieldCountry,
+				DEFAULT_COLUMN_SPAN);
 		builder.nextLine();
 
 		builder.appendSeparator(JsamsI18nResource.LABEL_CONTACT_INFORMATIONS
 				.getTranslation());
-		builder.append(JsamsI18nResource.LABEL_PHONE.getTranslation(),
-				textFieldPhone, MAX_COLUMN_SPAN);
+		builder.append(textFieldPhone.getLabel(), textFieldPhone,
+				DEFAULT_COLUMN_SPAN);
 		builder.nextLine();
-		builder.append(JsamsI18nResource.LABEL_FAX.getTranslation(),
-				textFieldFax, MAX_COLUMN_SPAN);
+		builder.append(textFieldFax.getLabel(), textFieldFax,
+				DEFAULT_COLUMN_SPAN);
 		builder.nextLine();
-		builder.append(JsamsI18nResource.LABEL_MOBILE.getTranslation(),
-				textFieldMobile, MAX_COLUMN_SPAN);
+		builder.append(textFieldMobile.getLabel(), textFieldMobile,
+				DEFAULT_COLUMN_SPAN);
 		builder.nextLine();
-		builder.append(JsamsI18nResource.LABEL_EMAIL.getTranslation(),
-				textFieldEmail, MAX_COLUMN_SPAN);
+		builder.append(textFieldEmail.getLabel(), textFieldEmail,
+				DEFAULT_COLUMN_SPAN);
 		builder.nextLine();
-		builder.append(JsamsI18nResource.LABEL_WEBSITE.getTranslation(),
-				textFieldWebsite, MAX_COLUMN_SPAN);
+		builder.append(textFieldWebsite.getLabel(), textFieldWebsite,
+				DEFAULT_COLUMN_SPAN);
 		builder.nextLine();
 		builder.appendSeparator(JsamsI18nResource.LABEL_MISC.getTranslation());
 
 		builder.append(JsamsI18nResource.LABEL_LEGAL_FORM.getTranslation(),
-				comboBoxLegalForm, MAX_COLUMN_SPAN);
+				comboBoxLegalForm, DEFAULT_COLUMN_SPAN);
 		builder.nextLine();
-		builder.append(JsamsI18nResource.LABEL_CAPITAL.getTranslation(),
-				textFieldCapital, MAX_COLUMN_SPAN);
+		builder.append(textFieldCapital.getLabel(), textFieldCapital,
+				DEFAULT_COLUMN_SPAN);
 		builder.nextLine();
-		builder.append(JsamsI18nResource.LABEL_ACTIVITY.getTranslation(),
-				textFieldActivity, MAX_COLUMN_SPAN);
+		builder.append(textFieldActivity.getLabel(), textFieldActivity,
+				DEFAULT_COLUMN_SPAN);
 		builder.nextLine();
-		builder.append(JsamsI18nResource.LABEL_RESPONSIBLE.getTranslation(),
-				textFieldResponsible, MAX_COLUMN_SPAN);
+		builder.append(textFieldResponsible.getLabel(), textFieldResponsible,
+				DEFAULT_COLUMN_SPAN);
 		builder.nextLine();
-		builder.append(JsamsI18nResource.LABEL_VAT_NUMBER.getTranslation(),
-				textFieldVatNumber, MAX_COLUMN_SPAN);
+		builder.append(textFieldVatNumber.getLabel(), textFieldVatNumber,
+				DEFAULT_COLUMN_SPAN);
 		builder.nextLine();
 
 		JPanel mainPanel = new JPanel();
@@ -211,6 +212,37 @@ public class EditSocietyFrame extends JsamsButtonsFrame {
 			JsamsApplicationContext.getSocietyService().create(newSociety);
 		} else {
 			// Update the current society
+			Society updatedSociety = new Society();
+			updatedSociety.setActivity(textFieldActivity.getText());
+			Address updatedAddress = new Address();
+			updatedAddress.setBox(textFieldBox.getText());
+			updatedAddress.setCity(textFieldCity.getText());
+			updatedAddress.setCountry(textFieldCountry.getText());
+			updatedAddress.setNumber(textFieldNumber.getText());
+			updatedAddress.setStreet(textFieldStreet.getText());
+			updatedAddress.setZipCode(Integer.parseInt(textFieldZipCode
+					.getText()));
+			updatedSociety.setAddress(updatedAddress);
+			updatedSociety
+					.setCapital(new BigDecimal(textFieldCapital.getText()));
+			ContactInformation updatedContactInformation = new ContactInformation();
+			updatedContactInformation.setEmail(textFieldEmail.getText());
+			updatedContactInformation.setFax(textFieldFax.getText());
+			updatedContactInformation.setMobile(textFieldMobile.getText());
+			updatedContactInformation.setPhone(textFieldPhone.getText());
+			updatedContactInformation.setWebsite(textFieldWebsite.getText());
+			updatedSociety.setContactInformation(updatedContactInformation);
+			updatedSociety.setLegalForm((LegalForm) comboBoxLegalForm
+					.getSelectedItem());
+			updatedSociety.setName(textFieldName.getText());
+			updatedSociety.setResponsible(textFieldResponsible.getText());
+			updatedSociety.setVatNumber(textFieldVatNumber.getText());
+
+			if (!getModel().equals(updatedSociety)) {
+				JsamsApplicationContext.getSocietyService().update(
+						updatedSociety);
+				JsamsDesktop.instance.setCurrentSociety(updatedSociety);
+			}
 		}
 		dispose();
 	}
@@ -222,8 +254,8 @@ public class EditSocietyFrame extends JsamsButtonsFrame {
 		for (Field field : fields) {
 			try {
 				Object value = field.get(this);
-				if (value instanceof JTextField) {
-					((JTextField) value).setText(null);
+				if (value instanceof JsamsTextField) {
+					((JsamsTextField) value).setText(null);
 				} else if (value instanceof JComboBox) {
 					((JComboBox) value).setSelectedIndex(0);
 				}
@@ -237,7 +269,7 @@ public class EditSocietyFrame extends JsamsButtonsFrame {
 
 	private void fillData() {
 		List<LegalForm> allLegalForms = JsamsApplicationContext
-				.getLegalFormService().findAll();
+				.getLegalFormDao().findAll();
 		comboBoxLegalForm = new JComboBox(allLegalForms.toArray());
 		if (getModel() != null) {
 			Society society = JsamsApplicationContext.getSocietyService()
@@ -252,7 +284,7 @@ public class EditSocietyFrame extends JsamsButtonsFrame {
 			textFieldResponsible.setText(society.getResponsible());
 			textFieldVatNumber.setText(society.getVatNumber());
 		}
-		comboBoxLegalForm.setRenderer(new LegalFormComboBoxRenderer());
+		comboBoxLegalForm.setRenderer(new GenericComboBoxRenderer());
 	}
 
 	private void fillAddress(final Society society) {
