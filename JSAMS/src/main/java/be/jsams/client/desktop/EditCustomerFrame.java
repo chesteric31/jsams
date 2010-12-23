@@ -16,6 +16,7 @@ import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.renderer.GenericComboBoxRenderer;
 import be.jsams.client.swing.component.JsamsButtonsFrame;
 import be.jsams.client.swing.component.JsamsTextField;
+import be.jsams.client.swing.utils.IconUtil;
 import be.jsams.server.model.Address;
 import be.jsams.server.model.Civility;
 import be.jsams.server.model.ContactInformation;
@@ -31,7 +32,7 @@ import com.jgoodies.forms.layout.FormLayout;
  * object.
  * 
  * @author chesteric31
- * @version $Rev$ $Date:: $ $Author$
+ * @version $Rev$ $Date::   $Author$
  */
 public class EditCustomerFrame extends JsamsButtonsFrame {
 
@@ -144,7 +145,7 @@ public class EditCustomerFrame extends JsamsButtonsFrame {
 	private JPanel miscPanel;
 
 	public EditCustomerFrame(final I18nString title, Customer model) {
-		super(title);
+		super(title, IconUtil.TITLE_ICON_PREFIX + "apps/system-users.png");
 		this.model = model;
 		initComponents();
 	}
@@ -197,7 +198,6 @@ public class EditCustomerFrame extends JsamsButtonsFrame {
 			fillContactInformation();
 			fillMisc();
 			comboBoxLegalForm.setSelectedItem(getModel().getLegalForm());
-			System.out.println(comboBoxLegalForm.getSelectedItem());
 			textFieldName.setText(getModel().getName());
 			textFieldVatNumber.setText(getModel().getVatNumber());
 		}

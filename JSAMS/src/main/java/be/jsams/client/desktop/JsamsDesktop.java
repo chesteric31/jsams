@@ -34,10 +34,10 @@ public class JsamsDesktop {
 
 	private ChooseSocietyFrame chooseSocietyFrame = null;
 
-	public static final Dimension screen = Toolkit.getDefaultToolkit()
+	public static final Dimension SCREEN = Toolkit.getDefaultToolkit()
 			.getScreenSize();
-	public static final Dimension center = new Dimension((int) screen
-			.getWidth(), (int) screen.getHeight());
+	public static final Dimension CENTER = new Dimension((int) SCREEN
+			.getWidth(), (int) SCREEN.getHeight());
 
 	public JsamsDesktop() {
 		instance = this;
@@ -60,8 +60,8 @@ public class JsamsDesktop {
 
 	public void start() {
 		frame.setVisible(true);
-		chooseSocietyFrame.setBounds(screen.width / 2
-				- chooseSocietyFrame.getWidth() / 2, screen.height / 2
+		chooseSocietyFrame.setBounds(SCREEN.width / 2
+				- chooseSocietyFrame.getWidth() / 2, SCREEN.height / 2
 				- chooseSocietyFrame.getHeight() / 2, chooseSocietyFrame
 				.getWidth(), chooseSocietyFrame.getHeight());
 		chooseSocietyFrame.setVisible(true);
