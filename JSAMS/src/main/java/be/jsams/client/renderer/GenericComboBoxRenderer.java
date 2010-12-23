@@ -8,15 +8,17 @@ import javax.swing.JList;
 import javax.swing.ListCellRenderer;
 
 import be.jsams.client.i18n.UserContext;
+import be.jsams.server.model.Civility;
 import be.jsams.server.model.LegalForm;
+import be.jsams.server.model.PaymentMode;
 
 /**
+ * Generic combo-box renderer.
  * 
- *
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class LegalFormComboBoxRenderer implements ListCellRenderer {
+public class GenericComboBoxRenderer implements ListCellRenderer {
 	protected DefaultListCellRenderer defaultRenderer = new DefaultListCellRenderer();
 
 	public Component getListCellRendererComponent(JList list, Object value,
@@ -33,6 +35,22 @@ public class LegalFormComboBoxRenderer implements ListCellRenderer {
 				theText = ((LegalForm) value).getLabelNl();
 			} else {
 				theText = ((LegalForm) value).getLabel();
+			}
+		} else if (value instanceof Civility) {
+			if (UserContext.isFrench()) {
+				theText = ((Civility) value).getLabelFr();
+			} else if (UserContext.isDutch()) {
+				theText = ((Civility) value).getLabelNl();
+			} else {
+				theText = ((Civility) value).getLabel();
+			}
+		} else if (value instanceof PaymentMode) {
+			if (UserContext.isFrench()) {
+				theText = ((PaymentMode) value).getLabelFr();
+			} else if (UserContext.isDutch()) {
+				theText = ((PaymentMode) value).getLabelNl();
+			} else {
+				theText = ((PaymentMode) value).getLabel();
 			}
 		}
 		renderer.setText(theText);
