@@ -41,6 +41,8 @@ public class Customer extends AbstractIdentity {
 	
 	private Agent agent;
 	
+	private LegalForm legalForm;
+	
 	public Customer() {
 		super();
 	}
@@ -137,7 +139,7 @@ public class Customer extends AbstractIdentity {
 		this.billingAddress = billingAddress;
 	}
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.REFRESH)
 	@JoinColumn(name = "FK_PAYMENT_MODE")
 	public PaymentMode getPaymentMode() {
 		return paymentMode;
@@ -157,7 +159,7 @@ public class Customer extends AbstractIdentity {
 		this.contactInformation = contactInformation;
 	}
 
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.REFRESH)
 	@JoinColumn(name = "FK_CIVILITY")
 	public Civility getCivility() {
 		return civility;
@@ -177,6 +179,16 @@ public class Customer extends AbstractIdentity {
 		this.agent = agent;
 	}
 
+	@OneToOne(cascade = CascadeType.REFRESH)
+	@JoinColumn(name = "FK_LEGAL_FORM")
+	public LegalForm getLegalForm() {
+		return legalForm;
+	}
+
+	public void setLegalForm(LegalForm legalForm) {
+		this.legalForm = legalForm;
+	}
+
 	@Override
 	public String toString() {
 		return "Customer [agent=" + agent + ", bank1=" + bank1 + ", bank2="
@@ -184,9 +196,10 @@ public class Customer extends AbstractIdentity {
 				+ civility + ", contactInformation=" + contactInformation
 				+ ", creditLimit=" + creditLimit + ", defaultDiscountRate="
 				+ defaultDiscountRate + ", deliveryAddress=" + deliveryAddress
-				+ ", description=" + description + ", name=" + name
-				+ ", paymentMode=" + paymentMode + ", vatApplicable="
-				+ vatApplicable + ", vatNumber=" + vatNumber + "]";
+				+ ", description=" + description + ", legalForm=" + legalForm
+				+ ", name=" + name + ", paymentMode=" + paymentMode
+				+ ", vatApplicable=" + vatApplicable + ", vatNumber="
+				+ vatNumber + "]";
 	}
 
 }

@@ -122,4 +122,78 @@ public class Society extends AbstractIdentity {
 				+ vatNumber + "]";
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result
+				+ ((activity == null) ? 0 : activity.hashCode());
+		result = prime * result + ((address == null) ? 0 : address.hashCode());
+		result = prime * result + ((capital == null) ? 0 : capital.hashCode());
+		result = prime
+				* result
+				+ ((contactInformation == null) ? 0 : contactInformation
+						.hashCode());
+		result = prime * result
+				+ ((legalForm == null) ? 0 : legalForm.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result
+				+ ((responsible == null) ? 0 : responsible.hashCode());
+		result = prime * result
+				+ ((vatNumber == null) ? 0 : vatNumber.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+//		if (!super.equals(obj))
+//			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Society other = (Society) obj;
+		if (activity == null) {
+			if (other.activity != null)
+				return false;
+		} else if (!activity.equals(other.activity))
+			return false;
+		if (address == null) {
+			if (other.address != null)
+				return false;
+		} else if (!address.equals(other.address))
+			return false;
+		if (capital == null) {
+			if (other.capital != null)
+				return false;
+		} else if (!capital.equals(other.capital))
+			return false;
+		if (contactInformation == null) {
+			if (other.contactInformation != null)
+				return false;
+		} else if (!contactInformation.equals(other.contactInformation))
+			return false;
+		if (legalForm == null) {
+			if (other.legalForm != null)
+				return false;
+		} else if (!legalForm.equals(other.legalForm))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (responsible == null) {
+			if (other.responsible != null)
+				return false;
+		} else if (!responsible.equals(other.responsible))
+			return false;
+		if (vatNumber == null) {
+			if (other.vatNumber != null)
+				return false;
+		} else if (!vatNumber.equals(other.vatNumber))
+			return false;
+		return true;
+	}
+
 }
