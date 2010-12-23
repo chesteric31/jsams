@@ -105,40 +105,54 @@ public class Address extends AbstractIdentity {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-//		if (!super.equals(obj))
+		}
+//		if (!super.equals(obj)) {
 //			return false;
-		if (getClass() != obj.getClass())
+//		}
+		if (!(obj instanceof Address)) {
 			return false;
+		}
 		Address other = (Address) obj;
 		if (box == null) {
-			if (other.box != null)
+			if (other.box != null) {
 				return false;
-		} else if (!box.equals(other.box))
+			}
+		} else if (!box.equals(other.box)) {
 			return false;
+		}
 		if (city == null) {
-			if (other.city != null)
+			if (other.city != null) {
 				return false;
-		} else if (!city.equals(other.city))
+			}
+		} else if (!city.equals(other.city)) {
 			return false;
+		}
 		if (country == null) {
-			if (other.country != null)
+			if (other.country != null) {
 				return false;
-		} else if (!country.equals(other.country))
+			}
+		} else if (!country.equals(other.country)) {
 			return false;
+		}
 		if (number == null) {
-			if (other.number != null)
+			if (other.number != null) {
 				return false;
-		} else if (!number.equals(other.number))
+			}
+		} else if (!number.equals(other.number)) {
 			return false;
+		}
 		if (street == null) {
-			if (other.street != null)
+			if (other.street != null) {
 				return false;
-		} else if (!street.equals(other.street))
+			}
+		} else if (!street.equals(other.street)) {
 			return false;
-		if (zipCode != other.zipCode)
+		}
+		if (zipCode != other.zipCode) {
 			return false;
+		}
 		return true;
 	}
 

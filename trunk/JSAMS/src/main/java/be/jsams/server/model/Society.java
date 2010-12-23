@@ -146,53 +146,72 @@ public class Society extends AbstractIdentity {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-//		if (!super.equals(obj))
+		}
+//		if (!super.equals(obj)) {
 //			return false;
-		if (getClass() != obj.getClass())
+//		}
+		if (!(obj instanceof Society)) {
 			return false;
+		}
 		Society other = (Society) obj;
 		if (activity == null) {
-			if (other.activity != null)
+			if (other.activity != null) {
 				return false;
-		} else if (!activity.equals(other.activity))
+			}
+		} else if (!activity.equals(other.activity)) {
 			return false;
+		}
 		if (address == null) {
-			if (other.address != null)
+			if (other.address != null) {
 				return false;
-		} else if (!address.equals(other.address))
+			}
+		} else if (!address.equals(other.address)) {
 			return false;
+		}
 		if (capital == null) {
-			if (other.capital != null)
+			if (other.capital != null) {
 				return false;
-		} else if (!capital.equals(other.capital))
+			}
+		} else if (!capital.equals(other.capital)) {
 			return false;
+		}
 		if (contactInformation == null) {
-			if (other.contactInformation != null)
+			if (other.contactInformation != null) {
 				return false;
-		} else if (!contactInformation.equals(other.contactInformation))
+			}
+		} else if (!contactInformation.equals(other.contactInformation)) {
 			return false;
+		}
 		if (legalForm == null) {
-			if (other.legalForm != null)
+			if (other.legalForm != null) {
 				return false;
-		} else if (!legalForm.equals(other.legalForm))
+			}
+		} else if (!legalForm.equals(other.legalForm)) {
 			return false;
+		}
 		if (name == null) {
-			if (other.name != null)
+			if (other.name != null) {
 				return false;
-		} else if (!name.equals(other.name))
+			}
+		} else if (!name.equals(other.name)) {
 			return false;
+		}
 		if (responsible == null) {
-			if (other.responsible != null)
+			if (other.responsible != null) {
 				return false;
-		} else if (!responsible.equals(other.responsible))
+			}
+		} else if (!responsible.equals(other.responsible)) {
 			return false;
+		}
 		if (vatNumber == null) {
-			if (other.vatNumber != null)
+			if (other.vatNumber != null) {
 				return false;
-		} else if (!vatNumber.equals(other.vatNumber))
+			}
+		} else if (!vatNumber.equals(other.vatNumber)) {
 			return false;
+		}
 		return true;
 	}
 

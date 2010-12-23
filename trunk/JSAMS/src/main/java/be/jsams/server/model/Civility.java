@@ -71,26 +71,37 @@ public class Civility extends AbstractIdentity {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (getClass() != obj.getClass())
+		}
+//		if (!super.equals(obj)) {
+//			return false;
+//		}
+		if (!(obj instanceof Civility)) {
 			return false;
+		}
 		Civility other = (Civility) obj;
 		if (label == null) {
-			if (other.label != null)
+			if (other.label != null) {
 				return false;
-		} else if (!label.equals(other.label))
+			}
+		} else if (!label.equals(other.label)) {
 			return false;
+		}
 		if (labelFr == null) {
-			if (other.labelFr != null)
+			if (other.labelFr != null) {
 				return false;
-		} else if (!labelFr.equals(other.labelFr))
+			}
+		} else if (!labelFr.equals(other.labelFr)) {
 			return false;
+		}
 		if (labelNl == null) {
-			if (other.labelNl != null)
+			if (other.labelNl != null) {
 				return false;
-		} else if (!labelNl.equals(other.labelNl))
+			}
+		} else if (!labelNl.equals(other.labelNl)) {
 			return false;
+		}
 		return true;
 	}
 
