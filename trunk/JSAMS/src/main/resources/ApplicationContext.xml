@@ -78,11 +78,11 @@
 	<bean id="societyService" parent="baseTransactionProxy">
 		<property name="target" ref="societyServiceTarget" />
 	</bean>
-	<bean id="legalFormServiceTarget" class="be.jsams.server.service.impl.LegalFormServiceImpl">
-		<property name="legalFormDao" ref="legalFormDao" />
+	<bean id="customerServiceTarget" class="be.jsams.server.service.impl.CustomerServiceImpl">
+		<property name="customerDao" ref="customerDao" />
 	</bean>
-	<bean id="legalFormService" parent="baseTransactionProxy">
-		<property name="target" ref="legalFormServiceTarget" />
+	<bean id="customerService" parent="baseTransactionProxy">
+		<property name="target" ref="customerServiceTarget" />
 	</bean>
 
 	<bean id="commandDao" class="be.jsams.server.dao.impl.CommandDaoImpl">
@@ -103,7 +103,7 @@
 		<constructor-arg value="be.jsams.server.model.Address" />
 	</bean>
 	<bean id="civilityDao" class="be.jsams.server.dao.impl.CivilityDaoImpl">
-		<constructor-arg value="be.jsams.server.model.Address" />
+		<constructor-arg value="be.jsams.server.model.Civility" />
 	</bean>
 	<bean id="agentDao" class="be.jsams.server.dao.impl.AgentDaoImpl">
 		<constructor-arg value="be.jsams.server.model.Agent" />
