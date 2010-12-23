@@ -277,7 +277,6 @@ public class EditSocietyFrame extends JsamsButtonsFrame {
 			fillAddress(society);
 			fillContactInformation(society);
 			comboBoxLegalForm.setSelectedItem(society.getLegalForm());
-			System.out.println(comboBoxLegalForm.getSelectedItem());
 			textFieldActivity.setText(society.getActivity());
 			textFieldCapital.setText(society.getCapital().toPlainString());
 			textFieldName.setText(society.getName());

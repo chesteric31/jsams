@@ -20,6 +20,7 @@ import be.jsams.client.swing.component.JsamsMenu;
 import be.jsams.client.swing.component.JsamsMenuItem;
 import be.jsams.client.swing.component.JsamsShortcutToolBar;
 import be.jsams.client.swing.component.JsamsStatusBar;
+import be.jsams.client.swing.utils.IconUtil;
 
 /**
  * {@link JsamsMainFrame} that contains all the components.
@@ -28,10 +29,6 @@ import be.jsams.client.swing.component.JsamsStatusBar;
  * @version $Rev$ $Date::                  $ $Author$
  */
 public class JsamsMainFrame extends JsamsFrame {
-
-	private static final String MENU_ICON_PREFIX = "org/freedesktop/tango/16x16/";
-
-	private static final String TITLE_ICON_PREFIX = "org/freedesktop/tango/32x32/";
 
 	/**
 	 * Serial Version UID
@@ -89,8 +86,8 @@ public class JsamsMainFrame extends JsamsFrame {
 	private JsamsStatusBar statusBar;
 
 	public JsamsMainFrame(final I18nString title) {
-		super(title, TITLE_ICON_PREFIX + "categories/applications-office.png");
-		setSize(JsamsDesktop.center);
+		super(title, IconUtil.TITLE_ICON_PREFIX + "categories/applications-office.png");
+		setSize(JsamsDesktop.CENTER);
 		setExtendedState(JFrame.MAXIMIZED_BOTH);
 		initComponents();
 	}
@@ -101,70 +98,70 @@ public class JsamsMainFrame extends JsamsFrame {
 			mainMenuBar = new JMenuBar();
 			fileMenu = new JsamsMenu(JsamsI18nResource.MENU_FILE);
 			newMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_NEW,
-					MENU_ICON_PREFIX + "actions/folder-new.png");
+					IconUtil.MENU_ICON_PREFIX + "actions/folder-new.png");
 			newMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N,
 					KeyEvent.CTRL_MASK));
 			newMI.addActionListener(newSocietyListener(this));
 			fileMenu.add(newMI);
 			openMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_OPEN,
-					MENU_ICON_PREFIX + "actions/document-open.png");
+					IconUtil.MENU_ICON_PREFIX + "actions/document-open.png");
 			openMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O,
 					KeyEvent.CTRL_MASK));
 			openMI.addActionListener(chooseSocietyListener(this));
 			fileMenu.add(openMI);
 			closeMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_CLOSE,
-					MENU_ICON_PREFIX + "status/folder-visiting.png");
+					IconUtil.MENU_ICON_PREFIX + "status/folder-visiting.png");
 			fileMenu.add(closeMI);
 			fileMenu.add(separators[0]);
 			societyParametersMI = new JsamsMenuItem(
 					JsamsI18nResource.MENU_ITEM_SOCIETY_PARAMETERS,
-					MENU_ICON_PREFIX + "actions/document-properties.png");
+					IconUtil.MENU_ICON_PREFIX + "actions/document-properties.png");
 			societyParametersMI.addActionListener(editSocietyListener(this));
 			fileMenu.add(societyParametersMI);
 			printerParametersMI = new JsamsMenuItem(
 					JsamsI18nResource.MENU_ITEM_PRINTER_PARAMETERS,
-					MENU_ICON_PREFIX + "devices/printer.png");
+					IconUtil.MENU_ICON_PREFIX + "devices/printer.png");
 			fileMenu.add(printerParametersMI);
 			fileMenu.add(separators[1]);
 			exitMI = new JsamsMenuItem(
 					JsamsI18nResource.MENU_ITEM_EXIT_APPLICATION,
-					MENU_ICON_PREFIX + "actions/system-log-out.png");
+					IconUtil.MENU_ICON_PREFIX + "actions/system-log-out.png");
 			exitMI.addActionListener(exitListener());
 			fileMenu.add(exitMI);
 			mainMenuBar.add(fileMenu);
 
 			editMenu = new JsamsMenu(JsamsI18nResource.MENU_EDIT);
 			cancelMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_CANCEL,
-					MENU_ICON_PREFIX + "actions/edit-undo.png");
+					IconUtil.MENU_ICON_PREFIX + "actions/edit-undo.png");
 			cancelMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Z,
 					KeyEvent.CTRL_MASK));
 			editMenu.add(cancelMI);
 			editMenu.add(separators[2]);
 			cutMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_CUT,
-					MENU_ICON_PREFIX + "actions/edit-cut.png");
+					IconUtil.MENU_ICON_PREFIX + "actions/edit-cut.png");
 			cutMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_X,
 					KeyEvent.CTRL_MASK));
 			editMenu.add(cutMI);
 			copyMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_COPY,
-					MENU_ICON_PREFIX + "actions/edit-copy.png");
+					IconUtil.MENU_ICON_PREFIX + "actions/edit-copy.png");
 			copyMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_C,
 					KeyEvent.CTRL_MASK));
 			editMenu.add(copyMI);
 			pasteMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_PASTE,
-					MENU_ICON_PREFIX + "actions/edit-paste.png");
+					IconUtil.MENU_ICON_PREFIX + "actions/edit-paste.png");
 			pasteMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_V,
 					KeyEvent.CTRL_MASK));
 			editMenu.add(pasteMI);
 			editMenu.add(separators[3]);
 			selectAllMI = new JsamsMenuItem(
-					JsamsI18nResource.MENU_ITEM_SELECT_ALL, MENU_ICON_PREFIX
+					JsamsI18nResource.MENU_ITEM_SELECT_ALL, IconUtil.MENU_ICON_PREFIX
 							+ "actions/edit-select-all.png");
 			selectAllMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A,
 					KeyEvent.CTRL_MASK));
 			editMenu.add(selectAllMI);
 			editMenu.add(separators[4]);
 			refreshMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_REFRESH,
-					MENU_ICON_PREFIX + "actions/view-refresh.png");
+					IconUtil.MENU_ICON_PREFIX + "actions/view-refresh.png");
 			refreshMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R,
 					KeyEvent.CTRL_MASK));
 			editMenu.add(refreshMI);
@@ -172,7 +169,7 @@ public class JsamsMainFrame extends JsamsFrame {
 
 			managementMenu = new JsamsMenu(JsamsI18nResource.MENU_MANAGEMENT);
 			customersMI = new JsamsMenuItem(
-					JsamsI18nResource.MENU_ITEM_CUSTOMERS, MENU_ICON_PREFIX
+					JsamsI18nResource.MENU_ITEM_CUSTOMERS, IconUtil.MENU_ICON_PREFIX
 							+ "apps/system-users.png");
 			managementMenu.add(customersMI);
 			managementMenu.add(separators[5]);
@@ -186,11 +183,11 @@ public class JsamsMainFrame extends JsamsFrame {
 			salesMenu = new JsamsMenu(JsamsI18nResource.MENU_SALES);
 			createDocumentsMI = new JsamsMenuItem(
 					JsamsI18nResource.MENU_ITEM_CREATE_DOCUMENTS,
-					MENU_ICON_PREFIX + "actions/document-new.png");
+					IconUtil.MENU_ICON_PREFIX + "actions/document-new.png");
 			salesMenu.add(createDocumentsMI);
 			transferDocumentsMI = new JsamsMenuItem(
 					JsamsI18nResource.MENU_ITEM_TRANSFER_DOCUMENTS,
-					MENU_ICON_PREFIX + "actions/media-seek-forward.png");
+					IconUtil.MENU_ICON_PREFIX + "actions/media-seek-forward.png");
 			salesMenu.add(transferDocumentsMI);
 			salesMenu.add(separators[6]);
 			listDocumentsMI = new JsamsMenuItem(
@@ -220,21 +217,21 @@ public class JsamsMainFrame extends JsamsFrame {
 			windowsMenu.add(closeAllWindowsMI);
 			windowsMenu.add(separators[8]);
 			nextMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_NEXT,
-					MENU_ICON_PREFIX + "actions/go-next.png");
+					IconUtil.MENU_ICON_PREFIX + "actions/go-next.png");
 			windowsMenu.add(nextMI);
 			previousMI = new JsamsMenuItem(
-					JsamsI18nResource.MENU_ITEM_PREVIOUS, MENU_ICON_PREFIX
+					JsamsI18nResource.MENU_ITEM_PREVIOUS, IconUtil.MENU_ICON_PREFIX
 							+ "actions/go-previous.png");
 			windowsMenu.add(previousMI);
 			mainMenuBar.add(windowsMenu);
 
 			helpMenu = new JsamsMenu(JsamsI18nResource.MENU_HELP);
 			helpMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_HELP,
-					MENU_ICON_PREFIX + "apps/help-browser.png");
+					IconUtil.MENU_ICON_PREFIX + "apps/help-browser.png");
 			helpMenu.add(helpMI);
 			helpMenu.add(separators[9]);
 			aboutMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_ABOUT,
-					MENU_ICON_PREFIX + "categories/applications-office.png");
+					IconUtil.MENU_ICON_PREFIX + "categories/applications-office.png");
 			helpMenu.add(aboutMI);
 			mainMenuBar.add(helpMenu);
 
