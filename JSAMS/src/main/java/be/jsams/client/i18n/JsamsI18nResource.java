@@ -1,5 +1,6 @@
 package be.jsams.client.i18n;
 
+
 /**
  * Resource file that contains all {@link I18nString} properties key.
  * 
@@ -189,6 +190,58 @@ public class JsamsI18nResource {
 
 	public static final I18nString MENU_ITEM_TRANSFER_DOCUMENTS = new I18nString(
 			"menu.item.transfer_documents");
-	
+
 	public static final I18nString MENU_WINDOWS = new I18nString("menu.windows");
+
+	public static final I18nString BUTTON_NEW_CUSTOMER = new I18nString(
+			"button.new_customer");
+
+	public static final I18nString BUTTON_NEW_ESTIMATE = new I18nString(
+			"button.new_estimate");
+
+	public static final I18nString BUTTON_NEW_BILL = new I18nString(
+			"button.new_bill");
+
+	public static final I18nString BUTTON_NEW_PRODUCT = new I18nString(
+			"button.new_product");
+
+	public static final I18nString BUTTON_STATISTICS = new I18nString(
+			"button.statistics");
+
+	public static final I18nString TITLE_EDIT_CUSTOMER = new I18nString(
+			"title.edit.customer");
+
+	public static final I18nString LABEL_VAT_APPLICABLE = new I18nString(
+			"label.vat_applicable");
+
+	public static final I18nString PANEL_GENERAL = new I18nString(
+			"panel.general");
+
+	public static final I18nString PANEL_BILLING_ADDRESS = new I18nString(
+			"panel.billing_address");
+
+	public static final I18nString PANEL_DELIVERY_ADDRESS = new I18nString(
+			"panel.delivery_address");
+
+	public static final I18nString PANEL_CONTACT_INFORMATIONS = new I18nString(
+			"panel.contact_informations");
+
+	public static final I18nString PANEL_MISC = new I18nString("panel.misc");
+
+	public static final I18nString LABEL_CIVILITY = new I18nString("label.civility");
+
+	public static final I18nString LABEL_BANK1 = new I18nString("label.bank1");
+
+	public static final I18nString LABEL_BANK2 = new I18nString("label.bank2");
+
+	public static final I18nString LABEL_CREDIT_LIMIT = new I18nString("label.credit_limit");
+
+	public static final I18nString LABEL_PAYMENT_MODE = new I18nString("label.payment_mode");
+	
+	public static final I18nString LABEL_AGENT = new I18nString("label.agent");
+
+	public static final I18nString LABEL_DEFAULT_DISCOUNT_RATE = new I18nString("label.default_discount_rate");
+
+	public static final I18nString LABEL_DESCRIPTION = new I18nString("label.description");
+	
 }
