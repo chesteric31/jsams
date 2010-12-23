@@ -4,10 +4,19 @@ import java.awt.Image;
 import java.awt.Toolkit;
 
 public class IconUtil {
-	
+
+	public static final String MENU_ICON_PREFIX = "org/freedesktop/tango/16x16/";
+
+	public static final String TITLE_ICON_PREFIX = "org/freedesktop/tango/32x32/";
+
 	public static Image buildIcon(final String fileName) {
-		return Toolkit.getDefaultToolkit().getImage(
-				IconUtil.class.getClassLoader().getResource(fileName));
+		if (fileName != null) {
+			return Toolkit.getDefaultToolkit().getImage(
+					Thread.currentThread().getContextClassLoader().getResource(
+							fileName));
+		} else {
+			return null;
+		}
 	}
 
 }
