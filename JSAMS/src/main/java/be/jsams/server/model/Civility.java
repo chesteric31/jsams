@@ -59,4 +59,39 @@ public class Civility extends AbstractIdentity {
 				+ ", labelNl=" + labelNl + "]";
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((label == null) ? 0 : label.hashCode());
+		result = prime * result + ((labelFr == null) ? 0 : labelFr.hashCode());
+		result = prime * result + ((labelNl == null) ? 0 : labelNl.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (getClass() != obj.getClass())
+			return false;
+		Civility other = (Civility) obj;
+		if (label == null) {
+			if (other.label != null)
+				return false;
+		} else if (!label.equals(other.label))
+			return false;
+		if (labelFr == null) {
+			if (other.labelFr != null)
+				return false;
+		} else if (!labelFr.equals(other.labelFr))
+			return false;
+		if (labelNl == null) {
+			if (other.labelNl != null)
+				return false;
+		} else if (!labelNl.equals(other.labelNl))
+			return false;
+		return true;
+	}
+
 }
