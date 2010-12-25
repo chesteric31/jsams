@@ -1,6 +1,8 @@
 package be.jsams.client.swing.component;
 
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
 import be.jsams.client.i18n.I18nString;
 
@@ -23,6 +25,10 @@ public class JsamsLabel extends JLabel {
 	
 	public JsamsLabel(final I18nString text) {
 		super(text.getTranslation());
+	}
+
+	public JsamsLabel(final I18nString text, final ImageIcon icon) {
+		super(text.getTranslation(), icon, SwingConstants.LEFT);
 	}
 
 }
