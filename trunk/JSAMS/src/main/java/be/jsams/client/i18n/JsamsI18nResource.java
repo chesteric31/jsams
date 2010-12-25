@@ -211,6 +211,12 @@ public class JsamsI18nResource {
 	public static final I18nString TITLE_EDIT_CUSTOMER = new I18nString(
 			"title.edit.customer");
 
+	public static final I18nString TITLE_SEARCH_CUSTOMER = new I18nString(
+			"title.search.customer");
+
+	public static final I18nString TITLE_SEARCH_PRODUCT = new I18nString(
+			"title.search.product");
+
 	public static final I18nString LABEL_VAT_APPLICABLE = new I18nString(
 			"label.vat_applicable");
 
