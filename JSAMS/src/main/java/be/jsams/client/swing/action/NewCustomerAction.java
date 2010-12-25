@@ -4,8 +4,8 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
 
-import be.jsams.client.desktop.EditCustomerFrame;
 import be.jsams.client.i18n.JsamsI18nResource;
+import be.jsams.client.model.frame.EditCustomerFrame;
 
 /**
  * {@link AbstractAction} to launch {@link EditCustomerFrame}.
