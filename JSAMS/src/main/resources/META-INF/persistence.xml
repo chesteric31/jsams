@@ -6,8 +6,7 @@
 	version="1.0">
 	<persistence-unit name="springUnit" transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
-		<class>be.jsams.server.model.Person</class>
-		
+<!--		<class>be.jsams.server.model.Person</class>-->
 		<class>be.jsams.server.model.Address</class>
 		<class>be.jsams.server.model.Civility</class>
 		<class>be.jsams.server.model.Command</class>
