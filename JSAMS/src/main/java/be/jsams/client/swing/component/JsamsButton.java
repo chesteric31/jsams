@@ -7,7 +7,7 @@ import be.jsams.client.i18n.I18nString;
 import be.jsams.client.swing.utils.IconUtil;
 
 /**
- * Button with internationalization.
+ * An extension of {@link JButton} with internationalization and icon.
  * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
@@ -28,7 +28,8 @@ public class JsamsButton extends JButton {
 	}
 
 	public JsamsButton(final I18nString text, final String iconFileName) {
-		super(text.getTranslation(), new ImageIcon(IconUtil.buildIcon(iconFileName)));
+		this(text);
+		setIcon(new ImageIcon(IconUtil.buildIcon(iconFileName)));
 	}
 
 	public JsamsButton(final String iconFileName) {

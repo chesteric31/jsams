@@ -20,6 +20,7 @@ import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.swing.component.JsamsButton;
 import be.jsams.client.swing.component.JsamsButtonsFrame;
 import be.jsams.client.swing.component.JsamsFrame;
+import be.jsams.client.swing.utils.IconUtil;
 import be.jsams.server.model.Society;
 
 import com.jgoodies.forms.builder.DefaultFormBuilder;
@@ -119,7 +120,7 @@ public class ChooseSocietyFrame extends JsamsButtonsFrame {
 	private JsamsButton buildButtonNewSociety() {
 		JsamsButton buttonNewSociety = new JsamsButton(
 				JsamsI18nResource.BUTTON_CHOOSE_SOCIETIES_NEW,
-				"org/freedesktop/tango/16x16/actions/folder-new.png");
+				IconUtil.MENU_ICON_PREFIX + "actions/folder-new.png");
 		buttonNewSociety.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {

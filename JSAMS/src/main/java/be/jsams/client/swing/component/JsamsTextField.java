@@ -5,7 +5,7 @@ import javax.swing.JTextField;
 import be.jsams.client.i18n.I18nString;
 
 /**
- * 
+ * An extension of {@link JTextField} with translation and label to use.
  *
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$

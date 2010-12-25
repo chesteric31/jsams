@@ -7,7 +7,8 @@ import be.jsams.client.i18n.I18nString;
 import be.jsams.client.swing.utils.IconUtil;
 
 /**
- * Generic {@link JFrame} for Jsams application.
+ * Generic {@link JFrame} with internalization, icon and native look and feel
+ * capabilities.
  * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$

@@ -18,7 +18,6 @@ import javax.swing.border.Border;
 
 /**
  * Jsams generic status bar, for all messages (warning, error and infos).
- * 
  *
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
