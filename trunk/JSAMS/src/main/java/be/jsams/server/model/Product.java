@@ -17,13 +17,12 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "PRODUCT")
-public class Product extends AbstractIdentity {
+public class Product extends AbstractNamedIdentity {
 
 	/**
 	 * Serial Version UID
 	 */
 	private static final long serialVersionUID = -6479784842022897090L;
-	private String label;
 	private BigDecimal price;
 	private int quantityStock;
 	private int reorderLevel;
@@ -33,15 +32,6 @@ public class Product extends AbstractIdentity {
 
 	public Product() {
 		super();
-	}
-
-	@Column(name = "LABEL")
-	public String getLabel() {
-		return label;
-	}
-
-	public void setLabel(String label) {
-		this.label = label;
 	}
 
 	@Column(name = "PRICE")
@@ -92,7 +82,7 @@ public class Product extends AbstractIdentity {
 
 	@Override
 	public String toString() {
-		return "Product [category=" + category + ", label=" + label
+		return "Product [category=" + category + ", name=" + getName()
 				+ ", price=" + price + ", quantityStock=" + quantityStock
 				+ ", reorderLevel=" + reorderLevel + ", vatApplicable="
 				+ vatApplicable + "]";
