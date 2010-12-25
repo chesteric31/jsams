@@ -85,11 +85,11 @@ public class CommandDetailDaoImplTest extends AbstractJUnitTestClass {
 		newCommand.setDeliveryAddress(billingAddress);
 		
 		ProductCategory booksCategory = new ProductCategory();
-		booksCategory.setLabel("Books");
+		booksCategory.setName("Books");
 		
 		Product book = new Product();
 		book.setCategory(booksCategory);
-		book.setLabel("Fight Club");
+		book.setName("Fight Club");
 		book.setPrice(new BigDecimal(35.95));
 		book.setQuantityStock(15);
 		book.setReorderLevel(10);
