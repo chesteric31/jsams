@@ -1,6 +1,5 @@
 package be.jsams.server.model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -12,60 +11,33 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "LEGAL_FORM")
-public class LegalForm extends AbstractIdentity {
+public class LegalForm extends AbstractTranslatableIdentity {
 
 	/**
 	 * Serial Version UID
 	 */
 	private static final long serialVersionUID = 7811347200401042583L;
-	private String label;
-	private String labelFr;
-	private String labelNl;
 
 	public LegalForm() {
 		super();
 	}
 
-	@Column(name = "LABEL")
-	public String getLabel() {
-		return label;
-	}
-
-	public void setLabel(String label) {
-		this.label = label;
-	}
-
-	@Column(name = "LABEL_FR")
-	public String getLabelFr() {
-		return labelFr;
-	}
-
-	public void setLabelFr(String labelFr) {
-		this.labelFr = labelFr;
-	}
-
-	@Column(name = "LABEL_NL")
-	public String getLabelNl() {
-		return labelNl;
-	}
-
-	public void setLabelNl(String labelNl) {
-		this.labelNl = labelNl;
-	}
-
 	@Override
 	public String toString() {
-		return "LegalForm [label=" + label + ", labelFr=" + labelFr
-				+ ", labelNl=" + labelNl + "]";
+		return "LegalForm [label=" + getLabel() + ", labelFr=" + getLabelFr()
+				+ ", labelNl=" + getLabelNl() + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
-		result = prime * result + ((label == null) ? 0 : label.hashCode());
-		result = prime * result + ((labelFr == null) ? 0 : labelFr.hashCode());
-		result = prime * result + ((labelNl == null) ? 0 : labelNl.hashCode());
+		result = prime * result
+				+ ((getLabel() == null) ? 0 : getLabel().hashCode());
+		result = prime * result
+				+ ((getLabelFr() == null) ? 0 : getLabelFr().hashCode());
+		result = prime * result
+				+ ((getLabelNl() == null) ? 0 : getLabelNl().hashCode());
 		return result;
 	}
 
@@ -74,32 +46,32 @@ public class LegalForm extends AbstractIdentity {
 		if (this == obj) {
 			return true;
 		}
-//		if (!super.equals(obj)) {
-//			return false;
-//		}
+		// if (!super.equals(obj)) {
+		// return false;
+		// }
 		if (!(obj instanceof LegalForm)) {
 			return false;
 		}
 		LegalForm other = (LegalForm) obj;
-		if (label == null) {
-			if (other.label != null) {
+		if (getLabel() == null) {
+			if (other.getLabel() != null) {
 				return false;
 			}
-		} else if (!label.equals(other.label)) {
+		} else if (!getLabel().equals(other.getLabel())) {
 			return false;
 		}
-		if (labelFr == null) {
-			if (other.labelFr != null) {
+		if (getLabelFr() == null) {
+			if (other.getLabelFr() != null) {
 				return false;
 			}
-		} else if (!labelFr.equals(other.labelFr)) {
+		} else if (!getLabelFr().equals(other.getLabelFr())) {
 			return false;
 		}
-		if (labelNl == null) {
-			if (other.labelNl != null) {
+		if (getLabelNl() == null) {
+			if (other.getLabelNl() != null) {
 				return false;
 			}
-		} else if (!labelNl.equals(other.labelNl)) {
+		} else if (!getLabelNl().equals(other.getLabelNl())) {
 			return false;
 		}
 		return true;
