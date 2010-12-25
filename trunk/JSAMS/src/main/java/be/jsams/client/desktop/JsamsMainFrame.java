@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.print.PageFormat;
+import java.awt.print.PrinterJob;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -15,6 +17,10 @@ import javax.swing.KeyStroke;
 
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.i18n.JsamsI18nResource;
+import be.jsams.client.model.frame.ChooseSocietyFrame;
+import be.jsams.client.model.frame.EditSocietyFrame;
+import be.jsams.client.model.panel.SearchCustomerPanel;
+import be.jsams.client.model.panel.SearchProductPanel;
 import be.jsams.client.swing.component.JsamsCloseableTabbedPane;
 import be.jsams.client.swing.component.JsamsFrame;
 import be.jsams.client.swing.component.JsamsMenu;
@@ -126,6 +132,7 @@ public class JsamsMainFrame extends JsamsFrame {
 			printerParametersMI = new JsamsMenuItem(
 					JsamsI18nResource.MENU_ITEM_PRINTER_PARAMETERS,
 					IconUtil.MENU_ICON_PREFIX + "devices/printer.png");
+			printerParametersMI.addActionListener(printerParametersListener());
 			fileMenu.add(printerParametersMI);
 			fileMenu.add(separators[1]);
 			exitMI = new JsamsMenuItem(
@@ -176,12 +183,14 @@ public class JsamsMainFrame extends JsamsFrame {
 			customersMI = new JsamsMenuItem(
 					JsamsI18nResource.MENU_ITEM_CUSTOMERS,
 					IconUtil.MENU_ICON_PREFIX + "apps/system-users.png");
+			customersMI.addActionListener(customersListener());
 			managementMenu.add(customersMI);
 			managementMenu.add(separators[5]);
 			productsCategoryMI = new JsamsMenuItem(
 					JsamsI18nResource.MENU_ITEM_PRODUCTS_CATEGORY);
 			managementMenu.add(productsCategoryMI);
 			productsMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_PRODUCTS);
+			productsMI.addActionListener(productsListener());
 			managementMenu.add(productsMI);
 			mainMenuBar.add(managementMenu);
 
@@ -242,21 +251,19 @@ public class JsamsMainFrame extends JsamsFrame {
 			helpMenu.add(aboutMI);
 			mainMenuBar.add(helpMenu);
 
-			setJMenuBar(mainMenuBar);
-
-			JPanel panel = new JPanel();
-			panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
-			panel.setBorder(BorderFactory.createEtchedBorder());
+			JPanel southPanel = new JPanel();
+			southPanel
+					.setLayout(new BoxLayout(southPanel, BoxLayout.PAGE_AXIS));
+			southPanel.setBorder(BorderFactory.createEtchedBorder());
 			shortcutToolBar = new JsamsShortcutToolBar();
 			statusBar = new JsamsStatusBar();
-			panel.add(shortcutToolBar);
-			panel.add(statusBar);
-			add(panel, BorderLayout.SOUTH);
+			southPanel.add(shortcutToolBar);
+			southPanel.add(statusBar);
+			add(southPanel, BorderLayout.SOUTH);
 
 			tabbedPane = new JsamsCloseableTabbedPane();
 
-			// only for test the following line
-			tabbedPane.addTab(JsamsI18nResource.PANEL_GENERAL, new JPanel());
+			setJMenuBar(mainMenuBar);
 
 			getContentPane().add(tabbedPane, BorderLayout.NORTH);
 		} catch (Exception e) {
@@ -267,7 +274,7 @@ public class JsamsMainFrame extends JsamsFrame {
 	private ActionListener exitListener() {
 		ActionListener listener = new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				JsamsDesktop.instance.stopNow();
+				JsamsDesktop.getInstance().stopNow();
 			}
 		};
 		return listener;
@@ -277,7 +284,7 @@ public class JsamsMainFrame extends JsamsFrame {
 		ActionListener listener = new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				new EditSocietyFrame(JsamsI18nResource.TITLE_EDIT_SOCIETY,
-						JsamsDesktop.instance.getCurrentSociety());
+						JsamsDesktop.getInstance().getCurrentSociety());
 			}
 		};
 		return listener;
@@ -296,6 +303,44 @@ public class JsamsMainFrame extends JsamsFrame {
 		ActionListener listener = new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				new ChooseSocietyFrame(JsamsI18nResource.TITLE_CHOOSE_SOCIETY);
+			}
+		};
+		return listener;
+	}
+
+	private ActionListener printerParametersListener() {
+		ActionListener listener = new ActionListener() {
+
+			public void actionPerformed(ActionEvent e) {
+				PrinterJob pjob = PrinterJob.getPrinterJob();
+				PageFormat pf = pjob.defaultPage();
+				pjob.setPrintable(null, pf);
+
+				if (pjob.printDialog()) {
+					// pjob.print();
+				}
+			}
+		};
+		return listener;
+	}
+
+	private ActionListener customersListener() {
+		ActionListener listener = new ActionListener() {
+			public void actionPerformed(ActionEvent event) {
+				SearchCustomerPanel searchPanel = new SearchCustomerPanel();
+				tabbedPane.addTab(JsamsI18nResource.TITLE_SEARCH_CUSTOMER,
+						"apps/system-users.png", searchPanel);
+			}
+		};
+		return listener;
+	}
+
+	private ActionListener productsListener() {
+		ActionListener listener = new ActionListener() {
+			public void actionPerformed(ActionEvent event) {
+				SearchProductPanel searchPanel = new SearchProductPanel();
+				tabbedPane.addTab(JsamsI18nResource.TITLE_SEARCH_PRODUCT, null,
+						searchPanel);
 			}
 		};
 		return listener;

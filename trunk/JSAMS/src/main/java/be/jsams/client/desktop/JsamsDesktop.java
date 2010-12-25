@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.i18n.JsamsI18nResource;
+import be.jsams.client.model.frame.ChooseSocietyFrame;
 import be.jsams.server.model.Society;
 
 /**
@@ -30,7 +31,7 @@ public class JsamsDesktop {
 
 	private JsamsMainFrame frame = null;
 
-	protected static JsamsDesktop instance = null;
+	private static JsamsDesktop instance = null;
 
 	private ChooseSocietyFrame chooseSocietyFrame = null;
 
@@ -40,7 +41,7 @@ public class JsamsDesktop {
 			.getWidth(), (int) SCREEN.getHeight());
 
 	public JsamsDesktop() {
-		instance = this;
+		setInstance(this);
 		initComponents();
 	}
 
@@ -98,6 +99,14 @@ public class JsamsDesktop {
 		I18nString newTitle = new I18nString("title.application",
 				new Object[] { this.currentSociety.getName() });
 		frame.setTitle(newTitle);
+	}
+
+	public static void setInstance(JsamsDesktop instance) {
+		JsamsDesktop.instance = instance;
+	}
+
+	public static JsamsDesktop getInstance() {
+		return instance;
 	}
 
 }
