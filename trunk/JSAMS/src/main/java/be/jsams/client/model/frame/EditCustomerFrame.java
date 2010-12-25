@@ -13,7 +13,7 @@ import javax.swing.JTextArea;
 import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.i18n.JsamsI18nResource;
-import be.jsams.client.renderer.GenericComboBoxRenderer;
+import be.jsams.client.renderer.TranslatableComboBoxRenderer;
 import be.jsams.client.swing.component.JsamsButtonsFrame;
 import be.jsams.client.swing.component.JsamsTextField;
 import be.jsams.client.swing.utils.IconUtil;
@@ -201,9 +201,9 @@ public class EditCustomerFrame extends JsamsButtonsFrame {
 			textFieldName.setText(getModel().getName());
 			textFieldVatNumber.setText(getModel().getVatNumber());
 		}
-		comboBoxLegalForm.setRenderer(new GenericComboBoxRenderer());
-		comboBoxCivility.setRenderer(new GenericComboBoxRenderer());
-		comboBoxPaymentMode.setRenderer(new GenericComboBoxRenderer());
+		comboBoxLegalForm.setRenderer(new TranslatableComboBoxRenderer());
+		comboBoxCivility.setRenderer(new TranslatableComboBoxRenderer());
+		comboBoxPaymentMode.setRenderer(new TranslatableComboBoxRenderer());
 	}
 
 	private JPanel buildGeneralTab() {

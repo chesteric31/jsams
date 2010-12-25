@@ -1,22 +1,18 @@
 package be.jsams.client.model.frame;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-import javax.swing.DefaultListCellRenderer;
 import javax.swing.JComboBox;
-import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.ListCellRenderer;
 
 import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.i18n.JsamsI18nResource;
+import be.jsams.client.renderer.NamedComboBoxRenderer;
 import be.jsams.client.swing.component.JsamsButton;
 import be.jsams.client.swing.component.JsamsButtonsFrame;
 import be.jsams.client.swing.component.JsamsFrame;
@@ -57,27 +53,7 @@ public class ChooseSocietyFrame extends JsamsButtonsFrame {
 		List<Society> allSocieties = JsamsApplicationContext
 				.getSocietyService().findAll();
 		comboBox = new JComboBox(allSocieties.toArray());
-		comboBox.setRenderer(new ListCellRenderer() {
-
-			protected DefaultListCellRenderer defaultRenderer = new DefaultListCellRenderer();
-
-			public Component getListCellRendererComponent(JList list,
-					Object value, int index, boolean isSelected,
-					boolean cellHasFocus) {
-				String theText = null;
-
-				JLabel renderer = (JLabel) defaultRenderer
-						.getListCellRendererComponent(list, value, index,
-								isSelected, cellHasFocus);
-				if (value instanceof Society) {
-					theText = ((Society) value).getName();
-				} else {
-					theText = "";
-				}
-				renderer.setText(theText);
-				return renderer;
-			}
-		});
+		comboBox.setRenderer(new NamedComboBoxRenderer());
 		builder.append(JsamsI18nResource.LABEL_CHOOSE_SOCIETY_AVAILABLES
 				.getTranslation(), comboBox);
 		JsamsButton buttonNewSociety = buildButtonNewSociety();

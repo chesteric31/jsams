@@ -12,7 +12,7 @@ import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.i18n.JsamsI18nResource;
-import be.jsams.client.renderer.GenericComboBoxRenderer;
+import be.jsams.client.renderer.TranslatableComboBoxRenderer;
 import be.jsams.client.swing.component.JsamsButtonsFrame;
 import be.jsams.client.swing.component.JsamsTextField;
 import be.jsams.server.model.Address;
@@ -284,7 +284,7 @@ public class EditSocietyFrame extends JsamsButtonsFrame {
 			textFieldResponsible.setText(society.getResponsible());
 			textFieldVatNumber.setText(society.getVatNumber());
 		}
-		comboBoxLegalForm.setRenderer(new GenericComboBoxRenderer());
+		comboBoxLegalForm.setRenderer(new TranslatableComboBoxRenderer());
 	}
 
 	private void fillAddress(final Society society) {
