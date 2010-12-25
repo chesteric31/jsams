@@ -56,15 +56,15 @@
 		</property>
 	</bean>
 
-	<bean id="personDao" class="be.jsams.server.dao.impl.PersonDaoImpl">
-		<constructor-arg value="be.jsams.server.model.Person" />
-	</bean>
-	<bean id="personServiceTarget" class="be.jsams.server.service.impl.PersonServiceImpl">
-		<property name="personDao" ref="personDao" />
-	</bean>
-	<bean id="personService" parent="baseTransactionProxy">
-		<property name="target" ref="personServiceTarget" />
-	</bean>
+<!--	<bean id="personDao" class="be.jsams.server.dao.impl.PersonDaoImpl">-->
+<!--		<constructor-arg value="be.jsams.server.model.Person" />-->
+<!--	</bean>-->
+<!--	<bean id="personServiceTarget" class="be.jsams.server.service.impl.PersonServiceImpl">-->
+<!--		<property name="personDao" ref="personDao" />-->
+<!--	</bean>-->
+<!--	<bean id="personService" parent="baseTransactionProxy">-->
+<!--		<property name="target" ref="personServiceTarget" />-->
+<!--	</bean>-->
 
 	<bean id="societyDao" class="be.jsams.server.dao.impl.SocietyDaoImpl">
 		<constructor-arg value="be.jsams.server.model.Society" />
