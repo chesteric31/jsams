@@ -1,6 +1,5 @@
 package be.jsams.client.i18n;
 
-
 /**
  * Resource file that contains all {@link I18nString} properties key.
  * 
@@ -234,20 +233,44 @@ public class JsamsI18nResource {
 
 	public static final I18nString PANEL_MISC = new I18nString("panel.misc");
 
-	public static final I18nString LABEL_CIVILITY = new I18nString("label.civility");
+	public static final I18nString LABEL_CIVILITY = new I18nString(
+			"label.civility");
 
 	public static final I18nString LABEL_BANK1 = new I18nString("label.bank1");
 
 	public static final I18nString LABEL_BANK2 = new I18nString("label.bank2");
 
-	public static final I18nString LABEL_CREDIT_LIMIT = new I18nString("label.credit_limit");
+	public static final I18nString LABEL_CREDIT_LIMIT = new I18nString(
+			"label.credit_limit");
 
-	public static final I18nString LABEL_PAYMENT_MODE = new I18nString("label.payment_mode");
-	
+	public static final I18nString LABEL_PAYMENT_MODE = new I18nString(
+			"label.payment_mode");
+
 	public static final I18nString LABEL_AGENT = new I18nString("label.agent");
 
-	public static final I18nString LABEL_DEFAULT_DISCOUNT_RATE = new I18nString("label.default_discount_rate");
+	public static final I18nString LABEL_DEFAULT_DISCOUNT_RATE = new I18nString(
+			"label.default_discount_rate");
 
-	public static final I18nString LABEL_DESCRIPTION = new I18nString("label.description");
+	public static final I18nString LABEL_DESCRIPTION = new I18nString(
+			"label.description");
+
+	public static final I18nString LABEL_PRODUCT_LABEL = new I18nString(
+			"label.product.label");
+
+	public static final I18nString LABEL_PRODUCT_PRICE = new I18nString(
+			"label.product.price");
+
+	public static final I18nString LABEL_PRODUCT_STOCK_QUANTITY = new I18nString(
+			"label.product.stock_quantity");
+
+	public static final I18nString LABEL_PRODUCT_REORDER_LEVEL = new I18nString(
+			"label.product.reorder_level");
+
+	public static final I18nString LABEL_PRODUCT_VAT_APPLICABLE = new I18nString(
+			"label.product.vat_applicable");
+
+	public static final I18nString LABEL_PRODUCT_CATEGORY = new I18nString(
+			"label.product.category");
 	
+	public static final I18nString SEARCH_CRITERIA = new I18nString("search.criteria");
 }
