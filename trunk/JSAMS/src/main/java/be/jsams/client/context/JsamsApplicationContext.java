@@ -5,6 +5,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import be.jsams.server.dao.CivilityDao;
 import be.jsams.server.dao.LegalFormDao;
 import be.jsams.server.dao.PaymentModeDao;
+import be.jsams.server.dao.ProductCategoryDao;
 import be.jsams.server.service.CustomerService;
 import be.jsams.server.service.SocietyService;
 
@@ -44,6 +45,10 @@ public class JsamsApplicationContext {
 
 	public static CustomerService getCustomerService() {
 		return (CustomerService) context.getBean("customerService");
+	}
+	
+	public static ProductCategoryDao getProductCategoryDao() {
+		return (ProductCategoryDao) context.getBean("productCategoryDao");
 	}
 
 }
