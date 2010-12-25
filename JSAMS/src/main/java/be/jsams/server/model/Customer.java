@@ -18,13 +18,12 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "CUSTOMER")
-public class Customer extends AbstractIdentity {
+public class Customer extends AbstractNamedIdentity {
 
 	/**
 	 * Serial Version UID
 	 */
 	private static final long serialVersionUID = 81052360779940712L;
-	private String name;
 	private String vatNumber;
 	private BigDecimal defaultDiscountRate;
 	private String bank1;
@@ -45,15 +44,6 @@ public class Customer extends AbstractIdentity {
 	
 	public Customer() {
 		super();
-	}
-
-	@Column(name = "NAME")
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	@Column(name = "VAT_NUMBER")
@@ -197,7 +187,7 @@ public class Customer extends AbstractIdentity {
 				+ ", creditLimit=" + creditLimit + ", defaultDiscountRate="
 				+ defaultDiscountRate + ", deliveryAddress=" + deliveryAddress
 				+ ", description=" + description + ", legalForm=" + legalForm
-				+ ", name=" + name + ", paymentMode=" + paymentMode
+				+ ", name=" + getName() + ", paymentMode=" + paymentMode
 				+ ", vatApplicable=" + vatApplicable + ", vatNumber="
 				+ vatNumber + "]";
 	}

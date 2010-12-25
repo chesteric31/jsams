@@ -18,13 +18,12 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "SOCIETY")
-public class Society extends AbstractIdentity {
+public class Society extends AbstractNamedIdentity {
 
 	/**
 	 * Serial Version UID
 	 */
 	private static final long serialVersionUID = -8541820243148400802L;
-	private String name;
 	private BigDecimal capital;
 	private String activity;
 	private String responsible;
@@ -36,15 +35,6 @@ public class Society extends AbstractIdentity {
 
 	public Society() {
 		super();
-	}
-
-	@Column(name = "LABEL")
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	@Column(name = "CAPITAL")
@@ -117,7 +107,7 @@ public class Society extends AbstractIdentity {
 	public String toString() {
 		return "Society [activity=" + activity + ", address=" + address
 				+ ", capital=" + capital + ", contactInformation="
-				+ contactInformation + ", name=" + name + ", legalForm="
+				+ contactInformation + ", name=" + getName() + ", legalForm="
 				+ legalForm + ", responsible=" + responsible + ", vatNumber="
 				+ vatNumber + "]";
 	}
@@ -136,7 +126,7 @@ public class Society extends AbstractIdentity {
 						.hashCode());
 		result = prime * result
 				+ ((legalForm == null) ? 0 : legalForm.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((getName() == null) ? 0 : getName().hashCode());
 		result = prime * result
 				+ ((responsible == null) ? 0 : responsible.hashCode());
 		result = prime * result
@@ -191,11 +181,11 @@ public class Society extends AbstractIdentity {
 		} else if (!legalForm.equals(other.legalForm)) {
 			return false;
 		}
-		if (name == null) {
-			if (other.name != null) {
+		if (getName() == null) {
+			if (other.getName() != null) {
 				return false;
 			}
-		} else if (!name.equals(other.name)) {
+		} else if (!getName().equals(other.getName())) {
 			return false;
 		}
 		if (responsible == null) {

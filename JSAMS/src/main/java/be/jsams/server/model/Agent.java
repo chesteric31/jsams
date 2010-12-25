@@ -19,13 +19,12 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "AGENT")
-public class Agent extends AbstractIdentity {
+public class Agent extends AbstractNamedIdentity {
 
 	/**
 	 * Serial Version UID
 	 */
 	private static final long serialVersionUID = 8508634686187725716L;
-	private String name;
 	private String function;
 	
 	private List<Customer> customers;
@@ -35,15 +34,6 @@ public class Agent extends AbstractIdentity {
 
 	public Agent() {
 		super();
-	}
-
-	@Column(name = "NAME")
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	@Column(name = "FUNCTION")
@@ -98,7 +88,7 @@ public class Agent extends AbstractIdentity {
 	public String toString() {
 		return "Agent [address=" + address + ", civility=" + civility
 				+ ", contactInformation=" + contactInformation + ", customers="
-				+ customers + ", function=" + function + ", name=" + name + "]";
+				+ customers + ", function=" + function + ", name=" + getName() + "]";
 	}
 
 }
