@@ -9,12 +9,14 @@ import be.jsams.client.i18n.I18nApplicationContext;
 /**
  * Startup class for the Jsams Application.
  * 
- * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
 public class JsamsStart {
 
+	/**
+	 * The JSAMS application context string
+	 */
 	private static final String JSAMS_APPLICATION_CONTEXT = "jsams";
 
 	/**

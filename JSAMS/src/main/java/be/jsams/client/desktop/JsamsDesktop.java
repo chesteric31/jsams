@@ -9,11 +9,11 @@ import javax.swing.JOptionPane;
 
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.i18n.JsamsI18nResource;
-import be.jsams.client.model.frame.ChooseSocietyFrame;
 import be.jsams.server.model.Society;
 
 /**
- * Jsams desktop.
+ * Jsams desktop that creates the {@link JsamsMainFrame} and contains the
+ * current {@link Society}.
  * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
@@ -33,25 +33,26 @@ public class JsamsDesktop {
 
 	private static JsamsDesktop instance = null;
 
-	private ChooseSocietyFrame chooseSocietyFrame = null;
-
 	public static final Dimension SCREEN = Toolkit.getDefaultToolkit()
 			.getScreenSize();
+	
 	public static final Dimension CENTER = new Dimension((int) SCREEN
 			.getWidth(), (int) SCREEN.getHeight());
 
+	/**
+	 * Constructor
+	 */
 	public JsamsDesktop() {
 		setInstance(this);
 		initComponents();
 	}
 
 	/**
-	 * Initializes the window.
+	 * Initializes the {@link JsamsMainFrame}
 	 */
 	private void initComponents() {
 		frame = new JsamsMainFrame(title);
-		chooseSocietyFrame = new ChooseSocietyFrame(
-				JsamsI18nResource.TITLE_CHOOSE_SOCIETY);
+		frame.openChooseSocietyDialog();
 		frame.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent we) {
 				stopNow();
@@ -59,17 +60,15 @@ public class JsamsDesktop {
 		});
 	}
 
+	/**
+	 * Sets visible the {@link JsamsMainFrame}
+	 */
 	public void start() {
 		frame.setVisible(true);
-		chooseSocietyFrame.setBounds(SCREEN.width / 2
-				- chooseSocietyFrame.getWidth() / 2, SCREEN.height / 2
-				- chooseSocietyFrame.getHeight() / 2, chooseSocietyFrame
-				.getWidth(), chooseSocietyFrame.getHeight());
-		chooseSocietyFrame.setVisible(true);
 	}
 
 	/**
-	 * Gets the main window.
+	 * Gets the {@link JsamsMainFrame}
 	 * 
 	 * @return the frame in which the application appears (in MDI-mode), or the
 	 *         central container (in SDI-mode).
@@ -79,7 +78,7 @@ public class JsamsDesktop {
 	}
 
 	/**
-	 * Exits the application after having shown a confirmation dialog.
+	 * Exits the application after having shown a confirmation dialog
 	 */
 	public void stopNow() {
 		int confirm = JOptionPane.showConfirmDialog(getMainWindow(),
@@ -90,21 +89,36 @@ public class JsamsDesktop {
 		}
 	}
 
+	/**
+	 * 
+	 * @return the current {@link Society}
+	 */
 	public Society getCurrentSociety() {
 		return currentSociety;
 	}
 
-	public void setCurrentSociety(Society currentSociety) {
+	/**
+	 * @param currentSociety the current {@link Society} to set
+	 */
+	public void setCurrentSociety(final Society currentSociety) {
 		this.currentSociety = currentSociety;
 		I18nString newTitle = new I18nString("title.application",
 				new Object[] { this.currentSociety.getName() });
 		frame.setTitle(newTitle);
 	}
 
+	/**
+	 * 
+	 * @param instance the {@link JsamsDesktop} instance to set
+	 */
 	public static void setInstance(JsamsDesktop instance) {
 		JsamsDesktop.instance = instance;
 	}
 
+	/**
+	 * 
+	 * @return the {@link JsamsDesktop} instance
+	 */
 	public static JsamsDesktop getInstance() {
 		return instance;
 	}
