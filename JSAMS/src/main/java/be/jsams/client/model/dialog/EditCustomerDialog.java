@@ -1,5 +1,6 @@
-package be.jsams.client.model.frame;
+package be.jsams.client.model.dialog;
 
+import java.awt.BorderLayout;
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.util.List;
@@ -11,10 +12,14 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 
 import be.jsams.client.context.JsamsApplicationContext;
+import be.jsams.client.desktop.JsamsMainFrame;
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.renderer.TranslatableComboBoxRenderer;
-import be.jsams.client.swing.component.JsamsButtonsFrame;
+import be.jsams.client.swing.component.JsamsButtonsInterface;
+import be.jsams.client.swing.component.JsamsButtonsPanel;
+import be.jsams.client.swing.component.JsamsDialog;
+import be.jsams.client.swing.component.JsamsFrame;
 import be.jsams.client.swing.component.JsamsTextField;
 import be.jsams.client.swing.utils.IconUtil;
 import be.jsams.server.model.Address;
@@ -28,13 +33,13 @@ import com.jgoodies.forms.builder.DefaultFormBuilder;
 import com.jgoodies.forms.layout.FormLayout;
 
 /**
- * Edit Customer {@link JsamsButtonsFrame}, to create or update a Customer
- * object.
+ * Edit Customer {@link JsamsDialog}, to create or update a Customer object.
  * 
  * @author chesteric31
  * @version $Rev$ $Date::   $Author$
  */
-public class EditCustomerFrame extends JsamsButtonsFrame {
+public class EditCustomerDialog extends JsamsDialog implements
+		JsamsButtonsInterface {
 
 	/**
 	 * Serial Version UID
@@ -47,8 +52,7 @@ public class EditCustomerFrame extends JsamsButtonsFrame {
 
 	private static final int MAX_NUMBERS = 10;
 
-	public JsamsTextField textFieldName = new JsamsTextField(MAX_CHARACTERS,
-			JsamsI18nResource.LABEL_NAME);
+	public JsamsTextField textFieldName = new JsamsTextField(MAX_CHARACTERS);
 
 	public JComboBox comboBoxLegalForm;
 
@@ -57,76 +61,65 @@ public class EditCustomerFrame extends JsamsButtonsFrame {
 	public JComboBox comboBoxPaymentMode;
 
 	public JsamsTextField textFieldVatNumber = new JsamsTextField(
-			MAX_CHARACTERS, JsamsI18nResource.LABEL_VAT_NUMBER);
+			MAX_CHARACTERS);
 
 	public JsamsTextField textFieldVatApplicable = new JsamsTextField(
-			MAX_CHARACTERS, JsamsI18nResource.LABEL_VAT_APPLICABLE);
+			MAX_CHARACTERS);
 
-	public JsamsTextField textFieldBank1 = new JsamsTextField(MAX_CHARACTERS,
-			JsamsI18nResource.LABEL_BANK1);
+	public JsamsTextField textFieldBank1 = new JsamsTextField(MAX_CHARACTERS);
 
-	public JsamsTextField textFieldBank2 = new JsamsTextField(MAX_CHARACTERS,
-			JsamsI18nResource.LABEL_BANK2);
+	public JsamsTextField textFieldBank2 = new JsamsTextField(MAX_CHARACTERS);
 
 	public JsamsTextField textFieldCreditLimit = new JsamsTextField(
-			MAX_CHARACTERS, JsamsI18nResource.LABEL_CREDIT_LIMIT);
+			MAX_CHARACTERS);
 
-	public JsamsTextField textFieldAgent = new JsamsTextField(MAX_CHARACTERS,
-			JsamsI18nResource.LABEL_AGENT);
+	public JsamsTextField textFieldAgent = new JsamsTextField(MAX_CHARACTERS);
 
 	public JsamsTextField textFieldBillingStreet = new JsamsTextField(
-			MAX_CHARACTERS, JsamsI18nResource.LABEL_STREET);
+			MAX_CHARACTERS);
 
 	public JsamsTextField textFieldBillingNumber = new JsamsTextField(
-			MAX_NUMBERS, JsamsI18nResource.LABEL_NUMBER);
+			MAX_NUMBERS);
 
-	public JsamsTextField textFieldBillingBox = new JsamsTextField(MAX_NUMBERS,
-			JsamsI18nResource.LABEL_BOX);
+	public JsamsTextField textFieldBillingBox = new JsamsTextField(MAX_NUMBERS);
 
 	public JsamsTextField textFieldBillingZipCode = new JsamsTextField(
-			MAX_NUMBERS, JsamsI18nResource.LABEL_ZIP_CODE);
+			MAX_NUMBERS);
 
 	public JsamsTextField textFieldBillingCity = new JsamsTextField(
-			MAX_CHARACTERS, JsamsI18nResource.LABEL_CITY);
+			MAX_CHARACTERS);
 
 	public JsamsTextField textFieldBillingCountry = new JsamsTextField(
-			MAX_CHARACTERS, JsamsI18nResource.LABEL_COUNTRY);
+			MAX_CHARACTERS);
 
 	public JsamsTextField textFieldDeliveryStreet = new JsamsTextField(
-			MAX_CHARACTERS, JsamsI18nResource.LABEL_STREET);
+			MAX_CHARACTERS);
 
 	public JsamsTextField textFieldDeliveryNumber = new JsamsTextField(
-			MAX_NUMBERS, JsamsI18nResource.LABEL_NUMBER);
+			MAX_NUMBERS);
 
-	public JsamsTextField textFieldDeliveryBox = new JsamsTextField(
-			MAX_NUMBERS, JsamsI18nResource.LABEL_BOX);
+	public JsamsTextField textFieldDeliveryBox = new JsamsTextField(MAX_NUMBERS);
 
 	public JsamsTextField textFieldDeliveryZipCode = new JsamsTextField(
-			MAX_NUMBERS, JsamsI18nResource.LABEL_ZIP_CODE);
+			MAX_NUMBERS);
 
 	public JsamsTextField textFieldDeliveryCity = new JsamsTextField(
-			MAX_CHARACTERS, JsamsI18nResource.LABEL_CITY);
+			MAX_CHARACTERS);
 
 	public JsamsTextField textFieldDeliveryCountry = new JsamsTextField(
-			MAX_CHARACTERS, JsamsI18nResource.LABEL_COUNTRY);
+			MAX_CHARACTERS);
 
-	public JsamsTextField textFieldDefaultDiscountRate = new JsamsTextField(5,
-			JsamsI18nResource.LABEL_DEFAULT_DISCOUNT_RATE);
+	public JsamsTextField textFieldDefaultDiscountRate = new JsamsTextField(5);
 
-	public JsamsTextField textFieldPhone = new JsamsTextField(MAX_CHARACTERS,
-			JsamsI18nResource.LABEL_PHONE);
+	public JsamsTextField textFieldPhone = new JsamsTextField(MAX_CHARACTERS);
 
-	public JsamsTextField textFieldFax = new JsamsTextField(MAX_CHARACTERS,
-			JsamsI18nResource.LABEL_FAX);
+	public JsamsTextField textFieldFax = new JsamsTextField(MAX_CHARACTERS);
 
-	public JsamsTextField textFieldMobile = new JsamsTextField(MAX_CHARACTERS,
-			JsamsI18nResource.LABEL_MOBILE);
+	public JsamsTextField textFieldMobile = new JsamsTextField(MAX_CHARACTERS);
 
-	public JsamsTextField textFieldEmail = new JsamsTextField(MAX_CHARACTERS,
-			JsamsI18nResource.LABEL_EMAIL);
+	public JsamsTextField textFieldEmail = new JsamsTextField(MAX_CHARACTERS);
 
-	public JsamsTextField textFieldWebsite = new JsamsTextField(MAX_CHARACTERS,
-			JsamsI18nResource.LABEL_WEBSITE);
+	public JsamsTextField textFieldWebsite = new JsamsTextField(MAX_CHARACTERS);
 
 	public JTextArea textAreaDescription = new JTextArea();
 
@@ -144,22 +137,48 @@ public class EditCustomerFrame extends JsamsButtonsFrame {
 
 	private JPanel miscPanel;
 
-	public EditCustomerFrame(final I18nString title, Customer model) {
-		super(title, IconUtil.TITLE_ICON_PREFIX + "apps/system-users.png");
+	private JsamsButtonsPanel buttonsPanel;
+
+	/**
+	 * Constructor
+	 * 
+	 * @param parent
+	 *            the {@link JsamsMainFrame}
+	 * @param title
+	 *            the {@link I18nString} title
+	 * @param model
+	 *            the {@link Customer} model
+	 */
+	public EditCustomerDialog(final JsamsMainFrame parent,
+			final I18nString title, Customer model) {
+		super(parent, title, IconUtil.TITLE_ICON_PREFIX
+				+ "apps/system-users.png");
 		this.model = model;
+		buttonsPanel = new JsamsButtonsPanel(this, true, true, true);
+		add(buttonsPanel, BorderLayout.SOUTH);
 		initComponents();
 	}
 
+	/**
+	 * 
+	 * @return the {@link Customer}
+	 */
 	public Customer getModel() {
 		return model;
 	}
 
+	/**
+	 * 
+	 * @param model the {@link Customer} to set
+	 */
 	public void setModel(Customer model) {
 		this.model = model;
 	}
 
+	/**
+	 * Initializes all the components
+	 */
 	private void initComponents() {
-		setTitle(JsamsI18nResource.TITLE_EDIT_CUSTOMER);
 		fillData();
 		tabbedPane = new JTabbedPane(JTabbedPane.LEFT);
 		generalPanel = buildGeneralTab();
@@ -208,37 +227,38 @@ public class EditCustomerFrame extends JsamsButtonsFrame {
 
 	private JPanel buildGeneralTab() {
 		FormLayout layout = new FormLayout("right:p, 3dlu, 100dlu", "p");
-		DefaultFormBuilder builder = new DefaultFormBuilder(layout);
+		DefaultFormBuilder builder = new DefaultFormBuilder(layout,
+				JsamsFrame.RESOURCE_BUNDLE);
 		builder.setDefaultDialogBorder();
-		builder.append(textFieldName.getLabel(), textFieldName,
-				DEFAULT_COLUMN_SPAN);
+		builder.appendI15d(JsamsI18nResource.LABEL_NAME.getKey(),
+				textFieldName, DEFAULT_COLUMN_SPAN);
 		builder.nextLine();
-		builder.append(JsamsI18nResource.LABEL_LEGAL_FORM.getTranslation(),
+		builder.appendI15d(JsamsI18nResource.LABEL_LEGAL_FORM.getKey(),
 				comboBoxLegalForm, DEFAULT_COLUMN_SPAN);
 		builder.nextLine();
-		builder.append(JsamsI18nResource.LABEL_CIVILITY.getTranslation(),
+		builder.appendI15d(JsamsI18nResource.LABEL_CIVILITY.getKey(),
 				comboBoxCivility, DEFAULT_COLUMN_SPAN);
 		builder.nextLine();
-		builder.append(textFieldVatNumber.getLabel(), textFieldVatNumber,
-				DEFAULT_COLUMN_SPAN);
+		builder.appendI15d(JsamsI18nResource.LABEL_VAT_NUMBER.getKey(),
+				textFieldVatNumber, DEFAULT_COLUMN_SPAN);
 		builder.nextLine();
-		builder.append(textFieldBank1.getLabel(), textFieldBank1,
-				DEFAULT_COLUMN_SPAN);
+		builder.appendI15d(JsamsI18nResource.LABEL_BANK1.getKey(),
+				textFieldBank1, DEFAULT_COLUMN_SPAN);
 		builder.nextLine();
-		builder.append(textFieldBank2.getLabel(), textFieldBank2,
-				DEFAULT_COLUMN_SPAN);
+		builder.appendI15d(JsamsI18nResource.LABEL_BANK2.getKey(),
+				textFieldBank2, DEFAULT_COLUMN_SPAN);
 		builder.nextLine();
-		builder.append(textFieldCreditLimit.getLabel(), textFieldCreditLimit,
-				DEFAULT_COLUMN_SPAN);
+		builder.appendI15d(JsamsI18nResource.LABEL_CREDIT_LIMIT.getKey(),
+				textFieldCreditLimit, DEFAULT_COLUMN_SPAN);
 		builder.nextLine();
-		builder.append(textFieldVatApplicable.getLabel(),
+		builder.appendI15d(JsamsI18nResource.LABEL_VAT_APPLICABLE.getKey(),
 				textFieldVatApplicable, DEFAULT_COLUMN_SPAN);
 		builder.nextLine();
-		builder.append(JsamsI18nResource.LABEL_PAYMENT_MODE.getTranslation(),
+		builder.appendI15d(JsamsI18nResource.LABEL_PAYMENT_MODE.getKey(),
 				comboBoxPaymentMode, DEFAULT_COLUMN_SPAN);
 		builder.nextLine();
-		builder.append(textFieldAgent.getLabel(), textFieldAgent,
-				DEFAULT_COLUMN_SPAN);
+		builder.appendI15d(JsamsI18nResource.LABEL_AGENT.getKey(),
+				textFieldAgent, DEFAULT_COLUMN_SPAN);
 		return builder.getPanel();
 	}
 
@@ -246,20 +266,21 @@ public class EditCustomerFrame extends JsamsButtonsFrame {
 		FormLayout layout = new FormLayout(
 				"right:p, 3dlu, 50dlu, 3dlu, right:p, 3dlu, 50dlu, 3dlu, right:p, 3dlu, 50dlu",
 				"p");
-		DefaultFormBuilder builder = new DefaultFormBuilder(layout);
+		DefaultFormBuilder builder = new DefaultFormBuilder(layout,
+				JsamsFrame.RESOURCE_BUNDLE);
 		builder.setDefaultDialogBorder();
-		builder.append(textFieldBillingStreet.getLabel(),
+		builder.appendI15d(JsamsI18nResource.LABEL_STREET.getKey(),
 				textFieldBillingStreet, 9);
 		builder.nextLine();
-		builder.append(textFieldBillingNumber.getLabel(),
+		builder.appendI15d(JsamsI18nResource.LABEL_NUMBER.getKey(),
 				textFieldBillingNumber, 1);
-		builder.append(textFieldBillingBox.getLabel(), textFieldBillingBox, 1);
-		builder.append(textFieldBillingZipCode.getLabel(),
+		builder.appendI15d(JsamsI18nResource.LABEL_BOX.getKey(),
+				textFieldBillingBox, 1);
+		builder.appendI15d(JsamsI18nResource.LABEL_ZIP_CODE.getKey(),
 				textFieldBillingZipCode, 1);
-		builder
-				.append(textFieldBillingCity.getLabel(), textFieldBillingCity,
-						9);
-		builder.append(textFieldBillingCountry.getLabel(),
+		builder.appendI15d(JsamsI18nResource.LABEL_CITY.getKey(),
+				textFieldBillingCity, 9);
+		builder.appendI15d(JsamsI18nResource.LABEL_COUNTRY.getKey(),
 				textFieldBillingCountry, 9);
 		return builder.getPanel();
 	}
@@ -268,47 +289,53 @@ public class EditCustomerFrame extends JsamsButtonsFrame {
 		FormLayout layout = new FormLayout(
 				"right:p, 3dlu, 50dlu, 3dlu, right:p, 3dlu, 50dlu, 3dlu, right:p, 3dlu, 50dlu",
 				"p");
-		DefaultFormBuilder builder = new DefaultFormBuilder(layout);
+		DefaultFormBuilder builder = new DefaultFormBuilder(layout,
+				JsamsFrame.RESOURCE_BUNDLE);
 		builder.setDefaultDialogBorder();
-		builder.append(textFieldDeliveryStreet.getLabel(),
+		builder.appendI15d(JsamsI18nResource.LABEL_STREET.getKey(),
 				textFieldDeliveryStreet, 9);
 		builder.nextLine();
-		builder.append(textFieldDeliveryNumber.getLabel(),
+		builder.appendI15d(JsamsI18nResource.LABEL_NUMBER.getKey(),
 				textFieldDeliveryNumber, 1);
-		builder
-				.append(textFieldDeliveryBox.getLabel(), textFieldDeliveryBox,
-						1);
-		builder.append(textFieldDeliveryZipCode.getLabel(),
+		builder.appendI15d(JsamsI18nResource.LABEL_BOX.getKey(),
+				textFieldDeliveryBox, 1);
+		builder.appendI15d(JsamsI18nResource.LABEL_ZIP_CODE.getKey(),
 				textFieldDeliveryZipCode, 1);
-		builder.append(textFieldDeliveryCity.getLabel(), textFieldDeliveryCity,
-				9);
-		builder.append(textFieldDeliveryCountry.getLabel(),
+		builder.appendI15d(JsamsI18nResource.LABEL_CITY.getKey(),
+				textFieldDeliveryCity, 9);
+		builder.appendI15d(JsamsI18nResource.LABEL_COUNTRY.getKey(),
 				textFieldDeliveryCountry, 9);
 		return builder.getPanel();
 	}
 
 	private JPanel buildContactInformationsTab() {
 		FormLayout layout = new FormLayout("right:p, 3dlu, 150dlu", "p");
-		DefaultFormBuilder builder = new DefaultFormBuilder(layout);
+		DefaultFormBuilder builder = new DefaultFormBuilder(layout,
+				JsamsFrame.RESOURCE_BUNDLE);
 		builder.setDefaultDialogBorder();
-		builder.append(textFieldPhone.getLabel(), textFieldPhone);
+		builder.appendI15d(JsamsI18nResource.LABEL_PHONE.getKey(),
+				textFieldPhone);
 		builder.nextLine();
-		builder.append(textFieldFax.getLabel(), textFieldFax);
+		builder.appendI15d(JsamsI18nResource.LABEL_FAX.getKey(), textFieldFax);
 		builder.nextLine();
-		builder.append(textFieldMobile.getLabel(), textFieldMobile);
+		builder.appendI15d(JsamsI18nResource.LABEL_MOBILE.getKey(),
+				textFieldMobile);
 		builder.nextLine();
-		builder.append(textFieldEmail.getLabel(), textFieldEmail);
+		builder.appendI15d(JsamsI18nResource.LABEL_EMAIL.getKey(),
+				textFieldEmail);
 		builder.nextLine();
-		builder.append(textFieldWebsite.getLabel(), textFieldWebsite);
+		builder.appendI15d(JsamsI18nResource.LABEL_WEBSITE.getKey(),
+				textFieldWebsite);
 		return builder.getPanel();
 	}
 
 	private JPanel buildMiscTab() {
 		FormLayout layout = new FormLayout("right:p, 3dlu, 150dlu", "p");
-		DefaultFormBuilder builder = new DefaultFormBuilder(layout);
+		DefaultFormBuilder builder = new DefaultFormBuilder(layout,
+				JsamsFrame.RESOURCE_BUNDLE);
 		builder.setDefaultDialogBorder();
-		builder.append(textFieldDefaultDiscountRate.getLabel(),
-				textFieldDefaultDiscountRate);
+		builder.appendI15d(JsamsI18nResource.LABEL_DEFAULT_DISCOUNT_RATE
+				.getKey(), textFieldDefaultDiscountRate);
 		builder.nextLine();
 		textAreaDescription.setRows(5);
 		textAreaDescription.setWrapStyleWord(true);
@@ -317,7 +344,7 @@ public class EditCustomerFrame extends JsamsButtonsFrame {
 		areaScrollPane
 				.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
-		builder.append(JsamsI18nResource.LABEL_DESCRIPTION.getTranslation(),
+		builder.appendI15d(JsamsI18nResource.LABEL_DESCRIPTION.getKey(),
 				areaScrollPane);
 		return builder.getPanel();
 	}
@@ -361,13 +388,11 @@ public class EditCustomerFrame extends JsamsButtonsFrame {
 		textAreaDescription.setText(getModel().getDescription());
 	}
 
-	@Override
-	protected void performCancel() {
+	public void performCancel() {
 		this.dispose();
 	}
 
-	@Override
-	protected void performOk() {
+	public void performOk() {
 		if (getModel() == null) {
 			// Create new one
 			Customer newCustomer = new Customer();
@@ -474,8 +499,7 @@ public class EditCustomerFrame extends JsamsButtonsFrame {
 		dispose();
 	}
 
-	@Override
-	protected void performReset() {
+	public void performReset() {
 		Class<?> clazz = this.getClass();
 		Field[] fields = clazz.getFields();
 		for (Field field : fields) {
