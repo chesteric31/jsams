@@ -17,8 +17,8 @@ import javax.swing.KeyStroke;
 
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.i18n.JsamsI18nResource;
-import be.jsams.client.model.frame.ChooseSocietyFrame;
-import be.jsams.client.model.frame.EditSocietyFrame;
+import be.jsams.client.model.dialog.ChooseSocietyDialog;
+import be.jsams.client.model.dialog.EditSocietyDialog;
 import be.jsams.client.model.panel.SearchCustomerPanel;
 import be.jsams.client.model.panel.SearchProductPanel;
 import be.jsams.client.swing.component.JsamsCloseableTabbedPane;
@@ -28,6 +28,7 @@ import be.jsams.client.swing.component.JsamsMenuItem;
 import be.jsams.client.swing.component.JsamsShortcutToolBar;
 import be.jsams.client.swing.component.JsamsStatusBar;
 import be.jsams.client.swing.utils.IconUtil;
+import be.jsams.server.model.Society;
 
 /**
  * {@link JsamsMainFrame} that contains all the components.
@@ -94,6 +95,12 @@ public class JsamsMainFrame extends JsamsFrame {
 
 	private JsamsCloseableTabbedPane tabbedPane;
 
+	/**
+	 * Constructor
+	 * 
+	 * @param title
+	 *            the {@link I18nString} title
+	 */
 	public JsamsMainFrame(final I18nString title) {
 		super(title, IconUtil.TITLE_ICON_PREFIX
 				+ "categories/applications-office.png");
@@ -102,6 +109,9 @@ public class JsamsMainFrame extends JsamsFrame {
 		initComponents();
 	}
 
+	/**
+	 * Initializes all the components
+	 */
 	private void initComponents() {
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		try {
@@ -111,13 +121,13 @@ public class JsamsMainFrame extends JsamsFrame {
 					IconUtil.MENU_ICON_PREFIX + "actions/folder-new.png");
 			newMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N,
 					KeyEvent.CTRL_MASK));
-			newMI.addActionListener(newSocietyListener());
+			newMI.addActionListener(newSocietyListener(this));
 			fileMenu.add(newMI);
 			openMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_OPEN,
 					IconUtil.MENU_ICON_PREFIX + "actions/document-open.png");
 			openMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O,
 					KeyEvent.CTRL_MASK));
-			openMI.addActionListener(chooseSocietyListener());
+			openMI.addActionListener(chooseSocietyListener(this));
 			fileMenu.add(openMI);
 			closeMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_CLOSE,
 					IconUtil.MENU_ICON_PREFIX + "status/folder-visiting.png");
@@ -127,7 +137,7 @@ public class JsamsMainFrame extends JsamsFrame {
 					JsamsI18nResource.MENU_ITEM_SOCIETY_PARAMETERS,
 					IconUtil.MENU_ICON_PREFIX
 							+ "actions/document-properties.png");
-			societyParametersMI.addActionListener(editSocietyListener());
+			societyParametersMI.addActionListener(editSocietyListener(this));
 			fileMenu.add(societyParametersMI);
 			printerParametersMI = new JsamsMenuItem(
 					JsamsI18nResource.MENU_ITEM_PRINTER_PARAMETERS,
@@ -271,6 +281,17 @@ public class JsamsMainFrame extends JsamsFrame {
 		}
 	}
 
+	/**
+	 * Opens the {@link ChooseSocietyDialog} at the starting of the application
+	 */
+	public void openChooseSocietyDialog() {
+		new ChooseSocietyDialog(this, JsamsI18nResource.TITLE_CHOOSE_SOCIETY);
+	}
+
+	/**
+	 * 
+	 * @return a {@link ActionListener} for the exiting of the application
+	 */
 	private ActionListener exitListener() {
 		ActionListener listener = new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
@@ -280,34 +301,56 @@ public class JsamsMainFrame extends JsamsFrame {
 		return listener;
 	}
 
-	private ActionListener editSocietyListener() {
+	/**
+	 * 
+	 * @param parent the {@link JsamsMainFrame}
+	 * @return a {@link ActionListener} for the editing of the {@link Society}
+	 */
+	private ActionListener editSocietyListener(final JsamsMainFrame parent) {
 		ActionListener listener = new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				new EditSocietyFrame(JsamsI18nResource.TITLE_EDIT_SOCIETY,
-						JsamsDesktop.getInstance().getCurrentSociety());
+				new EditSocietyDialog(parent,
+						JsamsI18nResource.TITLE_EDIT_SOCIETY, JsamsDesktop
+								.getInstance().getCurrentSociety());
 			}
 		};
 		return listener;
 	}
 
-	private ActionListener newSocietyListener() {
+	/**
+	 * 
+	 * @param parent the {@link JsamsMainFrame}
+	 * @return a {@link ActionListener} for the creation of the {@link Society}
+	 */
+	private ActionListener newSocietyListener(final JsamsMainFrame parent) {
 		ActionListener listener = new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				new EditSocietyFrame(JsamsI18nResource.TITLE_EDIT_SOCIETY, null);
+				new EditSocietyDialog(parent,
+						JsamsI18nResource.TITLE_EDIT_SOCIETY, null);
 			}
 		};
 		return listener;
 	}
 
-	private ActionListener chooseSocietyListener() {
+	/**
+	 * 
+	 * @param parent the {@link JsamsMainFrame}
+	 * @return a {@link ActionListener} for the choosing of the {@link Society}
+	 */
+	private ActionListener chooseSocietyListener(final JsamsMainFrame parent) {
 		ActionListener listener = new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				new ChooseSocietyFrame(JsamsI18nResource.TITLE_CHOOSE_SOCIETY);
+				new ChooseSocietyDialog(parent,
+						JsamsI18nResource.TITLE_CHOOSE_SOCIETY);
 			}
 		};
 		return listener;
 	}
 
+	/**
+	 * 
+	 * @return a {@link ActionListener} for the editing of printer settings
+	 */
 	private ActionListener printerParametersListener() {
 		ActionListener listener = new ActionListener() {
 
@@ -324,6 +367,10 @@ public class JsamsMainFrame extends JsamsFrame {
 		return listener;
 	}
 
+	/**
+	 * 
+	 * @return a {@link ActionListener} for the searching of customers
+	 */
 	private ActionListener customersListener() {
 		ActionListener listener = new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
@@ -335,6 +382,10 @@ public class JsamsMainFrame extends JsamsFrame {
 		return listener;
 	}
 
+	/**
+	 * 
+	 * @return a {@link ActionListener} for the searching of products
+	 */
 	private ActionListener productsListener() {
 		ActionListener listener = new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
@@ -346,6 +397,10 @@ public class JsamsMainFrame extends JsamsFrame {
 		return listener;
 	}
 
+	/**
+	 * 
+	 * @return the {@link JsamsStatusBar}
+	 */
 	public JsamsStatusBar getStatusBar() {
 		return statusBar;
 	}
