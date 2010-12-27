@@ -1,4 +1,4 @@
-package be.jsams.client.model.frame;
+package be.jsams.client.model.dialog;
 
 import java.awt.BorderLayout;
 import java.lang.reflect.Field;
@@ -10,10 +10,14 @@ import javax.swing.JPanel;
 
 import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.desktop.JsamsDesktop;
+import be.jsams.client.desktop.JsamsMainFrame;
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.renderer.TranslatableComboBoxRenderer;
-import be.jsams.client.swing.component.JsamsButtonsFrame;
+import be.jsams.client.swing.component.JsamsButtonsInterface;
+import be.jsams.client.swing.component.JsamsButtonsPanel;
+import be.jsams.client.swing.component.JsamsDialog;
+import be.jsams.client.swing.component.JsamsFrame;
 import be.jsams.client.swing.component.JsamsTextField;
 import be.jsams.server.model.Address;
 import be.jsams.server.model.ContactInformation;
@@ -24,12 +28,13 @@ import com.jgoodies.forms.builder.DefaultFormBuilder;
 import com.jgoodies.forms.layout.FormLayout;
 
 /**
- * Edit society {@link JsamsButtonsFrame}, to create or update a Society object.
+ * Edit society {@link JsamsDialog}, to create or update a Society object.
  * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class EditSocietyFrame extends JsamsButtonsFrame {
+public class EditSocietyDialog extends JsamsDialog implements
+		JsamsButtonsInterface {
 
 	/**
 	 * Serial Version UID
@@ -42,130 +47,145 @@ public class EditSocietyFrame extends JsamsButtonsFrame {
 
 	private static final int MAX_NUMBERS = 10;
 
-	public JsamsTextField textFieldName = new JsamsTextField(MAX_CHARACTERS,
-			JsamsI18nResource.LABEL_NAME);
+	public JsamsTextField textFieldName = new JsamsTextField(MAX_CHARACTERS);
 
-	public JsamsTextField textFieldStreet = new JsamsTextField(MAX_CHARACTERS,
-			JsamsI18nResource.LABEL_STREET);
+	public JsamsTextField textFieldStreet = new JsamsTextField(MAX_CHARACTERS);
 
-	public JsamsTextField textFieldNumber = new JsamsTextField(MAX_NUMBERS,
-			JsamsI18nResource.LABEL_NUMBER);
+	public JsamsTextField textFieldNumber = new JsamsTextField(MAX_NUMBERS);
 
-	public JsamsTextField textFieldBox = new JsamsTextField(MAX_NUMBERS,
-			JsamsI18nResource.LABEL_BOX);
+	public JsamsTextField textFieldBox = new JsamsTextField(MAX_NUMBERS);
 
-	public JsamsTextField textFieldZipCode = new JsamsTextField(MAX_NUMBERS,
-			JsamsI18nResource.LABEL_ZIP_CODE);
+	public JsamsTextField textFieldZipCode = new JsamsTextField(MAX_NUMBERS);
 
-	public JsamsTextField textFieldCity = new JsamsTextField(MAX_CHARACTERS,
-			JsamsI18nResource.LABEL_CITY);
+	public JsamsTextField textFieldCity = new JsamsTextField(MAX_CHARACTERS);
 
-	public JsamsTextField textFieldCountry = new JsamsTextField(MAX_CHARACTERS,
-			JsamsI18nResource.LABEL_COUNTRY);
+	public JsamsTextField textFieldCountry = new JsamsTextField(MAX_CHARACTERS);
 
-	public JsamsTextField textFieldPhone = new JsamsTextField(MAX_CHARACTERS,
-			JsamsI18nResource.LABEL_PHONE);
+	public JsamsTextField textFieldPhone = new JsamsTextField(MAX_CHARACTERS);
 
-	public JsamsTextField textFieldFax = new JsamsTextField(MAX_CHARACTERS,
-			JsamsI18nResource.LABEL_FAX);
+	public JsamsTextField textFieldFax = new JsamsTextField(MAX_CHARACTERS);
 
-	public JsamsTextField textFieldMobile = new JsamsTextField(MAX_CHARACTERS,
-			JsamsI18nResource.LABEL_MOBILE);
+	public JsamsTextField textFieldMobile = new JsamsTextField(MAX_CHARACTERS);
 
-	public JsamsTextField textFieldEmail = new JsamsTextField(MAX_CHARACTERS,
-			JsamsI18nResource.LABEL_EMAIL);
+	public JsamsTextField textFieldEmail = new JsamsTextField(MAX_CHARACTERS);
 
-	public JsamsTextField textFieldWebsite = new JsamsTextField(MAX_CHARACTERS,
-			JsamsI18nResource.LABEL_WEBSITE);
+	public JsamsTextField textFieldWebsite = new JsamsTextField(MAX_CHARACTERS);
 
 	public JComboBox comboBoxLegalForm;
 
-	public JsamsTextField textFieldCapital = new JsamsTextField(MAX_CHARACTERS,
-			JsamsI18nResource.LABEL_CAPITAL);
+	public JsamsTextField textFieldCapital = new JsamsTextField(MAX_CHARACTERS);
 
-	public JsamsTextField textFieldActivity = new JsamsTextField(
-			MAX_CHARACTERS, JsamsI18nResource.LABEL_ACTIVITY);
+	public JsamsTextField textFieldActivity = new JsamsTextField(MAX_CHARACTERS);
 
 	public JsamsTextField textFieldResponsible = new JsamsTextField(
-			MAX_CHARACTERS, JsamsI18nResource.LABEL_RESPONSIBLE);
+			MAX_CHARACTERS);
 
 	public JsamsTextField textFieldVatNumber = new JsamsTextField(
-			MAX_CHARACTERS, JsamsI18nResource.LABEL_VAT_NUMBER);
+			MAX_CHARACTERS);
 
 	private Society model;
 
-	public EditSocietyFrame(final I18nString title, Society model) {
-		super(title);
+	private JsamsButtonsPanel buttonsPanel;
+
+	/**
+	 * Constructor
+	 * 
+	 * @param parent
+	 *            the {@link JsamsMainFrame}
+	 * @param title
+	 *            the {@link I18nString} title
+	 * @param model
+	 *            the {@link Society} model
+	 */
+	public EditSocietyDialog(final JsamsMainFrame parent,
+			final I18nString title, Society model) {
+		super(parent, title);
 		this.model = model;
+		buttonsPanel = new JsamsButtonsPanel(this, true, true, true);
+		add(buttonsPanel, BorderLayout.SOUTH);
 		initComponents();
 	}
 
+	/**
+	 * 
+	 * @return the {@link Society}
+	 */
 	public Society getModel() {
 		return model;
 	}
 
+	/**
+	 * 
+	 * @param model the {@link Society} to set
+	 */
 	public void setModel(Society model) {
 		this.model = model;
 	}
 
+	/**
+	 * Initializes all the components
+	 */
 	private void initComponents() {
-		setTitle(JsamsI18nResource.TITLE_EDIT_SOCIETY);
 		fillData();
 		FormLayout layout = new FormLayout(
 				"right:p, 3dlu, 50dlu, 3dlu, right:p, 3dlu, 50dlu, 3dlu, right:p, 3dlu, 50dlu",
 				"p");
-		DefaultFormBuilder builder = new DefaultFormBuilder(layout);
+		DefaultFormBuilder builder = new DefaultFormBuilder(layout,
+				JsamsFrame.RESOURCE_BUNDLE);
 		builder.setDefaultDialogBorder();
-		builder.append(textFieldName.getLabel(), textFieldName,
-				DEFAULT_COLUMN_SPAN);
+		builder.appendI15d(JsamsI18nResource.LABEL_NAME.getKey(),
+				textFieldName, DEFAULT_COLUMN_SPAN);
 		builder.nextLine();
 		builder.appendSeparator(JsamsI18nResource.LABEL_ADDRESS
 				.getTranslation());
-		builder.append(textFieldStreet.getLabel(), textFieldStreet,
-				DEFAULT_COLUMN_SPAN);
+		builder.appendI15d(JsamsI18nResource.LABEL_STREET.getKey(),
+				textFieldStreet, DEFAULT_COLUMN_SPAN);
 		builder.nextLine();
-		builder.append(textFieldNumber.getLabel(), textFieldNumber, 1);
-		builder.append(textFieldBox.getLabel(), textFieldBox, 1);
-		builder.append(textFieldZipCode.getLabel(), textFieldZipCode, 1);
-		builder.append(textFieldCity.getLabel(), textFieldCity,
-				DEFAULT_COLUMN_SPAN);
-		builder.append(textFieldCountry.getLabel(), textFieldCountry,
-				DEFAULT_COLUMN_SPAN);
+		builder.appendI15d(JsamsI18nResource.LABEL_NUMBER.getKey(),
+				textFieldNumber, 1);
+		builder.appendI15d(JsamsI18nResource.LABEL_BOX.getKey(), textFieldBox,
+				1);
+		builder.appendI15d(JsamsI18nResource.LABEL_ZIP_CODE.getKey(),
+				textFieldZipCode, 1);
+		builder.appendI15d(JsamsI18nResource.LABEL_CITY.getKey(),
+				textFieldCity, DEFAULT_COLUMN_SPAN);
+		builder.appendI15d(JsamsI18nResource.LABEL_COUNTRY.getKey(),
+				textFieldCountry, DEFAULT_COLUMN_SPAN);
 		builder.nextLine();
 
 		builder.appendSeparator(JsamsI18nResource.LABEL_CONTACT_INFORMATIONS
 				.getTranslation());
-		builder.append(textFieldPhone.getLabel(), textFieldPhone,
+		builder.appendI15d(JsamsI18nResource.LABEL_PHONE.getKey(),
+				textFieldPhone, DEFAULT_COLUMN_SPAN);
+		builder.nextLine();
+		builder.appendI15d(JsamsI18nResource.LABEL_FAX.getKey(), textFieldFax,
 				DEFAULT_COLUMN_SPAN);
 		builder.nextLine();
-		builder.append(textFieldFax.getLabel(), textFieldFax,
-				DEFAULT_COLUMN_SPAN);
+		builder.appendI15d(JsamsI18nResource.LABEL_MOBILE.getKey(),
+				textFieldMobile, DEFAULT_COLUMN_SPAN);
 		builder.nextLine();
-		builder.append(textFieldMobile.getLabel(), textFieldMobile,
-				DEFAULT_COLUMN_SPAN);
+		builder.appendI15d(JsamsI18nResource.LABEL_EMAIL.getKey(),
+				textFieldEmail, DEFAULT_COLUMN_SPAN);
 		builder.nextLine();
-		builder.append(textFieldEmail.getLabel(), textFieldEmail,
-				DEFAULT_COLUMN_SPAN);
+		builder.appendI15d(JsamsI18nResource.LABEL_WEBSITE.getKey(),
+				textFieldWebsite, DEFAULT_COLUMN_SPAN);
 		builder.nextLine();
-		builder.append(textFieldWebsite.getLabel(), textFieldWebsite,
-				DEFAULT_COLUMN_SPAN);
-		builder.nextLine();
-		builder.appendSeparator(JsamsI18nResource.LABEL_MISC.getTranslation());
+		builder.appendSeparator(JsamsI18nResource.LABEL_MISC.getKey());
 
-		builder.append(JsamsI18nResource.LABEL_LEGAL_FORM.getTranslation(),
+		builder.appendI15d(JsamsI18nResource.LABEL_LEGAL_FORM.getKey(),
 				comboBoxLegalForm, DEFAULT_COLUMN_SPAN);
 		builder.nextLine();
-		builder.append(textFieldCapital.getLabel(), textFieldCapital,
-				DEFAULT_COLUMN_SPAN);
+		builder.appendI15d(JsamsI18nResource.LABEL_CAPITAL.getKey(),
+				textFieldCapital, DEFAULT_COLUMN_SPAN);
 		builder.nextLine();
-		builder.append(textFieldActivity.getLabel(), textFieldActivity,
-				DEFAULT_COLUMN_SPAN);
+		builder.appendI15d(JsamsI18nResource.LABEL_ACTIVITY.getKey(),
+				textFieldActivity, DEFAULT_COLUMN_SPAN);
 		builder.nextLine();
-		builder.append(textFieldResponsible.getLabel(), textFieldResponsible,
-				DEFAULT_COLUMN_SPAN);
+		builder.appendI15d(JsamsI18nResource.LABEL_RESPONSIBLE.getKey(),
+				textFieldResponsible, DEFAULT_COLUMN_SPAN);
 		builder.nextLine();
-		builder.append(textFieldVatNumber.getLabel(), textFieldVatNumber,
-				DEFAULT_COLUMN_SPAN);
+		builder.appendI15d(JsamsI18nResource.LABEL_VAT_NUMBER.getKey(),
+				textFieldVatNumber, DEFAULT_COLUMN_SPAN);
 		builder.nextLine();
 
 		JPanel mainPanel = new JPanel();
@@ -178,13 +198,11 @@ public class EditSocietyFrame extends JsamsButtonsFrame {
 		setResizable(false);
 	}
 
-	@Override
-	protected void performCancel() {
+	public void performCancel() {
 		this.dispose();
 	}
 
-	@Override
-	protected void performOk() {
+	public void performOk() {
 		if (getModel() == null) {
 			// Create new one
 			Society newSociety = new Society();
@@ -248,8 +266,7 @@ public class EditSocietyFrame extends JsamsButtonsFrame {
 		dispose();
 	}
 
-	@Override
-	protected void performReset() {
+	public void performReset() {
 		Class<?> clazz = this.getClass();
 		Field[] fields = clazz.getFields();
 		for (Field field : fields) {

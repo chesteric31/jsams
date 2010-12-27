@@ -1,4 +1,4 @@
-package be.jsams.client.model.frame;
+package be.jsams.client.model.dialog;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
@@ -10,11 +10,14 @@ import javax.swing.JPanel;
 
 import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.desktop.JsamsDesktop;
+import be.jsams.client.desktop.JsamsMainFrame;
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.renderer.NamedComboBoxRenderer;
 import be.jsams.client.swing.component.JsamsButton;
-import be.jsams.client.swing.component.JsamsButtonsFrame;
+import be.jsams.client.swing.component.JsamsButtonsInterface;
+import be.jsams.client.swing.component.JsamsButtonsPanel;
+import be.jsams.client.swing.component.JsamsDialog;
 import be.jsams.client.swing.component.JsamsFrame;
 import be.jsams.client.swing.utils.IconUtil;
 import be.jsams.server.model.Society;
@@ -23,12 +26,13 @@ import com.jgoodies.forms.builder.DefaultFormBuilder;
 import com.jgoodies.forms.layout.FormLayout;
 
 /**
- * Choose society {@link JsamsFrame}.
+ * Choose society {@link JsamsDialog}.
  * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class ChooseSocietyFrame extends JsamsButtonsFrame {
+public class ChooseSocietyDialog extends JsamsDialog implements
+		JsamsButtonsInterface {
 
 	/**
 	 * Serial Version UID
@@ -37,15 +41,33 @@ public class ChooseSocietyFrame extends JsamsButtonsFrame {
 
 	private JComboBox comboBox = null;
 
-	public ChooseSocietyFrame(final I18nString title) {
-		super(title);
+	private JsamsButtonsPanel buttonsPanel;
+
+	private JsamsMainFrame parent;
+
+	/**
+	 * Constructor
+	 * 
+	 * @param parent the {@link JsamsMainFrame}
+	 * @param title the {@link I18nString} title
+	 */
+	public ChooseSocietyDialog(final JsamsMainFrame parent,
+			final I18nString title) {
+		super(parent, title);
+		this.parent = parent;
+		buttonsPanel = new JsamsButtonsPanel(this, true, true, true);
+		add(buttonsPanel, BorderLayout.SOUTH);
 		initComponents();
 	}
 
+	/**
+	 * Initializes all the components
+	 */
 	private void initComponents() {
 		FormLayout layout = new FormLayout(
 				"right:pref, 3dlu, pref, 3dlu, pref", "pref, 5dlu");
-		DefaultFormBuilder builder = new DefaultFormBuilder(layout);
+		DefaultFormBuilder builder = new DefaultFormBuilder(layout,
+				JsamsFrame.RESOURCE_BUNDLE);
 		builder.setDefaultDialogBorder();
 		builder.append(JsamsI18nResource.LABEL_CHOOSE_SOCIETY.getTranslation());
 		builder.nextLine();
@@ -70,26 +92,20 @@ public class ChooseSocietyFrame extends JsamsButtonsFrame {
 		setResizable(false);
 	}
 
-
-	@Override
-	protected void performOk() {
+	public void performOk() {
 		Object selectedItem = comboBox.getSelectedItem();
 		if (comboBox.getSelectedIndex() >= 0 && selectedItem != null) {
 			JsamsDesktop jsamsDesktop = JsamsDesktop.getInstance();
 			jsamsDesktop.setCurrentSociety(((Society) selectedItem));
-			jsamsDesktop.getMainWindow().setEnabled(true);
-			dispose();
 		}
-	}
-
-	@Override
-	protected void performCancel() {
-		JsamsDesktop.getInstance().getMainWindow().setEnabled(true);
 		dispose();
 	}
 
-	@Override
-	protected void performReset() {
+	public void performCancel() {
+		dispose();
+	}
+
+	public void performReset() {
 		comboBox.setSelectedIndex(0);
 	}
 
@@ -101,7 +117,8 @@ public class ChooseSocietyFrame extends JsamsButtonsFrame {
 
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				new EditSocietyFrame(JsamsI18nResource.TITLE_EDIT_SOCIETY, null);
+				new EditSocietyDialog(parent,
+						JsamsI18nResource.TITLE_EDIT_SOCIETY, null);
 			}
 		});
 		return buttonNewSociety;
