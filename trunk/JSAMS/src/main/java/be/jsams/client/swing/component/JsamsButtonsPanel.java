@@ -23,7 +23,7 @@ public class JsamsButtonsPanel extends JPanel {
 
 	private static final int DEFAULT_V_GAP = 10;
 
-	private JsamsButtonsFrame parent;
+	private JsamsButtonsInterface parent;
 
 	JsamsButton buttonOk = null;
 	JsamsButton buttonCancel = null;
@@ -34,8 +34,7 @@ public class JsamsButtonsPanel extends JPanel {
 	 */
 	private static final long serialVersionUID = 8542255661439665645L;
 
-
-	public JsamsButtonsPanel(final JsamsButtonsFrame parent, final boolean okToAdd,
+	public JsamsButtonsPanel(final JsamsButtonsInterface parent, final boolean okToAdd,
 			final boolean cancelToAdd, final boolean resetToAdd) {
 		super();
 		this.parent = parent;
@@ -55,8 +54,7 @@ public class JsamsButtonsPanel extends JPanel {
 		BorderLayout buttonsLayout = new BorderLayout();
 		buttonsLayout.setVgap(DEFAULT_V_GAP);
 		this.setLayout(buttonsLayout);
-		JSeparator separator = new JSeparator();
-		this.add(separator, BorderLayout.NORTH);
+		this.add(new JSeparator(), BorderLayout.NORTH);
 		this.add(ButtonBarFactory.buildCenteredBar(new JButton[] { buttonOk,
 				buttonCancel, buttonReset }), BorderLayout.CENTER);
 		// following line for more space
