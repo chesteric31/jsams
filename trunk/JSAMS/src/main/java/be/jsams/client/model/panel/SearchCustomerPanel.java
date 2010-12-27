@@ -16,11 +16,17 @@ public class SearchCustomerPanel extends JPanel {
 	 */
 	private static final long serialVersionUID = 2222078506888522042L;
 	
+	/**
+	 * Constructor
+	 */
 	public SearchCustomerPanel() {
 		super();
 		initComponents();
 	}
-	
+
+	/**
+	 * Initializes all the components
+	 */
 	private void initComponents() {
 		JLabel label = new JLabel("customer");
 		add(label);

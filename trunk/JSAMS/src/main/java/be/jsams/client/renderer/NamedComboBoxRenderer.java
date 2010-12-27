@@ -13,7 +13,7 @@ import be.jsams.server.model.AbstractNamedIdentity;
  * Combo box renderer for object that have name column from DB.
  * 
  * @author chesteric31
- *  @version $$Rev$$ $$Date::                  $$ $$Author$$
+ * @version $$Rev$$ $$Date::                  $$ $$Author$$
  */
 public class NamedComboBoxRenderer implements ListCellRenderer {
 
