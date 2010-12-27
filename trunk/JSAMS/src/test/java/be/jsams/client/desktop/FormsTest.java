@@ -11,11 +11,18 @@ import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
 
+import be.jsams.client.swing.component.JsamsFrame;
+
 import com.jgoodies.forms.builder.DefaultFormBuilder;
 import com.jgoodies.forms.factories.ButtonBarFactory;
 import com.jgoodies.forms.layout.FormLayout;
 
 public class FormsTest extends JFrame {
+
+	/**
+	 * Serial Version UID
+	 */
+	private static final long serialVersionUID = 3987201626700818022L;
 
 	/**
 	 * @param args
@@ -49,7 +56,7 @@ public class FormsTest extends JFrame {
 		FormLayout layoutAddress = new FormLayout(
 				"right:p, 3dlu, 50dlu, 3dlu, right:p, 3dlu, 50dlu, 3dlu, right:p, 3dlu, 50dlu",
 				"p");
-		DefaultFormBuilder builder = new DefaultFormBuilder(layoutAddress);
+		DefaultFormBuilder builder = new DefaultFormBuilder(layoutAddress, JsamsFrame.RESOURCE_BUNDLE);
 		builder.setDefaultDialogBorder();
 		builder.append("Name", new JTextField(50), 9);
 		builder.nextLine();
