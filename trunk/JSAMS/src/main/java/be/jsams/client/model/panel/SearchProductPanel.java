@@ -78,27 +78,17 @@ public class SearchProductPanel extends JPanel {
 	 * Initializes all the components
 	 */
 	private void initComponents() {
-//		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		setLayout(new BorderLayout());
-		FormLayout layout = new FormLayout(
-				"right:p, 3dlu, p, 3dlu, right:p, 3dlu, p", "p");
+		FormLayout layout = new FormLayout("right:p, 3dlu, p:grow, 3dlu, "
+				+ "right:p, 3dlu, p:grow, 3dlu, "
+				+ "right:p, 3dlu, p:grow, 3dlu, " + "right:p, 3dlu, p:grow",
+				"p");
 		DefaultFormBuilder builder = new DefaultFormBuilder(layout,
 				JsamsFrame.RESOURCE_BUNDLE);
 		builder.appendSeparator(JsamsI18nResource.SEARCH_CRITERIA
 				.getTranslation());
 		builder.appendI15d(JsamsI18nResource.LABEL_PRODUCT_LABEL.getKey(),
 				textFieldLabel, 5);
-		builder.nextLine();
-		builder.appendI15d(JsamsI18nResource.LABEL_PRODUCT_PRICE.getKey(),
-				textFieldPrice, 1);
-		builder.appendI15d(JsamsI18nResource.LABEL_PRODUCT_STOCK_QUANTITY
-				.getKey(), textFieldStockQuantity, 1);
-		builder.nextLine();
-		builder.appendI15d(JsamsI18nResource.LABEL_PRODUCT_REORDER_LEVEL
-				.getKey(), textFieldReorderLevel, 1);
-		builder.appendI15d(JsamsI18nResource.LABEL_PRODUCT_VAT_APPLICABLE
-				.getKey(), textFieldVatApplicable, 1);
-
 		List<ProductCategory> allProductCategories = JsamsApplicationContext
 				.getProductCategoryDao().findAll();
 		comboBoxProductCategory = new JComboBox(allProductCategories.toArray());
@@ -106,6 +96,14 @@ public class SearchProductPanel extends JPanel {
 		builder.appendI15d(JsamsI18nResource.LABEL_PRODUCT_CATEGORY.getKey(),
 				comboBoxProductCategory, 5);
 		builder.nextLine();
+		builder.appendI15d(JsamsI18nResource.LABEL_PRODUCT_PRICE.getKey(),
+				textFieldPrice, 1);
+		builder.appendI15d(JsamsI18nResource.LABEL_PRODUCT_STOCK_QUANTITY
+				.getKey(), textFieldStockQuantity, 1);
+		builder.appendI15d(JsamsI18nResource.LABEL_PRODUCT_REORDER_LEVEL
+				.getKey(), textFieldReorderLevel, 1);
+		builder.appendI15d(JsamsI18nResource.LABEL_PRODUCT_VAT_APPLICABLE
+				.getKey(), textFieldVatApplicable, 1);
 
 		JPanel searchCriteriaPanel = new JPanel();
 		GridLayout gridLayout = new GridLayout(2, 1);
@@ -123,9 +121,9 @@ public class SearchProductPanel extends JPanel {
 		buttonsPanel.setLayout(buttonsLayout);
 		buttonsPanel.add(new JSeparator(), BorderLayout.NORTH);
 		buttonsPanel.add(ButtonBarFactory.buildCenteredBar(new JButton[] {
-				buttonOk, buttonCancel, buttonReset }), BorderLayout.CENTER);
+				buttonOk, buttonCancel, buttonReset }));
 		searchCriteriaPanel.add(buttonsPanel);
-		
+
 		this.add(searchCriteriaPanel, BorderLayout.NORTH);
 
 		ProductTableModel dataModel = new ProductTableModel();
@@ -137,7 +135,7 @@ public class SearchProductPanel extends JPanel {
 		p.setQuantityStock(5);
 		p.setReorderLevel(1);
 		p.setVatApplicable(new BigDecimal(21.00));
-		
+
 		ArrayList<Product> products = new ArrayList<Product>();
 		products.add(p);
 		dataModel.setData(products);
