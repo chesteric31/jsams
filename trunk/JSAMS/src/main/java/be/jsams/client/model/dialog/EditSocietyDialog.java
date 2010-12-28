@@ -229,6 +229,7 @@ public class EditSocietyDialog extends JsamsDialog implements
 			newSociety.setResponsible(textFieldResponsible.getText());
 			newSociety.setVatNumber(textFieldVatNumber.getText());
 			JsamsApplicationContext.getSocietyService().create(newSociety);
+			JsamsDesktop.getInstance().setCurrentSociety(newSociety);
 		} else {
 			// Update the current society
 			Society updatedSociety = new Society();
