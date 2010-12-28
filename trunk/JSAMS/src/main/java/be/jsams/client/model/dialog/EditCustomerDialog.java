@@ -169,7 +169,8 @@ public class EditCustomerDialog extends JsamsDialog implements
 
 	/**
 	 * 
-	 * @param model the {@link Customer} to set
+	 * @param model
+	 *            the {@link Customer} to set
 	 */
 	public void setModel(Customer model) {
 		this.model = model;
@@ -226,27 +227,27 @@ public class EditCustomerDialog extends JsamsDialog implements
 	}
 
 	private JPanel buildGeneralTab() {
-		FormLayout layout = new FormLayout("right:p, 3dlu, 100dlu", "p");
+		FormLayout layout = new FormLayout("right:p, 3dlu, 75dlu, p:grow", "p");
 		DefaultFormBuilder builder = new DefaultFormBuilder(layout,
 				JsamsFrame.RESOURCE_BUNDLE);
 		builder.setDefaultDialogBorder();
 		builder.appendI15d(JsamsI18nResource.LABEL_NAME.getKey(),
-				textFieldName, DEFAULT_COLUMN_SPAN);
+				textFieldName, 2);
 		builder.nextLine();
 		builder.appendI15d(JsamsI18nResource.LABEL_LEGAL_FORM.getKey(),
-				comboBoxLegalForm, DEFAULT_COLUMN_SPAN);
+				comboBoxLegalForm, 2);
 		builder.nextLine();
 		builder.appendI15d(JsamsI18nResource.LABEL_CIVILITY.getKey(),
 				comboBoxCivility, DEFAULT_COLUMN_SPAN);
 		builder.nextLine();
 		builder.appendI15d(JsamsI18nResource.LABEL_VAT_NUMBER.getKey(),
-				textFieldVatNumber, DEFAULT_COLUMN_SPAN);
+				textFieldVatNumber, 2);
 		builder.nextLine();
 		builder.appendI15d(JsamsI18nResource.LABEL_BANK1.getKey(),
-				textFieldBank1, DEFAULT_COLUMN_SPAN);
+				textFieldBank1, 2);
 		builder.nextLine();
 		builder.appendI15d(JsamsI18nResource.LABEL_BANK2.getKey(),
-				textFieldBank2, DEFAULT_COLUMN_SPAN);
+				textFieldBank2, 2);
 		builder.nextLine();
 		builder.appendI15d(JsamsI18nResource.LABEL_CREDIT_LIMIT.getKey(),
 				textFieldCreditLimit, DEFAULT_COLUMN_SPAN);
@@ -255,16 +256,16 @@ public class EditCustomerDialog extends JsamsDialog implements
 				textFieldVatApplicable, DEFAULT_COLUMN_SPAN);
 		builder.nextLine();
 		builder.appendI15d(JsamsI18nResource.LABEL_PAYMENT_MODE.getKey(),
-				comboBoxPaymentMode, DEFAULT_COLUMN_SPAN);
+				comboBoxPaymentMode, 2);
 		builder.nextLine();
 		builder.appendI15d(JsamsI18nResource.LABEL_AGENT.getKey(),
-				textFieldAgent, DEFAULT_COLUMN_SPAN);
+				textFieldAgent, 2);
 		return builder.getPanel();
 	}
 
 	private JPanel buildBillingAddressTab() {
 		FormLayout layout = new FormLayout(
-				"right:p, 3dlu, 50dlu, 3dlu, right:p, 3dlu, 50dlu, 3dlu, right:p, 3dlu, 50dlu",
+				"right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow",
 				"p");
 		DefaultFormBuilder builder = new DefaultFormBuilder(layout,
 				JsamsFrame.RESOURCE_BUNDLE);
@@ -278,8 +279,10 @@ public class EditCustomerDialog extends JsamsDialog implements
 				textFieldBillingBox, 1);
 		builder.appendI15d(JsamsI18nResource.LABEL_ZIP_CODE.getKey(),
 				textFieldBillingZipCode, 1);
+		builder.nextLine();
 		builder.appendI15d(JsamsI18nResource.LABEL_CITY.getKey(),
 				textFieldBillingCity, 9);
+		builder.nextLine();
 		builder.appendI15d(JsamsI18nResource.LABEL_COUNTRY.getKey(),
 				textFieldBillingCountry, 9);
 		return builder.getPanel();
@@ -287,7 +290,7 @@ public class EditCustomerDialog extends JsamsDialog implements
 
 	private JPanel buildDeliveryAddressTab() {
 		FormLayout layout = new FormLayout(
-				"right:p, 3dlu, 50dlu, 3dlu, right:p, 3dlu, 50dlu, 3dlu, right:p, 3dlu, 50dlu",
+				"right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow",
 				"p");
 		DefaultFormBuilder builder = new DefaultFormBuilder(layout,
 				JsamsFrame.RESOURCE_BUNDLE);
@@ -301,15 +304,17 @@ public class EditCustomerDialog extends JsamsDialog implements
 				textFieldDeliveryBox, 1);
 		builder.appendI15d(JsamsI18nResource.LABEL_ZIP_CODE.getKey(),
 				textFieldDeliveryZipCode, 1);
+		builder.nextLine();
 		builder.appendI15d(JsamsI18nResource.LABEL_CITY.getKey(),
 				textFieldDeliveryCity, 9);
+		builder.nextLine();
 		builder.appendI15d(JsamsI18nResource.LABEL_COUNTRY.getKey(),
 				textFieldDeliveryCountry, 9);
 		return builder.getPanel();
 	}
 
 	private JPanel buildContactInformationsTab() {
-		FormLayout layout = new FormLayout("right:p, 3dlu, 150dlu", "p");
+		FormLayout layout = new FormLayout("right:p, 3dlu, 100dlu", "p");
 		DefaultFormBuilder builder = new DefaultFormBuilder(layout,
 				JsamsFrame.RESOURCE_BUNDLE);
 		builder.setDefaultDialogBorder();
@@ -330,12 +335,12 @@ public class EditCustomerDialog extends JsamsDialog implements
 	}
 
 	private JPanel buildMiscTab() {
-		FormLayout layout = new FormLayout("right:p, 3dlu, 150dlu", "p");
+		FormLayout layout = new FormLayout("right:p, 3dlu, 75dlu, p:grow", "p");
 		DefaultFormBuilder builder = new DefaultFormBuilder(layout,
 				JsamsFrame.RESOURCE_BUNDLE);
 		builder.setDefaultDialogBorder();
 		builder.appendI15d(JsamsI18nResource.LABEL_DEFAULT_DISCOUNT_RATE
-				.getKey(), textFieldDefaultDiscountRate);
+				.getKey(), textFieldDefaultDiscountRate, DEFAULT_COLUMN_SPAN);
 		builder.nextLine();
 		textAreaDescription.setRows(5);
 		textAreaDescription.setWrapStyleWord(true);
@@ -345,7 +350,7 @@ public class EditCustomerDialog extends JsamsDialog implements
 				.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
 		builder.appendI15d(JsamsI18nResource.LABEL_DESCRIPTION.getKey(),
-				areaScrollPane);
+				areaScrollPane, 2);
 		return builder.getPanel();
 	}
 
