@@ -23,6 +23,10 @@ public class JsamsLabel extends JLabel {
 		super();
 	}
 
+	public JsamsLabel(final String text) {
+		super(text);
+	}
+
 	public JsamsLabel(final I18nString text) {
 		super(text.getTranslation());
 	}
