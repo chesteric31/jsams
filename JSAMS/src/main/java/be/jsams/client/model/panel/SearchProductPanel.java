@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +30,7 @@ import be.jsams.server.model.ProductCategory;
 import com.jgoodies.forms.builder.DefaultFormBuilder;
 import com.jgoodies.forms.factories.ButtonBarFactory;
 import com.jgoodies.forms.layout.FormLayout;
+import com.mysql.jdbc.StringUtils;
 
 /**
  * Search {@link JPanel} for Product objects.
@@ -91,7 +93,10 @@ public class SearchProductPanel extends JPanel {
 				textFieldLabel, 5);
 		List<ProductCategory> allProductCategories = JsamsApplicationContext
 				.getProductCategoryDao().findAll();
-		comboBoxProductCategory = new JComboBox(allProductCategories.toArray());
+		ArrayList<ProductCategory> allWithNull = new ArrayList<ProductCategory>();
+		allWithNull.add(null);
+		allWithNull.addAll(allProductCategories);
+		comboBoxProductCategory = new JComboBox(allWithNull.toArray());
 		comboBoxProductCategory.setRenderer(new NamedComboBoxRenderer());
 		builder.appendI15d(JsamsI18nResource.LABEL_PRODUCT_CATEGORY.getKey(),
 				comboBoxProductCategory, 5);
@@ -126,22 +131,23 @@ public class SearchProductPanel extends JPanel {
 
 		this.add(searchCriteriaPanel, BorderLayout.NORTH);
 
-		ProductTableModel dataModel = new ProductTableModel();
-		Product p = new Product();
-		p.setId(1L);
-		p.setCategory(new ProductCategory());
-		p.setName("BLA");
-		p.setPrice(new BigDecimal(123.00));
-		p.setQuantityStock(5);
-		p.setReorderLevel(1);
-		p.setVatApplicable(new BigDecimal(21.00));
-
-		ArrayList<Product> products = new ArrayList<Product>();
-		products.add(p);
-		dataModel.setData(products);
-		resultTable = new JTable(dataModel);
+		// ProductTableModel dataModel = new ProductTableModel();
+		// Product p = new Product();
+		// p.setId(1L);
+		// p.setCategory(new ProductCategory());
+		// p.setName("BLA");
+		// p.setPrice(new BigDecimal(123.00));
+		// p.setQuantityStock(5);
+		// p.setReorderLevel(1);
+		// p.setVatApplicable(new BigDecimal(21.00));
+		//
+		// ArrayList<Product> products = new ArrayList<Product>();
+		// products.add(p);
+		// dataModel.setData(products);
+		resultTable = new JTable();
 		JScrollPane scrollPane = new JScrollPane(resultTable);
-		scrollPane.setBorder(new TitledBorder("RESULT"));
+		scrollPane.setBorder(new TitledBorder(JsamsI18nResource.SEARCH_RESULTS
+				.getTranslation()));
 		this.add(scrollPane, BorderLayout.CENTER);
 	}
 
@@ -149,6 +155,43 @@ public class SearchProductPanel extends JPanel {
 		JsamsButton buttonOk = new JsamsButton(JsamsI18nResource.BUTTON_OK);
 		buttonOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String name = textFieldLabel.getText();
+				BigDecimal price = null;
+				if (!StringUtils.isNullOrEmpty(textFieldPrice.getText())) {
+					price = new BigDecimal(textFieldPrice.getText());
+				}
+				int reorderLevel = -1;
+				if (!StringUtils.isNullOrEmpty(textFieldReorderLevel.getText())) {
+					reorderLevel = Integer.parseInt(textFieldReorderLevel
+							.getText());
+				}
+				int stockQuantity = -1;
+				if (!StringUtils
+						.isNullOrEmpty(textFieldStockQuantity.getText())) {
+					stockQuantity = Integer.parseInt(textFieldStockQuantity
+							.getText());
+				}
+				BigDecimal vatApplicable = null;
+				if (!StringUtils
+						.isNullOrEmpty(textFieldVatApplicable.getText())) {
+					vatApplicable = new BigDecimal(textFieldVatApplicable
+							.getText());
+				}
+				ProductCategory category = (ProductCategory) comboBoxProductCategory
+						.getSelectedItem();
+				final Product criteria = new Product();
+				criteria.setCategory(category);
+				criteria.setName(name);
+				criteria.setPrice(price);
+				criteria.setQuantityStock(stockQuantity);
+				criteria.setReorderLevel(reorderLevel);
+				criteria.setVatApplicable(vatApplicable);
+				List<Product> products = JsamsApplicationContext
+						.getProductService().findByCriteria(criteria);
+				ProductTableModel model = new ProductTableModel();
+				model.setData(products);
+				resultTable.setModel(model);
+				resultTable.repaint();
 			}
 		});
 		return buttonOk;
@@ -169,6 +212,22 @@ public class SearchProductPanel extends JPanel {
 				JsamsI18nResource.BUTTON_RESET);
 		buttonReset.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Class<?> clazz = this.getClass();
+				Field[] fields = clazz.getFields();
+				for (Field field : fields) {
+					try {
+						Object value = field.get(this);
+						if (value instanceof JsamsTextField) {
+							((JsamsTextField) value).setText(null);
+						} else if (value instanceof JComboBox) {
+							((JComboBox) value).setSelectedIndex(0);
+						}
+					} catch (IllegalArgumentException e1) {
+						e1.printStackTrace();
+					} catch (IllegalAccessException e1) {
+						e1.printStackTrace();
+					}
+				}
 			}
 		});
 		return buttonReset;
