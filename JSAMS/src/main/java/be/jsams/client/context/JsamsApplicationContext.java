@@ -7,6 +7,7 @@ import be.jsams.server.dao.LegalFormDao;
 import be.jsams.server.dao.PaymentModeDao;
 import be.jsams.server.dao.ProductCategoryDao;
 import be.jsams.server.service.CustomerService;
+import be.jsams.server.service.ProductService;
 import be.jsams.server.service.SocietyService;
 
 /**
@@ -77,6 +78,14 @@ public class JsamsApplicationContext {
 	 */
 	public static ProductCategoryDao getProductCategoryDao() {
 		return (ProductCategoryDao) context.getBean("productCategoryDao");
+	}
+	
+	/**
+	 * 
+	 * @return the {@link ProductService}
+	 */
+	public static ProductService getProductService() {
+		return (ProductService) context.getBean("productService");
 	}
 
 }
