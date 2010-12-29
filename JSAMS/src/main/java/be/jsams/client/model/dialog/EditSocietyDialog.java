@@ -3,8 +3,10 @@ package be.jsams.client.model.dialog;
 import java.awt.BorderLayout;
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.BoxLayout;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
@@ -18,7 +20,10 @@ import be.jsams.client.swing.component.JsamsButtonsInterface;
 import be.jsams.client.swing.component.JsamsButtonsPanel;
 import be.jsams.client.swing.component.JsamsDialog;
 import be.jsams.client.swing.component.JsamsFrame;
+import be.jsams.client.swing.component.JsamsLabel;
+import be.jsams.client.swing.component.JsamsStatusBar;
 import be.jsams.client.swing.component.JsamsTextField;
+import be.jsams.client.validator.SocietyValidator;
 import be.jsams.server.model.Address;
 import be.jsams.server.model.ContactInformation;
 import be.jsams.server.model.LegalForm;
@@ -26,6 +31,14 @@ import be.jsams.server.model.Society;
 
 import com.jgoodies.forms.builder.DefaultFormBuilder;
 import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.validation.Severity;
+import com.jgoodies.validation.ValidationMessage;
+import com.jgoodies.validation.ValidationResult;
+import com.jgoodies.validation.ValidationResultModel;
+import com.jgoodies.validation.util.DefaultValidationResultModel;
+import com.jgoodies.validation.view.ValidationComponentUtils;
+import com.jgoodies.validation.view.ValidationResultViewFactory;
+import com.mysql.jdbc.StringUtils;
 
 /**
  * Edit society {@link JsamsDialog}, to create or update a Society object.
@@ -87,6 +100,12 @@ public class EditSocietyDialog extends JsamsDialog implements
 
 	private JsamsButtonsPanel buttonsPanel;
 
+	private ValidationResultModel validationResultModel = new DefaultValidationResultModel();
+
+	private JsamsStatusBar statusBar;
+
+	private JPanel southPanel;
+
 	/**
 	 * Constructor
 	 * 
@@ -101,9 +120,16 @@ public class EditSocietyDialog extends JsamsDialog implements
 			final I18nString title, Society model) {
 		super(parent, title);
 		this.model = model;
-		buttonsPanel = new JsamsButtonsPanel(this, true, true, true);
-		add(buttonsPanel, BorderLayout.SOUTH);
 		initComponents();
+	}
+
+	public ValidationResultModel getValidationResultModel() {
+		return validationResultModel;
+	}
+
+	public void setValidationResultModel(
+			ValidationResultModel validationResultModel) {
+		this.validationResultModel = validationResultModel;
 	}
 
 	/**
@@ -116,7 +142,8 @@ public class EditSocietyDialog extends JsamsDialog implements
 
 	/**
 	 * 
-	 * @param model the {@link Society} to set
+	 * @param model
+	 *            the {@link Society} to set
 	 */
 	public void setModel(Society model) {
 		this.model = model;
@@ -170,7 +197,7 @@ public class EditSocietyDialog extends JsamsDialog implements
 		builder.appendI15d(JsamsI18nResource.LABEL_WEBSITE.getKey(),
 				textFieldWebsite, DEFAULT_COLUMN_SPAN);
 		builder.nextLine();
-		builder.appendSeparator(JsamsI18nResource.LABEL_MISC.getKey());
+		builder.appendSeparator(JsamsI18nResource.LABEL_MISC.getTranslation());
 
 		builder.appendI15d(JsamsI18nResource.LABEL_LEGAL_FORM.getKey(),
 				comboBoxLegalForm, DEFAULT_COLUMN_SPAN);
@@ -188,10 +215,21 @@ public class EditSocietyDialog extends JsamsDialog implements
 				textFieldVatNumber, DEFAULT_COLUMN_SPAN);
 		builder.nextLine();
 
+		setMandatoryFields();
+
 		JPanel mainPanel = new JPanel();
 		mainPanel.setLayout(new BorderLayout());
+		statusBar = new JsamsStatusBar();
 		mainPanel.add(builder.getPanel(), BorderLayout.CENTER);
+		ValidationComponentUtils
+				.updateComponentTreeMandatoryBackground(mainPanel);
+		southPanel = new JPanel();
+		southPanel.setLayout(new BoxLayout(southPanel, BoxLayout.PAGE_AXIS));
+		buttonsPanel = new JsamsButtonsPanel(this, true, true, true);
+		southPanel.add(buttonsPanel);
+		southPanel.add(statusBar);
 		add(mainPanel);
+		add(southPanel, BorderLayout.SOUTH);
 		pack();
 		setLocationRelativeTo(null);
 		setVisible(true);
@@ -203,68 +241,77 @@ public class EditSocietyDialog extends JsamsDialog implements
 	}
 
 	public void performOk() {
-		if (getModel() == null) {
-			// Create new one
-			Society newSociety = new Society();
-			newSociety.setActivity(textFieldActivity.getText());
-			Address address = new Address();
+		Society society = new Society();
+		society.setActivity(textFieldActivity.getText());
+		Address address = new Address();
+		if (!StringUtils.isNullOrEmpty(textFieldBox.getText())) {
 			address.setBox(textFieldBox.getText());
-			address.setCity(textFieldCity.getText());
-			address.setCountry(textFieldCountry.getText());
-			address.setNumber(textFieldNumber.getText());
-			address.setStreet(textFieldStreet.getText());
-			address.setZipCode(Integer.parseInt(textFieldZipCode.getText()));
-			newSociety.setAddress(address);
-			newSociety.setCapital(new BigDecimal(textFieldCapital.getText()));
-			ContactInformation contactInformation = new ContactInformation();
-			contactInformation.setEmail(textFieldEmail.getText());
-			contactInformation.setFax(textFieldFax.getText());
-			contactInformation.setMobile(textFieldMobile.getText());
-			contactInformation.setPhone(textFieldPhone.getText());
-			contactInformation.setWebsite(textFieldWebsite.getText());
-			newSociety.setContactInformation(contactInformation);
-			newSociety.setLegalForm((LegalForm) comboBoxLegalForm
-					.getSelectedItem());
-			newSociety.setName(textFieldName.getText());
-			newSociety.setResponsible(textFieldResponsible.getText());
-			newSociety.setVatNumber(textFieldVatNumber.getText());
-			JsamsApplicationContext.getSocietyService().create(newSociety);
-			JsamsDesktop.getInstance().setCurrentSociety(newSociety);
-		} else {
-			// Update the current society
-			Society updatedSociety = new Society();
-			updatedSociety.setActivity(textFieldActivity.getText());
-			Address updatedAddress = new Address();
-			updatedAddress.setBox(textFieldBox.getText());
-			updatedAddress.setCity(textFieldCity.getText());
-			updatedAddress.setCountry(textFieldCountry.getText());
-			updatedAddress.setNumber(textFieldNumber.getText());
-			updatedAddress.setStreet(textFieldStreet.getText());
-			updatedAddress.setZipCode(Integer.parseInt(textFieldZipCode
-					.getText()));
-			updatedSociety.setAddress(updatedAddress);
-			updatedSociety
-					.setCapital(new BigDecimal(textFieldCapital.getText()));
-			ContactInformation updatedContactInformation = new ContactInformation();
-			updatedContactInformation.setEmail(textFieldEmail.getText());
-			updatedContactInformation.setFax(textFieldFax.getText());
-			updatedContactInformation.setMobile(textFieldMobile.getText());
-			updatedContactInformation.setPhone(textFieldPhone.getText());
-			updatedContactInformation.setWebsite(textFieldWebsite.getText());
-			updatedSociety.setContactInformation(updatedContactInformation);
-			updatedSociety.setLegalForm((LegalForm) comboBoxLegalForm
-					.getSelectedItem());
-			updatedSociety.setName(textFieldName.getText());
-			updatedSociety.setResponsible(textFieldResponsible.getText());
-			updatedSociety.setVatNumber(textFieldVatNumber.getText());
-
-			if (!getModel().equals(updatedSociety)) {
-				JsamsApplicationContext.getSocietyService().update(
-						updatedSociety);
-				JsamsDesktop.getInstance().setCurrentSociety(updatedSociety);
-			}
 		}
-		dispose();
+		address.setCity(textFieldCity.getText());
+		address.setCountry(textFieldCountry.getText());
+		address.setNumber(textFieldNumber.getText());
+		address.setStreet(textFieldStreet.getText());
+		if (!StringUtils.isNullOrEmpty(textFieldZipCode.getText())) {
+			address.setZipCode(Integer.parseInt(textFieldZipCode.getText()));
+		}
+		society.setAddress(address);
+		if (!StringUtils.isNullOrEmpty(textFieldCapital.getText())) {
+			society.setCapital(new BigDecimal(textFieldCapital.getText()));
+		}
+		ContactInformation contactInformation = new ContactInformation();
+		if (!StringUtils.isNullOrEmpty(textFieldEmail.getText())) {
+			contactInformation.setEmail(textFieldEmail.getText());
+		}
+		if (!StringUtils.isNullOrEmpty(textFieldFax.getText())) {
+			contactInformation.setFax(textFieldFax.getText());
+		}
+		if (!StringUtils.isNullOrEmpty(textFieldMobile.getText())) {
+			contactInformation.setMobile(textFieldMobile.getText());
+		}
+		contactInformation.setPhone(textFieldPhone.getText());
+		if (!StringUtils.isNullOrEmpty(textFieldWebsite.getText())) {
+			contactInformation.setWebsite(textFieldWebsite.getText());
+		}
+		society.setContactInformation(contactInformation);
+		if (comboBoxLegalForm.getSelectedItem() != null) {
+			society.setLegalForm((LegalForm) comboBoxLegalForm
+					.getSelectedItem());
+		}
+		society.setName(textFieldName.getText());
+		if (!StringUtils.isNullOrEmpty(textFieldResponsible.getText())) {
+			society.setResponsible(textFieldResponsible.getText());
+		}
+		if (!StringUtils.isNullOrEmpty(textFieldVatNumber.getText())) {
+			society.setVatNumber(textFieldVatNumber.getText());
+		}
+		SocietyValidator validator = new SocietyValidator();
+		ValidationResult result = validator.validate(society);
+		validationResultModel.setResult(result);
+		if (result.hasMessages()) {
+			statusBar.removeAll();
+			List<ValidationMessage> messages = validationResultModel.getResult().getMessages();
+			for (ValidationMessage message : messages) {
+				JsamsLabel label = new JsamsLabel(message.formattedText().replace(".", ""));
+	            if (message.severity() == Severity.ERROR) {
+	            	label.setIcon(ValidationResultViewFactory.getErrorIcon());
+	            } else if (message.severity() == Severity.WARNING) {
+	            	label.setIcon(ValidationResultViewFactory.getWarningIcon());
+	            }
+		        statusBar.addJComponent(label);
+			}
+			statusBar.revalidate();
+		} else {
+			if (getModel() == null) {
+				JsamsApplicationContext.getSocietyService().create(society);
+				JsamsDesktop.getInstance().setCurrentSociety(society);
+			} else {
+				if (!getModel().equals(society)) {
+					JsamsApplicationContext.getSocietyService().update(society);
+					JsamsDesktop.getInstance().setCurrentSociety(society);
+				}
+			}
+			dispose();
+		}
 	}
 
 	public void performReset() {
@@ -289,7 +336,10 @@ public class EditSocietyDialog extends JsamsDialog implements
 	private void fillData() {
 		List<LegalForm> allLegalForms = JsamsApplicationContext
 				.getLegalFormDao().findAll();
-		comboBoxLegalForm = new JComboBox(allLegalForms.toArray());
+		ArrayList<LegalForm> allWithNull = new ArrayList<LegalForm>();
+		allWithNull.add(null);
+		allWithNull.addAll(allLegalForms);
+		comboBoxLegalForm = new JComboBox(allWithNull.toArray());
 		if (getModel() != null) {
 			Society society = JsamsApplicationContext.getSocietyService()
 					.findById(getModel().getId());
@@ -322,6 +372,18 @@ public class EditSocietyDialog extends JsamsDialog implements
 		textFieldMobile.setText(information.getMobile());
 		textFieldPhone.setText(information.getPhone());
 		textFieldWebsite.setText(information.getWebsite());
+	}
+
+	private void setMandatoryFields() {
+		ValidationComponentUtils.setMandatory(textFieldActivity, true);
+		ValidationComponentUtils.setMandatory(textFieldCapital, true);
+		ValidationComponentUtils.setMandatory(textFieldCity, true);
+		ValidationComponentUtils.setMandatory(textFieldCountry, true);
+		ValidationComponentUtils.setMandatory(textFieldName, true);
+		ValidationComponentUtils.setMandatory(textFieldNumber, true);
+		ValidationComponentUtils.setMandatory(textFieldPhone, true);
+		ValidationComponentUtils.setMandatory(textFieldStreet, true);
+		ValidationComponentUtils.setMandatory(textFieldZipCode, true);
 	}
 
 }
