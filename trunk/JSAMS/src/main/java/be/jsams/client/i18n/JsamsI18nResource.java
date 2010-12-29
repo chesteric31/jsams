@@ -271,6 +271,32 @@ public class JsamsI18nResource {
 
 	public static final I18nString LABEL_PRODUCT_CATEGORY = new I18nString(
 			"label.product.category");
-	
-	public static final I18nString SEARCH_CRITERIA = new I18nString("search.criteria");
+
+	public static final I18nString SEARCH_CRITERIA = new I18nString(
+			"search.criteria");
+
+	public static final I18nString SEARCH_RESULTS = new I18nString(
+			"search.results");
+
+	public static final I18nString COLUMN_ID = new I18nString("column.id");
+
+	public static final I18nString COLUMN_NAME = new I18nString("column.name");
+
+	public static final I18nString COLUMN_VAT_APPLICABE = new I18nString(
+			"column.vat_applicable");
+
+	public static final I18nString COLUMN_PRICE = new I18nString("column.price");
+
+	public static final I18nString COLUMN_PRODUCT_CATEGORY = new I18nString(
+			"column.product_category");
+
+	public static final I18nString COLUMN_STOCK_QUANTITY = new I18nString(
+			"column.stock_quantity");
+
+	public static final I18nString COLUMN_REORDER_LEVEL = new I18nString(
+			"column.reorder_level");
+
+	public static final I18nString ERROR_IS_MANDATORY = new I18nString(
+			"error.is_mandatory");
+
 }
