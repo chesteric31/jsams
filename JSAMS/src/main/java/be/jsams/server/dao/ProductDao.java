@@ -1,5 +1,7 @@
 package be.jsams.server.dao;
 
+import java.util.List;
+
 import be.jsams.server.model.Product;
 
 /**
@@ -9,5 +11,7 @@ import be.jsams.server.model.Product;
  * @version $Rev$ $Date::                  $ $Author$
  */
 public interface ProductDao extends GenericDao<Product> {
+
+	List<Product> findByCriteria(Product criteria);
 
 }
