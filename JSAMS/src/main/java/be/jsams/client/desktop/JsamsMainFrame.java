@@ -27,6 +27,7 @@ import be.jsams.client.swing.component.JsamsMenu;
 import be.jsams.client.swing.component.JsamsMenuItem;
 import be.jsams.client.swing.component.JsamsShortcutToolBar;
 import be.jsams.client.swing.component.JsamsStatusBar;
+import be.jsams.client.swing.listener.TabbedPaneKeyListener;
 import be.jsams.client.swing.utils.IconUtil;
 import be.jsams.server.model.Society;
 
@@ -272,6 +273,7 @@ public class JsamsMainFrame extends JsamsFrame {
 			add(southPanel, BorderLayout.SOUTH);
 
 			tabbedPane = new JsamsCloseableTabbedPane();
+			tabbedPane.addKeyListener(new TabbedPaneKeyListener());
 
 			setJMenuBar(mainMenuBar);
 
@@ -404,4 +406,5 @@ public class JsamsMainFrame extends JsamsFrame {
 	public JsamsStatusBar getStatusBar() {
 		return statusBar;
 	}
+	
 }
