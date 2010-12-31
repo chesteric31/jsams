@@ -9,7 +9,7 @@ import javax.swing.KeyStroke;
 import be.jsams.client.swing.component.JsamsCloseableTabbedPane;
 
 /**
- * KeyListener for JsamsCloseableTabbedPane.
+ * {@link KeyListener} for {@link JsamsCloseableTabbedPane}.
  * 
  * @author chesteric31
  * @version $$Rev$$ $$Date::                  $$ $$Author$$
@@ -20,9 +20,11 @@ public class TabbedPaneKeyListener implements KeyListener {
 	 * Remove the tab at the selected index if the CTRL-W are pressed.
 	 */
 	public void keyPressed(KeyEvent e) {
-		KeyStroke keyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_W,
-				InputEvent.CTRL_MASK);
-		if (keyStroke.getKeyCode() == e.getKeyCode()) {
+		int pressedKeyCode = e.getKeyCode();
+
+		int closeKeyCode = KeyStroke.getKeyStroke(KeyEvent.VK_W,
+				InputEvent.CTRL_MASK).getKeyCode();
+		if (closeKeyCode == pressedKeyCode) {
 			JsamsCloseableTabbedPane tabbedPane = (JsamsCloseableTabbedPane) e
 					.getComponent();
 			int selectedIndex = tabbedPane.getSelectedIndex();
