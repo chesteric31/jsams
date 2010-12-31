@@ -14,15 +14,19 @@ import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
-import javax.swing.JTable;
 import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableCellRenderer;
 
 import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.model.table.ProductTableModel;
+import be.jsams.client.renderer.JsamsTableCellRenderer;
 import be.jsams.client.renderer.NamedComboBoxRenderer;
 import be.jsams.client.swing.component.JsamsButton;
 import be.jsams.client.swing.component.JsamsFrame;
+import be.jsams.client.swing.component.JsamsTable;
 import be.jsams.client.swing.component.JsamsTextField;
 import be.jsams.server.model.Product;
 import be.jsams.server.model.ProductCategory;
@@ -64,7 +68,7 @@ public class SearchProductPanel extends JPanel {
 	JsamsButton buttonCancel = null;
 	JsamsButton buttonReset = null;
 
-	JTable resultTable = null;
+	JsamsTable resultTable = null;
 
 	private JComboBox comboBoxProductCategory;
 
@@ -131,20 +135,7 @@ public class SearchProductPanel extends JPanel {
 
 		this.add(searchCriteriaPanel, BorderLayout.NORTH);
 
-		// ProductTableModel dataModel = new ProductTableModel();
-		// Product p = new Product();
-		// p.setId(1L);
-		// p.setCategory(new ProductCategory());
-		// p.setName("BLA");
-		// p.setPrice(new BigDecimal(123.00));
-		// p.setQuantityStock(5);
-		// p.setReorderLevel(1);
-		// p.setVatApplicable(new BigDecimal(21.00));
-		//
-		// ArrayList<Product> products = new ArrayList<Product>();
-		// products.add(p);
-		// dataModel.setData(products);
-		resultTable = new JTable();
+		resultTable = new JsamsTable(true);
 		JScrollPane scrollPane = new JScrollPane(resultTable);
 		scrollPane.setBorder(new TitledBorder(JsamsI18nResource.SEARCH_RESULTS
 				.getTranslation()));
@@ -188,13 +179,38 @@ public class SearchProductPanel extends JPanel {
 				criteria.setVatApplicable(vatApplicable);
 				List<Product> products = JsamsApplicationContext
 						.getProductService().findByCriteria(criteria);
-				ProductTableModel model = new ProductTableModel();
-				model.setData(products);
-				resultTable.setModel(model);
-				resultTable.repaint();
+				
+				fillTable(products);
 			}
 		});
 		return buttonOk;
+	}
+	
+	private void fillTable(final List<Product> products) {
+		ProductTableModel model = new ProductTableModel();
+		model.setData(products);
+		resultTable.setModel(model);
+
+		JTableHeader tableHeader = resultTable.getTableHeader();
+		TableCellRenderer headerRenderer = tableHeader
+				.getDefaultRenderer();
+
+		((DefaultTableCellRenderer) headerRenderer)
+				.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
+		resultTable.setAutoCreateRowSorter(true);
+		JsamsTableCellRenderer defaultCellRenderer = new JsamsTableCellRenderer();
+		resultTable.setDefaultRenderer(Long.class,
+				defaultCellRenderer);
+		resultTable.setDefaultRenderer(Integer.class,
+				defaultCellRenderer);
+		resultTable.setDefaultRenderer(Double.class,
+				defaultCellRenderer);
+		resultTable.setDefaultRenderer(BigDecimal.class,
+				defaultCellRenderer);
+		resultTable.setDefaultRenderer(String.class,
+				defaultCellRenderer);
+
+		resultTable.repaint();
 	}
 
 	private JsamsButton buildButtonCancel() {
