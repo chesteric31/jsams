@@ -1,5 +1,6 @@
 package be.jsams.client.model.table;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 
@@ -55,13 +56,13 @@ public class ProductTableModel extends AbstractTableModel {
 		case 1:
 			return data.get(rowIndex).getName();
 		case 2:
-			return data.get(rowIndex).getPrice().toPlainString();
+			return data.get(rowIndex).getPrice();
 		case 3:
 			return data.get(rowIndex).getQuantityStock();
 		case 4:
 			return data.get(rowIndex).getReorderLevel();
 		case 5:
-			return data.get(rowIndex).getVatApplicable().toPlainString();
+			return data.get(rowIndex).getVatApplicable().doubleValue();
 		case 6:
 			return data.get(rowIndex).getCategory().getName();
 		default:
@@ -71,6 +72,29 @@ public class ProductTableModel extends AbstractTableModel {
 
 	public String getColumnName(int columnIndex) {
 		return columnNames.get(columnIndex).getTranslation();
+	}
+	
+	@Override
+	public Class<?> getColumnClass(int columnIndex) {
+		switch (columnIndex) {
+		case 0:
+			return Long.class;
+		case 1:
+			return String.class;
+		case 2:
+			return BigDecimal.class;
+		case 3:
+			return Integer.class;
+		case 4:
+			return Integer.class;
+		case 5:
+			return Double.class;
+		case 6:
+			return String.class;
+		default:
+			return Object.class;
+		}
+		
 	}
 
 }
