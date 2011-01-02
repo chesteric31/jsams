@@ -1,11 +1,9 @@
 package be.jsams.client.validator;
 
-import java.math.BigDecimal;
-
 import be.jsams.client.i18n.JsamsI18nLabelResource;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.server.model.Address;
-import be.jsams.server.model.Society;
+import be.jsams.server.model.Customer;
 
 import com.jgoodies.validation.ValidationResult;
 import com.jgoodies.validation.Validator;
@@ -13,47 +11,46 @@ import com.jgoodies.validation.util.PropertyValidationSupport;
 import com.jgoodies.validation.util.ValidationUtils;
 
 /**
- * {@link Validator} for edit product panel.
- * 
+ * {@link Validator} for edit customer panel.
+ *
  * @author chesteric31
- * @version $Rev$ $Date::   $Author$
+ * @version $Rev$ $Date::                  $ $Author$
  */
-public class SocietyValidator implements Validator<Society> {
+public class CustomerValidator implements Validator<Customer> {
 
-	public ValidationResult validate(final Society society) {
+	public ValidationResult validate(final Customer customer) {
 		PropertyValidationSupport support = new PropertyValidationSupport(
-				society, "");
+				customer, "");
 
-		if (ValidationUtils.isBlank(society.getName())) {
+		if (ValidationUtils.isBlank(customer.getName())) {
 			support.addError(
 					JsamsI18nLabelResource.LABEL_NAME.getTranslation(),
 					JsamsI18nResource.ERROR_IS_MANDATORY.getTranslation());
 		}
-		if (ValidationUtils.isBlank(society.getActivity())) {
-			support.addError(JsamsI18nLabelResource.LABEL_ACTIVITY
+		
+		if (customer.getPaymentMode() == null) {
+			support.addError(JsamsI18nLabelResource.LABEL_PAYMENT_MODE
 					.getTranslation(), JsamsI18nResource.ERROR_IS_MANDATORY
 					.getTranslation());
 		}
-		BigDecimal capital = society.getCapital();
-		if (capital == null || ValidationUtils.isBlank(capital.toPlainString())) {
-			support.addError(JsamsI18nLabelResource.LABEL_CAPITAL
-					.getTranslation(), JsamsI18nResource.ERROR_IS_MANDATORY
-					.getTranslation());
-		}
-		String phone = society.getContactInformation().getPhone();
+
+		String phone = customer.getContactInformation().getPhone();
 		if (ValidationUtils.isBlank(phone)) {
 			support.addError(JsamsI18nLabelResource.LABEL_PHONE
 					.getTranslation(), JsamsI18nResource.ERROR_IS_MANDATORY
 					.getTranslation());
 		}
 		
-		Address address = society.getAddress();
 		Validator<Address> addressValidator = new AddressValidator();
-		ValidationResult addressResult = addressValidator.validate(address);
+		ValidationResult billingAddressResult = addressValidator
+				.validate(customer.getBillingAddress());
+		ValidationResult deliveryAddressResult = addressValidator
+				.validate(customer.getDeliveryAddress());
 		
 		ValidationResult result = support.getResult();
-		result.addAllFrom(addressResult);
-		return support.getResult();
+		result.addAllFrom(billingAddressResult);
+		result.addAllFrom(deliveryAddressResult);
+		return result;
 	}
 
 }
