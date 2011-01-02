@@ -35,6 +35,9 @@ public class CommandServiceImpl implements CommandService {
 		this.commandDetailDao = commandDetailDao;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public void create(Command command) {
 		commandDao.add(command);
 		List<CommandDetail> details = command.getDetails();
@@ -43,6 +46,9 @@ public class CommandServiceImpl implements CommandService {
 		}
 	}
 
+	/**
+     * {@inheritDoc}
+     */
 	public void delete(Command command) {
 		List<CommandDetail> details = command.getDetails();
 		for (CommandDetail detail : details) {
@@ -51,6 +57,9 @@ public class CommandServiceImpl implements CommandService {
 		commandDao.remove(command);
 	}
 
+	/**
+     * {@inheritDoc}
+     */
 	public void delete(Long id) {
 		Command command = findById(id);
 		List<CommandDetail> details = command.getDetails();
@@ -60,14 +69,23 @@ public class CommandServiceImpl implements CommandService {
 		commandDao.remove(id);
 	}
 
+	/**
+     * {@inheritDoc}
+     */
 	public List<Command> findAll() {
 		return commandDao.findAll();
 	}
 
+    /**
+     * {@inheritDoc}
+     */
 	public Command findById(Long id) {
 		return commandDao.findById(id);
 	}
 
+    /**
+     * {@inheritDoc}
+     */
 	public void update(Command command) {
 		commandDao.update(command);
 	}

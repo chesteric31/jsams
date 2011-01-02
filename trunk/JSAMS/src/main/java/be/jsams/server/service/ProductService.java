@@ -6,24 +6,60 @@ import be.jsams.server.model.Product;
 
 /**
  * Product service interface.
- *
+ * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
 public interface ProductService {
 
-	public void create(Product product);
+    /**
+     * Creates and persists a new {@link Product} object.
+     * 
+     * @param customer the {@link Product} to persist
+     */
+    public void create(Product product);
 
-	public void delete(Product product);
+    /**
+     * Deletes a {@link Product} object.
+     * 
+     * @param product the {@link Product} to delete
+     */
+    public void delete(Product product);
 
-	public void delete(Long id);
+    /**
+     * Deletes a {@link Product} object.
+     * 
+     * @param id the id of the {@link Product} to delete
+     */
+    public void delete(Long id);
 
-	public void update(Product product);
+    /**
+     * Updates a {@link Product} object.
+     * 
+     * @param product the {@link Product} to update
+     */
+    public void update(Product product);
 
-	public Product findById(Long id);
+    /**
+     * Finds a {@link Product} object.
+     * 
+     * @param id the if of the {@link Product} to find
+     */
+    public Product findById(Long id);
 
-	public List<Product> findAll();
+    /**
+     * Finds all the {@link Product} of the database.
+     * 
+     * @return a list of {@link Product}
+     */
+    public List<Product> findAll();
 
-	public List<Product> findByCriteria(final Product criteria);
+    /**
+     * Finds all {@link Product} following the criteria product.
+     * 
+     * @param criteria the criteria product
+     * @return a list of {@link Product}
+     */
+    public List<Product> findByCriteria(final Product criteria);
 
 }
