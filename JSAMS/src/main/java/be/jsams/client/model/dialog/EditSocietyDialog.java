@@ -12,9 +12,8 @@ import javax.swing.JPanel;
 
 import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.desktop.JsamsDesktop;
-import be.jsams.client.desktop.JsamsMainFrame;
 import be.jsams.client.i18n.I18nString;
-import be.jsams.client.i18n.JsamsI18nResource;
+import be.jsams.client.i18n.JsamsI18nLabelResource;
 import be.jsams.client.renderer.TranslatableComboBoxRenderer;
 import be.jsams.client.swing.component.JsamsButtonsInterface;
 import be.jsams.client.swing.component.JsamsButtonsPanel;
@@ -109,16 +108,13 @@ public class EditSocietyDialog extends JsamsDialog implements
 	/**
 	 * Constructor
 	 * 
-	 * @param parent
-	 *            the {@link JsamsMainFrame}
 	 * @param title
 	 *            the {@link I18nString} title
 	 * @param model
 	 *            the {@link Society} model
 	 */
-	public EditSocietyDialog(final JsamsMainFrame parent,
-			final I18nString title, Society model) {
-		super(parent, title);
+	public EditSocietyDialog(final I18nString title, Society model) {
+		super(null, title);
 		this.model = model;
 		initComponents();
 	}
@@ -160,58 +156,60 @@ public class EditSocietyDialog extends JsamsDialog implements
 		DefaultFormBuilder builder = new DefaultFormBuilder(layout,
 				JsamsFrame.RESOURCE_BUNDLE);
 		builder.setDefaultDialogBorder();
-		builder.appendI15d(JsamsI18nResource.LABEL_NAME.getKey(),
+		builder.appendI15d(JsamsI18nLabelResource.LABEL_NAME.getKey(),
 				textFieldName, DEFAULT_COLUMN_SPAN);
 		builder.nextLine();
-		builder.appendSeparator(JsamsI18nResource.LABEL_ADDRESS
+		builder.appendSeparator(JsamsI18nLabelResource.LABEL_ADDRESS
 				.getTranslation());
-		builder.appendI15d(JsamsI18nResource.LABEL_STREET.getKey(),
+		builder.appendI15d(JsamsI18nLabelResource.LABEL_STREET.getKey(),
 				textFieldStreet, DEFAULT_COLUMN_SPAN);
 		builder.nextLine();
-		builder.appendI15d(JsamsI18nResource.LABEL_NUMBER.getKey(),
+		builder.appendI15d(JsamsI18nLabelResource.LABEL_NUMBER.getKey(),
 				textFieldNumber, 1);
-		builder.appendI15d(JsamsI18nResource.LABEL_BOX.getKey(), textFieldBox,
-				1);
-		builder.appendI15d(JsamsI18nResource.LABEL_ZIP_CODE.getKey(),
+		builder.appendI15d(JsamsI18nLabelResource.LABEL_BOX.getKey(),
+				textFieldBox, 1);
+		builder.appendI15d(JsamsI18nLabelResource.LABEL_ZIP_CODE.getKey(),
 				textFieldZipCode, 1);
-		builder.appendI15d(JsamsI18nResource.LABEL_CITY.getKey(),
+		builder.appendI15d(JsamsI18nLabelResource.LABEL_CITY.getKey(),
 				textFieldCity, DEFAULT_COLUMN_SPAN);
-		builder.appendI15d(JsamsI18nResource.LABEL_COUNTRY.getKey(),
+		builder.appendI15d(JsamsI18nLabelResource.LABEL_COUNTRY.getKey(),
 				textFieldCountry, DEFAULT_COLUMN_SPAN);
 		builder.nextLine();
 
-		builder.appendSeparator(JsamsI18nResource.LABEL_CONTACT_INFORMATIONS
-				.getTranslation());
-		builder.appendI15d(JsamsI18nResource.LABEL_PHONE.getKey(),
+		builder
+				.appendSeparator(JsamsI18nLabelResource.LABEL_CONTACT_INFORMATIONS
+						.getTranslation());
+		builder.appendI15d(JsamsI18nLabelResource.LABEL_PHONE.getKey(),
 				textFieldPhone, DEFAULT_COLUMN_SPAN);
 		builder.nextLine();
-		builder.appendI15d(JsamsI18nResource.LABEL_FAX.getKey(), textFieldFax,
-				DEFAULT_COLUMN_SPAN);
+		builder.appendI15d(JsamsI18nLabelResource.LABEL_FAX.getKey(),
+				textFieldFax, DEFAULT_COLUMN_SPAN);
 		builder.nextLine();
-		builder.appendI15d(JsamsI18nResource.LABEL_MOBILE.getKey(),
+		builder.appendI15d(JsamsI18nLabelResource.LABEL_MOBILE.getKey(),
 				textFieldMobile, DEFAULT_COLUMN_SPAN);
 		builder.nextLine();
-		builder.appendI15d(JsamsI18nResource.LABEL_EMAIL.getKey(),
+		builder.appendI15d(JsamsI18nLabelResource.LABEL_EMAIL.getKey(),
 				textFieldEmail, DEFAULT_COLUMN_SPAN);
 		builder.nextLine();
-		builder.appendI15d(JsamsI18nResource.LABEL_WEBSITE.getKey(),
+		builder.appendI15d(JsamsI18nLabelResource.LABEL_WEBSITE.getKey(),
 				textFieldWebsite, DEFAULT_COLUMN_SPAN);
 		builder.nextLine();
-		builder.appendSeparator(JsamsI18nResource.LABEL_MISC.getTranslation());
+		builder.appendSeparator(JsamsI18nLabelResource.LABEL_MISC
+				.getTranslation());
 
-		builder.appendI15d(JsamsI18nResource.LABEL_LEGAL_FORM.getKey(),
+		builder.appendI15d(JsamsI18nLabelResource.LABEL_LEGAL_FORM.getKey(),
 				comboBoxLegalForm, DEFAULT_COLUMN_SPAN);
 		builder.nextLine();
-		builder.appendI15d(JsamsI18nResource.LABEL_CAPITAL.getKey(),
+		builder.appendI15d(JsamsI18nLabelResource.LABEL_CAPITAL.getKey(),
 				textFieldCapital, DEFAULT_COLUMN_SPAN);
 		builder.nextLine();
-		builder.appendI15d(JsamsI18nResource.LABEL_ACTIVITY.getKey(),
+		builder.appendI15d(JsamsI18nLabelResource.LABEL_ACTIVITY.getKey(),
 				textFieldActivity, DEFAULT_COLUMN_SPAN);
 		builder.nextLine();
-		builder.appendI15d(JsamsI18nResource.LABEL_RESPONSIBLE.getKey(),
+		builder.appendI15d(JsamsI18nLabelResource.LABEL_RESPONSIBLE.getKey(),
 				textFieldResponsible, DEFAULT_COLUMN_SPAN);
 		builder.nextLine();
-		builder.appendI15d(JsamsI18nResource.LABEL_VAT_NUMBER.getKey(),
+		builder.appendI15d(JsamsI18nLabelResource.LABEL_VAT_NUMBER.getKey(),
 				textFieldVatNumber, DEFAULT_COLUMN_SPAN);
 		builder.nextLine();
 
@@ -219,21 +217,27 @@ public class EditSocietyDialog extends JsamsDialog implements
 
 		JPanel mainPanel = new JPanel();
 		mainPanel.setLayout(new BorderLayout());
-		statusBar = new JsamsStatusBar();
 		mainPanel.add(builder.getPanel(), BorderLayout.CENTER);
 		ValidationComponentUtils
 				.updateComponentTreeMandatoryBackground(mainPanel);
+		add(mainPanel);
+
+		buildSouthPanel();
+		add(southPanel, BorderLayout.SOUTH);
+
+		pack();
+		setLocationRelativeTo(null);
+		setVisible(true);
+		setResizable(false);
+	}
+
+	private void buildSouthPanel() {
+		statusBar = new JsamsStatusBar();
 		southPanel = new JPanel();
 		southPanel.setLayout(new BoxLayout(southPanel, BoxLayout.PAGE_AXIS));
 		buttonsPanel = new JsamsButtonsPanel(this, true, true, true);
 		southPanel.add(buttonsPanel);
 		southPanel.add(statusBar);
-		add(mainPanel);
-		add(southPanel, BorderLayout.SOUTH);
-		pack();
-		setLocationRelativeTo(null);
-		setVisible(true);
-		setResizable(false);
 	}
 
 	public void performCancel() {
@@ -289,15 +293,17 @@ public class EditSocietyDialog extends JsamsDialog implements
 		validationResultModel.setResult(result);
 		if (result.hasMessages()) {
 			statusBar.removeAll();
-			List<ValidationMessage> messages = validationResultModel.getResult().getMessages();
+			List<ValidationMessage> messages = validationResultModel
+					.getResult().getMessages();
 			for (ValidationMessage message : messages) {
-				JsamsLabel label = new JsamsLabel(message.formattedText().replace(".", ""));
-	            if (message.severity() == Severity.ERROR) {
-	            	label.setIcon(ValidationResultViewFactory.getErrorIcon());
-	            } else if (message.severity() == Severity.WARNING) {
-	            	label.setIcon(ValidationResultViewFactory.getWarningIcon());
-	            }
-		        statusBar.addJComponent(label);
+				JsamsLabel label = new JsamsLabel(message.formattedText()
+						.replace(".", ""));
+				if (message.severity() == Severity.ERROR) {
+					label.setIcon(ValidationResultViewFactory.getErrorIcon());
+				} else if (message.severity() == Severity.WARNING) {
+					label.setIcon(ValidationResultViewFactory.getWarningIcon());
+				}
+				statusBar.addJComponent(label);
 			}
 			statusBar.revalidate();
 		} else {
