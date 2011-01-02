@@ -10,6 +10,9 @@ import javax.swing.BoxLayout;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.client.i18n.I18nString;
@@ -52,6 +55,8 @@ public class EditSocietyDialog extends JsamsDialog implements
 	 * Serial Version UID
 	 */
 	private static final long serialVersionUID = 4225744372592399187L;
+
+    protected final Log LOGGER = LogFactory.getLog(this.getClass());
 
 	private static final int DEFAULT_COLUMN_SPAN = 9;
 
@@ -332,9 +337,9 @@ public class EditSocietyDialog extends JsamsDialog implements
 					((JComboBox) value).setSelectedIndex(0);
 				}
 			} catch (IllegalArgumentException e1) {
-				e1.printStackTrace();
+				LOGGER.error(e1);
 			} catch (IllegalAccessException e1) {
-				e1.printStackTrace();
+				LOGGER.error(e1);
 			}
 		}
 	}
