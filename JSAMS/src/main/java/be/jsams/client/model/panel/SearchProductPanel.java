@@ -19,6 +19,9 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellRenderer;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.i18n.JsamsI18nLabelResource;
 import be.jsams.client.i18n.JsamsI18nResource;
@@ -32,6 +35,7 @@ import be.jsams.client.swing.component.JsamsButtonsPanel;
 import be.jsams.client.swing.component.JsamsFrame;
 import be.jsams.client.swing.component.JsamsTable;
 import be.jsams.client.swing.component.JsamsTextField;
+import be.jsams.client.swing.listener.TableMouseListener;
 import be.jsams.client.swing.utils.IconUtil;
 import be.jsams.server.model.Product;
 import be.jsams.server.model.ProductCategory;
@@ -53,6 +57,8 @@ public class SearchProductPanel extends JPanel implements JsamsButtonsInterface 
      * Serial Version UID
      */
     private static final long serialVersionUID = 2222078506888522042L;
+
+    protected final Log LOGGER = LogFactory.getLog(this.getClass());
 
     private static final int DEFAULT_V_GAP = 10;
 
@@ -137,6 +143,7 @@ public class SearchProductPanel extends JPanel implements JsamsButtonsInterface 
         this.add(searchCriteriaPanel, BorderLayout.NORTH);
 
         resultTable = new JsamsTable(true);
+        resultTable.addMouseListener(new TableMouseListener());
         JScrollPane scrollPane = new JScrollPane(resultTable);
         scrollPane.setBorder(new TitledBorder(JsamsI18nResource.SEARCH_RESULTS
                 .getTranslation()));
@@ -198,6 +205,14 @@ public class SearchProductPanel extends JPanel implements JsamsButtonsInterface 
                 + "apps/accessories-text-editor.png");
         buttonModify.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                int selectedRow = resultTable.getSelectedRow();
+                if (selectedRow > -1) {
+                    Long id = (Long) resultTable.getValueAt(selectedRow, 0);
+                    Product selectedProduct = JsamsApplicationContext
+                            .getProductService().findById(id);
+                    new EditProductDialog(JsamsI18nResource.TITLE_EDIT_PRODUCT,
+                            selectedProduct);
+                }
             }
         });
         return buttonModify;
@@ -253,9 +268,9 @@ public class SearchProductPanel extends JPanel implements JsamsButtonsInterface 
                     ((JComboBox) value).setSelectedIndex(0);
                 }
             } catch (IllegalArgumentException e1) {
-                e1.printStackTrace();
+                LOGGER.error(e1);
             } catch (IllegalAccessException e1) {
-                e1.printStackTrace();
+                LOGGER.error(e1);
             }
         }
     }
