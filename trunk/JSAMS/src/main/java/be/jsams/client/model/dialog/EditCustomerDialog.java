@@ -3,8 +3,10 @@ package be.jsams.client.model.dialog;
 import java.awt.BorderLayout;
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.BoxLayout;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -14,14 +16,18 @@ import javax.swing.JTextArea;
 import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.desktop.JsamsMainFrame;
 import be.jsams.client.i18n.I18nString;
+import be.jsams.client.i18n.JsamsI18nLabelResource;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.renderer.TranslatableComboBoxRenderer;
 import be.jsams.client.swing.component.JsamsButtonsInterface;
 import be.jsams.client.swing.component.JsamsButtonsPanel;
 import be.jsams.client.swing.component.JsamsDialog;
 import be.jsams.client.swing.component.JsamsFrame;
+import be.jsams.client.swing.component.JsamsLabel;
+import be.jsams.client.swing.component.JsamsStatusBar;
 import be.jsams.client.swing.component.JsamsTextField;
 import be.jsams.client.swing.utils.IconUtil;
+import be.jsams.client.validator.CustomerValidator;
 import be.jsams.server.model.Address;
 import be.jsams.server.model.Civility;
 import be.jsams.server.model.ContactInformation;
@@ -31,6 +37,14 @@ import be.jsams.server.model.PaymentMode;
 
 import com.jgoodies.forms.builder.DefaultFormBuilder;
 import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.validation.Severity;
+import com.jgoodies.validation.ValidationMessage;
+import com.jgoodies.validation.ValidationResult;
+import com.jgoodies.validation.ValidationResultModel;
+import com.jgoodies.validation.util.DefaultValidationResultModel;
+import com.jgoodies.validation.view.ValidationComponentUtils;
+import com.jgoodies.validation.view.ValidationResultViewFactory;
+import com.mysql.jdbc.StringUtils;
 
 /**
  * Edit Customer {@link JsamsDialog}, to create or update a Customer object.
@@ -139,6 +153,12 @@ public class EditCustomerDialog extends JsamsDialog implements
 
 	private JsamsButtonsPanel buttonsPanel;
 
+	private ValidationResultModel validationResultModel = new DefaultValidationResultModel();
+
+	private JsamsStatusBar statusBar;
+
+	private JPanel southPanel;
+
 	/**
 	 * Constructor
 	 * 
@@ -157,6 +177,15 @@ public class EditCustomerDialog extends JsamsDialog implements
 		buttonsPanel = new JsamsButtonsPanel(this, true, true, true);
 		add(buttonsPanel, BorderLayout.SOUTH);
 		initComponents();
+	}
+
+	public ValidationResultModel getValidationResultModel() {
+		return validationResultModel;
+	}
+
+	public void setValidationResultModel(
+			ValidationResultModel validationResultModel) {
+		this.validationResultModel = validationResultModel;
 	}
 
 	/**
@@ -199,19 +228,44 @@ public class EditCustomerDialog extends JsamsDialog implements
 		tabbedPane
 				.add(JsamsI18nResource.PANEL_MISC.getTranslation(), miscPanel);
 		getContentPane().add(tabbedPane);
+
+		setMandatoryFields();
+
+		ValidationComponentUtils
+				.updateComponentTreeMandatoryBackground(tabbedPane);
+
+		buildSouthPanel();
+		add(southPanel, BorderLayout.SOUTH);
+
 		pack();
+	}
+
+	private void buildSouthPanel() {
+		statusBar = new JsamsStatusBar();
+		southPanel = new JPanel();
+		southPanel.setLayout(new BoxLayout(southPanel, BoxLayout.PAGE_AXIS));
+		buttonsPanel = new JsamsButtonsPanel(this, true, true, true);
+		southPanel.add(buttonsPanel);
+		southPanel.add(statusBar);
 	}
 
 	private void fillData() {
 		List<LegalForm> allLegalForms = JsamsApplicationContext
 				.getLegalFormDao().findAll();
-		comboBoxLegalForm = new JComboBox(allLegalForms.toArray());
+		ArrayList<LegalForm> allWithNull = new ArrayList<LegalForm>();
+		allWithNull.add(null);
+		allWithNull.addAll(allLegalForms);
+		comboBoxLegalForm = new JComboBox(allWithNull.toArray());
 		List<Civility> allCivilities = JsamsApplicationContext.getCivilityDao()
 				.findAll();
-		comboBoxCivility = new JComboBox(allCivilities.toArray());
+		ArrayList<Civility> allWithNullCivilities = new ArrayList<Civility>();
+		allWithNullCivilities.add(null);
+		allWithNullCivilities.addAll(allCivilities);
+		comboBoxCivility = new JComboBox(allWithNullCivilities.toArray());
 		List<PaymentMode> allPaymentModes = JsamsApplicationContext
 				.getPaymentModeDao().findAll();
 		comboBoxPaymentMode = new JComboBox(allPaymentModes.toArray());
+
 		if (getModel() != null) {
 			fillBillingAddress();
 			fillDeliveryAddress();
@@ -221,6 +275,7 @@ public class EditCustomerDialog extends JsamsDialog implements
 			textFieldName.setText(getModel().getName());
 			textFieldVatNumber.setText(getModel().getVatNumber());
 		}
+
 		comboBoxLegalForm.setRenderer(new TranslatableComboBoxRenderer());
 		comboBoxCivility.setRenderer(new TranslatableComboBoxRenderer());
 		comboBoxPaymentMode.setRenderer(new TranslatableComboBoxRenderer());
@@ -231,34 +286,35 @@ public class EditCustomerDialog extends JsamsDialog implements
 		DefaultFormBuilder builder = new DefaultFormBuilder(layout,
 				JsamsFrame.RESOURCE_BUNDLE);
 		builder.setDefaultDialogBorder();
-		builder.appendI15d(JsamsI18nResource.LABEL_NAME.getKey(),
+		builder.appendI15d(JsamsI18nLabelResource.LABEL_NAME.getKey(),
 				textFieldName, 2);
 		builder.nextLine();
-		builder.appendI15d(JsamsI18nResource.LABEL_LEGAL_FORM.getKey(),
+		builder.appendI15d(JsamsI18nLabelResource.LABEL_LEGAL_FORM.getKey(),
 				comboBoxLegalForm, 2);
 		builder.nextLine();
-		builder.appendI15d(JsamsI18nResource.LABEL_CIVILITY.getKey(),
+		builder.appendI15d(JsamsI18nLabelResource.LABEL_CIVILITY.getKey(),
 				comboBoxCivility, DEFAULT_COLUMN_SPAN);
 		builder.nextLine();
-		builder.appendI15d(JsamsI18nResource.LABEL_VAT_NUMBER.getKey(),
+		builder.appendI15d(JsamsI18nLabelResource.LABEL_VAT_NUMBER.getKey(),
 				textFieldVatNumber, 2);
 		builder.nextLine();
-		builder.appendI15d(JsamsI18nResource.LABEL_BANK1.getKey(),
+		builder.appendI15d(JsamsI18nLabelResource.LABEL_BANK1.getKey(),
 				textFieldBank1, 2);
 		builder.nextLine();
-		builder.appendI15d(JsamsI18nResource.LABEL_BANK2.getKey(),
+		builder.appendI15d(JsamsI18nLabelResource.LABEL_BANK2.getKey(),
 				textFieldBank2, 2);
 		builder.nextLine();
-		builder.appendI15d(JsamsI18nResource.LABEL_CREDIT_LIMIT.getKey(),
+		builder.appendI15d(JsamsI18nLabelResource.LABEL_CREDIT_LIMIT.getKey(),
 				textFieldCreditLimit, DEFAULT_COLUMN_SPAN);
 		builder.nextLine();
-		builder.appendI15d(JsamsI18nResource.LABEL_VAT_APPLICABLE.getKey(),
+		builder.appendI15d(
+				JsamsI18nLabelResource.LABEL_VAT_APPLICABLE.getKey(),
 				textFieldVatApplicable, DEFAULT_COLUMN_SPAN);
 		builder.nextLine();
-		builder.appendI15d(JsamsI18nResource.LABEL_PAYMENT_MODE.getKey(),
+		builder.appendI15d(JsamsI18nLabelResource.LABEL_PAYMENT_MODE.getKey(),
 				comboBoxPaymentMode, 2);
 		builder.nextLine();
-		builder.appendI15d(JsamsI18nResource.LABEL_AGENT.getKey(),
+		builder.appendI15d(JsamsI18nLabelResource.LABEL_AGENT.getKey(),
 				textFieldAgent, 2);
 		return builder.getPanel();
 	}
@@ -270,20 +326,20 @@ public class EditCustomerDialog extends JsamsDialog implements
 		DefaultFormBuilder builder = new DefaultFormBuilder(layout,
 				JsamsFrame.RESOURCE_BUNDLE);
 		builder.setDefaultDialogBorder();
-		builder.appendI15d(JsamsI18nResource.LABEL_STREET.getKey(),
+		builder.appendI15d(JsamsI18nLabelResource.LABEL_STREET.getKey(),
 				textFieldBillingStreet, 9);
 		builder.nextLine();
-		builder.appendI15d(JsamsI18nResource.LABEL_NUMBER.getKey(),
+		builder.appendI15d(JsamsI18nLabelResource.LABEL_NUMBER.getKey(),
 				textFieldBillingNumber, 1);
-		builder.appendI15d(JsamsI18nResource.LABEL_BOX.getKey(),
+		builder.appendI15d(JsamsI18nLabelResource.LABEL_BOX.getKey(),
 				textFieldBillingBox, 1);
-		builder.appendI15d(JsamsI18nResource.LABEL_ZIP_CODE.getKey(),
+		builder.appendI15d(JsamsI18nLabelResource.LABEL_ZIP_CODE.getKey(),
 				textFieldBillingZipCode, 1);
 		builder.nextLine();
-		builder.appendI15d(JsamsI18nResource.LABEL_CITY.getKey(),
+		builder.appendI15d(JsamsI18nLabelResource.LABEL_CITY.getKey(),
 				textFieldBillingCity, 9);
 		builder.nextLine();
-		builder.appendI15d(JsamsI18nResource.LABEL_COUNTRY.getKey(),
+		builder.appendI15d(JsamsI18nLabelResource.LABEL_COUNTRY.getKey(),
 				textFieldBillingCountry, 9);
 		return builder.getPanel();
 	}
@@ -295,20 +351,20 @@ public class EditCustomerDialog extends JsamsDialog implements
 		DefaultFormBuilder builder = new DefaultFormBuilder(layout,
 				JsamsFrame.RESOURCE_BUNDLE);
 		builder.setDefaultDialogBorder();
-		builder.appendI15d(JsamsI18nResource.LABEL_STREET.getKey(),
+		builder.appendI15d(JsamsI18nLabelResource.LABEL_STREET.getKey(),
 				textFieldDeliveryStreet, 9);
 		builder.nextLine();
-		builder.appendI15d(JsamsI18nResource.LABEL_NUMBER.getKey(),
+		builder.appendI15d(JsamsI18nLabelResource.LABEL_NUMBER.getKey(),
 				textFieldDeliveryNumber, 1);
-		builder.appendI15d(JsamsI18nResource.LABEL_BOX.getKey(),
+		builder.appendI15d(JsamsI18nLabelResource.LABEL_BOX.getKey(),
 				textFieldDeliveryBox, 1);
-		builder.appendI15d(JsamsI18nResource.LABEL_ZIP_CODE.getKey(),
+		builder.appendI15d(JsamsI18nLabelResource.LABEL_ZIP_CODE.getKey(),
 				textFieldDeliveryZipCode, 1);
 		builder.nextLine();
-		builder.appendI15d(JsamsI18nResource.LABEL_CITY.getKey(),
+		builder.appendI15d(JsamsI18nLabelResource.LABEL_CITY.getKey(),
 				textFieldDeliveryCity, 9);
 		builder.nextLine();
-		builder.appendI15d(JsamsI18nResource.LABEL_COUNTRY.getKey(),
+		builder.appendI15d(JsamsI18nLabelResource.LABEL_COUNTRY.getKey(),
 				textFieldDeliveryCountry, 9);
 		return builder.getPanel();
 	}
@@ -318,18 +374,19 @@ public class EditCustomerDialog extends JsamsDialog implements
 		DefaultFormBuilder builder = new DefaultFormBuilder(layout,
 				JsamsFrame.RESOURCE_BUNDLE);
 		builder.setDefaultDialogBorder();
-		builder.appendI15d(JsamsI18nResource.LABEL_PHONE.getKey(),
+		builder.appendI15d(JsamsI18nLabelResource.LABEL_PHONE.getKey(),
 				textFieldPhone);
 		builder.nextLine();
-		builder.appendI15d(JsamsI18nResource.LABEL_FAX.getKey(), textFieldFax);
+		builder.appendI15d(JsamsI18nLabelResource.LABEL_FAX.getKey(),
+				textFieldFax);
 		builder.nextLine();
-		builder.appendI15d(JsamsI18nResource.LABEL_MOBILE.getKey(),
+		builder.appendI15d(JsamsI18nLabelResource.LABEL_MOBILE.getKey(),
 				textFieldMobile);
 		builder.nextLine();
-		builder.appendI15d(JsamsI18nResource.LABEL_EMAIL.getKey(),
+		builder.appendI15d(JsamsI18nLabelResource.LABEL_EMAIL.getKey(),
 				textFieldEmail);
 		builder.nextLine();
-		builder.appendI15d(JsamsI18nResource.LABEL_WEBSITE.getKey(),
+		builder.appendI15d(JsamsI18nLabelResource.LABEL_WEBSITE.getKey(),
 				textFieldWebsite);
 		return builder.getPanel();
 	}
@@ -339,7 +396,7 @@ public class EditCustomerDialog extends JsamsDialog implements
 		DefaultFormBuilder builder = new DefaultFormBuilder(layout,
 				JsamsFrame.RESOURCE_BUNDLE);
 		builder.setDefaultDialogBorder();
-		builder.appendI15d(JsamsI18nResource.LABEL_DEFAULT_DISCOUNT_RATE
+		builder.appendI15d(JsamsI18nLabelResource.LABEL_DEFAULT_DISCOUNT_RATE
 				.getKey(), textFieldDefaultDiscountRate, DEFAULT_COLUMN_SPAN);
 		builder.nextLine();
 		textAreaDescription.setRows(5);
@@ -349,7 +406,7 @@ public class EditCustomerDialog extends JsamsDialog implements
 		areaScrollPane
 				.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
-		builder.appendI15d(JsamsI18nResource.LABEL_DESCRIPTION.getKey(),
+		builder.appendI15d(JsamsI18nLabelResource.LABEL_DESCRIPTION.getKey(),
 				areaScrollPane, 2);
 		return builder.getPanel();
 	}
@@ -398,110 +455,115 @@ public class EditCustomerDialog extends JsamsDialog implements
 	}
 
 	public void performOk() {
-		if (getModel() == null) {
-			// Create new one
-			Customer newCustomer = new Customer();
-			// TODO: see for agent object
-			newCustomer.setName(textFieldName.getText());
-			newCustomer.setLegalForm((LegalForm) comboBoxLegalForm
+		Customer customer = new Customer();
+		// TODO: see for agent object
+		customer.setName(textFieldName.getText());
+		if (comboBoxLegalForm.getSelectedItem() != null) {
+			customer.setLegalForm((LegalForm) comboBoxLegalForm
 					.getSelectedItem());
-			newCustomer.setCivility((Civility) comboBoxCivility
-					.getSelectedItem());
-			newCustomer.setPaymentMode((PaymentMode) comboBoxPaymentMode
-					.getSelectedItem());
-			newCustomer.setBank1(textFieldBank1.getText());
-			newCustomer.setBank2(textFieldBank2.getText());
-			newCustomer.setVatApplicable(new BigDecimal(textFieldVatApplicable
-					.getText()));
-			newCustomer.setVatNumber(textFieldVatNumber.getText());
-			newCustomer.setCreditLimit(new BigDecimal(textFieldCreditLimit
-					.getText()));
-			Address billingAddress = new Address();
-			billingAddress.setBox(textFieldBillingBox.getText());
-			billingAddress.setCity(textFieldBillingCity.getText());
-			billingAddress.setCountry(textFieldBillingCountry.getText());
-			billingAddress.setNumber(textFieldBillingNumber.getText());
-			billingAddress.setStreet(textFieldBillingStreet.getText());
-			billingAddress.setZipCode(Integer.parseInt(textFieldBillingZipCode
-					.getText()));
-			newCustomer.setBillingAddress(billingAddress);
-			Address deliveryAddress = new Address();
-			deliveryAddress.setBox(textFieldDeliveryBox.getText());
-			deliveryAddress.setCity(textFieldDeliveryCity.getText());
-			deliveryAddress.setCountry(textFieldDeliveryCountry.getText());
-			deliveryAddress.setNumber(textFieldDeliveryNumber.getText());
-			deliveryAddress.setStreet(textFieldDeliveryStreet.getText());
-			deliveryAddress.setZipCode(Integer
-					.parseInt(textFieldDeliveryZipCode.getText()));
-			newCustomer.setDeliveryAddress(deliveryAddress);
-
-			newCustomer.setDefaultDiscountRate(new BigDecimal(
-					textFieldDefaultDiscountRate.getText()));
-			newCustomer.setDescription(textAreaDescription.getText());
-
-			ContactInformation contactInformation = new ContactInformation();
-			contactInformation.setEmail(textFieldEmail.getText());
-			contactInformation.setFax(textFieldFax.getText());
-			contactInformation.setMobile(textFieldMobile.getText());
-			contactInformation.setPhone(textFieldPhone.getText());
-			contactInformation.setWebsite(textFieldWebsite.getText());
-			newCustomer.setContactInformation(contactInformation);
-			JsamsApplicationContext.getCustomerService().create(newCustomer);
-		} else {
-			// Update the current customer
-			Customer updatedCustomer = new Customer();
-			// TODO: see for agent object
-			updatedCustomer.setName(textFieldName.getText());
-			updatedCustomer.setLegalForm((LegalForm) comboBoxLegalForm
-					.getSelectedItem());
-			updatedCustomer.setCivility((Civility) comboBoxCivility
-					.getSelectedItem());
-			updatedCustomer.setPaymentMode((PaymentMode) comboBoxPaymentMode
-					.getSelectedItem());
-			updatedCustomer.setBank1(textFieldBank1.getText());
-			updatedCustomer.setBank2(textFieldBank2.getText());
-			updatedCustomer.setVatApplicable(new BigDecimal(
-					textFieldVatApplicable.getText()));
-			updatedCustomer.setVatNumber(textFieldVatNumber.getText());
-			updatedCustomer.setCreditLimit(new BigDecimal(textFieldCreditLimit
-					.getText()));
-			Address billingAddress = new Address();
-			billingAddress.setBox(textFieldBillingBox.getText());
-			billingAddress.setCity(textFieldBillingCity.getText());
-			billingAddress.setCountry(textFieldBillingCountry.getText());
-			billingAddress.setNumber(textFieldBillingNumber.getText());
-			billingAddress.setStreet(textFieldBillingStreet.getText());
-			billingAddress.setZipCode(Integer.parseInt(textFieldBillingZipCode
-					.getText()));
-			updatedCustomer.setBillingAddress(billingAddress);
-			Address deliveryAddress = new Address();
-			deliveryAddress.setBox(textFieldDeliveryBox.getText());
-			deliveryAddress.setCity(textFieldDeliveryCity.getText());
-			deliveryAddress.setCountry(textFieldDeliveryCountry.getText());
-			deliveryAddress.setNumber(textFieldDeliveryNumber.getText());
-			deliveryAddress.setStreet(textFieldDeliveryStreet.getText());
-			deliveryAddress.setZipCode(Integer
-					.parseInt(textFieldDeliveryZipCode.getText()));
-			updatedCustomer.setDeliveryAddress(deliveryAddress);
-
-			updatedCustomer.setDefaultDiscountRate(new BigDecimal(
-					textFieldDefaultDiscountRate.getText()));
-			updatedCustomer.setDescription(textAreaDescription.getText());
-
-			ContactInformation contactInformation = new ContactInformation();
-			contactInformation.setEmail(textFieldEmail.getText());
-			contactInformation.setFax(textFieldFax.getText());
-			contactInformation.setMobile(textFieldMobile.getText());
-			contactInformation.setPhone(textFieldPhone.getText());
-			contactInformation.setWebsite(textFieldWebsite.getText());
-			updatedCustomer.setContactInformation(contactInformation);
-
-			if (!getModel().equals(updatedCustomer)) {
-				JsamsApplicationContext.getCustomerService().update(
-						updatedCustomer);
-			}
 		}
-		dispose();
+		if (comboBoxCivility.getSelectedItem() != null) {
+			customer.setCivility((Civility) comboBoxCivility.getSelectedItem());
+		}
+		customer.setPaymentMode((PaymentMode) comboBoxPaymentMode
+				.getSelectedItem());
+		if (!StringUtils.isNullOrEmpty(textFieldBank1.getText())) {
+			customer.setBank1(textFieldBank1.getText());
+		}
+		if (!StringUtils.isNullOrEmpty(textFieldBank2.getText())) {
+			customer.setBank2(textFieldBank2.getText());
+		}
+		if (!StringUtils.isNullOrEmpty(textFieldVatApplicable.getText())) {
+			customer.setVatApplicable(new BigDecimal(textFieldVatApplicable
+					.getText()));
+		}
+
+		if (!StringUtils.isNullOrEmpty(textFieldVatNumber.getText())) {
+			customer.setVatNumber(textFieldVatNumber.getText());
+		}
+		if (!StringUtils.isNullOrEmpty(textFieldCreditLimit.getText())) {
+			customer.setCreditLimit(new BigDecimal(textFieldCreditLimit
+					.getText()));
+		}
+		Address billingAddress = new Address();
+		if (!StringUtils.isNullOrEmpty(textFieldBillingBox.getText())) {
+			billingAddress.setBox(textFieldBillingBox.getText());
+		}
+		billingAddress.setCity(textFieldBillingCity.getText());
+		billingAddress.setCountry(textFieldBillingCountry.getText());
+		billingAddress.setNumber(textFieldBillingNumber.getText());
+		billingAddress.setStreet(textFieldBillingStreet.getText());
+		if (!StringUtils.isNullOrEmpty(textFieldBillingZipCode.getText())) {
+			billingAddress.setZipCode(Integer.parseInt(textFieldBillingZipCode
+					.getText()));
+		}
+		customer.setBillingAddress(billingAddress);
+		Address deliveryAddress = new Address();
+		if (!StringUtils.isNullOrEmpty(textFieldDeliveryBox.getText())) {
+			deliveryAddress.setBox(textFieldDeliveryBox.getText());
+		}
+		deliveryAddress.setCity(textFieldDeliveryCity.getText());
+		deliveryAddress.setCountry(textFieldDeliveryCountry.getText());
+		deliveryAddress.setNumber(textFieldDeliveryNumber.getText());
+		deliveryAddress.setStreet(textFieldDeliveryStreet.getText());
+		if (!StringUtils.isNullOrEmpty(textFieldDeliveryZipCode.getText())) {
+			deliveryAddress.setZipCode(Integer
+					.parseInt(textFieldDeliveryZipCode.getText()));
+		}
+		customer.setDeliveryAddress(deliveryAddress);
+
+		if (!StringUtils.isNullOrEmpty(textFieldDefaultDiscountRate.getText())) {
+			customer.setDefaultDiscountRate(new BigDecimal(
+					textFieldDefaultDiscountRate.getText()));
+		}
+		if (!StringUtils.isNullOrEmpty(textAreaDescription.getText())) {
+			customer.setDescription(textAreaDescription.getText());
+		}
+
+		ContactInformation contactInformation = new ContactInformation();
+		if (!StringUtils.isNullOrEmpty(textFieldEmail.getText())) {
+			contactInformation.setEmail(textFieldEmail.getText());
+		}
+		if (!StringUtils.isNullOrEmpty(textFieldFax.getText())) {
+			contactInformation.setFax(textFieldFax.getText());
+		}
+		if (!StringUtils.isNullOrEmpty(textFieldMobile.getText())) {
+			contactInformation.setMobile(textFieldMobile.getText());
+		}
+		contactInformation.setPhone(textFieldPhone.getText());
+		if (!StringUtils.isNullOrEmpty(textFieldWebsite.getText())) {
+			contactInformation.setWebsite(textFieldWebsite.getText());
+		}
+		customer.setContactInformation(contactInformation);
+		CustomerValidator validator = new CustomerValidator();
+		ValidationResult result = validator.validate(customer);
+		validationResultModel.setResult(result);
+		if (result.hasMessages()) {
+			statusBar.removeAll();
+			List<ValidationMessage> messages = validationResultModel
+					.getResult().getMessages();
+			for (ValidationMessage message : messages) {
+				JsamsLabel label = new JsamsLabel(message.formattedText()
+						.replace(".", ""));
+				if (message.severity() == Severity.ERROR) {
+					label.setIcon(ValidationResultViewFactory.getErrorIcon());
+				} else if (message.severity() == Severity.WARNING) {
+					label.setIcon(ValidationResultViewFactory.getWarningIcon());
+				}
+				statusBar.addJComponent(label);
+			}
+			statusBar.revalidate();
+		} else {
+			if (getModel() == null) {
+				JsamsApplicationContext.getCustomerService().create(customer);
+			} else {
+				if (!getModel().equals(customer)) {
+					JsamsApplicationContext.getCustomerService().update(
+							customer);
+				}
+			}
+			dispose();
+		}
 	}
 
 	public void performReset() {
@@ -523,6 +585,24 @@ public class EditCustomerDialog extends JsamsDialog implements
 				e1.printStackTrace();
 			}
 		}
+	}
+
+	private void setMandatoryFields() {
+		ValidationComponentUtils.setMandatory(textFieldBillingCity, true);
+		ValidationComponentUtils.setMandatory(textFieldBillingCountry, true);
+		ValidationComponentUtils.setMandatory(textFieldBillingNumber, true);
+		ValidationComponentUtils.setMandatory(textFieldBillingStreet, true);
+		ValidationComponentUtils.setMandatory(textFieldBillingZipCode, true);
+
+		ValidationComponentUtils.setMandatory(textFieldDeliveryCity, true);
+		ValidationComponentUtils.setMandatory(textFieldDeliveryCountry, true);
+		ValidationComponentUtils.setMandatory(textFieldDeliveryNumber, true);
+		ValidationComponentUtils.setMandatory(textFieldDeliveryStreet, true);
+		ValidationComponentUtils.setMandatory(textFieldDeliveryZipCode, true);
+
+		ValidationComponentUtils.setMandatory(textFieldName, true);
+		ValidationComponentUtils.setMandatory(textFieldPhone, true);
+		ValidationComponentUtils.setMandatory(textFieldVatApplicable, true);
 	}
 
 }
