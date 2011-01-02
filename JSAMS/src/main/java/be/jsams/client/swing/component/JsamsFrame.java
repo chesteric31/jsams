@@ -8,6 +8,9 @@ import javax.swing.JFrame;
 import javax.swing.UIManager;
 import javax.swing.plaf.FontUIResource;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import be.jsams.client.i18n.I18nManager;
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.swing.utils.IconUtil;
@@ -25,6 +28,8 @@ public abstract class JsamsFrame extends JFrame {
 	 * Serial Version UID
 	 */
 	private static final long serialVersionUID = 5732252811794674139L;
+
+    protected final Log LOGGER = LogFactory.getLog(this.getClass());
 
 	/**
 	 * The default resource bundle, integrating with the i18n component.
@@ -76,7 +81,7 @@ public abstract class JsamsFrame extends JFrame {
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOGGER.error(e);
 		}
 	}
 
