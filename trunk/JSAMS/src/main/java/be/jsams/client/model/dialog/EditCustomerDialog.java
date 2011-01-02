@@ -13,6 +13,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.desktop.JsamsMainFrame;
 import be.jsams.client.i18n.I18nString;
@@ -59,6 +62,8 @@ public class EditCustomerDialog extends JsamsDialog implements
 	 * Serial Version UID
 	 */
 	private static final long serialVersionUID = 6898471936119469349L;
+
+    protected final Log LOGGER = LogFactory.getLog(this.getClass());
 
 	private static final int DEFAULT_COLUMN_SPAN = 1;
 
@@ -580,9 +585,9 @@ public class EditCustomerDialog extends JsamsDialog implements
 					((JTextArea) value).setText(null);
 				}
 			} catch (IllegalArgumentException e1) {
-				e1.printStackTrace();
+				LOGGER.error(e1);
 			} catch (IllegalAccessException e1) {
-				e1.printStackTrace();
+				LOGGER.error(e1);
 			}
 		}
 	}
