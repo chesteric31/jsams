@@ -8,17 +8,11 @@ package be.jsams.client.i18n;
  */
 public class JsamsI18nResource {
 
-	public static final I18nString TITLE_CHOOSE_SOCIETY = new I18nString(
-			"title.choose.society");
+	public static final I18nString TITLE_OPEN_SOCIETY = new I18nString(
+			"title.open.society");
 
-	public static final I18nString LABEL_CHOOSE_SOCIETY = new I18nString(
-			"label.choose.society");
-
-	public static final I18nString LABEL_CHOOSE_SOCIETY_AVAILABLES = new I18nString(
-			"label.choose.society_availables");
-
-	public static final I18nString BUTTON_CHOOSE_SOCIETIES_NEW = new I18nString(
-			"button.choose.society_new");
+	public static final I18nString BUTTON_OPEN_SOCIETIES_NEW = new I18nString(
+			"button.open.society_new");
 
 	public static final I18nString EXIT_APPLICATION_CONFIRMATION = new I18nString(
 			"exit.confirmation");
@@ -85,32 +79,10 @@ public class JsamsI18nResource {
 	public static final I18nString TITLE_EDIT_SOCIETY_PARAMETERS = new I18nString(
 			"title.edit.society_parameters");
 
-	public static final I18nString LABEL_NAME = new I18nString("label.name");
-
-	public static final I18nString LABEL_STREET = new I18nString("label.street");
-
-	public static final I18nString LABEL_NUMBER = new I18nString("label.number");
-
-	public static final I18nString LABEL_BOX = new I18nString("label.box");
-
-	public static final I18nString LABEL_ZIP_CODE = new I18nString(
-			"label.zip_code");
-
-	public static final I18nString LABEL_CITY = new I18nString("label.city");
-
-	public static final I18nString LABEL_COUNTRY = new I18nString(
-			"label.country");
-
 	public static final I18nString BUTTON_OK = new I18nString("button.ok");
 
 	public static final I18nString BUTTON_CANCEL = new I18nString(
 			"button.cancel");
-
-	public static final I18nString LABEL_ADDRESS = new I18nString(
-			"label.address");
-
-	public static final I18nString LABEL_DETAILS = new I18nString(
-			"label.details");
 
 	public static final I18nString PANEL_CONTACT_INFORMATIONS_TITLE = new I18nString(
 			"panel.contact_informations.title");
@@ -119,37 +91,6 @@ public class JsamsI18nResource {
 
 	public static final I18nString TITLE_EDIT_SOCIETY = new I18nString(
 			"title.edit.society");
-
-	public static final I18nString LABEL_CONTACT_INFORMATIONS = new I18nString(
-			"label.contact_informations");
-
-	public static final I18nString LABEL_PHONE = new I18nString("label.phone");
-
-	public static final I18nString LABEL_FAX = new I18nString("label.fax");
-
-	public static final I18nString LABEL_MOBILE = new I18nString("label.mobile");
-
-	public static final I18nString LABEL_EMAIL = new I18nString("label.email");
-
-	public static final I18nString LABEL_WEBSITE = new I18nString(
-			"label.website");
-
-	public static final I18nString LABEL_MISC = new I18nString("label.misc");
-
-	public static final I18nString LABEL_LEGAL_FORM = new I18nString(
-			"label.legal_form");
-
-	public static final I18nString LABEL_CAPITAL = new I18nString(
-			"label.capital");
-
-	public static final I18nString LABEL_ACTIVITY = new I18nString(
-			"label.activity");
-
-	public static final I18nString LABEL_RESPONSIBLE = new I18nString(
-			"label.responsible");
-
-	public static final I18nString LABEL_VAT_NUMBER = new I18nString(
-			"label.vat_number");
 
 	public static final I18nString MENU_ITEM_CLOSE = new I18nString(
 			"menu.item.close");
@@ -216,9 +157,6 @@ public class JsamsI18nResource {
 	public static final I18nString TITLE_SEARCH_PRODUCT = new I18nString(
 			"title.search.product");
 
-	public static final I18nString LABEL_VAT_APPLICABLE = new I18nString(
-			"label.vat_applicable");
-
 	public static final I18nString PANEL_GENERAL = new I18nString(
 			"panel.general");
 
@@ -232,45 +170,6 @@ public class JsamsI18nResource {
 			"panel.contact_informations");
 
 	public static final I18nString PANEL_MISC = new I18nString("panel.misc");
-
-	public static final I18nString LABEL_CIVILITY = new I18nString(
-			"label.civility");
-
-	public static final I18nString LABEL_BANK1 = new I18nString("label.bank1");
-
-	public static final I18nString LABEL_BANK2 = new I18nString("label.bank2");
-
-	public static final I18nString LABEL_CREDIT_LIMIT = new I18nString(
-			"label.credit_limit");
-
-	public static final I18nString LABEL_PAYMENT_MODE = new I18nString(
-			"label.payment_mode");
-
-	public static final I18nString LABEL_AGENT = new I18nString("label.agent");
-
-	public static final I18nString LABEL_DEFAULT_DISCOUNT_RATE = new I18nString(
-			"label.default_discount_rate");
-
-	public static final I18nString LABEL_DESCRIPTION = new I18nString(
-			"label.description");
-
-	public static final I18nString LABEL_PRODUCT_LABEL = new I18nString(
-			"label.product.label");
-
-	public static final I18nString LABEL_PRODUCT_PRICE = new I18nString(
-			"label.product.price");
-
-	public static final I18nString LABEL_PRODUCT_STOCK_QUANTITY = new I18nString(
-			"label.product.stock_quantity");
-
-	public static final I18nString LABEL_PRODUCT_REORDER_LEVEL = new I18nString(
-			"label.product.reorder_level");
-
-	public static final I18nString LABEL_PRODUCT_VAT_APPLICABLE = new I18nString(
-			"label.product.vat_applicable");
-
-	public static final I18nString LABEL_PRODUCT_CATEGORY = new I18nString(
-			"label.product.category");
 
 	public static final I18nString SEARCH_CRITERIA = new I18nString(
 			"search.criteria");
@@ -298,5 +197,11 @@ public class JsamsI18nResource {
 
 	public static final I18nString ERROR_IS_MANDATORY = new I18nString(
 			"error.is_mandatory");
+
+	public static final I18nString PANEL_SHORTCUT_TOOLBAR = new I18nString(
+			"panel.shortcut_toolbar");
+
+	public static final I18nString TITLE_EDIT_PRODUCT = new I18nString(
+			"title.edit.product");
 
 }
