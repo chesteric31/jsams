@@ -17,7 +17,7 @@ import javax.swing.KeyStroke;
 
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.i18n.JsamsI18nResource;
-import be.jsams.client.model.dialog.ChooseSocietyDialog;
+import be.jsams.client.model.dialog.OpenSocietyDialog;
 import be.jsams.client.model.dialog.EditSocietyDialog;
 import be.jsams.client.model.panel.SearchCustomerPanel;
 import be.jsams.client.model.panel.SearchProductPanel;
@@ -122,13 +122,13 @@ public class JsamsMainFrame extends JsamsFrame {
 					IconUtil.MENU_ICON_PREFIX + "actions/folder-new.png");
 			newMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N,
 					KeyEvent.CTRL_MASK));
-			newMI.addActionListener(newSocietyListener(this));
+			newMI.addActionListener(newSocietyListener());
 			fileMenu.add(newMI);
 			openMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_OPEN,
 					IconUtil.MENU_ICON_PREFIX + "actions/document-open.png");
 			openMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O,
 					KeyEvent.CTRL_MASK));
-			openMI.addActionListener(chooseSocietyListener(this));
+			openMI.addActionListener(chooseSocietyListener());
 			fileMenu.add(openMI);
 			closeMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_CLOSE,
 					IconUtil.MENU_ICON_PREFIX + "status/folder-visiting.png");
@@ -138,7 +138,7 @@ public class JsamsMainFrame extends JsamsFrame {
 					JsamsI18nResource.MENU_ITEM_SOCIETY_PARAMETERS,
 					IconUtil.MENU_ICON_PREFIX
 							+ "actions/document-properties.png");
-			societyParametersMI.addActionListener(editSocietyListener(this));
+			societyParametersMI.addActionListener(editSocietyListener());
 			fileMenu.add(societyParametersMI);
 			printerParametersMI = new JsamsMenuItem(
 					JsamsI18nResource.MENU_ITEM_PRINTER_PARAMETERS,
@@ -277,17 +277,17 @@ public class JsamsMainFrame extends JsamsFrame {
 
 			setJMenuBar(mainMenuBar);
 
-			getContentPane().add(tabbedPane, BorderLayout.NORTH);
+			getContentPane().add(tabbedPane);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
 	/**
-	 * Opens the {@link ChooseSocietyDialog} at the starting of the application
+	 * Opens the {@link OpenSocietyDialog} at the starting of the application
 	 */
 	public void openChooseSocietyDialog() {
-		new ChooseSocietyDialog(this, JsamsI18nResource.TITLE_CHOOSE_SOCIETY);
+		new OpenSocietyDialog(JsamsI18nResource.TITLE_OPEN_SOCIETY);
 	}
 
 	/**
@@ -305,15 +305,13 @@ public class JsamsMainFrame extends JsamsFrame {
 
 	/**
 	 * 
-	 * @param parent the {@link JsamsMainFrame}
 	 * @return a {@link ActionListener} for the editing of the {@link Society}
 	 */
-	private ActionListener editSocietyListener(final JsamsMainFrame parent) {
+	private ActionListener editSocietyListener() {
 		ActionListener listener = new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				new EditSocietyDialog(parent,
-						JsamsI18nResource.TITLE_EDIT_SOCIETY, JsamsDesktop
-								.getInstance().getCurrentSociety());
+				new EditSocietyDialog(JsamsI18nResource.TITLE_EDIT_SOCIETY,
+						JsamsDesktop.getInstance().getCurrentSociety());
 			}
 		};
 		return listener;
@@ -321,14 +319,13 @@ public class JsamsMainFrame extends JsamsFrame {
 
 	/**
 	 * 
-	 * @param parent the {@link JsamsMainFrame}
 	 * @return a {@link ActionListener} for the creation of the {@link Society}
 	 */
-	private ActionListener newSocietyListener(final JsamsMainFrame parent) {
+	private ActionListener newSocietyListener() {
 		ActionListener listener = new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				new EditSocietyDialog(parent,
-						JsamsI18nResource.TITLE_EDIT_SOCIETY, null);
+				new EditSocietyDialog(JsamsI18nResource.TITLE_EDIT_SOCIETY,
+						null);
 			}
 		};
 		return listener;
@@ -336,14 +333,14 @@ public class JsamsMainFrame extends JsamsFrame {
 
 	/**
 	 * 
-	 * @param parent the {@link JsamsMainFrame}
+	 * @param parent
+	 *            the {@link JsamsMainFrame}
 	 * @return a {@link ActionListener} for the choosing of the {@link Society}
 	 */
-	private ActionListener chooseSocietyListener(final JsamsMainFrame parent) {
+	private ActionListener chooseSocietyListener() {
 		ActionListener listener = new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				new ChooseSocietyDialog(parent,
-						JsamsI18nResource.TITLE_CHOOSE_SOCIETY);
+				new OpenSocietyDialog(JsamsI18nResource.TITLE_OPEN_SOCIETY);
 			}
 		};
 		return listener;
@@ -406,5 +403,5 @@ public class JsamsMainFrame extends JsamsFrame {
 	public JsamsStatusBar getStatusBar() {
 		return statusBar;
 	}
-	
+
 }
