@@ -31,7 +31,7 @@ import com.jgoodies.validation.view.ValidationComponentUtils;
  * Edit Product {@link JsamsDialog}, to create or update a Product object.
  * 
  * @author chesteric31
- * @version $Rev$ $Date:: $ $Author$
+ * @version $Rev$ $Date::   $Author$
  */
 public class EditProductDialog extends JsamsDialog implements
 		JsamsButtonsInterface {
@@ -121,13 +121,6 @@ public class EditProductDialog extends JsamsDialog implements
 				JsamsFrame.RESOURCE_BUNDLE);
 		builder.appendI15d(JsamsI18nLabelResource.LABEL_PRODUCT_LABEL.getKey(),
 				textFieldLabel, 5);
-		List<ProductCategory> allProductCategories = JsamsApplicationContext
-				.getProductCategoryDao().findAll();
-		ArrayList<ProductCategory> allWithNull = new ArrayList<ProductCategory>();
-		allWithNull.add(null);
-		allWithNull.addAll(allProductCategories);
-		comboBoxProductCategory = new JComboBox(allWithNull.toArray());
-		comboBoxProductCategory.setRenderer(new NamedComboBoxRenderer());
 		builder.appendI15d(JsamsI18nLabelResource.LABEL_PRODUCT_CATEGORY.getKey(),
 				comboBoxProductCategory, 5);
 		builder.nextLine();
