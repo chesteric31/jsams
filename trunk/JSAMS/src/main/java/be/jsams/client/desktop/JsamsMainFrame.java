@@ -17,8 +17,8 @@ import javax.swing.KeyStroke;
 
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.i18n.JsamsI18nResource;
-import be.jsams.client.model.dialog.OpenSocietyDialog;
 import be.jsams.client.model.dialog.EditSocietyDialog;
+import be.jsams.client.model.dialog.OpenSocietyDialog;
 import be.jsams.client.model.panel.SearchCustomerPanel;
 import be.jsams.client.model.panel.SearchProductPanel;
 import be.jsams.client.swing.component.JsamsCloseableTabbedPane;
