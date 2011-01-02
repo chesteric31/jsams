@@ -24,30 +24,51 @@ public class ProductServiceImpl implements ProductService {
 		this.productDao = productDao;
 	}
 
+    /**
+     * {@inheritDoc}
+     */
 	public void create(Product product) {
 		productDao.add(product);
 	}
 
+    /**
+     * {@inheritDoc}
+     */
 	public void delete(Product product) {
 		productDao.remove(product);
 	}
 
+    /**
+     * {@inheritDoc}
+     */
 	public void delete(Long id) {
 		productDao.remove(id);
 	}
 
+    /**
+     * {@inheritDoc}
+     */
 	public List<Product> findAll() {
 		return productDao.findAll();
 	}
 
+    /**
+     * {@inheritDoc}
+     */
 	public List<Product> findByCriteria(Product criteria) {
 		return productDao.findByCriteria(criteria);
 	}
 
+    /**
+     * {@inheritDoc}
+     */
 	public Product findById(Long id) {
 		return productDao.findById(id);
 	}
 
+    /**
+     * {@inheritDoc}
+     */
 	public void update(Product product) {
 		productDao.update(product);
 	}

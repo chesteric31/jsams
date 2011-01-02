@@ -6,22 +6,52 @@ import be.jsams.server.model.Society;
 
 /**
  * Society service interface.
- *
+ * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
 public interface SocietyService {
 
-	public void create(Society society);
+    /**
+     * Creates and persists a new {@link Society} object.
+     * 
+     * @param society the {@link Society} to persist
+     */
+    public void create(Society society);
 
-	public void delete(Society society);
+    /**
+     * Deletes a {@link Society} object.
+     * 
+     * @param society the {@link Society} to delete
+     */
+    public void delete(Society society);
 
-	public void delete(Long id);
+    /**
+     * Deletes a {@link Society} object.
+     * 
+     * @param id the id of the {@link Society} to delete
+     */
+    public void delete(Long id);
 
-	public void update(Society society);
+    /**
+     * Updates a {@link Society} object.
+     * 
+     * @param society the {@link Society} to update
+     */
+    public void update(Society society);
 
-	public Society findById(Long id);
+    /**
+     * Finds a {@link Society} object.
+     * 
+     * @param id the if of the {@link Society} to find
+     */
+    public Society findById(Long id);
 
-	public List<Society> findAll();
-	
+    /**
+     * Finds all the {@link Society} of the database.
+     * 
+     * @return a list of {@link Society}
+     */
+    public List<Society> findAll();
+
 }

@@ -24,26 +24,44 @@ public class SocietyServiceImpl implements SocietyService {
 		this.societyDao = societyDao;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public List<Society> findAll() {
 		return societyDao.findAll();
 	}
 
+	/**
+     * {@inheritDoc}
+     */
 	public Society findById(Long id) {
 		return societyDao.findById(id);
 	}
 
+	/**
+     * {@inheritDoc}
+     */
 	public void update(Society society) {
 		societyDao.update(society);
 	}
 
+	/**
+     * {@inheritDoc}
+     */
 	public void create(Society society) {
 		societyDao.add(society);
 	}
 
+	/**
+     * {@inheritDoc}
+     */
 	public void delete(Society society) {
 		societyDao.remove(society);
 	}
 
+	/**
+     * {@inheritDoc}
+     */
 	public void delete(Long id) {
 		societyDao.remove(id);
 	}
