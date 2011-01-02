@@ -1,8 +1,7 @@
 package be.jsams.client.swing.component;
 
-import java.awt.FlowLayout;
-
 import javax.swing.JPanel;
+import javax.swing.border.TitledBorder;
 
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.swing.action.NewCustomerAction;
@@ -32,7 +31,8 @@ public class JsamsShortcutToolBar extends JPanel {
 	}
 
 	private void initComponents() {
-		JPanel panel = new JPanel(new FlowLayout());
+		JPanel panel = new JPanel();
+		panel.setBorder(new TitledBorder(JsamsI18nResource.PANEL_SHORTCUT_TOOLBAR.getTranslation()));
 		newCustomerButton = new JsamsButton(
 				JsamsI18nResource.BUTTON_NEW_CUSTOMER);
 		newCustomerButton.addActionListener(new NewCustomerAction());
