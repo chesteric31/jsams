@@ -24,6 +24,7 @@ public class ProductDaoImpl extends GenericDaoImpl<Product> implements
 		super(type);
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Product> findByCriteria(Product criteria) {
 		StringBuilder queryBuilder = new StringBuilder("FROM Product p");
 		
