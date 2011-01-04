@@ -45,7 +45,8 @@ public class AddressValidator implements Validator<Address> {
 					.getTranslation(), JsamsI18nResource.ERROR_IS_MANDATORY
 					.getTranslation());
 		}
-		if (ValidationUtils.isBlank(Integer.toString(address.getZipCode()))) {
+		if (ValidationUtils.isBlank(Integer.toString(address.getZipCode()))
+				|| address.getZipCode() == 0) {
 			support.addError(JsamsI18nLabelResource.LABEL_ZIP_CODE
 					.getTranslation(), JsamsI18nResource.ERROR_IS_MANDATORY
 					.getTranslation());

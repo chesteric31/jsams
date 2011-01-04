@@ -1,5 +1,7 @@
 package be.jsams.client.validator;
 
+import java.math.BigDecimal;
+
 import be.jsams.client.i18n.JsamsI18nLabelResource;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.server.model.Address;
@@ -41,10 +43,18 @@ public class CustomerValidator implements Validator<Customer> {
 					.getTranslation());
 		}
 		
-		Validator<Address> addressValidator = new AddressValidator();
-		ValidationResult billingAddressResult = addressValidator
+		BigDecimal vatApplicable = customer.getVatApplicable();
+		if (vatApplicable == null || ValidationUtils.isBlank(vatApplicable.toPlainString())) {
+			support.addError(JsamsI18nLabelResource.LABEL_VAT_APPLICABLE
+					.getTranslation(), JsamsI18nResource.ERROR_IS_MANDATORY
+					.getTranslation());
+		}
+		
+		Validator<Address> billingAddressValidator = new AddressValidator();
+		ValidationResult billingAddressResult = billingAddressValidator
 				.validate(customer.getBillingAddress());
-		ValidationResult deliveryAddressResult = addressValidator
+		Validator<Address> deliveryAddressValidator = new AddressValidator();
+		ValidationResult deliveryAddressResult = deliveryAddressValidator
 				.validate(customer.getDeliveryAddress());
 		
 		ValidationResult result = support.getResult();
