@@ -33,9 +33,11 @@ public class JsamsDesktop {
 
 	private static JsamsDesktop instance = null;
 
+	/** Screen dimension */
 	public static final Dimension SCREEN = Toolkit.getDefaultToolkit()
 			.getScreenSize();
-	
+
+	/** Center dimension onto the screen */
 	public static final Dimension CENTER = new Dimension((int) SCREEN
 			.getWidth(), (int) SCREEN.getHeight());
 
@@ -98,7 +100,8 @@ public class JsamsDesktop {
 	}
 
 	/**
-	 * @param currentSociety the current {@link Society} to set
+	 * @param currentSociety
+	 *            the current {@link Society} to set
 	 */
 	public void setCurrentSociety(final Society currentSociety) {
 		this.currentSociety = currentSociety;
@@ -109,7 +112,8 @@ public class JsamsDesktop {
 
 	/**
 	 * 
-	 * @param instance the {@link JsamsDesktop} instance to set
+	 * @param instance
+	 *            the {@link JsamsDesktop} instance to set
 	 */
 	public static void setInstance(JsamsDesktop instance) {
 		JsamsDesktop.instance = instance;
