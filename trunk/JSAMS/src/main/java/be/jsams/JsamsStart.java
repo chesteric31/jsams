@@ -14,25 +14,26 @@ import be.jsams.client.i18n.I18nApplicationContext;
  */
 public class JsamsStart {
 
-    /**
-     * The JSAMS application context string
-     */
-    private static final String JSAMS_APPLICATION_CONTEXT = "jsams";
+	/**
+	 * The JSAMS application context string
+	 */
+	private static final String JSAMS_APPLICATION_CONTEXT = "jsams";
 
-    /**
-     * Main starting method for the Jsams Application
-     * 
-     * @param args for now, no argument are needed
-     */
-    public static void main(final String[] args) {
-        System.setProperty("application.context", JSAMS_APPLICATION_CONTEXT);
-        JsamsApplicationContext.setContext(new ClassPathXmlApplicationContext(
-                JsamsApplicationContext.CONFIG));
-        I18nApplicationContext.setContext(new ClassPathXmlApplicationContext(
-                I18nApplicationContext.CONFIG));
+	/**
+	 * Main starting method for the Jsams Application
+	 * 
+	 * @param args
+	 *            for now, no argument are needed
+	 */
+	public static void main(final String[] args) {
+		System.setProperty("application.context", JSAMS_APPLICATION_CONTEXT);
+		JsamsApplicationContext.setContext(new ClassPathXmlApplicationContext(
+				JsamsApplicationContext.CONFIG));
+		I18nApplicationContext.setContext(new ClassPathXmlApplicationContext(
+				I18nApplicationContext.CONFIG));
 
-        JsamsDesktop application = new JsamsDesktop();
-        application.start();
-    }
+		JsamsDesktop application = new JsamsDesktop();
+		application.start();
+	}
 
 }
