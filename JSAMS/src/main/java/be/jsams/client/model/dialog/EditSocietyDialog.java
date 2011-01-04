@@ -337,12 +337,11 @@ public class EditSocietyDialog extends JsamsDialog implements
 		} else {
 			if (getModel() == null) {
 				JsamsApplicationContext.getSocietyService().create(society);
-				JsamsDesktop.getInstance().setCurrentSociety(society);
 			} else {
 				society.setId(getModel().getId());
 				JsamsApplicationContext.getSocietyService().update(society);
-				JsamsDesktop.getInstance().setCurrentSociety(society);
 			}
+			JsamsDesktop.getInstance().setCurrentSociety(society);
 			dispose();
 		}
 	}
