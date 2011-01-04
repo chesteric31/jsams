@@ -1,12 +1,9 @@
 package be.jsams.client.model.dialog;
 
-import java.awt.BorderLayout;
-import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.BoxLayout;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -22,12 +19,8 @@ import be.jsams.client.i18n.I18nString;
 import be.jsams.client.i18n.JsamsI18nLabelResource;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.renderer.TranslatableComboBoxRenderer;
-import be.jsams.client.swing.component.JsamsButtonsInterface;
-import be.jsams.client.swing.component.JsamsButtonsPanel;
 import be.jsams.client.swing.component.JsamsDialog;
 import be.jsams.client.swing.component.JsamsFrame;
-import be.jsams.client.swing.component.JsamsLabel;
-import be.jsams.client.swing.component.JsamsStatusBar;
 import be.jsams.client.swing.component.JsamsTextField;
 import be.jsams.client.swing.utils.IconUtil;
 import be.jsams.client.validator.CustomerValidator;
@@ -37,33 +30,27 @@ import be.jsams.server.model.ContactInformation;
 import be.jsams.server.model.Customer;
 import be.jsams.server.model.LegalForm;
 import be.jsams.server.model.PaymentMode;
+import be.jsams.server.service.CustomerService;
 
 import com.jgoodies.forms.builder.DefaultFormBuilder;
 import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.validation.Severity;
-import com.jgoodies.validation.ValidationMessage;
-import com.jgoodies.validation.ValidationResult;
-import com.jgoodies.validation.ValidationResultModel;
-import com.jgoodies.validation.util.DefaultValidationResultModel;
 import com.jgoodies.validation.view.ValidationComponentUtils;
-import com.jgoodies.validation.view.ValidationResultViewFactory;
 import com.mysql.jdbc.StringUtils;
 
 /**
  * Edit Customer {@link JsamsDialog}, to create or update a Customer object.
  * 
  * @author chesteric31
- * @version $Rev$ $Date::   $Author$
+ * @version $$Rev$$ $$Date::                  $$ $$Author$$
  */
-public class EditCustomerDialog extends JsamsDialog implements
-		JsamsButtonsInterface {
+public class EditCustomerDialog extends EditDialog<Customer, CustomerValidator, CustomerService> {
 
 	/**
 	 * Serial Version UID
 	 */
 	private static final long serialVersionUID = 6898471936119469349L;
 
-    protected final Log LOGGER = LogFactory.getLog(this.getClass());
+	protected final Log LOGGER = LogFactory.getLog(EditCustomerDialog.class);
 
 	private static final int DEFAULT_COLUMN_SPAN = 1;
 
@@ -142,8 +129,6 @@ public class EditCustomerDialog extends JsamsDialog implements
 
 	public JTextArea textAreaDescription = new JTextArea();
 
-	private Customer model;
-
 	private JTabbedPane tabbedPane;
 
 	private JPanel generalPanel;
@@ -155,14 +140,6 @@ public class EditCustomerDialog extends JsamsDialog implements
 	private JPanel contactInformationsPanel;
 
 	private JPanel miscPanel;
-
-	private JsamsButtonsPanel buttonsPanel;
-
-	private ValidationResultModel validationResultModel = new DefaultValidationResultModel();
-
-	private JsamsStatusBar statusBar;
-
-	private JPanel southPanel;
 
 	/**
 	 * Constructor
@@ -178,36 +155,10 @@ public class EditCustomerDialog extends JsamsDialog implements
 			final I18nString title, Customer model) {
 		super(parent, title, IconUtil.TITLE_ICON_PREFIX
 				+ "apps/system-users.png");
-		this.model = model;
-		buttonsPanel = new JsamsButtonsPanel(this, true, true, true);
-		add(buttonsPanel, BorderLayout.SOUTH);
+		super.setModel(model);
+		super.setValidator(new CustomerValidator());
+		super.setService(JsamsApplicationContext.getCustomerService());
 		initComponents();
-	}
-
-	public ValidationResultModel getValidationResultModel() {
-		return validationResultModel;
-	}
-
-	public void setValidationResultModel(
-			ValidationResultModel validationResultModel) {
-		this.validationResultModel = validationResultModel;
-	}
-
-	/**
-	 * 
-	 * @return the {@link Customer}
-	 */
-	public Customer getModel() {
-		return model;
-	}
-
-	/**
-	 * 
-	 * @param model
-	 *            the {@link Customer} to set
-	 */
-	public void setModel(Customer model) {
-		this.model = model;
 	}
 
 	/**
@@ -237,21 +188,9 @@ public class EditCustomerDialog extends JsamsDialog implements
 		setMandatoryFields();
 
 		ValidationComponentUtils
-				.updateComponentTreeMandatoryBackground(tabbedPane);
-
-		buildSouthPanel();
-		add(southPanel, BorderLayout.SOUTH);
+				.updateComponentTreeMandatoryBackground(this);
 
 		pack();
-	}
-
-	private void buildSouthPanel() {
-		statusBar = new JsamsStatusBar();
-		southPanel = new JPanel();
-		southPanel.setLayout(new BoxLayout(southPanel, BoxLayout.PAGE_AXIS));
-		buttonsPanel = new JsamsButtonsPanel(this, true, true, true);
-		southPanel.add(buttonsPanel);
-		southPanel.add(statusBar);
 	}
 
 	private void fillData() {
@@ -455,10 +394,6 @@ public class EditCustomerDialog extends JsamsDialog implements
 		textAreaDescription.setText(getModel().getDescription());
 	}
 
-	public void performCancel() {
-		this.dispose();
-	}
-
 	public void performOk() {
 		Customer customer = new Customer();
 		// TODO: see for agent object
@@ -540,56 +475,7 @@ public class EditCustomerDialog extends JsamsDialog implements
 			contactInformation.setWebsite(textFieldWebsite.getText());
 		}
 		customer.setContactInformation(contactInformation);
-		CustomerValidator validator = new CustomerValidator();
-		ValidationResult result = validator.validate(customer);
-		validationResultModel.setResult(result);
-		if (result.hasMessages()) {
-			statusBar.removeAll();
-			List<ValidationMessage> messages = validationResultModel
-					.getResult().getMessages();
-			for (ValidationMessage message : messages) {
-				JsamsLabel label = new JsamsLabel(message.formattedText()
-						.replace(".", ""));
-				if (message.severity() == Severity.ERROR) {
-					label.setIcon(ValidationResultViewFactory.getErrorIcon());
-				} else if (message.severity() == Severity.WARNING) {
-					label.setIcon(ValidationResultViewFactory.getWarningIcon());
-				}
-				statusBar.addJComponent(label);
-			}
-			statusBar.revalidate();
-		} else {
-			if (getModel() == null) {
-				JsamsApplicationContext.getCustomerService().create(customer);
-			} else {
-				if (!getModel().equals(customer)) {
-					JsamsApplicationContext.getCustomerService().update(
-							customer);
-				}
-			}
-			dispose();
-		}
-	}
-
-	public void performReset() {
-		Class<?> clazz = this.getClass();
-		Field[] fields = clazz.getFields();
-		for (Field field : fields) {
-			try {
-				Object value = field.get(this);
-				if (value instanceof JsamsTextField) {
-					((JsamsTextField) value).setText(null);
-				} else if (value instanceof JComboBox) {
-					((JComboBox) value).setSelectedIndex(0);
-				} else if (value instanceof JTextArea) {
-					((JTextArea) value).setText(null);
-				}
-			} catch (IllegalArgumentException e1) {
-				LOGGER.error(e1);
-			} catch (IllegalAccessException e1) {
-				LOGGER.error(e1);
-			}
-		}
+		super.postPerformOk(customer);
 	}
 
 	private void setMandatoryFields() {
@@ -608,6 +494,9 @@ public class EditCustomerDialog extends JsamsDialog implements
 		ValidationComponentUtils.setMandatory(textFieldName, true);
 		ValidationComponentUtils.setMandatory(textFieldPhone, true);
 		ValidationComponentUtils.setMandatory(textFieldVatApplicable, true);
+		
+		ValidationComponentUtils.setMandatory(comboBoxPaymentMode, true);
+//		TODO: find a way to color the background of combobox into windows l&f
 	}
 
 }
