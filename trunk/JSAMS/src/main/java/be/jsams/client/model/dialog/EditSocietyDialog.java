@@ -51,354 +51,378 @@ import com.mysql.jdbc.StringUtils;
  * @version $Rev$ $Date::                  $ $Author$
  */
 public class EditSocietyDialog extends JsamsDialog implements
-        JsamsButtonsInterface {
+		JsamsButtonsInterface {
 
-    /**
-     * Serial Version UID
-     */
-    private static final long serialVersionUID = 4225744372592399187L;
+	/**
+	 * Serial Version UID
+	 */
+	private static final long serialVersionUID = 4225744372592399187L;
 
-    protected final Log LOGGER = LogFactory.getLog(this.getClass());
+	protected final Log LOGGER = LogFactory.getLog(this.getClass());
 
-    private static final int DEFAULT_COLUMN_SPAN = 9;
+	private static final int DEFAULT_COLUMN_SPAN = 9;
 
-    private static final int MAX_CHARACTERS = 50;
+	private static final int MAX_CHARACTERS = 50;
 
-    private static final int MAX_NUMBERS = 10;
+	private static final int MAX_NUMBERS = 10;
 
-    public JsamsTextField textFieldName = new JsamsTextField(MAX_CHARACTERS);
+	public JsamsTextField textFieldName = new JsamsTextField(MAX_CHARACTERS);
 
-    public JsamsTextField textFieldStreet = new JsamsTextField(MAX_CHARACTERS);
+	public JsamsTextField textFieldStreet = new JsamsTextField(MAX_CHARACTERS);
 
-    public JsamsTextField textFieldNumber = new JsamsTextField(MAX_NUMBERS);
+	public JsamsTextField textFieldNumber = new JsamsTextField(MAX_NUMBERS);
 
-    public JsamsTextField textFieldBox = new JsamsTextField(MAX_NUMBERS);
+	public JsamsTextField textFieldBox = new JsamsTextField(MAX_NUMBERS);
 
-    public JsamsTextField textFieldZipCode = new JsamsTextField(MAX_NUMBERS);
+	public JsamsTextField textFieldZipCode = new JsamsTextField(MAX_NUMBERS);
 
-    public JsamsTextField textFieldCity = new JsamsTextField(MAX_CHARACTERS);
+	public JsamsTextField textFieldCity = new JsamsTextField(MAX_CHARACTERS);
 
-    public JsamsTextField textFieldCountry = new JsamsTextField(MAX_CHARACTERS);
+	public JsamsTextField textFieldCountry = new JsamsTextField(MAX_CHARACTERS);
 
-    public JsamsTextField textFieldPhone = new JsamsTextField(MAX_CHARACTERS);
+	public JsamsTextField textFieldPhone = new JsamsTextField(MAX_CHARACTERS);
 
-    public JsamsTextField textFieldFax = new JsamsTextField(MAX_CHARACTERS);
+	public JsamsTextField textFieldFax = new JsamsTextField(MAX_CHARACTERS);
 
-    public JsamsTextField textFieldMobile = new JsamsTextField(MAX_CHARACTERS);
+	public JsamsTextField textFieldMobile = new JsamsTextField(MAX_CHARACTERS);
 
-    public JsamsTextField textFieldEmail = new JsamsTextField(MAX_CHARACTERS);
+	public JsamsTextField textFieldEmail = new JsamsTextField(MAX_CHARACTERS);
 
-    public JsamsTextField textFieldWebsite = new JsamsTextField(MAX_CHARACTERS);
+	public JsamsTextField textFieldWebsite = new JsamsTextField(MAX_CHARACTERS);
 
-    public JComboBox comboBoxLegalForm;
+	public JComboBox comboBoxLegalForm;
 
-    public JsamsFormattedTextField textFieldCapital = new JsamsFormattedTextField(
-            DecimalFormat.getInstance());
+	public JsamsFormattedTextField textFieldCapital = new JsamsFormattedTextField(
+			DecimalFormat.getInstance());
 
-    public JsamsTextField textFieldActivity = new JsamsTextField(MAX_CHARACTERS);
+	public JsamsTextField textFieldActivity = new JsamsTextField(MAX_CHARACTERS);
 
-    public JsamsTextField textFieldResponsible = new JsamsTextField(
-            MAX_CHARACTERS);
+	public JsamsTextField textFieldResponsible = new JsamsTextField(
+			MAX_CHARACTERS);
 
-    public JsamsTextField textFieldVatNumber = new JsamsTextField(
-            MAX_CHARACTERS);
+	public JsamsTextField textFieldVatNumber = new JsamsTextField(
+			MAX_CHARACTERS);
 
-    private Society model;
+	private Society model;
 
-    private JsamsButtonsPanel buttonsPanel;
+	private JsamsButtonsPanel buttonsPanel;
 
-    private ValidationResultModel validationResultModel = new DefaultValidationResultModel();
+	private ValidationResultModel validationResultModel = new DefaultValidationResultModel();
 
-    private JsamsStatusBar statusBar;
+	private JsamsStatusBar statusBar;
 
-    private JPanel southPanel;
+	private JPanel southPanel;
 
-    /**
-     * Constructor
-     * 
-     * @param title the {@link I18nString} title
-     * @param model the {@link Society} model
-     */
-    public EditSocietyDialog(final I18nString title, Society model) {
-        super(null, title);
-        this.model = model;
-        initComponents();
-    }
+	/**
+	 * Constructor
+	 * 
+	 * @param title
+	 *            the {@link I18nString} title
+	 * @param model
+	 *            the {@link Society} model
+	 */
+	public EditSocietyDialog(final I18nString title, Society model) {
+		super(null, title);
+		this.model = model;
+		initComponents();
+	}
 
-    public ValidationResultModel getValidationResultModel() {
-        return validationResultModel;
-    }
+	public ValidationResultModel getValidationResultModel() {
+		return validationResultModel;
+	}
 
-    public void setValidationResultModel(
-            ValidationResultModel validationResultModel) {
-        this.validationResultModel = validationResultModel;
-    }
+	public void setValidationResultModel(
+			ValidationResultModel validationResultModel) {
+		this.validationResultModel = validationResultModel;
+	}
 
-    /**
-     * 
-     * @return the {@link Society}
-     */
-    public Society getModel() {
-        return model;
-    }
+	/**
+	 * 
+	 * @return the {@link Society}
+	 */
+	public Society getModel() {
+		return model;
+	}
 
-    /**
-     * 
-     * @param model the {@link Society} to set
-     */
-    public void setModel(Society model) {
-        this.model = model;
-    }
+	/**
+	 * 
+	 * @param model
+	 *            the {@link Society} to set
+	 */
+	public void setModel(Society model) {
+		this.model = model;
+	}
 
-    /**
-     * Initializes all the components
-     */
-    private void initComponents() {
-        fillData();
-        FormLayout layout = new FormLayout(
-                "right:p, 3dlu, 50dlu, 3dlu, right:p, 3dlu, 50dlu, 3dlu, right:p, 3dlu, 50dlu",
-                "p");
-        DefaultFormBuilder builder = new DefaultFormBuilder(layout,
-                JsamsFrame.RESOURCE_BUNDLE);
-        builder.setDefaultDialogBorder();
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_NAME.getKey(),
-                textFieldName, DEFAULT_COLUMN_SPAN);
-        builder.nextLine();
-        builder.appendSeparator(JsamsI18nLabelResource.LABEL_ADDRESS
-                .getTranslation());
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_STREET.getKey(),
-                textFieldStreet, DEFAULT_COLUMN_SPAN);
-        builder.nextLine();
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_NUMBER.getKey(),
-                textFieldNumber, 1);
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_BOX.getKey(),
-                textFieldBox, 1);
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_ZIP_CODE.getKey(),
-                textFieldZipCode, 1);
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_CITY.getKey(),
-                textFieldCity, DEFAULT_COLUMN_SPAN);
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_COUNTRY.getKey(),
-                textFieldCountry, DEFAULT_COLUMN_SPAN);
-        builder.nextLine();
+	/**
+	 * Initializes all the components
+	 */
+	private void initComponents() {
+		fillData();
+		FormLayout layout = new FormLayout(
+				"right:p, 3dlu, 50dlu, 3dlu, right:p, 3dlu, 50dlu, 3dlu, right:p, 3dlu, 50dlu",
+				"p");
+		DefaultFormBuilder builder = new DefaultFormBuilder(layout,
+				JsamsFrame.RESOURCE_BUNDLE);
+		builder.setDefaultDialogBorder();
+		builder.appendI15d(JsamsI18nLabelResource.LABEL_NAME.getKey(),
+				textFieldName, DEFAULT_COLUMN_SPAN);
+		builder.nextLine();
+		builder.appendSeparator(JsamsI18nLabelResource.LABEL_ADDRESS
+				.getTranslation());
+		builder.appendI15d(JsamsI18nLabelResource.LABEL_STREET.getKey(),
+				textFieldStreet, DEFAULT_COLUMN_SPAN);
+		builder.nextLine();
+		builder.appendI15d(JsamsI18nLabelResource.LABEL_NUMBER.getKey(),
+				textFieldNumber, 1);
+		builder.appendI15d(JsamsI18nLabelResource.LABEL_BOX.getKey(),
+				textFieldBox, 1);
+		builder.appendI15d(JsamsI18nLabelResource.LABEL_ZIP_CODE.getKey(),
+				textFieldZipCode, 1);
+		builder.appendI15d(JsamsI18nLabelResource.LABEL_CITY.getKey(),
+				textFieldCity, DEFAULT_COLUMN_SPAN);
+		builder.appendI15d(JsamsI18nLabelResource.LABEL_COUNTRY.getKey(),
+				textFieldCountry, DEFAULT_COLUMN_SPAN);
+		builder.nextLine();
 
-        builder
-                .appendSeparator(JsamsI18nLabelResource.LABEL_CONTACT_INFORMATIONS
-                        .getTranslation());
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_PHONE.getKey(),
-                textFieldPhone, DEFAULT_COLUMN_SPAN);
-        builder.nextLine();
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_FAX.getKey(),
-                textFieldFax, DEFAULT_COLUMN_SPAN);
-        builder.nextLine();
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_MOBILE.getKey(),
-                textFieldMobile, DEFAULT_COLUMN_SPAN);
-        builder.nextLine();
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_EMAIL.getKey(),
-                textFieldEmail, DEFAULT_COLUMN_SPAN);
-        builder.nextLine();
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_WEBSITE.getKey(),
-                textFieldWebsite, DEFAULT_COLUMN_SPAN);
-        builder.nextLine();
-        builder.appendSeparator(JsamsI18nLabelResource.LABEL_MISC
-                .getTranslation());
+		builder
+				.appendSeparator(JsamsI18nLabelResource.LABEL_CONTACT_INFORMATIONS
+						.getTranslation());
+		builder.appendI15d(JsamsI18nLabelResource.LABEL_PHONE.getKey(),
+				textFieldPhone, DEFAULT_COLUMN_SPAN);
+		builder.nextLine();
+		builder.appendI15d(JsamsI18nLabelResource.LABEL_FAX.getKey(),
+				textFieldFax, DEFAULT_COLUMN_SPAN);
+		builder.nextLine();
+		builder.appendI15d(JsamsI18nLabelResource.LABEL_MOBILE.getKey(),
+				textFieldMobile, DEFAULT_COLUMN_SPAN);
+		builder.nextLine();
+		builder.appendI15d(JsamsI18nLabelResource.LABEL_EMAIL.getKey(),
+				textFieldEmail, DEFAULT_COLUMN_SPAN);
+		builder.nextLine();
+		builder.appendI15d(JsamsI18nLabelResource.LABEL_WEBSITE.getKey(),
+				textFieldWebsite, DEFAULT_COLUMN_SPAN);
+		builder.nextLine();
+		builder.appendSeparator(JsamsI18nLabelResource.LABEL_MISC
+				.getTranslation());
 
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_LEGAL_FORM.getKey(),
-                comboBoxLegalForm, DEFAULT_COLUMN_SPAN);
-        builder.nextLine();
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_CAPITAL.getKey(),
-                textFieldCapital, DEFAULT_COLUMN_SPAN);
-        builder.nextLine();
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_ACTIVITY.getKey(),
-                textFieldActivity, DEFAULT_COLUMN_SPAN);
-        builder.nextLine();
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_RESPONSIBLE.getKey(),
-                textFieldResponsible, DEFAULT_COLUMN_SPAN);
-        builder.nextLine();
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_VAT_NUMBER.getKey(),
-                textFieldVatNumber, DEFAULT_COLUMN_SPAN);
-        builder.nextLine();
+		builder.appendI15d(JsamsI18nLabelResource.LABEL_LEGAL_FORM.getKey(),
+				comboBoxLegalForm, DEFAULT_COLUMN_SPAN);
+		builder.nextLine();
+		builder.appendI15d(JsamsI18nLabelResource.LABEL_CAPITAL.getKey(),
+				textFieldCapital, DEFAULT_COLUMN_SPAN);
+		builder.nextLine();
+		builder.appendI15d(JsamsI18nLabelResource.LABEL_ACTIVITY.getKey(),
+				textFieldActivity, DEFAULT_COLUMN_SPAN);
+		builder.nextLine();
+		builder.appendI15d(JsamsI18nLabelResource.LABEL_RESPONSIBLE.getKey(),
+				textFieldResponsible, DEFAULT_COLUMN_SPAN);
+		builder.nextLine();
+		builder.appendI15d(JsamsI18nLabelResource.LABEL_VAT_NUMBER.getKey(),
+				textFieldVatNumber, DEFAULT_COLUMN_SPAN);
+		builder.nextLine();
 
-        setMandatoryFields();
+		setMandatoryFields();
 
-        JPanel mainPanel = new JPanel();
-        mainPanel.setLayout(new BorderLayout());
-        mainPanel.add(builder.getPanel(), BorderLayout.CENTER);
-        ValidationComponentUtils
-                .updateComponentTreeMandatoryBackground(mainPanel);
-        add(mainPanel);
+		JPanel mainPanel = new JPanel();
+		mainPanel.setLayout(new BorderLayout());
+		mainPanel.add(builder.getPanel(), BorderLayout.CENTER);
+		ValidationComponentUtils
+				.updateComponentTreeMandatoryBackground(mainPanel);
+		add(mainPanel);
 
-        buildSouthPanel();
-        add(southPanel, BorderLayout.SOUTH);
+		buildSouthPanel();
+		add(southPanel, BorderLayout.SOUTH);
 
-        pack();
-        setLocationRelativeTo(null);
-        setVisible(true);
-        setResizable(false);
-    }
+		pack();
+		setLocationRelativeTo(null);
+		setVisible(true);
+		setResizable(false);
+	}
 
-    private void buildSouthPanel() {
-        statusBar = new JsamsStatusBar();
-        southPanel = new JPanel();
-        southPanel.setLayout(new BoxLayout(southPanel, BoxLayout.PAGE_AXIS));
-        buttonsPanel = new JsamsButtonsPanel(this, true, true, true);
-        southPanel.add(buttonsPanel);
-        southPanel.add(statusBar);
-    }
+	private void buildSouthPanel() {
+		statusBar = new JsamsStatusBar();
+		southPanel = new JPanel();
+		southPanel.setLayout(new BoxLayout(southPanel, BoxLayout.PAGE_AXIS));
+		buttonsPanel = new JsamsButtonsPanel(this, true, true, true);
+		southPanel.add(buttonsPanel);
+		southPanel.add(statusBar);
+	}
 
-    public void performCancel() {
-        this.dispose();
-    }
+	public void performCancel() {
+		this.dispose();
+	}
 
-    public void performOk() {
-        Society society = new Society();
+	public void performOk() {
+		Society society = new Society();
 
-        society.setActivity(textFieldActivity.getText());
-        Address address = new Address();
-        if (!StringUtils.isNullOrEmpty(textFieldBox.getText())) {
-            address.setBox(textFieldBox.getText());
-        }
-        address.setCity(textFieldCity.getText());
-        address.setCountry(textFieldCountry.getText());
-        address.setNumber(textFieldNumber.getText());
-        address.setStreet(textFieldStreet.getText());
-        if (!StringUtils.isNullOrEmpty(textFieldZipCode.getText())) {
-            address.setZipCode(Integer.parseInt(textFieldZipCode.getText()));
-        }
-        society.setAddress(address);
-        BigDecimal capital = (BigDecimal) textFieldCapital.getValue();
-        if (capital != null) {
-            capital = capital.setScale(2, BigDecimal.ROUND_HALF_EVEN);
-            society.setCapital(capital);
-        }
-        ContactInformation contactInformation = new ContactInformation();
-        if (!StringUtils.isNullOrEmpty(textFieldEmail.getText())) {
-            contactInformation.setEmail(textFieldEmail.getText());
-        }
-        if (!StringUtils.isNullOrEmpty(textFieldFax.getText())) {
-            contactInformation.setFax(textFieldFax.getText());
-        }
-        if (!StringUtils.isNullOrEmpty(textFieldMobile.getText())) {
-            contactInformation.setMobile(textFieldMobile.getText());
-        }
-        contactInformation.setPhone(textFieldPhone.getText());
-        if (!StringUtils.isNullOrEmpty(textFieldWebsite.getText())) {
-            contactInformation.setWebsite(textFieldWebsite.getText());
-        }
-        society.setContactInformation(contactInformation);
-        if (comboBoxLegalForm.getSelectedItem() != null) {
-            society.setLegalForm((LegalForm) comboBoxLegalForm
-                    .getSelectedItem());
-        }
-        society.setName(textFieldName.getText());
-        if (!StringUtils.isNullOrEmpty(textFieldResponsible.getText())) {
-            society.setResponsible(textFieldResponsible.getText());
-        }
-        if (!StringUtils.isNullOrEmpty(textFieldVatNumber.getText())) {
-            society.setVatNumber(textFieldVatNumber.getText());
-        }
-        SocietyValidator validator = new SocietyValidator();
-        ValidationResult result = validator.validate(society);
-        validationResultModel.setResult(result);
-        if (result.hasMessages()) {
-            statusBar.removeAll();
-            List<ValidationMessage> messages = validationResultModel
-                    .getResult().getMessages();
-            for (ValidationMessage message : messages) {
-                JsamsLabel label = new JsamsLabel(message.formattedText()
-                        .replace(".", ""));
-                if (message.severity() == Severity.ERROR) {
-                    label.setIcon(ValidationResultViewFactory.getErrorIcon());
-                } else if (message.severity() == Severity.WARNING) {
-                    label.setIcon(ValidationResultViewFactory.getWarningIcon());
-                }
-                statusBar.addJComponent(label);
-            }
-            statusBar.revalidate();
-        } else {
-            if (getModel() == null) {
-                JsamsApplicationContext.getSocietyService().create(society);
-                JsamsDesktop.getInstance().setCurrentSociety(society);
-            } else {
-                if (!getModel().equals(society)) {
-                    society.setId(getModel().getId());
-                    JsamsApplicationContext.getSocietyService().update(society);
-                    JsamsDesktop.getInstance().setCurrentSociety(society);
-                }
-            }
-            dispose();
-        }
-    }
+		society.setActivity(textFieldActivity.getText());
+		Address address = new Address();
+		if (getModel() != null && getModel().getAddress() != null
+				&& getModel().getAddress().getId() != null) {
+			address.setId(getModel().getAddress().getId());
+		}
+		if (!StringUtils.isNullOrEmpty(textFieldBox.getText())) {
+			address.setBox(textFieldBox.getText());
+		}
+		address.setCity(textFieldCity.getText());
+		address.setCountry(textFieldCountry.getText());
+		address.setNumber(textFieldNumber.getText());
+		address.setStreet(textFieldStreet.getText());
+		if (!StringUtils.isNullOrEmpty(textFieldZipCode.getText())) {
+			address.setZipCode(Integer.parseInt(textFieldZipCode.getText()));
+		}
+		society.setAddress(address);
+		BigDecimal capital = null;
+		Object value = textFieldCapital.getValue();
+		if (value instanceof Long) {
+			capital = BigDecimal.valueOf((Long) value);
+		} else if (value instanceof Double) {
+			capital = BigDecimal.valueOf((Double) value);
+		} else {
+			capital = (BigDecimal) value;
+		}
+		if (capital != null) {
+			capital = capital.setScale(2, BigDecimal.ROUND_HALF_EVEN);
+			society.setCapital(capital);
+		}
+		ContactInformation contactInformation = new ContactInformation();
+		if (getModel() != null && getModel().getContactInformation() != null
+				&& getModel().getContactInformation().getId() != null) {
+			contactInformation
+					.setId(getModel().getContactInformation().getId());
+		}
+		if (!StringUtils.isNullOrEmpty(textFieldEmail.getText())) {
+			contactInformation.setEmail(textFieldEmail.getText());
+		}
+		if (!StringUtils.isNullOrEmpty(textFieldFax.getText())) {
+			contactInformation.setFax(textFieldFax.getText());
+		}
+		if (!StringUtils.isNullOrEmpty(textFieldMobile.getText())) {
+			contactInformation.setMobile(textFieldMobile.getText());
+		}
+		contactInformation.setPhone(textFieldPhone.getText());
+		if (!StringUtils.isNullOrEmpty(textFieldWebsite.getText())) {
+			contactInformation.setWebsite(textFieldWebsite.getText());
+		}
+		society.setContactInformation(contactInformation);
+		if (comboBoxLegalForm.getSelectedItem() != null) {
+			society.setLegalForm((LegalForm) comboBoxLegalForm
+					.getSelectedItem());
+		}
+		society.setName(textFieldName.getText());
+		if (!StringUtils.isNullOrEmpty(textFieldResponsible.getText())) {
+			society.setResponsible(textFieldResponsible.getText());
+		}
+		if (!StringUtils.isNullOrEmpty(textFieldVatNumber.getText())) {
+			society.setVatNumber(textFieldVatNumber.getText());
+		}
+		SocietyValidator validator = new SocietyValidator();
+		ValidationResult result = validator.validate(society);
+		validationResultModel.setResult(result);
+		if (result.hasMessages()) {
+			statusBar.removeAll();
+			List<ValidationMessage> messages = validationResultModel
+					.getResult().getMessages();
+			for (ValidationMessage message : messages) {
+				JsamsLabel label = new JsamsLabel(message.formattedText()
+						.replace(".", ""));
+				if (message.severity() == Severity.ERROR) {
+					label.setIcon(ValidationResultViewFactory.getErrorIcon());
+				} else if (message.severity() == Severity.WARNING) {
+					label.setIcon(ValidationResultViewFactory.getWarningIcon());
+				}
+				statusBar.addJComponent(label);
+			}
+			statusBar.revalidate();
+		} else {
+			if (getModel() == null) {
+				JsamsApplicationContext.getSocietyService().create(society);
+				JsamsDesktop.getInstance().setCurrentSociety(society);
+			} else {
+				society.setId(getModel().getId());
+				JsamsApplicationContext.getSocietyService().update(society);
+				JsamsDesktop.getInstance().setCurrentSociety(society);
+			}
+			dispose();
+		}
+	}
 
-    public void performReset() {
-        Class<?> clazz = this.getClass();
-        Field[] fields = clazz.getFields();
-        for (Field field : fields) {
-            try {
-                Object value = field.get(this);
-                if (value instanceof JsamsTextField) {
-                    ((JsamsTextField) value).setText(null);
-                } else if (value instanceof JComboBox) {
-                    ((JComboBox) value).setSelectedIndex(0);
-                }
-            } catch (IllegalArgumentException e1) {
-                LOGGER.error(e1);
-            } catch (IllegalAccessException e1) {
-                LOGGER.error(e1);
-            }
-        }
-    }
+	public void performReset() {
+		Class<?> clazz = this.getClass();
+		Field[] fields = clazz.getFields();
+		for (Field field : fields) {
+			try {
+				Object value = field.get(this);
+				if (value instanceof JsamsTextField) {
+					((JsamsTextField) value).setText(null);
+				} else if (value instanceof JComboBox) {
+					((JComboBox) value).setSelectedIndex(0);
+				}
+			} catch (IllegalArgumentException e1) {
+				LOGGER.error(e1);
+			} catch (IllegalAccessException e1) {
+				LOGGER.error(e1);
+			}
+		}
+	}
 
-    private void fillData() {
-        List<LegalForm> allLegalForms = JsamsApplicationContext
-                .getLegalFormDao().findAll();
-        ArrayList<LegalForm> allWithNull = new ArrayList<LegalForm>();
-        allWithNull.add(null);
-        allWithNull.addAll(allLegalForms);
-        comboBoxLegalForm = new JComboBox(allWithNull.toArray());
-        if (getModel() != null) {
-            Society society = JsamsApplicationContext.getSocietyService()
-                    .findById(getModel().getId());
-            fillAddress(society);
-            fillContactInformation(society);
-            comboBoxLegalForm.setSelectedItem(society.getLegalForm());
-            textFieldActivity.setText(society.getActivity());
-            textFieldCapital.setValue(society.getCapital());
-            textFieldName.setText(society.getName());
-            textFieldResponsible.setText(society.getResponsible());
-            textFieldVatNumber.setText(society.getVatNumber());
-        }
-        comboBoxLegalForm.setRenderer(new TranslatableComboBoxRenderer());
-    }
+	private void fillData() {
+		List<LegalForm> allLegalForms = JsamsApplicationContext
+				.getLegalFormDao().findAll();
+		ArrayList<LegalForm> allWithNull = new ArrayList<LegalForm>();
+		allWithNull.add(null);
+		allWithNull.addAll(allLegalForms);
+		comboBoxLegalForm = new JComboBox(allWithNull.toArray());
+		if (getModel() != null) {
+			Society society = JsamsApplicationContext.getSocietyService()
+					.findById(getModel().getId());
+			fillAddress(society);
+			fillContactInformation(society);
+			if (society != null) {
+				comboBoxLegalForm.setSelectedItem(society.getLegalForm());
+				textFieldActivity.setText(society.getActivity());
+				textFieldCapital.setValue(society.getCapital());
+				textFieldName.setText(society.getName());
+				textFieldResponsible.setText(society.getResponsible());
+				textFieldVatNumber.setText(society.getVatNumber());
+			}
+		}
+		comboBoxLegalForm.setRenderer(new TranslatableComboBoxRenderer());
+	}
 
-    private void fillAddress(final Society society) {
-        Address address = society.getAddress();
-        textFieldBox.setText(address.getBox());
-        textFieldCity.setText(address.getCity());
-        textFieldCountry.setText(address.getCountry());
-        textFieldNumber.setText(address.getNumber());
-        textFieldStreet.setText(address.getStreet());
-        textFieldZipCode.setText(Integer.toString(address.getZipCode()));
-    }
+	private void fillAddress(final Society society) {
+		if (society != null) {
+			Address address = society.getAddress();
+			textFieldBox.setText(address.getBox());
+			textFieldCity.setText(address.getCity());
+			textFieldCountry.setText(address.getCountry());
+			textFieldNumber.setText(address.getNumber());
+			textFieldStreet.setText(address.getStreet());
+			textFieldZipCode.setText(Integer.toString(address.getZipCode()));
+		}
+	}
 
-    private void fillContactInformation(final Society society) {
-        ContactInformation information = society.getContactInformation();
-        textFieldEmail.setText(information.getEmail());
-        textFieldFax.setText(information.getFax());
-        textFieldMobile.setText(information.getMobile());
-        textFieldPhone.setText(information.getPhone());
-        textFieldWebsite.setText(information.getWebsite());
-    }
+	private void fillContactInformation(final Society society) {
+		if (society != null) {
+			ContactInformation information = society.getContactInformation();
+			textFieldEmail.setText(information.getEmail());
+			textFieldFax.setText(information.getFax());
+			textFieldMobile.setText(information.getMobile());
+			textFieldPhone.setText(information.getPhone());
+			textFieldWebsite.setText(information.getWebsite());
+		}
+	}
 
-    private void setMandatoryFields() {
-        ValidationComponentUtils.setMandatory(textFieldActivity, true);
-        ValidationComponentUtils.setMandatory(textFieldCapital, true);
-        ValidationComponentUtils.setMandatory(textFieldCity, true);
-        ValidationComponentUtils.setMandatory(textFieldCountry, true);
-        ValidationComponentUtils.setMandatory(textFieldName, true);
-        ValidationComponentUtils.setMandatory(textFieldNumber, true);
-        ValidationComponentUtils.setMandatory(textFieldPhone, true);
-        ValidationComponentUtils.setMandatory(textFieldStreet, true);
-        ValidationComponentUtils.setMandatory(textFieldZipCode, true);
-    }
+	private void setMandatoryFields() {
+		ValidationComponentUtils.setMandatory(textFieldActivity, true);
+		ValidationComponentUtils.setMandatory(textFieldCapital, true);
+		ValidationComponentUtils.setMandatory(textFieldCity, true);
+		ValidationComponentUtils.setMandatory(textFieldCountry, true);
+		ValidationComponentUtils.setMandatory(textFieldName, true);
+		ValidationComponentUtils.setMandatory(textFieldNumber, true);
+		ValidationComponentUtils.setMandatory(textFieldPhone, true);
+		ValidationComponentUtils.setMandatory(textFieldStreet, true);
+		ValidationComponentUtils.setMandatory(textFieldZipCode, true);
+	}
 
 }
