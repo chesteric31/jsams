@@ -26,7 +26,8 @@ public class JsamsApplicationContext {
 
 	/**
 	 * 
-	 * @param context the {@link ClassPathXmlApplicationContext} to set
+	 * @param context
+	 *            the {@link ClassPathXmlApplicationContext} to set
 	 */
 	public static void setContext(final ClassPathXmlApplicationContext context) {
 		JsamsApplicationContext.context = context;
@@ -47,7 +48,7 @@ public class JsamsApplicationContext {
 	public static LegalFormDao getLegalFormDao() {
 		return (LegalFormDao) context.getBean("legalFormDao");
 	}
-	
+
 	/**
 	 * 
 	 * @return the {@link CivilityDao}
@@ -55,7 +56,7 @@ public class JsamsApplicationContext {
 	public static CivilityDao getCivilityDao() {
 		return (CivilityDao) context.getBean("civilityDao");
 	}
-	
+
 	/**
 	 * 
 	 * @return the {@link PaymentModeDao}
@@ -71,7 +72,7 @@ public class JsamsApplicationContext {
 	public static CustomerService getCustomerService() {
 		return (CustomerService) context.getBean("customerService");
 	}
-	
+
 	/**
 	 * 
 	 * @return the {@link ProductCategoryDao}
@@ -79,7 +80,7 @@ public class JsamsApplicationContext {
 	public static ProductCategoryDao getProductCategoryDao() {
 		return (ProductCategoryDao) context.getBean("productCategoryDao");
 	}
-	
+
 	/**
 	 * 
 	 * @return the {@link ProductService}
