@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.BorderFactory;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -187,8 +188,7 @@ public class EditCustomerDialog extends EditDialog<Customer, CustomerValidator, 
 
 		setMandatoryFields();
 
-		ValidationComponentUtils
-				.updateComponentTreeMandatoryBackground(this);
+		ValidationComponentUtils.updateComponentTreeMandatoryBorder(this);
 
 		pack();
 	}
@@ -496,7 +496,9 @@ public class EditCustomerDialog extends EditDialog<Customer, CustomerValidator, 
 		ValidationComponentUtils.setMandatory(textFieldVatApplicable, true);
 		
 		ValidationComponentUtils.setMandatory(comboBoxPaymentMode, true);
-//		TODO: find a way to color the background of combobox into windows l&f
+		comboBoxPaymentMode.setBorder(BorderFactory
+				.createLineBorder(ValidationComponentUtils
+						.getMandatoryForeground()));
 	}
 
 }
