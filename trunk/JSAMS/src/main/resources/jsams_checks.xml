@@ -31,6 +31,8 @@
 -->
 
 <module name="Checker">
+
+    <property name="severity" value="warning"/>
     <!--
         If you set the basedir property below, then all reported file
         names will be relative to the specified directory. See
@@ -61,12 +63,12 @@
 
     <!-- Miscellaneous other checks.                   -->
     <!-- See http://checkstyle.sf.net/config_misc.html -->
-    <module name="RegexpSingleline">
-       <property name="format" value="\s+$"/>
-       <property name="minimum" value="0"/>
-       <property name="maximum" value="0"/>
-       <property name="message" value="Line has trailing spaces."/>
-    </module>
+<!--    <module name="RegexpSingleline">-->
+<!--       <property name="format" value="\s+$"/>-->
+<!--       <property name="minimum" value="0"/>-->
+<!--       <property name="maximum" value="0"/>-->
+<!--       <property name="message" value="Line has trailing spaces."/>-->
+<!--    </module>-->
 
     <module name="TreeWalker">
 
@@ -174,7 +176,7 @@
 
         <!-- Checks for class design                         -->
         <!-- See http://checkstyle.sf.net/config_design.html -->
-        <module name="DesignForExtension"/>
+<!--        <module name="DesignForExtension"/>-->
         <module name="FinalClass"/>
         <module name="HideUtilityClassConstructor"/>
         <module name="InterfaceIsType"/>
