@@ -29,7 +29,9 @@ public abstract class JsamsFrame extends JFrame {
 	 */
 	private static final long serialVersionUID = 5732252811794674139L;
 
-    protected final Log LOGGER = LogFactory.getLog(this.getClass());
+	protected final Log LOGGER = LogFactory.getLog(JsamsFrame.class);
+
+	public final int defaultFontSize = 13;
 
 	/**
 	 * The default resource bundle, integrating with the i18n component.
@@ -42,23 +44,40 @@ public abstract class JsamsFrame extends JFrame {
 		}
 
 		@Override
-		protected Object handleGetObject(String key) {
+		protected Object handleGetObject(final String key) {
 			return I18nManager.getInstance().translate(key);
 		}
 	};
 
-
+	/**
+	 * Constructor
+	 */
 	public JsamsFrame() {
 		super();
 		setNativeLookAndFeel();
-		setUIFont(new FontUIResource(Font.SANS_SERIF, Font.PLAIN, 13));
+		setUIFont(new FontUIResource(Font.SANS_SERIF, Font.PLAIN,
+				defaultFontSize));
 	}
 
+	/**
+	 * Constructor
+	 * 
+	 * @param title
+	 *            the {@link I18nString}
+	 */
 	public JsamsFrame(final I18nString title) {
 		this();
 		setTitle(title);
 	}
 
+	/**
+	 * Constructor
+	 * 
+	 * @param title
+	 *            the {@link I18nString}
+	 * @param iconFileName
+	 *            the icon path name
+	 */
 	public JsamsFrame(final I18nString title, final String iconFileName) {
 		this(title);
 		setIconImage(IconUtil.buildIcon(iconFileName));

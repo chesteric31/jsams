@@ -23,6 +23,9 @@ public class ProductTableModel extends AbstractTableModel {
 	 */
 	private static final long serialVersionUID = 5631609209979319706L;
 
+	/**
+	 * The columns name
+	 */
 	private List<I18nString> columnNames = Arrays.asList(
 			JsamsI18nResource.COLUMN_ID, JsamsI18nResource.COLUMN_NAME,
 			JsamsI18nResource.COLUMN_PRICE,
@@ -31,24 +34,49 @@ public class ProductTableModel extends AbstractTableModel {
 			JsamsI18nResource.COLUMN_VAT_APPLICABE,
 			JsamsI18nResource.COLUMN_PRODUCT_CATEGORY);
 
+	/**
+	 * The list of {@link Product}
+	 */
 	private List<Product> data;
 
+	/**
+	 * 
+	 * @return a list of {@link Product}
+	 */
 	public List<Product> getData() {
 		return data;
 	}
 
+	/**
+	 * 
+	 * @param data
+	 *            the list of {@link Product} to set
+	 */
 	public void setData(List<Product> data) {
 		this.data = data;
 	}
 
+	/**
+	 * @return the columns count
+	 */
 	public int getColumnCount() {
 		return columnNames.size();
 	}
 
+	/**
+	 * @return the rows count
+	 */
 	public int getRowCount() {
 		return data.size();
 	}
 
+	/**
+	 * @param rowIndex
+	 *            the row
+	 * @param columnIndex
+	 *            the column
+	 * @return the value following the row and column
+	 */
 	public Object getValueAt(int rowIndex, int columnIndex) {
 		switch (columnIndex) {
 		case 0:
@@ -70,10 +98,18 @@ public class ProductTableModel extends AbstractTableModel {
 		}
 	}
 
+	/**
+	 * @param columnIndex the column
+	 * @return the column name
+	 */
 	public String getColumnName(int columnIndex) {
 		return columnNames.get(columnIndex).getTranslation();
 	}
-	
+
+	/**
+	 * @param columnIndex the column
+	 * @return the column class
+	 */
 	@Override
 	public Class<?> getColumnClass(int columnIndex) {
 		switch (columnIndex) {
@@ -94,7 +130,7 @@ public class ProductTableModel extends AbstractTableModel {
 		default:
 			return Object.class;
 		}
-		
+
 	}
 
 }

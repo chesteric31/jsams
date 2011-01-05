@@ -17,7 +17,7 @@ import be.jsams.server.model.AbstractTranslatableIdentity;
  * @version $Rev$ $Date::                  $ $Author$
  */
 public class TranslatableComboBoxRenderer implements ListCellRenderer {
-	
+
 	protected DefaultListCellRenderer defaultRenderer = new DefaultListCellRenderer();
 
 	public Component getListCellRendererComponent(JList list, Object value,
@@ -39,5 +39,5 @@ public class TranslatableComboBoxRenderer implements ListCellRenderer {
 		renderer.setText(theText);
 		return renderer;
 	}
-	
+
 }
