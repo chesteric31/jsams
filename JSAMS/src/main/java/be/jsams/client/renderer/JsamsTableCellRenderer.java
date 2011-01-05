@@ -11,12 +11,11 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 
 /**
- * Custom Table cell renderer for JSAMS with
- * row shading and row horizontal alignment following
- * data type.
+ * Custom Table cell renderer for JSAMS with row shading and row horizontal
+ * alignment following data type.
  * 
  * @author chesteric31
- * @version $Rev$ $Date:: $ $Author$
+ * @version $Rev$ $Date::   $Author$
  */
 public class JsamsTableCellRenderer extends DefaultTableCellRenderer {
 
@@ -24,19 +23,24 @@ public class JsamsTableCellRenderer extends DefaultTableCellRenderer {
 	 * Serial Version UID
 	 */
 	private static final long serialVersionUID = -6717753457499479800L;
-    
+
+	/**
+	 * Constructor.
+	 */
 	public JsamsTableCellRenderer() {
-        setOpaque(true);
-    }
+		setOpaque(true);
+	}
 
 	public Component getTableCellRendererComponent(JTable table, Object value,
 			boolean isSelected, boolean hasFocus, int row, int column) {
+		
+		final int hundred = 100; 
 		Component renderer = super.getTableCellRendererComponent(table, value,
 				isSelected, hasFocus, row, column);
 
 		if (row % 2 == 0 && !isSelected) {
 			renderer.setBackground(Color.LIGHT_GRAY);
-		} else if (!isSelected){
+		} else if (!isSelected) {
 			renderer.setBackground(Color.WHITE);
 		}
 
@@ -51,7 +55,7 @@ public class JsamsTableCellRenderer extends DefaultTableCellRenderer {
 			if (value instanceof Double) {
 				NumberFormat percentInstance = DecimalFormat
 						.getPercentInstance();
-				Double doubleValue = (Double) value / 100;
+				Double doubleValue = (Double) value / hundred;
 				this.setValue(percentInstance.format(doubleValue));
 			}
 			this.setHorizontalAlignment(SwingConstants.RIGHT);

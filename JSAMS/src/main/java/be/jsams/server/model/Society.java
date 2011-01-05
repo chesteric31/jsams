@@ -33,6 +33,9 @@ public class Society extends AbstractNamedIdentity {
 	private LegalForm legalForm;
 	private ContactInformation contactInformation;
 
+	/**
+	 * Constructor
+	 */
 	public Society() {
 		super();
 	}
