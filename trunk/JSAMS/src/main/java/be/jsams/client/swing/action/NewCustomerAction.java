@@ -21,11 +21,8 @@ public class NewCustomerAction extends AbstractAction {
 	private static final long serialVersionUID = -872702115060030751L;
 
 	public void actionPerformed(ActionEvent e) {
-		EditCustomerDialog editCustomerDialog = new EditCustomerDialog(null,
-				JsamsI18nResource.TITLE_EDIT_CUSTOMER, null);
-		editCustomerDialog.setLocationRelativeTo(null);
-		editCustomerDialog.setResizable(false);
-		editCustomerDialog.setVisible(true);
+		new EditCustomerDialog(null, JsamsI18nResource.TITLE_EDIT_CUSTOMER,
+				null);
 	}
 
 }
