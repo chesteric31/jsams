@@ -20,7 +20,6 @@ import be.jsams.client.i18n.I18nString;
 import be.jsams.client.i18n.JsamsI18nLabelResource;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.renderer.TranslatableComboBoxRenderer;
-import be.jsams.client.swing.component.JsamsDialog;
 import be.jsams.client.swing.component.JsamsFrame;
 import be.jsams.client.swing.component.JsamsTextField;
 import be.jsams.client.swing.utils.IconUtil;
@@ -39,7 +38,7 @@ import com.jgoodies.validation.view.ValidationComponentUtils;
 import com.mysql.jdbc.StringUtils;
 
 /**
- * Edit Customer {@link JsamsDialog}, to create or update a Customer object.
+ * Edit Customer {@link EditDialog}, to create or update a {@link Customer} object.
  * 
  * @author chesteric31
  * @version $$Rev$$ $$Date::                  $$ $$Author$$
@@ -160,6 +159,9 @@ public class EditCustomerDialog extends EditDialog<Customer, CustomerValidator, 
 		super.setValidator(new CustomerValidator());
 		super.setService(JsamsApplicationContext.getCustomerService());
 		initComponents();
+		setLocationRelativeTo(null);
+		setResizable(false);
+		setVisible(true);
 	}
 
 	/**
