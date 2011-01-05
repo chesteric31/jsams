@@ -144,9 +144,10 @@ public abstract class EditDialog<M extends AbstractIdentity, V extends Validator
 	
 	public abstract void performOk();
 	
-	public void postPerformOk(final M object) {
+	public boolean postPerformOk(final M object) {
 		ValidationResult result = validator.validate(object);
 		validationResultModel.setResult(result);
+		boolean success = false;
 		if (result.hasMessages()) {
 			statusBar.removeAll();
 			statusBar.repaint();
@@ -167,12 +168,13 @@ public abstract class EditDialog<M extends AbstractIdentity, V extends Validator
 			if (getModel() == null) {
 				service.create(object);
 			} else {
-				if (!getModel().equals(object)) {
-					service.update(object);
-				}
+				object.setId(getModel().getId());
+				service.update(object);
 			}
+			success = true;
 			dispose();
 		}
+		return success;
 	}
 
 	public JsamsStatusBar getStatusBar() {
