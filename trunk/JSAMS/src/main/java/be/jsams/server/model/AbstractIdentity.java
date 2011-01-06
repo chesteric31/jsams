@@ -21,6 +21,9 @@ public class AbstractIdentity implements Identity, Serializable {
 	private static final long serialVersionUID = 2585047845813378914L;
 	private Long id;
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Id
 	@GeneratedValue
 	public Long getId() {
