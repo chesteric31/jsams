@@ -17,6 +17,9 @@ import com.jgoodies.validation.util.ValidationUtils;
  */
 public class AddressValidator implements Validator<Address> {
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public ValidationResult validate(final Address address) {
 		PropertyValidationSupport support = new PropertyValidationSupport(
 				address, "");
