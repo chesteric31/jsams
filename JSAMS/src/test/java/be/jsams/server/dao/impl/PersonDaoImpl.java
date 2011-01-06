@@ -22,7 +22,7 @@ public class PersonDaoImpl extends GenericDaoImpl<Person> implements PersonDao {
 			query.setParameter("name", name);
 			persons = query.getResultList();
 		} catch (RuntimeException re) {
-			super.LOGGER.error(re);
+			LOGGER.error(re);
 		}
 		return persons;
 	}
