@@ -8,7 +8,9 @@ import javax.swing.table.AbstractTableModel;
 
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.i18n.JsamsI18nResource;
+import be.jsams.client.i18n.UserContext;
 import be.jsams.server.model.Product;
+import be.jsams.server.model.ProductCategory;
 
 /**
  * {@link AbstractTableModel} for {@link Product} object.
@@ -92,14 +94,22 @@ public class ProductTableModel extends AbstractTableModel {
 		case 5:
 			return data.get(rowIndex).getVatApplicable().doubleValue();
 		case 6:
-			return data.get(rowIndex).getCategory().getName();
+			ProductCategory category = data.get(rowIndex).getCategory();
+			if (UserContext.isDutch()) {
+				return category.getLabelNl();
+			} else if (UserContext.isFrench()) {
+				return category.getLabelFr();
+			} else {
+				return category.getLabel();
+			}
 		default:
 			return "";
 		}
 	}
 
 	/**
-	 * @param columnIndex the column
+	 * @param columnIndex
+	 *            the column
 	 * @return the column name
 	 */
 	public String getColumnName(int columnIndex) {
@@ -107,7 +117,8 @@ public class ProductTableModel extends AbstractTableModel {
 	}
 
 	/**
-	 * @param columnIndex the column
+	 * @param columnIndex
+	 *            the column
 	 * @return the column class
 	 */
 	@Override
