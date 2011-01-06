@@ -14,25 +14,25 @@ import be.jsams.client.i18n.I18nString;
  */
 public class JsamsLabel extends JLabel {
 
-	/**
-	 * Serial Version UID
-	 */
-	private static final long serialVersionUID = -7371023160047637190L;
+    /**
+     * Serial Version UID
+     */
+    private static final long serialVersionUID = -7371023160047637190L;
 
-	public JsamsLabel() {
-		super();
-	}
+    public JsamsLabel() {
+        super();
+    }
 
-	public JsamsLabel(final String text) {
-		super(text);
-	}
+    public JsamsLabel(final String text) {
+        super(text);
+    }
 
-	public JsamsLabel(final I18nString text) {
-		super(text.getTranslation());
-	}
+    public JsamsLabel(final I18nString text) {
+        super(text.getTranslation());
+    }
 
-	public JsamsLabel(final I18nString text, final ImageIcon icon) {
-		super(text.getTranslation(), icon, SwingConstants.LEFT);
-	}
+    public JsamsLabel(final I18nString text, final ImageIcon icon) {
+        super(text.getTranslation(), icon, SwingConstants.LEFT);
+    }
 
 }

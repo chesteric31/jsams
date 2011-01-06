@@ -8,62 +8,62 @@ import be.jsams.server.service.CustomerService;
 
 /**
  * Customer service implementation.
- *
- * @author Eric
+ * 
+ * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
 public class CustomerServiceImpl implements CustomerService {
 
-	private CustomerDao customerDao;
+    private CustomerDao customerDao;
 
-	public CustomerDao getCustomerDao() {
-		return customerDao;
-	}
+    public CustomerDao getCustomerDao() {
+        return customerDao;
+    }
 
-	public void setCustomerDao(CustomerDao customerDao) {
-		this.customerDao = customerDao;
-	}
-
-    /**
-     * {@inheritDoc}
-     */
-	public void create(Customer customer) {
-		customerDao.add(customer);
-	}
+    public void setCustomerDao(CustomerDao customerDao) {
+        this.customerDao = customerDao;
+    }
 
     /**
      * {@inheritDoc}
      */
-	public void delete(Customer customer) {
-		customerDao.remove(customer);
-	}
+    public void create(Customer customer) {
+        customerDao.add(customer);
+    }
 
     /**
      * {@inheritDoc}
      */
-	public void delete(Long id) {
-		customerDao.remove(id);
-	}
+    public void delete(Customer customer) {
+        customerDao.remove(customer);
+    }
 
     /**
      * {@inheritDoc}
      */
-	public List<Customer> findAll() {
-		return customerDao.findAll();
-	}
+    public void delete(Long id) {
+        customerDao.remove(id);
+    }
 
     /**
      * {@inheritDoc}
      */
-	public Customer findById(Long id) {
-		return customerDao.findById(id);
-	}
+    public List<Customer> findAll() {
+        return customerDao.findAll();
+    }
 
     /**
      * {@inheritDoc}
      */
-	public void update(Customer customer) {
-		customerDao.update(customer);
-	}
+    public Customer findById(Long id) {
+        return customerDao.findById(id);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void update(Customer customer) {
+        customerDao.update(customer);
+    }
 
 }

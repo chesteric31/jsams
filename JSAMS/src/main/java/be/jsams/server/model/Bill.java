@@ -15,7 +15,7 @@ import javax.persistence.TemporalType;
 
 /**
  * Bill entity object.
- *
+ * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
@@ -23,164 +23,161 @@ import javax.persistence.TemporalType;
 @Table(name = "BILL")
 public class Bill extends AbstractIdentity {
 
-	/**
-	 * Serial Version UID
-	 */
-	private static final long serialVersionUID = -613138056155460436L;
-	private Date creationDate;
-	private String remark;
-	private BigDecimal discountRate;
-	private Date dueDate;
-	private boolean paid;
-	private Date dateFirstRemember;
-	private Date dateSecondRemember;
-	private Date dateFormalNotice;
-	private boolean closed;
-	
-	private PaymentMode paymentMode;
-	private Customer customer;
-	private Address billingAddress;
+    /**
+     * Serial Version UID
+     */
+    private static final long serialVersionUID = -613138056155460436L;
+    private Date creationDate;
+    private String remark;
+    private BigDecimal discountRate;
+    private Date dueDate;
+    private boolean paid;
+    private Date dateFirstRemember;
+    private Date dateSecondRemember;
+    private Date dateFormalNotice;
+    private boolean closed;
 
-	private List<BillDetail> details;
-	
-	public Bill() {
-		super();
-	}
+    private PaymentMode paymentMode;
+    private Customer customer;
+    private Address billingAddress;
 
-	@Column(name = "CREATION_DATE")
-	@Temporal(TemporalType.DATE)
-	public Date getCreationDate() {
-		return creationDate;
-	}
+    private List<BillDetail> details;
 
-	public void setCreationDate(Date creationDate) {
-		this.creationDate = creationDate;
-	}
+    public Bill() {
+        super();
+    }
 
-	@Column(name = "REMARK")
-	public String getRemark() {
-		return remark;
-	}
+    @Column(name = "CREATION_DATE")
+    @Temporal(TemporalType.DATE)
+    public Date getCreationDate() {
+        return creationDate;
+    }
 
-	public void setRemark(String remark) {
-		this.remark = remark;
-	}
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
+    }
 
-	@Column(name = "DISCOUNT_RATE")
-	public BigDecimal getDiscountRate() {
-		return discountRate;
-	}
+    @Column(name = "REMARK")
+    public String getRemark() {
+        return remark;
+    }
 
-	public void setDiscountRate(BigDecimal discountRate) {
-		this.discountRate = discountRate;
-	}
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
 
-	@Column(name = "DUE_DATE")
-	@Temporal(TemporalType.DATE)
-	public Date getDueDate() {
-		return dueDate;
-	}
+    @Column(name = "DISCOUNT_RATE")
+    public BigDecimal getDiscountRate() {
+        return discountRate;
+    }
 
-	public void setDueDate(Date dueDate) {
-		this.dueDate = dueDate;
-	}
+    public void setDiscountRate(BigDecimal discountRate) {
+        this.discountRate = discountRate;
+    }
 
-	@Column(name = "PAID")
-	public boolean isPaid() {
-		return paid;
-	}
+    @Column(name = "DUE_DATE")
+    @Temporal(TemporalType.DATE)
+    public Date getDueDate() {
+        return dueDate;
+    }
 
-	public void setPaid(boolean paid) {
-		this.paid = paid;
-	}
-	
-	@Column(name = "DATE_FIRST_REMINDER")
-	@Temporal(TemporalType.DATE)
-	public Date getDateFirstRemember() {
-		return dateFirstRemember;
-	}
+    public void setDueDate(Date dueDate) {
+        this.dueDate = dueDate;
+    }
 
-	public void setDateFirstRemember(Date dateFirstRemember) {
-		this.dateFirstRemember = dateFirstRemember;
-	}
+    @Column(name = "PAID")
+    public boolean isPaid() {
+        return paid;
+    }
 
-	@Column(name = "DATE_SECOND_REMINDER")
-	@Temporal(TemporalType.DATE)
-	public Date getDateSecondRemember() {
-		return dateSecondRemember;
-	}
+    public void setPaid(boolean paid) {
+        this.paid = paid;
+    }
 
-	public void setDateSecondRemember(Date dateSecondRemember) {
-		this.dateSecondRemember = dateSecondRemember;
-	}
+    @Column(name = "DATE_FIRST_REMINDER")
+    @Temporal(TemporalType.DATE)
+    public Date getDateFirstRemember() {
+        return dateFirstRemember;
+    }
 
-	@Column(name = "DATE_FORMAL_NOTICE")
-	@Temporal(TemporalType.DATE)
-	public Date getDateFormalNotice() {
-		return dateFormalNotice;
-	}
+    public void setDateFirstRemember(Date dateFirstRemember) {
+        this.dateFirstRemember = dateFirstRemember;
+    }
 
-	public void setDateFormalNotice(Date dateFormalNotice) {
-		this.dateFormalNotice = dateFormalNotice;
-	}
+    @Column(name = "DATE_SECOND_REMINDER")
+    @Temporal(TemporalType.DATE)
+    public Date getDateSecondRemember() {
+        return dateSecondRemember;
+    }
 
-	@Column(name = "CLOSED")
-	public boolean isClosed() {
-		return closed;
-	}
+    public void setDateSecondRemember(Date dateSecondRemember) {
+        this.dateSecondRemember = dateSecondRemember;
+    }
 
-	public void setClosed(boolean closed) {
-		this.closed = closed;
-	}
+    @Column(name = "DATE_FORMAL_NOTICE")
+    @Temporal(TemporalType.DATE)
+    public Date getDateFormalNotice() {
+        return dateFormalNotice;
+    }
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "FK_PAYMENT_MODE")
-	public PaymentMode getPaymentMode() {
-		return paymentMode;
-	}
+    public void setDateFormalNotice(Date dateFormalNotice) {
+        this.dateFormalNotice = dateFormalNotice;
+    }
 
-	public void setPaymentMode(PaymentMode paymentMode) {
-		this.paymentMode = paymentMode;
-	}
+    @Column(name = "CLOSED")
+    public boolean isClosed() {
+        return closed;
+    }
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "FK_CUSTOMER")
-	public Customer getCustomer() {
-		return customer;
-	}
+    public void setClosed(boolean closed) {
+        this.closed = closed;
+    }
 
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
-	}
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "FK_PAYMENT_MODE")
+    public PaymentMode getPaymentMode() {
+        return paymentMode;
+    }
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "FK_ADDRESS_BILLING")
-	public Address getBillingAddress() {
-		return billingAddress;
-	}
+    public void setPaymentMode(PaymentMode paymentMode) {
+        this.paymentMode = paymentMode;
+    }
 
-	public void setBillingAddress(Address billingAddress) {
-		this.billingAddress = billingAddress;
-	}
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "FK_CUSTOMER")
+    public Customer getCustomer() {
+        return customer;
+    }
 
-	public List<BillDetail> getDetails() {
-		return details;
-	}
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
 
-	public void setDetails(List<BillDetail> details) {
-		this.details = details;
-	}
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "FK_ADDRESS_BILLING")
+    public Address getBillingAddress() {
+        return billingAddress;
+    }
 
-	@Override
-	public String toString() {
-		return "Bill [billingAddress=" + billingAddress + ", closed=" + closed
-				+ ", creationDate=" + creationDate + ", customer=" + customer
-				+ ", dateFirstRemember=" + dateFirstRemember
-				+ ", dateFormalNotice=" + dateFormalNotice
-				+ ", dateSecondRemember=" + dateSecondRemember
-				+ ", discountRate=" + discountRate + ", dueDate=" + dueDate
-				+ ", paid=" + paid + ", paymentMode=" + paymentMode
-				+ ", remark=" + remark + "]";
-	}
+    public void setBillingAddress(Address billingAddress) {
+        this.billingAddress = billingAddress;
+    }
+
+    public List<BillDetail> getDetails() {
+        return details;
+    }
+
+    public void setDetails(List<BillDetail> details) {
+        this.details = details;
+    }
+
+    @Override
+    public String toString() {
+        return "Bill [billingAddress=" + billingAddress + ", closed=" + closed + ", creationDate=" + creationDate
+                + ", customer=" + customer + ", dateFirstRemember=" + dateFirstRemember + ", dateFormalNotice="
+                + dateFormalNotice + ", dateSecondRemember=" + dateSecondRemember + ", discountRate=" + discountRate
+                + ", dueDate=" + dueDate + ", paid=" + paid + ", paymentMode=" + paymentMode + ", remark=" + remark
+                + "]";
+    }
 
 }

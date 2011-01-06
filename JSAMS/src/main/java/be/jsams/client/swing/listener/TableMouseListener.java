@@ -11,7 +11,7 @@ import be.jsams.server.model.Product;
 
 /**
  * Customized {@link MouseListener} for {@link JsamsTable} double click.
- *
+ * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
@@ -26,10 +26,8 @@ public class TableMouseListener implements MouseListener {
             int selectedRow = table.getSelectedRow();
             if (selectedRow > -1) {
                 Long id = (Long) table.getValueAt(selectedRow, 0);
-                Product selectedProduct = JsamsApplicationContext
-                        .getProductService().findById(id);
-                new EditProductDialog(JsamsI18nResource.TITLE_EDIT_PRODUCT,
-                        selectedProduct);
+                Product selectedProduct = JsamsApplicationContext.getProductService().findById(id);
+                new EditProductDialog(JsamsI18nResource.TITLE_EDIT_PRODUCT, selectedProduct);
             }
         }
     }

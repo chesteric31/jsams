@@ -9,17 +9,16 @@ import be.jsams.server.model.Civility;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class CivilityDaoImpl extends GenericDaoImpl<Civility> implements
-		CivilityDao {
+public class CivilityDaoImpl extends GenericDaoImpl<Civility> implements CivilityDao {
 
-	/**
-	 * Constructor
-	 * 
-	 * @param type
-	 *            the class type
-	 */
-	public CivilityDaoImpl(Class<Civility> type) {
-		super(type);
-	}
+    /**
+     * Constructor
+     * 
+     * @param type
+     *            the class type
+     */
+    public CivilityDaoImpl(Class<Civility> type) {
+        super(type);
+    }
 
 }

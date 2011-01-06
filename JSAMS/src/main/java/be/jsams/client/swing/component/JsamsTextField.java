@@ -10,13 +10,13 @@ import javax.swing.JTextField;
  */
 public class JsamsTextField extends JTextField {
 
-	/**
-	 * Serial Version UID
-	 */
-	private static final long serialVersionUID = 410786496726208439L;
+    /**
+     * Serial Version UID
+     */
+    private static final long serialVersionUID = 410786496726208439L;
 
-	public JsamsTextField(final int columns) {
-		super(columns);
-	}
+    public JsamsTextField(final int columns) {
+        super(columns);
+    }
 
 }

@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 /**
  * Product entity object.
- *
+ * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
@@ -19,73 +19,71 @@ import javax.persistence.Table;
 @Table(name = "PRODUCT")
 public class Product extends AbstractNamedIdentity {
 
-	/**
-	 * Serial Version UID
-	 */
-	private static final long serialVersionUID = -6479784842022897090L;
-	private BigDecimal price;
-	private int quantityStock;
-	private int reorderLevel;
-	private BigDecimal vatApplicable;
-	
-	private ProductCategory category;
+    /**
+     * Serial Version UID
+     */
+    private static final long serialVersionUID = -6479784842022897090L;
+    private BigDecimal price;
+    private int quantityStock;
+    private int reorderLevel;
+    private BigDecimal vatApplicable;
 
-	public Product() {
-		super();
-	}
+    private ProductCategory category;
 
-	@Column(name = "PRICE")
-	public BigDecimal getPrice() {
-		return price;
-	}
+    public Product() {
+        super();
+    }
 
-	public void setPrice(BigDecimal price) {
-		this.price = price;
-	}
+    @Column(name = "PRICE")
+    public BigDecimal getPrice() {
+        return price;
+    }
 
-	@Column(name = "QUANTITY_STOCK")
-	public int getQuantityStock() {
-		return quantityStock;
-	}
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
 
-	public void setQuantityStock(int quantityStock) {
-		this.quantityStock = quantityStock;
-	}
+    @Column(name = "QUANTITY_STOCK")
+    public int getQuantityStock() {
+        return quantityStock;
+    }
 
-	@Column(name = "REORDER_LEVEL")
-	public int getReorderLevel() {
-		return reorderLevel;
-	}
+    public void setQuantityStock(int quantityStock) {
+        this.quantityStock = quantityStock;
+    }
 
-	public void setReorderLevel(int reorderLevel) {
-		this.reorderLevel = reorderLevel;
-	}
+    @Column(name = "REORDER_LEVEL")
+    public int getReorderLevel() {
+        return reorderLevel;
+    }
 
-	@Column(name = "VAT_APPLICABLE")
-	public BigDecimal getVatApplicable() {
-		return vatApplicable;
-	}
+    public void setReorderLevel(int reorderLevel) {
+        this.reorderLevel = reorderLevel;
+    }
 
-	public void setVatApplicable(BigDecimal vatApplicable) {
-		this.vatApplicable = vatApplicable;
-	}
+    @Column(name = "VAT_APPLICABLE")
+    public BigDecimal getVatApplicable() {
+        return vatApplicable;
+    }
 
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "FK_CATEGORY_PRODUCT")
-	public ProductCategory getCategory() {
-		return category;
-	}
+    public void setVatApplicable(BigDecimal vatApplicable) {
+        this.vatApplicable = vatApplicable;
+    }
 
-	public void setCategory(ProductCategory category) {
-		this.category = category;
-	}
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "FK_CATEGORY_PRODUCT")
+    public ProductCategory getCategory() {
+        return category;
+    }
 
-	@Override
-	public String toString() {
-		return "Product [category=" + category + ", name=" + getName()
-				+ ", price=" + price + ", quantityStock=" + quantityStock
-				+ ", reorderLevel=" + reorderLevel + ", vatApplicable="
-				+ vatApplicable + "]";
-	}
+    public void setCategory(ProductCategory category) {
+        this.category = category;
+    }
+
+    @Override
+    public String toString() {
+        return "Product [category=" + category + ", name=" + getName() + ", price=" + price + ", quantityStock="
+                + quantityStock + ", reorderLevel=" + reorderLevel + ", vatApplicable=" + vatApplicable + "]";
+    }
 
 }

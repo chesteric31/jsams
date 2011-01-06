@@ -11,29 +11,29 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  */
 public class I18nApplicationContext {
 
-	/**
-	 * Classpath resource containing the configuration file.
-	 */
-	public static final String CONFIG = "i18nApplicationContext.xml";
+    /**
+     * Classpath resource containing the configuration file.
+     */
+    public static final String CONFIG = "i18nApplicationContext.xml";
 
-	/**
-	 * The application context.
-	 */
-	private static ClassPathXmlApplicationContext context;
+    /**
+     * The application context.
+     */
+    private static ClassPathXmlApplicationContext context;
 
-	/**
-	 * @return the message source
-	 */
-	public static MessageSource getMessageSource() {
-		return context;
-	}
+    /**
+     * @return the message source
+     */
+    public static MessageSource getMessageSource() {
+        return context;
+    }
 
-	/**
-	 * @param context
-	 *            the context to set
-	 */
-	public static void setContext(ClassPathXmlApplicationContext context) {
-		I18nApplicationContext.context = context;
-	}
+    /**
+     * @param context
+     *            the context to set
+     */
+    public static void setContext(ClassPathXmlApplicationContext context) {
+        I18nApplicationContext.context = context;
+    }
 
 }

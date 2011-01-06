@@ -10,84 +10,84 @@ import be.jsams.server.service.CommandService;
 
 /**
  * Command service implementation
- *
+ * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
 public class CommandServiceImpl implements CommandService {
 
-	private CommandDao commandDao;
-	private CommandDetailDao commandDetailDao;
-	
-	public CommandDao getCommandDao() {
-		return commandDao;
-	}
+    private CommandDao commandDao;
+    private CommandDetailDao commandDetailDao;
 
-	public void setCommandDao(CommandDao commandDao) {
-		this.commandDao = commandDao;
-	}
+    public CommandDao getCommandDao() {
+        return commandDao;
+    }
 
-	public CommandDetailDao getCommandDetailDao() {
-		return commandDetailDao;
-	}
+    public void setCommandDao(CommandDao commandDao) {
+        this.commandDao = commandDao;
+    }
 
-	public void setCommandDetailDao(CommandDetailDao commandDetailDao) {
-		this.commandDetailDao = commandDetailDao;
-	}
+    public CommandDetailDao getCommandDetailDao() {
+        return commandDetailDao;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public void create(Command command) {
-		commandDao.add(command);
-		List<CommandDetail> details = command.getDetails();
-		for (CommandDetail detail : details) {
-			commandDetailDao.add(detail);
-		}
-	}
-
-	/**
-     * {@inheritDoc}
-     */
-	public void delete(Command command) {
-		List<CommandDetail> details = command.getDetails();
-		for (CommandDetail detail : details) {
-			commandDetailDao.remove(detail);
-		}
-		commandDao.remove(command);
-	}
-
-	/**
-     * {@inheritDoc}
-     */
-	public void delete(Long id) {
-		Command command = findById(id);
-		List<CommandDetail> details = command.getDetails();
-		for (CommandDetail detail : details) {
-			commandDetailDao.remove(detail);
-		}
-		commandDao.remove(id);
-	}
-
-	/**
-     * {@inheritDoc}
-     */
-	public List<Command> findAll() {
-		return commandDao.findAll();
-	}
+    public void setCommandDetailDao(CommandDetailDao commandDetailDao) {
+        this.commandDetailDao = commandDetailDao;
+    }
 
     /**
      * {@inheritDoc}
      */
-	public Command findById(Long id) {
-		return commandDao.findById(id);
-	}
+    public void create(Command command) {
+        commandDao.add(command);
+        List<CommandDetail> details = command.getDetails();
+        for (CommandDetail detail : details) {
+            commandDetailDao.add(detail);
+        }
+    }
 
     /**
      * {@inheritDoc}
      */
-	public void update(Command command) {
-		commandDao.update(command);
-	}
+    public void delete(Command command) {
+        List<CommandDetail> details = command.getDetails();
+        for (CommandDetail detail : details) {
+            commandDetailDao.remove(detail);
+        }
+        commandDao.remove(command);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void delete(Long id) {
+        Command command = findById(id);
+        List<CommandDetail> details = command.getDetails();
+        for (CommandDetail detail : details) {
+            commandDetailDao.remove(detail);
+        }
+        commandDao.remove(id);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public List<Command> findAll() {
+        return commandDao.findAll();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public Command findById(Long id) {
+        return commandDao.findById(id);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void update(Command command) {
+        commandDao.update(command);
+    }
 
 }

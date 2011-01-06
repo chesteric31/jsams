@@ -5,26 +5,26 @@ import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 
 import be.jsams.client.i18n.JsamsI18nResource;
-import be.jsams.client.model.dialog.EditCustomerDialog;
+import be.jsams.client.model.dialog.EditProductDialog;
 
 /**
- * {@link AbstractAction} to launch {@link EditCustomerDialog}.
- * 
+ * {@link AbstractAction} to launch {@link EditProductDialog}.
+ *
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class NewCustomerAction extends AbstractAction {
+public class NewProductAction extends AbstractAction {
 
     /**
      * Serial Version UID
      */
-    private static final long serialVersionUID = -872702115060030751L;
+    private static final long serialVersionUID = 3836214162446560188L;
 
     /**
      * {@inheritDoc}
      */
     public void actionPerformed(ActionEvent e) {
-        new EditCustomerDialog(null, JsamsI18nResource.TITLE_EDIT_CUSTOMER, null);
+        new EditProductDialog(JsamsI18nResource.TITLE_EDIT_PRODUCT, null);
     }
 
 }

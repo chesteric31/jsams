@@ -14,26 +14,49 @@ import be.jsams.client.swing.utils.IconUtil;
  */
 public class JsamsButton extends JButton {
 
-	/**
-	 * Serial Version UID
-	 */
-	private static final long serialVersionUID = 4932686000771764506L;
+    /**
+     * Serial Version UID
+     */
+    private static final long serialVersionUID = 4932686000771764506L;
 
-	public JsamsButton() {
-		super();
-	}
+    /**
+     * Constructor
+     */
+    public JsamsButton() {
+        super();
+    }
 
-	public JsamsButton(final I18nString text) {
-		super(text.getTranslation());
-	}
+    /**
+     * Constructor
+     * 
+     * @param text
+     *            the {@link I18nString} translatable String
+     */
+    public JsamsButton(final I18nString text) {
+        super(text.getTranslation());
+    }
 
-	public JsamsButton(final I18nString text, final String iconFileName) {
-		this(text);
-		setIcon(new ImageIcon(IconUtil.buildIcon(iconFileName)));
-	}
+    /**
+     * Constructor
+     * 
+     * @param text
+     *            the {@link I18nString} translatable String
+     * @param iconFileName
+     *            the icon path file name
+     */
+    public JsamsButton(final I18nString text, final String iconFileName) {
+        this(text);
+        setIcon(new ImageIcon(IconUtil.buildIcon(iconFileName)));
+    }
 
-	public JsamsButton(final String iconFileName) {
-		super(new ImageIcon(IconUtil.buildIcon(iconFileName)));
-	}
+    /**
+     * Constructor
+     * 
+     * @param iconFileName
+     *            the icon path file name
+     */
+    public JsamsButton(final String iconFileName) {
+        super(new ImageIcon(IconUtil.buildIcon(iconFileName)));
+    }
 
 }

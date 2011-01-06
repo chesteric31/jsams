@@ -16,47 +16,42 @@ import com.jgoodies.validation.util.ValidationUtils;
  * {@link Validator} for edit product panel.
  * 
  * @author chesteric31
- * @version $Rev$ $Date::   $Author$
+ * @version $$Rev$$ $$Date::                  $$ $$Author$$
  */
 public class SocietyValidator implements Validator<Society> {
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public ValidationResult validate(final Society society) {
-		PropertyValidationSupport support = new PropertyValidationSupport(
-				society, "");
+    /**
+     * {@inheritDoc}
+     */
+    public ValidationResult validate(final Society society) {
+        PropertyValidationSupport support = new PropertyValidationSupport(society, "");
 
-		if (ValidationUtils.isBlank(society.getName())) {
-			support.addError(
-					JsamsI18nLabelResource.LABEL_NAME.getTranslation(),
-					JsamsI18nResource.ERROR_IS_MANDATORY.getTranslation());
-		}
-		if (ValidationUtils.isBlank(society.getActivity())) {
-			support.addError(JsamsI18nLabelResource.LABEL_ACTIVITY
-					.getTranslation(), JsamsI18nResource.ERROR_IS_MANDATORY
-					.getTranslation());
-		}
-		BigDecimal capital = society.getCapital();
-		if (capital == null || ValidationUtils.isBlank(capital.toPlainString())) {
-			support.addError(JsamsI18nLabelResource.LABEL_CAPITAL
-					.getTranslation(), JsamsI18nResource.ERROR_IS_MANDATORY
-					.getTranslation());
-		}
-		String phone = society.getContactInformation().getPhone();
-		if (ValidationUtils.isBlank(phone)) {
-			support.addError(JsamsI18nLabelResource.LABEL_PHONE
-					.getTranslation(), JsamsI18nResource.ERROR_IS_MANDATORY
-					.getTranslation());
-		}
-		
-		Address address = society.getAddress();
-		Validator<Address> addressValidator = new AddressValidator();
-		ValidationResult addressResult = addressValidator.validate(address);
-		
-		ValidationResult result = support.getResult();
-		result.addAllFrom(addressResult);
-		return support.getResult();
-	}
+        if (ValidationUtils.isBlank(society.getName())) {
+            support.addError(JsamsI18nLabelResource.LABEL_NAME.getTranslation(), JsamsI18nResource.ERROR_IS_MANDATORY
+                    .getTranslation());
+        }
+        if (ValidationUtils.isBlank(society.getActivity())) {
+            support.addError(JsamsI18nLabelResource.LABEL_ACTIVITY.getTranslation(),
+                    JsamsI18nResource.ERROR_IS_MANDATORY.getTranslation());
+        }
+        BigDecimal capital = society.getCapital();
+        if (capital == null || ValidationUtils.isBlank(capital.toPlainString())) {
+            support.addError(JsamsI18nLabelResource.LABEL_CAPITAL.getTranslation(),
+                    JsamsI18nResource.ERROR_IS_MANDATORY.getTranslation());
+        }
+        String phone = society.getContactInformation().getPhone();
+        if (ValidationUtils.isBlank(phone)) {
+            support.addError(JsamsI18nLabelResource.LABEL_PHONE.getTranslation(), JsamsI18nResource.ERROR_IS_MANDATORY
+                    .getTranslation());
+        }
+
+        Address address = society.getAddress();
+        Validator<Address> addressValidator = new AddressValidator();
+        ValidationResult addressResult = addressValidator.validate(address);
+
+        ValidationResult result = support.getResult();
+        result.addAllFrom(addressResult);
+        return support.getResult();
+    }
 
 }

@@ -12,7 +12,7 @@ import javax.persistence.Table;
 
 /**
  * Customer entity object.
- *
+ * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
@@ -20,176 +20,173 @@ import javax.persistence.Table;
 @Table(name = "CUSTOMER")
 public class Customer extends AbstractNamedIdentity {
 
-	/**
-	 * Serial Version UID
-	 */
-	private static final long serialVersionUID = 81052360779940712L;
-	private String vatNumber;
-	private BigDecimal defaultDiscountRate;
-	private String bank1;
-	private String bank2;
-	private BigDecimal creditLimit;
-	private BigDecimal vatApplicable;
-	private String description;
-	
-	private Address deliveryAddress;
-	private Address billingAddress;
-	private PaymentMode paymentMode;
-	private ContactInformation contactInformation;
-	private Civility civility;
-	
-	private Agent agent;
-	
-	private LegalForm legalForm;
-	
-	public Customer() {
-		super();
-	}
+    /**
+     * Serial Version UID
+     */
+    private static final long serialVersionUID = 81052360779940712L;
+    private String vatNumber;
+    private BigDecimal defaultDiscountRate;
+    private String bank1;
+    private String bank2;
+    private BigDecimal creditLimit;
+    private BigDecimal vatApplicable;
+    private String description;
 
-	@Column(name = "VAT_NUMBER")
-	public String getVatNumber() {
-		return vatNumber;
-	}
+    private Address deliveryAddress;
+    private Address billingAddress;
+    private PaymentMode paymentMode;
+    private ContactInformation contactInformation;
+    private Civility civility;
 
-	public void setVatNumber(String vatNumber) {
-		this.vatNumber = vatNumber;
-	}
+    private Agent agent;
 
-	@Column(name = "DEFAULT_DISCOUNT_RATE")
-	public BigDecimal getDefaultDiscountRate() {
-		return defaultDiscountRate;
-	}
+    private LegalForm legalForm;
 
-	public void setDefaultDiscountRate(BigDecimal defaultDiscountRate) {
-		this.defaultDiscountRate = defaultDiscountRate;
-	}
+    public Customer() {
+        super();
+    }
 
-	@Column(name = "BANK_1")
-	public String getBank1() {
-		return bank1;
-	}
+    @Column(name = "VAT_NUMBER")
+    public String getVatNumber() {
+        return vatNumber;
+    }
 
-	public void setBank1(String bank1) {
-		this.bank1 = bank1;
-	}
+    public void setVatNumber(String vatNumber) {
+        this.vatNumber = vatNumber;
+    }
 
-	@Column(name = "BANK_2")
-	public String getBank2() {
-		return bank2;
-	}
+    @Column(name = "DEFAULT_DISCOUNT_RATE")
+    public BigDecimal getDefaultDiscountRate() {
+        return defaultDiscountRate;
+    }
 
-	public void setBank2(String bank2) {
-		this.bank2 = bank2;
-	}
+    public void setDefaultDiscountRate(BigDecimal defaultDiscountRate) {
+        this.defaultDiscountRate = defaultDiscountRate;
+    }
 
-	@Column(name = "CREDIT_LIMIT")
-	public BigDecimal getCreditLimit() {
-		return creditLimit;
-	}
+    @Column(name = "BANK_1")
+    public String getBank1() {
+        return bank1;
+    }
 
-	public void setCreditLimit(BigDecimal creditLimit) {
-		this.creditLimit = creditLimit;
-	}
+    public void setBank1(String bank1) {
+        this.bank1 = bank1;
+    }
 
-	@Column(name = "VAT_APPLICABLE")
-	public BigDecimal getVatApplicable() {
-		return vatApplicable;
-	}
+    @Column(name = "BANK_2")
+    public String getBank2() {
+        return bank2;
+    }
 
-	public void setVatApplicable(BigDecimal vatApplicable) {
-		this.vatApplicable = vatApplicable;
-	}
+    public void setBank2(String bank2) {
+        this.bank2 = bank2;
+    }
 
-	@Column(name = "DESCRIPTION")
-	public String getDescription() {
-		return description;
-	}
+    @Column(name = "CREDIT_LIMIT")
+    public BigDecimal getCreditLimit() {
+        return creditLimit;
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    public void setCreditLimit(BigDecimal creditLimit) {
+        this.creditLimit = creditLimit;
+    }
 
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "FK_ADDRESS_DELIVERY")
-	public Address getDeliveryAddress() {
-		return deliveryAddress;
-	}
+    @Column(name = "VAT_APPLICABLE")
+    public BigDecimal getVatApplicable() {
+        return vatApplicable;
+    }
 
-	public void setDeliveryAddress(Address deliveryAddress) {
-		this.deliveryAddress = deliveryAddress;
-	}
+    public void setVatApplicable(BigDecimal vatApplicable) {
+        this.vatApplicable = vatApplicable;
+    }
 
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "FK_ADDRESS_BILLING")
-	public Address getBillingAddress() {
-		return billingAddress;
-	}
+    @Column(name = "DESCRIPTION")
+    public String getDescription() {
+        return description;
+    }
 
-	public void setBillingAddress(Address billingAddress) {
-		this.billingAddress = billingAddress;
-	}
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
-	@OneToOne(cascade = CascadeType.REFRESH)
-	@JoinColumn(name = "FK_PAYMENT_MODE")
-	public PaymentMode getPaymentMode() {
-		return paymentMode;
-	}
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "FK_ADDRESS_DELIVERY")
+    public Address getDeliveryAddress() {
+        return deliveryAddress;
+    }
 
-	public void setPaymentMode(PaymentMode paymentMode) {
-		this.paymentMode = paymentMode;
-	}
+    public void setDeliveryAddress(Address deliveryAddress) {
+        this.deliveryAddress = deliveryAddress;
+    }
 
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "FK_CONTACT_INFORMATION")
-	public ContactInformation getContactInformation() {
-		return contactInformation;
-	}
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "FK_ADDRESS_BILLING")
+    public Address getBillingAddress() {
+        return billingAddress;
+    }
 
-	public void setContactInformation(ContactInformation contactInformation) {
-		this.contactInformation = contactInformation;
-	}
+    public void setBillingAddress(Address billingAddress) {
+        this.billingAddress = billingAddress;
+    }
 
-	@OneToOne(cascade = CascadeType.REFRESH)
-	@JoinColumn(name = "FK_CIVILITY")
-	public Civility getCivility() {
-		return civility;
-	}
+    @OneToOne(cascade = CascadeType.REFRESH)
+    @JoinColumn(name = "FK_PAYMENT_MODE")
+    public PaymentMode getPaymentMode() {
+        return paymentMode;
+    }
 
-	public void setCivility(Civility civility) {
-		this.civility = civility;
-	}
-	
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "FK_AGENT")
-	public Agent getAgent() {
-		return agent;
-	}
+    public void setPaymentMode(PaymentMode paymentMode) {
+        this.paymentMode = paymentMode;
+    }
 
-	public void setAgent(Agent agent) {
-		this.agent = agent;
-	}
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "FK_CONTACT_INFORMATION")
+    public ContactInformation getContactInformation() {
+        return contactInformation;
+    }
 
-	@OneToOne(cascade = CascadeType.REFRESH)
-	@JoinColumn(name = "FK_LEGAL_FORM")
-	public LegalForm getLegalForm() {
-		return legalForm;
-	}
+    public void setContactInformation(ContactInformation contactInformation) {
+        this.contactInformation = contactInformation;
+    }
 
-	public void setLegalForm(LegalForm legalForm) {
-		this.legalForm = legalForm;
-	}
+    @OneToOne(cascade = CascadeType.REFRESH)
+    @JoinColumn(name = "FK_CIVILITY")
+    public Civility getCivility() {
+        return civility;
+    }
 
-	@Override
-	public String toString() {
-		return "Customer [agent=" + agent + ", bank1=" + bank1 + ", bank2="
-				+ bank2 + ", billingAddress=" + billingAddress + ", civility="
-				+ civility + ", contactInformation=" + contactInformation
-				+ ", creditLimit=" + creditLimit + ", defaultDiscountRate="
-				+ defaultDiscountRate + ", deliveryAddress=" + deliveryAddress
-				+ ", description=" + description + ", legalForm=" + legalForm
-				+ ", name=" + getName() + ", paymentMode=" + paymentMode
-				+ ", vatApplicable=" + vatApplicable + ", vatNumber="
-				+ vatNumber + "]";
-	}
+    public void setCivility(Civility civility) {
+        this.civility = civility;
+    }
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "FK_AGENT")
+    public Agent getAgent() {
+        return agent;
+    }
+
+    public void setAgent(Agent agent) {
+        this.agent = agent;
+    }
+
+    @OneToOne(cascade = CascadeType.REFRESH)
+    @JoinColumn(name = "FK_LEGAL_FORM")
+    public LegalForm getLegalForm() {
+        return legalForm;
+    }
+
+    public void setLegalForm(LegalForm legalForm) {
+        this.legalForm = legalForm;
+    }
+
+    @Override
+    public String toString() {
+        return "Customer [agent=" + agent + ", bank1=" + bank1 + ", bank2=" + bank2 + ", billingAddress="
+                + billingAddress + ", civility=" + civility + ", contactInformation=" + contactInformation
+                + ", creditLimit=" + creditLimit + ", defaultDiscountRate=" + defaultDiscountRate
+                + ", deliveryAddress=" + deliveryAddress + ", description=" + description + ", legalForm=" + legalForm
+                + ", name=" + getName() + ", paymentMode=" + paymentMode + ", vatApplicable=" + vatApplicable
+                + ", vatNumber=" + vatNumber + "]";
+    }
 
 }

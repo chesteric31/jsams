@@ -80,6 +80,12 @@
 	<bean id="productService" parent="baseTransactionProxy">
 		<property name="target" ref="productServiceTarget" />
 	</bean>
+	<bean id="productCategoryServiceTarget" class="be.jsams.server.service.impl.ProductCategoryServiceImpl">
+		<property name="productCategoryDao" ref="productCategoryDao" />
+	</bean>
+	<bean id="productCategoryService" parent="baseTransactionProxy">
+		<property name="target" ref="productCategoryServiceTarget" />
+	</bean>
 
 	<bean id="commandDao" class="be.jsams.server.dao.impl.CommandDaoImpl">
 		<constructor-arg value="be.jsams.server.model.Command" />

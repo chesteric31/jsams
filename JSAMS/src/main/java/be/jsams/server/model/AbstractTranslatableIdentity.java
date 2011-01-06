@@ -7,46 +7,46 @@ import javax.persistence.MappedSuperclass;
  * 
  * 
  * @author chesteric31
- * @version $Rev$ $Date::   $Author$
+ * @version $$Rev$$ $$Date::                  $$ $$Author$$
  */
 @MappedSuperclass
 public class AbstractTranslatableIdentity extends AbstractIdentity {
 
-	/**
-	 * Serial Version UID
-	 */
-	private static final long serialVersionUID = 5943662285794644039L;
+    /**
+     * Serial Version UID
+     */
+    private static final long serialVersionUID = 5943662285794644039L;
 
-	private String label;
-	private String labelFr;
-	private String labelNl;
+    private String label;
+    private String labelFr;
+    private String labelNl;
 
-	@Column(name = "LABEL")
-	public String getLabel() {
-		return label;
-	}
+    @Column(name = "LABEL")
+    public String getLabel() {
+        return label;
+    }
 
-	public void setLabel(String label) {
-		this.label = label;
-	}
+    public void setLabel(String label) {
+        this.label = label;
+    }
 
-	@Column(name = "LABEL_FR")
-	public String getLabelFr() {
-		return labelFr;
-	}
+    @Column(name = "LABEL_FR")
+    public String getLabelFr() {
+        return labelFr;
+    }
 
-	public void setLabelFr(String labelFr) {
-		this.labelFr = labelFr;
-	}
+    public void setLabelFr(String labelFr) {
+        this.labelFr = labelFr;
+    }
 
-	@Column(name = "LABEL_NL")
-	public String getLabelNl() {
-		return labelNl;
-	}
+    @Column(name = "LABEL_NL")
+    public String getLabelNl() {
+        return labelNl;
+    }
 
-	public void setLabelNl(String labelNl) {
-		this.labelNl = labelNl;
-	}
+    public void setLabelNl(String labelNl) {
+        this.labelNl = labelNl;
+    }
 
     @Override
     public int hashCode() {
@@ -63,9 +63,9 @@ public class AbstractTranslatableIdentity extends AbstractIdentity {
         if (this == obj) {
             return true;
         }
-//        if (!super.equals(obj)) {
-//            return false;
-//        }
+        // if (!super.equals(obj)) {
+        // return false;
+        // }
         if (!(obj instanceof AbstractTranslatableIdentity)) {
             return false;
         }
@@ -96,8 +96,7 @@ public class AbstractTranslatableIdentity extends AbstractIdentity {
 
     @Override
     public String toString() {
-        return "AbstractTranslatableIdentity [label=" + label + ", labelFr="
-                + labelFr + ", labelNl=" + labelNl + "]";
+        return "AbstractTranslatableIdentity [label=" + label + ", labelFr=" + labelFr + ", labelNl=" + labelNl + "]";
     }
 
 }

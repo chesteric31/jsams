@@ -13,7 +13,7 @@ import javax.persistence.Table;
 
 /**
  * Agent entity object.
- *
+ * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
@@ -21,74 +21,73 @@ import javax.persistence.Table;
 @Table(name = "AGENT")
 public class Agent extends AbstractNamedIdentity {
 
-	/**
-	 * Serial Version UID
-	 */
-	private static final long serialVersionUID = 8508634686187725716L;
-	private String function;
-	
-	private List<Customer> customers;
-	private Civility civility;
-	private Address address;
-	private ContactInformation contactInformation;
+    /**
+     * Serial Version UID
+     */
+    private static final long serialVersionUID = 8508634686187725716L;
+    private String function;
 
-	public Agent() {
-		super();
-	}
+    private List<Customer> customers;
+    private Civility civility;
+    private Address address;
+    private ContactInformation contactInformation;
 
-	@Column(name = "FUNCTION")
-	public String getFunction() {
-		return function;
-	}
+    public Agent() {
+        super();
+    }
 
-	public void setFunction(String function) {
-		this.function = function;
-	}
+    @Column(name = "FUNCTION")
+    public String getFunction() {
+        return function;
+    }
 
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "FK_CIVILITY")
-	public Civility getCivility() {
-		return civility;
-	}
+    public void setFunction(String function) {
+        this.function = function;
+    }
 
-	public void setCivility(Civility civility) {
-		this.civility = civility;
-	}
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "FK_CIVILITY")
+    public Civility getCivility() {
+        return civility;
+    }
 
-	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "FK_ADDRESS")
-	public Address getAddress() {
-		return address;
-	}
+    public void setCivility(Civility civility) {
+        this.civility = civility;
+    }
 
-	public void setAddress(Address address) {
-		this.address = address;
-	}
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "FK_ADDRESS")
+    public Address getAddress() {
+        return address;
+    }
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "FK_CONTACT_INFORMATION")
-	public ContactInformation getContactInformation() {
-		return contactInformation;
-	}
+    public void setAddress(Address address) {
+        this.address = address;
+    }
 
-	public void setContactInformation(ContactInformation contactInformation) {
-		this.contactInformation = contactInformation;
-	}
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "FK_CONTACT_INFORMATION")
+    public ContactInformation getContactInformation() {
+        return contactInformation;
+    }
 
-	@ManyToMany(mappedBy = "agent")
-	public List<Customer> getCustomers() {
-		return customers;
-	}
+    public void setContactInformation(ContactInformation contactInformation) {
+        this.contactInformation = contactInformation;
+    }
 
-	public void setCustomers(List<Customer> customers) {
-		this.customers = customers;
-	}
+    @ManyToMany(mappedBy = "agent")
+    public List<Customer> getCustomers() {
+        return customers;
+    }
 
-	@Override
-	public String toString() {
-		return "Agent [address=" + address + ", civility=" + civility
-				+ ", contactInformation=" + contactInformation + ", customers="
-				+ customers + ", function=" + function + ", name=" + getName() + "]";
-	}
+    public void setCustomers(List<Customer> customers) {
+        this.customers = customers;
+    }
+
+    @Override
+    public String toString() {
+        return "Agent [address=" + address + ", civility=" + civility + ", contactInformation=" + contactInformation
+                + ", customers=" + customers + ", function=" + function + ", name=" + getName() + "]";
+    }
 
 }
