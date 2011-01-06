@@ -43,7 +43,8 @@ import com.jgoodies.validation.view.ValidationResultViewFactory;
  * @author chesteric31
  * @version $$Rev$$ $$Date::                  $$ $$Author$$
  */
-public abstract class EditDialog<M extends AbstractIdentity, V extends Validator<M>, S extends Service<M>> extends JsamsDialog implements JsamsButtonsInterface {
+public abstract class EditDialog<M extends AbstractIdentity, V extends Validator<M>, S extends Service<M>>
+		extends JsamsDialog implements JsamsButtonsInterface {
 
 	/**
 	 * Serial Version UID
@@ -51,9 +52,9 @@ public abstract class EditDialog<M extends AbstractIdentity, V extends Validator
 	private static final long serialVersionUID = 5146784638798425733L;
 
 	private static final Log LOGGER = LogFactory.getLog(EditDialog.class);
-	
+
 	private M model;
-	
+
 	private JsamsButtonsPanel buttonsPanel;
 
 	private ValidationResultModel validationResultModel = new DefaultValidationResultModel();
@@ -61,16 +62,17 @@ public abstract class EditDialog<M extends AbstractIdentity, V extends Validator
 	private JsamsStatusBar statusBar;
 
 	private JPanel southPanel;
-	
+
 	private Validator<M> validator;
-	
+
 	private Service<M> service;
-	
-	public EditDialog(final JsamsMainFrame parent, final I18nString title, final String iconFileName) {
+
+	public EditDialog(final JsamsMainFrame parent, final I18nString title,
+			final String iconFileName) {
 		super(parent, title, iconFileName);
 		add(buildSouthPanel(), BorderLayout.SOUTH);
 	}
-	
+
 	public EditDialog(final JsamsMainFrame parent, final I18nString title) {
 		this(parent, title, null);
 	}
@@ -95,7 +97,8 @@ public abstract class EditDialog<M extends AbstractIdentity, V extends Validator
 		return validationResultModel;
 	}
 
-	public void setValidationResultModel(ValidationResultModel validationResultModel) {
+	public void setValidationResultModel(
+			ValidationResultModel validationResultModel) {
 		this.validationResultModel = validationResultModel;
 	}
 
@@ -141,9 +144,9 @@ public abstract class EditDialog<M extends AbstractIdentity, V extends Validator
 			}
 		}
 	}
-	
+
 	public abstract void performOk();
-	
+
 	public boolean postPerformOk(final M object) {
 		ValidationResult result = validator.validate(object);
 		validationResultModel.setResult(result);

@@ -50,7 +50,7 @@ public class EditCustomerDialog extends EditDialog<Customer, CustomerValidator, 
 	 */
 	private static final long serialVersionUID = 6898471936119469349L;
 
-	protected final Log LOGGER = LogFactory.getLog(EditCustomerDialog.class);
+	protected static final Log LOGGER = LogFactory.getLog(EditCustomerDialog.class);
 
 	private static final int DEFAULT_COLUMN_SPAN = 1;
 

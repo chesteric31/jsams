@@ -12,6 +12,12 @@ import be.jsams.server.model.Customer;
 public class CustomerDaoImpl extends GenericDaoImpl<Customer> implements
 		CustomerDao {
 
+	/**
+	 * Constructor
+	 * 
+	 * @param type
+	 *            the class type
+	 */
 	public CustomerDaoImpl(Class<Customer> type) {
 		super(type);
 	}

@@ -20,12 +20,21 @@ import be.jsams.server.model.ProductCategory;
 public class ProductDaoImpl extends GenericDaoImpl<Product> implements
 		ProductDao {
 
+	/**
+	 * Constructor
+	 * 
+	 * @param type
+	 *            the class type
+	 */
 	public ProductDaoImpl(Class<Product> type) {
 		super(type);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@SuppressWarnings("unchecked")
-	public List<Product> findByCriteria(Product criteria) {
+	public List<Product> findByCriteria(final Product criteria) {
 		StringBuilder queryBuilder = new StringBuilder("FROM Product p");
 		
 		boolean isFirst = true;

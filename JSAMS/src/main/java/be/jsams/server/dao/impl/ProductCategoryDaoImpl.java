@@ -12,6 +12,12 @@ import be.jsams.server.model.ProductCategory;
 public class ProductCategoryDaoImpl extends GenericDaoImpl<ProductCategory>
 		implements ProductCategoryDao {
 
+	/**
+	 * Constructor
+	 * 
+	 * @param type
+	 *            the class type
+	 */
 	public ProductCategoryDaoImpl(Class<ProductCategory> type) {
 		super(type);
 	}

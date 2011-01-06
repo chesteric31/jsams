@@ -31,19 +31,22 @@ import com.jgoodies.validation.view.ValidationComponentUtils;
 import com.mysql.jdbc.StringUtils;
 
 /**
- * Edit society {@link EditDialog}, to create or update a {@link Society} object.
+ * Edit society {@link EditDialog}, to create or update a {@link Society}
+ * object.
  * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class EditSocietyDialog extends EditDialog<Society, SocietyValidator, SocietyService>  {
+public class EditSocietyDialog extends
+		EditDialog<Society, SocietyValidator, SocietyService> {
 
 	/**
 	 * Serial Version UID
 	 */
 	private static final long serialVersionUID = 4225744372592399187L;
 
-	protected final Log LOGGER = LogFactory.getLog(EditSocietyDialog.class);
+	protected static final Log LOGGER = LogFactory
+			.getLog(EditSocietyDialog.class);
 
 	private static final int DEFAULT_COLUMN_SPAN = 9;
 
@@ -174,13 +177,13 @@ public class EditSocietyDialog extends EditDialog<Society, SocietyValidator, Soc
 		builder.appendI15d(JsamsI18nLabelResource.LABEL_VAT_NUMBER.getKey(),
 				textFieldVatNumber, DEFAULT_COLUMN_SPAN);
 		builder.nextLine();
-		
+
 		getContentPane().add(builder.getPanel());
 
 		setMandatoryFields();
 
 		ValidationComponentUtils.updateComponentTreeMandatoryBorder(this);
-		
+
 		pack();
 	}
 

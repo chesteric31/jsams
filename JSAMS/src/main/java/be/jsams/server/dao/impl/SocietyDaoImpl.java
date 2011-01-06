@@ -13,6 +13,12 @@ import be.jsams.server.model.Society;
 public class SocietyDaoImpl extends GenericDaoImpl<Society> implements
 		SocietyDao {
 
+	/**
+	 * Constructor
+	 * 
+	 * @param type
+	 *            the class type
+	 */
 	public SocietyDaoImpl(Class<Society> type) {
 		super(type);
 	}

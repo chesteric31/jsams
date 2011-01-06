@@ -10,10 +10,13 @@ import java.util.Locale;
  */
 public class UserContext {
 
+	/** English language constant */
 	public static final String ENGLISH = "en";
 
+	/** French language constant */
 	public static final String FRENCH = "fr";
 
+	/** Dutch language constant */
 	public static final String DUTCH = "nl";
 
 	/**

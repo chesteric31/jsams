@@ -58,7 +58,7 @@ public class SearchProductPanel extends JPanel implements JsamsButtonsInterface 
      */
     private static final long serialVersionUID = 2222078506888522042L;
 
-    protected final Log LOGGER = LogFactory.getLog(this.getClass());
+    protected static final Log LOGGER = LogFactory.getLog(SearchProductPanel.class);
 
     private static final int DEFAULT_V_GAP = 10;
 
