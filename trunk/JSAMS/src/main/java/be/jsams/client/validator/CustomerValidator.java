@@ -20,6 +20,9 @@ import com.jgoodies.validation.util.ValidationUtils;
  */
 public class CustomerValidator implements Validator<Customer> {
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public ValidationResult validate(final Customer customer) {
 		PropertyValidationSupport support = new PropertyValidationSupport(
 				customer, "");
