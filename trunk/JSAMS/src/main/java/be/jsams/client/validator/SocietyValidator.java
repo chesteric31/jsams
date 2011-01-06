@@ -20,6 +20,9 @@ import com.jgoodies.validation.util.ValidationUtils;
  */
 public class SocietyValidator implements Validator<Society> {
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public ValidationResult validate(final Society society) {
 		PropertyValidationSupport support = new PropertyValidationSupport(
 				society, "");

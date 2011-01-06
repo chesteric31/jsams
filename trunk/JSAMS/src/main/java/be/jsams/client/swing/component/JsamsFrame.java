@@ -29,7 +29,7 @@ public abstract class JsamsFrame extends JFrame {
 	 */
 	private static final long serialVersionUID = 5732252811794674139L;
 
-	protected final Log LOGGER = LogFactory.getLog(JsamsFrame.class);
+	protected static final Log LOGGER = LogFactory.getLog(JsamsFrame.class);
 
 	public final int defaultFontSize = 13;
 

@@ -9,11 +9,11 @@ import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 
 /**
- * Specific {@link JTable} for JSAMS with auto resize capabilities
- * when the call to setModel method.
+ * Specific {@link JTable} for JSAMS with auto resize capabilities when the call
+ * to setModel method.
  * 
  * @author chesteric31
- * @version $Rev$ $Date:: $ $Author$
+ * @version $Rev$ $Date::   $Author$
  */
 public class JsamsTable extends JTable {
 
@@ -24,11 +24,17 @@ public class JsamsTable extends JTable {
 
 	private boolean autoResizeColumnWidth = false;
 
+	/**
+	 * Constructor.
+	 * 
+	 * @param autoResizeColumnWidth
+	 *            true to auto resize the column width, false otherwise
+	 */
 	public JsamsTable(boolean autoResizeColumnWidth) {
 		super();
 		this.autoResizeColumnWidth = autoResizeColumnWidth;
 	}
-	
+
 	@Override
 	public void setModel(final TableModel model) {
 		super.setModel(model);
@@ -36,7 +42,7 @@ public class JsamsTable extends JTable {
 			autoResizeColumnWidth();
 		}
 	}
-	
+
 	private void autoResizeColumnWidth() {
 		int margin = 5;
 
