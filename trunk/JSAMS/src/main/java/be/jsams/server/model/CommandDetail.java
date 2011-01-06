@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 /**
  * Command detail (line) entity object.
- *
+ * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
@@ -19,94 +19,93 @@ import javax.persistence.Table;
 @Table(name = "COMMAND_DETAIL")
 public class CommandDetail extends AbstractIdentity {
 
-	/**
-	 * Serial Version UID
-	 */
-	private static final long serialVersionUID = 3749700047686967069L;
-	private int quantity;
-	private BigDecimal price;
-	private BigDecimal vatApplicable;
-	private BigDecimal discountRate;
-	private boolean transferred;
-	
-	private Command command;
-	private Product product;
+    /**
+     * Serial Version UID
+     */
+    private static final long serialVersionUID = 3749700047686967069L;
+    private int quantity;
+    private BigDecimal price;
+    private BigDecimal vatApplicable;
+    private BigDecimal discountRate;
+    private boolean transferred;
 
-	public CommandDetail() {
-		super();
-	}
+    private Command command;
+    private Product product;
 
-	@Column(name = "QUANTITY")
-	public int getQuantity() {
-		return quantity;
-	}
+    public CommandDetail() {
+        super();
+    }
 
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
+    @Column(name = "QUANTITY")
+    public int getQuantity() {
+        return quantity;
+    }
 
-	@Column(name = "PRICE")
-	public BigDecimal getPrice() {
-		return price;
-	}
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
 
-	public void setPrice(BigDecimal price) {
-		this.price = price;
-	}
+    @Column(name = "PRICE")
+    public BigDecimal getPrice() {
+        return price;
+    }
 
-	@Column(name = "VAT_APPLICABLE")
-	public BigDecimal getVatApplicable() {
-		return vatApplicable;
-	}
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
 
-	public void setVatApplicable(BigDecimal vatApplicable) {
-		this.vatApplicable = vatApplicable;
-	}
+    @Column(name = "VAT_APPLICABLE")
+    public BigDecimal getVatApplicable() {
+        return vatApplicable;
+    }
 
-	@Column(name = "DISCOUNT_RATE")
-	public BigDecimal getDiscountRate() {
-		return discountRate;
-	}
+    public void setVatApplicable(BigDecimal vatApplicable) {
+        this.vatApplicable = vatApplicable;
+    }
 
-	public void setDiscountRate(BigDecimal discountRate) {
-		this.discountRate = discountRate;
-	}
+    @Column(name = "DISCOUNT_RATE")
+    public BigDecimal getDiscountRate() {
+        return discountRate;
+    }
 
-	@Column(name = "TRANSFERRED")
-	public boolean isTransferred() {
-		return transferred;
-	}
+    public void setDiscountRate(BigDecimal discountRate) {
+        this.discountRate = discountRate;
+    }
 
-	public void setTransferred(boolean transferred) {
-		this.transferred = transferred;
-	}
+    @Column(name = "TRANSFERRED")
+    public boolean isTransferred() {
+        return transferred;
+    }
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "FK_COMMAND")
-	public Command getCommand() {
-		return command;
-	}
+    public void setTransferred(boolean transferred) {
+        this.transferred = transferred;
+    }
 
-	public void setCommand(Command command) {
-		this.command = command;
-	}
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "FK_COMMAND")
+    public Command getCommand() {
+        return command;
+    }
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "FK_PRODUCT")
-	public Product getProduct() {
-		return product;
-	}
+    public void setCommand(Command command) {
+        this.command = command;
+    }
 
-	public void setProduct(Product product) {
-		this.product = product;
-	}
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "FK_PRODUCT")
+    public Product getProduct() {
+        return product;
+    }
 
-	@Override
-	public String toString() {
-		return "CommandDetail [command=" + command + ", discountRate="
-				+ discountRate + ", price=" + price + ", product=" + product
-				+ ", quantity=" + quantity + ", transferred=" + transferred
-				+ ", vatApplicable=" + vatApplicable + "]";
-	}
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    @Override
+    public String toString() {
+        return "CommandDetail [command=" + command + ", discountRate=" + discountRate + ", price=" + price
+                + ", product=" + product + ", quantity=" + quantity + ", transferred=" + transferred
+                + ", vatApplicable=" + vatApplicable + "]";
+    }
 
 }

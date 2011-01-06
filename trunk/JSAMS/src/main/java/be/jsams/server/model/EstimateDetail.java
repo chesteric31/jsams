@@ -11,102 +11,101 @@ import javax.persistence.Table;
 
 /**
  * Estimate detail (line) entity object.
- *
+ * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
 @Entity
 @Table(name = "ESTIMATE_DETAIL")
 public class EstimateDetail extends AbstractIdentity {
-	
-	/**
-	 * Serial Version UID
-	 */
-	private static final long serialVersionUID = -389048976022120236L;
-	private int quantity;
-	private BigDecimal price;
-	private BigDecimal vatApplicable;
-	private BigDecimal discountRate;
-	private boolean transferred;
-	
-	private Estimate estimate;
-	private Product product;
 
-	public EstimateDetail() {
-		super();
-	}
+    /**
+     * Serial Version UID
+     */
+    private static final long serialVersionUID = -389048976022120236L;
+    private int quantity;
+    private BigDecimal price;
+    private BigDecimal vatApplicable;
+    private BigDecimal discountRate;
+    private boolean transferred;
 
-	@Column(name = "QUANTITY")
-	public int getQuantity() {
-		return quantity;
-	}
+    private Estimate estimate;
+    private Product product;
 
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
-	}
+    public EstimateDetail() {
+        super();
+    }
 
-	@Column(name = "PRICE")
-	public BigDecimal getPrice() {
-		return price;
-	}
+    @Column(name = "QUANTITY")
+    public int getQuantity() {
+        return quantity;
+    }
 
-	public void setPrice(BigDecimal price) {
-		this.price = price;
-	}
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
 
-	@Column(name = "VAT_APPLICABLE")
-	public BigDecimal getVatApplicable() {
-		return vatApplicable;
-	}
+    @Column(name = "PRICE")
+    public BigDecimal getPrice() {
+        return price;
+    }
 
-	public void setVatApplicable(BigDecimal vatApplicable) {
-		this.vatApplicable = vatApplicable;
-	}
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
 
-	@Column(name = "DISCOUNT_RATE")
-	public BigDecimal getDiscountRate() {
-		return discountRate;
-	}
+    @Column(name = "VAT_APPLICABLE")
+    public BigDecimal getVatApplicable() {
+        return vatApplicable;
+    }
 
-	public void setDiscountRate(BigDecimal discountRate) {
-		this.discountRate = discountRate;
-	}
+    public void setVatApplicable(BigDecimal vatApplicable) {
+        this.vatApplicable = vatApplicable;
+    }
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "FK_ESTIMATE")
-	public Estimate getEstimate() {
-		return estimate;
-	}
+    @Column(name = "DISCOUNT_RATE")
+    public BigDecimal getDiscountRate() {
+        return discountRate;
+    }
 
-	public void setEstimate(Estimate estimate) {
-		this.estimate = estimate;
-	}
+    public void setDiscountRate(BigDecimal discountRate) {
+        this.discountRate = discountRate;
+    }
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "FK_PRODUCT")
-	public Product getProduct() {
-		return product;
-	}
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "FK_ESTIMATE")
+    public Estimate getEstimate() {
+        return estimate;
+    }
 
-	public void setProduct(Product product) {
-		this.product = product;
-	}
+    public void setEstimate(Estimate estimate) {
+        this.estimate = estimate;
+    }
 
-	@Column(name = "TRANSFERRED")
-	public boolean isTransferred() {
-		return transferred;
-	}
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "FK_PRODUCT")
+    public Product getProduct() {
+        return product;
+    }
 
-	public void setTransferred(boolean transferred) {
-		this.transferred = transferred;
-	}
+    public void setProduct(Product product) {
+        this.product = product;
+    }
 
-	@Override
-	public String toString() {
-		return "EstimateDetail [discountRate=" + discountRate + ", estimate="
-				+ estimate + ", price=" + price + ", product=" + product
-				+ ", quantity=" + quantity + ", transferred=" + transferred
-				+ ", vatApplicable=" + vatApplicable + "]";
-	}
+    @Column(name = "TRANSFERRED")
+    public boolean isTransferred() {
+        return transferred;
+    }
+
+    public void setTransferred(boolean transferred) {
+        this.transferred = transferred;
+    }
+
+    @Override
+    public String toString() {
+        return "EstimateDetail [discountRate=" + discountRate + ", estimate=" + estimate + ", price=" + price
+                + ", product=" + product + ", quantity=" + quantity + ", transferred=" + transferred
+                + ", vatApplicable=" + vatApplicable + "]";
+    }
 
 }

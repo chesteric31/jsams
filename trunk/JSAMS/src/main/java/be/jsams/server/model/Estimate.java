@@ -16,7 +16,7 @@ import javax.persistence.TemporalType;
 
 /**
  * Estimate entity object.
- *
+ * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
@@ -24,97 +24,96 @@ import javax.persistence.TemporalType;
 @Table(name = "ESTIMATE")
 public class Estimate extends AbstractIdentity {
 
-	/**
-	 * Serial Version UID
-	 */
-	private static final long serialVersionUID = 4590224667073848578L;
-	private Date creationDate;
-	private String remark;
-	private BigDecimal discountRate;
+    /**
+     * Serial Version UID
+     */
+    private static final long serialVersionUID = 4590224667073848578L;
+    private Date creationDate;
+    private String remark;
+    private BigDecimal discountRate;
 
-	private Agent agent;
-	private Customer customer;
-	private Address billingAddress;
+    private Agent agent;
+    private Customer customer;
+    private Address billingAddress;
 
-	private List<EstimateDetail> details;
+    private List<EstimateDetail> details;
 
-	public Estimate() {
-		super();
-	}
+    public Estimate() {
+        super();
+    }
 
-	@Column(name = "CREATION_DATE")
-	@Temporal(TemporalType.DATE)
-	public Date getCreationDate() {
-		return creationDate;
-	}
+    @Column(name = "CREATION_DATE")
+    @Temporal(TemporalType.DATE)
+    public Date getCreationDate() {
+        return creationDate;
+    }
 
-	public void setCreationDate(Date creationDate) {
-		this.creationDate = creationDate;
-	}
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
+    }
 
-	@Column(name = "REMARK")
-	public String getRemark() {
-		return remark;
-	}
+    @Column(name = "REMARK")
+    public String getRemark() {
+        return remark;
+    }
 
-	public void setRemark(String remark) {
-		this.remark = remark;
-	}
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
 
-	@Column(name = "DISCOUNT_RATE")
-	public BigDecimal getDiscountRate() {
-		return discountRate;
-	}
+    @Column(name = "DISCOUNT_RATE")
+    public BigDecimal getDiscountRate() {
+        return discountRate;
+    }
 
-	public void setDiscountRate(BigDecimal discountRate) {
-		this.discountRate = discountRate;
-	}
+    public void setDiscountRate(BigDecimal discountRate) {
+        this.discountRate = discountRate;
+    }
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "FK_AGENT")
-	public Agent getAgent() {
-		return agent;
-	}
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "FK_AGENT")
+    public Agent getAgent() {
+        return agent;
+    }
 
-	public void setAgent(Agent agent) {
-		this.agent = agent;
-	}
+    public void setAgent(Agent agent) {
+        this.agent = agent;
+    }
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "FK_CUSTOMER")
-	public Customer getCustomer() {
-		return customer;
-	}
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "FK_CUSTOMER")
+    public Customer getCustomer() {
+        return customer;
+    }
 
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
-	}
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "FK_ADDRESS_BILLING")
-	public Address getBillingAddress() {
-		return billingAddress;
-	}
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "FK_ADDRESS_BILLING")
+    public Address getBillingAddress() {
+        return billingAddress;
+    }
 
-	public void setBillingAddress(Address billingAddress) {
-		this.billingAddress = billingAddress;
-	}
+    public void setBillingAddress(Address billingAddress) {
+        this.billingAddress = billingAddress;
+    }
 
-	@OneToMany(mappedBy = "estimate")
-	public List<EstimateDetail> getDetails() {
-		return details;
-	}
+    @OneToMany(mappedBy = "estimate")
+    public List<EstimateDetail> getDetails() {
+        return details;
+    }
 
-	public void setDetails(List<EstimateDetail> details) {
-		this.details = details;
-	}
+    public void setDetails(List<EstimateDetail> details) {
+        this.details = details;
+    }
 
-	@Override
-	public String toString() {
-		return "Estimate [agent=" + agent + ", billingAddress="
-				+ billingAddress + ", creationDate=" + creationDate
-				+ ", customer=" + customer + ", details=" + details
-				+ ", discountRate=" + discountRate + ", remark=" + remark + "]";
-	}
+    @Override
+    public String toString() {
+        return "Estimate [agent=" + agent + ", billingAddress=" + billingAddress + ", creationDate=" + creationDate
+                + ", customer=" + customer + ", details=" + details + ", discountRate=" + discountRate + ", remark="
+                + remark + "]";
+    }
 
 }

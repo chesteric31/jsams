@@ -16,7 +16,7 @@ import javax.persistence.TemporalType;
 
 /**
  * Delivery order entity object.
- *
+ * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
@@ -24,85 +24,84 @@ import javax.persistence.TemporalType;
 @Table(name = "DELIVERY_ORDER")
 public class DeliveryOrder extends AbstractIdentity {
 
-	/**
-	 * Serial Version UID
-	 */
-	private static final long serialVersionUID = 6319674447875624133L;
-	private Date creationDate;
-	private String remark;
-	private BigDecimal discountRate;
-	
-	private Customer customer;
-	private Address deliveryAddress;
+    /**
+     * Serial Version UID
+     */
+    private static final long serialVersionUID = 6319674447875624133L;
+    private Date creationDate;
+    private String remark;
+    private BigDecimal discountRate;
 
-	private List<DeliveryOrderDetail> details;
-	
-	public DeliveryOrder() {
-		super();
-	}
-	
-	@Column(name = "CREATION_DATE")
-	@Temporal(TemporalType.DATE)
-	public Date getCreationDate() {
-		return creationDate;
-	}
+    private Customer customer;
+    private Address deliveryAddress;
 
-	@Column(name = "REMARK")
-	public String getRemark() {
-		return remark;
-	}
+    private List<DeliveryOrderDetail> details;
 
-	public void setRemark(String remark) {
-		this.remark = remark;
-	}
+    public DeliveryOrder() {
+        super();
+    }
 
-	@Column(name = "DISCOUNT_RATE")
-	public BigDecimal getDiscountRate() {
-		return discountRate;
-	}
+    @Column(name = "CREATION_DATE")
+    @Temporal(TemporalType.DATE)
+    public Date getCreationDate() {
+        return creationDate;
+    }
 
-	public void setDiscountRate(BigDecimal discountRate) {
-		this.discountRate = discountRate;
-	}
+    @Column(name = "REMARK")
+    public String getRemark() {
+        return remark;
+    }
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "FK_CUSTOMER")
-	public Customer getCustomer() {
-		return customer;
-	}
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
 
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
-	}
+    @Column(name = "DISCOUNT_RATE")
+    public BigDecimal getDiscountRate() {
+        return discountRate;
+    }
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "FK_ADDRESS_DELIVERY")
-	public Address getDeliveryAddress() {
-		return deliveryAddress;
-	}
+    public void setDiscountRate(BigDecimal discountRate) {
+        this.discountRate = discountRate;
+    }
 
-	public void setDeliveryAddress(Address deliveryAddress) {
-		this.deliveryAddress = deliveryAddress;
-	}
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "FK_CUSTOMER")
+    public Customer getCustomer() {
+        return customer;
+    }
 
-	@OneToMany(mappedBy = "deliveryOrder")
-	public List<DeliveryOrderDetail> getDetails() {
-		return details;
-	}
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
 
-	public void setDetails(List<DeliveryOrderDetail> details) {
-		this.details = details;
-	}
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "FK_ADDRESS_DELIVERY")
+    public Address getDeliveryAddress() {
+        return deliveryAddress;
+    }
 
-	public void setCreationDate(Date creationDate) {
-		this.creationDate = creationDate;
-	}
+    public void setDeliveryAddress(Address deliveryAddress) {
+        this.deliveryAddress = deliveryAddress;
+    }
 
-	@Override
-	public String toString() {
-		return "DeliveryOrder [creationDate=" + creationDate + ", customer="
-				+ customer + ", deliveryAddress=" + deliveryAddress
-				+ ", discountRate=" + discountRate + ", remark=" + remark + "]";
-	}
-	
+    @OneToMany(mappedBy = "deliveryOrder")
+    public List<DeliveryOrderDetail> getDetails() {
+        return details;
+    }
+
+    public void setDetails(List<DeliveryOrderDetail> details) {
+        this.details = details;
+    }
+
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    @Override
+    public String toString() {
+        return "DeliveryOrder [creationDate=" + creationDate + ", customer=" + customer + ", deliveryAddress="
+                + deliveryAddress + ", discountRate=" + discountRate + ", remark=" + remark + "]";
+    }
+
 }

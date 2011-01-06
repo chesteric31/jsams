@@ -5,7 +5,7 @@ import javax.persistence.Table;
 
 /**
  * Civility entity object.
- *
+ * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
@@ -13,13 +13,13 @@ import javax.persistence.Table;
 @Table(name = "CIVILITY")
 public class Civility extends AbstractTranslatableIdentity {
 
-	/**
-	 * Serial Version UID
-	 */
-	private static final long serialVersionUID = -7268110575101379157L;
+    /**
+     * Serial Version UID
+     */
+    private static final long serialVersionUID = -7268110575101379157L;
 
-	public Civility() {
-		super();
-	}
+    public Civility() {
+        super();
+    }
 
 }

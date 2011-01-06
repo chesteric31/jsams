@@ -13,13 +13,13 @@ import javax.persistence.Table;
 @Table(name = "PAYMENT_MODE")
 public class PaymentMode extends AbstractTranslatableIdentity {
 
-	/**
-	 * Serial Version UID
-	 */
-	private static final long serialVersionUID = -9072503968708609612L;
+    /**
+     * Serial Version UID
+     */
+    private static final long serialVersionUID = -9072503968708609612L;
 
-	public PaymentMode() {
-		super();
-	}
+    public PaymentMode() {
+        super();
+    }
 
 }

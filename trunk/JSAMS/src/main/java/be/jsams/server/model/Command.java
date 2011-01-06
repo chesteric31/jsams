@@ -16,7 +16,7 @@ import javax.persistence.TemporalType;
 
 /**
  * Command entity object.
- *
+ * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
@@ -24,109 +24,107 @@ import javax.persistence.TemporalType;
 @Table(name = "COMMAND")
 public class Command extends AbstractIdentity {
 
-	/**
-	 * Serial Version UID
-	 */
-	private static final long serialVersionUID = 8102219472482522357L;
-	private Date creationDate;
-	private String remark;
-	private BigDecimal discountRate;
-	
-	private Agent agent;
-	private Customer customer;
-	private Address billingAddress;
-	private Address deliveryAddress;
+    /**
+     * Serial Version UID
+     */
+    private static final long serialVersionUID = 8102219472482522357L;
+    private Date creationDate;
+    private String remark;
+    private BigDecimal discountRate;
 
-	private List<CommandDetail> details;
-	
-	public Command() {
-		super();
-	}
+    private Agent agent;
+    private Customer customer;
+    private Address billingAddress;
+    private Address deliveryAddress;
 
-	@Column(name = "CREATION_DATE")
-	@Temporal(TemporalType.DATE)
-	public Date getCreationDate() {
-		return creationDate;
-	}
+    private List<CommandDetail> details;
 
-	public void setCreationDate(Date creationDate) {
-		this.creationDate = creationDate;
-	}
+    public Command() {
+        super();
+    }
 
-	@Column(name = "REMARK")
-	public String getRemark() {
-		return remark;
-	}
+    @Column(name = "CREATION_DATE")
+    @Temporal(TemporalType.DATE)
+    public Date getCreationDate() {
+        return creationDate;
+    }
 
-	public void setRemark(String remark) {
-		this.remark = remark;
-	}
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
+    }
 
-	@Column(name = "DISCOUNT_RATE")
-	public BigDecimal getDiscountRate() {
-		return discountRate;
-	}
+    @Column(name = "REMARK")
+    public String getRemark() {
+        return remark;
+    }
 
-	public void setDiscountRate(BigDecimal discountRate) {
-		this.discountRate = discountRate;
-	}
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "FK_AGENT")
-	public Agent getAgent() {
-		return agent;
-	}
+    @Column(name = "DISCOUNT_RATE")
+    public BigDecimal getDiscountRate() {
+        return discountRate;
+    }
 
-	public void setAgent(Agent agent) {
-		this.agent = agent;
-	}
+    public void setDiscountRate(BigDecimal discountRate) {
+        this.discountRate = discountRate;
+    }
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "FK_CUSTOMER")
-	public Customer getCustomer() {
-		return customer;
-	}
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "FK_AGENT")
+    public Agent getAgent() {
+        return agent;
+    }
 
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
-	}
+    public void setAgent(Agent agent) {
+        this.agent = agent;
+    }
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "FK_ADDRESS_BILLING")
-	public Address getBillingAddress() {
-		return billingAddress;
-	}
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "FK_CUSTOMER")
+    public Customer getCustomer() {
+        return customer;
+    }
 
-	public void setBillingAddress(Address billingAddress) {
-		this.billingAddress = billingAddress;
-	}
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
 
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "FK_ADDRESS_DELIVERY")
-	public Address getDeliveryAddress() {
-		return deliveryAddress;
-	}
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "FK_ADDRESS_BILLING")
+    public Address getBillingAddress() {
+        return billingAddress;
+    }
 
-	public void setDeliveryAddress(Address deliveryAddress) {
-		this.deliveryAddress = deliveryAddress;
-	}
+    public void setBillingAddress(Address billingAddress) {
+        this.billingAddress = billingAddress;
+    }
 
-	@OneToMany(mappedBy = "command")
-	public List<CommandDetail> getDetails() {
-		return details;
-	}
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "FK_ADDRESS_DELIVERY")
+    public Address getDeliveryAddress() {
+        return deliveryAddress;
+    }
 
-	public void setDetails(List<CommandDetail> details) {
-		this.details = details;
-	}
+    public void setDeliveryAddress(Address deliveryAddress) {
+        this.deliveryAddress = deliveryAddress;
+    }
 
-	@Override
-	public String toString() {
-		return "Command [agent=" + agent + ", billingAddress=" + billingAddress
-				+ ", creationDate=" + creationDate + ", customer=" + customer
-				+ ", deliveryAddress=" + deliveryAddress + ", details="
-				+ details + ", discountRate=" + discountRate + ", remark="
-				+ remark + "]";
-	}
+    @OneToMany(mappedBy = "command")
+    public List<CommandDetail> getDetails() {
+        return details;
+    }
+
+    public void setDetails(List<CommandDetail> details) {
+        this.details = details;
+    }
+
+    @Override
+    public String toString() {
+        return "Command [agent=" + agent + ", billingAddress=" + billingAddress + ", creationDate=" + creationDate
+                + ", customer=" + customer + ", deliveryAddress=" + deliveryAddress + ", details=" + details
+                + ", discountRate=" + discountRate + ", remark=" + remark + "]";
+    }
 
 }

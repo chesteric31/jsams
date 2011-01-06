@@ -1,7 +1,8 @@
 package be.jsams.client.model.dialog;
 
 import java.awt.BorderLayout;
-import java.lang.reflect.Field;
+import java.awt.Component;
+import java.awt.Container;
 import java.util.List;
 
 import javax.swing.BoxLayout;
@@ -43,149 +44,234 @@ import com.jgoodies.validation.view.ValidationResultViewFactory;
  * @author chesteric31
  * @version $$Rev$$ $$Date::                  $$ $$Author$$
  */
-public abstract class EditDialog<M extends AbstractIdentity, V extends Validator<M>, S extends Service<M>>
-		extends JsamsDialog implements JsamsButtonsInterface {
+public abstract class EditDialog<M extends AbstractIdentity, V extends Validator<M>, S extends Service<M>> extends
+        JsamsDialog implements JsamsButtonsInterface {
 
-	/**
-	 * Serial Version UID
-	 */
-	private static final long serialVersionUID = 5146784638798425733L;
+    /**
+     * Serial Version UID
+     */
+    private static final long serialVersionUID = 5146784638798425733L;
 
-	private static final Log LOGGER = LogFactory.getLog(EditDialog.class);
+    private static final Log LOGGER = LogFactory.getLog(EditDialog.class);
 
-	private M model;
+    private M model;
 
-	private JsamsButtonsPanel buttonsPanel;
+    private JsamsButtonsPanel buttonsPanel;
 
-	private ValidationResultModel validationResultModel = new DefaultValidationResultModel();
+    private ValidationResultModel validationResultModel = new DefaultValidationResultModel();
 
-	private JsamsStatusBar statusBar;
+    private JsamsStatusBar statusBar;
 
-	private JPanel southPanel;
+    private JPanel southPanel;
 
-	private Validator<M> validator;
+    private Validator<M> validator;
 
-	private Service<M> service;
+    private Service<M> service;
 
-	public EditDialog(final JsamsMainFrame parent, final I18nString title,
-			final String iconFileName) {
-		super(parent, title, iconFileName);
-		add(buildSouthPanel(), BorderLayout.SOUTH);
-	}
+    /**
+     * Constructor
+     * 
+     * @param parent
+     *            the {@link JsamsMainFrame} parent
+     * @param title
+     *            the {@link I18nString} translatable String
+     * @param iconFileName
+     *            the icon path file mane
+     */
+    public EditDialog(final JsamsMainFrame parent, final I18nString title, final String iconFileName) {
+        super(parent, title, iconFileName);
+        add(buildSouthPanel(), BorderLayout.SOUTH);
+    }
 
-	public EditDialog(final JsamsMainFrame parent, final I18nString title) {
-		this(parent, title, null);
-	}
+    /**
+     * Constructor
+     * 
+     * @param parent
+     *            the {@link JsamsMainFrame} parent
+     * @param title
+     *            the {@link I18nString} translatable String
+     */
+    public EditDialog(final JsamsMainFrame parent, final I18nString title) {
+        this(parent, title, null);
+    }
 
-	public Service<M> getService() {
-		return service;
-	}
+    /**
+     * 
+     * @return the service
+     */
+    public Service<M> getService() {
+        return service;
+    }
 
-	public void setService(Service<M> service) {
-		this.service = service;
-	}
+    /**
+     * 
+     * @param service
+     *            the service to set
+     */
+    public void setService(Service<M> service) {
+        this.service = service;
+    }
 
-	public M getModel() {
-		return model;
-	}
+    /**
+     * 
+     * @return the model
+     */
+    public M getModel() {
+        return model;
+    }
 
-	public void setModel(M model) {
-		this.model = model;
-	}
+    /**
+     * 
+     * @param model
+     *            the model to set
+     */
+    public void setModel(M model) {
+        this.model = model;
+    }
 
-	public ValidationResultModel getValidationResultModel() {
-		return validationResultModel;
-	}
+    /**
+     * 
+     * @return the {@link ValidationResultModel}
+     */
+    public ValidationResultModel getValidationResultModel() {
+        return validationResultModel;
+    }
 
-	public void setValidationResultModel(
-			ValidationResultModel validationResultModel) {
-		this.validationResultModel = validationResultModel;
-	}
+    /**
+     * 
+     * @param validationResultModel
+     *            the {@link ValidationResultModel} to set
+     */
+    public void setValidationResultModel(ValidationResultModel validationResultModel) {
+        this.validationResultModel = validationResultModel;
+    }
 
-	public Validator<M> getValidator() {
-		return validator;
-	}
+    /**
+     * 
+     * @return the {@link Validator}
+     */
+    public Validator<M> getValidator() {
+        return validator;
+    }
 
-	public void setValidator(Validator<M> validator) {
-		this.validator = validator;
-	}
+    /**
+     * 
+     * @param validator
+     *            the {@link Validator} to set
+     */
+    public void setValidator(Validator<M> validator) {
+        this.validator = validator;
+    }
 
-	private JPanel buildSouthPanel() {
-		statusBar = new JsamsStatusBar();
-		southPanel = new JPanel();
-		southPanel.setLayout(new BoxLayout(southPanel, BoxLayout.PAGE_AXIS));
-		buttonsPanel = new JsamsButtonsPanel(this, true, true, true);
-		southPanel.add(buttonsPanel);
-		southPanel.add(statusBar);
-		return southPanel;
-	}
+    /**
+     * Builds the 'south panel' composed by a {@link JsamsButtonsPanel} {@link JsamsStatusBar}
+     * 
+     * @return the 'south panel'
+     */
+    private JPanel buildSouthPanel() {
+        statusBar = new JsamsStatusBar();
+        southPanel = new JPanel();
+        southPanel.setLayout(new BoxLayout(southPanel, BoxLayout.PAGE_AXIS));
+        buttonsPanel = new JsamsButtonsPanel(this, true, true, true);
+        southPanel.add(buttonsPanel);
+        southPanel.add(statusBar);
+        return southPanel;
+    }
 
-	public void performCancel() {
-		this.dispose();
-	}
+    /**
+     * {@inheritDoc}
+     */
+    public void performCancel() {
+        this.dispose();
+    }
 
-	public void performReset() {
-		Class<?> clazz = this.getClass();
-		Field[] fields = clazz.getFields();
-		for (Field field : fields) {
-			try {
-				Object value = field.get(this);
-				if (value instanceof JsamsTextField) {
-					((JsamsTextField) value).setText(null);
-				} else if (value instanceof JComboBox) {
-					((JComboBox) value).setSelectedIndex(0);
-				} else if (value instanceof JTextArea) {
-					((JTextArea) value).setText(null);
-				}
-			} catch (IllegalArgumentException e1) {
-				LOGGER.error(e1);
-			} catch (IllegalAccessException e1) {
-				LOGGER.error(e1);
-			}
-		}
-	}
+    /**
+     * {@inheritDoc}
+     */
+    public void performReset() {
+        performReset(this);
+    }
 
-	public abstract void performOk();
+    /**
+     * Performs the reset for the {@link Container}.
+     * 
+     * @param container
+     *            the contain to 'clean'
+     */
+    public void performReset(final Container container) {
+        for (Component component : container.getComponents()) {
+            if (component instanceof Container) {
+                this.performReset((Container) component);
+            }
+            // NOT ELSE IF cause that doesn't work
+            if (component instanceof JsamsTextField) {
+                ((JsamsTextField) component).setText(null);
+            } else if (component instanceof JComboBox) {
+                ((JComboBox) component).setSelectedIndex(0);
+            } else if (component instanceof JTextArea) {
+                ((JTextArea) component).setText(null);
+            }
+        }
+    }
 
-	public boolean postPerformOk(final M object) {
-		ValidationResult result = validator.validate(object);
-		validationResultModel.setResult(result);
-		boolean success = false;
-		if (result.hasMessages()) {
-			statusBar.removeAll();
-			statusBar.repaint();
-			List<ValidationMessage> messages = validationResultModel
-					.getResult().getMessages();
-			for (ValidationMessage message : messages) {
-				JsamsLabel label = new JsamsLabel(message.formattedText()
-						.replace(".", ""));
-				if (message.severity() == Severity.ERROR) {
-					label.setIcon(ValidationResultViewFactory.getErrorIcon());
-				} else if (message.severity() == Severity.WARNING) {
-					label.setIcon(ValidationResultViewFactory.getWarningIcon());
-				}
-				statusBar.addJComponent(label);
-			}
-			statusBar.revalidate();
-		} else {
-			if (getModel() == null) {
-				service.create(object);
-			} else {
-				object.setId(getModel().getId());
-				service.update(object);
-			}
-			success = true;
-			dispose();
-		}
-		return success;
-	}
+    /**
+     * {@inheritDoc}
+     */
+    public abstract void performOk();
 
-	public JsamsStatusBar getStatusBar() {
-		return statusBar;
-	}
+    /**
+     * Method called by the children class for validation and persistence.
+     * 
+     * @param object
+     *            the object to validate and to persist
+     * @return true if success of the operations, false otherwise
+     */
+    protected boolean postPerformOk(final M object) {
+        ValidationResult result = validator.validate(object);
+        validationResultModel.setResult(result);
+        boolean success = false;
+        if (result.hasMessages()) {
+            statusBar.removeAll();
+            statusBar.repaint();
+            List<ValidationMessage> messages = validationResultModel.getResult().getMessages();
+            for (ValidationMessage message : messages) {
+                JsamsLabel label = new JsamsLabel(message.formattedText().replace(".", ""));
+                if (message.severity() == Severity.ERROR) {
+                    label.setIcon(ValidationResultViewFactory.getErrorIcon());
+                } else if (message.severity() == Severity.WARNING) {
+                    label.setIcon(ValidationResultViewFactory.getWarningIcon());
+                }
+                statusBar.addJComponent(label);
+            }
+            statusBar.revalidate();
+        } else {
+            if (getModel() == null) {
+                service.create(object);
+            } else {
+                object.setId(getModel().getId());
+                service.update(object);
+            }
+            success = true;
+            dispose();
+        }
+        return success;
+    }
 
-	public void setStatusBar(JsamsStatusBar statusBar) {
-		this.statusBar = statusBar;
-	}
+    /**
+     * 
+     * @return the {@link JsamsStatusBar}
+     */
+    public JsamsStatusBar getStatusBar() {
+        return statusBar;
+    }
+
+    /**
+     * 
+     * @param statusBar
+     *            the {@link JsamsStatusBar} to set
+     */
+    public void setStatusBar(JsamsStatusBar statusBar) {
+        this.statusBar = statusBar;
+    }
 
 }

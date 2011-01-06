@@ -17,20 +17,19 @@ import be.jsams.server.model.AbstractNamedIdentity;
  */
 public class NamedComboBoxRenderer implements ListCellRenderer {
 
-	protected DefaultListCellRenderer defaultRenderer = new DefaultListCellRenderer();
+    private DefaultListCellRenderer defaultRenderer = new DefaultListCellRenderer();
 
-	public Component getListCellRendererComponent(JList list, Object value,
-			int index, boolean isSelected, boolean cellHasFocus) {
-		String theText = " ";
+    public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected,
+            boolean cellHasFocus) {
+        String theText = " ";
 
-		JLabel renderer = (JLabel) defaultRenderer
-				.getListCellRendererComponent(list, value, index, isSelected,
-						cellHasFocus);
-		if (value != null) {
-			theText = ((AbstractNamedIdentity) value).getName();
-		}
-		renderer.setText(theText);
-		return renderer;
-	}
+        JLabel renderer = (JLabel) defaultRenderer.getListCellRendererComponent(list, value, index, isSelected,
+                cellHasFocus);
+        if (value != null) {
+            theText = ((AbstractNamedIdentity) value).getName();
+        }
+        renderer.setText(theText);
+        return renderer;
+    }
 
 }

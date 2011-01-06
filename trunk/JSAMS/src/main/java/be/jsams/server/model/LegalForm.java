@@ -13,12 +13,12 @@ import javax.persistence.Table;
 @Table(name = "LEGAL_FORM")
 public class LegalForm extends AbstractTranslatableIdentity {
 
-	/**
-	 * Serial Version UID
-	 */
-	private static final long serialVersionUID = 7811347200401042583L;
+    /**
+     * Serial Version UID
+     */
+    private static final long serialVersionUID = 7811347200401042583L;
 
-	public LegalForm() {
-		super();
-	}
+    public LegalForm() {
+        super();
+    }
 }

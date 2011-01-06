@@ -12,13 +12,13 @@ import be.jsams.server.model.Product;
  */
 public interface ProductDao extends GenericDao<Product> {
 
-	/**
-	 * Finds a list of {@link Product} following the criteria model
-	 * 
-	 * @param criteria
-	 *            the criteria model
-	 * @return a list of {@link Product}
-	 */
-	List<Product> findByCriteria(Product criteria);
+    /**
+     * Finds a list of {@link Product} following the criteria model
+     * 
+     * @param criteria
+     *            the criteria model
+     * @return a list of {@link Product}
+     */
+    List<Product> findByCriteria(Product criteria);
 
 }

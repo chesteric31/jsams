@@ -66,20 +66,17 @@ public class SearchProductPanel extends JPanel implements JsamsButtonsInterface 
 
     private static final int MAX_NUMBERS = 10;
 
-    public JsamsTextField textFieldLabel = new JsamsTextField(MAX_CHARACTERS);
-    public JsamsTextField textFieldPrice = new JsamsTextField(MAX_NUMBERS);
-    public JsamsTextField textFieldStockQuantity = new JsamsTextField(
-            MAX_NUMBERS);
-    public JsamsTextField textFieldReorderLevel = new JsamsTextField(
-            MAX_NUMBERS);
-    public JsamsTextField textFieldVatApplicable = new JsamsTextField(
-            MAX_NUMBERS);
-    
+    private JsamsTextField textFieldLabel = new JsamsTextField(MAX_CHARACTERS);
+    private JsamsTextField textFieldPrice = new JsamsTextField(MAX_NUMBERS);
+    private JsamsTextField textFieldStockQuantity = new JsamsTextField(MAX_NUMBERS);
+    private JsamsTextField textFieldReorderLevel = new JsamsTextField(MAX_NUMBERS);
+    private JsamsTextField textFieldVatApplicable = new JsamsTextField(MAX_NUMBERS);
+
     private JsamsButtonsPanel buttonsPanel;
 
     JsamsTable resultTable = null;
 
-    public JComboBox comboBoxProductCategory;
+    private JComboBox comboBoxProductCategory;
 
     private JsamsButton buttonAdd = null;
     private JsamsButton buttonRemove = null;
@@ -98,32 +95,22 @@ public class SearchProductPanel extends JPanel implements JsamsButtonsInterface 
      */
     private void initComponents() {
         setLayout(new BorderLayout());
-        FormLayout layout = new FormLayout("right:p, 3dlu, p:grow, 3dlu, "
-                + "right:p, 3dlu, p:grow, 3dlu, "
-                + "right:p, 3dlu, p:grow, 3dlu, " + "right:p, 3dlu, p:grow",
-                "p");
-        DefaultFormBuilder builder = new DefaultFormBuilder(layout,
-                JsamsFrame.RESOURCE_BUNDLE);
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_PRODUCT_LABEL.getKey(),
-                textFieldLabel, 5);
-        List<ProductCategory> allProductCategories = JsamsApplicationContext
-                .getProductCategoryDao().findAll();
+        FormLayout layout = new FormLayout("right:p, 3dlu, p:grow, 3dlu, " + "right:p, 3dlu, p:grow, 3dlu, "
+                + "right:p, 3dlu, p:grow, 3dlu, " + "right:p, 3dlu, p:grow", "p");
+        DefaultFormBuilder builder = new DefaultFormBuilder(layout, JsamsFrame.RESOURCE_BUNDLE);
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_PRODUCT_LABEL.getKey(), textFieldLabel, 5);
+        List<ProductCategory> allProductCategories = JsamsApplicationContext.getProductCategoryDao().findAll();
         ArrayList<ProductCategory> allWithNull = new ArrayList<ProductCategory>();
         allWithNull.add(null);
         allWithNull.addAll(allProductCategories);
         comboBoxProductCategory = new JComboBox(allWithNull.toArray());
         comboBoxProductCategory.setRenderer(new NamedComboBoxRenderer());
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_PRODUCT_CATEGORY
-                .getKey(), comboBoxProductCategory, 5);
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_PRODUCT_CATEGORY.getKey(), comboBoxProductCategory, 5);
         builder.nextLine();
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_PRODUCT_PRICE.getKey(),
-                textFieldPrice, 1);
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_PRODUCT_STOCK_QUANTITY
-                .getKey(), textFieldStockQuantity, 1);
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_PRODUCT_REORDER_LEVEL
-                .getKey(), textFieldReorderLevel, 1);
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_PRODUCT_VAT_APPLICABLE
-                .getKey(), textFieldVatApplicable, 1);
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_PRODUCT_PRICE.getKey(), textFieldPrice, 1);
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_PRODUCT_STOCK_QUANTITY.getKey(), textFieldStockQuantity, 1);
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_PRODUCT_REORDER_LEVEL.getKey(), textFieldReorderLevel, 1);
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_PRODUCT_VAT_APPLICABLE.getKey(), textFieldVatApplicable, 1);
 
         JPanel searchCriteriaPanel = new JPanel();
         GridLayout gridLayout = new GridLayout(2, 1);
@@ -145,16 +132,15 @@ public class SearchProductPanel extends JPanel implements JsamsButtonsInterface 
         resultTable = new JsamsTable(true);
         resultTable.addMouseListener(new TableMouseListener());
         JScrollPane scrollPane = new JScrollPane(resultTable);
-        scrollPane.setBorder(new TitledBorder(JsamsI18nResource.SEARCH_RESULTS
-                .getTranslation()));
+        scrollPane.setBorder(new TitledBorder(JsamsI18nResource.SEARCH_RESULTS.getTranslation()));
         this.add(scrollPane, BorderLayout.CENTER);
 
         buttonAdd = buildButtonAdd();
         buttonRemove = buildButtonRemove();
         buttonModify = buildButtonModify();
 
-        this.add(ButtonBarFactory.buildCenteredBar(new JButton[] { buttonAdd,
-                buttonRemove, buttonModify }), BorderLayout.SOUTH);
+        this.add(ButtonBarFactory.buildCenteredBar(new JButton[] { buttonAdd, buttonRemove, buttonModify }),
+                BorderLayout.SOUTH);
     }
 
     private void fillTable(final List<Product> products) {
@@ -165,8 +151,7 @@ public class SearchProductPanel extends JPanel implements JsamsButtonsInterface 
         JTableHeader tableHeader = resultTable.getTableHeader();
         TableCellRenderer headerRenderer = tableHeader.getDefaultRenderer();
 
-        ((DefaultTableCellRenderer) headerRenderer)
-                .setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
+        ((DefaultTableCellRenderer) headerRenderer).setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
         resultTable.setAutoCreateRowSorter(true);
         JsamsTableCellRenderer defaultCellRenderer = new JsamsTableCellRenderer();
         resultTable.setDefaultRenderer(Long.class, defaultCellRenderer);
@@ -179,20 +164,17 @@ public class SearchProductPanel extends JPanel implements JsamsButtonsInterface 
     }
 
     private JsamsButton buildButtonAdd() {
-        JsamsButton buttonAdd = new JsamsButton(IconUtil.MENU_ICON_PREFIX
-                + "actions/list-add.png");
+        JsamsButton buttonAdd = new JsamsButton(IconUtil.MENU_ICON_PREFIX + "actions/list-add.png");
         buttonAdd.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                new EditProductDialog(JsamsI18nResource.TITLE_EDIT_PRODUCT,
-                        null);
+                new EditProductDialog(JsamsI18nResource.TITLE_EDIT_PRODUCT, null);
             }
         });
         return buttonAdd;
     }
 
     private JsamsButton buildButtonRemove() {
-        JsamsButton buttonRemove = new JsamsButton(IconUtil.MENU_ICON_PREFIX
-                + "actions/list-remove.png");
+        JsamsButton buttonRemove = new JsamsButton(IconUtil.MENU_ICON_PREFIX + "actions/list-remove.png");
         buttonRemove.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             }
@@ -201,17 +183,14 @@ public class SearchProductPanel extends JPanel implements JsamsButtonsInterface 
     }
 
     private JsamsButton buildButtonModify() {
-        JsamsButton buttonModify = new JsamsButton(IconUtil.MENU_ICON_PREFIX
-                + "apps/accessories-text-editor.png");
+        JsamsButton buttonModify = new JsamsButton(IconUtil.MENU_ICON_PREFIX + "apps/accessories-text-editor.png");
         buttonModify.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 int selectedRow = resultTable.getSelectedRow();
                 if (selectedRow > -1) {
                     Long id = (Long) resultTable.getValueAt(selectedRow, 0);
-                    Product selectedProduct = JsamsApplicationContext
-                            .getProductService().findById(id);
-                    new EditProductDialog(JsamsI18nResource.TITLE_EDIT_PRODUCT,
-                            selectedProduct);
+                    Product selectedProduct = JsamsApplicationContext.getProductService().findById(id);
+                    new EditProductDialog(JsamsI18nResource.TITLE_EDIT_PRODUCT, selectedProduct);
                 }
             }
         });
@@ -241,8 +220,7 @@ public class SearchProductPanel extends JPanel implements JsamsButtonsInterface 
         if (!StringUtils.isNullOrEmpty(textFieldVatApplicable.getText())) {
             vatApplicable = new BigDecimal(textFieldVatApplicable.getText());
         }
-        ProductCategory category = (ProductCategory) comboBoxProductCategory
-                .getSelectedItem();
+        ProductCategory category = (ProductCategory) comboBoxProductCategory.getSelectedItem();
         final Product criteria = new Product();
         criteria.setCategory(category);
         criteria.setName(name);
@@ -250,29 +228,29 @@ public class SearchProductPanel extends JPanel implements JsamsButtonsInterface 
         criteria.setQuantityStock(stockQuantity);
         criteria.setReorderLevel(reorderLevel);
         criteria.setVatApplicable(vatApplicable);
-        List<Product> products = JsamsApplicationContext.getProductService()
-                .findByCriteria(criteria);
+        List<Product> products = JsamsApplicationContext.getProductService().findByCriteria(criteria);
 
         fillTable(products);
     }
 
     public void performReset() {
-        Class<?> clazz = this.getClass();
-        Field[] fields = clazz.getFields();
-        for (Field field : fields) {
-            try {
-                Object value = field.get(this);
-                if (value instanceof JsamsTextField) {
-                    ((JsamsTextField) value).setText(null);
-                } else if (value instanceof JComboBox) {
-                    ((JComboBox) value).setSelectedIndex(0);
-                }
-            } catch (IllegalArgumentException e1) {
-                LOGGER.error(e1);
-            } catch (IllegalAccessException e1) {
-                LOGGER.error(e1);
-            }
-        }
+//        Class<?> clazz = this.getClass();
+//        Field[] fields = clazz.getFields();
+//        for (Field field : fields) {
+//            try {
+//                Object value = field.get(this);
+//                if (value instanceof JsamsTextField) {
+//                    ((JsamsTextField) value).setText(null);
+//                } else if (value instanceof JComboBox) {
+//                    ((JComboBox) value).setSelectedIndex(0);
+//                }
+//            } catch (IllegalArgumentException e1) {
+//                LOGGER.error(e1);
+//            } catch (IllegalAccessException e1) {
+//                LOGGER.error(e1);
+//            }
+//        }
+        // TODO: update todo
     }
 
 }

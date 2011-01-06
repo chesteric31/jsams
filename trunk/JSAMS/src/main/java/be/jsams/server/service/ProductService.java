@@ -12,13 +12,13 @@ import be.jsams.server.model.Product;
  */
 public interface ProductService extends Service<Product> {
 
-	/**
-	 * Finds all {@link Product} following the criteria product.
-	 * 
-	 * @param criteria
-	 *            the criteria product
-	 * @return a list of {@link Product}
-	 */
-	List<Product> findByCriteria(final Product criteria);
+    /**
+     * Finds all {@link Product} following the criteria product.
+     * 
+     * @param criteria
+     *            the criteria product
+     * @return a list of {@link Product}
+     */
+    List<Product> findByCriteria(final Product criteria);
 
 }

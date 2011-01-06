@@ -13,94 +13,93 @@ import be.jsams.server.model.ProductCategory;
 
 /**
  * Product DAO implementation.
- *
+ * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class ProductDaoImpl extends GenericDaoImpl<Product> implements
-		ProductDao {
+public class ProductDaoImpl extends GenericDaoImpl<Product> implements ProductDao {
 
-	/**
-	 * Constructor
-	 * 
-	 * @param type
-	 *            the class type
-	 */
-	public ProductDaoImpl(Class<Product> type) {
-		super(type);
-	}
+    /**
+     * Constructor
+     * 
+     * @param type
+     *            the class type
+     */
+    public ProductDaoImpl(Class<Product> type) {
+        super(type);
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@SuppressWarnings("unchecked")
-	public List<Product> findByCriteria(final Product criteria) {
-		StringBuilder queryBuilder = new StringBuilder("FROM Product p");
-		
-		boolean isFirst = true;
-		
-		ProductCategory category = criteria.getCategory();
-		String name = criteria.getName();
-		BigDecimal price = criteria.getPrice();
-		int quantityStock = criteria.getQuantityStock();
-		int reorderLevel = criteria.getReorderLevel();
-		BigDecimal vatApplicable = criteria.getVatApplicable();
-		if (!StringUtils.isNullOrEmpty(name)) {
-			if (isFirst) {
-				queryBuilder.append(" WHERE");
-				isFirst = false;
-			}
-			queryBuilder.append(" p.name LIKE '%" + name + "%'");
-		}
-		if (price != null) {
-			if (isFirst) {
-				queryBuilder.append(" WHERE");
-				isFirst = false;
-			} else {
-				queryBuilder.append(" AND");
-			}
-			queryBuilder.append(" p.price = " + price.toPlainString());
-		}
-		if (reorderLevel != -1) {
-			if (isFirst) {
-				queryBuilder.append(" WHERE");
-				isFirst = false;
-			} else {
-				queryBuilder.append(" AND");
-			}
-			queryBuilder.append(" p.reorderLevel = " + reorderLevel);
-		}
-		if (quantityStock != -1) {
-			if (isFirst) {
-				queryBuilder.append(" WHERE");
-				isFirst = false;
-			} else {
-				queryBuilder.append(" AND");
-			}
-			queryBuilder.append(" p.quantityStock = " + quantityStock);
-		}
-		if (vatApplicable != null) {
-			if (isFirst) {
-				queryBuilder.append(" WHERE");
-				isFirst = false;
-			} else {
-				queryBuilder.append(" AND");
-			}
-			queryBuilder.append(" p.vatApplicable = " + vatApplicable.toPlainString());
-		}
-		if (category != null) {
-			if (isFirst) {
-				queryBuilder.append(" WHERE");
-				isFirst = false;
-			} else {
-				queryBuilder.append(" AND");
-			}
-			queryBuilder.append(" p.category.id = " + category.getId());
-		}
-		
-		Query query = getEntityManager().createQuery(queryBuilder.toString());
-		List<Product> result = query.getResultList();
-		return result;
-	}
-	
+    /**
+     * {@inheritDoc}
+     */
+    @SuppressWarnings("unchecked")
+    public List<Product> findByCriteria(final Product criteria) {
+        StringBuilder queryBuilder = new StringBuilder("FROM Product p");
+
+        boolean isFirst = true;
+
+        ProductCategory category = criteria.getCategory();
+        String name = criteria.getName();
+        BigDecimal price = criteria.getPrice();
+        int quantityStock = criteria.getQuantityStock();
+        int reorderLevel = criteria.getReorderLevel();
+        BigDecimal vatApplicable = criteria.getVatApplicable();
+        if (!StringUtils.isNullOrEmpty(name)) {
+            if (isFirst) {
+                queryBuilder.append(" WHERE");
+                isFirst = false;
+            }
+            queryBuilder.append(" p.name LIKE '%" + name + "%'");
+        }
+        if (price != null) {
+            if (isFirst) {
+                queryBuilder.append(" WHERE");
+                isFirst = false;
+            } else {
+                queryBuilder.append(" AND");
+            }
+            queryBuilder.append(" p.price = " + price.toPlainString());
+        }
+        if (reorderLevel != -1) {
+            if (isFirst) {
+                queryBuilder.append(" WHERE");
+                isFirst = false;
+            } else {
+                queryBuilder.append(" AND");
+            }
+            queryBuilder.append(" p.reorderLevel = " + reorderLevel);
+        }
+        if (quantityStock != -1) {
+            if (isFirst) {
+                queryBuilder.append(" WHERE");
+                isFirst = false;
+            } else {
+                queryBuilder.append(" AND");
+            }
+            queryBuilder.append(" p.quantityStock = " + quantityStock);
+        }
+        if (vatApplicable != null) {
+            if (isFirst) {
+                queryBuilder.append(" WHERE");
+                isFirst = false;
+            } else {
+                queryBuilder.append(" AND");
+            }
+            queryBuilder.append(" p.vatApplicable = " + vatApplicable.toPlainString());
+        }
+        if (category != null) {
+            if (isFirst) {
+                queryBuilder.append(" WHERE");
+                isFirst = false;
+            } else {
+                queryBuilder.append(" AND");
+            }
+            queryBuilder.append(" p.category.id = " + category.getId());
+        }
+
+        Query query = getEntityManager().createQuery(queryBuilder.toString());
+        List<Product> result = query.getResultList();
+        return result;
+    }
+
 }

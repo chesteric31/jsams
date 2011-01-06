@@ -5,20 +5,20 @@ import be.jsams.server.model.Command;
 
 /**
  * Command DAO implementation.
- *
+ * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
 public class CommandDaoImpl extends GenericDaoImpl<Command> implements CommandDao {
 
-	/**
-	 * Constructor
-	 * 
-	 * @param type
-	 *            the class type
-	 */
-	public CommandDaoImpl(Class<Command> type) {
-		super(type);
-	}
+    /**
+     * Constructor
+     * 
+     * @param type
+     *            the class type
+     */
+    public CommandDaoImpl(Class<Command> type) {
+        super(type);
+    }
 
 }

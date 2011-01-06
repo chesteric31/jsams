@@ -5,7 +5,7 @@ import javax.persistence.Table;
 
 /**
  * Product category entity object.
- *
+ * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
@@ -13,16 +13,16 @@ import javax.persistence.Table;
 @Table(name = "PRODUCT_CATEGORY")
 public class ProductCategory extends AbstractTranslatableIdentity {
 
-	/**
-	 * Serial Version UID
-	 */
-	private static final long serialVersionUID = -5602936385893795004L;
+    /**
+     * Serial Version UID
+     */
+    private static final long serialVersionUID = -5602936385893795004L;
 
-	/**
-	 * Constructor
-	 */
-	public ProductCategory() {
-		super();
-	}
+    /**
+     * Constructor
+     */
+    public ProductCategory() {
+        super();
+    }
 
 }

@@ -7,21 +7,21 @@ import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 
 /**
- * PDF service interface. 
- *
+ * PDF service interface.
+ * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
 public interface PdfService {
 
-	Document createDocument();
+    Document createDocument();
 
-	Header createHeader();
+    Header createHeader();
 
-	PdfPTable createTable(final int columnNumber);
+    PdfPTable createTable(final int columnNumber);
 
-	PdfPCell createCell(final Phrase value);
+    PdfPCell createCell(final Phrase value);
 
-	void populateTable();
+    void populateTable();
 
 }

@@ -31,93 +31,99 @@ import com.jgoodies.forms.layout.FormLayout;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class OpenSocietyDialog extends JsamsDialog implements
-		JsamsButtonsInterface {
+public class OpenSocietyDialog extends JsamsDialog implements JsamsButtonsInterface {
 
-	/**
-	 * Serial Version UID
-	 */
-	private static final long serialVersionUID = 237617341189579756L;
+    /**
+     * Serial Version UID
+     */
+    private static final long serialVersionUID = 237617341189579756L;
 
-	private JComboBox comboBox = null;
+    private JComboBox comboBox = null;
 
-	private JsamsButtonsPanel buttonsPanel;
+    private JsamsButtonsPanel buttonsPanel;
 
-	/**
-	 * Constructor
-	 * 
-	 * @param title
-	 *            the {@link I18nString} title
-	 */
-	public OpenSocietyDialog(final I18nString title) {
-		super(null, title);
-		buttonsPanel = new JsamsButtonsPanel(this, true, true, true);
-		add(buttonsPanel, BorderLayout.SOUTH);
-		initComponents();
-	}
+    /**
+     * Constructor
+     * 
+     * @param title
+     *            the {@link I18nString} title
+     */
+    public OpenSocietyDialog(final I18nString title) {
+        super(null, title);
+        buttonsPanel = new JsamsButtonsPanel(this, true, true, true);
+        add(buttonsPanel, BorderLayout.SOUTH);
+        initComponents();
+    }
 
-	/**
-	 * Initializes all the components
-	 */
-	private void initComponents() {
-		FormLayout layout = new FormLayout(
-				"right:pref, 3dlu, pref, 3dlu, pref", "pref, 5dlu");
-		DefaultFormBuilder builder = new DefaultFormBuilder(layout,
-				JsamsFrame.RESOURCE_BUNDLE);
-		builder.setDefaultDialogBorder();
-		builder.append(JsamsI18nLabelResource.LABEL_OPEN_SOCIETY
-				.getTranslation());
-		builder.nextLine();
-		builder.appendSeparator();
-		List<Society> allSocieties = JsamsApplicationContext
-				.getSocietyService().findAll();
-		comboBox = new JComboBox(allSocieties.toArray());
-		comboBox.setRenderer(new NamedComboBoxRenderer());
-		builder.append(JsamsI18nLabelResource.LABEL_OPEN_SOCIETY_AVAILABLES
-				.getTranslation(), comboBox);
-		JsamsButton buttonNewSociety = buildButtonNewSociety();
-		builder.append(buttonNewSociety);
-		builder.nextLine();
-		JPanel panel = builder.getPanel();
-		JPanel mainPanel = new JPanel(new BorderLayout());
-		mainPanel.add(panel, BorderLayout.CENTER);
+    /**
+     * Initializes all the components
+     */
+    private void initComponents() {
+        FormLayout layout = new FormLayout("right:pref, 3dlu, pref, 3dlu, pref", "pref, 5dlu");
+        DefaultFormBuilder builder = new DefaultFormBuilder(layout, JsamsFrame.RESOURCE_BUNDLE);
+        builder.setDefaultDialogBorder();
+        builder.append(JsamsI18nLabelResource.LABEL_OPEN_SOCIETY.getTranslation());
+        builder.nextLine();
+        builder.appendSeparator();
+        List<Society> allSocieties = JsamsApplicationContext.getSocietyService().findAll();
+        comboBox = new JComboBox(allSocieties.toArray());
+        comboBox.setRenderer(new NamedComboBoxRenderer());
+        builder.append(JsamsI18nLabelResource.LABEL_OPEN_SOCIETY_AVAILABLES.getTranslation(), comboBox);
+        JsamsButton buttonNewSociety = buildButtonNewSociety();
+        builder.append(buttonNewSociety);
+        builder.nextLine();
+        JPanel panel = builder.getPanel();
+        JPanel mainPanel = new JPanel(new BorderLayout());
+        mainPanel.add(panel, BorderLayout.CENTER);
 
-		add(mainPanel);
-		pack();
-		setLocationRelativeTo(null);
-		setVisible(true);
-		setResizable(false);
-	}
+        add(mainPanel);
+        pack();
+        setLocationRelativeTo(null);
+        setVisible(true);
+        setResizable(false);
+    }
 
-	public void performOk() {
-		Object selectedItem = comboBox.getSelectedItem();
-		if (comboBox.getSelectedIndex() >= 0 && selectedItem != null) {
-			JsamsDesktop jsamsDesktop = JsamsDesktop.getInstance();
-			jsamsDesktop.setCurrentSociety(((Society) selectedItem));
-		}
-		dispose();
-	}
+    /**
+     * {@inheritDoc}
+     */
+    public void performOk() {
+        Object selectedItem = comboBox.getSelectedItem();
+        if (comboBox.getSelectedIndex() >= 0 && selectedItem != null) {
+            JsamsDesktop jsamsDesktop = JsamsDesktop.getInstance();
+            jsamsDesktop.setCurrentSociety(((Society) selectedItem));
+        }
+        dispose();
+    }
 
-	public void performCancel() {
-		dispose();
-	}
+    /**
+     * {@inheritDoc}
+     */
+    public void performCancel() {
+        dispose();
+    }
 
-	public void performReset() {
-		comboBox.setSelectedIndex(0);
-	}
+    /**
+     * {@inheritDoc}
+     */
+    public void performReset() {
+        comboBox.setSelectedIndex(0);
+    }
 
-	private JsamsButton buildButtonNewSociety() {
-		JsamsButton buttonNewSociety = new JsamsButton(
-				JsamsI18nResource.BUTTON_OPEN_SOCIETIES_NEW,
-				IconUtil.MENU_ICON_PREFIX + "actions/folder-new.png");
-		buttonNewSociety.addActionListener(new ActionListener() {
+    /**
+     * Builds the new society button.
+     * 
+     * @return the new society button
+     */
+    private JsamsButton buildButtonNewSociety() {
+        JsamsButton buttonNewSociety = new JsamsButton(JsamsI18nResource.BUTTON_OPEN_SOCIETIES_NEW,
+                IconUtil.MENU_ICON_PREFIX + "actions/folder-new.png");
+        buttonNewSociety.addActionListener(new ActionListener() {
 
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-				new EditSocietyDialog(JsamsI18nResource.TITLE_EDIT_SOCIETY,
-						null);
-			}
-		});
-		return buttonNewSociety;
-	}
+            public void actionPerformed(ActionEvent e) {
+                new EditSocietyDialog(JsamsI18nResource.TITLE_EDIT_SOCIETY, null);
+                dispose();
+            }
+        });
+        return buttonNewSociety;
+    }
 }

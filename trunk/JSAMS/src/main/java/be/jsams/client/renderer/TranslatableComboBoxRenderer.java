@@ -18,32 +18,28 @@ import be.jsams.server.model.AbstractTranslatableIdentity;
  */
 public class TranslatableComboBoxRenderer implements ListCellRenderer {
 
-	/**
-	 * Default list cell renderer
-	 */
-	protected DefaultListCellRenderer defaultRenderer = new DefaultListCellRenderer();
+    private DefaultListCellRenderer defaultRenderer = new DefaultListCellRenderer();
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public Component getListCellRendererComponent(JList list, Object value,
-			int index, boolean isSelected, boolean cellHasFocus) {
-		String theText = " ";
+    /**
+     * {@inheritDoc}
+     */
+    public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected,
+            boolean cellHasFocus) {
+        String theText = " ";
 
-		JLabel renderer = (JLabel) defaultRenderer
-				.getListCellRendererComponent(list, value, index, isSelected,
-						cellHasFocus);
-		if (value != null) {
-			if (UserContext.isFrench()) {
-				theText = ((AbstractTranslatableIdentity) value).getLabelFr();
-			} else if (UserContext.isDutch()) {
-				theText = ((AbstractTranslatableIdentity) value).getLabelNl();
-			} else {
-				theText = ((AbstractTranslatableIdentity) value).getLabel();
-			}
-		}
-		renderer.setText(theText);
-		return renderer;
-	}
+        JLabel renderer = (JLabel) defaultRenderer.getListCellRendererComponent(list, value, index, isSelected,
+                cellHasFocus);
+        if (value != null) {
+            if (UserContext.isFrench()) {
+                theText = ((AbstractTranslatableIdentity) value).getLabelFr();
+            } else if (UserContext.isDutch()) {
+                theText = ((AbstractTranslatableIdentity) value).getLabelNl();
+            } else {
+                theText = ((AbstractTranslatableIdentity) value).getLabel();
+            }
+        }
+        renderer.setText(theText);
+        return renderer;
+    }
 
 }
