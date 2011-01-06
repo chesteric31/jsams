@@ -19,6 +19,6 @@ public interface ProductService extends Service<Product> {
 	 *            the criteria product
 	 * @return a list of {@link Product}
 	 */
-	public List<Product> findByCriteria(final Product criteria);
+	List<Product> findByCriteria(final Product criteria);
 
 }
