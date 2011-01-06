@@ -11,20 +11,18 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "PRODUCT_CATEGORY")
-public class ProductCategory extends AbstractNamedIdentity {
+public class ProductCategory extends AbstractTranslatableIdentity {
 
 	/**
 	 * Serial Version UID
 	 */
 	private static final long serialVersionUID = -5602936385893795004L;
 
+	/**
+	 * Constructor
+	 */
 	public ProductCategory() {
 		super();
-	}
-
-	@Override
-	public String toString() {
-		return "ProductCategory [name=" + getName() + "]";
 	}
 
 }
