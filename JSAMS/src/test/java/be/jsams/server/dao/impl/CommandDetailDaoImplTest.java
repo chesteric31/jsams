@@ -85,7 +85,7 @@ public class CommandDetailDaoImplTest extends AbstractJUnitTestClass {
 		newCommand.setDeliveryAddress(billingAddress);
 		
 		ProductCategory booksCategory = new ProductCategory();
-		booksCategory.setName("Books");
+		booksCategory.setLabel("Books");
 		
 		Product book = new Product();
 		book.setCategory(booksCategory);
