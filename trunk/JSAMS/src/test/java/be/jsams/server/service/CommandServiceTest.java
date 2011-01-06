@@ -96,7 +96,7 @@ public class CommandServiceTest extends AbstractJUnitTestClass {
 	@Test
 	public void testCreate() {
 		ProductCategory booksCategory = new ProductCategory();
-		booksCategory.setName("Books");
+		booksCategory.setLabel("Books");
 		
 		Product book = new Product();
 		book.setCategory(booksCategory);
