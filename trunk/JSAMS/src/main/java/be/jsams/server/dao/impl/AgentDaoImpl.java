@@ -12,6 +12,12 @@ import be.jsams.server.model.Agent;
 public class AgentDaoImpl extends GenericDaoImpl<Agent> implements
 		AgentDao {
 
+	/**
+	 * Constructor
+	 * 
+	 * @param type
+	 *            the class type
+	 */
 	public AgentDaoImpl(Class<Agent> type) {
 		super(type);
 	}

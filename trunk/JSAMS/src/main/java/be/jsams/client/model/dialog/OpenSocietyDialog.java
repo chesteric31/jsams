@@ -10,7 +10,6 @@ import javax.swing.JPanel;
 
 import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.desktop.JsamsDesktop;
-import be.jsams.client.desktop.JsamsMainFrame;
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.i18n.JsamsI18nLabelResource;
 import be.jsams.client.i18n.JsamsI18nResource;
@@ -47,8 +46,6 @@ public class OpenSocietyDialog extends JsamsDialog implements
 	/**
 	 * Constructor
 	 * 
-	 * @param parent
-	 *            the {@link JsamsMainFrame}
 	 * @param title
 	 *            the {@link I18nString} title
 	 */
@@ -117,7 +114,8 @@ public class OpenSocietyDialog extends JsamsDialog implements
 
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				new EditSocietyDialog(JsamsI18nResource.TITLE_EDIT_SOCIETY, null);
+				new EditSocietyDialog(JsamsI18nResource.TITLE_EDIT_SOCIETY,
+						null);
 			}
 		});
 		return buttonNewSociety;

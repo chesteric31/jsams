@@ -11,6 +11,12 @@ import be.jsams.server.model.CommandDetail;
  */
 public class CommandDetailDaoImpl extends GenericDaoImpl<CommandDetail> implements CommandDetailDao {
 
+	/**
+	 * Constructor
+	 * 
+	 * @param type
+	 *            the class type
+	 */
 	public CommandDetailDaoImpl(Class<CommandDetail> type) {
 		super(type);
 	}

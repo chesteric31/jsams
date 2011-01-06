@@ -12,6 +12,12 @@ import be.jsams.server.model.Civility;
 public class CivilityDaoImpl extends GenericDaoImpl<Civility> implements
 		CivilityDao {
 
+	/**
+	 * Constructor
+	 * 
+	 * @param type
+	 *            the class type
+	 */
 	public CivilityDaoImpl(Class<Civility> type) {
 		super(type);
 	}

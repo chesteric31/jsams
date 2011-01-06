@@ -6,14 +6,20 @@ import be.jsams.server.model.Address;
 /**
  * Address DAO implementation.
  * 
- *
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class AddressDaoImpl extends GenericDaoImpl<Address> implements AddressDao {
+public class AddressDaoImpl extends GenericDaoImpl<Address> implements
+		AddressDao {
 
+	/**
+	 * Constructor
+	 * 
+	 * @param type
+	 *            the class type
+	 */
 	public AddressDaoImpl(Class<Address> type) {
 		super(type);
 	}
-	
+
 }
