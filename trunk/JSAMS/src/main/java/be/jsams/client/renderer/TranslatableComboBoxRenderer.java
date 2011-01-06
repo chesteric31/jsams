@@ -18,8 +18,14 @@ import be.jsams.server.model.AbstractTranslatableIdentity;
  */
 public class TranslatableComboBoxRenderer implements ListCellRenderer {
 
+	/**
+	 * Default list cell renderer
+	 */
 	protected DefaultListCellRenderer defaultRenderer = new DefaultListCellRenderer();
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public Component getListCellRendererComponent(JList list, Object value,
 			int index, boolean isSelected, boolean cellHasFocus) {
 		String theText = " ";
