@@ -6,16 +6,22 @@ import com.lowagie.text.Phrase;
 import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 
+/**
+ * PDF service interface. 
+ *
+ * @author chesteric31
+ * @version $Rev$ $Date::                  $ $Author$
+ */
 public interface PdfService {
 
-	public Document createDocument();
+	Document createDocument();
 
-	public Header createHeader();
+	Header createHeader();
 
-	public PdfPTable createTable(final int columnNumber);
+	PdfPTable createTable(final int columnNumber);
 
-	public PdfPCell createCell(final Phrase value);
+	PdfPCell createCell(final Phrase value);
 
-	public void populateTable();
+	void populateTable();
 
 }
