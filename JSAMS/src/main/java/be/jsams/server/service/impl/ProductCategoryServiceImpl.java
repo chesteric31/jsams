@@ -8,62 +8,77 @@ import be.jsams.server.service.ProductCategoryService;
 
 /**
  * Product category service implementation.
- *
+ * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
 public class ProductCategoryServiceImpl implements ProductCategoryService {
 
-	private ProductCategoryDao productCategoryDao;
+    private ProductCategoryDao productCategoryDao;
 
-	public ProductCategoryDao getProductCategoryDao() {
-		return productCategoryDao;
-	}
+    /**
+     * 
+     * @return the {@link ProductCategoryDao}
+     */
+    public ProductCategoryDao getProductCategoryDao() {
+        return productCategoryDao;
+    }
 
-	public void setProductCategoryDao(ProductCategoryDao productCategoryDao) {
-		this.productCategoryDao = productCategoryDao;
-	}
+    /**
+     * 
+     * @param productCategoryDao the {@link ProductCategoryDao} to set
+     */
+    public void setProductCategoryDao(ProductCategoryDao productCategoryDao) {
+        this.productCategoryDao = productCategoryDao;
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public void create(ProductCategory model) {
-		productCategoryDao.add(model);
-	}
+    /**
+     * {@inheritDoc}
+     */
+    public void create(final ProductCategory model) {
+        productCategoryDao.add(model);
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public void delete(ProductCategory model) {
-		productCategoryDao.remove(model);
-	}
+    /**
+     * {@inheritDoc}
+     */
+    public void delete(final ProductCategory model) {
+        productCategoryDao.remove(model);
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public void delete(Long id) {
-		productCategoryDao.remove(id);
-	}
+    /**
+     * {@inheritDoc}
+     */
+    public void delete(final Long id) {
+        productCategoryDao.remove(id);
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public List<ProductCategory> findAll() {
-		return productCategoryDao.findAll();
-	}
+    /**
+     * {@inheritDoc}
+     */
+    public List<ProductCategory> findAll() {
+        return productCategoryDao.findAll();
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public ProductCategory findById(Long id) {
-		return productCategoryDao.findById(id);
-	}
+    /**
+     * {@inheritDoc}
+     */
+    public ProductCategory findById(final Long id) {
+        return productCategoryDao.findById(id);
+    }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	public void update(ProductCategory model) {
-		productCategoryDao.update(model);
-	}
+    /**
+     * {@inheritDoc}
+     */
+    public void update(final ProductCategory model) {
+        productCategoryDao.update(model);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public List<ProductCategory> findByCriteria(final ProductCategory criteria) {
+        return productCategoryDao.findByCriteria(criteria);
+    }
 
 }

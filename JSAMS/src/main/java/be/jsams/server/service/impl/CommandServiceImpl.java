@@ -19,18 +19,34 @@ public class CommandServiceImpl implements CommandService {
     private CommandDao commandDao;
     private CommandDetailDao commandDetailDao;
 
+    /**
+     * 
+     * @return the {@link CommandDao}
+     */
     public CommandDao getCommandDao() {
         return commandDao;
     }
 
+    /**
+     * 
+     * @param commandDao the {@link CommandDao} to set
+     */
     public void setCommandDao(CommandDao commandDao) {
         this.commandDao = commandDao;
     }
 
+    /**
+     * 
+     * @return the {@link CommandDetailDao}
+     */
     public CommandDetailDao getCommandDetailDao() {
         return commandDetailDao;
     }
 
+    /**
+     * 
+     * @param commandDetailDao the {@link CommandDetailDao} to set
+     */
     public void setCommandDetailDao(CommandDetailDao commandDetailDao) {
         this.commandDetailDao = commandDetailDao;
     }
@@ -38,7 +54,7 @@ public class CommandServiceImpl implements CommandService {
     /**
      * {@inheritDoc}
      */
-    public void create(Command command) {
+    public void create(final Command command) {
         commandDao.add(command);
         List<CommandDetail> details = command.getDetails();
         for (CommandDetail detail : details) {
@@ -49,7 +65,7 @@ public class CommandServiceImpl implements CommandService {
     /**
      * {@inheritDoc}
      */
-    public void delete(Command command) {
+    public void delete(final Command command) {
         List<CommandDetail> details = command.getDetails();
         for (CommandDetail detail : details) {
             commandDetailDao.remove(detail);
@@ -60,7 +76,7 @@ public class CommandServiceImpl implements CommandService {
     /**
      * {@inheritDoc}
      */
-    public void delete(Long id) {
+    public void delete(final Long id) {
         Command command = findById(id);
         List<CommandDetail> details = command.getDetails();
         for (CommandDetail detail : details) {
@@ -79,14 +95,14 @@ public class CommandServiceImpl implements CommandService {
     /**
      * {@inheritDoc}
      */
-    public Command findById(Long id) {
+    public Command findById(final Long id) {
         return commandDao.findById(id);
     }
 
     /**
      * {@inheritDoc}
      */
-    public void update(Command command) {
+    public void update(final Command command) {
         commandDao.update(command);
     }
 

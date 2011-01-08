@@ -16,10 +16,18 @@ public class CustomerServiceImpl implements CustomerService {
 
     private CustomerDao customerDao;
 
+    /**
+     * 
+     * @return the {@link CustomerDao}
+     */
     public CustomerDao getCustomerDao() {
         return customerDao;
     }
 
+    /**
+     * 
+     * @param customerDao the {@link CustomerDao} to set
+     */
     public void setCustomerDao(CustomerDao customerDao) {
         this.customerDao = customerDao;
     }
@@ -27,21 +35,21 @@ public class CustomerServiceImpl implements CustomerService {
     /**
      * {@inheritDoc}
      */
-    public void create(Customer customer) {
+    public void create(final Customer customer) {
         customerDao.add(customer);
     }
 
     /**
      * {@inheritDoc}
      */
-    public void delete(Customer customer) {
+    public void delete(final Customer customer) {
         customerDao.remove(customer);
     }
 
     /**
      * {@inheritDoc}
      */
-    public void delete(Long id) {
+    public void delete(final Long id) {
         customerDao.remove(id);
     }
 
@@ -55,15 +63,22 @@ public class CustomerServiceImpl implements CustomerService {
     /**
      * {@inheritDoc}
      */
-    public Customer findById(Long id) {
+    public Customer findById(final Long id) {
         return customerDao.findById(id);
     }
 
     /**
      * {@inheritDoc}
      */
-    public void update(Customer customer) {
+    public void update(final Customer customer) {
         customerDao.update(customer);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public List<Customer> findByCriteria(final Customer criteria) {
+        return customerDao.findByCriteria(criteria);
     }
 
 }

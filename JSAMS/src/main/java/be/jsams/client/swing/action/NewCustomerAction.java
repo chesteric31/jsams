@@ -24,7 +24,7 @@ public class NewCustomerAction extends AbstractAction {
      * {@inheritDoc}
      */
     public void actionPerformed(ActionEvent e) {
-        new EditCustomerDialog(null, JsamsI18nResource.TITLE_EDIT_CUSTOMER, null);
+        new EditCustomerDialog(JsamsI18nResource.TITLE_EDIT_CUSTOMER, null);
     }
 
 }

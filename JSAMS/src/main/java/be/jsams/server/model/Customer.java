@@ -42,6 +42,9 @@ public class Customer extends AbstractNamedIdentity {
 
     private LegalForm legalForm;
 
+    /**
+     * Constructor
+     */
     public Customer() {
         super();
     }

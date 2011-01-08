@@ -16,10 +16,18 @@ public class ProductServiceImpl implements ProductService {
 
     private ProductDao productDao;
 
+    /**
+     * 
+     * @return the {@link ProductDao}
+     */
     public ProductDao getProductDao() {
         return productDao;
     }
 
+    /**
+     * 
+     * @param productDao the {@link ProductDao} to set
+     */
     public void setProductDao(ProductDao productDao) {
         this.productDao = productDao;
     }
@@ -27,21 +35,21 @@ public class ProductServiceImpl implements ProductService {
     /**
      * {@inheritDoc}
      */
-    public void create(Product product) {
+    public void create(final Product product) {
         productDao.add(product);
     }
 
     /**
      * {@inheritDoc}
      */
-    public void delete(Product product) {
+    public void delete(final Product product) {
         productDao.remove(product);
     }
 
     /**
      * {@inheritDoc}
      */
-    public void delete(Long id) {
+    public void delete(final Long id) {
         productDao.remove(id);
     }
 
@@ -55,21 +63,21 @@ public class ProductServiceImpl implements ProductService {
     /**
      * {@inheritDoc}
      */
-    public List<Product> findByCriteria(Product criteria) {
+    public List<Product> findByCriteria(final Product criteria) {
         return productDao.findByCriteria(criteria);
     }
 
     /**
      * {@inheritDoc}
      */
-    public Product findById(Long id) {
+    public Product findById(final Long id) {
         return productDao.findById(id);
     }
 
     /**
      * {@inheritDoc}
      */
-    public void update(Product product) {
+    public void update(final Product product) {
         productDao.update(product);
     }
 

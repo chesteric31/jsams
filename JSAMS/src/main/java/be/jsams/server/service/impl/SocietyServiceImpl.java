@@ -16,10 +16,18 @@ public class SocietyServiceImpl implements SocietyService {
 
     private SocietyDao societyDao;
 
+    /**
+     * 
+     * @return the {@link SocietyDao}
+     */
     public SocietyDao getSocietyDao() {
         return societyDao;
     }
 
+    /**
+     * 
+     * @param societyDao the {@link SocietyDao} to set
+     */
     public void setSocietyDao(SocietyDao societyDao) {
         this.societyDao = societyDao;
     }
@@ -34,35 +42,35 @@ public class SocietyServiceImpl implements SocietyService {
     /**
      * {@inheritDoc}
      */
-    public Society findById(Long id) {
+    public Society findById(final Long id) {
         return societyDao.findById(id);
     }
 
     /**
      * {@inheritDoc}
      */
-    public void update(Society society) {
+    public void update(final Society society) {
         societyDao.update(society);
     }
 
     /**
      * {@inheritDoc}
      */
-    public void create(Society society) {
+    public void create(final Society society) {
         societyDao.add(society);
     }
 
     /**
      * {@inheritDoc}
      */
-    public void delete(Society society) {
+    public void delete(final Society society) {
         societyDao.remove(society);
     }
 
     /**
      * {@inheritDoc}
      */
-    public void delete(Long id) {
+    public void delete(final Long id) {
         societyDao.remove(id);
     }
 

@@ -10,12 +10,12 @@ import be.jsams.client.swing.component.JsamsTable;
 import be.jsams.server.model.Product;
 
 /**
- * Customized {@link MouseListener} for {@link JsamsTable} double click.
+ * Customized {@link MouseListener} for Product table double click.
  * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class TableMouseListener implements MouseListener {
+public class ProductTableMouseListener implements MouseListener {
 
     /**
      * {@inheritDoc}

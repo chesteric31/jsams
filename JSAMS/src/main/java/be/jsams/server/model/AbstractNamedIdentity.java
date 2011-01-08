@@ -19,11 +19,19 @@ public class AbstractNamedIdentity extends AbstractIdentity {
 
     private String name;
 
+    /**
+     * 
+     * @return the name
+     */
     @Column(name = "NAME")
     public String getName() {
         return name;
     }
 
+    /**
+     * 
+     * @param name the name to set
+     */
     public void setName(String name) {
         this.name = name;
     }

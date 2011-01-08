@@ -13,7 +13,7 @@ import com.jgoodies.validation.util.PropertyValidationSupport;
 import com.jgoodies.validation.util.ValidationUtils;
 
 /**
- * {@link Validator} for edit product panel.
+ * {@link Validator} for edit society panel.
  * 
  * @author chesteric31
  * @version $$Rev$$ $$Date::                  $$ $$Author$$

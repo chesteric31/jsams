@@ -70,7 +70,7 @@ public class Product extends AbstractNamedIdentity {
         this.vatApplicable = vatApplicable;
     }
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "FK_CATEGORY_PRODUCT")
     public ProductCategory getCategory() {
         return category;
