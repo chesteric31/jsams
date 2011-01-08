@@ -1,6 +1,5 @@
 package be.jsams.client.model.table;
 
-import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 
@@ -9,49 +8,47 @@ import javax.swing.table.AbstractTableModel;
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.i18n.UserContext;
-import be.jsams.server.model.Product;
-import be.jsams.server.model.ProductCategory;
+import be.jsams.server.model.Customer;
+import be.jsams.server.model.PaymentMode;
 
 /**
- * {@link AbstractTableModel} for {@link Product} object.
- * 
+ * {@link AbstractTableModel} for {@link Customer} object.
+ *
  * @author chesteric31
- * @version $$Rev$$ $$Date::                  $$ $$Author$$
+ * @version $Rev$ $Date::                  $ $Author$
  */
-public class ProductTableModel extends AbstractTableModel {
+public class CustomerTableModel extends AbstractTableModel {
 
     /**
      * Serial Version UID
      */
-    private static final long serialVersionUID = 5631609209979319706L;
+    private static final long serialVersionUID = 5657883688442221105L;
 
     /**
      * The columns name
      */
     private List<I18nString> columnNames = Arrays.asList(JsamsI18nResource.COLUMN_ID, JsamsI18nResource.COLUMN_NAME,
-            JsamsI18nResource.COLUMN_PRICE, JsamsI18nResource.COLUMN_STOCK_QUANTITY,
-            JsamsI18nResource.COLUMN_REORDER_LEVEL, JsamsI18nResource.COLUMN_VAT_APPLICABE,
-            JsamsI18nResource.COLUMN_PRODUCT_CATEGORY);
+            JsamsI18nResource.COLUMN_ZIP_CODE, JsamsI18nResource.COLUMN_PAYMENT_MODE, JsamsI18nResource.COLUMN_PHONE);
 
     /**
-     * The list of {@link Product}
+     * The list of {@link Customer}
      */
-    private List<Product> data;
+    private List<Customer> data;
 
     /**
      * 
-     * @return a list of {@link Product}
+     * @return a list of {@link Customer}
      */
-    public List<Product> getData() {
+    public List<Customer> getData() {
         return data;
     }
 
     /**
      * 
      * @param data
-     *            the list of {@link Product} to set
+     *            the list of {@link Customer} to set
      */
-    public void setData(List<Product> data) {
+    public void setData(List<Customer> data) {
         this.data = data;
     }
 
@@ -83,22 +80,18 @@ public class ProductTableModel extends AbstractTableModel {
         case 1:
             return data.get(rowIndex).getName();
         case 2:
-            return data.get(rowIndex).getPrice();
+            return data.get(rowIndex).getBillingAddress().getZipCode();
         case 3:
-            return data.get(rowIndex).getQuantityStock();
-        case 4:
-            return data.get(rowIndex).getReorderLevel();
-        case 5:
-            return data.get(rowIndex).getVatApplicable().doubleValue();
-        case 6:
-            ProductCategory category = data.get(rowIndex).getCategory();
+            PaymentMode paymentMode = data.get(rowIndex).getPaymentMode();
             if (UserContext.isDutch()) {
-                return category.getLabelNl();
+                return paymentMode.getLabelNl();
             } else if (UserContext.isFrench()) {
-                return category.getLabelFr();
+                return paymentMode.getLabelFr();
             } else {
-                return category.getLabel();
+                return paymentMode.getLabel();
             }
+        case 4:
+            return data.get(rowIndex).getContactInformation().getPhone();
         default:
             return "";
         }
@@ -126,14 +119,10 @@ public class ProductTableModel extends AbstractTableModel {
         case 1:
             return String.class;
         case 2:
-            return BigDecimal.class;
+            return Integer.class;
         case 3:
-            return Integer.class;
+            return String.class;
         case 4:
-            return Integer.class;
-        case 5:
-            return Double.class;
-        case 6:
             return String.class;
         default:
             return Object.class;
