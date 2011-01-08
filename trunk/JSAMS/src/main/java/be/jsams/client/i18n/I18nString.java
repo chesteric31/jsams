@@ -22,7 +22,7 @@ public class I18nString {
      * @param key
      *            the key resource bundle
      */
-    public I18nString(String key) {
+    public I18nString(final String key) {
         this(key, NO_ARGUMENTS);
     }
 
@@ -34,7 +34,7 @@ public class I18nString {
      * @param arguments
      *            the table arguments
      */
-    public I18nString(String key, Object[] arguments) {
+    public I18nString(final String key, final Object[] arguments) {
         setKey(key);
         setArguments(arguments);
     }

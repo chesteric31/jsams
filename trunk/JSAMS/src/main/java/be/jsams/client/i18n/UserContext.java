@@ -8,8 +8,8 @@ import java.util.Locale;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class UserContext {
-
+public final class UserContext {
+    
     /** English language constant */
     public static final String ENGLISH = "en";
 
@@ -19,6 +19,12 @@ public class UserContext {
     /** Dutch language constant */
     public static final String DUTCH = "nl";
 
+    /**
+     * Constructor to avoid to instance this utility class.
+     */
+    private UserContext() {
+    }
+    
     /**
      * 
      * @return the default {@link Locale}
