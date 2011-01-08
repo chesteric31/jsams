@@ -18,8 +18,7 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.validation.view.ValidationComponentUtils;
 
 /**
- * Edit Product category {@link EditDialog}, to create or update a Product
- * category object.
+ * Edit Product category {@link EditDialog}, to create or update a Product category object.
  * 
  * @author chesteric31
  * @version $$Rev$$ $$Date::                  $$ $$Author$$
@@ -58,9 +57,9 @@ public class EditProductCategoryDialog extends
     }
 
     /**
-     * Initializes all the components
+     * {@inheritDoc}
      */
-    private void initComponents() {
+    protected void initComponents() {
         fillData();
         FormLayout layout = new FormLayout("right:p, 3dlu, p:grow, 3dlu", "p");
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, JsamsFrame.RESOURCE_BUNDLE);

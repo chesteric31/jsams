@@ -2,7 +2,6 @@ package be.jsams.client.model.dialog;
 
 import java.awt.BorderLayout;
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.BorderFactory;
@@ -71,9 +70,9 @@ public class EditProductDialog extends EditDialog<Product, ProductValidator, Pro
     }
 
     /**
-     * Initializes all the components
+     * {@inheritDoc}
      */
-    private void initComponents() {
+    protected void initComponents() {
         fillData();
         FormLayout layout = new FormLayout("right:p, 3dlu, p:grow, 3dlu, " + "right:p, 3dlu, p:grow", "p");
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, JsamsFrame.RESOURCE_BUNDLE);
@@ -102,12 +101,8 @@ public class EditProductDialog extends EditDialog<Product, ProductValidator, Pro
      */
     public void performOk() {
         Product product = new Product();
-
-        product.setName(textFieldName.getName());
-        ProductCategory category = new ProductCategory();
-        if (getModel() != null && getModel().getCategory() != null && getModel().getCategory().getId() != null) {
-            category.setId(getModel().getCategory().getId());
-        }
+        product.setName(textFieldName.getText());
+        ProductCategory category = (ProductCategory) comboBoxProductCategory.getSelectedItem();
         product.setCategory(category);
         BigDecimal price = null;
         Object value = textFieldPrice.getValue();
@@ -122,7 +117,6 @@ public class EditProductDialog extends EditDialog<Product, ProductValidator, Pro
             price = price.setScale(2, BigDecimal.ROUND_HALF_EVEN);
             product.setPrice(price);
         }
-
         BigDecimal vatApplicable = null;
         Object value2 = textFieldVatApplicable.getValue();
         if (value2 instanceof Long) {
@@ -136,16 +130,13 @@ public class EditProductDialog extends EditDialog<Product, ProductValidator, Pro
             vatApplicable = vatApplicable.setScale(2, BigDecimal.ROUND_HALF_EVEN);
             product.setVatApplicable(vatApplicable);
         }
-
         if (!StringUtils.isNullOrEmpty(textFieldReorderLevel.getText())) {
             product.setReorderLevel(Integer.parseInt(textFieldReorderLevel.getText()));
         }
         if (!StringUtils.isNullOrEmpty(textFieldStockQuantity.getText())) {
             product.setQuantityStock(Integer.parseInt(textFieldStockQuantity.getText()));
         }
-
         super.postPerformOk(product);
-
     }
 
     /**
@@ -153,18 +144,15 @@ public class EditProductDialog extends EditDialog<Product, ProductValidator, Pro
      */
     private void fillData() {
         List<ProductCategory> allProductCategories = JsamsApplicationContext.getProductCategoryDao().findAll();
-        ArrayList<ProductCategory> allWithNull = new ArrayList<ProductCategory>();
-        allWithNull.add(null);
-        allWithNull.addAll(allProductCategories);
-        comboBoxProductCategory = new JComboBox(allWithNull.toArray());
+        comboBoxProductCategory = new JComboBox(allProductCategories.toArray());
         if (getModel() != null) {
             Product product = JsamsApplicationContext.getProductService().findById(getModel().getId());
             comboBoxProductCategory.setSelectedItem(product.getCategory());
             textFieldName.setText(product.getName());
-            textFieldPrice.setText(product.getPrice().toPlainString());
+            textFieldPrice.setValue(product.getPrice());
             textFieldReorderLevel.setText(Integer.toString(product.getReorderLevel()));
             textFieldStockQuantity.setText(Integer.toString(product.getQuantityStock()));
-            textFieldVatApplicable.setText(product.getVatApplicable().toPlainString());
+            textFieldVatApplicable.setValue(product.getVatApplicable());
         }
         comboBoxProductCategory.setRenderer(new TranslatableComboBoxRenderer());
     }

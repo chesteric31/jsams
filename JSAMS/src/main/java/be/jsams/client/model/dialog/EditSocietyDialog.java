@@ -102,11 +102,11 @@ public class EditSocietyDialog extends EditDialog<Society, SocietyValidator, Soc
         setResizable(false);
         setVisible(true);
     }
-
+    
     /**
-     * Initializes all the components
+     * {@inheritDoc}
      */
-    private void initComponents() {
+    protected void initComponents() {
         fillData();
         FormLayout layout = new FormLayout(
                 "right:p, 3dlu, 50dlu, 3dlu, right:p, 3dlu, 50dlu, 3dlu, right:p, 3dlu, 50dlu", "p");

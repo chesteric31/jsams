@@ -15,11 +15,11 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import be.jsams.client.context.JsamsApplicationContext;
-import be.jsams.client.desktop.JsamsMainFrame;
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.i18n.JsamsI18nLabelResource;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.renderer.TranslatableComboBoxRenderer;
+import be.jsams.client.swing.component.JsamsFormattedTextField;
 import be.jsams.client.swing.component.JsamsFrame;
 import be.jsams.client.swing.component.JsamsTextField;
 import be.jsams.client.swing.utils.IconUtil;
@@ -68,13 +68,13 @@ public class EditCustomerDialog extends EditDialog<Customer, CustomerValidator, 
 
     private JsamsTextField textFieldVatNumber = new JsamsTextField(MAX_CHARACTERS);
 
-    private JsamsTextField textFieldVatApplicable = new JsamsTextField(MAX_CHARACTERS);
+    private JsamsFormattedTextField textFieldVatApplicable = new JsamsFormattedTextField();
 
     private JsamsTextField textFieldBank1 = new JsamsTextField(MAX_CHARACTERS);
 
     private JsamsTextField textFieldBank2 = new JsamsTextField(MAX_CHARACTERS);
 
-    private JsamsTextField textFieldCreditLimit = new JsamsTextField(MAX_CHARACTERS);
+    private JsamsFormattedTextField textFieldCreditLimit = new JsamsFormattedTextField();
 
     private JsamsTextField textFieldAgent = new JsamsTextField(MAX_CHARACTERS);
 
@@ -102,7 +102,7 @@ public class EditCustomerDialog extends EditDialog<Customer, CustomerValidator, 
 
     private JsamsTextField textFieldDeliveryCountry = new JsamsTextField(MAX_CHARACTERS);
 
-    private JsamsTextField textFieldDefaultDiscountRate = new JsamsTextField(MAX_NUMBERS);
+    private JsamsFormattedTextField textFieldDefaultDiscountRate = new JsamsFormattedTextField();
 
     private JsamsTextField textFieldPhone = new JsamsTextField(MAX_CHARACTERS);
 
@@ -131,15 +131,13 @@ public class EditCustomerDialog extends EditDialog<Customer, CustomerValidator, 
     /**
      * Constructor
      * 
-     * @param parent
-     *            the {@link JsamsMainFrame} parent
      * @param title
      *            the {@link I18nString} title
      * @param model
      *            the {@link Customer} model
      */
-    public EditCustomerDialog(final JsamsMainFrame parent, final I18nString title, Customer model) {
-        super(parent, title, IconUtil.TITLE_ICON_PREFIX + "apps/system-users.png");
+    public EditCustomerDialog(final I18nString title, Customer model) {
+        super(null, title, IconUtil.TITLE_ICON_PREFIX + "apps/system-users.png");
         super.setModel(model);
         super.setValidator(new CustomerValidator());
         super.setService(JsamsApplicationContext.getCustomerService());
@@ -150,9 +148,9 @@ public class EditCustomerDialog extends EditDialog<Customer, CustomerValidator, 
     }
 
     /**
-     * Initializes all the components
+     * {@inheritDoc}
      */
-    private void initComponents() {
+    protected void initComponents() {
         fillData();
         tabbedPane = new JTabbedPane(JTabbedPane.LEFT);
         generalPanel = buildGeneralTab();
@@ -165,9 +163,9 @@ public class EditCustomerDialog extends EditDialog<Customer, CustomerValidator, 
         tabbedPane.add(JsamsI18nResource.PANEL_CONTACT_INFORMATIONS.getTranslation(), contactInformationsPanel);
         miscPanel = buildMiscTab();
         tabbedPane.add(JsamsI18nResource.PANEL_MISC.getTranslation(), miscPanel);
-        getContentPane().add(tabbedPane);
 
         setMandatoryFields();
+        add(tabbedPane);
 
         ValidationComponentUtils.updateComponentTreeMandatoryBorder(this);
 
@@ -199,8 +197,8 @@ public class EditCustomerDialog extends EditDialog<Customer, CustomerValidator, 
             comboBoxLegalForm.setSelectedItem(getModel().getLegalForm());
             textFieldName.setText(getModel().getName());
             textFieldVatNumber.setText(getModel().getVatNumber());
+            textFieldVatApplicable.setValue(getModel().getVatApplicable());
         }
-
         comboBoxLegalForm.setRenderer(new TranslatableComboBoxRenderer());
         comboBoxCivility.setRenderer(new TranslatableComboBoxRenderer());
         comboBoxPaymentMode.setRenderer(new TranslatableComboBoxRenderer());
@@ -383,7 +381,9 @@ public class EditCustomerDialog extends EditDialog<Customer, CustomerValidator, 
      */
     private void fillMisc() {
         if (getModel() != null) {
-            textFieldDefaultDiscountRate.setText(getModel().getDefaultDiscountRate().toPlainString());
+            if (getModel().getDefaultDiscountRate() != null) {
+                textFieldDefaultDiscountRate.setValue(getModel().getDefaultDiscountRate());
+            }
             textAreaDescription.setText(getModel().getDescription());
         }
     }
@@ -408,15 +408,20 @@ public class EditCustomerDialog extends EditDialog<Customer, CustomerValidator, 
         if (!StringUtils.isNullOrEmpty(textFieldBank2.getText())) {
             customer.setBank2(textFieldBank2.getText());
         }
-        if (!StringUtils.isNullOrEmpty(textFieldVatApplicable.getText())) {
-            customer.setVatApplicable(new BigDecimal(textFieldVatApplicable.getText()));
+        String vatApplicable = textFieldVatApplicable.getText();
+        if (!StringUtils.isNullOrEmpty(vatApplicable)) {
+            BigDecimal bigDecimal = new BigDecimal(vatApplicable);
+            bigDecimal = bigDecimal.setScale(2, BigDecimal.ROUND_HALF_EVEN);
+            customer.setVatApplicable(bigDecimal);
         }
-
         if (!StringUtils.isNullOrEmpty(textFieldVatNumber.getText())) {
             customer.setVatNumber(textFieldVatNumber.getText());
         }
-        if (!StringUtils.isNullOrEmpty(textFieldCreditLimit.getText())) {
-            customer.setCreditLimit(new BigDecimal(textFieldCreditLimit.getText()));
+        String creditLimit = textFieldCreditLimit.getText();
+        if (!StringUtils.isNullOrEmpty(creditLimit)) {
+            BigDecimal bigDecimal = new BigDecimal(creditLimit);
+            bigDecimal = bigDecimal.setScale(2, BigDecimal.ROUND_HALF_EVEN);
+            customer.setCreditLimit(bigDecimal);
         }
         Address billingAddress = new Address();
         if (!StringUtils.isNullOrEmpty(textFieldBillingBox.getText())) {
@@ -442,14 +447,21 @@ public class EditCustomerDialog extends EditDialog<Customer, CustomerValidator, 
             deliveryAddress.setZipCode(Integer.parseInt(textFieldDeliveryZipCode.getText()));
         }
         customer.setDeliveryAddress(deliveryAddress);
-
+        String defaultDiscountRate = textFieldDefaultDiscountRate.getText();
+        if (!StringUtils.isNullOrEmpty(defaultDiscountRate)) {
+            BigDecimal bigDecimal = new BigDecimal(defaultDiscountRate);
+            bigDecimal = bigDecimal.setScale(2, BigDecimal.ROUND_HALF_EVEN);
+            customer.setDefaultDiscountRate(bigDecimal);
+        }
+        if (!StringUtils.isNullOrEmpty(textAreaDescription.getText())) {
+            customer.setDescription(textAreaDescription.getText());
+        }
         if (!StringUtils.isNullOrEmpty(textFieldDefaultDiscountRate.getText())) {
             customer.setDefaultDiscountRate(new BigDecimal(textFieldDefaultDiscountRate.getText()));
         }
         if (!StringUtils.isNullOrEmpty(textAreaDescription.getText())) {
             customer.setDescription(textAreaDescription.getText());
         }
-
         ContactInformation contactInformation = new ContactInformation();
         if (!StringUtils.isNullOrEmpty(textFieldEmail.getText())) {
             contactInformation.setEmail(textFieldEmail.getText());

@@ -52,7 +52,7 @@ public abstract class EditDialog<M extends AbstractIdentity, V extends Validator
      */
     private static final long serialVersionUID = 5146784638798425733L;
 
-    private static final Log LOGGER = LogFactory.getLog(EditDialog.class);
+    protected static final Log LOGGER = LogFactory.getLog(EditDialog.class);
 
     private M model;
 
@@ -94,6 +94,11 @@ public abstract class EditDialog<M extends AbstractIdentity, V extends Validator
     public EditDialog(final JsamsMainFrame parent, final I18nString title) {
         this(parent, title, null);
     }
+    
+    /**
+     * Initializes all the components.
+     */
+    protected abstract void initComponents();
 
     /**
      * 
