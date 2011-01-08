@@ -4,17 +4,30 @@ import java.awt.Image;
 import java.awt.Toolkit;
 
 /**
+ * Utility class for icon management.
  * 
- *
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class IconUtil {
+public final class IconUtil {
 
     public static final String MENU_ICON_PREFIX = "org/freedesktop/tango/16x16/";
 
     public static final String TITLE_ICON_PREFIX = "org/freedesktop/tango/32x32/";
 
+    /**
+     * Constructor to avoid to instance this utility class.
+     */
+    private IconUtil() {
+    }
+    
+    /**
+     * Builds an {@link Image} icon from a path file name.
+     * 
+     * @param fileName
+     *            the path file name
+     * @return the built image icon
+     */
     public static Image buildIcon(final String fileName) {
         if (fileName != null) {
             return Toolkit.getDefaultToolkit().getImage(
