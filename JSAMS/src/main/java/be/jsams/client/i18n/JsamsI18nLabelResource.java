@@ -6,7 +6,13 @@ package be.jsams.client.i18n;
  * @author chesteric31
  * @version $$Rev$$ $$Date::                  $$ $$Author$$
  */
-public class JsamsI18nLabelResource {
+public final class JsamsI18nLabelResource {
+
+    /**
+     * Constructor to avoid to instance this utility class.
+     */
+    private JsamsI18nLabelResource() {
+    }
 
     public static final I18nString LABEL_OPEN_SOCIETY = new I18nString("label.open.society");
 

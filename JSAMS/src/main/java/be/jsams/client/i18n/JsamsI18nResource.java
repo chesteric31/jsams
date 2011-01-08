@@ -6,7 +6,13 @@ package be.jsams.client.i18n;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class JsamsI18nResource {
+public final class JsamsI18nResource {
+
+    /**
+     * Constructor to avoid to instance this utility class.
+     */
+    private JsamsI18nResource() {
+    }
 
     public static final I18nString TITLE_OPEN_SOCIETY = new I18nString("title.open.society");
 
@@ -62,8 +68,7 @@ public class JsamsI18nResource {
 
     public static final I18nString BUTTON_CANCEL = new I18nString("button.cancel");
 
-    public static final I18nString PANEL_CONTACT_INFORMATIONS_TITLE
-        = new I18nString("panel.contact_informations.title");
+    public static final I18nString PANEL_CONTACT_INFORMATIONS_TITLE = new I18nString("panel.contact_informations.title");
 
     public static final I18nString BUTTON_RESET = new I18nString("button.reset");
 
@@ -147,4 +152,20 @@ public class JsamsI18nResource {
 
     public static final I18nString TITLE_EDIT_PRODUCT = new I18nString("title.edit.product");
 
+    public static final I18nString TITLE_SEARCH_PRODUCT_CATEGORY = new I18nString("title.search.product_category");
+
+    public static final I18nString COLUMN_LABEL_EN = new I18nString("column.label_en");
+
+    public static final I18nString COLUMN_LABEL_FR = new I18nString("column.label_fr");
+
+    public static final I18nString COLUMN_LABEL_NL = new I18nString("column.label_nl");
+
+    public static final I18nString TITLE_EDIT_PRODUCT_CATEGORY = new I18nString("title.edit.product_category");
+
+    public static final I18nString COLUMN_PAYMENT_MODE = new I18nString("column.payment_mode");
+
+    public static final I18nString COLUMN_PHONE = new I18nString("column.phone");
+    
+    public static final I18nString COLUMN_ZIP_CODE = new I18nString("column.zip_code");
+    
 }

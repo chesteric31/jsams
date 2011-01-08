@@ -9,7 +9,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class I18nApplicationContext {
+public final class I18nApplicationContext {
 
     /**
      * Classpath resource containing the configuration file.
@@ -22,6 +22,12 @@ public class I18nApplicationContext {
     private static ClassPathXmlApplicationContext context;
 
     /**
+     * Constructor to avoid to instance this utility class.
+     */
+    private I18nApplicationContext() {
+    }
+    
+    /**
      * @return the message source
      */
     public static MessageSource getMessageSource() {
@@ -32,7 +38,7 @@ public class I18nApplicationContext {
      * @param context
      *            the context to set
      */
-    public static void setContext(ClassPathXmlApplicationContext context) {
+    public static void setContext(final ClassPathXmlApplicationContext context) {
         I18nApplicationContext.context = context;
     }
 
