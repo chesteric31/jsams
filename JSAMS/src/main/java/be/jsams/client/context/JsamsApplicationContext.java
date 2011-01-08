@@ -18,12 +18,18 @@ import be.jsams.server.service.SocietyService;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class JsamsApplicationContext {
+public final class JsamsApplicationContext {
 
     public static final String CONFIG = "ApplicationContext.xml";
 
     private static ClassPathXmlApplicationContext context;
 
+    /**
+     * Constructor to avoid to instance this utility class.
+     */
+    private JsamsApplicationContext() {
+    }
+    
     /**
      * 
      * @param context

@@ -12,12 +12,18 @@ import be.jsams.client.i18n.I18nApplicationContext;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class JsamsStart {
-
+public final class JsamsStart {
+    
     /**
      * The JSAMS application context string
      */
     private static final String JSAMS_APPLICATION_CONTEXT = "jsams";
+
+    /**
+     * Constructor to avoid to instance this utility class.
+     */
+    private JsamsStart() {
+    }
 
     /**
      * Main starting method for the Jsams Application
