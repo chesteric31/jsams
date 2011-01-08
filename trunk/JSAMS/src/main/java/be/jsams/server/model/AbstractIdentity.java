@@ -30,6 +30,10 @@ public class AbstractIdentity implements Identity, Serializable {
         return id;
     }
 
+    /**
+     * 
+     * @param id the id to set
+     */
     public void setId(Long id) {
         this.id = id;
     }
@@ -43,7 +47,7 @@ public class AbstractIdentity implements Identity, Serializable {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj) {
             return true;
         }

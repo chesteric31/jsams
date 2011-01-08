@@ -15,6 +15,12 @@ public class JsamsTextField extends JTextField {
      */
     private static final long serialVersionUID = 410786496726208439L;
 
+    /**
+     * Constructor
+     * 
+     * @param columns
+     *            the columns number
+     */
     public JsamsTextField(final int columns) {
         super(columns);
     }

@@ -29,7 +29,7 @@ public class JsamsTable extends JTable {
      * @param autoResizeColumnWidth
      *            true to auto resize the column width, false otherwise
      */
-    public JsamsTable(boolean autoResizeColumnWidth) {
+    public JsamsTable(final boolean autoResizeColumnWidth) {
         super();
         this.autoResizeColumnWidth = autoResizeColumnWidth;
     }
@@ -42,8 +42,11 @@ public class JsamsTable extends JTable {
         }
     }
 
+    /**
+     * Methods that auto resize the column width following the size of the data.
+     */
     private void autoResizeColumnWidth() {
-        int margin = 5;
+        final int margin = 5;
 
         for (int i = 0; i < getColumnCount(); i++) {
             int vColIndex = i;
