@@ -14,7 +14,7 @@ import javax.swing.table.DefaultTableCellRenderer;
  * Custom Table cell renderer for JSAMS with row shading and row horizontal alignment following data type.
  * 
  * @author chesteric31
- * @version $Rev$ $Date::   $Author$
+ * @version $$Rev$$ $$Date::                  $$ $$Author$$
  */
 public class JsamsTableCellRenderer extends DefaultTableCellRenderer {
 
