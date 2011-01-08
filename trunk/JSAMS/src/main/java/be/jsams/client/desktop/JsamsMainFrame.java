@@ -23,6 +23,7 @@ import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.model.dialog.EditSocietyDialog;
 import be.jsams.client.model.dialog.OpenSocietyDialog;
 import be.jsams.client.model.panel.SearchCustomerPanel;
+import be.jsams.client.model.panel.SearchProductCategoryPanel;
 import be.jsams.client.model.panel.SearchProductPanel;
 import be.jsams.client.swing.component.JsamsCloseableTabbedPane;
 import be.jsams.client.swing.component.JsamsFrame;
@@ -151,6 +152,9 @@ public class JsamsMainFrame extends JsamsFrame {
         }
     }
 
+    /**
+     * Builds the helping menu.
+     */
     private void buildHelpMenu() {
         helpMenu = new JsamsMenu(JsamsI18nResource.MENU_HELP);
         helpMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_HELP, IconUtil.MENU_ICON_PREFIX
@@ -162,6 +166,9 @@ public class JsamsMainFrame extends JsamsFrame {
         helpMenu.add(aboutMI);
     }
 
+    /**
+     * Builds the windows menu.
+     */
     private void buildWindowsMenu() {
         windowsMenu = new JsamsMenu(JsamsI18nResource.MENU_WINDOWS);
         closeWindowMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_CLOSE_WINDOW);
@@ -176,6 +183,9 @@ public class JsamsMainFrame extends JsamsFrame {
         windowsMenu.add(previousMI);
     }
 
+    /**
+     * Builds the sales menu.
+     */
     private void buildSalesMenu() {
         salesMenu = new JsamsMenu(JsamsI18nResource.MENU_SALES);
         createDocumentsMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_CREATE_DOCUMENTS, IconUtil.MENU_ICON_PREFIX
@@ -200,6 +210,9 @@ public class JsamsMainFrame extends JsamsFrame {
         salesMenu.add(creditNoteMI);
     }
 
+    /**
+     * Builds the management menu.
+     */
     private void buildManagementMenu() {
         managementMenu = new JsamsMenu(JsamsI18nResource.MENU_MANAGEMENT);
         customersMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_CUSTOMERS, IconUtil.MENU_ICON_PREFIX
@@ -208,12 +221,16 @@ public class JsamsMainFrame extends JsamsFrame {
         managementMenu.add(customersMI);
         managementMenu.add(separators[5]);
         productsCategoryMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_PRODUCTS_CATEGORY);
+        productsCategoryMI.addActionListener(productsCategoryListener());
         managementMenu.add(productsCategoryMI);
         productsMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_PRODUCTS);
         productsMI.addActionListener(productsListener());
         managementMenu.add(productsMI);
     }
 
+    /**
+     * Builds the file menu.
+     */
     private void buildFileMenu() {
         fileMenu = new JsamsMenu(JsamsI18nResource.MENU_FILE);
         newMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_NEW, IconUtil.MENU_ICON_PREFIX + "actions/folder-new.png");
@@ -244,6 +261,9 @@ public class JsamsMainFrame extends JsamsFrame {
         fileMenu.add(exitMI);
     }
 
+    /**
+     * Builds the edit menu.
+     */
     private void buildEditMenu() {
         editMenu = new JsamsMenu(JsamsI18nResource.MENU_EDIT);
         cancelMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_CANCEL, IconUtil.MENU_ICON_PREFIX
@@ -274,6 +294,11 @@ public class JsamsMainFrame extends JsamsFrame {
         editMenu.add(refreshMI);
     }
 
+    /**
+     * Builds the 'south' panel that contains the shortcut tool-bar and the status bar.
+     * 
+     * @return the south panel
+     */
     private JPanel buildSouthPanel() {
         JPanel southPanel = new JPanel();
         southPanel.setLayout(new BoxLayout(southPanel, BoxLayout.PAGE_AXIS));
@@ -388,6 +413,20 @@ public class JsamsMainFrame extends JsamsFrame {
             public void actionPerformed(ActionEvent event) {
                 SearchProductPanel searchPanel = new SearchProductPanel();
                 tabbedPane.addTab(JsamsI18nResource.TITLE_SEARCH_PRODUCT, null, searchPanel);
+            }
+        };
+        return listener;
+    }
+
+    /**
+     * 
+     * @return a {@link ActionListener} for the searching of product categories
+     */
+    private ActionListener productsCategoryListener() {
+        ActionListener listener = new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                SearchProductCategoryPanel searchPanel = new SearchProductCategoryPanel();
+                tabbedPane.addTab(JsamsI18nResource.TITLE_SEARCH_PRODUCT_CATEGORY, null, searchPanel);
             }
         };
         return listener;
