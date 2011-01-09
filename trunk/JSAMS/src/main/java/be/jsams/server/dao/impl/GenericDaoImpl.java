@@ -37,7 +37,7 @@ public class GenericDaoImpl<T> implements GenericDao<T> {
      * @param type
      *            the class type
      */
-    public GenericDaoImpl(Class<T> type) {
+    public GenericDaoImpl(final Class<T> type) {
         this.type = type;
     }
 
@@ -61,12 +61,8 @@ public class GenericDaoImpl<T> implements GenericDao<T> {
     /**
      * {@inheritDoc}
      */
-    public void add(T newInstance) {
-        try {
-            entityManager.persist(newInstance);
-        } catch (RuntimeException re) {
-            LOGGER.error(re);
-        }
+    public void add(final T newInstance) {
+        entityManager.persist(newInstance);
     }
 
     /**
@@ -75,25 +71,16 @@ public class GenericDaoImpl<T> implements GenericDao<T> {
     @SuppressWarnings("unchecked")
     public List<T> findAll() {
         List<T> ts = null;
-        try {
-            Query query = entityManager.createQuery("FROM " + type.getSimpleName());
-            ts = query.getResultList();
-        } catch (RuntimeException re) {
-            LOGGER.error(re);
-        }
+        Query query = entityManager.createQuery("FROM " + type.getSimpleName());
+        ts = query.getResultList();
         return ts;
     }
 
     /**
      * {@inheritDoc}
      */
-    public T findById(Long id) {
-        T t = null;
-        try {
-            t = entityManager.find(type, id);
-        } catch (RuntimeException re) {
-            LOGGER.error(re);
-        }
+    public T findById(final Long id) {
+        T t = entityManager.find(type, id);
         return t;
     }
 
@@ -107,31 +94,23 @@ public class GenericDaoImpl<T> implements GenericDao<T> {
     /**
      * {@inheritDoc}
      */
-    public void remove(T persistentObject) {
-        try {
-            // Merge necessary for the detached object
-            // T object = entityManager.merge(persistentObject);
-            entityManager.remove(persistentObject);
-        } catch (RuntimeException re) {
-            LOGGER.error(re);
-        }
+    public void remove(final T persistentObject) {
+        // Merge necessary for the detached object
+        // T object = entityManager.merge(persistentObject);
+        entityManager.remove(persistentObject);
     }
 
     /**
      * {@inheritDoc}
      */
-    public void update(T transientObject) {
-        try {
-            entityManager.merge(transientObject);
-        } catch (RuntimeException re) {
-            LOGGER.error(re);
-        }
+    public void update(final T transientObject) {
+        entityManager.merge(transientObject);
     }
 
     /**
      * {@inheritDoc}
      */
-    public void remove(Long id) {
+    public void remove(final Long id) {
         this.remove(this.findById(id));
     }
 
