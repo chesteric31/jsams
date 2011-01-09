@@ -32,6 +32,9 @@ public class Agent extends AbstractNamedIdentity {
     private Address address;
     private ContactInformation contactInformation;
 
+    /**
+     * Constructor.
+     */
     public Agent() {
         super();
     }
@@ -45,7 +48,7 @@ public class Agent extends AbstractNamedIdentity {
         this.function = function;
     }
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "FK_CIVILITY")
     public Civility getCivility() {
         return civility;

@@ -39,6 +39,9 @@ public class Command extends AbstractIdentity {
 
     private List<CommandDetail> details;
 
+    /**
+     * Constructor.
+     */
     public Command() {
         super();
     }
@@ -71,7 +74,7 @@ public class Command extends AbstractIdentity {
         this.discountRate = discountRate;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "FK_AGENT")
     public Agent getAgent() {
         return agent;
@@ -81,7 +84,7 @@ public class Command extends AbstractIdentity {
         this.agent = agent;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "FK_CUSTOMER")
     public Customer getCustomer() {
         return customer;
