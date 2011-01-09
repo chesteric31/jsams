@@ -6,6 +6,8 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
+import javax.persistence.EntityExistsException;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,46 +45,47 @@ public class AddressDaoImplTest extends AbstractJUnitTestClass {
 		assertNotNull(address.getId());
 	}
 	
-	@Test
+	@Test(expected=EntityExistsException.class)
 	public void testAddNullCity() {
 		address.setCity(null);
 		dao.add(address);
-		assertNull(address.getId());
 	}
 	
-	@Test
+	@Test(expected=EntityExistsException.class)
 	public void testAddNullCountry() {
 		address.setCountry(null);
 		dao.add(address);
-		assertNull(address.getId());
 	}
 
-	@Test
+	@Test(expected=EntityExistsException.class)
 	public void testAddNullNumber() {
 		address.setNumber(null);
 		dao.add(address);
-		assertNull(address.getId());
 	}
 
-	@Test
-	public void testAddNullStreet() {
-		address.setStreet(null);
-		dao.add(address);
-		assertNull(address.getId());
-	}
+    @Test(expected = EntityExistsException.class)
+    public void testAddNullStreet() {
+        address.setStreet(null);
+        dao.add(address);
+    }
 
 	@Test
 	public void testFindAll() {
+	    int sizeBefore = dao.findAll().size();
 		dao.add(address);
 		Address anOtherAddress = new Address();
 		anOtherAddress.setCity("Brussels");
 		anOtherAddress.setCountry("Belgium");
 		anOtherAddress.setNumber("1");
 		anOtherAddress.setStreet("Rue Neuve");
-		anOtherAddress.setZipCode(1000);
-		dao.add(anOtherAddress);
-		List<Address> addresses = dao.findAll();
-		assertTrue(addresses.size() == 2);
+        anOtherAddress.setZipCode(1000);
+        dao.add(anOtherAddress);
+        List<Address> addresses = dao.findAll();
+        if (sizeBefore > 0) {
+            assertTrue(addresses.size() == (sizeBefore + 2));
+        } else {
+            assertTrue(addresses.size() == 2);
+        }
 	}
 
 	@Test

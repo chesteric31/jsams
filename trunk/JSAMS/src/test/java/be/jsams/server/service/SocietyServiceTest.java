@@ -1,6 +1,7 @@
 package be.jsams.server.service;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.math.BigDecimal;
@@ -16,6 +17,7 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 import be.jsams.server.dao.AbstractJUnitTestClass;
+import be.jsams.server.dao.LegalFormDao;
 import be.jsams.server.model.Address;
 import be.jsams.server.model.ContactInformation;
 import be.jsams.server.model.LegalForm;
@@ -36,6 +38,9 @@ public class SocietyServiceTest extends AbstractJUnitTestClass {
 	@Autowired
 	@Qualifier(value = "societyService")
 	private SocietyService societyService;
+	
+	@Autowired
+	private LegalFormDao legalFormDao;
 
 	private Society newSociety = null;
 
@@ -46,6 +51,9 @@ public class SocietyServiceTest extends AbstractJUnitTestClass {
 
 		LegalForm form = new LegalForm();
 		form.setLabel("Form");
+        form.setLabelFr("Forme");
+        form.setLabelNl("Form");
+        legalFormDao.add(form);
 		newSociety.setLegalForm(form);
 
 		Address societyAddress = new Address();
@@ -79,11 +87,10 @@ public class SocietyServiceTest extends AbstractJUnitTestClass {
 	@Rollback(value = false)
 	public void testDelete() {
 		societyService.create(newSociety);
-		List<Society> societies = societyService.findAll();
-		assertTrue(societies != null && !societies.isEmpty());
+		assertNotNull(societyService.findById(newSociety.getId()));
 		societyService.delete(newSociety);
-		societies = societyService.findAll();
-		assertTrue(societies == null || societies.isEmpty());
+		Society findById = societyService.findById(newSociety.getId());
+		assertNull(findById);
 	}
 
 	@Test
