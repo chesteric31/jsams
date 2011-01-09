@@ -16,9 +16,14 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 import be.jsams.server.dao.AbstractJUnitTestClass;
+import be.jsams.server.dao.AddressDao;
+import be.jsams.server.dao.AgentDao;
+import be.jsams.server.dao.CustomerDao;
+import be.jsams.server.dao.PaymentModeDao;
+import be.jsams.server.dao.ProductCategoryDao;
+import be.jsams.server.dao.ProductDao;
 import be.jsams.server.model.Address;
 import be.jsams.server.model.Agent;
-import be.jsams.server.model.Civility;
 import be.jsams.server.model.Command;
 import be.jsams.server.model.CommandDetail;
 import be.jsams.server.model.ContactInformation;
@@ -41,6 +46,18 @@ public class CommandServiceTest extends AbstractJUnitTestClass {
 	@Autowired
 	@Qualifier(value = "commandService")
 	private CommandService commandService;
+    @Autowired
+    private AgentDao agentDao;
+    @Autowired
+    private AddressDao addressDao;
+    @Autowired
+    private CustomerDao customerDao;
+    @Autowired
+    private PaymentModeDao paymentModeDao;
+    @Autowired
+    private ProductDao productDao;
+    @Autowired
+    private ProductCategoryDao productCategoryDao;
 	
 	private Command newCommand = null;
 
@@ -54,13 +71,18 @@ public class CommandServiceTest extends AbstractJUnitTestClass {
 		billingAddress.setNumber("1");
 		billingAddress.setStreet("Rue Neuve");
 		billingAddress.setZipCode(1000);
+		addressDao.add(billingAddress);
 		
 		newCommand.setBillingAddress(billingAddress);
-		
+
+        ContactInformation contactInformation = new ContactInformation();
+        contactInformation.setPhone("+3271887755");
 		Agent contact = new Agent();
 		contact.setFunction("Saler");
 		contact.setName("John Doe");
-		
+		contact.setAddress(billingAddress);
+		contact.setContactInformation(contactInformation);
+		agentDao.add(contact);
 		newCommand.setAgent(contact);
 		
 		newCommand.setCreationDate(new Date());
@@ -70,13 +92,6 @@ public class CommandServiceTest extends AbstractJUnitTestClass {
 		
 		customer.setBillingAddress(billingAddress);
 		
-		Civility civility = new Civility();
-		civility.setLabel("Mr");
-		
-		customer.setCivility(civility);
-		
-		ContactInformation contactInformation = new ContactInformation();
-		contactInformation.setPhone("+3271887755");
 		customer.setContactInformation(contactInformation);
 		
 		customer.setCreditLimit(new BigDecimal(1000.00));
@@ -84,9 +99,14 @@ public class CommandServiceTest extends AbstractJUnitTestClass {
 		customer.setName("Wyatt Earp");
 		
 		PaymentMode paymentMode = new PaymentMode();
-		paymentMode.setLabel("CASH");
+
+        paymentMode.setLabel("CASH");
+        paymentMode.setLabelFr("COMPTANT");
+        paymentMode.setLabelNl("CONTENT");
+        paymentModeDao.add(paymentMode);
 		
 		customer.setPaymentMode(paymentMode);
+		customerDao.add(customer);
 		
 		newCommand.setCustomer(customer);
 		
@@ -95,8 +115,11 @@ public class CommandServiceTest extends AbstractJUnitTestClass {
 	
 	@Test
 	public void testCreate() {
-		ProductCategory booksCategory = new ProductCategory();
-		booksCategory.setLabel("Books");
+        ProductCategory booksCategory = new ProductCategory();
+        booksCategory.setLabel("Books");
+        booksCategory.setLabelFr("Livres");
+        booksCategory.setLabelNl("Boeken");
+        productCategoryDao.add(booksCategory);
 		
 		Product book = new Product();
 		book.setCategory(booksCategory);
@@ -105,19 +128,20 @@ public class CommandServiceTest extends AbstractJUnitTestClass {
 		book.setQuantityStock(15);
 		book.setReorderLevel(10);
 		book.setVatApplicable(new BigDecimal(6.00));
-		
-		CommandDetail detail = new CommandDetail();
-		detail.setCommand(newCommand);
-		detail.setPrice(new BigDecimal(32.95));
-		detail.setProduct(book);
-		detail.setQuantity(1);
-		
-		List<CommandDetail> details = new ArrayList<CommandDetail>();
-		details.add(detail);
-		
-		newCommand.setDetails(details);
-		
-		commandService.create(newCommand);
+		productDao.add(book);
+
+        CommandDetail detail = new CommandDetail();
+        detail.setCommand(newCommand);
+        detail.setPrice(new BigDecimal(32.95));
+        detail.setProduct(book);
+        detail.setQuantity(1);
+//        detailDao.add(detail);
+        List<CommandDetail> details = new ArrayList<CommandDetail>();
+        details.add(detail);
+        
+        newCommand.setDetails(details);
+        
+        commandService.create(newCommand);
 		
 		Command command = commandService.findById(newCommand.getId());
 		assertNotNull(command);
