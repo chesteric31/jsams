@@ -32,6 +32,9 @@ public class CommandDetail extends AbstractIdentity {
     private Command command;
     private Product product;
 
+    /**
+     * Constructor.
+     */
     public CommandDetail() {
         super();
     }
@@ -81,7 +84,7 @@ public class CommandDetail extends AbstractIdentity {
         this.transferred = transferred;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "FK_COMMAND")
     public Command getCommand() {
         return command;
@@ -91,7 +94,7 @@ public class CommandDetail extends AbstractIdentity {
         this.command = command;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "FK_PRODUCT")
     public Product getProduct() {
         return product;
