@@ -8,6 +8,7 @@ import be.jsams.server.dao.CustomerDao;
 import be.jsams.server.model.Address;
 import be.jsams.server.model.ContactInformation;
 import be.jsams.server.model.Customer;
+import be.jsams.server.model.LegalForm;
 import be.jsams.server.model.PaymentMode;
 
 /**
@@ -24,7 +25,7 @@ public class CustomerDaoImpl extends GenericDaoImpl<Customer> implements Custome
      * @param type
      *            the class type
      */
-    public CustomerDaoImpl(Class<Customer> type) {
+    public CustomerDaoImpl(final Class<Customer> type) {
         super(type);
     }
 
@@ -53,6 +54,11 @@ public class CustomerDaoImpl extends GenericDaoImpl<Customer> implements Custome
         if (paymentMode != null) {
             paymentModeId = paymentMode.getId();
         }
+        LegalForm legalForm = criteria.getLegalForm();
+        Long legalFormId = 0L;
+        if (legalForm != null) {
+            legalFormId = legalForm.getId();
+        }
         
         if (name != null) {
             if (isFirst) {
@@ -78,6 +84,15 @@ public class CustomerDaoImpl extends GenericDaoImpl<Customer> implements Custome
                 queryBuilder.append(" AND");
             }
             queryBuilder.append(" c.paymentMode.id = " + paymentModeId);
+        }
+        if (!legalFormId.equals(0L)) {
+            if (isFirst) {
+                queryBuilder.append(" WHERE");
+                isFirst = false;
+            } else {
+                queryBuilder.append(" AND");
+            }
+            queryBuilder.append(" c.legalForm.id = " + legalFormId);
         }
         if (phone != null) {
             if (isFirst) {

@@ -9,6 +9,7 @@ import be.jsams.client.i18n.I18nString;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.i18n.UserContext;
 import be.jsams.server.model.Customer;
+import be.jsams.server.model.LegalForm;
 import be.jsams.server.model.PaymentMode;
 
 /**
@@ -28,7 +29,8 @@ public class CustomerTableModel extends AbstractTableModel {
      * The columns name
      */
     private List<I18nString> columnNames = Arrays.asList(JsamsI18nResource.COLUMN_ID, JsamsI18nResource.COLUMN_NAME,
-            JsamsI18nResource.COLUMN_ZIP_CODE, JsamsI18nResource.COLUMN_PAYMENT_MODE, JsamsI18nResource.COLUMN_PHONE);
+            JsamsI18nResource.COLUMN_LEGAL_FORM, JsamsI18nResource.COLUMN_ZIP_CODE,
+            JsamsI18nResource.COLUMN_PAYMENT_MODE, JsamsI18nResource.COLUMN_PHONE);
 
     /**
      * The list of {@link Customer}
@@ -80,8 +82,17 @@ public class CustomerTableModel extends AbstractTableModel {
         case 1:
             return data.get(rowIndex).getName();
         case 2:
-            return data.get(rowIndex).getBillingAddress().getZipCode();
+            LegalForm legalForm = data.get(rowIndex).getLegalForm();
+            if (UserContext.isDutch()) {
+                return legalForm.getLabelNl();
+            } else if (UserContext.isFrench()) {
+                return legalForm.getLabelFr();
+            } else {
+                return legalForm.getLabel();
+            }
         case 3:
+            return data.get(rowIndex).getBillingAddress().getZipCode();
+        case 4:
             PaymentMode paymentMode = data.get(rowIndex).getPaymentMode();
             if (UserContext.isDutch()) {
                 return paymentMode.getLabelNl();
@@ -90,7 +101,7 @@ public class CustomerTableModel extends AbstractTableModel {
             } else {
                 return paymentMode.getLabel();
             }
-        case 4:
+        case 5:
             return data.get(rowIndex).getContactInformation().getPhone();
         default:
             return "";
@@ -119,10 +130,12 @@ public class CustomerTableModel extends AbstractTableModel {
         case 1:
             return String.class;
         case 2:
-            return Integer.class;
-        case 3:
             return String.class;
+        case 3:
+            return Integer.class;
         case 4:
+            return String.class;
+        case 5:
             return String.class;
         default:
             return Object.class;
