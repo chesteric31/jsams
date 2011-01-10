@@ -26,6 +26,7 @@ import be.jsams.client.swing.listener.CustomerTableMouseListener;
 import be.jsams.server.model.Address;
 import be.jsams.server.model.ContactInformation;
 import be.jsams.server.model.Customer;
+import be.jsams.server.model.LegalForm;
 import be.jsams.server.model.PaymentMode;
 import be.jsams.server.service.CustomerService;
 
@@ -59,6 +60,7 @@ public class SearchCustomerPanel extends SearchPanel<Customer, CustomerTableMous
     private JsamsTextField textFieldPhone = new JsamsTextField(MAX_NUMBERS);
 
     private JComboBox comboBoxPaymentMode;
+    private JComboBox comboBoxLegalForm;
 
     /**
      * Constructor
@@ -86,7 +88,14 @@ public class SearchCustomerPanel extends SearchPanel<Customer, CustomerTableMous
         allWithNull.addAll(allPaymentModes);
         comboBoxPaymentMode = new JComboBox(allWithNull.toArray());
         comboBoxPaymentMode.setRenderer(new TranslatableComboBoxRenderer());
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_PAYMENT_MODE.getKey(), comboBoxPaymentMode, maxColumnSpan);
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_PAYMENT_MODE.getKey(), comboBoxPaymentMode);
+        List<LegalForm> allLegalForms = JsamsApplicationContext.getLegalFormDao().findAll();
+        ArrayList<LegalForm> allFormsWithNulls = new ArrayList<LegalForm>();
+        allFormsWithNulls.add(null);
+        allFormsWithNulls.addAll(allLegalForms);
+        comboBoxLegalForm = new JComboBox(allFormsWithNulls.toArray());
+        comboBoxLegalForm.setRenderer(new TranslatableComboBoxRenderer());
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_LEGAL_FORM.getKey(), comboBoxLegalForm);
         builder.nextLine();
         builder
                 .appendI15d(JsamsI18nLabelResource.LABEL_ZIP_CODE.getKey(), textFieldBillingZipCode,
@@ -146,8 +155,10 @@ public class SearchCustomerPanel extends SearchPanel<Customer, CustomerTableMous
             contactInformation.setPhone(textFieldPhone.getText());
         }
         PaymentMode paymentMode = (PaymentMode) comboBoxPaymentMode.getSelectedItem();
+        LegalForm legalForm = (LegalForm) comboBoxLegalForm.getSelectedItem();
         final Customer criteria = new Customer();
         criteria.setPaymentMode(paymentMode);
+        criteria.setLegalForm(legalForm);
         criteria.setName(name);
         criteria.setBillingAddress(address);
         criteria.setContactInformation(contactInformation);
