@@ -10,7 +10,7 @@ import be.jsams.server.model.Society;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class SocietyDaoImpl extends GenericDaoImpl<Society> implements SocietyDao {
+public class SocietyDaoImpl extends DaoImpl<Society> implements SocietyDao {
 
     /**
      * Constructor
@@ -18,7 +18,7 @@ public class SocietyDaoImpl extends GenericDaoImpl<Society> implements SocietyDa
      * @param type
      *            the class type
      */
-    public SocietyDaoImpl(Class<Society> type) {
+    public SocietyDaoImpl(final Class<Society> type) {
         super(type);
     }
 }

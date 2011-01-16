@@ -9,6 +9,6 @@ import be.jsams.server.model.LegalForm;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public interface LegalFormDao extends GenericDao<LegalForm> {
+public interface LegalFormDao extends Dao<LegalForm> {
 
 }

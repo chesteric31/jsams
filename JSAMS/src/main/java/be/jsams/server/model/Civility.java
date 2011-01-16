@@ -18,6 +18,9 @@ public class Civility extends AbstractTranslatableIdentity {
      */
     private static final long serialVersionUID = -7268110575101379157L;
 
+    /**
+     * Constructor.
+     */
     public Civility() {
         super();
     }

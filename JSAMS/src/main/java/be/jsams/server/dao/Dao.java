@@ -11,7 +11,7 @@ import java.util.List;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public interface GenericDao<T> {
+public interface Dao<T> {
 
     /**
      * Adds new object in the database
@@ -51,19 +51,19 @@ public interface GenericDao<T> {
     void update(T transientObject);
 
     /**
-     * Removes the object from the database
+     * Deletes the object from the database
      * 
      * @param persistentObject
      *            the object to remove
      */
-    void remove(T persistentObject);
+    void delete(T persistentObject);
 
     /**
-     * Removes the object from the database following the id
+     * Deletes the object from the database following the id
      * 
      * @param id
      *            the object id
      */
-    void remove(Long id);
+    void delete(Long id);
 
 }

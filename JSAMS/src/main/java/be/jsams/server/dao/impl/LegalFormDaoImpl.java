@@ -10,7 +10,7 @@ import be.jsams.server.model.LegalForm;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class LegalFormDaoImpl extends GenericDaoImpl<LegalForm> implements LegalFormDao {
+public class LegalFormDaoImpl extends DaoImpl<LegalForm> implements LegalFormDao {
 
     /**
      * Constructor
@@ -18,7 +18,7 @@ public class LegalFormDaoImpl extends GenericDaoImpl<LegalForm> implements Legal
      * @param type
      *            the class type
      */
-    public LegalFormDaoImpl(Class<LegalForm> type) {
+    public LegalFormDaoImpl(final Class<LegalForm> type) {
         super(type);
     }
 

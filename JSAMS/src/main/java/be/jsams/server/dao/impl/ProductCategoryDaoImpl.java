@@ -15,7 +15,7 @@ import com.mysql.jdbc.StringUtils;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class ProductCategoryDaoImpl extends GenericDaoImpl<ProductCategory> implements ProductCategoryDao {
+public class ProductCategoryDaoImpl extends DaoImpl<ProductCategory> implements ProductCategoryDao {
 
     /**
      * Constructor
@@ -23,7 +23,7 @@ public class ProductCategoryDaoImpl extends GenericDaoImpl<ProductCategory> impl
      * @param type
      *            the class type
      */
-    public ProductCategoryDaoImpl(Class<ProductCategory> type) {
+    public ProductCategoryDaoImpl(final Class<ProductCategory> type) {
         super(type);
     }
 

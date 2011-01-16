@@ -43,14 +43,14 @@ public class CustomerServiceImpl implements CustomerService {
      * {@inheritDoc}
      */
     public void delete(final Customer customer) {
-        customerDao.remove(customer);
+        customerDao.delete(customer);
     }
 
     /**
      * {@inheritDoc}
      */
     public void delete(final Long id) {
-        customerDao.remove(id);
+        customerDao.delete(id);
     }
 
     /**

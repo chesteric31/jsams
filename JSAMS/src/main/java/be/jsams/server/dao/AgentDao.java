@@ -8,6 +8,6 @@ import be.jsams.server.model.Agent;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public interface AgentDao extends GenericDao<Agent> {
+public interface AgentDao extends Dao<Agent> {
 
 }

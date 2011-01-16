@@ -17,7 +17,7 @@ import be.jsams.server.model.PaymentMode;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class CustomerDaoImpl extends GenericDaoImpl<Customer> implements CustomerDao {
+public class CustomerDaoImpl extends DaoImpl<Customer> implements CustomerDao {
 
     /**
      * Constructor

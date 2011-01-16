@@ -83,12 +83,16 @@ public class CustomerTableModel extends AbstractTableModel {
             return data.get(rowIndex).getName();
         case 2:
             LegalForm legalForm = data.get(rowIndex).getLegalForm();
+            if (legalForm != null) {
             if (UserContext.isDutch()) {
                 return legalForm.getLabelNl();
             } else if (UserContext.isFrench()) {
                 return legalForm.getLabelFr();
             } else {
                 return legalForm.getLabel();
+            }
+            } else {
+                return "";
             }
         case 3:
             return data.get(rowIndex).getBillingAddress().getZipCode();

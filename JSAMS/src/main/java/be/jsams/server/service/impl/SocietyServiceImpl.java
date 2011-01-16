@@ -64,14 +64,14 @@ public class SocietyServiceImpl implements SocietyService {
      * {@inheritDoc}
      */
     public void delete(final Society society) {
-        societyDao.remove(society);
+        societyDao.delete(society);
     }
 
     /**
      * {@inheritDoc}
      */
     public void delete(final Long id) {
-        societyDao.remove(id);
+        societyDao.delete(id);
     }
 
 }

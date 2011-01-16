@@ -27,60 +27,116 @@ public class ContactInformation extends AbstractIdentity {
     private String website;
     private byte[] logo;
 
+    /**
+     * Constructor.
+     */
     public ContactInformation() {
         super();
     }
 
+    /**
+     * 
+     * @return the phone
+     */
     @Column(name = "PHONE")
     public String getPhone() {
         return phone;
     }
 
+    /**
+     * 
+     * @param phone
+     *            the phone to set
+     */
     public void setPhone(String phone) {
         this.phone = phone;
     }
 
+    /**
+     * 
+     * @return the fax
+     */
     @Column(name = "FAX")
     public String getFax() {
         return fax;
     }
 
+    /**
+     * 
+     * @param fax
+     *            the fax to set
+     */
     public void setFax(String fax) {
         this.fax = fax;
     }
 
+    /**
+     * 
+     * @return the mobile
+     */
     @Column(name = "MOBILE")
     public String getMobile() {
         return mobile;
     }
 
+    /**
+     * 
+     * @param mobile
+     *            the mobile to set
+     */
     public void setMobile(String mobile) {
         this.mobile = mobile;
     }
 
+    /**
+     * 
+     * @return the email
+     */
     @Column(name = "EMAIL")
     public String getEmail() {
         return email;
     }
 
+    /**
+     * 
+     * @param email
+     *            the email to set
+     */
     public void setEmail(String email) {
         this.email = email;
     }
 
+    /**
+     * 
+     * @return the web-site
+     */
     @Column(name = "WEBSITE")
     public String getWebsite() {
         return website;
     }
 
+    /**
+     * 
+     * @param website
+     *            the web-site to set
+     */
     public void setWebsite(String website) {
         this.website = website;
     }
 
+    /**
+     * 
+     * @return the logo
+     */
     @Column(name = "LOGO")
     public byte[] getLogo() {
         return logo;
     }
 
+    /**
+     * 
+     * @param logo the logo to set
+     */
     public void setLogo(byte[] logo) {
         this.logo = logo;
     }
@@ -105,7 +161,7 @@ public class ContactInformation extends AbstractIdentity {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj) {
             return true;
         }

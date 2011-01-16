@@ -43,14 +43,14 @@ public class ProductServiceImpl implements ProductService {
      * {@inheritDoc}
      */
     public void delete(final Product product) {
-        productDao.remove(product);
+        productDao.delete(product);
     }
 
     /**
      * {@inheritDoc}
      */
     public void delete(final Long id) {
-        productDao.remove(id);
+        productDao.delete(id);
     }
 
     /**

@@ -4,7 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 
 /**
- * 
+ * {@link MappedSuperclass} for all entities that have the columns: label in English, French and Dutch.
  * 
  * @author chesteric31
  * @version $$Rev$$ $$Date::                  $$ $$Author$$
@@ -21,29 +21,56 @@ public class AbstractTranslatableIdentity extends AbstractIdentity {
     private String labelFr;
     private String labelNl;
 
+    /**
+     * 
+     * @return label in English
+     */
     @Column(name = "LABEL")
     public String getLabel() {
         return label;
     }
 
+    /**
+     * 
+     * @param label
+     *            the English label to set
+     */
     public void setLabel(String label) {
         this.label = label;
     }
 
+    /**
+     * 
+     * @return label in French
+     */
     @Column(name = "LABEL_FR")
     public String getLabelFr() {
         return labelFr;
     }
 
+    /**
+     * 
+     * @param labelFr
+     *            the French label to set
+     */
     public void setLabelFr(String labelFr) {
         this.labelFr = labelFr;
     }
 
+    /**
+     * 
+     * @return label in Dutch
+     */
     @Column(name = "LABEL_NL")
     public String getLabelNl() {
         return labelNl;
     }
 
+    /**
+     * 
+     * @param labelNl
+     *            the Dutch label to set
+     */
     public void setLabelNl(String labelNl) {
         this.labelNl = labelNl;
     }
@@ -59,7 +86,7 @@ public class AbstractTranslatableIdentity extends AbstractIdentity {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj) {
             return true;
         }

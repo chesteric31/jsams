@@ -18,6 +18,9 @@ public class PaymentMode extends AbstractTranslatableIdentity {
      */
     private static final long serialVersionUID = -9072503968708609612L;
 
+    /**
+     * Constructor.
+     */
     public PaymentMode() {
         super();
     }

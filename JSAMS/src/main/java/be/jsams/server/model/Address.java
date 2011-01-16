@@ -25,60 +25,117 @@ public class Address extends AbstractIdentity {
     private String city;
     private String country;
 
+    /**
+     * Constructor.
+     */
     public Address() {
         super();
     }
 
+    /**
+     * 
+     * @return the street
+     */
     @Column(name = "STREET")
     public String getStreet() {
         return street;
     }
 
+    /**
+     * 
+     * @param street
+     *            the street to set
+     */
     public void setStreet(String street) {
         this.street = street;
     }
 
+    /**
+     * 
+     * @return the house number
+     */
     @Column(name = "NUMBER")
     public String getNumber() {
         return number;
     }
 
+    /**
+     * 
+     * @param number
+     *            the house number to set
+     */
     public void setNumber(String number) {
         this.number = number;
     }
 
+    /**
+     * 
+     * @return the zip code
+     */
     @Column(name = "ZIP_CODE")
     public int getZipCode() {
         return zipCode;
     }
 
+    /**
+     * 
+     * @param zipCode
+     *            the zip code to set
+     */
     public void setZipCode(int zipCode) {
         this.zipCode = zipCode;
     }
 
+    /**
+     * 
+     * @return the box
+     */
     @Column(name = "BOX")
     public String getBox() {
         return box;
     }
 
+    /**
+     * 
+     * @param box
+     *            the box to set
+     */
     public void setBox(String box) {
         this.box = box;
     }
 
+    /**
+     * 
+     * @return the city
+     */
     @Column(name = "CITY")
     public String getCity() {
         return city;
     }
 
+    /**
+     * 
+     * @param city
+     *            the city to set
+     */
     public void setCity(String city) {
         this.city = city;
     }
 
+    /**
+     * 
+     * @return the country
+     */
     @Column(name = "COUNTRY")
     public String getCountry() {
         return country;
     }
 
+    /**
+     * 
+     * @param country
+     *            the country to set
+     */
     public void setCountry(String country) {
         this.country = country;
     }
@@ -103,7 +160,7 @@ public class Address extends AbstractIdentity {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj) {
             return true;
         }

@@ -8,6 +8,6 @@ import be.jsams.server.model.Civility;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public interface CivilityDao extends GenericDao<Civility> {
+public interface CivilityDao extends Dao<Civility> {
 
 }

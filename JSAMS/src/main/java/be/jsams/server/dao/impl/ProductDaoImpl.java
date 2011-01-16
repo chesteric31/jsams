@@ -17,7 +17,7 @@ import be.jsams.server.model.ProductCategory;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class ProductDaoImpl extends GenericDaoImpl<Product> implements ProductDao {
+public class ProductDaoImpl extends DaoImpl<Product> implements ProductDao {
 
     /**
      * Constructor
@@ -25,7 +25,7 @@ public class ProductDaoImpl extends GenericDaoImpl<Product> implements ProductDa
      * @param type
      *            the class type
      */
-    public ProductDaoImpl(Class<Product> type) {
+    public ProductDaoImpl(final Class<Product> type) {
         super(type);
     }
 
