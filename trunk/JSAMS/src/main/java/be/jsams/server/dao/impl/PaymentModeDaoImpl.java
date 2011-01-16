@@ -9,7 +9,7 @@ import be.jsams.server.model.PaymentMode;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class PaymentModeDaoImpl extends GenericDaoImpl<PaymentMode> implements PaymentModeDao {
+public class PaymentModeDaoImpl extends DaoImpl<PaymentMode> implements PaymentModeDao {
 
     /**
      * Constructor
@@ -17,7 +17,7 @@ public class PaymentModeDaoImpl extends GenericDaoImpl<PaymentMode> implements P
      * @param type
      *            the class type
      */
-    public PaymentModeDaoImpl(Class<PaymentMode> type) {
+    public PaymentModeDaoImpl(final Class<PaymentMode> type) {
         super(type);
     }
 

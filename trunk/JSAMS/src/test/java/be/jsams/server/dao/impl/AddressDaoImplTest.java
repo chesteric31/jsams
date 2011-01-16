@@ -98,7 +98,7 @@ public class AddressDaoImplTest extends AbstractJUnitTestClass {
 	@Test
 	public void testRemove() {
 		dao.add(address);
-		dao.remove(address);
+		dao.delete(address);
 		Address findAddress = dao.findById(address.getId());
 		assertNull(findAddress);
 	}

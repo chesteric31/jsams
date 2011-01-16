@@ -96,7 +96,7 @@ public class SearchProductCategoryPanel extends
 
         fillTable(categories);
     }
-    
+
     /**
      * Fills the data table.
      * 
@@ -140,6 +140,7 @@ public class SearchProductCategoryPanel extends
             ProductCategory selectedCategoryProduct = getService().findById(id);
             new EditProductCategoryDialog(JsamsI18nResource.TITLE_EDIT_PRODUCT_CATEGORY, selectedCategoryProduct);
         }
+        performOk();
     }
 
     /**
@@ -147,8 +148,11 @@ public class SearchProductCategoryPanel extends
      */
     @Override
     protected void performButtonRemove() {
-        // TODO Auto-generated method stub
-        
+        int selectedRow = resultTable.getSelectedRow();
+        if (selectedRow > -1) {
+            Long id = (Long) resultTable.getValueAt(selectedRow, 0);
+            getService().delete(id);
+        }
+        performOk();
     }
-    
 }

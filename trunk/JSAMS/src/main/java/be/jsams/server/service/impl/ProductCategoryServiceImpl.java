@@ -43,14 +43,14 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
      * {@inheritDoc}
      */
     public void delete(final ProductCategory model) {
-        productCategoryDao.remove(model);
+        productCategoryDao.delete(model);
     }
 
     /**
      * {@inheritDoc}
      */
     public void delete(final Long id) {
-        productCategoryDao.remove(id);
+        productCategoryDao.delete(id);
     }
 
     /**

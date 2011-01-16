@@ -68,9 +68,9 @@ public class CommandServiceImpl implements CommandService {
     public void delete(final Command command) {
         List<CommandDetail> details = command.getDetails();
         for (CommandDetail detail : details) {
-            commandDetailDao.remove(detail);
+            commandDetailDao.delete(detail);
         }
-        commandDao.remove(command);
+        commandDao.delete(command);
     }
 
     /**
@@ -80,9 +80,9 @@ public class CommandServiceImpl implements CommandService {
         Command command = findById(id);
         List<CommandDetail> details = command.getDetails();
         for (CommandDetail detail : details) {
-            commandDetailDao.remove(detail);
+            commandDetailDao.delete(detail);
         }
-        commandDao.remove(id);
+        commandDao.delete(id);
     }
 
     /**

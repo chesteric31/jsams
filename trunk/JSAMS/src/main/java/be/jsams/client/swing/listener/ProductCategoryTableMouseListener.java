@@ -29,6 +29,7 @@ public class ProductCategoryTableMouseListener implements MouseListener {
                 ProductCategory selectedProductCategory = JsamsApplicationContext.getProductCategoryService().findById(
                         id);
                 new EditProductCategoryDialog(JsamsI18nResource.TITLE_EDIT_PRODUCT_CATEGORY, selectedProductCategory);
+              //TODO perform ok onto table for refresh
             }
         }
     }

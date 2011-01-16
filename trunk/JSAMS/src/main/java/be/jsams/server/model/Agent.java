@@ -39,50 +39,95 @@ public class Agent extends AbstractNamedIdentity {
         super();
     }
 
+    /**
+     * 
+     * @return the function String
+     */
     @Column(name = "FUNCTION")
     public String getFunction() {
         return function;
     }
 
+    /**
+     * 
+     * @param function
+     *            the function to set
+     */
     public void setFunction(String function) {
         this.function = function;
     }
 
+    /**
+     * 
+     * @return the {@link Civility}
+     */
     @OneToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "FK_CIVILITY")
     public Civility getCivility() {
         return civility;
     }
 
+    /**
+     * 
+     * @param civility
+     *            the {@link Civility} to set
+     */
     public void setCivility(Civility civility) {
         this.civility = civility;
     }
 
+    /**
+     * 
+     * @return the {@link Address}
+     */
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "FK_ADDRESS")
     public Address getAddress() {
         return address;
     }
 
+    /**
+     * 
+     * @param address
+     *            the {@link Address} to set
+     */
     public void setAddress(Address address) {
         this.address = address;
     }
 
+    /**
+     * 
+     * @return the {@link ContactInformation}
+     */
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "FK_CONTACT_INFORMATION")
     public ContactInformation getContactInformation() {
         return contactInformation;
     }
 
+    /**
+     * 
+     * @param contactInformation
+     *            the {@link ContactInformation} to set
+     */
     public void setContactInformation(ContactInformation contactInformation) {
         this.contactInformation = contactInformation;
     }
 
+    /**
+     * 
+     * @return a list of {@link Customer}
+     */
     @ManyToMany(mappedBy = "agent")
     public List<Customer> getCustomers() {
         return customers;
     }
 
+    /**
+     * 
+     * @param customers
+     *            the list of {@link Customer}s to set
+     */
     public void setCustomers(List<Customer> customers) {
         this.customers = customers;
     }

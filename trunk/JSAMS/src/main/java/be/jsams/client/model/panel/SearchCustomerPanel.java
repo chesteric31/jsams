@@ -131,8 +131,11 @@ public class SearchCustomerPanel extends SearchPanel<Customer, CustomerTableMous
      */
     @Override
     protected void performButtonRemove() {
-        // TODO Auto-generated method stub
-        
+        int selectedRow = resultTable.getSelectedRow();
+        if (selectedRow > -1) {
+            Long id = (Long) resultTable.getValueAt(selectedRow, 0);
+            getService().delete(id);
+        }
     }
 
     /**

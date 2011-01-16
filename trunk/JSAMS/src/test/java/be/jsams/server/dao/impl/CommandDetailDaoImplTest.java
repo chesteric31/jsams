@@ -155,7 +155,7 @@ public class CommandDetailDaoImplTest extends AbstractJUnitTestClass {
         detailDao.add(detail);
         Long id = detail.getId();
         assertNotNull(id);
-        detailDao.remove(detail);
+        detailDao.delete(detail);
         assertNull(detailDao.findById(id));
 	}
 
@@ -173,7 +173,7 @@ public class CommandDetailDaoImplTest extends AbstractJUnitTestClass {
         detailDao.add(detail);
         Long id = detail.getId();
         assertNotNull(id);
-        detailDao.remove(id);
+        detailDao.delete(id);
         assertNull(detailDao.findById(id));
 	}
 

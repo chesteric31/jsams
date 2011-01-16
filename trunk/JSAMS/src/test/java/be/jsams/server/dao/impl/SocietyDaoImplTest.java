@@ -56,7 +56,7 @@ public class SocietyDaoImplTest extends AbstractJUnitTestClass {
     }
 
     /**
-     * Test method for {@link be.jsams.server.dao.impl.GenericDaoImpl#add(java.lang.Object)}.
+     * Test method for {@link be.jsams.server.dao.impl.DaoImpl#add(java.lang.Object)}.
      */
     @Test
     public void testAdd() {
@@ -65,7 +65,7 @@ public class SocietyDaoImplTest extends AbstractJUnitTestClass {
     }
 
     /**
-     * Test method for {@link be.jsams.server.dao.impl.GenericDaoImpl#findAll()}.
+     * Test method for {@link be.jsams.server.dao.impl.DaoImpl#findAll()}.
      */
     @Test
     public void testFindAll() {
@@ -74,7 +74,7 @@ public class SocietyDaoImplTest extends AbstractJUnitTestClass {
     }
 
     /**
-     * Test method for {@link be.jsams.server.dao.impl.GenericDaoImpl#findById(java.lang.Long)}.
+     * Test method for {@link be.jsams.server.dao.impl.DaoImpl#findById(java.lang.Long)}.
      */
     @Test
     public void testFindById() {
@@ -83,18 +83,18 @@ public class SocietyDaoImplTest extends AbstractJUnitTestClass {
     }
 
     /**
-     * Test method for {@link be.jsams.server.dao.impl.GenericDaoImpl#remove(java.lang.Object)}.
+     * Test method for {@link be.jsams.server.dao.impl.DaoImpl#delete(java.lang.Object)}.
      */
     @Test
     public void testRemove() {
         dao.add(society);
         assertNotNull(dao.findById(society.getId()));
-        dao.remove(society);
+        dao.delete(society);
         assertNull(dao.findById(society.getId()));
     }
 
     /**
-     * Test method for {@link be.jsams.server.dao.impl.GenericDaoImpl#update(java.lang.Object)}.
+     * Test method for {@link be.jsams.server.dao.impl.DaoImpl#update(java.lang.Object)}.
      */
     @Test
     public void testUpdate() {
@@ -107,14 +107,14 @@ public class SocietyDaoImplTest extends AbstractJUnitTestClass {
     }
 
     /**
-     * Test method for {@link be.jsams.server.dao.impl.GenericDaoImpl#remove(java.lang.Long)}.
+     * Test method for {@link be.jsams.server.dao.impl.DaoImpl#delete(java.lang.Long)}.
      */
     @Test
     public void testRemoveWithId() {
         dao.add(society);
         Long id = society.getId();
         assertNotNull(id);
-        dao.remove(id);
+        dao.delete(id);
         assertNull(dao.findById(id));
     }
 

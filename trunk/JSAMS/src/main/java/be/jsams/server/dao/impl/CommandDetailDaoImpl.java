@@ -9,7 +9,7 @@ import be.jsams.server.model.CommandDetail;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class CommandDetailDaoImpl extends GenericDaoImpl<CommandDetail> implements CommandDetailDao {
+public class CommandDetailDaoImpl extends DaoImpl<CommandDetail> implements CommandDetailDao {
 
     /**
      * Constructor
@@ -17,7 +17,7 @@ public class CommandDetailDaoImpl extends GenericDaoImpl<CommandDetail> implemen
      * @param type
      *            the class type
      */
-    public CommandDetailDaoImpl(Class<CommandDetail> type) {
+    public CommandDetailDaoImpl(final Class<CommandDetail> type) {
         super(type);
     }
 }

@@ -28,6 +28,7 @@ public class ProductTableMouseListener implements MouseListener {
                 Long id = (Long) table.getValueAt(selectedRow, 0);
                 Product selectedProduct = JsamsApplicationContext.getProductService().findById(id);
                 new EditProductDialog(JsamsI18nResource.TITLE_EDIT_PRODUCT, selectedProduct);
+              //TODO perform ok onto table for refresh
             }
         }
     }

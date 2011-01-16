@@ -18,7 +18,11 @@ public class LegalForm extends AbstractTranslatableIdentity {
      */
     private static final long serialVersionUID = 7811347200401042583L;
 
+    /**
+     * Constructor.
+     */
     public LegalForm() {
         super();
     }
+    
 }

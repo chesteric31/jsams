@@ -39,67 +39,131 @@ public class CommandDetail extends AbstractIdentity {
         super();
     }
 
+    /**
+     * 
+     * @return the quantity
+     */
     @Column(name = "QUANTITY")
     public int getQuantity() {
         return quantity;
     }
 
+    /**
+     * 
+     * @param quantity
+     *            the quantity to set
+     */
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 
+    /**
+     * 
+     * @return the price
+     */
     @Column(name = "PRICE")
     public BigDecimal getPrice() {
         return price;
     }
 
+    /**
+     * 
+     * @param price
+     *            the price to set
+     */
     public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
+    /**
+     * 
+     * @return the VAT to apply
+     */
     @Column(name = "VAT_APPLICABLE")
     public BigDecimal getVatApplicable() {
         return vatApplicable;
     }
 
+    /**
+     * 
+     * @param vatApplicable
+     *            the VAT applicable to set
+     */
     public void setVatApplicable(BigDecimal vatApplicable) {
         this.vatApplicable = vatApplicable;
     }
 
+    /**
+     * 
+     * @return a discount rate
+     */
     @Column(name = "DISCOUNT_RATE")
     public BigDecimal getDiscountRate() {
         return discountRate;
     }
 
+    /**
+     * 
+     * @param discountRate
+     *            a discount rate to set
+     */
     public void setDiscountRate(BigDecimal discountRate) {
         this.discountRate = discountRate;
     }
 
+    /**
+     * 
+     * @return true if the {@link CommandDetail} was transferred to a bill detail, false otherwise
+     */
     @Column(name = "TRANSFERRED")
     public boolean isTransferred() {
         return transferred;
     }
 
+    /**
+     * 
+     * @param transferred
+     *            the transferred boolean to set (true, this {@link CommandDetail} is transferred to a bill detail,
+     *            false otherwise
+     */
     public void setTransferred(boolean transferred) {
         this.transferred = transferred;
     }
 
+    /**
+     * 
+     * @return the {@link Command}
+     */
     @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "FK_COMMAND")
     public Command getCommand() {
         return command;
     }
 
+    /**
+     * 
+     * @param command
+     *            the {@link Command} to set
+     */
     public void setCommand(Command command) {
         this.command = command;
     }
 
+    /**
+     * 
+     * @return the {@link Product}
+     */
     @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "FK_PRODUCT")
     public Product getProduct() {
         return product;
     }
 
+    /**
+     * 
+     * @param product
+     *            the {@link Product} to set
+     */
     public void setProduct(Product product) {
         this.product = product;
     }

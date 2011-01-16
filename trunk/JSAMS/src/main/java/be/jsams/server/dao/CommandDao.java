@@ -8,6 +8,6 @@ import be.jsams.server.model.Command;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public interface CommandDao extends GenericDao<Command> {
+public interface CommandDao extends Dao<Command> {
 
 }

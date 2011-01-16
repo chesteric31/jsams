@@ -10,7 +10,7 @@ import be.jsams.server.model.Product;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public interface ProductDao extends GenericDao<Product> {
+public interface ProductDao extends Dao<Product> {
 
     /**
      * Finds a list of {@link Product} following the criteria model

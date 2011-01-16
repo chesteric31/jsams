@@ -30,6 +30,9 @@ public class Product extends AbstractNamedIdentity {
 
     private ProductCategory category;
 
+    /**
+     * Constructor.
+     */
     public Product() {
         super();
     }

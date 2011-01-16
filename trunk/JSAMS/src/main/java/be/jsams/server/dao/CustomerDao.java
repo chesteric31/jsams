@@ -10,7 +10,7 @@ import be.jsams.server.model.Customer;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public interface CustomerDao extends GenericDao<Customer> {
+public interface CustomerDao extends Dao<Customer> {
 
     /**
      * Finds a list of {@link Customer} following the criteria model

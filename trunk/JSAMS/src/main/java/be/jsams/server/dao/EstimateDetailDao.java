@@ -8,6 +8,6 @@ import be.jsams.server.model.EstimateDetail;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public interface EstimateDetailDao extends GenericDao<EstimateDetail> {
+public interface EstimateDetailDao extends Dao<EstimateDetail> {
 
 }

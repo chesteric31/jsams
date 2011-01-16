@@ -9,7 +9,7 @@ import be.jsams.server.model.Agent;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class AgentDaoImpl extends GenericDaoImpl<Agent> implements AgentDao {
+public class AgentDaoImpl extends DaoImpl<Agent> implements AgentDao {
 
     /**
      * Constructor
@@ -17,7 +17,7 @@ public class AgentDaoImpl extends GenericDaoImpl<Agent> implements AgentDao {
      * @param type
      *            the class type
      */
-    public AgentDaoImpl(Class<Agent> type) {
+    public AgentDaoImpl(final Class<Agent> type) {
         super(type);
     }
 

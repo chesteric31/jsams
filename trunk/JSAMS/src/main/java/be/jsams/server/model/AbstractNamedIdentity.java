@@ -4,7 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 
 /**
- * 
+ * {@link MappedSuperclass} for all entities that have the column: name.
  * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
