@@ -49,7 +49,9 @@
 		<property name="transactionAttributes">
 			<props>
 				<prop key="find*">PROPAGATION_REQUIRED,readOnly,-Exception</prop>
-				<prop key="*">PROPAGATION_REQUIRED,-Exception</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-Exception</prop>
+				<prop key="delete*">PROPAGATION_REQUIRED,-Exception</prop>
+				<prop key="create*">PROPAGATION_REQUIRED,-Exception</prop>
 			</props>
 		</property>
 	</bean>
@@ -99,6 +101,9 @@
 		<property name="target" ref="commandServiceTarget" />
 	</bean>
 
+	<bean id="contactInformationDao" class="be.jsams.server.dao.impl.ContactInformationDaoImpl">
+		<constructor-arg value="be.jsams.server.model.ContactInformation" />
+	</bean>
 	<bean id="addressDao" class="be.jsams.server.dao.impl.AddressDaoImpl">
 		<constructor-arg value="be.jsams.server.model.Address" />
 	</bean>
