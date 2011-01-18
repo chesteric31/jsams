@@ -19,14 +19,31 @@ public class JsamsMenuItem extends JMenuItem {
      */
     private static final long serialVersionUID = 6988054593643268473L;
 
+    /**
+     * Constructor.
+     */
     public JsamsMenuItem() {
         super();
     }
 
+    /**
+     * Constructor.
+     * 
+     * @param text
+     *            the translatable {@link I18nString}
+     */
     public JsamsMenuItem(final I18nString text) {
         super(text.getTranslation());
     }
 
+    /**
+     * Constructor.
+     * 
+     * @param text
+     *            the translatable {@link I18nString}
+     * @param iconFileName
+     *            the icon file name
+     */
     public JsamsMenuItem(final I18nString text, final String iconFileName) {
         this(text);
         ImageIcon defaultIcon = new ImageIcon(IconUtil.buildIcon(iconFileName));

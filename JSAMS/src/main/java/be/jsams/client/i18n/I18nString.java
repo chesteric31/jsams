@@ -93,6 +93,9 @@ public class I18nString {
         return (emptyString);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public String toString() {
         return getTranslation();
     }

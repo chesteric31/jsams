@@ -393,7 +393,7 @@ public class EditCustomerDialog extends EditDialog<Customer, CustomerValidator, 
      */
     public void performOk() {
         Customer customer = new Customer();
-        // TODO: see for agent object
+        // TODO see for agent object
         customer.setName(textFieldName.getText());
         if (comboBoxLegalForm.getSelectedItem() != null) {
             customer.setLegalForm((LegalForm) comboBoxLegalForm.getSelectedItem());

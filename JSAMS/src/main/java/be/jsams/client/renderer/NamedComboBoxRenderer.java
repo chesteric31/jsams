@@ -19,6 +19,9 @@ public class NamedComboBoxRenderer implements ListCellRenderer {
 
     private DefaultListCellRenderer defaultRenderer = new DefaultListCellRenderer();
 
+    /**
+     * {@inheritDoc}
+     */
     public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected,
             boolean cellHasFocus) {
         String theText = " ";

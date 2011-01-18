@@ -34,6 +34,18 @@ public class JsamsButtonsPanel extends JPanel {
      */
     private static final long serialVersionUID = 8542255661439665645L;
 
+    /**
+     * Constructor.
+     * 
+     * @param parent
+     *            the parent frame
+     * @param okToAdd
+     *            boolean to add button ok or not
+     * @param cancelToAdd
+     *            boolean to add button cancel or not
+     * @param resetToAdd
+     *            boolean to add button reset or not
+     */
     public JsamsButtonsPanel(final JsamsButtonsInterface parent, final boolean okToAdd, final boolean cancelToAdd,
             final boolean resetToAdd) {
         super();
@@ -50,6 +62,9 @@ public class JsamsButtonsPanel extends JPanel {
         initComponents();
     }
 
+    /**
+     * Initializes the components.
+     */
     private void initComponents() {
         BorderLayout buttonsLayout = new BorderLayout();
         buttonsLayout.setVgap(DEFAULT_V_GAP);
@@ -61,6 +76,11 @@ public class JsamsButtonsPanel extends JPanel {
         this.add(new JLabel(), BorderLayout.SOUTH);
     }
 
+    /**
+     * Builds the OK button.
+     * 
+     * @return the OK {@link JsamsButton}
+     */
     private JsamsButton buildButtonOk() {
         JsamsButton buttonOk = new JsamsButton(JsamsI18nResource.BUTTON_OK);
         buttonOk.addActionListener(new ActionListener() {
@@ -71,6 +91,11 @@ public class JsamsButtonsPanel extends JPanel {
         return buttonOk;
     }
 
+    /**
+     * Builds the cancel button.
+     * 
+     * @return the cancel {@link JsamsButton}
+     */
     private JsamsButton buildButtonCancel() {
         JsamsButton buttonCancel = new JsamsButton(JsamsI18nResource.BUTTON_CANCEL);
         buttonCancel.addActionListener(new ActionListener() {
@@ -81,6 +106,11 @@ public class JsamsButtonsPanel extends JPanel {
         return buttonCancel;
     }
 
+    /**
+     * Builds the reset button.
+     * 
+     * @return the reset {@link JsamsButton}
+     */
     private JsamsButton buildButtonReset() {
         JsamsButton buttonReset = new JsamsButton(JsamsI18nResource.BUTTON_RESET);
         buttonReset.addActionListener(new ActionListener() {
