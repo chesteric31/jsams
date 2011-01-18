@@ -37,48 +37,93 @@ public class Product extends AbstractNamedIdentity {
         super();
     }
 
+    /**
+     * 
+     * @return the price
+     */
     @Column(name = "PRICE")
     public BigDecimal getPrice() {
         return price;
     }
 
+    /**
+     * 
+     * @param price
+     *            the price to set
+     */
     public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
+    /**
+     * 
+     * @return the stock quantity
+     */
     @Column(name = "QUANTITY_STOCK")
     public int getQuantityStock() {
         return quantityStock;
     }
 
+    /**
+     * 
+     * @param quantityStock
+     *            the stock quantity to set
+     */
     public void setQuantityStock(int quantityStock) {
         this.quantityStock = quantityStock;
     }
 
+    /**
+     * 
+     * @return the reorder level
+     */
     @Column(name = "REORDER_LEVEL")
     public int getReorderLevel() {
         return reorderLevel;
     }
 
+    /**
+     * 
+     * @param reorderLevel
+     *            the reorder level to set
+     */
     public void setReorderLevel(int reorderLevel) {
         this.reorderLevel = reorderLevel;
     }
 
+    /**
+     * 
+     * @return the VAT applicable
+     */
     @Column(name = "VAT_APPLICABLE")
     public BigDecimal getVatApplicable() {
         return vatApplicable;
     }
 
+    /**
+     * 
+     * @param vatApplicable
+     *            the VAT applicable to set
+     */
     public void setVatApplicable(BigDecimal vatApplicable) {
         this.vatApplicable = vatApplicable;
     }
 
+    /**
+     * 
+     * @return the {@link ProductCategory}
+     */
     @OneToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "FK_CATEGORY_PRODUCT")
     public ProductCategory getCategory() {
         return category;
     }
 
+    /**
+     * 
+     * @param category
+     *            the {@link ProductCategory} to set
+     */
     public void setCategory(ProductCategory category) {
         this.category = category;
     }
