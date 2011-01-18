@@ -25,10 +25,23 @@ public class JsamsCloseableTabbedPane extends JTabbedPane {
      */
     private static final long serialVersionUID = -5934631016465665535L;
 
+    /**
+     * Constructor.
+     */
     public JsamsCloseableTabbedPane() {
         super();
     }
 
+    /**
+     * Adds a tab.
+     * 
+     * @param title
+     *            the title table
+     * @param iconFileName
+     *            the icon file name
+     * @param component
+     *            the tab content panel
+     */
     public void addTab(I18nString title, final String iconFileName, final Component component) {
         JPanel tab = new JPanel();
         tab.setOpaque(false);

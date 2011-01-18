@@ -68,7 +68,8 @@ public final class JsamsI18nResource {
 
     public static final I18nString BUTTON_CANCEL = new I18nString("button.cancel");
 
-    public static final I18nString PANEL_CONTACT_INFORMATIONS_TITLE = new I18nString("panel.contact_informations.title");
+    public static final I18nString PANEL_CONTACT_INFORMATIONS_TITLE
+        = new I18nString("panel.contact_informations.title");
 
     public static final I18nString BUTTON_RESET = new I18nString("button.reset");
 

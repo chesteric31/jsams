@@ -106,6 +106,12 @@ public class JsamsStatusBar extends JPanel {
         labelText.setText(messageWhenEmpty);
     }
 
+    /**
+     * Sets text when empty.
+     * 
+     * @param value
+     *            the value
+     */
     public synchronized void setTextWhenEmpty(String value) {
         final boolean wasEmpty = labelText.getText().equals(messageWhenEmpty);
         if (value != null && value.length() > 0) {
@@ -118,6 +124,12 @@ public class JsamsStatusBar extends JPanel {
         }
     }
 
+    /**
+     * Adds {@link JComponent}.
+     * 
+     * @param comp
+     *            the {@link JComponent} to add
+     */
     public synchronized void addJComponent(JComponent comp) {
         if (comp == null) {
             throw new IllegalArgumentException("JComponent == null");
@@ -130,11 +142,18 @@ public class JsamsStatusBar extends JPanel {
         super.add(comp, gribBagContraints);
     }
 
+    /**
+     * 
+     * @return a {@link Border}
+     */
     public static Border createComponentBorder() {
         return BorderFactory.createCompoundBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED), BorderFactory
                 .createEmptyBorder(0, 4, 0, 4));
     }
 
+    /**
+     * Creates the GUI.
+     */
     private void createGUI() {
         clearText();
 
@@ -162,6 +181,12 @@ public class JsamsStatusBar extends JPanel {
         gribBagContraints.gridx = GridBagConstraints.RELATIVE;
     }
 
+    /**
+     * Updates the sub components font.
+     * 
+     * @param cont
+     *            the {@link Container}
+     */
     private void updateSubcomponentsFont(Container cont) {
         Component[] comps = cont.getComponents();
         for (int i = 0; i < comps.length; ++i) {
@@ -172,6 +197,18 @@ public class JsamsStatusBar extends JPanel {
         }
     }
 
+    /**
+     * Sets status bar progress.
+     * 
+     * @param msg
+     *            the message
+     * @param minimum
+     *            the minimum
+     * @param maximum
+     *            the maximum
+     * @param value
+     *            the value
+     */
     public void setStatusBarProgress(String msg, int minimum, int maximum, int value) {
         Component firstComponent = labelOrProgressPanel.getComponent(0);
         if (!(firstComponent instanceof JProgressBar)) {
@@ -191,6 +228,9 @@ public class JsamsStatusBar extends JPanel {
         }
     }
 
+    /**
+     * Sets status bar progess finish.
+     */
     public void setStatusBarProgressFinished() {
         Component firstComponent = labelOrProgressPanel.getComponent(0);
         if (firstComponent instanceof JProgressBar) {

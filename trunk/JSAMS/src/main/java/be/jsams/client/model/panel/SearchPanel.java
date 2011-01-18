@@ -64,7 +64,7 @@ public abstract class SearchPanel<M extends AbstractIdentity, L extends MouseLis
     
     private JsamsButtonsPanel buttonsPanel;
 
-    JsamsTable resultTable = null;
+    protected JsamsTable resultTable = null;
 
     private JsamsButton buttonAdd = null;
     private JsamsButton buttonRemove = null;

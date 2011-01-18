@@ -30,7 +30,7 @@ public abstract class JsamsFrame extends JFrame {
 
     protected static final Log LOGGER = LogFactory.getLog(JsamsFrame.class);
 
-    public final int defaultFontSize = 13;
+    private final int defaultFontSize = 13;
 
     /**
      * The default resource bundle, integrating with the i18n component.

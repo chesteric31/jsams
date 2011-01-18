@@ -26,11 +26,17 @@ public class JsamsShortcutToolBar extends JPanel {
     private JsamsButton newProductButton;
     private JsamsButton statisticsButton;
 
+    /**
+     * Constructor.
+     */
     public JsamsShortcutToolBar() {
         super();
         initComponents();
     }
 
+    /**
+     * Initializes all the components.
+     */
     private void initComponents() {
         JPanel panel = new JPanel();
         panel.setBorder(new TitledBorder(JsamsI18nResource.PANEL_SHORTCUT_TOOLBAR.getTranslation()));
