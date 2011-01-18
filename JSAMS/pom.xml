@@ -31,28 +31,19 @@
 			<url>dav:https://jsams.googlecode.com/svn/maven2/releases</url>
 		</repository>
 	</distributionManagement>
-	<!--	<distributionManagement>-->
-	<!--		<repository>-->
-	<!--			<id>JSAMS-repository</id>-->
-	<!--			<url>https://jsams.googlecode.com/svn/maven/repository</url>-->
-	<!--		</repository>-->
-	<!--		<snapshotRepository>-->
-	<!--			<id>JSAMS-snapshot-repository</id>-->
-	<!--
-		<url>https://jsams.googlecode.com/svn/maven/repository-snapshot</url>
-	-->
-	<!--			<uniqueVersion>true</uniqueVersion>-->
-	<!--		</snapshotRepository>-->
-	<!--	</distributionManagement>-->
 	<build>
-		<!--		<extensions>-->
-		<!--			<extension>-->
-		<!--				<groupId>org.apache.maven.wagon</groupId>-->
-		<!--				<artifactId>wagon-webdav</artifactId>-->
-		<!--				<version>1.0-beta-2</version>-->
-		<!--			</extension>-->
-		<!--		</extensions>-->
 		<plugins>
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.2</version>
+				<configuration>
+					<archive>
+						<manifest>
+							<mainClass>be.jsams.JsamsStart</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-resources-plugin</artifactId>
@@ -69,11 +60,6 @@
 		</plugins>
 	</build>
 	<dependencies>
-		<!--		<dependency>-->
-		<!--			<groupId>com.googlecode.maven-gcu-plugin</groupId>-->
-		<!--			<artifactId>maven-gcu-plugin</artifactId>-->
-		<!--			<version>1.1</version>-->
-		<!--		</dependency>-->
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
