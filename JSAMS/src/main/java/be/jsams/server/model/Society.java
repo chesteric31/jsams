@@ -40,68 +40,131 @@ public class Society extends AbstractNamedIdentity {
         super();
     }
 
+    /**
+     * 
+     * @return the capital
+     */
     @Column(name = "CAPITAL")
     public BigDecimal getCapital() {
         return capital;
     }
 
+    /**
+     * 
+     * @param capital
+     *            the capital to set
+     */
     public void setCapital(BigDecimal capital) {
         this.capital = capital;
     }
 
+    /**
+     * 
+     * @return the activity
+     */
     @Column(name = "ACTIVITY")
     public String getActivity() {
         return activity;
     }
 
+    /**
+     * 
+     * @param activity
+     *            the activity to set
+     */
     public void setActivity(String activity) {
         this.activity = activity;
     }
 
+    /**
+     * 
+     * @return the responsible
+     */
     @Column(name = "RESPONSIBLE")
     public String getResponsible() {
         return responsible;
     }
 
+    /**
+     * 
+     * @param responsible
+     *            the responsible to set
+     */
     public void setResponsible(String responsible) {
         this.responsible = responsible;
     }
 
+    /**
+     * 
+     * @return the VAT number
+     */
     @Column(name = "VAT_NUMBER")
     public String getVatNumber() {
         return vatNumber;
     }
 
+    /**
+     * 
+     * @param vatNumber
+     *            the VAT number to set
+     */
     public void setVatNumber(String vatNumber) {
         this.vatNumber = vatNumber;
     }
 
+    /**
+     * 
+     * @return the {@link Address}
+     */
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "FK_ADDRESS")
     public Address getAddress() {
         return address;
     }
 
+    /**
+     * 
+     * @param address
+     *            the {@link Address} to set
+     */
     public void setAddress(Address address) {
         this.address = address;
     }
 
+    /**
+     * 
+     * @return the {@link LegalForm}
+     */
     @OneToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "FK_LEGAL_FORM")
     public LegalForm getLegalForm() {
         return legalForm;
     }
 
+    /**
+     * 
+     * @param legalForm
+     *            the {@link LegalForm} to set
+     */
     public void setLegalForm(LegalForm legalForm) {
         this.legalForm = legalForm;
     }
 
+    /**
+     * 
+     * @return the {@link ContactInformation}
+     */
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "FK_CONTACT_INFORMATION")
     public ContactInformation getContactInformation() {
         return contactInformation;
     }
 
+    /**
+     * 
+     * @param contactInformation
+     *            the {@link ContactInformation} to set
+     */
     public void setContactInformation(ContactInformation contactInformation) {
         this.contactInformation = contactInformation;
     }
@@ -129,7 +192,7 @@ public class Society extends AbstractNamedIdentity {
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (this == obj) {
             return true;
         }

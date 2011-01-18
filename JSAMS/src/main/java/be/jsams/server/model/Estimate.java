@@ -38,73 +38,137 @@ public class Estimate extends AbstractIdentity {
 
     private List<EstimateDetail> details;
 
+    /**
+     * Constructor.
+     */
     public Estimate() {
         super();
     }
 
+    /**
+     * 
+     * @return the creation date
+     */
     @Column(name = "CREATION_DATE")
     @Temporal(TemporalType.DATE)
     public Date getCreationDate() {
         return creationDate;
     }
 
+    /**
+     * 
+     * @param creationDate
+     *            the creation date to set
+     */
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
     }
 
+    /**
+     * 
+     * @return a remark
+     */
     @Column(name = "REMARK")
     public String getRemark() {
         return remark;
     }
 
+    /**
+     * 
+     * @param remark
+     *            a remark to set
+     */
     public void setRemark(String remark) {
         this.remark = remark;
     }
 
+    /**
+     * 
+     * @return the discount rate
+     */
     @Column(name = "DISCOUNT_RATE")
     public BigDecimal getDiscountRate() {
         return discountRate;
     }
 
+    /**
+     * 
+     * @param discountRate
+     *            the discount rate to set
+     */
     public void setDiscountRate(BigDecimal discountRate) {
         this.discountRate = discountRate;
     }
 
+    /**
+     * 
+     * @return the {@link Agent}
+     */
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "FK_AGENT")
     public Agent getAgent() {
         return agent;
     }
 
+    /**
+     * 
+     * @param agent
+     *            the {@link Agent} to set
+     */
     public void setAgent(Agent agent) {
         this.agent = agent;
     }
 
+    /**
+     * 
+     * @return the {@link Customer}
+     */
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "FK_CUSTOMER")
     public Customer getCustomer() {
         return customer;
     }
 
+    /**
+     * 
+     * @param customer
+     *            the {@link Customer} to set
+     */
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }
 
+    /**
+     * 
+     * @return the billing {@link Address}
+     */
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "FK_ADDRESS_BILLING")
     public Address getBillingAddress() {
         return billingAddress;
     }
 
+    /**
+     * 
+     * @param billingAddress the billing {@link Address} to set
+     */
     public void setBillingAddress(Address billingAddress) {
         this.billingAddress = billingAddress;
     }
 
+    /**
+     * 
+     * @return a list of {@link EstimateDetail}
+     */
     @OneToMany(mappedBy = "estimate")
     public List<EstimateDetail> getDetails() {
         return details;
     }
 
+    /**
+     * 
+     * @param details a list of {@link EstimateDetail} to set
+     */
     public void setDetails(List<EstimateDetail> details) {
         this.details = details;
     }
