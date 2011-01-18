@@ -178,9 +178,9 @@
 		<module name="DoubleCheckedLocking" />    <!-- MY FAVOURITE -->
 		<module name="EmptyStatement" />
 		<module name="EqualsHashCode" />
-		<module name="HiddenField">
-			<property name="ignoreSetter" value="true" />
-		</module>
+<!--		<module name="HiddenField">-->
+<!--			<property name="ignoreSetter" value="true" />-->
+<!--		</module>-->
 
 		<module name="IllegalInstantiation" />
 		<module name="InnerAssignment" />
@@ -202,7 +202,7 @@
 		<!-- Miscellaneous other checks.                   -->
 		<!-- See http://checkstyle.sf.net/config_misc.html -->
 		<module name="ArrayTypeStyle" />
-		<module name="FinalParameters" />
+<!--		<module name="FinalParameters" />-->
 		<module name="TodoComment" />
 		<module name="UpperEll" />
 
