@@ -2,11 +2,12 @@ package be.jsams.client.desktop;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.print.PageFormat;
 import java.awt.print.PrinterJob;
 
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
@@ -217,14 +218,14 @@ public class JsamsMainFrame extends JsamsFrame {
         managementMenu = new JsamsMenu(JsamsI18nResource.MENU_MANAGEMENT);
         customersMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_CUSTOMERS, IconUtil.MENU_ICON_PREFIX
                 + "apps/system-users.png");
-        customersMI.addActionListener(customersListener());
+        customersMI.addActionListener(customersAction());
         managementMenu.add(customersMI);
         managementMenu.add(separators[5]);
         productsCategoryMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_PRODUCTS_CATEGORY);
-        productsCategoryMI.addActionListener(productsCategoryListener());
+        productsCategoryMI.addActionListener(productsCategoryAction());
         managementMenu.add(productsCategoryMI);
         productsMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_PRODUCTS);
-        productsMI.addActionListener(productsListener());
+        productsMI.addActionListener(productsAction());
         managementMenu.add(productsMI);
     }
 
@@ -233,14 +234,15 @@ public class JsamsMainFrame extends JsamsFrame {
      */
     private void buildFileMenu() {
         fileMenu = new JsamsMenu(JsamsI18nResource.MENU_FILE);
-        newMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_NEW, IconUtil.MENU_ICON_PREFIX + "actions/folder-new.png");
+        newMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_NEW,
+                IconUtil.MENU_ICON_PREFIX + "actions/folder-new.png");
         newMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, KeyEvent.CTRL_MASK));
-        newMI.addActionListener(newSocietyListener());
+        newMI.addActionListener(newSocietyAction());
         fileMenu.add(newMI);
         openMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_OPEN, IconUtil.MENU_ICON_PREFIX
                 + "actions/document-open.png");
         openMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, KeyEvent.CTRL_MASK));
-        openMI.addActionListener(chooseSocietyListener());
+        openMI.addActionListener(chooseSocietyAction());
         fileMenu.add(openMI);
         closeMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_CLOSE, IconUtil.MENU_ICON_PREFIX
                 + "status/folder-visiting.png");
@@ -248,16 +250,16 @@ public class JsamsMainFrame extends JsamsFrame {
         fileMenu.add(separators[0]);
         societyParametersMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_SOCIETY_PARAMETERS,
                 IconUtil.MENU_ICON_PREFIX + "actions/document-properties.png");
-        societyParametersMI.addActionListener(editSocietyListener());
+        societyParametersMI.addActionListener(editSocietyAction());
         fileMenu.add(societyParametersMI);
         printerParametersMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_PRINTER_PARAMETERS,
                 IconUtil.MENU_ICON_PREFIX + "devices/printer.png");
-        printerParametersMI.addActionListener(printerParametersListener());
+        printerParametersMI.addActionListener(printerParametersAction());
         fileMenu.add(printerParametersMI);
         fileMenu.add(separators[1]);
         exitMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_EXIT_APPLICATION, IconUtil.MENU_ICON_PREFIX
                 + "actions/system-log-out.png");
-        exitMI.addActionListener(exitListener());
+        exitMI.addActionListener(exitAction());
         fileMenu.add(exitMI);
     }
 
@@ -319,117 +321,149 @@ public class JsamsMainFrame extends JsamsFrame {
 
     /**
      * 
-     * @return a {@link ActionListener} for the exiting of the application
+     * @return a {@link Action} for the exiting of the application
      */
-    private ActionListener exitListener() {
-        ActionListener listener = new ActionListener() {
+    private Action exitAction() {
+        return new AbstractAction() {
+            /**
+             * Serial
+             */
+            private static final long serialVersionUID = -5064095014620413226L;
+
             public void actionPerformed(ActionEvent event) {
                 JsamsDesktop.getInstance().stopNow();
             }
         };
-        return listener;
     }
 
     /**
      * 
-     * @return a {@link ActionListener} for the editing of a Society object
+     * @return a {@link Action} for the editing of a Society object
      */
-    private ActionListener editSocietyListener() {
-        ActionListener listener = new ActionListener() {
+    private Action editSocietyAction() {
+        return new AbstractAction() {
+            /**
+             * Serial
+             */
+            private static final long serialVersionUID = 4492391448101337168L;
+
             public void actionPerformed(ActionEvent event) {
                 new EditSocietyDialog(JsamsI18nResource.TITLE_EDIT_SOCIETY, JsamsDesktop.getInstance()
                         .getCurrentSociety());
             }
         };
-        return listener;
     }
 
     /**
      * 
-     * @return a {@link ActionListener} for the creation of the Society object
+     * @return a {@link Action} for the creation of the Society object
      */
-    private ActionListener newSocietyListener() {
-        ActionListener listener = new ActionListener() {
+    private Action newSocietyAction() {
+        return new AbstractAction() {
+            /**
+             * Serial
+             */
+            private static final long serialVersionUID = 3569088526731341971L;
+
             public void actionPerformed(ActionEvent event) {
                 new EditSocietyDialog(JsamsI18nResource.TITLE_EDIT_SOCIETY, null);
             }
         };
-        return listener;
     }
 
     /**
      * 
-     * @return a {@link ActionListener} for the choosing of the Society object
+     * @return a {@link Action} for the choosing of the Society object
      */
-    private ActionListener chooseSocietyListener() {
-        ActionListener listener = new ActionListener() {
+    private Action chooseSocietyAction() {
+        return new AbstractAction() {
+            /**
+             * Serial
+             */
+            private static final long serialVersionUID = -3391550953264009789L;
+
             public void actionPerformed(ActionEvent event) {
                 new OpenSocietyDialog(JsamsI18nResource.TITLE_OPEN_SOCIETY);
             }
         };
-        return listener;
     }
 
     /**
      * 
-     * @return a {@link ActionListener} for the editing of printer settings
+     * @return a {@link Action} for the editing of printer settings
      */
-    private ActionListener printerParametersListener() {
-        ActionListener listener = new ActionListener() {
+    private Action printerParametersAction() {
+        return new AbstractAction() {
+
+            /**
+             * Serial
+             */
+            private static final long serialVersionUID = 6272986006770429798L;
 
             public void actionPerformed(ActionEvent e) {
                 PrinterJob pjob = PrinterJob.getPrinterJob();
                 PageFormat pf = pjob.defaultPage();
                 pjob.setPrintable(null, pf);
 
-                if (pjob.printDialog()) {
-                    // pjob.print();
-                }
+                // if (pjob.printDialog()) {
+                // // pjob.print();
+                // }
             }
         };
-        return listener;
     }
 
     /**
      * 
-     * @return a {@link ActionListener} for the searching of customers
+     * @return a {@link Action} for the searching of customers
      */
-    private ActionListener customersListener() {
-        ActionListener listener = new ActionListener() {
+    private Action customersAction() {
+        return new AbstractAction() {
+            /**
+             * Serial
+             */
+            private static final long serialVersionUID = -8367998985097440307L;
+
             public void actionPerformed(ActionEvent event) {
                 SearchCustomerPanel searchPanel = new SearchCustomerPanel();
                 tabbedPane.addTab(JsamsI18nResource.TITLE_SEARCH_CUSTOMER, "apps/system-users.png", searchPanel);
             }
         };
-        return listener;
     }
 
     /**
      * 
-     * @return a {@link ActionListener} for the searching of products
+     * @return a {@link Action} for the searching of products
      */
-    private ActionListener productsListener() {
-        ActionListener listener = new ActionListener() {
+    private Action productsAction() {
+        return new AbstractAction() {
+            /**
+             * Serial
+             */
+            private static final long serialVersionUID = 3233472575375812337L;
+
             public void actionPerformed(ActionEvent event) {
                 SearchProductPanel searchPanel = new SearchProductPanel();
                 tabbedPane.addTab(JsamsI18nResource.TITLE_SEARCH_PRODUCT, null, searchPanel);
             }
         };
-        return listener;
     }
 
     /**
      * 
-     * @return a {@link ActionListener} for the searching of product categories
+     * @return a {@link Action} for the searching of product categories
      */
-    private ActionListener productsCategoryListener() {
-        ActionListener listener = new ActionListener() {
+    private Action productsCategoryAction() {
+        return new AbstractAction() {
+            /**
+             * Serial
+             */
+            private static final long serialVersionUID = -1558165346800183997L;
+
             public void actionPerformed(ActionEvent event) {
                 SearchProductCategoryPanel searchPanel = new SearchProductCategoryPanel();
                 tabbedPane.addTab(JsamsI18nResource.TITLE_SEARCH_PRODUCT_CATEGORY, null, searchPanel);
             }
         };
-        return listener;
     }
 
     /**
