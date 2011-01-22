@@ -63,6 +63,7 @@ public class JsamsDesktop {
      * Sets visible the {@link JsamsMainFrame}
      */
     public void start() {
+        // TODO add splash-screen...
         frame.setVisible(true);
     }
 
