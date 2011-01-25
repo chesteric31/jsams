@@ -175,6 +175,13 @@ public abstract class SearchPanel<M extends AbstractIdentity, L extends MouseLis
      * {@inheritDoc}
      */
     public abstract void performOk();
+    
+    /**
+     * Refreshes the result table to press to OK.
+     */
+    public void refresh() {
+        performOk();
+    }
 
     /**
      * {@inheritDoc}

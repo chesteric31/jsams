@@ -177,6 +177,7 @@ public class SearchProductPanel extends SearchPanel<Product, ProductTableMouseLi
     @Override
     protected void performButtonAdd() {
         new EditProductDialog(JsamsI18nResource.TITLE_EDIT_PRODUCT, null);
+        refresh();
     }
 
     /**
@@ -189,6 +190,7 @@ public class SearchProductPanel extends SearchPanel<Product, ProductTableMouseLi
             Long id = (Long) resultTable.getValueAt(selectedRow, 0);
             Product selectedProduct = getService().findById(id);
             new EditProductDialog(JsamsI18nResource.TITLE_EDIT_PRODUCT, selectedProduct);
+            refresh();
         }
     }
 
@@ -201,6 +203,7 @@ public class SearchProductPanel extends SearchPanel<Product, ProductTableMouseLi
         if (selectedRow > -1) {
             Long id = (Long) resultTable.getValueAt(selectedRow, 0);
             getService().delete(id);
+            refresh();
         }
     }
 

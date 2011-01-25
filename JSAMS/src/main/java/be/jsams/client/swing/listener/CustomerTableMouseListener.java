@@ -6,6 +6,7 @@ import java.awt.event.MouseListener;
 import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.model.dialog.EditCustomerDialog;
+import be.jsams.client.model.panel.SearchCustomerPanel;
 import be.jsams.client.swing.component.JsamsTable;
 import be.jsams.server.model.Customer;
 
@@ -28,6 +29,8 @@ public class CustomerTableMouseListener implements MouseListener {
                 Long id = (Long) table.getValueAt(selectedRow, 0);
                 Customer selectedCustomer = JsamsApplicationContext.getCustomerService().findById(id);
                 new EditCustomerDialog(JsamsI18nResource.TITLE_EDIT_CUSTOMER, selectedCustomer);
+                SearchCustomerPanel searchPanel = (SearchCustomerPanel) table.getEventuallySearchPanel();
+                searchPanel.refresh();
             }
         }
     }

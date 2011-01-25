@@ -6,6 +6,7 @@ import java.awt.event.MouseListener;
 import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.model.dialog.EditProductCategoryDialog;
+import be.jsams.client.model.panel.SearchProductCategoryPanel;
 import be.jsams.client.swing.component.JsamsTable;
 import be.jsams.server.model.ProductCategory;
 
@@ -29,6 +30,8 @@ public class ProductCategoryTableMouseListener implements MouseListener {
                 ProductCategory selectedProductCategory = JsamsApplicationContext.getProductCategoryService().findById(
                         id);
                 new EditProductCategoryDialog(JsamsI18nResource.TITLE_EDIT_PRODUCT_CATEGORY, selectedProductCategory);
+                SearchProductCategoryPanel searchPanel = (SearchProductCategoryPanel) table.getEventuallySearchPanel();
+                searchPanel.refresh();
             }
         }
     }

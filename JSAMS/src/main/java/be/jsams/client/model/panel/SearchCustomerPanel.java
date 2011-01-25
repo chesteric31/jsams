@@ -116,7 +116,7 @@ public class SearchCustomerPanel extends SearchPanel<Customer, CustomerTableMous
     @Override
     protected void performButtonAdd() {
         new EditCustomerDialog(JsamsI18nResource.TITLE_EDIT_CUSTOMER, null);
-        performOk();
+        refresh();
     }
 
     /**
@@ -129,7 +129,7 @@ public class SearchCustomerPanel extends SearchPanel<Customer, CustomerTableMous
             Long id = (Long) resultTable.getValueAt(selectedRow, 0);
             Customer selectedCustomer = getService().findById(id);
             new EditCustomerDialog(JsamsI18nResource.TITLE_EDIT_PRODUCT, selectedCustomer);
-            performOk();
+            refresh();
         }
     }
 
@@ -142,7 +142,7 @@ public class SearchCustomerPanel extends SearchPanel<Customer, CustomerTableMous
         if (selectedRow > -1) {
             Long id = (Long) resultTable.getValueAt(selectedRow, 0);
             getService().delete(id);
-            performOk();
+            refresh();
         }
     }
 

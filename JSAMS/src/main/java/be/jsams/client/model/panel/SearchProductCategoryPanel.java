@@ -131,7 +131,7 @@ public class SearchProductCategoryPanel extends
     @Override
     protected void performButtonAdd() {
         new EditProductCategoryDialog(JsamsI18nResource.TITLE_EDIT_PRODUCT_CATEGORY, null);
-//        performOk();
+        refresh();
     }
 
     /**
@@ -144,8 +144,8 @@ public class SearchProductCategoryPanel extends
             Long id = (Long) resultTable.getValueAt(selectedRow, 0);
             ProductCategory selectedCategoryProduct = getService().findById(id);
             new EditProductCategoryDialog(JsamsI18nResource.TITLE_EDIT_PRODUCT_CATEGORY, selectedCategoryProduct);
+            refresh();
         }
-        performOk();
     }
 
     /**
@@ -157,7 +157,7 @@ public class SearchProductCategoryPanel extends
         if (selectedRow > -1) {
             Long id = (Long) resultTable.getValueAt(selectedRow, 0);
             getService().delete(id);
+            refresh();
         }
-        performOk();
     }
 }

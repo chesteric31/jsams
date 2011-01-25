@@ -18,18 +18,6 @@ import be.jsams.server.model.Estimate;
  */
 public class EstimateMouseTableListener implements MouseListener {
 
-    private SearchEstimatePanel searchPanel;
-
-    /**
-     * Constructor.
-     * 
-     * @param searchPanel
-     *            the {@link SearchEstimatePanel}
-     */
-    public EstimateMouseTableListener(final SearchEstimatePanel searchPanel) {
-        this.searchPanel = searchPanel;
-    }
-
     /**
      * {@inheritDoc}
      */
@@ -41,7 +29,8 @@ public class EstimateMouseTableListener implements MouseListener {
                 Long id = (Long) table.getValueAt(selectedRow, 0);
                 Estimate selectedEstimate = JsamsApplicationContext.getEstimateService().findById(id);
                 new EditEstimateDialog(JsamsI18nResource.TITLE_EDIT_ESTIMATE, selectedEstimate);
-                searchPanel.performOk();
+                SearchEstimatePanel searchPanel = (SearchEstimatePanel) table.getEventuallySearchPanel();
+                searchPanel.refresh();
             }
         }
     }
