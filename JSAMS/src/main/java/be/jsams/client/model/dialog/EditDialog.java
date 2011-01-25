@@ -18,6 +18,7 @@ import be.jsams.client.i18n.I18nString;
 import be.jsams.client.swing.component.JsamsButtonsInterface;
 import be.jsams.client.swing.component.JsamsButtonsPanel;
 import be.jsams.client.swing.component.JsamsDialog;
+import be.jsams.client.swing.component.JsamsFormattedTextField;
 import be.jsams.client.swing.component.JsamsLabel;
 import be.jsams.client.swing.component.JsamsStatusBar;
 import be.jsams.client.swing.component.JsamsTextField;
@@ -215,6 +216,8 @@ public abstract class EditDialog<M extends AbstractIdentity, V extends Validator
                 ((JComboBox) component).setSelectedIndex(0);
             } else if (component instanceof JTextArea) {
                 ((JTextArea) component).setText(null);
+            } else if (component instanceof JsamsFormattedTextField) {
+                ((JsamsFormattedTextField) component).setValue(null);
             }
         }
     }
