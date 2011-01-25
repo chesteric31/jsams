@@ -3,8 +3,6 @@ package be.jsams.client.swing.listener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import javax.swing.table.AbstractTableModel;
-
 import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.model.dialog.EditProductDialog;
