@@ -33,8 +33,8 @@ public class ProductValidator implements Validator<Product> {
         }
         String name = product.getName();
         if (ValidationUtils.isBlank(name)) {
-            support.addError(JsamsI18nLabelResource.LABEL_NAME.getTranslation(), JsamsI18nResource.ERROR_IS_MANDATORY
-                    .getTranslation());
+            support.addError(JsamsI18nLabelResource.LABEL_PRODUCT_LABEL.getTranslation(),
+                    JsamsI18nResource.ERROR_IS_MANDATORY.getTranslation());
         }
         BigDecimal price = product.getPrice();
         if (price == null || ValidationUtils.isBlank(price.toPlainString())) {
