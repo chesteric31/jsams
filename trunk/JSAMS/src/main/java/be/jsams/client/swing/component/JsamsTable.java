@@ -1,12 +1,15 @@
 package be.jsams.client.swing.component;
 
 import java.awt.Component;
+import java.awt.Container;
 
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
+
+import be.jsams.client.model.panel.SearchPanel;
 
 /**
  * Specific {@link JTable} for JSAMS with auto resize capabilities when the call to setModel method.
@@ -81,6 +84,20 @@ public class JsamsTable extends JTable {
         }
 
         getTableHeader().setReorderingAllowed(false);
+    }
+    
+    /**
+     * Returns the eventually {@link SearchPanel}.
+     * 
+     * @return the eventually {@link SearchPanel} parent container
+     */
+    public Container getEventuallySearchPanel() {
+        for (Container p = this; p != null; p = p.getParent()) {
+            if (p instanceof SearchPanel<?, ?, ?>) {
+                return p;
+            }
+        }
+        return null;
     }
 
 }
