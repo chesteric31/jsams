@@ -53,7 +53,6 @@ public class ProductTableModel extends AbstractTableModel {
      */
     public void setData(List<Product> data) {
         this.data = data;
-        fireTableDataChanged();
     }
 
     /**
