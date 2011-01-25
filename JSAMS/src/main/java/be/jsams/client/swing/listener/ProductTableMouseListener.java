@@ -3,6 +3,8 @@ package be.jsams.client.swing.listener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.table.AbstractTableModel;
+
 import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.model.dialog.EditProductDialog;
@@ -28,7 +30,6 @@ public class ProductTableMouseListener implements MouseListener {
                 Long id = (Long) table.getValueAt(selectedRow, 0);
                 Product selectedProduct = JsamsApplicationContext.getProductService().findById(id);
                 new EditProductDialog(JsamsI18nResource.TITLE_EDIT_PRODUCT, selectedProduct);
-              //TODO perform ok onto table for refresh
             }
         }
     }

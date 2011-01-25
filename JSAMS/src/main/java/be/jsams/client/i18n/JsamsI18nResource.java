@@ -170,5 +170,7 @@ public final class JsamsI18nResource {
     public static final I18nString COLUMN_ZIP_CODE = new I18nString("column.zip_code");
 
     public static final I18nString COLUMN_LEGAL_FORM = new I18nString("column.legal_form");
+
+    public static final I18nString TITLE_EDIT_ESTIMATE = new I18nString("title.edit.estimate");
     
 }

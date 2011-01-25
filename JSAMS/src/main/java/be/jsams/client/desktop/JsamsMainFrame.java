@@ -19,6 +19,7 @@ import javax.swing.KeyStroke;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.model.dialog.EditSocietyDialog;
@@ -32,8 +33,14 @@ import be.jsams.client.swing.component.JsamsMenu;
 import be.jsams.client.swing.component.JsamsMenuItem;
 import be.jsams.client.swing.component.JsamsShortcutToolBar;
 import be.jsams.client.swing.component.JsamsStatusBar;
+import be.jsams.client.swing.listener.CustomerTableMouseListener;
+import be.jsams.client.swing.listener.ProductCategoryTableMouseListener;
+import be.jsams.client.swing.listener.ProductTableMouseListener;
 import be.jsams.client.swing.listener.TabbedPaneKeyListener;
 import be.jsams.client.swing.utils.IconUtil;
+import be.jsams.server.model.Customer;
+import be.jsams.server.model.Product;
+import be.jsams.server.model.ProductCategory;
 
 /**
  * {@link JsamsMainFrame} that contains all the components.
@@ -234,8 +241,7 @@ public class JsamsMainFrame extends JsamsFrame {
      */
     private void buildFileMenu() {
         fileMenu = new JsamsMenu(JsamsI18nResource.MENU_FILE);
-        newMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_NEW,
-                IconUtil.MENU_ICON_PREFIX + "actions/folder-new.png");
+        newMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_NEW, IconUtil.MENU_ICON_PREFIX + "actions/folder-new.png");
         newMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, KeyEvent.CTRL_MASK));
         newMI.addActionListener(newSocietyAction());
         fileMenu.add(newMI);
@@ -424,7 +430,8 @@ public class JsamsMainFrame extends JsamsFrame {
             private static final long serialVersionUID = -8367998985097440307L;
 
             public void actionPerformed(ActionEvent event) {
-                SearchCustomerPanel searchPanel = new SearchCustomerPanel();
+                SearchCustomerPanel searchPanel = new SearchCustomerPanel(new Customer(),
+                        new CustomerTableMouseListener(), JsamsApplicationContext.getCustomerService());
                 tabbedPane.addTab(JsamsI18nResource.TITLE_SEARCH_CUSTOMER, "apps/system-users.png", searchPanel);
             }
         };
@@ -442,7 +449,8 @@ public class JsamsMainFrame extends JsamsFrame {
             private static final long serialVersionUID = 3233472575375812337L;
 
             public void actionPerformed(ActionEvent event) {
-                SearchProductPanel searchPanel = new SearchProductPanel();
+                SearchProductPanel searchPanel = new SearchProductPanel(new Product(), new ProductTableMouseListener(),
+                        JsamsApplicationContext.getProductService());
                 tabbedPane.addTab(JsamsI18nResource.TITLE_SEARCH_PRODUCT, null, searchPanel);
             }
         };
@@ -460,7 +468,8 @@ public class JsamsMainFrame extends JsamsFrame {
             private static final long serialVersionUID = -1558165346800183997L;
 
             public void actionPerformed(ActionEvent event) {
-                SearchProductCategoryPanel searchPanel = new SearchProductCategoryPanel();
+                SearchProductCategoryPanel searchPanel = new SearchProductCategoryPanel(new ProductCategory(),
+                        new ProductCategoryTableMouseListener(), JsamsApplicationContext.getProductCategoryService());
                 tabbedPane.addTab(JsamsI18nResource.TITLE_SEARCH_PRODUCT_CATEGORY, null, searchPanel);
             }
         };

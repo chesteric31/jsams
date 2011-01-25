@@ -87,6 +87,20 @@
 		<property name="target" ref="productCategoryServiceTarget" />
 	</bean>
 
+	<bean id="estimateDao" class="be.jsams.server.dao.impl.EstimateDaoImpl">
+		<constructor-arg value="be.jsams.server.model.Estimate" />
+	</bean>
+	<bean id="estimateDetailDao" class="be.jsams.server.dao.impl.EstimateDetailDaoImpl">
+		<constructor-arg value="be.jsams.server.model.EstimateDetail" />
+	</bean>
+	<bean id="estimateServiceTarget" class="be.jsams.server.service.impl.EstimateServiceImpl">
+		<property name="estimateDao" ref="estimateDao" />
+		<property name="estimateDetailDao" ref="estimateDetailDao" />
+	</bean>
+	<bean id="estimateService" parent="baseTransactionProxy">
+		<property name="target" ref="estimateServiceTarget" />
+	</bean>
+	
 	<bean id="commandDao" class="be.jsams.server.dao.impl.CommandDaoImpl">
 		<constructor-arg value="be.jsams.server.model.Command" />
 	</bean>

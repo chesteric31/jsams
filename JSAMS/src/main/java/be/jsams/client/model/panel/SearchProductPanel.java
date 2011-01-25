@@ -61,12 +61,17 @@ public class SearchProductPanel extends SearchPanel<Product, ProductTableMouseLi
     private JComboBox comboBoxProductCategory;
 
     /**
-     * Constructor
+     * Constructor.
+     * 
+     * @param m
+     *            the {@link Product}
+     * @param l
+     *            the {@link ProductTableMouseListener}
+     * @param s
+     *            the {@link ProductService}
      */
-    public SearchProductPanel() {
-        super();
-        super.setService(JsamsApplicationContext.getProductService());
-        super.setMouseListener(new ProductTableMouseListener());
+    public SearchProductPanel(Product m, ProductTableMouseListener l, ProductService s) {
+        super(m, l, s);
         super.buildMainPanel(buildSearchCriteriaPanel());
     }
 
@@ -160,7 +165,7 @@ public class SearchProductPanel extends SearchPanel<Product, ProductTableMouseLi
         criteria.setQuantityStock(stockQuantity);
         criteria.setReorderLevel(reorderLevel);
         criteria.setVatApplicable(vatApplicable);
-        
+
         List<Product> products = ((ProductService) super.getService()).findByCriteria(criteria);
 
         fillTable(products);

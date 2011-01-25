@@ -11,7 +11,7 @@ import be.jsams.server.model.Customer;
 
 /**
  * Customized {@link MouseListener} for Customer table double click.
- *
+ * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
@@ -28,7 +28,6 @@ public class CustomerTableMouseListener implements MouseListener {
                 Long id = (Long) table.getValueAt(selectedRow, 0);
                 Customer selectedCustomer = JsamsApplicationContext.getCustomerService().findById(id);
                 new EditCustomerDialog(JsamsI18nResource.TITLE_EDIT_CUSTOMER, selectedCustomer);
-                //TODO perform ok onto table for refresh
             }
         }
     }

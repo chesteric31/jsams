@@ -10,7 +10,6 @@ import javax.swing.table.TableCellRenderer;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.i18n.JsamsI18nLabelResource;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.model.dialog.EditProductCategoryDialog;
@@ -49,12 +48,18 @@ public class SearchProductCategoryPanel extends
     private JsamsTextField textFieldLabelNl = new JsamsTextField(MAX_CHARACTERS);
 
     /**
-     * Constructor
+     * Constructor.
+     * 
+     * @param m
+     *            the {@link ProductCategory}
+     * @param l
+     *            the {@link ProductCategoryTableMouseListener}
+     * @param s
+     *            the {@link ProductCategoryService}
      */
-    public SearchProductCategoryPanel() {
-        super();
-        super.setService(JsamsApplicationContext.getProductCategoryService());
-        super.setMouseListener(new ProductCategoryTableMouseListener());
+    public SearchProductCategoryPanel(ProductCategory m, ProductCategoryTableMouseListener l,
+            ProductCategoryService s) {
+        super(m, l, s);
         super.buildMainPanel(buildSearchCriteriaPanel());
     }
 
@@ -126,7 +131,7 @@ public class SearchProductCategoryPanel extends
     @Override
     protected void performButtonAdd() {
         new EditProductCategoryDialog(JsamsI18nResource.TITLE_EDIT_PRODUCT_CATEGORY, null);
-        performOk();
+//        performOk();
     }
 
     /**
