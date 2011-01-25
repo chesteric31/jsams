@@ -63,12 +63,17 @@ public class SearchCustomerPanel extends SearchPanel<Customer, CustomerTableMous
     private JComboBox comboBoxLegalForm;
 
     /**
-     * Constructor
+     * Constructor.
+     * 
+     * @param m
+     *            the {@link Customer}
+     * @param l
+     *            the {@link CustomerTableMouseListener}
+     * @param s
+     *            the {@link CustomerService}
      */
-    public SearchCustomerPanel() {
-        super();
-        super.setService(JsamsApplicationContext.getCustomerService());
-        super.setMouseListener(new CustomerTableMouseListener());
+    public SearchCustomerPanel(Customer m, CustomerTableMouseListener l, CustomerService s) {
+        super(m, l, s);
         super.buildMainPanel(buildSearchCriteriaPanel());
     }
 
@@ -111,6 +116,7 @@ public class SearchCustomerPanel extends SearchPanel<Customer, CustomerTableMous
     @Override
     protected void performButtonAdd() {
         new EditCustomerDialog(JsamsI18nResource.TITLE_EDIT_CUSTOMER, null);
+        performOk();
     }
 
     /**
@@ -123,6 +129,7 @@ public class SearchCustomerPanel extends SearchPanel<Customer, CustomerTableMous
             Long id = (Long) resultTable.getValueAt(selectedRow, 0);
             Customer selectedCustomer = getService().findById(id);
             new EditCustomerDialog(JsamsI18nResource.TITLE_EDIT_PRODUCT, selectedCustomer);
+            performOk();
         }
     }
 
@@ -135,6 +142,7 @@ public class SearchCustomerPanel extends SearchPanel<Customer, CustomerTableMous
         if (selectedRow > -1) {
             Long id = (Long) resultTable.getValueAt(selectedRow, 0);
             getService().delete(id);
+            performOk();
         }
     }
 
@@ -142,7 +150,7 @@ public class SearchCustomerPanel extends SearchPanel<Customer, CustomerTableMous
      * {@inheritDoc}
      */
     @Override
-    public void performOk() {        
+    public void performOk() {
         String name = null;
         Address address = null;
         ContactInformation contactInformation = null;
@@ -170,6 +178,7 @@ public class SearchCustomerPanel extends SearchPanel<Customer, CustomerTableMous
 
         fillTable(customers);
     }
+
     /**
      * Fills the data table.
      * 

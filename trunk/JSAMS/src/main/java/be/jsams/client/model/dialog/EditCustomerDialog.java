@@ -195,6 +195,7 @@ public class EditCustomerDialog extends EditDialog<Customer, CustomerValidator, 
             fillContactInformation();
             fillMisc();
             comboBoxLegalForm.setSelectedItem(getModel().getLegalForm());
+            comboBoxCivility.setSelectedItem(getModel().getCivility());
             textFieldName.setText(getModel().getName());
             textFieldVatNumber.setText(getModel().getVatNumber());
             textFieldVatApplicable.setValue(getModel().getVatApplicable());

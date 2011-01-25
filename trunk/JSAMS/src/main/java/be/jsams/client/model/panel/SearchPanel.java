@@ -47,21 +47,21 @@ import com.jgoodies.forms.factories.ButtonBarFactory;
 public abstract class SearchPanel<M extends AbstractIdentity, L extends MouseListener, S extends Service<M>> extends
         JPanel implements JsamsButtonsInterface {
 
-  /**
+    /**
      * Serial Version UID
      */
     private static final long serialVersionUID = -4277242728022039298L;
 
     protected static final Log LOGGER = LogFactory.getLog(SearchPanel.class);
-    
+
     private static final int DEFAULT_V_GAP = 10;
 
     private M model;
 
-    private MouseListener mouseListener;
-    
-    private Service<M> service;
-    
+    private L mouseListener;
+
+    private S service;
+
     private JsamsButtonsPanel buttonsPanel;
 
     protected JsamsTable resultTable = null;
@@ -71,10 +71,20 @@ public abstract class SearchPanel<M extends AbstractIdentity, L extends MouseLis
     private JsamsButton buttonModify = null;
 
     /**
-     * Constructor
+     * Constructor.
+     * 
+     * @param m
+     *            the {@link AbstractIdentity}
+     * @param l
+     *            the {@link MouseListener}
+     * @param s
+     *            the {@link Service}
      */
-    public SearchPanel() {
+    public SearchPanel(M m, L l, S s) {
         super();
+        this.model = m;
+        this.mouseListener = l;
+        this.service = s;
         setLayout(new BorderLayout());
     }
 
@@ -95,7 +105,8 @@ public abstract class SearchPanel<M extends AbstractIdentity, L extends MouseLis
 
     /**
      * 
-     * @param model the model to set
+     * @param model
+     *            the model to set
      */
     public void setModel(M model) {
         this.model = model;
@@ -105,15 +116,16 @@ public abstract class SearchPanel<M extends AbstractIdentity, L extends MouseLis
      * 
      * @return the {@link MouseListener}
      */
-    public MouseListener getMouseListener() {
+    public L getMouseListener() {
         return mouseListener;
     }
-    
+
     /**
      * 
-     * @param mouseListener the {@link MouseListener} to set
+     * @param mouseListener
+     *            the {@link MouseListener} to set
      */
-    public void setMouseListener(MouseListener mouseListener) {
+    public void setMouseListener(L mouseListener) {
         this.mouseListener = mouseListener;
     }
 
@@ -121,15 +133,16 @@ public abstract class SearchPanel<M extends AbstractIdentity, L extends MouseLis
      * 
      * @return the service
      */
-    public Service<M> getService() {
+    public S getService() {
         return service;
     }
 
     /**
      * 
-     * @param service the service to set
+     * @param service
+     *            the service to set
      */
-    public void setService(Service<M> service) {
+    public void setService(S service) {
         this.service = service;
     }
 
@@ -143,7 +156,8 @@ public abstract class SearchPanel<M extends AbstractIdentity, L extends MouseLis
 
     /**
      * 
-     * @param resultTable the result {@link JsamsTable} to set
+     * @param resultTable
+     *            the result {@link JsamsTable} to set
      */
     public void setResultTable(JsamsTable resultTable) {
         this.resultTable = resultTable;
@@ -193,13 +207,12 @@ public abstract class SearchPanel<M extends AbstractIdentity, L extends MouseLis
      * The action to perform when click onto modifying button.
      */
     protected abstract void performButtonModify();
-    
+
     /**
      * The action to perform when click onto removing button.
      */
     protected abstract void performButtonRemove();
 
-    
     /**
      * Builds the removing button.
      * 

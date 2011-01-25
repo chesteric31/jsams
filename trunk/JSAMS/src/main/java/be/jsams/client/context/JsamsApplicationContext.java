@@ -7,6 +7,7 @@ import be.jsams.server.dao.LegalFormDao;
 import be.jsams.server.dao.PaymentModeDao;
 import be.jsams.server.dao.ProductCategoryDao;
 import be.jsams.server.service.CustomerService;
+import be.jsams.server.service.EstimateService;
 import be.jsams.server.service.ProductCategoryService;
 import be.jsams.server.service.ProductService;
 import be.jsams.server.service.SocietyService;
@@ -101,6 +102,14 @@ public final class JsamsApplicationContext {
      */
     public static ProductCategoryService getProductCategoryService() {
         return (ProductCategoryService) context.getBean("productCategoryService");
+    }
+
+    /**
+     * 
+     * @return the {@link EstimateService}
+     */
+    public static EstimateService getEstimateService() {
+        return (EstimateService) context.getBean("estimateService");
     }
 
 }
