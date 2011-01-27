@@ -5,6 +5,7 @@ import javax.swing.border.TitledBorder;
 
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.swing.action.NewCustomerAction;
+import be.jsams.client.swing.action.NewEstimateAction;
 import be.jsams.client.swing.action.NewProductAction;
 
 /**
@@ -43,6 +44,7 @@ public class JsamsShortcutToolBar extends JPanel {
         newCustomerButton = new JsamsButton(JsamsI18nResource.BUTTON_NEW_CUSTOMER);
         newCustomerButton.addActionListener(new NewCustomerAction());
         newEstimateButton = new JsamsButton(JsamsI18nResource.BUTTON_NEW_ESTIMATE);
+        newEstimateButton.addActionListener(new NewEstimateAction());
         newBillButton = new JsamsButton(JsamsI18nResource.BUTTON_NEW_BILL);
         newProductButton = new JsamsButton(JsamsI18nResource.BUTTON_NEW_PRODUCT);
         newProductButton.addActionListener(new NewProductAction());
