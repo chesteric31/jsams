@@ -27,7 +27,6 @@
 		<property name="jpaVendorAdapter">
 			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
 				<property name="showSql" value="true" />
-				<property name="generateDdl" value="true" />
 				<property name="databasePlatform" value="org.hibernate.dialect.MySQL5Dialect" />
 			</bean>
 		</property>
@@ -100,7 +99,7 @@
 	<bean id="estimateService" parent="baseTransactionProxy">
 		<property name="target" ref="estimateServiceTarget" />
 	</bean>
-	
+
 	<bean id="commandDao" class="be.jsams.server.dao.impl.CommandDaoImpl">
 		<constructor-arg value="be.jsams.server.model.Command" />
 	</bean>
