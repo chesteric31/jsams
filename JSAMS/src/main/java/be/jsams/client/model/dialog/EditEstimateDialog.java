@@ -11,7 +11,7 @@ import be.jsams.server.service.EstimateService;
 
 /**
  * Edit Estimate {@link EditDialog}, to create or update a {@link Estimate} object.
- *
+ * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
@@ -21,7 +21,7 @@ public class EditEstimateDialog extends EditDialog<Estimate, EstimateValidator, 
      * Serial Version UID
      */
     private static final long serialVersionUID = 646774314391865523L;
-    
+
     protected static final Log LOGGER = LogFactory.getLog(EditEstimateDialog.class);
 
     /**
@@ -42,16 +42,17 @@ public class EditEstimateDialog extends EditDialog<Estimate, EstimateValidator, 
         setResizable(false);
         setVisible(true);
     }
+
     @Override
     protected void initComponents() {
         // TODO Auto-generated method stub
-        
+
     }
 
     @Override
     public void performOk() {
         // TODO Auto-generated method stub
-        
+
     }
 
 }
