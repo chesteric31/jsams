@@ -64,7 +64,7 @@ public abstract class SearchPanel<M extends AbstractIdentity, L extends MouseLis
 
     private JsamsButtonsPanel buttonsPanel;
 
-    protected JsamsTable resultTable = null;
+    private JsamsTable resultTable = null;
 
     private JsamsButton buttonAdd = null;
     private JsamsButton buttonRemove = null;
@@ -175,7 +175,7 @@ public abstract class SearchPanel<M extends AbstractIdentity, L extends MouseLis
      * {@inheritDoc}
      */
     public abstract void performOk();
-    
+
     /**
      * Refreshes the result table to press to OK.
      */
@@ -268,6 +268,10 @@ public abstract class SearchPanel<M extends AbstractIdentity, L extends MouseLis
                 ((JComboBox) component).setSelectedIndex(0);
             } else if (component instanceof JTextArea) {
                 ((JTextArea) component).setText(null);
+            } else if (component instanceof JsamsTable) {
+                JsamsTable table = (JsamsTable) component;
+                table.clear();
+                table.revalidate();
             }
         }
     }

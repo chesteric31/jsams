@@ -25,9 +25,9 @@ public class JsamsButtonsPanel extends JPanel {
 
     private JsamsButtonsInterface parent;
 
-    JsamsButton buttonOk = null;
-    JsamsButton buttonCancel = null;
-    JsamsButton buttonReset = null;
+    private JsamsButton buttonOk = null;
+    private JsamsButton buttonCancel = null;
+    private JsamsButton buttonReset = null;
 
     /**
      * Serial Version UID
@@ -119,6 +119,55 @@ public class JsamsButtonsPanel extends JPanel {
             }
         });
         return buttonReset;
+    }
+
+    /**
+     * 
+     * @return the {@link JsamsButton} OK
+     */
+    public JsamsButton getButtonOk() {
+        return buttonOk;
+    }
+
+    /**
+     * 
+     * @param buttonOk
+     *            the {@link JsamsButton} OK to set
+     */
+    public void setButtonOk(JsamsButton buttonOk) {
+        this.buttonOk = buttonOk;
+    }
+
+    /**
+     * 
+     * @return the {@link JsamsButton} cancel
+     */
+    public JsamsButton getButtonCancel() {
+        return buttonCancel;
+    }
+
+    /**
+     * 
+     * @param buttonCancel the {@link JsamsButton} cancel to set
+     */
+    public void setButtonCancel(JsamsButton buttonCancel) {
+        this.buttonCancel = buttonCancel;
+    }
+
+    /**
+     * 
+     * @return the {@link JsamsButton} reset
+     */
+    public JsamsButton getButtonReset() {
+        return buttonReset;
+    }
+
+    /**
+     * 
+     * @param buttonReset the {@link JsamsButton} reset
+     */
+    public void setButtonReset(JsamsButton buttonReset) {
+        this.buttonReset = buttonReset;
     }
 
 }

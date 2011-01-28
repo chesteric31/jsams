@@ -4,8 +4,6 @@ import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.swing.table.AbstractTableModel;
-
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.i18n.UserContext;
@@ -13,12 +11,12 @@ import be.jsams.server.model.Product;
 import be.jsams.server.model.ProductCategory;
 
 /**
- * {@link AbstractTableModel} for {@link Product} object.
+ * {@link JsamsTableModel} for {@link Product} object.
  * 
  * @author chesteric31
  * @version $$Rev$$ $$Date::                  $$ $$Author$$
  */
-public class ProductTableModel extends AbstractTableModel {
+public class ProductTableModel extends JsamsTableModel<Product> {
 
     /**
      * Serial Version UID
@@ -34,39 +32,10 @@ public class ProductTableModel extends AbstractTableModel {
             JsamsI18nResource.COLUMN_PRODUCT_CATEGORY);
 
     /**
-     * The list of {@link Product}
-     */
-    private List<Product> data;
-
-    /**
-     * 
-     * @return a list of {@link Product}
-     */
-    public List<Product> getData() {
-        return data;
-    }
-
-    /**
-     * 
-     * @param data
-     *            the list of {@link Product} to set
-     */
-    public void setData(List<Product> data) {
-        this.data = data;
-    }
-
-    /**
      * @return the columns count
      */
     public int getColumnCount() {
         return columnNames.size();
-    }
-
-    /**
-     * @return the rows count
-     */
-    public int getRowCount() {
-        return data.size();
     }
 
     /**
@@ -79,19 +48,19 @@ public class ProductTableModel extends AbstractTableModel {
     public Object getValueAt(int rowIndex, int columnIndex) {
         switch (columnIndex) {
         case 0:
-            return data.get(rowIndex).getId();
+            return getData().get(rowIndex).getId();
         case 1:
-            return data.get(rowIndex).getName();
+            return getData().get(rowIndex).getName();
         case 2:
-            return data.get(rowIndex).getPrice();
+            return getData().get(rowIndex).getPrice();
         case 3:
-            return data.get(rowIndex).getQuantityStock();
+            return getData().get(rowIndex).getQuantityStock();
         case 4:
-            return data.get(rowIndex).getReorderLevel();
+            return getData().get(rowIndex).getReorderLevel();
         case 5:
-            return data.get(rowIndex).getVatApplicable().doubleValue();
+            return getData().get(rowIndex).getVatApplicable().doubleValue();
         case 6:
-            ProductCategory category = data.get(rowIndex).getCategory();
+            ProductCategory category = getData().get(rowIndex).getCategory();
             if (UserContext.isDutch()) {
                 return category.getLabelNl();
             } else if (UserContext.isFrench()) {
