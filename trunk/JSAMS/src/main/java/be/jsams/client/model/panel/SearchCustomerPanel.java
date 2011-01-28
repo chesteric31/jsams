@@ -124,9 +124,9 @@ public class SearchCustomerPanel extends SearchPanel<Customer, CustomerTableMous
      */
     @Override
     protected void performButtonModify() {
-        int selectedRow = resultTable.getSelectedRow();
+        int selectedRow = getResultTable().getSelectedRow();
         if (selectedRow > -1) {
-            Long id = (Long) resultTable.getValueAt(selectedRow, 0);
+            Long id = (Long) getResultTable().getValueAt(selectedRow, 0);
             Customer selectedCustomer = getService().findById(id);
             new EditCustomerDialog(JsamsI18nResource.TITLE_EDIT_PRODUCT, selectedCustomer);
             refresh();
@@ -138,9 +138,9 @@ public class SearchCustomerPanel extends SearchPanel<Customer, CustomerTableMous
      */
     @Override
     protected void performButtonRemove() {
-        int selectedRow = resultTable.getSelectedRow();
+        int selectedRow = getResultTable().getSelectedRow();
         if (selectedRow > -1) {
-            Long id = (Long) resultTable.getValueAt(selectedRow, 0);
+            Long id = (Long) getResultTable().getValueAt(selectedRow, 0);
             getService().delete(id);
             refresh();
         }
@@ -188,21 +188,21 @@ public class SearchCustomerPanel extends SearchPanel<Customer, CustomerTableMous
     private void fillTable(final List<Customer> customers) {
         CustomerTableModel model = new CustomerTableModel();
         model.setData(customers);
-        resultTable.setModel(model);
+        getResultTable().setModel(model);
 
-        JTableHeader tableHeader = resultTable.getTableHeader();
+        JTableHeader tableHeader = getResultTable().getTableHeader();
         TableCellRenderer headerRenderer = tableHeader.getDefaultRenderer();
 
         ((DefaultTableCellRenderer) headerRenderer).setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
-        resultTable.setAutoCreateRowSorter(true);
+        getResultTable().setAutoCreateRowSorter(true);
         JsamsTableCellRenderer defaultCellRenderer = new JsamsTableCellRenderer();
-        resultTable.setDefaultRenderer(Long.class, defaultCellRenderer);
-        resultTable.setDefaultRenderer(Integer.class, defaultCellRenderer);
-        resultTable.setDefaultRenderer(Double.class, defaultCellRenderer);
-        resultTable.setDefaultRenderer(BigDecimal.class, defaultCellRenderer);
-        resultTable.setDefaultRenderer(String.class, defaultCellRenderer);
+        getResultTable().setDefaultRenderer(Long.class, defaultCellRenderer);
+        getResultTable().setDefaultRenderer(Integer.class, defaultCellRenderer);
+        getResultTable().setDefaultRenderer(Double.class, defaultCellRenderer);
+        getResultTable().setDefaultRenderer(BigDecimal.class, defaultCellRenderer);
+        getResultTable().setDefaultRenderer(String.class, defaultCellRenderer);
 
-        resultTable.repaint();
+        getResultTable().repaint();
     }
 
 }

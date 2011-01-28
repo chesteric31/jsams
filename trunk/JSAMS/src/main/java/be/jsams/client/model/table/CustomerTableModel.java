@@ -3,8 +3,6 @@ package be.jsams.client.model.table;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.swing.table.AbstractTableModel;
-
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.i18n.UserContext;
@@ -13,12 +11,12 @@ import be.jsams.server.model.LegalForm;
 import be.jsams.server.model.PaymentMode;
 
 /**
- * {@link AbstractTableModel} for {@link Customer} object.
- *
+ * {@link JsamsTableModel} for {@link Customer} object.
+ * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class CustomerTableModel extends AbstractTableModel {
+public class CustomerTableModel extends JsamsTableModel<Customer> {
 
     /**
      * Serial Version UID
@@ -33,39 +31,10 @@ public class CustomerTableModel extends AbstractTableModel {
             JsamsI18nResource.COLUMN_PAYMENT_MODE, JsamsI18nResource.COLUMN_PHONE);
 
     /**
-     * The list of {@link Customer}
-     */
-    private List<Customer> data;
-
-    /**
-     * 
-     * @return a list of {@link Customer}
-     */
-    public List<Customer> getData() {
-        return data;
-    }
-
-    /**
-     * 
-     * @param data
-     *            the list of {@link Customer} to set
-     */
-    public void setData(List<Customer> data) {
-        this.data = data;
-    }
-
-    /**
      * @return the columns count
      */
     public int getColumnCount() {
         return columnNames.size();
-    }
-
-    /**
-     * @return the rows count
-     */
-    public int getRowCount() {
-        return data.size();
     }
 
     /**
@@ -78,26 +47,26 @@ public class CustomerTableModel extends AbstractTableModel {
     public Object getValueAt(int rowIndex, int columnIndex) {
         switch (columnIndex) {
         case 0:
-            return data.get(rowIndex).getId();
+            return getData().get(rowIndex).getId();
         case 1:
-            return data.get(rowIndex).getName();
+            return getData().get(rowIndex).getName();
         case 2:
-            LegalForm legalForm = data.get(rowIndex).getLegalForm();
+            LegalForm legalForm = getData().get(rowIndex).getLegalForm();
             if (legalForm != null) {
-            if (UserContext.isDutch()) {
-                return legalForm.getLabelNl();
-            } else if (UserContext.isFrench()) {
-                return legalForm.getLabelFr();
-            } else {
-                return legalForm.getLabel();
-            }
+                if (UserContext.isDutch()) {
+                    return legalForm.getLabelNl();
+                } else if (UserContext.isFrench()) {
+                    return legalForm.getLabelFr();
+                } else {
+                    return legalForm.getLabel();
+                }
             } else {
                 return "";
             }
         case 3:
-            return data.get(rowIndex).getBillingAddress().getZipCode();
+            return getData().get(rowIndex).getBillingAddress().getZipCode();
         case 4:
-            PaymentMode paymentMode = data.get(rowIndex).getPaymentMode();
+            PaymentMode paymentMode = getData().get(rowIndex).getPaymentMode();
             if (UserContext.isDutch()) {
                 return paymentMode.getLabelNl();
             } else if (UserContext.isFrench()) {
@@ -106,7 +75,7 @@ public class CustomerTableModel extends AbstractTableModel {
                 return paymentMode.getLabel();
             }
         case 5:
-            return data.get(rowIndex).getContactInformation().getPhone();
+            return getData().get(rowIndex).getContactInformation().getPhone();
         default:
             return "";
         }

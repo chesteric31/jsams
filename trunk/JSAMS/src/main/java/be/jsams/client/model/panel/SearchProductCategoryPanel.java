@@ -111,18 +111,18 @@ public class SearchProductCategoryPanel extends
     private void fillTable(final List<ProductCategory> categories) {
         ProductCategoryTableModel model = new ProductCategoryTableModel();
         model.setData(categories);
-        resultTable.setModel(model);
+        getResultTable().setModel(model);
 
-        JTableHeader tableHeader = resultTable.getTableHeader();
+        JTableHeader tableHeader = getResultTable().getTableHeader();
         TableCellRenderer headerRenderer = tableHeader.getDefaultRenderer();
 
         ((DefaultTableCellRenderer) headerRenderer).setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
-        resultTable.setAutoCreateRowSorter(true);
+        getResultTable().setAutoCreateRowSorter(true);
         JsamsTableCellRenderer defaultCellRenderer = new JsamsTableCellRenderer();
-        resultTable.setDefaultRenderer(Long.class, defaultCellRenderer);
-        resultTable.setDefaultRenderer(String.class, defaultCellRenderer);
+        getResultTable().setDefaultRenderer(Long.class, defaultCellRenderer);
+        getResultTable().setDefaultRenderer(String.class, defaultCellRenderer);
 
-        resultTable.repaint();
+        getResultTable().repaint();
     }
 
     /**
@@ -139,9 +139,9 @@ public class SearchProductCategoryPanel extends
      */
     @Override
     protected void performButtonModify() {
-        int selectedRow = resultTable.getSelectedRow();
+        int selectedRow = getResultTable().getSelectedRow();
         if (selectedRow > -1) {
-            Long id = (Long) resultTable.getValueAt(selectedRow, 0);
+            Long id = (Long) getResultTable().getValueAt(selectedRow, 0);
             ProductCategory selectedCategoryProduct = getService().findById(id);
             new EditProductCategoryDialog(JsamsI18nResource.TITLE_EDIT_PRODUCT_CATEGORY, selectedCategoryProduct);
             refresh();
@@ -153,9 +153,9 @@ public class SearchProductCategoryPanel extends
      */
     @Override
     protected void performButtonRemove() {
-        int selectedRow = resultTable.getSelectedRow();
+        int selectedRow = getResultTable().getSelectedRow();
         if (selectedRow > -1) {
-            Long id = (Long) resultTable.getValueAt(selectedRow, 0);
+            Long id = (Long) getResultTable().getValueAt(selectedRow, 0);
             getService().delete(id);
             refresh();
         }

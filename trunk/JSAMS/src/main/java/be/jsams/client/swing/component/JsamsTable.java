@@ -10,6 +10,7 @@ import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 
 import be.jsams.client.model.panel.SearchPanel;
+import be.jsams.client.model.table.JsamsTableModel;
 
 /**
  * Specific {@link JTable} for JSAMS with auto resize capabilities when the call to setModel method.
@@ -98,6 +99,14 @@ public class JsamsTable extends JTable {
             }
         }
         return null;
+    }
+
+    /**
+     * Clears the table. (remove all rows)
+     */
+    public synchronized void clear() {
+        JsamsTableModel<?> model = (JsamsTableModel<?>) getModel();
+        model.clear();
     }
 
 }

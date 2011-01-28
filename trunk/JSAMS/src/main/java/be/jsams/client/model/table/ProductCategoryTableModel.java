@@ -3,19 +3,17 @@ package be.jsams.client.model.table;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.swing.table.AbstractTableModel;
-
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.server.model.ProductCategory;
 
 /**
- * {@link AbstractTableModel} for {@link ProductCategory} object.
+ * {@link JsamsTableModel} for {@link ProductCategory} object.
  *
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class ProductCategoryTableModel extends AbstractTableModel {
+public class ProductCategoryTableModel extends JsamsTableModel<ProductCategory> {
 
     /**
      * Serial Version UID
@@ -29,39 +27,10 @@ public class ProductCategoryTableModel extends AbstractTableModel {
             JsamsI18nResource.COLUMN_LABEL_EN, JsamsI18nResource.COLUMN_LABEL_FR, JsamsI18nResource.COLUMN_LABEL_NL);
 
     /**
-     * The list of {@link ProductCategory}
-     */
-    private List<ProductCategory> data;
-
-    /**
-     * 
-     * @return a list of {@link ProductCategory}
-     */
-    public List<ProductCategory> getData() {
-        return data;
-    }
-
-    /**
-     * 
-     * @param data
-     *            the list of {@link ProductCategory} to set
-     */
-    public void setData(List<ProductCategory> data) {
-        this.data = data;
-    }
-
-    /**
      * @return the columns count
      */
     public int getColumnCount() {
         return columnNames.size();
-    }
-
-    /**
-     * @return the rows count
-     */
-    public int getRowCount() {
-        return data.size();
     }
 
     /**
@@ -74,13 +43,13 @@ public class ProductCategoryTableModel extends AbstractTableModel {
     public Object getValueAt(int rowIndex, int columnIndex) {
         switch (columnIndex) {
         case 0:
-            return data.get(rowIndex).getId();
+            return getData().get(rowIndex).getId();
         case 1:
-            return data.get(rowIndex).getLabel();
+            return getData().get(rowIndex).getLabel();
         case 2:
-            return data.get(rowIndex).getLabelFr();
+            return getData().get(rowIndex).getLabelFr();
         case 3:
-            return data.get(rowIndex).getLabelNl();
+            return getData().get(rowIndex).getLabelNl();
         default:
             return "";
         }
