@@ -117,9 +117,9 @@ public class EditSocietyDialog extends EditDialog<Society, SocietyValidator, Soc
         builder.appendSeparator(JsamsI18nLabelResource.LABEL_ADDRESS.getTranslation());
         builder.appendI15d(JsamsI18nLabelResource.LABEL_STREET.getKey(), textFieldStreet, DEFAULT_COLUMN_SPAN);
         builder.nextLine();
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_NUMBER.getKey(), textFieldNumber, 1);
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_BOX.getKey(), textFieldBox, 1);
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_ZIP_CODE.getKey(), textFieldZipCode, 1);
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_NUMBER.getKey(), textFieldNumber);
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_BOX.getKey(), textFieldBox);
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_ZIP_CODE.getKey(), textFieldZipCode);
         builder.appendI15d(JsamsI18nLabelResource.LABEL_CITY.getKey(), textFieldCity, DEFAULT_COLUMN_SPAN);
         builder.appendI15d(JsamsI18nLabelResource.LABEL_COUNTRY.getKey(), textFieldCountry, DEFAULT_COLUMN_SPAN);
         builder.nextLine();

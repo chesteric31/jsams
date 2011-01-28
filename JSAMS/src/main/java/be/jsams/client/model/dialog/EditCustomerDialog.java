@@ -51,7 +51,7 @@ public class EditCustomerDialog extends EditDialog<Customer, CustomerValidator, 
 
     protected static final Log LOGGER = LogFactory.getLog(EditCustomerDialog.class);
 
-    private static final int DEFAULT_COLUMN_SPAN = 1;
+//    private static final int DEFAULT_COLUMN_SPAN = 1;
 
     private static final int MAX_CHARACTERS = 50;
 
@@ -218,7 +218,7 @@ public class EditCustomerDialog extends EditDialog<Customer, CustomerValidator, 
         builder.nextLine();
         builder.appendI15d(JsamsI18nLabelResource.LABEL_LEGAL_FORM.getKey(), comboBoxLegalForm, maxColumnSpan);
         builder.nextLine();
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_CIVILITY.getKey(), comboBoxCivility, DEFAULT_COLUMN_SPAN);
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_CIVILITY.getKey(), comboBoxCivility);
         builder.nextLine();
         builder.appendI15d(JsamsI18nLabelResource.LABEL_VAT_NUMBER.getKey(), textFieldVatNumber, maxColumnSpan);
         builder.nextLine();
@@ -226,11 +226,9 @@ public class EditCustomerDialog extends EditDialog<Customer, CustomerValidator, 
         builder.nextLine();
         builder.appendI15d(JsamsI18nLabelResource.LABEL_BANK2.getKey(), textFieldBank2, maxColumnSpan);
         builder.nextLine();
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_CREDIT_LIMIT.getKey(), textFieldCreditLimit,
-                DEFAULT_COLUMN_SPAN);
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_CREDIT_LIMIT.getKey(), textFieldCreditLimit);
         builder.nextLine();
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_VAT_APPLICABLE.getKey(), textFieldVatApplicable,
-                DEFAULT_COLUMN_SPAN);
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_VAT_APPLICABLE.getKey(), textFieldVatApplicable);
         builder.nextLine();
         builder.appendI15d(JsamsI18nLabelResource.LABEL_PAYMENT_MODE.getKey(), comboBoxPaymentMode, maxColumnSpan);
         builder.nextLine();
@@ -251,11 +249,9 @@ public class EditCustomerDialog extends EditDialog<Customer, CustomerValidator, 
         builder.setDefaultDialogBorder();
         builder.appendI15d(JsamsI18nLabelResource.LABEL_STREET.getKey(), textFieldBillingStreet, maxColumnSpan);
         builder.nextLine();
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_NUMBER.getKey(), textFieldBillingNumber, DEFAULT_COLUMN_SPAN);
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_BOX.getKey(), textFieldBillingBox, DEFAULT_COLUMN_SPAN);
-        builder
-                .appendI15d(JsamsI18nLabelResource.LABEL_ZIP_CODE.getKey(), textFieldBillingZipCode,
-                        DEFAULT_COLUMN_SPAN);
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_NUMBER.getKey(), textFieldBillingNumber);
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_BOX.getKey(), textFieldBillingBox);
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_ZIP_CODE.getKey(), textFieldBillingZipCode);
         builder.nextLine();
         builder.appendI15d(JsamsI18nLabelResource.LABEL_CITY.getKey(), textFieldBillingCity, maxColumnSpan);
         builder.nextLine();
@@ -276,10 +272,9 @@ public class EditCustomerDialog extends EditDialog<Customer, CustomerValidator, 
         builder.setDefaultDialogBorder();
         builder.appendI15d(JsamsI18nLabelResource.LABEL_STREET.getKey(), textFieldDeliveryStreet, maxColumnSpan);
         builder.nextLine();
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_NUMBER.getKey(), textFieldDeliveryNumber, DEFAULT_COLUMN_SPAN);
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_BOX.getKey(), textFieldDeliveryBox, DEFAULT_COLUMN_SPAN);
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_ZIP_CODE.getKey(), textFieldDeliveryZipCode,
-                DEFAULT_COLUMN_SPAN);
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_NUMBER.getKey(), textFieldDeliveryNumber);
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_BOX.getKey(), textFieldDeliveryBox);
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_ZIP_CODE.getKey(), textFieldDeliveryZipCode);
         builder.nextLine();
         builder.appendI15d(JsamsI18nLabelResource.LABEL_CITY.getKey(), textFieldDeliveryCity, maxColumnSpan);
         builder.nextLine();
@@ -318,8 +313,7 @@ public class EditCustomerDialog extends EditDialog<Customer, CustomerValidator, 
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, JsamsFrame.RESOURCE_BUNDLE);
         builder.setDefaultDialogBorder();
         final int maxRows = 9;
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_DEFAULT_DISCOUNT_RATE.getKey(), textFieldDefaultDiscountRate,
-                DEFAULT_COLUMN_SPAN);
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_DEFAULT_DISCOUNT_RATE.getKey(), textFieldDefaultDiscountRate);
         builder.nextLine();
         textAreaDescription.setRows(maxRows);
         textAreaDescription.setWrapStyleWord(true);

@@ -28,7 +28,7 @@ public class EditAgentDialog extends EditDialog<Agent, AgentValidator, AgentServ
      *            the {@link Agent} model
      */
     public EditAgentDialog(final I18nString title, Agent model) {
-        super(null, title, "apps/system-users.png");
+        super(null, title, "categories/applications-development.png");
         super.setModel(model);
         super.setValidator(new AgentValidator());
         super.setService(JsamsApplicationContext.getAgentService());
