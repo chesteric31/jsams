@@ -78,7 +78,7 @@ public abstract class JsamsFrame extends JFrame {
      */
     public JsamsFrame(final I18nString title, final String iconFileName) {
         this(title);
-        setIconImage(IconUtil.buildIcon(iconFileName));
+        setIconImage(IconUtil.buildIcon(IconUtil.TITLE_ICON_PREFIX + iconFileName));
     }
 
     /**

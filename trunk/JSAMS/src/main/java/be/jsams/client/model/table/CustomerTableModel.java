@@ -46,11 +46,11 @@ public class CustomerTableModel extends JsamsTableModel<Customer> {
      */
     public Object getValueAt(int rowIndex, int columnIndex) {
         switch (columnIndex) {
-        case 0:
+        case ZERO:
             return getData().get(rowIndex).getId();
-        case 1:
+        case ONE:
             return getData().get(rowIndex).getName();
-        case 2:
+        case TWO:
             LegalForm legalForm = getData().get(rowIndex).getLegalForm();
             if (legalForm != null) {
                 if (UserContext.isDutch()) {
@@ -63,9 +63,9 @@ public class CustomerTableModel extends JsamsTableModel<Customer> {
             } else {
                 return "";
             }
-        case 3:
+        case THREE:
             return getData().get(rowIndex).getBillingAddress().getZipCode();
-        case 4:
+        case FOUR:
             PaymentMode paymentMode = getData().get(rowIndex).getPaymentMode();
             if (UserContext.isDutch()) {
                 return paymentMode.getLabelNl();
@@ -74,7 +74,7 @@ public class CustomerTableModel extends JsamsTableModel<Customer> {
             } else {
                 return paymentMode.getLabel();
             }
-        case 5:
+        case FIVE:
             return getData().get(rowIndex).getContactInformation().getPhone();
         default:
             return "";
@@ -98,17 +98,17 @@ public class CustomerTableModel extends JsamsTableModel<Customer> {
     @Override
     public Class<?> getColumnClass(int columnIndex) {
         switch (columnIndex) {
-        case 0:
+        case ZERO:
             return Long.class;
-        case 1:
+        case ONE:
             return String.class;
-        case 2:
+        case TWO:
             return String.class;
-        case 3:
+        case THREE:
             return Integer.class;
-        case 4:
+        case FOUR:
             return String.class;
-        case 5:
+        case FIVE:
             return String.class;
         default:
             return Object.class;

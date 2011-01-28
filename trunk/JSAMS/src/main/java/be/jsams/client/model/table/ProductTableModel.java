@@ -47,19 +47,19 @@ public class ProductTableModel extends JsamsTableModel<Product> {
      */
     public Object getValueAt(int rowIndex, int columnIndex) {
         switch (columnIndex) {
-        case 0:
+        case ZERO:
             return getData().get(rowIndex).getId();
-        case 1:
+        case ONE:
             return getData().get(rowIndex).getName();
-        case 2:
+        case TWO:
             return getData().get(rowIndex).getPrice();
-        case 3:
+        case THREE:
             return getData().get(rowIndex).getQuantityStock();
-        case 4:
+        case FOUR:
             return getData().get(rowIndex).getReorderLevel();
-        case 5:
+        case FIVE:
             return getData().get(rowIndex).getVatApplicable().doubleValue();
-        case 6:
+        case SIX:
             ProductCategory category = getData().get(rowIndex).getCategory();
             if (UserContext.isDutch()) {
                 return category.getLabelNl();
@@ -90,19 +90,19 @@ public class ProductTableModel extends JsamsTableModel<Product> {
     @Override
     public Class<?> getColumnClass(int columnIndex) {
         switch (columnIndex) {
-        case 0:
+        case ZERO:
             return Long.class;
-        case 1:
+        case ONE:
             return String.class;
-        case 2:
+        case TWO:
             return BigDecimal.class;
-        case 3:
+        case THREE:
             return Integer.class;
-        case 4:
+        case FOUR:
             return Integer.class;
-        case 5:
+        case FIVE:
             return Double.class;
-        case 6:
+        case SIX:
             return String.class;
         default:
             return Object.class;

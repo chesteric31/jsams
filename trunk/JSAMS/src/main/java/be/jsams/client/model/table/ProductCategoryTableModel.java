@@ -42,13 +42,13 @@ public class ProductCategoryTableModel extends JsamsTableModel<ProductCategory> 
      */
     public Object getValueAt(int rowIndex, int columnIndex) {
         switch (columnIndex) {
-        case 0:
+        case ZERO:
             return getData().get(rowIndex).getId();
-        case 1:
+        case ONE:
             return getData().get(rowIndex).getLabel();
-        case 2:
+        case TWO:
             return getData().get(rowIndex).getLabelFr();
-        case 3:
+        case THREE:
             return getData().get(rowIndex).getLabelNl();
         default:
             return "";
@@ -72,13 +72,13 @@ public class ProductCategoryTableModel extends JsamsTableModel<ProductCategory> 
     @Override
     public Class<?> getColumnClass(int columnIndex) {
         switch (columnIndex) {
-        case 0:
+        case ZERO:
             return Long.class;
-        case 1:
+        case ONE:
             return String.class;
-        case 2:
+        case TWO:
             return String.class;
-        case 3:
+        case THREE:
             return String.class;
         default:
             return Object.class;

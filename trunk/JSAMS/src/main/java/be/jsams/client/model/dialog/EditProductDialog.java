@@ -59,7 +59,7 @@ public class EditProductDialog extends EditDialog<Product, ProductValidator, Pro
      *            the {@link Product} model
      */
     public EditProductDialog(final I18nString title, Product model) {
-        super(null, title);
+        super(null, title, "apps/preferences-desktop-theme.png");
         super.setModel(model);
         super.setValidator(new ProductValidator());
         super.setService(JsamsApplicationContext.getProductService());
