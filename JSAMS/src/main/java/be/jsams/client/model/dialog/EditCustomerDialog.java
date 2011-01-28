@@ -22,7 +22,6 @@ import be.jsams.client.renderer.TranslatableComboBoxRenderer;
 import be.jsams.client.swing.component.JsamsFormattedTextField;
 import be.jsams.client.swing.component.JsamsFrame;
 import be.jsams.client.swing.component.JsamsTextField;
-import be.jsams.client.swing.utils.IconUtil;
 import be.jsams.client.validator.CustomerValidator;
 import be.jsams.server.model.Address;
 import be.jsams.server.model.Civility;
@@ -137,7 +136,7 @@ public class EditCustomerDialog extends EditDialog<Customer, CustomerValidator, 
      *            the {@link Customer} model
      */
     public EditCustomerDialog(final I18nString title, Customer model) {
-        super(null, title, IconUtil.TITLE_ICON_PREFIX + "apps/system-users.png");
+        super(null, title, "apps/system-users.png");
         super.setModel(model);
         super.setValidator(new CustomerValidator());
         super.setService(JsamsApplicationContext.getCustomerService());

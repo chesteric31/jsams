@@ -46,7 +46,7 @@ public class JsamsMenuItem extends JMenuItem {
      */
     public JsamsMenuItem(final I18nString text, final String iconFileName) {
         this(text);
-        ImageIcon defaultIcon = new ImageIcon(IconUtil.buildIcon(iconFileName));
+        ImageIcon defaultIcon = new ImageIcon(IconUtil.buildIcon(IconUtil.MENU_ICON_PREFIX + iconFileName));
         setIcon(defaultIcon);
     }
 

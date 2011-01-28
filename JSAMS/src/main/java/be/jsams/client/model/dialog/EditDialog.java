@@ -22,6 +22,7 @@ import be.jsams.client.swing.component.JsamsFormattedTextField;
 import be.jsams.client.swing.component.JsamsLabel;
 import be.jsams.client.swing.component.JsamsStatusBar;
 import be.jsams.client.swing.component.JsamsTextField;
+import be.jsams.client.swing.utils.IconUtil;
 import be.jsams.server.model.AbstractIdentity;
 import be.jsams.server.service.Service;
 
@@ -80,7 +81,7 @@ public abstract class EditDialog<M extends AbstractIdentity, V extends Validator
      *            the icon path file mane
      */
     public EditDialog(final JsamsMainFrame parent, final I18nString title, final String iconFileName) {
-        super(parent, title, iconFileName);
+        super(parent, title, IconUtil.TITLE_ICON_PREFIX + iconFileName);
         add(buildSouthPanel(), BorderLayout.SOUTH);
     }
 

@@ -27,6 +27,27 @@ public abstract class JsamsTableModel<D extends AbstractIdentity> extends Abstra
      */
     private List<D> data;
 
+    /** Column number zero for switch purpose */
+    protected static final int ZERO = 0;
+    /** Column number one for switch purpose */
+    protected static final int ONE = 1;
+    /** Column number two for switch purpose */
+    protected static final int TWO = 2;
+    /** Column number three for switch purpose */
+    protected static final int THREE = 3;
+    /** Column number four for switch purpose */
+    protected static final int FOUR = 4;
+    /** Column number five for switch purpose */
+    protected static final int FIVE = 5;
+    /** Column number six for switch purpose */
+    protected static final int SIX = 6;
+    /** Column number seven for switch purpose */
+    protected static final int SEVEN = 7;
+    /** Column number eight for switch purpose */
+    protected static final int EIGHT = 8;
+    /** Column number nine for switch purpose */
+    protected static final int NINE = 9;
+
     /**
      * 
      * @return a list of data
