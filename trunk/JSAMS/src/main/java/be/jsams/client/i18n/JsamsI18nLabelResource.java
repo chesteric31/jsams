@@ -96,4 +96,6 @@ public final class JsamsI18nLabelResource {
 
     public static final I18nString LABEL_VAT_APPLICABLE = new I18nString("label.vat_applicable");
 
+    public static final I18nString LABEL_FUNCTION = new I18nString("label.function");
+
 }

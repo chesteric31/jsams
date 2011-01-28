@@ -2,6 +2,9 @@ package be.jsams.client.model.panel;
 
 import javax.swing.JPanel;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import be.jsams.client.swing.listener.EstimateMouseTableListener;
 import be.jsams.server.model.Estimate;
 import be.jsams.server.service.EstimateService;
@@ -18,6 +21,8 @@ public class SearchEstimatePanel extends SearchPanel<Estimate, EstimateMouseTabl
      * Serial Version UID
      */
     private static final long serialVersionUID = -7701480812937524634L;
+    
+    protected static final Log LOGGER = LogFactory.getLog(SearchEstimatePanel.class);
 
     /**
      * Constructor.

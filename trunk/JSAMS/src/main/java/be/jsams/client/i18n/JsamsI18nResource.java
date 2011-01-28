@@ -172,5 +172,15 @@ public final class JsamsI18nResource {
     public static final I18nString COLUMN_LEGAL_FORM = new I18nString("column.legal_form");
 
     public static final I18nString TITLE_EDIT_ESTIMATE = new I18nString("title.edit.estimate");
+
+    public static final I18nString MENU_ITEM_AGENTS = new I18nString("menu.item.agents");
+
+    public static final I18nString TITLE_EDIT_AGENT = new I18nString("title.edit.agent");
+
+    public static final I18nString TITLE_SEARCH_AGENT = new I18nString("title.search.agent");
+
+    public static final I18nString COLUMN_FUNCTION = new I18nString("column.function");
+
+    public static final I18nString COLUMN_CITY = new I18nString("column.city");
     
 }
