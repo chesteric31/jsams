@@ -24,6 +24,7 @@ import be.jsams.client.i18n.I18nString;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.model.dialog.EditSocietyDialog;
 import be.jsams.client.model.dialog.OpenSocietyDialog;
+import be.jsams.client.model.panel.SearchAgentPanel;
 import be.jsams.client.model.panel.SearchCustomerPanel;
 import be.jsams.client.model.panel.SearchProductCategoryPanel;
 import be.jsams.client.model.panel.SearchProductPanel;
@@ -33,10 +34,12 @@ import be.jsams.client.swing.component.JsamsMenu;
 import be.jsams.client.swing.component.JsamsMenuItem;
 import be.jsams.client.swing.component.JsamsShortcutToolBar;
 import be.jsams.client.swing.component.JsamsStatusBar;
+import be.jsams.client.swing.listener.AgentTableMouseListener;
 import be.jsams.client.swing.listener.CustomerTableMouseListener;
 import be.jsams.client.swing.listener.ProductCategoryTableMouseListener;
 import be.jsams.client.swing.listener.ProductTableMouseListener;
 import be.jsams.client.swing.listener.TabbedPaneKeyListener;
+import be.jsams.server.model.Agent;
 import be.jsams.server.model.Customer;
 import be.jsams.server.model.Product;
 import be.jsams.server.model.ProductCategory;
@@ -79,6 +82,7 @@ public class JsamsMainFrame extends JsamsFrame {
 
     private JsamsMenu managementMenu;
     private JsamsMenuItem customersMI;
+    private JsamsMenuItem agentsMI;
     private JsamsMenuItem productsCategoryMI;
     private JsamsMenuItem productsMI;
 
@@ -176,7 +180,7 @@ public class JsamsMainFrame extends JsamsFrame {
      */
     private void buildWindowsMenu() {
         windowsMenu = new JsamsMenu(JsamsI18nResource.MENU_WINDOWS);
-        closeWindowMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_CLOSE_WINDOW);
+        closeWindowMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_CLOSE_WINDOW, "emblems/emblem-unreadable.png");
         windowsMenu.add(closeWindowMI);
         closeAllWindowsMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_CLOSE_ALL_WINDOWS);
         windowsMenu.add(closeAllWindowsMI);
@@ -198,7 +202,8 @@ public class JsamsMainFrame extends JsamsFrame {
                 "actions/media-seek-forward.png");
         salesMenu.add(transferDocumentsMI);
         salesMenu.add(separators[6]);
-        listDocumentsMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_LIST_DOCUMENTS);
+        listDocumentsMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_LIST_DOCUMENTS,
+                "apps/internet-news-reader.png");
         salesMenu.add(listDocumentsMI);
         salesMenu.add(separators[7]);
         estimateMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_ESTIMATE);
@@ -221,6 +226,9 @@ public class JsamsMainFrame extends JsamsFrame {
         customersMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_CUSTOMERS, "apps/system-users.png");
         customersMI.addActionListener(customersAction());
         managementMenu.add(customersMI);
+        agentsMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_AGENTS, "categories/applications-development.png");
+        agentsMI.addActionListener(agentsAction());
+        managementMenu.add(agentsMI);
         managementMenu.add(separators[5]);
         productsCategoryMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_PRODUCTS_CATEGORY);
         productsCategoryMI.addActionListener(productsCategoryAction());
@@ -405,7 +413,7 @@ public class JsamsMainFrame extends JsamsFrame {
 
     /**
      * 
-     * @return a {@link Action} for the searching of customers
+     * @return an {@link Action} for the searching of customers
      */
     private Action customersAction() {
         return new AbstractAction() {
@@ -418,6 +426,26 @@ public class JsamsMainFrame extends JsamsFrame {
                 SearchCustomerPanel searchPanel = new SearchCustomerPanel(new Customer(),
                         new CustomerTableMouseListener(), JsamsApplicationContext.getCustomerService());
                 tabbedPane.addTab(JsamsI18nResource.TITLE_SEARCH_CUSTOMER, "apps/system-users.png", searchPanel);
+            }
+        };
+    }
+    
+    /**
+     * 
+     * @return an {@link Action} for the searching of agents
+     */
+    private Action agentsAction() {
+        return new AbstractAction() {
+            /**
+             * Serial
+             */
+            private static final long serialVersionUID = 3233472575375812337L;
+
+            public void actionPerformed(ActionEvent event) {
+                SearchAgentPanel searchPanel = new SearchAgentPanel(new Agent(), new AgentTableMouseListener(),
+                        JsamsApplicationContext.getAgentService());
+                tabbedPane.addTab(JsamsI18nResource.TITLE_SEARCH_AGENT, "categories/applications-development.png",
+                        searchPanel);
             }
         };
     }

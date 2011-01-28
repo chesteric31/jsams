@@ -6,6 +6,7 @@ import be.jsams.server.dao.CivilityDao;
 import be.jsams.server.dao.LegalFormDao;
 import be.jsams.server.dao.PaymentModeDao;
 import be.jsams.server.dao.ProductCategoryDao;
+import be.jsams.server.service.AgentService;
 import be.jsams.server.service.CustomerService;
 import be.jsams.server.service.EstimateService;
 import be.jsams.server.service.ProductCategoryService;
@@ -30,7 +31,7 @@ public final class JsamsApplicationContext {
      */
     private JsamsApplicationContext() {
     }
-    
+
     /**
      * 
      * @param context
@@ -110,6 +111,14 @@ public final class JsamsApplicationContext {
      */
     public static EstimateService getEstimateService() {
         return (EstimateService) context.getBean("estimateService");
+    }
+
+    /**
+     * 
+     * @return the AgentService
+     */
+    public static AgentService getAgentService() {
+        return (AgentService) context.getBean("agentService");
     }
 
 }
