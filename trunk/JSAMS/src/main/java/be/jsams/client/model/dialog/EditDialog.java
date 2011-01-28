@@ -94,7 +94,8 @@ public abstract class EditDialog<M extends AbstractIdentity, V extends Validator
      *            the {@link I18nString} translatable String
      */
     public EditDialog(final JsamsMainFrame parent, final I18nString title) {
-        this(parent, title, null);
+        super(parent, title);
+        add(buildSouthPanel(), BorderLayout.SOUTH);
     }
     
     /**

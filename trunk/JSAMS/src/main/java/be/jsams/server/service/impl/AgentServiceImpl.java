@@ -74,4 +74,11 @@ public class AgentServiceImpl implements AgentService {
         agentDao.update(agent);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    public List<Agent> findByCriteria(Agent criteria) {
+        return agentDao.findByCriteria(criteria);
+    }
+
 }
