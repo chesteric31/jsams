@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
@@ -118,7 +119,7 @@ public class Agent extends AbstractNamedIdentity {
      * 
      * @return a list of {@link Customer}
      */
-    @ManyToMany(mappedBy = "agent")
+    @ManyToMany(mappedBy = "agent", fetch = FetchType.EAGER)
     public List<Customer> getCustomers() {
         return customers;
     }
