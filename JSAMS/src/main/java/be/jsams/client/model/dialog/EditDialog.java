@@ -253,7 +253,7 @@ public abstract class EditDialog<M extends AbstractIdentity, V extends Validator
                 }
                 statusBar.addJComponent(label);
             }
-            statusBar.revalidate();
+            statusBar.validate();
         } else {
             if (getModel() == null) {
                 service.create(object);
