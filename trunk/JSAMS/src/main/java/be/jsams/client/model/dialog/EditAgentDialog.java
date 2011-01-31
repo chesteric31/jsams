@@ -24,6 +24,7 @@ import be.jsams.server.service.AgentService;
 import com.jgoodies.forms.builder.DefaultFormBuilder;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.validation.view.ValidationComponentUtils;
+import com.mysql.jdbc.StringUtils;
 
 /**
  * Edit Agent {@link EditDialog}, to create or update a {@link Agent} object.
@@ -198,8 +199,40 @@ public class EditAgentDialog extends EditDialog<Agent, AgentValidator, AgentServ
 
     @Override
     public void performOk() {
-        // TODO Auto-generated method stub
-
+        Agent agent = new Agent();
+        agent.setName(textFieldName.getText());
+        agent.setFunction(textFieldFunction.getText());
+        if (comboBoxCivility.getSelectedItem() != null) {
+            agent.setCivility((Civility) comboBoxCivility.getSelectedItem());
+        }
+        Address address = new Address();
+        if (!StringUtils.isNullOrEmpty(textFieldBox.getText())) {
+            address.setBox(textFieldBox.getText());
+        }
+        address.setCity(textFieldCity.getText());
+        address.setCountry(textFieldCountry.getText());
+        address.setNumber(textFieldNumber.getText());
+        address.setStreet(textFieldStreet.getText());
+        if (!StringUtils.isNullOrEmpty(textFieldZipCode.getText())) {
+            address.setZipCode(Integer.parseInt(textFieldZipCode.getText()));
+        }
+        agent.setAddress(address);
+        ContactInformation contactInformation = new ContactInformation();
+        if (!StringUtils.isNullOrEmpty(textFieldEmail.getText())) {
+            contactInformation.setEmail(textFieldEmail.getText());
+        }
+        if (!StringUtils.isNullOrEmpty(textFieldFax.getText())) {
+            contactInformation.setFax(textFieldFax.getText());
+        }
+        if (!StringUtils.isNullOrEmpty(textFieldMobile.getText())) {
+            contactInformation.setMobile(textFieldMobile.getText());
+        }
+        contactInformation.setPhone(textFieldPhone.getText());
+        if (!StringUtils.isNullOrEmpty(textFieldWebsite.getText())) {
+            contactInformation.setWebsite(textFieldWebsite.getText());
+        }
+        agent.setContactInformation(contactInformation);
+        super.postPerformOk(agent);
     }
 
     /**
