@@ -51,8 +51,6 @@ public class EditCustomerDialog extends EditDialog<Customer, CustomerValidator, 
 
     protected static final Log LOGGER = LogFactory.getLog(EditCustomerDialog.class);
 
-//    private static final int DEFAULT_COLUMN_SPAN = 1;
-
     private static final int MAX_CHARACTERS = 50;
 
     private static final int MAX_NUMBERS = 10;
@@ -191,7 +189,7 @@ public class EditCustomerDialog extends EditDialog<Customer, CustomerValidator, 
         if (getModel() != null) {
             fillBillingAddress();
             fillDeliveryAddress();
-            fillContactInformation();
+            fillContactInformations();
             fillMisc();
             comboBoxLegalForm.setSelectedItem(getModel().getLegalForm());
             comboBoxCivility.setSelectedItem(getModel().getCivility());
@@ -210,15 +208,15 @@ public class EditCustomerDialog extends EditDialog<Customer, CustomerValidator, 
      * @return the general tab panel
      */
     private JPanel buildGeneralTab() {
-        FormLayout layout = new FormLayout("right:p, 3dlu, 75dlu, p:grow", "p");
+        FormLayout layout = new FormLayout("right:p, 3dlu, 75dlu, 3dlu, right:p, 3dlu, 75dlu", "p");
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, JsamsFrame.RESOURCE_BUNDLE);
-        final int maxColumnSpan = 2;
+        final int maxColumnSpan = 5;
         builder.setDefaultDialogBorder();
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_CIVILITY.getKey(), comboBoxCivility);
+        builder.nextLine();
         builder.appendI15d(JsamsI18nLabelResource.LABEL_NAME.getKey(), textFieldName, maxColumnSpan);
         builder.nextLine();
         builder.appendI15d(JsamsI18nLabelResource.LABEL_LEGAL_FORM.getKey(), comboBoxLegalForm, maxColumnSpan);
-        builder.nextLine();
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_CIVILITY.getKey(), comboBoxCivility);
         builder.nextLine();
         builder.appendI15d(JsamsI18nLabelResource.LABEL_VAT_NUMBER.getKey(), textFieldVatNumber, maxColumnSpan);
         builder.nextLine();
@@ -227,11 +225,11 @@ public class EditCustomerDialog extends EditDialog<Customer, CustomerValidator, 
         builder.appendI15d(JsamsI18nLabelResource.LABEL_BANK2.getKey(), textFieldBank2, maxColumnSpan);
         builder.nextLine();
         builder.appendI15d(JsamsI18nLabelResource.LABEL_CREDIT_LIMIT.getKey(), textFieldCreditLimit);
-        builder.nextLine();
         builder.appendI15d(JsamsI18nLabelResource.LABEL_VAT_APPLICABLE.getKey(), textFieldVatApplicable);
         builder.nextLine();
         builder.appendI15d(JsamsI18nLabelResource.LABEL_PAYMENT_MODE.getKey(), comboBoxPaymentMode, maxColumnSpan);
         builder.nextLine();
+        //TODO use of agent
         builder.appendI15d(JsamsI18nLabelResource.LABEL_AGENT.getKey(), textFieldAgent, maxColumnSpan);
         return builder.getPanel();
     }
@@ -243,7 +241,7 @@ public class EditCustomerDialog extends EditDialog<Customer, CustomerValidator, 
      */
     private JPanel buildBillingAddressTab() {
         FormLayout layout = new FormLayout(
-                "right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow", "p");
+                "right:p, 3dlu, 75dlu, 3dlu, right:p, 3dlu, 75dlu, 3dlu, right:p, 3dlu, 75dlu", "p");
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, JsamsFrame.RESOURCE_BUNDLE);
         final int maxColumnSpan = 9;
         builder.setDefaultDialogBorder();
@@ -266,7 +264,7 @@ public class EditCustomerDialog extends EditDialog<Customer, CustomerValidator, 
      */
     private JPanel buildDeliveryAddressTab() {
         FormLayout layout = new FormLayout(
-                "right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow", "p");
+                "right:p, 3dlu, 75dlu, 3dlu, right:p, 3dlu, 75dlu, 3dlu, right:p, 3dlu, 75dlu", "p");
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, JsamsFrame.RESOURCE_BUNDLE);
         final int maxColumnSpan = 9;
         builder.setDefaultDialogBorder();
@@ -288,18 +286,17 @@ public class EditCustomerDialog extends EditDialog<Customer, CustomerValidator, 
      * @return the contact informations tab panel
      */
     private JPanel buildContactInformationsTab() {
-        FormLayout layout = new FormLayout("right:p, 3dlu, 100dlu", "p");
+        FormLayout layout = new FormLayout(
+                "right:p, 3dlu, 75dlu, 3dlu, right:p, 3dlu, 75dlu, 3dlu, right:p, 3dlu, 75dlu", "p");
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, JsamsFrame.RESOURCE_BUNDLE);
+        final int maxColumnSpan = 5;
         builder.setDefaultDialogBorder();
         builder.appendI15d(JsamsI18nLabelResource.LABEL_PHONE.getKey(), textFieldPhone);
-        builder.nextLine();
         builder.appendI15d(JsamsI18nLabelResource.LABEL_FAX.getKey(), textFieldFax);
-        builder.nextLine();
         builder.appendI15d(JsamsI18nLabelResource.LABEL_MOBILE.getKey(), textFieldMobile);
         builder.nextLine();
         builder.appendI15d(JsamsI18nLabelResource.LABEL_EMAIL.getKey(), textFieldEmail);
-        builder.nextLine();
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_WEBSITE.getKey(), textFieldWebsite);
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_WEBSITE.getKey(), textFieldWebsite, maxColumnSpan);
         return builder.getPanel();
     }
 
@@ -309,7 +306,7 @@ public class EditCustomerDialog extends EditDialog<Customer, CustomerValidator, 
      * @return the miscellaneous tab panel
      */
     private JPanel buildMiscTab() {
-        FormLayout layout = new FormLayout("right:p, 3dlu, 75dlu, p:grow", "p");
+        FormLayout layout = new FormLayout("right:p, 3dlu, p:grow", "p");
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, JsamsFrame.RESOURCE_BUNDLE);
         builder.setDefaultDialogBorder();
         final int maxRows = 9;
@@ -321,7 +318,7 @@ public class EditCustomerDialog extends EditDialog<Customer, CustomerValidator, 
         JScrollPane areaScrollPane = new JScrollPane(textAreaDescription);
         areaScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_DESCRIPTION.getKey(), areaScrollPane, 2);
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_DESCRIPTION.getKey(), areaScrollPane);
         return builder.getPanel();
     }
 
@@ -358,16 +355,15 @@ public class EditCustomerDialog extends EditDialog<Customer, CustomerValidator, 
     /**
      * Fills the contact informations data.
      */
-    private void fillContactInformation() {
+    private void fillContactInformations() {
         if (getModel() != null) {
-            ContactInformation contactInformation = getModel().getContactInformation();
-            textFieldPhone.setText(contactInformation.getPhone());
-            textFieldFax.setText(contactInformation.getFax());
-            textFieldMobile.setText(contactInformation.getMobile());
-            textFieldEmail.setText(contactInformation.getEmail());
-            textFieldWebsite.setText(contactInformation.getWebsite());
+            ContactInformation contactInformations = getModel().getContactInformation();
+            textFieldPhone.setText(contactInformations.getPhone());
+            textFieldFax.setText(contactInformations.getFax());
+            textFieldMobile.setText(contactInformations.getMobile());
+            textFieldEmail.setText(contactInformations.getEmail());
+            textFieldWebsite.setText(contactInformations.getWebsite());
         }
-
     }
 
     /**
@@ -402,11 +398,19 @@ public class EditCustomerDialog extends EditDialog<Customer, CustomerValidator, 
         if (!StringUtils.isNullOrEmpty(textFieldBank2.getText())) {
             customer.setBank2(textFieldBank2.getText());
         }
-        String vatApplicable = textFieldVatApplicable.getText();
-        if (!StringUtils.isNullOrEmpty(vatApplicable)) {
-            BigDecimal bigDecimal = new BigDecimal(vatApplicable);
-            bigDecimal = bigDecimal.setScale(2, BigDecimal.ROUND_HALF_EVEN);
-            customer.setVatApplicable(bigDecimal);
+
+        BigDecimal vatApplicable = null;
+        Object value = textFieldVatApplicable.getValue();
+        if (value instanceof Long) {
+            vatApplicable = BigDecimal.valueOf((Long) value);
+        } else if (value instanceof Double) {
+            vatApplicable = BigDecimal.valueOf((Double) value);
+        } else {
+            vatApplicable = (BigDecimal) value;
+        }
+        if (vatApplicable != null) {
+            vatApplicable = vatApplicable.setScale(2, BigDecimal.ROUND_HALF_EVEN);
+            customer.setVatApplicable(vatApplicable);
         }
         if (!StringUtils.isNullOrEmpty(textFieldVatNumber.getText())) {
             customer.setVatNumber(textFieldVatNumber.getText());

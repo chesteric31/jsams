@@ -229,7 +229,7 @@ public class JsamsStatusBar extends JPanel {
     }
 
     /**
-     * Sets status bar progess finish.
+     * Sets status bar progress finish.
      */
     public void setStatusBarProgressFinished() {
         Component firstComponent = labelOrProgressPanel.getComponent(0);

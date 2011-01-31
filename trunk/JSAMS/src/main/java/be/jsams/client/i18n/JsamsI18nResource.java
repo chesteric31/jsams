@@ -183,4 +183,6 @@ public final class JsamsI18nResource {
 
     public static final I18nString COLUMN_CITY = new I18nString("column.city");
     
+    public static final I18nString PANEL_ADDRESS = new I18nString("panel.address");
+    
 }
