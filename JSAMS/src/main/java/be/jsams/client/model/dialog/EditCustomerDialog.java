@@ -19,9 +19,12 @@ import be.jsams.client.i18n.I18nString;
 import be.jsams.client.i18n.JsamsI18nLabelResource;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.renderer.TranslatableComboBoxRenderer;
+import be.jsams.client.swing.action.SearchAgentAction;
+import be.jsams.client.swing.component.JsamsButton;
 import be.jsams.client.swing.component.JsamsFormattedTextField;
 import be.jsams.client.swing.component.JsamsFrame;
 import be.jsams.client.swing.component.JsamsTextField;
+import be.jsams.client.swing.utils.IconUtil;
 import be.jsams.client.validator.CustomerValidator;
 import be.jsams.server.model.Address;
 import be.jsams.server.model.Civility;
@@ -74,6 +77,9 @@ public class EditCustomerDialog extends EditDialog<Customer, CustomerValidator, 
     private JsamsFormattedTextField textFieldCreditLimit = new JsamsFormattedTextField();
 
     private JsamsTextField textFieldAgent = new JsamsTextField(MAX_CHARACTERS);
+
+    private JsamsButton buttonSearchAgent = new JsamsButton(IconUtil.MENU_ICON_PREFIX
+            + "categories/applications-development.png");
 
     private JsamsTextField textFieldBillingStreet = new JsamsTextField(MAX_CHARACTERS);
 
@@ -151,6 +157,7 @@ public class EditCustomerDialog extends EditDialog<Customer, CustomerValidator, 
         fillData();
         tabbedPane = new JTabbedPane(JTabbedPane.LEFT);
         generalPanel = buildGeneralTab();
+        buttonSearchAgent.addActionListener(new SearchAgentAction());
         tabbedPane.add(JsamsI18nResource.PANEL_GENERAL.getTranslation(), generalPanel);
         billingAddressPanel = buildBillingAddressTab();
         tabbedPane.add(JsamsI18nResource.PANEL_BILLING_ADDRESS.getTranslation(), billingAddressPanel);
@@ -229,8 +236,7 @@ public class EditCustomerDialog extends EditDialog<Customer, CustomerValidator, 
         builder.nextLine();
         builder.appendI15d(JsamsI18nLabelResource.LABEL_PAYMENT_MODE.getKey(), comboBoxPaymentMode, maxColumnSpan);
         builder.nextLine();
-        //TODO use of agent
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_AGENT.getKey(), textFieldAgent, maxColumnSpan);
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_AGENT.getKey(), textFieldAgent, buttonSearchAgent);
         return builder.getPanel();
     }
 
