@@ -86,7 +86,7 @@ public class JsamsTable extends JTable {
 
         getTableHeader().setReorderingAllowed(false);
     }
-    
+
     /**
      * Returns the eventually {@link SearchPanel}.
      * 
@@ -95,6 +95,20 @@ public class JsamsTable extends JTable {
     public Container getEventuallySearchPanel() {
         for (Container p = this; p != null; p = p.getParent()) {
             if (p instanceof SearchPanel<?, ?, ?>) {
+                return p;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Returns the eventually {@link JsamsDialog}.
+     * 
+     * @return the eventually {@link JsamsDialog} parent container
+     */
+    public Container getEventuallyJsamsDialog() {
+        for (Container p = this; p != null; p = p.getParent()) {
+            if (p instanceof JsamsDialog) {
                 return p;
             }
         }

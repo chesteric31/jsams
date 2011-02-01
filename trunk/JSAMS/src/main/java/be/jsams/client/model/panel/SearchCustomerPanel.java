@@ -71,9 +71,13 @@ public class SearchCustomerPanel extends SearchPanel<Customer, CustomerTableMous
      *            the {@link CustomerTableMouseListener}
      * @param s
      *            the {@link CustomerService}
+     * @param showManagementButtons
+     *            a boolean that indicates if we have to display the buttons to manage the content: add, remove and
+     *            modify
      */
-    public SearchCustomerPanel(Customer m, CustomerTableMouseListener l, CustomerService s) {
-        super(m, l, s);
+    public SearchCustomerPanel(Customer m, CustomerTableMouseListener l, CustomerService s,
+            final boolean showManagementButtons) {
+        super(m, l, s, showManagementButtons);
         super.buildMainPanel(buildSearchCriteriaPanel());
     }
 

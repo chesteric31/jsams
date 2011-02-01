@@ -11,7 +11,7 @@ import be.jsams.server.service.EstimateService;
 
 /**
  * Search {@link JPanel} for Estimate objects.
- *
+ * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
@@ -21,20 +21,27 @@ public class SearchEstimatePanel extends SearchPanel<Estimate, EstimateMouseTabl
      * Serial Version UID
      */
     private static final long serialVersionUID = -7701480812937524634L;
-    
+
     protected static final Log LOGGER = LogFactory.getLog(SearchEstimatePanel.class);
 
     /**
      * Constructor.
      * 
-     * @param m the {@link Estimate}
-     * @param l the {@link EstimateMouseTableListener}
-     * @param s the {@link EstimateService}
+     * @param m
+     *            the {@link Estimate}
+     * @param l
+     *            the {@link EstimateMouseTableListener}
+     * @param s
+     *            the {@link EstimateService}
+     * @param showManagementButtons
+     *            a boolean that indicates if we have to display the buttons to manage the content: add, remove and
+     *            modify
      */
-    public SearchEstimatePanel(Estimate m, EstimateMouseTableListener l, EstimateService s) {
-        super(m, l, s);
+    public SearchEstimatePanel(Estimate m, EstimateMouseTableListener l, EstimateService s,
+            final boolean showManagementButtons) {
+        super(m, l, s, showManagementButtons);
     }
-    
+
     @Override
     protected JPanel buildSearchCriteriaPanel() {
         // TODO Auto-generated method stub
@@ -44,25 +51,25 @@ public class SearchEstimatePanel extends SearchPanel<Estimate, EstimateMouseTabl
     @Override
     protected void performButtonAdd() {
         // TODO Auto-generated method stub
-        
+
     }
 
     @Override
     protected void performButtonModify() {
         // TODO Auto-generated method stub
-        
+
     }
 
     @Override
     protected void performButtonRemove() {
         // TODO Auto-generated method stub
-        
+
     }
 
     @Override
     public void performOk() {
         // TODO Auto-generated method stub
-        
+
     }
 
 }
