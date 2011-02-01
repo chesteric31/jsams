@@ -69,9 +69,12 @@ public class SearchProductPanel extends SearchPanel<Product, ProductTableMouseLi
      *            the {@link ProductTableMouseListener}
      * @param s
      *            the {@link ProductService}
+     * @param showManagementButtons
+     *            the boolean to show or not the management buttons panel
      */
-    public SearchProductPanel(Product m, ProductTableMouseListener l, ProductService s) {
-        super(m, l, s);
+    public SearchProductPanel(Product m, ProductTableMouseListener l, ProductService s,
+            final boolean showManagementButtons) {
+        super(m, l, s, showManagementButtons);
         super.buildMainPanel(buildSearchCriteriaPanel());
     }
 

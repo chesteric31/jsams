@@ -56,10 +56,12 @@ public class SearchProductCategoryPanel extends
      *            the {@link ProductCategoryTableMouseListener}
      * @param s
      *            the {@link ProductCategoryService}
+     * @param showManagementButtons
+     *            the boolean to show or not the management buttons panel
      */
     public SearchProductCategoryPanel(ProductCategory m, ProductCategoryTableMouseListener l,
-            ProductCategoryService s) {
-        super(m, l, s);
+            ProductCategoryService s, final boolean showManagementButtons) {
+        super(m, l, s, showManagementButtons);
         super.buildMainPanel(buildSearchCriteriaPanel());
     }
 

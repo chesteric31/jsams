@@ -424,7 +424,7 @@ public class JsamsMainFrame extends JsamsFrame {
 
             public void actionPerformed(ActionEvent event) {
                 SearchCustomerPanel searchPanel = new SearchCustomerPanel(new Customer(),
-                        new CustomerTableMouseListener(), JsamsApplicationContext.getCustomerService());
+                        new CustomerTableMouseListener(), JsamsApplicationContext.getCustomerService(), true);
                 tabbedPane.addTab(JsamsI18nResource.TITLE_SEARCH_CUSTOMER, "apps/system-users.png", searchPanel);
             }
         };
@@ -443,7 +443,7 @@ public class JsamsMainFrame extends JsamsFrame {
 
             public void actionPerformed(ActionEvent event) {
                 SearchAgentPanel searchPanel = new SearchAgentPanel(new Agent(), new AgentTableMouseListener(),
-                        JsamsApplicationContext.getAgentService());
+                        JsamsApplicationContext.getAgentService(), true);
                 tabbedPane.addTab(JsamsI18nResource.TITLE_SEARCH_AGENT, "categories/applications-development.png",
                         searchPanel);
             }
@@ -463,7 +463,7 @@ public class JsamsMainFrame extends JsamsFrame {
 
             public void actionPerformed(ActionEvent event) {
                 SearchProductPanel searchPanel = new SearchProductPanel(new Product(), new ProductTableMouseListener(),
-                        JsamsApplicationContext.getProductService());
+                        JsamsApplicationContext.getProductService(), true);
                 tabbedPane.addTab(JsamsI18nResource.TITLE_SEARCH_PRODUCT, "apps/preferences-desktop-theme.png",
                         searchPanel);
             }
@@ -483,7 +483,8 @@ public class JsamsMainFrame extends JsamsFrame {
 
             public void actionPerformed(ActionEvent event) {
                 SearchProductCategoryPanel searchPanel = new SearchProductCategoryPanel(new ProductCategory(),
-                        new ProductCategoryTableMouseListener(), JsamsApplicationContext.getProductCategoryService());
+                        new ProductCategoryTableMouseListener(), JsamsApplicationContext.getProductCategoryService(),
+                        true);
                 tabbedPane.addTab(JsamsI18nResource.TITLE_SEARCH_PRODUCT_CATEGORY, null, searchPanel);
             }
         };

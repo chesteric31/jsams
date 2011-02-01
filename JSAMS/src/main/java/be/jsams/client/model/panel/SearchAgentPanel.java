@@ -57,7 +57,7 @@ public class SearchAgentPanel extends SearchPanel<Agent, AgentTableMouseListener
     private JsamsTextField textFieldZipCode = new JsamsTextField(MAX_CHARACTERS);
     
     private JComboBox comboBoxCivility;
-    
+
     /**
      * Constructor.
      * 
@@ -67,9 +67,12 @@ public class SearchAgentPanel extends SearchPanel<Agent, AgentTableMouseListener
      *            the {@link AgentTableMouseListener}
      * @param s
      *            the {@link AgentService}
+     * @param showManagementButtons
+     *            a boolean that indicates if we have to display the buttons to manage the content: add, remove and
+     *            modify
      */
-    public SearchAgentPanel(Agent m, AgentTableMouseListener l, AgentService s) {
-        super(m, l, s);
+    public SearchAgentPanel(Agent m, AgentTableMouseListener l, AgentService s, final boolean showManagementButtons) {
+        super(m, l, s, showManagementButtons);
         super.buildMainPanel(buildSearchCriteriaPanel());
     }
 
@@ -78,6 +81,7 @@ public class SearchAgentPanel extends SearchPanel<Agent, AgentTableMouseListener
         FormLayout layout = new FormLayout(
                 "right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, 50dlu", "p");
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, JsamsFrame.RESOURCE_BUNDLE);
+        builder.setDefaultDialogBorder();
         builder.appendI15d(JsamsI18nLabelResource.LABEL_NAME.getKey(), textFieldName);
         builder.appendI15d(JsamsI18nLabelResource.LABEL_FUNCTION.getKey(), textFieldFunction);
         List<Civility> allCivilities = JsamsApplicationContext.getCivilityDao().findAll();
