@@ -65,14 +65,14 @@ public class AgentDaoImpl extends DaoImpl<Agent> implements AgentDao {
                 queryBuilder.append(" WHERE");
                 isFirst = false;
             }
-            queryBuilder.append(" c.name LIKE '%" + name + "%'");
+            queryBuilder.append(" a.name LIKE '%" + name + "%'");
         }
         if (function != null) {
             if (isFirst) {
                 queryBuilder.append(" WHERE");
                 isFirst = false;
             }
-            queryBuilder.append(" c.function LIKE '%" + function + "%'");
+            queryBuilder.append(" a.function LIKE '%" + function + "%'");
         }
         if (zipCode != -1) {
             if (isFirst) {
@@ -81,7 +81,7 @@ public class AgentDaoImpl extends DaoImpl<Agent> implements AgentDao {
             } else {
                 queryBuilder.append(" AND");
             }
-            queryBuilder.append(" c.address.zipCode = " + zipCode);
+            queryBuilder.append(" a.address.zipCode = " + zipCode);
         }
         if (city != null) {
             if (isFirst) {
@@ -90,7 +90,7 @@ public class AgentDaoImpl extends DaoImpl<Agent> implements AgentDao {
             } else {
                 queryBuilder.append(" AND");
             }
-            queryBuilder.append(" c.address.city = " + city);
+            queryBuilder.append(" a.address.city = " + city);
         }
         if (!civilityId.equals(0L)) {
             if (isFirst) {
@@ -99,7 +99,7 @@ public class AgentDaoImpl extends DaoImpl<Agent> implements AgentDao {
             } else {
                 queryBuilder.append(" AND");
             }
-            queryBuilder.append(" c.civility.id = " + civilityId);
+            queryBuilder.append(" a.civility.id = " + civilityId);
         }
         if (phone != null) {
             if (isFirst) {
@@ -108,7 +108,7 @@ public class AgentDaoImpl extends DaoImpl<Agent> implements AgentDao {
             } else {
                 queryBuilder.append(" AND");
             }
-            queryBuilder.append(" c.contactInformation.phone LIKE '%" + phone + "%'");
+            queryBuilder.append(" a.contactInformation.phone LIKE '%" + phone + "%'");
         }
 
         Query query = getEntityManager().createQuery(queryBuilder.toString());

@@ -274,7 +274,7 @@ public class Customer extends AbstractNamedIdentity {
      * 
      * @return the {@link Agent}
      */
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "FK_AGENT")
     public Agent getAgent() {
         return agent;
