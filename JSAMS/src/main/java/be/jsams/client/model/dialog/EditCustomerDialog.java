@@ -27,6 +27,7 @@ import be.jsams.client.swing.component.JsamsTextField;
 import be.jsams.client.swing.utils.IconUtil;
 import be.jsams.client.validator.CustomerValidator;
 import be.jsams.server.model.Address;
+import be.jsams.server.model.Agent;
 import be.jsams.server.model.Civility;
 import be.jsams.server.model.ContactInformation;
 import be.jsams.server.model.Customer;
@@ -157,7 +158,7 @@ public class EditCustomerDialog extends EditDialog<Customer, CustomerValidator, 
         fillData();
         tabbedPane = new JTabbedPane(JTabbedPane.LEFT);
         generalPanel = buildGeneralTab();
-        buttonSearchAgent.addActionListener(new SearchAgentAction());
+        buttonSearchAgent.addActionListener(new SearchAgentAction(this));
         tabbedPane.add(JsamsI18nResource.PANEL_GENERAL.getTranslation(), generalPanel);
         billingAddressPanel = buildBillingAddressTab();
         tabbedPane.add(JsamsI18nResource.PANEL_BILLING_ADDRESS.getTranslation(), billingAddressPanel);
@@ -203,6 +204,10 @@ public class EditCustomerDialog extends EditDialog<Customer, CustomerValidator, 
             textFieldName.setText(getModel().getName());
             textFieldVatNumber.setText(getModel().getVatNumber());
             textFieldVatApplicable.setValue(getModel().getVatApplicable());
+            Agent agent = getModel().getAgent();
+            if (agent != null) {
+                textFieldAgent.setText(agent.getName());
+            }
         }
         comboBoxLegalForm.setRenderer(new TranslatableComboBoxRenderer());
         comboBoxCivility.setRenderer(new TranslatableComboBoxRenderer());
@@ -389,7 +394,6 @@ public class EditCustomerDialog extends EditDialog<Customer, CustomerValidator, 
      */
     public void performOk() {
         Customer customer = new Customer();
-        // TODO see for agent object
         customer.setName(textFieldName.getText());
         if (comboBoxLegalForm.getSelectedItem() != null) {
             customer.setLegalForm((LegalForm) comboBoxLegalForm.getSelectedItem());
@@ -481,6 +485,14 @@ public class EditCustomerDialog extends EditDialog<Customer, CustomerValidator, 
             contactInformation.setWebsite(textFieldWebsite.getText());
         }
         customer.setContactInformation(contactInformation);
+        if (!StringUtils.isNullOrEmpty(textFieldAgent.getText())) {
+            Agent criteria = new Agent();
+            criteria.setName(textFieldAgent.getText());
+            List<Agent> agents = JsamsApplicationContext.getAgentService().findByCriteria(criteria);
+            if (agents != null && !agents.isEmpty()) {
+                customer.setAgent(agents.get(0));
+            }
+        }
         super.postPerformOk(customer);
     }
 
@@ -507,6 +519,13 @@ public class EditCustomerDialog extends EditDialog<Customer, CustomerValidator, 
         ValidationComponentUtils.setMandatory(comboBoxPaymentMode, true);
         comboBoxPaymentMode
                 .setBorder(BorderFactory.createLineBorder(ValidationComponentUtils.getMandatoryForeground()));
+    }
+
+    /**
+     * @return the textFieldAgent
+     */
+    public JsamsTextField getTextFieldAgent() {
+        return textFieldAgent;
     }
 
 }
