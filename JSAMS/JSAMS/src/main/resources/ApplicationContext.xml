@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+
+	<context:property-placeholder location="jdbc.properties" />
+	<context:annotation-config />
+
+	<bean
+		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${jdbc.driverClassName}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+	</bean>
+
+	<bean id="entityManagerFactory"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="persistenceUnitName" value="springUnit" />
+		<property name="jpaVendorAdapter">
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+				<property name="showSql" value="true" />
+				<property name="databasePlatform" value="org.hibernate.dialect.MySQL5Dialect" />
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="txManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+	</bean>
+	<!--
+		enable the configuration of transactional behavior based on
+		annotations
+	-->
+	<!--	<tx:annotation-driven transaction-manager="txManager" />-->
+
+	<bean id="baseTransactionProxy"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean"
+		abstract="true">
+		<property name="transactionManager" ref="txManager" />
+		<property name="transactionAttributes">
+			<props>
+				<prop key="find*">PROPAGATION_REQUIRED,readOnly,-Exception</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-Exception</prop>
+				<prop key="delete*">PROPAGATION_REQUIRED,-Exception</prop>
+				<prop key="create*">PROPAGATION_REQUIRED,-Exception</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="societyDao" class="be.jsams.server.dao.impl.SocietyDaoImpl">
+		<constructor-arg value="be.jsams.server.model.Society" />
+	</bean>
+	<bean id="legalFormDao" class="be.jsams.server.dao.impl.LegalFormDaoImpl">
+		<constructor-arg value="be.jsams.server.model.LegalForm" />
+	</bean>
+	<bean id="societyServiceTarget" class="be.jsams.server.service.impl.SocietyServiceImpl">
+		<property name="societyDao" ref="societyDao" />
+	</bean>
+	<bean id="societyService" parent="baseTransactionProxy">
+		<property name="target" ref="societyServiceTarget" />
+	</bean>
+	<bean id="agentServiceTarget" class="be.jsams.server.service.impl.AgentServiceImpl">
+		<property name="agentDao" ref="agentDao" />
+	</bean>
+	<bean id="agentService" parent="baseTransactionProxy">
+		<property name="target" ref="agentServiceTarget" />
+	</bean>
+	<bean id="customerServiceTarget" class="be.jsams.server.service.impl.CustomerServiceImpl">
+		<property name="customerDao" ref="customerDao" />
+	</bean>
+	<bean id="customerService" parent="baseTransactionProxy">
+		<property name="target" ref="customerServiceTarget" />
+	</bean>
+	<bean id="productServiceTarget" class="be.jsams.server.service.impl.ProductServiceImpl">
+		<property name="productDao" ref="productDao" />
+	</bean>
+	<bean id="productService" parent="baseTransactionProxy">
+		<property name="target" ref="productServiceTarget" />
+	</bean>
+	<bean id="productCategoryServiceTarget" class="be.jsams.server.service.impl.ProductCategoryServiceImpl">
+		<property name="productCategoryDao" ref="productCategoryDao" />
+	</bean>
+	<bean id="productCategoryService" parent="baseTransactionProxy">
+		<property name="target" ref="productCategoryServiceTarget" />
+	</bean>
+
+	<bean id="estimateDao" class="be.jsams.server.dao.impl.EstimateDaoImpl">
+		<constructor-arg value="be.jsams.server.model.Estimate" />
+	</bean>
+	<bean id="estimateDetailDao" class="be.jsams.server.dao.impl.EstimateDetailDaoImpl">
+		<constructor-arg value="be.jsams.server.model.EstimateDetail" />
+	</bean>
+	<bean id="estimateServiceTarget" class="be.jsams.server.service.impl.EstimateServiceImpl">
+		<property name="estimateDao" ref="estimateDao" />
+		<property name="estimateDetailDao" ref="estimateDetailDao" />
+	</bean>
+	<bean id="estimateService" parent="baseTransactionProxy">
+		<property name="target" ref="estimateServiceTarget" />
+	</bean>
+
+	<bean id="commandDao" class="be.jsams.server.dao.impl.CommandDaoImpl">
+		<constructor-arg value="be.jsams.server.model.Command" />
+	</bean>
+	<bean id="commandDetailDao" class="be.jsams.server.dao.impl.CommandDetailDaoImpl">
+		<constructor-arg value="be.jsams.server.model.CommandDetail" />
+	</bean>
+	<bean id="commandServiceTarget" class="be.jsams.server.service.impl.CommandServiceImpl">
+		<property name="commandDao" ref="commandDao" />
+		<property name="commandDetailDao" ref="commandDetailDao" />
+	</bean>
+	<bean id="commandService" parent="baseTransactionProxy">
+		<property name="target" ref="commandServiceTarget" />
+	</bean>
+
+	<bean id="contactInformationDao" class="be.jsams.server.dao.impl.ContactInformationDaoImpl">
+		<constructor-arg value="be.jsams.server.model.ContactInformation" />
+	</bean>
+	<bean id="addressDao" class="be.jsams.server.dao.impl.AddressDaoImpl">
+		<constructor-arg value="be.jsams.server.model.Address" />
+	</bean>
+	<bean id="civilityDao" class="be.jsams.server.dao.impl.CivilityDaoImpl">
+		<constructor-arg value="be.jsams.server.model.Civility" />
+	</bean>
+	<bean id="agentDao" class="be.jsams.server.dao.impl.AgentDaoImpl">
+		<constructor-arg value="be.jsams.server.model.Agent" />
+	</bean>
+	<bean id="customerDao" class="be.jsams.server.dao.impl.CustomerDaoImpl">
+		<constructor-arg value="be.jsams.server.model.Customer" />
+	</bean>
+	<bean id="paymentModeDao" class="be.jsams.server.dao.impl.PaymentModeDaoImpl">
+		<constructor-arg value="be.jsams.server.model.PaymentMode" />
+	</bean>
+	<bean id="productCategoryDao" class="be.jsams.server.dao.impl.ProductCategoryDaoImpl">
+		<constructor-arg value="be.jsams.server.model.ProductCategory" />
+	</bean>
+	<bean id="productDao" class="be.jsams.server.dao.impl.ProductDaoImpl">
+		<constructor-arg value="be.jsams.server.model.Product" />
+	</bean>
+
+	<!-- JDBC template -->
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<!-- JPA template -->
+	<bean id="jpaTemplate" class="org.springframework.orm.jpa.JpaTemplate">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+	</bean>
+
+	<import resource="i18nApplicationContext.xml" />
+
+</beans>
