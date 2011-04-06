@@ -3,12 +3,9 @@ package be.jsams.client.model.dialog;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
 
-import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
-import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.i18n.JsamsI18nLabelResource;
@@ -17,13 +14,18 @@ import be.jsams.client.renderer.NamedComboBoxRenderer;
 import be.jsams.client.swing.component.JsamsButton;
 import be.jsams.client.swing.component.JsamsButtonsInterface;
 import be.jsams.client.swing.component.JsamsButtonsPanel;
+import be.jsams.client.swing.component.JsamsComboBox;
 import be.jsams.client.swing.component.JsamsDialog;
 import be.jsams.client.swing.component.JsamsFrame;
+import be.jsams.client.swing.component.JsamsLabel;
+import be.jsams.client.swing.component.JsamsStatusBar;
 import be.jsams.client.swing.utils.IconUtil;
-import be.jsams.server.model.Society;
+import be.jsams.common.bean.model.management.SocietyBean;
+import be.jsams.common.bean.view.ViewFactory;
 
 import com.jgoodies.forms.builder.DefaultFormBuilder;
 import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.validation.view.ValidationResultViewFactory;
 
 /**
  * Open society {@link JsamsDialog}.
@@ -38,9 +40,13 @@ public class OpenSocietyDialog extends JsamsDialog implements JsamsButtonsInterf
      */
     private static final long serialVersionUID = 237617341189579756L;
 
-    private JComboBox comboBox = null;
+    private JsamsComboBox comboBox = null;
 
     private JsamsButtonsPanel buttonsPanel;
+
+    private SocietyBean bean;
+
+    private JsamsStatusBar statusBar;
 
     /**
      * Constructor
@@ -50,7 +56,8 @@ public class OpenSocietyDialog extends JsamsDialog implements JsamsButtonsInterf
      */
     public OpenSocietyDialog(final I18nString title) {
         super(null, title);
-        buttonsPanel = new JsamsButtonsPanel(this, true, true, true);
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        buttonsPanel = new JsamsButtonsPanel(this, true, false, false);
         add(buttonsPanel, BorderLayout.SOUTH);
         initComponents();
     }
@@ -65,16 +72,20 @@ public class OpenSocietyDialog extends JsamsDialog implements JsamsButtonsInterf
         builder.append(JsamsI18nLabelResource.LABEL_OPEN_SOCIETY.getTranslation());
         builder.nextLine();
         builder.appendSeparator();
-        List<Society> allSocieties = JsamsApplicationContext.getSocietyService().findAll();
-        comboBox = new JComboBox(allSocieties.toArray());
+        ViewFactory<SocietyBean> helper = new ViewFactory<SocietyBean>();
+        bean = new SocietyBean();
+        comboBox = helper.createBindingComboComponent(bean, true, false, new NamedComboBoxRenderer());
         comboBox.setRenderer(new NamedComboBoxRenderer());
-        builder.append(JsamsI18nLabelResource.LABEL_OPEN_SOCIETY_AVAILABLES.getTranslation(), comboBox);
+        builder.append(JsamsI18nLabelResource.LABEL_AVAILABLES_SOCIETIES.getTranslation(), comboBox);
         JsamsButton buttonNewSociety = buildButtonNewSociety();
         builder.append(buttonNewSociety);
         builder.nextLine();
         JPanel panel = builder.getPanel();
         JPanel mainPanel = new JPanel(new BorderLayout());
         mainPanel.add(panel, BorderLayout.CENTER);
+
+        statusBar = new JsamsStatusBar();
+        mainPanel.add(statusBar, BorderLayout.SOUTH);
 
         add(mainPanel);
         pack();
@@ -87,12 +98,18 @@ public class OpenSocietyDialog extends JsamsDialog implements JsamsButtonsInterf
      * {@inheritDoc}
      */
     public void performOk() {
-        Object selectedItem = comboBox.getSelectedItem();
-        if (comboBox.getSelectedIndex() >= 0 && selectedItem != null) {
-            JsamsDesktop jsamsDesktop = JsamsDesktop.getInstance();
-            jsamsDesktop.setCurrentSociety(((Society) selectedItem));
+        SocietyBean selectedSociety = (SocietyBean) bean.getSelection();
+        if (selectedSociety != null) {
+            JsamsDesktop.getInstance().setCurrentSociety(selectedSociety);
+            dispose();
+        } else {
+            statusBar.removeAll();
+            statusBar.repaint();
+            JsamsLabel label = new JsamsLabel(JsamsI18nLabelResource.LABEL_ERROR_MANDATORY_SOCIETY,
+                    ValidationResultViewFactory.getErrorIcon());
+            statusBar.addComponent(label);
+            statusBar.validate();
         }
-        dispose();
     }
 
     /**
@@ -120,8 +137,11 @@ public class OpenSocietyDialog extends JsamsDialog implements JsamsButtonsInterf
         buttonNewSociety.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent e) {
-                new EditSocietyDialog(JsamsI18nResource.TITLE_EDIT_SOCIETY, null);
-                dispose();
+                EditSocietyDialog dialog = new EditSocietyDialog(JsamsI18nResource.TITLE_EDIT_SOCIETY,
+                        new SocietyBean());
+                if (dialog.isSuccess()) {
+                    dispose();
+                }
             }
         });
         return buttonNewSociety;

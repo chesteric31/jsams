@@ -3,12 +3,10 @@ package be.jsams.client.swing.listener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.model.dialog.EditCustomerDialog;
-import be.jsams.client.model.panel.SearchCustomerPanel;
+import be.jsams.client.model.table.CustomerTableModel;
 import be.jsams.client.swing.component.JsamsTable;
-import be.jsams.server.model.Customer;
 
 /**
  * Customized {@link MouseListener} for Customer table double click.
@@ -26,11 +24,10 @@ public class CustomerTableMouseListener implements MouseListener {
         if (e.getClickCount() == 2) {
             int selectedRow = table.getSelectedRow();
             if (selectedRow > -1) {
-                Long id = (Long) table.getValueAt(selectedRow, 0);
-                Customer selectedCustomer = JsamsApplicationContext.getCustomerService().findById(id);
-                new EditCustomerDialog(JsamsI18nResource.TITLE_EDIT_CUSTOMER, selectedCustomer);
-                SearchCustomerPanel searchPanel = (SearchCustomerPanel) table.getEventuallySearchPanel();
-                searchPanel.refresh();
+                int selectedRowModel = table.convertRowIndexToModel(selectedRow);
+                CustomerTableModel model = (CustomerTableModel) table.getModel();
+                new EditCustomerDialog(JsamsI18nResource.TITLE_EDIT_CUSTOMER, model.getRow(selectedRowModel));
+                table.updateUI();
             }
         }
     }

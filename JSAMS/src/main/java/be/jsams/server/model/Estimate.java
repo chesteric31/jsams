@@ -1,6 +1,5 @@
 package be.jsams.server.model;
 
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -14,6 +13,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import be.jsams.common.bean.model.sale.EstimateBean;
+
 /**
  * Estimate entity object.
  * 
@@ -24,13 +25,10 @@ import javax.persistence.TemporalType;
 @Table(name = "ESTIMATE")
 public class Estimate extends AbstractIdentity {
 
-    /**
-     * Serial Version UID
-     */
-    private static final long serialVersionUID = 4590224667073848578L;
     private Date creationDate;
     private String remark;
-    private BigDecimal discountRate;
+    private Double discountRate;
+    private boolean transferred;
 
     private Agent agent;
     private Customer customer;
@@ -43,6 +41,23 @@ public class Estimate extends AbstractIdentity {
      */
     public Estimate() {
         super();
+    }
+
+    /**
+     * Constructor
+     * 
+     * @param bean
+     *            the {@link EstimateBean}
+     */
+    public Estimate(EstimateBean bean) {
+        super(bean);
+        setAgent(new Agent(bean.getAgent()));
+        setBillingAddress(new Address(bean.getBillingAddress()));
+        setCreationDate(bean.getCreationDate());
+        setCustomer(new Customer(bean.getCustomer()));
+        setDiscountRate(bean.getDiscountRate());
+        setRemark(bean.getRemark());
+        setTransferred(bean.isTransferred());
     }
 
     /**
@@ -87,7 +102,7 @@ public class Estimate extends AbstractIdentity {
      * @return the discount rate
      */
     @Column(name = "DISCOUNT_RATE")
-    public BigDecimal getDiscountRate() {
+    public Double getDiscountRate() {
         return discountRate;
     }
 
@@ -96,7 +111,7 @@ public class Estimate extends AbstractIdentity {
      * @param discountRate
      *            the discount rate to set
      */
-    public void setDiscountRate(BigDecimal discountRate) {
+    public void setDiscountRate(Double discountRate) {
         this.discountRate = discountRate;
     }
 
@@ -104,7 +119,7 @@ public class Estimate extends AbstractIdentity {
      * 
      * @return the {@link Agent}
      */
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "FK_AGENT")
     public Agent getAgent() {
         return agent;
@@ -123,7 +138,7 @@ public class Estimate extends AbstractIdentity {
      * 
      * @return the {@link Customer}
      */
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "FK_CUSTOMER")
     public Customer getCustomer() {
         return customer;
@@ -150,7 +165,8 @@ public class Estimate extends AbstractIdentity {
 
     /**
      * 
-     * @param billingAddress the billing {@link Address} to set
+     * @param billingAddress
+     *            the billing {@link Address} to set
      */
     public void setBillingAddress(Address billingAddress) {
         this.billingAddress = billingAddress;
@@ -167,17 +183,53 @@ public class Estimate extends AbstractIdentity {
 
     /**
      * 
-     * @param details a list of {@link EstimateDetail} to set
+     * @param details
+     *            a list of {@link EstimateDetail} to set
      */
     public void setDetails(List<EstimateDetail> details) {
         this.details = details;
     }
 
+    /**
+     * @return the transferred
+     */
+    @Column(name = "TRANSFERRED")
+    public boolean isTransferred() {
+        return transferred;
+    }
+
+    /**
+     * @param transferred
+     *            the transferred to set
+     */
+    public void setTransferred(boolean transferred) {
+        this.transferred = transferred;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
-        return "Estimate [agent=" + agent + ", billingAddress=" + billingAddress + ", creationDate=" + creationDate
-                + ", customer=" + customer + ", details=" + details + ", discountRate=" + discountRate + ", remark="
-                + remark + "]";
+        StringBuilder builder = new StringBuilder();
+        builder.append("Estimate [agent=");
+        builder.append(agent);
+        builder.append(", billingAddress=");
+        builder.append(billingAddress);
+        builder.append(", creationDate=");
+        builder.append(creationDate);
+        builder.append(", customer=");
+        builder.append(customer);
+        builder.append(", details=");
+        builder.append(details);
+        builder.append(", discountRate=");
+        builder.append(discountRate);
+        builder.append(", remark=");
+        builder.append(remark);
+        builder.append(", transferred=");
+        builder.append(transferred);
+        builder.append("]");
+        return builder.toString();
     }
 
 }

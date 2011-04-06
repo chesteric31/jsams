@@ -1,18 +1,28 @@
 package be.jsams.client.desktop;
 
-import java.awt.Dimension;
-import java.awt.Toolkit;
+import java.awt.Font;
+import java.awt.Graphics2D;
+import java.awt.SplashScreen;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.Enumeration;
 
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import javax.swing.plaf.FontUIResource;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.i18n.JsamsI18nResource;
-import be.jsams.server.model.Society;
+import be.jsams.client.model.dialog.OpenSocietyDialog;
+import be.jsams.client.swing.action.EditSocietyAction;
+import be.jsams.client.swing.component.JsamsMenuItem;
+import be.jsams.common.bean.model.management.SocietyBean;
 
 /**
- * Jsams desktop that creates the {@link JsamsMainFrame} and contains the current {@link Society}.
+ * JSAMS desktop that creates the {@link JsamsMainFrame} and contains the current Society.
  * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
@@ -24,34 +34,44 @@ public class JsamsDesktop {
      */
     private static final long serialVersionUID = 4428593979427620070L;
 
-    private Society currentSociety = null;
+    private static final Log LOGGER = LogFactory.getLog(JsamsDesktop.class);
 
-    private I18nString title = new I18nString("title.application_no_arguments");
+    private final boolean debug = LOGGER.isDebugEnabled();
+
+    private SocietyBean currentSociety = null;
 
     private JsamsMainFrame frame = null;
 
     private static JsamsDesktop instance = null;
 
-    /** Screen dimension */
-    public static final Dimension SCREEN = Toolkit.getDefaultToolkit().getScreenSize();
-
-    /** Center dimension onto the screen */
-    public static final Dimension CENTER = new Dimension((int) SCREEN.getWidth(), (int) SCREEN.getHeight());
+    private final int defaultFontSize = 13;
 
     /**
-     * Constructor
+     * Default constructor
      */
     public JsamsDesktop() {
         setInstance(this);
-        initComponents();
+        try {
+            initComponents();
+        } catch (Throwable e) {
+            JOptionPane.showMessageDialog(null, e.getCause(), JsamsI18nResource.ERROR_TITLE.getTranslation(),
+                    JOptionPane.ERROR_MESSAGE);
+            System.exit(0);
+        }
     }
 
     /**
      * Initializes the {@link JsamsMainFrame}
      */
     private void initComponents() {
-        frame = new JsamsMainFrame(title);
-        frame.openChooseSocietyDialog();
+        setNativeLookAndFeel();
+        setUIFont(new FontUIResource(Font.SANS_SERIF, Font.PLAIN, defaultFontSize));
+
+        new OpenSocietyDialog(JsamsI18nResource.TITLE_OPEN_SOCIETY);
+        Object[] parameters = new Object[1];
+        parameters[0] = this.currentSociety.getName();
+        I18nString newTitle = new I18nString("title.application", parameters);
+        frame = new JsamsMainFrame(newTitle);
         frame.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent we) {
                 stopNow();
@@ -63,8 +83,29 @@ public class JsamsDesktop {
      * Sets visible the {@link JsamsMainFrame}
      */
     public void start() {
-        // TODO add splash-screen...
+        showSplash();
+        frame.toFront();
         frame.setVisible(true);
+    }
+
+    /**
+     * Shows the splash screen
+     */
+    private void showSplash() {
+        final SplashScreen splash = SplashScreen.getSplashScreen();
+        if (splash == null) {
+            if (debug) {
+                LOGGER.debug("An error occurred with the splash screen");
+            }
+        } else {
+            Graphics2D graphics = splash.createGraphics();
+            if (graphics == null) {
+                if (debug) {
+                    LOGGER.debug("Graphics is null");
+                }
+            }
+            splash.close();
+        }
     }
 
     /**
@@ -80,7 +121,7 @@ public class JsamsDesktop {
      * Exits the application after having shown a confirmation dialog
      */
     public void stopNow() {
-        int confirm = JOptionPane.showConfirmDialog(getMainWindow(), JsamsI18nResource.EXIT_APPLICATION_CONFIRMATION);
+        int confirm = JOptionPane.showConfirmDialog(getMainWindow(), JsamsI18nResource.EXIT_CONFIRMATION);
         if (confirm == 0) {
             frame.dispose();
             System.exit(0);
@@ -89,20 +130,61 @@ public class JsamsDesktop {
 
     /**
      * 
-     * @return the current {@link Society}
+     * @return the current {@link SocietyBean}
      */
-    public Society getCurrentSociety() {
+    public SocietyBean getCurrentSociety() {
         return currentSociety;
     }
 
     /**
      * @param currentSociety
-     *            the current {@link Society} to set
+     *            the current {@link SocietyBean} to set
      */
-    public void setCurrentSociety(final Society currentSociety) {
+    public void setCurrentSociety(final SocietyBean currentSociety) {
         this.currentSociety = currentSociety;
-        I18nString newTitle = new I18nString("title.application", new Object[] { this.currentSociety.getName() });
-        frame.setTitle(newTitle);
+
+        // TODO review this if
+        if (frame != null) {
+            Object[] parameters = new Object[1];
+            parameters[0] = this.currentSociety.getName();
+            I18nString newTitle = new I18nString("title.application", parameters);
+            frame.setTitle(newTitle);
+            JsamsMenuItem societyParametersMI = frame.getSocietyParametersMI();
+            societyParametersMI.setAction(new EditSocietyAction(societyParametersMI.getText(), societyParametersMI
+                    .getIcon(), 1));
+        }
+        // frame.getManagementMenu().setEnabled(true);
+        // frame.getSalesMenu().setEnabled(true);
+    }
+
+    /**
+     * Sets the native look and feel.
+     */
+    protected void setNativeLookAndFeel() {
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception e) {
+            LOGGER.error(e);
+        }
+    }
+
+    /**
+     * Sets the default font for all swing components.
+     * 
+     * ex. setUIFont (new javax.swing.plaf.FontUIResource ("Serif",Font.ITALIC,12));
+     * 
+     * @param fontUIResource
+     *            the {@link FontUIResource}
+     */
+    protected void setUIFont(FontUIResource fontUIResource) {
+        Enumeration<Object> keys = UIManager.getDefaults().keys();
+        while (keys.hasMoreElements()) {
+            Object key = keys.nextElement();
+            Object value = UIManager.get(key);
+            if (value instanceof FontUIResource) {
+                UIManager.put(key, fontUIResource);
+            }
+        }
     }
 
     /**

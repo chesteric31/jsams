@@ -36,7 +36,7 @@ public class AddressDaoImplTest extends AbstractJUnitTestClass {
 		address.setCountry("France");
 		address.setNumber("79");
 		address.setStreet("Rue de Varenne");
-		address.setZipCode(75007);
+		address.setZipCode("75007");
 	}
 
 	@Test
@@ -78,7 +78,7 @@ public class AddressDaoImplTest extends AbstractJUnitTestClass {
 		anOtherAddress.setCountry("Belgium");
 		anOtherAddress.setNumber("1");
 		anOtherAddress.setStreet("Rue Neuve");
-        anOtherAddress.setZipCode(1000);
+        anOtherAddress.setZipCode("1000");
         dao.add(anOtherAddress);
         List<Address> addresses = dao.findAll();
         if (sizeBefore > 0) {

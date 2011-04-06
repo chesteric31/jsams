@@ -1,6 +1,6 @@
 package be.jsams.server.service;
 
-import be.jsams.server.model.Bill;
+import be.jsams.common.bean.model.sale.BillBean;
 
 /**
  * Bill service interface.
@@ -8,6 +8,6 @@ import be.jsams.server.model.Bill;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public interface BillService extends Service<Bill> {
+public interface BillService extends Service<BillBean> {
 
 }

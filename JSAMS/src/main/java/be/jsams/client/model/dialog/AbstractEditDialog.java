@@ -1,29 +1,24 @@
 package be.jsams.client.model.dialog;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Container;
+import java.awt.event.KeyEvent;
 import java.util.List;
 
 import javax.swing.BoxLayout;
-import javax.swing.JComboBox;
+import javax.swing.InputMap;
+import javax.swing.JComponent;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import javax.swing.KeyStroke;
 
 import be.jsams.client.desktop.JsamsMainFrame;
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.swing.component.JsamsButtonsInterface;
 import be.jsams.client.swing.component.JsamsButtonsPanel;
 import be.jsams.client.swing.component.JsamsDialog;
-import be.jsams.client.swing.component.JsamsFormattedTextField;
 import be.jsams.client.swing.component.JsamsLabel;
 import be.jsams.client.swing.component.JsamsStatusBar;
-import be.jsams.client.swing.component.JsamsTextField;
 import be.jsams.client.swing.utils.IconUtil;
-import be.jsams.server.model.AbstractIdentity;
+import be.jsams.common.bean.model.AbstractIdentityBean;
 import be.jsams.server.service.Service;
 
 import com.jgoodies.validation.Severity;
@@ -37,26 +32,24 @@ import com.jgoodies.validation.view.ValidationResultViewFactory;
 /**
  * Edit generic panel.
  * 
- * @param <M>
- *            a extension of {@link AbstractIdentity}
+ * @param <B>
+ *            an extension of {@link AbstractIdentityBean}
  * @param <V>
- *            a extension of {@link Validator}
+ *            an extension of {@link Validator}
  * @param <S>
  *            an extension of {@link Service}
  * @author chesteric31
  * @version $$Rev$$ $$Date::                  $$ $$Author$$
  */
-public abstract class EditDialog<M extends AbstractIdentity, V extends Validator<M>, S extends Service<M>> extends
-        JsamsDialog implements JsamsButtonsInterface {
+public abstract class AbstractEditDialog<B extends AbstractIdentityBean<?, ?>, V extends Validator<B>,
+        S extends Service<B>> extends JsamsDialog implements JsamsButtonsInterface {
 
     /**
      * Serial Version UID
      */
     private static final long serialVersionUID = 5146784638798425733L;
-
-    protected static final Log LOGGER = LogFactory.getLog(EditDialog.class);
-
-    private M model;
+    
+    private B model;
 
     private JsamsButtonsPanel buttonsPanel;
 
@@ -66,9 +59,9 @@ public abstract class EditDialog<M extends AbstractIdentity, V extends Validator
 
     private JPanel southPanel;
 
-    private Validator<M> validator;
+    private Validator<B> validator;
 
-    private Service<M> service;
+    private Service<B> service;
 
     /**
      * Constructor
@@ -80,8 +73,10 @@ public abstract class EditDialog<M extends AbstractIdentity, V extends Validator
      * @param iconFileName
      *            the icon path file mane
      */
-    public EditDialog(final JsamsMainFrame parent, final I18nString title, final String iconFileName) {
+    public AbstractEditDialog(final JsamsMainFrame parent, final I18nString title, final String iconFileName) {
         super(parent, title, IconUtil.TITLE_ICON_PREFIX + iconFileName);
+        buttonsPanel = new JsamsButtonsPanel(this, true, true, true);
+        setDefaultKeyActions();
         add(buildSouthPanel(), BorderLayout.SOUTH);
     }
 
@@ -93,11 +88,13 @@ public abstract class EditDialog<M extends AbstractIdentity, V extends Validator
      * @param title
      *            the {@link I18nString} translatable String
      */
-    public EditDialog(final JsamsMainFrame parent, final I18nString title) {
+    public AbstractEditDialog(final JsamsMainFrame parent, final I18nString title) {
         super(parent, title);
+        buttonsPanel = new JsamsButtonsPanel(this, true, true, true);
+        setDefaultKeyActions();
         add(buildSouthPanel(), BorderLayout.SOUTH);
     }
-    
+
     /**
      * Initializes all the components.
      */
@@ -107,7 +104,7 @@ public abstract class EditDialog<M extends AbstractIdentity, V extends Validator
      * 
      * @return the service
      */
-    public Service<M> getService() {
+    public Service<B> getService() {
         return service;
     }
 
@@ -116,7 +113,7 @@ public abstract class EditDialog<M extends AbstractIdentity, V extends Validator
      * @param service
      *            the service to set
      */
-    public void setService(Service<M> service) {
+    public void setService(Service<B> service) {
         this.service = service;
     }
 
@@ -124,7 +121,7 @@ public abstract class EditDialog<M extends AbstractIdentity, V extends Validator
      * 
      * @return the model
      */
-    public M getModel() {
+    public B getModel() {
         return model;
     }
 
@@ -133,7 +130,7 @@ public abstract class EditDialog<M extends AbstractIdentity, V extends Validator
      * @param model
      *            the model to set
      */
-    public void setModel(M model) {
+    public void setModel(B model) {
         this.model = model;
     }
 
@@ -158,7 +155,7 @@ public abstract class EditDialog<M extends AbstractIdentity, V extends Validator
      * 
      * @return the {@link Validator}
      */
-    public Validator<M> getValidator() {
+    public Validator<B> getValidator() {
         return validator;
     }
 
@@ -167,7 +164,7 @@ public abstract class EditDialog<M extends AbstractIdentity, V extends Validator
      * @param validator
      *            the {@link Validator} to set
      */
-    public void setValidator(Validator<M> validator) {
+    public void setValidator(Validator<B> validator) {
         this.validator = validator;
     }
 
@@ -180,7 +177,6 @@ public abstract class EditDialog<M extends AbstractIdentity, V extends Validator
         statusBar = new JsamsStatusBar();
         southPanel = new JPanel();
         southPanel.setLayout(new BoxLayout(southPanel, BoxLayout.PAGE_AXIS));
-        buttonsPanel = new JsamsButtonsPanel(this, true, true, true);
         southPanel.add(buttonsPanel);
         southPanel.add(statusBar);
         return southPanel;
@@ -190,6 +186,7 @@ public abstract class EditDialog<M extends AbstractIdentity, V extends Validator
      * {@inheritDoc}
      */
     public void performCancel() {
+        //TODO use memento pattern for undo of reset
         this.dispose();
     }
 
@@ -197,31 +194,7 @@ public abstract class EditDialog<M extends AbstractIdentity, V extends Validator
      * {@inheritDoc}
      */
     public void performReset() {
-        performReset(this);
-    }
-
-    /**
-     * Performs the reset for the {@link Container}.
-     * 
-     * @param container
-     *            the contain to 'clean'
-     */
-    public void performReset(final Container container) {
-        for (Component component : container.getComponents()) {
-            if (component instanceof Container) {
-                this.performReset((Container) component);
-            }
-            // NOT ELSE IF cause that doesn't work
-            if (component instanceof JsamsTextField) {
-                ((JsamsTextField) component).setText(null);
-            } else if (component instanceof JComboBox) {
-                ((JComboBox) component).setSelectedIndex(0);
-            } else if (component instanceof JTextArea) {
-                ((JTextArea) component).setText(null);
-            } else if (component instanceof JsamsFormattedTextField) {
-                ((JsamsFormattedTextField) component).setValue(null);
-            }
-        }
+        model.clear();
     }
 
     /**
@@ -234,12 +207,12 @@ public abstract class EditDialog<M extends AbstractIdentity, V extends Validator
      * 
      * @param object
      *            the object to validate and to persist
-     * @return true if success of the operations, false otherwise
+     * @return the result B object (updated or created), null if an error occurred
      */
-    protected boolean postPerformOk(final M object) {
+    protected B postPerformOk(B object) {
         ValidationResult result = validator.validate(object);
         validationResultModel.setResult(result);
-        boolean success = false;
+        B persistedObject = null;
         if (result.hasMessages()) {
             statusBar.removeAll();
             statusBar.repaint();
@@ -251,20 +224,36 @@ public abstract class EditDialog<M extends AbstractIdentity, V extends Validator
                 } else if (message.severity() == Severity.WARNING) {
                     label.setIcon(ValidationResultViewFactory.getWarningIcon());
                 }
-                statusBar.addJComponent(label);
+                statusBar.addComponent(label);
             }
             statusBar.validate();
         } else {
-            if (getModel() == null) {
-                service.create(object);
+            if (getModel().getId() == null) {
+                persistedObject = service.create(object);
             } else {
-                object.setId(getModel().getId());
+                // object.setId(getModel().getId());
                 service.update(object);
+                persistedObject = object;
             }
-            success = true;
             dispose();
         }
-        return success;
+        return persistedObject;
+    }
+
+    /**
+     * Sets the default keys actions.
+     */
+    private void setDefaultKeyActions() {
+        // Automatically choose OK when Enter Key is pressed
+        int noModifiers = 0;
+        KeyStroke okKey = KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, noModifiers, false);
+        InputMap inputMap = rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+        inputMap.put(okKey, JsamsButtonsPanel.OK_ACTION_KEY);
+        rootPane.getActionMap().put(JsamsButtonsPanel.OK_ACTION_KEY, buttonsPanel.getButtonOk().getAction());
+
+        KeyStroke cancelKey = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, noModifiers, false);
+        inputMap.put(cancelKey, JsamsButtonsPanel.CANCEL_ACTION_KEY);
+        rootPane.getActionMap().put(JsamsButtonsPanel.CANCEL_ACTION_KEY, buttonsPanel.getButtonCancel().getAction());
     }
 
     /**

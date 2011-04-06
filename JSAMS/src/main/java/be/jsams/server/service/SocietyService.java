@@ -1,6 +1,6 @@
 package be.jsams.server.service;
 
-import be.jsams.server.model.Society;
+import be.jsams.common.bean.model.management.SocietyBean;
 
 /**
  * Society service interface.
@@ -8,6 +8,6 @@ import be.jsams.server.model.Society;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public interface SocietyService extends Service<Society> {
+public interface SocietyService extends Service<SocietyBean> {
 
 }

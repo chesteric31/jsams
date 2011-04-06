@@ -2,8 +2,10 @@ package be.jsams.client.swing.component;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.swing.AbstractAction;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -21,6 +23,11 @@ import com.jgoodies.forms.factories.ButtonBarFactory;
  */
 public class JsamsButtonsPanel extends JPanel {
 
+    /**
+     * Serial Version UID
+     */
+    private static final long serialVersionUID = 8542255661439665645L;
+
     private static final int DEFAULT_V_GAP = 10;
 
     private JsamsButtonsInterface parent;
@@ -29,10 +36,12 @@ public class JsamsButtonsPanel extends JPanel {
     private JsamsButton buttonCancel = null;
     private JsamsButton buttonReset = null;
 
-    /**
-     * Serial Version UID
-     */
-    private static final long serialVersionUID = 8542255661439665645L;
+    public static final String OK_ACTION_KEY = "OK_ACTION_KEY";
+    public static final String CANCEL_ACTION_KEY = "CANCEL_ACTION_KEY";
+    public static final String RESET_ACTION_KEY = "RESET_ACTION_KEY";
+    private AbstractAction okAction = null;
+    private AbstractAction cancelAction = null;
+    private AbstractAction resetAction = null;
 
     /**
      * Constructor.
@@ -70,8 +79,19 @@ public class JsamsButtonsPanel extends JPanel {
         buttonsLayout.setVgap(DEFAULT_V_GAP);
         this.setLayout(buttonsLayout);
         this.add(new JSeparator(), BorderLayout.NORTH);
-        this.add(ButtonBarFactory.buildCenteredBar(new JButton[] { buttonOk, buttonCancel, buttonReset }),
-                BorderLayout.CENTER);
+        List<JButton> buttons = new ArrayList<JButton>();
+        if (buttonOk != null) {
+            buttons.add(buttonOk);
+        }
+        if (buttonCancel != null) {
+            buttons.add(buttonCancel);
+        }
+        if (buttonReset != null) {
+            buttons.add(buttonReset);
+        }
+        JButton[] array = (JButton[]) buttons.toArray(new JButton[buttons.size()]);
+
+        this.add(ButtonBarFactory.buildCenteredBar(array), BorderLayout.CENTER);
         // following line for more space
         this.add(new JLabel(), BorderLayout.SOUTH);
     }
@@ -82,12 +102,21 @@ public class JsamsButtonsPanel extends JPanel {
      * @return the OK {@link JsamsButton}
      */
     private JsamsButton buildButtonOk() {
-        JsamsButton buttonOk = new JsamsButton(JsamsI18nResource.BUTTON_OK);
-        buttonOk.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+        buttonOk = new JsamsButton(JsamsI18nResource.BUTTON_OK);
+        okAction = new AbstractAction(buttonOk.getText()) {
+
+            /**
+             * Serial Version UID
+             */
+            private static final long serialVersionUID = 8813678697157516871L;
+
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
                 parent.performOk();
+
             }
-        });
+        };
+        buttonOk.setAction(okAction);
         return buttonOk;
     }
 
@@ -97,12 +126,21 @@ public class JsamsButtonsPanel extends JPanel {
      * @return the cancel {@link JsamsButton}
      */
     private JsamsButton buildButtonCancel() {
-        JsamsButton buttonCancel = new JsamsButton(JsamsI18nResource.BUTTON_CANCEL);
-        buttonCancel.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+        buttonCancel = new JsamsButton(JsamsI18nResource.BUTTON_CANCEL);
+        cancelAction = new AbstractAction(buttonCancel.getText()) {
+
+            /**
+             * Serial Version UID
+             */
+            private static final long serialVersionUID = 677942607120998764L;
+
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
                 parent.performCancel();
+
             }
-        });
+        };
+        buttonCancel.setAction(cancelAction);
         return buttonCancel;
     }
 
@@ -112,12 +150,21 @@ public class JsamsButtonsPanel extends JPanel {
      * @return the reset {@link JsamsButton}
      */
     private JsamsButton buildButtonReset() {
-        JsamsButton buttonReset = new JsamsButton(JsamsI18nResource.BUTTON_RESET);
-        buttonReset.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+        buttonReset = new JsamsButton(JsamsI18nResource.BUTTON_RESET);
+        resetAction = new AbstractAction(buttonReset.getText()) {
+
+            /**
+             * Serial Version UID
+             */
+            private static final long serialVersionUID = -638120084648685148L;
+
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
                 parent.performReset();
+
             }
-        });
+        };
+        buttonReset.setAction(resetAction);
         return buttonReset;
     }
 
@@ -148,7 +195,8 @@ public class JsamsButtonsPanel extends JPanel {
 
     /**
      * 
-     * @param buttonCancel the {@link JsamsButton} cancel to set
+     * @param buttonCancel
+     *            the {@link JsamsButton} cancel to set
      */
     public void setButtonCancel(JsamsButton buttonCancel) {
         this.buttonCancel = buttonCancel;
@@ -164,7 +212,8 @@ public class JsamsButtonsPanel extends JPanel {
 
     /**
      * 
-     * @param buttonReset the {@link JsamsButton} reset
+     * @param buttonReset
+     *            the {@link JsamsButton} reset
      */
     public void setButtonReset(JsamsButton buttonReset) {
         this.buttonReset = buttonReset;

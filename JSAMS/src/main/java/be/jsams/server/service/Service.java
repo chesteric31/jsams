@@ -2,65 +2,66 @@ package be.jsams.server.service;
 
 import java.util.List;
 
-import be.jsams.server.model.AbstractIdentity;
+import be.jsams.common.bean.model.AbstractIdentityBean;
 
 /**
- * Generic service for M extends of {@link AbstractIdentity}.
+ * Generic service for B extends of {@link AbstractIdentityBean}.
  * 
- * @param <M>
- *            an extension of {@link AbstractIdentity}
+ * @param <B>
+ *            an extension of {@link AbstractIdentityBean}
  * 
  * @author chesteric31
  * @version $$Rev$$ $$Date::                  $$ $$Author$$
  */
-public interface Service<M extends AbstractIdentity> {
+public interface Service<B extends AbstractIdentityBean<?, ?>> {
 
     /**
-     * Creates and persists a new M object.
+     * Creates and persists a new B object.
      * 
-     * @param model
-     *            the M object to persist
+     * @param bean
+     *            the B object to persist
+     * @return the B object persisted with id
      */
-    void create(M model);
+    B create(B bean);
 
     /**
-     * Deletes a M object.
+     * Deletes a B object.
      * 
-     * @param model
-     *            the M object to delete
+     * @param bean
+     *            the B object to delete
      */
-    void delete(M model);
+    void delete(B bean);
 
     /**
-     * Deletes a M object.
+     * Deletes a B object.
      * 
      * @param id
-     *            the id of the M object to delete
+     *            the id of the B object to delete
      */
     void delete(Long id);
 
     /**
-     * Updates a M object.
+     * Updates a B object.
      * 
-     * @param model
-     *            the M object to update
+     * @param bean
+     *            the B object to update
      */
-    void update(M model);
+    void update(B bean);
 
     /**
-     * Finds a M object.
+     * Finds a B object.
      * 
      * @param id
-     *            the if of the M object to find
+     *            the if of the B object to find
      * @return the found object
      */
-    M findById(Long id);
+    B findById(Long id);
 
     /**
-     * Finds all the M object of the database.
+     * Finds all the B object of the database.
      * 
-     * @return a list of M object
+     * @return a list of B objects
      */
-    List<M> findAll();
+    List<B> findAll();
 
 }

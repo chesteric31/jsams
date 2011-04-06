@@ -3,6 +3,8 @@ package be.jsams.server.model;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import be.jsams.common.bean.model.CivilityBean;
+
 /**
  * Civility entity object.
  * 
@@ -14,15 +16,20 @@ import javax.persistence.Table;
 public class Civility extends AbstractTranslatableIdentity {
 
     /**
-     * Serial Version UID
-     */
-    private static final long serialVersionUID = -7268110575101379157L;
-
-    /**
      * Constructor.
      */
     public Civility() {
         super();
+    }
+
+    /**
+     * Constructor
+     * 
+     * @param bean
+     *            the {@link CivilityBean}
+     */
+    public Civility(CivilityBean bean) {
+        super(bean);
     }
 
 }

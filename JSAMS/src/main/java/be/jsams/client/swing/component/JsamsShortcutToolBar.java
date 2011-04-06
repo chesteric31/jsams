@@ -57,4 +57,5 @@ public class JsamsShortcutToolBar extends JPanel {
         panel.add(statisticsButton);
         this.add(panel);
     }
+    
 }
