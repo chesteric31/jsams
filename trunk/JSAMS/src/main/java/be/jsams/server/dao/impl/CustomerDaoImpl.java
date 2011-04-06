@@ -4,12 +4,16 @@ import java.util.List;
 
 import javax.persistence.Query;
 
+import com.mysql.jdbc.StringUtils;
+
+import be.jsams.client.desktop.JsamsDesktop;
+import be.jsams.common.bean.model.AddressBean;
+import be.jsams.common.bean.model.ContactInformationBean;
+import be.jsams.common.bean.model.LegalFormBean;
+import be.jsams.common.bean.model.PaymentModeBean;
+import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.server.dao.CustomerDao;
-import be.jsams.server.model.Address;
-import be.jsams.server.model.ContactInformation;
 import be.jsams.server.model.Customer;
-import be.jsams.server.model.LegalForm;
-import be.jsams.server.model.PaymentMode;
 
 /**
  * Customer DAO implementation.
@@ -33,75 +37,36 @@ public class CustomerDaoImpl extends DaoImpl<Customer> implements CustomerDao {
      * {@inheritDoc}
      */
     @SuppressWarnings("unchecked")
-    public List<Customer> findByCriteria(final Customer criteria) {
+    public List<Customer> findByCriteria(final CustomerBean criteria) {
         StringBuilder queryBuilder = new StringBuilder("FROM Customer c");
 
-        boolean isFirst = true;
-
         String name = criteria.getName();
-        Address billingAddress = criteria.getBillingAddress();
-        int zipCode = -1;
-        if (billingAddress != null) {
-            zipCode = billingAddress.getZipCode();
-        }
-        ContactInformation contactInformation = criteria.getContactInformation();
-        String phone = null;
-        if (contactInformation != null) {
-            phone = contactInformation.getPhone();
-        }
-        PaymentMode paymentMode = criteria.getPaymentMode();
-        Long paymentModeId = 0L;
-        if (paymentMode != null) {
-            paymentModeId = paymentMode.getId();
-        }
-        LegalForm legalForm = criteria.getLegalForm();
-        Long legalFormId = 0L;
-        if (legalForm != null) {
-            legalFormId = legalForm.getId();
-        }
+        AddressBean billingAddress = criteria.getBillingAddress();
+        String zipCode = billingAddress.getZipCode();
+        ContactInformationBean contactInformation = criteria.getContactInformation();
+        String phone = contactInformation.getPhone();
+        PaymentModeBean paymentMode = (PaymentModeBean) criteria.getPaymentMode().getSelection();
+        LegalFormBean legalForm = (LegalFormBean) criteria.getLegalForm().getSelection();
         
-        if (name != null) {
-            if (isFirst) {
-                queryBuilder.append(" WHERE");
-                isFirst = false;
-            }
-            queryBuilder.append(" c.name LIKE '%" + name + "%'");
+        Long societyId = JsamsDesktop.getInstance().getCurrentSociety().getId();
+        
+        queryBuilder.append(" WHERE ");
+        queryBuilder.append("c.society.id = " + societyId);
+
+        if (!StringUtils.isNullOrEmpty(name)) {
+            queryBuilder.append(" AND c.name LIKE '%" + name + "%'");
         }
-        if (zipCode != -1) {
-            if (isFirst) {
-                queryBuilder.append(" WHERE");
-                isFirst = false;
-            } else {
-                queryBuilder.append(" AND");
-            }
-            queryBuilder.append(" c.billingAddress.zipCode = " + zipCode);
+        if (!StringUtils.isNullOrEmpty(zipCode)) {
+            queryBuilder.append(" AND c.billingAddress.zipCode = " + zipCode);
         }
-        if (!paymentModeId.equals(0L)) {
-            if (isFirst) {
-                queryBuilder.append(" WHERE");
-                isFirst = false;
-            } else {
-                queryBuilder.append(" AND");
-            }
-            queryBuilder.append(" c.paymentMode.id = " + paymentModeId);
+        if (paymentMode != null) {
+            queryBuilder.append(" AND c.paymentMode.id = " + paymentMode.getId());
         }
-        if (!legalFormId.equals(0L)) {
-            if (isFirst) {
-                queryBuilder.append(" WHERE");
-                isFirst = false;
-            } else {
-                queryBuilder.append(" AND");
-            }
-            queryBuilder.append(" c.legalForm.id = " + legalFormId);
+        if (legalForm != null) {
+            queryBuilder.append(" AND c.legalForm.id = " + legalForm.getId());
         }
-        if (phone != null) {
-            if (isFirst) {
-                queryBuilder.append(" WHERE");
-                isFirst = false;
-            } else {
-                queryBuilder.append(" AND");
-            }
-            queryBuilder.append(" c.contactInformation.phone LIKE '%" + phone + "%'");
+        if (!StringUtils.isNullOrEmpty(phone)) {
+            queryBuilder.append(" AND c.contactInformation.phone LIKE '%" + phone + "%'");
         }
 
         Query query = getEntityManager().createQuery(queryBuilder.toString());

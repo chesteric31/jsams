@@ -1,7 +1,9 @@
 package be.jsams.server.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import be.jsams.common.bean.model.management.ProductBean;
 import be.jsams.server.dao.ProductDao;
 import be.jsams.server.model.Product;
 import be.jsams.server.service.ProductService;
@@ -35,14 +37,17 @@ public class ProductServiceImpl implements ProductService {
     /**
      * {@inheritDoc}
      */
-    public void create(final Product product) {
+    public ProductBean create(final ProductBean bean) {
+        Product product = new Product(bean);
         productDao.add(product);
+        return new ProductBean(product);
     }
 
     /**
      * {@inheritDoc}
      */
-    public void delete(final Product product) {
+    public void delete(final ProductBean bean) {
+        Product product = new Product(bean);
         productDao.delete(product);
     }
 
@@ -56,28 +61,41 @@ public class ProductServiceImpl implements ProductService {
     /**
      * {@inheritDoc}
      */
-    public List<Product> findAll() {
-        return productDao.findAll();
+    public List<ProductBean> findAll() {
+        List<Product> products = productDao.findAll();
+        List<ProductBean> beans = new ArrayList<ProductBean>();
+        for (Product product : products) {
+            beans.add(new ProductBean(product));
+        }
+        return beans;
     }
 
     /**
      * {@inheritDoc}
      */
-    public List<Product> findByCriteria(final Product criteria) {
-        return productDao.findByCriteria(criteria);
+    public List<ProductBean> findByCriteria(final ProductBean criteria) {
+        List<Product> products = productDao.findByCriteria(criteria);
+        List<ProductBean> beans = new ArrayList<ProductBean>();
+        for (Product product : products) {
+            beans.add(new ProductBean(product));
+        }
+        return beans;
     }
 
     /**
      * {@inheritDoc}
      */
-    public Product findById(final Long id) {
-        return productDao.findById(id);
+    public ProductBean findById(final Long id) {
+        Product product = productDao.findById(id);
+        ProductBean bean = new ProductBean(product);
+        return bean;
     }
 
     /**
      * {@inheritDoc}
      */
-    public void update(final Product product) {
+    public void update(final ProductBean bean) {
+        Product product = new Product(bean);
         productDao.update(product);
     }
 

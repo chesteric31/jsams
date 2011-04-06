@@ -6,17 +6,19 @@ import java.util.List;
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.i18n.UserContext;
-import be.jsams.server.model.Customer;
-import be.jsams.server.model.LegalForm;
-import be.jsams.server.model.PaymentMode;
+import be.jsams.common.bean.model.AddressBean;
+import be.jsams.common.bean.model.ContactInformationBean;
+import be.jsams.common.bean.model.LegalFormBean;
+import be.jsams.common.bean.model.PaymentModeBean;
+import be.jsams.common.bean.model.management.CustomerBean;
 
 /**
- * {@link JsamsTableModel} for {@link Customer} object.
+ * {@link JsamsTableModel} for {@link CustomerBean} object.
  * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class CustomerTableModel extends JsamsTableModel<Customer> {
+public class CustomerTableModel extends JsamsTableModel<CustomerBean> {
 
     /**
      * Serial Version UID
@@ -26,15 +28,25 @@ public class CustomerTableModel extends JsamsTableModel<Customer> {
     /**
      * The columns name
      */
-    private List<I18nString> columnNames = Arrays.asList(JsamsI18nResource.COLUMN_ID, JsamsI18nResource.COLUMN_NAME,
-            JsamsI18nResource.COLUMN_LEGAL_FORM, JsamsI18nResource.COLUMN_ZIP_CODE,
+    private static List<I18nString> columnsName = Arrays.asList(JsamsI18nResource.COLUMN_ID,
+            JsamsI18nResource.COLUMN_NAME, JsamsI18nResource.COLUMN_LEGAL_FORM, JsamsI18nResource.COLUMN_ZIP_CODE,
             JsamsI18nResource.COLUMN_PAYMENT_MODE, JsamsI18nResource.COLUMN_PHONE);
+
+    /**
+     * Constructor
+     * 
+     * @param listModel
+     *            a list of {@link CustomerBean}
+     */
+    public CustomerTableModel(List<CustomerBean> listModel) {
+        super(listModel);
+    }
 
     /**
      * @return the columns count
      */
     public int getColumnCount() {
-        return columnNames.size();
+        return columnsName.size();
     }
 
     /**
@@ -45,13 +57,14 @@ public class CustomerTableModel extends JsamsTableModel<Customer> {
      * @return the value following the row and column
      */
     public Object getValueAt(int rowIndex, int columnIndex) {
+        CustomerBean customer = (CustomerBean) getRow(rowIndex);
         switch (columnIndex) {
         case ZERO:
-            return getData().get(rowIndex).getId();
+            return customer.getId();
         case ONE:
-            return getData().get(rowIndex).getName();
+            return customer.getName();
         case TWO:
-            LegalForm legalForm = getData().get(rowIndex).getLegalForm();
+            LegalFormBean legalForm = customer.getLegalForm();
             if (legalForm != null) {
                 if (UserContext.isDutch()) {
                     return legalForm.getLabelNl();
@@ -64,18 +77,26 @@ public class CustomerTableModel extends JsamsTableModel<Customer> {
                 return "";
             }
         case THREE:
-            return getData().get(rowIndex).getBillingAddress().getZipCode();
+            AddressBean billingAddress = customer.getBillingAddress();
+            if (billingAddress != null) {
+                return billingAddress.getZipCode();
+            }
         case FOUR:
-            PaymentMode paymentMode = getData().get(rowIndex).getPaymentMode();
-            if (UserContext.isDutch()) {
-                return paymentMode.getLabelNl();
-            } else if (UserContext.isFrench()) {
-                return paymentMode.getLabelFr();
-            } else {
-                return paymentMode.getLabel();
+            PaymentModeBean paymentMode = customer.getPaymentMode();
+            if (paymentMode != null) {
+                if (UserContext.isDutch()) {
+                    return paymentMode.getLabelNl();
+                } else if (UserContext.isFrench()) {
+                    return paymentMode.getLabelFr();
+                } else {
+                    return paymentMode.getLabel();
+                }
             }
         case FIVE:
-            return getData().get(rowIndex).getContactInformation().getPhone();
+            ContactInformationBean contactInformation = customer.getContactInformation();
+            if (contactInformation != null) {
+                return contactInformation.getPhone();
+            }
         default:
             return "";
         }
@@ -87,7 +108,7 @@ public class CustomerTableModel extends JsamsTableModel<Customer> {
      * @return the column name
      */
     public String getColumnName(int columnIndex) {
-        return columnNames.get(columnIndex).getTranslation();
+        return columnsName.get(columnIndex).getTranslation();
     }
 
     /**
@@ -105,7 +126,7 @@ public class CustomerTableModel extends JsamsTableModel<Customer> {
         case TWO:
             return String.class;
         case THREE:
-            return Integer.class;
+            return String.class;
         case FOUR:
             return String.class;
         case FIVE:

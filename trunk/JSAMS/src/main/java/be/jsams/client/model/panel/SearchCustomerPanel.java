@@ -1,38 +1,25 @@
 package be.jsams.client.model.panel;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableRowSorter;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import be.jsams.client.context.JsamsApplicationContext;
-import be.jsams.client.i18n.JsamsI18nLabelResource;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.model.dialog.EditCustomerDialog;
 import be.jsams.client.model.table.CustomerTableModel;
 import be.jsams.client.renderer.JsamsTableCellRenderer;
-import be.jsams.client.renderer.TranslatableComboBoxRenderer;
-import be.jsams.client.swing.component.JsamsFrame;
-import be.jsams.client.swing.component.JsamsTextField;
 import be.jsams.client.swing.listener.CustomerTableMouseListener;
-import be.jsams.server.model.Address;
-import be.jsams.server.model.ContactInformation;
-import be.jsams.server.model.Customer;
-import be.jsams.server.model.LegalForm;
-import be.jsams.server.model.PaymentMode;
+import be.jsams.client.validator.EditCustomerValidator;
+import be.jsams.client.validator.SearchCustomerValidator;
+import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.server.service.CustomerService;
-
-import com.jgoodies.forms.builder.DefaultFormBuilder;
-import com.jgoodies.forms.layout.FormLayout;
-import com.mysql.jdbc.StringUtils;
 
 /**
  * Search {@link JPanel} for Customer objects.
@@ -40,44 +27,35 @@ import com.mysql.jdbc.StringUtils;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class SearchCustomerPanel extends SearchPanel<Customer, CustomerTableMouseListener, CustomerService> {
+public class SearchCustomerPanel extends
+        AbstractSearchPanel<CustomerBean, CustomerTableMouseListener, CustomerService, EditCustomerValidator> {
 
     /**
      * Serial Version UID
      */
     private static final long serialVersionUID = 2222078506888522042L;
 
-    protected static final Log LOGGER = LogFactory.getLog(SearchCustomerPanel.class);
+    private static final Log LOGGER = LogFactory.getLog(SearchCustomerPanel.class);
 
-    private static final int DEFAULT_COLUMN_SPAN = 1;
-
-    private static final int MAX_CHARACTERS = 50;
-
-    private static final int MAX_NUMBERS = 10;
-
-    private JsamsTextField textFieldName = new JsamsTextField(MAX_CHARACTERS);
-    private JsamsTextField textFieldBillingZipCode = new JsamsTextField(MAX_NUMBERS);
-    private JsamsTextField textFieldPhone = new JsamsTextField(MAX_NUMBERS);
-
-    private JComboBox comboBoxPaymentMode;
-    private JComboBox comboBoxLegalForm;
+    private final boolean debug = LOGGER.isDebugEnabled();
 
     /**
      * Constructor.
      * 
-     * @param m
-     *            the {@link Customer}
-     * @param l
+     * @param model
+     *            the {@link CustomerBean}
+     * @param listener
      *            the {@link CustomerTableMouseListener}
-     * @param s
+     * @param service
      *            the {@link CustomerService}
-     * @param showManagementButtons
+     * @param showButtons
      *            a boolean that indicates if we have to display the buttons to manage the content: add, remove and
      *            modify
      */
-    public SearchCustomerPanel(Customer m, CustomerTableMouseListener l, CustomerService s,
-            final boolean showManagementButtons) {
-        super(m, l, s, showManagementButtons);
+    public SearchCustomerPanel(CustomerBean model, CustomerTableMouseListener listener, CustomerService service,
+            final boolean showButtons) {
+        super(model, listener, service, showButtons);
+        super.setValidator(new SearchCustomerValidator());
         super.buildMainPanel(buildSearchCriteriaPanel());
     }
 
@@ -86,32 +64,7 @@ public class SearchCustomerPanel extends SearchPanel<Customer, CustomerTableMous
      */
     @Override
     protected JPanel buildSearchCriteriaPanel() {
-        FormLayout layout = new FormLayout("right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow", "p");
-        DefaultFormBuilder builder = new DefaultFormBuilder(layout, JsamsFrame.RESOURCE_BUNDLE);
-        final int maxColumnSpan = 5;
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_NAME.getKey(), textFieldName, maxColumnSpan);
-        builder.nextLine();
-        List<PaymentMode> allPaymentModes = JsamsApplicationContext.getPaymentModeDao().findAll();
-        ArrayList<PaymentMode> allWithNull = new ArrayList<PaymentMode>();
-        allWithNull.add(null);
-        allWithNull.addAll(allPaymentModes);
-        comboBoxPaymentMode = new JComboBox(allWithNull.toArray());
-        comboBoxPaymentMode.setRenderer(new TranslatableComboBoxRenderer());
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_PAYMENT_MODE.getKey(), comboBoxPaymentMode);
-        List<LegalForm> allLegalForms = JsamsApplicationContext.getLegalFormDao().findAll();
-        ArrayList<LegalForm> allFormsWithNulls = new ArrayList<LegalForm>();
-        allFormsWithNulls.add(null);
-        allFormsWithNulls.addAll(allLegalForms);
-        comboBoxLegalForm = new JComboBox(allFormsWithNulls.toArray());
-        comboBoxLegalForm.setRenderer(new TranslatableComboBoxRenderer());
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_LEGAL_FORM.getKey(), comboBoxLegalForm);
-        builder.nextLine();
-        builder
-                .appendI15d(JsamsI18nLabelResource.LABEL_ZIP_CODE.getKey(), textFieldBillingZipCode,
-                        DEFAULT_COLUMN_SPAN);
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_PHONE.getKey(), textFieldPhone, DEFAULT_COLUMN_SPAN);
-
-        return builder.getPanel();
+        return getModel().getView().createSearchView();
     }
 
     /**
@@ -119,8 +72,8 @@ public class SearchCustomerPanel extends SearchPanel<Customer, CustomerTableMous
      */
     @Override
     protected void performButtonAdd() {
-        new EditCustomerDialog(JsamsI18nResource.TITLE_EDIT_CUSTOMER, null);
-        refresh();
+        new EditCustomerDialog(JsamsI18nResource.TITLE_EDIT_CUSTOMER, new CustomerBean());
+        updateUI();
     }
 
     /**
@@ -130,10 +83,14 @@ public class SearchCustomerPanel extends SearchPanel<Customer, CustomerTableMous
     protected void performButtonModify() {
         int selectedRow = getResultTable().getSelectedRow();
         if (selectedRow > -1) {
-            Long id = (Long) getResultTable().getValueAt(selectedRow, 0);
-            Customer selectedCustomer = getService().findById(id);
-            new EditCustomerDialog(JsamsI18nResource.TITLE_EDIT_PRODUCT, selectedCustomer);
-            refresh();
+            int selectedRowModel = getResultTable().convertRowIndexToModel(selectedRow);
+            CustomerTableModel model = (CustomerTableModel) getResultTable().getModel();
+            CustomerBean beanToModify = model.getRow(selectedRowModel);
+            if (debug) {
+                LOGGER.debug("The customer to modify: " + beanToModify);
+            }
+            new EditCustomerDialog(JsamsI18nResource.TITLE_EDIT_CUSTOMER, beanToModify);
+            updateUI();
         }
     }
 
@@ -144,9 +101,15 @@ public class SearchCustomerPanel extends SearchPanel<Customer, CustomerTableMous
     protected void performButtonRemove() {
         int selectedRow = getResultTable().getSelectedRow();
         if (selectedRow > -1) {
-            Long id = (Long) getResultTable().getValueAt(selectedRow, 0);
-            getService().delete(id);
-            refresh();
+            int selectedRowModel = getResultTable().convertRowIndexToModel(selectedRow);
+            CustomerTableModel model = (CustomerTableModel) getResultTable().getModel();
+            CustomerBean beanToDelete = model.getRow(selectedRowModel);
+            if (debug) {
+                LOGGER.debug("The customer to delete: " + beanToDelete);
+            }
+            getService().delete(beanToDelete);
+            model.remove(selectedRowModel);
+            updateUI();
         }
     }
 
@@ -155,44 +118,24 @@ public class SearchCustomerPanel extends SearchPanel<Customer, CustomerTableMous
      */
     @Override
     public void performOk() {
-        String name = null;
-        Address address = null;
-        ContactInformation contactInformation = null;
-        if (!StringUtils.isNullOrEmpty(textFieldName.getText())) {
-            name = textFieldName.getText();
+        final CustomerBean criteria = getModel();
+        if (super.prePerformOk(criteria)) {
+            List<CustomerBean> customers = ((CustomerService) super.getService()).findByCriteria(criteria);
+            fillTable(customers);
+            super.postPerformOk();
         }
-        if (!StringUtils.isNullOrEmpty(textFieldBillingZipCode.getText())) {
-            address = new Address();
-            address.setZipCode(Integer.parseInt(textFieldBillingZipCode.getText()));
-        }
-        if (!StringUtils.isNullOrEmpty(textFieldPhone.getText())) {
-            contactInformation = new ContactInformation();
-            contactInformation.setPhone(textFieldPhone.getText());
-        }
-        PaymentMode paymentMode = (PaymentMode) comboBoxPaymentMode.getSelectedItem();
-        LegalForm legalForm = (LegalForm) comboBoxLegalForm.getSelectedItem();
-        final Customer criteria = new Customer();
-        criteria.setPaymentMode(paymentMode);
-        criteria.setLegalForm(legalForm);
-        criteria.setName(name);
-        criteria.setBillingAddress(address);
-        criteria.setContactInformation(contactInformation);
-
-        List<Customer> customers = ((CustomerService) super.getService()).findByCriteria(criteria);
-
-        fillTable(customers);
     }
 
     /**
      * Fills the data table.
      * 
      * @param customers
-     *            the {@link Customer} list
+     *            the {@link CustomerBean} list
      */
-    private void fillTable(final List<Customer> customers) {
-        CustomerTableModel model = new CustomerTableModel();
-        model.setData(customers);
+    private void fillTable(final List<CustomerBean> customers) {
+        CustomerTableModel model = new CustomerTableModel(customers);
         getResultTable().setModel(model);
+        getResultTable().setRowSorter(new TableRowSorter<CustomerTableModel>(model));
 
         JTableHeader tableHeader = getResultTable().getTableHeader();
         TableCellRenderer headerRenderer = tableHeader.getDefaultRenderer();
@@ -201,12 +144,20 @@ public class SearchCustomerPanel extends SearchPanel<Customer, CustomerTableMous
         getResultTable().setAutoCreateRowSorter(true);
         JsamsTableCellRenderer defaultCellRenderer = new JsamsTableCellRenderer();
         getResultTable().setDefaultRenderer(Long.class, defaultCellRenderer);
-        getResultTable().setDefaultRenderer(Integer.class, defaultCellRenderer);
+        getResultTable().setDefaultRenderer(String.class, defaultCellRenderer);
         getResultTable().setDefaultRenderer(Double.class, defaultCellRenderer);
-        getResultTable().setDefaultRenderer(BigDecimal.class, defaultCellRenderer);
         getResultTable().setDefaultRenderer(String.class, defaultCellRenderer);
 
         getResultTable().repaint();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void performCancel() {
+        // TODO Auto-generated method stub
+
     }
 
 }

@@ -38,8 +38,7 @@ public final class UserContext {
      * @return the default Language
      */
     public static String getLanguage() {
-        String currentLanguage = getLocale().getLanguage();
-        return currentLanguage;
+        return getLocale().getLanguage();
     }
 
     /**

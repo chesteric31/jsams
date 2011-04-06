@@ -1,6 +1,6 @@
 package be.jsams.client.validator;
 
-import be.jsams.server.model.Estimate;
+import be.jsams.common.bean.model.EstimateBean;
 
 import com.jgoodies.validation.ValidationResult;
 import com.jgoodies.validation.Validator;
@@ -12,12 +12,12 @@ import com.jgoodies.validation.util.PropertyValidationSupport;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class EstimateValidator implements Validator<Estimate> {
+public class EstimateValidator implements Validator<EstimateBean> {
 
     /**
      * {@inheritDoc}
      */
-    public ValidationResult validate(final Estimate estimate) {
+    public ValidationResult validate(final EstimateBean estimate) {
         PropertyValidationSupport support = new PropertyValidationSupport(estimate, "");
 
 //        if (ValidationUtils.isBlank(customer.getName())) {

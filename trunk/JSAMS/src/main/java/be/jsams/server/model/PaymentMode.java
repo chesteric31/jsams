@@ -3,6 +3,8 @@ package be.jsams.server.model;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import be.jsams.common.bean.model.PaymentModeBean;
+
 /**
  * Payment mode entity object.
  * 
@@ -14,15 +16,20 @@ import javax.persistence.Table;
 public class PaymentMode extends AbstractTranslatableIdentity {
 
     /**
-     * Serial Version UID
-     */
-    private static final long serialVersionUID = -9072503968708609612L;
-
-    /**
      * Constructor.
      */
     public PaymentMode() {
         super();
+    }
+
+    /**
+     * Constructor
+     * 
+     * @param bean
+     *            the {@link PaymentModeBean}
+     */
+    public PaymentMode(PaymentModeBean bean) {
+        super(bean);
     }
 
 }

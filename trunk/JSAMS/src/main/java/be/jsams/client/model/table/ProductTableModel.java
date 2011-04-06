@@ -1,22 +1,21 @@
 package be.jsams.client.model.table;
 
-import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.i18n.UserContext;
-import be.jsams.server.model.Product;
-import be.jsams.server.model.ProductCategory;
+import be.jsams.common.bean.model.management.ProductBean;
+import be.jsams.common.bean.model.management.ProductCategoryBean;
 
 /**
- * {@link JsamsTableModel} for {@link Product} object.
+ * {@link JsamsTableModel} for {@link ProductBean} object.
  * 
  * @author chesteric31
  * @version $$Rev$$ $$Date::                  $$ $$Author$$
  */
-public class ProductTableModel extends JsamsTableModel<Product> {
+public class ProductTableModel extends JsamsTableModel<ProductBean> {
 
     /**
      * Serial Version UID
@@ -32,6 +31,16 @@ public class ProductTableModel extends JsamsTableModel<Product> {
             JsamsI18nResource.COLUMN_PRODUCT_CATEGORY);
 
     /**
+     * Constructor
+     * 
+     * @param listModel
+     *            a list of {@link ProductBean}
+     */
+    public ProductTableModel(List<ProductBean> listModel) {
+        super(listModel);
+    }
+    
+    /**
      * @return the columns count
      */
     public int getColumnCount() {
@@ -46,21 +55,22 @@ public class ProductTableModel extends JsamsTableModel<Product> {
      * @return the value following the row and column
      */
     public Object getValueAt(int rowIndex, int columnIndex) {
+        ProductBean product = (ProductBean) getRow(rowIndex);
         switch (columnIndex) {
         case ZERO:
-            return getData().get(rowIndex).getId();
+            return product.getId();
         case ONE:
-            return getData().get(rowIndex).getName();
+            return product.getName();
         case TWO:
-            return getData().get(rowIndex).getPrice();
+            return product.getPrice();
         case THREE:
-            return getData().get(rowIndex).getQuantityStock();
+            return product.getQuantityStock();
         case FOUR:
-            return getData().get(rowIndex).getReorderLevel();
+            return product.getReorderLevel();
         case FIVE:
-            return getData().get(rowIndex).getVatApplicable().doubleValue();
+            return product.getVatApplicable().doubleValue();
         case SIX:
-            ProductCategory category = getData().get(rowIndex).getCategory();
+            ProductCategoryBean category = product.getCategory();
             if (UserContext.isDutch()) {
                 return category.getLabelNl();
             } else if (UserContext.isFrench()) {
@@ -95,7 +105,7 @@ public class ProductTableModel extends JsamsTableModel<Product> {
         case ONE:
             return String.class;
         case TWO:
-            return BigDecimal.class;
+            return Double.class;
         case THREE:
             return Integer.class;
         case FOUR:

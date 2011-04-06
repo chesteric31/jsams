@@ -14,8 +14,7 @@ import be.jsams.server.service.ProductService;
 import be.jsams.server.service.SocietyService;
 
 /**
- * This class provides static methods to get a reference to a specific service, anywhere in this project. As a side-job,
- * it provides caching for business objects that are frequently used.
+ * This class provides static methods to get a reference to a specific service, anywhere in this project.
  * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
@@ -115,7 +114,7 @@ public final class JsamsApplicationContext {
 
     /**
      * 
-     * @return the AgentService
+     * @return the {@link AgentService}
      */
     public static AgentService getAgentService() {
         return (AgentService) context.getBean("agentService");

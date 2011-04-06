@@ -1,7 +1,9 @@
 package be.jsams.server.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import be.jsams.common.bean.model.management.SocietyBean;
 import be.jsams.server.dao.SocietyDao;
 import be.jsams.server.model.Society;
 import be.jsams.server.service.SocietyService;
@@ -35,35 +37,46 @@ public class SocietyServiceImpl implements SocietyService {
     /**
      * {@inheritDoc}
      */
-    public List<Society> findAll() {
-        return societyDao.findAll();
+    public List<SocietyBean> findAll() {
+        List<Society> societies = societyDao.findAll();
+        List<SocietyBean> beans = new ArrayList<SocietyBean>();
+        for (Society society : societies) {
+            beans.add(new SocietyBean(society));
+        }
+        return beans;
     }
 
     /**
      * {@inheritDoc}
      */
-    public Society findById(final Long id) {
-        return societyDao.findById(id);
+    public SocietyBean findById(final Long id) {
+        Society society = societyDao.findById(id);
+        SocietyBean bean = new SocietyBean(society);
+        return bean;
     }
 
     /**
      * {@inheritDoc}
      */
-    public void update(final Society society) {
+    public void update(final SocietyBean bean) {
+        Society society = new Society(bean);
         societyDao.update(society);
     }
 
     /**
      * {@inheritDoc}
      */
-    public void create(final Society society) {
+    public SocietyBean create(final SocietyBean bean) {
+        Society society = new Society(bean);
         societyDao.add(society);
+        return new SocietyBean(society);
     }
 
     /**
      * {@inheritDoc}
      */
-    public void delete(final Society society) {
+    public void delete(final SocietyBean bean) {
+        Society society = new Society(bean);
         societyDao.delete(society);
     }
 

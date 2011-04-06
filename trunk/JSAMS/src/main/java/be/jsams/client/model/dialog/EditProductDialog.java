@@ -1,54 +1,29 @@
 package be.jsams.client.model.dialog;
 
-import java.awt.BorderLayout;
-import java.math.BigDecimal;
-import java.util.List;
-
-import javax.swing.BorderFactory;
-import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
 import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.i18n.I18nString;
-import be.jsams.client.i18n.JsamsI18nLabelResource;
-import be.jsams.client.renderer.TranslatableComboBoxRenderer;
-import be.jsams.client.swing.component.JsamsFormattedTextField;
-import be.jsams.client.swing.component.JsamsFrame;
-import be.jsams.client.swing.component.JsamsTextField;
-import be.jsams.client.validator.ProductValidator;
-import be.jsams.server.model.Product;
-import be.jsams.server.model.ProductCategory;
+import be.jsams.client.validator.EditProductValidator;
+import be.jsams.common.bean.model.management.ProductBean;
+import be.jsams.common.bean.model.management.ProductCategoryBean;
+import be.jsams.common.bean.view.ProductBeanView;
 import be.jsams.server.service.ProductService;
 
-import com.jgoodies.forms.builder.DefaultFormBuilder;
-import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.validation.view.ValidationComponentUtils;
-import com.mysql.jdbc.StringUtils;
 
 /**
- * Edit Product {@link EditDialog}, to create or update a Product object.
+ * Edit Product {@link AbstractEditDialog}, to create or update a Product object.
  * 
  * @author chesteric31
  * @version $$Rev$$ $$Date::                  $$ $$Author$$
  */
-public class EditProductDialog extends EditDialog<Product, ProductValidator, ProductService> {
+public class EditProductDialog extends AbstractEditDialog<ProductBean, EditProductValidator, ProductService> {
 
     /**
      * Serial Version UID
      */
     private static final long serialVersionUID = -5931469580616365674L;
-
-    private static final int MAX_CHARACTERS = 50;
-
-    private static final int MAX_NUMBERS = 10;
-
-    private JsamsTextField textFieldName = new JsamsTextField(MAX_CHARACTERS);
-    private JsamsFormattedTextField textFieldPrice = new JsamsFormattedTextField();
-    private JsamsTextField textFieldStockQuantity = new JsamsTextField(MAX_NUMBERS);
-    private JsamsTextField textFieldReorderLevel = new JsamsTextField(MAX_NUMBERS);
-    private JsamsFormattedTextField textFieldVatApplicable = new JsamsFormattedTextField();
-
-    private JComboBox comboBoxProductCategory;
 
     /**
      * Constructor
@@ -56,12 +31,12 @@ public class EditProductDialog extends EditDialog<Product, ProductValidator, Pro
      * @param title
      *            the {@link I18nString} title
      * @param model
-     *            the {@link Product} model
+     *            the {@link ProductBean} model
      */
-    public EditProductDialog(final I18nString title, Product model) {
+    public EditProductDialog(final I18nString title, ProductBean model) {
         super(null, title, "apps/preferences-desktop-theme.png");
         super.setModel(model);
-        super.setValidator(new ProductValidator());
+        super.setValidator(new EditProductValidator());
         super.setService(JsamsApplicationContext.getProductService());
         initComponents();
         setLocationRelativeTo(null);
@@ -73,28 +48,10 @@ public class EditProductDialog extends EditDialog<Product, ProductValidator, Pro
      * {@inheritDoc}
      */
     protected void initComponents() {
-        fillData();
-        FormLayout layout = new FormLayout("right:p, 3dlu, p:grow, 3dlu, " + "right:p, 3dlu, p:grow", "p");
-        DefaultFormBuilder builder = new DefaultFormBuilder(layout, JsamsFrame.RESOURCE_BUNDLE);
-        final int maxColumnSpan = 5;
-        builder.setDefaultDialogBorder();
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_PRODUCT_LABEL.getKey(), textFieldName, maxColumnSpan);
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_PRODUCT_CATEGORY.getKey(), comboBoxProductCategory,
-                maxColumnSpan);
-        builder.nextLine();
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_PRODUCT_PRICE.getKey(), textFieldPrice);
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_PRODUCT_STOCK_QUANTITY.getKey(), textFieldStockQuantity);
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_PRODUCT_REORDER_LEVEL.getKey(), textFieldReorderLevel);
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_PRODUCT_VAT_APPLICABLE.getKey(), textFieldVatApplicable);
-
-        setMandatoryFields();
-
-        JPanel mainPanel = new JPanel();
-        mainPanel.setLayout(new BorderLayout());
-        mainPanel.add(builder.getPanel(), BorderLayout.CENTER);
-        add(mainPanel);
+        ProductBeanView view = getModel().getView();
+        JPanel panel = view.createEditView();
+        getContentPane().add(panel);
         ValidationComponentUtils.updateComponentTreeMandatoryBorder(this);
-
         pack();
     }
 
@@ -102,74 +59,9 @@ public class EditProductDialog extends EditDialog<Product, ProductValidator, Pro
      * {@inheritDoc}
      */
     public void performOk() {
-        Product product = new Product();
-        product.setName(textFieldName.getText());
-        ProductCategory category = (ProductCategory) comboBoxProductCategory.getSelectedItem();
-        product.setCategory(category);
-        BigDecimal price = null;
-        Object value = textFieldPrice.getValue();
-        if (value instanceof Long) {
-            price = BigDecimal.valueOf((Long) value);
-        } else if (value instanceof Double) {
-            price = BigDecimal.valueOf((Double) value);
-        } else {
-            price = (BigDecimal) value;
-        }
-        if (price != null) {
-            price = price.setScale(2, BigDecimal.ROUND_HALF_EVEN);
-            product.setPrice(price);
-        }
-        BigDecimal vatApplicable = null;
-        Object value2 = textFieldVatApplicable.getValue();
-        if (value2 instanceof Long) {
-            vatApplicable = BigDecimal.valueOf((Long) value2);
-        } else if (value instanceof Double) {
-            vatApplicable = BigDecimal.valueOf((Double) value2);
-        } else {
-            vatApplicable = (BigDecimal) value2;
-        }
-        if (vatApplicable != null) {
-            vatApplicable = vatApplicable.setScale(2, BigDecimal.ROUND_HALF_EVEN);
-            product.setVatApplicable(vatApplicable);
-        }
-        if (!StringUtils.isNullOrEmpty(textFieldReorderLevel.getText())) {
-            product.setReorderLevel(Integer.parseInt(textFieldReorderLevel.getText()));
-        }
-        if (!StringUtils.isNullOrEmpty(textFieldStockQuantity.getText())) {
-            product.setQuantityStock(Integer.parseInt(textFieldStockQuantity.getText()));
-        }
+        ProductBean product = getModel();
+        product.setCategory((ProductCategoryBean) product.getCategory().getSelection());
         super.postPerformOk(product);
-    }
-
-    /**
-     * Fills all the data in case of update.
-     */
-    private void fillData() {
-        List<ProductCategory> allProductCategories = JsamsApplicationContext.getProductCategoryDao().findAll();
-        comboBoxProductCategory = new JComboBox(allProductCategories.toArray());
-        if (getModel() != null) {
-            Product product = JsamsApplicationContext.getProductService().findById(getModel().getId());
-            comboBoxProductCategory.setSelectedItem(product.getCategory());
-            textFieldName.setText(product.getName());
-            textFieldPrice.setValue(product.getPrice());
-            textFieldReorderLevel.setText(Integer.toString(product.getReorderLevel()));
-            textFieldStockQuantity.setText(Integer.toString(product.getQuantityStock()));
-            textFieldVatApplicable.setValue(product.getVatApplicable());
-        }
-        comboBoxProductCategory.setRenderer(new TranslatableComboBoxRenderer());
-    }
-
-    /**
-     * Sets all mandatory fields.
-     */
-    private void setMandatoryFields() {
-        ValidationComponentUtils.setMandatory(textFieldName, true);
-        ValidationComponentUtils.setMandatory(textFieldPrice, true);
-        ValidationComponentUtils.setMandatory(textFieldVatApplicable, true);
-        ValidationComponentUtils.setMandatory(textFieldStockQuantity, true);
-        ValidationComponentUtils.setMandatory(comboBoxProductCategory, true);
-        comboBoxProductCategory.setBorder(BorderFactory.createLineBorder(ValidationComponentUtils
-                .getMandatoryForeground()));
     }
 
 }

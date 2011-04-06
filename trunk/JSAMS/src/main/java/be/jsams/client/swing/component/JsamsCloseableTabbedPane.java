@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
@@ -56,8 +57,8 @@ public class JsamsCloseableTabbedPane extends JTabbedPane {
         }
 
         JsamsButton tabCloseButton = new JsamsButton(IconUtil.MENU_ICON_PREFIX + "emblems/emblem-unreadable.png");
-        tabCloseButton.setPreferredSize(new Dimension(tabCloseButton.getIcon().getIconWidth(), tabCloseButton.getIcon()
-                .getIconHeight()));
+        Icon icon = tabCloseButton.getIcon();
+        tabCloseButton.setPreferredSize(new Dimension(icon.getIconWidth(), icon.getIconHeight()));
         tabCloseButton.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent e) {

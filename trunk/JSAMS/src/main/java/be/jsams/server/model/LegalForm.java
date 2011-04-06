@@ -3,6 +3,8 @@ package be.jsams.server.model;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import be.jsams.common.bean.model.LegalFormBean;
+
 /**
  * Legal form entity object.
  * 
@@ -24,5 +26,15 @@ public class LegalForm extends AbstractTranslatableIdentity {
     public LegalForm() {
         super();
     }
-    
+
+    /**
+     * Constructor
+     * 
+     * @param bean
+     *            the {@link LegalFormBean}
+     */
+    public LegalForm(LegalFormBean bean) {
+        super(bean);
+    }
+
 }

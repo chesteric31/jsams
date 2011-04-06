@@ -1,7 +1,9 @@
 package be.jsams.server.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import be.jsams.common.bean.model.management.AgentBean;
 import be.jsams.server.dao.AgentDao;
 import be.jsams.server.model.Agent;
 import be.jsams.server.service.AgentService;
@@ -35,14 +37,17 @@ public class AgentServiceImpl implements AgentService {
     /**
      * {@inheritDoc}
      */
-    public void create(Agent agent) {
+    public AgentBean create(AgentBean bean) {
+        Agent agent = new Agent(bean);
         agentDao.add(agent);
+        return new AgentBean(agent);
     }
 
     /**
      * {@inheritDoc}
      */
-    public void delete(Agent agent) {
+    public void delete(AgentBean bean) {
+        Agent agent = agentDao.findById(bean.getId());
         agentDao.delete(agent);
     }
 
@@ -56,29 +61,42 @@ public class AgentServiceImpl implements AgentService {
     /**
      * {@inheritDoc}
      */
-    public List<Agent> findAll() {
-        return agentDao.findAll();
+    public List<AgentBean> findAll() {
+        List<Agent> agents = agentDao.findAll();
+        List<AgentBean> beans = new ArrayList<AgentBean>();
+        for (Agent agent : agents) {
+            beans.add(new AgentBean(agent));
+        }
+        return beans;
     }
 
     /**
      * {@inheritDoc}
      */
-    public Agent findById(Long id) {
-        return agentDao.findById(id);
+    public AgentBean findById(Long id) {
+        Agent agent = agentDao.findById(id);
+        AgentBean bean = new AgentBean(agent);
+        return bean;
     }
 
     /**
      * {@inheritDoc}
      */
-    public void update(Agent agent) {
+    public void update(AgentBean bean) {
+        Agent agent = new Agent(bean);
         agentDao.update(agent);
     }
 
     /**
      * {@inheritDoc}
      */
-    public List<Agent> findByCriteria(Agent criteria) {
-        return agentDao.findByCriteria(criteria);
+    public List<AgentBean> findByCriteria(AgentBean criteria) {
+        List<Agent> agents = agentDao.findByCriteria(criteria);
+        List<AgentBean> beans = new ArrayList<AgentBean>();
+        for (Agent agent : agents) {
+            beans.add(new AgentBean(agent));
+        }
+        return beans;
     }
 
 }

@@ -2,6 +2,7 @@ package be.jsams.server.dao;
 
 import java.util.List;
 
+import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.server.model.Customer;
 
 /**
@@ -19,6 +20,6 @@ public interface CustomerDao extends Dao<Customer> {
      *            the criteria model
      * @return a list of {@link Customer}
      */
-    List<Customer> findByCriteria(final Customer criteria);
+    List<Customer> findByCriteria(final CustomerBean criteria);
 
 }

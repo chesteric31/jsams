@@ -1,15 +1,15 @@
 package be.jsams.server.dao.impl;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import javax.persistence.Query;
 
-import com.mysql.jdbc.StringUtils;
-
+import be.jsams.common.bean.model.management.ProductBean;
+import be.jsams.common.bean.model.management.ProductCategoryBean;
 import be.jsams.server.dao.ProductDao;
 import be.jsams.server.model.Product;
-import be.jsams.server.model.ProductCategory;
+
+import com.mysql.jdbc.StringUtils;
 
 /**
  * Product DAO implementation.
@@ -33,17 +33,17 @@ public class ProductDaoImpl extends DaoImpl<Product> implements ProductDao {
      * {@inheritDoc}
      */
     @SuppressWarnings("unchecked")
-    public List<Product> findByCriteria(final Product criteria) {
+    public List<Product> findByCriteria(final ProductBean criteria) {
         StringBuilder queryBuilder = new StringBuilder("FROM Product p");
 
         boolean isFirst = true;
 
-        ProductCategory category = criteria.getCategory();
+        ProductCategoryBean category = (ProductCategoryBean) criteria.getCategory().getSelection();
         String name = criteria.getName();
-        BigDecimal price = criteria.getPrice();
+        Double price = criteria.getPrice();
         int quantityStock = criteria.getQuantityStock();
         int reorderLevel = criteria.getReorderLevel();
-        BigDecimal vatApplicable = criteria.getVatApplicable();
+        Double vatApplicable = criteria.getVatApplicable();
         if (!StringUtils.isNullOrEmpty(name)) {
             if (isFirst) {
                 queryBuilder.append(" WHERE");
@@ -58,9 +58,9 @@ public class ProductDaoImpl extends DaoImpl<Product> implements ProductDao {
             } else {
                 queryBuilder.append(" AND");
             }
-            queryBuilder.append(" p.price = " + price.toPlainString());
+            queryBuilder.append(" p.price = " + price);
         }
-        if (reorderLevel != -1) {
+        if (reorderLevel != 0) {
             if (isFirst) {
                 queryBuilder.append(" WHERE");
                 isFirst = false;
@@ -69,7 +69,7 @@ public class ProductDaoImpl extends DaoImpl<Product> implements ProductDao {
             }
             queryBuilder.append(" p.reorderLevel = " + reorderLevel);
         }
-        if (quantityStock != -1) {
+        if (quantityStock != 0) {
             if (isFirst) {
                 queryBuilder.append(" WHERE");
                 isFirst = false;
@@ -85,7 +85,7 @@ public class ProductDaoImpl extends DaoImpl<Product> implements ProductDao {
             } else {
                 queryBuilder.append(" AND");
             }
-            queryBuilder.append(" p.vatApplicable = " + vatApplicable.toPlainString());
+            queryBuilder.append(" p.vatApplicable = " + vatApplicable);
         }
         if (category != null) {
             if (isFirst) {
