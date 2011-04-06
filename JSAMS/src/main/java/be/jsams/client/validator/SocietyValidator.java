@@ -1,9 +1,11 @@
 package be.jsams.client.validator;
 
+import java.math.BigDecimal;
+
 import be.jsams.client.i18n.JsamsI18nLabelResource;
 import be.jsams.client.i18n.JsamsI18nResource;
-import be.jsams.common.bean.model.AddressBean;
-import be.jsams.common.bean.model.SocietyBean;
+import be.jsams.server.model.Address;
+import be.jsams.server.model.Society;
 
 import com.jgoodies.validation.ValidationResult;
 import com.jgoodies.validation.Validator;
@@ -16,32 +18,24 @@ import com.jgoodies.validation.util.ValidationUtils;
  * @author chesteric31
  * @version $$Rev$$ $$Date::                  $$ $$Author$$
  */
-public class SocietyValidator implements Validator<SocietyBean> {
+public class SocietyValidator implements Validator<Society> {
 
     /**
      * {@inheritDoc}
      */
-    public ValidationResult validate(final SocietyBean society) {
+    public ValidationResult validate(final Society society) {
         PropertyValidationSupport support = new PropertyValidationSupport(society, "");
 
-        String name = society.getName();
-        if (ValidationUtils.isBlank(name)) {
+        if (ValidationUtils.isBlank(society.getName())) {
             support.addError(JsamsI18nLabelResource.LABEL_NAME.getTranslation(), JsamsI18nResource.ERROR_IS_MANDATORY
                     .getTranslation());
-        } else if (!ValidationUtils.isAlphanumericSpace(name)) {
-            support.addError(JsamsI18nLabelResource.LABEL_NAME.getTranslation(),
-                    JsamsI18nResource.ERROR_IS_ALPHANUMERIC.getTranslation());
         }
-        String activity = society.getActivity();
-        if (ValidationUtils.isBlank(activity)) {
+        if (ValidationUtils.isBlank(society.getActivity())) {
             support.addError(JsamsI18nLabelResource.LABEL_ACTIVITY.getTranslation(),
                     JsamsI18nResource.ERROR_IS_MANDATORY.getTranslation());
-        } else if (!ValidationUtils.isAlphanumericSpace(activity)) {
-            support.addError(JsamsI18nLabelResource.LABEL_ACTIVITY.getTranslation(),
-                    JsamsI18nResource.ERROR_IS_ALPHANUMERIC.getTranslation());
         }
-        Double capital = society.getCapital();
-        if (capital == null || ValidationUtils.isBlank(capital.toString())) {
+        BigDecimal capital = society.getCapital();
+        if (capital == null || ValidationUtils.isBlank(capital.toPlainString())) {
             support.addError(JsamsI18nLabelResource.LABEL_CAPITAL.getTranslation(),
                     JsamsI18nResource.ERROR_IS_MANDATORY.getTranslation());
         }
@@ -49,13 +43,10 @@ public class SocietyValidator implements Validator<SocietyBean> {
         if (ValidationUtils.isBlank(phone)) {
             support.addError(JsamsI18nLabelResource.LABEL_PHONE.getTranslation(), JsamsI18nResource.ERROR_IS_MANDATORY
                     .getTranslation());
-        } else if (!ValidationUtils.isAlphanumericSpace(phone)) {
-            support.addError(JsamsI18nLabelResource.LABEL_PHONE.getTranslation(),
-                    JsamsI18nResource.ERROR_IS_ALPHANUMERIC.getTranslation());
         }
 
-        AddressBean address = society.getAddress();
-        Validator<AddressBean> addressValidator = new AddressValidator();
+        Address address = society.getAddress();
+        Validator<Address> addressValidator = new AddressValidator();
         ValidationResult addressResult = addressValidator.validate(address);
 
         ValidationResult result = support.getResult();

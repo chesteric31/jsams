@@ -3,8 +3,6 @@ package be.jsams.server.model;
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 
-import be.jsams.common.bean.model.AbstractNamedIdentityBean;
-
 /**
  * {@link MappedSuperclass} for all entities that have the column: name.
  * 
@@ -12,26 +10,14 @@ import be.jsams.common.bean.model.AbstractNamedIdentityBean;
  * @version $Rev$ $Date::                  $ $Author$
  */
 @MappedSuperclass
-public abstract class AbstractNamedIdentity extends AbstractIdentity {
+public class AbstractNamedIdentity extends AbstractIdentity {
+
+    /**
+     * Serial Version UID
+     */
+    private static final long serialVersionUID = 6640874458565482802L;
 
     private String name;
-
-    /**
-     * Constructor.
-     */
-    public AbstractNamedIdentity() {
-    }
-
-    /**
-     * Constructor.
-     * 
-     * @param bean
-     *            the {@link AbstractNamedIdentityBean}
-     */
-    public AbstractNamedIdentity(final AbstractNamedIdentityBean<?, ?> bean) {
-        super(bean);
-        setName(bean.getName());
-    }
 
     /**
      * 
@@ -44,23 +30,10 @@ public abstract class AbstractNamedIdentity extends AbstractIdentity {
 
     /**
      * 
-     * @param name
-     *            the name to set
+     * @param name the name to set
      */
     public void setName(String name) {
         this.name = name;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("AbstractNamedIdentity [name=");
-        builder.append(name);
-        builder.append("]");
-        return builder.toString();
     }
 
 }

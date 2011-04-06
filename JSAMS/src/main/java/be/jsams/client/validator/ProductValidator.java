@@ -1,9 +1,11 @@
 package be.jsams.client.validator;
 
+import java.math.BigDecimal;
+
 import be.jsams.client.i18n.JsamsI18nLabelResource;
 import be.jsams.client.i18n.JsamsI18nResource;
-import be.jsams.common.bean.model.ProductBean;
-import be.jsams.common.bean.model.ProductCategoryBean;
+import be.jsams.server.model.Product;
+import be.jsams.server.model.ProductCategory;
 
 import com.jgoodies.validation.ValidationResult;
 import com.jgoodies.validation.Validator;
@@ -16,15 +18,15 @@ import com.jgoodies.validation.util.ValidationUtils;
  * @author chesteric31
  * @version $$Rev$$ $$Date::                  $$ $$Author$$
  */
-public class ProductValidator implements Validator<ProductBean> {
+public class ProductValidator implements Validator<Product> {
 
     /**
      * {@inheritDoc}
      */
-    public ValidationResult validate(final ProductBean product) {
+    public ValidationResult validate(final Product product) {
         PropertyValidationSupport support = new PropertyValidationSupport(product, "");
 
-        ProductCategoryBean category = product.getCategory();
+        ProductCategory category = product.getCategory();
         if (category == null) {
             support.addError(JsamsI18nLabelResource.LABEL_PRODUCT_CATEGORY.getTranslation(),
                     JsamsI18nResource.ERROR_IS_MANDATORY.getTranslation());
@@ -33,12 +35,9 @@ public class ProductValidator implements Validator<ProductBean> {
         if (ValidationUtils.isBlank(name)) {
             support.addError(JsamsI18nLabelResource.LABEL_PRODUCT_LABEL.getTranslation(),
                     JsamsI18nResource.ERROR_IS_MANDATORY.getTranslation());
-        } else if (!ValidationUtils.isAlphanumeric(name)) {
-            support.addError(JsamsI18nLabelResource.LABEL_PRODUCT_LABEL.getTranslation(),
-                    JsamsI18nResource.ERROR_IS_ALPHANUMERIC.getTranslation());
         }
-        Double price = product.getPrice();
-        if (price == null || ValidationUtils.isBlank(price.toString())) {
+        BigDecimal price = product.getPrice();
+        if (price == null || ValidationUtils.isBlank(price.toPlainString())) {
             support.addError(JsamsI18nLabelResource.LABEL_PRODUCT_PRICE.getTranslation(),
                     JsamsI18nResource.ERROR_IS_MANDATORY.getTranslation());
         }
@@ -47,8 +46,8 @@ public class ProductValidator implements Validator<ProductBean> {
             support.addError(JsamsI18nLabelResource.LABEL_PRODUCT_STOCK_QUANTITY.getTranslation(),
                     JsamsI18nResource.ERROR_IS_MANDATORY.getTranslation());
         }
-        Double vatApplicable = product.getVatApplicable();
-        if (vatApplicable == null || ValidationUtils.isBlank(vatApplicable.toString())) {
+        BigDecimal vatApplicable = product.getVatApplicable();
+        if (vatApplicable == null || ValidationUtils.isBlank(vatApplicable.toPlainString())) {
             support.addError(JsamsI18nLabelResource.LABEL_VAT_APPLICABLE.getTranslation(),
                     JsamsI18nResource.ERROR_IS_MANDATORY.getTranslation());
         }

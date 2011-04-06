@@ -1,18 +1,18 @@
 package be.jsams.client.model.panel;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Container;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseListener;
 
-import javax.swing.InputMap;
-import javax.swing.JComponent;
+import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
-import javax.swing.KeyStroke;
+import javax.swing.JTextArea;
 import javax.swing.border.TitledBorder;
 
 import org.apache.commons.logging.Log;
@@ -23,8 +23,9 @@ import be.jsams.client.swing.component.JsamsButton;
 import be.jsams.client.swing.component.JsamsButtonsInterface;
 import be.jsams.client.swing.component.JsamsButtonsPanel;
 import be.jsams.client.swing.component.JsamsTable;
+import be.jsams.client.swing.component.JsamsTextField;
 import be.jsams.client.swing.utils.IconUtil;
-import be.jsams.common.bean.model.AbstractIdentityBean;
+import be.jsams.server.model.AbstractIdentity;
 import be.jsams.server.service.Service;
 
 import com.jgoodies.forms.factories.ButtonBarFactory;
@@ -32,8 +33,8 @@ import com.jgoodies.forms.factories.ButtonBarFactory;
 /**
  * Search generic panel.
  * 
- * @param <B>
- *            an extension of {@link AbstractIdentityBean}
+ * @param <M>
+ *            an extension of {@link AbstractIdentity}
  * @param <L>
  *            an extension of {@link MouseListener}
  * @param <S>
@@ -42,8 +43,8 @@ import com.jgoodies.forms.factories.ButtonBarFactory;
  * @author chesteric31
  * @version $$Rev$$ $$Date::                  $$ $$Author$$
  */
-public abstract class SearchPanel<B extends AbstractIdentityBean<?, ?>, L extends MouseListener, S extends Service<B>>
-        extends JPanel implements JsamsButtonsInterface {
+public abstract class SearchPanel<M extends AbstractIdentity, L extends MouseListener, S extends Service<M>> extends
+        JPanel implements JsamsButtonsInterface {
 
     /**
      * Serial Version UID
@@ -54,7 +55,7 @@ public abstract class SearchPanel<B extends AbstractIdentityBean<?, ?>, L extend
 
     private static final int DEFAULT_V_GAP = 10;
 
-    private B model;
+    private M model;
 
     private L mouseListener;
 
@@ -67,30 +68,28 @@ public abstract class SearchPanel<B extends AbstractIdentityBean<?, ?>, L extend
     private JsamsButton buttonAdd = null;
     private JsamsButton buttonRemove = null;
     private JsamsButton buttonModify = null;
-
-    private boolean showButtons;
+    
+    private boolean showManagementButtons;
 
     /**
      * Constructor.
      * 
-     * @param bean
-     *            the {@link AbstractIdentityBean}
-     * @param listener
+     * @param m
+     *            the {@link AbstractIdentity}
+     * @param l
      *            the {@link MouseListener}
-     * @param service
+     * @param s
      *            the {@link Service}
-     * @param showButtons
+     * @param showManagementButtons
      *            a boolean that indicates to show or not a management buttons (add, modify and remove)
      */
-    public SearchPanel(B bean, L listener, S service, boolean showButtons) {
+    public SearchPanel(M m, L l, S s, boolean showManagementButtons) {
         super();
-        this.model = bean;
-        this.mouseListener = listener;
-        this.service = service;
-        this.showButtons = showButtons;
+        this.model = m;
+        this.mouseListener = l;
+        this.service = s;
+        this.showManagementButtons = showManagementButtons;
         setLayout(new BorderLayout());
-        buttonsPanel = new JsamsButtonsPanel(this, true, true, true);
-        setDefaultKeyActions();
     }
 
     /**
@@ -104,7 +103,7 @@ public abstract class SearchPanel<B extends AbstractIdentityBean<?, ?>, L extend
      * 
      * @return the model
      */
-    public B getModel() {
+    public M getModel() {
         return model;
     }
 
@@ -113,7 +112,7 @@ public abstract class SearchPanel<B extends AbstractIdentityBean<?, ?>, L extend
      * @param model
      *            the model to set
      */
-    public void setModel(B model) {
+    public void setModel(M model) {
         this.model = model;
     }
 
@@ -158,22 +157,22 @@ public abstract class SearchPanel<B extends AbstractIdentityBean<?, ?>, L extend
     public JsamsTable getResultTable() {
         return resultTable;
     }
-
+    
     /**
      * 
      * @return true, if we have to display the management buttons panel, false otherwise
      */
-    public boolean isShowButtons() {
-        return showButtons;
+    public boolean isShowManagementButtons() {
+        return showManagementButtons;
     }
 
     /**
      * 
-     * @param showButtons
+     * @param showManagementButtons
      *            the boolean to set, if we have to display the management buttons panel or not
      */
-    public void setShowButtons(boolean showButtons) {
-        this.showButtons = showButtons;
+    public void setShowManagementButtons(boolean showManagementButtons) {
+        this.showManagementButtons = showManagementButtons;
     }
 
     /**
@@ -188,7 +187,10 @@ public abstract class SearchPanel<B extends AbstractIdentityBean<?, ?>, L extend
     /**
      * {@inheritDoc}
      */
-    public abstract void performCancel();
+    public void performCancel() {
+        // TODO Auto-generated method stub
+
+    }
 
     /**
      * {@inheritDoc}
@@ -206,9 +208,7 @@ public abstract class SearchPanel<B extends AbstractIdentityBean<?, ?>, L extend
      * {@inheritDoc}
      */
     public void performReset() {
-        model.clear();
-        ((JsamsTable) getResultTable()).clear();
-        updateUI();
+        performReset(this);
     }
 
     /**
@@ -272,6 +272,32 @@ public abstract class SearchPanel<B extends AbstractIdentityBean<?, ?>, L extend
     }
 
     /**
+     * Performs the reseting.
+     * 
+     * @param container
+     *            the {@link Container}
+     */
+    public void performReset(final Container container) {
+        for (Component component : container.getComponents()) {
+            if (component instanceof Container) {
+                this.performReset((Container) component);
+            }
+            // NOT ELSE IF cause that doesn't work
+            if (component instanceof JsamsTextField) {
+                ((JsamsTextField) component).setText(null);
+            } else if (component instanceof JComboBox) {
+                ((JComboBox) component).setSelectedIndex(0);
+            } else if (component instanceof JTextArea) {
+                ((JTextArea) component).setText(null);
+            } else if (component instanceof JsamsTable) {
+                JsamsTable table = (JsamsTable) component;
+                table.clear();
+                table.revalidate();
+            }
+        }
+    }
+
+    /**
      * Builds the main panel contained all the components.
      * 
      * @param criteriaPanel
@@ -289,6 +315,7 @@ public abstract class SearchPanel<B extends AbstractIdentityBean<?, ?>, L extend
         buttonsLayout.setVgap(DEFAULT_V_GAP);
         northPanel.setLayout(buttonsLayout);
         northPanel.add(new JSeparator(), BorderLayout.NORTH);
+        buttonsPanel = new JsamsButtonsPanel(this, true, true, true);
         northPanel.add(buttonsPanel);
         searchCriteriaPanel.add(buttonsPanel);
 
@@ -300,7 +327,7 @@ public abstract class SearchPanel<B extends AbstractIdentityBean<?, ?>, L extend
         scrollPane.setBorder(new TitledBorder(JsamsI18nResource.SEARCH_RESULTS.getTranslation()));
         this.add(scrollPane, BorderLayout.CENTER);
 
-        if (showButtons) {
+        if (showManagementButtons) {
             buttonAdd = buildButtonAdd();
             buttonRemove = buildButtonRemove();
             buttonModify = buildButtonModify();
@@ -310,22 +337,6 @@ public abstract class SearchPanel<B extends AbstractIdentityBean<?, ?>, L extend
             buttons[2] = buttonModify;
             this.add(ButtonBarFactory.buildCenteredBar(buttons), BorderLayout.SOUTH);
         }
-    }
-
-    /**
-     * Sets the default keys actions.
-     */
-    private void setDefaultKeyActions() {
-        // Automatically choose OK when Enter Key is pressed
-        int noModifiers = 0;
-        KeyStroke okKey = KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, noModifiers, false);
-        InputMap inputMap = this.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
-        inputMap.put(okKey, JsamsButtonsPanel.OK_ACTION_KEY);
-        this.getActionMap().put(JsamsButtonsPanel.OK_ACTION_KEY, buttonsPanel.getButtonOk().getAction());
-
-        KeyStroke resetKey = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, noModifiers, false);
-        inputMap.put(resetKey, JsamsButtonsPanel.RESET_ACTION_KEY);
-        this.getActionMap().put(JsamsButtonsPanel.RESET_ACTION_KEY, buttonsPanel.getButtonReset().getAction());
     }
 
 }

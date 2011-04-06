@@ -1,9 +1,7 @@
 package be.jsams.server.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import be.jsams.common.bean.model.sale.CommandBean;
 import be.jsams.server.dao.CommandDao;
 import be.jsams.server.dao.CommandDetailDao;
 import be.jsams.server.model.Command;
@@ -56,23 +54,18 @@ public class CommandServiceImpl implements CommandService {
     /**
      * {@inheritDoc}
      */
-    public CommandBean create(final CommandBean bean) {
-        return null;
-        // TODO
-//        Command command = new Command(bean);
-//        commandDao.add(command);
-//        return new CommandBean(command);
-//        List<CommandDetailBean> details = bean.getDetails();
-//        for (CommandDetail detail : details) {
-//            commandDetailDao.add(new CommandDetailBean(detail));
-//        }
+    public void create(final Command command) {
+        commandDao.add(command);
+        List<CommandDetail> details = command.getDetails();
+        for (CommandDetail detail : details) {
+            commandDetailDao.add(detail);
+        }
     }
 
     /**
      * {@inheritDoc}
      */
-    public void delete(final CommandBean bean) {
-        Command command = commandDao.findById(bean.getId());
+    public void delete(final Command command) {
         List<CommandDetail> details = command.getDetails();
         for (CommandDetail detail : details) {
             commandDetailDao.delete(detail);
@@ -84,7 +77,7 @@ public class CommandServiceImpl implements CommandService {
      * {@inheritDoc}
      */
     public void delete(final Long id) {
-        Command command = commandDao.findById(id);
+        Command command = findById(id);
         List<CommandDetail> details = command.getDetails();
         for (CommandDetail detail : details) {
             commandDetailDao.delete(detail);
@@ -95,29 +88,21 @@ public class CommandServiceImpl implements CommandService {
     /**
      * {@inheritDoc}
      */
-    public List<CommandBean> findAll() {
-        List<Command> commands = commandDao.findAll();
-        List<CommandBean> beans = new ArrayList<CommandBean>();
-        for (Command command : commands) {
-            beans.add(new CommandBean(command));
-        }
-        return beans;
+    public List<Command> findAll() {
+        return commandDao.findAll();
     }
 
     /**
      * {@inheritDoc}
      */
-    public CommandBean findById(final Long id) {
-        Command command = commandDao.findById(id);
-        CommandBean bean = new CommandBean(command);
-        return bean;
+    public Command findById(final Long id) {
+        return commandDao.findById(id);
     }
 
     /**
      * {@inheritDoc}
      */
-    public void update(final CommandBean bean) {
-        Command command = new Command(bean);
+    public void update(final Command command) {
         commandDao.update(command);
     }
 

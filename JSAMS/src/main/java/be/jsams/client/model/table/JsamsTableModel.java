@@ -2,26 +2,30 @@ package be.jsams.client.model.table;
 
 import java.util.List;
 
-import be.jsams.common.bean.model.AbstractIdentityBean;
+import javax.swing.table.AbstractTableModel;
 
-import com.jgoodies.binding.adapter.AbstractTableAdapter;
-import com.jgoodies.common.collect.ArrayListModel;
+import be.jsams.server.model.AbstractIdentity;
 
 /**
  * Customized abstract table model for all search panels.
  * 
  * @param <D>
- *            an object extension of {@link AbstractIdentityBean}
+ *            an object extension of {@link AbstractIdentity}
  * 
  * @author chesteric31
  * @version $$Rev$$ $$Date::                  $$ $$Author$$
  */
-public abstract class JsamsTableModel<D extends AbstractIdentityBean<?, ?>> extends AbstractTableAdapter<D> {
+public abstract class JsamsTableModel<D extends AbstractIdentity> extends AbstractTableModel {
 
     /**
      * Serial Version UID
      */
     private static final long serialVersionUID = 2372165332757954578L;
+
+    /**
+     * The list of data
+     */
+    private List<D> data;
 
     /** Column number zero for switch purpose */
     protected static final int ZERO = 0;
@@ -45,32 +49,34 @@ public abstract class JsamsTableModel<D extends AbstractIdentityBean<?, ?>> exte
     protected static final int NINE = 9;
 
     /**
-     * Constructor
      * 
-     * @param listBean
-     *            a list of data bean
+     * @return a list of data
      */
-    public JsamsTableModel(final List<D> listBean) {
-        super(new ArrayListModel<D>(listBean));
+    public List<D> getData() {
+        return data;
     }
 
     /**
-     * Removes from the ListModel the bean at index parameter.
      * 
-     * @param index
-     *            the index of the bean to delete
+     * @param data
+     *            the list of data
      */
-    @SuppressWarnings("unchecked")
-    public void remove(int index) {
-        ((ArrayListModel<D>) getListModel()).remove(index);
+    public void setData(List<D> data) {
+        this.data = data;
     }
 
     /**
-     * Clears all beans from the ListModel.
+     * @return the rows count
      */
-    @SuppressWarnings("unchecked")
+    public int getRowCount() {
+        return data.size();
+    }
+
+    /**
+     * Clears all data.
+     */
     public void clear() {
-        ((ArrayListModel<D>) getListModel()).clear();
+        data.clear();
     }
 
 }

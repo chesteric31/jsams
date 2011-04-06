@@ -1,10 +1,9 @@
 package be.jsams.client.swing.component;
 
 import java.text.DecimalFormat;
-import java.text.Format;
+import java.text.NumberFormat;
 
 import javax.swing.JFormattedTextField;
-import javax.swing.text.DefaultFormatterFactory;
 
 /**
  * Customized {@link JFormattedTextField}.
@@ -30,30 +29,10 @@ public class JsamsFormattedTextField extends JFormattedTextField {
      * Constructor
      * 
      * @param format
-     *            the {@link Format} to use
+     *            the {@link NumberFormat} to use
      */
-    public JsamsFormattedTextField(final Format format) {
+    public JsamsFormattedTextField(final NumberFormat format) {
         super(format);
-    }
-
-    /**
-     * Constructor
-     * 
-     * @param formatter
-     *            the {@link AbstractFormatter} to use
-     */
-    public JsamsFormattedTextField(final AbstractFormatter formatter) {
-        super(formatter);
-    }
-
-    /**
-     * Constructor
-     * 
-     * @param factory
-     *            the {@link DefaultFormatterFactory}
-     */
-    public JsamsFormattedTextField(DefaultFormatterFactory factory) {
-        super(factory);
     }
 
 }

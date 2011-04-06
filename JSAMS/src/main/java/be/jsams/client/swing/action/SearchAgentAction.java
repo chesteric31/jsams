@@ -4,16 +4,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 
 import javax.swing.AbstractAction;
-import javax.swing.Icon;
 
 import be.jsams.client.context.JsamsApplicationContext;
+import be.jsams.client.i18n.JsamsI18nResource;
+import be.jsams.client.model.dialog.EditCustomerDialog;
 import be.jsams.client.model.panel.SearchAgentPanel;
-import be.jsams.client.model.table.AgentTableModel;
-import be.jsams.client.swing.component.JsamsButton;
 import be.jsams.client.swing.component.JsamsDialog;
 import be.jsams.client.swing.component.JsamsTable;
 import be.jsams.client.swing.listener.AgentTableMouseListener;
-import be.jsams.common.bean.model.management.AgentBean;
+import be.jsams.client.swing.utils.IconUtil;
+import be.jsams.server.model.Agent;
 
 /**
  * {@link AbstractAction} to launch {@link SearchAgentPanel}.
@@ -21,37 +21,29 @@ import be.jsams.common.bean.model.management.AgentBean;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public final class SearchAgentAction extends AbstractAction {
+public class SearchAgentAction extends AbstractAction {
 
-    private final AgentBean bean;
-    private final JsamsDialog dialog;
-    
     /**
      * Serial Version UID
      */
-    private static final long serialVersionUID = -4903401985131831848L;
+    private static final long serialVersionUID = 8266044738535674682L;
+
+    private EditCustomerDialog editDialog;
 
     /**
-     * Constructor
+     * Constructor.
      * 
-     * @param name the name
-     * @param icon the icon
-     * @param bean the {@link AgentBean}
-     * @param dialog the {@link JsamsDialog}
+     * @param editCustomerDialog the {@link EditCustomerDialog}
      */
-    public SearchAgentAction(String name, Icon icon, AgentBean bean, JsamsDialog dialog) {
-        super(name, icon);
-        this.bean = bean;
-        this.dialog = dialog;
+    public SearchAgentAction(EditCustomerDialog editCustomerDialog) {
+        editDialog = editCustomerDialog;
     }
 
     /**
      * {@inheritDoc}
      */
-    @Override
     public void actionPerformed(ActionEvent e) {
         AgentTableMouseListener customListener = new AgentTableMouseListener() {
-
             /**
              * {@inheritDoc}
              */
@@ -61,30 +53,22 @@ public final class SearchAgentAction extends AbstractAction {
                 if (e.getClickCount() == 2) {
                     int selectedRow = table.getSelectedRow();
                     if (selectedRow > -1) {
-                        int selectedRowModel = table.convertRowIndexToModel(selectedRow);
-                        AgentTableModel model = (AgentTableModel) table.getModel();
-                        AgentBean selectedBean = model.getRow(selectedRowModel);
-                        bean.refresh(selectedBean);
-//                        bean.setAddress(selectedBean.getAddress());
-//                        bean.setCivility(selectedBean.getCivility());
-//                        bean.setContactInformation(selectedBean.getContactInformation());
-//                        bean.setCustomers(selectedBean.getCustomers());
-//                        bean.setFunction(selectedBean.getFunction());
-//                        bean.setId(selectedBean.getId());
-//                        bean.setListModel(selectedBean.getListModel());
-//                        bean.setName(selectedBean.getName());
-//                        bean.setSelection(selectedBean.getSelection());
-                        dialog.dispose();
+                        Long id = (Long) table.getValueAt(selectedRow, 0);
+                        Agent selectedAgent = JsamsApplicationContext.getAgentService().findById(id);
+                        editDialog.getTextFieldAgent().setText(selectedAgent.getName());
+                        table.getEventuallyJsamsDialog().setVisible(false);
                     }
                 }
             }
         };
-        SearchAgentPanel searchAgentPanel = new SearchAgentPanel(new AgentBean(), customListener,
-                JsamsApplicationContext.getAgentService(), false);
+        SearchAgentPanel searchAgentPanel = new SearchAgentPanel(new Agent(), customListener, JsamsApplicationContext
+                .getAgentService(), false);
+        JsamsDialog dialog = new JsamsDialog(null, JsamsI18nResource.TITLE_SEARCH_AGENT, IconUtil.TITLE_ICON_PREFIX
+                + "categories/applications-development.png");
         dialog.add(searchAgentPanel);
         dialog.pack();
-        dialog.setLocationRelativeTo(((JsamsButton) e.getSource()).getRootPane());
         dialog.setVisible(true);
+        dialog.setLocationRelativeTo(null);
     }
 
 }

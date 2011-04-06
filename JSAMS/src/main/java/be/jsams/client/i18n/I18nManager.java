@@ -25,11 +25,11 @@ public class I18nManager {
      */
     private static final I18nManager INSTANCE = new I18nManager();
 
-//    /**
-//     * Constructor
-//     */
-//    public I18nManager() {
-//    }
+    /**
+     * Constructor
+     */
+    public I18nManager() {
+    }
 
     /**
      * Gets the instance.

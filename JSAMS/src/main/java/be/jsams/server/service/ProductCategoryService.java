@@ -2,7 +2,7 @@ package be.jsams.server.service;
 
 import java.util.List;
 
-import be.jsams.common.bean.model.management.ProductCategoryBean;
+import be.jsams.server.model.ProductCategory;
 
 /**
  * Product category service interface.
@@ -10,15 +10,15 @@ import be.jsams.common.bean.model.management.ProductCategoryBean;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public interface ProductCategoryService extends Service<ProductCategoryBean> {
+public interface ProductCategoryService extends Service<ProductCategory> {
 
     /**
-     * Finds all {@link ProductCategoryBean} following the criteria product category.
+     * Finds all {@link ProductCategory} following the criteria product category.
      * 
      * @param criteria
      *            the criteria product category
-     * @return a list of {@link ProductCategoryBean}
+     * @return a list of {@link ProductCategory}
      */
-    List<ProductCategoryBean> findByCriteria(final ProductCategoryBean criteria);
+    List<ProductCategory> findByCriteria(final ProductCategory criteria);
     
 }

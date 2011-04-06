@@ -1,6 +1,6 @@
 package be.jsams.server.service;
 
-import be.jsams.common.bean.model.sale.CommandBean;
+import be.jsams.server.model.Command;
 
 /**
  * Command service interface.
@@ -8,6 +8,6 @@ import be.jsams.common.bean.model.sale.CommandBean;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public interface CommandService extends Service<CommandBean> {
+public interface CommandService extends Service<Command> {
 
 }

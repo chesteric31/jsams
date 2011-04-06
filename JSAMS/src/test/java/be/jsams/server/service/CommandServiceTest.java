@@ -1,5 +1,7 @@
 package be.jsams.server.service;
 
+import static org.junit.Assert.assertNotNull;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
@@ -13,7 +15,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
-import be.jsams.common.bean.model.sale.CommandBean;
 import be.jsams.server.dao.AbstractJUnitTestClass;
 import be.jsams.server.dao.AddressDao;
 import be.jsams.server.dao.AgentDao;
@@ -69,7 +70,7 @@ public class CommandServiceTest extends AbstractJUnitTestClass {
 		billingAddress.setCountry("Belgium");
 		billingAddress.setNumber("1");
 		billingAddress.setStreet("Rue Neuve");
-		billingAddress.setZipCode("1000");
+		billingAddress.setZipCode(1000);
 		addressDao.add(billingAddress);
 		
 		newCommand.setBillingAddress(billingAddress);
@@ -93,7 +94,7 @@ public class CommandServiceTest extends AbstractJUnitTestClass {
 		
 		customer.setContactInformation(contactInformation);
 		
-		customer.setCreditLimit(Double.valueOf(1000.00));
+		customer.setCreditLimit(new BigDecimal(1000.00));
 		customer.setDeliveryAddress(billingAddress);
 		customer.setName("Wyatt Earp");
 		
@@ -123,10 +124,10 @@ public class CommandServiceTest extends AbstractJUnitTestClass {
 		Product book = new Product();
 		book.setCategory(booksCategory);
 		book.setName("Fight Club");
-		book.setPrice(Double.valueOf(35.95D));
+		book.setPrice(new BigDecimal(35.95));
 		book.setQuantityStock(15);
 		book.setReorderLevel(10);
-		book.setVatApplicable(Double.valueOf(6.00D));
+		book.setVatApplicable(new BigDecimal(6.00));
 		productDao.add(book);
 
         CommandDetail detail = new CommandDetail();
@@ -140,10 +141,10 @@ public class CommandServiceTest extends AbstractJUnitTestClass {
         
         newCommand.setDetails(details);
         
-        commandService.create(new CommandBean(newCommand));
+        commandService.create(newCommand);
 		
-//		CommandBean command = commandService.findById(newCommand.getId());
-//		assertNotNull(command);
+		Command command = commandService.findById(newCommand.getId());
+		assertNotNull(command);
 	}
 
 	@Test

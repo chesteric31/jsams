@@ -7,7 +7,7 @@ import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.client.i18n.I18nApplicationContext;
 
 /**
- * Startup class for the JSAMS Application.
+ * Startup class for the Jsams Application.
  * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
@@ -26,7 +26,7 @@ public final class JsamsStart {
     }
 
     /**
-     * Main starting method for the JSAMS Application
+     * Main starting method for the Jsams Application
      * 
      * @param args
      *            for now, no argument are needed
@@ -36,7 +36,7 @@ public final class JsamsStart {
         JsamsApplicationContext.setContext(new ClassPathXmlApplicationContext(JsamsApplicationContext.CONFIG));
         I18nApplicationContext.setContext(new ClassPathXmlApplicationContext(I18nApplicationContext.CONFIG));
 
-        final JsamsDesktop application = new JsamsDesktop();
+        JsamsDesktop application = new JsamsDesktop();
         application.start();
     }
 

@@ -2,7 +2,6 @@ package be.jsams.server.dao;
 
 import java.util.List;
 
-import be.jsams.common.bean.model.management.AgentBean;
 import be.jsams.server.model.Agent;
 
 /**
@@ -20,6 +19,6 @@ public interface AgentDao extends Dao<Agent> {
      *            the criteria model
      * @return a list of {@link Agent}
      */
-    List<Agent> findByCriteria(final AgentBean criteria);
+    List<Agent> findByCriteria(Agent criteria);
 
 }

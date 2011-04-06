@@ -19,6 +19,10 @@ import javax.persistence.Table;
 @Table(name = "COMMAND_DETAIL")
 public class CommandDetail extends AbstractIdentity {
 
+    /**
+     * Serial Version UID
+     */
+    private static final long serialVersionUID = 3749700047686967069L;
     private int quantity;
     private BigDecimal price;
     private BigDecimal vatApplicable;
@@ -164,28 +168,11 @@ public class CommandDetail extends AbstractIdentity {
         this.product = product;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("CommandDetail [command=");
-        builder.append(command);
-        builder.append(", discountRate=");
-        builder.append(discountRate);
-        builder.append(", price=");
-        builder.append(price);
-        builder.append(", product=");
-        builder.append(product);
-        builder.append(", quantity=");
-        builder.append(quantity);
-        builder.append(", transferred=");
-        builder.append(transferred);
-        builder.append(", vatApplicable=");
-        builder.append(vatApplicable);
-        builder.append("]");
-        return builder.toString();
+        return "CommandDetail [command=" + command + ", discountRate=" + discountRate + ", price=" + price
+                + ", product=" + product + ", quantity=" + quantity + ", transferred=" + transferred
+                + ", vatApplicable=" + vatApplicable + "]";
     }
 
 }

@@ -7,7 +7,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.ListCellRenderer;
 
-import be.jsams.common.bean.model.AbstractNamedIdentityBean;
+import be.jsams.server.model.AbstractNamedIdentity;
 
 /**
  * Combo box renderer for object that have name column from DB.
@@ -29,7 +29,7 @@ public class NamedComboBoxRenderer implements ListCellRenderer {
         JLabel renderer = (JLabel) defaultRenderer.getListCellRendererComponent(list, value, index, isSelected,
                 cellHasFocus);
         if (value != null) {
-            theText = ((AbstractNamedIdentityBean<?, ?>) value).getName();
+            theText = ((AbstractNamedIdentity) value).getName();
         }
         renderer.setText(theText);
         return renderer;

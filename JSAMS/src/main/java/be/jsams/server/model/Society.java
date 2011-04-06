@@ -1,18 +1,14 @@
 package be.jsams.server.model;
 
-import java.util.List;
+import java.math.BigDecimal;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import be.jsams.common.bean.model.management.SocietyBean;
 
 /**
  * Society entity object.
@@ -24,7 +20,11 @@ import be.jsams.common.bean.model.management.SocietyBean;
 @Table(name = "SOCIETY")
 public class Society extends AbstractNamedIdentity {
 
-    private Double capital;
+    /**
+     * Serial Version UID
+     */
+    private static final long serialVersionUID = -8541820243148400802L;
+    private BigDecimal capital;
     private String activity;
     private String responsible;
     private String vatNumber;
@@ -32,10 +32,6 @@ public class Society extends AbstractNamedIdentity {
     private Address address;
     private LegalForm legalForm;
     private ContactInformation contactInformation;
-
-    private List<Agent> agents;
-    private List<Customer> customers;
-    private List<ProductCategory> productCategories;
 
     /**
      * Constructor
@@ -45,31 +41,11 @@ public class Society extends AbstractNamedIdentity {
     }
 
     /**
-     * Constructor
-     * 
-     * @param bean
-     *            the {@link SocietyBean}
-     */
-    public Society(SocietyBean bean) {
-        super(bean);
-        setActivity(bean.getActivity());
-        setAddress(new Address(bean.getAddress()));
-        setCapital(bean.getCapital());
-        setContactInformation(new ContactInformation(bean.getContactInformation()));
-        if (bean.getLegalForm().getId() != null) {
-            setLegalForm(new LegalForm(bean.getLegalForm()));
-        }
-        setName(bean.getName());
-        setResponsible(bean.getResponsible());
-        setVatNumber(bean.getVatNumber());
-    }
-
-    /**
      * 
      * @return the capital
      */
     @Column(name = "CAPITAL")
-    public Double getCapital() {
+    public BigDecimal getCapital() {
         return capital;
     }
 
@@ -78,7 +54,7 @@ public class Society extends AbstractNamedIdentity {
      * @param capital
      *            the capital to set
      */
-    public void setCapital(Double capital) {
+    public void setCapital(BigDecimal capital) {
         this.capital = capital;
     }
 
@@ -159,7 +135,7 @@ public class Society extends AbstractNamedIdentity {
      * 
      * @return the {@link LegalForm}
      */
-    @ManyToOne(cascade = CascadeType.REFRESH)
+    @OneToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "FK_LEGAL_FORM")
     public LegalForm getLegalForm() {
         return legalForm;
@@ -178,7 +154,7 @@ public class Society extends AbstractNamedIdentity {
      * 
      * @return the {@link ContactInformation}
      */
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "FK_CONTACT_INFORMATION")
     public ContactInformation getContactInformation() {
         return contactInformation;
@@ -193,85 +169,97 @@ public class Society extends AbstractNamedIdentity {
         this.contactInformation = contactInformation;
     }
 
-    /**
-     * @return the agents
-     */
-    @ManyToMany(mappedBy = "society", fetch = FetchType.LAZY)
-    @JoinColumn(name = "FK_SOCIETY")
-    public List<Agent> getAgents() {
-        return agents;
-    }
-
-    /**
-     * @param agents
-     *            the agents to set
-     */
-    public void setAgents(List<Agent> agents) {
-        this.agents = agents;
-    }
-
-    /**
-     * @return the customers
-     */
-    @ManyToMany(mappedBy = "society", fetch = FetchType.LAZY)
-    @JoinColumn(name = "FK_SOCIETY")
-    public List<Customer> getCustomers() {
-        return customers;
-    }
-
-    /**
-     * @param customers
-     *            the customers to set
-     */
-    public void setCustomers(List<Customer> customers) {
-        this.customers = customers;
-    }
-
-    /**
-     * @return the productCategories
-     */
-    @ManyToMany(mappedBy = "society", fetch = FetchType.LAZY)
-    @JoinColumn(name = "FK_SOCIETY")
-    public List<ProductCategory> getProductCategories() {
-        return productCategories;
-    }
-
-    /**
-     * @param productCategories
-     *            the productCategories to set
-     */
-    public void setProductCategories(List<ProductCategory> productCategories) {
-        this.productCategories = productCategories;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("Society [activity=");
-        builder.append(activity);
-        builder.append(", address=");
-        builder.append(address);
-        builder.append(", agents=");
-        builder.append(agents);
-        builder.append(", capital=");
-        builder.append(capital);
-        builder.append(", contactInformation=");
-        builder.append(contactInformation);
-        builder.append(", customers=");
-        builder.append(customers);
-        builder.append(", legalForm=");
-        builder.append(legalForm);
-        builder.append(", productCategories=");
-        builder.append(productCategories);
-        builder.append(", responsible=");
-        builder.append(responsible);
-        builder.append(", vatNumber=");
-        builder.append(vatNumber);
-        builder.append("]");
-        return builder.toString();
+        return "Society [activity=" + activity + ", address=" + address + ", capital=" + capital
+                + ", contactInformation=" + contactInformation + ", name=" + getName() + ", legalForm=" + legalForm
+                + ", responsible=" + responsible + ", vatNumber=" + vatNumber + "]";
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = super.hashCode();
+        result = prime * result + ((activity == null) ? 0 : activity.hashCode());
+        result = prime * result + ((address == null) ? 0 : address.hashCode());
+        result = prime * result + ((capital == null) ? 0 : capital.hashCode());
+        result = prime * result + ((contactInformation == null) ? 0 : contactInformation.hashCode());
+        result = prime * result + ((legalForm == null) ? 0 : legalForm.hashCode());
+        result = prime * result + ((getName() == null) ? 0 : getName().hashCode());
+        result = prime * result + ((responsible == null) ? 0 : responsible.hashCode());
+        result = prime * result + ((vatNumber == null) ? 0 : vatNumber.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(final Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        // if (!super.equals(obj)) {
+        // return false;
+        // }
+        if (!(obj instanceof Society)) {
+            return false;
+        }
+        Society other = (Society) obj;
+        if (activity == null) {
+            if (other.activity != null) {
+                return false;
+            }
+        } else if (!activity.equals(other.activity)) {
+            return false;
+        }
+        if (address == null) {
+            if (other.address != null) {
+                return false;
+            }
+        } else if (!address.equals(other.address)) {
+            return false;
+        }
+        if (capital == null) {
+            if (other.capital != null) {
+                return false;
+            }
+        } else if (!capital.equals(other.capital)) {
+            return false;
+        }
+        if (contactInformation == null) {
+            if (other.contactInformation != null) {
+                return false;
+            }
+        } else if (!contactInformation.equals(other.contactInformation)) {
+            return false;
+        }
+        if (legalForm == null) {
+            if (other.legalForm != null) {
+                return false;
+            }
+        } else if (!legalForm.equals(other.legalForm)) {
+            return false;
+        }
+        if (getName() == null) {
+            if (other.getName() != null) {
+                return false;
+            }
+        } else if (!getName().equals(other.getName())) {
+            return false;
+        }
+        if (responsible == null) {
+            if (other.responsible != null) {
+                return false;
+            }
+        } else if (!responsible.equals(other.responsible)) {
+            return false;
+        }
+        if (vatNumber == null) {
+            if (other.vatNumber != null) {
+                return false;
+            }
+        } else if (!vatNumber.equals(other.vatNumber)) {
+            return false;
+        }
+        return true;
     }
 
 }
