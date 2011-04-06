@@ -6,7 +6,6 @@ import javax.swing.AbstractAction;
 
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.model.dialog.EditEstimateDialog;
-import be.jsams.common.bean.model.sale.EstimateBean;
 
 /**
  * {@link AbstractAction} to launch {@link EditEstimateDialog}.
@@ -25,7 +24,7 @@ public class NewEstimateAction extends AbstractAction {
      * {@inheritDoc}
      */
     public void actionPerformed(ActionEvent arg0) {
-        new EditEstimateDialog(JsamsI18nResource.TITLE_EDIT_ESTIMATE, new EstimateBean());
+        new EditEstimateDialog(JsamsI18nResource.TITLE_EDIT_ESTIMATE, null);
     }
 
 }

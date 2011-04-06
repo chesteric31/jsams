@@ -4,11 +4,11 @@ import java.util.List;
 
 import javax.persistence.Query;
 
-import be.jsams.client.desktop.JsamsDesktop;
-import be.jsams.common.bean.model.CivilityBean;
-import be.jsams.common.bean.model.management.AgentBean;
 import be.jsams.server.dao.AgentDao;
+import be.jsams.server.model.Address;
 import be.jsams.server.model.Agent;
+import be.jsams.server.model.Civility;
+import be.jsams.server.model.ContactInformation;
 
 /**
  * Agent DAO implementation.
@@ -32,41 +32,83 @@ public class AgentDaoImpl extends DaoImpl<Agent> implements AgentDao {
      * {@inheritDoc}
      */
     @SuppressWarnings("unchecked")
-    public List<Agent> findByCriteria(final AgentBean criteria) {
+    public List<Agent> findByCriteria(Agent criteria) {
         StringBuilder queryBuilder = new StringBuilder("FROM Agent a");
+
+        boolean isFirst = true;
 
         String name = criteria.getName();
 
         String function = criteria.getFunction();
-
-        String zipCode = criteria.getAddress().getZipCode();
-        String city = criteria.getAddress().getCity();
-
-        String phone = criteria.getContactInformation().getPhone();
-        CivilityBean civility = (CivilityBean) criteria.getCivility().getSelection();
         
-        Long societyId = JsamsDesktop.getInstance().getCurrentSociety().getId();
+        Address address = criteria.getAddress();
+        int zipCode = -1;
+        String city = null;
+        if (address != null) {
+            zipCode = address.getZipCode();
+            city = address.getCity();
+        }
         
-        queryBuilder.append(" WHERE ");
-        queryBuilder.append("a.society.id = " + societyId);
+        ContactInformation contactInformation = criteria.getContactInformation();
+        String phone = null;
+        if (contactInformation != null) {
+            phone = contactInformation.getPhone();
+        }
+        Civility civility = criteria.getCivility();
+        Long civilityId = 0L;
+        if (civility != null) {
+            civilityId = civility.getId();
+        }
         
         if (name != null) {
-            queryBuilder.append(" AND a.name LIKE '%" + name + "%'");
+            if (isFirst) {
+                queryBuilder.append(" WHERE");
+                isFirst = false;
+            }
+            queryBuilder.append(" a.name LIKE '%" + name + "%'");
         }
         if (function != null) {
-            queryBuilder.append(" AND a.function LIKE '%" + function + "%'");
+            if (isFirst) {
+                queryBuilder.append(" WHERE");
+                isFirst = false;
+            }
+            queryBuilder.append(" a.function LIKE '%" + function + "%'");
         }
-        if (zipCode != null) {
-            queryBuilder.append(" AND a.address.zipCode = " + zipCode);
+        if (zipCode != -1) {
+            if (isFirst) {
+                queryBuilder.append(" WHERE");
+                isFirst = false;
+            } else {
+                queryBuilder.append(" AND");
+            }
+            queryBuilder.append(" a.address.zipCode = " + zipCode);
         }
         if (city != null) {
-            queryBuilder.append(" AND a.address.city LIKE '%" + city + "%'");
+            if (isFirst) {
+                queryBuilder.append(" WHERE");
+                isFirst = false;
+            } else {
+                queryBuilder.append(" AND");
+            }
+            queryBuilder.append(" a.address.city = " + city);
         }
-        if (civility != null) {
-            queryBuilder.append(" AND a.civility.id = " + civility.getId());
+        if (!civilityId.equals(0L)) {
+            if (isFirst) {
+                queryBuilder.append(" WHERE");
+                isFirst = false;
+            } else {
+                queryBuilder.append(" AND");
+            }
+            queryBuilder.append(" a.civility.id = " + civilityId);
         }
         if (phone != null) {
-            queryBuilder.append(" AND a.contactInformation.phone LIKE '%" + phone + "%'");
+            if (isFirst) {
+                queryBuilder.append(" WHERE");
+                isFirst = false;
+            } else {
+                queryBuilder.append(" AND");
+            }
+            queryBuilder.append(" a.contactInformation.phone LIKE '%" + phone + "%'");
         }
 
         Query query = getEntityManager().createQuery(queryBuilder.toString());

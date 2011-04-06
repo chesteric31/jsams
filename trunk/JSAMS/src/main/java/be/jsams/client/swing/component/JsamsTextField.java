@@ -16,13 +16,6 @@ public class JsamsTextField extends JTextField {
     private static final long serialVersionUID = 410786496726208439L;
 
     /**
-     * Default constructor
-     */
-    public JsamsTextField() {
-        super();
-    }
-
-    /**
      * Constructor
      * 
      * @param columns

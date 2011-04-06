@@ -3,8 +3,6 @@ package be.jsams.server.model;
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 
-import be.jsams.common.bean.model.AbstractTranslatableIdentityBean;
-
 /**
  * {@link MappedSuperclass} for all entities that have the columns: label in English, French and Dutch.
  * 
@@ -12,30 +10,16 @@ import be.jsams.common.bean.model.AbstractTranslatableIdentityBean;
  * @version $$Rev$$ $$Date::                  $$ $$Author$$
  */
 @MappedSuperclass
-public abstract class AbstractTranslatableIdentity extends AbstractIdentity {
+public class AbstractTranslatableIdentity extends AbstractIdentity {
+
+    /**
+     * Serial Version UID
+     */
+    private static final long serialVersionUID = 5943662285794644039L;
 
     private String label;
     private String labelFr;
     private String labelNl;
-
-    /**
-     * Constructor.
-     */
-    public AbstractTranslatableIdentity() {
-    }
-
-    /**
-     * Constructor.
-     * 
-     * @param bean
-     *            the {@link AbstractTranslatableIdentityBean}
-     */
-    public AbstractTranslatableIdentity(final AbstractTranslatableIdentityBean<?, ?> bean) {
-        super(bean);
-        setLabel(bean.getLabel());
-        setLabelFr(bean.getLabelFr());
-        setLabelNl(bean.getLabelNl());
-    }
 
     /**
      * 
@@ -91,20 +75,55 @@ public abstract class AbstractTranslatableIdentity extends AbstractIdentity {
         this.labelNl = labelNl;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = super.hashCode();
+        result = prime * result + ((label == null) ? 0 : label.hashCode());
+        result = prime * result + ((labelFr == null) ? 0 : labelFr.hashCode());
+        result = prime * result + ((labelNl == null) ? 0 : labelNl.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(final Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        // if (!super.equals(obj)) {
+        // return false;
+        // }
+        if (!(obj instanceof AbstractTranslatableIdentity)) {
+            return false;
+        }
+        AbstractTranslatableIdentity other = (AbstractTranslatableIdentity) obj;
+        if (label == null) {
+            if (other.label != null) {
+                return false;
+            }
+        } else if (!label.equals(other.label)) {
+            return false;
+        }
+        if (labelFr == null) {
+            if (other.labelFr != null) {
+                return false;
+            }
+        } else if (!labelFr.equals(other.labelFr)) {
+            return false;
+        }
+        if (labelNl == null) {
+            if (other.labelNl != null) {
+                return false;
+            }
+        } else if (!labelNl.equals(other.labelNl)) {
+            return false;
+        }
+        return true;
+    }
+
     @Override
     public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("AbstractTranslatableIdentity [label=");
-        builder.append(label);
-        builder.append(", labelFr=");
-        builder.append(labelFr);
-        builder.append(", labelNl=");
-        builder.append(labelNl);
-        builder.append("]");
-        return builder.toString();
+        return "AbstractTranslatableIdentity [label=" + label + ", labelFr=" + labelFr + ", labelNl=" + labelNl + "]";
     }
 
 }

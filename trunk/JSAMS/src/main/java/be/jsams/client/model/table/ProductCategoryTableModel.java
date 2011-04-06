@@ -5,15 +5,15 @@ import java.util.List;
 
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.i18n.JsamsI18nResource;
-import be.jsams.common.bean.model.management.ProductCategoryBean;
+import be.jsams.server.model.ProductCategory;
 
 /**
- * {@link JsamsTableModel} for {@link ProductCategoryBean} object.
- * 
+ * {@link JsamsTableModel} for {@link ProductCategory} object.
+ *
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class ProductCategoryTableModel extends JsamsTableModel<ProductCategoryBean> {
+public class ProductCategoryTableModel extends JsamsTableModel<ProductCategory> {
 
     /**
      * Serial Version UID
@@ -25,16 +25,6 @@ public class ProductCategoryTableModel extends JsamsTableModel<ProductCategoryBe
      */
     private List<I18nString> columnNames = Arrays.asList(JsamsI18nResource.COLUMN_ID,
             JsamsI18nResource.COLUMN_LABEL_EN, JsamsI18nResource.COLUMN_LABEL_FR, JsamsI18nResource.COLUMN_LABEL_NL);
-
-    /**
-     * Constructor
-     * 
-     * @param listModel
-     *            a list of {@link ProductCategoryBean}
-     */
-    public ProductCategoryTableModel(List<ProductCategoryBean> listModel) {
-        super(listModel);
-    }
 
     /**
      * @return the columns count
@@ -51,16 +41,15 @@ public class ProductCategoryTableModel extends JsamsTableModel<ProductCategoryBe
      * @return the value following the row and column
      */
     public Object getValueAt(int rowIndex, int columnIndex) {
-        ProductCategoryBean category = (ProductCategoryBean) getRow(rowIndex);
         switch (columnIndex) {
         case ZERO:
-            return category.getId();
+            return getData().get(rowIndex).getId();
         case ONE:
-            return category.getLabel();
+            return getData().get(rowIndex).getLabel();
         case TWO:
-            return category.getLabelFr();
+            return getData().get(rowIndex).getLabelFr();
         case THREE:
-            return category.getLabelNl();
+            return getData().get(rowIndex).getLabelNl();
         default:
             return "";
         }

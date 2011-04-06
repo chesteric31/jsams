@@ -1,5 +1,7 @@
 package be.jsams.server.model;
 
+import java.math.BigDecimal;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,8 +9,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import be.jsams.common.bean.model.management.CustomerBean;
 
 /**
  * Customer entity object.
@@ -20,12 +20,16 @@ import be.jsams.common.bean.model.management.CustomerBean;
 @Table(name = "CUSTOMER")
 public class Customer extends AbstractNamedIdentity {
 
+    /**
+     * Serial Version UID
+     */
+    private static final long serialVersionUID = 81052360779940712L;
     private String vatNumber;
-    private Double defaultDiscountRate;
+    private BigDecimal defaultDiscountRate;
     private String bank1;
     private String bank2;
-    private Double creditLimit;
-    private Double vatApplicable;
+    private BigDecimal creditLimit;
+    private BigDecimal vatApplicable;
     private String description;
 
     private Address deliveryAddress;
@@ -35,46 +39,14 @@ public class Customer extends AbstractNamedIdentity {
     private Civility civility;
 
     private Agent agent;
-    private Society society;
 
     private LegalForm legalForm;
 
     /**
-     * Default constructor
+     * Constructor
      */
     public Customer() {
         super();
-    }
-
-    /**
-     * Constructor
-     * 
-     * @param bean
-     *            the {@link CustomerBean}
-     */
-    public Customer(CustomerBean bean) {
-        super(bean);
-        setAgent(new Agent(bean.getAgent()));
-        setBank1(bean.getBank1());
-        setBank2(bean.getBank2());
-        setBillingAddress(new Address(bean.getBillingAddress()));
-        if (bean.getCivility().getId() != null) {
-            setCivility(new Civility(bean.getCivility()));
-        }
-        setContactInformation(new ContactInformation(bean.getContactInformation()));
-        setCreditLimit(bean.getCreditLimit());
-        setDefaultDiscountRate(bean.getDefaultDiscountRate());
-        setDeliveryAddress(new Address(bean.getDeliveryAddress()));
-        setDescription(bean.getDescription());
-        if (bean.getLegalForm().getId() != null) {
-            setLegalForm(new LegalForm(bean.getLegalForm()));
-        }
-        if (bean.getPaymentMode().getId() != null) {
-            setPaymentMode(new PaymentMode(bean.getPaymentMode()));
-        }
-        setVatApplicable(bean.getVatApplicable());
-        setVatNumber(bean.getVatNumber());
-        setSociety(new Society(bean.getSociety()));
     }
 
     /**
@@ -100,7 +72,7 @@ public class Customer extends AbstractNamedIdentity {
      * @return the default discount rate
      */
     @Column(name = "DEFAULT_DISCOUNT_RATE")
-    public Double getDefaultDiscountRate() {
+    public BigDecimal getDefaultDiscountRate() {
         return defaultDiscountRate;
     }
 
@@ -109,7 +81,7 @@ public class Customer extends AbstractNamedIdentity {
      * @param defaultDiscountRate
      *            the default discount rate
      */
-    public void setDefaultDiscountRate(Double defaultDiscountRate) {
+    public void setDefaultDiscountRate(BigDecimal defaultDiscountRate) {
         this.defaultDiscountRate = defaultDiscountRate;
     }
 
@@ -154,7 +126,7 @@ public class Customer extends AbstractNamedIdentity {
      * @return the credit limit
      */
     @Column(name = "CREDIT_LIMIT")
-    public Double getCreditLimit() {
+    public BigDecimal getCreditLimit() {
         return creditLimit;
     }
 
@@ -163,7 +135,7 @@ public class Customer extends AbstractNamedIdentity {
      * @param creditLimit
      *            the credit limit to set
      */
-    public void setCreditLimit(Double creditLimit) {
+    public void setCreditLimit(BigDecimal creditLimit) {
         this.creditLimit = creditLimit;
     }
 
@@ -172,7 +144,7 @@ public class Customer extends AbstractNamedIdentity {
      * @return the VAT applicable
      */
     @Column(name = "VAT_APPLICABLE")
-    public Double getVatApplicable() {
+    public BigDecimal getVatApplicable() {
         return vatApplicable;
     }
 
@@ -181,7 +153,7 @@ public class Customer extends AbstractNamedIdentity {
      * @param vatApplicable
      *            the VAT applicable
      */
-    public void setVatApplicable(Double vatApplicable) {
+    public void setVatApplicable(BigDecimal vatApplicable) {
         this.vatApplicable = vatApplicable;
     }
 
@@ -245,7 +217,7 @@ public class Customer extends AbstractNamedIdentity {
      * 
      * @return the default {@link PaymentMode}
      */
-    @ManyToOne(cascade = CascadeType.REFRESH)
+    @OneToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "FK_PAYMENT_MODE")
     public PaymentMode getPaymentMode() {
         return paymentMode;
@@ -283,7 +255,7 @@ public class Customer extends AbstractNamedIdentity {
      * 
      * @return the {@link Civility}
      */
-    @ManyToOne(cascade = CascadeType.REFRESH)
+    @OneToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "FK_CIVILITY")
     public Civility getCivility() {
         return civility;
@@ -321,7 +293,7 @@ public class Customer extends AbstractNamedIdentity {
      * 
      * @return the {@link LegalForm}
      */
-    @ManyToOne(cascade = CascadeType.REFRESH)
+    @OneToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "FK_LEGAL_FORM")
     public LegalForm getLegalForm() {
         return legalForm;
@@ -336,61 +308,14 @@ public class Customer extends AbstractNamedIdentity {
         this.legalForm = legalForm;
     }
 
-    /**
-     * @return the society
-     */
-    @ManyToOne(cascade = CascadeType.REFRESH)
-    @JoinColumn(name = "FK_SOCIETY")
-    public Society getSociety() {
-        return society;
-    }
-
-    /**
-     * @param society
-     *            the society to set
-     */
-    public void setSociety(Society society) {
-        this.society = society;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("Customer [agent=");
-        builder.append(agent);
-        builder.append(", bank1=");
-        builder.append(bank1);
-        builder.append(", bank2=");
-        builder.append(bank2);
-        builder.append(", billingAddress=");
-        builder.append(billingAddress);
-        builder.append(", civility=");
-        builder.append(civility);
-        builder.append(", contactInformation=");
-        builder.append(contactInformation);
-        builder.append(", creditLimit=");
-        builder.append(creditLimit);
-        builder.append(", defaultDiscountRate=");
-        builder.append(defaultDiscountRate);
-        builder.append(", deliveryAddress=");
-        builder.append(deliveryAddress);
-        builder.append(", description=");
-        builder.append(description);
-        builder.append(", legalForm=");
-        builder.append(legalForm);
-        builder.append(", paymentMode=");
-        builder.append(paymentMode);
-        builder.append(", society=");
-        builder.append(society);
-        builder.append(", vatApplicable=");
-        builder.append(vatApplicable);
-        builder.append(", vatNumber=");
-        builder.append(vatNumber);
-        builder.append("]");
-        return builder.toString();
+        return "Customer [agent=" + agent + ", bank1=" + bank1 + ", bank2=" + bank2 + ", billingAddress="
+                + billingAddress + ", civility=" + civility + ", contactInformation=" + contactInformation
+                + ", creditLimit=" + creditLimit + ", defaultDiscountRate=" + defaultDiscountRate
+                + ", deliveryAddress=" + deliveryAddress + ", description=" + description + ", legalForm=" + legalForm
+                + ", name=" + getName() + ", paymentMode=" + paymentMode + ", vatApplicable=" + vatApplicable
+                + ", vatNumber=" + vatNumber + "]";
     }
 
 }

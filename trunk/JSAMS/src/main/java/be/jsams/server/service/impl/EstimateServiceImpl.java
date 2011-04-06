@@ -1,10 +1,7 @@
 package be.jsams.server.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import be.jsams.common.bean.model.sale.EstimateBean;
-import be.jsams.common.bean.model.sale.EstimateDetailBean;
 import be.jsams.server.dao.EstimateDao;
 import be.jsams.server.dao.EstimateDetailDao;
 import be.jsams.server.model.Estimate;
@@ -53,25 +50,18 @@ public class EstimateServiceImpl implements EstimateService {
     /**
      * {@inheritDoc}
      */
-    public EstimateBean create(final EstimateBean bean) {
-        Estimate estimate = new Estimate(bean);
-        Estimate addingEstimate = estimateDao.add(estimate);
-        List<EstimateDetailBean> details = bean.getDetails();
-        List<EstimateDetail> addingDetails = new ArrayList<EstimateDetail>();
-        for (EstimateDetailBean detail : details) {
-            EstimateDetail detailObject = new EstimateDetail(detail);
-            detailObject.setEstimate(addingEstimate);
-            addingDetails.add((estimateDetailDao.add(detailObject)));
+    public void create(final Estimate estimate) {
+        estimateDao.add(estimate);
+        List<EstimateDetail> details = estimate.getDetails();
+        for (EstimateDetail detail : details) {
+            estimateDetailDao.add(detail);
         }
-        addingEstimate.setDetails(addingDetails);
-        return new EstimateBean(addingEstimate);
     }
 
     /**
      * {@inheritDoc}
      */
-    public void delete(final EstimateBean bean) {
-        Estimate estimate = new Estimate(bean);
+    public void delete(final Estimate estimate) {
         List<EstimateDetail> details = estimate.getDetails();
         for (EstimateDetail detail : details) {
             estimateDetailDao.delete(detail);
@@ -83,7 +73,7 @@ public class EstimateServiceImpl implements EstimateService {
      * {@inheritDoc}
      */
     public void delete(Long id) {
-        Estimate estimate = estimateDao.findById(id);
+        Estimate estimate = findById(id);
         List<EstimateDetail> details = estimate.getDetails();
         for (EstimateDetail detail : details) {
             estimateDetailDao.delete(detail);
@@ -94,43 +84,22 @@ public class EstimateServiceImpl implements EstimateService {
     /**
      * {@inheritDoc}
      */
-    public List<EstimateBean> findAll() {
-        List<Estimate> estimates = estimateDao.findAll();
-        List<EstimateBean> beans = new ArrayList<EstimateBean>();
-        for (Estimate estimate : estimates) {
-            beans.add(new EstimateBean(estimate));
-        }
-        return beans;
+    public List<Estimate> findAll() {
+        return estimateDao.findAll();
     }
 
     /**
      * {@inheritDoc}
      */
-    public EstimateBean findById(final Long id) {
-        Estimate estimate = estimateDao.findById(id);
-        EstimateBean bean = new EstimateBean(estimate);
-        return bean;
+    public Estimate findById(final Long id) {
+        return estimateDao.findById(id);
     }
 
     /**
      * {@inheritDoc}
      */
-    public void update(final EstimateBean bean) {
-        Estimate estimate = new Estimate(bean);
+    public void update(final Estimate estimate) {
         estimateDao.update(estimate);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public List<EstimateBean> findByCriteria(EstimateBean criteria) {
-        List<Estimate> estimates = estimateDao.findByCriteria(criteria);
-        List<EstimateBean> beans = new ArrayList<EstimateBean>();
-        for (Estimate estimate : estimates) {
-            beans.add(new EstimateBean(estimate));
-        }
-        return beans;
     }
 
 }

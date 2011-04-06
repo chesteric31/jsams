@@ -1,6 +1,7 @@
 package be.jsams.client.swing.component;
 
 import java.awt.Component;
+import java.awt.Container;
 
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableColumnModel;
@@ -8,6 +9,7 @@ import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 
+import be.jsams.client.model.panel.SearchPanel;
 import be.jsams.client.model.table.JsamsTableModel;
 
 /**
@@ -36,16 +38,14 @@ public class JsamsTable extends JTable {
         this.autoResizeColumnWidth = autoResizeColumnWidth;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    @Override
     public void setModel(final TableModel model) {
         super.setModel(model);
         if (autoResizeColumnWidth) {
             autoResizeColumnWidth();
         }
     }
-    
+
     /**
      * Methods that auto resize the column width following the size of the data.
      */
@@ -87,16 +87,40 @@ public class JsamsTable extends JTable {
         getTableHeader().setReorderingAllowed(false);
     }
 
+    /**
+     * Returns the eventually {@link SearchPanel}.
+     * 
+     * @return the eventually {@link SearchPanel} parent container
+     */
+    public Container getEventuallySearchPanel() {
+        for (Container p = this; p != null; p = p.getParent()) {
+            if (p instanceof SearchPanel<?, ?, ?>) {
+                return p;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Returns the eventually {@link JsamsDialog}.
+     * 
+     * @return the eventually {@link JsamsDialog} parent container
+     */
+    public Container getEventuallyJsamsDialog() {
+        for (Container p = this; p != null; p = p.getParent()) {
+            if (p instanceof JsamsDialog) {
+                return p;
+            }
+        }
+        return null;
+    }
 
     /**
      * Clears the table. (remove all rows)
      */
     public synchronized void clear() {
-        // only if instance of jsamsTableModel and not defaultTableModel
-        if (getModel() instanceof JsamsTableModel<?>) {
-            JsamsTableModel<?> model = (JsamsTableModel<?>) getModel();
-            model.clear();
-        }
+        JsamsTableModel<?> model = (JsamsTableModel<?>) getModel();
+        model.clear();
     }
 
 }

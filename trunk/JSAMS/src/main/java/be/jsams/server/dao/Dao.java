@@ -18,9 +18,8 @@ public interface Dao<T> {
      * 
      * @param newInstance
      *            the object to persist
-     * @return the newInstance with the id provided
      */
-    T add(T newInstance);
+    void add(T newInstance);
 
     /**
      * Finds an object following the id

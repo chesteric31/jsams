@@ -1,16 +1,15 @@
 package be.jsams.client.desktop;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.awt.print.PageFormat;
+import java.awt.print.PrinterJob;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
-import javax.swing.Icon;
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
@@ -23,31 +22,27 @@ import org.apache.commons.logging.LogFactory;
 import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.i18n.JsamsI18nResource;
+import be.jsams.client.model.dialog.EditSocietyDialog;
+import be.jsams.client.model.dialog.OpenSocietyDialog;
 import be.jsams.client.model.panel.SearchAgentPanel;
 import be.jsams.client.model.panel.SearchCustomerPanel;
-import be.jsams.client.model.panel.SearchEstimatePanel;
 import be.jsams.client.model.panel.SearchProductCategoryPanel;
 import be.jsams.client.model.panel.SearchProductPanel;
-import be.jsams.client.swing.action.ChooseSocietyAction;
-import be.jsams.client.swing.action.EditSocietyAction;
-import be.jsams.client.swing.action.ExitAction;
-import be.jsams.client.swing.action.PrinterParametersAction;
 import be.jsams.client.swing.component.JsamsCloseableTabbedPane;
 import be.jsams.client.swing.component.JsamsFrame;
 import be.jsams.client.swing.component.JsamsMenu;
 import be.jsams.client.swing.component.JsamsMenuItem;
 import be.jsams.client.swing.component.JsamsShortcutToolBar;
+import be.jsams.client.swing.component.JsamsStatusBar;
 import be.jsams.client.swing.listener.AgentTableMouseListener;
 import be.jsams.client.swing.listener.CustomerTableMouseListener;
-import be.jsams.client.swing.listener.EstimateTableMouseListener;
 import be.jsams.client.swing.listener.ProductCategoryTableMouseListener;
 import be.jsams.client.swing.listener.ProductTableMouseListener;
 import be.jsams.client.swing.listener.TabbedPaneKeyListener;
-import be.jsams.common.bean.model.management.AgentBean;
-import be.jsams.common.bean.model.management.CustomerBean;
-import be.jsams.common.bean.model.management.ProductBean;
-import be.jsams.common.bean.model.management.ProductCategoryBean;
-import be.jsams.common.bean.model.sale.EstimateBean;
+import be.jsams.server.model.Agent;
+import be.jsams.server.model.Customer;
+import be.jsams.server.model.Product;
+import be.jsams.server.model.ProductCategory;
 
 /**
  * {@link JsamsMainFrame} that contains all the components.
@@ -62,13 +57,7 @@ public class JsamsMainFrame extends JsamsFrame {
      */
     private static final long serialVersionUID = 8570689474653666931L;
 
-    private static final Log LOGGER = LogFactory.getLog(JsamsMainFrame.class);
-
-    /** Screen dimension */
-    public static final Dimension SCREEN = Toolkit.getDefaultToolkit().getScreenSize();
-
-    /** Center dimension onto the screen */
-    public static final Dimension CENTER = new Dimension((int) SCREEN.getWidth(), (int) SCREEN.getHeight());
+    protected static final Log LOGGER = LogFactory.getLog(JsamsMainFrame.class);
 
     private JMenuBar mainMenuBar;
 
@@ -115,7 +104,7 @@ public class JsamsMainFrame extends JsamsFrame {
     private JsamsMenuItem aboutMI;
 
     private JsamsShortcutToolBar shortcutToolBar;
-    // private JsamsStatusBar statusBar;
+    private JsamsStatusBar statusBar;
 
     private JsamsCloseableTabbedPane tabbedPane;
 
@@ -127,7 +116,7 @@ public class JsamsMainFrame extends JsamsFrame {
      */
     public JsamsMainFrame(final I18nString title) {
         super(title, "categories/applications-office.png");
-        setSize(CENTER);
+        setSize(JsamsDesktop.CENTER);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         initComponents();
     }
@@ -165,9 +154,7 @@ public class JsamsMainFrame extends JsamsFrame {
 
             setJMenuBar(mainMenuBar);
 
-            // TODO correct the components with splash panel, with the closing and opening menu item...
-            add(tabbedPane);
-            // add(JsamsSpashPanel.getInstance());
+            getContentPane().add(tabbedPane);
         } catch (Exception e) {
             LOGGER.error(e);
         }
@@ -206,8 +193,6 @@ public class JsamsMainFrame extends JsamsFrame {
      */
     private void buildSalesMenu() {
         salesMenu = new JsamsMenu(JsamsI18nResource.MENU_SALES);
-        // per default: false, true if a current society is set
-        // salesMenu.setEnabled(false);
         createDocumentsMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_CREATE_DOCUMENTS, "actions/document-new.png");
         salesMenu.add(createDocumentsMI);
         transferDocumentsMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_TRANSFER_DOCUMENTS,
@@ -219,7 +204,6 @@ public class JsamsMainFrame extends JsamsFrame {
         salesMenu.add(listDocumentsMI);
         salesMenu.add(new JSeparator());
         estimateMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_ESTIMATE);
-        estimateMI.setAction(estimatesAction(estimateMI.getText(), estimateMI.getIcon()));
         salesMenu.add(estimateMI);
         commandMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_COMMAND);
         salesMenu.add(commandMI);
@@ -236,21 +220,18 @@ public class JsamsMainFrame extends JsamsFrame {
      */
     private void buildManagementMenu() {
         managementMenu = new JsamsMenu(JsamsI18nResource.MENU_MANAGEMENT);
-        // per default: false, true if a current society is set
-        // managementMenu.setEnabled(false);
         customersMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_CUSTOMERS, "apps/system-users.png");
-        customersMI.setAction(customersAction(customersMI.getText(), customersMI.getIcon()));
+        customersMI.addActionListener(customersAction());
         managementMenu.add(customersMI);
         agentsMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_AGENTS, "categories/applications-development.png");
-        agentsMI.setAction(agentsAction(agentsMI.getText(), agentsMI.getIcon()));
+        agentsMI.addActionListener(agentsAction());
         managementMenu.add(agentsMI);
         managementMenu.add(new JSeparator());
         productsCategoryMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_PRODUCTS_CATEGORY);
-        productsCategoryMI
-                .setAction(productsCategoryAction(productsCategoryMI.getText(), productsCategoryMI.getIcon()));
+        productsCategoryMI.addActionListener(productsCategoryAction());
         managementMenu.add(productsCategoryMI);
         productsMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_PRODUCTS, "apps/preferences-desktop-theme.png");
-        productsMI.setAction(productsAction(productsMI.getText(), productsMI.getIcon()));
+        productsMI.addActionListener(productsAction());
         managementMenu.add(productsMI);
     }
 
@@ -260,29 +241,26 @@ public class JsamsMainFrame extends JsamsFrame {
     private void buildFileMenu() {
         fileMenu = new JsamsMenu(JsamsI18nResource.MENU_FILE);
         newMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_NEW, "actions/folder-new.png");
-        newMI.setAction(new EditSocietyAction(newMI.getText(), newMI.getIcon(), EditSocietyAction.NEW_ONE_MODE));
         newMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, KeyEvent.CTRL_MASK));
+        newMI.addActionListener(newSocietyAction());
         fileMenu.add(newMI);
         openMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_OPEN, "actions/document-open.png");
         openMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, KeyEvent.CTRL_MASK));
-        openMI.setAction(new ChooseSocietyAction(openMI.getText(), openMI.getIcon()));
+        openMI.addActionListener(chooseSocietyAction());
         fileMenu.add(openMI);
         closeMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_CLOSE, "status/folder-visiting.png");
         fileMenu.add(closeMI);
         fileMenu.add(new JSeparator());
         societyParametersMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_SOCIETY_PARAMETERS,
                 "actions/document-properties.png");
-//        SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
-        societyParametersMI.setAction(new EditSocietyAction(societyParametersMI.getText(), societyParametersMI
-                .getIcon(), EditSocietyAction.CURRENT_SOCIETY_MODE));
+        societyParametersMI.addActionListener(editSocietyAction());
         fileMenu.add(societyParametersMI);
         printerParametersMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_PRINTER_PARAMETERS, "devices/printer.png");
-        printerParametersMI.setAction(new PrinterParametersAction(printerParametersMI.getText(), printerParametersMI
-                .getIcon()));
+        printerParametersMI.addActionListener(printerParametersAction());
         fileMenu.add(printerParametersMI);
         fileMenu.add(new JSeparator());
         exitMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_EXIT_APPLICATION, "actions/system-log-out.png");
-        exitMI.setAction(new ExitAction(exitMI.getText(), exitMI.getIcon()));
+        exitMI.addActionListener(exitAction());
         fileMenu.add(exitMI);
     }
 
@@ -324,202 +302,197 @@ public class JsamsMainFrame extends JsamsFrame {
         southPanel.setLayout(new BoxLayout(southPanel, BoxLayout.PAGE_AXIS));
         southPanel.setBorder(BorderFactory.createEtchedBorder());
         shortcutToolBar = new JsamsShortcutToolBar();
-        // statusBar = new JsamsStatusBar();
-        // southPanel.add(statusBar);
+        statusBar = new JsamsStatusBar();
         southPanel.add(shortcutToolBar);
+        southPanel.add(statusBar);
         return southPanel;
     }
 
-    // /**
-    // * Opens the {@link OpenSocietyDialog} at the starting of the application
-    // */
-    // public void openChooseSocietyDialog() {
-    // new OpenSocietyDialog(JsamsI18nResource.TITLE_OPEN_SOCIETY);
-    // }
+    /**
+     * Opens the {@link OpenSocietyDialog} at the starting of the application
+     */
+    public void openChooseSocietyDialog() {
+        new OpenSocietyDialog(JsamsI18nResource.TITLE_OPEN_SOCIETY);
+    }
 
     /**
      * 
-     * @param text
-     *            the text to display
-     * @param icon
-     *            the {@link Icon} to display
+     * @return a {@link Action} for the exiting of the application
+     */
+    private Action exitAction() {
+        return new AbstractAction() {
+            /**
+             * Serial
+             */
+            private static final long serialVersionUID = -5064095014620413226L;
+
+            public void actionPerformed(ActionEvent event) {
+                JsamsDesktop.getInstance().stopNow();
+            }
+        };
+    }
+
+    /**
+     * 
+     * @return a {@link Action} for the editing of a Society object
+     */
+    private Action editSocietyAction() {
+        return new AbstractAction() {
+            /**
+             * Serial
+             */
+            private static final long serialVersionUID = 4492391448101337168L;
+
+            public void actionPerformed(ActionEvent event) {
+                new EditSocietyDialog(JsamsI18nResource.TITLE_EDIT_SOCIETY, JsamsDesktop.getInstance()
+                        .getCurrentSociety());
+            }
+        };
+    }
+
+    /**
+     * 
+     * @return a {@link Action} for the creation of the Society object
+     */
+    private Action newSocietyAction() {
+        return new AbstractAction() {
+            /**
+             * Serial
+             */
+            private static final long serialVersionUID = 3569088526731341971L;
+
+            public void actionPerformed(ActionEvent event) {
+                new EditSocietyDialog(JsamsI18nResource.TITLE_EDIT_SOCIETY, null);
+            }
+        };
+    }
+
+    /**
+     * 
+     * @return a {@link Action} for the choosing of the Society object
+     */
+    private Action chooseSocietyAction() {
+        return new AbstractAction() {
+            /**
+             * Serial
+             */
+            private static final long serialVersionUID = -3391550953264009789L;
+
+            public void actionPerformed(ActionEvent event) {
+                new OpenSocietyDialog(JsamsI18nResource.TITLE_OPEN_SOCIETY);
+            }
+        };
+    }
+
+    /**
+     * 
+     * @return a {@link Action} for the editing of printer settings
+     */
+    private Action printerParametersAction() {
+        return new AbstractAction() {
+
+            /**
+             * Serial
+             */
+            private static final long serialVersionUID = 6272986006770429798L;
+
+            public void actionPerformed(ActionEvent e) {
+                PrinterJob pjob = PrinterJob.getPrinterJob();
+                PageFormat pf = pjob.defaultPage();
+                pjob.setPrintable(null, pf);
+
+                // if (pjob.printDialog()) {
+                // // pjob.print();
+                // }
+            }
+        };
+    }
+
+    /**
+     * 
      * @return an {@link Action} for the searching of customers
      */
-    private Action customersAction(String text, Icon icon) {
-        AbstractAction action = new AbstractAction() {
+    private Action customersAction() {
+        return new AbstractAction() {
             /**
              * Serial
              */
             private static final long serialVersionUID = -8367998985097440307L;
 
             public void actionPerformed(ActionEvent event) {
-                SearchCustomerPanel searchPanel = new SearchCustomerPanel(new CustomerBean(),
+                SearchCustomerPanel searchPanel = new SearchCustomerPanel(new Customer(),
                         new CustomerTableMouseListener(), JsamsApplicationContext.getCustomerService(), true);
                 tabbedPane.addTab(JsamsI18nResource.TITLE_SEARCH_CUSTOMER, "apps/system-users.png", searchPanel);
             }
         };
-        action.putValue(Action.NAME, text);
-        action.putValue(Action.SMALL_ICON, icon);
-        return action;
     }
-
+    
     /**
      * 
-     * @param text
-     *            the text to display
-     * @param icon
-     *            the {@link Icon} to display
      * @return an {@link Action} for the searching of agents
      */
-    private Action agentsAction(String text, Icon icon) {
-        AbstractAction action = new AbstractAction() {
+    private Action agentsAction() {
+        return new AbstractAction() {
             /**
              * Serial
              */
             private static final long serialVersionUID = 3233472575375812337L;
 
             public void actionPerformed(ActionEvent event) {
-                SearchAgentPanel searchPanel = new SearchAgentPanel(new AgentBean(), new AgentTableMouseListener(),
+                SearchAgentPanel searchPanel = new SearchAgentPanel(new Agent(), new AgentTableMouseListener(),
                         JsamsApplicationContext.getAgentService(), true);
                 tabbedPane.addTab(JsamsI18nResource.TITLE_SEARCH_AGENT, "categories/applications-development.png",
                         searchPanel);
             }
         };
-        action.putValue(Action.NAME, text);
-        action.putValue(Action.SMALL_ICON, icon);
-        return action;
     }
 
     /**
      * 
-     * @param text
-     *            the text to display
-     * @param icon
-     *            the {@link Icon} to display
-     * @return an {@link Action} for the searching of estimates
-     */
-    private Action estimatesAction(String text, Icon icon) {
-        AbstractAction action = new AbstractAction() {
-            /**
-             * Serial Version UID
-             */
-            private static final long serialVersionUID = 3569088526731341971L;
-
-            public void actionPerformed(ActionEvent event) {
-                SearchEstimatePanel searchPanel = new SearchEstimatePanel(new EstimateBean(),
-                        new EstimateTableMouseListener(), JsamsApplicationContext.getEstimateService(), true);
-                tabbedPane.addTab(JsamsI18nResource.TITLE_SEARCH_ESTIMATE, null, searchPanel);
-            }
-        };
-        action.putValue(Action.NAME, text);
-        action.putValue(Action.SMALL_ICON, icon);
-        return action;
-    }
-
-    /**
-     * 
-     * @param text
-     *            the text to display
-     * @param icon
-     *            the {@link Icon} to display
      * @return a {@link Action} for the searching of products
      */
-    private Action productsAction(String text, Icon icon) {
-        AbstractAction action = new AbstractAction() {
+    private Action productsAction() {
+        return new AbstractAction() {
             /**
              * Serial
              */
             private static final long serialVersionUID = 3233472575375812337L;
 
             public void actionPerformed(ActionEvent event) {
-                SearchProductPanel searchPanel = new SearchProductPanel(new ProductBean(),
-                        new ProductTableMouseListener(), JsamsApplicationContext.getProductService(), true);
+                SearchProductPanel searchPanel = new SearchProductPanel(new Product(), new ProductTableMouseListener(),
+                        JsamsApplicationContext.getProductService(), true);
                 tabbedPane.addTab(JsamsI18nResource.TITLE_SEARCH_PRODUCT, "apps/preferences-desktop-theme.png",
                         searchPanel);
             }
         };
-        action.putValue(Action.NAME, text);
-        action.putValue(Action.SMALL_ICON, icon);
-        return action;
     }
 
     /**
      * 
-     * @param text
-     *            the text to display
-     * @param icon
-     *            the {@link Icon} to display
      * @return a {@link Action} for the searching of product categories
      */
-    private Action productsCategoryAction(String text, Icon icon) {
-        AbstractAction action = new AbstractAction() {
+    private Action productsCategoryAction() {
+        return new AbstractAction() {
             /**
              * Serial
              */
             private static final long serialVersionUID = -1558165346800183997L;
 
             public void actionPerformed(ActionEvent event) {
-                SearchProductCategoryPanel searchPanel = new SearchProductCategoryPanel(new ProductCategoryBean(),
+                SearchProductCategoryPanel searchPanel = new SearchProductCategoryPanel(new ProductCategory(),
                         new ProductCategoryTableMouseListener(), JsamsApplicationContext.getProductCategoryService(),
                         true);
                 tabbedPane.addTab(JsamsI18nResource.TITLE_SEARCH_PRODUCT_CATEGORY, null, searchPanel);
             }
         };
-        action.putValue(Action.NAME, text);
-        action.putValue(Action.SMALL_ICON, icon);
-        return action;
-    }
-
-    // /**
-    // *
-    // * @return the {@link JsamsStatusBar}
-    // */
-    // public JsamsStatusBar getStatusBar() {
-    // return statusBar;
-    // }
-
-    /**
-     * @return the managementMenu
-     */
-    public JsamsMenu getManagementMenu() {
-        return managementMenu;
-    }
-
-    // /**
-    // * @param managementMenu
-    // * the managementMenu to set
-    // */
-    // public void setManagementMenu(JsamsMenu managementMenu) {
-    // this.managementMenu = managementMenu;
-    // }
-
-    /**
-     * @return the salesMenu
-     */
-    public JsamsMenu getSalesMenu() {
-        return salesMenu;
-    }
-
-    // /**
-    // * @param salesMenu
-    // * the salesMenu to set
-    // */
-    // public void setSalesMenu(JsamsMenu salesMenu) {
-    // this.salesMenu = salesMenu;
-    // }
-
-    /**
-     * @return the tabbedPane
-     */
-    public JsamsCloseableTabbedPane getTabbedPane() {
-        return tabbedPane;
     }
 
     /**
-     * @return the societyParametersMI
+     * 
+     * @return the {@link JsamsStatusBar}
      */
-    public JsamsMenuItem getSocietyParametersMI() {
-        return societyParametersMI;
+    public JsamsStatusBar getStatusBar() {
+        return statusBar;
     }
 
 }

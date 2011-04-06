@@ -18,6 +18,11 @@ import javax.persistence.TemporalType;
  */
 public class CreditNote extends AbstractIdentity {
 
+    /**
+     * Serial Version UID
+     */
+    private static final long serialVersionUID = -5751333650368429179L;
+
     private Date creationDate;
     private String remark;
 
@@ -125,24 +130,10 @@ public class CreditNote extends AbstractIdentity {
         this.details = details;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("CreditNote [billingAddress=");
-        builder.append(billingAddress);
-        builder.append(", creationDate=");
-        builder.append(creationDate);
-        builder.append(", customer=");
-        builder.append(customer);
-        builder.append(", details=");
-        builder.append(details);
-        builder.append(", remark=");
-        builder.append(remark);
-        builder.append("]");
-        return builder.toString();
+        return "CreditNote [billingAddress=" + billingAddress + ", creationDate=" + creationDate + ", customer="
+                + customer + ", remark=" + remark + "]";
     }
 
 }

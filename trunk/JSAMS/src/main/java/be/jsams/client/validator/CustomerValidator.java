@@ -1,9 +1,11 @@
 package be.jsams.client.validator;
 
+import java.math.BigDecimal;
+
 import be.jsams.client.i18n.JsamsI18nLabelResource;
 import be.jsams.client.i18n.JsamsI18nResource;
-import be.jsams.common.bean.model.AddressBean;
-import be.jsams.common.bean.model.CustomerBean;
+import be.jsams.server.model.Address;
+import be.jsams.server.model.Customer;
 
 import com.jgoodies.validation.ValidationResult;
 import com.jgoodies.validation.Validator;
@@ -16,24 +18,20 @@ import com.jgoodies.validation.util.ValidationUtils;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class CustomerValidator implements Validator<CustomerBean> {
+public class CustomerValidator implements Validator<Customer> {
 
     /**
      * {@inheritDoc}
      */
-    public ValidationResult validate(final CustomerBean customer) {
+    public ValidationResult validate(final Customer customer) {
         PropertyValidationSupport support = new PropertyValidationSupport(customer, "");
 
-        String name = customer.getName();
-        if (ValidationUtils.isBlank(name)) {
+        if (ValidationUtils.isBlank(customer.getName())) {
             support.addError(JsamsI18nLabelResource.LABEL_NAME.getTranslation(), JsamsI18nResource.ERROR_IS_MANDATORY
                     .getTranslation());
-        } else if (!ValidationUtils.isAlphanumeric(name)) {
-            support.addError(JsamsI18nLabelResource.LABEL_NAME.getTranslation(),
-                    JsamsI18nResource.ERROR_IS_ALPHANUMERIC.getTranslation());
         }
 
-        if (customer.getPaymentMode().getSelection() == null) {
+        if (customer.getPaymentMode() == null) {
             support.addError(JsamsI18nLabelResource.LABEL_PAYMENT_MODE.getTranslation(),
                     JsamsI18nResource.ERROR_IS_MANDATORY.getTranslation());
         }
@@ -42,20 +40,17 @@ public class CustomerValidator implements Validator<CustomerBean> {
         if (ValidationUtils.isBlank(phone)) {
             support.addError(JsamsI18nLabelResource.LABEL_PHONE.getTranslation(), JsamsI18nResource.ERROR_IS_MANDATORY
                     .getTranslation());
-        } else if (!ValidationUtils.isAlphanumericSpace(phone)) {
-            support.addError(JsamsI18nLabelResource.LABEL_PHONE.getTranslation(),
-                    JsamsI18nResource.ERROR_IS_ALPHANUMERIC.getTranslation());
         }
 
-        Double vatApplicable = customer.getVatApplicable();
-        if (vatApplicable == null || ValidationUtils.isBlank(vatApplicable.toString())) {
+        BigDecimal vatApplicable = customer.getVatApplicable();
+        if (vatApplicable == null || ValidationUtils.isBlank(vatApplicable.toPlainString())) {
             support.addError(JsamsI18nLabelResource.LABEL_VAT_APPLICABLE.getTranslation(),
                     JsamsI18nResource.ERROR_IS_MANDATORY.getTranslation());
         }
 
-        Validator<AddressBean> billingAddressValidator = new AddressValidator();
+        Validator<Address> billingAddressValidator = new AddressValidator();
         ValidationResult billingAddressResult = billingAddressValidator.validate(customer.getBillingAddress());
-        Validator<AddressBean> deliveryAddressValidator = new AddressValidator();
+        Validator<Address> deliveryAddressValidator = new AddressValidator();
         ValidationResult deliveryAddressResult = deliveryAddressValidator.validate(customer.getDeliveryAddress());
 
         ValidationResult result = support.getResult();

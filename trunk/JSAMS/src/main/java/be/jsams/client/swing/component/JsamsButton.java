@@ -58,5 +58,5 @@ public class JsamsButton extends JButton {
     public JsamsButton(final String iconFileName) {
         super(new ImageIcon(IconUtil.buildIcon(iconFileName)));
     }
-    
+
 }

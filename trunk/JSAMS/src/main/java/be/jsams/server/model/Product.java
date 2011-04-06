@@ -1,13 +1,13 @@
 package be.jsams.server.model;
 
+import java.math.BigDecimal;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import be.jsams.common.bean.model.management.ProductBean;
 
 /**
  * Product entity object.
@@ -19,10 +19,14 @@ import be.jsams.common.bean.model.management.ProductBean;
 @Table(name = "PRODUCT")
 public class Product extends AbstractNamedIdentity {
 
-    private Double price;
+    /**
+     * Serial Version UID
+     */
+    private static final long serialVersionUID = -6479784842022897090L;
+    private BigDecimal price;
     private int quantityStock;
     private int reorderLevel;
-    private Double vatApplicable;
+    private BigDecimal vatApplicable;
 
     private ProductCategory category;
 
@@ -34,28 +38,11 @@ public class Product extends AbstractNamedIdentity {
     }
 
     /**
-     * Constructor
-     * 
-     * @param bean
-     *            the {@link ProductBean}
-     */
-    public Product(ProductBean bean) {
-        super(bean);
-        if (bean.getCategory().getId() != null) {
-            setCategory(new ProductCategory(bean.getCategory()));
-        }
-        setPrice(bean.getPrice());
-        setQuantityStock(bean.getQuantityStock());
-        setReorderLevel(bean.getReorderLevel());
-        setVatApplicable(bean.getVatApplicable());
-    }
-
-    /**
      * 
      * @return the price
      */
     @Column(name = "PRICE")
-    public Double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
@@ -64,7 +51,7 @@ public class Product extends AbstractNamedIdentity {
      * @param price
      *            the price to set
      */
-    public void setPrice(Double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
@@ -109,7 +96,7 @@ public class Product extends AbstractNamedIdentity {
      * @return the VAT applicable
      */
     @Column(name = "VAT_APPLICABLE")
-    public Double getVatApplicable() {
+    public BigDecimal getVatApplicable() {
         return vatApplicable;
     }
 
@@ -118,7 +105,7 @@ public class Product extends AbstractNamedIdentity {
      * @param vatApplicable
      *            the VAT applicable to set
      */
-    public void setVatApplicable(Double vatApplicable) {
+    public void setVatApplicable(BigDecimal vatApplicable) {
         this.vatApplicable = vatApplicable;
     }
 
@@ -141,24 +128,10 @@ public class Product extends AbstractNamedIdentity {
         this.category = category;
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("Product [category=");
-        builder.append(category);
-        builder.append(", price=");
-        builder.append(price);
-        builder.append(", quantityStock=");
-        builder.append(quantityStock);
-        builder.append(", reorderLevel=");
-        builder.append(reorderLevel);
-        builder.append(", vatApplicable=");
-        builder.append(vatApplicable);
-        builder.append("]");
-        return builder.toString();
+        return "Product [category=" + category + ", name=" + getName() + ", price=" + price + ", quantityStock="
+                + quantityStock + ", reorderLevel=" + reorderLevel + ", vatApplicable=" + vatApplicable + "]";
     }
 
 }

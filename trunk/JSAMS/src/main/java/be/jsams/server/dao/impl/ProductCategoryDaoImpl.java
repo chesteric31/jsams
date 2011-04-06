@@ -4,8 +4,6 @@ import java.util.List;
 
 import javax.persistence.Query;
 
-import be.jsams.client.desktop.JsamsDesktop;
-import be.jsams.common.bean.model.management.ProductCategoryBean;
 import be.jsams.server.dao.ProductCategoryDao;
 import be.jsams.server.model.ProductCategory;
 
@@ -33,26 +31,38 @@ public class ProductCategoryDaoImpl extends DaoImpl<ProductCategory> implements 
      * {@inheritDoc}
      */
     @SuppressWarnings("unchecked")
-    public List<ProductCategory> findByCriteria(final ProductCategoryBean criteria) {
+    public List<ProductCategory> findByCriteria(final ProductCategory criteria) {
         StringBuilder queryBuilder = new StringBuilder("FROM ProductCategory c");
+
+        boolean isFirst = true;
 
         String name = criteria.getLabel();
         String nameFr = criteria.getLabelFr();
         String nameNl = criteria.getLabelNl();
-        
-        Long societyId = JsamsDesktop.getInstance().getCurrentSociety().getId();
-        
-        queryBuilder.append(" WHERE ");
-        queryBuilder.append("c.society.id = " + societyId);
-        
         if (!StringUtils.isNullOrEmpty(name)) {
-            queryBuilder.append(" AND c.label LIKE '%" + name + "%'");
+            if (isFirst) {
+                queryBuilder.append(" WHERE");
+                isFirst = false;
+            }
+            queryBuilder.append(" c.label LIKE '%" + name + "%'");
         }
-        if (!StringUtils.isNullOrEmpty(nameFr)) {
-            queryBuilder.append(" AND c.labelFr LIKE '%" + nameFr + "%'");
+        if (nameFr != null) {
+            if (isFirst) {
+                queryBuilder.append(" WHERE");
+                isFirst = false;
+            } else {
+                queryBuilder.append(" AND");
+            }
+            queryBuilder.append(" c.labelFr LIKE '%" + nameFr + "%'");
         }
-        if (!StringUtils.isNullOrEmpty(nameNl)) {
-            queryBuilder.append(" AND c.labelNl LIKE '%" + nameNl + "%'");
+        if (nameNl != null) {
+            if (isFirst) {
+                queryBuilder.append(" WHERE");
+                isFirst = false;
+            } else {
+                queryBuilder.append(" AND");
+            }
+            queryBuilder.append(" c.labelNl LIKE '%" + nameNl + "%'");
         }
 
         Query query = getEntityManager().createQuery(queryBuilder.toString());

@@ -12,8 +12,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import be.jsams.common.bean.model.management.AgentBean;
-
 /**
  * Agent entity object.
  * 
@@ -24,36 +22,22 @@ import be.jsams.common.bean.model.management.AgentBean;
 @Table(name = "AGENT")
 public class Agent extends AbstractNamedIdentity {
 
+    /**
+     * Serial Version UID
+     */
+    private static final long serialVersionUID = 8508634686187725716L;
     private String function;
 
     private List<Customer> customers;
     private Civility civility;
     private Address address;
     private ContactInformation contactInformation;
-    private Society society;
 
     /**
      * Constructor.
      */
     public Agent() {
         super();
-    }
-
-    /**
-     * Constructor.
-     * 
-     * @param bean
-     *            the {@link AgentBean}
-     */
-    public Agent(final AgentBean bean) {
-        super(bean);
-        setFunction(bean.getFunction());
-        setAddress(new Address(bean.getAddress()));
-        if (bean.getCivility().getId() != null) {
-            setCivility(new Civility(bean.getCivility()));
-        }
-        setContactInformation(new ContactInformation(bean.getContactInformation()));
-        setSociety(new Society(bean.getSociety()));
     }
 
     /**
@@ -135,7 +119,7 @@ public class Agent extends AbstractNamedIdentity {
      * 
      * @return a list of {@link Customer}
      */
-    @ManyToMany(mappedBy = "agent", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "agent", fetch = FetchType.EAGER)
     public List<Customer> getCustomers() {
         return customers;
     }
@@ -149,43 +133,10 @@ public class Agent extends AbstractNamedIdentity {
         this.customers = customers;
     }
 
-    /**
-     * @return the society
-     */
-    @ManyToOne(cascade = CascadeType.REFRESH)
-    @JoinColumn(name = "FK_SOCIETY")
-    public Society getSociety() {
-        return society;
-    }
-
-    /**
-     * @param society
-     *            the society to set
-     */
-    public void setSociety(Society society) {
-        this.society = society;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("Agent [address=");
-        builder.append(address);
-        builder.append(", civility=");
-        builder.append(civility);
-        builder.append(", contactInformation=");
-        builder.append(contactInformation);
-        builder.append(", customers=");
-        builder.append(customers);
-        builder.append(", function=");
-        builder.append(function);
-        builder.append(", society=");
-        builder.append(society);
-        builder.append("]");
-        return builder.toString();
+        return "Agent [address=" + address + ", civility=" + civility + ", contactInformation=" + contactInformation
+                + ", customers=" + customers + ", function=" + function + ", name=" + getName() + "]";
     }
 
 }
