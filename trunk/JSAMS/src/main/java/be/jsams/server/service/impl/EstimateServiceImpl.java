@@ -116,8 +116,17 @@ public class EstimateServiceImpl implements EstimateService {
      * {@inheritDoc}
      */
     public void update(final EstimateBean bean) {
-        Estimate estimate = new Estimate(bean);
-        estimateDao.update(estimate);
+        Estimate updatedEstimate = new Estimate(bean);
+        estimateDao.update(updatedEstimate);
+        List<EstimateDetailBean> details = bean.getDetails();
+//        List<EstimateDetail> updatedDetails = new ArrayList<EstimateDetail>();
+        for (EstimateDetailBean detail : details) {
+            EstimateDetail detailObject = new EstimateDetail(detail);
+            detailObject.setEstimate(updatedEstimate);
+            estimateDetailDao.update(detailObject);
+        }
+//        estimate.setDetails(addingDetails);
+//        return new EstimateBean(addingEstimate);
     }
 
     /**

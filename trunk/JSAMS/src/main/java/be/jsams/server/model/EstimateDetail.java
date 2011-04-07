@@ -44,7 +44,7 @@ public class EstimateDetail extends AbstractIdentity {
     public EstimateDetail(final EstimateDetailBean bean) {
         super(bean);
         setDiscountRate(bean.getDiscountRate());
-        setEstimate(new Estimate(bean.getEstimate()));
+//        setEstimate(new Estimate(bean.getEstimate()));
         setPrice(bean.getPrice());
         setProduct(new Product(bean.getProduct()));
         setQuantity(bean.getQuantity());
