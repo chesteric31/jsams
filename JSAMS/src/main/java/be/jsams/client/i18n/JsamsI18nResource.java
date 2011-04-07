@@ -14,11 +14,13 @@ public final class JsamsI18nResource {
     private JsamsI18nResource() {
     }
 
+    public static final I18nString TITLE_NO_ARGUMENTS = new I18nString("title.application_no_arguments");
+    
     public static final I18nString TITLE_OPEN_SOCIETY = new I18nString("title.open.society");
 
     public static final I18nString BUTTON_OPEN_SOCIETIES_NEW = new I18nString("button.open.society_new");
 
-    public static final I18nString EXIT_APPLICATION_CONFIRMATION = new I18nString("exit.confirmation");
+    public static final I18nString EXIT_CONFIRMATION = new I18nString("exit.confirmation");
 
     public static final I18nString MENU_FILE = new I18nString("menu.file");
 
@@ -184,5 +186,34 @@ public final class JsamsI18nResource {
     public static final I18nString COLUMN_CITY = new I18nString("column.city");
     
     public static final I18nString PANEL_ADDRESS = new I18nString("panel.address");
+
+    public static final I18nString ERROR_TITLE = new I18nString("title.error");
+
+    public static final I18nString BUTTON_COPY_BILLING_TO_DELIVERY = new I18nString("button.copy_billing_to_delivery");
+
+    public static final I18nString ERROR_IS_ALPHANUMERIC = new I18nString("error.is_alphanumeric");
+
+    public static final I18nString ERROR_IS_NUMERIC = new I18nString("error.is_numeric");
+
+    public static final I18nString COLUMN_CREATION_DATE = new I18nString("column.creation_date");
+
+    public static final I18nString COLUMN_TRANSFERRED = new I18nString("column.transferred");
+    
+    public static final I18nString COLUMN_REMARK = new I18nString("column.remark");
+    
+    public static final I18nString COLUMN_DISCOUNT_RATE = new I18nString("column.discount_rate");
+
+    public static final I18nString TITLE_SEARCH_ESTIMATE = new I18nString("title.search.estimate");
+
+    public static final I18nString TABLE_ONE_RESULT = new I18nString("table.info.one_result");
+
+    public static final I18nString PANEL_ESTIMATE_DETAILS = new I18nString("panel.estimate_details");
+
+    public static final I18nString COLUMN_PRODUCT_ID = new I18nString("column.product_id");
+    
+    public static final I18nString COLUMN_PRODUCT_NAME = new I18nString("column.product_name");
+
+    public static final I18nString COLUMN_QUANTITY = new I18nString("column.quantity");
+
     
 }

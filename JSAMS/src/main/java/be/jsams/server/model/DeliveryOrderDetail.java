@@ -15,10 +15,6 @@ import javax.persistence.ManyToOne;
  */
 public class DeliveryOrderDetail extends AbstractIdentity {
 
-    /**
-     * Serial Version UID
-     */
-    private static final long serialVersionUID = -2260567879212953331L;
     private int quantity;
     private String description;
     private BigDecimal vatApplicable;
@@ -199,11 +195,32 @@ public class DeliveryOrderDetail extends AbstractIdentity {
         this.billDetail = billDetail;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
-        return "DeliveryOrderDetail [commandDetail=" + commandDetail + ", deliveryOrder=" + deliveryOrder
-                + ", description=" + description + ", discountRate=" + discountRate + ", product=" + product
-                + ", quantity=" + quantity + ", transferred=" + transferred + ", vatApplicable=" + vatApplicable + "]";
+        StringBuilder builder = new StringBuilder();
+        builder.append("DeliveryOrderDetail [billDetail=");
+        builder.append(billDetail);
+        builder.append(", commandDetail=");
+        builder.append(commandDetail);
+        builder.append(", deliveryOrder=");
+        builder.append(deliveryOrder);
+        builder.append(", description=");
+        builder.append(description);
+        builder.append(", discountRate=");
+        builder.append(discountRate);
+        builder.append(", product=");
+        builder.append(product);
+        builder.append(", quantity=");
+        builder.append(quantity);
+        builder.append(", transferred=");
+        builder.append(transferred);
+        builder.append(", vatApplicable=");
+        builder.append(vatApplicable);
+        builder.append("]");
+        return builder.toString();
     }
 
 }

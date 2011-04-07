@@ -61,8 +61,9 @@ public class DaoImpl<T> implements Dao<T> {
     /**
      * {@inheritDoc}
      */
-    public void add(final T newInstance) {
+    public T add(final T newInstance) {
         entityManager.persist(newInstance);
+        return newInstance;
     }
 
     /**

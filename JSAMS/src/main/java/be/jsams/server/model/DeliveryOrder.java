@@ -24,13 +24,10 @@ import javax.persistence.TemporalType;
 @Table(name = "DELIVERY_ORDER")
 public class DeliveryOrder extends AbstractIdentity {
 
-    /**
-     * Serial Version UID
-     */
-    private static final long serialVersionUID = 6319674447875624133L;
     private Date creationDate;
     private String remark;
     private BigDecimal discountRate;
+    private boolean transferred;
 
     private Customer customer;
     private Address deliveryAddress;
@@ -155,10 +152,44 @@ public class DeliveryOrder extends AbstractIdentity {
         this.details = details;
     }
 
+    /**
+     * @return the transferred
+     */
+    @Column(name = "TRANSFERRED")
+    public boolean isTransferred() {
+        return transferred;
+    }
+
+    /**
+     * @param transferred
+     *            the transferred to set
+     */
+    public void setTransferred(boolean transferred) {
+        this.transferred = transferred;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
-        return "DeliveryOrder [creationDate=" + creationDate + ", customer=" + customer + ", deliveryAddress="
-                + deliveryAddress + ", discountRate=" + discountRate + ", remark=" + remark + "]";
+        StringBuilder builder = new StringBuilder();
+        builder.append("DeliveryOrder [creationDate=");
+        builder.append(creationDate);
+        builder.append(", customer=");
+        builder.append(customer);
+        builder.append(", deliveryAddress=");
+        builder.append(deliveryAddress);
+        builder.append(", details=");
+        builder.append(details);
+        builder.append(", discountRate=");
+        builder.append(discountRate);
+        builder.append(", remark=");
+        builder.append(remark);
+        builder.append(", transferred=");
+        builder.append(transferred);
+        builder.append("]");
+        return builder.toString();
     }
 
 }

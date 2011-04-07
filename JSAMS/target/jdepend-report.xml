@@ -1,0 +1,1991 @@
+<?xml version="1.0"?>
+<JDepend>
+    <Packages>
+
+        <Package name="be.jsams">
+            <Stats>
+                <TotalClasses>1</TotalClasses>
+                <ConcreteClasses>1</ConcreteClasses>
+                <AbstractClasses>0</AbstractClasses>
+                <Ca>0</Ca>
+                <Ce>5</Ce>
+                <A>0</A>
+                <I>1</I>
+                <D>0</D>
+                <V>1</V>
+            </Stats>
+
+            <AbstractClasses>
+            </AbstractClasses>
+
+            <ConcreteClasses>
+                <Class sourceFile="JsamsStart.java">
+                    be.jsams.JsamsStart
+                </Class>
+            </ConcreteClasses>
+
+            <DependsUpon>
+                <Package>be.jsams.client.context</Package>
+                <Package>be.jsams.client.desktop</Package>
+                <Package>be.jsams.client.i18n</Package>
+                <Package>java.lang</Package>
+                <Package>org.springframework.context.support</Package>
+            </DependsUpon>
+
+            <UsedBy>
+            </UsedBy>
+        </Package>
+
+        <Package name="be.jsams.client.context">
+            <Stats>
+                <TotalClasses>1</TotalClasses>
+                <ConcreteClasses>1</ConcreteClasses>
+                <AbstractClasses>0</AbstractClasses>
+                <Ca>7</Ca>
+                <Ce>4</Ce>
+                <A>0</A>
+                <I>0.36</I>
+                <D>0.64</D>
+                <V>1</V>
+            </Stats>
+
+            <AbstractClasses>
+            </AbstractClasses>
+
+            <ConcreteClasses>
+                <Class sourceFile="JsamsApplicationContext.java">
+                    be.jsams.client.context.JsamsApplicationContext
+                </Class>
+            </ConcreteClasses>
+
+            <DependsUpon>
+                <Package>be.jsams.server.dao</Package>
+                <Package>be.jsams.server.service</Package>
+                <Package>java.lang</Package>
+                <Package>org.springframework.context.support</Package>
+            </DependsUpon>
+
+            <UsedBy>
+                <Package>be.jsams</Package>
+                <Package>be.jsams.client.desktop</Package>
+                <Package>be.jsams.client.model.dialog</Package>
+                <Package>be.jsams.client.swing.action</Package>
+                <Package>be.jsams.common.bean.model</Package>
+                <Package>be.jsams.common.bean.model.management</Package>
+                <Package>be.jsams.common.bean.view</Package>
+            </UsedBy>
+        </Package>
+
+        <Package name="be.jsams.client.desktop">
+            <Stats>
+                <TotalClasses>9</TotalClasses>
+                <ConcreteClasses>9</ConcreteClasses>
+                <AbstractClasses>0</AbstractClasses>
+                <Ca>6</Ca>
+                <Ce>16</Ce>
+                <A>0</A>
+                <I>0.73</I>
+                <D>0.27</D>
+                <V>1</V>
+            </Stats>
+
+            <AbstractClasses>
+            </AbstractClasses>
+
+            <ConcreteClasses>
+                <Class sourceFile="JsamsDesktop.java">
+                    be.jsams.client.desktop.JsamsDesktop
+                </Class>
+                <Class sourceFile="JsamsDesktop.java">
+                    be.jsams.client.desktop.JsamsDesktop$1
+                </Class>
+                <Class sourceFile="JsamsMainFrame.java">
+                    be.jsams.client.desktop.JsamsMainFrame
+                </Class>
+                <Class sourceFile="JsamsMainFrame.java">
+                    be.jsams.client.desktop.JsamsMainFrame$1
+                </Class>
+                <Class sourceFile="JsamsMainFrame.java">
+                    be.jsams.client.desktop.JsamsMainFrame$2
+                </Class>
+                <Class sourceFile="JsamsMainFrame.java">
+                    be.jsams.client.desktop.JsamsMainFrame$3
+                </Class>
+                <Class sourceFile="JsamsMainFrame.java">
+                    be.jsams.client.desktop.JsamsMainFrame$4
+                </Class>
+                <Class sourceFile="JsamsMainFrame.java">
+                    be.jsams.client.desktop.JsamsMainFrame$5
+                </Class>
+                <Class sourceFile="JsamsSpashPanel.java">
+                    be.jsams.client.desktop.JsamsSpashPanel
+                </Class>
+            </ConcreteClasses>
+
+            <DependsUpon>
+                <Package>be.jsams.client.context</Package>
+                <Package>be.jsams.client.i18n</Package>
+                <Package>be.jsams.client.model.dialog</Package>
+                <Package>be.jsams.client.model.panel</Package>
+                <Package>be.jsams.client.swing.action</Package>
+                <Package>be.jsams.client.swing.component</Package>
+                <Package>be.jsams.client.swing.listener</Package>
+                <Package>be.jsams.common.bean.model.management</Package>
+                <Package>be.jsams.common.bean.model.sale</Package>
+                <Package>java.awt</Package>
+                <Package>java.awt.event</Package>
+                <Package>java.lang</Package>
+                <Package>java.util</Package>
+                <Package>javax.swing</Package>
+                <Package>javax.swing.plaf</Package>
+                <Package>org.apache.commons.logging</Package>
+            </DependsUpon>
+
+            <UsedBy>
+                <Package>be.jsams</Package>
+                <Package>be.jsams.client.model.dialog</Package>
+                <Package>be.jsams.client.swing.action</Package>
+                <Package>be.jsams.client.swing.component</Package>
+                <Package>be.jsams.common.bean.model.management</Package>
+                <Package>be.jsams.server.dao.impl</Package>
+            </UsedBy>
+        </Package>
+
+        <Package name="be.jsams.client.formatter">
+            <Stats>
+                <TotalClasses>1</TotalClasses>
+                <ConcreteClasses>1</ConcreteClasses>
+                <AbstractClasses>0</AbstractClasses>
+                <Ca>1</Ca>
+                <Ce>3</Ce>
+                <A>0</A>
+                <I>0.75</I>
+                <D>0.25</D>
+                <V>1</V>
+            </Stats>
+
+            <AbstractClasses>
+            </AbstractClasses>
+
+            <ConcreteClasses>
+                <Class sourceFile="DoubleFormatter.java">
+                    be.jsams.client.formatter.DoubleFormatter
+                </Class>
+            </ConcreteClasses>
+
+            <DependsUpon>
+                <Package>java.lang</Package>
+                <Package>java.text</Package>
+                <Package>javax.swing.text</Package>
+            </DependsUpon>
+
+            <UsedBy>
+                <Package>be.jsams.common.bean.view</Package>
+            </UsedBy>
+        </Package>
+
+        <Package name="be.jsams.client.i18n">
+            <Stats>
+                <TotalClasses>6</TotalClasses>
+                <ConcreteClasses>6</ConcreteClasses>
+                <AbstractClasses>0</AbstractClasses>
+                <Ca>11</Ca>
+                <Ce>4</Ce>
+                <A>0</A>
+                <I>0.27</I>
+                <D>0.73</D>
+                <V>1</V>
+            </Stats>
+
+            <AbstractClasses>
+            </AbstractClasses>
+
+            <ConcreteClasses>
+                <Class sourceFile="I18nApplicationContext.java">
+                    be.jsams.client.i18n.I18nApplicationContext
+                </Class>
+                <Class sourceFile="I18nManager.java">
+                    be.jsams.client.i18n.I18nManager
+                </Class>
+                <Class sourceFile="I18nString.java">
+                    be.jsams.client.i18n.I18nString
+                </Class>
+                <Class sourceFile="JsamsI18nLabelResource.java">
+                    be.jsams.client.i18n.JsamsI18nLabelResource
+                </Class>
+                <Class sourceFile="JsamsI18nResource.java">
+                    be.jsams.client.i18n.JsamsI18nResource
+                </Class>
+                <Class sourceFile="UserContext.java">
+                    be.jsams.client.i18n.UserContext
+                </Class>
+            </ConcreteClasses>
+
+            <DependsUpon>
+                <Package>java.lang</Package>
+                <Package>java.util</Package>
+                <Package>org.springframework.context</Package>
+                <Package>org.springframework.context.support</Package>
+            </DependsUpon>
+
+            <UsedBy>
+                <Package>be.jsams</Package>
+                <Package>be.jsams.client.desktop</Package>
+                <Package>be.jsams.client.model.dialog</Package>
+                <Package>be.jsams.client.model.panel</Package>
+                <Package>be.jsams.client.model.table</Package>
+                <Package>be.jsams.client.renderer</Package>
+                <Package>be.jsams.client.swing.action</Package>
+                <Package>be.jsams.client.swing.component</Package>
+                <Package>be.jsams.client.swing.listener</Package>
+                <Package>be.jsams.client.validator</Package>
+                <Package>be.jsams.common.bean.view</Package>
+            </UsedBy>
+        </Package>
+
+        <Package name="be.jsams.client.model.dialog">
+            <Stats>
+                <TotalClasses>9</TotalClasses>
+                <ConcreteClasses>8</ConcreteClasses>
+                <AbstractClasses>1</AbstractClasses>
+                <Ca>4</Ca>
+                <Ce>21</Ce>
+                <A>0.11</A>
+                <I>0.84</I>
+                <D>0.05</D>
+                <V>1</V>
+            </Stats>
+
+            <AbstractClasses>
+                <Class sourceFile="AbstractEditDialog.java">
+                    be.jsams.client.model.dialog.AbstractEditDialog
+                </Class>
+            </AbstractClasses>
+
+            <ConcreteClasses>
+                <Class sourceFile="EditAgentDialog.java">
+                    be.jsams.client.model.dialog.EditAgentDialog
+                </Class>
+                <Class sourceFile="EditCustomerDialog.java">
+                    be.jsams.client.model.dialog.EditCustomerDialog
+                </Class>
+                <Class sourceFile="EditEstimateDialog.java">
+                    be.jsams.client.model.dialog.EditEstimateDialog
+                </Class>
+                <Class sourceFile="EditProductCategoryDialog.java">
+                    be.jsams.client.model.dialog.EditProductCategoryDialog
+                </Class>
+                <Class sourceFile="EditProductDialog.java">
+                    be.jsams.client.model.dialog.EditProductDialog
+                </Class>
+                <Class sourceFile="EditSocietyDialog.java">
+                    be.jsams.client.model.dialog.EditSocietyDialog
+                </Class>
+                <Class sourceFile="OpenSocietyDialog.java">
+                    be.jsams.client.model.dialog.OpenSocietyDialog
+                </Class>
+                <Class sourceFile="OpenSocietyDialog.java">
+                    be.jsams.client.model.dialog.OpenSocietyDialog$1
+                </Class>
+            </ConcreteClasses>
+
+            <DependsUpon>
+                <Package>be.jsams.client.context</Package>
+                <Package>be.jsams.client.desktop</Package>
+                <Package>be.jsams.client.i18n</Package>
+                <Package>be.jsams.client.renderer</Package>
+                <Package>be.jsams.client.swing.component</Package>
+                <Package>be.jsams.client.validator</Package>
+                <Package>be.jsams.common.bean.model</Package>
+                <Package>be.jsams.common.bean.model.management</Package>
+                <Package>be.jsams.common.bean.model.sale</Package>
+                <Package>be.jsams.common.bean.view</Package>
+                <Package>be.jsams.server.service</Package>
+                <Package>com.jgoodies.forms.builder</Package>
+                <Package>com.jgoodies.forms.layout</Package>
+                <Package>com.jgoodies.validation</Package>
+                <Package>com.jgoodies.validation.util</Package>
+                <Package>com.jgoodies.validation.view</Package>
+                <Package>java.awt</Package>
+                <Package>java.awt.event</Package>
+                <Package>java.lang</Package>
+                <Package>java.util</Package>
+                <Package>javax.swing</Package>
+            </DependsUpon>
+
+            <UsedBy>
+                <Package>be.jsams.client.desktop</Package>
+                <Package>be.jsams.client.model.panel</Package>
+                <Package>be.jsams.client.swing.action</Package>
+                <Package>be.jsams.client.swing.listener</Package>
+            </UsedBy>
+        </Package>
+
+        <Package name="be.jsams.client.model.panel">
+            <Stats>
+                <TotalClasses>9</TotalClasses>
+                <ConcreteClasses>8</ConcreteClasses>
+                <AbstractClasses>1</AbstractClasses>
+                <Ca>3</Ca>
+                <Ce>24</Ce>
+                <A>0.11</A>
+                <I>0.89</I>
+                <D>0</D>
+                <V>1</V>
+            </Stats>
+
+            <AbstractClasses>
+                <Class sourceFile="AbstractSearchPanel.java">
+                    be.jsams.client.model.panel.AbstractSearchPanel
+                </Class>
+            </AbstractClasses>
+
+            <ConcreteClasses>
+                <Class sourceFile="AbstractSearchPanel.java">
+                    be.jsams.client.model.panel.AbstractSearchPanel$1
+                </Class>
+                <Class sourceFile="AbstractSearchPanel.java">
+                    be.jsams.client.model.panel.AbstractSearchPanel$2
+                </Class>
+                <Class sourceFile="AbstractSearchPanel.java">
+                    be.jsams.client.model.panel.AbstractSearchPanel$3
+                </Class>
+                <Class sourceFile="SearchAgentPanel.java">
+                    be.jsams.client.model.panel.SearchAgentPanel
+                </Class>
+                <Class sourceFile="SearchCustomerPanel.java">
+                    be.jsams.client.model.panel.SearchCustomerPanel
+                </Class>
+                <Class sourceFile="SearchEstimatePanel.java">
+                    be.jsams.client.model.panel.SearchEstimatePanel
+                </Class>
+                <Class sourceFile="SearchProductCategoryPanel.java">
+                    be.jsams.client.model.panel.SearchProductCategoryPanel
+                </Class>
+                <Class sourceFile="SearchProductPanel.java">
+                    be.jsams.client.model.panel.SearchProductPanel
+                </Class>
+            </ConcreteClasses>
+
+            <DependsUpon>
+                <Package>be.jsams.client.i18n</Package>
+                <Package>be.jsams.client.model.dialog</Package>
+                <Package>be.jsams.client.model.table</Package>
+                <Package>be.jsams.client.renderer</Package>
+                <Package>be.jsams.client.swing.component</Package>
+                <Package>be.jsams.client.swing.listener</Package>
+                <Package>be.jsams.client.validator</Package>
+                <Package>be.jsams.common.bean.model</Package>
+                <Package>be.jsams.common.bean.model.management</Package>
+                <Package>be.jsams.common.bean.model.sale</Package>
+                <Package>be.jsams.common.bean.view</Package>
+                <Package>be.jsams.server.service</Package>
+                <Package>com.jgoodies.forms.factories</Package>
+                <Package>com.jgoodies.validation</Package>
+                <Package>com.jgoodies.validation.util</Package>
+                <Package>com.jgoodies.validation.view</Package>
+                <Package>java.awt</Package>
+                <Package>java.awt.event</Package>
+                <Package>java.lang</Package>
+                <Package>java.util</Package>
+                <Package>javax.swing</Package>
+                <Package>javax.swing.border</Package>
+                <Package>javax.swing.table</Package>
+                <Package>org.apache.commons.logging</Package>
+            </DependsUpon>
+
+            <UsedBy>
+                <Package>be.jsams.client.desktop</Package>
+                <Package>be.jsams.client.swing.action</Package>
+                <Package>be.jsams.common.bean.view</Package>
+            </UsedBy>
+        </Package>
+
+        <Package name="be.jsams.client.model.table">
+            <Stats>
+                <TotalClasses>7</TotalClasses>
+                <ConcreteClasses>6</ConcreteClasses>
+                <AbstractClasses>1</AbstractClasses>
+                <Ca>5</Ca>
+                <Ce>8</Ce>
+                <A>0.14</A>
+                <I>0.62</I>
+                <D>0.24</D>
+                <V>1</V>
+            </Stats>
+
+            <AbstractClasses>
+                <Class sourceFile="JsamsTableModel.java">
+                    be.jsams.client.model.table.JsamsTableModel
+                </Class>
+            </AbstractClasses>
+
+            <ConcreteClasses>
+                <Class sourceFile="AgentTableModel.java">
+                    be.jsams.client.model.table.AgentTableModel
+                </Class>
+                <Class sourceFile="CustomerTableModel.java">
+                    be.jsams.client.model.table.CustomerTableModel
+                </Class>
+                <Class sourceFile="EstimateDetailTableModel.java">
+                    be.jsams.client.model.table.EstimateDetailTableModel
+                </Class>
+                <Class sourceFile="EstimateTableModel.java">
+                    be.jsams.client.model.table.EstimateTableModel
+                </Class>
+                <Class sourceFile="ProductCategoryTableModel.java">
+                    be.jsams.client.model.table.ProductCategoryTableModel
+                </Class>
+                <Class sourceFile="ProductTableModel.java">
+                    be.jsams.client.model.table.ProductTableModel
+                </Class>
+            </ConcreteClasses>
+
+            <DependsUpon>
+                <Package>be.jsams.client.i18n</Package>
+                <Package>be.jsams.common.bean.model</Package>
+                <Package>be.jsams.common.bean.model.management</Package>
+                <Package>be.jsams.common.bean.model.sale</Package>
+                <Package>com.jgoodies.binding.adapter</Package>
+                <Package>com.jgoodies.common.collect</Package>
+                <Package>java.lang</Package>
+                <Package>java.util</Package>
+            </DependsUpon>
+
+            <UsedBy>
+                <Package>be.jsams.client.model.panel</Package>
+                <Package>be.jsams.client.swing.action</Package>
+                <Package>be.jsams.client.swing.component</Package>
+                <Package>be.jsams.client.swing.listener</Package>
+                <Package>be.jsams.common.bean.view</Package>
+            </UsedBy>
+        </Package>
+
+        <Package name="be.jsams.client.renderer">
+            <Stats>
+                <TotalClasses>4</TotalClasses>
+                <ConcreteClasses>4</ConcreteClasses>
+                <AbstractClasses>0</AbstractClasses>
+                <Ca>3</Ca>
+                <Ce>10</Ce>
+                <A>0</A>
+                <I>0.77</I>
+                <D>0.23</D>
+                <V>1</V>
+            </Stats>
+
+            <AbstractClasses>
+            </AbstractClasses>
+
+            <ConcreteClasses>
+                <Class sourceFile="JsamsBooleanTableCellRenderer.java">
+                    be.jsams.client.renderer.JsamsBooleanTableCellRenderer
+                </Class>
+                <Class sourceFile="JsamsTableCellRenderer.java">
+                    be.jsams.client.renderer.JsamsTableCellRenderer
+                </Class>
+                <Class sourceFile="NamedComboBoxRenderer.java">
+                    be.jsams.client.renderer.NamedComboBoxRenderer
+                </Class>
+                <Class sourceFile="TranslatableComboBoxRenderer.java">
+                    be.jsams.client.renderer.TranslatableComboBoxRenderer
+                </Class>
+            </ConcreteClasses>
+
+            <DependsUpon>
+                <Package>be.jsams.client.i18n</Package>
+                <Package>be.jsams.common.bean.model</Package>
+                <Package>java.awt</Package>
+                <Package>java.lang</Package>
+                <Package>java.text</Package>
+                <Package>java.util</Package>
+                <Package>javax.swing</Package>
+                <Package>javax.swing.border</Package>
+                <Package>javax.swing.plaf</Package>
+                <Package>javax.swing.table</Package>
+            </DependsUpon>
+
+            <UsedBy>
+                <Package>be.jsams.client.model.dialog</Package>
+                <Package>be.jsams.client.model.panel</Package>
+                <Package>be.jsams.common.bean.view</Package>
+            </UsedBy>
+        </Package>
+
+        <Package name="be.jsams.client.swing.action">
+            <Stats>
+                <TotalClasses>11</TotalClasses>
+                <ConcreteClasses>11</ConcreteClasses>
+                <AbstractClasses>0</AbstractClasses>
+                <Ca>3</Ca>
+                <Ce>14</Ce>
+                <A>0</A>
+                <I>0.82</I>
+                <D>0.18</D>
+                <V>1</V>
+            </Stats>
+
+            <AbstractClasses>
+            </AbstractClasses>
+
+            <ConcreteClasses>
+                <Class sourceFile="ChooseSocietyAction.java">
+                    be.jsams.client.swing.action.ChooseSocietyAction
+                </Class>
+                <Class sourceFile="EditSocietyAction.java">
+                    be.jsams.client.swing.action.EditSocietyAction
+                </Class>
+                <Class sourceFile="ExitAction.java">
+                    be.jsams.client.swing.action.ExitAction
+                </Class>
+                <Class sourceFile="NewCustomerAction.java">
+                    be.jsams.client.swing.action.NewCustomerAction
+                </Class>
+                <Class sourceFile="NewEstimateAction.java">
+                    be.jsams.client.swing.action.NewEstimateAction
+                </Class>
+                <Class sourceFile="NewProductAction.java">
+                    be.jsams.client.swing.action.NewProductAction
+                </Class>
+                <Class sourceFile="PrinterParametersAction.java">
+                    be.jsams.client.swing.action.PrinterParametersAction
+                </Class>
+                <Class sourceFile="SearchAgentAction.java">
+                    be.jsams.client.swing.action.SearchAgentAction
+                </Class>
+                <Class sourceFile="SearchAgentAction.java">
+                    be.jsams.client.swing.action.SearchAgentAction$1
+                </Class>
+                <Class sourceFile="SearchCustomerAction.java">
+                    be.jsams.client.swing.action.SearchCustomerAction
+                </Class>
+                <Class sourceFile="SearchCustomerAction.java">
+                    be.jsams.client.swing.action.SearchCustomerAction$1
+                </Class>
+            </ConcreteClasses>
+
+            <DependsUpon>
+                <Package>be.jsams.client.context</Package>
+                <Package>be.jsams.client.desktop</Package>
+                <Package>be.jsams.client.i18n</Package>
+                <Package>be.jsams.client.model.dialog</Package>
+                <Package>be.jsams.client.model.panel</Package>
+                <Package>be.jsams.client.model.table</Package>
+                <Package>be.jsams.client.swing.component</Package>
+                <Package>be.jsams.client.swing.listener</Package>
+                <Package>be.jsams.common.bean.model.management</Package>
+                <Package>be.jsams.common.bean.model.sale</Package>
+                <Package>java.awt.event</Package>
+                <Package>java.awt.print</Package>
+                <Package>java.lang</Package>
+                <Package>javax.swing</Package>
+            </DependsUpon>
+
+            <UsedBy>
+                <Package>be.jsams.client.desktop</Package>
+                <Package>be.jsams.client.swing.component</Package>
+                <Package>be.jsams.common.bean.view</Package>
+            </UsedBy>
+        </Package>
+
+        <Package name="be.jsams.client.swing.component">
+            <Stats>
+                <TotalClasses>21</TotalClasses>
+                <ConcreteClasses>19</ConcreteClasses>
+                <AbstractClasses>2</AbstractClasses>
+                <Ca>6</Ca>
+                <Ce>18</Ce>
+                <A>0.1</A>
+                <I>0.75</I>
+                <D>0.15</D>
+                <V>1</V>
+            </Stats>
+
+            <AbstractClasses>
+                <Class sourceFile="JsamsButtonsInterface.java">
+                    be.jsams.client.swing.component.JsamsButtonsInterface
+                </Class>
+                <Class sourceFile="JsamsFrame.java">
+                    be.jsams.client.swing.component.JsamsFrame
+                </Class>
+            </AbstractClasses>
+
+            <ConcreteClasses>
+                <Class sourceFile="JsamsButton.java">
+                    be.jsams.client.swing.component.JsamsButton
+                </Class>
+                <Class sourceFile="JsamsButtonsPanel.java">
+                    be.jsams.client.swing.component.JsamsButtonsPanel
+                </Class>
+                <Class sourceFile="JsamsButtonsPanel.java">
+                    be.jsams.client.swing.component.JsamsButtonsPanel$1
+                </Class>
+                <Class sourceFile="JsamsButtonsPanel.java">
+                    be.jsams.client.swing.component.JsamsButtonsPanel$2
+                </Class>
+                <Class sourceFile="JsamsButtonsPanel.java">
+                    be.jsams.client.swing.component.JsamsButtonsPanel$3
+                </Class>
+                <Class sourceFile="JsamsCloseableTabbedPane.java">
+                    be.jsams.client.swing.component.JsamsCloseableTabbedPane
+                </Class>
+                <Class sourceFile="JsamsCloseableTabbedPane.java">
+                    be.jsams.client.swing.component.JsamsCloseableTabbedPane$1
+                </Class>
+                <Class sourceFile="JsamsComboBox.java">
+                    be.jsams.client.swing.component.JsamsComboBox
+                </Class>
+                <Class sourceFile="JsamsDialog.java">
+                    be.jsams.client.swing.component.JsamsDialog
+                </Class>
+                <Class sourceFile="JsamsFormattedTextField.java">
+                    be.jsams.client.swing.component.JsamsFormattedTextField
+                </Class>
+                <Class sourceFile="JsamsFrame.java">
+                    be.jsams.client.swing.component.JsamsFrame$1
+                </Class>
+                <Class sourceFile="JsamsLabel.java">
+                    be.jsams.client.swing.component.JsamsLabel
+                </Class>
+                <Class sourceFile="JsamsMenu.java">
+                    be.jsams.client.swing.component.JsamsMenu
+                </Class>
+                <Class sourceFile="JsamsMenuItem.java">
+                    be.jsams.client.swing.component.JsamsMenuItem
+                </Class>
+                <Class sourceFile="JsamsPeriodField.java">
+                    be.jsams.client.swing.component.JsamsPeriodField
+                </Class>
+                <Class sourceFile="JsamsShortcutToolBar.java">
+                    be.jsams.client.swing.component.JsamsShortcutToolBar
+                </Class>
+                <Class sourceFile="JsamsStatusBar.java">
+                    be.jsams.client.swing.component.JsamsStatusBar
+                </Class>
+                <Class sourceFile="JsamsTable.java">
+                    be.jsams.client.swing.component.JsamsTable
+                </Class>
+                <Class sourceFile="JsamsTextField.java">
+                    be.jsams.client.swing.component.JsamsTextField
+                </Class>
+            </ConcreteClasses>
+
+            <DependsUpon>
+                <Package>be.jsams.client.desktop</Package>
+                <Package>be.jsams.client.i18n</Package>
+                <Package>be.jsams.client.model.table</Package>
+                <Package>be.jsams.client.swing.action</Package>
+                <Package>be.jsams.client.swing.utils</Package>
+                <Package>com.jgoodies.forms.builder</Package>
+                <Package>com.jgoodies.forms.factories</Package>
+                <Package>com.jgoodies.forms.layout</Package>
+                <Package>com.toedter.calendar</Package>
+                <Package>java.awt</Package>
+                <Package>java.awt.event</Package>
+                <Package>java.lang</Package>
+                <Package>java.text</Package>
+                <Package>java.util</Package>
+                <Package>javax.swing</Package>
+                <Package>javax.swing.border</Package>
+                <Package>javax.swing.table</Package>
+                <Package>javax.swing.text</Package>
+            </DependsUpon>
+
+            <UsedBy>
+                <Package>be.jsams.client.desktop</Package>
+                <Package>be.jsams.client.model.dialog</Package>
+                <Package>be.jsams.client.model.panel</Package>
+                <Package>be.jsams.client.swing.action</Package>
+                <Package>be.jsams.client.swing.listener</Package>
+                <Package>be.jsams.common.bean.view</Package>
+            </UsedBy>
+        </Package>
+
+        <Package name="be.jsams.client.swing.listener">
+            <Stats>
+                <TotalClasses>7</TotalClasses>
+                <ConcreteClasses>7</ConcreteClasses>
+                <AbstractClasses>0</AbstractClasses>
+                <Ca>4</Ca>
+                <Ce>10</Ce>
+                <A>0</A>
+                <I>0.71</I>
+                <D>0.29</D>
+                <V>1</V>
+            </Stats>
+
+            <AbstractClasses>
+            </AbstractClasses>
+
+            <ConcreteClasses>
+                <Class sourceFile="AgentTableMouseListener.java">
+                    be.jsams.client.swing.listener.AgentTableMouseListener
+                </Class>
+                <Class sourceFile="ComboBoxKeySelectionManager.java">
+                    be.jsams.client.swing.listener.ComboBoxKeySelectionManager
+                </Class>
+                <Class sourceFile="CustomerTableMouseListener.java">
+                    be.jsams.client.swing.listener.CustomerTableMouseListener
+                </Class>
+                <Class sourceFile="EstimateTableMouseListener.java">
+                    be.jsams.client.swing.listener.EstimateTableMouseListener
+                </Class>
+                <Class sourceFile="ProductCategoryTableMouseListener.java">
+                    be.jsams.client.swing.listener.ProductCategoryTableMouseListener
+                </Class>
+                <Class sourceFile="ProductTableMouseListener.java">
+                    be.jsams.client.swing.listener.ProductTableMouseListener
+                </Class>
+                <Class sourceFile="TabbedPaneKeyListener.java">
+                    be.jsams.client.swing.listener.TabbedPaneKeyListener
+                </Class>
+            </ConcreteClasses>
+
+            <DependsUpon>
+                <Package>be.jsams.client.i18n</Package>
+                <Package>be.jsams.client.model.dialog</Package>
+                <Package>be.jsams.client.model.table</Package>
+                <Package>be.jsams.client.swing.component</Package>
+                <Package>be.jsams.common.bean.model.management</Package>
+                <Package>be.jsams.common.bean.model.sale</Package>
+                <Package>java.awt.event</Package>
+                <Package>java.lang</Package>
+                <Package>javax.swing</Package>
+                <Package>org.apache.log4j</Package>
+            </DependsUpon>
+
+            <UsedBy>
+                <Package>be.jsams.client.desktop</Package>
+                <Package>be.jsams.client.model.panel</Package>
+                <Package>be.jsams.client.swing.action</Package>
+                <Package>be.jsams.common.bean.view</Package>
+            </UsedBy>
+        </Package>
+
+        <Package name="be.jsams.client.swing.utils">
+            <Stats>
+                <TotalClasses>1</TotalClasses>
+                <ConcreteClasses>1</ConcreteClasses>
+                <AbstractClasses>0</AbstractClasses>
+                <Ca>1</Ca>
+                <Ce>2</Ce>
+                <A>0</A>
+                <I>0.67</I>
+                <D>0.33</D>
+                <V>1</V>
+            </Stats>
+
+            <AbstractClasses>
+            </AbstractClasses>
+
+            <ConcreteClasses>
+                <Class sourceFile="IconUtil.java">
+                    be.jsams.client.swing.utils.IconUtil
+                </Class>
+            </ConcreteClasses>
+
+            <DependsUpon>
+                <Package>java.awt</Package>
+                <Package>java.lang</Package>
+            </DependsUpon>
+
+            <UsedBy>
+                <Package>be.jsams.client.swing.component</Package>
+            </UsedBy>
+        </Package>
+
+        <Package name="be.jsams.client.validator">
+            <Stats>
+                <TotalClasses>12</TotalClasses>
+                <ConcreteClasses>12</ConcreteClasses>
+                <AbstractClasses>0</AbstractClasses>
+                <Ca>2</Ca>
+                <Ce>7</Ce>
+                <A>0</A>
+                <I>0.78</I>
+                <D>0.22</D>
+                <V>1</V>
+            </Stats>
+
+            <AbstractClasses>
+            </AbstractClasses>
+
+            <ConcreteClasses>
+                <Class sourceFile="EditAddressValidator.java">
+                    be.jsams.client.validator.EditAddressValidator
+                </Class>
+                <Class sourceFile="EditAgentValidator.java">
+                    be.jsams.client.validator.EditAgentValidator
+                </Class>
+                <Class sourceFile="EditCustomerValidator.java">
+                    be.jsams.client.validator.EditCustomerValidator
+                </Class>
+                <Class sourceFile="EditEstimateValidator.java">
+                    be.jsams.client.validator.EditEstimateValidator
+                </Class>
+                <Class sourceFile="EditProductCategoryValidator.java">
+                    be.jsams.client.validator.EditProductCategoryValidator
+                </Class>
+                <Class sourceFile="EditProductValidator.java">
+                    be.jsams.client.validator.EditProductValidator
+                </Class>
+                <Class sourceFile="EditSocietyValidator.java">
+                    be.jsams.client.validator.EditSocietyValidator
+                </Class>
+                <Class sourceFile="SearchAgentValidator.java">
+                    be.jsams.client.validator.SearchAgentValidator
+                </Class>
+                <Class sourceFile="SearchCustomerValidator.java">
+                    be.jsams.client.validator.SearchCustomerValidator
+                </Class>
+                <Class sourceFile="SearchEstimateValidator.java">
+                    be.jsams.client.validator.SearchEstimateValidator
+                </Class>
+                <Class sourceFile="SearchProductCategoryValidator.java">
+                    be.jsams.client.validator.SearchProductCategoryValidator
+                </Class>
+                <Class sourceFile="SearchProductValidator.java">
+                    be.jsams.client.validator.SearchProductValidator
+                </Class>
+            </ConcreteClasses>
+
+            <DependsUpon>
+                <Package>be.jsams.client.i18n</Package>
+                <Package>be.jsams.common.bean.model</Package>
+                <Package>be.jsams.common.bean.model.management</Package>
+                <Package>be.jsams.common.bean.model.sale</Package>
+                <Package>com.jgoodies.validation</Package>
+                <Package>com.jgoodies.validation.util</Package>
+                <Package>java.lang</Package>
+            </DependsUpon>
+
+            <UsedBy>
+                <Package>be.jsams.client.model.dialog</Package>
+                <Package>be.jsams.client.model.panel</Package>
+            </UsedBy>
+        </Package>
+
+        <Package name="be.jsams.common.bean.model">
+            <Stats>
+                <TotalClasses>9</TotalClasses>
+                <ConcreteClasses>5</ConcreteClasses>
+                <AbstractClasses>4</AbstractClasses>
+                <Ca>12</Ca>
+                <Ce>8</Ce>
+                <A>0.44</A>
+                <I>0.4</I>
+                <D>0.16</D>
+                <V>1</V>
+            </Stats>
+
+            <AbstractClasses>
+                <Class sourceFile="AbstractIdentityBean.java">
+                    be.jsams.common.bean.model.AbstractIdentityBean
+                </Class>
+                <Class sourceFile="AbstractNamedIdentityBean.java">
+                    be.jsams.common.bean.model.AbstractNamedIdentityBean
+                </Class>
+                <Class sourceFile="AbstractTranslatableIdentityBean.java">
+                    be.jsams.common.bean.model.AbstractTranslatableIdentityBean
+                </Class>
+                <Class sourceFile="Refreshable.java">
+                    be.jsams.common.bean.model.Refreshable
+                </Class>
+            </AbstractClasses>
+
+            <ConcreteClasses>
+                <Class sourceFile="AddressBean.java">
+                    be.jsams.common.bean.model.AddressBean
+                </Class>
+                <Class sourceFile="CivilityBean.java">
+                    be.jsams.common.bean.model.CivilityBean
+                </Class>
+                <Class sourceFile="ContactInformationBean.java">
+                    be.jsams.common.bean.model.ContactInformationBean
+                </Class>
+                <Class sourceFile="LegalFormBean.java">
+                    be.jsams.common.bean.model.LegalFormBean
+                </Class>
+                <Class sourceFile="PaymentModeBean.java">
+                    be.jsams.common.bean.model.PaymentModeBean
+                </Class>
+            </ConcreteClasses>
+
+            <DependsUpon>
+                <Package>be.jsams.client.context</Package>
+                <Package>be.jsams.common.bean.view</Package>
+                <Package>be.jsams.server.dao</Package>
+                <Package>be.jsams.server.model</Package>
+                <Package>com.jgoodies.binding.beans</Package>
+                <Package>com.jgoodies.common.collect</Package>
+                <Package>java.lang</Package>
+                <Package>java.util</Package>
+            </DependsUpon>
+
+            <UsedBy>
+                <Package>be.jsams.client.model.dialog</Package>
+                <Package>be.jsams.client.model.panel</Package>
+                <Package>be.jsams.client.model.table</Package>
+                <Package>be.jsams.client.renderer</Package>
+                <Package>be.jsams.client.validator</Package>
+                <Package>be.jsams.common.bean.model.management</Package>
+                <Package>be.jsams.common.bean.model.sale</Package>
+                <Package>be.jsams.common.bean.view</Package>
+                <Package>be.jsams.server.dao.impl</Package>
+                <Package>be.jsams.server.model</Package>
+                <Package>be.jsams.server.service</Package>
+                <Package>be.jsams.server.service.impl</Package>
+            </UsedBy>
+        </Package>
+
+        <Package name="be.jsams.common.bean.model.management">
+            <Stats>
+                <TotalClasses>5</TotalClasses>
+                <ConcreteClasses>5</ConcreteClasses>
+                <AbstractClasses>0</AbstractClasses>
+                <Ca>14</Ca>
+                <Ce>9</Ce>
+                <A>0</A>
+                <I>0.39</I>
+                <D>0.61</D>
+                <V>1</V>
+            </Stats>
+
+            <AbstractClasses>
+            </AbstractClasses>
+
+            <ConcreteClasses>
+                <Class sourceFile="AgentBean.java">
+                    be.jsams.common.bean.model.management.AgentBean
+                </Class>
+                <Class sourceFile="CustomerBean.java">
+                    be.jsams.common.bean.model.management.CustomerBean
+                </Class>
+                <Class sourceFile="ProductBean.java">
+                    be.jsams.common.bean.model.management.ProductBean
+                </Class>
+                <Class sourceFile="ProductCategoryBean.java">
+                    be.jsams.common.bean.model.management.ProductCategoryBean
+                </Class>
+                <Class sourceFile="SocietyBean.java">
+                    be.jsams.common.bean.model.management.SocietyBean
+                </Class>
+            </ConcreteClasses>
+
+            <DependsUpon>
+                <Package>be.jsams.client.context</Package>
+                <Package>be.jsams.client.desktop</Package>
+                <Package>be.jsams.common.bean.model</Package>
+                <Package>be.jsams.common.bean.view</Package>
+                <Package>be.jsams.server.model</Package>
+                <Package>be.jsams.server.service</Package>
+                <Package>com.jgoodies.common.collect</Package>
+                <Package>java.lang</Package>
+                <Package>java.util</Package>
+            </DependsUpon>
+
+            <UsedBy>
+                <Package>be.jsams.client.desktop</Package>
+                <Package>be.jsams.client.model.dialog</Package>
+                <Package>be.jsams.client.model.panel</Package>
+                <Package>be.jsams.client.model.table</Package>
+                <Package>be.jsams.client.swing.action</Package>
+                <Package>be.jsams.client.swing.listener</Package>
+                <Package>be.jsams.client.validator</Package>
+                <Package>be.jsams.common.bean.model.sale</Package>
+                <Package>be.jsams.common.bean.view</Package>
+                <Package>be.jsams.server.dao</Package>
+                <Package>be.jsams.server.dao.impl</Package>
+                <Package>be.jsams.server.model</Package>
+                <Package>be.jsams.server.service</Package>
+                <Package>be.jsams.server.service.impl</Package>
+            </UsedBy>
+        </Package>
+
+        <Package name="be.jsams.common.bean.model.sale">
+            <Stats>
+                <TotalClasses>12</TotalClasses>
+                <ConcreteClasses>12</ConcreteClasses>
+                <AbstractClasses>0</AbstractClasses>
+                <Ca>13</Ca>
+                <Ce>8</Ce>
+                <A>0</A>
+                <I>0.38</I>
+                <D>0.62</D>
+                <V>1</V>
+            </Stats>
+
+            <AbstractClasses>
+            </AbstractClasses>
+
+            <ConcreteClasses>
+                <Class sourceFile="BillBean.java">
+                    be.jsams.common.bean.model.sale.BillBean
+                </Class>
+                <Class sourceFile="BillDetailBean.java">
+                    be.jsams.common.bean.model.sale.BillDetailBean
+                </Class>
+                <Class sourceFile="CommandBean.java">
+                    be.jsams.common.bean.model.sale.CommandBean
+                </Class>
+                <Class sourceFile="CommandDetailBean.java">
+                    be.jsams.common.bean.model.sale.CommandDetailBean
+                </Class>
+                <Class sourceFile="CreditNoteBean.java">
+                    be.jsams.common.bean.model.sale.CreditNoteBean
+                </Class>
+                <Class sourceFile="CreditNoteDetailBean.java">
+                    be.jsams.common.bean.model.sale.CreditNoteDetailBean
+                </Class>
+                <Class sourceFile="DateBean.java">
+                    be.jsams.common.bean.model.sale.DateBean
+                </Class>
+                <Class sourceFile="DeliveryOrderBean.java">
+                    be.jsams.common.bean.model.sale.DeliveryOrderBean
+                </Class>
+                <Class sourceFile="DeliveryOrderDetailBean.java">
+                    be.jsams.common.bean.model.sale.DeliveryOrderDetailBean
+                </Class>
+                <Class sourceFile="EstimateBean.java">
+                    be.jsams.common.bean.model.sale.EstimateBean
+                </Class>
+                <Class sourceFile="EstimateDetailBean.java">
+                    be.jsams.common.bean.model.sale.EstimateDetailBean
+                </Class>
+                <Class sourceFile="PeriodBean.java">
+                    be.jsams.common.bean.model.sale.PeriodBean
+                </Class>
+            </ConcreteClasses>
+
+            <DependsUpon>
+                <Package>be.jsams.common.bean.model</Package>
+                <Package>be.jsams.common.bean.model.management</Package>
+                <Package>be.jsams.common.bean.view</Package>
+                <Package>be.jsams.server.model</Package>
+                <Package>com.jgoodies.common.collect</Package>
+                <Package>java.lang</Package>
+                <Package>java.math</Package>
+                <Package>java.util</Package>
+            </DependsUpon>
+
+            <UsedBy>
+                <Package>be.jsams.client.desktop</Package>
+                <Package>be.jsams.client.model.dialog</Package>
+                <Package>be.jsams.client.model.panel</Package>
+                <Package>be.jsams.client.model.table</Package>
+                <Package>be.jsams.client.swing.action</Package>
+                <Package>be.jsams.client.swing.listener</Package>
+                <Package>be.jsams.client.validator</Package>
+                <Package>be.jsams.common.bean.view</Package>
+                <Package>be.jsams.server.dao</Package>
+                <Package>be.jsams.server.dao.impl</Package>
+                <Package>be.jsams.server.model</Package>
+                <Package>be.jsams.server.service</Package>
+                <Package>be.jsams.server.service.impl</Package>
+            </UsedBy>
+        </Package>
+
+        <Package name="be.jsams.common.bean.view">
+            <Stats>
+                <TotalClasses>32</TotalClasses>
+                <ConcreteClasses>30</ConcreteClasses>
+                <AbstractClasses>2</AbstractClasses>
+                <Ca>5</Ca>
+                <Ce>34</Ce>
+                <A>0.06</A>
+                <I>0.87</I>
+                <D>0.07</D>
+                <V>1</V>
+            </Stats>
+
+            <AbstractClasses>
+                <Class sourceFile="AbstractView.java">
+                    be.jsams.common.bean.view.AbstractView
+                </Class>
+                <Class sourceFile="Viewable.java">
+                    be.jsams.common.bean.view.Viewable
+                </Class>
+            </AbstractClasses>
+
+            <ConcreteClasses>
+                <Class sourceFile="AddressBeanView.java">
+                    be.jsams.common.bean.view.AddressBeanView
+                </Class>
+                <Class sourceFile="AgentBeanView.java">
+                    be.jsams.common.bean.view.AgentBeanView
+                </Class>
+                <Class sourceFile="BillBeanView.java">
+                    be.jsams.common.bean.view.BillBeanView
+                </Class>
+                <Class sourceFile="BillDetailBeanView.java">
+                    be.jsams.common.bean.view.BillDetailBeanView
+                </Class>
+                <Class sourceFile="CivilityBeanView.java">
+                    be.jsams.common.bean.view.CivilityBeanView
+                </Class>
+                <Class sourceFile="CommandBeanView.java">
+                    be.jsams.common.bean.view.CommandBeanView
+                </Class>
+                <Class sourceFile="CommandDetailBeanView.java">
+                    be.jsams.common.bean.view.CommandDetailBeanView
+                </Class>
+                <Class sourceFile="ContactInformationBeanView.java">
+                    be.jsams.common.bean.view.ContactInformationBeanView
+                </Class>
+                <Class sourceFile="CreditNoteBeanView.java">
+                    be.jsams.common.bean.view.CreditNoteBeanView
+                </Class>
+                <Class sourceFile="CreditNoteDetailBeanView.java">
+                    be.jsams.common.bean.view.CreditNoteDetailBeanView
+                </Class>
+                <Class sourceFile="CustomerBeanView.java">
+                    be.jsams.common.bean.view.CustomerBeanView
+                </Class>
+                <Class sourceFile="CustomerBeanView.java">
+                    be.jsams.common.bean.view.CustomerBeanView$1
+                </Class>
+                <Class sourceFile="DateBeanView.java">
+                    be.jsams.common.bean.view.DateBeanView
+                </Class>
+                <Class sourceFile="DeliveryOrderBeanView.java">
+                    be.jsams.common.bean.view.DeliveryOrderBeanView
+                </Class>
+                <Class sourceFile="DeliveryOrderDetailBeanView.java">
+                    be.jsams.common.bean.view.DeliveryOrderDetailBeanView
+                </Class>
+                <Class sourceFile="EstimateBeanView.java">
+                    be.jsams.common.bean.view.EstimateBeanView
+                </Class>
+                <Class sourceFile="EstimateBeanView.java">
+                    be.jsams.common.bean.view.EstimateBeanView$1
+                </Class>
+                <Class sourceFile="EstimateBeanView.java">
+                    be.jsams.common.bean.view.EstimateBeanView$1$1
+                </Class>
+                <Class sourceFile="EstimateBeanView.java">
+                    be.jsams.common.bean.view.EstimateBeanView$2
+                </Class>
+                <Class sourceFile="EstimateBeanView.java">
+                    be.jsams.common.bean.view.EstimateBeanView$3
+                </Class>
+                <Class sourceFile="EstimateBeanView.java">
+                    be.jsams.common.bean.view.EstimateBeanView$4
+                </Class>
+                <Class sourceFile="EstimateBeanView.java">
+                    be.jsams.common.bean.view.EstimateBeanView$5
+                </Class>
+                <Class sourceFile="EstimateDetailBeanView.java">
+                    be.jsams.common.bean.view.EstimateDetailBeanView
+                </Class>
+                <Class sourceFile="LegalFormBeanView.java">
+                    be.jsams.common.bean.view.LegalFormBeanView
+                </Class>
+                <Class sourceFile="PaymentModeBeanView.java">
+                    be.jsams.common.bean.view.PaymentModeBeanView
+                </Class>
+                <Class sourceFile="PeriodBeanView.java">
+                    be.jsams.common.bean.view.PeriodBeanView
+                </Class>
+                <Class sourceFile="ProductBeanView.java">
+                    be.jsams.common.bean.view.ProductBeanView
+                </Class>
+                <Class sourceFile="ProductCategoryBeanView.java">
+                    be.jsams.common.bean.view.ProductCategoryBeanView
+                </Class>
+                <Class sourceFile="SocietyBeanView.java">
+                    be.jsams.common.bean.view.SocietyBeanView
+                </Class>
+                <Class sourceFile="ViewFactory.java">
+                    be.jsams.common.bean.view.ViewFactory
+                </Class>
+            </ConcreteClasses>
+
+            <DependsUpon>
+                <Package>be.jsams.client.context</Package>
+                <Package>be.jsams.client.formatter</Package>
+                <Package>be.jsams.client.i18n</Package>
+                <Package>be.jsams.client.model.panel</Package>
+                <Package>be.jsams.client.model.table</Package>
+                <Package>be.jsams.client.renderer</Package>
+                <Package>be.jsams.client.swing.action</Package>
+                <Package>be.jsams.client.swing.component</Package>
+                <Package>be.jsams.client.swing.listener</Package>
+                <Package>be.jsams.common.bean.model</Package>
+                <Package>be.jsams.common.bean.model.management</Package>
+                <Package>be.jsams.common.bean.model.sale</Package>
+                <Package>com.jgoodies.binding</Package>
+                <Package>com.jgoodies.binding.adapter</Package>
+                <Package>com.jgoodies.binding.beans</Package>
+                <Package>com.jgoodies.binding.list</Package>
+                <Package>com.jgoodies.binding.value</Package>
+                <Package>com.jgoodies.common.collect</Package>
+                <Package>com.jgoodies.common.format</Package>
+                <Package>com.jgoodies.forms.builder</Package>
+                <Package>com.jgoodies.forms.factories</Package>
+                <Package>com.jgoodies.forms.layout</Package>
+                <Package>com.jgoodies.validation.view</Package>
+                <Package>com.toedter.calendar</Package>
+                <Package>java.awt</Package>
+                <Package>java.awt.event</Package>
+                <Package>java.beans</Package>
+                <Package>java.io</Package>
+                <Package>java.lang</Package>
+                <Package>java.text</Package>
+                <Package>java.util</Package>
+                <Package>javax.swing</Package>
+                <Package>javax.swing.table</Package>
+                <Package>javax.swing.text</Package>
+            </DependsUpon>
+
+            <UsedBy>
+                <Package>be.jsams.client.model.dialog</Package>
+                <Package>be.jsams.client.model.panel</Package>
+                <Package>be.jsams.common.bean.model</Package>
+                <Package>be.jsams.common.bean.model.management</Package>
+                <Package>be.jsams.common.bean.model.sale</Package>
+            </UsedBy>
+        </Package>
+
+        <Package name="be.jsams.pdf">
+            <Stats>
+                <TotalClasses>1</TotalClasses>
+                <ConcreteClasses>0</ConcreteClasses>
+                <AbstractClasses>1</AbstractClasses>
+                <Ca>1</Ca>
+                <Ce>3</Ce>
+                <A>1</A>
+                <I>0.75</I>
+                <D>0.75</D>
+                <V>1</V>
+            </Stats>
+
+            <AbstractClasses>
+                <Class sourceFile="PdfService.java">
+                    be.jsams.pdf.PdfService
+                </Class>
+            </AbstractClasses>
+
+            <ConcreteClasses>
+            </ConcreteClasses>
+
+            <DependsUpon>
+                <Package>com.lowagie.text</Package>
+                <Package>com.lowagie.text.pdf</Package>
+                <Package>java.lang</Package>
+            </DependsUpon>
+
+            <UsedBy>
+                <Package>be.jsams.pdf.impl</Package>
+            </UsedBy>
+        </Package>
+
+        <Package name="be.jsams.pdf.impl">
+            <Stats>
+                <TotalClasses>1</TotalClasses>
+                <ConcreteClasses>1</ConcreteClasses>
+                <AbstractClasses>0</AbstractClasses>
+                <Ca>0</Ca>
+                <Ce>4</Ce>
+                <A>0</A>
+                <I>1</I>
+                <D>0</D>
+                <V>1</V>
+            </Stats>
+
+            <AbstractClasses>
+            </AbstractClasses>
+
+            <ConcreteClasses>
+                <Class sourceFile="PdfServiceImpl.java">
+                    be.jsams.pdf.impl.PdfServiceImpl
+                </Class>
+            </ConcreteClasses>
+
+            <DependsUpon>
+                <Package>be.jsams.pdf</Package>
+                <Package>com.lowagie.text</Package>
+                <Package>com.lowagie.text.pdf</Package>
+                <Package>java.lang</Package>
+            </DependsUpon>
+
+            <UsedBy>
+            </UsedBy>
+        </Package>
+
+        <Package name="be.jsams.server.dao">
+            <Stats>
+                <TotalClasses>15</TotalClasses>
+                <ConcreteClasses>0</ConcreteClasses>
+                <AbstractClasses>15</AbstractClasses>
+                <Ca>4</Ca>
+                <Ce>4</Ce>
+                <A>1</A>
+                <I>0.5</I>
+                <D>0.5</D>
+                <V>1</V>
+            </Stats>
+
+            <AbstractClasses>
+                <Class sourceFile="AddressDao.java">
+                    be.jsams.server.dao.AddressDao
+                </Class>
+                <Class sourceFile="AgentDao.java">
+                    be.jsams.server.dao.AgentDao
+                </Class>
+                <Class sourceFile="CivilityDao.java">
+                    be.jsams.server.dao.CivilityDao
+                </Class>
+                <Class sourceFile="CommandDao.java">
+                    be.jsams.server.dao.CommandDao
+                </Class>
+                <Class sourceFile="CommandDetailDao.java">
+                    be.jsams.server.dao.CommandDetailDao
+                </Class>
+                <Class sourceFile="ContactInformationDao.java">
+                    be.jsams.server.dao.ContactInformationDao
+                </Class>
+                <Class sourceFile="CustomerDao.java">
+                    be.jsams.server.dao.CustomerDao
+                </Class>
+                <Class sourceFile="Dao.java">
+                    be.jsams.server.dao.Dao
+                </Class>
+                <Class sourceFile="EstimateDao.java">
+                    be.jsams.server.dao.EstimateDao
+                </Class>
+                <Class sourceFile="EstimateDetailDao.java">
+                    be.jsams.server.dao.EstimateDetailDao
+                </Class>
+                <Class sourceFile="LegalFormDao.java">
+                    be.jsams.server.dao.LegalFormDao
+                </Class>
+                <Class sourceFile="PaymentModeDao.java">
+                    be.jsams.server.dao.PaymentModeDao
+                </Class>
+                <Class sourceFile="ProductCategoryDao.java">
+                    be.jsams.server.dao.ProductCategoryDao
+                </Class>
+                <Class sourceFile="ProductDao.java">
+                    be.jsams.server.dao.ProductDao
+                </Class>
+                <Class sourceFile="SocietyDao.java">
+                    be.jsams.server.dao.SocietyDao
+                </Class>
+            </AbstractClasses>
+
+            <ConcreteClasses>
+            </ConcreteClasses>
+
+            <DependsUpon>
+                <Package>be.jsams.common.bean.model.management</Package>
+                <Package>be.jsams.common.bean.model.sale</Package>
+                <Package>java.lang</Package>
+                <Package>java.util</Package>
+            </DependsUpon>
+
+            <UsedBy>
+                <Package>be.jsams.client.context</Package>
+                <Package>be.jsams.common.bean.model</Package>
+                <Package>be.jsams.server.dao.impl</Package>
+                <Package>be.jsams.server.service.impl</Package>
+            </UsedBy>
+        </Package>
+
+        <Package name="be.jsams.server.dao.impl">
+            <Stats>
+                <TotalClasses>15</TotalClasses>
+                <ConcreteClasses>15</ConcreteClasses>
+                <AbstractClasses>0</AbstractClasses>
+                <Ca>0</Ca>
+                <Ce>10</Ce>
+                <A>0</A>
+                <I>1</I>
+                <D>0</D>
+                <V>1</V>
+            </Stats>
+
+            <AbstractClasses>
+            </AbstractClasses>
+
+            <ConcreteClasses>
+                <Class sourceFile="AddressDaoImpl.java">
+                    be.jsams.server.dao.impl.AddressDaoImpl
+                </Class>
+                <Class sourceFile="AgentDaoImpl.java">
+                    be.jsams.server.dao.impl.AgentDaoImpl
+                </Class>
+                <Class sourceFile="CivilityDaoImpl.java">
+                    be.jsams.server.dao.impl.CivilityDaoImpl
+                </Class>
+                <Class sourceFile="CommandDaoImpl.java">
+                    be.jsams.server.dao.impl.CommandDaoImpl
+                </Class>
+                <Class sourceFile="CommandDetailDaoImpl.java">
+                    be.jsams.server.dao.impl.CommandDetailDaoImpl
+                </Class>
+                <Class sourceFile="ContactInformationDaoImpl.java">
+                    be.jsams.server.dao.impl.ContactInformationDaoImpl
+                </Class>
+                <Class sourceFile="CustomerDaoImpl.java">
+                    be.jsams.server.dao.impl.CustomerDaoImpl
+                </Class>
+                <Class sourceFile="DaoImpl.java">
+                    be.jsams.server.dao.impl.DaoImpl
+                </Class>
+                <Class sourceFile="EstimateDaoImpl.java">
+                    be.jsams.server.dao.impl.EstimateDaoImpl
+                </Class>
+                <Class sourceFile="EstimateDetailDaoImpl.java">
+                    be.jsams.server.dao.impl.EstimateDetailDaoImpl
+                </Class>
+                <Class sourceFile="LegalFormDaoImpl.java">
+                    be.jsams.server.dao.impl.LegalFormDaoImpl
+                </Class>
+                <Class sourceFile="PaymentModeDaoImpl.java">
+                    be.jsams.server.dao.impl.PaymentModeDaoImpl
+                </Class>
+                <Class sourceFile="ProductCategoryDaoImpl.java">
+                    be.jsams.server.dao.impl.ProductCategoryDaoImpl
+                </Class>
+                <Class sourceFile="ProductDaoImpl.java">
+                    be.jsams.server.dao.impl.ProductDaoImpl
+                </Class>
+                <Class sourceFile="SocietyDaoImpl.java">
+                    be.jsams.server.dao.impl.SocietyDaoImpl
+                </Class>
+            </ConcreteClasses>
+
+            <DependsUpon>
+                <Package>be.jsams.client.desktop</Package>
+                <Package>be.jsams.common.bean.model</Package>
+                <Package>be.jsams.common.bean.model.management</Package>
+                <Package>be.jsams.common.bean.model.sale</Package>
+                <Package>be.jsams.server.dao</Package>
+                <Package>com.mysql.jdbc</Package>
+                <Package>java.lang</Package>
+                <Package>java.util</Package>
+                <Package>javax.persistence</Package>
+                <Package>org.apache.commons.logging</Package>
+            </DependsUpon>
+
+            <UsedBy>
+            </UsedBy>
+        </Package>
+
+        <Package name="be.jsams.server.model">
+            <Stats>
+                <TotalClasses>24</TotalClasses>
+                <ConcreteClasses>20</ConcreteClasses>
+                <AbstractClasses>4</AbstractClasses>
+                <Ca>4</Ca>
+                <Ce>6</Ce>
+                <A>0.17</A>
+                <I>0.6</I>
+                <D>0.23</D>
+                <V>1</V>
+            </Stats>
+
+            <AbstractClasses>
+                <Class sourceFile="AbstractIdentity.java">
+                    be.jsams.server.model.AbstractIdentity
+                </Class>
+                <Class sourceFile="AbstractNamedIdentity.java">
+                    be.jsams.server.model.AbstractNamedIdentity
+                </Class>
+                <Class sourceFile="AbstractTranslatableIdentity.java">
+                    be.jsams.server.model.AbstractTranslatableIdentity
+                </Class>
+                <Class sourceFile="Identity.java">
+                    be.jsams.server.model.Identity
+                </Class>
+            </AbstractClasses>
+
+            <ConcreteClasses>
+                <Class sourceFile="Address.java">
+                    be.jsams.server.model.Address
+                </Class>
+                <Class sourceFile="Agent.java">
+                    be.jsams.server.model.Agent
+                </Class>
+                <Class sourceFile="Bill.java">
+                    be.jsams.server.model.Bill
+                </Class>
+                <Class sourceFile="BillDetail.java">
+                    be.jsams.server.model.BillDetail
+                </Class>
+                <Class sourceFile="Civility.java">
+                    be.jsams.server.model.Civility
+                </Class>
+                <Class sourceFile="Command.java">
+                    be.jsams.server.model.Command
+                </Class>
+                <Class sourceFile="CommandDetail.java">
+                    be.jsams.server.model.CommandDetail
+                </Class>
+                <Class sourceFile="ContactInformation.java">
+                    be.jsams.server.model.ContactInformation
+                </Class>
+                <Class sourceFile="CreditNote.java">
+                    be.jsams.server.model.CreditNote
+                </Class>
+                <Class sourceFile="CreditNoteDetail.java">
+                    be.jsams.server.model.CreditNoteDetail
+                </Class>
+                <Class sourceFile="Customer.java">
+                    be.jsams.server.model.Customer
+                </Class>
+                <Class sourceFile="DeliveryOrder.java">
+                    be.jsams.server.model.DeliveryOrder
+                </Class>
+                <Class sourceFile="DeliveryOrderDetail.java">
+                    be.jsams.server.model.DeliveryOrderDetail
+                </Class>
+                <Class sourceFile="Estimate.java">
+                    be.jsams.server.model.Estimate
+                </Class>
+                <Class sourceFile="EstimateDetail.java">
+                    be.jsams.server.model.EstimateDetail
+                </Class>
+                <Class sourceFile="LegalForm.java">
+                    be.jsams.server.model.LegalForm
+                </Class>
+                <Class sourceFile="PaymentMode.java">
+                    be.jsams.server.model.PaymentMode
+                </Class>
+                <Class sourceFile="Product.java">
+                    be.jsams.server.model.Product
+                </Class>
+                <Class sourceFile="ProductCategory.java">
+                    be.jsams.server.model.ProductCategory
+                </Class>
+                <Class sourceFile="Society.java">
+                    be.jsams.server.model.Society
+                </Class>
+            </ConcreteClasses>
+
+            <DependsUpon>
+                <Package>be.jsams.common.bean.model</Package>
+                <Package>be.jsams.common.bean.model.management</Package>
+                <Package>be.jsams.common.bean.model.sale</Package>
+                <Package>java.lang</Package>
+                <Package>java.math</Package>
+                <Package>java.util</Package>
+            </DependsUpon>
+
+            <UsedBy>
+                <Package>be.jsams.common.bean.model</Package>
+                <Package>be.jsams.common.bean.model.management</Package>
+                <Package>be.jsams.common.bean.model.sale</Package>
+                <Package>be.jsams.server.service.impl</Package>
+            </UsedBy>
+        </Package>
+
+        <Package name="be.jsams.server.service">
+            <Stats>
+                <TotalClasses>9</TotalClasses>
+                <ConcreteClasses>0</ConcreteClasses>
+                <AbstractClasses>9</AbstractClasses>
+                <Ca>5</Ca>
+                <Ce>5</Ce>
+                <A>1</A>
+                <I>0.5</I>
+                <D>0.5</D>
+                <V>1</V>
+            </Stats>
+
+            <AbstractClasses>
+                <Class sourceFile="AgentService.java">
+                    be.jsams.server.service.AgentService
+                </Class>
+                <Class sourceFile="BillService.java">
+                    be.jsams.server.service.BillService
+                </Class>
+                <Class sourceFile="CommandService.java">
+                    be.jsams.server.service.CommandService
+                </Class>
+                <Class sourceFile="CustomerService.java">
+                    be.jsams.server.service.CustomerService
+                </Class>
+                <Class sourceFile="EstimateService.java">
+                    be.jsams.server.service.EstimateService
+                </Class>
+                <Class sourceFile="ProductCategoryService.java">
+                    be.jsams.server.service.ProductCategoryService
+                </Class>
+                <Class sourceFile="ProductService.java">
+                    be.jsams.server.service.ProductService
+                </Class>
+                <Class sourceFile="Service.java">
+                    be.jsams.server.service.Service
+                </Class>
+                <Class sourceFile="SocietyService.java">
+                    be.jsams.server.service.SocietyService
+                </Class>
+            </AbstractClasses>
+
+            <ConcreteClasses>
+            </ConcreteClasses>
+
+            <DependsUpon>
+                <Package>be.jsams.common.bean.model</Package>
+                <Package>be.jsams.common.bean.model.management</Package>
+                <Package>be.jsams.common.bean.model.sale</Package>
+                <Package>java.lang</Package>
+                <Package>java.util</Package>
+            </DependsUpon>
+
+            <UsedBy>
+                <Package>be.jsams.client.context</Package>
+                <Package>be.jsams.client.model.dialog</Package>
+                <Package>be.jsams.client.model.panel</Package>
+                <Package>be.jsams.common.bean.model.management</Package>
+                <Package>be.jsams.server.service.impl</Package>
+            </UsedBy>
+        </Package>
+
+        <Package name="be.jsams.server.service.impl">
+            <Stats>
+                <TotalClasses>7</TotalClasses>
+                <ConcreteClasses>7</ConcreteClasses>
+                <AbstractClasses>0</AbstractClasses>
+                <Ca>0</Ca>
+                <Ce>8</Ce>
+                <A>0</A>
+                <I>1</I>
+                <D>0</D>
+                <V>1</V>
+            </Stats>
+
+            <AbstractClasses>
+            </AbstractClasses>
+
+            <ConcreteClasses>
+                <Class sourceFile="AgentServiceImpl.java">
+                    be.jsams.server.service.impl.AgentServiceImpl
+                </Class>
+                <Class sourceFile="CommandServiceImpl.java">
+                    be.jsams.server.service.impl.CommandServiceImpl
+                </Class>
+                <Class sourceFile="CustomerServiceImpl.java">
+                    be.jsams.server.service.impl.CustomerServiceImpl
+                </Class>
+                <Class sourceFile="EstimateServiceImpl.java">
+                    be.jsams.server.service.impl.EstimateServiceImpl
+                </Class>
+                <Class sourceFile="ProductCategoryServiceImpl.java">
+                    be.jsams.server.service.impl.ProductCategoryServiceImpl
+                </Class>
+                <Class sourceFile="ProductServiceImpl.java">
+                    be.jsams.server.service.impl.ProductServiceImpl
+                </Class>
+                <Class sourceFile="SocietyServiceImpl.java">
+                    be.jsams.server.service.impl.SocietyServiceImpl
+                </Class>
+            </ConcreteClasses>
+
+            <DependsUpon>
+                <Package>be.jsams.common.bean.model</Package>
+                <Package>be.jsams.common.bean.model.management</Package>
+                <Package>be.jsams.common.bean.model.sale</Package>
+                <Package>be.jsams.server.dao</Package>
+                <Package>be.jsams.server.model</Package>
+                <Package>be.jsams.server.service</Package>
+                <Package>java.lang</Package>
+                <Package>java.util</Package>
+            </DependsUpon>
+
+            <UsedBy>
+            </UsedBy>
+        </Package>
+
+        <Package name="com.jgoodies.binding">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+
+        <Package name="com.jgoodies.binding.adapter">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+
+        <Package name="com.jgoodies.binding.beans">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+
+        <Package name="com.jgoodies.binding.list">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+
+        <Package name="com.jgoodies.binding.value">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+
+        <Package name="com.jgoodies.common.collect">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+
+        <Package name="com.jgoodies.common.format">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+
+        <Package name="com.jgoodies.forms.builder">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+
+        <Package name="com.jgoodies.forms.factories">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+
+        <Package name="com.jgoodies.forms.layout">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+
+        <Package name="com.jgoodies.validation">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+
+        <Package name="com.jgoodies.validation.util">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+
+        <Package name="com.jgoodies.validation.view">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+
+        <Package name="com.lowagie.text">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+
+        <Package name="com.lowagie.text.pdf">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+
+        <Package name="com.mysql.jdbc">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+
+        <Package name="com.toedter.calendar">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+
+        <Package name="java.awt">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+
+        <Package name="java.awt.event">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+
+        <Package name="java.awt.print">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+
+        <Package name="java.beans">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+
+        <Package name="java.io">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+
+        <Package name="java.lang">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+
+        <Package name="java.math">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+
+        <Package name="java.text">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+
+        <Package name="java.util">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+
+        <Package name="javax.persistence">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+
+        <Package name="javax.swing">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+
+        <Package name="javax.swing.border">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+
+        <Package name="javax.swing.plaf">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+
+        <Package name="javax.swing.table">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+
+        <Package name="javax.swing.text">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+
+        <Package name="org.apache.commons.logging">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+
+        <Package name="org.apache.log4j">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+
+        <Package name="org.springframework.context">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+
+        <Package name="org.springframework.context.support">
+            <error>No stats available: package referenced, but not analyzed.</error>
+        </Package>
+    </Packages>
+
+    <Cycles>
+        <Package Name="be.jsams">
+            <Package>be.jsams.client.desktop</Package>
+            <Package>be.jsams.client.swing.action</Package>
+            <Package>be.jsams.client.model.dialog</Package>
+            <Package>be.jsams.client.desktop</Package>
+        </Package>
+
+        <Package Name="be.jsams.client.context">
+            <Package>be.jsams.server.service</Package>
+            <Package>be.jsams.common.bean.model.management</Package>
+            <Package>be.jsams.client.desktop</Package>
+            <Package>be.jsams.client.swing.action</Package>
+            <Package>be.jsams.client.model.dialog</Package>
+            <Package>be.jsams.client.desktop</Package>
+        </Package>
+
+        <Package Name="be.jsams.client.desktop">
+            <Package>be.jsams.client.swing.action</Package>
+            <Package>be.jsams.client.model.dialog</Package>
+            <Package>be.jsams.client.desktop</Package>
+        </Package>
+
+        <Package Name="be.jsams.client.model.dialog">
+            <Package>be.jsams.client.desktop</Package>
+            <Package>be.jsams.client.swing.action</Package>
+            <Package>be.jsams.client.model.dialog</Package>
+        </Package>
+
+        <Package Name="be.jsams.client.model.panel">
+            <Package>be.jsams.server.service</Package>
+            <Package>be.jsams.common.bean.model.management</Package>
+            <Package>be.jsams.client.desktop</Package>
+            <Package>be.jsams.client.swing.action</Package>
+            <Package>be.jsams.client.model.dialog</Package>
+            <Package>be.jsams.client.desktop</Package>
+        </Package>
+
+        <Package Name="be.jsams.client.model.table">
+            <Package>be.jsams.common.bean.model.management</Package>
+            <Package>be.jsams.client.desktop</Package>
+            <Package>be.jsams.client.swing.action</Package>
+            <Package>be.jsams.client.model.dialog</Package>
+            <Package>be.jsams.client.desktop</Package>
+        </Package>
+
+        <Package Name="be.jsams.client.renderer">
+            <Package>be.jsams.common.bean.model</Package>
+            <Package>be.jsams.server.model</Package>
+            <Package>be.jsams.common.bean.model</Package>
+        </Package>
+
+        <Package Name="be.jsams.client.swing.action">
+            <Package>be.jsams.client.model.dialog</Package>
+            <Package>be.jsams.client.desktop</Package>
+            <Package>be.jsams.client.swing.action</Package>
+        </Package>
+
+        <Package Name="be.jsams.client.swing.component">
+            <Package>be.jsams.client.desktop</Package>
+            <Package>be.jsams.client.swing.action</Package>
+            <Package>be.jsams.client.model.dialog</Package>
+            <Package>be.jsams.client.desktop</Package>
+        </Package>
+
+        <Package Name="be.jsams.client.swing.listener">
+            <Package>be.jsams.client.swing.component</Package>
+            <Package>be.jsams.client.desktop</Package>
+            <Package>be.jsams.client.swing.action</Package>
+            <Package>be.jsams.client.model.dialog</Package>
+            <Package>be.jsams.client.desktop</Package>
+        </Package>
+
+        <Package Name="be.jsams.client.validator">
+            <Package>be.jsams.common.bean.model</Package>
+            <Package>be.jsams.server.model</Package>
+            <Package>be.jsams.common.bean.model</Package>
+        </Package>
+
+        <Package Name="be.jsams.common.bean.model">
+            <Package>be.jsams.server.model</Package>
+            <Package>be.jsams.common.bean.model</Package>
+        </Package>
+
+        <Package Name="be.jsams.common.bean.model.management">
+            <Package>be.jsams.client.desktop</Package>
+            <Package>be.jsams.client.swing.action</Package>
+            <Package>be.jsams.client.model.dialog</Package>
+            <Package>be.jsams.client.desktop</Package>
+        </Package>
+
+        <Package Name="be.jsams.common.bean.model.sale">
+            <Package>be.jsams.common.bean.model.management</Package>
+            <Package>be.jsams.client.desktop</Package>
+            <Package>be.jsams.client.swing.action</Package>
+            <Package>be.jsams.client.model.dialog</Package>
+            <Package>be.jsams.client.desktop</Package>
+        </Package>
+
+        <Package Name="be.jsams.common.bean.view">
+            <Package>be.jsams.common.bean.model</Package>
+            <Package>be.jsams.server.model</Package>
+            <Package>be.jsams.common.bean.model</Package>
+        </Package>
+
+        <Package Name="be.jsams.server.dao">
+            <Package>be.jsams.common.bean.model.management</Package>
+            <Package>be.jsams.client.desktop</Package>
+            <Package>be.jsams.client.swing.action</Package>
+            <Package>be.jsams.client.model.dialog</Package>
+            <Package>be.jsams.client.desktop</Package>
+        </Package>
+
+        <Package Name="be.jsams.server.dao.impl">
+            <Package>be.jsams.server.dao</Package>
+            <Package>be.jsams.common.bean.model.management</Package>
+            <Package>be.jsams.client.desktop</Package>
+            <Package>be.jsams.client.swing.action</Package>
+            <Package>be.jsams.client.model.dialog</Package>
+            <Package>be.jsams.client.desktop</Package>
+        </Package>
+
+        <Package Name="be.jsams.server.model">
+            <Package>be.jsams.common.bean.model</Package>
+            <Package>be.jsams.server.model</Package>
+        </Package>
+
+        <Package Name="be.jsams.server.service">
+            <Package>be.jsams.common.bean.model.management</Package>
+            <Package>be.jsams.client.desktop</Package>
+            <Package>be.jsams.client.swing.action</Package>
+            <Package>be.jsams.client.model.dialog</Package>
+            <Package>be.jsams.client.desktop</Package>
+        </Package>
+
+        <Package Name="be.jsams.server.service.impl">
+            <Package>be.jsams.server.service</Package>
+            <Package>be.jsams.common.bean.model.management</Package>
+            <Package>be.jsams.client.desktop</Package>
+            <Package>be.jsams.client.swing.action</Package>
+            <Package>be.jsams.client.model.dialog</Package>
+            <Package>be.jsams.client.desktop</Package>
+        </Package>
+
+    </Cycles>
+</JDepend>

@@ -2,7 +2,7 @@ package be.jsams.server.service;
 
 import java.util.List;
 
-import be.jsams.server.model.Customer;
+import be.jsams.common.bean.model.management.CustomerBean;
 
 /**
  * Customer service interface.
@@ -10,15 +10,15 @@ import be.jsams.server.model.Customer;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public interface CustomerService extends Service<Customer> {
+public interface CustomerService extends Service<CustomerBean> {
 
     /**
-     * Finds all {@link Customer} following the criteria customer.
+     * Finds all {@link CustomerBean} following the criteria customer.
      * 
      * @param criteria
      *            the criteria customer
-     * @return a list of {@link Customer}
+     * @return a list of {@link CustomerBean}
      */
-    List<Customer> findByCriteria(final Customer criteria);
+    List<CustomerBean> findByCriteria(final CustomerBean criteria);
 
 }

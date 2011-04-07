@@ -1,0 +1,170 @@
+<class-diagram version="0.9.86" automaticImage="PNG" icons="true" always-add-relationships="true" generalizations="true" 
+  realizations="true" associations="true" dependencies="true" nesting-relationships="true">  
+  <class corner="BOTTOM_RIGHT" language="java" name="be.jsams.server.model.Estimate" project="JSAMS" 
+    file="/JSAMS/src/main/java/be/jsams/server/model/Estimate.java" binary="false">    
+    <position x="130" y="103" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="false" signature="false" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class corner="BOTTOM_RIGHT" language="java" name="be.jsams.common.bean.model.sale.EstimateBean" project="JSAMS" 
+    file="/JSAMS/src/main/java/be/jsams/common/bean/model/sale/EstimateBean.java" binary="false">    
+    <position x="343" y="102" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="false" signature="false" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class corner="BOTTOM_RIGHT" language="java" name="be.jsams.server.model.EstimateDetail" project="JSAMS" 
+    file="/JSAMS/src/main/java/be/jsams/server/model/EstimateDetail.java" binary="false">    
+    <position x="97" y="253" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="false" signature="false" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class corner="BOTTOM_RIGHT" language="java" name="be.jsams.common.bean.model.sale.EstimateDetailBean" project="JSAMS" 
+    file="/JSAMS/src/main/java/be/jsams/common/bean/model/sale/EstimateDetailBean.java" binary="false">    
+    <position x="289" y="251" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="true" signature="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class corner="BOTTOM_RIGHT" language="java" name="be.jsams.common.bean.view.EstimateBeanView" project="JSAMS" 
+    file="/JSAMS/src/main/java/be/jsams/common/bean/view/EstimateBeanView.java" binary="false">    
+    <position x="558" y="101" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="true" signature="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <class corner="BOTTOM_RIGHT" language="java" name="be.jsams.common.bean.view.EstimateDetailBeanView" project="JSAMS" 
+    file="/JSAMS/src/main/java/be/jsams/common/bean/view/EstimateDetailBeanView.java" binary="false">    
+    <position x="530" y="251" width="-1" height="-1"/>    
+    <display autosize="true" package="true" initial-value="true" signature="true" visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false"/>      
+      <operations public="false" package="false" protected="false" private="false"/>    
+    </display>  
+  </class>  
+  <association>    
+    <source project="JSAMS" name="be.jsams.server.model.EstimateDetail" 
+      file="/JSAMS/src/main/java/be/jsams/server/model/EstimateDetail.java" binary="false" navigable="false">      
+      <attribute name="estimate"/>      
+      <multiplicity minimum="0" maximum="1"/>    
+    </source>    
+    <target project="JSAMS" name="be.jsams.server.model.Estimate" 
+      file="/JSAMS/src/main/java/be/jsams/server/model/Estimate.java" binary="false" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association>    
+    <source project="JSAMS" name="be.jsams.common.bean.model.sale.EstimateDetailBean" 
+      file="/JSAMS/src/main/java/be/jsams/common/bean/model/sale/EstimateDetailBean.java" binary="false" 
+      navigable="false">      
+      <attribute name="list"/>      
+      <multiplicity minimum="0" maximum="2147483647"/>    
+    </source>    
+    <target project="JSAMS" name="be.jsams.common.bean.model.sale.EstimateDetailBean" 
+      file="/JSAMS/src/main/java/be/jsams/common/bean/model/sale/EstimateDetailBean.java" binary="false" 
+      navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency>    
+    <source project="JSAMS" name="be.jsams.common.bean.view.EstimateBeanView" 
+      file="/JSAMS/src/main/java/be/jsams/common/bean/view/EstimateBeanView.java" binary="false"/>    
+    <target project="JSAMS" name="be.jsams.common.bean.model.sale.EstimateBean" 
+      file="/JSAMS/src/main/java/be/jsams/common/bean/model/sale/EstimateBean.java" binary="false"/>  
+  </dependency>  
+  <association>    
+    <source project="JSAMS" name="be.jsams.common.bean.model.sale.EstimateBean" 
+      file="/JSAMS/src/main/java/be/jsams/common/bean/model/sale/EstimateBean.java" binary="false" navigable="false">      
+      <attribute name="details"/>      
+      <multiplicity minimum="0" maximum="2147483647"/>    
+    </source>    
+    <target project="JSAMS" name="be.jsams.common.bean.model.sale.EstimateDetailBean" 
+      file="/JSAMS/src/main/java/be/jsams/common/bean/model/sale/EstimateDetailBean.java" binary="false" 
+      navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency>    
+    <source project="JSAMS" name="be.jsams.common.bean.model.sale.EstimateBean" 
+      file="/JSAMS/src/main/java/be/jsams/common/bean/model/sale/EstimateBean.java" binary="false"/>    
+    <target project="JSAMS" name="be.jsams.common.bean.view.EstimateBeanView" 
+      file="/JSAMS/src/main/java/be/jsams/common/bean/view/EstimateBeanView.java" binary="false"/>  
+  </dependency>  
+  <association>    
+    <source project="JSAMS" name="be.jsams.common.bean.model.sale.EstimateDetailBean" 
+      file="/JSAMS/src/main/java/be/jsams/common/bean/model/sale/EstimateDetailBean.java" binary="false" 
+      navigable="false">      
+      <attribute name="estimate"/>      
+      <multiplicity minimum="0" maximum="1"/>    
+    </source>    
+    <target project="JSAMS" name="be.jsams.common.bean.model.sale.EstimateBean" 
+      file="/JSAMS/src/main/java/be/jsams/common/bean/model/sale/EstimateBean.java" binary="false" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency>    
+    <source project="JSAMS" name="be.jsams.server.model.Estimate" 
+      file="/JSAMS/src/main/java/be/jsams/server/model/Estimate.java" binary="false"/>    
+    <target project="JSAMS" name="be.jsams.common.bean.model.sale.EstimateBean" 
+      file="/JSAMS/src/main/java/be/jsams/common/bean/model/sale/EstimateBean.java" binary="false"/>  
+  </dependency>  
+  <association>    
+    <source project="JSAMS" name="be.jsams.server.model.Estimate" 
+      file="/JSAMS/src/main/java/be/jsams/server/model/Estimate.java" binary="false" navigable="false">      
+      <attribute name="details"/>      
+      <multiplicity minimum="0" maximum="2147483647"/>    
+    </source>    
+    <target project="JSAMS" name="be.jsams.server.model.EstimateDetail" 
+      file="/JSAMS/src/main/java/be/jsams/server/model/EstimateDetail.java" binary="false" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency>    
+    <source project="JSAMS" name="be.jsams.common.bean.model.sale.EstimateDetailBean" 
+      file="/JSAMS/src/main/java/be/jsams/common/bean/model/sale/EstimateDetailBean.java" binary="false"/>    
+    <target project="JSAMS" name="be.jsams.common.bean.view.EstimateDetailBeanView" 
+      file="/JSAMS/src/main/java/be/jsams/common/bean/view/EstimateDetailBeanView.java" binary="false"/>  
+  </dependency>  
+  <dependency>    
+    <source project="JSAMS" name="be.jsams.common.bean.model.sale.EstimateBean" 
+      file="/JSAMS/src/main/java/be/jsams/common/bean/model/sale/EstimateBean.java" binary="false"/>    
+    <target project="JSAMS" name="be.jsams.server.model.Estimate" 
+      file="/JSAMS/src/main/java/be/jsams/server/model/Estimate.java" binary="false"/>  
+  </dependency>  
+  <dependency>    
+    <source project="JSAMS" name="be.jsams.server.model.EstimateDetail" 
+      file="/JSAMS/src/main/java/be/jsams/server/model/EstimateDetail.java" binary="false"/>    
+    <target project="JSAMS" name="be.jsams.common.bean.model.sale.EstimateDetailBean" 
+      file="/JSAMS/src/main/java/be/jsams/common/bean/model/sale/EstimateDetailBean.java" binary="false"/>  
+  </dependency>  
+  <dependency>    
+    <source project="JSAMS" name="be.jsams.common.bean.view.EstimateBeanView" 
+      file="/JSAMS/src/main/java/be/jsams/common/bean/view/EstimateBeanView.java" binary="false"/>    
+    <target project="JSAMS" name="be.jsams.common.bean.model.sale.EstimateDetailBean" 
+      file="/JSAMS/src/main/java/be/jsams/common/bean/model/sale/EstimateDetailBean.java" binary="false"/>  
+  </dependency>  
+  <dependency>    
+    <source project="JSAMS" name="be.jsams.common.bean.model.sale.EstimateBean" 
+      file="/JSAMS/src/main/java/be/jsams/common/bean/model/sale/EstimateBean.java" binary="false"/>    
+    <target project="JSAMS" name="be.jsams.server.model.EstimateDetail" 
+      file="/JSAMS/src/main/java/be/jsams/server/model/EstimateDetail.java" binary="false"/>  
+  </dependency>  
+  <dependency>    
+    <source project="JSAMS" name="be.jsams.common.bean.view.EstimateDetailBeanView" 
+      file="/JSAMS/src/main/java/be/jsams/common/bean/view/EstimateDetailBeanView.java" binary="false"/>    
+    <target project="JSAMS" name="be.jsams.common.bean.model.sale.EstimateDetailBean" 
+      file="/JSAMS/src/main/java/be/jsams/common/bean/model/sale/EstimateDetailBean.java" binary="false"/>  
+  </dependency>  
+  <dependency>    
+    <source project="JSAMS" name="be.jsams.common.bean.model.sale.EstimateDetailBean" 
+      file="/JSAMS/src/main/java/be/jsams/common/bean/model/sale/EstimateDetailBean.java" binary="false"/>    
+    <target project="JSAMS" name="be.jsams.server.model.EstimateDetail" 
+      file="/JSAMS/src/main/java/be/jsams/server/model/EstimateDetail.java" binary="false"/>  
+  </dependency>  
+  <classifier-display autosize="true" package="true" initial-value="true" signature="true" visibility="true">    
+    <attributes public="false" package="false" protected="false" private="false"/>    
+    <operations public="false" package="false" protected="false" private="false"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

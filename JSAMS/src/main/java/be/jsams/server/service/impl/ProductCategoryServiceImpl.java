@@ -1,7 +1,9 @@
 package be.jsams.server.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import be.jsams.common.bean.model.management.ProductCategoryBean;
 import be.jsams.server.dao.ProductCategoryDao;
 import be.jsams.server.model.ProductCategory;
 import be.jsams.server.service.ProductCategoryService;
@@ -35,15 +37,18 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
     /**
      * {@inheritDoc}
      */
-    public void create(final ProductCategory model) {
-        productCategoryDao.add(model);
+    public ProductCategoryBean create(final ProductCategoryBean bean) {
+        ProductCategory category = new ProductCategory(bean);
+        productCategoryDao.add(category);
+        return new ProductCategoryBean(category);
     }
 
     /**
      * {@inheritDoc}
      */
-    public void delete(final ProductCategory model) {
-        productCategoryDao.delete(model);
+    public void delete(final ProductCategoryBean bean) {
+        ProductCategory category = new ProductCategory(bean);
+        productCategoryDao.delete(category);
     }
 
     /**
@@ -56,29 +61,42 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
     /**
      * {@inheritDoc}
      */
-    public List<ProductCategory> findAll() {
-        return productCategoryDao.findAll();
+    public List<ProductCategoryBean> findAll() {
+        List<ProductCategory> categories = productCategoryDao.findAll();
+        List<ProductCategoryBean> beans = new ArrayList<ProductCategoryBean>();
+        for (ProductCategory category : categories) {
+            beans.add(new ProductCategoryBean(category));
+        }
+        return beans;
     }
 
     /**
      * {@inheritDoc}
      */
-    public ProductCategory findById(final Long id) {
-        return productCategoryDao.findById(id);
+    public ProductCategoryBean findById(final Long id) {
+        ProductCategory category = productCategoryDao.findById(id);
+        ProductCategoryBean bean = new ProductCategoryBean(category);
+        return bean;
     }
 
     /**
      * {@inheritDoc}
      */
-    public void update(final ProductCategory model) {
-        productCategoryDao.update(model);
+    public void update(final ProductCategoryBean bean) {
+        ProductCategory category = new ProductCategory(bean);
+        productCategoryDao.update(category);
     }
 
     /**
      * {@inheritDoc}
      */
-    public List<ProductCategory> findByCriteria(final ProductCategory criteria) {
-        return productCategoryDao.findByCriteria(criteria);
+    public List<ProductCategoryBean> findByCriteria(final ProductCategoryBean criteria) {
+        List<ProductCategory> categories = productCategoryDao.findByCriteria(criteria);
+        List<ProductCategoryBean> beans = new ArrayList<ProductCategoryBean>();
+        for (ProductCategory category : categories) {
+            beans.add(new ProductCategoryBean(category));
+        }
+        return beans;
     }
 
 }

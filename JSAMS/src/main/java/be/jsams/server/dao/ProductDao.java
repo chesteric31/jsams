@@ -2,6 +2,7 @@ package be.jsams.server.dao;
 
 import java.util.List;
 
+import be.jsams.common.bean.model.management.ProductBean;
 import be.jsams.server.model.Product;
 
 /**
@@ -19,6 +20,6 @@ public interface ProductDao extends Dao<Product> {
      *            the criteria model
      * @return a list of {@link Product}
      */
-    List<Product> findByCriteria(Product criteria);
+    List<Product> findByCriteria(final ProductBean criteria);
 
 }
