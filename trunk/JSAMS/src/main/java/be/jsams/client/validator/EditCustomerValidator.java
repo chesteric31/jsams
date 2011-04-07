@@ -29,7 +29,7 @@ public class EditCustomerValidator implements Validator<CustomerBean> {
         if (ValidationUtils.isBlank(name)) {
             support.addError(JsamsI18nLabelResource.LABEL_NAME.getTranslation(), JsamsI18nResource.ERROR_IS_MANDATORY
                     .getTranslation());
-        } else if (!ValidationUtils.isAlphanumeric(name)) {
+        } else if (!ValidationUtils.isAlphanumericSpace(name)) {
             support.addError(JsamsI18nLabelResource.LABEL_NAME.getTranslation(),
                     JsamsI18nResource.ERROR_IS_ALPHANUMERIC.getTranslation());
         }
