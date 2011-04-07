@@ -40,7 +40,7 @@ public class EstimateDetailBeanView extends AbstractView<EstimateDetailBean, Jsa
         EstimateDetailBean bean = getBean();
         EstimateDetailTableModel tableModel = new EstimateDetailTableModel(
                 (List<EstimateDetailBean>) bean.getListModel());
-        JsamsTable table = helper.createBindingTableComponent(bean, tableModel, false, false);
+        JsamsTable table = helper.createBindingTableComponent(tableModel, false, false);
         return table;
     }
 

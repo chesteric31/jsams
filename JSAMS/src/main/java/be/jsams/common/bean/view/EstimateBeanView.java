@@ -64,8 +64,7 @@ public class EstimateBeanView extends AbstractView<EstimateBean, JPanel, JPanel>
     /**
      * Constructor
      * 
-     * @param bean
-     *            the {@link EstimateBean}
+     * @param bean the {@link EstimateBean}
      */
     public EstimateBeanView(EstimateBean bean) {
         super(bean);
@@ -107,10 +106,14 @@ public class EstimateBeanView extends AbstractView<EstimateBean, JPanel, JPanel>
         List<EstimateDetailBean> details = bean.getDetails();
         int maxColumnSpan = builder.getColumnCount();
 
+        EstimateDetailTableModel tableModel = new EstimateDetailTableModel(details);
+        ViewFactory<EstimateDetailBean> detailView = new ViewFactory<EstimateDetailBean>();
+        table = detailView.createBindingTableComponent(tableModel, false, false);
+
         // we add per default one detail
-        final EstimateDetailBean detailBean = details.get(0);
-        detailBean.setListModel(new ArrayListModel<EstimateDetailBean>(details));
-        table = detailBean.getView().createEditView();
+//        final EstimateDetailBean detailBean = details.get(0);
+//        detailBean.setListModel(new ArrayListModel<EstimateDetailBean>(details));
+//        table = detailBean.getView().createEditView();
         table.addMouseListener(handleProductEditing());
 
         JTableHeader tableHeader = table.getTableHeader();
@@ -124,15 +127,6 @@ public class EstimateBeanView extends AbstractView<EstimateBean, JPanel, JPanel>
         table.setDefaultRenderer(Double.class, defaultCellRenderer);
         table.setDefaultRenderer(String.class, defaultCellRenderer);
 
-        // EstimateDetailTableModel tableModel = new EstimateDetailTableModel(details);
-        // ViewFactory<EstimateDetailBean> detailHelper = new ViewFactory<EstimateDetailBean>();
-        // table = detailHelper.createBindingTableComponent(details.get(0), tableModel, false, false);
-
-        // TableColumn productIdColumn = table.getColumnModel().getColumn(0);
-        // TableColumn productNameColumn = table.getColumnModel().getColumn(1);
-        // ProductCellEditor editor = new ProductCellEditor();
-        // productIdColumn.setCellEditor(editor);
-        // productNameColumn.setCellEditor(editor);
         builder.appendI15dSeparator(JsamsI18nResource.PANEL_ESTIMATE_DETAILS.getKey());
         builder.append(new JScrollPane(table), maxColumnSpan);
 
@@ -203,7 +197,6 @@ public class EstimateBeanView extends AbstractView<EstimateBean, JPanel, JPanel>
             @Override
             public void mouseClicked(MouseEvent e) {
                 Object source = e.getSource();
-                // if (source instanceof JsamsTable) {
                 int selectedColumn = table.getSelectedColumn();
                 System.out.println("clickcount " + e.getClickCount());
                 // only edit dialog for product editing
@@ -264,19 +257,10 @@ public class EstimateBeanView extends AbstractView<EstimateBean, JPanel, JPanel>
              */
             @Override
             public void propertyChange(PropertyChangeEvent evt) {
-                // System.out.println("new value: " + evt.getNewValue() + " for: " + evt.getPropertyName());
                 CustomerBean source = (CustomerBean) evt.getSource();
                 AddressBean billingAddress = getBean().getBillingAddress();
                 AddressBean customerBillingAddress = source.getBillingAddress();
                 billingAddress.refresh(customerBillingAddress);
-                // billingAddress.setBox(customerBillingAddress.getBox());
-                // billingAddress.setCity(customerBillingAddress.getCity());
-                // billingAddress.setCountry(customerBillingAddress.getCountry());
-                // billingAddress.setListModel(customerBillingAddress.getListModel());
-                // billingAddress.setNumber(customerBillingAddress.getNumber());
-                // billingAddress.setSelection(customerBillingAddress.getSelection());
-                // billingAddress.setStreet(customerBillingAddress.getStreet());
-                // billingAddress.setZipCode(customerBillingAddress.getZipCode());
             }
         };
     }
@@ -284,8 +268,7 @@ public class EstimateBeanView extends AbstractView<EstimateBean, JPanel, JPanel>
     /**
      * Builds the adding button.
      * 
-     * @param tableModel
-     *            the {@link TableModel}
+     * @param tableModel the {@link TableModel}
      * @return the adding {@link JsamsButton}
      */
     private JsamsButton buildButtonAdd(final TableModel tableModel) {

@@ -31,8 +31,7 @@ public class EstimateDetailTableModel extends JsamsTableModel<EstimateDetailBean
     /**
      * Constructor
      * 
-     * @param listBean
-     *            a list of {@link EstimateDetailBean}
+     * @param listBean a list of {@link EstimateDetailBean}
      */
     public EstimateDetailTableModel(List<EstimateDetailBean> listBean) {
         super(listBean);
@@ -46,10 +45,8 @@ public class EstimateDetailTableModel extends JsamsTableModel<EstimateDetailBean
     }
 
     /**
-     * @param rowIndex
-     *            the row
-     * @param columnIndex
-     *            the column
+     * @param rowIndex the row
+     * @param columnIndex the column
      * @return the value following the row and column
      */
     public Object getValueAt(int rowIndex, int columnIndex) {
@@ -82,8 +79,7 @@ public class EstimateDetailTableModel extends JsamsTableModel<EstimateDetailBean
     }
 
     /**
-     * @param columnIndex
-     *            the column
+     * @param columnIndex the column
      * @return the column name
      */
     public String getColumnName(int columnIndex) {
@@ -91,8 +87,7 @@ public class EstimateDetailTableModel extends JsamsTableModel<EstimateDetailBean
     }
 
     /**
-     * @param columnIndex
-     *            the column
+     * @param columnIndex the column
      * @return the column class
      */
     @Override
@@ -121,6 +116,29 @@ public class EstimateDetailTableModel extends JsamsTableModel<EstimateDetailBean
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
         return (columnIndex != 0 && columnIndex != 1);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void setValueAt(Object value, int row, int col) {
+        EstimateDetailBean detail = (EstimateDetailBean) getRow(row);
+        String stringValue = value.toString();
+        switch (col) {
+        case TWO:
+            detail.setQuantity(Integer.parseInt(stringValue));
+            break;
+        case THREE:
+            detail.setPrice(Double.parseDouble(stringValue));
+            break;
+        case FOUR:
+            detail.setDiscountRate(Double.parseDouble(stringValue));
+            break;
+        case FIVE:
+            detail.setVatApplicable(Double.parseDouble(stringValue));
+            break;
+        default:
+        }
     }
 
 }
