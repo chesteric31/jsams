@@ -45,6 +45,8 @@ public class JsamsBooleanTableCellRenderer extends JCheckBox implements TableCel
             setBackground(Color.YELLOW);
         } else if (!isSelected) {
             setBackground(Color.WHITE);
+        } else {
+            setBackground(table.getSelectionBackground());
         }
         
         setSelected((value != null && ((Boolean) value).booleanValue()));
