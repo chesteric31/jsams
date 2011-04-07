@@ -97,8 +97,8 @@ public class DaoImpl<T> implements Dao<T> {
      */
     public void delete(final T persistentObject) {
         // Merge necessary for the detached object
-        // T object = entityManager.merge(persistentObject);
-        entityManager.remove(persistentObject);
+        T object = entityManager.merge(persistentObject);
+        entityManager.remove(object);
     }
 
     /**

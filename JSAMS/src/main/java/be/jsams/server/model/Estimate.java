@@ -1,5 +1,6 @@
 package be.jsams.server.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -14,6 +15,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import be.jsams.common.bean.model.sale.EstimateBean;
+import be.jsams.common.bean.model.sale.EstimateDetailBean;
 
 /**
  * Estimate entity object.
@@ -58,6 +60,14 @@ public class Estimate extends AbstractIdentity {
         setDiscountRate(bean.getDiscountRate());
         setRemark(bean.getRemark());
         setTransferred(bean.isTransferred());
+        List<EstimateDetailBean> list = bean.getDetails();
+        List<EstimateDetail> tmp = new ArrayList<EstimateDetail>();
+        if (list != null) {
+            for (EstimateDetailBean detail : list) {
+                tmp.add(new EstimateDetail(detail));
+            }
+        }
+        setDetails(tmp);
     }
 
     /**

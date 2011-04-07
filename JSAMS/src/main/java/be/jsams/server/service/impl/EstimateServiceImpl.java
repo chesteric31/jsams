@@ -13,15 +13,15 @@ import be.jsams.server.service.EstimateService;
 
 /**
  * Estimate service implementation.
- *
+ * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
 public class EstimateServiceImpl implements EstimateService {
-    
+
     private EstimateDao estimateDao;
     private EstimateDetailDao estimateDetailDao;
-    
+
     /**
      * @return the estimateDao
      */
@@ -30,7 +30,8 @@ public class EstimateServiceImpl implements EstimateService {
     }
 
     /**
-     * @param estimateDao the estimateDao to set
+     * @param estimateDao
+     *            the estimateDao to set
      */
     public void setEstimateDao(EstimateDao estimateDao) {
         this.estimateDao = estimateDao;
@@ -44,7 +45,8 @@ public class EstimateServiceImpl implements EstimateService {
     }
 
     /**
-     * @param estimateDetailDao the estimateDetailDao to set
+     * @param estimateDetailDao
+     *            the estimateDetailDao to set
      */
     public void setEstimateDetailDao(EstimateDetailDao estimateDetailDao) {
         this.estimateDetailDao = estimateDetailDao;
@@ -72,11 +74,7 @@ public class EstimateServiceImpl implements EstimateService {
      */
     public void delete(final EstimateBean bean) {
         Estimate estimate = new Estimate(bean);
-        List<EstimateDetail> details = estimate.getDetails();
-        for (EstimateDetail detail : details) {
-            estimateDetailDao.delete(detail);
-        }
-        estimateDao.delete(estimate);
+        delete(estimate);
     }
 
     /**
@@ -84,11 +82,20 @@ public class EstimateServiceImpl implements EstimateService {
      */
     public void delete(Long id) {
         Estimate estimate = estimateDao.findById(id);
+        delete(estimate);
+    }
+
+    /**
+     * Delete a {@link Estimate} object and all its {@link EstimateDetail} object.
+     * 
+     * @param estimate the {@link Estimate} to delete
+     */
+    private void delete(Estimate estimate) {
         List<EstimateDetail> details = estimate.getDetails();
         for (EstimateDetail detail : details) {
             estimateDetailDao.delete(detail);
         }
-        estimateDao.delete(id);
+        estimateDao.delete(estimate);
     }
 
     /**
@@ -119,14 +126,14 @@ public class EstimateServiceImpl implements EstimateService {
         Estimate updatedEstimate = new Estimate(bean);
         estimateDao.update(updatedEstimate);
         List<EstimateDetailBean> details = bean.getDetails();
-//        List<EstimateDetail> updatedDetails = new ArrayList<EstimateDetail>();
+        // List<EstimateDetail> updatedDetails = new ArrayList<EstimateDetail>();
         for (EstimateDetailBean detail : details) {
             EstimateDetail detailObject = new EstimateDetail(detail);
             detailObject.setEstimate(updatedEstimate);
             estimateDetailDao.update(detailObject);
         }
-//        estimate.setDetails(addingDetails);
-//        return new EstimateBean(addingEstimate);
+        // estimate.setDetails(addingDetails);
+        // return new EstimateBean(addingEstimate);
     }
 
     /**
