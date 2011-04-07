@@ -5,15 +5,15 @@ import java.util.List;
 
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.i18n.JsamsI18nResource;
-import be.jsams.server.model.ProductCategory;
+import be.jsams.common.bean.model.management.ProductCategoryBean;
 
 /**
- * {@link JsamsTableModel} for {@link ProductCategory} object.
- *
+ * {@link JsamsTableModel} for {@link ProductCategoryBean} object.
+ * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class ProductCategoryTableModel extends JsamsTableModel<ProductCategory> {
+public class ProductCategoryTableModel extends JsamsTableModel<ProductCategoryBean> {
 
     /**
      * Serial Version UID
@@ -25,6 +25,16 @@ public class ProductCategoryTableModel extends JsamsTableModel<ProductCategory> 
      */
     private List<I18nString> columnNames = Arrays.asList(JsamsI18nResource.COLUMN_ID,
             JsamsI18nResource.COLUMN_LABEL_EN, JsamsI18nResource.COLUMN_LABEL_FR, JsamsI18nResource.COLUMN_LABEL_NL);
+
+    /**
+     * Constructor
+     * 
+     * @param listModel
+     *            a list of {@link ProductCategoryBean}
+     */
+    public ProductCategoryTableModel(List<ProductCategoryBean> listModel) {
+        super(listModel);
+    }
 
     /**
      * @return the columns count
@@ -41,15 +51,16 @@ public class ProductCategoryTableModel extends JsamsTableModel<ProductCategory> 
      * @return the value following the row and column
      */
     public Object getValueAt(int rowIndex, int columnIndex) {
+        ProductCategoryBean category = (ProductCategoryBean) getRow(rowIndex);
         switch (columnIndex) {
         case ZERO:
-            return getData().get(rowIndex).getId();
+            return category.getId();
         case ONE:
-            return getData().get(rowIndex).getLabel();
+            return category.getLabel();
         case TWO:
-            return getData().get(rowIndex).getLabelFr();
+            return category.getLabelFr();
         case THREE:
-            return getData().get(rowIndex).getLabelNl();
+            return category.getLabelNl();
         default:
             return "";
         }

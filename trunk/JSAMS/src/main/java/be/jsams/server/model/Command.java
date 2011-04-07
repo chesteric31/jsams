@@ -14,6 +14,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import be.jsams.common.bean.model.sale.CommandBean;
+
 /**
  * Command entity object.
  * 
@@ -24,13 +26,10 @@ import javax.persistence.TemporalType;
 @Table(name = "COMMAND")
 public class Command extends AbstractIdentity {
 
-    /**
-     * Serial Version UID
-     */
-    private static final long serialVersionUID = 8102219472482522357L;
     private Date creationDate;
     private String remark;
     private BigDecimal discountRate;
+    private boolean transferred;
 
     private Agent agent;
     private Customer customer;
@@ -40,10 +39,20 @@ public class Command extends AbstractIdentity {
     private List<CommandDetail> details;
 
     /**
-     * Constructor.
+     * Default constructor
      */
     public Command() {
         super();
+    }
+
+    /**
+     * Constructor
+     * 
+     * @param bean
+     *            the {@link CommandBean}
+     */
+    public Command(CommandBean bean) {
+        super(bean);
     }
 
     /**
@@ -195,11 +204,48 @@ public class Command extends AbstractIdentity {
         this.details = details;
     }
 
+    /**
+     * @return the transferred
+     */
+    @Column(name = "TRANSFERRED")
+    public boolean isTransferred() {
+        return transferred;
+    }
+
+    /**
+     * @param transferred
+     *            the transferred to set
+     */
+    public void setTransferred(boolean transferred) {
+        this.transferred = transferred;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
-        return "Command [agent=" + agent + ", billingAddress=" + billingAddress + ", creationDate=" + creationDate
-                + ", customer=" + customer + ", deliveryAddress=" + deliveryAddress + ", details=" + details
-                + ", discountRate=" + discountRate + ", remark=" + remark + "]";
+        StringBuilder builder = new StringBuilder();
+        builder.append("Command [agent=");
+        builder.append(agent);
+        builder.append(", billingAddress=");
+        builder.append(billingAddress);
+        builder.append(", creationDate=");
+        builder.append(creationDate);
+        builder.append(", customer=");
+        builder.append(customer);
+        builder.append(", deliveryAddress=");
+        builder.append(deliveryAddress);
+        builder.append(", details=");
+        builder.append(details);
+        builder.append(", discountRate=");
+        builder.append(discountRate);
+        builder.append(", remark=");
+        builder.append(remark);
+        builder.append(", transferred=");
+        builder.append(transferred);
+        builder.append("]");
+        return builder.toString();
     }
 
 }

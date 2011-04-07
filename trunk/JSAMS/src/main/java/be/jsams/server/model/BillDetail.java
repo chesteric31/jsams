@@ -19,10 +19,6 @@ import javax.persistence.Table;
 @Table(name = "BILL_DETAIL")
 public class BillDetail extends AbstractIdentity {
 
-    /**
-     * Serial Version UID
-     */
-    private static final long serialVersionUID = -5662462711250331221L;
     private int quantity;
     private BigDecimal price;
     private String description;
@@ -187,11 +183,30 @@ public class BillDetail extends AbstractIdentity {
         this.product = product;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
-        return "BillDetail [bill=" + bill + ", description=" + description + ", discountRate=" + discountRate
-                + ", price=" + price + ", product=" + product + ", quantity=" + quantity + ", transferred="
-                + transferred + ", vatApplicable=" + vatApplicable + "]";
+        StringBuilder builder = new StringBuilder();
+        builder.append("BillDetail [bill=");
+        builder.append(bill);
+        builder.append(", description=");
+        builder.append(description);
+        builder.append(", discountRate=");
+        builder.append(discountRate);
+        builder.append(", price=");
+        builder.append(price);
+        builder.append(", product=");
+        builder.append(product);
+        builder.append(", quantity=");
+        builder.append(quantity);
+        builder.append(", transferred=");
+        builder.append(transferred);
+        builder.append(", vatApplicable=");
+        builder.append(vatApplicable);
+        builder.append("]");
+        return builder.toString();
     }
 
 }

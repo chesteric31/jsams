@@ -1,7 +1,9 @@
 package be.jsams.server.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.server.dao.CustomerDao;
 import be.jsams.server.model.Customer;
 import be.jsams.server.service.CustomerService;
@@ -26,7 +28,8 @@ public class CustomerServiceImpl implements CustomerService {
 
     /**
      * 
-     * @param customerDao the {@link CustomerDao} to set
+     * @param customerDao
+     *            the {@link CustomerDao} to set
      */
     public void setCustomerDao(CustomerDao customerDao) {
         this.customerDao = customerDao;
@@ -35,14 +38,17 @@ public class CustomerServiceImpl implements CustomerService {
     /**
      * {@inheritDoc}
      */
-    public void create(final Customer customer) {
+    public CustomerBean create(final CustomerBean bean) {
+        Customer customer = new Customer(bean);
         customerDao.add(customer);
+        return new CustomerBean(customer);
     }
 
     /**
      * {@inheritDoc}
      */
-    public void delete(final Customer customer) {
+    public void delete(final CustomerBean bean) {
+        Customer customer = customerDao.findById(bean.getId());
         customerDao.delete(customer);
     }
 
@@ -56,29 +62,44 @@ public class CustomerServiceImpl implements CustomerService {
     /**
      * {@inheritDoc}
      */
-    public List<Customer> findAll() {
-        return customerDao.findAll();
+    public List<CustomerBean> findAll() {
+        List<Customer> customers = customerDao.findAll();
+        List<CustomerBean> beans = new ArrayList<CustomerBean>();
+        for (Customer customer : customers) {
+            beans.add(new CustomerBean(customer));
+        }
+        return beans;
     }
 
     /**
      * {@inheritDoc}
      */
-    public Customer findById(final Long id) {
-        return customerDao.findById(id);
+    public CustomerBean findById(final Long id) {
+        Customer customer = customerDao.findById(id);
+        CustomerBean bean = new CustomerBean(customer);
+        return bean;
     }
 
     /**
      * {@inheritDoc}
      */
-    public void update(final Customer customer) {
+    public void update(final CustomerBean bean) {
+        Customer customer = new Customer(bean);
         customerDao.update(customer);
     }
 
     /**
      * {@inheritDoc}
      */
-    public List<Customer> findByCriteria(final Customer criteria) {
-        return customerDao.findByCriteria(criteria);
+    public List<CustomerBean> findByCriteria(final CustomerBean criteria) {
+        List<Customer> customers = customerDao.findByCriteria(criteria);
+        List<CustomerBean> beans = new ArrayList<CustomerBean>();
+        if (customers != null && !customers.isEmpty()) {
+            for (Customer customer : customers) {
+                beans.add(new CustomerBean(customer));
+            }
+        }
+        return beans;
     }
 
 }

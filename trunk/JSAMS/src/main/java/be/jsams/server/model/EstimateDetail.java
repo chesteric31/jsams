@@ -1,13 +1,13 @@
 package be.jsams.server.model;
 
-import java.math.BigDecimal;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import be.jsams.common.bean.model.sale.EstimateDetailBean;
 
 /**
  * Estimate detail (line) entity object.
@@ -19,14 +19,10 @@ import javax.persistence.Table;
 @Table(name = "ESTIMATE_DETAIL")
 public class EstimateDetail extends AbstractIdentity {
 
-    /**
-     * Serial Version UID
-     */
-    private static final long serialVersionUID = -389048976022120236L;
     private int quantity;
-    private BigDecimal price;
-    private BigDecimal vatApplicable;
-    private BigDecimal discountRate;
+    private Double price;
+    private Double vatApplicable;
+    private Double discountRate;
     private boolean transferred;
 
     private Estimate estimate;
@@ -37,6 +33,23 @@ public class EstimateDetail extends AbstractIdentity {
      */
     public EstimateDetail() {
         super();
+    }
+
+    /**
+     * Constructor.
+     * 
+     * @param bean
+     *            the {@link EstimateDetailBean}
+     */
+    public EstimateDetail(final EstimateDetailBean bean) {
+        super(bean);
+        setDiscountRate(bean.getDiscountRate());
+        setEstimate(new Estimate(bean.getEstimate()));
+        setPrice(bean.getPrice());
+        setProduct(new Product(bean.getProduct()));
+        setQuantity(bean.getQuantity());
+        setTransferred(bean.isTransferred());
+        setVatApplicable(bean.getVatApplicable());
     }
 
     /**
@@ -62,7 +75,7 @@ public class EstimateDetail extends AbstractIdentity {
      * @return the price
      */
     @Column(name = "PRICE")
-    public BigDecimal getPrice() {
+    public Double getPrice() {
         return price;
     }
 
@@ -71,7 +84,7 @@ public class EstimateDetail extends AbstractIdentity {
      * @param price
      *            the price to set
      */
-    public void setPrice(BigDecimal price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
@@ -80,7 +93,7 @@ public class EstimateDetail extends AbstractIdentity {
      * @return the VAT applicable
      */
     @Column(name = "VAT_APPLICABLE")
-    public BigDecimal getVatApplicable() {
+    public Double getVatApplicable() {
         return vatApplicable;
     }
 
@@ -89,7 +102,7 @@ public class EstimateDetail extends AbstractIdentity {
      * @param vatApplicable
      *            the VAT applicable to set
      */
-    public void setVatApplicable(BigDecimal vatApplicable) {
+    public void setVatApplicable(Double vatApplicable) {
         this.vatApplicable = vatApplicable;
     }
 
@@ -98,7 +111,7 @@ public class EstimateDetail extends AbstractIdentity {
      * @return the discount rate
      */
     @Column(name = "DISCOUNT_RATE")
-    public BigDecimal getDiscountRate() {
+    public Double getDiscountRate() {
         return discountRate;
     }
 
@@ -107,7 +120,7 @@ public class EstimateDetail extends AbstractIdentity {
      * @param discountRate
      *            the discount rate to set
      */
-    public void setDiscountRate(BigDecimal discountRate) {
+    public void setDiscountRate(Double discountRate) {
         this.discountRate = discountRate;
     }
 
@@ -115,7 +128,7 @@ public class EstimateDetail extends AbstractIdentity {
      * 
      * @return the {@link Estimate}
      */
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "FK_ESTIMATE")
     public Estimate getEstimate() {
         return estimate;
@@ -134,7 +147,7 @@ public class EstimateDetail extends AbstractIdentity {
      * 
      * @return the {@link Product}
      */
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "FK_PRODUCT")
     public Product getProduct() {
         return product;
@@ -167,11 +180,28 @@ public class EstimateDetail extends AbstractIdentity {
         this.transferred = transferred;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
-        return "EstimateDetail [discountRate=" + discountRate + ", estimate=" + estimate + ", price=" + price
-                + ", product=" + product + ", quantity=" + quantity + ", transferred=" + transferred
-                + ", vatApplicable=" + vatApplicable + "]";
+        StringBuilder builder = new StringBuilder();
+        builder.append("EstimateDetail [discountRate=");
+        builder.append(discountRate);
+        builder.append(", estimate=");
+        builder.append(estimate);
+        builder.append(", price=");
+        builder.append(price);
+        builder.append(", product=");
+        builder.append(product);
+        builder.append(", quantity=");
+        builder.append(quantity);
+        builder.append(", transferred=");
+        builder.append(transferred);
+        builder.append(", vatApplicable=");
+        builder.append(vatApplicable);
+        builder.append("]");
+        return builder.toString();
     }
 
 }

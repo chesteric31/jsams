@@ -23,10 +23,6 @@ import javax.persistence.TemporalType;
 @Table(name = "BILL")
 public class Bill extends AbstractIdentity {
 
-    /**
-     * Serial Version UID
-     */
-    private static final long serialVersionUID = -613138056155460436L;
     private Date creationDate;
     private String remark;
     private BigDecimal discountRate;
@@ -291,13 +287,40 @@ public class Bill extends AbstractIdentity {
         this.details = details;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
-        return "Bill [billingAddress=" + billingAddress + ", closed=" + closed + ", creationDate=" + creationDate
-                + ", customer=" + customer + ", dateFirstRemember=" + dateFirstRemember + ", dateFormalNotice="
-                + dateFormalNotice + ", dateSecondRemember=" + dateSecondRemember + ", discountRate=" + discountRate
-                + ", dueDate=" + dueDate + ", paid=" + paid + ", paymentMode=" + paymentMode + ", remark=" + remark
-                + "]";
+        StringBuilder builder = new StringBuilder();
+        builder.append("Bill [billingAddress=");
+        builder.append(billingAddress);
+        builder.append(", closed=");
+        builder.append(closed);
+        builder.append(", creationDate=");
+        builder.append(creationDate);
+        builder.append(", customer=");
+        builder.append(customer);
+        builder.append(", dateFirstRemember=");
+        builder.append(dateFirstRemember);
+        builder.append(", dateFormalNotice=");
+        builder.append(dateFormalNotice);
+        builder.append(", dateSecondRemember=");
+        builder.append(dateSecondRemember);
+        builder.append(", details=");
+        builder.append(details);
+        builder.append(", discountRate=");
+        builder.append(discountRate);
+        builder.append(", dueDate=");
+        builder.append(dueDate);
+        builder.append(", paid=");
+        builder.append(paid);
+        builder.append(", paymentMode=");
+        builder.append(paymentMode);
+        builder.append(", remark=");
+        builder.append(remark);
+        builder.append("]");
+        return builder.toString();
     }
 
 }

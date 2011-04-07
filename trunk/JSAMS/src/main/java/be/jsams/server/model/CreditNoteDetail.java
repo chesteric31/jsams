@@ -15,10 +15,6 @@ import javax.persistence.ManyToOne;
  */
 public class CreditNoteDetail extends AbstractIdentity {
 
-    /**
-     * Serial Version UID
-     */
-    private static final long serialVersionUID = -2841513484839283690L;
     private int quantity;
     private BigDecimal price;
     private String description;
@@ -125,10 +121,24 @@ public class CreditNoteDetail extends AbstractIdentity {
         this.billDetail = billDetail;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
-        return "CreditNoteDetail [billDetail=" + billDetail + ", creditNote=" + creditNote + ", description="
-                + description + ", price=" + price + ", quantity=" + quantity + "]";
+        StringBuilder builder = new StringBuilder();
+        builder.append("CreditNoteDetail [billDetail=");
+        builder.append(billDetail);
+        builder.append(", creditNote=");
+        builder.append(creditNote);
+        builder.append(", description=");
+        builder.append(description);
+        builder.append(", price=");
+        builder.append(price);
+        builder.append(", quantity=");
+        builder.append(quantity);
+        builder.append("]");
+        return builder.toString();
     }
 
 }

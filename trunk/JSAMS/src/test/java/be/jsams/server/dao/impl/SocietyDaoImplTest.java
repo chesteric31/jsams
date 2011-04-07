@@ -4,8 +4,6 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
-import java.math.BigDecimal;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +34,7 @@ public class SocietyDaoImplTest extends AbstractJUnitTestClass {
     public void setUp() throws Exception {
         society = new Society();
         society.setActivity("Activity");
-        society.setCapital(new BigDecimal("123456.78"));
+        society.setCapital(new Double("123456.78"));
         society.setName("Name");
         society.setVatNumber("BE123456789");
         
@@ -45,7 +43,7 @@ public class SocietyDaoImplTest extends AbstractJUnitTestClass {
         address.setCountry("Belgium");
         address.setNumber("1");
         address.setStreet("Rue Neuve");
-        address.setZipCode(1000);
+        address.setZipCode("1000");
         
         society.setAddress(address);
         

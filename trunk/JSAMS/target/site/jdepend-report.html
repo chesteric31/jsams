@@ -1,0 +1,1882 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+
+
+
+
+
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>JSAMS - JDepend Report Metrics</title>
+    <style type="text/css" media="all">
+      @import url("./css/maven-base.css");
+      @import url("./css/maven-theme.css");
+      @import url("./css/site.css");
+    </style>
+    <link rel="stylesheet" href="./css/print.css" type="text/css" media="print" />
+        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+      </head>
+  <body class="composite">
+    <div id="banner">
+                    <span id="bannerLeft">
+    
+            JSAMS
+    
+            </span>
+                    <div class="clear">
+        <hr/>
+      </div>
+    </div>
+    <div id="breadcrumbs">
+          
+  
+
+  
+    
+  
+  
+    
+            <div class="xleft">
+        Last Published: 2011-04-05
+                      </div>
+            <div class="xright">            <a href="">JSAMS</a>
+            
+  
+
+  
+    
+  
+  
+    
+  </div>
+      <div class="clear">
+        <hr/>
+      </div>
+    </div>
+    <div id="leftColumn">
+      <div id="navcolumn">
+           
+  
+
+  
+    
+  
+  
+    
+                             <h5>Project Documentation</h5>
+            <ul>
+              
+                
+              
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+            
+      
+              
+        <li class="collapsed">
+                    <a href="project-info.html">Project Information</a>
+                </li>
+              
+                
+              
+      
+            
+      
+            
+      
+            
+      
+            
+            
+            
+      
+            
+      
+              
+            <li class="expanded">
+                    <a href="project-reports.html">Project Reports</a>
+                  <ul>
+                  
+    <li class="none">
+                    <a href="checkstyle.html">Checkstyle</a>
+          </li>
+                  
+    <li class="none">
+                    <a href="cpd.html">CPD Report</a>
+          </li>
+                  
+    <li class="none">
+                    <a href="findbugs.html">FindBugs Report</a>
+          </li>
+                  
+    <li class="none">
+                    <a href="apidocs/index.html">JavaDocs</a>
+          </li>
+                  
+    <li class="none">
+              <strong>JDepend</strong>
+        </li>
+                  
+    <li class="none">
+                    <a href="pmd.html">PMD Report</a>
+          </li>
+                  
+    <li class="none">
+                    <a href="testapidocs/index.html">Test JavaDocs</a>
+          </li>
+              </ul>
+        </li>
+          </ul>
+                                           <a href="http://maven.apache.org/" title="Built by Maven" class="poweredBy">
+            <img alt="Built by Maven" src="./images/logos/maven-feather.png"></img>
+          </a>
+                       
+  
+
+  
+    
+  
+  
+    
+        </div>
+    </div>
+    <div id="bodyColumn">
+      <div id="contentBox">
+        <div class="section"><h2>Metric Results</h2>
+[ <a href="#summary">summary</a> ] [ <a href="#packages">packages</a> ] [ <a href="#cycles">cycles</a> ] [ <a href="#explanations">explanations</a> ] <br />
+<br />
+The following document contains the results of a JDepend metric analysis. The various metrics are defined at the bottom of this document.<br />
+<br />
+<a name="summary"></a><h2>Summary</h2>
+[ <a href="#summary">summary</a> ] [ <a href="#packages">packages</a> ] [ <a href="#cycles">cycles</a> ] [ <a href="#explanations">explanations</a> ] <br />
+<br />
+<table class="bodyTable"><tr class="a"><th>Package</th>
+<th>TC</th>
+<th>CC</th>
+<th>AC</th>
+<th>Ca</th>
+<th>Ce</th>
+<th>A</th>
+<th>I</th>
+<th>D</th>
+<th>V</th>
+</tr>
+<tr class="b"><td><a href="#be.jsams">be.jsams</a></td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>5</td>
+<td>0.0%</td>
+<td>100.0%</td>
+<td>0.0%</td>
+<td>1</td>
+</tr>
+<tr class="a"><td><a href="#be.jsams.client.context">be.jsams.client.context</a></td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>7</td>
+<td>4</td>
+<td>0.0%</td>
+<td>36.0%</td>
+<td>64.0%</td>
+<td>1</td>
+</tr>
+<tr class="b"><td><a href="#be.jsams.client.desktop">be.jsams.client.desktop</a></td>
+<td>9</td>
+<td>9</td>
+<td>0</td>
+<td>6</td>
+<td>16</td>
+<td>0.0%</td>
+<td>73.0%</td>
+<td>27.000002%</td>
+<td>1</td>
+</tr>
+<tr class="a"><td><a href="#be.jsams.client.formatter">be.jsams.client.formatter</a></td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>3</td>
+<td>0.0%</td>
+<td>75.0%</td>
+<td>25.0%</td>
+<td>1</td>
+</tr>
+<tr class="b"><td><a href="#be.jsams.client.i18n">be.jsams.client.i18n</a></td>
+<td>6</td>
+<td>6</td>
+<td>0</td>
+<td>11</td>
+<td>4</td>
+<td>0.0%</td>
+<td>27.000002%</td>
+<td>73.0%</td>
+<td>1</td>
+</tr>
+<tr class="a"><td><a href="#be.jsams.client.model.dialog">be.jsams.client.model.dialog</a></td>
+<td>9</td>
+<td>8</td>
+<td>1</td>
+<td>4</td>
+<td>21</td>
+<td>11.0%</td>
+<td>84.0%</td>
+<td>5.0%</td>
+<td>1</td>
+</tr>
+<tr class="b"><td><a href="#be.jsams.client.model.panel">be.jsams.client.model.panel</a></td>
+<td>9</td>
+<td>8</td>
+<td>1</td>
+<td>3</td>
+<td>24</td>
+<td>11.0%</td>
+<td>89.0%</td>
+<td>0.0%</td>
+<td>1</td>
+</tr>
+<tr class="a"><td><a href="#be.jsams.client.model.table">be.jsams.client.model.table</a></td>
+<td>7</td>
+<td>6</td>
+<td>1</td>
+<td>5</td>
+<td>8</td>
+<td>14.0%</td>
+<td>62.0%</td>
+<td>24.0%</td>
+<td>1</td>
+</tr>
+<tr class="b"><td><a href="#be.jsams.client.renderer">be.jsams.client.renderer</a></td>
+<td>4</td>
+<td>4</td>
+<td>0</td>
+<td>3</td>
+<td>10</td>
+<td>0.0%</td>
+<td>77.0%</td>
+<td>23.0%</td>
+<td>1</td>
+</tr>
+<tr class="a"><td><a href="#be.jsams.client.swing.action">be.jsams.client.swing.action</a></td>
+<td>11</td>
+<td>11</td>
+<td>0</td>
+<td>3</td>
+<td>14</td>
+<td>0.0%</td>
+<td>82.0%</td>
+<td>18.0%</td>
+<td>1</td>
+</tr>
+<tr class="b"><td><a href="#be.jsams.client.swing.component">be.jsams.client.swing.component</a></td>
+<td>21</td>
+<td>19</td>
+<td>2</td>
+<td>6</td>
+<td>18</td>
+<td>10.0%</td>
+<td>75.0%</td>
+<td>15.000001%</td>
+<td>1</td>
+</tr>
+<tr class="a"><td><a href="#be.jsams.client.swing.listener">be.jsams.client.swing.listener</a></td>
+<td>7</td>
+<td>7</td>
+<td>0</td>
+<td>4</td>
+<td>10</td>
+<td>0.0%</td>
+<td>71.0%</td>
+<td>29.0%</td>
+<td>1</td>
+</tr>
+<tr class="b"><td><a href="#be.jsams.client.swing.utils">be.jsams.client.swing.utils</a></td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+<td>0.0%</td>
+<td>67.0%</td>
+<td>33.0%</td>
+<td>1</td>
+</tr>
+<tr class="a"><td><a href="#be.jsams.client.validator">be.jsams.client.validator</a></td>
+<td>12</td>
+<td>12</td>
+<td>0</td>
+<td>2</td>
+<td>7</td>
+<td>0.0%</td>
+<td>78.0%</td>
+<td>22.0%</td>
+<td>1</td>
+</tr>
+<tr class="b"><td><a href="#be.jsams.common.bean.model">be.jsams.common.bean.model</a></td>
+<td>9</td>
+<td>5</td>
+<td>4</td>
+<td>12</td>
+<td>8</td>
+<td>44.0%</td>
+<td>40.0%</td>
+<td>16.0%</td>
+<td>1</td>
+</tr>
+<tr class="a"><td><a href="#be.jsams.common.bean.model.management">be.jsams.common.bean.model.management</a></td>
+<td>5</td>
+<td>5</td>
+<td>0</td>
+<td>14</td>
+<td>9</td>
+<td>0.0%</td>
+<td>39.0%</td>
+<td>61.0%</td>
+<td>1</td>
+</tr>
+<tr class="b"><td><a href="#be.jsams.common.bean.model.sale">be.jsams.common.bean.model.sale</a></td>
+<td>12</td>
+<td>12</td>
+<td>0</td>
+<td>13</td>
+<td>8</td>
+<td>0.0%</td>
+<td>38.0%</td>
+<td>62.0%</td>
+<td>1</td>
+</tr>
+<tr class="a"><td><a href="#be.jsams.common.bean.view">be.jsams.common.bean.view</a></td>
+<td>32</td>
+<td>30</td>
+<td>2</td>
+<td>5</td>
+<td>34</td>
+<td>6.0%</td>
+<td>87.0%</td>
+<td>7.0%</td>
+<td>1</td>
+</tr>
+<tr class="b"><td><a href="#be.jsams.pdf">be.jsams.pdf</a></td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>3</td>
+<td>100.0%</td>
+<td>75.0%</td>
+<td>75.0%</td>
+<td>1</td>
+</tr>
+<tr class="a"><td><a href="#be.jsams.pdf.impl">be.jsams.pdf.impl</a></td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>4</td>
+<td>0.0%</td>
+<td>100.0%</td>
+<td>0.0%</td>
+<td>1</td>
+</tr>
+<tr class="b"><td><a href="#be.jsams.server.dao">be.jsams.server.dao</a></td>
+<td>15</td>
+<td>0</td>
+<td>15</td>
+<td>4</td>
+<td>4</td>
+<td>100.0%</td>
+<td>50.0%</td>
+<td>50.0%</td>
+<td>1</td>
+</tr>
+<tr class="a"><td><a href="#be.jsams.server.dao.impl">be.jsams.server.dao.impl</a></td>
+<td>15</td>
+<td>15</td>
+<td>0</td>
+<td>0</td>
+<td>10</td>
+<td>0.0%</td>
+<td>100.0%</td>
+<td>0.0%</td>
+<td>1</td>
+</tr>
+<tr class="b"><td><a href="#be.jsams.server.model">be.jsams.server.model</a></td>
+<td>24</td>
+<td>20</td>
+<td>4</td>
+<td>4</td>
+<td>6</td>
+<td>17.0%</td>
+<td>60.000004%</td>
+<td>23.0%</td>
+<td>1</td>
+</tr>
+<tr class="a"><td><a href="#be.jsams.server.service">be.jsams.server.service</a></td>
+<td>9</td>
+<td>0</td>
+<td>9</td>
+<td>5</td>
+<td>5</td>
+<td>100.0%</td>
+<td>50.0%</td>
+<td>50.0%</td>
+<td>1</td>
+</tr>
+<tr class="b"><td><a href="#be.jsams.server.service.impl">be.jsams.server.service.impl</a></td>
+<td>7</td>
+<td>7</td>
+<td>0</td>
+<td>0</td>
+<td>8</td>
+<td>0.0%</td>
+<td>100.0%</td>
+<td>0.0%</td>
+<td>1</td>
+</tr>
+</table>
+<a name="packages"></a><h2>Packages</h2>
+[ <a href="#summary">summary</a> ] [ <a href="#packages">packages</a> ] [ <a href="#cycles">cycles</a> ] [ <a href="#explanations">explanations</a> ] <br />
+<a name="be.jsams"></a><h3>be.jsams</h3>
+<table class="bodyTable"><tr class="a"><th>Afferent Couplings</th>
+<th>Efferent Couplings</th>
+<th>Abstractness</th>
+<th>Instability</th>
+<th>Distance</th>
+</tr>
+<tr class="b"><td>0</td>
+<td>5</td>
+<td>0.0%</td>
+<td>100.0%</td>
+<td>0.0%</td>
+</tr>
+</table>
+<table class="bodyTable"><tr class="a"><th>Abstract Classes</th>
+<th>Concrete Classes</th>
+<th>Used by Packages</th>
+<th>Uses Packages</th>
+</tr>
+<tr class="b"><td><i>None</i></td>
+<td>be.jsams.JsamsStart<br />
+</td>
+<td><i>None</i></td>
+<td>be.jsams.client.context<br />
+be.jsams.client.desktop<br />
+be.jsams.client.i18n<br />
+java.lang<br />
+org.springframework.context.support<br />
+</td>
+</tr>
+</table>
+<a name="be.jsams.client.context"></a><h3>be.jsams.client.context</h3>
+<table class="bodyTable"><tr class="a"><th>Afferent Couplings</th>
+<th>Efferent Couplings</th>
+<th>Abstractness</th>
+<th>Instability</th>
+<th>Distance</th>
+</tr>
+<tr class="b"><td>7</td>
+<td>4</td>
+<td>0.0%</td>
+<td>36.0%</td>
+<td>64.0%</td>
+</tr>
+</table>
+<table class="bodyTable"><tr class="a"><th>Abstract Classes</th>
+<th>Concrete Classes</th>
+<th>Used by Packages</th>
+<th>Uses Packages</th>
+</tr>
+<tr class="b"><td><i>None</i></td>
+<td>be.jsams.client.context.JsamsApplicationContext<br />
+</td>
+<td>be.jsams<br />
+be.jsams.client.desktop<br />
+be.jsams.client.model.dialog<br />
+be.jsams.client.swing.action<br />
+be.jsams.common.bean.model<br />
+be.jsams.common.bean.model.management<br />
+be.jsams.common.bean.view<br />
+</td>
+<td>be.jsams.server.dao<br />
+be.jsams.server.service<br />
+java.lang<br />
+org.springframework.context.support<br />
+</td>
+</tr>
+</table>
+<a name="be.jsams.client.desktop"></a><h3>be.jsams.client.desktop</h3>
+<table class="bodyTable"><tr class="a"><th>Afferent Couplings</th>
+<th>Efferent Couplings</th>
+<th>Abstractness</th>
+<th>Instability</th>
+<th>Distance</th>
+</tr>
+<tr class="b"><td>6</td>
+<td>16</td>
+<td>0.0%</td>
+<td>73.0%</td>
+<td>27.000002%</td>
+</tr>
+</table>
+<table class="bodyTable"><tr class="a"><th>Abstract Classes</th>
+<th>Concrete Classes</th>
+<th>Used by Packages</th>
+<th>Uses Packages</th>
+</tr>
+<tr class="b"><td><i>None</i></td>
+<td>be.jsams.client.desktop.JsamsDesktop<br />
+be.jsams.client.desktop.JsamsDesktop$1<br />
+be.jsams.client.desktop.JsamsMainFrame<br />
+be.jsams.client.desktop.JsamsMainFrame$1<br />
+be.jsams.client.desktop.JsamsMainFrame$2<br />
+be.jsams.client.desktop.JsamsMainFrame$3<br />
+be.jsams.client.desktop.JsamsMainFrame$4<br />
+be.jsams.client.desktop.JsamsMainFrame$5<br />
+be.jsams.client.desktop.JsamsSpashPanel<br />
+</td>
+<td>be.jsams<br />
+be.jsams.client.model.dialog<br />
+be.jsams.client.swing.action<br />
+be.jsams.client.swing.component<br />
+be.jsams.common.bean.model.management<br />
+be.jsams.server.dao.impl<br />
+</td>
+<td>be.jsams.client.context<br />
+be.jsams.client.i18n<br />
+be.jsams.client.model.dialog<br />
+be.jsams.client.model.panel<br />
+be.jsams.client.swing.action<br />
+be.jsams.client.swing.component<br />
+be.jsams.client.swing.listener<br />
+be.jsams.common.bean.model.management<br />
+be.jsams.common.bean.model.sale<br />
+java.awt<br />
+java.awt.event<br />
+java.lang<br />
+java.util<br />
+javax.swing<br />
+javax.swing.plaf<br />
+org.apache.commons.logging<br />
+</td>
+</tr>
+</table>
+<a name="be.jsams.client.formatter"></a><h3>be.jsams.client.formatter</h3>
+<table class="bodyTable"><tr class="a"><th>Afferent Couplings</th>
+<th>Efferent Couplings</th>
+<th>Abstractness</th>
+<th>Instability</th>
+<th>Distance</th>
+</tr>
+<tr class="b"><td>1</td>
+<td>3</td>
+<td>0.0%</td>
+<td>75.0%</td>
+<td>25.0%</td>
+</tr>
+</table>
+<table class="bodyTable"><tr class="a"><th>Abstract Classes</th>
+<th>Concrete Classes</th>
+<th>Used by Packages</th>
+<th>Uses Packages</th>
+</tr>
+<tr class="b"><td><i>None</i></td>
+<td>be.jsams.client.formatter.DoubleFormatter<br />
+</td>
+<td>be.jsams.common.bean.view<br />
+</td>
+<td>java.lang<br />
+java.text<br />
+javax.swing.text<br />
+</td>
+</tr>
+</table>
+<a name="be.jsams.client.i18n"></a><h3>be.jsams.client.i18n</h3>
+<table class="bodyTable"><tr class="a"><th>Afferent Couplings</th>
+<th>Efferent Couplings</th>
+<th>Abstractness</th>
+<th>Instability</th>
+<th>Distance</th>
+</tr>
+<tr class="b"><td>11</td>
+<td>4</td>
+<td>0.0%</td>
+<td>27.000002%</td>
+<td>73.0%</td>
+</tr>
+</table>
+<table class="bodyTable"><tr class="a"><th>Abstract Classes</th>
+<th>Concrete Classes</th>
+<th>Used by Packages</th>
+<th>Uses Packages</th>
+</tr>
+<tr class="b"><td><i>None</i></td>
+<td>be.jsams.client.i18n.I18nApplicationContext<br />
+be.jsams.client.i18n.I18nManager<br />
+be.jsams.client.i18n.I18nString<br />
+be.jsams.client.i18n.JsamsI18nLabelResource<br />
+be.jsams.client.i18n.JsamsI18nResource<br />
+be.jsams.client.i18n.UserContext<br />
+</td>
+<td>be.jsams<br />
+be.jsams.client.desktop<br />
+be.jsams.client.model.dialog<br />
+be.jsams.client.model.panel<br />
+be.jsams.client.model.table<br />
+be.jsams.client.renderer<br />
+be.jsams.client.swing.action<br />
+be.jsams.client.swing.component<br />
+be.jsams.client.swing.listener<br />
+be.jsams.client.validator<br />
+be.jsams.common.bean.view<br />
+</td>
+<td>java.lang<br />
+java.util<br />
+org.springframework.context<br />
+org.springframework.context.support<br />
+</td>
+</tr>
+</table>
+<a name="be.jsams.client.model.dialog"></a><h3>be.jsams.client.model.dialog</h3>
+<table class="bodyTable"><tr class="a"><th>Afferent Couplings</th>
+<th>Efferent Couplings</th>
+<th>Abstractness</th>
+<th>Instability</th>
+<th>Distance</th>
+</tr>
+<tr class="b"><td>4</td>
+<td>21</td>
+<td>11.0%</td>
+<td>84.0%</td>
+<td>5.0%</td>
+</tr>
+</table>
+<table class="bodyTable"><tr class="a"><th>Abstract Classes</th>
+<th>Concrete Classes</th>
+<th>Used by Packages</th>
+<th>Uses Packages</th>
+</tr>
+<tr class="b"><td>be.jsams.client.model.dialog.AbstractEditDialog<br />
+</td>
+<td>be.jsams.client.model.dialog.EditAgentDialog<br />
+be.jsams.client.model.dialog.EditCustomerDialog<br />
+be.jsams.client.model.dialog.EditEstimateDialog<br />
+be.jsams.client.model.dialog.EditProductCategoryDialog<br />
+be.jsams.client.model.dialog.EditProductDialog<br />
+be.jsams.client.model.dialog.EditSocietyDialog<br />
+be.jsams.client.model.dialog.OpenSocietyDialog<br />
+be.jsams.client.model.dialog.OpenSocietyDialog$1<br />
+</td>
+<td>be.jsams.client.desktop<br />
+be.jsams.client.model.panel<br />
+be.jsams.client.swing.action<br />
+be.jsams.client.swing.listener<br />
+</td>
+<td>be.jsams.client.context<br />
+be.jsams.client.desktop<br />
+be.jsams.client.i18n<br />
+be.jsams.client.renderer<br />
+be.jsams.client.swing.component<br />
+be.jsams.client.validator<br />
+be.jsams.common.bean.model<br />
+be.jsams.common.bean.model.management<br />
+be.jsams.common.bean.model.sale<br />
+be.jsams.common.bean.view<br />
+be.jsams.server.service<br />
+com.jgoodies.forms.builder<br />
+com.jgoodies.forms.layout<br />
+com.jgoodies.validation<br />
+com.jgoodies.validation.util<br />
+com.jgoodies.validation.view<br />
+java.awt<br />
+java.awt.event<br />
+java.lang<br />
+java.util<br />
+javax.swing<br />
+</td>
+</tr>
+</table>
+<a name="be.jsams.client.model.panel"></a><h3>be.jsams.client.model.panel</h3>
+<table class="bodyTable"><tr class="a"><th>Afferent Couplings</th>
+<th>Efferent Couplings</th>
+<th>Abstractness</th>
+<th>Instability</th>
+<th>Distance</th>
+</tr>
+<tr class="b"><td>3</td>
+<td>24</td>
+<td>11.0%</td>
+<td>89.0%</td>
+<td>0.0%</td>
+</tr>
+</table>
+<table class="bodyTable"><tr class="a"><th>Abstract Classes</th>
+<th>Concrete Classes</th>
+<th>Used by Packages</th>
+<th>Uses Packages</th>
+</tr>
+<tr class="b"><td>be.jsams.client.model.panel.AbstractSearchPanel<br />
+</td>
+<td>be.jsams.client.model.panel.AbstractSearchPanel$1<br />
+be.jsams.client.model.panel.AbstractSearchPanel$2<br />
+be.jsams.client.model.panel.AbstractSearchPanel$3<br />
+be.jsams.client.model.panel.SearchAgentPanel<br />
+be.jsams.client.model.panel.SearchCustomerPanel<br />
+be.jsams.client.model.panel.SearchEstimatePanel<br />
+be.jsams.client.model.panel.SearchProductCategoryPanel<br />
+be.jsams.client.model.panel.SearchProductPanel<br />
+</td>
+<td>be.jsams.client.desktop<br />
+be.jsams.client.swing.action<br />
+be.jsams.common.bean.view<br />
+</td>
+<td>be.jsams.client.i18n<br />
+be.jsams.client.model.dialog<br />
+be.jsams.client.model.table<br />
+be.jsams.client.renderer<br />
+be.jsams.client.swing.component<br />
+be.jsams.client.swing.listener<br />
+be.jsams.client.validator<br />
+be.jsams.common.bean.model<br />
+be.jsams.common.bean.model.management<br />
+be.jsams.common.bean.model.sale<br />
+be.jsams.common.bean.view<br />
+be.jsams.server.service<br />
+com.jgoodies.forms.factories<br />
+com.jgoodies.validation<br />
+com.jgoodies.validation.util<br />
+com.jgoodies.validation.view<br />
+java.awt<br />
+java.awt.event<br />
+java.lang<br />
+java.util<br />
+javax.swing<br />
+javax.swing.border<br />
+javax.swing.table<br />
+org.apache.commons.logging<br />
+</td>
+</tr>
+</table>
+<a name="be.jsams.client.model.table"></a><h3>be.jsams.client.model.table</h3>
+<table class="bodyTable"><tr class="a"><th>Afferent Couplings</th>
+<th>Efferent Couplings</th>
+<th>Abstractness</th>
+<th>Instability</th>
+<th>Distance</th>
+</tr>
+<tr class="b"><td>5</td>
+<td>8</td>
+<td>14.0%</td>
+<td>62.0%</td>
+<td>24.0%</td>
+</tr>
+</table>
+<table class="bodyTable"><tr class="a"><th>Abstract Classes</th>
+<th>Concrete Classes</th>
+<th>Used by Packages</th>
+<th>Uses Packages</th>
+</tr>
+<tr class="b"><td>be.jsams.client.model.table.JsamsTableModel<br />
+</td>
+<td>be.jsams.client.model.table.AgentTableModel<br />
+be.jsams.client.model.table.CustomerTableModel<br />
+be.jsams.client.model.table.EstimateDetailTableModel<br />
+be.jsams.client.model.table.EstimateTableModel<br />
+be.jsams.client.model.table.ProductCategoryTableModel<br />
+be.jsams.client.model.table.ProductTableModel<br />
+</td>
+<td>be.jsams.client.model.panel<br />
+be.jsams.client.swing.action<br />
+be.jsams.client.swing.component<br />
+be.jsams.client.swing.listener<br />
+be.jsams.common.bean.view<br />
+</td>
+<td>be.jsams.client.i18n<br />
+be.jsams.common.bean.model<br />
+be.jsams.common.bean.model.management<br />
+be.jsams.common.bean.model.sale<br />
+com.jgoodies.binding.adapter<br />
+com.jgoodies.common.collect<br />
+java.lang<br />
+java.util<br />
+</td>
+</tr>
+</table>
+<a name="be.jsams.client.renderer"></a><h3>be.jsams.client.renderer</h3>
+<table class="bodyTable"><tr class="a"><th>Afferent Couplings</th>
+<th>Efferent Couplings</th>
+<th>Abstractness</th>
+<th>Instability</th>
+<th>Distance</th>
+</tr>
+<tr class="b"><td>3</td>
+<td>10</td>
+<td>0.0%</td>
+<td>77.0%</td>
+<td>23.0%</td>
+</tr>
+</table>
+<table class="bodyTable"><tr class="a"><th>Abstract Classes</th>
+<th>Concrete Classes</th>
+<th>Used by Packages</th>
+<th>Uses Packages</th>
+</tr>
+<tr class="b"><td><i>None</i></td>
+<td>be.jsams.client.renderer.JsamsBooleanTableCellRenderer<br />
+be.jsams.client.renderer.JsamsTableCellRenderer<br />
+be.jsams.client.renderer.NamedComboBoxRenderer<br />
+be.jsams.client.renderer.TranslatableComboBoxRenderer<br />
+</td>
+<td>be.jsams.client.model.dialog<br />
+be.jsams.client.model.panel<br />
+be.jsams.common.bean.view<br />
+</td>
+<td>be.jsams.client.i18n<br />
+be.jsams.common.bean.model<br />
+java.awt<br />
+java.lang<br />
+java.text<br />
+java.util<br />
+javax.swing<br />
+javax.swing.border<br />
+javax.swing.plaf<br />
+javax.swing.table<br />
+</td>
+</tr>
+</table>
+<a name="be.jsams.client.swing.action"></a><h3>be.jsams.client.swing.action</h3>
+<table class="bodyTable"><tr class="a"><th>Afferent Couplings</th>
+<th>Efferent Couplings</th>
+<th>Abstractness</th>
+<th>Instability</th>
+<th>Distance</th>
+</tr>
+<tr class="b"><td>3</td>
+<td>14</td>
+<td>0.0%</td>
+<td>82.0%</td>
+<td>18.0%</td>
+</tr>
+</table>
+<table class="bodyTable"><tr class="a"><th>Abstract Classes</th>
+<th>Concrete Classes</th>
+<th>Used by Packages</th>
+<th>Uses Packages</th>
+</tr>
+<tr class="b"><td><i>None</i></td>
+<td>be.jsams.client.swing.action.ChooseSocietyAction<br />
+be.jsams.client.swing.action.EditSocietyAction<br />
+be.jsams.client.swing.action.ExitAction<br />
+be.jsams.client.swing.action.NewCustomerAction<br />
+be.jsams.client.swing.action.NewEstimateAction<br />
+be.jsams.client.swing.action.NewProductAction<br />
+be.jsams.client.swing.action.PrinterParametersAction<br />
+be.jsams.client.swing.action.SearchAgentAction<br />
+be.jsams.client.swing.action.SearchAgentAction$1<br />
+be.jsams.client.swing.action.SearchCustomerAction<br />
+be.jsams.client.swing.action.SearchCustomerAction$1<br />
+</td>
+<td>be.jsams.client.desktop<br />
+be.jsams.client.swing.component<br />
+be.jsams.common.bean.view<br />
+</td>
+<td>be.jsams.client.context<br />
+be.jsams.client.desktop<br />
+be.jsams.client.i18n<br />
+be.jsams.client.model.dialog<br />
+be.jsams.client.model.panel<br />
+be.jsams.client.model.table<br />
+be.jsams.client.swing.component<br />
+be.jsams.client.swing.listener<br />
+be.jsams.common.bean.model.management<br />
+be.jsams.common.bean.model.sale<br />
+java.awt.event<br />
+java.awt.print<br />
+java.lang<br />
+javax.swing<br />
+</td>
+</tr>
+</table>
+<a name="be.jsams.client.swing.component"></a><h3>be.jsams.client.swing.component</h3>
+<table class="bodyTable"><tr class="a"><th>Afferent Couplings</th>
+<th>Efferent Couplings</th>
+<th>Abstractness</th>
+<th>Instability</th>
+<th>Distance</th>
+</tr>
+<tr class="b"><td>6</td>
+<td>18</td>
+<td>10.0%</td>
+<td>75.0%</td>
+<td>15.000001%</td>
+</tr>
+</table>
+<table class="bodyTable"><tr class="a"><th>Abstract Classes</th>
+<th>Concrete Classes</th>
+<th>Used by Packages</th>
+<th>Uses Packages</th>
+</tr>
+<tr class="b"><td>be.jsams.client.swing.component.JsamsButtonsInterface<br />
+be.jsams.client.swing.component.JsamsFrame<br />
+</td>
+<td>be.jsams.client.swing.component.JsamsButton<br />
+be.jsams.client.swing.component.JsamsButtonsPanel<br />
+be.jsams.client.swing.component.JsamsButtonsPanel$1<br />
+be.jsams.client.swing.component.JsamsButtonsPanel$2<br />
+be.jsams.client.swing.component.JsamsButtonsPanel$3<br />
+be.jsams.client.swing.component.JsamsCloseableTabbedPane<br />
+be.jsams.client.swing.component.JsamsCloseableTabbedPane$1<br />
+be.jsams.client.swing.component.JsamsComboBox<br />
+be.jsams.client.swing.component.JsamsDialog<br />
+be.jsams.client.swing.component.JsamsFormattedTextField<br />
+be.jsams.client.swing.component.JsamsFrame$1<br />
+be.jsams.client.swing.component.JsamsLabel<br />
+be.jsams.client.swing.component.JsamsMenu<br />
+be.jsams.client.swing.component.JsamsMenuItem<br />
+be.jsams.client.swing.component.JsamsPeriodField<br />
+be.jsams.client.swing.component.JsamsShortcutToolBar<br />
+be.jsams.client.swing.component.JsamsStatusBar<br />
+be.jsams.client.swing.component.JsamsTable<br />
+be.jsams.client.swing.component.JsamsTextField<br />
+</td>
+<td>be.jsams.client.desktop<br />
+be.jsams.client.model.dialog<br />
+be.jsams.client.model.panel<br />
+be.jsams.client.swing.action<br />
+be.jsams.client.swing.listener<br />
+be.jsams.common.bean.view<br />
+</td>
+<td>be.jsams.client.desktop<br />
+be.jsams.client.i18n<br />
+be.jsams.client.model.table<br />
+be.jsams.client.swing.action<br />
+be.jsams.client.swing.utils<br />
+com.jgoodies.forms.builder<br />
+com.jgoodies.forms.factories<br />
+com.jgoodies.forms.layout<br />
+com.toedter.calendar<br />
+java.awt<br />
+java.awt.event<br />
+java.lang<br />
+java.text<br />
+java.util<br />
+javax.swing<br />
+javax.swing.border<br />
+javax.swing.table<br />
+javax.swing.text<br />
+</td>
+</tr>
+</table>
+<a name="be.jsams.client.swing.listener"></a><h3>be.jsams.client.swing.listener</h3>
+<table class="bodyTable"><tr class="a"><th>Afferent Couplings</th>
+<th>Efferent Couplings</th>
+<th>Abstractness</th>
+<th>Instability</th>
+<th>Distance</th>
+</tr>
+<tr class="b"><td>4</td>
+<td>10</td>
+<td>0.0%</td>
+<td>71.0%</td>
+<td>29.0%</td>
+</tr>
+</table>
+<table class="bodyTable"><tr class="a"><th>Abstract Classes</th>
+<th>Concrete Classes</th>
+<th>Used by Packages</th>
+<th>Uses Packages</th>
+</tr>
+<tr class="b"><td><i>None</i></td>
+<td>be.jsams.client.swing.listener.AgentTableMouseListener<br />
+be.jsams.client.swing.listener.ComboBoxKeySelectionManager<br />
+be.jsams.client.swing.listener.CustomerTableMouseListener<br />
+be.jsams.client.swing.listener.EstimateTableMouseListener<br />
+be.jsams.client.swing.listener.ProductCategoryTableMouseListener<br />
+be.jsams.client.swing.listener.ProductTableMouseListener<br />
+be.jsams.client.swing.listener.TabbedPaneKeyListener<br />
+</td>
+<td>be.jsams.client.desktop<br />
+be.jsams.client.model.panel<br />
+be.jsams.client.swing.action<br />
+be.jsams.common.bean.view<br />
+</td>
+<td>be.jsams.client.i18n<br />
+be.jsams.client.model.dialog<br />
+be.jsams.client.model.table<br />
+be.jsams.client.swing.component<br />
+be.jsams.common.bean.model.management<br />
+be.jsams.common.bean.model.sale<br />
+java.awt.event<br />
+java.lang<br />
+javax.swing<br />
+org.apache.log4j<br />
+</td>
+</tr>
+</table>
+<a name="be.jsams.client.swing.utils"></a><h3>be.jsams.client.swing.utils</h3>
+<table class="bodyTable"><tr class="a"><th>Afferent Couplings</th>
+<th>Efferent Couplings</th>
+<th>Abstractness</th>
+<th>Instability</th>
+<th>Distance</th>
+</tr>
+<tr class="b"><td>1</td>
+<td>2</td>
+<td>0.0%</td>
+<td>67.0%</td>
+<td>33.0%</td>
+</tr>
+</table>
+<table class="bodyTable"><tr class="a"><th>Abstract Classes</th>
+<th>Concrete Classes</th>
+<th>Used by Packages</th>
+<th>Uses Packages</th>
+</tr>
+<tr class="b"><td><i>None</i></td>
+<td>be.jsams.client.swing.utils.IconUtil<br />
+</td>
+<td>be.jsams.client.swing.component<br />
+</td>
+<td>java.awt<br />
+java.lang<br />
+</td>
+</tr>
+</table>
+<a name="be.jsams.client.validator"></a><h3>be.jsams.client.validator</h3>
+<table class="bodyTable"><tr class="a"><th>Afferent Couplings</th>
+<th>Efferent Couplings</th>
+<th>Abstractness</th>
+<th>Instability</th>
+<th>Distance</th>
+</tr>
+<tr class="b"><td>2</td>
+<td>7</td>
+<td>0.0%</td>
+<td>78.0%</td>
+<td>22.0%</td>
+</tr>
+</table>
+<table class="bodyTable"><tr class="a"><th>Abstract Classes</th>
+<th>Concrete Classes</th>
+<th>Used by Packages</th>
+<th>Uses Packages</th>
+</tr>
+<tr class="b"><td><i>None</i></td>
+<td>be.jsams.client.validator.EditAddressValidator<br />
+be.jsams.client.validator.EditAgentValidator<br />
+be.jsams.client.validator.EditCustomerValidator<br />
+be.jsams.client.validator.EditEstimateValidator<br />
+be.jsams.client.validator.EditProductCategoryValidator<br />
+be.jsams.client.validator.EditProductValidator<br />
+be.jsams.client.validator.EditSocietyValidator<br />
+be.jsams.client.validator.SearchAgentValidator<br />
+be.jsams.client.validator.SearchCustomerValidator<br />
+be.jsams.client.validator.SearchEstimateValidator<br />
+be.jsams.client.validator.SearchProductCategoryValidator<br />
+be.jsams.client.validator.SearchProductValidator<br />
+</td>
+<td>be.jsams.client.model.dialog<br />
+be.jsams.client.model.panel<br />
+</td>
+<td>be.jsams.client.i18n<br />
+be.jsams.common.bean.model<br />
+be.jsams.common.bean.model.management<br />
+be.jsams.common.bean.model.sale<br />
+com.jgoodies.validation<br />
+com.jgoodies.validation.util<br />
+java.lang<br />
+</td>
+</tr>
+</table>
+<a name="be.jsams.common.bean.model"></a><h3>be.jsams.common.bean.model</h3>
+<table class="bodyTable"><tr class="a"><th>Afferent Couplings</th>
+<th>Efferent Couplings</th>
+<th>Abstractness</th>
+<th>Instability</th>
+<th>Distance</th>
+</tr>
+<tr class="b"><td>12</td>
+<td>8</td>
+<td>44.0%</td>
+<td>40.0%</td>
+<td>16.0%</td>
+</tr>
+</table>
+<table class="bodyTable"><tr class="a"><th>Abstract Classes</th>
+<th>Concrete Classes</th>
+<th>Used by Packages</th>
+<th>Uses Packages</th>
+</tr>
+<tr class="b"><td>be.jsams.common.bean.model.AbstractIdentityBean<br />
+be.jsams.common.bean.model.AbstractNamedIdentityBean<br />
+be.jsams.common.bean.model.AbstractTranslatableIdentityBean<br />
+be.jsams.common.bean.model.Refreshable<br />
+</td>
+<td>be.jsams.common.bean.model.AddressBean<br />
+be.jsams.common.bean.model.CivilityBean<br />
+be.jsams.common.bean.model.ContactInformationBean<br />
+be.jsams.common.bean.model.LegalFormBean<br />
+be.jsams.common.bean.model.PaymentModeBean<br />
+</td>
+<td>be.jsams.client.model.dialog<br />
+be.jsams.client.model.panel<br />
+be.jsams.client.model.table<br />
+be.jsams.client.renderer<br />
+be.jsams.client.validator<br />
+be.jsams.common.bean.model.management<br />
+be.jsams.common.bean.model.sale<br />
+be.jsams.common.bean.view<br />
+be.jsams.server.dao.impl<br />
+be.jsams.server.model<br />
+be.jsams.server.service<br />
+be.jsams.server.service.impl<br />
+</td>
+<td>be.jsams.client.context<br />
+be.jsams.common.bean.view<br />
+be.jsams.server.dao<br />
+be.jsams.server.model<br />
+com.jgoodies.binding.beans<br />
+com.jgoodies.common.collect<br />
+java.lang<br />
+java.util<br />
+</td>
+</tr>
+</table>
+<a name="be.jsams.common.bean.model.management"></a><h3>be.jsams.common.bean.model.management</h3>
+<table class="bodyTable"><tr class="a"><th>Afferent Couplings</th>
+<th>Efferent Couplings</th>
+<th>Abstractness</th>
+<th>Instability</th>
+<th>Distance</th>
+</tr>
+<tr class="b"><td>14</td>
+<td>9</td>
+<td>0.0%</td>
+<td>39.0%</td>
+<td>61.0%</td>
+</tr>
+</table>
+<table class="bodyTable"><tr class="a"><th>Abstract Classes</th>
+<th>Concrete Classes</th>
+<th>Used by Packages</th>
+<th>Uses Packages</th>
+</tr>
+<tr class="b"><td><i>None</i></td>
+<td>be.jsams.common.bean.model.management.AgentBean<br />
+be.jsams.common.bean.model.management.CustomerBean<br />
+be.jsams.common.bean.model.management.ProductBean<br />
+be.jsams.common.bean.model.management.ProductCategoryBean<br />
+be.jsams.common.bean.model.management.SocietyBean<br />
+</td>
+<td>be.jsams.client.desktop<br />
+be.jsams.client.model.dialog<br />
+be.jsams.client.model.panel<br />
+be.jsams.client.model.table<br />
+be.jsams.client.swing.action<br />
+be.jsams.client.swing.listener<br />
+be.jsams.client.validator<br />
+be.jsams.common.bean.model.sale<br />
+be.jsams.common.bean.view<br />
+be.jsams.server.dao<br />
+be.jsams.server.dao.impl<br />
+be.jsams.server.model<br />
+be.jsams.server.service<br />
+be.jsams.server.service.impl<br />
+</td>
+<td>be.jsams.client.context<br />
+be.jsams.client.desktop<br />
+be.jsams.common.bean.model<br />
+be.jsams.common.bean.view<br />
+be.jsams.server.model<br />
+be.jsams.server.service<br />
+com.jgoodies.common.collect<br />
+java.lang<br />
+java.util<br />
+</td>
+</tr>
+</table>
+<a name="be.jsams.common.bean.model.sale"></a><h3>be.jsams.common.bean.model.sale</h3>
+<table class="bodyTable"><tr class="a"><th>Afferent Couplings</th>
+<th>Efferent Couplings</th>
+<th>Abstractness</th>
+<th>Instability</th>
+<th>Distance</th>
+</tr>
+<tr class="b"><td>13</td>
+<td>8</td>
+<td>0.0%</td>
+<td>38.0%</td>
+<td>62.0%</td>
+</tr>
+</table>
+<table class="bodyTable"><tr class="a"><th>Abstract Classes</th>
+<th>Concrete Classes</th>
+<th>Used by Packages</th>
+<th>Uses Packages</th>
+</tr>
+<tr class="b"><td><i>None</i></td>
+<td>be.jsams.common.bean.model.sale.BillBean<br />
+be.jsams.common.bean.model.sale.BillDetailBean<br />
+be.jsams.common.bean.model.sale.CommandBean<br />
+be.jsams.common.bean.model.sale.CommandDetailBean<br />
+be.jsams.common.bean.model.sale.CreditNoteBean<br />
+be.jsams.common.bean.model.sale.CreditNoteDetailBean<br />
+be.jsams.common.bean.model.sale.DateBean<br />
+be.jsams.common.bean.model.sale.DeliveryOrderBean<br />
+be.jsams.common.bean.model.sale.DeliveryOrderDetailBean<br />
+be.jsams.common.bean.model.sale.EstimateBean<br />
+be.jsams.common.bean.model.sale.EstimateDetailBean<br />
+be.jsams.common.bean.model.sale.PeriodBean<br />
+</td>
+<td>be.jsams.client.desktop<br />
+be.jsams.client.model.dialog<br />
+be.jsams.client.model.panel<br />
+be.jsams.client.model.table<br />
+be.jsams.client.swing.action<br />
+be.jsams.client.swing.listener<br />
+be.jsams.client.validator<br />
+be.jsams.common.bean.view<br />
+be.jsams.server.dao<br />
+be.jsams.server.dao.impl<br />
+be.jsams.server.model<br />
+be.jsams.server.service<br />
+be.jsams.server.service.impl<br />
+</td>
+<td>be.jsams.common.bean.model<br />
+be.jsams.common.bean.model.management<br />
+be.jsams.common.bean.view<br />
+be.jsams.server.model<br />
+com.jgoodies.common.collect<br />
+java.lang<br />
+java.math<br />
+java.util<br />
+</td>
+</tr>
+</table>
+<a name="be.jsams.common.bean.view"></a><h3>be.jsams.common.bean.view</h3>
+<table class="bodyTable"><tr class="a"><th>Afferent Couplings</th>
+<th>Efferent Couplings</th>
+<th>Abstractness</th>
+<th>Instability</th>
+<th>Distance</th>
+</tr>
+<tr class="b"><td>5</td>
+<td>34</td>
+<td>6.0%</td>
+<td>87.0%</td>
+<td>7.0%</td>
+</tr>
+</table>
+<table class="bodyTable"><tr class="a"><th>Abstract Classes</th>
+<th>Concrete Classes</th>
+<th>Used by Packages</th>
+<th>Uses Packages</th>
+</tr>
+<tr class="b"><td>be.jsams.common.bean.view.AbstractView<br />
+be.jsams.common.bean.view.Viewable<br />
+</td>
+<td>be.jsams.common.bean.view.AddressBeanView<br />
+be.jsams.common.bean.view.AgentBeanView<br />
+be.jsams.common.bean.view.BillBeanView<br />
+be.jsams.common.bean.view.BillDetailBeanView<br />
+be.jsams.common.bean.view.CivilityBeanView<br />
+be.jsams.common.bean.view.CommandBeanView<br />
+be.jsams.common.bean.view.CommandDetailBeanView<br />
+be.jsams.common.bean.view.ContactInformationBeanView<br />
+be.jsams.common.bean.view.CreditNoteBeanView<br />
+be.jsams.common.bean.view.CreditNoteDetailBeanView<br />
+be.jsams.common.bean.view.CustomerBeanView<br />
+be.jsams.common.bean.view.CustomerBeanView$1<br />
+be.jsams.common.bean.view.DateBeanView<br />
+be.jsams.common.bean.view.DeliveryOrderBeanView<br />
+be.jsams.common.bean.view.DeliveryOrderDetailBeanView<br />
+be.jsams.common.bean.view.EstimateBeanView<br />
+be.jsams.common.bean.view.EstimateBeanView$1<br />
+be.jsams.common.bean.view.EstimateBeanView$1$1<br />
+be.jsams.common.bean.view.EstimateBeanView$2<br />
+be.jsams.common.bean.view.EstimateBeanView$3<br />
+be.jsams.common.bean.view.EstimateBeanView$4<br />
+be.jsams.common.bean.view.EstimateBeanView$5<br />
+be.jsams.common.bean.view.EstimateDetailBeanView<br />
+be.jsams.common.bean.view.LegalFormBeanView<br />
+be.jsams.common.bean.view.PaymentModeBeanView<br />
+be.jsams.common.bean.view.PeriodBeanView<br />
+be.jsams.common.bean.view.ProductBeanView<br />
+be.jsams.common.bean.view.ProductCategoryBeanView<br />
+be.jsams.common.bean.view.SocietyBeanView<br />
+be.jsams.common.bean.view.ViewFactory<br />
+</td>
+<td>be.jsams.client.model.dialog<br />
+be.jsams.client.model.panel<br />
+be.jsams.common.bean.model<br />
+be.jsams.common.bean.model.management<br />
+be.jsams.common.bean.model.sale<br />
+</td>
+<td>be.jsams.client.context<br />
+be.jsams.client.formatter<br />
+be.jsams.client.i18n<br />
+be.jsams.client.model.panel<br />
+be.jsams.client.model.table<br />
+be.jsams.client.renderer<br />
+be.jsams.client.swing.action<br />
+be.jsams.client.swing.component<br />
+be.jsams.client.swing.listener<br />
+be.jsams.common.bean.model<br />
+be.jsams.common.bean.model.management<br />
+be.jsams.common.bean.model.sale<br />
+com.jgoodies.binding<br />
+com.jgoodies.binding.adapter<br />
+com.jgoodies.binding.beans<br />
+com.jgoodies.binding.list<br />
+com.jgoodies.binding.value<br />
+com.jgoodies.common.collect<br />
+com.jgoodies.common.format<br />
+com.jgoodies.forms.builder<br />
+com.jgoodies.forms.factories<br />
+com.jgoodies.forms.layout<br />
+com.jgoodies.validation.view<br />
+com.toedter.calendar<br />
+java.awt<br />
+java.awt.event<br />
+java.beans<br />
+java.io<br />
+java.lang<br />
+java.text<br />
+java.util<br />
+javax.swing<br />
+javax.swing.table<br />
+javax.swing.text<br />
+</td>
+</tr>
+</table>
+<a name="be.jsams.pdf"></a><h3>be.jsams.pdf</h3>
+<table class="bodyTable"><tr class="a"><th>Afferent Couplings</th>
+<th>Efferent Couplings</th>
+<th>Abstractness</th>
+<th>Instability</th>
+<th>Distance</th>
+</tr>
+<tr class="b"><td>1</td>
+<td>3</td>
+<td>100.0%</td>
+<td>75.0%</td>
+<td>75.0%</td>
+</tr>
+</table>
+<table class="bodyTable"><tr class="a"><th>Abstract Classes</th>
+<th>Concrete Classes</th>
+<th>Used by Packages</th>
+<th>Uses Packages</th>
+</tr>
+<tr class="b"><td>be.jsams.pdf.PdfService<br />
+</td>
+<td><i>None</i></td>
+<td>be.jsams.pdf.impl<br />
+</td>
+<td>com.lowagie.text<br />
+com.lowagie.text.pdf<br />
+java.lang<br />
+</td>
+</tr>
+</table>
+<a name="be.jsams.pdf.impl"></a><h3>be.jsams.pdf.impl</h3>
+<table class="bodyTable"><tr class="a"><th>Afferent Couplings</th>
+<th>Efferent Couplings</th>
+<th>Abstractness</th>
+<th>Instability</th>
+<th>Distance</th>
+</tr>
+<tr class="b"><td>0</td>
+<td>4</td>
+<td>0.0%</td>
+<td>100.0%</td>
+<td>0.0%</td>
+</tr>
+</table>
+<table class="bodyTable"><tr class="a"><th>Abstract Classes</th>
+<th>Concrete Classes</th>
+<th>Used by Packages</th>
+<th>Uses Packages</th>
+</tr>
+<tr class="b"><td><i>None</i></td>
+<td>be.jsams.pdf.impl.PdfServiceImpl<br />
+</td>
+<td><i>None</i></td>
+<td>be.jsams.pdf<br />
+com.lowagie.text<br />
+com.lowagie.text.pdf<br />
+java.lang<br />
+</td>
+</tr>
+</table>
+<a name="be.jsams.server.dao"></a><h3>be.jsams.server.dao</h3>
+<table class="bodyTable"><tr class="a"><th>Afferent Couplings</th>
+<th>Efferent Couplings</th>
+<th>Abstractness</th>
+<th>Instability</th>
+<th>Distance</th>
+</tr>
+<tr class="b"><td>4</td>
+<td>4</td>
+<td>100.0%</td>
+<td>50.0%</td>
+<td>50.0%</td>
+</tr>
+</table>
+<table class="bodyTable"><tr class="a"><th>Abstract Classes</th>
+<th>Concrete Classes</th>
+<th>Used by Packages</th>
+<th>Uses Packages</th>
+</tr>
+<tr class="b"><td>be.jsams.server.dao.AddressDao<br />
+be.jsams.server.dao.AgentDao<br />
+be.jsams.server.dao.CivilityDao<br />
+be.jsams.server.dao.CommandDao<br />
+be.jsams.server.dao.CommandDetailDao<br />
+be.jsams.server.dao.ContactInformationDao<br />
+be.jsams.server.dao.CustomerDao<br />
+be.jsams.server.dao.Dao<br />
+be.jsams.server.dao.EstimateDao<br />
+be.jsams.server.dao.EstimateDetailDao<br />
+be.jsams.server.dao.LegalFormDao<br />
+be.jsams.server.dao.PaymentModeDao<br />
+be.jsams.server.dao.ProductCategoryDao<br />
+be.jsams.server.dao.ProductDao<br />
+be.jsams.server.dao.SocietyDao<br />
+</td>
+<td><i>None</i></td>
+<td>be.jsams.client.context<br />
+be.jsams.common.bean.model<br />
+be.jsams.server.dao.impl<br />
+be.jsams.server.service.impl<br />
+</td>
+<td>be.jsams.common.bean.model.management<br />
+be.jsams.common.bean.model.sale<br />
+java.lang<br />
+java.util<br />
+</td>
+</tr>
+</table>
+<a name="be.jsams.server.dao.impl"></a><h3>be.jsams.server.dao.impl</h3>
+<table class="bodyTable"><tr class="a"><th>Afferent Couplings</th>
+<th>Efferent Couplings</th>
+<th>Abstractness</th>
+<th>Instability</th>
+<th>Distance</th>
+</tr>
+<tr class="b"><td>0</td>
+<td>10</td>
+<td>0.0%</td>
+<td>100.0%</td>
+<td>0.0%</td>
+</tr>
+</table>
+<table class="bodyTable"><tr class="a"><th>Abstract Classes</th>
+<th>Concrete Classes</th>
+<th>Used by Packages</th>
+<th>Uses Packages</th>
+</tr>
+<tr class="b"><td><i>None</i></td>
+<td>be.jsams.server.dao.impl.AddressDaoImpl<br />
+be.jsams.server.dao.impl.AgentDaoImpl<br />
+be.jsams.server.dao.impl.CivilityDaoImpl<br />
+be.jsams.server.dao.impl.CommandDaoImpl<br />
+be.jsams.server.dao.impl.CommandDetailDaoImpl<br />
+be.jsams.server.dao.impl.ContactInformationDaoImpl<br />
+be.jsams.server.dao.impl.CustomerDaoImpl<br />
+be.jsams.server.dao.impl.DaoImpl<br />
+be.jsams.server.dao.impl.EstimateDaoImpl<br />
+be.jsams.server.dao.impl.EstimateDetailDaoImpl<br />
+be.jsams.server.dao.impl.LegalFormDaoImpl<br />
+be.jsams.server.dao.impl.PaymentModeDaoImpl<br />
+be.jsams.server.dao.impl.ProductCategoryDaoImpl<br />
+be.jsams.server.dao.impl.ProductDaoImpl<br />
+be.jsams.server.dao.impl.SocietyDaoImpl<br />
+</td>
+<td><i>None</i></td>
+<td>be.jsams.client.desktop<br />
+be.jsams.common.bean.model<br />
+be.jsams.common.bean.model.management<br />
+be.jsams.common.bean.model.sale<br />
+be.jsams.server.dao<br />
+com.mysql.jdbc<br />
+java.lang<br />
+java.util<br />
+javax.persistence<br />
+org.apache.commons.logging<br />
+</td>
+</tr>
+</table>
+<a name="be.jsams.server.model"></a><h3>be.jsams.server.model</h3>
+<table class="bodyTable"><tr class="a"><th>Afferent Couplings</th>
+<th>Efferent Couplings</th>
+<th>Abstractness</th>
+<th>Instability</th>
+<th>Distance</th>
+</tr>
+<tr class="b"><td>4</td>
+<td>6</td>
+<td>17.0%</td>
+<td>60.000004%</td>
+<td>23.0%</td>
+</tr>
+</table>
+<table class="bodyTable"><tr class="a"><th>Abstract Classes</th>
+<th>Concrete Classes</th>
+<th>Used by Packages</th>
+<th>Uses Packages</th>
+</tr>
+<tr class="b"><td>be.jsams.server.model.AbstractIdentity<br />
+be.jsams.server.model.AbstractNamedIdentity<br />
+be.jsams.server.model.AbstractTranslatableIdentity<br />
+be.jsams.server.model.Identity<br />
+</td>
+<td>be.jsams.server.model.Address<br />
+be.jsams.server.model.Agent<br />
+be.jsams.server.model.Bill<br />
+be.jsams.server.model.BillDetail<br />
+be.jsams.server.model.Civility<br />
+be.jsams.server.model.Command<br />
+be.jsams.server.model.CommandDetail<br />
+be.jsams.server.model.ContactInformation<br />
+be.jsams.server.model.CreditNote<br />
+be.jsams.server.model.CreditNoteDetail<br />
+be.jsams.server.model.Customer<br />
+be.jsams.server.model.DeliveryOrder<br />
+be.jsams.server.model.DeliveryOrderDetail<br />
+be.jsams.server.model.Estimate<br />
+be.jsams.server.model.EstimateDetail<br />
+be.jsams.server.model.LegalForm<br />
+be.jsams.server.model.PaymentMode<br />
+be.jsams.server.model.Product<br />
+be.jsams.server.model.ProductCategory<br />
+be.jsams.server.model.Society<br />
+</td>
+<td>be.jsams.common.bean.model<br />
+be.jsams.common.bean.model.management<br />
+be.jsams.common.bean.model.sale<br />
+be.jsams.server.service.impl<br />
+</td>
+<td>be.jsams.common.bean.model<br />
+be.jsams.common.bean.model.management<br />
+be.jsams.common.bean.model.sale<br />
+java.lang<br />
+java.math<br />
+java.util<br />
+</td>
+</tr>
+</table>
+<a name="be.jsams.server.service"></a><h3>be.jsams.server.service</h3>
+<table class="bodyTable"><tr class="a"><th>Afferent Couplings</th>
+<th>Efferent Couplings</th>
+<th>Abstractness</th>
+<th>Instability</th>
+<th>Distance</th>
+</tr>
+<tr class="b"><td>5</td>
+<td>5</td>
+<td>100.0%</td>
+<td>50.0%</td>
+<td>50.0%</td>
+</tr>
+</table>
+<table class="bodyTable"><tr class="a"><th>Abstract Classes</th>
+<th>Concrete Classes</th>
+<th>Used by Packages</th>
+<th>Uses Packages</th>
+</tr>
+<tr class="b"><td>be.jsams.server.service.AgentService<br />
+be.jsams.server.service.BillService<br />
+be.jsams.server.service.CommandService<br />
+be.jsams.server.service.CustomerService<br />
+be.jsams.server.service.EstimateService<br />
+be.jsams.server.service.ProductCategoryService<br />
+be.jsams.server.service.ProductService<br />
+be.jsams.server.service.Service<br />
+be.jsams.server.service.SocietyService<br />
+</td>
+<td><i>None</i></td>
+<td>be.jsams.client.context<br />
+be.jsams.client.model.dialog<br />
+be.jsams.client.model.panel<br />
+be.jsams.common.bean.model.management<br />
+be.jsams.server.service.impl<br />
+</td>
+<td>be.jsams.common.bean.model<br />
+be.jsams.common.bean.model.management<br />
+be.jsams.common.bean.model.sale<br />
+java.lang<br />
+java.util<br />
+</td>
+</tr>
+</table>
+<a name="be.jsams.server.service.impl"></a><h3>be.jsams.server.service.impl</h3>
+<table class="bodyTable"><tr class="a"><th>Afferent Couplings</th>
+<th>Efferent Couplings</th>
+<th>Abstractness</th>
+<th>Instability</th>
+<th>Distance</th>
+</tr>
+<tr class="b"><td>0</td>
+<td>8</td>
+<td>0.0%</td>
+<td>100.0%</td>
+<td>0.0%</td>
+</tr>
+</table>
+<table class="bodyTable"><tr class="a"><th>Abstract Classes</th>
+<th>Concrete Classes</th>
+<th>Used by Packages</th>
+<th>Uses Packages</th>
+</tr>
+<tr class="b"><td><i>None</i></td>
+<td>be.jsams.server.service.impl.AgentServiceImpl<br />
+be.jsams.server.service.impl.CommandServiceImpl<br />
+be.jsams.server.service.impl.CustomerServiceImpl<br />
+be.jsams.server.service.impl.EstimateServiceImpl<br />
+be.jsams.server.service.impl.ProductCategoryServiceImpl<br />
+be.jsams.server.service.impl.ProductServiceImpl<br />
+be.jsams.server.service.impl.SocietyServiceImpl<br />
+</td>
+<td><i>None</i></td>
+<td>be.jsams.common.bean.model<br />
+be.jsams.common.bean.model.management<br />
+be.jsams.common.bean.model.sale<br />
+be.jsams.server.dao<br />
+be.jsams.server.model<br />
+be.jsams.server.service<br />
+java.lang<br />
+java.util<br />
+</td>
+</tr>
+</table>
+<a name="cycles"></a><h2>Cycles</h2>
+[ <a href="#summary">summary</a> ] [ <a href="#packages">packages</a> ] [ <a href="#cycles">cycles</a> ] [ <a href="#explanations">explanations</a> ] <br />
+<br />
+<table class="bodyTable"><tr class="a"><th>Package</th>
+<th>Package Dependencies</th>
+</tr>
+<tr class="b"><td>be.jsams</td>
+<td>be.jsams.client.desktop<br />
+be.jsams.client.swing.action<br />
+be.jsams.client.model.dialog<br />
+be.jsams.client.desktop<br />
+</td>
+</tr>
+<tr class="a"><td>be.jsams.client.context</td>
+<td>be.jsams.server.service<br />
+be.jsams.common.bean.model.management<br />
+be.jsams.client.desktop<br />
+be.jsams.client.swing.action<br />
+be.jsams.client.model.dialog<br />
+be.jsams.client.desktop<br />
+</td>
+</tr>
+<tr class="b"><td>be.jsams.client.desktop</td>
+<td>be.jsams.client.swing.action<br />
+be.jsams.client.model.dialog<br />
+be.jsams.client.desktop<br />
+</td>
+</tr>
+<tr class="a"><td>be.jsams.client.model.dialog</td>
+<td>be.jsams.client.desktop<br />
+be.jsams.client.swing.action<br />
+be.jsams.client.model.dialog<br />
+</td>
+</tr>
+<tr class="b"><td>be.jsams.client.model.panel</td>
+<td>be.jsams.server.service<br />
+be.jsams.common.bean.model.management<br />
+be.jsams.client.desktop<br />
+be.jsams.client.swing.action<br />
+be.jsams.client.model.dialog<br />
+be.jsams.client.desktop<br />
+</td>
+</tr>
+<tr class="a"><td>be.jsams.client.model.table</td>
+<td>be.jsams.common.bean.model.management<br />
+be.jsams.client.desktop<br />
+be.jsams.client.swing.action<br />
+be.jsams.client.model.dialog<br />
+be.jsams.client.desktop<br />
+</td>
+</tr>
+<tr class="b"><td>be.jsams.client.renderer</td>
+<td>be.jsams.common.bean.model<br />
+be.jsams.server.model<br />
+be.jsams.common.bean.model<br />
+</td>
+</tr>
+<tr class="a"><td>be.jsams.client.swing.action</td>
+<td>be.jsams.client.model.dialog<br />
+be.jsams.client.desktop<br />
+be.jsams.client.swing.action<br />
+</td>
+</tr>
+<tr class="b"><td>be.jsams.client.swing.component</td>
+<td>be.jsams.client.desktop<br />
+be.jsams.client.swing.action<br />
+be.jsams.client.model.dialog<br />
+be.jsams.client.desktop<br />
+</td>
+</tr>
+<tr class="a"><td>be.jsams.client.swing.listener</td>
+<td>be.jsams.client.swing.component<br />
+be.jsams.client.desktop<br />
+be.jsams.client.swing.action<br />
+be.jsams.client.model.dialog<br />
+be.jsams.client.desktop<br />
+</td>
+</tr>
+<tr class="b"><td>be.jsams.client.validator</td>
+<td>be.jsams.common.bean.model<br />
+be.jsams.server.model<br />
+be.jsams.common.bean.model<br />
+</td>
+</tr>
+<tr class="a"><td>be.jsams.common.bean.model</td>
+<td>be.jsams.server.model<br />
+be.jsams.common.bean.model<br />
+</td>
+</tr>
+<tr class="b"><td>be.jsams.common.bean.model.management</td>
+<td>be.jsams.client.desktop<br />
+be.jsams.client.swing.action<br />
+be.jsams.client.model.dialog<br />
+be.jsams.client.desktop<br />
+</td>
+</tr>
+<tr class="a"><td>be.jsams.common.bean.model.sale</td>
+<td>be.jsams.common.bean.model.management<br />
+be.jsams.client.desktop<br />
+be.jsams.client.swing.action<br />
+be.jsams.client.model.dialog<br />
+be.jsams.client.desktop<br />
+</td>
+</tr>
+<tr class="b"><td>be.jsams.common.bean.view</td>
+<td>be.jsams.common.bean.model<br />
+be.jsams.server.model<br />
+be.jsams.common.bean.model<br />
+</td>
+</tr>
+<tr class="a"><td>be.jsams.server.dao</td>
+<td>be.jsams.common.bean.model.management<br />
+be.jsams.client.desktop<br />
+be.jsams.client.swing.action<br />
+be.jsams.client.model.dialog<br />
+be.jsams.client.desktop<br />
+</td>
+</tr>
+<tr class="b"><td>be.jsams.server.dao.impl</td>
+<td>be.jsams.server.dao<br />
+be.jsams.common.bean.model.management<br />
+be.jsams.client.desktop<br />
+be.jsams.client.swing.action<br />
+be.jsams.client.model.dialog<br />
+be.jsams.client.desktop<br />
+</td>
+</tr>
+<tr class="a"><td>be.jsams.server.model</td>
+<td>be.jsams.common.bean.model<br />
+be.jsams.server.model<br />
+</td>
+</tr>
+<tr class="b"><td>be.jsams.server.service</td>
+<td>be.jsams.common.bean.model.management<br />
+be.jsams.client.desktop<br />
+be.jsams.client.swing.action<br />
+be.jsams.client.model.dialog<br />
+be.jsams.client.desktop<br />
+</td>
+</tr>
+<tr class="a"><td>be.jsams.server.service.impl</td>
+<td>be.jsams.server.service<br />
+be.jsams.common.bean.model.management<br />
+be.jsams.client.desktop<br />
+be.jsams.client.swing.action<br />
+be.jsams.client.model.dialog<br />
+be.jsams.client.desktop<br />
+</td>
+</tr>
+</table>
+<a name="explanations"></a><h2>Explanation</h2>
+[ <a href="#summary">summary</a> ] [ <a href="#packages">packages</a> ] [ <a href="#cycles">cycles</a> ] [ <a href="#explanations">explanations</a> ] <br />
+<br />
+The following explanations are for quick reference and are lifted directly from the original JDepend documentation.<br />
+<br />
+<table class="bodyTable"><tr class="b"><th>Term</th>
+<th>Description</th>
+</tr>
+<tr class="a"><td>Number of Classes</td>
+<td>The number of concrete and abstract classes (and interfaces) in the package is an indicator of the extensibility of the package.</td>
+</tr>
+<tr class="b"><td>Afferent Couplings</td>
+<td>The number of other packages that depend upon classes within the package is an indicator of the package's responsibility.</td>
+</tr>
+<tr class="a"><td>Efferent Couplings</td>
+<td>The number of other packages that the classes in the package depend upon is an indicator of the package's independence.</td>
+</tr>
+<tr class="b"><td>Abstractness</td>
+<td>The ratio of the number of abstract classes (and interfaces) in the analyzed package to the total number of classes in the analyzed package. The range for this metric is 0 to 1, with A=0 indicating a completely concrete package and A=1 indicating a completely abstract package.</td>
+</tr>
+<tr class="a"><td>Instability</td>
+<td>The ratio of efferent coupling (Ce) to total coupling (Ce / (Ce + Ca)). This metric is an indicator of the package's resilience to change. The range for this metric is 0 to 1, with I=0 indicating a completely stable package and I=1 indicating a completely instable package.</td>
+</tr>
+<tr class="b"><td>Distance</td>
+<td>The perpendicular distance of a package from the idealized line A + I = 1. This metric is an indicator of the package's balance between abstractness and stability. A package squarely on the main sequence is optimally balanced with respect to its abstractness and stability. Ideal packages are either completely abstract and stable (x=0, y=1) or completely concrete and instable (x=1, y=0). The range for this metric is 0 to 1, with D=0 indicating a package that is coincident with the main sequence and D=1 indicating a package that is as far from the main sequence as possible.</td>
+</tr>
+<tr class="a"><td>Cycles</td>
+<td>Packages participating in a package dependency cycle are  in a deadly embrace with respect to reusability and their  release cycle. Package dependency cycles can be easily identified by reviewing the textual reports of dependency cycles. Once these dependency cycles have been identified with JDepend, they can be broken by employing various object-oriented techniques.</td>
+</tr>
+</table>
+</div>
+
+      </div>
+    </div>
+    <div class="clear">
+      <hr/>
+    </div>
+    <div id="footer">
+      <div class="xright">&#169;  
+          2011
+    
+          
+  
+
+  
+    
+  
+  
+    
+  </div>
+      <div class="clear">
+        <hr/>
+      </div>
+    </div>
+  </body>
+</html>

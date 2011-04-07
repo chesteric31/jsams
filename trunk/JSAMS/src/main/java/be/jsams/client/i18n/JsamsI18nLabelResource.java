@@ -16,7 +16,7 @@ public final class JsamsI18nLabelResource {
 
     public static final I18nString LABEL_OPEN_SOCIETY = new I18nString("label.open.society");
 
-    public static final I18nString LABEL_OPEN_SOCIETY_AVAILABLES = new I18nString("label.open.society_availables");
+    public static final I18nString LABEL_AVAILABLES_SOCIETIES = new I18nString("label.open.society_availables");
 
     public static final I18nString LABEL_NAME = new I18nString("label.name");
 
@@ -97,5 +97,22 @@ public final class JsamsI18nLabelResource {
     public static final I18nString LABEL_VAT_APPLICABLE = new I18nString("label.vat_applicable");
 
     public static final I18nString LABEL_FUNCTION = new I18nString("label.function");
+    
+    public static final I18nString LABEL_START_DATE = new I18nString("label.start_date");
+    
+    public static final I18nString LABEL_END_DATE = new I18nString("label.end_date");
+
+    public static final I18nString LABEL_CUSTOMER_NAME = new I18nString("label.customer_name");
+
+    public static final I18nString LABEL_TRANSFERRED = new I18nString("label.transferred");
+
+    public static final I18nString LABEL_ERROR_MANDATORY_SOCIETY = new I18nString("label.error.mandatory_society");
+
+    public static final I18nString LABEL_CREATION_DATE = new I18nString("label.creation_date");
+
+    public static final I18nString LABEL_REMARK = new I18nString("label.remark");
+
+    public static final I18nString LABEL_BILLING_ADDRESS = new I18nString("label.billing_address");
+    
 
 }

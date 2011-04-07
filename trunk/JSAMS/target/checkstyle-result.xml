@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="5.0">
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\context\JsamsApplicationContext.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\desktop\JsamsDesktop.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\desktop\JsamsMainFrame.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\desktop\JsamsSpashPanel.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\formatter\DoubleFormatter.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\i18n\I18nApplicationContext.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\i18n\I18nManager.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\i18n\I18nString.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\i18n\JsamsI18nLabelResource.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\i18n\JsamsI18nResource.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\i18n\UserContext.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\model\dialog\AbstractEditDialog.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\model\dialog\EditAgentDialog.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\model\dialog\EditCustomerDialog.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\model\dialog\EditEstimateDialog.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\model\dialog\EditProductCategoryDialog.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\model\dialog\EditProductDialog.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\model\dialog\EditSocietyDialog.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\model\dialog\OpenSocietyDialog.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\model\panel\AbstractSearchPanel.java">
+<error line="361" column="53" severity="warning" message="&apos;3&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\model\panel\SearchAgentPanel.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\model\panel\SearchCustomerPanel.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\model\panel\SearchEstimatePanel.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\model\panel\SearchProductCategoryPanel.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\model\panel\SearchProductPanel.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\model\table\AgentTableModel.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\model\table\CustomerTableModel.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\model\table\EstimateDetailTableModel.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\model\table\EstimateTableModel.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\model\table\JsamsTableModel.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\model\table\ProductCategoryTableModel.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\model\table\ProductTableModel.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\renderer\JsamsBooleanTableCellRenderer.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\renderer\JsamsTableCellRenderer.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\renderer\NamedComboBoxRenderer.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\renderer\TranslatableComboBoxRenderer.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\swing\action\ChooseSocietyAction.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\swing\action\EditSocietyAction.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\swing\action\ExitAction.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\swing\action\NewCustomerAction.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\swing\action\NewEstimateAction.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\swing\action\NewProductAction.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\swing\action\PrinterParametersAction.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\swing\action\SearchAgentAction.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\swing\action\SearchCustomerAction.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\swing\component\JsamsButton.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\swing\component\JsamsButtonsInterface.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\swing\component\JsamsButtonsPanel.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\swing\component\JsamsCloseableTabbedPane.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\swing\component\JsamsComboBox.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\swing\component\JsamsDialog.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\swing\component\JsamsFormattedTextField.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\swing\component\JsamsFrame.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\swing\component\JsamsLabel.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\swing\component\JsamsMenu.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\swing\component\JsamsMenuItem.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\swing\component\JsamsPeriodField.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\swing\component\JsamsShortcutToolBar.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\swing\component\JsamsStatusBar.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\swing\component\JsamsTable.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\swing\component\JsamsTextField.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\swing\listener\AgentTableMouseListener.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\swing\listener\ComboBoxKeySelectionManager.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\swing\listener\CustomerTableMouseListener.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\swing\listener\EstimateTableMouseListener.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\swing\listener\ProductCategoryTableMouseListener.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\swing\listener\ProductTableMouseListener.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\swing\listener\TabbedPaneKeyListener.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\swing\utils\IconUtil.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\validator\EditAddressValidator.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\validator\EditAgentValidator.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\validator\EditCustomerValidator.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\validator\EditEstimateValidator.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\validator\EditProductCategoryValidator.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\validator\EditProductValidator.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\validator\EditSocietyValidator.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\validator\SearchAgentValidator.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\validator\SearchCustomerValidator.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\validator\SearchEstimateValidator.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\validator\SearchProductCategoryValidator.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\client\validator\SearchProductValidator.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\common\bean\model\AbstractIdentityBean.java">
+<error line="113" column="49" severity="warning" message="Avoid inline conditionals." source="com.puppycrawl.tools.checkstyle.checks.coding.AvoidInlineConditionalsCheck"/>
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\common\bean\model\AbstractNamedIdentityBean.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\common\bean\model\AbstractTranslatableIdentityBean.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\common\bean\model\AddressBean.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\common\bean\model\CivilityBean.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\common\bean\model\ContactInformationBean.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\common\bean\model\LegalFormBean.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\common\bean\model\management\AgentBean.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\common\bean\model\management\CustomerBean.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\common\bean\model\management\ProductBean.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\common\bean\model\management\ProductCategoryBean.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\common\bean\model\management\SocietyBean.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\common\bean\model\PaymentModeBean.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\common\bean\model\Refreshable.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\common\bean\model\sale\BillBean.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\common\bean\model\sale\BillDetailBean.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\common\bean\model\sale\CommandBean.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\common\bean\model\sale\CommandDetailBean.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\common\bean\model\sale\CreditNoteBean.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\common\bean\model\sale\CreditNoteDetailBean.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\common\bean\model\sale\DateBean.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\common\bean\model\sale\DeliveryOrderBean.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\common\bean\model\sale\DeliveryOrderDetailBean.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\common\bean\model\sale\EstimateBean.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\common\bean\model\sale\EstimateDetailBean.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\common\bean\model\sale\PeriodBean.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\common\bean\view\AbstractView.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\common\bean\view\AddressBeanView.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\common\bean\view\AgentBeanView.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\common\bean\view\BillBeanView.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\common\bean\view\BillDetailBeanView.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\common\bean\view\CivilityBeanView.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\common\bean\view\CommandBeanView.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\common\bean\view\CommandDetailBeanView.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\common\bean\view\ContactInformationBeanView.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\common\bean\view\CreditNoteBeanView.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\common\bean\view\CreditNoteDetailBeanView.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\common\bean\view\CustomerBeanView.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\common\bean\view\DateBeanView.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\common\bean\view\DeliveryOrderBeanView.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\common\bean\view\DeliveryOrderDetailBeanView.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\common\bean\view\EstimateBeanView.java">
+<error line="146" column="49" severity="warning" message="&apos;3&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\common\bean\view\EstimateDetailBeanView.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\common\bean\view\LegalFormBeanView.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\common\bean\view\PaymentModeBeanView.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\common\bean\view\PeriodBeanView.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\common\bean\view\ProductBeanView.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\common\bean\view\ProductCategoryBeanView.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\common\bean\view\SocietyBeanView.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\common\bean\view\Viewable.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\common\bean\view\ViewFactory.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\JsamsStart.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\pdf\impl\PdfServiceImpl.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\pdf\PdfService.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\server\dao\AddressDao.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\server\dao\AgentDao.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\server\dao\CivilityDao.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\server\dao\CommandDao.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\server\dao\CommandDetailDao.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\server\dao\ContactInformationDao.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\server\dao\CustomerDao.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\server\dao\Dao.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\server\dao\EstimateDao.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\server\dao\EstimateDetailDao.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\server\dao\impl\AddressDaoImpl.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\server\dao\impl\AgentDaoImpl.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\server\dao\impl\CivilityDaoImpl.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\server\dao\impl\CommandDaoImpl.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\server\dao\impl\CommandDetailDaoImpl.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\server\dao\impl\ContactInformationDaoImpl.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\server\dao\impl\CustomerDaoImpl.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\server\dao\impl\DaoImpl.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\server\dao\impl\EstimateDaoImpl.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\server\dao\impl\EstimateDetailDaoImpl.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\server\dao\impl\LegalFormDaoImpl.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\server\dao\impl\PaymentModeDaoImpl.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\server\dao\impl\ProductCategoryDaoImpl.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\server\dao\impl\ProductDaoImpl.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\server\dao\impl\SocietyDaoImpl.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\server\dao\LegalFormDao.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\server\dao\PaymentModeDao.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\server\dao\ProductCategoryDao.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\server\dao\ProductDao.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\server\dao\SocietyDao.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\server\model\AbstractIdentity.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\server\model\AbstractNamedIdentity.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\server\model\AbstractTranslatableIdentity.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\server\model\Address.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\server\model\Agent.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\server\model\Bill.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\server\model\BillDetail.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\server\model\Civility.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\server\model\Command.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\server\model\CommandDetail.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\server\model\ContactInformation.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\server\model\CreditNote.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\server\model\CreditNoteDetail.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\server\model\Customer.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\server\model\DeliveryOrder.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\server\model\DeliveryOrderDetail.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\server\model\Estimate.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\server\model\EstimateDetail.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\server\model\Identity.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\server\model\LegalForm.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\server\model\PaymentMode.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\server\model\Product.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\server\model\ProductCategory.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\server\model\Society.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\server\service\AgentService.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\server\service\BillService.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\server\service\CommandService.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\server\service\CustomerService.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\server\service\EstimateService.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\server\service\impl\AgentServiceImpl.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\server\service\impl\CommandServiceImpl.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\server\service\impl\CustomerServiceImpl.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\server\service\impl\EstimateServiceImpl.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\server\service\impl\ProductCategoryServiceImpl.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\server\service\impl\ProductServiceImpl.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\server\service\impl\SocietyServiceImpl.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\server\service\ProductCategoryService.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\server\service\ProductService.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\server\service\Service.java">
+</file>
+<file name="C:\Documents and Settings\ebinard\workspace-jsams\JSAMS\src\main\java\be\jsams\server\service\SocietyService.java">
+</file>
+</checkstyle>

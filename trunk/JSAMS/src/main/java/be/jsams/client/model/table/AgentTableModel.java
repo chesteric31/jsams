@@ -5,7 +5,9 @@ import java.util.List;
 
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.i18n.JsamsI18nResource;
-import be.jsams.server.model.Agent;
+import be.jsams.common.bean.model.AddressBean;
+import be.jsams.common.bean.model.ContactInformationBean;
+import be.jsams.common.bean.model.management.AgentBean;
 
 /**
  * 
@@ -13,7 +15,7 @@ import be.jsams.server.model.Agent;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class AgentTableModel extends JsamsTableModel<Agent> {
+public class AgentTableModel extends JsamsTableModel<AgentBean> {
 
     /**
      * Serial Version UID
@@ -26,6 +28,15 @@ public class AgentTableModel extends JsamsTableModel<Agent> {
     private List<I18nString> columnNames = Arrays.asList(JsamsI18nResource.COLUMN_ID, JsamsI18nResource.COLUMN_NAME,
             JsamsI18nResource.COLUMN_FUNCTION, JsamsI18nResource.COLUMN_PHONE, JsamsI18nResource.COLUMN_ZIP_CODE,
             JsamsI18nResource.COLUMN_CITY);
+    
+    /**
+     * Constructor
+     * 
+     * @param listModel a list of {@link AgentBean}
+     */
+    public AgentTableModel(List<AgentBean> listModel) {
+        super(listModel);
+    }
 
     /**
      * @return the columns count
@@ -38,19 +49,28 @@ public class AgentTableModel extends JsamsTableModel<Agent> {
      * {@inheritDoc}
      */
     public Object getValueAt(int rowIndex, int columnIndex) {
+        AgentBean agent = (AgentBean) getRow(rowIndex);
+        AddressBean address = agent.getAddress();
         switch (columnIndex) {
         case ZERO:
-            return getData().get(rowIndex).getId();
+            return agent.getId();
         case ONE:
-            return getData().get(rowIndex).getName();
+            return agent.getName();
         case TWO:
-            return getData().get(rowIndex).getFunction();
+            return agent.getFunction();
         case THREE:
-            return getData().get(rowIndex).getContactInformation().getPhone();
+            ContactInformationBean contactInformation = agent.getContactInformation();
+            if (contactInformation != null) {
+                return contactInformation.getPhone();
+            }
         case FOUR:
-            return getData().get(rowIndex).getAddress().getZipCode();
+            if (address != null) {
+                return address.getZipCode();
+            }
         case FIVE:
-            return getData().get(rowIndex).getAddress().getCity();
+            if (address != null) {
+                return address.getCity();
+            }
         default:
             return "";
         }

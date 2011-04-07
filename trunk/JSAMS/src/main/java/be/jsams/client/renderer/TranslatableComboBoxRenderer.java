@@ -8,7 +8,7 @@ import javax.swing.JList;
 import javax.swing.ListCellRenderer;
 
 import be.jsams.client.i18n.UserContext;
-import be.jsams.server.model.AbstractTranslatableIdentity;
+import be.jsams.common.bean.model.AbstractTranslatableIdentityBean;
 
 /**
  * Combo box renderer for object that have translatable label from DB.
@@ -31,11 +31,11 @@ public class TranslatableComboBoxRenderer implements ListCellRenderer {
                 cellHasFocus);
         if (value != null) {
             if (UserContext.isFrench()) {
-                theText = ((AbstractTranslatableIdentity) value).getLabelFr();
+                theText = ((AbstractTranslatableIdentityBean<?, ?>) value).getLabelFr();
             } else if (UserContext.isDutch()) {
-                theText = ((AbstractTranslatableIdentity) value).getLabelNl();
+                theText = ((AbstractTranslatableIdentityBean<?, ?>) value).getLabelNl();
             } else {
-                theText = ((AbstractTranslatableIdentity) value).getLabel();
+                theText = ((AbstractTranslatableIdentityBean<?, ?>) value).getLabel();
             }
         }
         renderer.setText(theText);

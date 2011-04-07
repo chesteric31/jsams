@@ -68,7 +68,7 @@ public class CommandDetailDaoImplTest extends AbstractJUnitTestClass {
 		billingAddress.setCountry("Belgium");
 		billingAddress.setNumber("1");
 		billingAddress.setStreet("Rue Neuve");
-		billingAddress.setZipCode(1000);
+		billingAddress.setZipCode("1000");
 		addressDao.add(billingAddress);
 		newCommand.setBillingAddress(billingAddress);
 
@@ -92,7 +92,7 @@ public class CommandDetailDaoImplTest extends AbstractJUnitTestClass {
 		
 		customer.setContactInformation(contactInformation);
 		
-		customer.setCreditLimit(new BigDecimal(1000.00));
+		customer.setCreditLimit(Double.valueOf(1000.00));
 		customer.setDeliveryAddress(billingAddress);
 		customer.setName("Wyatt Earp");
 		
@@ -120,10 +120,10 @@ public class CommandDetailDaoImplTest extends AbstractJUnitTestClass {
 		Product book = new Product();
 		book.setCategory(booksCategory);
 		book.setName("Fight Club");
-		book.setPrice(new BigDecimal(35.95));
+		book.setPrice(Double.valueOf(35.95D));
 		book.setQuantityStock(15);
 		book.setReorderLevel(10);
-		book.setVatApplicable(new BigDecimal("6"));
+		book.setVatApplicable(Double.valueOf(6D));
 		productDao.add(book);
 		
 		detail = new CommandDetail();
