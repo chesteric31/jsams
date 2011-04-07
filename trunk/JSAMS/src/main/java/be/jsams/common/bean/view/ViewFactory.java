@@ -29,8 +29,7 @@ import com.toedter.calendar.JDateChooser;
 /**
  * A View factory to create all the Swing components from a bean property.
  * 
- * @param <B>
- *            an extension of {@link AbstractIdentityBean}
+ * @param <B> an extension of {@link AbstractIdentityBean}
  * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
@@ -38,16 +37,13 @@ import com.toedter.calendar.JDateChooser;
 public class ViewFactory<B extends AbstractIdentityBean<?, ?>> {
 
     /**
-     * Creates {@link JsamsTextField} and binds this component to the bean parameter.
+     * Creates {@link JsamsTextField} and binds this component to the bean
+     * parameter.
      * 
-     * @param bean
-     *            the bean
-     * @param property
-     *            the property to bind
-     * @param mandatory
-     *            mandatory boolean
-     * @param readOnly
-     *            read only boolean
+     * @param bean the bean
+     * @param property the property to bind
+     * @param mandatory mandatory boolean
+     * @param readOnly read only boolean
      * @return the {@link JsamsTextField}
      */
     public JsamsTextField createBindingTextComponent(final B bean, final String property, final boolean mandatory,
@@ -61,16 +57,13 @@ public class ViewFactory<B extends AbstractIdentityBean<?, ?>> {
     }
 
     /**
-     * Creates {@link JsamsComboBox} and binds this component to the bean parameter.
+     * Creates {@link JsamsComboBox} and binds this component to the bean
+     * parameter.
      * 
-     * @param bean
-     *            the Bean object to bind
-     * @param mandatory
-     *            mandatory boolean
-     * @param readOnly
-     *            read only boolean
-     * @param renderer
-     *            a {@link ListCellRenderer}
+     * @param bean the Bean object to bind
+     * @param mandatory mandatory boolean
+     * @param readOnly read only boolean
+     * @param renderer a {@link ListCellRenderer}
      * @return the {@link JsamsComboBox}
      */
     public JsamsComboBox createBindingComboComponent(B bean, final boolean mandatory, final boolean readOnly,
@@ -87,16 +80,13 @@ public class ViewFactory<B extends AbstractIdentityBean<?, ?>> {
     }
 
     /**
-     * Creates {@link JsamsFormattedTextField} and binds this component to the bean parameter.
+     * Creates {@link JsamsFormattedTextField} and binds this component to the
+     * bean parameter.
      * 
-     * @param bean
-     *            the bean
-     * @param property
-     *            the property to bind
-     * @param mandatory
-     *            mandatory boolean
-     * @param readOnly
-     *            read only boolean
+     * @param bean the bean
+     * @param property the property to bind
+     * @param mandatory mandatory boolean
+     * @param readOnly read only boolean
      * @return the {@link JsamsFormattedTextField}
      */
     public JsamsFormattedTextField createBindingIntComponent(final B bean, final String property,
@@ -112,16 +102,13 @@ public class ViewFactory<B extends AbstractIdentityBean<?, ?>> {
     }
 
     /**
-     * Creates {@link JDateChooser} and binds this component to the bean parameter.
+     * Creates {@link JDateChooser} and binds this component to the bean
+     * parameter.
      * 
-     * @param bean
-     *            the bean
-     * @param property
-     *            the property
-     * @param mandatory
-     *            mandatory boolean
-     * @param readOnly
-     *            read only boolean
+     * @param bean the bean
+     * @param property the property
+     * @param mandatory mandatory boolean
+     * @param readOnly read only boolean
      * @return the {@link JDateChooser}
      */
     public JDateChooser createBindingDateComponent(final B bean, final String property, final boolean mandatory,
@@ -136,16 +123,13 @@ public class ViewFactory<B extends AbstractIdentityBean<?, ?>> {
     }
 
     /**
-     * Creates {@link JsamsFormattedTextField} and binds this component to the bean parameter.
+     * Creates {@link JsamsFormattedTextField} and binds this component to the
+     * bean parameter.
      * 
-     * @param bean
-     *            the bean
-     * @param property
-     *            the property to bind
-     * @param mandatory
-     *            mandatory boolean
-     * @param readOnly
-     *            read only boolean
+     * @param bean the bean
+     * @param property the property to bind
+     * @param mandatory mandatory boolean
+     * @param readOnly read only boolean
      * @return the {@link JsamsFormattedTextField}
      */
     public JsamsFormattedTextField createBindingDecimalComponent(final B bean, final String property,
@@ -168,16 +152,13 @@ public class ViewFactory<B extends AbstractIdentityBean<?, ?>> {
     }
 
     /**
-     * Creates a {@link JTextArea} and binds this component to the bean parameter.
+     * Creates a {@link JTextArea} and binds this component to the bean
+     * parameter.
      * 
-     * @param bean
-     *            the bean
-     * @param property
-     *            the property
-     * @param mandatory
-     *            mandatory boolean
-     * @param readOnly
-     *            read only boolean
+     * @param bean the bean
+     * @param property the property
+     * @param mandatory mandatory boolean
+     * @param readOnly read only boolean
      * @return the {@link JTextArea}
      */
     public JTextArea createBindingTextAreaComponent(final B bean, final String property, final boolean mandatory,
@@ -191,16 +172,13 @@ public class ViewFactory<B extends AbstractIdentityBean<?, ?>> {
 
     /**
      * 
-     * Creates a {@link JCheckBox} and binds this component to the bean parameter.
+     * Creates a {@link JCheckBox} and binds this component to the bean
+     * parameter.
      * 
-     * @param bean
-     *            the bean
-     * @param property
-     *            the property
-     * @param mandatory
-     *            mandatory boolean
-     * @param readOnly
-     *            read only boolean
+     * @param bean the bean
+     * @param property the property
+     * @param mandatory mandatory boolean
+     * @param readOnly read only boolean
      * @return the {@link JCheckBox}
      */
     public JCheckBox createBindingBooleanComponent(final B bean, String property, final boolean mandatory,
@@ -215,17 +193,12 @@ public class ViewFactory<B extends AbstractIdentityBean<?, ?>> {
     /**
      * Creates a {@link JsamsTable} and binds this component to the bean.
      * 
-     * @param bean
-     *            the bean
-     * @param tableModel
-     *            the {@link TableModel} to set
-     * @param mandatory
-     *            mandatory boolean
-     * @param readOnly
-     *            read only boolean
+     * @param tableModel the {@link TableModel} to set
+     * @param mandatory mandatory boolean
+     * @param readOnly read only boolean
      * @return the {@link JsamsTable}
      */
-    public JsamsTable createBindingTableComponent(final B bean, final TableModel tableModel, final boolean mandatory,
+    public JsamsTable createBindingTableComponent(final TableModel tableModel, final boolean mandatory,
             final boolean readOnly) {
         JsamsTable table = new JsamsTable(true);
         table.setModel(tableModel);
