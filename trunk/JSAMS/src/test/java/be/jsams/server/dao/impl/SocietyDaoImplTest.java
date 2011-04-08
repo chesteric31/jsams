@@ -1,5 +1,6 @@
 package be.jsams.server.dao.impl;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
@@ -68,7 +69,7 @@ public class SocietyDaoImplTest extends AbstractJUnitTestClass {
     @Test
     public void testFindAll() {
         dao.add(society);
-        assertTrue(dao.findAll().size() > 0);
+        assertFalse(dao.findAll().isEmpty());
     }
 
     /**
