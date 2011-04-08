@@ -12,7 +12,7 @@ import be.jsams.server.dao.impl.ContactInformationDaoImplTest;
 import be.jsams.server.dao.impl.SocietyDaoImplTest;
 
 /**
- * Test suite for all junit tests.
+ * Test suite for all JUNIT tests.
  * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
