@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import be.jsams.server.dao.AbstractJUnitTestClass;
 import be.jsams.server.dao.AddressDao;
 import be.jsams.server.model.Address;
+import be.jsams.server.model.mock.MockModelGenerator;
 
 /**
  * Test class for {@link AddressDaoImpl}.
@@ -31,12 +32,7 @@ public class AddressDaoImplTest extends AbstractJUnitTestClass {
 
     @Before
     public void setUp() {
-        address = new Address();
-        address.setCity("Paris");
-        address.setCountry("France");
-        address.setNumber("79");
-        address.setStreet("Rue de Varenne");
-        address.setZipCode("75007");
+        address = MockModelGenerator.generateMockAddress();
     }
 
     @Test

@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import be.jsams.server.dao.AbstractJUnitTestClass;
 import be.jsams.server.dao.ContactInformationDao;
 import be.jsams.server.model.ContactInformation;
+import be.jsams.server.model.mock.MockModelGenerator;
 
 /**
  * Test class for {@link ContactInformationDaoImpl}.
@@ -34,8 +35,7 @@ public class ContactInformationDaoImplTest extends AbstractJUnitTestClass {
      */
     @Before
     public void setUp() throws Exception {
-        contactInformation = new ContactInformation();
-        contactInformation.setPhone("08161553322");
+        contactInformation = MockModelGenerator.generateMockContactInformation();
     }
 
     /**

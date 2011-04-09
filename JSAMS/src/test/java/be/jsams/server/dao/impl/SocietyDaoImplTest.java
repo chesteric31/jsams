@@ -11,12 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import be.jsams.server.dao.AbstractJUnitTestClass;
 import be.jsams.server.dao.SocietyDao;
-import be.jsams.server.model.Address;
-import be.jsams.server.model.ContactInformation;
 import be.jsams.server.model.Society;
+import be.jsams.server.model.mock.MockModelGenerator;
 
 /**
- * 
+ * Test class for {@link SocietyDaoImpl}.
  *
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
@@ -33,25 +32,7 @@ public class SocietyDaoImplTest extends AbstractJUnitTestClass {
      */
     @Before
     public void setUp() throws Exception {
-        society = new Society();
-        society.setActivity("Activity");
-        society.setCapital(new Double("123456.78"));
-        society.setName("Name");
-        society.setVatNumber("BE123456789");
-        
-        Address address = new Address();
-        address.setCity("Brussels");
-        address.setCountry("Belgium");
-        address.setNumber("1");
-        address.setStreet("Rue Neuve");
-        address.setZipCode("1000");
-        
-        society.setAddress(address);
-        
-        ContactInformation contactInformation = new ContactInformation();
-        contactInformation.setPhone("+3221223456");
-        
-        society.setContactInformation(contactInformation);
+        society = MockModelGenerator.generateMockSociety();
     }
 
     /**
