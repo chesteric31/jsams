@@ -13,12 +13,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import be.jsams.server.dao.AbstractJUnitTestClass;
 import be.jsams.server.dao.CivilityDao;
 import be.jsams.server.model.Civility;
+import be.jsams.server.model.mock.MockModelGenerator;
 
 /**
  * Test class for {@link CivilityDaoImpl}.
  *
  * @author chesteric31
- * @version $Rev$ $Date::                  $ $Author$
+ * @version $$Rev$$ $$Date::                  $$ $$Author$$
  */
 public class CivilityDaoImplTest extends AbstractJUnitTestClass {
 
@@ -29,10 +30,7 @@ public class CivilityDaoImplTest extends AbstractJUnitTestClass {
     
     @Before
     public void setUp() throws Exception {
-        civility = new Civility();
-        civility.setLabel("label");
-        civility.setLabelFr("labelFr");
-        civility.setLabelNl("labelNl");
+        civility = MockModelGenerator.generateMockCivility();
     }
 
     @Test
