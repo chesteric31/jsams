@@ -2,13 +2,12 @@ package be.jsams.common.bean.model.management;
 
 import java.util.List;
 
-import com.jgoodies.common.collect.ArrayListModel;
-
 import be.jsams.client.context.JsamsApplicationContext;
-import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.common.bean.model.AbstractTranslatableIdentityBean;
 import be.jsams.common.bean.view.ProductCategoryBeanView;
 import be.jsams.server.model.ProductCategory;
+
+import com.jgoodies.common.collect.ArrayListModel;
 
 /**
  * Bean model for {@link ProductCategory} object.
@@ -33,7 +32,6 @@ public class ProductCategoryBean extends AbstractTranslatableIdentityBean<Produc
      */
     public ProductCategoryBean() {
         super();
-        setSociety(JsamsDesktop.getInstance().getCurrentSociety());
         initList();
     }
 
@@ -60,7 +58,6 @@ public class ProductCategoryBean extends AbstractTranslatableIdentityBean<Produc
         super(model);
         setListModel(list);
         setSelection(this);
-        setSociety(new SocietyBean(model.getSociety()));
     }
 
     /**

@@ -1,8 +1,10 @@
 package be.jsams.common.bean.model.management;
 
+import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.common.bean.model.AbstractNamedIdentityBean;
 import be.jsams.common.bean.view.ProductBeanView;
 import be.jsams.server.model.Product;
+import be.jsams.server.model.ProductCategory;
 
 import com.jgoodies.common.collect.ArrayListModel;
 
@@ -38,7 +40,9 @@ public class ProductBean extends AbstractNamedIdentityBean<Product, ProductBeanV
      */
     public ProductBean() {
         super();
-        setCategory(new ProductCategoryBean());
+        ProductCategoryBean categoryBean = new ProductCategoryBean();
+        categoryBean.setSociety(JsamsDesktop.getInstance().getCurrentSociety());
+        setCategory(categoryBean);
     }
 
     /**
@@ -49,7 +53,10 @@ public class ProductBean extends AbstractNamedIdentityBean<Product, ProductBeanV
      */
     public ProductBean(Product model) {
         super(model);
-        setCategory(new ProductCategoryBean(model.getCategory()));
+        ProductCategory productCategory = model.getCategory();
+        ProductCategoryBean categoryBean = new ProductCategoryBean(productCategory);
+        categoryBean.setSociety(new SocietyBean(productCategory.getSociety()));
+        setCategory(categoryBean);
         setPrice(model.getPrice());
         setQuantityStock(model.getQuantityStock());
         setReorderLevel(model.getReorderLevel());
