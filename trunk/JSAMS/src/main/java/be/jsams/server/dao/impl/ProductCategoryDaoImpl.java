@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.persistence.Query;
 
-import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.common.bean.model.management.ProductCategoryBean;
 import be.jsams.server.dao.ProductCategoryDao;
 import be.jsams.server.model.ProductCategory;
@@ -40,10 +39,10 @@ public class ProductCategoryDaoImpl extends DaoImpl<ProductCategory> implements 
         String nameFr = criteria.getLabelFr();
         String nameNl = criteria.getLabelNl();
         
-        Long societyId = JsamsDesktop.getInstance().getCurrentSociety().getId();
+//        Long societyId = JsamsDesktop.getInstance().getCurrentSociety().getId();
         
         queryBuilder.append(" WHERE ");
-        queryBuilder.append("c.society.id = " + societyId);
+        queryBuilder.append("c.society.id = " + criteria.getSociety().getId());
         
         if (!StringUtils.isNullOrEmpty(name)) {
             queryBuilder.append(" AND c.label LIKE '%" + name + "%'");
