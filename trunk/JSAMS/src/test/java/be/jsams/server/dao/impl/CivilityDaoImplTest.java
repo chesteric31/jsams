@@ -19,7 +19,7 @@ import be.jsams.server.model.mock.MockModelGenerator;
  * Test class for {@link CivilityDaoImpl}.
  *
  * @author chesteric31
- * @version $$Rev$$ $$Date::                  $$ $$Author$$
+ * @version $Rev$ $Date::                  $ $Author$
  */
 public class CivilityDaoImplTest extends AbstractJUnitTestClass {
 

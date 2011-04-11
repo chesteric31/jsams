@@ -86,6 +86,8 @@ public abstract class AbstractSearchPanel<B extends AbstractIdentityBean<?, ?>,
     private JsamsButton buttonModify = null;
 
     private boolean showButtons;
+    
+    public static final int THREE = 3;
 
     /**
      * Constructor.
@@ -358,7 +360,7 @@ public abstract class AbstractSearchPanel<B extends AbstractIdentityBean<?, ?>,
             buttonAdd = buildButtonAdd();
             buttonRemove = buildButtonRemove();
             buttonModify = buildButtonModify();
-            JsamsButton[] buttons = new JsamsButton[3];
+            JsamsButton[] buttons = new JsamsButton[THREE];
             buttons[0] = buttonAdd;
             buttons[1] = buttonRemove;
             buttons[2] = buttonModify;

@@ -22,9 +22,10 @@ public class ProductCategoryBean extends AbstractTranslatableIdentityBean<Produc
      */
     private static final long serialVersionUID = -6394980207406343489L;
 
-    // Remark, that must be non static list, to avoid to share this list for everyone
+    // Remark, that must be non static list, to avoid to share this list for
+    // everyone
     private ArrayListModel<ProductCategoryBean> list = new ArrayListModel<ProductCategoryBean>();
-    
+
     private SocietyBean society;
 
     /**
@@ -36,7 +37,8 @@ public class ProductCategoryBean extends AbstractTranslatableIdentityBean<Produc
     }
 
     /**
-     * Initializes the ListModel and the eventually the selection element.
+     * Initializes the ObservableList and the eventually the selection
+     * element.
      */
     private void initList() {
         List<ProductCategoryBean> beans = JsamsApplicationContext.getProductCategoryService().findAll();
@@ -51,8 +53,7 @@ public class ProductCategoryBean extends AbstractTranslatableIdentityBean<Produc
     /**
      * Constructor.
      * 
-     * @param model
-     *            the {@link ProductCategory}
+     * @param model the {@link ProductCategory}
      */
     public ProductCategoryBean(ProductCategory model) {
         super(model);
