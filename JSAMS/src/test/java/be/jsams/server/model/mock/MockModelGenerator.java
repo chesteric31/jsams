@@ -28,8 +28,8 @@ public class MockModelGenerator {
         ContactInformation contactInformation = generateMockContactInformation();
         society.setContactInformation(contactInformation);
         
-        LegalForm legalForm = generateMockLegalForm();
-        society.setLegalForm(legalForm);
+//        LegalForm legalForm = generateMockLegalForm();
+//        society.setLegalForm(legalForm);
 
         return society;
     }

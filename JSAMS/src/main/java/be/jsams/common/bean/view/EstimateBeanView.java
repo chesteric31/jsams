@@ -75,6 +75,7 @@ public class EstimateBeanView extends AbstractView<EstimateBean, JPanel, JPanel>
      */
     public JPanel createEditView() {
         EstimateBean bean = getBean();
+        final int three = 3;
         ViewFactory<EstimateBean> helper = new ViewFactory<EstimateBean>();
 
         JCheckBox transferred = helper.createBindingBooleanComponent(bean, EstimateBean.TRANSFERRED_PROPERTY, false,
@@ -137,7 +138,7 @@ public class EstimateBeanView extends AbstractView<EstimateBean, JPanel, JPanel>
         JsamsButton buttonAdd = buildButtonAdd(table.getModel());
         JsamsButton buttonRemove = buildButtonRemove();
         JsamsButton buttonModify = buildButtonModify();
-        JsamsButton[] buttons = new JsamsButton[3];
+        JsamsButton[] buttons = new JsamsButton[three];
         buttons[0] = buttonAdd;
         buttons[1] = buttonRemove;
         buttons[2] = buttonModify;

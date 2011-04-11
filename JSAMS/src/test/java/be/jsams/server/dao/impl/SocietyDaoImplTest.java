@@ -80,10 +80,11 @@ public class SocietyDaoImplTest extends AbstractJUnitTestClass {
     public void testUpdate() {
         dao.add(society);
         assertNotNull(dao.findById(society.getId()));
-        society.setActivity("Management");
+        String activity = "Management";
+        society.setActivity(activity);
         dao.update(society);
         Society findById = dao.findById(society.getId());
-        assertTrue(findById.getActivity().equals("Management"));
+        assertTrue(findById.getActivity().equals(activity));
     }
 
     /**
