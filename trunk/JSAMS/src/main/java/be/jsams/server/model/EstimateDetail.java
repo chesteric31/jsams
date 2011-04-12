@@ -38,13 +38,14 @@ public class EstimateDetail extends AbstractIdentity {
     /**
      * Constructor.
      * 
-     * @param bean
-     *            the {@link EstimateDetailBean}
+     * @param bean the {@link EstimateDetailBean}
+     * @param estimate the {@link Estimate} model
+     * 
      */
-    public EstimateDetail(final EstimateDetailBean bean) {
+    public EstimateDetail(final EstimateDetailBean bean, final Estimate estimate) {
         super(bean);
         setDiscountRate(bean.getDiscountRate());
-//        setEstimate(new Estimate(bean.getEstimate()));
+        setEstimate(estimate);
         setPrice(bean.getPrice());
         setProduct(new Product(bean.getProduct()));
         setQuantity(bean.getQuantity());
@@ -63,8 +64,7 @@ public class EstimateDetail extends AbstractIdentity {
 
     /**
      * 
-     * @param quantity
-     *            the quantity to set
+     * @param quantity the quantity to set
      */
     public void setQuantity(int quantity) {
         this.quantity = quantity;
@@ -81,8 +81,7 @@ public class EstimateDetail extends AbstractIdentity {
 
     /**
      * 
-     * @param price
-     *            the price to set
+     * @param price the price to set
      */
     public void setPrice(Double price) {
         this.price = price;
@@ -99,8 +98,7 @@ public class EstimateDetail extends AbstractIdentity {
 
     /**
      * 
-     * @param vatApplicable
-     *            the VAT applicable to set
+     * @param vatApplicable the VAT applicable to set
      */
     public void setVatApplicable(Double vatApplicable) {
         this.vatApplicable = vatApplicable;
@@ -117,8 +115,7 @@ public class EstimateDetail extends AbstractIdentity {
 
     /**
      * 
-     * @param discountRate
-     *            the discount rate to set
+     * @param discountRate the discount rate to set
      */
     public void setDiscountRate(Double discountRate) {
         this.discountRate = discountRate;
@@ -136,8 +133,7 @@ public class EstimateDetail extends AbstractIdentity {
 
     /**
      * 
-     * @param estimate
-     *            the {@link Estimate} to set
+     * @param estimate the {@link Estimate} to set
      */
     public void setEstimate(Estimate estimate) {
         this.estimate = estimate;
@@ -155,8 +151,7 @@ public class EstimateDetail extends AbstractIdentity {
 
     /**
      * 
-     * @param product
-     *            the {@link Product} to set
+     * @param product the {@link Product} to set
      */
     public void setProduct(Product product) {
         this.product = product;
@@ -164,7 +159,8 @@ public class EstimateDetail extends AbstractIdentity {
 
     /**
      * 
-     * @return a boolean to indicate if the {@link EstimateDetail} is transferred to an other document
+     * @return a boolean to indicate if the {@link EstimateDetail} is
+     *         transferred to an other document
      */
     @Column(name = "TRANSFERRED")
     public boolean isTransferred() {
@@ -173,8 +169,8 @@ public class EstimateDetail extends AbstractIdentity {
 
     /**
      * 
-     * @param transferred
-     *            true if the {@link EstimateDetail} is transferred to an other document, false otherwise
+     * @param transferred true if the {@link EstimateDetail} is transferred to
+     *            an other document, false otherwise
      */
     public void setTransferred(boolean transferred) {
         this.transferred = transferred;

@@ -1,10 +1,7 @@
 package be.jsams.common.bean.view;
 
-import java.util.List;
-
 import javax.swing.JPanel;
 
-import be.jsams.client.model.table.EstimateDetailTableModel;
 import be.jsams.client.swing.component.JsamsTable;
 import be.jsams.common.bean.model.sale.EstimateDetailBean;
 
@@ -34,14 +31,9 @@ public class EstimateDetailBeanView extends AbstractView<EstimateDetailBean, Jsa
     /**
      * {@inheritDoc}
      */
-    @SuppressWarnings("unchecked")
     public JsamsTable createEditView() {
-        ViewFactory<EstimateDetailBean> helper = new ViewFactory<EstimateDetailBean>();
-        EstimateDetailBean bean = getBean();
-        EstimateDetailTableModel tableModel = new EstimateDetailTableModel(
-                (List<EstimateDetailBean>) bean.getListModel());
-        JsamsTable table = helper.createBindingTableComponent(tableModel, false, false);
-        return table;
+        // TODO Auto-generated method stub
+        return null;
     }
 
     /**

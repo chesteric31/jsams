@@ -4,11 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import be.jsams.common.bean.model.sale.EstimateBean;
-import be.jsams.common.bean.model.sale.EstimateDetailBean;
 import be.jsams.server.dao.EstimateDao;
 import be.jsams.server.dao.EstimateDetailDao;
 import be.jsams.server.model.Estimate;
-import be.jsams.server.model.EstimateDetail;
 import be.jsams.server.service.EstimateService;
 
 /**
@@ -58,14 +56,6 @@ public class EstimateServiceImpl implements EstimateService {
     public EstimateBean create(final EstimateBean bean) {
         Estimate estimate = new Estimate(bean);
         Estimate addingEstimate = estimateDao.add(estimate);
-        List<EstimateDetailBean> details = bean.getDetails();
-        List<EstimateDetail> addingDetails = new ArrayList<EstimateDetail>();
-        for (EstimateDetailBean detail : details) {
-            EstimateDetail detailObject = new EstimateDetail(detail);
-            detailObject.setEstimate(addingEstimate);
-            addingDetails.add((estimateDetailDao.add(detailObject)));
-        }
-        addingEstimate.setDetails(addingDetails);
         return new EstimateBean(addingEstimate);
     }
 
@@ -86,15 +76,11 @@ public class EstimateServiceImpl implements EstimateService {
     }
 
     /**
-     * Delete a {@link Estimate} object and all its {@link EstimateDetail} object.
+     * Delete a {@link Estimate} object and all its EstimateDetail object.
      * 
      * @param estimate the {@link Estimate} to delete
      */
     private void delete(Estimate estimate) {
-        List<EstimateDetail> details = estimate.getDetails();
-        for (EstimateDetail detail : details) {
-            estimateDetailDao.delete(detail);
-        }
         estimateDao.delete(estimate);
     }
 
@@ -125,15 +111,6 @@ public class EstimateServiceImpl implements EstimateService {
     public void update(final EstimateBean bean) {
         Estimate updatedEstimate = new Estimate(bean);
         estimateDao.update(updatedEstimate);
-        List<EstimateDetailBean> details = bean.getDetails();
-        // List<EstimateDetail> updatedDetails = new ArrayList<EstimateDetail>();
-        for (EstimateDetailBean detail : details) {
-            EstimateDetail detailObject = new EstimateDetail(detail);
-            detailObject.setEstimate(updatedEstimate);
-            estimateDetailDao.update(detailObject);
-        }
-        // estimate.setDetails(addingDetails);
-        // return new EstimateBean(addingEstimate);
     }
 
     /**

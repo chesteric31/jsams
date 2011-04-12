@@ -73,7 +73,7 @@ public class EstimateBean extends AbstractIdentityBean<Estimate, EstimateBeanVie
         setCustomer(new CustomerBean(model.getCustomer()));
         List<EstimateDetailBean> beans = new ArrayList<EstimateDetailBean>();
         for (EstimateDetail detail : model.getDetails()) {
-            beans.add(new EstimateDetailBean(detail));
+            beans.add(new EstimateDetailBean(detail, this));
         }
         setDetails(beans);
         setDiscountRate(model.getDiscountRate());
