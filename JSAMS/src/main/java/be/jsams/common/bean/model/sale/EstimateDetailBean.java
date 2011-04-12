@@ -52,11 +52,12 @@ public class EstimateDetailBean extends AbstractIdentityBean<EstimateDetail, Est
      * 
      * @param model
      *            the {@link EstimateDetail}
+     * @param estimate the {@link EstimateBean}            
      */
-    public EstimateDetailBean(EstimateDetail model) {
+    public EstimateDetailBean(EstimateDetail model, EstimateBean estimate) {
         super(model);
         setDiscountRate(model.getDiscountRate());
-//        setEstimate(new EstimateBean(model.getEstimate()));
+        setEstimate(estimate);
         setPrice(model.getPrice());
         setProduct(new ProductBean(model.getProduct()));
         setQuantity(model.getQuantity());

@@ -7,12 +7,15 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.Cascade;
 
 import be.jsams.common.bean.model.sale.EstimateBean;
 import be.jsams.common.bean.model.sale.EstimateDetailBean;
@@ -48,8 +51,7 @@ public class Estimate extends AbstractIdentity {
     /**
      * Constructor
      * 
-     * @param bean
-     *            the {@link EstimateBean}
+     * @param bean the {@link EstimateBean}
      */
     public Estimate(EstimateBean bean) {
         super(bean);
@@ -64,7 +66,7 @@ public class Estimate extends AbstractIdentity {
         List<EstimateDetail> tmp = new ArrayList<EstimateDetail>();
         if (list != null) {
             for (EstimateDetailBean detail : list) {
-                tmp.add(new EstimateDetail(detail));
+                tmp.add(new EstimateDetail(detail, this));
             }
         }
         setDetails(tmp);
@@ -82,8 +84,7 @@ public class Estimate extends AbstractIdentity {
 
     /**
      * 
-     * @param creationDate
-     *            the creation date to set
+     * @param creationDate the creation date to set
      */
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
@@ -100,8 +101,7 @@ public class Estimate extends AbstractIdentity {
 
     /**
      * 
-     * @param remark
-     *            a remark to set
+     * @param remark a remark to set
      */
     public void setRemark(String remark) {
         this.remark = remark;
@@ -118,8 +118,7 @@ public class Estimate extends AbstractIdentity {
 
     /**
      * 
-     * @param discountRate
-     *            the discount rate to set
+     * @param discountRate the discount rate to set
      */
     public void setDiscountRate(Double discountRate) {
         this.discountRate = discountRate;
@@ -137,8 +136,7 @@ public class Estimate extends AbstractIdentity {
 
     /**
      * 
-     * @param agent
-     *            the {@link Agent} to set
+     * @param agent the {@link Agent} to set
      */
     public void setAgent(Agent agent) {
         this.agent = agent;
@@ -156,8 +154,7 @@ public class Estimate extends AbstractIdentity {
 
     /**
      * 
-     * @param customer
-     *            the {@link Customer} to set
+     * @param customer the {@link Customer} to set
      */
     public void setCustomer(Customer customer) {
         this.customer = customer;
@@ -175,8 +172,7 @@ public class Estimate extends AbstractIdentity {
 
     /**
      * 
-     * @param billingAddress
-     *            the billing {@link Address} to set
+     * @param billingAddress the billing {@link Address} to set
      */
     public void setBillingAddress(Address billingAddress) {
         this.billingAddress = billingAddress;
@@ -186,15 +182,15 @@ public class Estimate extends AbstractIdentity {
      * 
      * @return a list of {@link EstimateDetail}
      */
-    @OneToMany(mappedBy = "estimate")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "estimate")
+    @Cascade(org.hibernate.annotations.CascadeType.DELETE_ORPHAN)
     public List<EstimateDetail> getDetails() {
         return details;
     }
 
     /**
      * 
-     * @param details
-     *            a list of {@link EstimateDetail} to set
+     * @param details a list of {@link EstimateDetail} to set
      */
     public void setDetails(List<EstimateDetail> details) {
         this.details = details;
@@ -209,8 +205,7 @@ public class Estimate extends AbstractIdentity {
     }
 
     /**
-     * @param transferred
-     *            the transferred to set
+     * @param transferred the transferred to set
      */
     public void setTransferred(boolean transferred) {
         this.transferred = transferred;
