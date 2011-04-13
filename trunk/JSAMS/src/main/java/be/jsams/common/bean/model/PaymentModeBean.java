@@ -1,8 +1,5 @@
 package be.jsams.common.bean.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.common.bean.view.PaymentModeBeanView;
 import be.jsams.server.model.PaymentMode;
@@ -24,13 +21,10 @@ public class PaymentModeBean extends AbstractTranslatableIdentityBean<PaymentMod
 
     private static ArrayListModel<PaymentModeBean> list = new ArrayListModel<PaymentModeBean>();
     static {
-        List<PaymentMode> allPaymentModes = JsamsApplicationContext.getPaymentModeDao().findAll();
-        List<PaymentModeBean> beans = new ArrayList<PaymentModeBean>();
-        for (PaymentMode paymentMode : allPaymentModes) {
-            beans.add(new PaymentModeBean(paymentMode));
-        }
         list.add(null);
-        list.addAll(beans);
+        for (PaymentMode mode : JsamsApplicationContext.getPaymentModeDao().findAll()) {
+            list.add(new PaymentModeBean(mode));
+        }
     }
 
     /**

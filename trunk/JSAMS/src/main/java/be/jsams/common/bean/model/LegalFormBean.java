@@ -1,8 +1,5 @@
 package be.jsams.common.bean.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.common.bean.view.LegalFormBeanView;
 import be.jsams.server.model.LegalForm;
@@ -24,13 +21,10 @@ public class LegalFormBean extends AbstractTranslatableIdentityBean<LegalForm, L
 
     private static ArrayListModel<LegalFormBean> list = new ArrayListModel<LegalFormBean>();
     static {
-        List<LegalForm> allLegalForms = JsamsApplicationContext.getLegalFormDao().findAll();
-        List<LegalFormBean> beans = new ArrayList<LegalFormBean>();
-        for (LegalForm legalForm : allLegalForms) {
-            beans.add(new LegalFormBean(legalForm));
-        }
         list.add(null);
-        list.addAll(beans);
+        for (LegalForm legalForm : JsamsApplicationContext.getLegalFormDao().findAll()) {
+            list.add(new LegalFormBean(legalForm));
+        }
     }
 
     /**
@@ -45,8 +39,7 @@ public class LegalFormBean extends AbstractTranslatableIdentityBean<LegalForm, L
     /**
      * Constructor
      * 
-     * @param model
-     *            the {@link LegalForm}
+     * @param model the {@link LegalForm}
      */
     public LegalFormBean(LegalForm model) {
         super(model);
@@ -61,6 +54,5 @@ public class LegalFormBean extends AbstractTranslatableIdentityBean<LegalForm, L
     public LegalFormBeanView getView() {
         return new LegalFormBeanView(this);
     }
-
 
 }
