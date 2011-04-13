@@ -13,7 +13,7 @@ import com.jgoodies.forms.builder.DefaultFormBuilder;
 import com.jgoodies.forms.layout.FormLayout;
 
 /**
- * 
+ * Customized views for {@link ProductBean}.
  * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$

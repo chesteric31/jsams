@@ -1,8 +1,5 @@
 package be.jsams.common.bean.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.common.bean.view.CivilityBeanView;
 import be.jsams.server.model.Civility;
@@ -24,13 +21,10 @@ public class CivilityBean extends AbstractTranslatableIdentityBean<Civility, Civ
 
     private static ArrayListModel<CivilityBean> list = new ArrayListModel<CivilityBean>();
     static {
-        List<Civility> allCivilities = JsamsApplicationContext.getCivilityDao().findAll();
-        List<CivilityBean> beans = new ArrayList<CivilityBean>();
-        for (Civility civility : allCivilities) {
-            beans.add(new CivilityBean(civility));
-        }
         list.add(null);
-        list.addAll(beans);
+        for (Civility civility : JsamsApplicationContext.getCivilityDao().findAll()) {
+            list.add(new CivilityBean(civility));
+        }
     }
 
     /**
