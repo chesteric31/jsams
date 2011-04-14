@@ -1,10 +1,9 @@
 package be.jsams.common.bean.model;
 
-import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.common.bean.view.PaymentModeBeanView;
 import be.jsams.server.model.PaymentMode;
 
-import com.jgoodies.common.collect.ArrayListModel;
+import com.jgoodies.common.collect.ObservableList;
 
 /**
  * Bean model for {@link PaymentMode} object.
@@ -19,18 +18,21 @@ public class PaymentModeBean extends AbstractTranslatableIdentityBean<PaymentMod
      */
     private static final long serialVersionUID = 3641238456200690731L;
 
-    private static ArrayListModel<PaymentModeBean> list = new ArrayListModel<PaymentModeBean>();
-    static {
-        list.add(null);
-        for (PaymentMode mode : JsamsApplicationContext.getPaymentModeDao().findAll()) {
-            list.add(new PaymentModeBean(mode));
-        }
+    /**
+     * Constructor.
+     * 
+     * @param model the {@link PaymentMode}
+     */
+    public PaymentModeBean(PaymentMode model) {
+        super(model);
     }
 
     /**
-     * Default constructor.
+     * Constructor.
+     * 
+     * @param list the {@link ObservableList}
      */
-    public PaymentModeBean() {
+    public PaymentModeBean(ObservableList<PaymentModeBean> list) {
         super();
         setListModel(list);
         setSelection(list.get(0));
@@ -39,11 +41,11 @@ public class PaymentModeBean extends AbstractTranslatableIdentityBean<PaymentMod
     /**
      * Constructor
      * 
-     * @param model
-     *            the {@link PaymentMode}
+     * @param list the {@link ObservableList}
+     * @param model the {@link PaymentMode} object
      */
-    public PaymentModeBean(PaymentMode model) {
-        super(model);
+    public PaymentModeBean(ObservableList<PaymentModeBean> list, PaymentMode model) {
+        this(model);
         setListModel(list);
         setSelection(this);
     }

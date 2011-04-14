@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.Query;
 
+import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.common.bean.model.management.ProductCategoryBean;
 import be.jsams.server.dao.ProductCategoryDao;
 import be.jsams.server.model.ProductCategory;
@@ -39,8 +40,6 @@ public class ProductCategoryDaoImpl extends DaoImpl<ProductCategory> implements 
         String nameFr = criteria.getLabelFr();
         String nameNl = criteria.getLabelNl();
         
-//        Long societyId = JsamsDesktop.getInstance().getCurrentSociety().getId();
-        
         queryBuilder.append(" WHERE ");
         queryBuilder.append("c.society.id = " + criteria.getSociety().getId());
         
@@ -53,6 +52,21 @@ public class ProductCategoryDaoImpl extends DaoImpl<ProductCategory> implements 
         if (!StringUtils.isNullOrEmpty(nameNl)) {
             queryBuilder.append(" AND c.labelNl LIKE '%" + nameNl + "%'");
         }
+
+        Query query = getEntityManager().createQuery(queryBuilder.toString());
+        List<ProductCategory> result = query.getResultList();
+        return result;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @SuppressWarnings("unchecked")
+    public List<ProductCategory> findAll() {
+        StringBuilder queryBuilder = new StringBuilder("FROM ProductCategory c");
+
+        queryBuilder.append(" WHERE ");
+        queryBuilder.append("c.society.id = " + JsamsDesktop.getInstance().getCurrentSociety().getId());
 
         Query query = getEntityManager().createQuery(queryBuilder.toString());
         List<ProductCategory> result = query.getResultList();

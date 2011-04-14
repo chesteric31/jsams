@@ -3,7 +3,8 @@ package be.jsams.common.bean.model.management;
 import java.util.ArrayList;
 import java.util.List;
 
-import be.jsams.client.desktop.JsamsDesktop;
+import be.jsams.client.context.JsamsApplicationContext;
+import be.jsams.common.bean.builder.CivilityBeanBuilder;
 import be.jsams.common.bean.model.AbstractIdentityBean;
 import be.jsams.common.bean.model.AbstractNamedIdentityBean;
 import be.jsams.common.bean.model.AddressBean;
@@ -11,6 +12,7 @@ import be.jsams.common.bean.model.CivilityBean;
 import be.jsams.common.bean.model.ContactInformationBean;
 import be.jsams.common.bean.view.AgentBeanView;
 import be.jsams.server.model.Agent;
+import be.jsams.server.model.Civility;
 
 /**
  * Bean model for {@link Agent} object.
@@ -28,26 +30,28 @@ public class AgentBean extends AbstractNamedIdentityBean<Agent, AgentBeanView> {
     private String function;
 
     private CivilityBean civility;
-
     private AddressBean address;
-
     private ContactInformationBean contactInformation;
-
     private List<CustomerBean> customers;
-    
     private SocietyBean society;
+    
+    private CivilityBeanBuilder builder;
 
     public static final String FUNCTION_PROPERTY = "function";
 
     /**
      * Default constructor
+     * 
+     * @param society the {@link SocietyBean} to use
      */
-    public AgentBean() {
+    public AgentBean(SocietyBean society) {
         super();
         setAddress(new AddressBean());
         setContactInformation(new ContactInformationBean());
-        setCivility(new CivilityBean());
-        setSociety(JsamsDesktop.getInstance().getCurrentSociety());
+        builder = new CivilityBeanBuilder();
+        builder.setDao(JsamsApplicationContext.getCivilityDao());
+        setCivility(builder.build());
+        setSociety(society);
     }
 
     /**
@@ -59,9 +63,13 @@ public class AgentBean extends AbstractNamedIdentityBean<Agent, AgentBeanView> {
     public AgentBean(Agent model) {
         super(model);
         setAddress(new AddressBean(model.getAddress()));
-        if (model.getCivility() != null) {
-            setCivility(new CivilityBean(model.getCivility()));
+        builder = new CivilityBeanBuilder();
+        builder.setDao(JsamsApplicationContext.getCivilityDao());
+        Civility temp = model.getCivility();
+        if (temp != null) {
+            builder.setModel(temp);
         }
+        setCivility(builder.build());
         setContactInformation(new ContactInformationBean(model.getContactInformation()));
         setFunction(model.getFunction());
         setSociety(new SocietyBean(model.getSociety()));

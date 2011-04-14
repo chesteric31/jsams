@@ -47,6 +47,7 @@ import be.jsams.common.bean.model.management.AgentBean;
 import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.management.ProductBean;
 import be.jsams.common.bean.model.management.ProductCategoryBean;
+import be.jsams.common.bean.model.management.SocietyBean;
 import be.jsams.common.bean.model.sale.EstimateBean;
 
 /**
@@ -119,11 +120,12 @@ public class JsamsMainFrame extends JsamsFrame {
 
     private JsamsCloseableTabbedPane tabbedPane;
 
+    private SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
+
     /**
      * Constructor
      * 
-     * @param title
-     *            the {@link I18nString} title
+     * @param title the {@link I18nString} title
      */
     public JsamsMainFrame(final I18nString title) {
         super(title, "categories/applications-office.png");
@@ -165,7 +167,8 @@ public class JsamsMainFrame extends JsamsFrame {
 
             setJMenuBar(mainMenuBar);
 
-            // TODO correct the components with splash panel, with the closing and opening menu item...
+            // TODO correct the components with splash panel, with the closing
+            // and opening menu item...
             add(tabbedPane);
             // add(JsamsSpashPanel.getInstance());
         } catch (Exception e) {
@@ -314,7 +317,8 @@ public class JsamsMainFrame extends JsamsFrame {
     }
 
     /**
-     * Builds the 'south' panel that contains the shortcut tool-bar and the status bar.
+     * Builds the 'south' panel that contains the shortcut tool-bar and the
+     * status bar.
      * 
      * @return the south panel
      */
@@ -329,10 +333,8 @@ public class JsamsMainFrame extends JsamsFrame {
 
     /**
      * 
-     * @param text
-     *            the text to display
-     * @param icon
-     *            the {@link Icon} to display
+     * @param text the text to display
+     * @param icon the {@link Icon} to display
      * @return an {@link Action} for the searching of customers
      */
     private Action customersAction(String text, Icon icon) {
@@ -343,7 +345,7 @@ public class JsamsMainFrame extends JsamsFrame {
             private static final long serialVersionUID = -8367998985097440307L;
 
             public void actionPerformed(ActionEvent event) {
-                SearchCustomerPanel searchPanel = new SearchCustomerPanel(new CustomerBean(),
+                SearchCustomerPanel searchPanel = new SearchCustomerPanel(new CustomerBean(currentSociety),
                         new CustomerTableMouseListener(), JsamsApplicationContext.getCustomerService(), true);
                 tabbedPane.addTab(JsamsI18nResource.TITLE_SEARCH_CUSTOMER, "apps/system-users.png", searchPanel);
             }
@@ -355,10 +357,8 @@ public class JsamsMainFrame extends JsamsFrame {
 
     /**
      * 
-     * @param text
-     *            the text to display
-     * @param icon
-     *            the {@link Icon} to display
+     * @param text the text to display
+     * @param icon the {@link Icon} to display
      * @return an {@link Action} for the searching of agents
      */
     private Action agentsAction(String text, Icon icon) {
@@ -369,8 +369,8 @@ public class JsamsMainFrame extends JsamsFrame {
             private static final long serialVersionUID = 3233472575375812337L;
 
             public void actionPerformed(ActionEvent event) {
-                SearchAgentPanel searchPanel = new SearchAgentPanel(new AgentBean(), new AgentTableMouseListener(),
-                        JsamsApplicationContext.getAgentService(), true);
+                SearchAgentPanel searchPanel = new SearchAgentPanel(new AgentBean(currentSociety),
+                        new AgentTableMouseListener(), JsamsApplicationContext.getAgentService(), true);
                 tabbedPane.addTab(JsamsI18nResource.TITLE_SEARCH_AGENT, "categories/applications-development.png",
                         searchPanel);
             }
@@ -382,10 +382,8 @@ public class JsamsMainFrame extends JsamsFrame {
 
     /**
      * 
-     * @param text
-     *            the text to display
-     * @param icon
-     *            the {@link Icon} to display
+     * @param text the text to display
+     * @param icon the {@link Icon} to display
      * @return an {@link Action} for the searching of estimates
      */
     private Action estimatesAction(String text, Icon icon) {
@@ -408,10 +406,8 @@ public class JsamsMainFrame extends JsamsFrame {
 
     /**
      * 
-     * @param text
-     *            the text to display
-     * @param icon
-     *            the {@link Icon} to display
+     * @param text the text to display
+     * @param icon the {@link Icon} to display
      * @return a {@link Action} for the searching of products
      */
     private Action productsAction(String text, Icon icon) {
@@ -435,10 +431,8 @@ public class JsamsMainFrame extends JsamsFrame {
 
     /**
      * 
-     * @param text
-     *            the text to display
-     * @param icon
-     *            the {@link Icon} to display
+     * @param text the text to display
+     * @param icon the {@link Icon} to display
      * @return a {@link Action} for the searching of product categories
      */
     private Action productsCategoryAction(String text, Icon icon) {
@@ -450,7 +444,7 @@ public class JsamsMainFrame extends JsamsFrame {
 
             public void actionPerformed(ActionEvent event) {
                 ProductCategoryBean categoryBean = new ProductCategoryBean();
-                categoryBean.setSociety(JsamsDesktop.getInstance().getCurrentSociety());
+                categoryBean.setSociety(currentSociety);
                 SearchProductCategoryPanel searchPanel = new SearchProductCategoryPanel(categoryBean,
                         new ProductCategoryTableMouseListener(), JsamsApplicationContext.getProductCategoryService(),
                         true);

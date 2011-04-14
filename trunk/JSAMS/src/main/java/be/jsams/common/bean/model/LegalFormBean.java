@@ -1,10 +1,9 @@
 package be.jsams.common.bean.model;
 
-import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.common.bean.view.LegalFormBeanView;
 import be.jsams.server.model.LegalForm;
 
-import com.jgoodies.common.collect.ArrayListModel;
+import com.jgoodies.common.collect.ObservableList;
 
 /**
  * Bean model for {@link LegalForm} object.
@@ -19,18 +18,21 @@ public class LegalFormBean extends AbstractTranslatableIdentityBean<LegalForm, L
      */
     private static final long serialVersionUID = 426593985962833277L;
 
-    private static ArrayListModel<LegalFormBean> list = new ArrayListModel<LegalFormBean>();
-    static {
-        list.add(null);
-        for (LegalForm legalForm : JsamsApplicationContext.getLegalFormDao().findAll()) {
-            list.add(new LegalFormBean(legalForm));
-        }
+    /**
+     * Constructor.
+     * 
+     * @param model the {@link LegalForm}
+     */
+    public LegalFormBean(LegalForm model) {
+        super(model);
     }
 
     /**
-     * Default constructor
+     * Constructor.
+     * 
+     * @param list the {@link ObservableList}
      */
-    public LegalFormBean() {
+    public LegalFormBean(ObservableList<LegalFormBean> list) {
         super();
         setListModel(list);
         setSelection(list.get(0));
@@ -39,10 +41,11 @@ public class LegalFormBean extends AbstractTranslatableIdentityBean<LegalForm, L
     /**
      * Constructor
      * 
-     * @param model the {@link LegalForm}
+     * @param list the {@link ObservableList}
+     * @param model the {@link LegalForm} object
      */
-    public LegalFormBean(LegalForm model) {
-        super(model);
+    public LegalFormBean(ObservableList<LegalFormBean> list, LegalForm model) {
+        this(model);
         setListModel(list);
         setSelection(this);
     }

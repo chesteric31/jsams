@@ -7,6 +7,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellRenderer;
 
+import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.model.dialog.EditAgentDialog;
 import be.jsams.client.model.table.AgentTableModel;
@@ -23,8 +24,8 @@ import be.jsams.server.service.AgentService;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class SearchAgentPanel
-        extends AbstractSearchPanel<AgentBean, AgentTableMouseListener, AgentService, EditAgentValidator> {
+public class SearchAgentPanel extends
+        AbstractSearchPanel<AgentBean, AgentTableMouseListener, AgentService, EditAgentValidator> {
 
     /**
      * Serial Version UID
@@ -34,15 +35,11 @@ public class SearchAgentPanel
     /**
      * Constructor.
      * 
-     * @param model
-     *            the {@link AgentBean}
-     * @param listener
-     *            the {@link AgentTableMouseListener}
-     * @param service
-     *            the {@link AgentService}
-     * @param showButtons
-     *            a boolean that indicates if we have to display the buttons to manage the content: add, remove and
-     *            modify
+     * @param model the {@link AgentBean}
+     * @param listener the {@link AgentTableMouseListener}
+     * @param service the {@link AgentService}
+     * @param showButtons a boolean that indicates if we have to display the
+     *            buttons to manage the content: add, remove and modify
      */
     public SearchAgentPanel(AgentBean model, AgentTableMouseListener listener, AgentService service,
             final boolean showButtons) {
@@ -64,7 +61,8 @@ public class SearchAgentPanel
      */
     @Override
     protected void performButtonAdd() {
-        new EditAgentDialog(JsamsI18nResource.TITLE_EDIT_AGENT, new AgentBean());
+        new EditAgentDialog(JsamsI18nResource.TITLE_EDIT_AGENT, new AgentBean(JsamsDesktop.getInstance()
+                .getCurrentSociety()));
         updateUI();
     }
 
@@ -115,8 +113,7 @@ public class SearchAgentPanel
     /**
      * Fills the data table.
      * 
-     * @param agents
-     *            the {@link AgentBean} list
+     * @param agents the {@link AgentBean} list
      */
     private void fillTable(final List<AgentBean> agents) {
         AgentTableModel model = new AgentTableModel(agents);

@@ -11,6 +11,7 @@ import javax.swing.table.TableRowSorter;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.model.dialog.EditCustomerDialog;
 import be.jsams.client.model.table.CustomerTableModel;
@@ -42,15 +43,11 @@ public class SearchCustomerPanel extends
     /**
      * Constructor.
      * 
-     * @param model
-     *            the {@link CustomerBean}
-     * @param listener
-     *            the {@link CustomerTableMouseListener}
-     * @param service
-     *            the {@link CustomerService}
-     * @param showButtons
-     *            a boolean that indicates if we have to display the buttons to manage the content: add, remove and
-     *            modify
+     * @param model the {@link CustomerBean}
+     * @param listener the {@link CustomerTableMouseListener}
+     * @param service the {@link CustomerService}
+     * @param showButtons a boolean that indicates if we have to display the
+     *            buttons to manage the content: add, remove and modify
      */
     public SearchCustomerPanel(CustomerBean model, CustomerTableMouseListener listener, CustomerService service,
             final boolean showButtons) {
@@ -72,7 +69,8 @@ public class SearchCustomerPanel extends
      */
     @Override
     protected void performButtonAdd() {
-        new EditCustomerDialog(JsamsI18nResource.TITLE_EDIT_CUSTOMER, new CustomerBean());
+        new EditCustomerDialog(JsamsI18nResource.TITLE_EDIT_CUSTOMER, new CustomerBean(JsamsDesktop.getInstance()
+                .getCurrentSociety()));
         updateUI();
     }
 
@@ -129,8 +127,7 @@ public class SearchCustomerPanel extends
     /**
      * Fills the data table.
      * 
-     * @param customers
-     *            the {@link CustomerBean} list
+     * @param customers the {@link CustomerBean} list
      */
     private void fillTable(final List<CustomerBean> customers) {
         CustomerTableModel model = new CustomerTableModel(customers);

@@ -7,6 +7,7 @@ import javax.swing.AbstractAction;
 import javax.swing.Icon;
 
 import be.jsams.client.context.JsamsApplicationContext;
+import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.client.model.panel.SearchAgentPanel;
 import be.jsams.client.model.table.AgentTableModel;
 import be.jsams.client.swing.component.JsamsButton;
@@ -65,22 +66,13 @@ public final class SearchAgentAction extends AbstractAction {
                         AgentTableModel model = (AgentTableModel) table.getModel();
                         AgentBean selectedBean = model.getRow(selectedRowModel);
                         bean.refresh(selectedBean);
-//                        bean.setAddress(selectedBean.getAddress());
-//                        bean.setCivility(selectedBean.getCivility());
-//                        bean.setContactInformation(selectedBean.getContactInformation());
-//                        bean.setCustomers(selectedBean.getCustomers());
-//                        bean.setFunction(selectedBean.getFunction());
-//                        bean.setId(selectedBean.getId());
-//                        bean.setListModel(selectedBean.getListModel());
-//                        bean.setName(selectedBean.getName());
-//                        bean.setSelection(selectedBean.getSelection());
                         dialog.dispose();
                     }
                 }
             }
         };
-        SearchAgentPanel searchAgentPanel = new SearchAgentPanel(new AgentBean(), customListener,
-                JsamsApplicationContext.getAgentService(), false);
+        SearchAgentPanel searchAgentPanel = new SearchAgentPanel(new AgentBean(JsamsDesktop.getInstance()
+                .getCurrentSociety()), customListener, JsamsApplicationContext.getAgentService(), false);
         dialog.add(searchAgentPanel);
         dialog.pack();
         dialog.setLocationRelativeTo(((JsamsButton) e.getSource()).getRootPane());
