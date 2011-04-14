@@ -1,10 +1,9 @@
 package be.jsams.common.bean.model;
 
-import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.common.bean.view.CivilityBeanView;
 import be.jsams.server.model.Civility;
 
-import com.jgoodies.common.collect.ArrayListModel;
+import com.jgoodies.common.collect.ObservableList;
 
 /**
  * Bean model for {@link Civility} object.
@@ -19,18 +18,21 @@ public class CivilityBean extends AbstractTranslatableIdentityBean<Civility, Civ
      */
     private static final long serialVersionUID = 8432665851403685710L;
 
-    private static ArrayListModel<CivilityBean> list = new ArrayListModel<CivilityBean>();
-    static {
-        list.add(null);
-        for (Civility civility : JsamsApplicationContext.getCivilityDao().findAll()) {
-            list.add(new CivilityBean(civility));
-        }
+    /**
+     * Constructor.
+     * 
+     * @param model the {@link Civility}
+     */
+    public CivilityBean(Civility model) {
+        super(model);
     }
 
     /**
-     * Default constructor.
+     * Constructor.
+     * 
+     * @param list the {@link ObservableList}
      */
-    public CivilityBean() {
+    public CivilityBean(ObservableList<CivilityBean> list) {
         super();
         setListModel(list);
         setSelection(list.get(0));
@@ -39,11 +41,11 @@ public class CivilityBean extends AbstractTranslatableIdentityBean<Civility, Civ
     /**
      * Constructor
      * 
-     * @param model
-     *            the {@link Civility} object
+     * @param list the {@link ObservableList}
+     * @param model the {@link Civility} object
      */
-    public CivilityBean(Civility model) {
-        super(model);
+    public CivilityBean(ObservableList<CivilityBean> list, Civility model) {
+        this(model);
         setListModel(list);
         setSelection(this);
     }

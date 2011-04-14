@@ -31,7 +31,7 @@ public abstract class AbstractIdentityBean<M extends AbstractIdentity, V extends
     private ObservableList<? extends AbstractIdentityBean<M, V>> listModel;
     private AbstractIdentityBean<M, V> selection;
 
-    public static final String PROPERTYNAME_SELECTION = "selection";
+    public static final String PROPERTY_NAME_SELECTION = "selection";
 
     /**
      * Constructor.
@@ -100,7 +100,7 @@ public abstract class AbstractIdentityBean<M extends AbstractIdentity, V extends
     public void setSelection(AbstractIdentityBean<M, V> newSelection) {
         AbstractIdentityBean<M, V> oldSelection = getSelection();
         selection = newSelection;
-        firePropertyChange(PROPERTYNAME_SELECTION, oldSelection, newSelection);
+        firePropertyChange(PROPERTY_NAME_SELECTION, oldSelection, newSelection);
     }
 
     /**

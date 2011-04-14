@@ -3,12 +3,14 @@ package be.jsams.common.bean.model.management;
 import java.util.List;
 
 import be.jsams.client.context.JsamsApplicationContext;
+import be.jsams.common.bean.builder.LegalFormBeanBuilder;
 import be.jsams.common.bean.model.AbstractIdentityBean;
 import be.jsams.common.bean.model.AbstractNamedIdentityBean;
 import be.jsams.common.bean.model.AddressBean;
 import be.jsams.common.bean.model.ContactInformationBean;
 import be.jsams.common.bean.model.LegalFormBean;
 import be.jsams.common.bean.view.SocietyBeanView;
+import be.jsams.server.dao.LegalFormDao;
 import be.jsams.server.model.LegalForm;
 import be.jsams.server.model.Society;
 
@@ -36,6 +38,8 @@ public class SocietyBean extends AbstractNamedIdentityBean<Society, SocietyBeanV
     private LegalFormBean legalForm;
     private ContactInformationBean contactInformation;
 
+    private LegalFormBeanBuilder legalFormBuilder;
+
     public static final String CAPITAL_PROPERTY = "capital";
     public static final String ACTIVITY_PROPERTY = "activity";
     public static final String RESPONSIBLE_PROPERTY = "responsible";
@@ -49,7 +53,11 @@ public class SocietyBean extends AbstractNamedIdentityBean<Society, SocietyBeanV
     public SocietyBean() {
         super();
         address = new AddressBean();
-        legalForm = new LegalFormBean();
+        
+        legalFormBuilder = new LegalFormBeanBuilder();
+        legalFormBuilder.setDao(JsamsApplicationContext.getLegalFormDao());
+        setLegalForm(legalFormBuilder.build());
+        
         contactInformation = new ContactInformationBean();
         initList();
     }
@@ -79,12 +87,15 @@ public class SocietyBean extends AbstractNamedIdentityBean<Society, SocietyBeanV
         setAddress(new AddressBean(model.getAddress()));
         setCapital(model.getCapital());
         setContactInformation(new ContactInformationBean(model.getContactInformation()));
+        
+        legalFormBuilder = new LegalFormBeanBuilder();
+        legalFormBuilder.setDao(getLegalFormDao());
         LegalForm form = model.getLegalForm();
         if (form != null) {
-            setLegalForm(new LegalFormBean(form));
-        } else {
-            setLegalForm(new LegalFormBean());
+            legalFormBuilder.setModel(form);
         }
+        
+        setLegalForm(legalFormBuilder.build());
         setResponsible(model.getResponsible());
         setVatNumber(model.getVatNumber());
         setListModel(list);
@@ -254,4 +265,13 @@ public class SocietyBean extends AbstractNamedIdentityBean<Society, SocietyBeanV
         setVatNumber(other.getVatNumber());
         setId(other.getId());
     }
+
+    /**
+     * 
+     * @return the {@link LegalFormDao} necessary for test for now
+     */
+    public LegalFormDao getLegalFormDao() {
+        return JsamsApplicationContext.getLegalFormDao();
+    }
+
 }

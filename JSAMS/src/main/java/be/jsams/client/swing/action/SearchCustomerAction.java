@@ -7,6 +7,7 @@ import javax.swing.AbstractAction;
 import javax.swing.Icon;
 
 import be.jsams.client.context.JsamsApplicationContext;
+import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.client.model.panel.SearchCustomerPanel;
 import be.jsams.client.model.table.CustomerTableModel;
 import be.jsams.client.swing.component.JsamsButton;
@@ -17,7 +18,7 @@ import be.jsams.common.bean.model.management.CustomerBean;
 
 /**
  * {@link AbstractAction} to launch {@link SearchCustomerPanel}.
- *
+ * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
@@ -25,7 +26,7 @@ public class SearchCustomerAction extends AbstractAction {
 
     private final CustomerBean bean;
     private final JsamsDialog dialog;
-    
+
     /**
      * Serial Version UID
      */
@@ -44,7 +45,7 @@ public class SearchCustomerAction extends AbstractAction {
         this.bean = bean;
         this.dialog = dialog;
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -65,31 +66,13 @@ public class SearchCustomerAction extends AbstractAction {
                         CustomerTableModel model = (CustomerTableModel) table.getModel();
                         CustomerBean selectedBean = model.getRow(selectedRowModel);
                         bean.refresh(selectedBean);
-//                        bean.setAgent(selectedBean.getAgent());
-//                        bean.setBank1(selectedBean.getBank1());
-//                        bean.setBank2(selectedBean.getBank2());
-//                        bean.setBillingAddress(selectedBean.getBillingAddress());
-//                        bean.setCivility(selectedBean.getCivility());
-//                        bean.setContactInformation(selectedBean.getContactInformation());
-//                        bean.setCreditLimit(selectedBean.getCreditLimit());
-//                        bean.setDeliveryAddress(selectedBean.getDeliveryAddress());
-//                        bean.setDescription(selectedBean.getDescription());
-//                        bean.setId(selectedBean.getId());
-//                        bean.setLegalForm(selectedBean.getLegalForm());
-//                        bean.setListModel(selectedBean.getListModel());
-//                        bean.setName(selectedBean.getName());
-//                        bean.setPaymentMode(selectedBean.getPaymentMode());
-//                        bean.setSelection(selectedBean.getSelection());
-//                        bean.setSociety(selectedBean.getSociety());
-//                        bean.setVatApplicable(selectedBean.getVatApplicable());
-//                        bean.setVatNumber(selectedBean.getVatNumber());
                         dialog.dispose();
                     }
                 }
             }
         };
-        SearchCustomerPanel searchCustomerPanel = new SearchCustomerPanel(new CustomerBean(), customListener,
-                JsamsApplicationContext.getCustomerService(), false);
+        SearchCustomerPanel searchCustomerPanel = new SearchCustomerPanel(new CustomerBean(JsamsDesktop.getInstance()
+                .getCurrentSociety()), customListener, JsamsApplicationContext.getCustomerService(), false);
         dialog.add(searchCustomerPanel);
         dialog.pack();
         dialog.setLocationRelativeTo(((JsamsButton) e.getSource()).getRootPane());

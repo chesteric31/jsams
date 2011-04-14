@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.common.bean.model.AbstractIdentityBean;
 import be.jsams.common.bean.model.AddressBean;
 import be.jsams.common.bean.model.management.AgentBean;
 import be.jsams.common.bean.model.management.CustomerBean;
+import be.jsams.common.bean.model.management.SocietyBean;
 import be.jsams.common.bean.view.EstimateBeanView;
 import be.jsams.server.model.Estimate;
 import be.jsams.server.model.EstimateDetail;
@@ -47,9 +49,10 @@ public class EstimateBean extends AbstractIdentityBean<Estimate, EstimateBeanVie
     public EstimateBean() {
         super();
         setBillingAddress(new AddressBean());
-        setAgent(new AgentBean());
+        SocietyBean society = JsamsDesktop.getInstance().getCurrentSociety();
+        setAgent(new AgentBean(society));
         setCreationDate(new Date());
-        setCustomer(new CustomerBean());
+        setCustomer(new CustomerBean(society));
         setPeriod(new PeriodBean());
         setTransferred(false);
         List<EstimateDetailBean> details = new ArrayList<EstimateDetailBean>();

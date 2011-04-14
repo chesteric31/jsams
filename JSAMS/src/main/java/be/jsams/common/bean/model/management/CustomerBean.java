@@ -1,6 +1,9 @@
 package be.jsams.common.bean.model.management;
 
-import be.jsams.client.desktop.JsamsDesktop;
+import be.jsams.client.context.JsamsApplicationContext;
+import be.jsams.common.bean.builder.CivilityBeanBuilder;
+import be.jsams.common.bean.builder.LegalFormBeanBuilder;
+import be.jsams.common.bean.builder.PaymentModeBeanBuilder;
 import be.jsams.common.bean.model.AbstractIdentityBean;
 import be.jsams.common.bean.model.AbstractNamedIdentityBean;
 import be.jsams.common.bean.model.AddressBean;
@@ -10,8 +13,10 @@ import be.jsams.common.bean.model.LegalFormBean;
 import be.jsams.common.bean.model.PaymentModeBean;
 import be.jsams.common.bean.view.CustomerBeanView;
 import be.jsams.server.model.Agent;
+import be.jsams.server.model.Civility;
 import be.jsams.server.model.Customer;
 import be.jsams.server.model.LegalForm;
+import be.jsams.server.model.PaymentMode;
 
 /**
  * Bean model for {@link Customer} object.
@@ -43,6 +48,10 @@ public class CustomerBean extends AbstractNamedIdentityBean<Customer, CustomerBe
     private LegalFormBean legalForm;
     private SocietyBean society;
 
+    private CivilityBeanBuilder civilityBuilder;
+    private LegalFormBeanBuilder legalFormBuilder;
+    private PaymentModeBeanBuilder paymentModeBuilder;
+
     public static final String VATNUMBER_PROPERTY = "vatNumber";
     public static final String DEFAULT_DISCOUNT_RATE_PROPERTY = "defaultDiscountRate";
     public static final String BANK1_PROPERTY = "bank1";
@@ -53,46 +62,68 @@ public class CustomerBean extends AbstractNamedIdentityBean<Customer, CustomerBe
 
     /**
      * Constructor
+     * 
+     * @param society the {@link SocietyBean} to use
      */
-    public CustomerBean() {
+    public CustomerBean(SocietyBean society) {
         super();
         setBillingAddress(new AddressBean());
         setDeliveryAddress(new AddressBean());
-        setLegalForm(new LegalFormBean());
+        
+        legalFormBuilder = new LegalFormBeanBuilder();
+        legalFormBuilder.setDao(JsamsApplicationContext.getLegalFormDao());
+        setLegalForm(legalFormBuilder.build());
+        
         setContactInformation(new ContactInformationBean());
-        setCivility(new CivilityBean());
-        setPaymentMode(new PaymentModeBean());
-        setAgent(new AgentBean());
-        setSociety(JsamsDesktop.getInstance().getCurrentSociety());
+        
+        civilityBuilder = new CivilityBeanBuilder();
+        civilityBuilder.setDao(JsamsApplicationContext.getCivilityDao());
+        setCivility(civilityBuilder.build());
+        
+        paymentModeBuilder = new PaymentModeBeanBuilder();
+        paymentModeBuilder.setDao(JsamsApplicationContext.getPaymentModeDao());
+        setPaymentMode(paymentModeBuilder.build());
+        
+        setAgent(new AgentBean(society));
+        setSociety(society);
     }
 
     /**
      * Constructor
      * 
-     * @param model
-     *            the {@link Customer} to use
+     * @param model the {@link Customer} to use
      */
     public CustomerBean(Customer model) {
         super(model);
         setBillingAddress(new AddressBean(model.getBillingAddress()));
         setDeliveryAddress(new AddressBean(model.getDeliveryAddress()));
+        
+        legalFormBuilder = new LegalFormBeanBuilder();
+        legalFormBuilder.setDao(JsamsApplicationContext.getLegalFormDao());
         LegalForm form = model.getLegalForm();
         if (form != null) {
-            setLegalForm(new LegalFormBean(form));
-        } else {
-            setLegalForm(new LegalFormBean());
+            legalFormBuilder.setModel(form);
         }
+        setLegalForm(legalFormBuilder.build());
+        
         setContactInformation(new ContactInformationBean(model.getContactInformation()));
-        if (model.getCivility() != null) {
-            setCivility(new CivilityBean(model.getCivility()));
-        } else {
-            setCivility(new CivilityBean());
+        
+        civilityBuilder = new CivilityBeanBuilder();
+        civilityBuilder.setDao(JsamsApplicationContext.getCivilityDao());
+        Civility temp = model.getCivility();
+        if (temp != null) {
+            civilityBuilder.setModel(temp);
         }
-        if (model.getPaymentMode() != null) {
-            setPaymentMode(new PaymentModeBean(model.getPaymentMode()));
-        } else {
-            setPaymentMode(new PaymentModeBean());
+        setCivility(civilityBuilder.build());
+
+        paymentModeBuilder = new PaymentModeBeanBuilder();
+        paymentModeBuilder.setDao(JsamsApplicationContext.getPaymentModeDao());
+        PaymentMode mode = model.getPaymentMode();
+        if (mode != null) {
+            paymentModeBuilder.setModel(mode);
         }
+        setCivility(civilityBuilder.build());
+        
         setBank1(model.getBank1());
         setBank2(model.getBank2());
         setCreditLimit(model.getCreditLimit());
@@ -100,13 +131,16 @@ public class CustomerBean extends AbstractNamedIdentityBean<Customer, CustomerBe
         setVatApplicable(model.getVatApplicable());
         setVatNumber(model.getVatNumber());
         setDescription(model.getDescription());
+
+        SocietyBean societyBean = new SocietyBean(model.getSociety());
+        setSociety(societyBean);
         Agent agent = model.getAgent();
         if (agent != null) {
             setAgent(new AgentBean(agent));
         } else {
-            setAgent(new AgentBean());
+            setAgent(new AgentBean(societyBean));
         }
-        setSociety(new SocietyBean(model.getSociety()));
+
     }
 
     /**
@@ -117,8 +151,7 @@ public class CustomerBean extends AbstractNamedIdentityBean<Customer, CustomerBe
     }
 
     /**
-     * @param vatNumber
-     *            the vatNumber to set
+     * @param vatNumber the vatNumber to set
      */
     public void setVatNumber(String vatNumber) {
         String oldValue = this.vatNumber;
@@ -134,8 +167,7 @@ public class CustomerBean extends AbstractNamedIdentityBean<Customer, CustomerBe
     }
 
     /**
-     * @param defaultDiscountRate
-     *            the defaultDiscountRate to set
+     * @param defaultDiscountRate the defaultDiscountRate to set
      */
     public void setDefaultDiscountRate(Double defaultDiscountRate) {
         Double oldValue = this.defaultDiscountRate;
@@ -151,8 +183,7 @@ public class CustomerBean extends AbstractNamedIdentityBean<Customer, CustomerBe
     }
 
     /**
-     * @param bank1
-     *            the bank1 to set
+     * @param bank1 the bank1 to set
      */
     public void setBank1(String bank1) {
         String oldValue = this.bank1;
@@ -168,8 +199,7 @@ public class CustomerBean extends AbstractNamedIdentityBean<Customer, CustomerBe
     }
 
     /**
-     * @param bank2
-     *            the bank2 to set
+     * @param bank2 the bank2 to set
      */
     public void setBank2(String bank2) {
         String oldValue = this.bank2;
@@ -185,8 +215,7 @@ public class CustomerBean extends AbstractNamedIdentityBean<Customer, CustomerBe
     }
 
     /**
-     * @param creditLimit
-     *            the creditLimit to set
+     * @param creditLimit the creditLimit to set
      */
     public void setCreditLimit(Double creditLimit) {
         Double oldValue = this.creditLimit;
@@ -202,8 +231,7 @@ public class CustomerBean extends AbstractNamedIdentityBean<Customer, CustomerBe
     }
 
     /**
-     * @param vatApplicable
-     *            the vatApplicable to set
+     * @param vatApplicable the vatApplicable to set
      */
     public void setVatApplicable(Double vatApplicable) {
         Double oldValue = this.vatApplicable;
@@ -219,8 +247,7 @@ public class CustomerBean extends AbstractNamedIdentityBean<Customer, CustomerBe
     }
 
     /**
-     * @param description
-     *            the description to set
+     * @param description the description to set
      */
     public void setDescription(String description) {
         String oldValue = this.description;
@@ -236,8 +263,7 @@ public class CustomerBean extends AbstractNamedIdentityBean<Customer, CustomerBe
     }
 
     /**
-     * @param deliveryAddress
-     *            the deliveryAddress to set
+     * @param deliveryAddress the deliveryAddress to set
      */
     public void setDeliveryAddress(AddressBean deliveryAddress) {
         this.deliveryAddress = deliveryAddress;
@@ -251,8 +277,7 @@ public class CustomerBean extends AbstractNamedIdentityBean<Customer, CustomerBe
     }
 
     /**
-     * @param billingAddress
-     *            the billingAddress to set
+     * @param billingAddress the billingAddress to set
      */
     public void setBillingAddress(AddressBean billingAddress) {
         this.billingAddress = billingAddress;
@@ -266,8 +291,7 @@ public class CustomerBean extends AbstractNamedIdentityBean<Customer, CustomerBe
     }
 
     /**
-     * @param paymentMode
-     *            the paymentMode to set
+     * @param paymentMode the paymentMode to set
      */
     public void setPaymentMode(PaymentModeBean paymentMode) {
         this.paymentMode = paymentMode;
@@ -281,8 +305,7 @@ public class CustomerBean extends AbstractNamedIdentityBean<Customer, CustomerBe
     }
 
     /**
-     * @param contactInformation
-     *            the contactInformation to set
+     * @param contactInformation the contactInformation to set
      */
     public void setContactInformation(ContactInformationBean contactInformation) {
         this.contactInformation = contactInformation;
@@ -296,8 +319,7 @@ public class CustomerBean extends AbstractNamedIdentityBean<Customer, CustomerBe
     }
 
     /**
-     * @param civility
-     *            the civility to set
+     * @param civility the civility to set
      */
     public void setCivility(CivilityBean civility) {
         this.civility = civility;
@@ -311,8 +333,7 @@ public class CustomerBean extends AbstractNamedIdentityBean<Customer, CustomerBe
     }
 
     /**
-     * @param agent
-     *            the agent to set
+     * @param agent the agent to set
      */
     public void setAgent(AgentBean agent) {
         this.agent = agent;
@@ -326,8 +347,7 @@ public class CustomerBean extends AbstractNamedIdentityBean<Customer, CustomerBe
     }
 
     /**
-     * @param legalForm
-     *            the legalForm to set
+     * @param legalForm the legalForm to set
      */
     public void setLegalForm(LegalFormBean legalForm) {
         this.legalForm = legalForm;
@@ -370,13 +390,12 @@ public class CustomerBean extends AbstractNamedIdentityBean<Customer, CustomerBe
     }
 
     /**
-     * @param society
-     *            the society to set
+     * @param society the society to set
      */
     public void setSociety(SocietyBean society) {
         this.society = society;
     }
-    
+
     /**
      * {@inheritDoc}
      */

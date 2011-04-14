@@ -2,6 +2,7 @@ package be.jsams.server.model;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -41,7 +42,7 @@ public class ProductCategory extends AbstractTranslatableIdentity {
     /**
      * @return the society
      */
-    @ManyToOne(cascade = CascadeType.REFRESH)
+    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
     @JoinColumn(name = "FK_SOCIETY")
     public Society getSociety() {
         return society;

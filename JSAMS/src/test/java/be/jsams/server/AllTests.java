@@ -9,6 +9,7 @@ import be.jsams.server.dao.impl.AddressDaoImplTest;
 import be.jsams.server.dao.impl.CivilityDaoImplTest;
 import be.jsams.server.dao.impl.CommandDetailDaoImplTest;
 import be.jsams.server.dao.impl.ContactInformationDaoImplTest;
+import be.jsams.server.dao.impl.ProductCategoryDaoImplTest;
 import be.jsams.server.dao.impl.SocietyDaoImplTest;
 
 /**
@@ -19,7 +20,7 @@ import be.jsams.server.dao.impl.SocietyDaoImplTest;
  */
 @RunWith(Suite.class)
 @SuiteClasses(value = { AddressDaoImplTest.class, CivilityDaoImplTest.class, ContactInformationDaoImplTest.class,
-        CommandDetailDaoImplTest.class, SocietyDaoImplTest.class })
+        CommandDetailDaoImplTest.class, ProductCategoryDaoImplTest.class, SocietyDaoImplTest.class })
 public class AllTests {
 
     /**
