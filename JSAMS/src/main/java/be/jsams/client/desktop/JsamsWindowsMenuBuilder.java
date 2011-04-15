@@ -10,7 +10,7 @@ import be.jsams.client.swing.component.JsamsMenuItem;
  * Specific menu builder for windows menu.
  *
  * @author chesteric31
- * @version $Rev$ $Date::                  $ $Author$
+ * @version $Rev: 692 $ $Date::                  $ $Author$
  */
 public class JsamsWindowsMenuBuilder extends AbstractMenuBuilder {
 

@@ -19,7 +19,7 @@ import be.jsams.common.bean.model.sale.EstimateBean;
  * Specific menu builder for sales menu.
  *
  * @author chesteric31
- * @version $Rev$ $Date::                  $ $Author$
+ * @version $Rev: 692 $ $Date::                  $ $Author$
  */
 public class JsamsSalesMenuBuilder extends AbstractMenuBuilder {
 
