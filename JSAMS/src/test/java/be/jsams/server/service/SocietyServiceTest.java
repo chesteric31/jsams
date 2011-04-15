@@ -8,7 +8,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
-import be.jsams.common.bean.model.management.SocietyBean;
+import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.server.dao.AbstractJUnitTestClass;
 import be.jsams.server.dao.LegalFormDao;
 

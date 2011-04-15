@@ -1,14 +1,9 @@
-package be.jsams.common.bean.model.management;
+package be.jsams.common.bean.model;
 
 import java.util.List;
 
 import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.common.bean.builder.LegalFormBeanBuilder;
-import be.jsams.common.bean.model.AbstractIdentityBean;
-import be.jsams.common.bean.model.AbstractNamedIdentityBean;
-import be.jsams.common.bean.model.AddressBean;
-import be.jsams.common.bean.model.ContactInformationBean;
-import be.jsams.common.bean.model.LegalFormBean;
 import be.jsams.common.bean.view.SocietyBeanView;
 import be.jsams.server.dao.LegalFormDao;
 import be.jsams.server.model.LegalForm;

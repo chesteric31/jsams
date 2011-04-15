@@ -2,6 +2,7 @@ package be.jsams.common.bean.model.management;
 
 import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.common.bean.model.AbstractNamedIdentityBean;
+import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.view.ProductBeanView;
 import be.jsams.server.model.Product;
 import be.jsams.server.model.ProductCategory;

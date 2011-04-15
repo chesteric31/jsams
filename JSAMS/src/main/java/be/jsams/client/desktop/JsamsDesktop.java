@@ -19,7 +19,7 @@ import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.model.dialog.OpenSocietyDialog;
 import be.jsams.client.swing.action.EditSocietyAction;
 import be.jsams.client.swing.component.JsamsMenuItem;
-import be.jsams.common.bean.model.management.SocietyBean;
+import be.jsams.common.bean.model.SocietyBean;
 
 /**
  * JSAMS desktop that creates the {@link JsamsMainFrame} and contains the current Society.

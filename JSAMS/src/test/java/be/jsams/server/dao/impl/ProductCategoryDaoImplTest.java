@@ -8,8 +8,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.ProductCategoryBean;
-import be.jsams.common.bean.model.management.SocietyBean;
 import be.jsams.server.dao.AbstractJUnitTestClass;
 import be.jsams.server.dao.LegalFormDao;
 import be.jsams.server.dao.MockDaoGenerator;

@@ -8,7 +8,7 @@ import be.jsams.client.i18n.I18nString;
 import be.jsams.client.validator.EditSocietyValidator;
 import be.jsams.common.bean.model.AbstractIdentityBean;
 import be.jsams.common.bean.model.LegalFormBean;
-import be.jsams.common.bean.model.management.SocietyBean;
+import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.view.LegalFormBeanView;
 import be.jsams.common.bean.view.SocietyBeanView;
 import be.jsams.server.model.LegalForm;

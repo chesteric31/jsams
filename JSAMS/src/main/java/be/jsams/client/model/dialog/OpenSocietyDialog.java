@@ -20,7 +20,7 @@ import be.jsams.client.swing.component.JsamsFrame;
 import be.jsams.client.swing.component.JsamsLabel;
 import be.jsams.client.swing.component.JsamsStatusBar;
 import be.jsams.client.swing.utils.IconUtil;
-import be.jsams.common.bean.model.management.SocietyBean;
+import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.view.ViewFactory;
 
 import com.jgoodies.forms.builder.DefaultFormBuilder;
