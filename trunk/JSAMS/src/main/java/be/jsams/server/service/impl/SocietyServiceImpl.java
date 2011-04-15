@@ -3,7 +3,7 @@ package be.jsams.server.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import be.jsams.common.bean.model.management.SocietyBean;
+import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.server.dao.SocietyDao;
 import be.jsams.server.model.Society;
 import be.jsams.server.service.SocietyService;

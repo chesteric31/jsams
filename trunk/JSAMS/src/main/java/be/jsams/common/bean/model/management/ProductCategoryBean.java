@@ -4,6 +4,7 @@ import java.util.List;
 
 import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.common.bean.model.AbstractTranslatableIdentityBean;
+import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.view.ProductCategoryBeanView;
 import be.jsams.server.model.ProductCategory;
 

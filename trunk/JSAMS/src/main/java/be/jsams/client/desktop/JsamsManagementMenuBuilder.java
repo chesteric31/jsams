@@ -19,11 +19,11 @@ import be.jsams.client.swing.listener.AgentTableMouseListener;
 import be.jsams.client.swing.listener.CustomerTableMouseListener;
 import be.jsams.client.swing.listener.ProductCategoryTableMouseListener;
 import be.jsams.client.swing.listener.ProductTableMouseListener;
+import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.AgentBean;
 import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.management.ProductBean;
 import be.jsams.common.bean.model.management.ProductCategoryBean;
-import be.jsams.common.bean.model.management.SocietyBean;
 
 /**
  * Specific menu builder for management menu.

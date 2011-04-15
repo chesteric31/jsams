@@ -8,7 +8,7 @@ import javax.swing.Icon;
 import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.model.dialog.EditSocietyDialog;
-import be.jsams.common.bean.model.management.SocietyBean;
+import be.jsams.common.bean.model.SocietyBean;
 
 /**
  * Edit action to edit the {@link SocietyBean}.

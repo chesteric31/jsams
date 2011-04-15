@@ -6,7 +6,7 @@ import be.jsams.client.i18n.JsamsI18nLabelResource;
 import be.jsams.client.swing.component.JsamsFormattedTextField;
 import be.jsams.client.swing.component.JsamsFrame;
 import be.jsams.client.swing.component.JsamsTextField;
-import be.jsams.common.bean.model.management.SocietyBean;
+import be.jsams.common.bean.model.SocietyBean;
 
 import com.jgoodies.forms.builder.DefaultFormBuilder;
 import com.jgoodies.forms.layout.FormLayout;

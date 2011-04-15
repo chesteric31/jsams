@@ -1,6 +1,6 @@
 package be.jsams.server.service;
 
-import be.jsams.common.bean.model.management.SocietyBean;
+import be.jsams.common.bean.model.SocietyBean;
 
 /**
  * Society service interface.
