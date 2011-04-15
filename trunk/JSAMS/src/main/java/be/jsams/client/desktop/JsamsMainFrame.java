@@ -345,7 +345,7 @@ public class JsamsMainFrame extends JsamsFrame {
             private static final long serialVersionUID = -8367998985097440307L;
 
             public void actionPerformed(ActionEvent event) {
-                SearchCustomerPanel searchPanel = new SearchCustomerPanel(new CustomerBean(),
+                SearchCustomerPanel searchPanel = new SearchCustomerPanel(new CustomerBean(currentSociety),
                         new CustomerTableMouseListener(), JsamsApplicationContext.getCustomerService(), true);
                 tabbedPane.addTab(JsamsI18nResource.TITLE_SEARCH_CUSTOMER, "apps/system-users.png", searchPanel);
             }
@@ -369,7 +369,7 @@ public class JsamsMainFrame extends JsamsFrame {
             private static final long serialVersionUID = 3233472575375812337L;
 
             public void actionPerformed(ActionEvent event) {
-                SearchAgentPanel searchPanel = new SearchAgentPanel(new AgentBean(),
+                SearchAgentPanel searchPanel = new SearchAgentPanel(new AgentBean(currentSociety),
                         new AgentTableMouseListener(), JsamsApplicationContext.getAgentService(), true);
                 tabbedPane.addTab(JsamsI18nResource.TITLE_SEARCH_AGENT, "categories/applications-development.png",
                         searchPanel);
