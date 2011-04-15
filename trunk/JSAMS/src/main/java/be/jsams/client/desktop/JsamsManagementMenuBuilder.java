@@ -19,6 +19,7 @@ import be.jsams.client.swing.listener.AgentTableMouseListener;
 import be.jsams.client.swing.listener.CustomerTableMouseListener;
 import be.jsams.client.swing.listener.ProductCategoryTableMouseListener;
 import be.jsams.client.swing.listener.ProductTableMouseListener;
+import be.jsams.common.bean.builder.ProductCategoryBeanBuilder;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.AgentBean;
 import be.jsams.common.bean.model.management.CustomerBean;
@@ -40,7 +41,7 @@ public class JsamsManagementMenuBuilder extends AbstractMenuBuilder {
     private JsamsMenuItem productsMI;
 
     private JsamsMainFrame parent;
-    
+
     private SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
 
     /**
@@ -170,8 +171,10 @@ public class JsamsManagementMenuBuilder extends AbstractMenuBuilder {
             private static final long serialVersionUID = -1558165346800183997L;
 
             public void actionPerformed(ActionEvent event) {
-                ProductCategoryBean categoryBean = new ProductCategoryBean();
-                categoryBean.setSociety(currentSociety);
+                ProductCategoryBeanBuilder builder = new ProductCategoryBeanBuilder();
+                builder.setDao(JsamsApplicationContext.getProductCategoryDao());
+                ProductCategoryBean categoryBean = builder.build();
+                categoryBean.setSociety(JsamsDesktop.getInstance().getCurrentSociety());
                 SearchProductCategoryPanel searchPanel = new SearchProductCategoryPanel(categoryBean,
                         new ProductCategoryTableMouseListener(), JsamsApplicationContext.getProductCategoryService(),
                         true);

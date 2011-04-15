@@ -1,13 +1,12 @@
 package be.jsams.common.bean.model.management;
 
+import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.desktop.JsamsDesktop;
+import be.jsams.common.bean.builder.ProductCategoryBeanBuilder;
 import be.jsams.common.bean.model.AbstractNamedIdentityBean;
-import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.view.ProductBeanView;
 import be.jsams.server.model.Product;
 import be.jsams.server.model.ProductCategory;
-
-import com.jgoodies.common.collect.ArrayListModel;
 
 /**
  * Bean model for {@link Product} object.
@@ -28,20 +27,24 @@ public class ProductBean extends AbstractNamedIdentityBean<Product, ProductBeanV
     private Double vatApplicable;
 
     private ProductCategoryBean category;
+    
+    private ProductCategoryBeanBuilder productCategoryBuilder;
 
     public static final String PRICE_PROPERTY = "price";
     public static final String QUANTITYSTOCK_PROPERTY = "quantityStock";
     public static final String REORDERLEVEL_PROPERTY = "reorderLevel";
     public static final String VATAPPLICABLE_PROPERTY = "vatApplicable";
 
-    private static ArrayListModel<ProductBean> list = new ArrayListModel<ProductBean>();
+//    private static ArrayListModel<ProductBean> list = new ArrayListModel<ProductBean>();
 
     /**
      * Default constructor
      */
     public ProductBean() {
         super();
-        ProductCategoryBean categoryBean = new ProductCategoryBean();
+        productCategoryBuilder = new ProductCategoryBeanBuilder();
+        productCategoryBuilder.setDao(JsamsApplicationContext.getProductCategoryDao());
+        ProductCategoryBean categoryBean = productCategoryBuilder.build();
         categoryBean.setSociety(JsamsDesktop.getInstance().getCurrentSociety());
         setCategory(categoryBean);
     }
@@ -55,15 +58,20 @@ public class ProductBean extends AbstractNamedIdentityBean<Product, ProductBeanV
     public ProductBean(Product model) {
         super(model);
         ProductCategory productCategory = model.getCategory();
-        ProductCategoryBean categoryBean = new ProductCategoryBean(productCategory);
-        categoryBean.setSociety(new SocietyBean(productCategory.getSociety()));
+        
+        productCategoryBuilder = new ProductCategoryBeanBuilder();
+        productCategoryBuilder.setModel(productCategory);
+        productCategoryBuilder.setDao(JsamsApplicationContext.getProductCategoryDao());
+        ProductCategoryBean categoryBean = productCategoryBuilder.build();
+        categoryBean.setSociety(JsamsDesktop.getInstance().getCurrentSociety());
         setCategory(categoryBean);
+        
         setPrice(model.getPrice());
         setQuantityStock(model.getQuantityStock());
         setReorderLevel(model.getReorderLevel());
         setVatApplicable(model.getVatApplicable());
-        setListModel(list);
-        setSelection(this);
+//        setListModel(list);
+//        setSelection(this);
     }
 
     /**
