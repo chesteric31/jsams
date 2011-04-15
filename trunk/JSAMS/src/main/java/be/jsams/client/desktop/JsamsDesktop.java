@@ -25,7 +25,7 @@ import be.jsams.common.bean.model.management.SocietyBean;
  * JSAMS desktop that creates the {@link JsamsMainFrame} and contains the current Society.
  * 
  * @author chesteric31
- * @version $Rev$ $Date::                  $ $Author$
+ * @version $Rev: 672 $ $Date::                  $ $Author$
  */
 public class JsamsDesktop {
 
