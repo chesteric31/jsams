@@ -1,14 +1,11 @@
 package be.jsams.common.bean.model.management;
 
-import java.util.List;
-
-import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.common.bean.model.AbstractTranslatableIdentityBean;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.view.ProductCategoryBeanView;
 import be.jsams.server.model.ProductCategory;
 
-import com.jgoodies.common.collect.ArrayListModel;
+import com.jgoodies.common.collect.ObservableList;
 
 /**
  * Bean model for {@link ProductCategory} object.
@@ -22,34 +19,8 @@ public class ProductCategoryBean extends AbstractTranslatableIdentityBean<Produc
      * Serial Version UID
      */
     private static final long serialVersionUID = -6394980207406343489L;
-
-    // Remark, that must be non static list, to avoid to share this list for
-    // everyone
-    private ArrayListModel<ProductCategoryBean> list = new ArrayListModel<ProductCategoryBean>();
-
+    
     private SocietyBean society;
-
-    /**
-     * Default constructor
-     */
-    public ProductCategoryBean() {
-        super();
-        initList();
-    }
-
-    /**
-     * Initializes the ObservableList and the eventually the selection
-     * element.
-     */
-    private void initList() {
-        List<ProductCategoryBean> beans = JsamsApplicationContext.getProductCategoryService().findAll();
-        list.clear();
-        list.addAll(beans);
-        setListModel(list);
-        if (!list.isEmpty()) {
-            setSelection(list.get(0));
-        }
-    }
 
     /**
      * Constructor.
@@ -58,6 +29,29 @@ public class ProductCategoryBean extends AbstractTranslatableIdentityBean<Produc
      */
     public ProductCategoryBean(ProductCategory model) {
         super(model);
+    }
+
+    /**
+     * Constructor.
+     * 
+     * @param list the {@link ObservableList}
+     */
+    public ProductCategoryBean(ObservableList<ProductCategoryBean> list) {
+        super();
+        setListModel(list);
+        if (!list.isEmpty()) {
+            setSelection(list.get(0));
+        }
+    }
+
+    /**
+     * Constructor
+     * 
+     * @param list the {@link ObservableList}
+     * @param model the {@link ProductCategory} object
+     */
+    public ProductCategoryBean(ObservableList<ProductCategoryBean> list, ProductCategory model) {
+        this(model);
         setListModel(list);
         setSelection(this);
     }

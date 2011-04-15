@@ -53,7 +53,6 @@ public class ProductCategoryDaoImplTest extends AbstractJUnitTestClass {
     @Test
     public void testFindByCriteria() {
         final Society persistedSociety = societyDao.add(society);
-//        SocietyBean societyBean = new SocietyBean(persistedSociety);
         SocietyBean societyBean = new SocietyBean(persistedSociety) {
             /**
              * Serial Version UID
