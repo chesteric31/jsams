@@ -5,6 +5,7 @@ import javax.swing.JPanel;
 import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.validator.EditProductValidator;
+import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.ProductBean;
 import be.jsams.common.bean.model.management.ProductCategoryBean;
 import be.jsams.common.bean.view.ProductBeanView;
@@ -60,7 +61,11 @@ public class EditProductDialog extends AbstractEditDialog<ProductBean, EditProdu
      */
     public void performOk() {
         ProductBean product = getModel();
-        product.setCategory((ProductCategoryBean) product.getCategory().getSelection());
+        //FIXME: workaround
+        SocietyBean society = product.getCategory().getSociety();
+        ProductCategoryBean selection = (ProductCategoryBean) product.getCategory().getSelection();
+        selection.setSociety(society);
+        product.setCategory(selection);
         super.postPerformOk(product);
     }
 
