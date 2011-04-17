@@ -21,7 +21,7 @@ import be.jsams.server.model.mock.MockModelGenerator;
 
 /**
  * Test class for {@link ProductCategoryDaoImpl}.
- *
+ * 
  * @author chesteric31
  * @version $$Rev$$ $$Date::                  $$ $$Author$$
  */
@@ -34,7 +34,7 @@ public class ProductCategoryDaoImplTest extends AbstractJUnitTestClass {
     @Autowired
     private SocietyDao societyDao;
     private Society society = MockModelGenerator.generateMockSociety();
-    
+
     /**
      * @throws java.lang.Exception
      */
@@ -48,7 +48,37 @@ public class ProductCategoryDaoImplTest extends AbstractJUnitTestClass {
     }
 
     /**
-     * Test method for {@link be.jsams.server.dao.impl.ProductCategoryDaoImpl#findByCriteria(be.jsams.common.bean.model.management.ProductCategoryBean)}.
+     * Test method for {@link be.jsams.server.dao.impl.ProductCategoryDaoImpl#findAll()}.
+     */
+    @Test
+    public void testFindAll() {
+        final Society persistedSociety = societyDao.add(society);
+        productCategory.setSociety(persistedSociety);
+        SocietyBean societyBean = new SocietyBean(persistedSociety) {
+
+            /**
+             * Serial Version UID
+             */
+            private static final long serialVersionUID = -4781433278494586047L;
+
+            /**
+             * {@inheritDoc}
+             */
+            @Override
+            public LegalFormDao getLegalFormDao() {
+                return MockDaoGenerator.generateMockLegalForm(persistedSociety);
+            }
+        };
+        ((ProductCategoryDaoImpl) dao).setCurrentSociety(societyBean);
+        ProductCategory category = dao.add(productCategory);
+        List<ProductCategory> founds = dao.findAll();
+        assertTrue(founds.contains(category));
+    }
+
+    /**
+     * Test method for
+     * {@link be.jsams.server.dao.impl.ProductCategoryDaoImpl#findByCriteria(be.jsams.common.bean.model.management.ProductCategoryBean)}
+     * .
      */
     @Test
     public void testFindByCriteria() {
@@ -64,7 +94,7 @@ public class ProductCategoryDaoImplTest extends AbstractJUnitTestClass {
              */
             @Override
             public LegalFormDao getLegalFormDao() {
-             return MockDaoGenerator.generateMockLegalForm(persistedSociety);
+                return MockDaoGenerator.generateMockLegalForm(persistedSociety);
             }
         };
         ProductCategory category = dao.add(productCategory);
