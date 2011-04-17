@@ -123,7 +123,7 @@ public class CustomerBean extends AbstractNamedIdentityBean<Customer, CustomerBe
         if (mode != null) {
             paymentModeBuilder.setModel(mode);
         }
-        setCivility(civilityBuilder.build());
+        setPaymentMode(paymentModeBuilder.build());
         
         setBank1(model.getBank1());
         setBank2(model.getBank2());
