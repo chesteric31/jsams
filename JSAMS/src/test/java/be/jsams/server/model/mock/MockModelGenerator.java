@@ -1,6 +1,7 @@
 package be.jsams.server.model.mock;
 
 import be.jsams.server.model.Address;
+import be.jsams.server.model.Agent;
 import be.jsams.server.model.Civility;
 import be.jsams.server.model.ContactInformation;
 import be.jsams.server.model.LegalForm;
@@ -74,4 +75,24 @@ public class MockModelGenerator {
         form.setLabelNl("labelNl");
         return form;
     }
+
+    public static Agent generateMockAgent() {
+        Agent agent = new Agent();
+        agent.setName("Neme");
+        agent.setFunction("Contact");
+
+        Address address = generateMockAddress();
+        agent.setAddress(address);
+        
+        ContactInformation contactInformation = generateMockContactInformation();
+        agent.setContactInformation(contactInformation);
+       
+        Civility civility = generateMockCivility();
+        agent.setCivility(civility);
+        
+        agent.setSociety(generateMockSociety());
+        
+        return agent;
+    }
+    
 }

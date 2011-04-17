@@ -12,6 +12,7 @@ import be.jsams.common.bean.model.CivilityBean;
 import be.jsams.common.bean.model.ContactInformationBean;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.view.AgentBeanView;
+import be.jsams.server.dao.CivilityDao;
 import be.jsams.server.model.Agent;
 import be.jsams.server.model.Civility;
 
@@ -50,7 +51,7 @@ public class AgentBean extends AbstractNamedIdentityBean<Agent, AgentBeanView> {
         setAddress(new AddressBean());
         setContactInformation(new ContactInformationBean());
         builder = new CivilityBeanBuilder();
-        builder.setDao(JsamsApplicationContext.getCivilityDao());
+        builder.setDao(getCivilityDao());
         setCivility(builder.build());
         setSociety(society);
     }
@@ -65,7 +66,7 @@ public class AgentBean extends AbstractNamedIdentityBean<Agent, AgentBeanView> {
         super(model);
         setAddress(new AddressBean(model.getAddress()));
         builder = new CivilityBeanBuilder();
-        builder.setDao(JsamsApplicationContext.getCivilityDao());
+        builder.setDao(getCivilityDao());
         Civility temp = model.getCivility();
         if (temp != null) {
             builder.setModel(temp);
@@ -211,6 +212,14 @@ public class AgentBean extends AbstractNamedIdentityBean<Agent, AgentBeanView> {
         setListModel(other.getListModel());
         setSelection(other.getSelection());
         society.refresh(other.getSociety());
+    }
+
+    /**
+     * 
+     * @return the {@link CivilityDao} necessary for test for now
+     */
+    public CivilityDao getCivilityDao() {
+        return JsamsApplicationContext.getCivilityDao();
     }
 
 }

@@ -40,7 +40,7 @@ public class ProductDaoImpl extends DaoImpl<Product> implements ProductDao {
         StringBuilder queryBuilder = new StringBuilder("FROM Product p");
 
         queryBuilder.append(" WHERE ");
-        queryBuilder.append("p.productCategory.society.id = " + getCurrentSociety().getId());
+        queryBuilder.append("p.category.society.id = " + getCurrentSociety().getId());
 
         Query query = getEntityManager().createQuery(queryBuilder.toString());
         List<Product> result = query.getResultList();

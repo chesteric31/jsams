@@ -24,7 +24,6 @@ public class SocietyDaoImplTest extends AbstractJUnitTestClass {
 
     @Autowired
     private SocietyDao dao;
-    
     private Society society;
     
     /**
