@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.persistence.Query;
 
-import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.common.bean.model.CivilityBean;
 import be.jsams.common.bean.model.management.AgentBean;
 import be.jsams.server.dao.AgentDao;
@@ -45,10 +44,8 @@ public class AgentDaoImpl extends DaoImpl<Agent> implements AgentDao {
         String phone = criteria.getContactInformation().getPhone();
         CivilityBean civility = (CivilityBean) criteria.getCivility().getSelection();
         
-        Long societyId = JsamsDesktop.getInstance().getCurrentSociety().getId();
-        
         queryBuilder.append(" WHERE ");
-        queryBuilder.append("a.society.id = " + societyId);
+        queryBuilder.append("a.society.id = " + criteria.getSociety().getId());
         
         if (name != null) {
             queryBuilder.append(" AND a.name LIKE '%" + name + "%'");
