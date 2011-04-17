@@ -140,7 +140,7 @@ public class Society extends AbstractNamedIdentity {
      * 
      * @return the {@link Address}
      */
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "FK_ADDRESS")
     public Address getAddress() {
         return address;
@@ -159,7 +159,7 @@ public class Society extends AbstractNamedIdentity {
      * 
      * @return the {@link LegalForm}
      */
-    @ManyToOne(cascade = CascadeType.REFRESH)
+    @ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
     @JoinColumn(name = "FK_LEGAL_FORM")
     public LegalForm getLegalForm() {
         return legalForm;
@@ -178,7 +178,7 @@ public class Society extends AbstractNamedIdentity {
      * 
      * @return the {@link ContactInformation}
      */
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "FK_CONTACT_INFORMATION")
     public ContactInformation getContactInformation() {
         return contactInformation;
