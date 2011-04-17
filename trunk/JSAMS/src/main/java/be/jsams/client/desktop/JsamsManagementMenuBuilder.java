@@ -20,7 +20,6 @@ import be.jsams.client.swing.listener.CustomerTableMouseListener;
 import be.jsams.client.swing.listener.ProductCategoryTableMouseListener;
 import be.jsams.client.swing.listener.ProductTableMouseListener;
 import be.jsams.common.bean.builder.ProductCategoryBeanBuilder;
-import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.AgentBean;
 import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.management.ProductBean;
@@ -42,12 +41,11 @@ public class JsamsManagementMenuBuilder extends AbstractMenuBuilder {
 
     private JsamsMainFrame parent;
 
-    private SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
-
     /**
      * Constructor
      * 
-     * @param parent the {@link JsamsMainFrame} parent
+     * @param parent
+     *            the {@link JsamsMainFrame} parent
      */
     public JsamsManagementMenuBuilder(final JsamsMainFrame parent) {
         this.parent = parent;
@@ -81,8 +79,10 @@ public class JsamsManagementMenuBuilder extends AbstractMenuBuilder {
     /**
      * {@link AbstractAction} for customer menu item.
      * 
-     * @param text the text to display
-     * @param icon the {@link Icon} to display
+     * @param text
+     *            the text to display
+     * @param icon
+     *            the {@link Icon} to display
      * @return an {@link Action} for the searching of customers
      */
     private Action customersAction(String text, Icon icon) {
@@ -93,8 +93,9 @@ public class JsamsManagementMenuBuilder extends AbstractMenuBuilder {
             private static final long serialVersionUID = -8367998985097440307L;
 
             public void actionPerformed(ActionEvent event) {
-                SearchCustomerPanel searchPanel = new SearchCustomerPanel(new CustomerBean(currentSociety),
-                        new CustomerTableMouseListener(), JsamsApplicationContext.getCustomerService(), true);
+                SearchCustomerPanel searchPanel = new SearchCustomerPanel(new CustomerBean(JsamsDesktop.getInstance()
+                        .getCurrentSociety()), new CustomerTableMouseListener(), JsamsApplicationContext
+                        .getCustomerService(), true);
                 parent.getTabbedPane().addTab(JsamsI18nResource.TITLE_SEARCH_CUSTOMER, "apps/system-users.png",
                         searchPanel);
             }
@@ -107,8 +108,10 @@ public class JsamsManagementMenuBuilder extends AbstractMenuBuilder {
     /**
      * {@link AbstractAction} for agent menu item.
      * 
-     * @param text the text to display
-     * @param icon the {@link Icon} to display
+     * @param text
+     *            the text to display
+     * @param icon
+     *            the {@link Icon} to display
      * @return an {@link Action} for the searching of agents
      */
     private Action agentsAction(String text, Icon icon) {
@@ -119,8 +122,9 @@ public class JsamsManagementMenuBuilder extends AbstractMenuBuilder {
             private static final long serialVersionUID = 3233472575375812337L;
 
             public void actionPerformed(ActionEvent event) {
-                SearchAgentPanel searchPanel = new SearchAgentPanel(new AgentBean(currentSociety),
-                        new AgentTableMouseListener(), JsamsApplicationContext.getAgentService(), true);
+                SearchAgentPanel searchPanel = new SearchAgentPanel(new AgentBean(JsamsDesktop.getInstance()
+                        .getCurrentSociety()), new AgentTableMouseListener(),
+                        JsamsApplicationContext.getAgentService(), true);
                 parent.getTabbedPane().addTab(JsamsI18nResource.TITLE_SEARCH_AGENT,
                         "categories/applications-development.png", searchPanel);
             }
@@ -133,8 +137,10 @@ public class JsamsManagementMenuBuilder extends AbstractMenuBuilder {
     /**
      * {@link AbstractAction} for product menu item.
      * 
-     * @param text the text to display
-     * @param icon the {@link Icon} to display
+     * @param text
+     *            the text to display
+     * @param icon
+     *            the {@link Icon} to display
      * @return a {@link Action} for the searching of products
      */
     private Action productsAction(String text, Icon icon) {
@@ -159,8 +165,10 @@ public class JsamsManagementMenuBuilder extends AbstractMenuBuilder {
     /**
      * {@link AbstractAction} for product category menu item.
      * 
-     * @param text the text to display
-     * @param icon the {@link Icon} to display
+     * @param text
+     *            the text to display
+     * @param icon
+     *            the {@link Icon} to display
      * @return a {@link Action} for the searching of product categories
      */
     private Action productsCategoryAction(String text, Icon icon) {
