@@ -50,7 +50,7 @@ public class SocietyBean extends AbstractNamedIdentityBean<Society, SocietyBeanV
         address = new AddressBean();
         
         legalFormBuilder = new LegalFormBeanBuilder();
-        legalFormBuilder.setDao(JsamsApplicationContext.getLegalFormDao());
+        legalFormBuilder.setDao(getLegalFormDao());
         setLegalForm(legalFormBuilder.build());
         
         contactInformation = new ContactInformationBean();
