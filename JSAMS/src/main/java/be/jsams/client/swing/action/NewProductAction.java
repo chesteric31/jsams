@@ -25,7 +25,7 @@ public class NewProductAction extends AbstractAction {
      * {@inheritDoc}
      */
     public void actionPerformed(ActionEvent e) {
-        new EditProductDialog(JsamsI18nResource.TITLE_EDIT_PRODUCT, new ProductBean());
+        new EditProductDialog(JsamsI18nResource.TITLE_EDIT_PRODUCT, new ProductBean(false));
     }
 
 }

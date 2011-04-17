@@ -145,7 +145,7 @@ public class JsamsManagementMenuBuilder extends AbstractMenuBuilder {
             private static final long serialVersionUID = 3233472575375812337L;
 
             public void actionPerformed(ActionEvent event) {
-                SearchProductPanel searchPanel = new SearchProductPanel(new ProductBean(),
+                SearchProductPanel searchPanel = new SearchProductPanel(new ProductBean(true),
                         new ProductTableMouseListener(), JsamsApplicationContext.getProductService(), true);
                 parent.getTabbedPane().addTab(JsamsI18nResource.TITLE_SEARCH_PRODUCT,
                         "apps/preferences-desktop-theme.png", searchPanel);
@@ -173,7 +173,7 @@ public class JsamsManagementMenuBuilder extends AbstractMenuBuilder {
             public void actionPerformed(ActionEvent event) {
                 ProductCategoryBeanBuilder builder = new ProductCategoryBeanBuilder();
                 builder.setDao(JsamsApplicationContext.getProductCategoryDao());
-                ProductCategoryBean categoryBean = builder.build();
+                ProductCategoryBean categoryBean = builder.build(false);
                 categoryBean.setSociety(JsamsDesktop.getInstance().getCurrentSociety());
                 SearchProductCategoryPanel searchPanel = new SearchProductCategoryPanel(categoryBean,
                         new ProductCategoryTableMouseListener(), JsamsApplicationContext.getProductCategoryService(),

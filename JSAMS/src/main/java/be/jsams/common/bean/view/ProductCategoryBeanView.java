@@ -1,10 +1,10 @@
 package be.jsams.common.bean.view;
 
-import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
 import be.jsams.client.i18n.JsamsI18nLabelResource;
 import be.jsams.client.renderer.TranslatableComboBoxRenderer;
+import be.jsams.client.swing.component.JsamsComboBox;
 import be.jsams.client.swing.component.JsamsFrame;
 import be.jsams.client.swing.component.JsamsTextField;
 import be.jsams.common.bean.model.management.ProductCategoryBean;
@@ -36,13 +36,13 @@ public class ProductCategoryBeanView extends AbstractView<ProductCategoryBean, J
     }
 
     /**
-     * Creates custom view {@link JComboBox}.
+     * Creates custom view {@link JsamsComboBox}.
      * 
-     * @return the {@link JComboBox} view
+     * @return the {@link JsamsComboBox} view
      */
-    public JComboBox createCustomView() {
+    public JsamsComboBox createCustomView() {
         ViewFactory<ProductCategoryBean> helper = new ViewFactory<ProductCategoryBean>();
-        JComboBox comboBox = helper.createBindingComboComponent(getBean(), true, false,
+        JsamsComboBox comboBox = helper.createBindingComboComponent(getBean(), true, false,
                 new TranslatableComboBoxRenderer());
         return comboBox;
     }
