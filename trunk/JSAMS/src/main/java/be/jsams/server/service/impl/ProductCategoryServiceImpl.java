@@ -3,8 +3,10 @@ package be.jsams.server.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.common.bean.model.management.ProductCategoryBean;
 import be.jsams.server.dao.ProductCategoryDao;
+import be.jsams.server.dao.impl.ProductCategoryDaoImpl;
 import be.jsams.server.model.ProductCategory;
 import be.jsams.server.service.ProductCategoryService;
 
@@ -28,7 +30,8 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
 
     /**
      * 
-     * @param productCategoryDao the {@link ProductCategoryDao} to set
+     * @param productCategoryDao
+     *            the {@link ProductCategoryDao} to set
      */
     public void setProductCategoryDao(ProductCategoryDao productCategoryDao) {
         this.productCategoryDao = productCategoryDao;
@@ -62,6 +65,7 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
      * {@inheritDoc}
      */
     public List<ProductCategoryBean> findAll() {
+        ((ProductCategoryDaoImpl) productCategoryDao).setCurrentSociety(JsamsDesktop.getInstance().getCurrentSociety());
         List<ProductCategory> categories = productCategoryDao.findAll();
         List<ProductCategoryBean> beans = new ArrayList<ProductCategoryBean>();
         for (ProductCategory category : categories) {

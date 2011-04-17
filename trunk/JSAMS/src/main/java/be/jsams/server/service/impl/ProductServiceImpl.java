@@ -3,8 +3,10 @@ package be.jsams.server.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.common.bean.model.management.ProductBean;
 import be.jsams.server.dao.ProductDao;
+import be.jsams.server.dao.impl.ProductDaoImpl;
 import be.jsams.server.model.Product;
 import be.jsams.server.service.ProductService;
 
@@ -16,22 +18,23 @@ import be.jsams.server.service.ProductService;
  */
 public class ProductServiceImpl implements ProductService {
 
-    private ProductDao productDao;
+    private ProductDao dao;
 
     /**
      * 
      * @return the {@link ProductDao}
      */
     public ProductDao getProductDao() {
-        return productDao;
+        return dao;
     }
 
     /**
      * 
-     * @param productDao the {@link ProductDao} to set
+     * @param productDao
+     *            the {@link ProductDao} to set
      */
     public void setProductDao(ProductDao productDao) {
-        this.productDao = productDao;
+        this.dao = productDao;
     }
 
     /**
@@ -39,7 +42,7 @@ public class ProductServiceImpl implements ProductService {
      */
     public ProductBean create(final ProductBean bean) {
         Product product = new Product(bean);
-        productDao.add(product);
+        dao.add(product);
         return new ProductBean(product);
     }
 
@@ -48,21 +51,22 @@ public class ProductServiceImpl implements ProductService {
      */
     public void delete(final ProductBean bean) {
         Product product = new Product(bean);
-        productDao.delete(product);
+        dao.delete(product);
     }
 
     /**
      * {@inheritDoc}
      */
     public void delete(final Long id) {
-        productDao.delete(id);
+        dao.delete(id);
     }
 
     /**
      * {@inheritDoc}
      */
     public List<ProductBean> findAll() {
-        List<Product> products = productDao.findAll();
+        ((ProductDaoImpl) dao).setCurrentSociety(JsamsDesktop.getInstance().getCurrentSociety());
+        List<Product> products = dao.findAll();
         List<ProductBean> beans = new ArrayList<ProductBean>();
         for (Product product : products) {
             beans.add(new ProductBean(product));
@@ -74,7 +78,8 @@ public class ProductServiceImpl implements ProductService {
      * {@inheritDoc}
      */
     public List<ProductBean> findByCriteria(final ProductBean criteria) {
-        List<Product> products = productDao.findByCriteria(criteria);
+        ((ProductDaoImpl) dao).setCurrentSociety(JsamsDesktop.getInstance().getCurrentSociety());
+        List<Product> products = dao.findByCriteria(criteria);
         List<ProductBean> beans = new ArrayList<ProductBean>();
         for (Product product : products) {
             beans.add(new ProductBean(product));
@@ -86,7 +91,7 @@ public class ProductServiceImpl implements ProductService {
      * {@inheritDoc}
      */
     public ProductBean findById(final Long id) {
-        Product product = productDao.findById(id);
+        Product product = dao.findById(id);
         ProductBean bean = new ProductBean(product);
         return bean;
     }
@@ -96,7 +101,7 @@ public class ProductServiceImpl implements ProductService {
      */
     public void update(final ProductBean bean) {
         Product product = new Product(bean);
-        productDao.update(product);
+        dao.update(product);
     }
 
 }

@@ -45,9 +45,9 @@ public class ProductBeanView extends AbstractView<ProductBean, JPanel, JPanel> {
         JsamsFormattedTextField textFieldPrice = helper.createBindingDecimalComponent(bean, ProductBean.PRICE_PROPERTY,
                 true, false);
         JsamsFormattedTextField textFieldStockQuantity = helper.createBindingIntComponent(bean,
-                ProductBean.QUANTITYSTOCK_PROPERTY, true, false);
+                ProductBean.QUANTITY_STOCK_PROPERTY, true, false);
         JsamsFormattedTextField textFieldReorderLevel = helper.createBindingIntComponent(bean,
-                ProductBean.REORDERLEVEL_PROPERTY, false, false);
+                ProductBean.REORDER_LEVEL_PROPERTY, false, false);
         JsamsFormattedTextField textFieldVatApplicable = helper.createBindingDecimalComponent(bean,
                 CustomerBean.VATAPPLICABLE_PROPERTY, true, false);
         FormLayout layout = new FormLayout("right:p, 3dlu, 50dlu, 3dlu, right:p, 3dlu, 50dlu", "p");
@@ -76,11 +76,11 @@ public class ProductBeanView extends AbstractView<ProductBean, JPanel, JPanel> {
         JsamsFormattedTextField textFieldPrice = helper.createBindingDecimalComponent(bean, ProductBean.PRICE_PROPERTY,
                 false, false);
         JsamsFormattedTextField textFieldStockQuantity = helper.createBindingIntComponent(bean,
-                ProductBean.QUANTITYSTOCK_PROPERTY, false, false);
+                ProductBean.QUANTITY_STOCK_PROPERTY, false, false);
         JsamsFormattedTextField textFieldReorderLevel = helper.createBindingIntComponent(bean,
-                ProductBean.REORDERLEVEL_PROPERTY, false, false);
+                ProductBean.REORDER_LEVEL_PROPERTY, false, false);
         JsamsFormattedTextField textFieldVatApplicable = helper.createBindingDecimalComponent(bean,
-                ProductBean.VATAPPLICABLE_PROPERTY, false, false);
+                ProductBean.VAT_APPLICABLE_PROPERTY, false, false);
         FormLayout layout = new FormLayout("right:p, 3dlu, p:grow, 3dlu, " + "right:p, 3dlu, p:grow, 3dlu, "
                 + "right:p, 3dlu, p:grow, 3dlu, " + "right:p, 3dlu, p:grow", "p");
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, JsamsFrame.RESOURCE_BUNDLE);

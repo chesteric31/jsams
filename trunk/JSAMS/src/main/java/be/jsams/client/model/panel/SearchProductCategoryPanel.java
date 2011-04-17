@@ -107,7 +107,7 @@ public class SearchProductCategoryPanel extends AbstractSearchPanel<ProductCateg
     protected void performButtonAdd() {
         ProductCategoryBeanBuilder builder = new ProductCategoryBeanBuilder();
         builder.setDao(JsamsApplicationContext.getProductCategoryDao());
-        ProductCategoryBean categoryBean = builder.build();
+        ProductCategoryBean categoryBean = builder.build(false);
         categoryBean.setSociety(JsamsDesktop.getInstance().getCurrentSociety());
         new EditProductCategoryDialog(JsamsI18nResource.TITLE_EDIT_PRODUCT_CATEGORY, categoryBean);
         updateUI();

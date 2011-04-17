@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.Query;
 
+import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.ProductBean;
 import be.jsams.common.bean.model.management.ProductCategoryBean;
 import be.jsams.server.dao.ProductDao;
@@ -19,6 +20,8 @@ import com.mysql.jdbc.StringUtils;
  */
 public class ProductDaoImpl extends DaoImpl<Product> implements ProductDao {
 
+    private SocietyBean currentSociety;
+    
     /**
      * Constructor
      * 
@@ -27,6 +30,21 @@ public class ProductDaoImpl extends DaoImpl<Product> implements ProductDao {
      */
     public ProductDaoImpl(final Class<Product> type) {
         super(type);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @SuppressWarnings("unchecked")
+    public List<Product> findAll() {
+        StringBuilder queryBuilder = new StringBuilder("FROM Product p");
+
+        queryBuilder.append(" WHERE ");
+        queryBuilder.append("p.productCategory.society.id = " + getCurrentSociety().getId());
+
+        Query query = getEntityManager().createQuery(queryBuilder.toString());
+        List<Product> result = query.getResultList();
+        return result;
     }
 
     /**
@@ -95,6 +113,14 @@ public class ProductDaoImpl extends DaoImpl<Product> implements ProductDao {
                 queryBuilder.append(" AND");
             }
             queryBuilder.append(" p.category.id = " + category.getId());
+        } else {
+            if (isFirst) {
+                queryBuilder.append(" WHERE");
+                isFirst = false;
+            } else {
+                queryBuilder.append(" AND");
+            }
+            queryBuilder.append(" p.category.society.id = " + getCurrentSociety().getId());
         }
 
         Query query = getEntityManager().createQuery(queryBuilder.toString());
@@ -102,4 +128,17 @@ public class ProductDaoImpl extends DaoImpl<Product> implements ProductDao {
         return result;
     }
 
+    /**
+     * @return the currentSociety
+     */
+    public SocietyBean getCurrentSociety() {
+        return currentSociety;
+    }
+
+    /**
+     * @param currentSociety the currentSociety to set
+     */
+    public void setCurrentSociety(SocietyBean currentSociety) {
+        this.currentSociety = currentSociety;
+    }
 }

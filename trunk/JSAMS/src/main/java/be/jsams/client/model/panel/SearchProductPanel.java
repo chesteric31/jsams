@@ -105,7 +105,7 @@ public class SearchProductPanel extends
      */
     @Override
     protected void performButtonAdd() {
-        new EditProductDialog(JsamsI18nResource.TITLE_EDIT_PRODUCT, new ProductBean());
+        new EditProductDialog(JsamsI18nResource.TITLE_EDIT_PRODUCT, new ProductBean(false));
         updateUI();
     }
 

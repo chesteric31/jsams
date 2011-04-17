@@ -27,24 +27,25 @@ public class ProductBean extends AbstractNamedIdentityBean<Product, ProductBeanV
     private Double vatApplicable;
 
     private ProductCategoryBean category;
-    
+
     private ProductCategoryBeanBuilder productCategoryBuilder;
 
     public static final String PRICE_PROPERTY = "price";
-    public static final String QUANTITYSTOCK_PROPERTY = "quantityStock";
-    public static final String REORDERLEVEL_PROPERTY = "reorderLevel";
-    public static final String VATAPPLICABLE_PROPERTY = "vatApplicable";
-
-//    private static ArrayListModel<ProductBean> list = new ArrayListModel<ProductBean>();
+    public static final String QUANTITY_STOCK_PROPERTY = "quantityStock";
+    public static final String REORDER_LEVEL_PROPERTY = "reorderLevel";
+    public static final String VAT_APPLICABLE_PROPERTY = "vatApplicable";
 
     /**
      * Default constructor
+     * 
+     * @param categoryCanBeNull
+     *            to specify if the category can be null in the combo box
      */
-    public ProductBean() {
+    public ProductBean(boolean categoryCanBeNull) {
         super();
         productCategoryBuilder = new ProductCategoryBeanBuilder();
         productCategoryBuilder.setDao(JsamsApplicationContext.getProductCategoryDao());
-        ProductCategoryBean categoryBean = productCategoryBuilder.build();
+        ProductCategoryBean categoryBean = productCategoryBuilder.build(categoryCanBeNull);
         categoryBean.setSociety(JsamsDesktop.getInstance().getCurrentSociety());
         setCategory(categoryBean);
     }
@@ -58,20 +59,20 @@ public class ProductBean extends AbstractNamedIdentityBean<Product, ProductBeanV
     public ProductBean(Product model) {
         super(model);
         ProductCategory productCategory = model.getCategory();
-        
+
         productCategoryBuilder = new ProductCategoryBeanBuilder();
         productCategoryBuilder.setModel(productCategory);
         productCategoryBuilder.setDao(JsamsApplicationContext.getProductCategoryDao());
-        ProductCategoryBean categoryBean = productCategoryBuilder.build();
+        ProductCategoryBean categoryBean = productCategoryBuilder.build(false);
         categoryBean.setSociety(JsamsDesktop.getInstance().getCurrentSociety());
         setCategory(categoryBean);
-        
+
         setPrice(model.getPrice());
         setQuantityStock(model.getQuantityStock());
         setReorderLevel(model.getReorderLevel());
         setVatApplicable(model.getVatApplicable());
-//        setListModel(list);
-//        setSelection(this);
+        // setListModel(list);
+        // setSelection(this);
     }
 
     /**
@@ -105,7 +106,7 @@ public class ProductBean extends AbstractNamedIdentityBean<Product, ProductBeanV
     public void setQuantityStock(int quantityStock) {
         int oldValue = this.quantityStock;
         this.quantityStock = quantityStock;
-        firePropertyChange(QUANTITYSTOCK_PROPERTY, oldValue, this.quantityStock);
+        firePropertyChange(QUANTITY_STOCK_PROPERTY, oldValue, this.quantityStock);
     }
 
     /**
@@ -122,7 +123,7 @@ public class ProductBean extends AbstractNamedIdentityBean<Product, ProductBeanV
     public void setReorderLevel(int reorderLevel) {
         int oldValue = this.reorderLevel;
         this.reorderLevel = reorderLevel;
-        firePropertyChange(REORDERLEVEL_PROPERTY, oldValue, this.reorderLevel);
+        firePropertyChange(REORDER_LEVEL_PROPERTY, oldValue, this.reorderLevel);
     }
 
     /**
@@ -139,7 +140,7 @@ public class ProductBean extends AbstractNamedIdentityBean<Product, ProductBeanV
     public void setVatApplicable(Double vatApplicable) {
         Double oldValue = this.vatApplicable;
         this.vatApplicable = vatApplicable;
-        firePropertyChange(VATAPPLICABLE_PROPERTY, oldValue, this.vatApplicable);
+        firePropertyChange(VAT_APPLICABLE_PROPERTY, oldValue, this.vatApplicable);
     }
 
     /**
