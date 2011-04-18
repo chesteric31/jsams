@@ -73,8 +73,8 @@ public class PeriodBean extends AbstractIdentityBean<AbstractIdentity, PeriodBea
      */
     @Override
     public void clear() {
-        // TODO Auto-generated method stub
-
+        setStartDate(null);
+        setEndDate(null);
     }
 
     /**

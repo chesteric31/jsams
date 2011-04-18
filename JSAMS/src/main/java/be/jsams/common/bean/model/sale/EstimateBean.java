@@ -243,8 +243,19 @@ public class EstimateBean extends AbstractIdentityBean<Estimate, EstimateBeanVie
      */
     @Override
     public void clear() {
-        // TODO Auto-generated method stub
-
+        agent.clear();
+        billingAddress.clear();
+        customer.clear();
+        setCreationDate(null);
+        for (EstimateDetailBean detail : details) {
+            detail.clear();
+        }
+        setDiscountRate(null);
+        setListModel(null);
+        setRemark(null);
+        setSelection(null);
+        setTransferred(false);
+        period.clear();
     }
 
     /**
