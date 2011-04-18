@@ -58,7 +58,7 @@ public class EstimateDaoImpl extends DaoImpl<Estimate> implements EstimateDao {
             queryBuilder.append(" AND e.billingAddress.zipCode = " + zipCode);
         }
         if (!StringUtils.isNullOrEmpty(city)) {
-            queryBuilder.append(" AND e.billingAddress.city = " + city);
+            queryBuilder.append(" AND e.billingAddress.city LIKE '%" + city + "%'");
         }
         if (startDate != null && endDate != null) {
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
