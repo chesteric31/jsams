@@ -1,5 +1,6 @@
 package be.jsams.server.dao.impl;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -60,14 +61,13 @@ public class EstimateDaoImpl extends DaoImpl<Estimate> implements EstimateDao {
             queryBuilder.append(" AND e.billingAddress.city = " + city);
         }
         if (startDate != null && endDate != null) {
-            queryBuilder.append(" AND e.creationDate BETWEEN STR_TO_DATE('" + startDate
-                    + "', 'yyyy/mm/dd') AND STR_TO_DATE('" + endDate + "', 'yyyy/mm/dd')");
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            String formattedStartDate = format.format(startDate);
+            String formattedEndDate = format.format(endDate);
+            queryBuilder.append(" AND e.creationDate BETWEEN '" + formattedStartDate + "' AND '" + formattedEndDate
+                    + "'");
         }
-        int bit = 0;
-        if (transferred) {
-            bit = 1;
-        }
-        queryBuilder.append(" AND e.transferred = " + bit);
+        queryBuilder.append(" AND e.transferred = " + transferred);
 
         Query query = getEntityManager().createQuery(queryBuilder.toString());
         List<Estimate> result = query.getResultList();
