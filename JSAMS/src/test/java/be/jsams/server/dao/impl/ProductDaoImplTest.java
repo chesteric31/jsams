@@ -9,6 +9,8 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import be.jsams.common.bean.model.SocietyBean;
+import be.jsams.common.bean.model.management.ProductBean;
+import be.jsams.common.bean.model.management.ProductCategoryBean;
 import be.jsams.server.dao.AbstractJUnitTestClass;
 import be.jsams.server.dao.LegalFormDao;
 import be.jsams.server.dao.MockDaoGenerator;
@@ -22,7 +24,7 @@ import be.jsams.server.model.mock.MockModelGenerator;
 
 /**
  * Test class for {@link ProductDaoImpl}.
- *
+ * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
@@ -31,7 +33,7 @@ public class ProductDaoImplTest extends AbstractJUnitTestClass {
     @Autowired
     private ProductDao dao;
     private Product product;
-    
+
     @Autowired
     private ProductCategoryDao categoryDao;
     private ProductCategory category = MockModelGenerator.generateMockProductCategory();
@@ -81,6 +83,62 @@ public class ProductDaoImplTest extends AbstractJUnitTestClass {
         Product persistedProduct = dao.add(product);
         ((ProductDaoImpl) dao).setCurrentSociety(societyBean);
         List<Product> founds = dao.findAll();
+        assertTrue(founds.contains(persistedProduct));
+    }
+
+    /**
+     * Test method for
+     * {@link be.jsams.server.dao.impl.ProductDaoImpl#findByCriteria(be.jsams.common.bean.model.management.ProductBean)}
+     * .
+     */
+    @Test
+    public void testFindByCriteria() {
+        final Society persistedSociety = societyDao.add(society);
+        category.setSociety(persistedSociety);
+        SocietyBean societyBean = new SocietyBean(persistedSociety) {
+
+            /**
+             * Serial Version UID
+             */
+            private static final long serialVersionUID = 8623360287537334295L;
+
+            /**
+             * {@inheritDoc}
+             */
+            @Override
+            public LegalFormDao getLegalFormDao() {
+                return MockDaoGenerator.generateMockLegalForm(persistedSociety);
+            }
+        };
+        ((ProductCategoryDaoImpl) categoryDao).setCurrentSociety(societyBean);
+        ProductCategory persistedCategory = categoryDao.add(category);
+        product.setCategory(persistedCategory);
+        final Product persistedProduct = dao.add(product);
+        final ProductCategoryBean categoryBean = new ProductCategoryBean(persistedCategory, societyBean);
+        ProductBean criteria = new ProductBean(persistedProduct) {
+
+            /**
+             * Serial Version UID
+             */
+            private static final long serialVersionUID = -4399264563287934694L;
+
+            /**
+             * {@inheritDoc}
+             */
+            @Override
+            public ProductCategoryDao getProductCategoryDao() {
+                return MockDaoGenerator.generateMockProductCategory(persistedProduct);
+            }
+
+            /**
+             * @return the category
+             */
+            @Override
+            public ProductCategoryBean getCategory() {
+                return categoryBean;
+            }
+        };
+        List<Product> founds = dao.findByCriteria(criteria);
         assertTrue(founds.contains(persistedProduct));
     }
 
