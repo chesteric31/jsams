@@ -19,29 +19,33 @@ public class ProductCategoryBean extends AbstractTranslatableIdentityBean<Produc
      * Serial Version UID
      */
     private static final long serialVersionUID = -6394980207406343489L;
-    
+
     private SocietyBean society;
 
     /**
      * Constructor.
      * 
      * @param model the {@link ProductCategory}
+     * @param society the current {@link SocietyBean} used
      */
-    public ProductCategoryBean(ProductCategory model) {
+    public ProductCategoryBean(ProductCategory model, SocietyBean society) {
         super(model);
+        setSociety(society);
     }
 
     /**
      * Constructor.
      * 
      * @param list the {@link ObservableList}
+     * @param society the current {@link SocietyBean} used
      */
-    public ProductCategoryBean(ObservableList<ProductCategoryBean> list) {
+    public ProductCategoryBean(ObservableList<ProductCategoryBean> list, SocietyBean society) {
         super();
         setListModel(list);
         if (!list.isEmpty()) {
             setSelection(list.get(0));
         }
+        setSociety(society);
     }
 
     /**
@@ -49,9 +53,10 @@ public class ProductCategoryBean extends AbstractTranslatableIdentityBean<Produc
      * 
      * @param list the {@link ObservableList}
      * @param model the {@link ProductCategory} object
+     * @param society the current {@link SocietyBean} used
      */
-    public ProductCategoryBean(ObservableList<ProductCategoryBean> list, ProductCategory model) {
-        this(model);
+    public ProductCategoryBean(ObservableList<ProductCategoryBean> list, ProductCategory model, SocietyBean society) {
+        this(model, society);
         setListModel(list);
         setSelection(this);
     }

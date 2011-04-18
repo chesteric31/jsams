@@ -2,7 +2,7 @@ package be.jsams.common.bean.builder;
 
 import java.util.List;
 
-import be.jsams.client.desktop.JsamsDesktop;
+import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.ProductCategoryBean;
 import be.jsams.server.dao.ProductCategoryDao;
 import be.jsams.server.dao.impl.ProductCategoryDaoImpl;
@@ -12,7 +12,8 @@ import com.jgoodies.common.collect.ArrayListModel;
 import com.jgoodies.common.collect.ObservableList;
 
 /**
- * Builder that makes a {@link ProductCategoryBean} from DAO list model and entity model.
+ * Builder that makes a {@link ProductCategoryBean} from DAO list model and
+ * entity model.
  * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
@@ -25,27 +26,41 @@ public class ProductCategoryBeanBuilder {
 
     private ProductCategoryDao dao;
 
+    private boolean canBeNull;
+
+    private SocietyBean society;
+
+    /**
+     * Constructor.
+     * 
+     * @param categoryCanBeNull to specify if the category can be null in the
+     *            combo box
+     * @param currentSociety to specify the current {@link SocietyBean}
+     */
+    public ProductCategoryBeanBuilder(boolean categoryCanBeNull, final SocietyBean currentSociety) {
+        this.canBeNull = categoryCanBeNull;
+        this.society = currentSociety;
+    }
+
     /**
      * Build the {@link ProductCategoryBean}.
      * 
-     * @param categoryCanBeNull
-     *            to specify if the category can be null in the combo box
      * @return the built {@link ProductCategoryBean}
      */
-    public ProductCategoryBean build(boolean categoryCanBeNull) {
-        ((ProductCategoryDaoImpl) dao).setCurrentSociety(JsamsDesktop.getInstance().getCurrentSociety());
+    public ProductCategoryBean build() {
+        ((ProductCategoryDaoImpl) dao).setCurrentSociety(society);
         List<ProductCategory> categories = dao.findAll();
         listModel = new ArrayListModel<ProductCategoryBean>();
         for (ProductCategory category : categories) {
-            listModel.add(new ProductCategoryBean(category));
+            listModel.add(new ProductCategoryBean(category, society));
         }
-        if (categoryCanBeNull) {
+        if (canBeNull) {
             listModel.add(0, null);
         }
         if (model != null) {
-            return new ProductCategoryBean(listModel, model);
+            return new ProductCategoryBean(listModel, model, society);
         } else {
-            return new ProductCategoryBean(listModel);
+            return new ProductCategoryBean(listModel, society);
         }
     }
 
@@ -57,8 +72,7 @@ public class ProductCategoryBeanBuilder {
     }
 
     /**
-     * @param model
-     *            the model to set
+     * @param model the model to set
      */
     public void setModel(ProductCategory model) {
         this.model = model;
@@ -72,8 +86,7 @@ public class ProductCategoryBeanBuilder {
     }
 
     /**
-     * @param listModel
-     *            the listModel to set
+     * @param listModel the listModel to set
      */
     public void setListModel(ObservableList<ProductCategoryBean> listModel) {
         this.listModel = listModel;
@@ -87,11 +100,38 @@ public class ProductCategoryBeanBuilder {
     }
 
     /**
-     * @param dao
-     *            the dao to set
+     * @param dao the dao to set
      */
     public void setDao(ProductCategoryDao dao) {
         this.dao = dao;
+    }
+
+    /**
+     * @return the canBeNull
+     */
+    public boolean isCanBeNull() {
+        return canBeNull;
+    }
+
+    /**
+     * @param canBeNull the canBeNull to set
+     */
+    public void setCanBeNull(boolean canBeNull) {
+        this.canBeNull = canBeNull;
+    }
+
+    /**
+     * @return the society
+     */
+    public SocietyBean getSociety() {
+        return society;
+    }
+
+    /**
+     * @param society the society to set
+     */
+    public void setSociety(SocietyBean society) {
+        this.society = society;
     }
 
 }

@@ -6,7 +6,7 @@ import javax.swing.AbstractAction;
 
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.model.dialog.EditProductDialog;
-import be.jsams.common.bean.model.management.ProductBean;
+import be.jsams.common.bean.builder.ProductBeanBuilder;
 
 /**
  * {@link AbstractAction} to launch {@link EditProductDialog}.
@@ -25,7 +25,7 @@ public class NewProductAction extends AbstractAction {
      * {@inheritDoc}
      */
     public void actionPerformed(ActionEvent e) {
-        new EditProductDialog(JsamsI18nResource.TITLE_EDIT_PRODUCT, new ProductBean(false));
+        new EditProductDialog(JsamsI18nResource.TITLE_EDIT_PRODUCT, new ProductBeanBuilder().build(true, false));
     }
 
 }

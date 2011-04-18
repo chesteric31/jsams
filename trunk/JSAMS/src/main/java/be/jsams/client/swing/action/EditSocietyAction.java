@@ -5,13 +5,14 @@ import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import javax.swing.Icon;
 
+import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.model.dialog.EditSocietyDialog;
-import be.jsams.common.bean.model.SocietyBean;
+import be.jsams.common.bean.builder.SocietyBeanBuilder;
 
 /**
- * Edit action to edit the {@link SocietyBean}.
+ * Edit action to edit the Society.
  * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
@@ -50,7 +51,8 @@ public class EditSocietyAction extends AbstractAction {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (editionMode == NEW_ONE_MODE) {
-            new EditSocietyDialog(JsamsI18nResource.TITLE_EDIT_SOCIETY, new SocietyBean());
+            SocietyBeanBuilder builder = JsamsApplicationContext.getSocietyBeanBuilder();
+            new EditSocietyDialog(JsamsI18nResource.TITLE_EDIT_SOCIETY, builder.build(true));
         } else {
             new EditSocietyDialog(JsamsI18nResource.TITLE_EDIT_SOCIETY, JsamsDesktop.getInstance().getCurrentSociety());
         }

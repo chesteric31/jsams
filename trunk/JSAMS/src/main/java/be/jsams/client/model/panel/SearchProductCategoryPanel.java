@@ -20,6 +20,7 @@ import be.jsams.client.swing.listener.ProductCategoryTableMouseListener;
 import be.jsams.client.validator.EditProductCategoryValidator;
 import be.jsams.client.validator.SearchProductCategoryValidator;
 import be.jsams.common.bean.builder.ProductCategoryBeanBuilder;
+import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.ProductCategoryBean;
 import be.jsams.server.service.ProductCategoryService;
 
@@ -105,10 +106,10 @@ public class SearchProductCategoryPanel extends AbstractSearchPanel<ProductCateg
      */
     @Override
     protected void performButtonAdd() {
-        ProductCategoryBeanBuilder builder = new ProductCategoryBeanBuilder();
+        SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
+        ProductCategoryBeanBuilder builder = new ProductCategoryBeanBuilder(false, currentSociety);
         builder.setDao(JsamsApplicationContext.getProductCategoryDao());
-        ProductCategoryBean categoryBean = builder.build(false);
-        categoryBean.setSociety(JsamsDesktop.getInstance().getCurrentSociety());
+        ProductCategoryBean categoryBean = builder.build();
         new EditProductCategoryDialog(JsamsI18nResource.TITLE_EDIT_PRODUCT_CATEGORY, categoryBean);
         updateUI();
     }

@@ -3,8 +3,11 @@ package be.jsams.common.bean.model.management;
 import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.common.bean.builder.ProductCategoryBeanBuilder;
+import be.jsams.common.bean.builder.SocietyBeanBuilder;
 import be.jsams.common.bean.model.AbstractNamedIdentityBean;
+import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.view.ProductBeanView;
+import be.jsams.server.dao.ProductCategoryDao;
 import be.jsams.server.model.Product;
 import be.jsams.server.model.ProductCategory;
 
@@ -38,41 +41,40 @@ public class ProductBean extends AbstractNamedIdentityBean<Product, ProductBeanV
     /**
      * Default constructor
      * 
-     * @param categoryCanBeNull
-     *            to specify if the category can be null in the combo box
+     * @param categoryCanBeNull to specify if the category can be null in the
+     *            combo box
      */
     public ProductBean(boolean categoryCanBeNull) {
         super();
-        productCategoryBuilder = new ProductCategoryBeanBuilder();
+        SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
+        productCategoryBuilder = new ProductCategoryBeanBuilder(categoryCanBeNull, currentSociety);
         productCategoryBuilder.setDao(JsamsApplicationContext.getProductCategoryDao());
-        ProductCategoryBean categoryBean = productCategoryBuilder.build(categoryCanBeNull);
-        categoryBean.setSociety(JsamsDesktop.getInstance().getCurrentSociety());
+        ProductCategoryBean categoryBean = productCategoryBuilder.build();
         setCategory(categoryBean);
     }
 
     /**
      * Constructor
      * 
-     * @param model
-     *            the {@link Product}
+     * @param model the {@link Product}
      */
     public ProductBean(Product model) {
         super(model);
         ProductCategory productCategory = model.getCategory();
 
-        productCategoryBuilder = new ProductCategoryBeanBuilder();
+        SocietyBeanBuilder societyBuilder = new SocietyBeanBuilder();
+        societyBuilder.setModel(productCategory.getSociety());
+        SocietyBean currentSociety = societyBuilder.build(false);
+        productCategoryBuilder = new ProductCategoryBeanBuilder(false, currentSociety);
         productCategoryBuilder.setModel(productCategory);
-        productCategoryBuilder.setDao(JsamsApplicationContext.getProductCategoryDao());
-        ProductCategoryBean categoryBean = productCategoryBuilder.build(false);
-        categoryBean.setSociety(JsamsDesktop.getInstance().getCurrentSociety());
+        productCategoryBuilder.setDao(getProductCategoryDao());
+        ProductCategoryBean categoryBean = productCategoryBuilder.build();
         setCategory(categoryBean);
 
         setPrice(model.getPrice());
         setQuantityStock(model.getQuantityStock());
         setReorderLevel(model.getReorderLevel());
         setVatApplicable(model.getVatApplicable());
-        // setListModel(list);
-        // setSelection(this);
     }
 
     /**
@@ -83,8 +85,7 @@ public class ProductBean extends AbstractNamedIdentityBean<Product, ProductBeanV
     }
 
     /**
-     * @param price
-     *            the price to set
+     * @param price the price to set
      */
     public void setPrice(Double price) {
         Double oldValue = this.price;
@@ -100,8 +101,7 @@ public class ProductBean extends AbstractNamedIdentityBean<Product, ProductBeanV
     }
 
     /**
-     * @param quantityStock
-     *            the quantityStock to set
+     * @param quantityStock the quantityStock to set
      */
     public void setQuantityStock(int quantityStock) {
         int oldValue = this.quantityStock;
@@ -117,8 +117,7 @@ public class ProductBean extends AbstractNamedIdentityBean<Product, ProductBeanV
     }
 
     /**
-     * @param reorderLevel
-     *            the reorderLevel to set
+     * @param reorderLevel the reorderLevel to set
      */
     public void setReorderLevel(int reorderLevel) {
         int oldValue = this.reorderLevel;
@@ -134,8 +133,7 @@ public class ProductBean extends AbstractNamedIdentityBean<Product, ProductBeanV
     }
 
     /**
-     * @param vatApplicable
-     *            the vatApplicable to set
+     * @param vatApplicable the vatApplicable to set
      */
     public void setVatApplicable(Double vatApplicable) {
         Double oldValue = this.vatApplicable;
@@ -151,8 +149,7 @@ public class ProductBean extends AbstractNamedIdentityBean<Product, ProductBeanV
     }
 
     /**
-     * @param category
-     *            the category to set
+     * @param category the category to set
      */
     public void setCategory(ProductCategoryBean category) {
         this.category = category;
@@ -185,6 +182,14 @@ public class ProductBean extends AbstractNamedIdentityBean<Product, ProductBeanV
         setQuantityStock(0);
         setReorderLevel(0);
         setVatApplicable(null);
+    }
+
+    /**
+     * 
+     * @return the {@link ProductCategoryDao}
+     */
+    public ProductCategoryDao getProductCategoryDao() {
+        return JsamsApplicationContext.getProductCategoryDao();
     }
 
 }

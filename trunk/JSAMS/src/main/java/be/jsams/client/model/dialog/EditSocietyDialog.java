@@ -7,7 +7,6 @@ import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.validator.EditSocietyValidator;
 import be.jsams.common.bean.model.AbstractIdentityBean;
-import be.jsams.common.bean.model.LegalFormBean;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.view.LegalFormBeanView;
 import be.jsams.common.bean.view.SocietyBeanView;
@@ -69,7 +68,8 @@ public class EditSocietyDialog extends AbstractEditDialog<SocietyBean, EditSocie
         // set to the object the selection
         AbstractIdentityBean<LegalForm, LegalFormBeanView> legalForm = society.getLegalForm().getSelection();
         if (legalForm != null) {
-            society.setLegalForm((LegalFormBean) legalForm);
+            society.getLegalForm().refresh(legalForm);
+//            society.setLegalForm((LegalFormBean) legalForm);
         }
         SocietyBean persistedSociety = postPerformOk(society);
         if (persistedSociety != null) {

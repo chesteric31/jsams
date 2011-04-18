@@ -63,6 +63,7 @@
 	</bean>
 	<bean id="societyServiceTarget" class="be.jsams.server.service.impl.SocietyServiceImpl">
 		<property name="societyDao" ref="societyDao" />
+		<property name="builder" ref="societyBeanBuilder" />
 	</bean>
 	<bean id="societyService" parent="baseTransactionProxy">
 		<property name="target" ref="societyServiceTarget" />
@@ -81,6 +82,7 @@
 	</bean>
 	<bean id="productServiceTarget" class="be.jsams.server.service.impl.ProductServiceImpl">
 		<property name="productDao" ref="productDao" />
+		<property name="builder" ref="productBeanBuilder" />
 	</bean>
 	<bean id="productService" parent="baseTransactionProxy">
 		<property name="target" ref="productServiceTarget" />
@@ -153,6 +155,14 @@
 	<!-- JPA template -->
 	<bean id="jpaTemplate" class="org.springframework.orm.jpa.JpaTemplate">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
+	</bean>
+
+	<!--  BUILDERS -->
+	<bean id="societyBeanBuilder" class="be.jsams.common.bean.builder.SocietyBeanBuilder">
+		<property name="dao" ref="societyDao" />
+	</bean>
+	<bean id="productBeanBuilder" class="be.jsams.common.bean.builder.ProductBeanBuilder">
+		<property name="dao" ref="productDao" />
 	</bean>
 
 	<import resource="i18nApplicationContext.xml" />

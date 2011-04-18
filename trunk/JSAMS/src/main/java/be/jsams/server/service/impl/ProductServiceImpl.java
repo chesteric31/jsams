@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import be.jsams.client.desktop.JsamsDesktop;
+import be.jsams.common.bean.builder.ProductBeanBuilder;
 import be.jsams.common.bean.model.management.ProductBean;
 import be.jsams.server.dao.ProductDao;
 import be.jsams.server.dao.impl.ProductDaoImpl;
@@ -19,6 +20,7 @@ import be.jsams.server.service.ProductService;
 public class ProductServiceImpl implements ProductService {
 
     private ProductDao dao;
+    private ProductBeanBuilder builder;
 
     /**
      * 
@@ -43,7 +45,9 @@ public class ProductServiceImpl implements ProductService {
     public ProductBean create(final ProductBean bean) {
         Product product = new Product(bean);
         dao.add(product);
-        return new ProductBean(product);
+        builder.setModel(product);
+        ProductBean productBean = builder.build(false, false);
+        return productBean;
     }
 
     /**
@@ -69,7 +73,9 @@ public class ProductServiceImpl implements ProductService {
         List<Product> products = dao.findAll();
         List<ProductBean> beans = new ArrayList<ProductBean>();
         for (Product product : products) {
-            beans.add(new ProductBean(product));
+            builder.setModel(product);
+            ProductBean productBean = builder.build(false, false);
+            beans.add(productBean);
         }
         return beans;
     }
@@ -82,7 +88,9 @@ public class ProductServiceImpl implements ProductService {
         List<Product> products = dao.findByCriteria(criteria);
         List<ProductBean> beans = new ArrayList<ProductBean>();
         for (Product product : products) {
-            beans.add(new ProductBean(product));
+            builder.setModel(product);
+            ProductBean productBean = builder.build(false, false);
+            beans.add(productBean);
         }
         return beans;
     }
@@ -92,8 +100,9 @@ public class ProductServiceImpl implements ProductService {
      */
     public ProductBean findById(final Long id) {
         Product product = dao.findById(id);
-        ProductBean bean = new ProductBean(product);
-        return bean;
+        builder.setModel(product);
+        ProductBean productBean = builder.build(false, false);
+        return productBean;
     }
 
     /**
@@ -102,6 +111,34 @@ public class ProductServiceImpl implements ProductService {
     public void update(final ProductBean bean) {
         Product product = new Product(bean);
         dao.update(product);
+    }
+
+    /**
+     * @return the builder
+     */
+    public ProductBeanBuilder getBuilder() {
+        return builder;
+    }
+
+    /**
+     * @param builder the builder to set
+     */
+    public void setBuilder(ProductBeanBuilder builder) {
+        this.builder = builder;
+    }
+
+    /**
+     * @return the dao
+     */
+    public ProductDao getDao() {
+        return dao;
+    }
+
+    /**
+     * @param dao the dao to set
+     */
+    public void setDao(ProductDao dao) {
+        this.dao = dao;
     }
 
 }

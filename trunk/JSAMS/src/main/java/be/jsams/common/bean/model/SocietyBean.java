@@ -1,7 +1,5 @@
 package be.jsams.common.bean.model;
 
-import java.util.List;
-
 import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.common.bean.builder.LegalFormBeanBuilder;
 import be.jsams.common.bean.view.SocietyBeanView;
@@ -9,7 +7,7 @@ import be.jsams.server.dao.LegalFormDao;
 import be.jsams.server.model.LegalForm;
 import be.jsams.server.model.Society;
 
-import com.jgoodies.common.collect.ArrayListModel;
+import com.jgoodies.common.collect.ObservableList;
 
 /**
  * Bean model for {@link Society} object.
@@ -40,8 +38,6 @@ public class SocietyBean extends AbstractNamedIdentityBean<Society, SocietyBeanV
     public static final String RESPONSIBLE_PROPERTY = "responsible";
     public static final String VATNUMBER_PROPERTY = "vatNumber";
 
-    private static ArrayListModel<SocietyBean> list = new ArrayListModel<SocietyBean>();
-
     /**
      * Default constructor
      */
@@ -53,48 +49,58 @@ public class SocietyBean extends AbstractNamedIdentityBean<Society, SocietyBeanV
         legalFormBuilder.setDao(getLegalFormDao());
         setLegalForm(legalFormBuilder.build());
         
-        contactInformation = new ContactInformationBean();
-        initList();
+        setContactInformation(new ContactInformationBean());
     }
 
     /**
-     * Initializes the ListModel and the eventually the selection element.
-     */
-    private void initList() {
-        List<SocietyBean> beans = JsamsApplicationContext.getSocietyService().findAll();
-        list.clear();
-        list.addAll(beans);
-        setListModel(list);
-        if (!list.isEmpty()) {
-            setSelection(list.get(0));
-        }
-    }
-
-    /**
-     * Constructor.
+     * Constructor
      * 
-     * @param model
-     *            the {@link Society}
+     * @param model the {@link Society}
      */
     public SocietyBean(Society model) {
         super(model);
-        setActivity(model.getActivity());
-        setAddress(new AddressBean(model.getAddress()));
-        setCapital(model.getCapital());
-        setContactInformation(new ContactInformationBean(model.getContactInformation()));
-        
+        address = new AddressBean();
+
         legalFormBuilder = new LegalFormBeanBuilder();
         legalFormBuilder.setDao(getLegalFormDao());
         LegalForm form = model.getLegalForm();
         if (form != null) {
             legalFormBuilder.setModel(form);
         }
-        
         setLegalForm(legalFormBuilder.build());
+        
+        setContactInformation(new ContactInformationBean(model.getContactInformation()));
+        setActivity(model.getActivity());
+        setAddress(new AddressBean(model.getAddress()));
+        setCapital(model.getCapital());
         setResponsible(model.getResponsible());
         setVatNumber(model.getVatNumber());
+    }
+
+    /**
+     * Constructor.
+     * 
+     * @param list the {@link ObservableList}
+     * @param model the {@link Society} object
+     */
+    public SocietyBean(ObservableList<SocietyBean> list, Society model) {
+        this(model);
+        
         setListModel(list);
         setSelection(this);
+    }
+
+    /**
+     * Constructor.
+     * 
+     * @param list the {@link ObservableList}
+     */
+    public SocietyBean(ObservableList<SocietyBean> list) {
+        super();
+        setListModel(list);
+        if (list != null && !list.isEmpty()) {
+            setSelection(list.get(0));
+        }
     }
 
     /**

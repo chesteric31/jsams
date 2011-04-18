@@ -17,6 +17,7 @@ import be.jsams.client.renderer.JsamsTableCellRenderer;
 import be.jsams.client.swing.listener.ProductTableMouseListener;
 import be.jsams.client.validator.EditProductValidator;
 import be.jsams.client.validator.SearchProductValidator;
+import be.jsams.common.bean.builder.ProductBeanBuilder;
 import be.jsams.common.bean.model.management.ProductBean;
 import be.jsams.server.service.ProductService;
 
@@ -105,7 +106,8 @@ public class SearchProductPanel extends
      */
     @Override
     protected void performButtonAdd() {
-        new EditProductDialog(JsamsI18nResource.TITLE_EDIT_PRODUCT, new ProductBean(false));
+        ProductBeanBuilder builder = new ProductBeanBuilder();
+        new EditProductDialog(JsamsI18nResource.TITLE_EDIT_PRODUCT, builder.build(true, false));
         updateUI();
     }
 

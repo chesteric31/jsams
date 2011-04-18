@@ -33,6 +33,7 @@ import be.jsams.client.swing.component.JsamsTable;
 import be.jsams.client.swing.component.JsamsTextField;
 import be.jsams.client.swing.listener.ProductTableMouseListener;
 import be.jsams.client.swing.utils.IconUtil;
+import be.jsams.common.bean.builder.ProductBeanBuilder;
 import be.jsams.common.bean.model.AddressBean;
 import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.management.ProductBean;
@@ -64,8 +65,7 @@ public class EstimateBeanView extends AbstractView<EstimateBean, JPanel, JPanel>
     /**
      * Constructor
      * 
-     * @param bean
-     *            the {@link EstimateBean}
+     * @param bean the {@link EstimateBean}
      */
     public EstimateBeanView(EstimateBean bean) {
         super(bean);
@@ -114,7 +114,8 @@ public class EstimateBeanView extends AbstractView<EstimateBean, JPanel, JPanel>
 
         // we add per default one detail
         // final EstimateDetailBean detailBean = details.get(0);
-        // detailBean.setListModel(new ArrayListModel<EstimateDetailBean>(details));
+        // detailBean.setListModel(new
+        // ArrayListModel<EstimateDetailBean>(details));
         // table = detailBean.getView().createEditView();
         table.addMouseListener(handleProductEditing());
 
@@ -233,8 +234,9 @@ public class EstimateBeanView extends AbstractView<EstimateBean, JPanel, JPanel>
                                 }
                             }
                         };
-                        SearchProductPanel searchPanel = new SearchProductPanel(new ProductBean(true), customListener,
-                                JsamsApplicationContext.getProductService(), false);
+                        ProductBeanBuilder builder = new ProductBeanBuilder();
+                        SearchProductPanel searchPanel = new SearchProductPanel(builder.build(true,
+                                true), customListener, JsamsApplicationContext.getProductService(), false);
 
                         dialog.add(searchPanel);
                         dialog.pack();
@@ -270,8 +272,7 @@ public class EstimateBeanView extends AbstractView<EstimateBean, JPanel, JPanel>
     /**
      * Builds the adding button.
      * 
-     * @param tableModel
-     *            the {@link TableModel}
+     * @param tableModel the {@link TableModel}
      * @return the adding {@link JsamsButton}
      */
     private JsamsButton buildButtonAdd(final TableModel tableModel) {
