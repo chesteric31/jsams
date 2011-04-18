@@ -98,8 +98,7 @@ public class ProductCategoryDaoImplTest extends AbstractJUnitTestClass {
             }
         };
         ProductCategory category = dao.add(productCategory);
-        ProductCategoryBean criteria = new ProductCategoryBean(category);
-        criteria.setSociety(societyBean);
+        ProductCategoryBean criteria = new ProductCategoryBean(category, societyBean);
         List<ProductCategory> founds = dao.findByCriteria(criteria);
         assertTrue(founds.contains(category));
     }
