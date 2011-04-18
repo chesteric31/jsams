@@ -43,7 +43,7 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
     public ProductCategoryBean create(final ProductCategoryBean bean) {
         ProductCategory category = new ProductCategory(bean);
         productCategoryDao.add(category);
-        return new ProductCategoryBean(category);
+        return new ProductCategoryBean(category, JsamsDesktop.getInstance().getCurrentSociety());
     }
 
     /**
@@ -69,7 +69,7 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
         List<ProductCategory> categories = productCategoryDao.findAll();
         List<ProductCategoryBean> beans = new ArrayList<ProductCategoryBean>();
         for (ProductCategory category : categories) {
-            beans.add(new ProductCategoryBean(category));
+            beans.add(new ProductCategoryBean(category, JsamsDesktop.getInstance().getCurrentSociety()));
         }
         return beans;
     }
@@ -79,7 +79,7 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
      */
     public ProductCategoryBean findById(final Long id) {
         ProductCategory category = productCategoryDao.findById(id);
-        ProductCategoryBean bean = new ProductCategoryBean(category);
+        ProductCategoryBean bean = new ProductCategoryBean(category, JsamsDesktop.getInstance().getCurrentSociety());
         return bean;
     }
 
@@ -98,7 +98,7 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
         List<ProductCategory> categories = productCategoryDao.findByCriteria(criteria);
         List<ProductCategoryBean> beans = new ArrayList<ProductCategoryBean>();
         for (ProductCategory category : categories) {
-            beans.add(new ProductCategoryBean(category));
+            beans.add(new ProductCategoryBean(category, JsamsDesktop.getInstance().getCurrentSociety()));
         }
         return beans;
     }

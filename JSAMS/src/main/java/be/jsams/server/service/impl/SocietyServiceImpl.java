@@ -3,6 +3,7 @@ package be.jsams.server.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import be.jsams.common.bean.builder.SocietyBeanBuilder;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.server.dao.SocietyDao;
 import be.jsams.server.model.Society;
@@ -17,6 +18,8 @@ import be.jsams.server.service.SocietyService;
 public class SocietyServiceImpl implements SocietyService {
 
     private SocietyDao societyDao;
+    
+    private SocietyBeanBuilder builder;
 
     /**
      * 
@@ -41,7 +44,8 @@ public class SocietyServiceImpl implements SocietyService {
         List<Society> societies = societyDao.findAll();
         List<SocietyBean> beans = new ArrayList<SocietyBean>();
         for (Society society : societies) {
-            beans.add(new SocietyBean(society));
+            builder.setModel(society);
+            beans.add(builder.build(false));
         }
         return beans;
     }
@@ -51,7 +55,8 @@ public class SocietyServiceImpl implements SocietyService {
      */
     public SocietyBean findById(final Long id) {
         Society society = societyDao.findById(id);
-        SocietyBean bean = new SocietyBean(society);
+        builder.setModel(society);
+        SocietyBean bean = builder.build(false);
         return bean;
     }
 
@@ -68,8 +73,9 @@ public class SocietyServiceImpl implements SocietyService {
      */
     public SocietyBean create(final SocietyBean bean) {
         Society society = new Society(bean);
-        societyDao.add(society);
-        return new SocietyBean(society);
+        Society persistedSociety = societyDao.add(society);
+        builder.setModel(persistedSociety);
+        return builder.build(false);
     }
 
     /**
@@ -85,6 +91,20 @@ public class SocietyServiceImpl implements SocietyService {
      */
     public void delete(final Long id) {
         societyDao.delete(id);
+    }
+
+    /**
+     * @return the builder
+     */
+    public SocietyBeanBuilder getBuilder() {
+        return builder;
+    }
+
+    /**
+     * @param builder the builder to set
+     */
+    public void setBuilder(SocietyBeanBuilder builder) {
+        this.builder = builder;
     }
 
 }

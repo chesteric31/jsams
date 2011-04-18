@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
 
+import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.i18n.JsamsI18nLabelResource;
@@ -20,6 +21,7 @@ import be.jsams.client.swing.component.JsamsFrame;
 import be.jsams.client.swing.component.JsamsLabel;
 import be.jsams.client.swing.component.JsamsStatusBar;
 import be.jsams.client.swing.utils.IconUtil;
+import be.jsams.common.bean.builder.SocietyBeanBuilder;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.view.ViewFactory;
 
@@ -51,8 +53,7 @@ public class OpenSocietyDialog extends JsamsDialog implements JsamsButtonsInterf
     /**
      * Constructor
      * 
-     * @param title
-     *            the {@link I18nString} title
+     * @param title the {@link I18nString} title
      */
     public OpenSocietyDialog(final I18nString title) {
         super(null, title);
@@ -73,7 +74,8 @@ public class OpenSocietyDialog extends JsamsDialog implements JsamsButtonsInterf
         builder.nextLine();
         builder.appendSeparator();
         ViewFactory<SocietyBean> helper = new ViewFactory<SocietyBean>();
-        bean = new SocietyBean();
+        SocietyBeanBuilder societyBuilder = getSocietyBeanBuilder();
+        bean = societyBuilder.build(false);
         comboBox = helper.createBindingComboComponent(bean, true, false, new NamedComboBoxRenderer());
         comboBox.setRenderer(new NamedComboBoxRenderer());
         builder.append(JsamsI18nLabelResource.LABEL_AVAILABLES_SOCIETIES.getTranslation(), comboBox);
@@ -137,8 +139,9 @@ public class OpenSocietyDialog extends JsamsDialog implements JsamsButtonsInterf
         buttonNewSociety.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent e) {
-                EditSocietyDialog dialog = new EditSocietyDialog(JsamsI18nResource.TITLE_EDIT_SOCIETY,
-                        new SocietyBean());
+                SocietyBeanBuilder builder = new SocietyBeanBuilder();
+                SocietyBean societyBean = builder.build(true);
+                EditSocietyDialog dialog = new EditSocietyDialog(JsamsI18nResource.TITLE_EDIT_SOCIETY, societyBean);
                 if (dialog.isSuccess()) {
                     dispose();
                 }
@@ -146,4 +149,13 @@ public class OpenSocietyDialog extends JsamsDialog implements JsamsButtonsInterf
         });
         return buttonNewSociety;
     }
+    
+    /**
+     * 
+     * @return the {@link SocietyBeanBuilder}
+     */
+    public SocietyBeanBuilder getSocietyBeanBuilder() {
+        return JsamsApplicationContext.getSocietyBeanBuilder();
+    }
+    
 }

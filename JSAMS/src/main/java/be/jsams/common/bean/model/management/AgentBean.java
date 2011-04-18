@@ -5,6 +5,7 @@ import java.util.List;
 
 import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.common.bean.builder.CivilityBeanBuilder;
+import be.jsams.common.bean.builder.SocietyBeanBuilder;
 import be.jsams.common.bean.model.AbstractIdentityBean;
 import be.jsams.common.bean.model.AbstractNamedIdentityBean;
 import be.jsams.common.bean.model.AddressBean;
@@ -74,7 +75,10 @@ public class AgentBean extends AbstractNamedIdentityBean<Agent, AgentBeanView> {
         setCivility(builder.build());
         setContactInformation(new ContactInformationBean(model.getContactInformation()));
         setFunction(model.getFunction());
-        setSociety(new SocietyBean(model.getSociety()));
+        SocietyBeanBuilder societyBuilder = JsamsApplicationContext.getSocietyBeanBuilder();
+        societyBuilder.setModel(model.getSociety());
+        SocietyBean bean = societyBuilder.build(false);
+        setSociety(bean);
         //TODO verify this part
 //        List<CustomerBean> beans = new ArrayList<CustomerBean>();
 //        List<Customer> customers = model.getCustomers();

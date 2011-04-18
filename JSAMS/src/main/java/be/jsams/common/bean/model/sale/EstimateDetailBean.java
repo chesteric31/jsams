@@ -1,5 +1,6 @@
 package be.jsams.common.bean.model.sale;
 
+import be.jsams.common.bean.builder.ProductBeanBuilder;
 import be.jsams.common.bean.model.AbstractIdentityBean;
 import be.jsams.common.bean.model.management.ProductBean;
 import be.jsams.common.bean.view.EstimateDetailBeanView;
@@ -59,7 +60,9 @@ public class EstimateDetailBean extends AbstractIdentityBean<EstimateDetail, Est
         setDiscountRate(model.getDiscountRate());
         setEstimate(estimate);
         setPrice(model.getPrice());
-        setProduct(new ProductBean(model.getProduct()));
+        ProductBeanBuilder builder = new ProductBeanBuilder();
+        builder.setModel(model.getProduct());
+        setProduct(builder.build(false, false));
         setQuantity(model.getQuantity());
         setTransferred(model.isTransferred());
         setVatApplicable(model.getVatApplicable());

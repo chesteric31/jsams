@@ -4,6 +4,7 @@ import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.common.bean.builder.CivilityBeanBuilder;
 import be.jsams.common.bean.builder.LegalFormBeanBuilder;
 import be.jsams.common.bean.builder.PaymentModeBeanBuilder;
+import be.jsams.common.bean.builder.SocietyBeanBuilder;
 import be.jsams.common.bean.model.AbstractIdentityBean;
 import be.jsams.common.bean.model.AbstractNamedIdentityBean;
 import be.jsams.common.bean.model.AddressBean;
@@ -133,7 +134,9 @@ public class CustomerBean extends AbstractNamedIdentityBean<Customer, CustomerBe
         setVatNumber(model.getVatNumber());
         setDescription(model.getDescription());
 
-        SocietyBean societyBean = new SocietyBean(model.getSociety());
+        SocietyBeanBuilder societyBuilder = JsamsApplicationContext.getSocietyBeanBuilder();
+        societyBuilder.setModel(model.getSociety());
+        SocietyBean societyBean = societyBuilder.build(false);
         setSociety(societyBean);
         Agent agent = model.getAgent();
         if (agent != null) {

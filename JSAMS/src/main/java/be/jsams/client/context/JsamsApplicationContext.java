@@ -2,6 +2,7 @@ package be.jsams.client.context;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import be.jsams.common.bean.builder.SocietyBeanBuilder;
 import be.jsams.server.dao.CivilityDao;
 import be.jsams.server.dao.LegalFormDao;
 import be.jsams.server.dao.PaymentModeDao;
@@ -118,6 +119,14 @@ public final class JsamsApplicationContext {
      */
     public static AgentService getAgentService() {
         return (AgentService) context.getBean("agentService");
+    }
+    
+    /**
+     * 
+     * @return the {@link SocietyBeanBuilder}
+     */
+    public static SocietyBeanBuilder getSocietyBeanBuilder() {
+        return (SocietyBeanBuilder) context.getBean("societyBeanBuilder");
     }
 
 }
