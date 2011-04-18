@@ -3,9 +3,12 @@ package be.jsams.server.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import be.jsams.common.bean.model.management.ProductCategoryBean;
 import be.jsams.server.model.Agent;
 import be.jsams.server.model.Civility;
 import be.jsams.server.model.LegalForm;
+import be.jsams.server.model.Product;
+import be.jsams.server.model.ProductCategory;
 import be.jsams.server.model.Society;
 
 /**
@@ -112,6 +115,59 @@ public class MockDaoGenerator {
             
             @Override
             public Civility add(Civility newInstance) {
+                // TODO Auto-generated method stub
+                return null;
+            }
+        };
+    }
+    
+    public static ProductCategoryDao generateMockProductCategory(final Product product) {
+        return new ProductCategoryDao() {
+            
+            @Override
+            public void update(ProductCategory transientObject) {
+                // TODO Auto-generated method stub
+                
+            }
+            
+            @Override
+            public void flush() {
+                // TODO Auto-generated method stub
+                
+            }
+            
+            @Override
+            public ProductCategory findById(Long id) {
+                // TODO Auto-generated method stub
+                return null;
+            }
+            
+            @Override
+            public List<ProductCategory> findAll() {
+                // TODO Auto-generated method stub
+                return null;
+            }
+            
+            @Override
+            public void delete(Long id) {
+                // TODO Auto-generated method stub
+                
+            }
+            
+            @Override
+            public void delete(ProductCategory persistentObject) {
+                // TODO Auto-generated method stub
+                
+            }
+            
+            @Override
+            public ProductCategory add(ProductCategory newInstance) {
+                // TODO Auto-generated method stub
+                return null;
+            }
+            
+            @Override
+            public List<ProductCategory> findByCriteria(ProductCategoryBean criteria) {
                 // TODO Auto-generated method stub
                 return null;
             }
