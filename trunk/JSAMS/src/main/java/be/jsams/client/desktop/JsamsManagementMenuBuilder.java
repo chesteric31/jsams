@@ -146,7 +146,7 @@ public class JsamsManagementMenuBuilder extends AbstractMenuBuilder {
 
             public void actionPerformed(ActionEvent event) {
                 ProductBeanBuilder builder = new ProductBeanBuilder();
-                SearchProductPanel searchPanel = new SearchProductPanel(builder.build(true, false),
+                SearchProductPanel searchPanel = new SearchProductPanel(builder.build(true, true),
                         new ProductTableMouseListener(), JsamsApplicationContext.getProductService(), true);
                 parent.getTabbedPane().addTab(JsamsI18nResource.TITLE_SEARCH_PRODUCT,
                         "apps/preferences-desktop-theme.png", searchPanel);

@@ -62,7 +62,7 @@ public class ProductBean extends AbstractNamedIdentityBean<Product, ProductBeanV
         super(model);
         ProductCategory productCategory = model.getCategory();
 
-        SocietyBeanBuilder societyBuilder = new SocietyBeanBuilder();
+        SocietyBeanBuilder societyBuilder = JsamsApplicationContext.getSocietyBeanBuilder();
         societyBuilder.setModel(productCategory.getSociety());
         SocietyBean currentSociety = societyBuilder.build(false);
         productCategoryBuilder = new ProductCategoryBeanBuilder(false, currentSociety);
