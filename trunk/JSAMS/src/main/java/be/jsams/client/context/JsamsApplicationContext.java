@@ -8,6 +8,7 @@ import be.jsams.server.dao.LegalFormDao;
 import be.jsams.server.dao.PaymentModeDao;
 import be.jsams.server.dao.ProductCategoryDao;
 import be.jsams.server.service.AgentService;
+import be.jsams.server.service.CommandService;
 import be.jsams.server.service.CustomerService;
 import be.jsams.server.service.EstimateService;
 import be.jsams.server.service.ProductCategoryService;
@@ -127,6 +128,13 @@ public final class JsamsApplicationContext {
      */
     public static SocietyBeanBuilder getSocietyBeanBuilder() {
         return (SocietyBeanBuilder) context.getBean("societyBeanBuilder");
+    }
+
+    /**
+     * @return the {@link CommandService}
+     */
+    public static CommandService getCommandService() {
+        return (CommandService) context.getBean("commandService");
     }
 
 }

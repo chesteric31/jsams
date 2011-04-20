@@ -13,7 +13,7 @@ import be.jsams.common.bean.model.management.ProductCategoryBean;
  * {@link JsamsTableModel} for {@link ProductBean} object.
  * 
  * @author chesteric31
- * @version $$Rev$$ $$Date::                  $$ $$Author$$
+ * @version $$Rev: 689 $$ $$Date::                  $$ $$Author$$
  */
 public class ProductTableModel extends JsamsTableModel<ProductBean> {
 

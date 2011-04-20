@@ -26,7 +26,7 @@ import be.jsams.server.service.CustomerService;
  * Search {@link JPanel} for Customer objects.
  * 
  * @author chesteric31
- * @version $Rev$ $Date::                  $ $Author$
+ * @version $Rev: 710 $ $Date::                  $ $Author$
  */
 public class SearchCustomerPanel extends
         AbstractSearchPanel<CustomerBean, CustomerTableMouseListener, CustomerService, EditCustomerValidator> {

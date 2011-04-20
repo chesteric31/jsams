@@ -6,20 +6,20 @@ import java.util.List;
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.common.bean.model.management.ProductBean;
-import be.jsams.common.bean.model.sale.EstimateDetailBean;
+import be.jsams.common.bean.model.sale.CommandDetailBean;
 
 /**
- * Customized table model for {@link EstimateDetailBean}.
- * 
+ * Customized table model for {@link CommandDetailBean}.
+ *
  * @author chesteric31
- * @version $$Rev: 689 $$ $$Date::                  $$ $$Author$$
+ * @version $Rev$ $Date::                  $ $Author$
  */
-public class EstimateDetailTableModel extends JsamsTableModel<EstimateDetailBean> {
+public class CommandDetailTableModel extends JsamsTableModel<CommandDetailBean> {
 
     /**
      * Serial Version UID
      */
-    private static final long serialVersionUID = -6461186432772120925L;
+    private static final long serialVersionUID = -6559193493434025054L;
 
     /**
      * The columns name
@@ -31,9 +31,9 @@ public class EstimateDetailTableModel extends JsamsTableModel<EstimateDetailBean
     /**
      * Constructor
      * 
-     * @param listBean a list of {@link EstimateDetailBean}
+     * @param listBean a list of {@link CommandDetailBean}
      */
-    public EstimateDetailTableModel(List<EstimateDetailBean> listBean) {
+    public CommandDetailTableModel(List<CommandDetailBean> listBean) {
         super(listBean);
     }
 
@@ -48,7 +48,7 @@ public class EstimateDetailTableModel extends JsamsTableModel<EstimateDetailBean
      * {@inheritDoc}
      */
     public Object getValueAt(int rowIndex, int columnIndex) {
-        EstimateDetailBean detail = (EstimateDetailBean) getRow(rowIndex);
+        CommandDetailBean detail = (CommandDetailBean) getRow(rowIndex);
         ProductBean product = detail.getProduct();
         switch (columnIndex) {
         case ZERO:
@@ -118,7 +118,7 @@ public class EstimateDetailTableModel extends JsamsTableModel<EstimateDetailBean
      * {@inheritDoc}
      */
     public void setValueAt(Object value, int row, int col) {
-        EstimateDetailBean detail = (EstimateDetailBean) getRow(row);
+        CommandDetailBean detail = (CommandDetailBean) getRow(row);
         String stringValue = value.toString();
         switch (col) {
         case TWO:

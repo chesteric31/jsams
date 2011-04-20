@@ -26,7 +26,7 @@ import be.jsams.server.service.EstimateService;
  * Search {@link JPanel} for {@link EstimateBean} objects.
  * 
  * @author chesteric31
- * @version $Rev$ $Date::                  $ $Author$
+ * @version $Rev: 711 $ $Date::                  $ $Author$
  */
 public class SearchEstimatePanel extends
         AbstractSearchPanel<EstimateBean, EstimateTableMouseListener, EstimateService, EditEstimateValidator> {

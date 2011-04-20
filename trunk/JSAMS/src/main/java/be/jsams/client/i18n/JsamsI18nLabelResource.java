@@ -113,6 +113,8 @@ public final class JsamsI18nLabelResource {
     public static final I18nString LABEL_REMARK = new I18nString("label.remark");
 
     public static final I18nString LABEL_BILLING_ADDRESS = new I18nString("label.billing_address");
+
+    public static final I18nString LABEL_DELIVERY_ADDRESS = new I18nString("label.delivery_address");
     
 
 }

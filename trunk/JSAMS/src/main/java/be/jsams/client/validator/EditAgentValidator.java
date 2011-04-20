@@ -14,7 +14,7 @@ import com.jgoodies.validation.util.ValidationUtils;
  * {@link Validator} for Agent object.
  * 
  * @author chesteric31
- * @version $Rev$ $Date::                  $ $Author$
+ * @version $Rev: 689 $ $Date::                  $ $Author$
  */
 public class EditAgentValidator implements Validator<AgentBean> {
 

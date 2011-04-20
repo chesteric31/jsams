@@ -25,7 +25,7 @@ import be.jsams.server.service.ProductService;
  * Search Product panel.
  * 
  * @author chesteric31
- * @version $Rev$ $Date::                  $ $Author$
+ * @version $Rev: 710 $ $Date::                  $ $Author$
  */
 public class SearchProductPanel extends
         AbstractSearchPanel<ProductBean, ProductTableMouseListener, ProductService, EditProductValidator> {

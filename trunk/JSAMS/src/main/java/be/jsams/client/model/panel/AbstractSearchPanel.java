@@ -52,7 +52,7 @@ import com.jgoodies.validation.view.ValidationResultViewFactory;
  *            an extension of {@link Validator}
  * 
  * @author chesteric31
- * @version $$Rev$$ $$Date::                  $$ $$Author$$
+ * @version $$Rev: 689 $$ $$Date::                  $$ $$Author$$
  */
 public abstract class AbstractSearchPanel<B extends AbstractIdentityBean<?, ?>,
         L extends MouseListener, S extends Service<B>, V extends Validator<B>>

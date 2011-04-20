@@ -28,7 +28,7 @@ import be.jsams.server.service.ProductCategoryService;
  * Search Product category panel.
  * 
  * @author chesteric31
- * @version $$Rev$$ $$Date::                  $$ $$Author$$
+ * @version $$Rev: 710 $$ $$Date::                  $$ $$Author$$
  */
 public class SearchProductCategoryPanel extends AbstractSearchPanel<ProductCategoryBean,
         ProductCategoryTableMouseListener, ProductCategoryService, EditProductCategoryValidator> {

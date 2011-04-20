@@ -327,6 +327,7 @@ public class EstimateBeanView extends AbstractView<EstimateBean, JPanel, JPanel>
         JsamsButton buttonModify = new JsamsButton(IconUtil.MENU_ICON_PREFIX + "apps/accessories-text-editor.png");
         buttonModify.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                //TODO
             }
         });
         return buttonModify;

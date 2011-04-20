@@ -13,7 +13,7 @@ import be.jsams.common.bean.model.management.AgentBean;
  * 
  * 
  * @author chesteric31
- * @version $Rev$ $Date::                  $ $Author$
+ * @version $Rev: 689 $ $Date::                  $ $Author$
  */
 public class AgentTableModel extends JsamsTableModel<AgentBean> {
 

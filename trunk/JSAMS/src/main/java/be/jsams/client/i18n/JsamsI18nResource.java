@@ -215,5 +215,11 @@ public final class JsamsI18nResource {
 
     public static final I18nString COLUMN_QUANTITY = new I18nString("column.quantity");
 
+    public static final I18nString PANEL_COMMAND_DETAILS = new I18nString("panel.command_details");
+
+    public static final I18nString TITLE_SEARCH_COMMAND = new I18nString("title.search.command");
+    
+    public static final I18nString TITLE_EDIT_COMMAND = new I18nString("title.edit.command");
+
     
 }
