@@ -13,7 +13,7 @@ import org.apache.commons.logging.LogFactory;
 
 import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.client.i18n.JsamsI18nResource;
-import be.jsams.client.model.dialog.EditCustomerDialog;
+import be.jsams.client.model.dialog.management.EditCustomerDialog;
 import be.jsams.client.model.table.CustomerTableModel;
 import be.jsams.client.renderer.JsamsTableCellRenderer;
 import be.jsams.client.swing.listener.CustomerTableMouseListener;

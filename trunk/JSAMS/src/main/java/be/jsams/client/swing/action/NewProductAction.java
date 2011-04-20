@@ -5,7 +5,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 
 import be.jsams.client.i18n.JsamsI18nResource;
-import be.jsams.client.model.dialog.EditProductDialog;
+import be.jsams.client.model.dialog.management.EditProductDialog;
 import be.jsams.common.bean.builder.ProductBeanBuilder;
 
 /**

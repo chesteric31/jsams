@@ -6,7 +6,7 @@ import javax.swing.AbstractAction;
 
 import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.client.i18n.JsamsI18nResource;
-import be.jsams.client.model.dialog.EditCustomerDialog;
+import be.jsams.client.model.dialog.management.EditCustomerDialog;
 import be.jsams.common.bean.model.management.CustomerBean;
 
 /**

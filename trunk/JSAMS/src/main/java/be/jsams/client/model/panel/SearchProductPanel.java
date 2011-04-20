@@ -11,7 +11,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import be.jsams.client.i18n.JsamsI18nResource;
-import be.jsams.client.model.dialog.EditProductDialog;
+import be.jsams.client.model.dialog.management.EditProductDialog;
 import be.jsams.client.model.table.ProductTableModel;
 import be.jsams.client.renderer.JsamsTableCellRenderer;
 import be.jsams.client.swing.listener.ProductTableMouseListener;

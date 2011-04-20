@@ -9,7 +9,7 @@ import javax.swing.table.TableCellRenderer;
 
 import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.client.i18n.JsamsI18nResource;
-import be.jsams.client.model.dialog.EditAgentDialog;
+import be.jsams.client.model.dialog.management.EditAgentDialog;
 import be.jsams.client.model.table.AgentTableModel;
 import be.jsams.client.renderer.JsamsTableCellRenderer;
 import be.jsams.client.swing.listener.AgentTableMouseListener;

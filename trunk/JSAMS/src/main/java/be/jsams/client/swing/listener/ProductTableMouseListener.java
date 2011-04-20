@@ -4,7 +4,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import be.jsams.client.i18n.JsamsI18nResource;
-import be.jsams.client.model.dialog.EditProductDialog;
+import be.jsams.client.model.dialog.management.EditProductDialog;
 import be.jsams.client.model.table.ProductTableModel;
 import be.jsams.client.swing.component.JsamsTable;
 
