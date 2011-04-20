@@ -3,14 +3,14 @@ package be.jsams.common.bean.model.sale;
 import be.jsams.common.bean.builder.ProductBeanBuilder;
 import be.jsams.common.bean.model.AbstractIdentityBean;
 import be.jsams.common.bean.model.management.ProductBean;
-import be.jsams.common.bean.view.EstimateDetailBeanView;
+import be.jsams.common.bean.view.sale.EstimateDetailBeanView;
 import be.jsams.server.model.EstimateDetail;
 
 import com.jgoodies.common.collect.ArrayListModel;
 import com.jgoodies.common.collect.ObservableList;
 
 /**
- * 
+ * {@link AbstractIdentityBean} for {@link EstimateDetail} object.
  * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
@@ -199,8 +199,14 @@ public class EstimateDetailBean extends AbstractIdentityBean<EstimateDetail, Est
      */
     @Override
     public void clear() {
-        // TODO Auto-generated method stub
-
+        setPrice(null);
+        setProduct(null);
+        setQuantity(0);
+        setVatApplicable(null);
+        setDiscountRate(null);
+        setListModel(null);
+        setSelection(null);
+        setTransferred(false);
     }
 
     /**

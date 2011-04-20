@@ -13,7 +13,7 @@ import be.jsams.common.bean.model.ContactInformationBean;
 import be.jsams.common.bean.model.LegalFormBean;
 import be.jsams.common.bean.model.PaymentModeBean;
 import be.jsams.common.bean.model.SocietyBean;
-import be.jsams.common.bean.view.CustomerBeanView;
+import be.jsams.common.bean.view.management.CustomerBeanView;
 import be.jsams.server.model.Agent;
 import be.jsams.server.model.Civility;
 import be.jsams.server.model.Customer;

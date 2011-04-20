@@ -1,6 +1,5 @@
 package be.jsams.server.model;
 
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -28,7 +27,7 @@ public class Command extends AbstractIdentity {
 
     private Date creationDate;
     private String remark;
-    private BigDecimal discountRate;
+    private Double discountRate;
     private boolean transferred;
 
     private Agent agent;
@@ -97,7 +96,7 @@ public class Command extends AbstractIdentity {
      * @return a discount rate
      */
     @Column(name = "DISCOUNT_RATE")
-    public BigDecimal getDiscountRate() {
+    public Double getDiscountRate() {
         return discountRate;
     }
 
@@ -106,7 +105,7 @@ public class Command extends AbstractIdentity {
      * @param discountRate
      *            a discount rate to set
      */
-    public void setDiscountRate(BigDecimal discountRate) {
+    public void setDiscountRate(Double discountRate) {
         this.discountRate = discountRate;
     }
 
