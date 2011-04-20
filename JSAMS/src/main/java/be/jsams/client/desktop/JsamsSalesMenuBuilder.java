@@ -9,10 +9,13 @@ import javax.swing.JSeparator;
 
 import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.i18n.JsamsI18nResource;
+import be.jsams.client.model.panel.SearchCommandPanel;
 import be.jsams.client.model.panel.SearchEstimatePanel;
 import be.jsams.client.swing.component.JsamsMenu;
 import be.jsams.client.swing.component.JsamsMenuItem;
+import be.jsams.client.swing.listener.CommandTableMouseListener;
 import be.jsams.client.swing.listener.EstimateTableMouseListener;
+import be.jsams.common.bean.model.sale.CommandBean;
 import be.jsams.common.bean.model.sale.EstimateBean;
 
 /**
@@ -66,6 +69,7 @@ public class JsamsSalesMenuBuilder extends AbstractMenuBuilder {
         estimateMI.setAction(estimatesAction(estimateMI.getText(), estimateMI.getIcon()));
         salesMenu.add(estimateMI);
         commandMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_COMMAND);
+        commandMI.setAction(commandsAction(commandMI.getText(), commandMI.getIcon()));
         salesMenu.add(commandMI);
         deliveryOrderMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_DELIVERY_ORDER);
         salesMenu.add(deliveryOrderMI);
@@ -94,6 +98,31 @@ public class JsamsSalesMenuBuilder extends AbstractMenuBuilder {
                 SearchEstimatePanel searchPanel = new SearchEstimatePanel(new EstimateBean(),
                         new EstimateTableMouseListener(), JsamsApplicationContext.getEstimateService(), true);
                 parent.getTabbedPane().addTab(JsamsI18nResource.TITLE_SEARCH_ESTIMATE, null, searchPanel);
+            }
+        };
+        action.putValue(Action.NAME, text);
+        action.putValue(Action.SMALL_ICON, icon);
+        return action;
+    }
+
+    /**
+     * {@link AbstractAction} for command menu item.
+     * 
+     * @param text the text to display
+     * @param icon the {@link Icon} to display
+     * @return an {@link Action} for the searching of commands
+     */
+    private Action commandsAction(String text, Icon icon) {
+        AbstractAction action = new AbstractAction() {
+            /**
+             * Serial Version UID
+             */
+            private static final long serialVersionUID = 2179785949720803623L;
+
+            public void actionPerformed(ActionEvent event) {
+                SearchCommandPanel searchPanel = new SearchCommandPanel(new CommandBean(),
+                        new CommandTableMouseListener(), JsamsApplicationContext.getCommandService(), true);
+                parent.getTabbedPane().addTab(JsamsI18nResource.TITLE_SEARCH_COMMAND, null, searchPanel);
             }
         };
         action.putValue(Action.NAME, text);

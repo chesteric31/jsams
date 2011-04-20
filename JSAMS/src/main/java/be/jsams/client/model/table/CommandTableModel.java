@@ -6,20 +6,20 @@ import java.util.List;
 
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.i18n.JsamsI18nResource;
-import be.jsams.common.bean.model.sale.EstimateBean;
+import be.jsams.common.bean.model.sale.CommandBean;
 
 /**
- * {@link JsamsTableModel} for {@link EstimateBean} object.
- * 
+ * {@link JsamsTableModel} for {@link CommandBean} object.
+ *
  * @author chesteric31
- * @version $Rev: 689 $ $Date::                  $ $Author$
+ * @version $Rev$ $Date::                  $ $Author$
  */
-public class EstimateTableModel extends JsamsTableModel<EstimateBean> {
+public class CommandTableModel extends JsamsTableModel<CommandBean> {
 
     /**
      * Serial Version UID
      */
-    private static final long serialVersionUID = 8310299690507417519L;
+    private static final long serialVersionUID = -1772992590405438534L;
 
     /**
      * The columns name
@@ -28,13 +28,14 @@ public class EstimateTableModel extends JsamsTableModel<EstimateBean> {
             JsamsI18nResource.COLUMN_CREATION_DATE, JsamsI18nResource.COLUMN_TRANSFERRED,
             JsamsI18nResource.COLUMN_REMARK, JsamsI18nResource.COLUMN_DISCOUNT_RATE);
 
+
     /**
      * Constructor
      * 
      * @param listBean
-     *            a list of {@link EstimateBean}
+     *            a list of {@link CommandBean}
      */
-    public EstimateTableModel(List<EstimateBean> listBean) {
+    public CommandTableModel(List<CommandBean> listBean) {
         super(listBean);
     }
 
@@ -49,18 +50,18 @@ public class EstimateTableModel extends JsamsTableModel<EstimateBean> {
      * {@inheritDoc}
      */
     public Object getValueAt(int rowIndex, int columnIndex) {
-        EstimateBean estimate = (EstimateBean) getRow(rowIndex);
+        CommandBean command = (CommandBean) getRow(rowIndex);
         switch (columnIndex) {
         case ZERO:
-            return estimate.getId();
+            return command.getId();
         case ONE:
-            return estimate.getCreationDate();
+            return command.getCreationDate();
         case TWO:
-            return estimate.isTransferred();
+            return command.isTransferred();
         case THREE:
-            return estimate.getRemark();
+            return command.getRemark();
         case FOUR:
-            return estimate.getDiscountRate();
+            return command.getDiscountRate();
         default:
             return "";
         }

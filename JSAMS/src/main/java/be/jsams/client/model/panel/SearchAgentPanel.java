@@ -22,7 +22,7 @@ import be.jsams.server.service.AgentService;
  * Search {@link JPanel} for agents objects.
  * 
  * @author chesteric31
- * @version $Rev$ $Date::                  $ $Author$
+ * @version $Rev: 710 $ $Date::                  $ $Author$
  */
 public class SearchAgentPanel extends
         AbstractSearchPanel<AgentBean, AgentTableMouseListener, AgentService, EditAgentValidator> {

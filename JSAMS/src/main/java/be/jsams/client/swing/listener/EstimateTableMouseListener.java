@@ -12,7 +12,7 @@ import be.jsams.client.swing.component.JsamsTable;
  * Customized {@link MouseListener} for Estimate table double click.
  * 
  * @author chesteric31
- * @version $Rev$ $Date::                  $ $Author$
+ * @version $Rev: 711 $ $Date::                  $ $Author$
  */
 public class EstimateTableMouseListener implements MouseListener {
 

@@ -12,7 +12,7 @@ import be.jsams.client.swing.component.JsamsTable;
  * Customized {@link MouseListener} for Product table double click.
  * 
  * @author chesteric31
- * @version $Rev$ $Date::                  $ $Author$
+ * @version $Rev: 710 $ $Date::                  $ $Author$
  */
 public class ProductTableMouseListener implements MouseListener {
 
