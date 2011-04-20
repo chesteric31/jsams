@@ -5,7 +5,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 
 import be.jsams.client.i18n.JsamsI18nResource;
-import be.jsams.client.model.dialog.EditEstimateDialog;
+import be.jsams.client.model.dialog.sale.EditEstimateDialog;
 import be.jsams.common.bean.model.sale.EstimateBean;
 
 /**
