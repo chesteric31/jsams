@@ -4,7 +4,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import be.jsams.client.i18n.JsamsI18nResource;
-import be.jsams.client.model.dialog.EditEstimateDialog;
+import be.jsams.client.model.dialog.sale.EditEstimateDialog;
 import be.jsams.client.model.table.EstimateTableModel;
 import be.jsams.client.swing.component.JsamsTable;
 
