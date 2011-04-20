@@ -6,7 +6,7 @@ import be.jsams.common.bean.builder.ProductCategoryBeanBuilder;
 import be.jsams.common.bean.builder.SocietyBeanBuilder;
 import be.jsams.common.bean.model.AbstractNamedIdentityBean;
 import be.jsams.common.bean.model.SocietyBean;
-import be.jsams.common.bean.view.ProductBeanView;
+import be.jsams.common.bean.view.management.ProductBeanView;
 import be.jsams.server.dao.ProductCategoryDao;
 import be.jsams.server.model.Product;
 import be.jsams.server.model.ProductCategory;

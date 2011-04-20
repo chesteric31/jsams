@@ -10,12 +10,12 @@ import be.jsams.common.bean.model.AddressBean;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.AgentBean;
 import be.jsams.common.bean.model.management.CustomerBean;
-import be.jsams.common.bean.view.EstimateBeanView;
+import be.jsams.common.bean.view.sale.EstimateBeanView;
 import be.jsams.server.model.Estimate;
 import be.jsams.server.model.EstimateDetail;
 
 /**
- * The {@link AbstractIdentityBean} for {@link Estimate} object.
+ * {@link AbstractIdentityBean} for {@link Estimate} object.
  * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
@@ -96,10 +96,9 @@ public class EstimateBean extends AbstractIdentityBean<Estimate, EstimateBeanVie
      *            the creationDate to set
      */
     public void setCreationDate(Date creationDate) {
+        Date oldValue = this.creationDate;
         this.creationDate = creationDate;
-//        DateBean oldValue = this.creationDate;
-//        this.creationDate = creationDate;
-//        firePropertyChange(CREATION_DATE_PROPERTY, oldValue, this.creationDate);
+        firePropertyChange(CREATION_DATE_PROPERTY, oldValue, this.creationDate);
     }
 
     /**
@@ -268,6 +267,7 @@ public class EstimateBean extends AbstractIdentityBean<Estimate, EstimateBeanVie
         billingAddress.refresh(other.getBillingAddress());
         setCreationDate(other.getCreationDate());
         customer.refresh(other.getCustomer());
+        details.clear();
         details.addAll(other.getDetails());
         setDiscountRate(other.getDiscountRate());
         setListModel(other.getListModel());

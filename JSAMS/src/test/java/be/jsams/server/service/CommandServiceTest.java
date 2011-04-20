@@ -1,6 +1,5 @@
 package be.jsams.server.service;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -131,7 +130,7 @@ public class CommandServiceTest extends AbstractJUnitTestClass {
 
         CommandDetail detail = new CommandDetail();
         detail.setCommand(newCommand);
-        detail.setPrice(new BigDecimal(32.95));
+        detail.setPrice(32.95D);
         detail.setProduct(book);
         detail.setQuantity(1);
 //        detailDao.add(detail);

@@ -1,4 +1,4 @@
-package be.jsams.common.bean.view;
+package be.jsams.common.bean.view.management;
 
 import javax.swing.JPanel;
 
@@ -8,6 +8,8 @@ import be.jsams.client.swing.component.JsamsComboBox;
 import be.jsams.client.swing.component.JsamsFrame;
 import be.jsams.client.swing.component.JsamsTextField;
 import be.jsams.common.bean.model.management.ProductCategoryBean;
+import be.jsams.common.bean.view.AbstractView;
+import be.jsams.common.bean.view.ViewFactory;
 
 import com.jgoodies.forms.builder.DefaultFormBuilder;
 import com.jgoodies.forms.layout.FormLayout;

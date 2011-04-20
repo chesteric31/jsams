@@ -9,7 +9,7 @@ import be.jsams.client.validator.EditProductValidator;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.ProductBean;
 import be.jsams.common.bean.model.management.ProductCategoryBean;
-import be.jsams.common.bean.view.ProductBeanView;
+import be.jsams.common.bean.view.management.ProductBeanView;
 import be.jsams.server.service.ProductService;
 
 import com.jgoodies.validation.view.ValidationComponentUtils;

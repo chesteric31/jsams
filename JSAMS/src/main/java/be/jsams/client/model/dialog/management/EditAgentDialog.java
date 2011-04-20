@@ -9,8 +9,8 @@ import be.jsams.client.validator.EditAgentValidator;
 import be.jsams.common.bean.model.AbstractIdentityBean;
 import be.jsams.common.bean.model.CivilityBean;
 import be.jsams.common.bean.model.management.AgentBean;
-import be.jsams.common.bean.view.AgentBeanView;
 import be.jsams.common.bean.view.CivilityBeanView;
+import be.jsams.common.bean.view.management.AgentBeanView;
 import be.jsams.server.model.Civility;
 import be.jsams.server.service.AgentService;
 

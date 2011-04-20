@@ -1,7 +1,5 @@
 package be.jsams.server.model;
 
-import java.math.BigDecimal;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,9 +18,9 @@ import javax.persistence.Table;
 public class CommandDetail extends AbstractIdentity {
 
     private int quantity;
-    private BigDecimal price;
-    private BigDecimal vatApplicable;
-    private BigDecimal discountRate;
+    private Double price;
+    private Double vatApplicable;
+    private Double discountRate;
     private boolean transferred;
 
     private Command command;
@@ -58,7 +56,7 @@ public class CommandDetail extends AbstractIdentity {
      * @return the price
      */
     @Column(name = "PRICE")
-    public BigDecimal getPrice() {
+    public Double getPrice() {
         return price;
     }
 
@@ -67,7 +65,7 @@ public class CommandDetail extends AbstractIdentity {
      * @param price
      *            the price to set
      */
-    public void setPrice(BigDecimal price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
@@ -76,7 +74,7 @@ public class CommandDetail extends AbstractIdentity {
      * @return the VAT to apply
      */
     @Column(name = "VAT_APPLICABLE")
-    public BigDecimal getVatApplicable() {
+    public Double getVatApplicable() {
         return vatApplicable;
     }
 
@@ -85,7 +83,7 @@ public class CommandDetail extends AbstractIdentity {
      * @param vatApplicable
      *            the VAT applicable to set
      */
-    public void setVatApplicable(BigDecimal vatApplicable) {
+    public void setVatApplicable(Double vatApplicable) {
         this.vatApplicable = vatApplicable;
     }
 
@@ -94,7 +92,7 @@ public class CommandDetail extends AbstractIdentity {
      * @return a discount rate
      */
     @Column(name = "DISCOUNT_RATE")
-    public BigDecimal getDiscountRate() {
+    public Double getDiscountRate() {
         return discountRate;
     }
 
@@ -103,7 +101,7 @@ public class CommandDetail extends AbstractIdentity {
      * @param discountRate
      *            a discount rate to set
      */
-    public void setDiscountRate(BigDecimal discountRate) {
+    public void setDiscountRate(Double discountRate) {
         this.discountRate = discountRate;
     }
 

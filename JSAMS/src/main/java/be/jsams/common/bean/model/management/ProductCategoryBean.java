@@ -2,7 +2,7 @@ package be.jsams.common.bean.model.management;
 
 import be.jsams.common.bean.model.AbstractTranslatableIdentityBean;
 import be.jsams.common.bean.model.SocietyBean;
-import be.jsams.common.bean.view.ProductCategoryBeanView;
+import be.jsams.common.bean.view.management.ProductCategoryBeanView;
 import be.jsams.server.model.ProductCategory;
 
 import com.jgoodies.common.collect.ObservableList;

@@ -5,7 +5,6 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 import org.junit.Before;
@@ -92,7 +91,7 @@ public class CommandDetailDaoImplTest extends AbstractJUnitTestClass {
 		
 		customer.setContactInformation(contactInformation);
 		
-		customer.setCreditLimit(Double.valueOf(1000.00));
+		customer.setCreditLimit(1000.00D);
 		customer.setDeliveryAddress(billingAddress);
 		customer.setName("Wyatt Earp");
 		
@@ -120,15 +119,15 @@ public class CommandDetailDaoImplTest extends AbstractJUnitTestClass {
 		Product book = new Product();
 		book.setCategory(booksCategory);
 		book.setName("Fight Club");
-		book.setPrice(Double.valueOf(35.95D));
+		book.setPrice(35.95D);
 		book.setQuantityStock(15);
 		book.setReorderLevel(10);
-		book.setVatApplicable(Double.valueOf(6D));
+		book.setVatApplicable(6D);
 		productDao.add(book);
 		
 		detail = new CommandDetail();
 		detail.setCommand(newCommand);
-		detail.setPrice(new BigDecimal(32.95));
+		detail.setPrice(32.95D);
 		detail.setProduct(book);
 		detail.setQuantity(1);
 	}
@@ -162,10 +161,10 @@ public class CommandDetailDaoImplTest extends AbstractJUnitTestClass {
 	@Test
 	public void testUpdate() {
 	    detailDao.add(detail);
-	    detail.setPrice(new BigDecimal("30.95"));
+	    detail.setPrice(30.95D);
 	    detailDao.update(detail);
 	    CommandDetail findById = detailDao.findById(detail.getId());
-        assertEquals(0, findById.getPrice().compareTo(new BigDecimal("30.95")));
+        assertEquals(0, findById.getPrice().compareTo(30.95D));
 	}
 
 	@Test

@@ -1,4 +1,4 @@
-package be.jsams.common.bean.view;
+package be.jsams.common.bean.view.management;
 
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
@@ -14,6 +14,8 @@ import be.jsams.client.swing.utils.IconUtil;
 import be.jsams.common.bean.model.AddressBean;
 import be.jsams.common.bean.model.ContactInformationBean;
 import be.jsams.common.bean.model.management.AgentBean;
+import be.jsams.common.bean.view.AbstractView;
+import be.jsams.common.bean.view.ViewFactory;
 
 import com.jgoodies.forms.builder.DefaultFormBuilder;
 import com.jgoodies.forms.factories.Borders;
