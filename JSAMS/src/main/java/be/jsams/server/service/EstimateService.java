@@ -13,12 +13,12 @@ import be.jsams.common.bean.model.sale.EstimateBean;
 public interface EstimateService extends Service<EstimateBean> {
 
     /**
-     * Finds all {@link EstimateBean} following the criteria agent.
+     * Finds all {@link EstimateBean} following the criteria
+     * {@link EstimateBean}.
      * 
-     * @param criteria
-     *            the criteria agent
+     * @param criteria the criteria {@link EstimateBean}
      * @return a list of {@link EstimateBean}
      */
-    List<EstimateBean> findByCriteria(EstimateBean criteria);
+    List<EstimateBean> findByCriteria(final EstimateBean criteria);
 
 }

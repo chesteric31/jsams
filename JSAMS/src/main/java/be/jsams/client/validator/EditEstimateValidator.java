@@ -51,7 +51,6 @@ public class EditEstimateValidator implements Validator<EstimateBean> {
 //        result.addAllFrom(billingAddressResult);
 //        result.addAllFrom(deliveryAddressResult);
         return support.getResult();
-
     }
 
 }

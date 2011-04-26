@@ -1,7 +1,21 @@
 package be.jsams.client.model.panel;
 
-import javax.swing.JPanel;
+import java.util.Date;
+import java.util.List;
 
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableCellRenderer;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import be.jsams.client.i18n.JsamsI18nResource;
+import be.jsams.client.model.dialog.sale.EditCommandDialog;
+import be.jsams.client.model.table.CommandTableModel;
+import be.jsams.client.renderer.JsamsBooleanTableCellRenderer;
+import be.jsams.client.renderer.JsamsTableCellRenderer;
 import be.jsams.client.swing.listener.CommandTableMouseListener;
 import be.jsams.client.validator.EditCommandValidator;
 import be.jsams.client.validator.SearchCommandValidator;
@@ -22,6 +36,10 @@ public class SearchCommandPanel extends
      */
     private static final long serialVersionUID = -494667273780356685L;
 
+    private static final Log LOGGER = LogFactory.getLog(SearchCommandPanel.class);
+
+    private final boolean debug = LOGGER.isDebugEnabled();
+    
     /**
      * Constructor.
      * 
@@ -47,8 +65,7 @@ public class SearchCommandPanel extends
      */
     @Override
     protected JPanel buildSearchCriteriaPanel() {
-        // TODO Auto-generated method stub
-        return null;
+        return getModel().getView().createSearchView();
     }
 
     /**
@@ -56,8 +73,8 @@ public class SearchCommandPanel extends
      */
     @Override
     protected void performButtonAdd() {
-        // TODO Auto-generated method stub
-        
+        new EditCommandDialog(JsamsI18nResource.TITLE_EDIT_COMMAND, new CommandBean());
+        updateUI();
     }
 
     /**
@@ -65,8 +82,17 @@ public class SearchCommandPanel extends
      */
     @Override
     protected void performButtonModify() {
-        // TODO Auto-generated method stub
-        
+        int selectedRow = getResultTable().getSelectedRow();
+        if (selectedRow > -1) {
+            int selectedRowModel = getResultTable().convertRowIndexToModel(selectedRow);
+            CommandTableModel model = (CommandTableModel) getResultTable().getModel();
+            CommandBean beanToModify = model.getRow(selectedRowModel);
+            if (debug) {
+                LOGGER.debug("The command to modify: " + beanToModify);
+            }
+            new EditCommandDialog(JsamsI18nResource.TITLE_EDIT_COMMAND, beanToModify);
+            updateUI();
+        }
     }
 
     /**
@@ -74,8 +100,15 @@ public class SearchCommandPanel extends
      */
     @Override
     protected void performButtonRemove() {
-        // TODO Auto-generated method stub
-        
+        int selectedRow = getResultTable().getSelectedRow();
+        if (selectedRow > -1) {
+            int selectedRowModel = getResultTable().convertRowIndexToModel(selectedRow);
+            CommandTableModel model = (CommandTableModel) getResultTable().getModel();
+            CommandBean beanToDelete = model.getRow(selectedRowModel);
+            getService().delete(beanToDelete);
+            model.remove(selectedRowModel);
+            updateUI();
+        }
     }
 
     /**
@@ -92,8 +125,38 @@ public class SearchCommandPanel extends
      */
     @Override
     public void performOk() {
-        // TODO Auto-generated method stub
-        
+        final CommandBean criteria = getModel();
+        if (super.prePerformOk(criteria)) {
+            List<CommandBean> commands = ((CommandService) super.getService()).findByCriteria(criteria);
+            fillTable(commands);
+            super.postPerformOk();
+        }
+    }
+
+    /**
+     * Fills the data table.
+     * 
+     * @param commands
+     *            the {@link CommandBean} list
+     */
+    private void fillTable(final List<CommandBean> commands) {
+        CommandTableModel model = new CommandTableModel(commands);
+        getResultTable().setModel(model);
+
+        JTableHeader tableHeader = getResultTable().getTableHeader();
+        TableCellRenderer headerRenderer = tableHeader.getDefaultRenderer();
+
+        ((DefaultTableCellRenderer) headerRenderer).setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
+        getResultTable().setAutoCreateRowSorter(true);
+        JsamsTableCellRenderer defaultCellRenderer = new JsamsTableCellRenderer();
+        getResultTable().setDefaultRenderer(Long.class, defaultCellRenderer);
+        getResultTable().setDefaultRenderer(Integer.class, defaultCellRenderer);
+        getResultTable().setDefaultRenderer(Double.class, defaultCellRenderer);
+        getResultTable().setDefaultRenderer(String.class, defaultCellRenderer);
+        getResultTable().setDefaultRenderer(Boolean.class, new JsamsBooleanTableCellRenderer());
+        getResultTable().setDefaultRenderer(Date.class, defaultCellRenderer);
+
+        getResultTable().repaint();
     }
 
 }

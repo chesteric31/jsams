@@ -31,12 +31,13 @@ public class EstimateBean extends AbstractIdentityBean<Estimate, EstimateBeanVie
     private PeriodBean period;
     private String remark;
     private Double discountRate;
+    private boolean transferred;
 
     private AgentBean agent;
     private CustomerBean customer;
     private AddressBean billingAddress;
     private List<EstimateDetailBean> details;
-    private boolean transferred;
+    private SocietyBean society;
 
     public static final String CREATION_DATE_PROPERTY = "creationDate";
     public static final String REMARK_PROPERTY = "remark";
@@ -230,6 +231,20 @@ public class EstimateBean extends AbstractIdentityBean<Estimate, EstimateBeanVie
     }
 
     /**
+     * @return the society
+     */
+    public SocietyBean getSociety() {
+        return society;
+    }
+
+    /**
+     * @param society the society to set
+     */
+    public void setSociety(SocietyBean society) {
+        this.society = society;
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
@@ -255,6 +270,7 @@ public class EstimateBean extends AbstractIdentityBean<Estimate, EstimateBeanVie
         setSelection(null);
         setTransferred(false);
         period.clear();
+        society.clear();
     }
 
     /**
@@ -274,6 +290,7 @@ public class EstimateBean extends AbstractIdentityBean<Estimate, EstimateBeanVie
         setRemark(other.getRemark());
         setSelection(other.getSelection());
         setTransferred(other.isTransferred());
+        society.refresh(other.getSociety());
     }
 
 }

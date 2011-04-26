@@ -7,6 +7,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import be.jsams.common.bean.model.sale.CommandDetailBean;
+
 /**
  * Command detail (line) entity object.
  * 
@@ -31,6 +33,23 @@ public class CommandDetail extends AbstractIdentity {
      */
     public CommandDetail() {
         super();
+    }
+
+    /**
+     * Constructor.
+     * 
+     * @param bean the {@link CommandDetailBean}
+     * @param command the {@link Command} model
+     */
+    public CommandDetail(final CommandDetailBean bean, final Command command) {
+        super(bean);
+        setDiscountRate(bean.getDiscountRate());
+        setCommand(command);
+        setPrice(bean.getPrice());
+        setProduct(new Product(bean.getProduct()));
+        setQuantity(bean.getQuantity());
+        setTransferred(bean.isTransferred());
+        setVatApplicable(bean.getVatApplicable());
     }
 
     /**

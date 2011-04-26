@@ -3,6 +3,7 @@ package be.jsams.server.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.common.bean.model.sale.EstimateBean;
 import be.jsams.server.dao.EstimateDao;
 import be.jsams.server.dao.EstimateDetailDao;
@@ -117,7 +118,9 @@ public class EstimateServiceImpl implements EstimateService {
      * {@inheritDoc}
      */
     @Override
-    public List<EstimateBean> findByCriteria(EstimateBean criteria) {
+    public List<EstimateBean> findByCriteria(final EstimateBean criteria) {
+        // necessary to have the current society in the criteria
+        criteria.setSociety(JsamsDesktop.getInstance().getCurrentSociety());
         List<Estimate> estimates = estimateDao.findByCriteria(criteria);
         List<EstimateBean> beans = new ArrayList<EstimateBean>();
         for (Estimate estimate : estimates) {
