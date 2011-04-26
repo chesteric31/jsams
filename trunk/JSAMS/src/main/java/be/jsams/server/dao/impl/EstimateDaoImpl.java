@@ -6,7 +6,6 @@ import java.util.List;
 
 import javax.persistence.Query;
 
-import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.common.bean.model.sale.EstimateBean;
 import be.jsams.common.bean.model.sale.PeriodBean;
 import be.jsams.server.dao.EstimateDao;
@@ -49,7 +48,7 @@ public class EstimateDaoImpl extends DaoImpl<Estimate> implements EstimateDao {
 
         boolean transferred = criteria.isTransferred();
 
-        Long societyId = JsamsDesktop.getInstance().getCurrentSociety().getId();
+        Long societyId = criteria.getSociety().getId();
 
         queryBuilder.append(" WHERE ");
         queryBuilder.append("e.customer.society.id = " + societyId);

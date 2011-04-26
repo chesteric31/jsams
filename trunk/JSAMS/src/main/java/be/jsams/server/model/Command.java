@@ -1,11 +1,13 @@
 package be.jsams.server.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -13,7 +15,10 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.hibernate.annotations.Cascade;
+
 import be.jsams.common.bean.model.sale.CommandBean;
+import be.jsams.common.bean.model.sale.CommandDetailBean;
 
 /**
  * Command entity object.
@@ -52,6 +57,22 @@ public class Command extends AbstractIdentity {
      */
     public Command(CommandBean bean) {
         super(bean);
+        setAgent(new Agent(bean.getAgent()));
+        setBillingAddress(new Address(bean.getBillingAddress()));
+        setDeliveryAddress(new Address(bean.getDeliveryAddress()));
+        setCreationDate(bean.getCreationDate());
+        setCustomer(new Customer(bean.getCustomer()));
+        setDiscountRate(bean.getDiscountRate());
+        setRemark(bean.getRemark());
+        setTransferred(bean.isTransferred());
+        List<CommandDetailBean> list = bean.getDetails();
+        List<CommandDetail> tmp = new ArrayList<CommandDetail>();
+        if (list != null) {
+            for (CommandDetailBean detail : list) {
+                tmp.add(new CommandDetail(detail, this));
+            }
+        }
+        setDetails(tmp);
     }
 
     /**
@@ -189,7 +210,8 @@ public class Command extends AbstractIdentity {
      * 
      * @return a list of {@link CommandDetail}
      */
-    @OneToMany(mappedBy = "command")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "command")
+    @Cascade(org.hibernate.annotations.CascadeType.DELETE_ORPHAN)
     public List<CommandDetail> getDetails() {
         return details;
     }

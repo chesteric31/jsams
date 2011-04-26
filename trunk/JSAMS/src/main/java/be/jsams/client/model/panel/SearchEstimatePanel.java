@@ -68,12 +68,18 @@ public class SearchEstimatePanel extends
         return getModel().getView().createSearchView();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected void performButtonAdd() {
         new EditEstimateDialog(JsamsI18nResource.TITLE_EDIT_ESTIMATE, new EstimateBean());
         updateUI();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     protected void performButtonModify() {
         int selectedRow = getResultTable().getSelectedRow();
@@ -87,7 +93,6 @@ public class SearchEstimatePanel extends
             new EditEstimateDialog(JsamsI18nResource.TITLE_EDIT_ESTIMATE, beanToModify);
             updateUI();
         }
-
     }
 
     /**

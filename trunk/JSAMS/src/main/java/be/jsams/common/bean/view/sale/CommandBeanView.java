@@ -39,6 +39,7 @@ import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.management.ProductBean;
 import be.jsams.common.bean.model.sale.CommandBean;
 import be.jsams.common.bean.model.sale.CommandDetailBean;
+import be.jsams.common.bean.model.sale.PeriodBean;
 import be.jsams.common.bean.view.AbstractView;
 import be.jsams.common.bean.view.ViewFactory;
 
@@ -340,8 +341,35 @@ public class CommandBeanView extends AbstractView<CommandBean, JPanel, JPanel> {
      * {@inheritDoc}
      */
     public JPanel createSearchView() {
-        // TODO Auto-generated method stub
-        return null;
+        CommandBean bean = getBean();
+        ViewFactory<CommandBean> helper = new ViewFactory<CommandBean>();
+
+        JCheckBox transferred = helper.createBindingBooleanComponent(bean, CommandBean.TRANSFERRED_PROPERTY, false,
+                false);
+        ViewFactory<PeriodBean> periodHelper = new ViewFactory<PeriodBean>();
+        JDateChooser startDate = periodHelper.createBindingDateComponent(bean.getPeriod(),
+                PeriodBean.START_DATE_PROPERTY, false, false);
+        JDateChooser endDate = periodHelper.createBindingDateComponent(bean.getPeriod(), PeriodBean.END_DATE_PROPERTY,
+                false, false);
+        ViewFactory<AddressBean> addressHelper = new ViewFactory<AddressBean>();
+        JsamsTextField textFieldCity = addressHelper.createBindingTextComponent(bean.getBillingAddress(),
+                AddressBean.CITY_PROPERTY, false, false);
+        JsamsTextField textFieldZipCode = addressHelper.createBindingTextComponent(bean.getBillingAddress(),
+                AddressBean.ZIP_CODE_PROPERTY, false, false);
+        FormLayout layout = new FormLayout(
+                "right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow", "p");
+        DefaultFormBuilder builder = new DefaultFormBuilder(layout, JsamsFrame.RESOURCE_BUNDLE);
+        builder.setDefaultDialogBorder();
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_CUSTOMER_NAME.getKey(), bean.getCustomer().getView()
+                .createCustomView());
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_START_DATE.getKey(), startDate);
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_END_DATE.getKey(), endDate);
+        builder.nextLine();
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_CITY.getKey(), textFieldCity);
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_ZIP_CODE.getKey(), textFieldZipCode);
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_TRANSFERRED.getKey(), transferred);
+
+        return builder.getPanel();
     }
 
 }

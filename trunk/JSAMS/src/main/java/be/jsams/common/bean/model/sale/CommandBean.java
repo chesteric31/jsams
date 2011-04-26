@@ -31,13 +31,14 @@ public class CommandBean extends AbstractIdentityBean<Command, CommandBeanView> 
     private PeriodBean period;
     private String remark;
     private Double discountRate;
+    private boolean transferred;
 
     private AgentBean agent;
     private CustomerBean customer;
     private AddressBean billingAddress;
     private AddressBean deliveryAddress;
     private List<CommandDetailBean> details;
-    private boolean transferred;
+    private SocietyBean society;
 
     public static final String CREATION_DATE_PROPERTY = "creationDate";
     public static final String REMARK_PROPERTY = "remark";
@@ -235,6 +236,20 @@ public class CommandBean extends AbstractIdentityBean<Command, CommandBeanView> 
     }
 
     /**
+     * @return the {@link SocietyBean}
+     */
+    public SocietyBean getSociety() {
+        return society;
+    }
+
+    /**
+     * @param society the {@link SocietyBean} to set
+     */
+    public void setSociety(SocietyBean society) {
+        this.society = society;
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
@@ -261,6 +276,7 @@ public class CommandBean extends AbstractIdentityBean<Command, CommandBeanView> 
         setSelection(null);
         setTransferred(false);
         period.clear();
+        society.clear();
     }
 
     /**
@@ -280,6 +296,7 @@ public class CommandBean extends AbstractIdentityBean<Command, CommandBeanView> 
         setRemark(other.getRemark());
         setSelection(other.getSelection());
         setTransferred(other.isTransferred());
+        society.refresh(other.getSociety());
     }
 
 }

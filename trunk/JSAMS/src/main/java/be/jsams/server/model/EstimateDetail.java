@@ -40,7 +40,6 @@ public class EstimateDetail extends AbstractIdentity {
      * 
      * @param bean the {@link EstimateDetailBean}
      * @param estimate the {@link Estimate} model
-     * 
      */
     public EstimateDetail(final EstimateDetailBean bean, final Estimate estimate) {
         super(bean);

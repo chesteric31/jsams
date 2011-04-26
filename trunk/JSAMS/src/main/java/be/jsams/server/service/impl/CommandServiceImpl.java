@@ -3,6 +3,7 @@ package be.jsams.server.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.common.bean.model.sale.CommandBean;
 import be.jsams.server.dao.CommandDao;
 import be.jsams.server.dao.CommandDetailDao;
@@ -57,15 +58,9 @@ public class CommandServiceImpl implements CommandService {
      * {@inheritDoc}
      */
     public CommandBean create(final CommandBean bean) {
-        return null;
-        // TODO
-//        Command command = new Command(bean);
-//        commandDao.add(command);
-//        return new CommandBean(command);
-//        List<CommandDetailBean> details = bean.getDetails();
-//        for (CommandDetail detail : details) {
-//            commandDetailDao.add(new CommandDetailBean(detail));
-//        }
+        Command command = new Command(bean);
+        Command addingCommand = commandDao.add(command);
+        return new CommandBean(addingCommand);
     }
 
     /**
@@ -119,6 +114,20 @@ public class CommandServiceImpl implements CommandService {
     public void update(final CommandBean bean) {
         Command command = new Command(bean);
         commandDao.update(command);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<CommandBean> findByCriteria(final CommandBean criteria) {
+        criteria.setSociety(JsamsDesktop.getInstance().getCurrentSociety());
+        List<Command> commands = commandDao.findByCriteria(criteria);
+        List<CommandBean> beans = new ArrayList<CommandBean>();
+        for (Command command : commands) {
+            beans.add(new CommandBean(command));
+        }
+        return beans;
     }
 
 }

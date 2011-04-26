@@ -1,11 +1,16 @@
 package be.jsams.client.model.dialog.sale;
 
+import javax.swing.JPanel;
+
 import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.model.dialog.AbstractEditDialog;
 import be.jsams.client.validator.EditCommandValidator;
 import be.jsams.common.bean.model.sale.CommandBean;
+import be.jsams.common.bean.view.sale.CommandBeanView;
 import be.jsams.server.service.CommandService;
+
+import com.jgoodies.validation.view.ValidationComponentUtils;
 
 /**
  * Edit Command {@link AbstractEditDialog}, to create or update a {@link CommandBean} object.
@@ -44,8 +49,11 @@ public class EditCommandDialog extends AbstractEditDialog<CommandBean, EditComma
      */
     @Override
     protected void initComponents() {
-        // TODO Auto-generated method stub
-        
+        CommandBeanView view = getModel().getView();
+        JPanel panel = view.createEditView();
+        getContentPane().add(panel);
+        ValidationComponentUtils.updateComponentTreeMandatoryBorder(this);
+        pack();
     }
 
     /**
@@ -53,8 +61,8 @@ public class EditCommandDialog extends AbstractEditDialog<CommandBean, EditComma
      */
     @Override
     public void performOk() {
-        // TODO Auto-generated method stub
-        
+        CommandBean command = getModel();
+        super.postPerformOk(command);
     }
 
 }
