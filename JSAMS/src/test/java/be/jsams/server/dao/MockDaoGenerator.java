@@ -4,12 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import be.jsams.common.bean.model.management.ProductCategoryBean;
-import be.jsams.server.model.Agent;
+import be.jsams.server.dao.management.ProductCategoryDao;
 import be.jsams.server.model.Civility;
 import be.jsams.server.model.LegalForm;
-import be.jsams.server.model.Product;
-import be.jsams.server.model.ProductCategory;
 import be.jsams.server.model.Society;
+import be.jsams.server.model.management.Agent;
+import be.jsams.server.model.management.Product;
+import be.jsams.server.model.management.ProductCategory;
 
 /**
  * Generator of Mock DAOs.

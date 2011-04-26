@@ -13,22 +13,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import be.jsams.server.dao.AbstractJUnitTestClass;
 import be.jsams.server.dao.AddressDao;
-import be.jsams.server.dao.AgentDao;
-import be.jsams.server.dao.CommandDao;
-import be.jsams.server.dao.CommandDetailDao;
-import be.jsams.server.dao.CustomerDao;
 import be.jsams.server.dao.PaymentModeDao;
-import be.jsams.server.dao.ProductCategoryDao;
-import be.jsams.server.dao.ProductDao;
+import be.jsams.server.dao.management.AgentDao;
+import be.jsams.server.dao.management.CustomerDao;
+import be.jsams.server.dao.management.ProductCategoryDao;
+import be.jsams.server.dao.management.ProductDao;
+import be.jsams.server.dao.sale.CommandDao;
+import be.jsams.server.dao.sale.CommandDetailDao;
+import be.jsams.server.dao.sale.impl.CommandDetailDaoImpl;
 import be.jsams.server.model.Address;
-import be.jsams.server.model.Agent;
-import be.jsams.server.model.Command;
-import be.jsams.server.model.CommandDetail;
 import be.jsams.server.model.ContactInformation;
-import be.jsams.server.model.Customer;
 import be.jsams.server.model.PaymentMode;
-import be.jsams.server.model.Product;
-import be.jsams.server.model.ProductCategory;
+import be.jsams.server.model.management.Agent;
+import be.jsams.server.model.management.Customer;
+import be.jsams.server.model.management.Product;
+import be.jsams.server.model.management.ProductCategory;
+import be.jsams.server.model.sale.Command;
+import be.jsams.server.model.sale.CommandDetail;
 
 /**
  * Test class for {@link CommandDetailDaoImpl}.

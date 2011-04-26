@@ -14,12 +14,14 @@ import be.jsams.common.bean.model.management.ProductCategoryBean;
 import be.jsams.server.dao.AbstractJUnitTestClass;
 import be.jsams.server.dao.LegalFormDao;
 import be.jsams.server.dao.MockDaoGenerator;
-import be.jsams.server.dao.ProductCategoryDao;
-import be.jsams.server.dao.ProductDao;
 import be.jsams.server.dao.SocietyDao;
-import be.jsams.server.model.Product;
-import be.jsams.server.model.ProductCategory;
+import be.jsams.server.dao.management.ProductCategoryDao;
+import be.jsams.server.dao.management.ProductDao;
+import be.jsams.server.dao.management.impl.ProductCategoryDaoImpl;
+import be.jsams.server.dao.management.impl.ProductDaoImpl;
 import be.jsams.server.model.Society;
+import be.jsams.server.model.management.Product;
+import be.jsams.server.model.management.ProductCategory;
 import be.jsams.server.model.mock.MockModelGenerator;
 
 /**
@@ -88,7 +90,7 @@ public class ProductDaoImplTest extends AbstractJUnitTestClass {
 
     /**
      * Test method for
-     * {@link be.jsams.server.dao.impl.ProductDaoImpl#findByCriteria(be.jsams.common.bean.model.management.ProductBean)}
+     * {@link be.jsams.server.dao.management.impl.ProductDaoImpl#findByCriteria(be.jsams.common.bean.model.management.ProductBean)}
      * .
      */
     @Test
