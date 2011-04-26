@@ -9,7 +9,7 @@ import be.jsams.common.bean.model.AddressBean;
 import be.jsams.common.bean.model.PaymentModeBean;
 import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.view.sale.BillBeanView;
-import be.jsams.server.model.Bill;
+import be.jsams.server.model.sale.Bill;
 
 /**
  * 

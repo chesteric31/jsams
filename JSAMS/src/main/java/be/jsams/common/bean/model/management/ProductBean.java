@@ -7,9 +7,9 @@ import be.jsams.common.bean.builder.SocietyBeanBuilder;
 import be.jsams.common.bean.model.AbstractNamedIdentityBean;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.view.management.ProductBeanView;
-import be.jsams.server.dao.ProductCategoryDao;
-import be.jsams.server.model.Product;
-import be.jsams.server.model.ProductCategory;
+import be.jsams.server.dao.management.ProductCategoryDao;
+import be.jsams.server.model.management.Product;
+import be.jsams.server.model.management.ProductCategory;
 
 /**
  * Bean model for {@link Product} object.

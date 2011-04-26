@@ -11,8 +11,8 @@ import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.AgentBean;
 import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.view.sale.EstimateBeanView;
-import be.jsams.server.model.Estimate;
-import be.jsams.server.model.EstimateDetail;
+import be.jsams.server.model.sale.Estimate;
+import be.jsams.server.model.sale.EstimateDetail;
 
 /**
  * {@link AbstractIdentityBean} for {@link Estimate} object.

@@ -8,7 +8,7 @@ import be.jsams.client.model.dialog.AbstractEditDialog;
 import be.jsams.client.validator.EditProductCategoryValidator;
 import be.jsams.common.bean.model.management.ProductCategoryBean;
 import be.jsams.common.bean.view.management.ProductCategoryBeanView;
-import be.jsams.server.service.ProductCategoryService;
+import be.jsams.server.service.management.ProductCategoryService;
 
 import com.jgoodies.validation.view.ValidationComponentUtils;
 

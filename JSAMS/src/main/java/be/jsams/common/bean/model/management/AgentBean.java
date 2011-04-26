@@ -14,8 +14,8 @@ import be.jsams.common.bean.model.ContactInformationBean;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.view.management.AgentBeanView;
 import be.jsams.server.dao.CivilityDao;
-import be.jsams.server.model.Agent;
 import be.jsams.server.model.Civility;
+import be.jsams.server.model.management.Agent;
 
 /**
  * Bean model for {@link Agent} object.

@@ -18,7 +18,7 @@ import be.jsams.common.bean.view.management.CustomerBeanView;
 import be.jsams.server.model.Civility;
 import be.jsams.server.model.LegalForm;
 import be.jsams.server.model.PaymentMode;
-import be.jsams.server.service.CustomerService;
+import be.jsams.server.service.management.CustomerService;
 
 import com.jgoodies.validation.view.ValidationComponentUtils;
 

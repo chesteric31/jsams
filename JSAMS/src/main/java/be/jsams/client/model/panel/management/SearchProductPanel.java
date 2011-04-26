@@ -20,7 +20,7 @@ import be.jsams.client.validator.EditProductValidator;
 import be.jsams.client.validator.SearchProductValidator;
 import be.jsams.common.bean.builder.ProductBeanBuilder;
 import be.jsams.common.bean.model.management.ProductBean;
-import be.jsams.server.service.ProductService;
+import be.jsams.server.service.management.ProductService;
 
 /**
  * Search Product panel.

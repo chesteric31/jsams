@@ -8,7 +8,7 @@ import be.jsams.client.model.dialog.AbstractEditDialog;
 import be.jsams.client.validator.EditEstimateValidator;
 import be.jsams.common.bean.model.sale.EstimateBean;
 import be.jsams.common.bean.view.sale.EstimateBeanView;
-import be.jsams.server.service.EstimateService;
+import be.jsams.server.service.sale.EstimateService;
 
 import com.jgoodies.validation.view.ValidationComponentUtils;
 

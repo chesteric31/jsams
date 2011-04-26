@@ -11,8 +11,8 @@ import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.AgentBean;
 import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.view.sale.CommandBeanView;
-import be.jsams.server.model.Command;
-import be.jsams.server.model.CommandDetail;
+import be.jsams.server.model.sale.Command;
+import be.jsams.server.model.sale.CommandDetail;
 
 /**
  * {@link AbstractIdentityBean} for {@link Command} object.

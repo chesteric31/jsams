@@ -6,14 +6,14 @@ import be.jsams.common.bean.builder.SocietyBeanBuilder;
 import be.jsams.server.dao.CivilityDao;
 import be.jsams.server.dao.LegalFormDao;
 import be.jsams.server.dao.PaymentModeDao;
-import be.jsams.server.dao.ProductCategoryDao;
-import be.jsams.server.service.AgentService;
-import be.jsams.server.service.CommandService;
-import be.jsams.server.service.CustomerService;
-import be.jsams.server.service.EstimateService;
-import be.jsams.server.service.ProductCategoryService;
-import be.jsams.server.service.ProductService;
+import be.jsams.server.dao.management.ProductCategoryDao;
 import be.jsams.server.service.SocietyService;
+import be.jsams.server.service.management.AgentService;
+import be.jsams.server.service.management.CustomerService;
+import be.jsams.server.service.management.ProductCategoryService;
+import be.jsams.server.service.management.ProductService;
+import be.jsams.server.service.sale.CommandService;
+import be.jsams.server.service.sale.EstimateService;
 
 /**
  * This class provides static methods to get a reference to a specific service, anywhere in this project.

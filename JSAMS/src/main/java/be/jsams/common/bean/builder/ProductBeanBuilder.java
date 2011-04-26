@@ -1,8 +1,8 @@
 package be.jsams.common.bean.builder;
 
 import be.jsams.common.bean.model.management.ProductBean;
-import be.jsams.server.dao.ProductDao;
-import be.jsams.server.model.Product;
+import be.jsams.server.dao.management.ProductDao;
+import be.jsams.server.model.management.Product;
 
 /**
  * Builder that makes a {@link ProductBean} from DAO list model and

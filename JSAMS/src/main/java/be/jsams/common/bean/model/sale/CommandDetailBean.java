@@ -4,7 +4,7 @@ import be.jsams.common.bean.builder.ProductBeanBuilder;
 import be.jsams.common.bean.model.AbstractIdentityBean;
 import be.jsams.common.bean.model.management.ProductBean;
 import be.jsams.common.bean.view.sale.CommandDetailBeanView;
-import be.jsams.server.model.CommandDetail;
+import be.jsams.server.model.sale.CommandDetail;
 
 import com.jgoodies.common.collect.ArrayListModel;
 import com.jgoodies.common.collect.ObservableList;

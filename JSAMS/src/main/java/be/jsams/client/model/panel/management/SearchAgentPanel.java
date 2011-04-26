@@ -17,7 +17,7 @@ import be.jsams.client.swing.listener.AgentTableMouseListener;
 import be.jsams.client.validator.EditAgentValidator;
 import be.jsams.client.validator.SearchAgentValidator;
 import be.jsams.common.bean.model.management.AgentBean;
-import be.jsams.server.service.AgentService;
+import be.jsams.server.service.management.AgentService;
 
 /**
  * Search {@link JPanel} for agents objects.

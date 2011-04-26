@@ -13,6 +13,9 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import be.jsams.common.bean.model.SocietyBean;
+import be.jsams.server.model.management.Agent;
+import be.jsams.server.model.management.Customer;
+import be.jsams.server.model.management.ProductCategory;
 
 /**
  * Society entity object.

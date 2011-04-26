@@ -12,7 +12,7 @@ import be.jsams.common.bean.model.management.AgentBean;
 import be.jsams.common.bean.view.CivilityBeanView;
 import be.jsams.common.bean.view.management.AgentBeanView;
 import be.jsams.server.model.Civility;
-import be.jsams.server.service.AgentService;
+import be.jsams.server.service.management.AgentService;
 
 import com.jgoodies.validation.view.ValidationComponentUtils;
 
