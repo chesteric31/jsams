@@ -21,7 +21,7 @@ import javax.swing.table.TableModel;
 import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.i18n.JsamsI18nLabelResource;
 import be.jsams.client.i18n.JsamsI18nResource;
-import be.jsams.client.model.panel.SearchProductPanel;
+import be.jsams.client.model.panel.management.SearchProductPanel;
 import be.jsams.client.model.table.EstimateDetailTableModel;
 import be.jsams.client.model.table.ProductTableModel;
 import be.jsams.client.renderer.JsamsTableCellRenderer;
@@ -53,7 +53,7 @@ import com.toedter.calendar.JDateChooser;
  * Implementation of all sorts of views for {@link EstimateBean} object.
  * 
  * @author chesteric31
- * @version $Rev: 706 $ $Date:: 2011-04-18 13:24#$ $Author: chesteric31 $
+ * @version $Rev$ $Date::                  $ $Author$
  */
 public class EstimateBeanView extends AbstractView<EstimateBean, JPanel, JPanel> {
 

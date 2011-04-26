@@ -21,7 +21,7 @@ import javax.swing.table.TableModel;
 import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.i18n.JsamsI18nLabelResource;
 import be.jsams.client.i18n.JsamsI18nResource;
-import be.jsams.client.model.panel.SearchProductPanel;
+import be.jsams.client.model.panel.management.SearchProductPanel;
 import be.jsams.client.model.table.CommandDetailTableModel;
 import be.jsams.client.model.table.ProductTableModel;
 import be.jsams.client.renderer.JsamsTableCellRenderer;
@@ -53,7 +53,7 @@ import com.toedter.calendar.JDateChooser;
  * Implementation of all sorts of views for {@link CommandBean} object.
  *
  * @author chesteric31
- * @version $Rev: 689 $ $Date:: 2011-04-14 16:11#$ $Author: chesteric31 $
+ * @version $Rev$ $Date::                  $ $Author$
  */
 public class CommandBeanView extends AbstractView<CommandBean, JPanel, JPanel> {
 
