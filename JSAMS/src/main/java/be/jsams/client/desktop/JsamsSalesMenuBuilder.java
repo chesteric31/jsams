@@ -9,8 +9,8 @@ import javax.swing.JSeparator;
 
 import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.i18n.JsamsI18nResource;
-import be.jsams.client.model.panel.SearchCommandPanel;
-import be.jsams.client.model.panel.SearchEstimatePanel;
+import be.jsams.client.model.panel.sale.SearchCommandPanel;
+import be.jsams.client.model.panel.sale.SearchEstimatePanel;
 import be.jsams.client.swing.component.JsamsMenu;
 import be.jsams.client.swing.component.JsamsMenuItem;
 import be.jsams.client.swing.listener.CommandTableMouseListener;

@@ -1,4 +1,4 @@
-package be.jsams.client.model.panel;
+package be.jsams.client.model.panel.management;
 
 import java.util.List;
 
@@ -14,6 +14,7 @@ import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.model.dialog.management.EditProductCategoryDialog;
+import be.jsams.client.model.panel.AbstractSearchPanel;
 import be.jsams.client.model.table.ProductCategoryTableModel;
 import be.jsams.client.renderer.JsamsTableCellRenderer;
 import be.jsams.client.swing.listener.ProductCategoryTableMouseListener;

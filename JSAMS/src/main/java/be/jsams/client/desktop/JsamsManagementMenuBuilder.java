@@ -9,10 +9,10 @@ import javax.swing.JSeparator;
 
 import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.i18n.JsamsI18nResource;
-import be.jsams.client.model.panel.SearchAgentPanel;
-import be.jsams.client.model.panel.SearchCustomerPanel;
-import be.jsams.client.model.panel.SearchProductCategoryPanel;
-import be.jsams.client.model.panel.SearchProductPanel;
+import be.jsams.client.model.panel.management.SearchAgentPanel;
+import be.jsams.client.model.panel.management.SearchCustomerPanel;
+import be.jsams.client.model.panel.management.SearchProductCategoryPanel;
+import be.jsams.client.model.panel.management.SearchProductPanel;
 import be.jsams.client.swing.component.JsamsMenu;
 import be.jsams.client.swing.component.JsamsMenuItem;
 import be.jsams.client.swing.listener.AgentTableMouseListener;

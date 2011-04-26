@@ -8,7 +8,7 @@ import javax.swing.Icon;
 
 import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.desktop.JsamsDesktop;
-import be.jsams.client.model.panel.SearchAgentPanel;
+import be.jsams.client.model.panel.management.SearchAgentPanel;
 import be.jsams.client.model.table.AgentTableModel;
 import be.jsams.client.swing.component.JsamsButton;
 import be.jsams.client.swing.component.JsamsDialog;

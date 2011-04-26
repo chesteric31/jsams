@@ -1,4 +1,4 @@
-package be.jsams.client.model.panel;
+package be.jsams.client.model.panel.sale;
 
 import java.util.Date;
 import java.util.List;
@@ -13,6 +13,7 @@ import org.apache.commons.logging.LogFactory;
 
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.model.dialog.sale.EditEstimateDialog;
+import be.jsams.client.model.panel.AbstractSearchPanel;
 import be.jsams.client.model.table.EstimateTableModel;
 import be.jsams.client.renderer.JsamsBooleanTableCellRenderer;
 import be.jsams.client.renderer.JsamsTableCellRenderer;
