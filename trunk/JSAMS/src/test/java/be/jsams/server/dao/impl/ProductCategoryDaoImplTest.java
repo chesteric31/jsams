@@ -13,10 +13,11 @@ import be.jsams.common.bean.model.management.ProductCategoryBean;
 import be.jsams.server.dao.AbstractJUnitTestClass;
 import be.jsams.server.dao.LegalFormDao;
 import be.jsams.server.dao.MockDaoGenerator;
-import be.jsams.server.dao.ProductCategoryDao;
 import be.jsams.server.dao.SocietyDao;
-import be.jsams.server.model.ProductCategory;
+import be.jsams.server.dao.management.ProductCategoryDao;
+import be.jsams.server.dao.management.impl.ProductCategoryDaoImpl;
 import be.jsams.server.model.Society;
+import be.jsams.server.model.management.ProductCategory;
 import be.jsams.server.model.mock.MockModelGenerator;
 
 /**
@@ -48,7 +49,7 @@ public class ProductCategoryDaoImplTest extends AbstractJUnitTestClass {
     }
 
     /**
-     * Test method for {@link be.jsams.server.dao.impl.ProductCategoryDaoImpl#findAll()}.
+     * Test method for {@link be.jsams.server.dao.management.impl.ProductCategoryDaoImpl#findAll()}.
      */
     @Test
     public void testFindAll() {
@@ -77,7 +78,7 @@ public class ProductCategoryDaoImplTest extends AbstractJUnitTestClass {
 
     /**
      * Test method for
-     * {@link be.jsams.server.dao.impl.ProductCategoryDaoImpl#findByCriteria(be.jsams.common.bean.model.management.ProductCategoryBean)}
+     * {@link be.jsams.server.dao.management.impl.ProductCategoryDaoImpl#findByCriteria(be.jsams.common.bean.model.management.ProductCategoryBean)}
      * .
      */
     @Test

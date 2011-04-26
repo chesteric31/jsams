@@ -1,12 +1,12 @@
 package be.jsams.server.model.mock;
 
 import be.jsams.server.model.Address;
-import be.jsams.server.model.Agent;
 import be.jsams.server.model.Civility;
 import be.jsams.server.model.ContactInformation;
 import be.jsams.server.model.LegalForm;
-import be.jsams.server.model.ProductCategory;
 import be.jsams.server.model.Society;
+import be.jsams.server.model.management.Agent;
+import be.jsams.server.model.management.ProductCategory;
 
 /**
  * Generator of model objects.

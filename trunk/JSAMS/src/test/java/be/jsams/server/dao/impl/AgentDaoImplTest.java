@@ -12,17 +12,18 @@ import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.AgentBean;
 import be.jsams.server.dao.AbstractJUnitTestClass;
 import be.jsams.server.dao.AddressDao;
-import be.jsams.server.dao.AgentDao;
 import be.jsams.server.dao.CivilityDao;
 import be.jsams.server.dao.ContactInformationDao;
 import be.jsams.server.dao.LegalFormDao;
 import be.jsams.server.dao.MockDaoGenerator;
 import be.jsams.server.dao.SocietyDao;
+import be.jsams.server.dao.management.AgentDao;
+import be.jsams.server.dao.management.impl.AgentDaoImpl;
 import be.jsams.server.model.Address;
-import be.jsams.server.model.Agent;
 import be.jsams.server.model.Civility;
 import be.jsams.server.model.ContactInformation;
 import be.jsams.server.model.Society;
+import be.jsams.server.model.management.Agent;
 import be.jsams.server.model.mock.MockModelGenerator;
 
 /**
@@ -58,7 +59,7 @@ public class AgentDaoImplTest extends AbstractJUnitTestClass {
     }
 
     /**
-     * Test method for {@link be.jsams.server.dao.impl.AgentDaoImpl#findByCriteria(be.jsams.common.bean.model.management.AgentBean)}.
+     * Test method for {@link be.jsams.server.dao.management.impl.AgentDaoImpl#findByCriteria(be.jsams.common.bean.model.management.AgentBean)}.
      */
     @Test
     public void testFindByCriteria() {
