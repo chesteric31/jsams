@@ -2,7 +2,7 @@ package be.jsams.common.bean.model.sale;
 
 import be.jsams.common.bean.model.AbstractIdentityBean;
 import be.jsams.common.bean.view.sale.CreditNoteBeanView;
-import be.jsams.server.model.CreditNote;
+import be.jsams.server.model.sale.CreditNote;
 
 /**
  * 

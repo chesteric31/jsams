@@ -14,11 +14,11 @@ import be.jsams.common.bean.model.LegalFormBean;
 import be.jsams.common.bean.model.PaymentModeBean;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.view.management.CustomerBeanView;
-import be.jsams.server.model.Agent;
 import be.jsams.server.model.Civility;
-import be.jsams.server.model.Customer;
 import be.jsams.server.model.LegalForm;
 import be.jsams.server.model.PaymentMode;
+import be.jsams.server.model.management.Agent;
+import be.jsams.server.model.management.Customer;
 
 /**
  * Bean model for {@link Customer} object.

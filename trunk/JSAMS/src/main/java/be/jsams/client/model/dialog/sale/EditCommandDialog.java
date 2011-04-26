@@ -8,7 +8,7 @@ import be.jsams.client.model.dialog.AbstractEditDialog;
 import be.jsams.client.validator.EditCommandValidator;
 import be.jsams.common.bean.model.sale.CommandBean;
 import be.jsams.common.bean.view.sale.CommandBeanView;
-import be.jsams.server.service.CommandService;
+import be.jsams.server.service.sale.CommandService;
 
 import com.jgoodies.validation.view.ValidationComponentUtils;
 

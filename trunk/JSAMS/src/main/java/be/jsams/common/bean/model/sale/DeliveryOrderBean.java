@@ -2,7 +2,7 @@ package be.jsams.common.bean.model.sale;
 
 import be.jsams.common.bean.model.AbstractIdentityBean;
 import be.jsams.common.bean.view.sale.DeliveryOrderBeanView;
-import be.jsams.server.model.DeliveryOrder;
+import be.jsams.server.model.sale.DeliveryOrder;
 
 /**
  * 

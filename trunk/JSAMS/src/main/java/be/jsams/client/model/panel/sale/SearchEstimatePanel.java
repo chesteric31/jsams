@@ -21,7 +21,7 @@ import be.jsams.client.swing.listener.EstimateTableMouseListener;
 import be.jsams.client.validator.EditEstimateValidator;
 import be.jsams.client.validator.SearchEstimateValidator;
 import be.jsams.common.bean.model.sale.EstimateBean;
-import be.jsams.server.service.EstimateService;
+import be.jsams.server.service.sale.EstimateService;
 
 /**
  * Search {@link JPanel} for {@link EstimateBean} objects.

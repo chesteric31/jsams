@@ -21,7 +21,7 @@ import be.jsams.client.swing.listener.CommandTableMouseListener;
 import be.jsams.client.validator.EditCommandValidator;
 import be.jsams.client.validator.SearchCommandValidator;
 import be.jsams.common.bean.model.sale.CommandBean;
-import be.jsams.server.service.CommandService;
+import be.jsams.server.service.sale.CommandService;
 
 /**
  * Search {@link JPanel} for {@link CommandBean} objects.

@@ -4,9 +4,9 @@ import java.util.List;
 
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.ProductCategoryBean;
-import be.jsams.server.dao.ProductCategoryDao;
-import be.jsams.server.dao.impl.ProductCategoryDaoImpl;
-import be.jsams.server.model.ProductCategory;
+import be.jsams.server.dao.management.ProductCategoryDao;
+import be.jsams.server.dao.management.impl.ProductCategoryDaoImpl;
+import be.jsams.server.model.management.ProductCategory;
 
 import com.jgoodies.common.collect.ArrayListModel;
 import com.jgoodies.common.collect.ObservableList;

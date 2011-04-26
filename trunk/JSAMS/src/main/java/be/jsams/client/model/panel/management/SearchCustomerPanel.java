@@ -21,7 +21,7 @@ import be.jsams.client.swing.listener.CustomerTableMouseListener;
 import be.jsams.client.validator.EditCustomerValidator;
 import be.jsams.client.validator.SearchCustomerValidator;
 import be.jsams.common.bean.model.management.CustomerBean;
-import be.jsams.server.service.CustomerService;
+import be.jsams.server.service.management.CustomerService;
 
 /**
  * Search {@link JPanel} for Customer objects.

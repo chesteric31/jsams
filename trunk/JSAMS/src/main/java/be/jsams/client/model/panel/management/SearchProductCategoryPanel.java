@@ -23,7 +23,7 @@ import be.jsams.client.validator.SearchProductCategoryValidator;
 import be.jsams.common.bean.builder.ProductCategoryBeanBuilder;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.ProductCategoryBean;
-import be.jsams.server.service.ProductCategoryService;
+import be.jsams.server.service.management.ProductCategoryService;
 
 /**
  * Search Product category panel.
