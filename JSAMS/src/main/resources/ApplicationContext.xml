@@ -68,39 +68,39 @@
 	<bean id="societyService" parent="baseTransactionProxy">
 		<property name="target" ref="societyServiceTarget" />
 	</bean>
-	<bean id="agentServiceTarget" class="be.jsams.server.service.impl.AgentServiceImpl">
+	<bean id="agentServiceTarget" class="be.jsams.server.service.management.impl.AgentServiceImpl">
 		<property name="agentDao" ref="agentDao" />
 	</bean>
 	<bean id="agentService" parent="baseTransactionProxy">
 		<property name="target" ref="agentServiceTarget" />
 	</bean>
-	<bean id="customerServiceTarget" class="be.jsams.server.service.impl.CustomerServiceImpl">
+	<bean id="customerServiceTarget" class="be.jsams.server.service.management.impl.CustomerServiceImpl">
 		<property name="customerDao" ref="customerDao" />
 	</bean>
 	<bean id="customerService" parent="baseTransactionProxy">
 		<property name="target" ref="customerServiceTarget" />
 	</bean>
-	<bean id="productServiceTarget" class="be.jsams.server.service.impl.ProductServiceImpl">
+	<bean id="productServiceTarget" class="be.jsams.server.service.management.impl.ProductServiceImpl">
 		<property name="productDao" ref="productDao" />
 		<property name="builder" ref="productBeanBuilder" />
 	</bean>
 	<bean id="productService" parent="baseTransactionProxy">
 		<property name="target" ref="productServiceTarget" />
 	</bean>
-	<bean id="productCategoryServiceTarget" class="be.jsams.server.service.impl.ProductCategoryServiceImpl">
+	<bean id="productCategoryServiceTarget" class="be.jsams.server.service.management.impl.ProductCategoryServiceImpl">
 		<property name="productCategoryDao" ref="productCategoryDao" />
 	</bean>
 	<bean id="productCategoryService" parent="baseTransactionProxy">
 		<property name="target" ref="productCategoryServiceTarget" />
 	</bean>
 
-	<bean id="estimateDao" class="be.jsams.server.dao.impl.EstimateDaoImpl">
-		<constructor-arg value="be.jsams.server.model.Estimate" />
+	<bean id="estimateDao" class="be.jsams.server.dao.sale.impl.EstimateDaoImpl">
+		<constructor-arg value="be.jsams.server.model.sale.Estimate" />
 	</bean>
-	<bean id="estimateDetailDao" class="be.jsams.server.dao.impl.EstimateDetailDaoImpl">
-		<constructor-arg value="be.jsams.server.model.EstimateDetail" />
+	<bean id="estimateDetailDao" class="be.jsams.server.dao.sale.impl.EstimateDetailDaoImpl">
+		<constructor-arg value="be.jsams.server.model.sale.EstimateDetail" />
 	</bean>
-	<bean id="estimateServiceTarget" class="be.jsams.server.service.impl.EstimateServiceImpl">
+	<bean id="estimateServiceTarget" class="be.jsams.server.service.sale.impl.EstimateServiceImpl">
 		<property name="estimateDao" ref="estimateDao" />
 		<property name="estimateDetailDao" ref="estimateDetailDao" />
 	</bean>
@@ -108,13 +108,13 @@
 		<property name="target" ref="estimateServiceTarget" />
 	</bean>
 
-	<bean id="commandDao" class="be.jsams.server.dao.impl.CommandDaoImpl">
-		<constructor-arg value="be.jsams.server.model.Command" />
+	<bean id="commandDao" class="be.jsams.server.dao.sale.impl.CommandDaoImpl">
+		<constructor-arg value="be.jsams.server.model.sale.Command" />
 	</bean>
-	<bean id="commandDetailDao" class="be.jsams.server.dao.impl.CommandDetailDaoImpl">
-		<constructor-arg value="be.jsams.server.model.CommandDetail" />
+	<bean id="commandDetailDao" class="be.jsams.server.dao.sale.impl.CommandDetailDaoImpl">
+		<constructor-arg value="be.jsams.server.model.sale.CommandDetail" />
 	</bean>
-	<bean id="commandServiceTarget" class="be.jsams.server.service.impl.CommandServiceImpl">
+	<bean id="commandServiceTarget" class="be.jsams.server.service.sale.impl.CommandServiceImpl">
 		<property name="commandDao" ref="commandDao" />
 		<property name="commandDetailDao" ref="commandDetailDao" />
 	</bean>
@@ -131,20 +131,20 @@
 	<bean id="civilityDao" class="be.jsams.server.dao.impl.CivilityDaoImpl">
 		<constructor-arg value="be.jsams.server.model.Civility" />
 	</bean>
-	<bean id="agentDao" class="be.jsams.server.dao.impl.AgentDaoImpl">
-		<constructor-arg value="be.jsams.server.model.Agent" />
+	<bean id="agentDao" class="be.jsams.server.dao.management.impl.AgentDaoImpl">
+		<constructor-arg value="be.jsams.server.model.management.Agent" />
 	</bean>
-	<bean id="customerDao" class="be.jsams.server.dao.impl.CustomerDaoImpl">
-		<constructor-arg value="be.jsams.server.model.Customer" />
+	<bean id="customerDao" class="be.jsams.server.dao.management.impl.CustomerDaoImpl">
+		<constructor-arg value="be.jsams.server.model.management.Customer" />
 	</bean>
 	<bean id="paymentModeDao" class="be.jsams.server.dao.impl.PaymentModeDaoImpl">
 		<constructor-arg value="be.jsams.server.model.PaymentMode" />
 	</bean>
-	<bean id="productCategoryDao" class="be.jsams.server.dao.impl.ProductCategoryDaoImpl">
-		<constructor-arg value="be.jsams.server.model.ProductCategory" />
+	<bean id="productCategoryDao" class="be.jsams.server.dao.management.impl.ProductCategoryDaoImpl">
+		<constructor-arg value="be.jsams.server.model.management.ProductCategory" />
 	</bean>
-	<bean id="productDao" class="be.jsams.server.dao.impl.ProductDaoImpl">
-		<constructor-arg value="be.jsams.server.model.Product" />
+	<bean id="productDao" class="be.jsams.server.dao.management.impl.ProductDaoImpl">
+		<constructor-arg value="be.jsams.server.model.management.Product" />
 	</bean>
 
 	<!-- JDBC template -->
