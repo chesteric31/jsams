@@ -29,7 +29,7 @@ import be.jsams.server.model.management.Product;
 import be.jsams.server.model.management.ProductCategory;
 import be.jsams.server.model.sale.Command;
 import be.jsams.server.model.sale.CommandDetail;
-import be.jsams.server.service.management.CommandService;
+import be.jsams.server.service.sale.CommandService;
 
 /**
  * Test class for {@link CommandService}.
