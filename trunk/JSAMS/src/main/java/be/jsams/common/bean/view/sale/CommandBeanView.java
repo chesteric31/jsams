@@ -51,7 +51,7 @@ import com.toedter.calendar.JDateChooser;
 
 /**
  * Implementation of all sorts of views for {@link CommandBean} object.
- *
+ * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
@@ -114,12 +114,6 @@ public class CommandBeanView extends AbstractView<CommandBean, JPanel, JPanel> {
         CommandDetailTableModel tableModel = new CommandDetailTableModel(details);
         ViewFactory<CommandDetailBean> detailView = new ViewFactory<CommandDetailBean>();
         table = detailView.createBindingTableComponent(tableModel, false, false);
-
-        // we add per default one detail
-        // final EstimateDetailBean detailBean = details.get(0);
-        // detailBean.setListModel(new
-        // ArrayListModel<EstimateDetailBean>(details));
-        // table = detailBean.getView().createEditView();
         table.addMouseListener(handleProductEditing());
 
         JTableHeader tableHeader = table.getTableHeader();
@@ -284,12 +278,15 @@ public class CommandBeanView extends AbstractView<CommandBean, JPanel, JPanel> {
         JsamsButton buttonAdd = new JsamsButton(IconUtil.MENU_ICON_PREFIX + "actions/list-add.png");
         buttonAdd.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                List<CommandDetailBean> details = getBean().getDetails();
+                CommandBean bean = getBean();
+                List<CommandDetailBean> details = bean.getDetails();
                 CommandDetailBean detail = new CommandDetailBean();
-                detail.setCommand(getBean());
-                details.add(detail);
+                detail.setCommand(bean);
+                detail.setDiscountRate(bean.getDiscountRate());
+                detail.setQuantity(1);
                 detail.setListModel(new ArrayListModel<CommandDetailBean>(details));
-                getBean().setDetails(details);
+                details.add(detail);
+                bean.setDetails(details);
                 ((CommandDetailTableModel) tableModel).setListModel(detail.getListModel());
                 table.repaint();
             }
