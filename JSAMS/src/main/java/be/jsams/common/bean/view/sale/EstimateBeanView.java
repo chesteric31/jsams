@@ -367,5 +367,4 @@ public class EstimateBeanView extends AbstractView<EstimateBean, JPanel, JPanel>
 
         return builder.getPanel();
     }
-
 }
