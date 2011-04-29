@@ -1,7 +1,5 @@
 package be.jsams.server.model.sale;
 
-import java.math.BigDecimal;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.JoinColumn;
@@ -18,7 +16,7 @@ import be.jsams.server.model.AbstractIdentity;
 public class CreditNoteDetail extends AbstractIdentity {
 
     private int quantity;
-    private BigDecimal price;
+    private Double price;
     private String description;
 
     private CreditNote creditNote;
@@ -42,8 +40,7 @@ public class CreditNoteDetail extends AbstractIdentity {
 
     /**
      * 
-     * @param quantity
-     *            the quantity to set
+     * @param quantity the quantity to set
      */
     public void setQuantity(int quantity) {
         this.quantity = quantity;
@@ -54,16 +51,15 @@ public class CreditNoteDetail extends AbstractIdentity {
      * @return the price
      */
     @Column(name = "PRICE")
-    public BigDecimal getPrice() {
+    public Double getPrice() {
         return price;
     }
 
     /**
      * 
-     * @param price
-     *            the price to set
+     * @param price the price to set
      */
-    public void setPrice(BigDecimal price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
@@ -78,8 +74,7 @@ public class CreditNoteDetail extends AbstractIdentity {
 
     /**
      * 
-     * @param description
-     *            the description to set
+     * @param description the description to set
      */
     public void setDescription(String description) {
         this.description = description;
@@ -97,8 +92,7 @@ public class CreditNoteDetail extends AbstractIdentity {
 
     /**
      * 
-     * @param creditNote
-     *            the {@link CreditNote} to set
+     * @param creditNote the {@link CreditNote} to set
      */
     public void setCreditNote(CreditNote creditNote) {
         this.creditNote = creditNote;
@@ -116,8 +110,7 @@ public class CreditNoteDetail extends AbstractIdentity {
 
     /**
      * 
-     * @param billDetail
-     *            the {@link BillDetail} to set
+     * @param billDetail the {@link BillDetail} to set
      */
     public void setBillDetail(BillDetail billDetail) {
         this.billDetail = billDetail;

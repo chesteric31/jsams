@@ -50,8 +50,7 @@ public class BillDetail extends AbstractIdentity {
 
     /**
      * 
-     * @param quantity
-     *            the quantity to set
+     * @param quantity the quantity to set
      */
     public void setQuantity(int quantity) {
         this.quantity = quantity;
@@ -68,8 +67,7 @@ public class BillDetail extends AbstractIdentity {
 
     /**
      * 
-     * @param price
-     *            the price to set
+     * @param price the price to set
      */
     public void setPrice(BigDecimal price) {
         this.price = price;
@@ -86,8 +84,7 @@ public class BillDetail extends AbstractIdentity {
 
     /**
      * 
-     * @param description
-     *            the description to set
+     * @param description the description to set
      */
     public void setDescription(String description) {
         this.description = description;
@@ -104,8 +101,7 @@ public class BillDetail extends AbstractIdentity {
 
     /**
      * 
-     * @param vatApplicable
-     *            the VAT applicable to set
+     * @param vatApplicable the VAT applicable to set
      */
     public void setVatApplicable(BigDecimal vatApplicable) {
         this.vatApplicable = vatApplicable;
@@ -122,8 +118,7 @@ public class BillDetail extends AbstractIdentity {
 
     /**
      * 
-     * @param discountRate
-     *            a discount rate to set
+     * @param discountRate a discount rate to set
      */
     public void setDiscountRate(BigDecimal discountRate) {
         this.discountRate = discountRate;
@@ -140,9 +135,8 @@ public class BillDetail extends AbstractIdentity {
 
     /**
      * 
-     * @param transferred
-     *            the transferred boolean to set (true, this {@link BillDetail} is transferred to a credit note detail,
-     *            false otherwise
+     * @param transferred the transferred boolean to set (true, this {@link BillDetail} is transferred to a credit note
+     *            detail, false otherwise
      */
     public void setTransferred(boolean transferred) {
         this.transferred = transferred;
@@ -152,7 +146,7 @@ public class BillDetail extends AbstractIdentity {
      * 
      * @return the {@link Bill}
      */
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "FK_BILL")
     public Bill getBill() {
         return bill;
@@ -160,8 +154,7 @@ public class BillDetail extends AbstractIdentity {
 
     /**
      * 
-     * @param bill
-     *            the {@link Bill} to set
+     * @param bill the {@link Bill} to set
      */
     public void setBill(Bill bill) {
         this.bill = bill;
@@ -171,7 +164,7 @@ public class BillDetail extends AbstractIdentity {
      * 
      * @return the {@link Product}
      */
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "FK_PRODUCT")
     public Product getProduct() {
         return product;
@@ -179,8 +172,7 @@ public class BillDetail extends AbstractIdentity {
 
     /**
      * 
-     * @param product
-     *            the {@link Product} to set
+     * @param product the {@link Product} to set
      */
     public void setProduct(Product product) {
         this.product = product;
