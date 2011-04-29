@@ -51,9 +51,9 @@ import com.toedter.calendar.JDateChooser;
 
 /**
  * Implementation of all sorts of views for {@link CommandBean} object.
- *
+ * 
  * @author chesteric31
- * @version $Rev$ $Date::                  $ $Author$
+ * @version $Rev$ $Date:: $ $Author$
  */
 public class CommandBeanView extends AbstractView<CommandBean, JPanel, JPanel> {
 
@@ -61,7 +61,7 @@ public class CommandBeanView extends AbstractView<CommandBean, JPanel, JPanel> {
      * Serial Version UID
      */
     private static final long serialVersionUID = 7008183975354064256L;
-    
+
     private JsamsTable table;
 
     /**
@@ -238,8 +238,8 @@ public class CommandBeanView extends AbstractView<CommandBean, JPanel, JPanel> {
                             }
                         };
                         ProductBeanBuilder builder = new ProductBeanBuilder();
-                        SearchProductPanel searchPanel = new SearchProductPanel(builder.build(true,
-                                true), customListener, JsamsApplicationContext.getProductService(), false);
+                        SearchProductPanel searchPanel = new SearchProductPanel(builder.build(true, true),
+                                customListener, JsamsApplicationContext.getProductService(), false);
 
                         dialog.add(searchPanel);
                         dialog.pack();
@@ -331,7 +331,7 @@ public class CommandBeanView extends AbstractView<CommandBean, JPanel, JPanel> {
         JsamsButton buttonModify = new JsamsButton(IconUtil.MENU_ICON_PREFIX + "apps/accessories-text-editor.png");
         buttonModify.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                //TODO
+                // TODO
             }
         });
         return buttonModify;
@@ -371,5 +371,4 @@ public class CommandBeanView extends AbstractView<CommandBean, JPanel, JPanel> {
 
         return builder.getPanel();
     }
-
 }

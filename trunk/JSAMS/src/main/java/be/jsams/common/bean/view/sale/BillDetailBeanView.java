@@ -9,7 +9,7 @@ import be.jsams.common.bean.view.AbstractView;
  * 
  * 
  * @author chesteric31
- * @version $Rev: 689 $ $Date:: 2011-04-14 16:11#$ $Author: chesteric31 $
+ * @version $Rev$ $Date::                  $ $Author$
  */
 public class BillDetailBeanView extends AbstractView<BillDetailBean, JPanel, JPanel> {
 
@@ -21,8 +21,7 @@ public class BillDetailBeanView extends AbstractView<BillDetailBean, JPanel, JPa
     /**
      * Constructor
      * 
-     * @param bean
-     *            the {@link BillDetailBean}
+     * @param bean the {@link BillDetailBean}
      */
     public BillDetailBeanView(BillDetailBean bean) {
         super(bean);
