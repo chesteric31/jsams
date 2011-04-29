@@ -51,9 +51,9 @@ import com.toedter.calendar.JDateChooser;
 
 /**
  * Implementation of all sorts of views for {@link CommandBean} object.
- * 
+ *
  * @author chesteric31
- * @version $$Rev$$ $$Date::                  $$ $$Author$$
+ * @version $Rev$ $Date::                  $ $Author$
  */
 public class CommandBeanView extends AbstractView<CommandBean, JPanel, JPanel> {
 
