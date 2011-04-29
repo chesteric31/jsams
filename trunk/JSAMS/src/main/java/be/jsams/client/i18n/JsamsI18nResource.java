@@ -221,5 +221,7 @@ public final class JsamsI18nResource {
     
     public static final I18nString TITLE_EDIT_COMMAND = new I18nString("title.edit.command");
 
+    public static final I18nString ERROR_DETAILS_ARE_EMPTY = new I18nString("error.details_are_empty");
+
     
 }
