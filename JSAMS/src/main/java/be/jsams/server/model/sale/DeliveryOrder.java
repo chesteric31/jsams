@@ -1,6 +1,5 @@
 package be.jsams.server.model.sale;
 
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -33,7 +32,7 @@ public class DeliveryOrder extends AbstractIdentity {
 
     private Date creationDate;
     private String remark;
-    private BigDecimal discountRate;
+    private Double discountRate;
     private boolean transferred;
 
     private Customer customer;
@@ -60,8 +59,7 @@ public class DeliveryOrder extends AbstractIdentity {
 
     /**
      * 
-     * @param creationDate
-     *            the creation date to set
+     * @param creationDate the creation date to set
      */
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
@@ -78,8 +76,7 @@ public class DeliveryOrder extends AbstractIdentity {
 
     /**
      * 
-     * @param remark
-     *            a remark to set
+     * @param remark a remark to set
      */
     public void setRemark(String remark) {
         this.remark = remark;
@@ -90,16 +87,15 @@ public class DeliveryOrder extends AbstractIdentity {
      * @return the discount rate
      */
     @Column(name = "DISCOUNT_RATE")
-    public BigDecimal getDiscountRate() {
+    public Double getDiscountRate() {
         return discountRate;
     }
 
     /**
      * 
-     * @param discountRate
-     *            the discount rate to set
+     * @param discountRate the discount rate to set
      */
-    public void setDiscountRate(BigDecimal discountRate) {
+    public void setDiscountRate(Double discountRate) {
         this.discountRate = discountRate;
     }
 
@@ -115,8 +111,7 @@ public class DeliveryOrder extends AbstractIdentity {
 
     /**
      * 
-     * @param customer
-     *            the {@link Customer} to set
+     * @param customer the {@link Customer} to set
      */
     public void setCustomer(Customer customer) {
         this.customer = customer;
@@ -134,8 +129,7 @@ public class DeliveryOrder extends AbstractIdentity {
 
     /**
      * 
-     * @param deliveryAddress
-     *            the delivery {@link Address} to set
+     * @param deliveryAddress the delivery {@link Address} to set
      */
     public void setDeliveryAddress(Address deliveryAddress) {
         this.deliveryAddress = deliveryAddress;
@@ -153,8 +147,7 @@ public class DeliveryOrder extends AbstractIdentity {
 
     /**
      * 
-     * @param details
-     *            a list of {@link DeliveryOrderDetail} to set
+     * @param details a list of {@link DeliveryOrderDetail} to set
      */
     public void setDetails(List<DeliveryOrderDetail> details) {
         this.details = details;
@@ -169,8 +162,7 @@ public class DeliveryOrder extends AbstractIdentity {
     }
 
     /**
-     * @param transferred
-     *            the transferred to set
+     * @param transferred the transferred to set
      */
     public void setTransferred(boolean transferred) {
         this.transferred = transferred;

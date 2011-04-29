@@ -1,12 +1,11 @@
 package be.jsams.server.model.sale;
 
-import java.math.BigDecimal;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import be.jsams.server.model.AbstractIdentity;
@@ -24,8 +23,8 @@ public class DeliveryOrderDetail extends AbstractIdentity {
 
     private int quantity;
     private String description;
-    private BigDecimal vatApplicable;
-    private BigDecimal discountRate;
+    private Double vatApplicable;
+    private Double discountRate;
     private boolean transferred;
 
     private DeliveryOrder deliveryOrder;
@@ -51,8 +50,7 @@ public class DeliveryOrderDetail extends AbstractIdentity {
 
     /**
      * 
-     * @param quantity
-     *            the quantity to set
+     * @param quantity the quantity to set
      */
     public void setQuantity(int quantity) {
         this.quantity = quantity;
@@ -69,8 +67,7 @@ public class DeliveryOrderDetail extends AbstractIdentity {
 
     /**
      * 
-     * @param description
-     *            the description to set
+     * @param description the description to set
      */
     public void setDescription(String description) {
         this.description = description;
@@ -81,16 +78,15 @@ public class DeliveryOrderDetail extends AbstractIdentity {
      * @return the VAT applicable
      */
     @Column(name = "VAT_APPLICABLE")
-    public BigDecimal getVatApplicable() {
+    public Double getVatApplicable() {
         return vatApplicable;
     }
 
     /**
      * 
-     * @param vatApplicable
-     *            the VAT applicable to set
+     * @param vatApplicable the VAT applicable to set
      */
-    public void setVatApplicable(BigDecimal vatApplicable) {
+    public void setVatApplicable(Double vatApplicable) {
         this.vatApplicable = vatApplicable;
     }
 
@@ -99,16 +95,15 @@ public class DeliveryOrderDetail extends AbstractIdentity {
      * @return the discount rate
      */
     @Column(name = "DISCOUNT_RATE")
-    public BigDecimal getDiscountRate() {
+    public Double getDiscountRate() {
         return discountRate;
     }
 
     /**
      * 
-     * @param discountRate
-     *            the discount rate to set
+     * @param discountRate the discount rate to set
      */
-    public void setDiscountRate(BigDecimal discountRate) {
+    public void setDiscountRate(Double discountRate) {
         this.discountRate = discountRate;
     }
 
@@ -123,8 +118,7 @@ public class DeliveryOrderDetail extends AbstractIdentity {
 
     /**
      * 
-     * @param transferred
-     *            a boolean to indicate is the {@link DeliveryOrderDetail} is transferred to bill detail
+     * @param transferred a boolean to indicate is the {@link DeliveryOrderDetail} is transferred to bill detail
      */
     public void setTransferred(boolean transferred) {
         this.transferred = transferred;
@@ -142,8 +136,7 @@ public class DeliveryOrderDetail extends AbstractIdentity {
 
     /**
      * 
-     * @param deliveryOrder
-     *            the {@link DeliveryOrder} to set
+     * @param deliveryOrder the {@link DeliveryOrder} to set
      */
     public void setDeliveryOrder(DeliveryOrder deliveryOrder) {
         this.deliveryOrder = deliveryOrder;
@@ -161,8 +154,7 @@ public class DeliveryOrderDetail extends AbstractIdentity {
 
     /**
      * 
-     * @param product
-     *            the {@link Product} to set
+     * @param product the {@link Product} to set
      */
     public void setProduct(Product product) {
         this.product = product;
@@ -172,14 +164,15 @@ public class DeliveryOrderDetail extends AbstractIdentity {
      * 
      * @return the {@link CommandDetail}
      */
+    @OneToOne(cascade = CascadeType.REFRESH)
+    @JoinColumn(name = "FK_COMMAND_DETAIL")
     public CommandDetail getCommandDetail() {
         return commandDetail;
     }
 
     /**
      * 
-     * @param commandDetail
-     *            the {@link CommandDetail} to set
+     * @param commandDetail the {@link CommandDetail} to set
      */
     public void setCommandDetail(CommandDetail commandDetail) {
         this.commandDetail = commandDetail;
@@ -189,14 +182,15 @@ public class DeliveryOrderDetail extends AbstractIdentity {
      * 
      * @return the {@link BillDetail}
      */
+    @OneToOne(cascade = CascadeType.REFRESH)
+    @JoinColumn(name = "FK_BILL_DETAIL")
     public BillDetail getBillDetail() {
         return billDetail;
     }
 
     /**
      * 
-     * @param billDetail
-     *            the {@link BillDetail} to set
+     * @param billDetail the {@link BillDetail} to set
      */
     public void setBillDetail(BillDetail billDetail) {
         this.billDetail = billDetail;

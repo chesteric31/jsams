@@ -5,10 +5,14 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.Cascade;
 
 import be.jsams.server.model.AbstractIdentity;
 import be.jsams.server.model.Address;
@@ -78,7 +82,7 @@ public class CreditNote extends AbstractIdentity {
      * 
      * @return the {@link Customer}
      */
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "FK_CUSTOMER")
     public Customer getCustomer() {
         return customer;
@@ -116,6 +120,8 @@ public class CreditNote extends AbstractIdentity {
      * 
      * @return a list of {@link CreditNoteDetail}
      */
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "creditNote")
+    @Cascade(org.hibernate.annotations.CascadeType.DELETE_ORPHAN)
     public List<CreditNoteDetail> getDetails() {
         return details;
     }

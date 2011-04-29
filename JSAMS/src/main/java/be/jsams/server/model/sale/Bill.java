@@ -7,11 +7,15 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import org.hibernate.annotations.Cascade;
 
 import be.jsams.server.model.AbstractIdentity;
 import be.jsams.server.model.Address;
@@ -222,7 +226,7 @@ public class Bill extends AbstractIdentity {
      * 
      * @return the {@link PaymentMode}
      */
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "FK_PAYMENT_MODE")
     public PaymentMode getPaymentMode() {
         return paymentMode;
@@ -241,7 +245,7 @@ public class Bill extends AbstractIdentity {
      * 
      * @return the customer
      */
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "FK_CUSTOMER")
     public Customer getCustomer() {
         return customer;
@@ -279,6 +283,8 @@ public class Bill extends AbstractIdentity {
      * 
      * @return a list of {@link BillDetail}
      */
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "bill")
+    @Cascade(org.hibernate.annotations.CascadeType.DELETE_ORPHAN)
     public List<BillDetail> getDetails() {
         return details;
     }
