@@ -59,9 +59,9 @@ public class CommandBean extends AbstractIdentityBean<Command, CommandBeanView> 
         setPeriod(new PeriodBean());
         setTransferred(false);
         List<CommandDetailBean> details = new ArrayList<CommandDetailBean>();
-        CommandDetailBean detail = new CommandDetailBean();
-        detail.setCommand(this);
-        details.add(detail);
+//        CommandDetailBean detail = new CommandDetailBean();
+//        detail.setCommand(this);
+//        details.add(detail);
         setDetails(details);
     }
 

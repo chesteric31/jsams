@@ -113,12 +113,6 @@ public class EstimateBeanView extends AbstractView<EstimateBean, JPanel, JPanel>
         EstimateDetailTableModel tableModel = new EstimateDetailTableModel(details);
         ViewFactory<EstimateDetailBean> detailView = new ViewFactory<EstimateDetailBean>();
         table = detailView.createBindingTableComponent(tableModel, false, false);
-
-        // we add per default one detail
-        // final EstimateDetailBean detailBean = details.get(0);
-        // detailBean.setListModel(new
-        // ArrayListModel<EstimateDetailBean>(details));
-        // table = detailBean.getView().createEditView();
         table.addMouseListener(handleProductEditing());
 
         JTableHeader tableHeader = table.getTableHeader();
@@ -237,8 +231,8 @@ public class EstimateBeanView extends AbstractView<EstimateBean, JPanel, JPanel>
                             }
                         };
                         ProductBeanBuilder builder = new ProductBeanBuilder();
-                        SearchProductPanel searchPanel = new SearchProductPanel(builder.build(true,
-                                true), customListener, JsamsApplicationContext.getProductService(), false);
+                        SearchProductPanel searchPanel = new SearchProductPanel(builder.build(true, true),
+                                customListener, JsamsApplicationContext.getProductService(), false);
 
                         dialog.add(searchPanel);
                         dialog.pack();
@@ -281,12 +275,15 @@ public class EstimateBeanView extends AbstractView<EstimateBean, JPanel, JPanel>
         JsamsButton buttonAdd = new JsamsButton(IconUtil.MENU_ICON_PREFIX + "actions/list-add.png");
         buttonAdd.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                List<EstimateDetailBean> details = getBean().getDetails();
+                EstimateBean bean = getBean();
+                List<EstimateDetailBean> details = bean.getDetails();
                 EstimateDetailBean detail = new EstimateDetailBean();
-                detail.setEstimate(getBean());
-                details.add(detail);
+                detail.setEstimate(bean);
+                detail.setDiscountRate(bean.getDiscountRate());
+                detail.setQuantity(1);
                 detail.setListModel(new ArrayListModel<EstimateDetailBean>(details));
-                getBean().setDetails(details);
+                details.add(detail);
+                bean.setDetails(details);
                 ((EstimateDetailTableModel) tableModel).setListModel(detail.getListModel());
                 table.repaint();
             }
@@ -327,7 +324,7 @@ public class EstimateBeanView extends AbstractView<EstimateBean, JPanel, JPanel>
         JsamsButton buttonModify = new JsamsButton(IconUtil.MENU_ICON_PREFIX + "apps/accessories-text-editor.png");
         buttonModify.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                //TODO
+                // TODO
             }
         });
         return buttonModify;

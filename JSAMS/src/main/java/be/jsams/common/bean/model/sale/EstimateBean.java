@@ -57,9 +57,9 @@ public class EstimateBean extends AbstractIdentityBean<Estimate, EstimateBeanVie
         setPeriod(new PeriodBean());
         setTransferred(false);
         List<EstimateDetailBean> details = new ArrayList<EstimateDetailBean>();
-        EstimateDetailBean detail = new EstimateDetailBean();
-        detail.setEstimate(this);
-        details.add(detail);
+//        EstimateDetailBean detail = new EstimateDetailBean();
+//        detail.setEstimate(this);
+//        details.add(detail);
         setDetails(details);
     }
 
