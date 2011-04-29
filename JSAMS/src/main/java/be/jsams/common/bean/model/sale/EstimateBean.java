@@ -270,7 +270,10 @@ public class EstimateBean extends AbstractIdentityBean<Estimate, EstimateBeanVie
         setSelection(null);
         setTransferred(false);
         period.clear();
-        society.clear();
+        // only not null if searching of estimate...
+        if (society != null) {
+            society.clear();
+        }
     }
 
     /**
