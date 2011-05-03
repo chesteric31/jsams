@@ -277,7 +277,9 @@ public class CommandBean extends AbstractIdentityBean<Command, CommandBeanView> 
         setSelection(null);
         setTransferred(false);
         period.clear();
-        society.clear();
+        if (society != null) {
+            society.clear();
+        }
     }
 
     /**

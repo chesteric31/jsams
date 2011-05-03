@@ -367,4 +367,5 @@ public class CommandBeanView extends AbstractView<CommandBean, JPanel, JPanel> {
 
         return builder.getPanel();
     }
+
 }
