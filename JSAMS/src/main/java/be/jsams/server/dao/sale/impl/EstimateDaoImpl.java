@@ -66,6 +66,14 @@ public class EstimateDaoImpl extends DaoImpl<Estimate> implements EstimateDao {
             String formattedEndDate = format.format(endDate);
             queryBuilder.append(" AND e.creationDate BETWEEN '" + formattedStartDate + "' AND '" + formattedEndDate
                     + "'");
+        } else if (startDate != null && endDate == null) {
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            String formattedStartDate = format.format(startDate);
+            queryBuilder.append(" AND e.creationDate >= '" + formattedStartDate + "'");
+        } else if (startDate == null && endDate != null) {
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            String formattedEndDate = format.format(endDate);
+            queryBuilder.append(" AND e.creationDate <= '" + formattedEndDate + "'");
         }
         queryBuilder.append(" AND e.transferred = " + transferred);
 
