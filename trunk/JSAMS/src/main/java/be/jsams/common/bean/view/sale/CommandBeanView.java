@@ -35,11 +35,11 @@ import be.jsams.client.swing.listener.ProductTableMouseListener;
 import be.jsams.client.swing.utils.IconUtil;
 import be.jsams.common.bean.builder.ProductBeanBuilder;
 import be.jsams.common.bean.model.AddressBean;
+import be.jsams.common.bean.model.PeriodBean;
 import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.management.ProductBean;
 import be.jsams.common.bean.model.sale.CommandBean;
 import be.jsams.common.bean.model.sale.CommandDetailBean;
-import be.jsams.common.bean.model.sale.PeriodBean;
 import be.jsams.common.bean.view.AbstractView;
 import be.jsams.common.bean.view.ViewFactory;
 

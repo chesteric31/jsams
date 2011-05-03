@@ -7,6 +7,7 @@ import java.util.List;
 import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.common.bean.model.AbstractIdentityBean;
 import be.jsams.common.bean.model.AddressBean;
+import be.jsams.common.bean.model.PeriodBean;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.AgentBean;
 import be.jsams.common.bean.model.management.CustomerBean;
