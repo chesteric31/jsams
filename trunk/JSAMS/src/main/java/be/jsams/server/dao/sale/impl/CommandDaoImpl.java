@@ -66,6 +66,14 @@ public class CommandDaoImpl extends DaoImpl<Command> implements CommandDao {
             String formattedEndDate = format.format(endDate);
             queryBuilder.append(" AND c.creationDate BETWEEN '" + formattedStartDate + "' AND '" + formattedEndDate
                     + "'");
+        } else if (startDate != null && endDate == null) {
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            String formattedStartDate = format.format(startDate);
+            queryBuilder.append(" AND c.creationDate >= '" + formattedStartDate + "'");
+        } else if (startDate == null && endDate != null) {
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            String formattedEndDate = format.format(endDate);
+            queryBuilder.append(" AND c.creationDate <= '" + formattedEndDate + "'");
         }
         queryBuilder.append(" AND c.transferred = " + transferred);
 
