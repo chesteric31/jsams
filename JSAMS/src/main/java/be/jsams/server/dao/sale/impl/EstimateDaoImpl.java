@@ -6,8 +6,8 @@ import java.util.List;
 
 import javax.persistence.Query;
 
+import be.jsams.common.bean.model.PeriodBean;
 import be.jsams.common.bean.model.sale.EstimateBean;
-import be.jsams.common.bean.model.sale.PeriodBean;
 import be.jsams.server.dao.impl.DaoImpl;
 import be.jsams.server.dao.sale.EstimateDao;
 import be.jsams.server.model.sale.Estimate;

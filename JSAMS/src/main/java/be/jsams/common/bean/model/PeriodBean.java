@@ -1,8 +1,7 @@
-package be.jsams.common.bean.model.sale;
+package be.jsams.common.bean.model;
 
 import java.util.Date;
 
-import be.jsams.common.bean.model.AbstractIdentityBean;
 import be.jsams.common.bean.view.PeriodBeanView;
 import be.jsams.server.model.AbstractIdentity;
 

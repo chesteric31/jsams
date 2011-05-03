@@ -4,7 +4,7 @@ import javax.swing.JPanel;
 
 import be.jsams.client.i18n.JsamsI18nLabelResource;
 import be.jsams.client.swing.component.JsamsFrame;
-import be.jsams.common.bean.model.sale.PeriodBean;
+import be.jsams.common.bean.model.PeriodBean;
 
 import com.jgoodies.forms.builder.DefaultFormBuilder;
 import com.jgoodies.forms.layout.FormLayout;
