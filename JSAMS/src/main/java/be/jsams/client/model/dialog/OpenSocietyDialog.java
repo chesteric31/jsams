@@ -56,7 +56,7 @@ public class OpenSocietyDialog extends JsamsDialog implements JsamsButtonsInterf
      * @param title the {@link I18nString} title
      */
     public OpenSocietyDialog(final I18nString title) {
-        super(null, title);
+        super(null, title, IconUtil.TITLE_ICON_PREFIX + "categories/applications-office.png");
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         buttonsPanel = new JsamsButtonsPanel(this, true, false, false);
         add(buttonsPanel, BorderLayout.SOUTH);
