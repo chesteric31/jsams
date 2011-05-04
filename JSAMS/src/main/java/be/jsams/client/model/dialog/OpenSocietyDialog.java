@@ -77,7 +77,6 @@ public class OpenSocietyDialog extends JsamsDialog implements JsamsButtonsInterf
         SocietyBeanBuilder societyBuilder = getSocietyBeanBuilder();
         bean = societyBuilder.build(false);
         comboBox = helper.createBindingComboComponent(bean, true, false, new NamedComboBoxRenderer());
-        comboBox.setRenderer(new NamedComboBoxRenderer());
         builder.append(JsamsI18nLabelResource.LABEL_AVAILABLES_SOCIETIES.getTranslation(), comboBox);
         JsamsButton buttonNewSociety = buildButtonNewSociety();
         builder.append(buttonNewSociety);
