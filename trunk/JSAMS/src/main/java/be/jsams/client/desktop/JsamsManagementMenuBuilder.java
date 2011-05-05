@@ -19,6 +19,10 @@ import be.jsams.client.swing.listener.AgentTableMouseListener;
 import be.jsams.client.swing.listener.CustomerTableMouseListener;
 import be.jsams.client.swing.listener.ProductCategoryTableMouseListener;
 import be.jsams.client.swing.listener.ProductTableMouseListener;
+import be.jsams.client.validator.SearchAgentValidator;
+import be.jsams.client.validator.SearchCustomerValidator;
+import be.jsams.client.validator.SearchProductCategoryValidator;
+import be.jsams.client.validator.SearchProductValidator;
 import be.jsams.common.bean.builder.ProductBeanBuilder;
 import be.jsams.common.bean.builder.ProductCategoryBeanBuilder;
 import be.jsams.common.bean.model.SocietyBean;
@@ -92,8 +96,8 @@ public class JsamsManagementMenuBuilder extends AbstractMenuBuilder {
 
             public void actionPerformed(ActionEvent event) {
                 SearchCustomerPanel searchPanel = new SearchCustomerPanel(new CustomerBean(JsamsDesktop.getInstance()
-                        .getCurrentSociety()), new CustomerTableMouseListener(), JsamsApplicationContext
-                        .getCustomerService(), true);
+                        .getCurrentSociety()), new CustomerTableMouseListener(),
+                        JsamsApplicationContext.getCustomerService(), new SearchCustomerValidator(), true);
                 parent.getTabbedPane().addTab(JsamsI18nResource.TITLE_SEARCH_CUSTOMER, "apps/system-users.png",
                         searchPanel);
             }
@@ -120,7 +124,7 @@ public class JsamsManagementMenuBuilder extends AbstractMenuBuilder {
             public void actionPerformed(ActionEvent event) {
                 SearchAgentPanel searchPanel = new SearchAgentPanel(new AgentBean(JsamsDesktop.getInstance()
                         .getCurrentSociety()), new AgentTableMouseListener(),
-                        JsamsApplicationContext.getAgentService(), true);
+                        JsamsApplicationContext.getAgentService(), new SearchAgentValidator(), true);
                 parent.getTabbedPane().addTab(JsamsI18nResource.TITLE_SEARCH_AGENT,
                         "categories/applications-development.png", searchPanel);
             }
@@ -147,7 +151,8 @@ public class JsamsManagementMenuBuilder extends AbstractMenuBuilder {
             public void actionPerformed(ActionEvent event) {
                 ProductBeanBuilder builder = new ProductBeanBuilder();
                 SearchProductPanel searchPanel = new SearchProductPanel(builder.build(true, true),
-                        new ProductTableMouseListener(), JsamsApplicationContext.getProductService(), true);
+                        new ProductTableMouseListener(), JsamsApplicationContext.getProductService(),
+                        new SearchProductValidator(), true);
                 parent.getTabbedPane().addTab(JsamsI18nResource.TITLE_SEARCH_PRODUCT,
                         "apps/preferences-desktop-theme.png", searchPanel);
             }
@@ -178,7 +183,7 @@ public class JsamsManagementMenuBuilder extends AbstractMenuBuilder {
                 ProductCategoryBean categoryBean = builder.build();
                 SearchProductCategoryPanel searchPanel = new SearchProductCategoryPanel(categoryBean,
                         new ProductCategoryTableMouseListener(), JsamsApplicationContext.getProductCategoryService(),
-                        true);
+                        new SearchProductCategoryValidator(), true);
                 parent.getTabbedPane().addTab(JsamsI18nResource.TITLE_SEARCH_PRODUCT_CATEGORY, null, searchPanel);
             }
         };

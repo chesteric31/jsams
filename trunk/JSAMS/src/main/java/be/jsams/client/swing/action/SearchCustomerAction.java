@@ -14,6 +14,7 @@ import be.jsams.client.swing.component.JsamsButton;
 import be.jsams.client.swing.component.JsamsDialog;
 import be.jsams.client.swing.component.JsamsTable;
 import be.jsams.client.swing.listener.CustomerTableMouseListener;
+import be.jsams.client.validator.SearchCustomerValidator;
 import be.jsams.common.bean.model.management.CustomerBean;
 
 /**
@@ -72,7 +73,8 @@ public class SearchCustomerAction extends AbstractAction {
             }
         };
         SearchCustomerPanel searchCustomerPanel = new SearchCustomerPanel(new CustomerBean(JsamsDesktop.getInstance()
-                .getCurrentSociety()), customListener, JsamsApplicationContext.getCustomerService(), false);
+                .getCurrentSociety()), customListener, JsamsApplicationContext.getCustomerService(),
+                new SearchCustomerValidator(), false);
         dialog.add(searchCustomerPanel);
         dialog.pack();
         dialog.setLocationRelativeTo(((JsamsButton) e.getSource()).getRootPane());

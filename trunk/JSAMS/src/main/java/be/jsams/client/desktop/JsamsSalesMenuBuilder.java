@@ -15,12 +15,14 @@ import be.jsams.client.swing.component.JsamsMenu;
 import be.jsams.client.swing.component.JsamsMenuItem;
 import be.jsams.client.swing.listener.CommandTableMouseListener;
 import be.jsams.client.swing.listener.EstimateTableMouseListener;
+import be.jsams.client.validator.SearchCommandValidator;
+import be.jsams.client.validator.SearchEstimateValidator;
 import be.jsams.common.bean.model.sale.CommandBean;
 import be.jsams.common.bean.model.sale.EstimateBean;
 
 /**
  * Specific menu builder for sales menu.
- *
+ * 
  * @author chesteric31
  * @version $Rev: 692 $ $Date::                  $ $Author$
  */
@@ -35,9 +37,9 @@ public class JsamsSalesMenuBuilder extends AbstractMenuBuilder {
     private JsamsMenuItem deliveryOrderMI;
     private JsamsMenuItem billMI;
     private JsamsMenuItem creditNoteMI;
-    
+
     private JsamsMainFrame parent;
-    
+
     /**
      * Constructor
      * 
@@ -46,7 +48,7 @@ public class JsamsSalesMenuBuilder extends AbstractMenuBuilder {
     public JsamsSalesMenuBuilder(final JsamsMainFrame parent) {
         this.parent = parent;
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -96,7 +98,8 @@ public class JsamsSalesMenuBuilder extends AbstractMenuBuilder {
 
             public void actionPerformed(ActionEvent event) {
                 SearchEstimatePanel searchPanel = new SearchEstimatePanel(new EstimateBean(),
-                        new EstimateTableMouseListener(), JsamsApplicationContext.getEstimateService(), true);
+                        new EstimateTableMouseListener(), JsamsApplicationContext.getEstimateService(),
+                        new SearchEstimateValidator(), true);
                 parent.getTabbedPane().addTab(JsamsI18nResource.TITLE_SEARCH_ESTIMATE, null, searchPanel);
             }
         };
@@ -121,7 +124,8 @@ public class JsamsSalesMenuBuilder extends AbstractMenuBuilder {
 
             public void actionPerformed(ActionEvent event) {
                 SearchCommandPanel searchPanel = new SearchCommandPanel(new CommandBean(),
-                        new CommandTableMouseListener(), JsamsApplicationContext.getCommandService(), true);
+                        new CommandTableMouseListener(), JsamsApplicationContext.getCommandService(),
+                        new SearchCommandValidator(), true);
                 parent.getTabbedPane().addTab(JsamsI18nResource.TITLE_SEARCH_COMMAND, null, searchPanel);
             }
         };

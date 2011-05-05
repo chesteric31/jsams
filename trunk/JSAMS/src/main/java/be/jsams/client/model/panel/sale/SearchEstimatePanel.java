@@ -10,7 +10,6 @@ import be.jsams.client.model.dialog.sale.EditEstimateDialog;
 import be.jsams.client.model.panel.AbstractSearchPanel;
 import be.jsams.client.model.table.EstimateTableModel;
 import be.jsams.client.swing.listener.EstimateTableMouseListener;
-import be.jsams.client.validator.EditEstimateValidator;
 import be.jsams.client.validator.SearchEstimateValidator;
 import be.jsams.common.bean.model.sale.EstimateBean;
 import be.jsams.server.service.sale.EstimateService;
@@ -22,7 +21,7 @@ import be.jsams.server.service.sale.EstimateService;
  * @version $Rev: 711 $ $Date::                  $ $Author$
  */
 public class SearchEstimatePanel extends
-        AbstractSearchPanel<EstimateBean, EstimateTableMouseListener, EstimateService, EditEstimateValidator> {
+        AbstractSearchPanel<EstimateBean, EstimateTableMouseListener, EstimateService, SearchEstimateValidator> {
 
     /**
      * Serial Version UID
@@ -39,13 +38,13 @@ public class SearchEstimatePanel extends
      * @param model the {@link EstimateBean}
      * @param listener the {@link EstimateTableMouseListener}
      * @param service the {@link EstimateService}
+     * @param validator the {@link SearchEstimateValidator} 
      * @param showButtons a boolean that indicates if we have to display the
      *            buttons to manage the content: add, remove and modify
      */
     public SearchEstimatePanel(EstimateBean model, EstimateTableMouseListener listener, EstimateService service,
-            final boolean showButtons) {
-        super(model, listener, service, showButtons);
-        super.setValidator(new SearchEstimateValidator());
+            SearchEstimateValidator validator, final boolean showButtons) {
+        super(model, listener, service, validator, showButtons);
     }
 
     /**

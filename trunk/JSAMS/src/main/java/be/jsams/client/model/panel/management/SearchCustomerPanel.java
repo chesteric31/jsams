@@ -13,7 +13,6 @@ import be.jsams.client.model.dialog.management.EditCustomerDialog;
 import be.jsams.client.model.panel.AbstractSearchPanel;
 import be.jsams.client.model.table.CustomerTableModel;
 import be.jsams.client.swing.listener.CustomerTableMouseListener;
-import be.jsams.client.validator.EditCustomerValidator;
 import be.jsams.client.validator.SearchCustomerValidator;
 import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.server.service.management.CustomerService;
@@ -25,7 +24,7 @@ import be.jsams.server.service.management.CustomerService;
  * @version $Rev: 710 $ $Date::                  $ $Author$
  */
 public class SearchCustomerPanel extends
-        AbstractSearchPanel<CustomerBean, CustomerTableMouseListener, CustomerService, EditCustomerValidator> {
+        AbstractSearchPanel<CustomerBean, CustomerTableMouseListener, CustomerService, SearchCustomerValidator> {
 
     /**
      * Serial Version UID
@@ -42,13 +41,13 @@ public class SearchCustomerPanel extends
      * @param model the {@link CustomerBean}
      * @param listener the {@link CustomerTableMouseListener}
      * @param service the {@link CustomerService}
+     * @param validator the {@link SearchCustomerValidator}
      * @param showButtons a boolean that indicates if we have to display the
      *            buttons to manage the content: add, remove and modify
      */
     public SearchCustomerPanel(CustomerBean model, CustomerTableMouseListener listener, CustomerService service,
-            final boolean showButtons) {
-        super(model, listener, service, showButtons);
-        super.setValidator(new SearchCustomerValidator());
+            SearchCustomerValidator validator, final boolean showButtons) {
+        super(model, listener, service, validator, showButtons);
     }
 
     /**

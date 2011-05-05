@@ -10,7 +10,6 @@ import be.jsams.client.model.dialog.sale.EditCommandDialog;
 import be.jsams.client.model.panel.AbstractSearchPanel;
 import be.jsams.client.model.table.CommandTableModel;
 import be.jsams.client.swing.listener.CommandTableMouseListener;
-import be.jsams.client.validator.EditCommandValidator;
 import be.jsams.client.validator.SearchCommandValidator;
 import be.jsams.common.bean.model.sale.CommandBean;
 import be.jsams.server.service.sale.CommandService;
@@ -22,7 +21,7 @@ import be.jsams.server.service.sale.CommandService;
  * @version $Rev$ $Date::                  $ $Author$
  */
 public class SearchCommandPanel extends
-        AbstractSearchPanel<CommandBean, CommandTableMouseListener, CommandService, EditCommandValidator> {
+        AbstractSearchPanel<CommandBean, CommandTableMouseListener, CommandService, SearchCommandValidator> {
 
     /**
      * Serial Version UID
@@ -39,13 +38,13 @@ public class SearchCommandPanel extends
      * @param model the {@link CommandBean}
      * @param listener the {@link CommandTableMouseListener}
      * @param service the {@link CommandService}
+     * @param validator the {@link SearchCommandValidator}
      * @param showButtons a boolean that indicates if we have to display the
      *            buttons to manage the content: add, remove and modify
      */
     public SearchCommandPanel(CommandBean model, CommandTableMouseListener listener, CommandService service,
-            final boolean showButtons) {
-        super(model, listener, service, showButtons);
-        super.setValidator(new SearchCommandValidator());
+            SearchCommandValidator validator, final boolean showButtons) {
+        super(model, listener, service, validator, showButtons);
     }
 
     /**
