@@ -1,16 +1,11 @@
 package be.jsams.common.bean.model.sale;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.common.bean.model.AbstractIdentityBean;
 import be.jsams.common.bean.model.AddressBean;
-import be.jsams.common.bean.model.PeriodBean;
-import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.AgentBean;
-import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.view.sale.CommandBeanView;
 import be.jsams.server.model.sale.Command;
 import be.jsams.server.model.sale.CommandDetail;
@@ -46,16 +41,9 @@ public class CommandBean extends AbstractDocumentBean<Command, CommandBeanView> 
         super();
         setBillingAddress(new AddressBean());
         setDeliveryAddress(new AddressBean());
-        SocietyBean society = JsamsDesktop.getInstance().getCurrentSociety();
-        setAgent(new AgentBean(society));
-        setCreationDate(new Date());
-        setCustomer(new CustomerBean(society));
-        setPeriod(new PeriodBean());
+        setAgent(new AgentBean(getSociety()));
         setTransferred(false);
         List<CommandDetailBean> details = new ArrayList<CommandDetailBean>();
-//        CommandDetailBean detail = new CommandDetailBean();
-//        detail.setCommand(this);
-//        details.add(detail);
         setDetails(details);
     }
 
@@ -69,15 +57,12 @@ public class CommandBean extends AbstractDocumentBean<Command, CommandBeanView> 
         setAgent(new AgentBean(model.getAgent()));
         setBillingAddress(new AddressBean(model.getBillingAddress()));
         setDeliveryAddress(new AddressBean(model.getDeliveryAddress()));
-        setCreationDate(model.getCreationDate());
-        setCustomer(new CustomerBean(model.getCustomer()));
         List<CommandDetailBean> beans = new ArrayList<CommandDetailBean>();
         for (CommandDetail detail : model.getDetails()) {
             beans.add(new CommandDetailBean(detail, this));
         }
         setDetails(beans);
         setDiscountRate(model.getDiscountRate());
-        setRemark(model.getRemark());
         setTransferred(model.isTransferred());
     }
 

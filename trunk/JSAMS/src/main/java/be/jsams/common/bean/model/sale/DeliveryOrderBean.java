@@ -1,15 +1,10 @@
 package be.jsams.common.bean.model.sale;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.common.bean.model.AbstractIdentityBean;
 import be.jsams.common.bean.model.AddressBean;
-import be.jsams.common.bean.model.PeriodBean;
-import be.jsams.common.bean.model.SocietyBean;
-import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.view.sale.DeliveryOrderBeanView;
 import be.jsams.server.model.sale.DeliveryOrder;
 import be.jsams.server.model.sale.DeliveryOrderDetail;
@@ -42,10 +37,6 @@ public class DeliveryOrderBean extends AbstractDocumentBean<DeliveryOrder, Deliv
     public DeliveryOrderBean() {
         super();
         setDeliveryAddress(new AddressBean());
-        SocietyBean society = JsamsDesktop.getInstance().getCurrentSociety();
-        setCreationDate(new Date());
-        setCustomer(new CustomerBean(society));
-        setPeriod(new PeriodBean());
         setTransferred(false);
         List<DeliveryOrderDetailBean> details = new ArrayList<DeliveryOrderDetailBean>();
         setDetails(details);
@@ -60,15 +51,12 @@ public class DeliveryOrderBean extends AbstractDocumentBean<DeliveryOrder, Deliv
     public DeliveryOrderBean(DeliveryOrder model) {
         super(model);
         setDeliveryAddress(new AddressBean(model.getDeliveryAddress()));
-        setCreationDate(model.getCreationDate());
-        setCustomer(new CustomerBean(model.getCustomer()));
         List<DeliveryOrderDetailBean> beans = new ArrayList<DeliveryOrderDetailBean>();
         for (DeliveryOrderDetail detail : model.getDetails()) {
             beans.add(new DeliveryOrderDetailBean(detail, this));
         }
         setDetails(beans);
         setDiscountRate(model.getDiscountRate());
-        setRemark(model.getRemark());
         setTransferred(model.isTransferred());
     }
 

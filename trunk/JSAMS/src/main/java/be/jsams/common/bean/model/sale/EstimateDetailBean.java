@@ -51,9 +51,8 @@ public class EstimateDetailBean extends AbstractIdentityBean<EstimateDetail, Est
     /**
      * Constructor
      * 
-     * @param model
-     *            the {@link EstimateDetail}
-     * @param estimate the {@link EstimateBean}            
+     * @param model the {@link EstimateDetail}
+     * @param estimate the {@link EstimateBean}
      */
     public EstimateDetailBean(EstimateDetail model, EstimateBean estimate) {
         super(model);
@@ -79,8 +78,7 @@ public class EstimateDetailBean extends AbstractIdentityBean<EstimateDetail, Est
     }
 
     /**
-     * @param quantity
-     *            the quantity to set
+     * @param quantity the quantity to set
      */
     public void setQuantity(int quantity) {
         int oldValue = this.quantity;
@@ -96,8 +94,7 @@ public class EstimateDetailBean extends AbstractIdentityBean<EstimateDetail, Est
     }
 
     /**
-     * @param price
-     *            the price to set
+     * @param price the price to set
      */
     public void setPrice(Double price) {
         Double oldValue = this.price;
@@ -113,8 +110,7 @@ public class EstimateDetailBean extends AbstractIdentityBean<EstimateDetail, Est
     }
 
     /**
-     * @param vatApplicable
-     *            the vatApplicable to set
+     * @param vatApplicable the vatApplicable to set
      */
     public void setVatApplicable(Double vatApplicable) {
         Double oldValue = this.vatApplicable;
@@ -130,8 +126,7 @@ public class EstimateDetailBean extends AbstractIdentityBean<EstimateDetail, Est
     }
 
     /**
-     * @param discountRate
-     *            the discountRate to set
+     * @param discountRate the discountRate to set
      */
     public void setDiscountRate(Double discountRate) {
         Double oldValue = this.discountRate;
@@ -147,8 +142,7 @@ public class EstimateDetailBean extends AbstractIdentityBean<EstimateDetail, Est
     }
 
     /**
-     * @param transferred
-     *            the transferred to set
+     * @param transferred the transferred to set
      */
     public void setTransferred(boolean transferred) {
         boolean oldValue = this.transferred;
@@ -164,8 +158,7 @@ public class EstimateDetailBean extends AbstractIdentityBean<EstimateDetail, Est
     }
 
     /**
-     * @param estimate
-     *            the estimate to set
+     * @param estimate the estimate to set
      */
     public void setEstimate(EstimateBean estimate) {
         this.estimate = estimate;
@@ -179,8 +172,7 @@ public class EstimateDetailBean extends AbstractIdentityBean<EstimateDetail, Est
     }
 
     /**
-     * @param product
-     *            the product to set
+     * @param product the product to set
      */
     public void setProduct(ProductBean product) {
         this.product = product;
