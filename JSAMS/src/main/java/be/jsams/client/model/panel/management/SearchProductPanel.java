@@ -10,7 +10,6 @@ import be.jsams.client.model.dialog.management.EditProductDialog;
 import be.jsams.client.model.panel.AbstractSearchPanel;
 import be.jsams.client.model.table.ProductTableModel;
 import be.jsams.client.swing.listener.ProductTableMouseListener;
-import be.jsams.client.validator.EditProductValidator;
 import be.jsams.client.validator.SearchProductValidator;
 import be.jsams.common.bean.builder.ProductBeanBuilder;
 import be.jsams.common.bean.model.management.ProductBean;
@@ -23,7 +22,7 @@ import be.jsams.server.service.management.ProductService;
  * @version $Rev: 710 $ $Date::                  $ $Author$
  */
 public class SearchProductPanel extends
-        AbstractSearchPanel<ProductBean, ProductTableMouseListener, ProductService, EditProductValidator> {
+        AbstractSearchPanel<ProductBean, ProductTableMouseListener, ProductService, SearchProductValidator> {
 
     /**
      * Serial Version UID
@@ -40,13 +39,13 @@ public class SearchProductPanel extends
      * @param model the {@link ProductBean}
      * @param listener the {@link ProductTableMouseListener}
      * @param service the {@link ProductService}
+     * @param validator the {@link SearchProductValidator}
      * @param showButtons the boolean to show or not the management buttons
      *            panel
      */
     public SearchProductPanel(ProductBean model, ProductTableMouseListener listener, ProductService service,
-            final boolean showButtons) {
-        super(model, listener, service, showButtons);
-        super.setValidator(new SearchProductValidator());
+            SearchProductValidator validator, final boolean showButtons) {
+        super(model, listener, service, validator, showButtons);
     }
 
     /**

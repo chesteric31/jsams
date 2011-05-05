@@ -8,7 +8,6 @@ import be.jsams.client.model.dialog.management.EditAgentDialog;
 import be.jsams.client.model.panel.AbstractSearchPanel;
 import be.jsams.client.model.table.AgentTableModel;
 import be.jsams.client.swing.listener.AgentTableMouseListener;
-import be.jsams.client.validator.EditAgentValidator;
 import be.jsams.client.validator.SearchAgentValidator;
 import be.jsams.common.bean.model.management.AgentBean;
 import be.jsams.server.service.management.AgentService;
@@ -20,7 +19,7 @@ import be.jsams.server.service.management.AgentService;
  * @version $Rev: 710 $ $Date::                  $ $Author$
  */
 public class SearchAgentPanel extends
-        AbstractSearchPanel<AgentBean, AgentTableMouseListener, AgentService, EditAgentValidator> {
+        AbstractSearchPanel<AgentBean, AgentTableMouseListener, AgentService, SearchAgentValidator> {
 
     /**
      * Serial Version UID
@@ -33,13 +32,13 @@ public class SearchAgentPanel extends
      * @param model the {@link AgentBean}
      * @param listener the {@link AgentTableMouseListener}
      * @param service the {@link AgentService}
+     * @param validator the {@link SearchAgentValidator}
      * @param showButtons a boolean that indicates if we have to display the
      *            buttons to manage the content: add, remove and modify
      */
     public SearchAgentPanel(AgentBean model, AgentTableMouseListener listener, AgentService service,
-            final boolean showButtons) {
-        super(model, listener, service, showButtons);
-        super.setValidator(new SearchAgentValidator());
+            SearchAgentValidator validator, final boolean showButtons) {
+        super(model, listener, service, validator, showButtons);
     }
 
     /**

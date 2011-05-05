@@ -33,6 +33,7 @@ import be.jsams.client.swing.component.JsamsTable;
 import be.jsams.client.swing.component.JsamsTextField;
 import be.jsams.client.swing.listener.ProductTableMouseListener;
 import be.jsams.client.swing.utils.IconUtil;
+import be.jsams.client.validator.SearchProductValidator;
 import be.jsams.common.bean.builder.ProductBeanBuilder;
 import be.jsams.common.bean.model.AddressBean;
 import be.jsams.common.bean.model.PeriodBean;
@@ -232,7 +233,8 @@ public class EstimateBeanView extends AbstractView<EstimateBean, JPanel, JPanel>
                         };
                         ProductBeanBuilder builder = new ProductBeanBuilder();
                         SearchProductPanel searchPanel = new SearchProductPanel(builder.build(true, true),
-                                customListener, JsamsApplicationContext.getProductService(), false);
+                                customListener, JsamsApplicationContext.getProductService(),
+                                new SearchProductValidator(), false);
 
                         dialog.add(searchPanel);
                         dialog.pack();

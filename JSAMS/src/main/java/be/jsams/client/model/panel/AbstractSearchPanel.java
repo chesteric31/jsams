@@ -48,21 +48,16 @@ import com.jgoodies.validation.view.ValidationResultViewFactory;
 /**
  * Search generic panel.
  * 
- * @param <B>
- *            an extension of {@link AbstractIdentityBean}
- * @param <L>
- *            an extension of {@link MouseListener}
- * @param <S>
- *            an extension of {@link Service}
- * @param <V>
- *            an extension of {@link Validator}
+ * @param <B> an extension of {@link AbstractIdentityBean}
+ * @param <L> an extension of {@link MouseListener}
+ * @param <S> an extension of {@link Service}
+ * @param <V> an extension of {@link Validator}
  * 
  * @author chesteric31
  * @version $$Rev: 689 $$ $$Date::                  $$ $$Author$$
  */
-public abstract class AbstractSearchPanel<B extends AbstractIdentityBean<?, ?>,
-        L extends MouseListener, S extends Service<B>, V extends Validator<B>>
-        extends JPanel implements JsamsButtonsInterface {
+public abstract class AbstractSearchPanel<B extends AbstractIdentityBean<?, ?>, L extends MouseListener,
+        S extends Service<B>, V extends Validator<B>> extends JPanel implements JsamsButtonsInterface {
 
     /**
      * Serial Version UID
@@ -92,26 +87,25 @@ public abstract class AbstractSearchPanel<B extends AbstractIdentityBean<?, ?>,
     private JsamsButton buttonModify = null;
 
     private boolean showButtons;
-    
+
     public static final int THREE = 3;
 
     /**
      * Constructor.
      * 
-     * @param bean
-     *            the {@link AbstractIdentityBean}
-     * @param listener
-     *            the {@link MouseListener}
-     * @param service
-     *            the {@link Service}
-     * @param showButtons
-     *            a boolean that indicates to show or not a management buttons (add, modify and remove)
+     * @param bean the {@link AbstractIdentityBean}
+     * @param listener the {@link MouseListener}
+     * @param service the {@link Service}
+     * @param validator the {@link Validator}
+     * @param showButtons a boolean that indicates to show or not a management
+     *            buttons (add, modify and remove)
      */
-    public AbstractSearchPanel(B bean, L listener, S service, boolean showButtons) {
+    public AbstractSearchPanel(B bean, L listener, S service, V validator, boolean showButtons) {
         super();
         this.model = bean;
         this.mouseListener = listener;
         this.service = service;
+        this.validator = validator;
         this.showButtons = showButtons;
         setLayout(new BorderLayout());
         buttonsPanel = new JsamsButtonsPanel(this, true, true, true);
@@ -130,8 +124,7 @@ public abstract class AbstractSearchPanel<B extends AbstractIdentityBean<?, ?>,
 
     /**
      * 
-     * @param model
-     *            the model to set
+     * @param model the model to set
      */
     public void setModel(B model) {
         this.model = model;
@@ -147,8 +140,7 @@ public abstract class AbstractSearchPanel<B extends AbstractIdentityBean<?, ?>,
 
     /**
      * 
-     * @param mouseListener
-     *            the {@link MouseListener} to set
+     * @param mouseListener the {@link MouseListener} to set
      */
     public void setMouseListener(L mouseListener) {
         this.mouseListener = mouseListener;
@@ -164,8 +156,7 @@ public abstract class AbstractSearchPanel<B extends AbstractIdentityBean<?, ?>,
 
     /**
      * 
-     * @param service
-     *            the service to set
+     * @param service the service to set
      */
     public void setService(S service) {
         this.service = service;
@@ -181,8 +172,7 @@ public abstract class AbstractSearchPanel<B extends AbstractIdentityBean<?, ?>,
 
     /**
      * 
-     * @param validator
-     *            the {@link Validator} to set
+     * @param validator the {@link Validator} to set
      */
     public void setValidator(Validator<B> validator) {
         this.validator = validator;
@@ -204,8 +194,7 @@ public abstract class AbstractSearchPanel<B extends AbstractIdentityBean<?, ?>,
     }
 
     /**
-     * @param statusBar
-     *            the statusBar to set
+     * @param statusBar the statusBar to set
      */
     public void setStatusBar(JsamsStatusBar statusBar) {
         this.statusBar = statusBar;
@@ -213,7 +202,8 @@ public abstract class AbstractSearchPanel<B extends AbstractIdentityBean<?, ?>,
 
     /**
      * 
-     * @return true, if we have to display the management buttons panel, false otherwise
+     * @return true, if we have to display the management buttons panel, false
+     *         otherwise
      */
     public boolean isShowButtons() {
         return showButtons;
@@ -221,8 +211,8 @@ public abstract class AbstractSearchPanel<B extends AbstractIdentityBean<?, ?>,
 
     /**
      * 
-     * @param showButtons
-     *            the boolean to set, if we have to display the management buttons panel or not
+     * @param showButtons the boolean to set, if we have to display the
+     *            management buttons panel or not
      */
     public void setShowButtons(boolean showButtons) {
         this.showButtons = showButtons;
@@ -230,8 +220,7 @@ public abstract class AbstractSearchPanel<B extends AbstractIdentityBean<?, ?>,
 
     /**
      * 
-     * @param resultTable
-     *            the result {@link JsamsTable} to set
+     * @param resultTable the result {@link JsamsTable} to set
      */
     public void setResultTable(JsamsTable resultTable) {
         this.resultTable = resultTable;
@@ -389,8 +378,7 @@ public abstract class AbstractSearchPanel<B extends AbstractIdentityBean<?, ?>,
     /**
      * Method called by the children class for validation.
      * 
-     * @param criteria
-     *            the criteria object to validate
+     * @param criteria the criteria object to validate
      * @return true if no error occurred, false otherwise
      */
     protected boolean prePerformOk(B criteria) {
@@ -441,7 +429,7 @@ public abstract class AbstractSearchPanel<B extends AbstractIdentityBean<?, ?>,
             statusBar.clear();
         }
     }
-    
+
     /**
      * Sets the default JSAMS renderer for result table.
      */

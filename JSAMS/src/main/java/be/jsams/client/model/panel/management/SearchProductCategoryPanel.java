@@ -12,7 +12,6 @@ import be.jsams.client.model.dialog.management.EditProductCategoryDialog;
 import be.jsams.client.model.panel.AbstractSearchPanel;
 import be.jsams.client.model.table.ProductCategoryTableModel;
 import be.jsams.client.swing.listener.ProductCategoryTableMouseListener;
-import be.jsams.client.validator.EditProductCategoryValidator;
 import be.jsams.client.validator.SearchProductCategoryValidator;
 import be.jsams.common.bean.builder.ProductCategoryBeanBuilder;
 import be.jsams.common.bean.model.SocietyBean;
@@ -25,8 +24,9 @@ import be.jsams.server.service.management.ProductCategoryService;
  * @author chesteric31
  * @version $$Rev: 710 $$ $$Date::                  $$ $$Author$$
  */
-public class SearchProductCategoryPanel extends AbstractSearchPanel<ProductCategoryBean,
-        ProductCategoryTableMouseListener, ProductCategoryService, EditProductCategoryValidator> {
+public class SearchProductCategoryPanel
+        extends AbstractSearchPanel<ProductCategoryBean, ProductCategoryTableMouseListener, 
+        ProductCategoryService, SearchProductCategoryValidator> {
 
     /**
      * Serial Version UID
@@ -40,19 +40,16 @@ public class SearchProductCategoryPanel extends AbstractSearchPanel<ProductCateg
     /**
      * Constructor.
      * 
-     * @param model
-     *            the {@link ProductCategoryBean}
-     * @param listener
-     *            the {@link ProductCategoryTableMouseListener}
-     * @param service
-     *            the {@link ProductCategoryService}
-     * @param showButtons
-     *            the boolean to show or not the management buttons panel
+     * @param model the {@link ProductCategoryBean}
+     * @param listener the {@link ProductCategoryTableMouseListener}
+     * @param service the {@link ProductCategoryService}
+     * @param validator the {@link SearchProductCategoryValidator}
+     * @param showButtons the boolean to show or not the management buttons
+     *            panel
      */
     public SearchProductCategoryPanel(ProductCategoryBean model, ProductCategoryTableMouseListener listener,
-            ProductCategoryService service, final boolean showButtons) {
-        super(model, listener, service, showButtons);
-        super.setValidator(new SearchProductCategoryValidator());
+            ProductCategoryService service, SearchProductCategoryValidator validator, final boolean showButtons) {
+        super(model, listener, service, validator, showButtons);
     }
 
     /**
@@ -71,8 +68,7 @@ public class SearchProductCategoryPanel extends AbstractSearchPanel<ProductCateg
     /**
      * Fills the data table.
      * 
-     * @param categories
-     *            the {@link ProductCategoryBean} list
+     * @param categories the {@link ProductCategoryBean} list
      */
     private void fillTable(final List<ProductCategoryBean> categories) {
         ProductCategoryTableModel model = new ProductCategoryTableModel(categories);
