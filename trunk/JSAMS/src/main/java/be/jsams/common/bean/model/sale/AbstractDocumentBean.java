@@ -49,6 +49,7 @@ public abstract class AbstractDocumentBean<M extends AbstractDocument, V extends
         setCreationDate(new Date());
         setCustomer(new CustomerBean(society));
         setPeriod(new PeriodBean());
+        setSociety(society);
     }
 
     /**
