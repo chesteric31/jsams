@@ -2,6 +2,7 @@ package be.jsams.common.bean.model.sale;
 
 import be.jsams.common.bean.model.AbstractIdentityBean;
 import be.jsams.common.bean.view.sale.CreditNoteDetailBeanView;
+import be.jsams.server.model.sale.BillDetail;
 import be.jsams.server.model.sale.CreditNoteDetail;
 
 import com.jgoodies.common.collect.ArrayListModel;
@@ -43,7 +44,8 @@ public class CreditNoteDetailBean extends AbstractIdentityBean<CreditNoteDetail,
     public CreditNoteDetailBean(CreditNoteDetail model, CreditNoteBean creditNote) {
         super(model);
         setCreditNote(creditNote);
-        setBillDetail(new BillDetailBean(model.getBillDetail()));
+        BillDetail detail = model.getBillDetail();
+        setBillDetail(new BillDetailBean(detail, new BillBean(detail.getBill())));
         list.add(this);
         setListModel(list);
         setSelection(this);

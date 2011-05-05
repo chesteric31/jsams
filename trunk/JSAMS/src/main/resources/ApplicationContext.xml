@@ -119,6 +119,19 @@
 	<bean id="commandService" parent="baseTransactionProxy">
 		<property name="target" ref="commandServiceTarget" />
 	</bean>
+	
+	<bean id="deliveryOrderDao" class="be.jsams.server.dao.sale.impl.DeliveryOrderDaoImpl">
+		<constructor-arg value="be.jsams.server.model.sale.DeliveryOrder" />
+	</bean>
+	<bean id="deliveryOrderDetailDao" class="be.jsams.server.dao.sale.impl.DeliveryOrderDetailDaoImpl">
+		<constructor-arg value="be.jsams.server.model.sale.DeliveryOrderDetail" />
+	</bean>
+	<bean id="deliveryOrderServiceTarget" class="be.jsams.server.service.sale.impl.DeliveryOrderServiceImpl">
+		<property name="deliveryOrderDao" ref="deliveryOrderDao" />
+	</bean>
+	<bean id="deliveryOrderService" parent="baseTransactionProxy">
+		<property name="target" ref="deliveryOrderServiceTarget" />
+	</bean>
 
 	<bean id="contactInformationDao" class="be.jsams.server.dao.impl.ContactInformationDaoImpl">
 		<constructor-arg value="be.jsams.server.model.ContactInformation" />

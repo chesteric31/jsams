@@ -18,7 +18,6 @@ import be.jsams.common.bean.model.sale.CommandBean;
 import be.jsams.common.bean.model.sale.CommandDetailBean;
 import be.jsams.server.model.Address;
 import be.jsams.server.model.management.Agent;
-import be.jsams.server.model.management.Customer;
 
 /**
  * Command entity object.
@@ -49,18 +48,14 @@ public class Command extends AbstractDocument {
     /**
      * Constructor
      * 
-     * @param bean
-     *            the {@link CommandBean}
+     * @param bean the {@link CommandBean}
      */
     public Command(CommandBean bean) {
         super(bean);
         setAgent(new Agent(bean.getAgent()));
         setBillingAddress(new Address(bean.getBillingAddress()));
         setDeliveryAddress(new Address(bean.getDeliveryAddress()));
-        setCreationDate(bean.getCreationDate());
-        setCustomer(new Customer(bean.getCustomer()));
         setDiscountRate(bean.getDiscountRate());
-        setRemark(bean.getRemark());
         setTransferred(bean.isTransferred());
         List<CommandDetailBean> list = bean.getDetails();
         List<CommandDetail> tmp = new ArrayList<CommandDetail>();
@@ -83,8 +78,7 @@ public class Command extends AbstractDocument {
 
     /**
      * 
-     * @param discountRate
-     *            a discount rate to set
+     * @param discountRate a discount rate to set
      */
     public void setDiscountRate(Double discountRate) {
         this.discountRate = discountRate;
@@ -102,8 +96,7 @@ public class Command extends AbstractDocument {
 
     /**
      * 
-     * @param agent
-     *            the {@link Agent} to set
+     * @param agent the {@link Agent} to set
      */
     public void setAgent(Agent agent) {
         this.agent = agent;
@@ -121,8 +114,7 @@ public class Command extends AbstractDocument {
 
     /**
      * 
-     * @param billingAddress
-     *            the billing {@link Address} to set
+     * @param billingAddress the billing {@link Address} to set
      */
     public void setBillingAddress(Address billingAddress) {
         this.billingAddress = billingAddress;
@@ -140,8 +132,7 @@ public class Command extends AbstractDocument {
 
     /**
      * 
-     * @param deliveryAddress
-     *            the delivery {@link Address} to set
+     * @param deliveryAddress the delivery {@link Address} to set
      */
     public void setDeliveryAddress(Address deliveryAddress) {
         this.deliveryAddress = deliveryAddress;
@@ -159,8 +150,7 @@ public class Command extends AbstractDocument {
 
     /**
      * 
-     * @param details
-     *            a list of {@link CommandDetail} to set
+     * @param details a list of {@link CommandDetail} to set
      */
     public void setDetails(List<CommandDetail> details) {
         this.details = details;
@@ -175,8 +165,7 @@ public class Command extends AbstractDocument {
     }
 
     /**
-     * @param transferred
-     *            the transferred to set
+     * @param transferred the transferred to set
      */
     public void setTransferred(boolean transferred) {
         this.transferred = transferred;

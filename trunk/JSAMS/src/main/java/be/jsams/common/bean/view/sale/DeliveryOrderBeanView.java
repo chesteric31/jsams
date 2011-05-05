@@ -22,7 +22,6 @@ import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.i18n.JsamsI18nLabelResource;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.model.panel.management.SearchProductPanel;
-import be.jsams.client.model.table.CommandDetailTableModel;
 import be.jsams.client.model.table.DeliveryOrderDetailTableModel;
 import be.jsams.client.model.table.ProductTableModel;
 import be.jsams.client.renderer.JsamsTableCellRenderer;
@@ -84,13 +83,14 @@ public class DeliveryOrderBeanView extends AbstractView<DeliveryOrderBean, JPane
         final int three = 3;
         ViewFactory<DeliveryOrderBean> helper = new ViewFactory<DeliveryOrderBean>();
 
-        JCheckBox transferred = helper.createBindingBooleanComponent(bean, CommandBean.TRANSFERRED_PROPERTY, false,
-                false);
-        JDateChooser creationDate = helper.createBindingDateComponent(bean, CommandBean.CREATION_DATE_PROPERTY, false,
-                false);
+        JCheckBox transferred = helper.createBindingBooleanComponent(bean, DeliveryOrderBean.TRANSFERRED_PROPERTY,
+                false, false);
+        JDateChooser creationDate = helper.createBindingDateComponent(bean, DeliveryOrderBean.CREATION_DATE_PROPERTY,
+                false, false);
         JsamsFormattedTextField discountRate = helper.createBindingDecimalComponent(bean,
-                CommandBean.DISCOUNT_RATE_PROPERTY, false, false);
-        JsamsTextField remark = helper.createBindingTextComponent(bean, CommandBean.REMARK_PROPERTY, false, false);
+                DeliveryOrderBean.DISCOUNT_RATE_PROPERTY, false, false);
+        JsamsTextField remark = helper
+                .createBindingTextComponent(bean, DeliveryOrderBean.REMARK_PROPERTY, false, false);
 
         FormLayout layout = new FormLayout("right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p", "p");
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, JsamsFrame.RESOURCE_BUNDLE);
@@ -127,7 +127,7 @@ public class DeliveryOrderBeanView extends AbstractView<DeliveryOrderBean, JPane
         table.setDefaultRenderer(Double.class, defaultCellRenderer);
         table.setDefaultRenderer(String.class, defaultCellRenderer);
 
-        builder.appendI15dSeparator(JsamsI18nResource.PANEL_COMMAND_DETAILS.getKey());
+        builder.appendI15dSeparator(JsamsI18nResource.PANEL_DELIVERY_ORDER_DETAILS.getKey());
         builder.append(new JScrollPane(table), maxColumnSpan);
 
         JPanel southPanel = new JPanel();
@@ -217,8 +217,8 @@ public class DeliveryOrderBeanView extends AbstractView<DeliveryOrderBean, JPane
                                         ProductBean selectedBean = model.getRow(selectedRowModel);
                                         int detailSelectedRow = table.getSelectedRow();
                                         int detailSelectedRowModel = table.convertRowIndexToModel(detailSelectedRow);
-                                        DeliveryOrderDetailTableModel detailModel
-                                            = (DeliveryOrderDetailTableModel) table.getModel();
+                                        DeliveryOrderDetailTableModel detailModel =
+                                            (DeliveryOrderDetailTableModel) table.getModel();
                                         DeliveryOrderDetailBean selectedDetailBean = detailModel
                                                 .getRow(detailSelectedRowModel);
                                         selectedDetailBean.setProduct(selectedBean);
@@ -281,10 +281,10 @@ public class DeliveryOrderBeanView extends AbstractView<DeliveryOrderBean, JPane
                 detail.setDeliveryOrder(bean);
                 detail.setDiscountRate(bean.getDiscountRate());
                 detail.setQuantity(1);
-                detail.setListModel(new ArrayListModel<DeliveryOrderDetailBean>(details));
                 details.add(detail);
+                detail.setListModel(new ArrayListModel<DeliveryOrderDetailBean>(details));
                 bean.setDetails(details);
-                ((CommandDetailTableModel) tableModel).setListModel(detail.getListModel());
+                ((DeliveryOrderDetailTableModel) tableModel).setListModel(detail.getListModel());
                 table.repaint();
             }
         });

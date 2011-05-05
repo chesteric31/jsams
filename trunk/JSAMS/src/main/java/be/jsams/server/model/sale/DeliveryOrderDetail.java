@@ -8,6 +8,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import be.jsams.common.bean.model.sale.BillDetailBean;
+import be.jsams.common.bean.model.sale.CommandDetailBean;
+import be.jsams.common.bean.model.sale.DeliveryOrderDetailBean;
 import be.jsams.server.model.AbstractIdentity;
 import be.jsams.server.model.management.Product;
 
@@ -36,6 +39,27 @@ public class DeliveryOrderDetail extends AbstractIdentity {
      */
     public DeliveryOrderDetail() {
         super();
+    }
+
+    /**
+     * Constructor.
+     * 
+     * @param bean the {@link DeliveryOrderDetailBean}
+     * @param deliveryOrder the {@link DeliveryOrder} model
+     */
+    public DeliveryOrderDetail(final DeliveryOrderDetailBean bean, final DeliveryOrder deliveryOrder) {
+        super(bean);
+        setDiscountRate(bean.getDiscountRate());
+        setDeliveryOrder(deliveryOrder);
+        setProduct(new Product(bean.getProduct()));
+        setQuantity(bean.getQuantity());
+        setTransferred(bean.isTransferred());
+        setVatApplicable(bean.getVatApplicable());
+        //TODO review for command detail
+        CommandDetailBean commandDetail = bean.getCommandDetail();
+        setCommandDetail(new CommandDetail(commandDetail, new Command(commandDetail.getCommand())));
+        BillDetailBean billDetail = bean.getBillDetail();
+        setBillDetail(new BillDetail(billDetail, new Bill(billDetail.getBill())));
     }
 
     /**

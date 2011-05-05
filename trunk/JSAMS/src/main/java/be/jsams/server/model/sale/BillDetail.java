@@ -1,7 +1,5 @@
 package be.jsams.server.model.sale;
 
-import java.math.BigDecimal;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +7,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import be.jsams.common.bean.model.sale.BillDetailBean;
 import be.jsams.server.model.AbstractIdentity;
 import be.jsams.server.model.management.Product;
 
@@ -23,9 +22,9 @@ import be.jsams.server.model.management.Product;
 public class BillDetail extends AbstractIdentity {
 
     private int quantity;
-    private BigDecimal price;
-    private BigDecimal vatApplicable;
-    private BigDecimal discountRate;
+    private Double price;
+    private Double vatApplicable;
+    private Double discountRate;
     private boolean transferred;
 
     private Bill bill;
@@ -36,6 +35,23 @@ public class BillDetail extends AbstractIdentity {
      */
     public BillDetail() {
         super();
+    }
+
+    /**
+     * Constructor.
+     * 
+     * @param bean the {@link BillDetailBean}
+     * @param bill the {@link Bill} model
+     */
+    public BillDetail(BillDetailBean bean, final Bill bill) {
+        super(bean);
+        setDiscountRate(bean.getDiscountRate());
+        setBill(bill);
+        setPrice(bean.getPrice());
+        setProduct(new Product(bean.getProduct()));
+        setQuantity(bean.getQuantity());
+        setTransferred(bean.isTransferred());
+        setVatApplicable(bean.getVatApplicable());
     }
 
     /**
@@ -60,7 +76,7 @@ public class BillDetail extends AbstractIdentity {
      * @return the price
      */
     @Column(name = "PRICE")
-    public BigDecimal getPrice() {
+    public Double getPrice() {
         return price;
     }
 
@@ -68,7 +84,7 @@ public class BillDetail extends AbstractIdentity {
      * 
      * @param price the price to set
      */
-    public void setPrice(BigDecimal price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
@@ -77,7 +93,7 @@ public class BillDetail extends AbstractIdentity {
      * @return the VAT to apply
      */
     @Column(name = "VAT_APPLICABLE")
-    public BigDecimal getVatApplicable() {
+    public Double getVatApplicable() {
         return vatApplicable;
     }
 
@@ -85,7 +101,7 @@ public class BillDetail extends AbstractIdentity {
      * 
      * @param vatApplicable the VAT applicable to set
      */
-    public void setVatApplicable(BigDecimal vatApplicable) {
+    public void setVatApplicable(Double vatApplicable) {
         this.vatApplicable = vatApplicable;
     }
 
@@ -94,7 +110,7 @@ public class BillDetail extends AbstractIdentity {
      * @return a discount rate
      */
     @Column(name = "DISCOUNT_RATE")
-    public BigDecimal getDiscountRate() {
+    public Double getDiscountRate() {
         return discountRate;
     }
 
@@ -102,7 +118,7 @@ public class BillDetail extends AbstractIdentity {
      * 
      * @param discountRate a discount rate to set
      */
-    public void setDiscountRate(BigDecimal discountRate) {
+    public void setDiscountRate(Double discountRate) {
         this.discountRate = discountRate;
     }
 

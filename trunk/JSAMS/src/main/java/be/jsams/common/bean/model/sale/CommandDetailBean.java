@@ -51,9 +51,8 @@ public class CommandDetailBean extends AbstractIdentityBean<CommandDetail, Comma
     /**
      * Constructor
      * 
-     * @param model
-     *            the {@link CommandDetail}
-     * @param command the {@link CommandBean}            
+     * @param model the {@link CommandDetail}
+     * @param command the {@link CommandBean}
      */
     public CommandDetailBean(CommandDetail model, CommandBean command) {
         super(model);
@@ -200,6 +199,8 @@ public class CommandDetailBean extends AbstractIdentityBean<CommandDetail, Comma
         setListModel(null);
         setSelection(null);
         setTransferred(false);
+        command.clear();
+        product.clear();
     }
 
     /**

@@ -15,10 +15,10 @@ public class CommandDetailDaoImpl extends DaoImpl<CommandDetail> implements Comm
     /**
      * Constructor
      * 
-     * @param type
-     *            the class type
+     * @param type the class type
      */
     public CommandDetailDaoImpl(final Class<CommandDetail> type) {
         super(type);
     }
+
 }
