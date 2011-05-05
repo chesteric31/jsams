@@ -1,16 +1,11 @@
 package be.jsams.common.bean.model.sale;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.common.bean.model.AbstractIdentityBean;
 import be.jsams.common.bean.model.AddressBean;
-import be.jsams.common.bean.model.PeriodBean;
-import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.AgentBean;
-import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.view.sale.EstimateBeanView;
 import be.jsams.server.model.sale.Estimate;
 import be.jsams.server.model.sale.EstimateDetail;
@@ -44,38 +39,27 @@ public class EstimateBean extends AbstractDocumentBean<Estimate, EstimateBeanVie
     public EstimateBean() {
         super();
         setBillingAddress(new AddressBean());
-        SocietyBean society = JsamsDesktop.getInstance().getCurrentSociety();
-        setAgent(new AgentBean(society));
-        setCreationDate(new Date());
-        setCustomer(new CustomerBean(society));
-        setPeriod(new PeriodBean());
+        setAgent(new AgentBean(getSociety()));
         setTransferred(false);
         List<EstimateDetailBean> details = new ArrayList<EstimateDetailBean>();
-//        EstimateDetailBean detail = new EstimateDetailBean();
-//        detail.setEstimate(this);
-//        details.add(detail);
         setDetails(details);
     }
 
     /**
      * Constructor
      * 
-     * @param model
-     *            the {@link Estimate}
+     * @param model the {@link Estimate}
      */
     public EstimateBean(Estimate model) {
         super(model);
         setAgent(new AgentBean(model.getAgent()));
         setBillingAddress(new AddressBean(model.getBillingAddress()));
-        setCreationDate(model.getCreationDate());
-        setCustomer(new CustomerBean(model.getCustomer()));
         List<EstimateDetailBean> beans = new ArrayList<EstimateDetailBean>();
         for (EstimateDetail detail : model.getDetails()) {
             beans.add(new EstimateDetailBean(detail, this));
         }
         setDetails(beans);
         setDiscountRate(model.getDiscountRate());
-        setRemark(model.getRemark());
         setTransferred(model.isTransferred());
     }
 
@@ -87,8 +71,7 @@ public class EstimateBean extends AbstractDocumentBean<Estimate, EstimateBeanVie
     }
 
     /**
-     * @param discountRate
-     *            the discountRate to set
+     * @param discountRate the discountRate to set
      */
     public void setDiscountRate(Double discountRate) {
         Double oldValue = this.discountRate;
@@ -104,8 +87,7 @@ public class EstimateBean extends AbstractDocumentBean<Estimate, EstimateBeanVie
     }
 
     /**
-     * @param agent
-     *            the agent to set
+     * @param agent the agent to set
      */
     public void setAgent(AgentBean agent) {
         this.agent = agent;
@@ -119,8 +101,7 @@ public class EstimateBean extends AbstractDocumentBean<Estimate, EstimateBeanVie
     }
 
     /**
-     * @param billingAddress
-     *            the billingAddress to set
+     * @param billingAddress the billingAddress to set
      */
     public void setBillingAddress(AddressBean billingAddress) {
         this.billingAddress = billingAddress;
@@ -134,8 +115,7 @@ public class EstimateBean extends AbstractDocumentBean<Estimate, EstimateBeanVie
     }
 
     /**
-     * @param details
-     *            the details to set
+     * @param details the details to set
      */
     public void setDetails(List<EstimateDetailBean> details) {
         this.details = details;
@@ -150,8 +130,8 @@ public class EstimateBean extends AbstractDocumentBean<Estimate, EstimateBeanVie
 
     /**
      * 
-     * @param transferred
-     *            the boolean to indicate that the estimate is transferred or not
+     * @param transferred the boolean to indicate that the estimate is
+     *            transferred or not
      */
     public void setTransferred(boolean transferred) {
         boolean oldValue = this.transferred;

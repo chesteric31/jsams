@@ -4,9 +4,12 @@ import be.jsams.common.bean.model.AbstractIdentityBean;
 import be.jsams.common.bean.view.sale.CreditNoteDetailBeanView;
 import be.jsams.server.model.sale.CreditNoteDetail;
 
+import com.jgoodies.common.collect.ArrayListModel;
+import com.jgoodies.common.collect.ObservableList;
+
 /**
+ * {@link AbstractIdentityBean} for {@link CreditNoteDetail} object.
  * 
- *
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
@@ -17,15 +20,61 @@ public class CreditNoteDetailBean extends AbstractIdentityBean<CreditNoteDetail,
      */
     private static final long serialVersionUID = 2345486313955221349L;
 
+    private CreditNoteBean creditNote;
+    private BillDetailBean billDetail;
+
+    private ObservableList<CreditNoteDetailBean> list = new ArrayListModel<CreditNoteDetailBean>();
+
+    /**
+     * Default constructor
+     */
+    public CreditNoteDetailBean() {
+        super();
+        setListModel(list);
+        setSelection(this);
+    }
+
     /**
      * Constructor
      * 
-     * @param model
-     *            the {@link CreditNoteDetail}
+     * @param model the {@link CreditNoteDetail}
+     * @param creditNote the {@link CreditNoteBean}
      */
-    public CreditNoteDetailBean(CreditNoteDetail model) {
+    public CreditNoteDetailBean(CreditNoteDetail model, CreditNoteBean creditNote) {
         super(model);
-        // TODO Auto-generated constructor stub
+        setCreditNote(creditNote);
+        setBillDetail(new BillDetailBean(model.getBillDetail()));
+        list.add(this);
+        setListModel(list);
+        setSelection(this);
+    }
+
+    /**
+     * @return the estimate
+     */
+    public CreditNoteBean getCreditNote() {
+        return creditNote;
+    }
+
+    /**
+     * @param creditNote the {@link CreditNoteBean} to set
+     */
+    public void setCreditNote(CreditNoteBean creditNote) {
+        this.creditNote = creditNote;
+    }
+
+    /**
+     * @return the {@link BillDetailBean}
+     */
+    public BillDetailBean getBillDetail() {
+        return billDetail;
+    }
+
+    /**
+     * @param billDetail the {@link BillDetailBean} to set
+     */
+    public void setBillDetail(BillDetailBean billDetail) {
+        this.billDetail = billDetail;
     }
 
     /**
@@ -33,20 +82,28 @@ public class CreditNoteDetailBean extends AbstractIdentityBean<CreditNoteDetail,
      */
     @Override
     public CreditNoteDetailBeanView getView() {
-        // TODO Auto-generated method stub
-        return null;
+        return new CreditNoteDetailBeanView(this);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void clear() {
-        // TODO Auto-generated method stub
-        
+        setListModel(null);
+        setSelection(null);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void refresh(AbstractIdentityBean<?, ?> bean) {
-        // TODO Auto-generated method stub
-        
+        CreditNoteDetailBean other = (CreditNoteDetailBean) bean;
+        creditNote.refresh(other.getCreditNote());
+        setListModel(other.getListModel());
+        billDetail.refresh(other.getBillDetail());
+        setSelection(other.getSelection());
     }
 
 }
