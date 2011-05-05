@@ -286,8 +286,8 @@ public class CommandBeanView extends AbstractView<CommandBean, JPanel, JPanel> {
                 detail.setCommand(bean);
                 detail.setDiscountRate(bean.getDiscountRate());
                 detail.setQuantity(1);
-                detail.setListModel(new ArrayListModel<CommandDetailBean>(details));
                 details.add(detail);
+                detail.setListModel(new ArrayListModel<CommandDetailBean>(details));
                 bean.setDetails(details);
                 ((CommandDetailTableModel) tableModel).setListModel(detail.getListModel());
                 table.repaint();
