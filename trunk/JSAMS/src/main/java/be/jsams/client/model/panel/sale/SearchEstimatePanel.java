@@ -1,12 +1,6 @@
 package be.jsams.client.model.panel.sale;
 
-import java.util.Date;
 import java.util.List;
-
-import javax.swing.JPanel;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.JTableHeader;
-import javax.swing.table.TableCellRenderer;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -15,8 +9,6 @@ import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.model.dialog.sale.EditEstimateDialog;
 import be.jsams.client.model.panel.AbstractSearchPanel;
 import be.jsams.client.model.table.EstimateTableModel;
-import be.jsams.client.renderer.JsamsBooleanTableCellRenderer;
-import be.jsams.client.renderer.JsamsTableCellRenderer;
 import be.jsams.client.swing.listener.EstimateTableMouseListener;
 import be.jsams.client.validator.EditEstimateValidator;
 import be.jsams.client.validator.SearchEstimateValidator;
@@ -24,7 +16,7 @@ import be.jsams.common.bean.model.sale.EstimateBean;
 import be.jsams.server.service.sale.EstimateService;
 
 /**
- * Search {@link JPanel} for {@link EstimateBean} objects.
+ * {@link AbstractSearchPanel} for {@link EstimateBean} objects.
  * 
  * @author chesteric31
  * @version $Rev: 711 $ $Date::                  $ $Author$
@@ -44,29 +36,16 @@ public class SearchEstimatePanel extends
     /**
      * Constructor.
      * 
-     * @param model
-     *            the {@link EstimateBean}
-     * @param listener
-     *            the {@link EstimateTableMouseListener}
-     * @param service
-     *            the {@link EstimateService}
-     * @param showButtons
-     *            a boolean that indicates if we have to display the buttons to manage the content: add, remove and
-     *            modify
+     * @param model the {@link EstimateBean}
+     * @param listener the {@link EstimateTableMouseListener}
+     * @param service the {@link EstimateService}
+     * @param showButtons a boolean that indicates if we have to display the
+     *            buttons to manage the content: add, remove and modify
      */
     public SearchEstimatePanel(EstimateBean model, EstimateTableMouseListener listener, EstimateService service,
             final boolean showButtons) {
         super(model, listener, service, showButtons);
         super.setValidator(new SearchEstimateValidator());
-        super.buildMainPanel(buildSearchCriteriaPanel());
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected JPanel buildSearchCriteriaPanel() {
-        return getModel().getView().createSearchView();
     }
 
     /**
@@ -128,26 +107,11 @@ public class SearchEstimatePanel extends
     /**
      * Fills the data table.
      * 
-     * @param estimates
-     *            the {@link EstimateBean} list
+     * @param estimates the {@link EstimateBean} list
      */
     private void fillTable(final List<EstimateBean> estimates) {
         EstimateTableModel model = new EstimateTableModel(estimates);
         getResultTable().setModel(model);
-
-        JTableHeader tableHeader = getResultTable().getTableHeader();
-        TableCellRenderer headerRenderer = tableHeader.getDefaultRenderer();
-
-        ((DefaultTableCellRenderer) headerRenderer).setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
-        getResultTable().setAutoCreateRowSorter(true);
-        JsamsTableCellRenderer defaultCellRenderer = new JsamsTableCellRenderer();
-        getResultTable().setDefaultRenderer(Long.class, defaultCellRenderer);
-        getResultTable().setDefaultRenderer(Integer.class, defaultCellRenderer);
-        getResultTable().setDefaultRenderer(Double.class, defaultCellRenderer);
-        getResultTable().setDefaultRenderer(String.class, defaultCellRenderer);
-        getResultTable().setDefaultRenderer(Boolean.class, new JsamsBooleanTableCellRenderer());
-        getResultTable().setDefaultRenderer(Date.class, defaultCellRenderer);
-
         getResultTable().repaint();
     }
 

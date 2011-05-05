@@ -2,17 +2,11 @@ package be.jsams.client.model.panel.management;
 
 import java.util.List;
 
-import javax.swing.JPanel;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.JTableHeader;
-import javax.swing.table.TableCellRenderer;
-
 import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.model.dialog.management.EditAgentDialog;
 import be.jsams.client.model.panel.AbstractSearchPanel;
 import be.jsams.client.model.table.AgentTableModel;
-import be.jsams.client.renderer.JsamsTableCellRenderer;
 import be.jsams.client.swing.listener.AgentTableMouseListener;
 import be.jsams.client.validator.EditAgentValidator;
 import be.jsams.client.validator.SearchAgentValidator;
@@ -20,7 +14,7 @@ import be.jsams.common.bean.model.management.AgentBean;
 import be.jsams.server.service.management.AgentService;
 
 /**
- * Search {@link JPanel} for agents objects.
+ * {@link AbstractSearchPanel} for agents objects.
  * 
  * @author chesteric31
  * @version $Rev: 710 $ $Date::                  $ $Author$
@@ -46,15 +40,6 @@ public class SearchAgentPanel extends
             final boolean showButtons) {
         super(model, listener, service, showButtons);
         super.setValidator(new SearchAgentValidator());
-        super.buildMainPanel(buildSearchCriteriaPanel());
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected JPanel buildSearchCriteriaPanel() {
-        return getModel().getView().createSearchView();
     }
 
     /**
@@ -119,18 +104,6 @@ public class SearchAgentPanel extends
     private void fillTable(final List<AgentBean> agents) {
         AgentTableModel model = new AgentTableModel(agents);
         getResultTable().setModel(model);
-
-        JTableHeader tableHeader = getResultTable().getTableHeader();
-        TableCellRenderer headerRenderer = tableHeader.getDefaultRenderer();
-
-        ((DefaultTableCellRenderer) headerRenderer).setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
-        getResultTable().setAutoCreateRowSorter(true);
-        JsamsTableCellRenderer defaultCellRenderer = new JsamsTableCellRenderer();
-        getResultTable().setDefaultRenderer(Long.class, defaultCellRenderer);
-        getResultTable().setDefaultRenderer(Integer.class, defaultCellRenderer);
-        getResultTable().setDefaultRenderer(Double.class, defaultCellRenderer);
-        getResultTable().setDefaultRenderer(String.class, defaultCellRenderer);
-
         getResultTable().repaint();
     }
 
