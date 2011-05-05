@@ -6,7 +6,6 @@ import java.util.List;
 import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.common.bean.model.sale.EstimateBean;
 import be.jsams.server.dao.sale.EstimateDao;
-import be.jsams.server.dao.sale.EstimateDetailDao;
 import be.jsams.server.model.sale.Estimate;
 import be.jsams.server.service.sale.EstimateService;
 
@@ -19,7 +18,6 @@ import be.jsams.server.service.sale.EstimateService;
 public class EstimateServiceImpl implements EstimateService {
 
     private EstimateDao estimateDao;
-    private EstimateDetailDao estimateDetailDao;
 
     /**
      * @return the estimateDao
@@ -34,21 +32,6 @@ public class EstimateServiceImpl implements EstimateService {
      */
     public void setEstimateDao(EstimateDao estimateDao) {
         this.estimateDao = estimateDao;
-    }
-
-    /**
-     * @return the estimateDetailDao
-     */
-    public EstimateDetailDao getEstimateDetailDao() {
-        return estimateDetailDao;
-    }
-
-    /**
-     * @param estimateDetailDao
-     *            the estimateDetailDao to set
-     */
-    public void setEstimateDetailDao(EstimateDetailDao estimateDetailDao) {
-        this.estimateDetailDao = estimateDetailDao;
     }
 
     /**
