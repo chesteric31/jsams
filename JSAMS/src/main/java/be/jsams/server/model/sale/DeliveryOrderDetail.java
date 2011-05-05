@@ -22,7 +22,6 @@ import be.jsams.server.model.management.Product;
 public class DeliveryOrderDetail extends AbstractIdentity {
 
     private int quantity;
-    private String description;
     private Double vatApplicable;
     private Double discountRate;
     private boolean transferred;
@@ -54,23 +53,6 @@ public class DeliveryOrderDetail extends AbstractIdentity {
      */
     public void setQuantity(int quantity) {
         this.quantity = quantity;
-    }
-
-    /**
-     * 
-     * @return the description
-     */
-    @Column(name = "DESCRIPTION")
-    public String getDescription() {
-        return description;
-    }
-
-    /**
-     * 
-     * @param description the description to set
-     */
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     /**
@@ -208,8 +190,6 @@ public class DeliveryOrderDetail extends AbstractIdentity {
         builder.append(commandDetail);
         builder.append(", deliveryOrder=");
         builder.append(deliveryOrder);
-        builder.append(", description=");
-        builder.append(description);
         builder.append(", discountRate=");
         builder.append(discountRate);
         builder.append(", product=");

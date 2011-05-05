@@ -24,7 +24,6 @@ public class BillDetail extends AbstractIdentity {
 
     private int quantity;
     private BigDecimal price;
-    private String description;
     private BigDecimal vatApplicable;
     private BigDecimal discountRate;
     private boolean transferred;
@@ -71,23 +70,6 @@ public class BillDetail extends AbstractIdentity {
      */
     public void setPrice(BigDecimal price) {
         this.price = price;
-    }
-
-    /**
-     * 
-     * @return the description
-     */
-    @Column(name = "DESCRIPTION")
-    public String getDescription() {
-        return description;
-    }
-
-    /**
-     * 
-     * @param description the description to set
-     */
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     /**
@@ -186,8 +168,6 @@ public class BillDetail extends AbstractIdentity {
         StringBuilder builder = new StringBuilder();
         builder.append("BillDetail [bill=");
         builder.append(bill);
-        builder.append(", description=");
-        builder.append(description);
         builder.append(", discountRate=");
         builder.append(discountRate);
         builder.append(", price=");

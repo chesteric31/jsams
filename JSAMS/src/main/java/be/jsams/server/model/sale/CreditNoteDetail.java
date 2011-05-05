@@ -1,9 +1,9 @@
 package be.jsams.server.model.sale;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 import be.jsams.server.model.AbstractIdentity;
 
@@ -14,10 +14,6 @@ import be.jsams.server.model.AbstractIdentity;
  * @version $Rev$ $Date::                  $ $Author$
  */
 public class CreditNoteDetail extends AbstractIdentity {
-
-    private int quantity;
-    private Double price;
-    private String description;
 
     private CreditNote creditNote;
     private BillDetail billDetail;
@@ -31,60 +27,9 @@ public class CreditNoteDetail extends AbstractIdentity {
 
     /**
      * 
-     * @return the quantity
-     */
-    @Column(name = "QUANTITY")
-    public int getQuantity() {
-        return quantity;
-    }
-
-    /**
-     * 
-     * @param quantity the quantity to set
-     */
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    /**
-     * 
-     * @return the price
-     */
-    @Column(name = "PRICE")
-    public Double getPrice() {
-        return price;
-    }
-
-    /**
-     * 
-     * @param price the price to set
-     */
-    public void setPrice(Double price) {
-        this.price = price;
-    }
-
-    /**
-     * 
-     * @return the description
-     */
-    @Column(name = "DESCRIPTION")
-    public String getDescription() {
-        return description;
-    }
-
-    /**
-     * 
-     * @param description the description to set
-     */
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    /**
-     * 
      * @return the {@link CreditNote}
      */
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "FK_CREDIT_NOTE")
     public CreditNote getCreditNote() {
         return creditNote;
@@ -102,7 +47,7 @@ public class CreditNoteDetail extends AbstractIdentity {
      * 
      * @return a {@link BillDetail}
      */
-    @ManyToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.REFRESH)
     @JoinColumn(name = "FK_BILL_DETAIL")
     public BillDetail getBillDetail() {
         return billDetail;
@@ -126,12 +71,6 @@ public class CreditNoteDetail extends AbstractIdentity {
         builder.append(billDetail);
         builder.append(", creditNote=");
         builder.append(creditNote);
-        builder.append(", description=");
-        builder.append(description);
-        builder.append(", price=");
-        builder.append(price);
-        builder.append(", quantity=");
-        builder.append(quantity);
         builder.append("]");
         return builder.toString();
     }
