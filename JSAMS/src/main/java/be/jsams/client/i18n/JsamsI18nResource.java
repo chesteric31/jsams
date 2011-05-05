@@ -223,5 +223,11 @@ public final class JsamsI18nResource {
 
     public static final I18nString ERROR_DETAILS_ARE_EMPTY = new I18nString("error.details_are_empty");
 
+    public static final I18nString TITLE_EDIT_DELIVERY_ORDER = new I18nString("title.edit.delivery_order");
+
+    public static final I18nString TITLE_SEARCH_DELIVERY_ORDER = new I18nString("title.search.delivery_order");
+
+    public static final I18nString PANEL_DELIVERY_ORDER_DETAILS = new I18nString("panel.delivery_order_details");
+
     
 }

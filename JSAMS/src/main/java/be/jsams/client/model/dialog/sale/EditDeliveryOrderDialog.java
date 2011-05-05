@@ -5,38 +5,38 @@ import javax.swing.JPanel;
 import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.model.dialog.AbstractEditDialog;
-import be.jsams.client.validator.EditCommandValidator;
-import be.jsams.common.bean.model.sale.CommandBean;
-import be.jsams.common.bean.view.sale.CommandBeanView;
-import be.jsams.server.service.sale.CommandService;
+import be.jsams.client.validator.EditDeliveryOrderValidator;
+import be.jsams.common.bean.model.sale.DeliveryOrderBean;
+import be.jsams.common.bean.view.sale.DeliveryOrderBeanView;
+import be.jsams.server.service.sale.DeliveryOrderService;
 
 import com.jgoodies.validation.view.ValidationComponentUtils;
 
 /**
- * Edit Command {@link AbstractEditDialog}, to create or update a
- * {@link CommandBean} object.
- * 
- * @author chesteric31
+ * Edit Delivery Order {@link AbstractEditDialog}, to create or update a {@link DeliveryOrderBean} object.
+ *
+ * @author ebinard
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class EditCommandDialog extends AbstractEditDialog<CommandBean, EditCommandValidator, CommandService> {
+public class EditDeliveryOrderDialog extends AbstractEditDialog<DeliveryOrderBean,
+        EditDeliveryOrderValidator, DeliveryOrderService> {
 
     /**
      * Serial Version UID
      */
-    private static final long serialVersionUID = -5020990836528415188L;
+    private static final long serialVersionUID = 6891067908001649339L;
 
     /**
      * Constructor
      * 
      * @param title the {@link I18nString} title
-     * @param model the {@link CommandBean} model
+     * @param model the {@link DeliveryOrderBean} model
      */
-    public EditCommandDialog(final I18nString title, CommandBean model) {
+    public EditDeliveryOrderDialog(final I18nString title, DeliveryOrderBean model) {
         super(null, title);
         super.setModel(model);
-        super.setValidator(new EditCommandValidator());
-        super.setService(JsamsApplicationContext.getCommandService());
+        super.setValidator(new EditDeliveryOrderValidator());
+        super.setService(JsamsApplicationContext.getDeliveryOrderService());
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
@@ -48,7 +48,7 @@ public class EditCommandDialog extends AbstractEditDialog<CommandBean, EditComma
      */
     @Override
     protected void initComponents() {
-        CommandBeanView view = getModel().getView();
+        DeliveryOrderBeanView view = getModel().getView();
         JPanel panel = view.createEditView();
         getContentPane().add(panel);
         ValidationComponentUtils.updateComponentTreeMandatoryBorder(this);
@@ -60,8 +60,8 @@ public class EditCommandDialog extends AbstractEditDialog<CommandBean, EditComma
      */
     @Override
     public void performOk() {
-        CommandBean command = getModel();
+        DeliveryOrderBean command = getModel();
         super.postPerformOk(command);
     }
-
+    
 }

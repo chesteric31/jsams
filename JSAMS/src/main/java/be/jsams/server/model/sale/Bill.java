@@ -1,5 +1,6 @@
 package be.jsams.server.model.sale;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -16,6 +17,8 @@ import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.Cascade;
 
+import be.jsams.common.bean.model.sale.BillBean;
+import be.jsams.common.bean.model.sale.BillDetailBean;
 import be.jsams.server.model.Address;
 import be.jsams.server.model.PaymentMode;
 
@@ -47,6 +50,28 @@ public class Bill extends AbstractDocument {
      */
     public Bill() {
         super();
+    }
+    
+    /**
+     * Constructor
+     * 
+     * @param bean the {@link BillBean}
+     */
+    public Bill(BillBean bean) {
+        super(bean);
+        setBillingAddress(new Address(bean.getBillingAddress()));
+        setDiscountRate(bean.getDiscountRate());
+        setPaid(bean.isPaid());
+        setClosed(bean.isClosed());
+        List<BillDetailBean> list = bean.getDetails();
+        List<BillDetail> tmp = new ArrayList<BillDetail>();
+        if (list != null) {
+            for (BillDetailBean detail : list) {
+                tmp.add(new BillDetail(detail, this));
+            }
+        }
+        setDetails(tmp);
+        //TODO complete this
     }
 
     /**

@@ -13,10 +13,12 @@ import be.jsams.server.service.management.CustomerService;
 import be.jsams.server.service.management.ProductCategoryService;
 import be.jsams.server.service.management.ProductService;
 import be.jsams.server.service.sale.CommandService;
+import be.jsams.server.service.sale.DeliveryOrderService;
 import be.jsams.server.service.sale.EstimateService;
 
 /**
- * This class provides static methods to get a reference to a specific service, anywhere in this project.
+ * This class provides static methods to get a reference to a specific service,
+ * anywhere in this project.
  * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
@@ -34,16 +36,13 @@ public final class JsamsApplicationContext {
     }
 
     /**
-     * 
-     * @param context
-     *            the {@link ClassPathXmlApplicationContext} to set
+     * @param context the {@link ClassPathXmlApplicationContext} to set
      */
     public static void setContext(final ClassPathXmlApplicationContext context) {
         JsamsApplicationContext.context = context;
     }
 
     /**
-     * 
      * @return the {@link SocietyService}
      */
     public static SocietyService getSocietyService() {
@@ -51,7 +50,6 @@ public final class JsamsApplicationContext {
     }
 
     /**
-     * 
      * @return the {@link LegalFormDao}
      */
     public static LegalFormDao getLegalFormDao() {
@@ -59,7 +57,6 @@ public final class JsamsApplicationContext {
     }
 
     /**
-     * 
      * @return the {@link CivilityDao}
      */
     public static CivilityDao getCivilityDao() {
@@ -67,7 +64,6 @@ public final class JsamsApplicationContext {
     }
 
     /**
-     * 
      * @return the {@link PaymentModeDao}
      */
     public static PaymentModeDao getPaymentModeDao() {
@@ -75,7 +71,6 @@ public final class JsamsApplicationContext {
     }
 
     /**
-     * 
      * @return the {@link CustomerService}
      */
     public static CustomerService getCustomerService() {
@@ -83,7 +78,6 @@ public final class JsamsApplicationContext {
     }
 
     /**
-     * 
      * @return the {@link ProductCategoryDao}
      */
     public static ProductCategoryDao getProductCategoryDao() {
@@ -91,7 +85,6 @@ public final class JsamsApplicationContext {
     }
 
     /**
-     * 
      * @return the {@link ProductService}
      */
     public static ProductService getProductService() {
@@ -99,7 +92,6 @@ public final class JsamsApplicationContext {
     }
 
     /**
-     * 
      * @return the {@link ProductCategoryService}
      */
     public static ProductCategoryService getProductCategoryService() {
@@ -107,7 +99,6 @@ public final class JsamsApplicationContext {
     }
 
     /**
-     * 
      * @return the {@link EstimateService}
      */
     public static EstimateService getEstimateService() {
@@ -115,15 +106,13 @@ public final class JsamsApplicationContext {
     }
 
     /**
-     * 
      * @return the {@link AgentService}
      */
     public static AgentService getAgentService() {
         return (AgentService) context.getBean("agentService");
     }
-    
+
     /**
-     * 
      * @return the {@link SocietyBeanBuilder}
      */
     public static SocietyBeanBuilder getSocietyBeanBuilder() {
@@ -135,6 +124,13 @@ public final class JsamsApplicationContext {
      */
     public static CommandService getCommandService() {
         return (CommandService) context.getBean("commandService");
+    }
+
+    /**
+     * @return the {@link DeliveryOrderService}
+     */
+    public static DeliveryOrderService getDeliveryOrderService() {
+        return (DeliveryOrderService) context.getBean("deliveryOrderService");
     }
 
 }

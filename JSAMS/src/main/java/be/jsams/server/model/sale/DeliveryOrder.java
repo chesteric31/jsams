@@ -1,5 +1,6 @@
 package be.jsams.server.model.sale;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -13,6 +14,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Cascade;
 
+import be.jsams.common.bean.model.sale.DeliveryOrderBean;
+import be.jsams.common.bean.model.sale.DeliveryOrderDetailBean;
 import be.jsams.server.model.Address;
 
 /**
@@ -37,6 +40,26 @@ public class DeliveryOrder extends AbstractDocument {
      */
     public DeliveryOrder() {
         super();
+    }
+
+    /**
+     * Constructor
+     * 
+     * @param bean the {@link DeliveryOrderBean}
+     */
+    public DeliveryOrder(DeliveryOrderBean bean) {
+        super(bean);
+        setDeliveryAddress(new Address(bean.getDeliveryAddress()));
+        setDiscountRate(bean.getDiscountRate());
+        setTransferred(bean.isTransferred());
+        List<DeliveryOrderDetailBean> list = bean.getDetails();
+        List<DeliveryOrderDetail> tmp = new ArrayList<DeliveryOrderDetail>();
+        if (list != null) {
+            for (DeliveryOrderDetailBean detail : list) {
+                tmp.add(new DeliveryOrderDetail(detail, this));
+            }
+        }
+        setDetails(tmp);
     }
 
     /**

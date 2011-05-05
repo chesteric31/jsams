@@ -29,6 +29,8 @@ public class DeliveryOrderDetailBean extends AbstractIdentityBean<DeliveryOrderD
 
     private DeliveryOrderBean deliveryOrder;
     private ProductBean product;
+    private CommandDetailBean commandDetailBean;
+    private BillDetailBean billDetailBean;
 
     public static final String QUANTITY_PROPERTY = "quantity";
     public static final String VAT_APPLICABLE_PROPERTY = "vatApplicable";
@@ -160,6 +162,34 @@ public class DeliveryOrderDetailBean extends AbstractIdentityBean<DeliveryOrderD
     }
 
     /**
+     * @return the commandDetailBean
+     */
+    public CommandDetailBean getCommandDetail() {
+        return commandDetailBean;
+    }
+
+    /**
+     * @param commandDetailBean the commandDetailBean to set
+     */
+    public void setCommandDetail(CommandDetailBean commandDetailBean) {
+        this.commandDetailBean = commandDetailBean;
+    }
+
+    /**
+     * @return the billDetailBean
+     */
+    public BillDetailBean getBillDetail() {
+        return billDetailBean;
+    }
+
+    /**
+     * @param billDetailBean the billDetailBean to set
+     */
+    public void setBillDetail(BillDetailBean billDetailBean) {
+        this.billDetailBean = billDetailBean;
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
@@ -179,6 +209,10 @@ public class DeliveryOrderDetailBean extends AbstractIdentityBean<DeliveryOrderD
         setListModel(null);
         setSelection(null);
         setTransferred(false);
+        deliveryOrder.clear();
+        product.clear();
+        commandDetailBean.clear();
+        billDetailBean.clear();
     }
 
     /**
@@ -195,6 +229,8 @@ public class DeliveryOrderDetailBean extends AbstractIdentityBean<DeliveryOrderD
         setSelection(other.getSelection());
         setTransferred(other.isTransferred());
         setVatApplicable(other.getVatApplicable());
+        commandDetailBean.refresh(other.getCommandDetail());
+        billDetailBean.refresh(other.getBillDetail());
     }
 
 }
