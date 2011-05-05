@@ -1,7 +1,6 @@
 package be.jsams.server.model.sale;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -12,17 +11,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.Cascade;
 
 import be.jsams.common.bean.model.sale.EstimateBean;
 import be.jsams.common.bean.model.sale.EstimateDetailBean;
-import be.jsams.server.model.AbstractIdentity;
 import be.jsams.server.model.Address;
 import be.jsams.server.model.management.Agent;
-import be.jsams.server.model.management.Customer;
 
 /**
  * Estimate entity object.
@@ -32,15 +27,12 @@ import be.jsams.server.model.management.Customer;
  */
 @Entity
 @Table(name = "ESTIMATE")
-public class Estimate extends AbstractIdentity {
+public class Estimate extends AbstractDocument {
 
-    private Date creationDate;
-    private String remark;
     private Double discountRate;
     private boolean transferred;
 
     private Agent agent;
-    private Customer customer;
     private Address billingAddress;
 
     private List<EstimateDetail> details;
@@ -61,10 +53,7 @@ public class Estimate extends AbstractIdentity {
         super(bean);
         setAgent(new Agent(bean.getAgent()));
         setBillingAddress(new Address(bean.getBillingAddress()));
-        setCreationDate(bean.getCreationDate());
-        setCustomer(new Customer(bean.getCustomer()));
         setDiscountRate(bean.getDiscountRate());
-        setRemark(bean.getRemark());
         setTransferred(bean.isTransferred());
         List<EstimateDetailBean> list = bean.getDetails();
         List<EstimateDetail> tmp = new ArrayList<EstimateDetail>();
@@ -74,41 +63,6 @@ public class Estimate extends AbstractIdentity {
             }
         }
         setDetails(tmp);
-    }
-
-    /**
-     * 
-     * @return the creation date
-     */
-    @Column(name = "CREATION_DATE")
-    @Temporal(TemporalType.DATE)
-    public Date getCreationDate() {
-        return creationDate;
-    }
-
-    /**
-     * 
-     * @param creationDate the creation date to set
-     */
-    public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
-    }
-
-    /**
-     * 
-     * @return a remark
-     */
-    @Column(name = "REMARK")
-    public String getRemark() {
-        return remark;
-    }
-
-    /**
-     * 
-     * @param remark a remark to set
-     */
-    public void setRemark(String remark) {
-        this.remark = remark;
     }
 
     /**
@@ -144,24 +98,6 @@ public class Estimate extends AbstractIdentity {
      */
     public void setAgent(Agent agent) {
         this.agent = agent;
-    }
-
-    /**
-     * 
-     * @return the {@link Customer}
-     */
-    @ManyToOne(cascade = CascadeType.REFRESH)
-    @JoinColumn(name = "FK_CUSTOMER")
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    /**
-     * 
-     * @param customer the {@link Customer} to set
-     */
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
     }
 
     /**
@@ -226,15 +162,15 @@ public class Estimate extends AbstractIdentity {
         builder.append(", billingAddress=");
         builder.append(billingAddress);
         builder.append(", creationDate=");
-        builder.append(creationDate);
+        builder.append(getCreationDate());
         builder.append(", customer=");
-        builder.append(customer);
+        builder.append(getCustomer());
         builder.append(", details=");
         builder.append(details);
         builder.append(", discountRate=");
         builder.append(discountRate);
         builder.append(", remark=");
-        builder.append(remark);
+        builder.append(getRemark());
         builder.append(", transferred=");
         builder.append(transferred);
         builder.append("]");
