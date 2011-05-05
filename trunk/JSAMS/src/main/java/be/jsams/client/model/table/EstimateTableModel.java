@@ -4,17 +4,16 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import be.jsams.client.i18n.I18nString;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.common.bean.model.sale.EstimateBean;
 
 /**
- * {@link JsamsTableModel} for {@link EstimateBean} object.
+ * {@link AbstractJsamsTableModel} for {@link EstimateBean} object.
  * 
  * @author chesteric31
  * @version $Rev: 689 $ $Date::                  $ $Author$
  */
-public class EstimateTableModel extends JsamsTableModel<EstimateBean> {
+public class EstimateTableModel extends AbstractJsamsTableModel<EstimateBean> {
 
     /**
      * Serial Version UID
@@ -22,27 +21,15 @@ public class EstimateTableModel extends JsamsTableModel<EstimateBean> {
     private static final long serialVersionUID = 8310299690507417519L;
 
     /**
-     * The columns name
-     */
-    private static List<I18nString> columnsName = Arrays.asList(JsamsI18nResource.COLUMN_ID,
-            JsamsI18nResource.COLUMN_CREATION_DATE, JsamsI18nResource.COLUMN_TRANSFERRED,
-            JsamsI18nResource.COLUMN_REMARK, JsamsI18nResource.COLUMN_DISCOUNT_RATE);
-
-    /**
      * Constructor
      * 
-     * @param listBean
-     *            a list of {@link EstimateBean}
+     * @param listBean a list of {@link EstimateBean}
      */
     public EstimateTableModel(List<EstimateBean> listBean) {
         super(listBean);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public int getColumnCount() {
-        return columnsName.size();
+        setColumnNames(Arrays.asList(JsamsI18nResource.COLUMN_ID, JsamsI18nResource.COLUMN_CREATION_DATE,
+                JsamsI18nResource.COLUMN_TRANSFERRED, JsamsI18nResource.COLUMN_REMARK,
+                JsamsI18nResource.COLUMN_DISCOUNT_RATE));
     }
 
     /**
@@ -64,13 +51,6 @@ public class EstimateTableModel extends JsamsTableModel<EstimateBean> {
         default:
             return "";
         }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public String getColumnName(int columnIndex) {
-        return columnsName.get(columnIndex).getTranslation();
     }
 
     /**

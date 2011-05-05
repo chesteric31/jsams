@@ -3,17 +3,16 @@ package be.jsams.client.model.table;
 import java.util.Arrays;
 import java.util.List;
 
-import be.jsams.client.i18n.I18nString;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.common.bean.model.management.ProductCategoryBean;
 
 /**
- * {@link JsamsTableModel} for {@link ProductCategoryBean} object.
+ * {@link AbstractJsamsTableModel} for {@link ProductCategoryBean} object.
  * 
  * @author chesteric31
  * @version $Rev: 689 $ $Date::                  $ $Author$
  */
-public class ProductCategoryTableModel extends JsamsTableModel<ProductCategoryBean> {
+public class ProductCategoryTableModel extends AbstractJsamsTableModel<ProductCategoryBean> {
 
     /**
      * Serial Version UID
@@ -21,34 +20,18 @@ public class ProductCategoryTableModel extends JsamsTableModel<ProductCategoryBe
     private static final long serialVersionUID = -7016107019455922155L;
 
     /**
-     * The columns name
-     */
-    private List<I18nString> columnNames = Arrays.asList(JsamsI18nResource.COLUMN_ID,
-            JsamsI18nResource.COLUMN_LABEL_EN, JsamsI18nResource.COLUMN_LABEL_FR, JsamsI18nResource.COLUMN_LABEL_NL);
-
-    /**
      * Constructor
      * 
-     * @param listModel
-     *            a list of {@link ProductCategoryBean}
+     * @param listModel a list of {@link ProductCategoryBean}
      */
     public ProductCategoryTableModel(List<ProductCategoryBean> listModel) {
         super(listModel);
+        setColumnNames(Arrays.asList(JsamsI18nResource.COLUMN_ID, JsamsI18nResource.COLUMN_LABEL_EN,
+                JsamsI18nResource.COLUMN_LABEL_FR, JsamsI18nResource.COLUMN_LABEL_NL));
     }
 
     /**
-     * @return the columns count
-     */
-    public int getColumnCount() {
-        return columnNames.size();
-    }
-
-    /**
-     * @param rowIndex
-     *            the row
-     * @param columnIndex
-     *            the column
-     * @return the value following the row and column
+     * {@inheritDoc}
      */
     public Object getValueAt(int rowIndex, int columnIndex) {
         ProductCategoryBean category = (ProductCategoryBean) getRow(rowIndex);
@@ -67,18 +50,7 @@ public class ProductCategoryTableModel extends JsamsTableModel<ProductCategoryBe
     }
 
     /**
-     * @param columnIndex
-     *            the column
-     * @return the column name
-     */
-    public String getColumnName(int columnIndex) {
-        return columnNames.get(columnIndex).getTranslation();
-    }
-
-    /**
-     * @param columnIndex
-     *            the column
-     * @return the column class
+     * {@inheritDoc}
      */
     @Override
     public Class<?> getColumnClass(int columnIndex) {

@@ -11,7 +11,7 @@ import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.NumberFormatter;
 
 import be.jsams.client.formatter.DoubleFormatter;
-import be.jsams.client.model.table.JsamsTableModel;
+import be.jsams.client.model.table.AbstractJsamsTableModel;
 import be.jsams.client.swing.component.JsamsComboBox;
 import be.jsams.client.swing.component.JsamsFormattedTextField;
 import be.jsams.client.swing.component.JsamsTable;
@@ -192,12 +192,12 @@ public class ViewFactory<B extends AbstractIdentityBean<?, ?>> {
     /**
      * Creates a {@link JsamsTable} and binds this component to the bean.
      * 
-     * @param tableModel the {@link JsamsTableModel} to set
+     * @param tableModel the {@link AbstractJsamsTableModel} to set
      * @param mandatory mandatory boolean
      * @param readOnly read only boolean
      * @return the {@link JsamsTable}
      */
-    public JsamsTable createBindingTableComponent(final JsamsTableModel<?> tableModel, final boolean mandatory,
+    public JsamsTable createBindingTableComponent(final AbstractJsamsTableModel<?> tableModel, final boolean mandatory,
             final boolean readOnly) {
         JsamsTable table = new JsamsTable(true);
         table.setModel(tableModel);

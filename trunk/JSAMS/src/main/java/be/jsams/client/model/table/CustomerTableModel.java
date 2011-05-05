@@ -3,7 +3,6 @@ package be.jsams.client.model.table;
 import java.util.Arrays;
 import java.util.List;
 
-import be.jsams.client.i18n.I18nString;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.i18n.UserContext;
 import be.jsams.common.bean.model.AddressBean;
@@ -13,12 +12,12 @@ import be.jsams.common.bean.model.PaymentModeBean;
 import be.jsams.common.bean.model.management.CustomerBean;
 
 /**
- * {@link JsamsTableModel} for {@link CustomerBean} object.
+ * {@link AbstractJsamsTableModel} for {@link CustomerBean} object.
  * 
  * @author chesteric31
  * @version $Rev: 689 $ $Date::                  $ $Author$
  */
-public class CustomerTableModel extends JsamsTableModel<CustomerBean> {
+public class CustomerTableModel extends AbstractJsamsTableModel<CustomerBean> {
 
     /**
      * Serial Version UID
@@ -26,35 +25,19 @@ public class CustomerTableModel extends JsamsTableModel<CustomerBean> {
     private static final long serialVersionUID = 5657883688442221105L;
 
     /**
-     * The columns name
-     */
-    private static List<I18nString> columnsName = Arrays.asList(JsamsI18nResource.COLUMN_ID,
-            JsamsI18nResource.COLUMN_NAME, JsamsI18nResource.COLUMN_LEGAL_FORM, JsamsI18nResource.COLUMN_ZIP_CODE,
-            JsamsI18nResource.COLUMN_PAYMENT_MODE, JsamsI18nResource.COLUMN_PHONE);
-
-    /**
      * Constructor
      * 
-     * @param listModel
-     *            a list of {@link CustomerBean}
+     * @param listModel a list of {@link CustomerBean}
      */
     public CustomerTableModel(List<CustomerBean> listModel) {
         super(listModel);
+        setColumnNames(Arrays.asList(JsamsI18nResource.COLUMN_ID, JsamsI18nResource.COLUMN_NAME,
+                JsamsI18nResource.COLUMN_LEGAL_FORM, JsamsI18nResource.COLUMN_ZIP_CODE,
+                JsamsI18nResource.COLUMN_PAYMENT_MODE, JsamsI18nResource.COLUMN_PHONE));
     }
 
     /**
-     * @return the columns count
-     */
-    public int getColumnCount() {
-        return columnsName.size();
-    }
-
-    /**
-     * @param rowIndex
-     *            the row
-     * @param columnIndex
-     *            the column
-     * @return the value following the row and column
+     * {@inheritDoc}
      */
     public Object getValueAt(int rowIndex, int columnIndex) {
         CustomerBean customer = (CustomerBean) getRow(rowIndex);
@@ -103,18 +86,7 @@ public class CustomerTableModel extends JsamsTableModel<CustomerBean> {
     }
 
     /**
-     * @param columnIndex
-     *            the column
-     * @return the column name
-     */
-    public String getColumnName(int columnIndex) {
-        return columnsName.get(columnIndex).getTranslation();
-    }
-
-    /**
-     * @param columnIndex
-     *            the column
-     * @return the column class
+     * {@inheritDoc}
      */
     @Override
     public Class<?> getColumnClass(int columnIndex) {

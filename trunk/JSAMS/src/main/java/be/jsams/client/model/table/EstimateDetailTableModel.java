@@ -3,7 +3,6 @@ package be.jsams.client.model.table;
 import java.util.Arrays;
 import java.util.List;
 
-import be.jsams.client.i18n.I18nString;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.common.bean.model.management.ProductBean;
 import be.jsams.common.bean.model.sale.EstimateDetailBean;
@@ -14,19 +13,12 @@ import be.jsams.common.bean.model.sale.EstimateDetailBean;
  * @author chesteric31
  * @version $$Rev: 689 $$ $$Date::                  $$ $$Author$$
  */
-public class EstimateDetailTableModel extends JsamsTableModel<EstimateDetailBean> {
+public class EstimateDetailTableModel extends AbstractJsamsTableModel<EstimateDetailBean> {
 
     /**
      * Serial Version UID
      */
     private static final long serialVersionUID = -6461186432772120925L;
-
-    /**
-     * The columns name
-     */
-    private static List<I18nString> columnsName = Arrays.asList(JsamsI18nResource.COLUMN_PRODUCT_ID,
-            JsamsI18nResource.COLUMN_PRODUCT_NAME, JsamsI18nResource.COLUMN_QUANTITY, JsamsI18nResource.COLUMN_PRICE,
-            JsamsI18nResource.COLUMN_DISCOUNT_RATE, JsamsI18nResource.COLUMN_VAT_APPLICABE);
 
     /**
      * Constructor
@@ -35,13 +27,9 @@ public class EstimateDetailTableModel extends JsamsTableModel<EstimateDetailBean
      */
     public EstimateDetailTableModel(List<EstimateDetailBean> listBean) {
         super(listBean);
-    }
-
-    /**
-     * @return the columns count
-     */
-    public int getColumnCount() {
-        return columnsName.size();
+        setColumnNames(Arrays.asList(JsamsI18nResource.COLUMN_PRODUCT_ID, JsamsI18nResource.COLUMN_PRODUCT_NAME,
+                JsamsI18nResource.COLUMN_QUANTITY, JsamsI18nResource.COLUMN_PRICE,
+                JsamsI18nResource.COLUMN_DISCOUNT_RATE, JsamsI18nResource.COLUMN_VAT_APPLICABE));
     }
 
     /**
@@ -74,13 +62,6 @@ public class EstimateDetailTableModel extends JsamsTableModel<EstimateDetailBean
         default:
             return "";
         }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public String getColumnName(int columnIndex) {
-        return columnsName.get(columnIndex).getTranslation();
     }
 
     /**

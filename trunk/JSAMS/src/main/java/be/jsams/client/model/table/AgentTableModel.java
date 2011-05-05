@@ -3,19 +3,18 @@ package be.jsams.client.model.table;
 import java.util.Arrays;
 import java.util.List;
 
-import be.jsams.client.i18n.I18nString;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.common.bean.model.AddressBean;
 import be.jsams.common.bean.model.ContactInformationBean;
 import be.jsams.common.bean.model.management.AgentBean;
 
 /**
- * 
+ * Customized table model for {@link AgentBean}.
  * 
  * @author chesteric31
  * @version $Rev: 689 $ $Date::                  $ $Author$
  */
-public class AgentTableModel extends JsamsTableModel<AgentBean> {
+public class AgentTableModel extends AbstractJsamsTableModel<AgentBean> {
 
     /**
      * Serial Version UID
@@ -23,26 +22,15 @@ public class AgentTableModel extends JsamsTableModel<AgentBean> {
     private static final long serialVersionUID = -1514081531839355887L;
 
     /**
-     * The columns name
-     */
-    private List<I18nString> columnNames = Arrays.asList(JsamsI18nResource.COLUMN_ID, JsamsI18nResource.COLUMN_NAME,
-            JsamsI18nResource.COLUMN_FUNCTION, JsamsI18nResource.COLUMN_PHONE, JsamsI18nResource.COLUMN_ZIP_CODE,
-            JsamsI18nResource.COLUMN_CITY);
-    
-    /**
      * Constructor
      * 
      * @param listModel a list of {@link AgentBean}
      */
     public AgentTableModel(List<AgentBean> listModel) {
         super(listModel);
-    }
-
-    /**
-     * @return the columns count
-     */
-    public int getColumnCount() {
-        return columnNames.size();
+        setColumnNames(Arrays.asList(JsamsI18nResource.COLUMN_ID, JsamsI18nResource.COLUMN_NAME,
+            JsamsI18nResource.COLUMN_FUNCTION, JsamsI18nResource.COLUMN_PHONE, JsamsI18nResource.COLUMN_ZIP_CODE,
+            JsamsI18nResource.COLUMN_CITY));
     }
 
     /**
@@ -77,9 +65,7 @@ public class AgentTableModel extends JsamsTableModel<AgentBean> {
     }
 
     /**
-     * @param columnIndex
-     *            the column
-     * @return the column class
+     * {@inheritDoc}
      */
     @Override
     public Class<?> getColumnClass(int columnIndex) {
@@ -99,15 +85,6 @@ public class AgentTableModel extends JsamsTableModel<AgentBean> {
         default:
             return Object.class;
         }
-    }
-
-    /**
-     * @param columnIndex
-     *            the column
-     * @return the column name
-     */
-    public String getColumnName(int columnIndex) {
-        return columnNames.get(columnIndex).getTranslation();
     }
 
 }
