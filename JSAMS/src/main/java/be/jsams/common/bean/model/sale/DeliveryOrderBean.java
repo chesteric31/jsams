@@ -15,31 +15,24 @@ import be.jsams.server.model.sale.DeliveryOrder;
 import be.jsams.server.model.sale.DeliveryOrderDetail;
 
 /**
- * {@link AbstractIdentityBean} for {@link DeliveryOrder} object.
+ * {@link AbstractDocumentBean} for {@link DeliveryOrder} object.
  * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class DeliveryOrderBean extends AbstractIdentityBean<DeliveryOrder, DeliveryOrderBeanView> {
+public class DeliveryOrderBean extends AbstractDocumentBean<DeliveryOrder, DeliveryOrderBeanView> {
 
     /**
      * Serial Version UID
      */
     private static final long serialVersionUID = 6774873021985339541L;
 
-    private Date creationDate;
-    private PeriodBean period;
-    private String remark;
     private Double discountRate;
     private boolean transferred;
 
-    private CustomerBean customer;
     private AddressBean deliveryAddress;
     private List<DeliveryOrderDetailBean> details;
-    private SocietyBean society;
 
-    public static final String CREATION_DATE_PROPERTY = "creationDate";
-    public static final String REMARK_PROPERTY = "remark";
     public static final String DISCOUNT_RATE_PROPERTY = "discountRate";
     public static final String TRANSFERRED_PROPERTY = "transferred";
 
@@ -80,52 +73,6 @@ public class DeliveryOrderBean extends AbstractIdentityBean<DeliveryOrder, Deliv
     }
 
     /**
-     * @return the creationDate
-     */
-    public Date getCreationDate() {
-        return creationDate;
-    }
-
-    /**
-     * @param creationDate the creationDate to set
-     */
-    public void setCreationDate(Date creationDate) {
-        Date oldValue = this.creationDate;
-        this.creationDate = creationDate;
-        firePropertyChange(CREATION_DATE_PROPERTY, oldValue, this.creationDate);
-    }
-
-    /**
-     * @return the period
-     */
-    public PeriodBean getPeriod() {
-        return period;
-    }
-
-    /**
-     * @param period the period to set
-     */
-    public void setPeriod(PeriodBean period) {
-        this.period = period;
-    }
-
-    /**
-     * @return the remark
-     */
-    public String getRemark() {
-        return remark;
-    }
-
-    /**
-     * @param remark the remark to set
-     */
-    public void setRemark(String remark) {
-        String oldValue = this.remark;
-        this.remark = remark;
-        firePropertyChange(REMARK_PROPERTY, oldValue, this.remark);
-    }
-
-    /**
      * @return the discountRate
      */
     public Double getDiscountRate() {
@@ -158,20 +105,6 @@ public class DeliveryOrderBean extends AbstractIdentityBean<DeliveryOrder, Deliv
     }
 
     /**
-     * @return the customer
-     */
-    public CustomerBean getCustomer() {
-        return customer;
-    }
-
-    /**
-     * @param customer the customer to set
-     */
-    public void setCustomer(CustomerBean customer) {
-        this.customer = customer;
-    }
-
-    /**
      * @return the deliveryAddress
      */
     public AddressBean getDeliveryAddress() {
@@ -200,20 +133,6 @@ public class DeliveryOrderBean extends AbstractIdentityBean<DeliveryOrder, Deliv
     }
 
     /**
-     * @return the society
-     */
-    public SocietyBean getSociety() {
-        return society;
-    }
-
-    /**
-     * @param society the society to set
-     */
-    public void setSociety(SocietyBean society) {
-        this.society = society;
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Override
@@ -227,7 +146,7 @@ public class DeliveryOrderBean extends AbstractIdentityBean<DeliveryOrder, Deliv
     @Override
     public void clear() {
         deliveryAddress.clear();
-        customer.clear();
+        getCustomer().clear();
         setCreationDate(null);
         for (DeliveryOrderDetailBean detail : details) {
             detail.clear();
@@ -237,9 +156,9 @@ public class DeliveryOrderBean extends AbstractIdentityBean<DeliveryOrder, Deliv
         setRemark(null);
         setSelection(null);
         setTransferred(false);
-        period.clear();
-        if (society != null) {
-            society.clear();
+        getPeriod().clear();
+        if (getSociety() != null) {
+            getSociety().clear();
         }
     }
 
@@ -251,14 +170,15 @@ public class DeliveryOrderBean extends AbstractIdentityBean<DeliveryOrder, Deliv
         DeliveryOrderBean other = (DeliveryOrderBean) bean;
         deliveryAddress.refresh(other.getDeliveryAddress());
         setCreationDate(other.getCreationDate());
-        customer.refresh(other.getCustomer());
+        getCustomer().refresh(other.getCustomer());
         details.addAll(other.getDetails());
         setDiscountRate(other.getDiscountRate());
         setListModel(other.getListModel());
         setRemark(other.getRemark());
         setSelection(other.getSelection());
         setTransferred(other.isTransferred());
-        society.refresh(other.getSociety());
+        getSociety().refresh(other.getSociety());
+        getPeriod().refresh(other.getPeriod());
     }
 
 }

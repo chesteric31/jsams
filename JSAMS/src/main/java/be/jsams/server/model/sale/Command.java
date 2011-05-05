@@ -1,7 +1,6 @@
 package be.jsams.server.model.sale;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -12,14 +11,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.Cascade;
 
 import be.jsams.common.bean.model.sale.CommandBean;
 import be.jsams.common.bean.model.sale.CommandDetailBean;
-import be.jsams.server.model.AbstractIdentity;
 import be.jsams.server.model.Address;
 import be.jsams.server.model.management.Agent;
 import be.jsams.server.model.management.Customer;
@@ -32,15 +28,12 @@ import be.jsams.server.model.management.Customer;
  */
 @Entity
 @Table(name = "COMMAND")
-public class Command extends AbstractIdentity {
+public class Command extends AbstractDocument {
 
-    private Date creationDate;
-    private String remark;
     private Double discountRate;
     private boolean transferred;
 
     private Agent agent;
-    private Customer customer;
     private Address billingAddress;
     private Address deliveryAddress;
 
@@ -81,43 +74,6 @@ public class Command extends AbstractIdentity {
 
     /**
      * 
-     * @return the creation date
-     */
-    @Column(name = "CREATION_DATE")
-    @Temporal(TemporalType.DATE)
-    public Date getCreationDate() {
-        return creationDate;
-    }
-
-    /**
-     * 
-     * @param creationDate
-     *            the creation date to set
-     */
-    public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
-    }
-
-    /**
-     * 
-     * @return a remark
-     */
-    @Column(name = "REMARK")
-    public String getRemark() {
-        return remark;
-    }
-
-    /**
-     * 
-     * @param remark
-     *            a remark to set
-     */
-    public void setRemark(String remark) {
-        this.remark = remark;
-    }
-
-    /**
-     * 
      * @return a discount rate
      */
     @Column(name = "DISCOUNT_RATE")
@@ -151,25 +107,6 @@ public class Command extends AbstractIdentity {
      */
     public void setAgent(Agent agent) {
         this.agent = agent;
-    }
-
-    /**
-     * 
-     * @return the {@link Customer}
-     */
-    @ManyToOne(cascade = CascadeType.REFRESH)
-    @JoinColumn(name = "FK_CUSTOMER")
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    /**
-     * 
-     * @param customer
-     *            the {@link Customer} to set
-     */
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
     }
 
     /**
@@ -256,9 +193,9 @@ public class Command extends AbstractIdentity {
         builder.append(", billingAddress=");
         builder.append(billingAddress);
         builder.append(", creationDate=");
-        builder.append(creationDate);
+        builder.append(getCreationDate());
         builder.append(", customer=");
-        builder.append(customer);
+        builder.append(getCustomer());
         builder.append(", deliveryAddress=");
         builder.append(deliveryAddress);
         builder.append(", details=");
@@ -266,7 +203,7 @@ public class Command extends AbstractIdentity {
         builder.append(", discountRate=");
         builder.append(discountRate);
         builder.append(", remark=");
-        builder.append(remark);
+        builder.append(getRemark());
         builder.append(", transferred=");
         builder.append(transferred);
         builder.append("]");

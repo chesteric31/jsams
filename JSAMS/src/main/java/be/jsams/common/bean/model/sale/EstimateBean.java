@@ -16,32 +16,25 @@ import be.jsams.server.model.sale.Estimate;
 import be.jsams.server.model.sale.EstimateDetail;
 
 /**
- * {@link AbstractIdentityBean} for {@link Estimate} object.
+ * {@link AbstractDocumentBean} for {@link Estimate} object.
  * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class EstimateBean extends AbstractIdentityBean<Estimate, EstimateBeanView> {
+public class EstimateBean extends AbstractDocumentBean<Estimate, EstimateBeanView> {
 
     /**
      * Serial Version UID
      */
     private static final long serialVersionUID = -4335706521574884643L;
 
-    private Date creationDate;
-    private PeriodBean period;
-    private String remark;
     private Double discountRate;
     private boolean transferred;
 
     private AgentBean agent;
-    private CustomerBean customer;
     private AddressBean billingAddress;
     private List<EstimateDetailBean> details;
-    private SocietyBean society;
 
-    public static final String CREATION_DATE_PROPERTY = "creationDate";
-    public static final String REMARK_PROPERTY = "remark";
     public static final String DISCOUNT_RATE_PROPERTY = "discountRate";
     public static final String TRANSFERRED_PROPERTY = "transferred";
 
@@ -87,40 +80,6 @@ public class EstimateBean extends AbstractIdentityBean<Estimate, EstimateBeanVie
     }
 
     /**
-     * @return the creationDate
-     */
-    public Date getCreationDate() {
-        return creationDate;
-    }
-
-    /**
-     * @param creationDate
-     *            the creationDate to set
-     */
-    public void setCreationDate(Date creationDate) {
-        Date oldValue = this.creationDate;
-        this.creationDate = creationDate;
-        firePropertyChange(CREATION_DATE_PROPERTY, oldValue, this.creationDate);
-    }
-
-    /**
-     * @return the remark
-     */
-    public String getRemark() {
-        return remark;
-    }
-
-    /**
-     * @param remark
-     *            the remark to set
-     */
-    public void setRemark(String remark) {
-        String oldValue = this.remark;
-        this.remark = remark;
-        firePropertyChange(REMARK_PROPERTY, oldValue, this.remark);
-    }
-
-    /**
      * @return the discountRate
      */
     public Double getDiscountRate() {
@@ -150,21 +109,6 @@ public class EstimateBean extends AbstractIdentityBean<Estimate, EstimateBeanVie
      */
     public void setAgent(AgentBean agent) {
         this.agent = agent;
-    }
-
-    /**
-     * @return the customer
-     */
-    public CustomerBean getCustomer() {
-        return customer;
-    }
-
-    /**
-     * @param customer
-     *            the customer to set
-     */
-    public void setCustomer(CustomerBean customer) {
-        this.customer = customer;
     }
 
     /**
@@ -217,35 +161,6 @@ public class EstimateBean extends AbstractIdentityBean<Estimate, EstimateBeanVie
     }
 
     /**
-     * @return the period
-     */
-    public PeriodBean getPeriod() {
-        return period;
-    }
-
-    /**
-     * @param period
-     *            the period to set
-     */
-    public void setPeriod(PeriodBean period) {
-        this.period = period;
-    }
-
-    /**
-     * @return the society
-     */
-    public SocietyBean getSociety() {
-        return society;
-    }
-
-    /**
-     * @param society the society to set
-     */
-    public void setSociety(SocietyBean society) {
-        this.society = society;
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Override
@@ -260,7 +175,7 @@ public class EstimateBean extends AbstractIdentityBean<Estimate, EstimateBeanVie
     public void clear() {
         agent.clear();
         billingAddress.clear();
-        customer.clear();
+        getCustomer().clear();
         setCreationDate(null);
         for (EstimateDetailBean detail : details) {
             detail.clear();
@@ -270,10 +185,10 @@ public class EstimateBean extends AbstractIdentityBean<Estimate, EstimateBeanVie
         setRemark(null);
         setSelection(null);
         setTransferred(false);
-        period.clear();
+        getPeriod().clear();
         // only not null if searching of estimate...
-        if (society != null) {
-            society.clear();
+        if (getSociety() != null) {
+            getSociety().clear();
         }
     }
 
@@ -286,7 +201,7 @@ public class EstimateBean extends AbstractIdentityBean<Estimate, EstimateBeanVie
         agent.refresh(other.getAgent());
         billingAddress.refresh(other.getBillingAddress());
         setCreationDate(other.getCreationDate());
-        customer.refresh(other.getCustomer());
+        getCustomer().refresh(other.getCustomer());
         details.clear();
         details.addAll(other.getDetails());
         setDiscountRate(other.getDiscountRate());
@@ -294,7 +209,8 @@ public class EstimateBean extends AbstractIdentityBean<Estimate, EstimateBeanVie
         setRemark(other.getRemark());
         setSelection(other.getSelection());
         setTransferred(other.isTransferred());
-        society.refresh(other.getSociety());
+        getSociety().refresh(other.getSociety());
+        getPeriod().refresh(other.getPeriod());
     }
 
 }

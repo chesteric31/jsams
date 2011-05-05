@@ -1,6 +1,5 @@
 package be.jsams.server.model.sale;
 
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -17,10 +16,8 @@ import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.Cascade;
 
-import be.jsams.server.model.AbstractIdentity;
 import be.jsams.server.model.Address;
 import be.jsams.server.model.PaymentMode;
-import be.jsams.server.model.management.Customer;
 
 /**
  * Bill entity object.
@@ -30,11 +27,9 @@ import be.jsams.server.model.management.Customer;
  */
 @Entity
 @Table(name = "BILL")
-public class Bill extends AbstractIdentity {
+public class Bill extends AbstractDocument {
 
-    private Date creationDate;
-    private String remark;
-    private BigDecimal discountRate;
+    private Double discountRate;
     private Date dueDate;
     private boolean paid;
     private Date dateFirstRemember;
@@ -43,7 +38,6 @@ public class Bill extends AbstractIdentity {
     private boolean closed;
 
     private PaymentMode paymentMode;
-    private Customer customer;
     private Address billingAddress;
 
     private List<BillDetail> details;
@@ -57,56 +51,18 @@ public class Bill extends AbstractIdentity {
 
     /**
      * 
-     * @return the creation date
-     */
-    @Column(name = "CREATION_DATE")
-    @Temporal(TemporalType.DATE)
-    public Date getCreationDate() {
-        return creationDate;
-    }
-
-    /**
-     * 
-     * @param creationDate
-     *            the creation date to set
-     */
-    public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
-    }
-
-    /**
-     * 
-     * @return a remark
-     */
-    @Column(name = "REMARK")
-    public String getRemark() {
-        return remark;
-    }
-
-    /**
-     * 
-     * @param remark
-     *            a remark to set
-     */
-    public void setRemark(String remark) {
-        this.remark = remark;
-    }
-
-    /**
-     * 
      * @return a discount rate
      */
     @Column(name = "DISCOUNT_RATE")
-    public BigDecimal getDiscountRate() {
+    public Double getDiscountRate() {
         return discountRate;
     }
 
     /**
      * 
-     * @param discountRate
-     *            a discount rate to set
+     * @param discountRate a discount rate to set
      */
-    public void setDiscountRate(BigDecimal discountRate) {
+    public void setDiscountRate(Double discountRate) {
         this.discountRate = discountRate;
     }
 
@@ -122,8 +78,7 @@ public class Bill extends AbstractIdentity {
 
     /**
      * 
-     * @param dueDate
-     *            the due date to set
+     * @param dueDate the due date to set
      */
     public void setDueDate(Date dueDate) {
         this.dueDate = dueDate;
@@ -140,8 +95,7 @@ public class Bill extends AbstractIdentity {
 
     /**
      * 
-     * @param paid
-     *            true if the {@link Bill} was paid, false otherwise
+     * @param paid true if the {@link Bill} was paid, false otherwise
      */
     public void setPaid(boolean paid) {
         this.paid = paid;
@@ -159,8 +113,7 @@ public class Bill extends AbstractIdentity {
 
     /**
      * 
-     * @param dateFirstRemember
-     *            the date of the first reminder to set
+     * @param dateFirstRemember the date of the first reminder to set
      */
     public void setDateFirstRemember(Date dateFirstRemember) {
         this.dateFirstRemember = dateFirstRemember;
@@ -178,8 +131,7 @@ public class Bill extends AbstractIdentity {
 
     /**
      * 
-     * @param dateSecondRemember
-     *            the date of the second reminder
+     * @param dateSecondRemember the date of the second reminder
      */
     public void setDateSecondRemember(Date dateSecondRemember) {
         this.dateSecondRemember = dateSecondRemember;
@@ -197,8 +149,7 @@ public class Bill extends AbstractIdentity {
 
     /**
      * 
-     * @param dateFormalNotice
-     *            the date of the formal notice to set
+     * @param dateFormalNotice the date of the formal notice to set
      */
     public void setDateFormalNotice(Date dateFormalNotice) {
         this.dateFormalNotice = dateFormalNotice;
@@ -215,8 +166,7 @@ public class Bill extends AbstractIdentity {
 
     /**
      * 
-     * @param closed
-     *            true if the {@link Bill} was closed, false otherwise
+     * @param closed true if the {@link Bill} was closed, false otherwise
      */
     public void setClosed(boolean closed) {
         this.closed = closed;
@@ -234,30 +184,10 @@ public class Bill extends AbstractIdentity {
 
     /**
      * 
-     * @param paymentMode
-     *            the {@link PaymentMode} to set
+     * @param paymentMode the {@link PaymentMode} to set
      */
     public void setPaymentMode(PaymentMode paymentMode) {
         this.paymentMode = paymentMode;
-    }
-
-    /**
-     * 
-     * @return the customer
-     */
-    @ManyToOne(cascade = CascadeType.REFRESH)
-    @JoinColumn(name = "FK_CUSTOMER")
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    /**
-     * 
-     * @param customer
-     *            the {@link Customer} to set
-     */
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
     }
 
     /**
@@ -272,8 +202,7 @@ public class Bill extends AbstractIdentity {
 
     /**
      * 
-     * @param billingAddress
-     *            the billing {@link Address} to set
+     * @param billingAddress the billing {@link Address} to set
      */
     public void setBillingAddress(Address billingAddress) {
         this.billingAddress = billingAddress;
@@ -291,8 +220,7 @@ public class Bill extends AbstractIdentity {
 
     /**
      * 
-     * @param details
-     *            a list of {@link BillDetail} to set
+     * @param details a list of {@link BillDetail} to set
      */
     public void setDetails(List<BillDetail> details) {
         this.details = details;
@@ -309,9 +237,9 @@ public class Bill extends AbstractIdentity {
         builder.append(", closed=");
         builder.append(closed);
         builder.append(", creationDate=");
-        builder.append(creationDate);
+        builder.append(getCreationDate());
         builder.append(", customer=");
-        builder.append(customer);
+        builder.append(getCustomer());
         builder.append(", dateFirstRemember=");
         builder.append(dateFirstRemember);
         builder.append(", dateFormalNotice=");
@@ -329,7 +257,7 @@ public class Bill extends AbstractIdentity {
         builder.append(", paymentMode=");
         builder.append(paymentMode);
         builder.append(", remark=");
-        builder.append(remark);
+        builder.append(getRemark());
         builder.append("]");
         return builder.toString();
     }

@@ -16,33 +16,26 @@ import be.jsams.server.model.sale.Command;
 import be.jsams.server.model.sale.CommandDetail;
 
 /**
- * {@link AbstractIdentityBean} for {@link Command} object.
+ * {@link AbstractDocumentBean} for {@link Command} object.
  * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class CommandBean extends AbstractIdentityBean<Command, CommandBeanView> {
+public class CommandBean extends AbstractDocumentBean<Command, CommandBeanView> {
 
     /**
      * Serial Version UID
      */
     private static final long serialVersionUID = -2213182386643300641L;
 
-    private Date creationDate;
-    private PeriodBean period;
-    private String remark;
     private Double discountRate;
     private boolean transferred;
 
     private AgentBean agent;
-    private CustomerBean customer;
     private AddressBean billingAddress;
     private AddressBean deliveryAddress;
     private List<CommandDetailBean> details;
-    private SocietyBean society;
 
-    public static final String CREATION_DATE_PROPERTY = "creationDate";
-    public static final String REMARK_PROPERTY = "remark";
     public static final String DISCOUNT_RATE_PROPERTY = "discountRate";
     public static final String TRANSFERRED_PROPERTY = "transferred";
 
@@ -89,38 +82,6 @@ public class CommandBean extends AbstractIdentityBean<Command, CommandBeanView> 
     }
 
     /**
-     * @return the creationDate
-     */
-    public Date getCreationDate() {
-        return creationDate;
-    }
-
-    /**
-     * @param creationDate the creationDate to set
-     */
-    public void setCreationDate(Date creationDate) {
-        Date oldValue = this.creationDate;
-        this.creationDate = creationDate;
-        firePropertyChange(CREATION_DATE_PROPERTY, oldValue, this.creationDate);
-    }
-
-    /**
-     * @return the remark
-     */
-    public String getRemark() {
-        return remark;
-    }
-
-    /**
-     * @param remark the remark to set
-     */
-    public void setRemark(String remark) {
-        String oldValue = this.remark;
-        this.remark = remark;
-        firePropertyChange(REMARK_PROPERTY, oldValue, this.remark);
-    }
-
-    /**
      * @return the discountRate
      */
     public Double getDiscountRate() {
@@ -148,20 +109,6 @@ public class CommandBean extends AbstractIdentityBean<Command, CommandBeanView> 
      */
     public void setAgent(AgentBean agent) {
         this.agent = agent;
-    }
-
-    /**
-     * @return the customer
-     */
-    public CustomerBean getCustomer() {
-        return customer;
-    }
-
-    /**
-     * @param customer the customer to set
-     */
-    public void setCustomer(CustomerBean customer) {
-        this.customer = customer;
     }
 
     /**
@@ -209,20 +156,6 @@ public class CommandBean extends AbstractIdentityBean<Command, CommandBeanView> 
     }
 
     /**
-     * @return the period
-     */
-    public PeriodBean getPeriod() {
-        return period;
-    }
-
-    /**
-     * @param period the period to set
-     */
-    public void setPeriod(PeriodBean period) {
-        this.period = period;
-    }
-
-    /**
      * @return the details
      */
     public List<CommandDetailBean> getDetails() {
@@ -234,20 +167,6 @@ public class CommandBean extends AbstractIdentityBean<Command, CommandBeanView> 
      */
     public void setDetails(List<CommandDetailBean> details) {
         this.details = details;
-    }
-
-    /**
-     * @return the {@link SocietyBean}
-     */
-    public SocietyBean getSociety() {
-        return society;
-    }
-
-    /**
-     * @param society the {@link SocietyBean} to set
-     */
-    public void setSociety(SocietyBean society) {
-        this.society = society;
     }
 
     /**
@@ -266,7 +185,7 @@ public class CommandBean extends AbstractIdentityBean<Command, CommandBeanView> 
         agent.clear();
         billingAddress.clear();
         deliveryAddress.clear();
-        customer.clear();
+        getCustomer().clear();
         setCreationDate(null);
         for (CommandDetailBean detail : details) {
             detail.clear();
@@ -276,9 +195,9 @@ public class CommandBean extends AbstractIdentityBean<Command, CommandBeanView> 
         setRemark(null);
         setSelection(null);
         setTransferred(false);
-        period.clear();
-        if (society != null) {
-            society.clear();
+        getPeriod().clear();
+        if (getSociety() != null) {
+            getSociety().clear();
         }
     }
 
@@ -292,14 +211,15 @@ public class CommandBean extends AbstractIdentityBean<Command, CommandBeanView> 
         billingAddress.refresh(other.getBillingAddress());
         deliveryAddress.refresh(other.getDeliveryAddress());
         setCreationDate(other.getCreationDate());
-        customer.refresh(other.getCustomer());
+        getCustomer().refresh(other.getCustomer());
         details.addAll(other.getDetails());
         setDiscountRate(other.getDiscountRate());
         setListModel(other.getListModel());
         setRemark(other.getRemark());
         setSelection(other.getSelection());
         setTransferred(other.isTransferred());
-        society.refresh(other.getSociety());
+        getSociety().refresh(other.getSociety());
+        getPeriod().refresh(other.getPeriod());
     }
 
 }
