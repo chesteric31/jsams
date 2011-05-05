@@ -2,11 +2,6 @@ package be.jsams.client.model.panel.management;
 
 import java.util.List;
 
-import javax.swing.JPanel;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.JTableHeader;
-import javax.swing.table.TableCellRenderer;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -16,7 +11,6 @@ import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.model.dialog.management.EditProductCategoryDialog;
 import be.jsams.client.model.panel.AbstractSearchPanel;
 import be.jsams.client.model.table.ProductCategoryTableModel;
-import be.jsams.client.renderer.JsamsTableCellRenderer;
 import be.jsams.client.swing.listener.ProductCategoryTableMouseListener;
 import be.jsams.client.validator.EditProductCategoryValidator;
 import be.jsams.client.validator.SearchProductCategoryValidator;
@@ -26,7 +20,7 @@ import be.jsams.common.bean.model.management.ProductCategoryBean;
 import be.jsams.server.service.management.ProductCategoryService;
 
 /**
- * Search Product category panel.
+ * {@link AbstractSearchPanel} for Product category panel.
  * 
  * @author chesteric31
  * @version $$Rev: 710 $$ $$Date::                  $$ $$Author$$
@@ -59,12 +53,6 @@ public class SearchProductCategoryPanel extends AbstractSearchPanel<ProductCateg
             ProductCategoryService service, final boolean showButtons) {
         super(model, listener, service, showButtons);
         super.setValidator(new SearchProductCategoryValidator());
-        super.buildMainPanel(buildSearchCriteriaPanel());
-    }
-
-    @Override
-    protected JPanel buildSearchCriteriaPanel() {
-        return getModel().getView().createSearchView();
     }
 
     /**
@@ -89,16 +77,6 @@ public class SearchProductCategoryPanel extends AbstractSearchPanel<ProductCateg
     private void fillTable(final List<ProductCategoryBean> categories) {
         ProductCategoryTableModel model = new ProductCategoryTableModel(categories);
         getResultTable().setModel(model);
-
-        JTableHeader tableHeader = getResultTable().getTableHeader();
-        TableCellRenderer headerRenderer = tableHeader.getDefaultRenderer();
-
-        ((DefaultTableCellRenderer) headerRenderer).setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
-        getResultTable().setAutoCreateRowSorter(true);
-        JsamsTableCellRenderer defaultCellRenderer = new JsamsTableCellRenderer();
-        getResultTable().setDefaultRenderer(Long.class, defaultCellRenderer);
-        getResultTable().setDefaultRenderer(String.class, defaultCellRenderer);
-
         getResultTable().repaint();
     }
 
