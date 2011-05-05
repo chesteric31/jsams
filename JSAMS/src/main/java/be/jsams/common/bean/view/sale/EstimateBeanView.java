@@ -283,8 +283,8 @@ public class EstimateBeanView extends AbstractView<EstimateBean, JPanel, JPanel>
                 detail.setEstimate(bean);
                 detail.setDiscountRate(bean.getDiscountRate());
                 detail.setQuantity(1);
-                detail.setListModel(new ArrayListModel<EstimateDetailBean>(details));
                 details.add(detail);
+                detail.setListModel(new ArrayListModel<EstimateDetailBean>(details));
                 bean.setDetails(details);
                 ((EstimateDetailTableModel) tableModel).setListModel(detail.getListModel());
                 table.repaint();
