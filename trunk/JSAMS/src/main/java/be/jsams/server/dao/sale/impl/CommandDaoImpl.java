@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.Query;
 
+import be.jsams.common.bean.model.AddressBean;
 import be.jsams.common.bean.model.PeriodBean;
 import be.jsams.common.bean.model.sale.CommandBean;
 import be.jsams.server.dao.impl.DaoImpl;
@@ -25,8 +26,7 @@ public class CommandDaoImpl extends DaoImpl<Command> implements CommandDao {
     /**
      * Constructor
      * 
-     * @param type
-     *            the class type
+     * @param type the class type
      */
     public CommandDaoImpl(final Class<Command> type) {
         super(type);
@@ -44,8 +44,9 @@ public class CommandDaoImpl extends DaoImpl<Command> implements CommandDao {
         Date startDate = period.getStartDate();
         Date endDate = period.getEndDate();
 
-        String zipCode = criteria.getBillingAddress().getZipCode();
-        String city = criteria.getBillingAddress().getCity();
+        AddressBean billingAddress = criteria.getBillingAddress();
+        String zipCode = billingAddress.getZipCode();
+        String city = billingAddress.getCity();
 
         boolean transferred = criteria.isTransferred();
 

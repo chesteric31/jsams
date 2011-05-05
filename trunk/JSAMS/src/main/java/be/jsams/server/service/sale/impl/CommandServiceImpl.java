@@ -6,13 +6,11 @@ import java.util.List;
 import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.common.bean.model.sale.CommandBean;
 import be.jsams.server.dao.sale.CommandDao;
-import be.jsams.server.dao.sale.CommandDetailDao;
 import be.jsams.server.model.sale.Command;
-import be.jsams.server.model.sale.CommandDetail;
 import be.jsams.server.service.sale.CommandService;
 
 /**
- * Command service implementation
+ * Command service implementation.
  * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
@@ -20,7 +18,6 @@ import be.jsams.server.service.sale.CommandService;
 public class CommandServiceImpl implements CommandService {
 
     private CommandDao commandDao;
-    private CommandDetailDao commandDetailDao;
 
     /**
      * 
@@ -39,22 +36,6 @@ public class CommandServiceImpl implements CommandService {
     }
 
     /**
-     * 
-     * @return the {@link CommandDetailDao}
-     */
-    public CommandDetailDao getCommandDetailDao() {
-        return commandDetailDao;
-    }
-
-    /**
-     * 
-     * @param commandDetailDao the {@link CommandDetailDao} to set
-     */
-    public void setCommandDetailDao(CommandDetailDao commandDetailDao) {
-        this.commandDetailDao = commandDetailDao;
-    }
-
-    /**
      * {@inheritDoc}
      */
     public CommandBean create(final CommandBean bean) {
@@ -68,10 +49,6 @@ public class CommandServiceImpl implements CommandService {
      */
     public void delete(final CommandBean bean) {
         Command command = commandDao.findById(bean.getId());
-        List<CommandDetail> details = command.getDetails();
-        for (CommandDetail detail : details) {
-            commandDetailDao.delete(detail);
-        }
         commandDao.delete(command);
     }
 
@@ -80,11 +57,7 @@ public class CommandServiceImpl implements CommandService {
      */
     public void delete(final Long id) {
         Command command = commandDao.findById(id);
-        List<CommandDetail> details = command.getDetails();
-        for (CommandDetail detail : details) {
-            commandDetailDao.delete(detail);
-        }
-        commandDao.delete(id);
+        commandDao.delete(command);
     }
 
     /**

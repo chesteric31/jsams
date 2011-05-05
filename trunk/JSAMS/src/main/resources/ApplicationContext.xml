@@ -102,7 +102,6 @@
 	</bean>
 	<bean id="estimateServiceTarget" class="be.jsams.server.service.sale.impl.EstimateServiceImpl">
 		<property name="estimateDao" ref="estimateDao" />
-		<property name="estimateDetailDao" ref="estimateDetailDao" />
 	</bean>
 	<bean id="estimateService" parent="baseTransactionProxy">
 		<property name="target" ref="estimateServiceTarget" />
@@ -116,7 +115,6 @@
 	</bean>
 	<bean id="commandServiceTarget" class="be.jsams.server.service.sale.impl.CommandServiceImpl">
 		<property name="commandDao" ref="commandDao" />
-		<property name="commandDetailDao" ref="commandDetailDao" />
 	</bean>
 	<bean id="commandService" parent="baseTransactionProxy">
 		<property name="target" ref="commandServiceTarget" />
