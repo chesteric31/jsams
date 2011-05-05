@@ -8,7 +8,7 @@ import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 
-import be.jsams.client.model.table.JsamsTableModel;
+import be.jsams.client.model.table.AbstractJsamsTableModel;
 
 /**
  * Specific {@link JTable} for JSAMS with auto resize capabilities when the call to setModel method.
@@ -93,8 +93,8 @@ public class JsamsTable extends JTable {
      */
     public synchronized void clear() {
         // only if instance of jsamsTableModel and not defaultTableModel
-        if (getModel() instanceof JsamsTableModel<?>) {
-            JsamsTableModel<?> model = (JsamsTableModel<?>) getModel();
+        if (getModel() instanceof AbstractJsamsTableModel<?>) {
+            AbstractJsamsTableModel<?> model = (AbstractJsamsTableModel<?>) getModel();
             model.clear();
         }
     }

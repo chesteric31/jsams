@@ -2,6 +2,7 @@ package be.jsams.client.model.table;
 
 import java.util.List;
 
+import be.jsams.client.i18n.I18nString;
 import be.jsams.common.bean.model.AbstractIdentityBean;
 
 import com.jgoodies.binding.adapter.AbstractTableAdapter;
@@ -16,7 +17,7 @@ import com.jgoodies.common.collect.ArrayListModel;
  * @author chesteric31
  * @version $$Rev: 689 $$ $$Date::                  $$ $$Author$$
  */
-public abstract class JsamsTableModel<D extends AbstractIdentityBean<?, ?>> extends AbstractTableAdapter<D> {
+public abstract class AbstractJsamsTableModel<D extends AbstractIdentityBean<?, ?>> extends AbstractTableAdapter<D> {
 
     /**
      * Serial Version UID
@@ -43,6 +44,8 @@ public abstract class JsamsTableModel<D extends AbstractIdentityBean<?, ?>> exte
     protected static final int EIGHT = 8;
     /** Column number nine for switch purpose */
     protected static final int NINE = 9;
+    
+    private List<I18nString> columnNames;
 
     /**
      * Constructor
@@ -50,8 +53,22 @@ public abstract class JsamsTableModel<D extends AbstractIdentityBean<?, ?>> exte
      * @param listBean
      *            a list of data bean
      */
-    public JsamsTableModel(final List<D> listBean) {
+    public AbstractJsamsTableModel(final List<D> listBean) {
         super(new ArrayListModel<D>(listBean));
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    public int getColumnCount() {
+        return columnNames.size();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public String getColumnName(int columnIndex) {
+        return columnNames.get(columnIndex).getTranslation();
     }
 
     /**
@@ -73,4 +90,18 @@ public abstract class JsamsTableModel<D extends AbstractIdentityBean<?, ?>> exte
         ((ArrayListModel<D>) getListModel()).clear();
     }
 
+    /**
+     * @return the columnNames
+     */
+    public List<I18nString> getColumnNames() {
+        return columnNames;
+    }
+
+    /**
+     * @param columnNames the columnNames to set
+     */
+    public void setColumnNames(List<I18nString> columnNames) {
+        this.columnNames = columnNames;
+    }
+    
 }

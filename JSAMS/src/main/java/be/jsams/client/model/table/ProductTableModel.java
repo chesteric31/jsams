@@ -3,19 +3,18 @@ package be.jsams.client.model.table;
 import java.util.Arrays;
 import java.util.List;
 
-import be.jsams.client.i18n.I18nString;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.i18n.UserContext;
 import be.jsams.common.bean.model.management.ProductBean;
 import be.jsams.common.bean.model.management.ProductCategoryBean;
 
 /**
- * {@link JsamsTableModel} for {@link ProductBean} object.
+ * {@link AbstractJsamsTableModel} for {@link ProductBean} object.
  * 
  * @author chesteric31
  * @version $$Rev: 689 $$ $$Date::                  $$ $$Author$$
  */
-public class ProductTableModel extends JsamsTableModel<ProductBean> {
+public class ProductTableModel extends AbstractJsamsTableModel<ProductBean> {
 
     /**
      * Serial Version UID
@@ -23,36 +22,20 @@ public class ProductTableModel extends JsamsTableModel<ProductBean> {
     private static final long serialVersionUID = 5631609209979319706L;
 
     /**
-     * The columns name
-     */
-    private List<I18nString> columnNames = Arrays.asList(JsamsI18nResource.COLUMN_ID, JsamsI18nResource.COLUMN_NAME,
-            JsamsI18nResource.COLUMN_PRICE, JsamsI18nResource.COLUMN_STOCK_QUANTITY,
-            JsamsI18nResource.COLUMN_REORDER_LEVEL, JsamsI18nResource.COLUMN_VAT_APPLICABE,
-            JsamsI18nResource.COLUMN_PRODUCT_CATEGORY);
-
-    /**
      * Constructor
      * 
-     * @param listModel
-     *            a list of {@link ProductBean}
+     * @param listModel a list of {@link ProductBean}
      */
     public ProductTableModel(List<ProductBean> listModel) {
         super(listModel);
-    }
-    
-    /**
-     * @return the columns count
-     */
-    public int getColumnCount() {
-        return columnNames.size();
+        setColumnNames(Arrays.asList(JsamsI18nResource.COLUMN_ID, JsamsI18nResource.COLUMN_NAME,
+                JsamsI18nResource.COLUMN_PRICE, JsamsI18nResource.COLUMN_STOCK_QUANTITY,
+                JsamsI18nResource.COLUMN_REORDER_LEVEL, JsamsI18nResource.COLUMN_VAT_APPLICABE,
+                JsamsI18nResource.COLUMN_PRODUCT_CATEGORY));
     }
 
     /**
-     * @param rowIndex
-     *            the row
-     * @param columnIndex
-     *            the column
-     * @return the value following the row and column
+     * {@inheritDoc}
      */
     public Object getValueAt(int rowIndex, int columnIndex) {
         ProductBean product = (ProductBean) getRow(rowIndex);
@@ -84,18 +67,7 @@ public class ProductTableModel extends JsamsTableModel<ProductBean> {
     }
 
     /**
-     * @param columnIndex
-     *            the column
-     * @return the column name
-     */
-    public String getColumnName(int columnIndex) {
-        return columnNames.get(columnIndex).getTranslation();
-    }
-
-    /**
-     * @param columnIndex
-     *            the column
-     * @return the column class
+     * {@inheritDoc}
      */
     @Override
     public Class<?> getColumnClass(int columnIndex) {
