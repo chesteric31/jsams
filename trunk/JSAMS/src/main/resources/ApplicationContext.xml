@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:tx="http://www.springframework.org/schema/tx"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
-		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
 	<context:property-placeholder location="jdbc.properties" />
 	<context:annotation-config />
@@ -68,71 +69,7 @@
 	<bean id="societyService" parent="baseTransactionProxy">
 		<property name="target" ref="societyServiceTarget" />
 	</bean>
-	<bean id="agentServiceTarget" class="be.jsams.server.service.management.impl.AgentServiceImpl">
-		<property name="agentDao" ref="agentDao" />
-	</bean>
-	<bean id="agentService" parent="baseTransactionProxy">
-		<property name="target" ref="agentServiceTarget" />
-	</bean>
-	<bean id="customerServiceTarget" class="be.jsams.server.service.management.impl.CustomerServiceImpl">
-		<property name="customerDao" ref="customerDao" />
-	</bean>
-	<bean id="customerService" parent="baseTransactionProxy">
-		<property name="target" ref="customerServiceTarget" />
-	</bean>
-	<bean id="productServiceTarget" class="be.jsams.server.service.management.impl.ProductServiceImpl">
-		<property name="productDao" ref="productDao" />
-		<property name="builder" ref="productBeanBuilder" />
-	</bean>
-	<bean id="productService" parent="baseTransactionProxy">
-		<property name="target" ref="productServiceTarget" />
-	</bean>
-	<bean id="productCategoryServiceTarget" class="be.jsams.server.service.management.impl.ProductCategoryServiceImpl">
-		<property name="productCategoryDao" ref="productCategoryDao" />
-	</bean>
-	<bean id="productCategoryService" parent="baseTransactionProxy">
-		<property name="target" ref="productCategoryServiceTarget" />
-	</bean>
-
-	<bean id="estimateDao" class="be.jsams.server.dao.sale.impl.EstimateDaoImpl">
-		<constructor-arg value="be.jsams.server.model.sale.Estimate" />
-	</bean>
-	<bean id="estimateDetailDao" class="be.jsams.server.dao.sale.impl.EstimateDetailDaoImpl">
-		<constructor-arg value="be.jsams.server.model.sale.EstimateDetail" />
-	</bean>
-	<bean id="estimateServiceTarget" class="be.jsams.server.service.sale.impl.EstimateServiceImpl">
-		<property name="estimateDao" ref="estimateDao" />
-	</bean>
-	<bean id="estimateService" parent="baseTransactionProxy">
-		<property name="target" ref="estimateServiceTarget" />
-	</bean>
-
-	<bean id="commandDao" class="be.jsams.server.dao.sale.impl.CommandDaoImpl">
-		<constructor-arg value="be.jsams.server.model.sale.Command" />
-	</bean>
-	<bean id="commandDetailDao" class="be.jsams.server.dao.sale.impl.CommandDetailDaoImpl">
-		<constructor-arg value="be.jsams.server.model.sale.CommandDetail" />
-	</bean>
-	<bean id="commandServiceTarget" class="be.jsams.server.service.sale.impl.CommandServiceImpl">
-		<property name="commandDao" ref="commandDao" />
-	</bean>
-	<bean id="commandService" parent="baseTransactionProxy">
-		<property name="target" ref="commandServiceTarget" />
-	</bean>
 	
-	<bean id="deliveryOrderDao" class="be.jsams.server.dao.sale.impl.DeliveryOrderDaoImpl">
-		<constructor-arg value="be.jsams.server.model.sale.DeliveryOrder" />
-	</bean>
-	<bean id="deliveryOrderDetailDao" class="be.jsams.server.dao.sale.impl.DeliveryOrderDetailDaoImpl">
-		<constructor-arg value="be.jsams.server.model.sale.DeliveryOrderDetail" />
-	</bean>
-	<bean id="deliveryOrderServiceTarget" class="be.jsams.server.service.sale.impl.DeliveryOrderServiceImpl">
-		<property name="deliveryOrderDao" ref="deliveryOrderDao" />
-	</bean>
-	<bean id="deliveryOrderService" parent="baseTransactionProxy">
-		<property name="target" ref="deliveryOrderServiceTarget" />
-	</bean>
-
 	<bean id="contactInformationDao" class="be.jsams.server.dao.impl.ContactInformationDaoImpl">
 		<constructor-arg value="be.jsams.server.model.ContactInformation" />
 	</bean>
@@ -142,20 +79,8 @@
 	<bean id="civilityDao" class="be.jsams.server.dao.impl.CivilityDaoImpl">
 		<constructor-arg value="be.jsams.server.model.Civility" />
 	</bean>
-	<bean id="agentDao" class="be.jsams.server.dao.management.impl.AgentDaoImpl">
-		<constructor-arg value="be.jsams.server.model.management.Agent" />
-	</bean>
-	<bean id="customerDao" class="be.jsams.server.dao.management.impl.CustomerDaoImpl">
-		<constructor-arg value="be.jsams.server.model.management.Customer" />
-	</bean>
 	<bean id="paymentModeDao" class="be.jsams.server.dao.impl.PaymentModeDaoImpl">
 		<constructor-arg value="be.jsams.server.model.PaymentMode" />
-	</bean>
-	<bean id="productCategoryDao" class="be.jsams.server.dao.management.impl.ProductCategoryDaoImpl">
-		<constructor-arg value="be.jsams.server.model.management.ProductCategory" />
-	</bean>
-	<bean id="productDao" class="be.jsams.server.dao.management.impl.ProductDaoImpl">
-		<constructor-arg value="be.jsams.server.model.management.Product" />
 	</bean>
 
 	<!-- JDBC template -->
@@ -168,13 +93,13 @@
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
 
-	<!--  BUILDERS -->
+	<!--  Beans builders -->
 	<bean id="societyBeanBuilder" class="be.jsams.common.bean.builder.SocietyBeanBuilder">
 		<property name="dao" ref="societyDao" />
 	</bean>
-	<bean id="productBeanBuilder" class="be.jsams.common.bean.builder.ProductBeanBuilder">
-		<property name="dao" ref="productDao" />
-	</bean>
+	
+	<import resource="ManagementApplicationContext.xml" />
+	<import resource="SaleApplicationContext.xml" />
 
 	<import resource="i18nApplicationContext.xml" />
 
