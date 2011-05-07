@@ -123,6 +123,7 @@ public abstract class AbstractTranslatableIdentityBean<M extends AbstractTransla
     @Override
     public void refresh(AbstractIdentityBean<?, ?> bean) {
         AbstractTranslatableIdentityBean<?, ?> other = (AbstractTranslatableIdentityBean<?, ?>) bean;
+        setId(other.getId());
         setLabel(other.getLabel());
         setLabelFr(other.getLabelFr());
         setLabelNl(other.getLabelNl());

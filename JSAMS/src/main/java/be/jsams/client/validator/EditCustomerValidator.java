@@ -34,7 +34,7 @@ public class EditCustomerValidator implements Validator<CustomerBean> {
                     JsamsI18nResource.ERROR_IS_ALPHANUMERIC.getTranslation());
         }
 
-        if (customer.getPaymentMode().getSelection() == null) {
+        if (customer.getPaymentMode().getLabel() == null) {
             support.addError(JsamsI18nLabelResource.LABEL_PAYMENT_MODE.getTranslation(),
                     JsamsI18nResource.ERROR_IS_MANDATORY.getTranslation());
         }

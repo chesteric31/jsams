@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<!--  DAOs -->
+	<bean id="estimateDao" class="be.jsams.server.dao.sale.impl.EstimateDaoImpl">
+		<constructor-arg value="be.jsams.server.model.sale.Estimate" />
+	</bean>
+	<bean id="estimateDetailDao" class="be.jsams.server.dao.sale.impl.EstimateDetailDaoImpl">
+		<constructor-arg value="be.jsams.server.model.sale.EstimateDetail" />
+	</bean>
+	<bean id="commandDao" class="be.jsams.server.dao.sale.impl.CommandDaoImpl">
+		<constructor-arg value="be.jsams.server.model.sale.Command" />
+	</bean>
+	<bean id="commandDetailDao" class="be.jsams.server.dao.sale.impl.CommandDetailDaoImpl">
+		<constructor-arg value="be.jsams.server.model.sale.CommandDetail" />
+	</bean>
+	<bean id="deliveryOrderDao" class="be.jsams.server.dao.sale.impl.DeliveryOrderDaoImpl">
+		<constructor-arg value="be.jsams.server.model.sale.DeliveryOrder" />
+	</bean>
+	<bean id="deliveryOrderDetailDao" class="be.jsams.server.dao.sale.impl.DeliveryOrderDetailDaoImpl">
+		<constructor-arg value="be.jsams.server.model.sale.DeliveryOrderDetail" />
+	</bean>
+	
+	<!--  Services -->
+	<bean id="estimateServiceTarget" class="be.jsams.server.service.sale.impl.EstimateServiceImpl">
+		<property name="estimateDao" ref="estimateDao" />
+	</bean>
+	<bean id="estimateService" parent="baseTransactionProxy">
+		<property name="target" ref="estimateServiceTarget" />
+	</bean>
+	<bean id="commandServiceTarget" class="be.jsams.server.service.sale.impl.CommandServiceImpl">
+		<property name="commandDao" ref="commandDao" />
+	</bean>
+	<bean id="commandService" parent="baseTransactionProxy">
+		<property name="target" ref="commandServiceTarget" />
+	</bean>
+	<bean id="deliveryOrderServiceTarget" class="be.jsams.server.service.sale.impl.DeliveryOrderServiceImpl">
+		<property name="deliveryOrderDao" ref="deliveryOrderDao" />
+	</bean>
+	<bean id="deliveryOrderService" parent="baseTransactionProxy">
+		<property name="target" ref="deliveryOrderServiceTarget" />
+	</bean>
+
+</beans>

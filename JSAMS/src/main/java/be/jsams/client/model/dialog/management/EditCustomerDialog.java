@@ -7,9 +7,6 @@ import be.jsams.client.i18n.I18nString;
 import be.jsams.client.model.dialog.AbstractEditDialog;
 import be.jsams.client.validator.EditCustomerValidator;
 import be.jsams.common.bean.model.AbstractIdentityBean;
-import be.jsams.common.bean.model.CivilityBean;
-import be.jsams.common.bean.model.LegalFormBean;
-import be.jsams.common.bean.model.PaymentModeBean;
 import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.view.CivilityBeanView;
 import be.jsams.common.bean.view.LegalFormBeanView;
@@ -72,15 +69,18 @@ public class EditCustomerDialog extends AbstractEditDialog<CustomerBean, EditCus
         CustomerBean customer = getModel();
         AbstractIdentityBean<LegalForm, LegalFormBeanView> legalForm = customer.getLegalForm().getSelection();
         if (legalForm != null) {
-            customer.setLegalForm((LegalFormBean) legalForm);
+            customer.getLegalForm().refresh(legalForm);
+//            customer.setLegalForm((LegalFormBean) legalForm);
         }
         AbstractIdentityBean<Civility, CivilityBeanView> civility = customer.getCivility().getSelection();
         if (civility != null) {
-            customer.setCivility((CivilityBean) civility);
+            customer.getCivility().refresh(civility);
+//            customer.setCivility((CivilityBean) civility);
         }
         AbstractIdentityBean<PaymentMode, PaymentModeBeanView> paymentMode = customer.getPaymentMode().getSelection();
         if (paymentMode != null) {
-            customer.setPaymentMode((PaymentModeBean) paymentMode);
+            customer.getPaymentMode().refresh(paymentMode);
+//            customer.setPaymentMode((PaymentModeBean) paymentMode);
         }
         super.postPerformOk(customer);
     }
