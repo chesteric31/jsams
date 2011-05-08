@@ -199,8 +199,8 @@ public class CommandDetailBean extends AbstractIdentityBean<CommandDetail, Comma
         setListModel(null);
         setSelection(null);
         setTransferred(false);
-        command.clear();
-        product.clear();
+        setCommand(null);
+        setProduct(null);
     }
 
     /**

@@ -290,7 +290,7 @@ public class CommandBeanView extends AbstractView<CommandBean, JPanel, JPanel> {
                 detail.setListModel(new ArrayListModel<CommandDetailBean>(details));
                 bean.setDetails(details);
                 ((CommandDetailTableModel) tableModel).setListModel(detail.getListModel());
-                table.repaint();
+//                table.repaint();
             }
         });
         return buttonAdd;
@@ -313,7 +313,7 @@ public class CommandBeanView extends AbstractView<CommandBean, JPanel, JPanel> {
                     details.remove(model.getRow(selectedRowModel));
                     getBean().setDetails(details);
                     model.setListModel(new ArrayListModel<CommandDetailBean>(details));
-                    table.repaint();
+//                    table.repaint();
                 }
             }
         });

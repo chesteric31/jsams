@@ -63,6 +63,11 @@ public class Bill extends AbstractDocument {
         setDiscountRate(bean.getDiscountRate());
         setPaid(bean.isPaid());
         setClosed(bean.isClosed());
+        setDateFirstRemember(bean.getDateFirstRemember());
+        setDateSecondRemember(bean.getDateSecondRemember());
+        setDateFormalNotice(bean.getDateFormalNotice());
+        setDueDate(bean.getDueDate());
+        setPaymentMode(new PaymentMode(bean.getPaymentMode()));
         List<BillDetailBean> list = bean.getDetails();
         List<BillDetail> tmp = new ArrayList<BillDetail>();
         if (list != null) {
@@ -71,7 +76,6 @@ public class Bill extends AbstractDocument {
             }
         }
         setDetails(tmp);
-        //TODO complete this
     }
 
     /**

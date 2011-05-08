@@ -32,12 +32,9 @@ import com.jgoodies.validation.view.ValidationResultViewFactory;
 /**
  * Edit generic panel.
  * 
- * @param <B>
- *            an extension of {@link AbstractIdentityBean}
- * @param <V>
- *            an extension of {@link Validator}
- * @param <S>
- *            an extension of {@link Service}
+ * @param <B> an extension of {@link AbstractIdentityBean}
+ * @param <V> an extension of {@link Validator}
+ * @param <S> an extension of {@link Service}
  * @author chesteric31
  * @version $$Rev$$ $$Date::                  $$ $$Author$$
  */
@@ -48,7 +45,7 @@ public abstract class AbstractEditDialog<B extends AbstractIdentityBean<?, ?>, V
      * Serial Version UID
      */
     private static final long serialVersionUID = 5146784638798425733L;
-    
+
     private B model;
 
     private JsamsButtonsPanel buttonsPanel;
@@ -66,12 +63,9 @@ public abstract class AbstractEditDialog<B extends AbstractIdentityBean<?, ?>, V
     /**
      * Constructor
      * 
-     * @param parent
-     *            the {@link JsamsMainFrame} parent
-     * @param title
-     *            the {@link I18nString} translatable String
-     * @param iconFileName
-     *            the icon path file mane
+     * @param parent the {@link JsamsMainFrame} parent
+     * @param title the {@link I18nString} translatable String
+     * @param iconFileName the icon path file mane
      */
     public AbstractEditDialog(final JsamsMainFrame parent, final I18nString title, final String iconFileName) {
         super(parent, title, IconUtil.TITLE_ICON_PREFIX + iconFileName);
@@ -83,10 +77,8 @@ public abstract class AbstractEditDialog<B extends AbstractIdentityBean<?, ?>, V
     /**
      * Constructor
      * 
-     * @param parent
-     *            the {@link JsamsMainFrame} parent
-     * @param title
-     *            the {@link I18nString} translatable String
+     * @param parent the {@link JsamsMainFrame} parent
+     * @param title the {@link I18nString} translatable String
      */
     public AbstractEditDialog(final JsamsMainFrame parent, final I18nString title) {
         super(parent, title);
@@ -110,8 +102,7 @@ public abstract class AbstractEditDialog<B extends AbstractIdentityBean<?, ?>, V
 
     /**
      * 
-     * @param service
-     *            the service to set
+     * @param service the service to set
      */
     public void setService(Service<B> service) {
         this.service = service;
@@ -127,8 +118,7 @@ public abstract class AbstractEditDialog<B extends AbstractIdentityBean<?, ?>, V
 
     /**
      * 
-     * @param model
-     *            the model to set
+     * @param model the model to set
      */
     public void setModel(B model) {
         this.model = model;
@@ -144,8 +134,7 @@ public abstract class AbstractEditDialog<B extends AbstractIdentityBean<?, ?>, V
 
     /**
      * 
-     * @param validationResultModel
-     *            the {@link ValidationResultModel} to set
+     * @param validationResultModel the {@link ValidationResultModel} to set
      */
     public void setValidationResultModel(ValidationResultModel validationResultModel) {
         this.validationResultModel = validationResultModel;
@@ -161,8 +150,7 @@ public abstract class AbstractEditDialog<B extends AbstractIdentityBean<?, ?>, V
 
     /**
      * 
-     * @param validator
-     *            the {@link Validator} to set
+     * @param validator the {@link Validator} to set
      */
     public void setValidator(Validator<B> validator) {
         this.validator = validator;
@@ -186,7 +174,7 @@ public abstract class AbstractEditDialog<B extends AbstractIdentityBean<?, ?>, V
      * {@inheritDoc}
      */
     public void performCancel() {
-        //TODO use memento pattern for undo of reset
+        // TODO use memento pattern for undo of reset
         this.dispose();
     }
 
@@ -205,8 +193,7 @@ public abstract class AbstractEditDialog<B extends AbstractIdentityBean<?, ?>, V
     /**
      * Method called by the children class for validation and persistence.
      * 
-     * @param object
-     *            the object to validate and to persist
+     * @param object the object to validate and to persist
      * @return the result B object (updated or created), null if an error occurred
      */
     protected B postPerformOk(B object) {
@@ -266,8 +253,7 @@ public abstract class AbstractEditDialog<B extends AbstractIdentityBean<?, ?>, V
 
     /**
      * 
-     * @param statusBar
-     *            the {@link JsamsStatusBar} to set
+     * @param statusBar the {@link JsamsStatusBar} to set
      */
     public void setStatusBar(JsamsStatusBar statusBar) {
         this.statusBar = statusBar;

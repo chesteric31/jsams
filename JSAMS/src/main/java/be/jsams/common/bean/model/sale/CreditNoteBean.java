@@ -91,19 +91,10 @@ public class CreditNoteBean extends AbstractDocumentBean<CreditNote, CreditNoteB
      */
     @Override
     public void clear() {
+        super.clear();
         billingAddress.clear();
-        getCustomer().clear();
-        setCreationDate(null);
         for (CreditNoteDetailBean detail : details) {
             detail.clear();
-        }
-        setListModel(null);
-        setRemark(null);
-        setSelection(null);
-        getPeriod().clear();
-        // only not null if searching...
-        if (getSociety() != null) {
-            getSociety().clear();
         }
     }
 
@@ -112,17 +103,11 @@ public class CreditNoteBean extends AbstractDocumentBean<CreditNote, CreditNoteB
      */
     @Override
     public void refresh(AbstractIdentityBean<?, ?> bean) {
+        super.refresh(bean);
         CreditNoteBean other = (CreditNoteBean) bean;
         billingAddress.refresh(other.getBillingAddress());
-        setCreationDate(other.getCreationDate());
-        getCustomer().refresh(other.getCustomer());
         details.clear();
         details.addAll(other.getDetails());
-        setListModel(other.getListModel());
-        setRemark(other.getRemark());
-        setSelection(other.getSelection());
-        getSociety().refresh(other.getSociety());
-        getPeriod().refresh(other.getPeriod());
     }
 
 }

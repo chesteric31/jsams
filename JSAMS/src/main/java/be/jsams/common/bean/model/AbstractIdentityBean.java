@@ -9,10 +9,8 @@ import com.jgoodies.common.collect.ObservableList;
 /**
  * Abstract class for all beans that have an id.
  * 
- * @param <M>
- *            an extension of {@link AbstractIdentity}
- * @param <V>
- *            an extension of {@link AbstractView}
+ * @param <M> an extension of {@link AbstractIdentity}
+ * @param <V> an extension of {@link AbstractView}
  * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
@@ -31,7 +29,8 @@ public abstract class AbstractIdentityBean<M extends AbstractIdentity, V extends
     private ObservableList<? extends AbstractIdentityBean<M, V>> listModel;
     private AbstractIdentityBean<M, V> selection;
 
-    public static final String PROPERTY_NAME_SELECTION = "selection";
+    public static final String SELECTION_PROPERTY = "selection";
+    public static final String LIST_MODEL_PROPERTY = "listModel";
 
     /**
      * Constructor.
@@ -43,8 +42,7 @@ public abstract class AbstractIdentityBean<M extends AbstractIdentity, V extends
     /**
      * Constructor.
      * 
-     * @param model
-     *            the {@link AbstractIdentity}
+     * @param model the {@link AbstractIdentity}
      */
     public AbstractIdentityBean(M model) {
         setId(model.getId());
@@ -58,8 +56,7 @@ public abstract class AbstractIdentityBean<M extends AbstractIdentity, V extends
     }
 
     /**
-     * @param id
-     *            the id to set
+     * @param id the id to set
      */
     public void setId(Long id) {
         Long oldValue = this.id;
@@ -77,11 +74,12 @@ public abstract class AbstractIdentityBean<M extends AbstractIdentity, V extends
 
     /**
      * 
-     * @param listModel
-     *            the {@link ObservableList} to set
+     * @param newListModel the {@link ObservableList} to set
      */
-    public void setListModel(ObservableList<? extends AbstractIdentityBean<M, V>> listModel) {
-        this.listModel = listModel;
+    public void setListModel(ObservableList<? extends AbstractIdentityBean<M, V>> newListModel) {
+        ObservableList<? extends AbstractIdentityBean<M, V>> oldListModel = getListModel();
+        this.listModel = newListModel;
+        firePropertyChange(LIST_MODEL_PROPERTY, oldListModel, newListModel);
     }
 
     /**
@@ -94,13 +92,12 @@ public abstract class AbstractIdentityBean<M extends AbstractIdentity, V extends
 
     /**
      * 
-     * @param newSelection
-     *            the new selected object
+     * @param newSelection the new selected object
      */
     public void setSelection(AbstractIdentityBean<M, V> newSelection) {
         AbstractIdentityBean<M, V> oldSelection = getSelection();
         selection = newSelection;
-        firePropertyChange(PROPERTY_NAME_SELECTION, oldSelection, newSelection);
+        firePropertyChange(SELECTION_PROPERTY, oldSelection, newSelection);
     }
 
     /**
