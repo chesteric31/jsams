@@ -209,10 +209,10 @@ public class DeliveryOrderDetailBean extends AbstractIdentityBean<DeliveryOrderD
         setListModel(null);
         setSelection(null);
         setTransferred(false);
-        deliveryOrder.clear();
-        product.clear();
-        commandDetailBean.clear();
-        billDetailBean.clear();
+        setDeliveryOrder(null);
+        setProduct(null);
+        setCommandDetail(null);
+        setBillDetail(null);
     }
 
     /**

@@ -199,8 +199,8 @@ public class BillDetailBean extends AbstractIdentityBean<BillDetail, BillDetailB
         setListModel(null);
         setSelection(null);
         setTransferred(false);
-        bill.clear();
-        product.clear();
+        setBill(null);
+        setProduct(null);
     }
 
     /**

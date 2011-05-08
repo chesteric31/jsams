@@ -42,7 +42,7 @@ public abstract class AbstractView<B extends AbstractIdentityBean<?, ?>, J exten
         super(bean);
         ObservableList<?> listModel = bean.getListModel();
         ValueHolder listHolder = new ValueHolder(listModel, true);
-        selectionInList = new SelectionInList<B>(listHolder, getModel(B.PROPERTY_NAME_SELECTION));
+        selectionInList = new SelectionInList<B>(listHolder, getModel(B.SELECTION_PROPERTY));
     }
 
     /**

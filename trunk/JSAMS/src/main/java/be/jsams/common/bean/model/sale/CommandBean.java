@@ -167,23 +167,15 @@ public class CommandBean extends AbstractDocumentBean<Command, CommandBeanView> 
      */
     @Override
     public void clear() {
+        super.clear();
         agent.clear();
         billingAddress.clear();
         deliveryAddress.clear();
-        getCustomer().clear();
-        setCreationDate(null);
         for (CommandDetailBean detail : details) {
             detail.clear();
         }
         setDiscountRate(null);
-        setListModel(null);
-        setRemark(null);
-        setSelection(null);
         setTransferred(false);
-        getPeriod().clear();
-        if (getSociety() != null) {
-            getSociety().clear();
-        }
     }
 
     /**
@@ -191,20 +183,15 @@ public class CommandBean extends AbstractDocumentBean<Command, CommandBeanView> 
      */
     @Override
     public void refresh(AbstractIdentityBean<?, ?> bean) {
+        super.refresh(bean);
         CommandBean other = (CommandBean) bean;
         agent.refresh(other.getAgent());
         billingAddress.refresh(other.getBillingAddress());
         deliveryAddress.refresh(other.getDeliveryAddress());
-        setCreationDate(other.getCreationDate());
-        getCustomer().refresh(other.getCustomer());
+        details.clear();
         details.addAll(other.getDetails());
         setDiscountRate(other.getDiscountRate());
-        setListModel(other.getListModel());
-        setRemark(other.getRemark());
-        setSelection(other.getSelection());
         setTransferred(other.isTransferred());
-        getSociety().refresh(other.getSociety());
-        getPeriod().refresh(other.getPeriod());
     }
 
 }

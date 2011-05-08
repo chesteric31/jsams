@@ -94,6 +94,8 @@ public class CreditNoteDetailBean extends AbstractIdentityBean<CreditNoteDetail,
     public void clear() {
         setListModel(null);
         setSelection(null);
+        setCreditNote(null);
+//        setProduct(null);
     }
 
     /**

@@ -199,8 +199,8 @@ public class EstimateDetailBean extends AbstractIdentityBean<EstimateDetail, Est
         setListModel(null);
         setSelection(null);
         setTransferred(false);
-        estimate.clear();
-        product.clear();
+        setEstimate(null);
+        setProduct(null);
     }
 
     /**

@@ -137,5 +137,39 @@ public abstract class AbstractDocumentBean<M extends AbstractDocument, V extends
     public void setSociety(SocietyBean society) {
         this.society = society;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void clear() {
+        customer.clear();
+        setCreationDate(null);
+        setListModel(null);
+        setRemark(null);
+        setSelection(null);
+        if (period != null) {
+            period.clear();
+        }
+        if (society != null) {
+            society.clear();
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public void refresh(AbstractIdentityBean<?, ?> bean) {
+        AbstractDocumentBean<M, V> other = (AbstractDocumentBean<M, V>) bean;
+        setCreationDate(other.getCreationDate());
+        customer.refresh(other.getCustomer());
+        setListModel(other.getListModel());
+        setRemark(other.getRemark());
+        setSelection(other.getSelection());
+        society.refresh(other.getSociety());
+        period.refresh(other.getPeriod());
+    }
     
 }

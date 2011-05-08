@@ -1,13 +1,18 @@
 package be.jsams.common.bean.model.sale;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import be.jsams.client.context.JsamsApplicationContext;
+import be.jsams.common.bean.builder.PaymentModeBeanBuilder;
 import be.jsams.common.bean.model.AbstractIdentityBean;
 import be.jsams.common.bean.model.AddressBean;
 import be.jsams.common.bean.model.PaymentModeBean;
 import be.jsams.common.bean.view.sale.BillBeanView;
+import be.jsams.server.model.PaymentMode;
 import be.jsams.server.model.sale.Bill;
+import be.jsams.server.model.sale.BillDetail;
 
 /**
  * {@link AbstractDocumentBean} for {@link Bill} object.
@@ -33,6 +38,8 @@ public class BillBean extends AbstractDocumentBean<Bill, BillBeanView> {
     private PaymentModeBean paymentMode;
     private AddressBean billingAddress;
 
+    private PaymentModeBeanBuilder paymentModeBuilder;
+
     private List<BillDetailBean> details;
 
     public static final String DISCOUNT_RATE_PROPERTY = "discountRate";
@@ -45,14 +52,48 @@ public class BillBean extends AbstractDocumentBean<Bill, BillBeanView> {
 
     /**
      * Constructor.
+     */
+    public BillBean() {
+        super();
+        paymentModeBuilder = new PaymentModeBeanBuilder();
+        paymentModeBuilder.setDao(JsamsApplicationContext.getPaymentModeDao());
+        setPaymentMode(paymentModeBuilder.build());
+        setBillingAddress(new AddressBean());
+        setClosed(false);
+        setPaid(false);
+        List<BillDetailBean> details = new ArrayList<BillDetailBean>();
+        setDetails(details);
+    }
+
+    /**
+     * Constructor.
      * 
      * @param model the {@link Bill}
      */
     public BillBean(Bill model) {
         super(model);
-        // TODO Auto-generated constructor stub
+        setBillingAddress(new AddressBean(model.getBillingAddress()));
+        List<BillDetailBean> beans = new ArrayList<BillDetailBean>();
+        for (BillDetail detail : model.getDetails()) {
+            beans.add(new BillDetailBean(detail, this));
+        }
+        setDetails(beans);
+        setDiscountRate(model.getDiscountRate());
+        setClosed(model.isClosed());
+        setPaid(model.isPaid());
+        setDateFirstRemember(model.getDateFirstRemember());
+        setDateSecondRemember(model.getDateSecondRemember());
+        setDateFormalNotice(model.getDateFormalNotice());
+        setDueDate(model.getDueDate());
+        paymentModeBuilder = new PaymentModeBeanBuilder();
+        paymentModeBuilder.setDao(JsamsApplicationContext.getPaymentModeDao());
+        PaymentMode mode = model.getPaymentMode();
+        if (mode != null) {
+            paymentModeBuilder.setModel(mode);
+        }
+        setPaymentMode(paymentModeBuilder.build());
     }
-    
+
     /**
      * @return the discountRate
      */
@@ -61,8 +102,7 @@ public class BillBean extends AbstractDocumentBean<Bill, BillBeanView> {
     }
 
     /**
-     * @param discountRate
-     *            the discountRate to set
+     * @param discountRate the discountRate to set
      */
     public void setDiscountRate(Double discountRate) {
         Double oldValue = this.discountRate;
@@ -78,8 +118,7 @@ public class BillBean extends AbstractDocumentBean<Bill, BillBeanView> {
     }
 
     /**
-     * @param dueDate
-     *            the dueDate to set
+     * @param dueDate the dueDate to set
      */
     public void setDueDate(Date dueDate) {
         Date oldValue = this.dueDate;
@@ -95,8 +134,7 @@ public class BillBean extends AbstractDocumentBean<Bill, BillBeanView> {
     }
 
     /**
-     * @param paid
-     *            the paid to set
+     * @param paid the paid to set
      */
     public void setPaid(boolean paid) {
         boolean oldValue = this.paid;
@@ -112,8 +150,7 @@ public class BillBean extends AbstractDocumentBean<Bill, BillBeanView> {
     }
 
     /**
-     * @param dateFirstRemember
-     *            the dateFirstRemember to set
+     * @param dateFirstRemember the dateFirstRemember to set
      */
     public void setDateFirstRemember(Date dateFirstRemember) {
         Date oldValue = this.dateFirstRemember;
@@ -129,8 +166,7 @@ public class BillBean extends AbstractDocumentBean<Bill, BillBeanView> {
     }
 
     /**
-     * @param dateSecondRemember
-     *            the dateSecondRemember to set
+     * @param dateSecondRemember the dateSecondRemember to set
      */
     public void setDateSecondRemember(Date dateSecondRemember) {
         Date oldValue = this.dateSecondRemember;
@@ -146,8 +182,7 @@ public class BillBean extends AbstractDocumentBean<Bill, BillBeanView> {
     }
 
     /**
-     * @param dateFormalNotice
-     *            the dateFormalNotice to set
+     * @param dateFormalNotice the dateFormalNotice to set
      */
     public void setDateFormalNotice(Date dateFormalNotice) {
         Date oldValue = this.dateFormalNotice;
@@ -163,8 +198,7 @@ public class BillBean extends AbstractDocumentBean<Bill, BillBeanView> {
     }
 
     /**
-     * @param closed
-     *            the closed to set
+     * @param closed the closed to set
      */
     public void setClosed(boolean closed) {
         boolean oldValue = this.closed;
@@ -180,8 +214,7 @@ public class BillBean extends AbstractDocumentBean<Bill, BillBeanView> {
     }
 
     /**
-     * @param paymentMode
-     *            the paymentMode to set
+     * @param paymentMode the paymentMode to set
      */
     public void setPaymentMode(PaymentModeBean paymentMode) {
         this.paymentMode = paymentMode;
@@ -195,8 +228,7 @@ public class BillBean extends AbstractDocumentBean<Bill, BillBeanView> {
     }
 
     /**
-     * @param billingAddress
-     *            the billingAddress to set
+     * @param billingAddress the billingAddress to set
      */
     public void setBillingAddress(AddressBean billingAddress) {
         this.billingAddress = billingAddress;
@@ -210,20 +242,32 @@ public class BillBean extends AbstractDocumentBean<Bill, BillBeanView> {
     }
 
     /**
-     * @param details
-     *            the details to set
+     * @param details the details to set
      */
     public void setDetails(List<BillDetailBean> details) {
         this.details = details;
     }
 
     /**
+     * @return the paymentModeBuilder
+     */
+    public PaymentModeBeanBuilder getPaymentModeBuilder() {
+        return paymentModeBuilder;
+    }
+
+    /**
+     * @param paymentModeBuilder the paymentModeBuilder to set
+     */
+    public void setPaymentModeBuilder(PaymentModeBeanBuilder paymentModeBuilder) {
+        this.paymentModeBuilder = paymentModeBuilder;
+    }
+    
+    /**
      * {@inheritDoc}
      */
     @Override
     public BillBeanView getView() {
-        // TODO Auto-generated method stub
-        return null;
+        return new BillBeanView(this);
     }
 
     /**
@@ -231,8 +275,18 @@ public class BillBean extends AbstractDocumentBean<Bill, BillBeanView> {
      */
     @Override
     public void clear() {
-        // TODO Auto-generated method stub
-        
+        super.clear();
+        billingAddress.clear();
+        for (BillDetailBean detail : details) {
+            detail.clear();
+        }
+        setDiscountRate(null);
+        setClosed(false);
+        setPaid(false);
+        setDueDate(null);
+        setDateFirstRemember(null);
+        setDateSecondRemember(null);
+        setDateFormalNotice(null);
     }
 
     /**
@@ -240,8 +294,19 @@ public class BillBean extends AbstractDocumentBean<Bill, BillBeanView> {
      */
     @Override
     public void refresh(AbstractIdentityBean<?, ?> bean) {
-        // TODO Auto-generated method stub
-        
+        super.refresh(bean);
+        BillBean other = (BillBean) bean;
+        billingAddress.refresh(other.getBillingAddress());
+        details.clear();
+        details.addAll(other.getDetails());
+        setDiscountRate(other.getDiscountRate());
+        setClosed(other.isClosed());
+        setPaid(other.isPaid());
+        setDueDate(other.getDueDate());
+        setDateFirstRemember(other.getDateFirstRemember());
+        setDateSecondRemember(other.getDateSecondRemember());
+        setDateFormalNotice(other.getDateFormalNotice());
+        setPaymentMode(other.getPaymentMode());
     }
 
 }
