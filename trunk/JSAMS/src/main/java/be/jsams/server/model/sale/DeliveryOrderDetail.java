@@ -55,11 +55,14 @@ public class DeliveryOrderDetail extends AbstractIdentity {
         setQuantity(bean.getQuantity());
         setTransferred(bean.isTransferred());
         setVatApplicable(bean.getVatApplicable());
-        //TODO review for command detail
         CommandDetailBean commandDetail = bean.getCommandDetail();
-        setCommandDetail(new CommandDetail(commandDetail, new Command(commandDetail.getCommand())));
+        if (commandDetail != null) {
+            setCommandDetail(new CommandDetail(commandDetail, new Command(commandDetail.getCommand())));
+        }
         BillDetailBean billDetail = bean.getBillDetail();
-        setBillDetail(new BillDetail(billDetail, new Bill(billDetail.getBill())));
+        if (billDetail != null) {
+            setBillDetail(new BillDetail(billDetail, new Bill(billDetail.getBill())));
+        }
     }
 
     /**
