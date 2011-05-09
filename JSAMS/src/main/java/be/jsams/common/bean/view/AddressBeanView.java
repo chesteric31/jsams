@@ -16,7 +16,7 @@ import com.jgoodies.forms.layout.FormLayout;
  * @author chesteric31
  * @version $$Rev$$ $$Date::                  $$ $$Author$$
  */
-public class AddressBeanView extends AbstractView<AddressBean, JPanel, JPanel> {
+public class AddressBeanView extends AbstractBeanView<AddressBean, JPanel, JPanel> {
 
     /**
      * Serial Version UID
@@ -26,8 +26,7 @@ public class AddressBeanView extends AbstractView<AddressBean, JPanel, JPanel> {
     /**
      * Constructor
      * 
-     * @param bean
-     *            the {@link AddressBean}
+     * @param bean the {@link AddressBean}
      */
     public AddressBeanView(AddressBean bean) {
         super(bean);
@@ -53,7 +52,7 @@ public class AddressBeanView extends AbstractView<AddressBean, JPanel, JPanel> {
                 "right:p, 3dlu, 70dlu, 3dlu, right:p, 3dlu, 70dlu, 3dlu, right:p, 3dlu, 70dlu", "p");
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, JsamsFrame.RESOURCE_BUNDLE);
         final int maxColumnSpan = 9;
-//        builder.setDefaultDialogBorder();
+        // builder.setDefaultDialogBorder();
         builder.appendSeparator(JsamsI18nLabelResource.LABEL_ADDRESS.getTranslation());
         builder.appendI15d(JsamsI18nLabelResource.LABEL_STREET.getKey(), textFieldStreet, maxColumnSpan);
         builder.nextLine();

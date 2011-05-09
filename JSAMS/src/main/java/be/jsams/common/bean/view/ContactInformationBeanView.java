@@ -16,7 +16,7 @@ import com.jgoodies.forms.layout.FormLayout;
  * @author chesteric31
  * @version $Rev$ $Date::   $Author$
  */
-public class ContactInformationBeanView extends AbstractView<ContactInformationBean, JPanel, JPanel> {
+public class ContactInformationBeanView extends AbstractBeanView<ContactInformationBean, JPanel, JPanel> {
 
     /**
      * Serial Version UID
@@ -26,8 +26,7 @@ public class ContactInformationBeanView extends AbstractView<ContactInformationB
     /**
      * Constructor
      * 
-     * @param bean
-     *            the {@link ContactInformationBean}
+     * @param bean the {@link ContactInformationBean}
      */
     public ContactInformationBeanView(ContactInformationBean bean) {
         super(bean);
@@ -54,7 +53,7 @@ public class ContactInformationBeanView extends AbstractView<ContactInformationB
                 "right:p, 3dlu, 70dlu, 3dlu, right:p, 3dlu, 70dlu, 3dlu, right:p, 3dlu, 70dlu", "p");
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, JsamsFrame.RESOURCE_BUNDLE);
         final int maxColumnSpan = 5;
-//        builder.setDefaultDialogBorder();
+        // builder.setDefaultDialogBorder();
         builder.appendSeparator(JsamsI18nLabelResource.LABEL_CONTACT_INFORMATIONS.getTranslation());
         builder.appendI15d(JsamsI18nLabelResource.LABEL_PHONE.getKey(), textFieldPhone);
         builder.appendI15d(JsamsI18nLabelResource.LABEL_FAX.getKey(), textFieldFax);

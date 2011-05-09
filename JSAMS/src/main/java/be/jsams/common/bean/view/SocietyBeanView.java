@@ -17,7 +17,7 @@ import com.jgoodies.forms.layout.FormLayout;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class SocietyBeanView extends AbstractView<SocietyBean, JPanel, JPanel> {
+public class SocietyBeanView extends AbstractBeanView<SocietyBean, JPanel, JPanel> {
 
     /**
      * Serial Version UID
@@ -27,8 +27,7 @@ public class SocietyBeanView extends AbstractView<SocietyBean, JPanel, JPanel> {
     /**
      * Constructor
      * 
-     * @param bean
-     *            the {@link SocietyBean}
+     * @param bean the {@link SocietyBean}
      */
     public SocietyBeanView(SocietyBean bean) {
         super(bean);

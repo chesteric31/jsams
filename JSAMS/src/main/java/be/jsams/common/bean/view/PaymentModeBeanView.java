@@ -12,7 +12,7 @@ import be.jsams.common.bean.model.PaymentModeBean;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class PaymentModeBeanView extends AbstractView<PaymentModeBean, JsamsComboBox, JPanel> {
+public class PaymentModeBeanView extends AbstractBeanView<PaymentModeBean, JsamsComboBox, JPanel> {
 
     /**
      * Serial Version UID
@@ -22,8 +22,7 @@ public class PaymentModeBeanView extends AbstractView<PaymentModeBean, JsamsComb
     /**
      * Constructor
      * 
-     * @param bean
-     *            the {@link PaymentModeBean}
+     * @param bean the {@link PaymentModeBean}
      */
     public PaymentModeBeanView(PaymentModeBean bean) {
         super(bean);

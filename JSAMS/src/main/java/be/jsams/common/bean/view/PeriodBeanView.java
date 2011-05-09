@@ -16,7 +16,7 @@ import com.toedter.calendar.JDateChooser;
  * @author chesteric31
  * @version $$Rev$$ $$Date::                  $$ $$Author$$
  */
-public class PeriodBeanView extends AbstractView<PeriodBean, JPanel, JPanel> implements Viewable<JPanel, JPanel> {
+public class PeriodBeanView extends AbstractBeanView<PeriodBean, JPanel, JPanel> implements Viewable<JPanel, JPanel> {
 
     /**
      * Serial Version UID
@@ -26,8 +26,7 @@ public class PeriodBeanView extends AbstractView<PeriodBean, JPanel, JPanel> imp
     /**
      * Constructor
      * 
-     * @param bean
-     *            the {@link PeriodBean}
+     * @param bean the {@link PeriodBean}
      */
     public PeriodBeanView(PeriodBean bean) {
         super(bean);

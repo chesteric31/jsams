@@ -16,12 +16,12 @@ import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellRenderer;
-import javax.swing.table.TableModel;
 
 import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.i18n.JsamsI18nLabelResource;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.model.panel.management.SearchProductPanel;
+import be.jsams.client.model.table.AbstractJsamsTableModel;
 import be.jsams.client.model.table.DeliveryOrderDetailTableModel;
 import be.jsams.client.model.table.ProductTableModel;
 import be.jsams.client.renderer.JsamsTableCellRenderer;
@@ -42,7 +42,6 @@ import be.jsams.common.bean.model.management.ProductBean;
 import be.jsams.common.bean.model.sale.CommandBean;
 import be.jsams.common.bean.model.sale.DeliveryOrderBean;
 import be.jsams.common.bean.model.sale.DeliveryOrderDetailBean;
-import be.jsams.common.bean.view.AbstractView;
 import be.jsams.common.bean.view.ViewFactory;
 
 import com.jgoodies.common.collect.ArrayListModel;
@@ -57,14 +56,12 @@ import com.toedter.calendar.JDateChooser;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class DeliveryOrderBeanView extends AbstractView<DeliveryOrderBean, JPanel, JPanel> {
+public class DeliveryOrderBeanView extends AbstractDocumentBeanView<DeliveryOrderBean, JPanel, JPanel> {
 
     /**
      * Serial Version UID
      */
     private static final long serialVersionUID = 4995396899905110598L;
-
-    private JsamsTable table;
 
     /**
      * Constructor
@@ -113,28 +110,28 @@ public class DeliveryOrderBeanView extends AbstractView<DeliveryOrderBean, JPane
 
         DeliveryOrderDetailTableModel tableModel = new DeliveryOrderDetailTableModel(details);
         ViewFactory<DeliveryOrderDetailBean> detailView = new ViewFactory<DeliveryOrderDetailBean>();
-        table = detailView.createBindingTableComponent(tableModel, false, false);
-        table.addMouseListener(handleProductEditing());
+        setDetailsTable(detailView.createBindingTableComponent(tableModel, false, false));
+        getDetailsTable().addMouseListener(handleProductEditing());
 
-        JTableHeader tableHeader = table.getTableHeader();
+        JTableHeader tableHeader = getDetailsTable().getTableHeader();
         TableCellRenderer headerRenderer = tableHeader.getDefaultRenderer();
 
         ((DefaultTableCellRenderer) headerRenderer).setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
-        table.setAutoCreateRowSorter(true);
+        getDetailsTable().setAutoCreateRowSorter(true);
         JsamsTableCellRenderer defaultCellRenderer = new JsamsTableCellRenderer();
-        table.setDefaultRenderer(Long.class, defaultCellRenderer);
-        table.setDefaultRenderer(Integer.class, defaultCellRenderer);
-        table.setDefaultRenderer(Double.class, defaultCellRenderer);
-        table.setDefaultRenderer(String.class, defaultCellRenderer);
+        getDetailsTable().setDefaultRenderer(Long.class, defaultCellRenderer);
+        getDetailsTable().setDefaultRenderer(Integer.class, defaultCellRenderer);
+        getDetailsTable().setDefaultRenderer(Double.class, defaultCellRenderer);
+        getDetailsTable().setDefaultRenderer(String.class, defaultCellRenderer);
 
         builder.appendI15dSeparator(JsamsI18nResource.PANEL_DELIVERY_ORDER_DETAILS.getKey());
-        builder.append(new JScrollPane(table), maxColumnSpan);
+        builder.append(new JScrollPane(getDetailsTable()), maxColumnSpan);
 
         JPanel southPanel = new JPanel();
         southPanel.setLayout(new BoxLayout(southPanel, BoxLayout.PAGE_AXIS));
         southPanel.setBorder(BorderFactory.createEtchedBorder());
 
-        JsamsButton buttonAdd = buildButtonAdd(table.getModel());
+        JsamsButton buttonAdd = buildButtonAdd();
         JsamsButton buttonRemove = buildButtonRemove();
         JsamsButton buttonModify = buildButtonModify();
         JsamsButton[] buttons = new JsamsButton[three];
@@ -197,7 +194,7 @@ public class DeliveryOrderBeanView extends AbstractView<DeliveryOrderBean, JPane
             @Override
             public void mouseClicked(MouseEvent e) {
                 Object source = e.getSource();
-                int selectedColumn = table.getSelectedColumn();
+                int selectedColumn = getDetailsTable().getSelectedColumn();
                 // only edit dialog for product editing
                 if (e.getClickCount() == 2) {
                     if (selectedColumn == 0 || selectedColumn == 1) {
@@ -215,15 +212,16 @@ public class DeliveryOrderBeanView extends AbstractView<DeliveryOrderBean, JPane
                                         int selectedRowModel = productTable.convertRowIndexToModel(selectedRow);
                                         ProductTableModel model = (ProductTableModel) productTable.getModel();
                                         ProductBean selectedBean = model.getRow(selectedRowModel);
-                                        int detailSelectedRow = table.getSelectedRow();
-                                        int detailSelectedRowModel = table.convertRowIndexToModel(detailSelectedRow);
-                                        DeliveryOrderDetailTableModel detailModel =
-                                            (DeliveryOrderDetailTableModel) table.getModel();
+                                        int detailSelectedRow = getDetailsTable().getSelectedRow();
+                                        int detailSelectedRowModel = getDetailsTable().convertRowIndexToModel(
+                                                detailSelectedRow);
+                                        DeliveryOrderDetailTableModel detailModel
+                                            = (DeliveryOrderDetailTableModel) getDetailsTable().getModel();
                                         DeliveryOrderDetailBean selectedDetailBean = detailModel
                                                 .getRow(detailSelectedRowModel);
                                         selectedDetailBean.setProduct(selectedBean);
                                         selectedDetailBean.setVatApplicable(selectedBean.getVatApplicable());
-                                        table.repaint();
+                                        getDetailsTable().repaint();
                                         dialog.dispose();
                                     }
                                 }
@@ -268,10 +266,9 @@ public class DeliveryOrderBeanView extends AbstractView<DeliveryOrderBean, JPane
     /**
      * Builds the adding button.
      * 
-     * @param tableModel the {@link TableModel}
      * @return the adding {@link JsamsButton}
      */
-    private JsamsButton buildButtonAdd(final TableModel tableModel) {
+    private JsamsButton buildButtonAdd() {
         JsamsButton buttonAdd = new JsamsButton(IconUtil.MENU_ICON_PREFIX + "actions/list-add.png");
         buttonAdd.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -284,8 +281,8 @@ public class DeliveryOrderBeanView extends AbstractView<DeliveryOrderBean, JPane
                 details.add(detail);
                 detail.setListModel(new ArrayListModel<DeliveryOrderDetailBean>(details));
                 bean.setDetails(details);
-                ((DeliveryOrderDetailTableModel) tableModel).setListModel(detail.getListModel());
-                table.repaint();
+                ((AbstractJsamsTableModel<?>) getDetailsTable().getModel()).setListModel(detail.getListModel());
+                // getDetailsTable().repaint();
             }
         });
         return buttonAdd;
@@ -300,15 +297,15 @@ public class DeliveryOrderBeanView extends AbstractView<DeliveryOrderBean, JPane
         JsamsButton buttonRemove = new JsamsButton(IconUtil.MENU_ICON_PREFIX + "actions/list-remove.png");
         buttonRemove.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                int selectedRow = table.getSelectedRow();
+                int selectedRow = getDetailsTable().getSelectedRow();
                 List<DeliveryOrderDetailBean> details = getBean().getDetails();
                 if (selectedRow > -1) {
-                    int selectedRowModel = table.convertRowIndexToModel(selectedRow);
-                    DeliveryOrderDetailTableModel model = (DeliveryOrderDetailTableModel) table.getModel();
+                    int selectedRowModel = getDetailsTable().convertRowIndexToModel(selectedRow);
+                    DeliveryOrderDetailTableModel model = (DeliveryOrderDetailTableModel) getDetailsTable().getModel();
                     details.remove(model.getRow(selectedRowModel));
                     getBean().setDetails(details);
                     model.setListModel(new ArrayListModel<DeliveryOrderDetailBean>(details));
-                    table.repaint();
+                    // getDetailsTable().repaint();
                 }
             }
         });

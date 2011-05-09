@@ -33,6 +33,7 @@ public class CreditNoteBean extends AbstractDocumentBean<CreditNote, CreditNoteB
         setBillingAddress(new AddressBean());
         List<CreditNoteDetailBean> details = new ArrayList<CreditNoteDetailBean>();
         setDetails(details);
+        setView(new CreditNoteBeanView(this));
     }
 
     /**
@@ -48,6 +49,7 @@ public class CreditNoteBean extends AbstractDocumentBean<CreditNote, CreditNoteB
             beans.add(new CreditNoteDetailBean(detail, this));
         }
         setDetails(beans);
+        setView(new CreditNoteBeanView(this));
     }
 
     /**
@@ -82,20 +84,9 @@ public class CreditNoteBean extends AbstractDocumentBean<CreditNote, CreditNoteB
      * {@inheritDoc}
      */
     @Override
-    public CreditNoteBeanView getView() {
-        return new CreditNoteBeanView(this);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public void clear() {
         super.clear();
         billingAddress.clear();
-        for (CreditNoteDetailBean detail : details) {
-            detail.clear();
-        }
     }
 
     /**

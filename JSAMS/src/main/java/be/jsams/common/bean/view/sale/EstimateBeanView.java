@@ -16,12 +16,12 @@ import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellRenderer;
-import javax.swing.table.TableModel;
 
 import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.i18n.JsamsI18nLabelResource;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.model.panel.management.SearchProductPanel;
+import be.jsams.client.model.table.AbstractJsamsTableModel;
 import be.jsams.client.model.table.EstimateDetailTableModel;
 import be.jsams.client.model.table.ProductTableModel;
 import be.jsams.client.renderer.JsamsTableCellRenderer;
@@ -41,7 +41,6 @@ import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.management.ProductBean;
 import be.jsams.common.bean.model.sale.EstimateBean;
 import be.jsams.common.bean.model.sale.EstimateDetailBean;
-import be.jsams.common.bean.view.AbstractView;
 import be.jsams.common.bean.view.ViewFactory;
 
 import com.jgoodies.common.collect.ArrayListModel;
@@ -56,14 +55,12 @@ import com.toedter.calendar.JDateChooser;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class EstimateBeanView extends AbstractView<EstimateBean, JPanel, JPanel> {
+public class EstimateBeanView extends AbstractDocumentBeanView<EstimateBean, JPanel, JPanel> {
 
     /**
      * Serial Version UID
      */
     private static final long serialVersionUID = -1438658754345137680L;
-
-    private JsamsTable table;
 
     /**
      * Constructor
@@ -113,28 +110,28 @@ public class EstimateBeanView extends AbstractView<EstimateBean, JPanel, JPanel>
 
         EstimateDetailTableModel tableModel = new EstimateDetailTableModel(details);
         ViewFactory<EstimateDetailBean> detailView = new ViewFactory<EstimateDetailBean>();
-        table = detailView.createBindingTableComponent(tableModel, false, false);
-        table.addMouseListener(handleProductEditing());
+        setDetailsTable(detailView.createBindingTableComponent(tableModel, false, false));
+        getDetailsTable().addMouseListener(handleProductEditing());
 
-        JTableHeader tableHeader = table.getTableHeader();
+        JTableHeader tableHeader = getDetailsTable().getTableHeader();
         TableCellRenderer headerRenderer = tableHeader.getDefaultRenderer();
 
         ((DefaultTableCellRenderer) headerRenderer).setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
-        table.setAutoCreateRowSorter(true);
+        getDetailsTable().setAutoCreateRowSorter(true);
         JsamsTableCellRenderer defaultCellRenderer = new JsamsTableCellRenderer();
-        table.setDefaultRenderer(Long.class, defaultCellRenderer);
-        table.setDefaultRenderer(Integer.class, defaultCellRenderer);
-        table.setDefaultRenderer(Double.class, defaultCellRenderer);
-        table.setDefaultRenderer(String.class, defaultCellRenderer);
+        getDetailsTable().setDefaultRenderer(Long.class, defaultCellRenderer);
+        getDetailsTable().setDefaultRenderer(Integer.class, defaultCellRenderer);
+        getDetailsTable().setDefaultRenderer(Double.class, defaultCellRenderer);
+        getDetailsTable().setDefaultRenderer(String.class, defaultCellRenderer);
 
         builder.appendI15dSeparator(JsamsI18nResource.PANEL_ESTIMATE_DETAILS.getKey());
-        builder.append(new JScrollPane(table), maxColumnSpan);
+        builder.append(new JScrollPane(getDetailsTable()), maxColumnSpan);
 
         JPanel southPanel = new JPanel();
         southPanel.setLayout(new BoxLayout(southPanel, BoxLayout.PAGE_AXIS));
         southPanel.setBorder(BorderFactory.createEtchedBorder());
 
-        JsamsButton buttonAdd = buildButtonAdd(table.getModel());
+        JsamsButton buttonAdd = buildButtonAdd();
         JsamsButton buttonRemove = buildButtonRemove();
         JsamsButton buttonModify = buildButtonModify();
         JsamsButton[] buttons = new JsamsButton[three];
@@ -197,7 +194,7 @@ public class EstimateBeanView extends AbstractView<EstimateBean, JPanel, JPanel>
             @Override
             public void mouseClicked(MouseEvent e) {
                 Object source = e.getSource();
-                int selectedColumn = table.getSelectedColumn();
+                int selectedColumn = getDetailsTable().getSelectedColumn();
                 System.out.println("clickcount " + e.getClickCount());
                 // only edit dialog for product editing
                 if (e.getClickCount() == 2) {
@@ -216,16 +213,17 @@ public class EstimateBeanView extends AbstractView<EstimateBean, JPanel, JPanel>
                                         int selectedRowModel = productTable.convertRowIndexToModel(selectedRow);
                                         ProductTableModel model = (ProductTableModel) productTable.getModel();
                                         ProductBean selectedBean = model.getRow(selectedRowModel);
-                                        int detailSelectedRow = table.getSelectedRow();
-                                        int detailSelectedRowModel = table.convertRowIndexToModel(detailSelectedRow);
-                                        EstimateDetailTableModel detailModel = (EstimateDetailTableModel) table
-                                                .getModel();
+                                        int detailSelectedRow = getDetailsTable().getSelectedRow();
+                                        int detailSelectedRowModel = getDetailsTable().convertRowIndexToModel(
+                                                detailSelectedRow);
+                                        EstimateDetailTableModel detailModel
+                                            = (EstimateDetailTableModel) getDetailsTable().getModel();
                                         EstimateDetailBean selectedDetailBean = detailModel
                                                 .getRow(detailSelectedRowModel);
                                         selectedDetailBean.setPrice(selectedBean.getPrice());
                                         selectedDetailBean.setProduct(selectedBean);
                                         selectedDetailBean.setVatApplicable(selectedBean.getVatApplicable());
-                                        table.repaint();
+                                        getDetailsTable().repaint();
                                         dialog.dispose();
                                     }
                                 }
@@ -270,10 +268,9 @@ public class EstimateBeanView extends AbstractView<EstimateBean, JPanel, JPanel>
     /**
      * Builds the adding button.
      * 
-     * @param tableModel the {@link TableModel}
      * @return the adding {@link JsamsButton}
      */
-    private JsamsButton buildButtonAdd(final TableModel tableModel) {
+    private JsamsButton buildButtonAdd() {
         JsamsButton buttonAdd = new JsamsButton(IconUtil.MENU_ICON_PREFIX + "actions/list-add.png");
         buttonAdd.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -286,8 +283,8 @@ public class EstimateBeanView extends AbstractView<EstimateBean, JPanel, JPanel>
                 details.add(detail);
                 detail.setListModel(new ArrayListModel<EstimateDetailBean>(details));
                 bean.setDetails(details);
-                ((EstimateDetailTableModel) tableModel).setListModel(detail.getListModel());
-                table.repaint();
+                ((AbstractJsamsTableModel<?>) getDetailsTable().getModel()).setListModel(detail.getListModel());
+                // getDetailsTable().repaint();
             }
         });
         return buttonAdd;
@@ -302,15 +299,15 @@ public class EstimateBeanView extends AbstractView<EstimateBean, JPanel, JPanel>
         JsamsButton buttonRemove = new JsamsButton(IconUtil.MENU_ICON_PREFIX + "actions/list-remove.png");
         buttonRemove.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                int selectedRow = table.getSelectedRow();
+                int selectedRow = getDetailsTable().getSelectedRow();
                 List<EstimateDetailBean> details = getBean().getDetails();
                 if (selectedRow > -1) {
-                    int selectedRowModel = table.convertRowIndexToModel(selectedRow);
-                    EstimateDetailTableModel model = (EstimateDetailTableModel) table.getModel();
+                    int selectedRowModel = getDetailsTable().convertRowIndexToModel(selectedRow);
+                    EstimateDetailTableModel model = (EstimateDetailTableModel) getDetailsTable().getModel();
                     details.remove(model.getRow(selectedRowModel));
                     getBean().setDetails(details);
                     model.setListModel(new ArrayListModel<EstimateDetailBean>(details));
-                    table.repaint();
+                    // getDetailsTable().repaint();
                 }
             }
         });
@@ -366,4 +363,5 @@ public class EstimateBeanView extends AbstractView<EstimateBean, JPanel, JPanel>
 
         return builder.getPanel();
     }
+
 }

@@ -12,7 +12,7 @@ import be.jsams.common.bean.model.CivilityBean;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class CivilityBeanView extends AbstractView<CivilityBean, JsamsComboBox, JPanel> {
+public class CivilityBeanView extends AbstractBeanView<CivilityBean, JsamsComboBox, JPanel> {
 
     /**
      * Serial Version UID
@@ -22,8 +22,7 @@ public class CivilityBeanView extends AbstractView<CivilityBean, JsamsComboBox, 
     /**
      * Constructor
      * 
-     * @param bean
-     *            the {@link CivilityBean}
+     * @param bean the {@link CivilityBean}
      */
     public CivilityBeanView(CivilityBean bean) {
         super(bean);
