@@ -32,7 +32,7 @@ public class EstimateBean extends AbstractDocumentBean<Estimate, EstimateBeanVie
 
     public static final String DISCOUNT_RATE_PROPERTY = "discountRate";
     public static final String TRANSFERRED_PROPERTY = "transferred";
-
+    
     /**
      * Default constructor
      */
@@ -43,6 +43,7 @@ public class EstimateBean extends AbstractDocumentBean<Estimate, EstimateBeanVie
         setTransferred(false);
         List<EstimateDetailBean> details = new ArrayList<EstimateDetailBean>();
         setDetails(details);
+        setView(new EstimateBeanView(this));
     }
 
     /**
@@ -61,6 +62,7 @@ public class EstimateBean extends AbstractDocumentBean<Estimate, EstimateBeanVie
         setDetails(beans);
         setDiscountRate(model.getDiscountRate());
         setTransferred(model.isTransferred());
+        setView(new EstimateBeanView(this));
     }
 
     /**
@@ -144,21 +146,10 @@ public class EstimateBean extends AbstractDocumentBean<Estimate, EstimateBeanVie
      * {@inheritDoc}
      */
     @Override
-    public EstimateBeanView getView() {
-        return new EstimateBeanView(this);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public void clear() {
         super.clear();
         agent.clear();
         billingAddress.clear();
-        for (EstimateDetailBean detail : details) {
-            detail.clear();
-        }
         setDiscountRate(null);
         setTransferred(false);
     }

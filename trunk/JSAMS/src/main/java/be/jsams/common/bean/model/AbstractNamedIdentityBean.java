@@ -1,6 +1,6 @@
 package be.jsams.common.bean.model;
 
-import be.jsams.common.bean.view.AbstractView;
+import be.jsams.common.bean.view.AbstractBeanView;
 import be.jsams.server.model.AbstractNamedIdentity;
 
 /**
@@ -9,11 +9,11 @@ import be.jsams.server.model.AbstractNamedIdentity;
  * @param <M>
  *            and extension of {@link AbstractNamedIdentity}
  * @param <V>
- *            an extension of {@link AbstractView}
+ *            an extension of {@link AbstractBeanView}
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public abstract class AbstractNamedIdentityBean<M extends AbstractNamedIdentity, V extends AbstractView<?, ?, ?>>
+public abstract class AbstractNamedIdentityBean<M extends AbstractNamedIdentity, V extends AbstractBeanView<?, ?, ?>>
         extends AbstractIdentityBean<M, V> {
 
     /**

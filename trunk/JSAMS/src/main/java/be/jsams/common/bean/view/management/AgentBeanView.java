@@ -14,7 +14,7 @@ import be.jsams.client.swing.utils.IconUtil;
 import be.jsams.common.bean.model.AddressBean;
 import be.jsams.common.bean.model.ContactInformationBean;
 import be.jsams.common.bean.model.management.AgentBean;
-import be.jsams.common.bean.view.AbstractView;
+import be.jsams.common.bean.view.AbstractBeanView;
 import be.jsams.common.bean.view.ViewFactory;
 
 import com.jgoodies.forms.builder.DefaultFormBuilder;
@@ -22,12 +22,12 @@ import com.jgoodies.forms.factories.Borders;
 import com.jgoodies.forms.layout.FormLayout;
 
 /**
- * {@link AbstractView} for {@link AgentBean}.
+ * {@link AbstractBeanView} for {@link AgentBean}.
  * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class AgentBeanView extends AbstractView<AgentBean, JPanel, JPanel> {
+public class AgentBeanView extends AbstractBeanView<AgentBean, JPanel, JPanel> {
 
     /**
      * Serial Version UID
@@ -40,8 +40,7 @@ public class AgentBeanView extends AbstractView<AgentBean, JPanel, JPanel> {
     /**
      * Constructor
      * 
-     * @param bean
-     *            the {@link AgentBean}
+     * @param bean the {@link AgentBean}
      */
     public AgentBeanView(AgentBean bean) {
         super(bean);

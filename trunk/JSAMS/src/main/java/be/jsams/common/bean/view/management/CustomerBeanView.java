@@ -22,7 +22,7 @@ import be.jsams.client.swing.utils.IconUtil;
 import be.jsams.common.bean.model.AddressBean;
 import be.jsams.common.bean.model.ContactInformationBean;
 import be.jsams.common.bean.model.management.CustomerBean;
-import be.jsams.common.bean.view.AbstractView;
+import be.jsams.common.bean.view.AbstractBeanView;
 import be.jsams.common.bean.view.ViewFactory;
 
 import com.jgoodies.forms.builder.DefaultFormBuilder;
@@ -31,12 +31,12 @@ import com.jgoodies.forms.factories.ButtonBarFactory;
 import com.jgoodies.forms.layout.FormLayout;
 
 /**
- * {@link AbstractView} for {@link CustomerBean}.
+ * {@link AbstractBeanView} for {@link CustomerBean}.
  * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class CustomerBeanView extends AbstractView<CustomerBean, JPanel, JPanel> {
+public class CustomerBeanView extends AbstractBeanView<CustomerBean, JPanel, JPanel> {
 
     /**
      * Serial Version UID
@@ -48,8 +48,7 @@ public class CustomerBeanView extends AbstractView<CustomerBean, JPanel, JPanel>
     /**
      * Constructor
      * 
-     * @param bean
-     *            the {@link CustomerBean}
+     * @param bean the {@link CustomerBean}
      */
     public CustomerBeanView(CustomerBean bean) {
         super(bean);

@@ -1,6 +1,6 @@
 package be.jsams.common.bean.model;
 
-import be.jsams.common.bean.view.AbstractView;
+import be.jsams.common.bean.view.AbstractBeanView;
 import be.jsams.server.model.AbstractIdentity;
 
 import com.jgoodies.binding.beans.Model;
@@ -10,13 +10,13 @@ import com.jgoodies.common.collect.ObservableList;
  * Abstract class for all beans that have an id.
  * 
  * @param <M> an extension of {@link AbstractIdentity}
- * @param <V> an extension of {@link AbstractView}
+ * @param <V> an extension of {@link AbstractBeanView}
  * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public abstract class AbstractIdentityBean<M extends AbstractIdentity, V extends AbstractView<?, ?, ?>> extends Model
-        implements Refreshable<AbstractIdentityBean<?, ?>> {
+public abstract class AbstractIdentityBean<M extends AbstractIdentity, V extends AbstractBeanView<?, ?, ?>> 
+        extends Model implements Refreshable<AbstractIdentityBean<?, ?>> {
     /**
      * Serial Version UID
      */
@@ -138,7 +138,7 @@ public abstract class AbstractIdentityBean<M extends AbstractIdentity, V extends
 
     /**
      * 
-     * @return the {@link AbstractView} of this class
+     * @return the {@link AbstractBeanView} of this class
      */
     public abstract V getView();
 

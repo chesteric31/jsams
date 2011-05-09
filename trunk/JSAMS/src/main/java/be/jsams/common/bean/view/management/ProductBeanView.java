@@ -8,7 +8,7 @@ import be.jsams.client.swing.component.JsamsFrame;
 import be.jsams.client.swing.component.JsamsTextField;
 import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.management.ProductBean;
-import be.jsams.common.bean.view.AbstractView;
+import be.jsams.common.bean.view.AbstractBeanView;
 import be.jsams.common.bean.view.ViewFactory;
 
 import com.jgoodies.forms.builder.DefaultFormBuilder;
@@ -20,7 +20,7 @@ import com.jgoodies.forms.layout.FormLayout;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class ProductBeanView extends AbstractView<ProductBean, JPanel, JPanel> {
+public class ProductBeanView extends AbstractBeanView<ProductBean, JPanel, JPanel> {
 
     /**
      * Serial Version UID
@@ -30,8 +30,7 @@ public class ProductBeanView extends AbstractView<ProductBean, JPanel, JPanel> {
     /**
      * Constructor
      * 
-     * @param bean
-     *            the {@link ProductBean}
+     * @param bean the {@link ProductBean}
      */
     public ProductBeanView(ProductBean bean) {
         super(bean);

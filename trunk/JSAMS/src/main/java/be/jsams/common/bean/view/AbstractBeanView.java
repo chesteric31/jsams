@@ -20,7 +20,7 @@ import com.jgoodies.common.collect.ObservableList;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public abstract class AbstractView<B extends AbstractIdentityBean<?, ?>, J extends JComponent, K extends JPanel>
+public abstract class AbstractBeanView<B extends AbstractIdentityBean<?, ?>, J extends JComponent, K extends JPanel>
         extends PresentationModel<B> implements Viewable<J, K> {
 
     /**
@@ -38,7 +38,7 @@ public abstract class AbstractView<B extends AbstractIdentityBean<?, ?>, J exten
      * 
      * @param bean the bean
      */
-    public AbstractView(B bean) {
+    public AbstractBeanView(B bean) {
         super(bean);
         ObservableList<?> listModel = bean.getListModel();
         ValueHolder listHolder = new ValueHolder(listModel, true);

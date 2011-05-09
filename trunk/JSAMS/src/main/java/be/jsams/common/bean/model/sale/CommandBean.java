@@ -45,6 +45,7 @@ public class CommandBean extends AbstractDocumentBean<Command, CommandBeanView> 
         setTransferred(false);
         List<CommandDetailBean> details = new ArrayList<CommandDetailBean>();
         setDetails(details);
+        setView(new CommandBeanView(this));
     }
 
     /**
@@ -64,6 +65,7 @@ public class CommandBean extends AbstractDocumentBean<Command, CommandBeanView> 
         setDetails(beans);
         setDiscountRate(model.getDiscountRate());
         setTransferred(model.isTransferred());
+        setView(new CommandBeanView(this));
     }
 
     /**
@@ -158,22 +160,11 @@ public class CommandBean extends AbstractDocumentBean<Command, CommandBeanView> 
      * {@inheritDoc}
      */
     @Override
-    public CommandBeanView getView() {
-        return new CommandBeanView(this);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public void clear() {
         super.clear();
         agent.clear();
         billingAddress.clear();
         deliveryAddress.clear();
-        for (CommandDetailBean detail : details) {
-            detail.clear();
-        }
         setDiscountRate(null);
         setTransferred(false);
     }

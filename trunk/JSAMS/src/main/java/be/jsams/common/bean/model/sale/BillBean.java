@@ -63,6 +63,7 @@ public class BillBean extends AbstractDocumentBean<Bill, BillBeanView> {
         setPaid(false);
         List<BillDetailBean> details = new ArrayList<BillDetailBean>();
         setDetails(details);
+        setView(new BillBeanView(this));
     }
 
     /**
@@ -92,6 +93,7 @@ public class BillBean extends AbstractDocumentBean<Bill, BillBeanView> {
             paymentModeBuilder.setModel(mode);
         }
         setPaymentMode(paymentModeBuilder.build());
+        setView(new BillBeanView(this));
     }
 
     /**
@@ -277,9 +279,6 @@ public class BillBean extends AbstractDocumentBean<Bill, BillBeanView> {
     public void clear() {
         super.clear();
         billingAddress.clear();
-        for (BillDetailBean detail : details) {
-            detail.clear();
-        }
         setDiscountRate(null);
         setClosed(false);
         setPaid(false);

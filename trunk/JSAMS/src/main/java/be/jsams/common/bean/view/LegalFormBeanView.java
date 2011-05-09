@@ -12,7 +12,7 @@ import be.jsams.common.bean.model.LegalFormBean;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class LegalFormBeanView extends AbstractView<LegalFormBean, JsamsComboBox, JPanel> {
+public class LegalFormBeanView extends AbstractBeanView<LegalFormBean, JsamsComboBox, JPanel> {
 
     /**
      * Serial Version UID
@@ -22,8 +22,7 @@ public class LegalFormBeanView extends AbstractView<LegalFormBean, JsamsComboBox
     /**
      * Constructor
      * 
-     * @param bean
-     *            the {@link LegalFormBean}
+     * @param bean the {@link LegalFormBean}
      */
     public LegalFormBeanView(LegalFormBean bean) {
         super(bean);

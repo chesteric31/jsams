@@ -3,15 +3,15 @@ package be.jsams.common.bean.view.sale;
 import javax.swing.JPanel;
 
 import be.jsams.common.bean.model.sale.CommandDetailBean;
-import be.jsams.common.bean.view.AbstractView;
+import be.jsams.common.bean.view.AbstractBeanView;
 
 /**
  * 
  *
  * @author chesteric31
- * @version $Rev: 689 $ $Date:: 2011-04-14 16:11#$ $Author: chesteric31 $
+ * @version $Rev$ $Date::                  $ $Author$
  */
-public class CommandDetailBeanView extends AbstractView<CommandDetailBean, JPanel, JPanel> {
+public class CommandDetailBeanView extends AbstractBeanView<CommandDetailBean, JPanel, JPanel> {
 
     /**
      * Serial Version UID

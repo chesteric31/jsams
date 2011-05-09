@@ -3,27 +3,26 @@ package be.jsams.common.bean.model.sale;
 import java.util.Date;
 
 import be.jsams.client.desktop.JsamsDesktop;
+import be.jsams.client.swing.component.JsamsTable;
 import be.jsams.common.bean.model.AbstractIdentityBean;
 import be.jsams.common.bean.model.PeriodBean;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.CustomerBean;
-import be.jsams.common.bean.view.AbstractView;
+import be.jsams.common.bean.view.sale.AbstractDocumentBeanView;
 import be.jsams.server.model.sale.AbstractDocument;
 
 /**
- * Abstract class for all beans that have an id, a creation date, a period (for criteria),
- * a remark, a society (for criteria) and a customer
+ * Abstract class for all beans that have an id, a creation date, a period (for
+ * criteria), a remark, a society (for criteria) and a customer
  * 
- * @param <M>
- *            an extension of {@link AbstractDocument}
- * @param <V>
- *            an extension of {@link AbstractView}
- *
+ * @param <M> an extension of {@link AbstractDocument}
+ * @param <V> an extension of {@link AbstractDocumentBeanView}
+ * 
  * @author ebinard
  * @version $Rev$ $Date::                  $ $Author$
  */
-public abstract class AbstractDocumentBean<M extends AbstractDocument, V extends AbstractView<?, ?, ?>> extends
-        AbstractIdentityBean<M, V> {
+public abstract class AbstractDocumentBean<M extends AbstractDocument, V extends AbstractDocumentBeanView<?, ?, ?>>
+        extends AbstractIdentityBean<M, V> {
 
     /**
      * Serial Version UID
@@ -39,6 +38,8 @@ public abstract class AbstractDocumentBean<M extends AbstractDocument, V extends
 
     public static final String CREATION_DATE_PROPERTY = "creationDate";
     public static final String REMARK_PROPERTY = "remark";
+
+    private V view;
 
     /**
      * Default constructor.
@@ -139,6 +140,20 @@ public abstract class AbstractDocumentBean<M extends AbstractDocument, V extends
     }
 
     /**
+     * @return the view
+     */
+    public V getView() {
+        return view;
+    }
+
+    /**
+     * @param view the view to set
+     */
+    public void setView(V view) {
+        this.view = view;
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
@@ -153,6 +168,10 @@ public abstract class AbstractDocumentBean<M extends AbstractDocument, V extends
         }
         if (society != null) {
             society.clear();
+        }
+        JsamsTable detailsTable = view.getDetailsTable();
+        if (detailsTable != null) {
+            detailsTable.clear();
         }
     }
 
@@ -171,5 +190,5 @@ public abstract class AbstractDocumentBean<M extends AbstractDocument, V extends
         society.refresh(other.getSociety());
         period.refresh(other.getPeriod());
     }
-    
+
 }

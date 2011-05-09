@@ -40,13 +40,13 @@ public class DeliveryOrderBean extends AbstractDocumentBean<DeliveryOrder, Deliv
         setTransferred(false);
         List<DeliveryOrderDetailBean> details = new ArrayList<DeliveryOrderDetailBean>();
         setDetails(details);
+        setView(new DeliveryOrderBeanView(this));
     }
-    
+
     /**
      * Constructor
      * 
-     * @param model
-     *            the {@link DeliveryOrder}
+     * @param model the {@link DeliveryOrder}
      */
     public DeliveryOrderBean(DeliveryOrder model) {
         super(model);
@@ -58,6 +58,7 @@ public class DeliveryOrderBean extends AbstractDocumentBean<DeliveryOrder, Deliv
         setDetails(beans);
         setDiscountRate(model.getDiscountRate());
         setTransferred(model.isTransferred());
+        setView(new DeliveryOrderBeanView(this));
     }
 
     /**
@@ -124,20 +125,9 @@ public class DeliveryOrderBean extends AbstractDocumentBean<DeliveryOrder, Deliv
      * {@inheritDoc}
      */
     @Override
-    public DeliveryOrderBeanView getView() {
-        return new DeliveryOrderBeanView(this);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public void clear() {
         super.clear();
         deliveryAddress.clear();
-        for (DeliveryOrderDetailBean detail : details) {
-            detail.clear();
-        }
         setDiscountRate(null);
         setTransferred(false);
     }

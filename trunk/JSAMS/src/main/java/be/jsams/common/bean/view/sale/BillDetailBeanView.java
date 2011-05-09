@@ -3,7 +3,7 @@ package be.jsams.common.bean.view.sale;
 import javax.swing.JPanel;
 
 import be.jsams.common.bean.model.sale.BillDetailBean;
-import be.jsams.common.bean.view.AbstractView;
+import be.jsams.common.bean.view.AbstractBeanView;
 
 /**
  * 
@@ -11,7 +11,7 @@ import be.jsams.common.bean.view.AbstractView;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class BillDetailBeanView extends AbstractView<BillDetailBean, JPanel, JPanel> {
+public class BillDetailBeanView extends AbstractBeanView<BillDetailBean, JPanel, JPanel> {
 
     /**
      * Serial Version UID

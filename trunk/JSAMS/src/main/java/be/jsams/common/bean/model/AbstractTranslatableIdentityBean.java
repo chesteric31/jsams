@@ -1,6 +1,6 @@
 package be.jsams.common.bean.model;
 
-import be.jsams.common.bean.view.AbstractView;
+import be.jsams.common.bean.view.AbstractBeanView;
 import be.jsams.server.model.AbstractTranslatableIdentity;
 
 /**
@@ -9,12 +9,12 @@ import be.jsams.server.model.AbstractTranslatableIdentity;
  * @param <M>
  *            an extension of {@link AbstractTranslatableIdentity}
  * @param <V>
- *            an extension of {@link AbstractView}
+ *            an extension of {@link AbstractBeanView}
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
 public abstract class AbstractTranslatableIdentityBean<M extends AbstractTranslatableIdentity,
-        V extends AbstractView<?, ?, ?>> extends AbstractIdentityBean<M, V> {
+        V extends AbstractBeanView<?, ?, ?>> extends AbstractIdentityBean<M, V> {
 
     /**
      * Serial Version UID

@@ -4,15 +4,15 @@ import javax.swing.JPanel;
 
 import be.jsams.client.swing.component.JsamsTable;
 import be.jsams.common.bean.model.sale.EstimateDetailBean;
-import be.jsams.common.bean.view.AbstractView;
+import be.jsams.common.bean.view.AbstractBeanView;
 
 /**
  * Implementation of all sorts of views for {@link EstimateDetailBean} object.
  * 
  * @author chesteric31
- * @version $Rev: 689 $ $Date:: 2011-04-14 16:11#$ $Author: chesteric31 $
+ * @version $Rev$ $Date::                  $ $Author$
  */
-public class EstimateDetailBeanView extends AbstractView<EstimateDetailBean, JsamsTable, JPanel> {
+public class EstimateDetailBeanView extends AbstractBeanView<EstimateDetailBean, JsamsTable, JPanel> {
 
     /**
      * Serial Version UID

@@ -6,7 +6,6 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
-import javax.swing.table.TableModel;
 
 import be.jsams.client.model.table.AbstractJsamsTableModel;
 
@@ -39,7 +38,7 @@ public class JsamsTable extends JTable {
     /**
      * {@inheritDoc}
      */
-    public void setModel(final TableModel model) {
+    public void setModel(final AbstractJsamsTableModel<?> model) {
         super.setModel(model);
         if (autoResizeColumnWidth) {
             autoResizeColumnWidth();
@@ -98,5 +97,5 @@ public class JsamsTable extends JTable {
             model.clear();
         }
     }
-
+    
 }
