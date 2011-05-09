@@ -13,7 +13,8 @@ import be.jsams.server.service.sale.EstimateService;
 import com.jgoodies.validation.view.ValidationComponentUtils;
 
 /**
- * Edit Estimate {@link AbstractEditDialog}, to create or update a {@link EstimateBean} object.
+ * Edit Estimate {@link AbstractEditDialog}, to create or update a
+ * {@link EstimateBean} object.
  * 
  * @author chesteric31
  * @version $Rev: 712 $ $Date::                  $ $Author$
@@ -28,10 +29,8 @@ public class EditEstimateDialog extends AbstractEditDialog<EstimateBean, EditEst
     /**
      * Constructor
      * 
-     * @param title
-     *            the {@link I18nString} title
-     * @param model
-     *            the {@link EstimateBean} model
+     * @param title the {@link I18nString} title
+     * @param model the {@link EstimateBean} model
      */
     public EditEstimateDialog(final I18nString title, EstimateBean model) {
         super(null, title);
