@@ -3,13 +3,14 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-	<!--  Bean builders -->
+	<!-- Bean builders -->
 	<bean id="productBeanBuilder" class="be.jsams.common.bean.builder.ProductBeanBuilder">
 		<property name="dao" ref="productDao" />
 	</bean>
-	
+
 	<!-- DAOs -->
-	<bean id="productCategoryDao" class="be.jsams.server.dao.management.impl.ProductCategoryDaoImpl">
+	<bean id="productCategoryDao"
+		class="be.jsams.server.dao.management.impl.ProductCategoryDaoImpl">
 		<constructor-arg value="be.jsams.server.model.management.ProductCategory" />
 	</bean>
 	<bean id="productDao" class="be.jsams.server.dao.management.impl.ProductDaoImpl">
@@ -21,28 +22,32 @@
 	<bean id="customerDao" class="be.jsams.server.dao.management.impl.CustomerDaoImpl">
 		<constructor-arg value="be.jsams.server.model.management.Customer" />
 	</bean>
-	
-	<!--  Services -->
-	<bean id="agentServiceTarget" class="be.jsams.server.service.management.impl.AgentServiceImpl">
+
+	<!-- Services -->
+	<bean id="agentServiceTarget"
+		class="be.jsams.server.service.management.impl.AgentServiceImpl">
 		<property name="agentDao" ref="agentDao" />
 	</bean>
 	<bean id="agentService" parent="baseTransactionProxy">
 		<property name="target" ref="agentServiceTarget" />
 	</bean>
-	<bean id="customerServiceTarget" class="be.jsams.server.service.management.impl.CustomerServiceImpl">
+	<bean id="customerServiceTarget"
+		class="be.jsams.server.service.management.impl.CustomerServiceImpl">
 		<property name="customerDao" ref="customerDao" />
 	</bean>
 	<bean id="customerService" parent="baseTransactionProxy">
 		<property name="target" ref="customerServiceTarget" />
 	</bean>
-	<bean id="productServiceTarget" class="be.jsams.server.service.management.impl.ProductServiceImpl">
+	<bean id="productServiceTarget"
+		class="be.jsams.server.service.management.impl.ProductServiceImpl">
 		<property name="productDao" ref="productDao" />
 		<property name="builder" ref="productBeanBuilder" />
 	</bean>
 	<bean id="productService" parent="baseTransactionProxy">
 		<property name="target" ref="productServiceTarget" />
 	</bean>
-	<bean id="productCategoryServiceTarget" class="be.jsams.server.service.management.impl.ProductCategoryServiceImpl">
+	<bean id="productCategoryServiceTarget"
+		class="be.jsams.server.service.management.impl.ProductCategoryServiceImpl">
 		<property name="productCategoryDao" ref="productCategoryDao" />
 	</bean>
 	<bean id="productCategoryService" parent="baseTransactionProxy">
