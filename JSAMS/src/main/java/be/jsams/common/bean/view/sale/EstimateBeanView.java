@@ -89,16 +89,19 @@ public class EstimateBeanView extends AbstractDocumentBeanView<EstimateBean, JPa
 
         FormLayout layout = new FormLayout("right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p", "p");
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, JsamsFrame.RESOURCE_BUNDLE);
+        int maxColumnSpan = builder.getColumnCount();
         builder.setDefaultDialogBorder();
         CustomerBean customer = bean.getCustomer();
         JPanel customerPanel = customer.getView().createCustomView();
         customer.addPropertyChangeListener(handleCustomerChangeListener());
         builder.appendI15d(JsamsI18nLabelResource.LABEL_CUSTOMER_NAME.getKey(), customerPanel);
         builder.appendI15d(JsamsI18nLabelResource.LABEL_CREATION_DATE.getKey(), creationDate);
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_AGENT.getKey(), bean.getAgent().getView().createCustomView());
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_BILLING_ADDRESS.getKey(), bean.getBillingAddress().getView()
-                .createEditView());
         builder.nextLine();
+        // -2 for column span for the label and the space
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_BILLING_ADDRESS.getKey(), bean.getBillingAddress().getView()
+                .createEditView(), maxColumnSpan - 2);
+
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_AGENT.getKey(), bean.getAgent().getView().createCustomView());
         builder.appendI15d(JsamsI18nLabelResource.LABEL_TRANSFERRED.getKey(), transferred);
         builder.nextLine();
         builder.appendI15d(JsamsI18nLabelResource.LABEL_DEFAULT_DISCOUNT_RATE.getKey(), discountRate);
@@ -106,7 +109,6 @@ public class EstimateBeanView extends AbstractDocumentBeanView<EstimateBean, JPa
 
         builder.nextLine();
         List<EstimateDetailBean> details = bean.getDetails();
-        int maxColumnSpan = builder.getColumnCount();
 
         EstimateDetailTableModel tableModel = new EstimateDetailTableModel(details);
         ViewFactory<EstimateDetailBean> detailView = new ViewFactory<EstimateDetailBean>();
