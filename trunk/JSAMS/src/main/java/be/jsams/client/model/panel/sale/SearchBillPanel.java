@@ -28,7 +28,7 @@ public class SearchBillPanel extends AbstractSearchPanel<BillBean,
      */
     private static final long serialVersionUID = 4113451180402839180L;
 
-    private static final Log LOGGER = LogFactory.getLog(SearchCommandPanel.class);
+    private static final Log LOGGER = LogFactory.getLog(SearchBillPanel.class);
 
     private final boolean debug = LOGGER.isDebugEnabled();
 

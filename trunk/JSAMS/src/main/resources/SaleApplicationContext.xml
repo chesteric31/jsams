@@ -26,6 +26,9 @@
 	<bean id="billDao" class="be.jsams.server.dao.sale.impl.BillDaoImpl">
 		<constructor-arg value="be.jsams.server.model.sale.Bill" />
 	</bean>
+	<bean id="creditNoteDao" class="be.jsams.server.dao.sale.impl.CreditNoteDaoImpl">
+		<constructor-arg value="be.jsams.server.model.sale.CreditNote" />
+	</bean>
 
 	<!-- Services -->
 	<bean id="estimateServiceTarget" class="be.jsams.server.service.sale.impl.EstimateServiceImpl">
@@ -53,6 +56,13 @@
 	</bean>
 	<bean id="billService" parent="baseTransactionProxy">
 		<property name="target" ref="billServiceTarget" />
+	</bean>
+	<bean id="creditNoteServiceTarget"
+		class="be.jsams.server.service.sale.impl.CreditNoteServiceImpl">
+		<property name="creditNoteDao" ref="creditNoteDao" />
+	</bean>
+	<bean id="creditNoteService" parent="baseTransactionProxy">
+		<property name="target" ref="creditNoteServiceTarget" />
 	</bean>
 
 </beans>

@@ -14,6 +14,7 @@ import be.jsams.server.service.management.ProductCategoryService;
 import be.jsams.server.service.management.ProductService;
 import be.jsams.server.service.sale.BillService;
 import be.jsams.server.service.sale.CommandService;
+import be.jsams.server.service.sale.CreditNoteService;
 import be.jsams.server.service.sale.DeliveryOrderService;
 import be.jsams.server.service.sale.EstimateService;
 
@@ -139,6 +140,13 @@ public final class JsamsApplicationContext {
      */
     public static BillService getBillService() {
         return (BillService) context.getBean("billService");
+    }
+
+    /**
+     * @return the {@link CreditNoteService}
+     */
+    public static CreditNoteService getCreditNoteService() {
+        return (CreditNoteService) context.getBean("creditNoteService");
     }
 
 }

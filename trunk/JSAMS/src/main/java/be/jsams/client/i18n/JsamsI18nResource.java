@@ -238,5 +238,11 @@ public final class JsamsI18nResource {
     public static final I18nString TITLE_EDIT_BILL = new I18nString("title.edit.bill");
 
     public static final I18nString TITLE_SEARCH_BILL = new I18nString("title.search.bill");
+
+    public static final I18nString PANEL_CREDIT_NOTE_DETAILS = new I18nString("panel.credit_note_details");
+
+    public static final I18nString TITLE_EDIT_CREDIT_NOTE = new I18nString("title.edit.credit_note");
+
+    public static final I18nString TITLE_SEARCH_CREDIT_NOTE = new I18nString("title.search.credit_note");
     
 }

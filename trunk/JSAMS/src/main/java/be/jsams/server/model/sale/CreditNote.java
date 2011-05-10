@@ -1,15 +1,20 @@
 package be.jsams.server.model.sale;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.Cascade;
 
+import be.jsams.common.bean.model.sale.CreditNoteBean;
+import be.jsams.common.bean.model.sale.CreditNoteDetailBean;
 import be.jsams.server.model.Address;
 
 /**
@@ -18,6 +23,8 @@ import be.jsams.server.model.Address;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
+@Entity
+@Table(name = "CREDIT_NOTE")
 public class CreditNote extends AbstractDocument {
 
     private Address billingAddress;
@@ -25,10 +32,28 @@ public class CreditNote extends AbstractDocument {
     private List<CreditNoteDetail> details;
 
     /**
-     * Constructor.
+     * Default constructor
      */
     public CreditNote() {
         super();
+    }
+    
+    /**
+     * Constructor
+     * 
+     * @param bean the {@link CreditNoteBean}
+     */
+    public CreditNote(CreditNoteBean bean) {
+        super(bean);
+        setBillingAddress(new Address(bean.getBillingAddress()));
+        List<CreditNoteDetailBean> list = bean.getDetails();
+        List<CreditNoteDetail> tmp = new ArrayList<CreditNoteDetail>();
+        if (list != null) {
+            for (CreditNoteDetailBean detail : list) {
+                tmp.add(new CreditNoteDetail(detail, this));
+            }
+        }
+        setDetails(tmp);
     }
 
     /**
@@ -43,8 +68,7 @@ public class CreditNote extends AbstractDocument {
 
     /**
      * 
-     * @param billingAddress
-     *            the billing {@link Address} to set
+     * @param billingAddress the billing {@link Address} to set
      */
     public void setBillingAddress(Address billingAddress) {
         this.billingAddress = billingAddress;
@@ -62,8 +86,7 @@ public class CreditNote extends AbstractDocument {
 
     /**
      * 
-     * @param details
-     *            a list of {@link CreditNoteDetail} to set
+     * @param details a list of {@link CreditNoteDetail} to set
      */
     public void setDetails(List<CreditNoteDetail> details) {
         this.details = details;
