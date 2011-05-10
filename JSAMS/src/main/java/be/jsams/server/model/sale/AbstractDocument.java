@@ -100,5 +100,21 @@ public abstract class AbstractDocument extends AbstractIdentity {
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("AbstractDocument [creationDate=");
+        builder.append(creationDate);
+        builder.append(", customer=");
+        builder.append(customer);
+        builder.append(", remark=");
+        builder.append(remark);
+        builder.append("]");
+        return builder.toString();
+    }
     
 }

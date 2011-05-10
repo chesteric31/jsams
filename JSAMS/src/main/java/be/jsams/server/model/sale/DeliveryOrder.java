@@ -136,18 +136,11 @@ public class DeliveryOrder extends AbstractDocument {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        builder.append("DeliveryOrder [creationDate=");
-        builder.append(getCreationDate());
-        builder.append(", customer=");
-        builder.append(getCustomer());
-        builder.append(", deliveryAddress=");
+        builder.append(super.toString());
+        builder.append("DeliveryOrder [deliveryAddress=");
         builder.append(deliveryAddress);
-        builder.append(", details=");
-        builder.append(details);
         builder.append(", discountRate=");
         builder.append(discountRate);
-        builder.append(", remark=");
-        builder.append(getRemark());
         builder.append(", transferred=");
         builder.append(transferred);
         builder.append("]");

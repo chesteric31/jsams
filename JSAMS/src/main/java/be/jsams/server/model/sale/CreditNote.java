@@ -37,7 +37,7 @@ public class CreditNote extends AbstractDocument {
     public CreditNote() {
         super();
     }
-    
+
     /**
      * Constructor
      * 
@@ -98,16 +98,9 @@ public class CreditNote extends AbstractDocument {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
+        builder.append(super.toString());
         builder.append("CreditNote [billingAddress=");
         builder.append(billingAddress);
-        builder.append(", creationDate=");
-        builder.append(getCreationDate());
-        builder.append(", customer=");
-        builder.append(getCustomer());
-        builder.append(", details=");
-        builder.append(details);
-        builder.append(", remark=");
-        builder.append(getRemark());
         builder.append("]");
         return builder.toString();
     }

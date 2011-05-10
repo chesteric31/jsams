@@ -51,7 +51,7 @@ public class Bill extends AbstractDocument {
     public Bill() {
         super();
     }
-    
+
     /**
      * Constructor
      * 
@@ -261,22 +261,17 @@ public class Bill extends AbstractDocument {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
+        builder.append(super.toString());
         builder.append("Bill [billingAddress=");
         builder.append(billingAddress);
         builder.append(", closed=");
         builder.append(closed);
-        builder.append(", creationDate=");
-        builder.append(getCreationDate());
-        builder.append(", customer=");
-        builder.append(getCustomer());
         builder.append(", dateFirstRemember=");
         builder.append(dateFirstRemember);
         builder.append(", dateFormalNotice=");
         builder.append(dateFormalNotice);
         builder.append(", dateSecondRemember=");
         builder.append(dateSecondRemember);
-        builder.append(", details=");
-        builder.append(details);
         builder.append(", discountRate=");
         builder.append(discountRate);
         builder.append(", dueDate=");
@@ -285,8 +280,6 @@ public class Bill extends AbstractDocument {
         builder.append(paid);
         builder.append(", paymentMode=");
         builder.append(paymentMode);
-        builder.append(", remark=");
-        builder.append(getRemark());
         builder.append("]");
         return builder.toString();
     }

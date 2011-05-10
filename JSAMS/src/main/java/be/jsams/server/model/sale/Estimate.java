@@ -157,20 +157,13 @@ public class Estimate extends AbstractDocument {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
+        builder.append(super.toString());
         builder.append("Estimate [agent=");
         builder.append(agent);
         builder.append(", billingAddress=");
         builder.append(billingAddress);
-        builder.append(", creationDate=");
-        builder.append(getCreationDate());
-        builder.append(", customer=");
-        builder.append(getCustomer());
-        builder.append(", details=");
-        builder.append(details);
         builder.append(", discountRate=");
         builder.append(discountRate);
-        builder.append(", remark=");
-        builder.append(getRemark());
         builder.append(", transferred=");
         builder.append(transferred);
         builder.append("]");
