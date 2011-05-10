@@ -229,5 +229,14 @@ public final class JsamsI18nResource {
 
     public static final I18nString PANEL_DELIVERY_ORDER_DETAILS = new I18nString("panel.delivery_order_details");
 
+    public static final I18nString PANEL_BILL_DETAILS = new I18nString("panel.bill_details");
+
+    public static final I18nString COLUMN_PAID = new I18nString("column.paid");
+    
+    public static final I18nString COLUMN_CLOSED = new I18nString("column.closed");
+
+    public static final I18nString TITLE_EDIT_BILL = new I18nString("title.edit.bill");
+
+    public static final I18nString TITLE_SEARCH_BILL = new I18nString("title.search.bill");
     
 }
