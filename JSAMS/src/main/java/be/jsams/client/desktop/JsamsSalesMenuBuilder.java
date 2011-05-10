@@ -11,20 +11,24 @@ import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.model.panel.sale.SearchBillPanel;
 import be.jsams.client.model.panel.sale.SearchCommandPanel;
+import be.jsams.client.model.panel.sale.SearchCreditNotePanel;
 import be.jsams.client.model.panel.sale.SearchDeliveryOrderPanel;
 import be.jsams.client.model.panel.sale.SearchEstimatePanel;
 import be.jsams.client.swing.component.JsamsMenu;
 import be.jsams.client.swing.component.JsamsMenuItem;
 import be.jsams.client.swing.listener.BillTableMouseListener;
 import be.jsams.client.swing.listener.CommandTableMouseListener;
+import be.jsams.client.swing.listener.CreditNoteTableMouseListener;
 import be.jsams.client.swing.listener.DeliveryOrderTableMouseListener;
 import be.jsams.client.swing.listener.EstimateTableMouseListener;
 import be.jsams.client.validator.SearchBillValidator;
 import be.jsams.client.validator.SearchCommandValidator;
+import be.jsams.client.validator.SearchCreditNoteValidator;
 import be.jsams.client.validator.SearchDeliveryOrderValidator;
 import be.jsams.client.validator.SearchEstimateValidator;
 import be.jsams.common.bean.model.sale.BillBean;
 import be.jsams.common.bean.model.sale.CommandBean;
+import be.jsams.common.bean.model.sale.CreditNoteBean;
 import be.jsams.common.bean.model.sale.DeliveryOrderBean;
 import be.jsams.common.bean.model.sale.EstimateBean;
 
@@ -88,6 +92,7 @@ public class JsamsSalesMenuBuilder extends AbstractMenuBuilder {
         billMI.setAction(billsAction(billMI.getText(), billMI.getIcon()));
         salesMenu.add(billMI);
         creditNoteMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_CREDIT_NOTE);
+        creditNoteMI.setAction(creditNotesAction(creditNoteMI.getText(), creditNoteMI.getIcon()));
         salesMenu.add(creditNoteMI);
         return salesMenu;
     }
@@ -189,6 +194,32 @@ public class JsamsSalesMenuBuilder extends AbstractMenuBuilder {
                         new BillTableMouseListener(), JsamsApplicationContext.getBillService(),
                         new SearchBillValidator(), true);
                 parent.getTabbedPane().addTab(JsamsI18nResource.TITLE_SEARCH_BILL, null, searchPanel);
+            }
+        };
+        action.putValue(Action.NAME, text);
+        action.putValue(Action.SMALL_ICON, icon);
+        return action;
+    }
+
+    /**
+     * {@link AbstractAction} for credit note menu item.
+     * 
+     * @param text the text to display
+     * @param icon the {@link Icon} to display
+     * @return an {@link Action} for the searching of credit notes
+     */
+    private Action creditNotesAction(String text, Icon icon) {
+        AbstractAction action = new AbstractAction() {
+            /**
+             * Serial Version UID
+             */
+            private static final long serialVersionUID = 1834120131584668841L;
+
+            public void actionPerformed(ActionEvent event) {
+                SearchCreditNotePanel searchPanel = new SearchCreditNotePanel(new CreditNoteBean(),
+                        new CreditNoteTableMouseListener(), JsamsApplicationContext.getCreditNoteService(),
+                        new SearchCreditNoteValidator(), true);
+                parent.getTabbedPane().addTab(JsamsI18nResource.TITLE_SEARCH_CREDIT_NOTE, null, searchPanel);
             }
         };
         action.putValue(Action.NAME, text);
