@@ -268,14 +268,6 @@ public class BillBean extends AbstractDocumentBean<Bill, BillBeanView> {
      * {@inheritDoc}
      */
     @Override
-    public BillBeanView getView() {
-        return new BillBeanView(this);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public void clear() {
         super.clear();
         billingAddress.clear();
@@ -286,6 +278,7 @@ public class BillBean extends AbstractDocumentBean<Bill, BillBeanView> {
         setDateFirstRemember(null);
         setDateSecondRemember(null);
         setDateFormalNotice(null);
+        paymentMode.clear();
     }
 
     /**

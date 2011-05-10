@@ -118,4 +118,16 @@ public final class JsamsI18nLabelResource {
 
     public static final I18nString LABEL_CUSTOMER = new I18nString("label.customer");
 
+    public static final I18nString LABEL_PAID = new I18nString("label.paid");
+    
+    public static final I18nString LABEL_CLOSED = new I18nString("label.closed");
+
+    public static final I18nString LABEL_DUE_DATE = new I18nString("label.due_date");
+
+    public static final I18nString LABEL_FIRST_REMEMBER_DATE = new I18nString("label.first_remember_date");
+
+    public static final I18nString LABEL_SECOND_REMEMBER_DATE = new I18nString("label.second_remember_date");
+
+    public static final I18nString LABEL_FORMAL_NOTICE_DATE = new I18nString("label.formal_notice_date");
+
 }

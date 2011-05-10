@@ -12,6 +12,7 @@ import be.jsams.server.service.management.AgentService;
 import be.jsams.server.service.management.CustomerService;
 import be.jsams.server.service.management.ProductCategoryService;
 import be.jsams.server.service.management.ProductService;
+import be.jsams.server.service.sale.BillService;
 import be.jsams.server.service.sale.CommandService;
 import be.jsams.server.service.sale.DeliveryOrderService;
 import be.jsams.server.service.sale.EstimateService;
@@ -131,6 +132,13 @@ public final class JsamsApplicationContext {
      */
     public static DeliveryOrderService getDeliveryOrderService() {
         return (DeliveryOrderService) context.getBean("deliveryOrderService");
+    }
+
+    /**
+     * @return the {@link BillService}
+     */
+    public static BillService getBillService() {
+        return (BillService) context.getBean("billService");
     }
 
 }

@@ -9,17 +9,21 @@ import javax.swing.JSeparator;
 
 import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.i18n.JsamsI18nResource;
+import be.jsams.client.model.panel.sale.SearchBillPanel;
 import be.jsams.client.model.panel.sale.SearchCommandPanel;
 import be.jsams.client.model.panel.sale.SearchDeliveryOrderPanel;
 import be.jsams.client.model.panel.sale.SearchEstimatePanel;
 import be.jsams.client.swing.component.JsamsMenu;
 import be.jsams.client.swing.component.JsamsMenuItem;
+import be.jsams.client.swing.listener.BillTableMouseListener;
 import be.jsams.client.swing.listener.CommandTableMouseListener;
 import be.jsams.client.swing.listener.DeliveryOrderTableMouseListener;
 import be.jsams.client.swing.listener.EstimateTableMouseListener;
+import be.jsams.client.validator.SearchBillValidator;
 import be.jsams.client.validator.SearchCommandValidator;
 import be.jsams.client.validator.SearchDeliveryOrderValidator;
 import be.jsams.client.validator.SearchEstimateValidator;
+import be.jsams.common.bean.model.sale.BillBean;
 import be.jsams.common.bean.model.sale.CommandBean;
 import be.jsams.common.bean.model.sale.DeliveryOrderBean;
 import be.jsams.common.bean.model.sale.EstimateBean;
@@ -81,6 +85,7 @@ public class JsamsSalesMenuBuilder extends AbstractMenuBuilder {
         deliveryOrderMI.setAction(deliveryOrdersAction(deliveryOrderMI.getText(), deliveryOrderMI.getIcon()));
         salesMenu.add(deliveryOrderMI);
         billMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_BILL);
+        billMI.setAction(billsAction(billMI.getText(), billMI.getIcon()));
         salesMenu.add(billMI);
         creditNoteMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_CREDIT_NOTE);
         salesMenu.add(creditNoteMI);
@@ -158,6 +163,32 @@ public class JsamsSalesMenuBuilder extends AbstractMenuBuilder {
                         new DeliveryOrderTableMouseListener(), JsamsApplicationContext.getDeliveryOrderService(),
                         new SearchDeliveryOrderValidator(), true);
                 parent.getTabbedPane().addTab(JsamsI18nResource.TITLE_SEARCH_DELIVERY_ORDER, null, searchPanel);
+            }
+        };
+        action.putValue(Action.NAME, text);
+        action.putValue(Action.SMALL_ICON, icon);
+        return action;
+    }
+
+    /**
+     * {@link AbstractAction} for bill menu item.
+     * 
+     * @param text the text to display
+     * @param icon the {@link Icon} to display
+     * @return an {@link Action} for the searching of bills
+     */
+    private Action billsAction(String text, Icon icon) {
+        AbstractAction action = new AbstractAction() {
+            /**
+             * Serial Version UID
+             */
+            private static final long serialVersionUID = 5123918962354748462L;
+
+            public void actionPerformed(ActionEvent event) {
+                SearchBillPanel searchPanel = new SearchBillPanel(new BillBean(),
+                        new BillTableMouseListener(), JsamsApplicationContext.getBillService(),
+                        new SearchBillValidator(), true);
+                parent.getTabbedPane().addTab(JsamsI18nResource.TITLE_SEARCH_BILL, null, searchPanel);
             }
         };
         action.putValue(Action.NAME, text);
