@@ -5,6 +5,7 @@ import java.util.List;
 
 import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.common.bean.builder.ProductBeanBuilder;
+import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.ProductBean;
 import be.jsams.server.dao.management.ProductDao;
 import be.jsams.server.dao.management.impl.ProductDaoImpl;
@@ -69,11 +70,13 @@ public class ProductServiceImpl implements ProductService {
      * {@inheritDoc}
      */
     public List<ProductBean> findAll() {
-        ((ProductDaoImpl) dao).setCurrentSociety(JsamsDesktop.getInstance().getCurrentSociety());
+        SocietyBean society = JsamsDesktop.getInstance().getCurrentSociety();
+        ((ProductDaoImpl) dao).setCurrentSociety(society);
         List<Product> products = dao.findAll();
         List<ProductBean> beans = new ArrayList<ProductBean>();
         for (Product product : products) {
             builder.setModel(product);
+            builder.setSociety(society);
             ProductBean productBean = builder.build(false, false);
             beans.add(productBean);
         }
@@ -84,11 +87,13 @@ public class ProductServiceImpl implements ProductService {
      * {@inheritDoc}
      */
     public List<ProductBean> findByCriteria(final ProductBean criteria) {
-        ((ProductDaoImpl) dao).setCurrentSociety(JsamsDesktop.getInstance().getCurrentSociety());
+        SocietyBean society = JsamsDesktop.getInstance().getCurrentSociety();
+        ((ProductDaoImpl) dao).setCurrentSociety(society);
         List<Product> products = dao.findByCriteria(criteria);
         List<ProductBean> beans = new ArrayList<ProductBean>();
         for (Product product : products) {
             builder.setModel(product);
+            builder.setSociety(society);
             ProductBean productBean = builder.build(false, false);
             beans.add(productBean);
         }

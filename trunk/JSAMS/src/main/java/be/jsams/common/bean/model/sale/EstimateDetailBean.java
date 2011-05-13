@@ -60,6 +60,7 @@ public class EstimateDetailBean extends AbstractIdentityBean<EstimateDetail, Est
         setEstimate(estimate);
         setPrice(model.getPrice());
         ProductBeanBuilder builder = new ProductBeanBuilder();
+        builder.setSociety(estimate.getSociety());
         builder.setModel(model.getProduct());
         setProduct(builder.build(false, false));
         setQuantity(model.getQuantity());

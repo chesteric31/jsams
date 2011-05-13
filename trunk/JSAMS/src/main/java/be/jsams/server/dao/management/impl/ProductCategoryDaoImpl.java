@@ -21,12 +21,11 @@ import com.mysql.jdbc.StringUtils;
 public class ProductCategoryDaoImpl extends DaoImpl<ProductCategory> implements ProductCategoryDao {
 
     private SocietyBean currentSociety;
-    
+
     /**
      * Constructor
      * 
-     * @param type
-     *            the class type
+     * @param type the class type
      */
     public ProductCategoryDaoImpl(final Class<ProductCategory> type) {
         super(type);
@@ -42,10 +41,10 @@ public class ProductCategoryDaoImpl extends DaoImpl<ProductCategory> implements 
         String name = criteria.getLabel();
         String nameFr = criteria.getLabelFr();
         String nameNl = criteria.getLabelNl();
-        
+
         queryBuilder.append(" WHERE ");
         queryBuilder.append("c.society.id = " + criteria.getSociety().getId());
-        
+
         if (!StringUtils.isNullOrEmpty(name)) {
             queryBuilder.append(" AND c.label LIKE '%" + name + "%'");
         }
@@ -77,14 +76,14 @@ public class ProductCategoryDaoImpl extends DaoImpl<ProductCategory> implements 
     }
 
     /**
-     * @return the currentSociety
+     * {@inheritDoc}
      */
     public SocietyBean getCurrentSociety() {
         return currentSociety;
     }
 
     /**
-     * @param currentSociety the currentSociety to set
+     * {@inheritDoc}
      */
     public void setCurrentSociety(SocietyBean currentSociety) {
         this.currentSociety = currentSociety;

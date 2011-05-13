@@ -5,7 +5,6 @@ import java.util.List;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.ProductCategoryBean;
 import be.jsams.server.dao.management.ProductCategoryDao;
-import be.jsams.server.dao.management.impl.ProductCategoryDaoImpl;
 import be.jsams.server.model.management.ProductCategory;
 
 import com.jgoodies.common.collect.ArrayListModel;
@@ -48,7 +47,7 @@ public class ProductCategoryBeanBuilder {
      * @return the built {@link ProductCategoryBean}
      */
     public ProductCategoryBean build() {
-        ((ProductCategoryDaoImpl) dao).setCurrentSociety(society);
+        dao.setCurrentSociety(society);
         List<ProductCategory> categories = dao.findAll();
         listModel = new ArrayListModel<ProductCategoryBean>();
         for (ProductCategory category : categories) {

@@ -18,6 +18,7 @@ import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellRenderer;
 
 import be.jsams.client.context.JsamsApplicationContext;
+import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.client.i18n.JsamsI18nLabelResource;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.model.panel.management.SearchProductPanel;
@@ -51,7 +52,7 @@ import com.toedter.calendar.JDateChooser;
 
 /**
  * Implementation of all sorts of views for {@link BillBean} object.
- *
+ * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
@@ -79,8 +80,7 @@ public class BillBeanView extends AbstractDocumentBeanView<BillBean, JPanel, JPa
         final int three = 3;
         ViewFactory<BillBean> helper = new ViewFactory<BillBean>();
 
-        JCheckBox closed = helper.createBindingBooleanComponent(bean, BillBean.CLOSED_PROPERTY, false,
-                false);
+        JCheckBox closed = helper.createBindingBooleanComponent(bean, BillBean.CLOSED_PROPERTY, false, false);
         JCheckBox paid = helper.createBindingBooleanComponent(bean, BillBean.PAID_PROPERTY, false, false);
         JDateChooser creationDate = helper.createBindingDateComponent(bean, BillBean.CREATION_DATE_PROPERTY, false,
                 false);
@@ -122,7 +122,7 @@ public class BillBeanView extends AbstractDocumentBeanView<BillBean, JPanel, JPa
         builder.appendI15d(JsamsI18nLabelResource.LABEL_SECOND_REMEMBER_DATE.getKey(), secondRememberDate);
         builder.appendI15d(JsamsI18nLabelResource.LABEL_FORMAL_NOTICE_DATE.getKey(), formalNoticeDate);
         builder.nextLine();
-        
+
         List<BillDetailBean> details = bean.getDetails();
 
         BillDetailTableModel tableModel = new BillDetailTableModel(details);
@@ -232,10 +232,9 @@ public class BillBeanView extends AbstractDocumentBeanView<BillBean, JPanel, JPa
                                         int detailSelectedRow = getDetailsTable().getSelectedRow();
                                         int detailSelectedRowModel = getDetailsTable().convertRowIndexToModel(
                                                 detailSelectedRow);
-                                        BillDetailTableModel detailModel
-                                            = (BillDetailTableModel) getDetailsTable().getModel();
-                                        BillDetailBean selectedDetailBean = detailModel
-                                                .getRow(detailSelectedRowModel);
+                                        BillDetailTableModel detailModel = (BillDetailTableModel) getDetailsTable()
+                                                .getModel();
+                                        BillDetailBean selectedDetailBean = detailModel.getRow(detailSelectedRowModel);
                                         selectedDetailBean.setPrice(selectedBean.getPrice());
                                         selectedDetailBean.setProduct(selectedBean);
                                         selectedDetailBean.setVatApplicable(selectedBean.getVatApplicable());
@@ -246,6 +245,7 @@ public class BillBeanView extends AbstractDocumentBeanView<BillBean, JPanel, JPa
                             }
                         };
                         ProductBeanBuilder builder = new ProductBeanBuilder();
+                        builder.setSociety(JsamsDesktop.getInstance().getCurrentSociety());
                         SearchProductPanel searchPanel = new SearchProductPanel(builder.build(true, true),
                                 customListener, JsamsApplicationContext.getProductService(),
                                 new SearchProductValidator(), false);
@@ -350,8 +350,7 @@ public class BillBeanView extends AbstractDocumentBeanView<BillBean, JPanel, JPa
         BillBean bean = getBean();
         ViewFactory<BillBean> helper = new ViewFactory<BillBean>();
 
-        JCheckBox closed = helper.createBindingBooleanComponent(bean, BillBean.CLOSED_PROPERTY, false,
-                false);
+        JCheckBox closed = helper.createBindingBooleanComponent(bean, BillBean.CLOSED_PROPERTY, false, false);
         JCheckBox paid = helper.createBindingBooleanComponent(bean, BillBean.PAID_PROPERTY, false, false);
 
         ViewFactory<PeriodBean> periodHelper = new ViewFactory<PeriodBean>();
@@ -380,7 +379,7 @@ public class BillBeanView extends AbstractDocumentBeanView<BillBean, JPanel, JPa
         builder.nextLine();
         builder.appendI15d(JsamsI18nLabelResource.LABEL_CLOSED.getKey(), closed);
         builder.appendI15d(JsamsI18nLabelResource.LABEL_PAID.getKey(), paid);
-        
+
         return builder.getPanel();
     }
 

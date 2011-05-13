@@ -6,6 +6,7 @@ import be.jsams.server.model.ContactInformation;
 import be.jsams.server.model.LegalForm;
 import be.jsams.server.model.Society;
 import be.jsams.server.model.management.Agent;
+import be.jsams.server.model.management.Product;
 import be.jsams.server.model.management.ProductCategory;
 
 /**
@@ -93,6 +94,17 @@ public class MockModelGenerator {
         agent.setSociety(generateMockSociety());
         
         return agent;
+    }
+
+    public static Product generateMockProduct() {
+        Product product = new Product();
+        product.setCategory(generateMockProductCategory());
+        product.setName("Product");
+        product.setPrice(100D);
+        product.setQuantityStock(1);
+        product.setReorderLevel(2);
+        product.setVatApplicable(6D);
+        return product;
     }
     
 }

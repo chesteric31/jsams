@@ -59,6 +59,7 @@ public class DeliveryOrderDetailBean extends AbstractIdentityBean<DeliveryOrderD
         setDiscountRate(model.getDiscountRate());
         setDeliveryOrder(deliveryOrder);
         ProductBeanBuilder builder = new ProductBeanBuilder();
+        builder.setSociety(deliveryOrder.getSociety());
         builder.setModel(model.getProduct());
         setProduct(builder.build(false, false));
         setQuantity(model.getQuantity());

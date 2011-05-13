@@ -60,6 +60,7 @@ public class BillDetailBean extends AbstractIdentityBean<BillDetail, BillDetailB
         setBill(bill);
         setPrice(model.getPrice());
         ProductBeanBuilder builder = new ProductBeanBuilder();
+        builder.setSociety(bill.getSociety());
         builder.setModel(model.getProduct());
         setProduct(builder.build(false, false));
         setQuantity(model.getQuantity());

@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.model.dialog.management.EditProductDialog;
 import be.jsams.client.model.panel.AbstractSearchPanel;
@@ -77,6 +78,7 @@ public class SearchProductPanel extends
     @Override
     protected void performButtonAdd() {
         ProductBeanBuilder builder = new ProductBeanBuilder();
+        builder.setSociety(JsamsDesktop.getInstance().getCurrentSociety());
         new EditProductDialog(JsamsI18nResource.TITLE_EDIT_PRODUCT, builder.build(true, false));
         updateUI();
     }

@@ -3,13 +3,13 @@ package be.jsams.server.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.ProductCategoryBean;
 import be.jsams.server.dao.management.ProductCategoryDao;
 import be.jsams.server.model.Civility;
 import be.jsams.server.model.LegalForm;
 import be.jsams.server.model.Society;
 import be.jsams.server.model.management.Agent;
-import be.jsams.server.model.management.Product;
 import be.jsams.server.model.management.ProductCategory;
 
 /**
@@ -122,7 +122,7 @@ public class MockDaoGenerator {
         };
     }
     
-    public static ProductCategoryDao generateMockProductCategory(final Product product) {
+    public static ProductCategoryDao generateMockProductCategory(final ProductCategory category) {
         return new ProductCategoryDao() {
             
             @Override
@@ -145,8 +145,9 @@ public class MockDaoGenerator {
             
             @Override
             public List<ProductCategory> findAll() {
-                // TODO Auto-generated method stub
-                return null;
+                List<ProductCategory> categories = new ArrayList<ProductCategory>();
+                categories.add(category);
+                return categories;
             }
             
             @Override
@@ -171,6 +172,17 @@ public class MockDaoGenerator {
             public List<ProductCategory> findByCriteria(ProductCategoryBean criteria) {
                 // TODO Auto-generated method stub
                 return null;
+            }
+
+            @Override
+            public SocietyBean getCurrentSociety() {
+                // TODO Auto-generated method stub
+                return null;
+            }
+
+            @Override
+            public void setCurrentSociety(SocietyBean currentSociety) {
+                // TODO Auto-generated method stub
             }
         };
     }
