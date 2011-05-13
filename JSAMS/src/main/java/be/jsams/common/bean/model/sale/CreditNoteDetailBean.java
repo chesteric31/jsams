@@ -65,6 +65,7 @@ public class CreditNoteDetailBean extends AbstractIdentityBean<CreditNoteDetail,
         setListModel(list);
         setSelection(this);
         ProductBeanBuilder builder = new ProductBeanBuilder();
+        builder.setSociety(creditNote.getSociety());
         builder.setModel(model.getProduct());
         setProduct(builder.build(false, false));
         setQuantity(model.getQuantity());

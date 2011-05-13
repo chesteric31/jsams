@@ -1,9 +1,7 @@
 package be.jsams.common.bean.model.management;
 
 import be.jsams.client.context.JsamsApplicationContext;
-import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.common.bean.builder.ProductCategoryBeanBuilder;
-import be.jsams.common.bean.builder.SocietyBeanBuilder;
 import be.jsams.common.bean.model.AbstractNamedIdentityBean;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.view.management.ProductBeanView;
@@ -43,11 +41,13 @@ public class ProductBean extends AbstractNamedIdentityBean<Product, ProductBeanV
      * 
      * @param categoryCanBeNull to specify if the category can be null in the
      *            combo box
+     * @param society the current {@link SocietyBean}
      */
-    public ProductBean(boolean categoryCanBeNull) {
+    public ProductBean(boolean categoryCanBeNull, SocietyBean society) {
         super();
-        SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
-        productCategoryBuilder = new ProductCategoryBeanBuilder(categoryCanBeNull, currentSociety);
+        // SocietyBean currentSociety =
+        // JsamsDesktop.getInstance().getCurrentSociety();
+        productCategoryBuilder = new ProductCategoryBeanBuilder(categoryCanBeNull, society);
         productCategoryBuilder.setDao(JsamsApplicationContext.getProductCategoryDao());
         ProductCategoryBean categoryBean = productCategoryBuilder.build();
         setCategory(categoryBean);
@@ -57,17 +57,20 @@ public class ProductBean extends AbstractNamedIdentityBean<Product, ProductBeanV
      * Constructor
      * 
      * @param model the {@link Product}
+     * @param society the current {@link SocietyBean}
      */
-    public ProductBean(Product model) {
+    public ProductBean(Product model, SocietyBean society) {
         super(model);
         ProductCategory productCategory = model.getCategory();
 
-        SocietyBeanBuilder societyBuilder = JsamsApplicationContext.getSocietyBeanBuilder();
-        societyBuilder.setModel(productCategory.getSociety());
-        SocietyBean currentSociety = societyBuilder.build(false);
-        productCategoryBuilder = new ProductCategoryBeanBuilder(false, currentSociety);
+        // SocietyBeanBuilder societyBuilder =
+        // JsamsApplicationContext.getSocietyBeanBuilder();
+        // societyBuilder.setModel(productCategory.getSociety());
+        // SocietyBean currentSociety = societyBuilder.build(false);
+        productCategoryBuilder = new ProductCategoryBeanBuilder(false, society);
         productCategoryBuilder.setModel(productCategory);
         productCategoryBuilder.setDao(getProductCategoryDao());
+        productCategoryBuilder.setSociety(society);
         ProductCategoryBean categoryBean = productCategoryBuilder.build();
         setCategory(categoryBean);
 

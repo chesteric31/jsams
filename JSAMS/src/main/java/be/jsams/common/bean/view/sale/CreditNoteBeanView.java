@@ -17,6 +17,7 @@ import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellRenderer;
 
 import be.jsams.client.context.JsamsApplicationContext;
+import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.client.i18n.JsamsI18nLabelResource;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.model.panel.management.SearchProductPanel;
@@ -221,6 +222,7 @@ public class CreditNoteBeanView extends AbstractDocumentBeanView<CreditNoteBean,
                             }
                         };
                         ProductBeanBuilder builder = new ProductBeanBuilder();
+                        builder.setSociety(JsamsDesktop.getInstance().getCurrentSociety());
                         SearchProductPanel searchPanel = new SearchProductPanel(builder.build(true, true),
                                 customListener, JsamsApplicationContext.getProductService(),
                                 new SearchProductValidator(), false);

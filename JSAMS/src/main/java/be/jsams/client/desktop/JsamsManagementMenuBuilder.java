@@ -150,6 +150,7 @@ public class JsamsManagementMenuBuilder extends AbstractMenuBuilder {
 
             public void actionPerformed(ActionEvent event) {
                 ProductBeanBuilder builder = new ProductBeanBuilder();
+                builder.setSociety(JsamsDesktop.getInstance().getCurrentSociety());
                 SearchProductPanel searchPanel = new SearchProductPanel(builder.build(true, true),
                         new ProductTableMouseListener(), JsamsApplicationContext.getProductService(),
                         new SearchProductValidator(), true);

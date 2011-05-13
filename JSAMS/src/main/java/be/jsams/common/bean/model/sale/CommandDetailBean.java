@@ -60,6 +60,7 @@ public class CommandDetailBean extends AbstractIdentityBean<CommandDetail, Comma
         setCommand(command);
         setPrice(model.getPrice());
         ProductBeanBuilder builder = new ProductBeanBuilder();
+        builder.setSociety(command.getSociety());
         builder.setModel(model.getProduct());
         setProduct(builder.build(false, false));
         setQuantity(model.getQuantity());

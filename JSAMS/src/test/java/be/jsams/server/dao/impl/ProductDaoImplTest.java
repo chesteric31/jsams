@@ -34,7 +34,7 @@ public class ProductDaoImplTest extends AbstractJUnitTestClass {
 
     @Autowired
     private ProductDao dao;
-    private Product product;
+    private Product product = MockModelGenerator.generateMockProduct();
 
     @Autowired
     private ProductCategoryDao categoryDao;
@@ -112,12 +112,12 @@ public class ProductDaoImplTest extends AbstractJUnitTestClass {
                 return MockDaoGenerator.generateMockLegalForm(persistedSociety);
             }
         };
-        ((ProductCategoryDaoImpl) categoryDao).setCurrentSociety(societyBean);
+        categoryDao.setCurrentSociety(societyBean);
         ProductCategory persistedCategory = categoryDao.add(category);
         product.setCategory(persistedCategory);
         final Product persistedProduct = dao.add(product);
         final ProductCategoryBean categoryBean = new ProductCategoryBean(persistedCategory, societyBean);
-        ProductBean criteria = new ProductBean(persistedProduct) {
+        ProductBean criteria = new ProductBean(persistedProduct, societyBean) {
 
             /**
              * Serial Version UID
@@ -129,7 +129,7 @@ public class ProductDaoImplTest extends AbstractJUnitTestClass {
              */
             @Override
             public ProductCategoryDao getProductCategoryDao() {
-                return MockDaoGenerator.generateMockProductCategory(persistedProduct);
+                return MockDaoGenerator.generateMockProductCategory(category);
             }
 
             /**
@@ -140,6 +140,7 @@ public class ProductDaoImplTest extends AbstractJUnitTestClass {
                 return categoryBean;
             }
         };
+        dao.setCurrentSociety(societyBean);
         List<Product> founds = dao.findByCriteria(criteria);
         assertTrue(founds.contains(persistedProduct));
     }

@@ -4,13 +4,14 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
 
+import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.model.dialog.management.EditProductDialog;
 import be.jsams.common.bean.builder.ProductBeanBuilder;
 
 /**
  * {@link AbstractAction} to launch {@link EditProductDialog}.
- *
+ * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
@@ -25,7 +26,9 @@ public class NewProductAction extends AbstractAction {
      * {@inheritDoc}
      */
     public void actionPerformed(ActionEvent e) {
-        new EditProductDialog(JsamsI18nResource.TITLE_EDIT_PRODUCT, new ProductBeanBuilder().build(true, false));
+        ProductBeanBuilder builder = new ProductBeanBuilder();
+        builder.setSociety(JsamsDesktop.getInstance().getCurrentSociety());
+        new EditProductDialog(JsamsI18nResource.TITLE_EDIT_PRODUCT, builder.build(true, false));
     }
 
 }

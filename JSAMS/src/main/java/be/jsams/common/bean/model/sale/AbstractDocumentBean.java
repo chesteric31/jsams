@@ -63,6 +63,7 @@ public abstract class AbstractDocumentBean<M extends AbstractDocument, V extends
         setCreationDate(model.getCreationDate());
         setCustomer(new CustomerBean(model.getCustomer()));
         setRemark(model.getRemark());
+        setSociety(this.customer.getSociety());
     }
 
     /**
