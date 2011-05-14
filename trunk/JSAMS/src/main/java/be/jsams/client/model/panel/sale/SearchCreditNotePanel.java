@@ -17,7 +17,7 @@ import be.jsams.server.service.sale.CreditNoteService;
 /**
  * {@link AbstractSearchPanel} for {@link CreditNoteBean} objects.
  *
- * @author ebinard
+ * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
 public class SearchCreditNotePanel extends

@@ -8,7 +8,7 @@ import be.jsams.server.service.Service;
 /**
  * Credit note service interface.
  *
- * @author ebinard
+ * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
 public interface CreditNoteService extends Service<CreditNoteBean> {

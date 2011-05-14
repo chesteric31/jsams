@@ -15,7 +15,7 @@ import com.jgoodies.validation.view.ValidationComponentUtils;
 /**
  * Edit Delivery Order {@link AbstractEditDialog}, to create or update a {@link DeliveryOrderBean} object.
  *
- * @author ebinard
+ * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
 public class EditDeliveryOrderDialog extends AbstractEditDialog<DeliveryOrderBean,

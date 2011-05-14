@@ -15,7 +15,7 @@ import be.jsams.common.bean.view.AbstractBeanView;
  * @param <J> an extension of {@link JComponent} for editing
  * @param <K> an extension of {@link JPanel} for searching
  * 
- * @author ebinard
+ * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
 public abstract class AbstractDocumentBeanView<B extends AbstractDocumentBean<?, ?>,

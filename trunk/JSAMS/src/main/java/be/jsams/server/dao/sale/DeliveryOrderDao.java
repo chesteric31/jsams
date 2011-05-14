@@ -9,7 +9,7 @@ import be.jsams.server.model.sale.DeliveryOrder;
 /**
  * Delivery Order DAO interface.
  *
- * @author ebinard
+ * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
 public interface DeliveryOrderDao extends Dao<DeliveryOrder> {

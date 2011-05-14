@@ -16,7 +16,7 @@ import com.jgoodies.validation.view.ValidationComponentUtils;
  * Edit Command {@link AbstractEditDialog}, to create or update a
  * {@link CreditNoteBean} object.
  *
- * @author ebinard
+ * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
 public class EditCreditNoteDialog extends

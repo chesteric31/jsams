@@ -18,7 +18,7 @@ import com.jgoodies.validation.util.ValidationUtils;
 /**
  * {@link Validator} for edit bill panel.
  *
- * @author ebinard
+ * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
 public class EditBillValidator implements Validator<BillBean> {

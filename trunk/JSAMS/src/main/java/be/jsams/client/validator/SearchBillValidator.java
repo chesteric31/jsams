@@ -9,7 +9,7 @@ import com.jgoodies.validation.util.PropertyValidationSupport;
 /**
  * {@link Validator} for search bill panel.
  *
- * @author ebinard
+ * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
 public class SearchBillValidator implements Validator<BillBean> {

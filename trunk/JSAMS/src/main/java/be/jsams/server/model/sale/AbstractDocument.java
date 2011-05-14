@@ -18,7 +18,7 @@ import be.jsams.server.model.management.Customer;
  * {@link MappedSuperclass} abstract class to abstract all the common fields between the documents:
  * estimate, command, delivery order, bill and credit note.
  *
- * @author ebinard
+ * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
 @MappedSuperclass

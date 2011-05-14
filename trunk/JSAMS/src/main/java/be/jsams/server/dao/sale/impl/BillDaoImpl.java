@@ -19,7 +19,7 @@ import com.mysql.jdbc.StringUtils;
 /**
  * Bill DAO implementation.
  *
- * @author ebinard
+ * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
 public class BillDaoImpl extends DaoImpl<Bill> implements BillDao {

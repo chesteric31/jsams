@@ -9,7 +9,7 @@ import com.jgoodies.validation.util.PropertyValidationSupport;
 /**
  * {@link Validator} for search delivery order panel.
  *
- * @author ebinard
+ * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
 public class SearchDeliveryOrderValidator implements Validator<DeliveryOrderBean> {

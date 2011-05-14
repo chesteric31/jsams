@@ -9,7 +9,7 @@ import be.jsams.server.model.sale.CreditNote;
 /**
  * Credit note DAO interface.
  *
- * @author ebinard
+ * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
 public interface CreditNoteDao extends Dao<CreditNote> {

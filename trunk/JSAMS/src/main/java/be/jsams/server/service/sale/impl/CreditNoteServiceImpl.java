@@ -12,7 +12,7 @@ import be.jsams.server.service.sale.CreditNoteService;
 /**
  * Credit note service implementation
  *
- * @author ebinard
+ * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
 public class CreditNoteServiceImpl implements CreditNoteService {

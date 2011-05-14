@@ -11,7 +11,7 @@ import be.jsams.client.swing.component.JsamsTable;
 /**
  * Customized {@link MouseListener} for Bill table double click.
  *
- * @author ebinard
+ * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
 public class BillTableMouseListener implements MouseListener {
