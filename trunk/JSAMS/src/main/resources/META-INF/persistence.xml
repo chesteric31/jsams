@@ -17,15 +17,15 @@
 		<class>be.jsams.server.model.management.Product</class>
 		<class>be.jsams.server.model.management.ProductCategory</class>
 		<class>be.jsams.server.model.sale.Bill</class>
-		<class>be.jsams.server.model.sale.BillDetail</class>
+		<class>be.jsams.server.model.sale.detail.BillDetail</class>
 		<class>be.jsams.server.model.sale.Command</class>
-		<class>be.jsams.server.model.sale.CommandDetail</class>
+		<class>be.jsams.server.model.sale.detail.CommandDetail</class>
 		<class>be.jsams.server.model.sale.CreditNote</class>
-		<class>be.jsams.server.model.sale.CreditNoteDetail</class>
+		<class>be.jsams.server.model.sale.detail.CreditNoteDetail</class>
 		<class>be.jsams.server.model.sale.DeliveryOrder</class>
-		<class>be.jsams.server.model.sale.DeliveryOrderDetail</class>
+		<class>be.jsams.server.model.sale.detail.DeliveryOrderDetail</class>
 		<class>be.jsams.server.model.sale.Estimate</class>
-		<class>be.jsams.server.model.sale.EstimateDetail</class>
+		<class>be.jsams.server.model.sale.detail.EstimateDetail</class>
 		<exclude-unlisted-classes />
 		<properties>
 			<property name="hibernate.show_sql" value="true" />

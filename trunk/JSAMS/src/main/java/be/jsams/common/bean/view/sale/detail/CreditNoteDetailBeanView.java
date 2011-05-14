@@ -1,9 +1,8 @@
-package be.jsams.common.bean.view.sale;
+package be.jsams.common.bean.view.sale.detail;
 
 import javax.swing.JPanel;
 
-import be.jsams.common.bean.model.sale.CreditNoteDetailBean;
-import be.jsams.common.bean.view.AbstractBeanView;
+import be.jsams.common.bean.model.sale.detail.CreditNoteDetailBean;
 
 /**
  * 
@@ -11,7 +10,7 @@ import be.jsams.common.bean.view.AbstractBeanView;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class CreditNoteDetailBeanView extends AbstractBeanView<CreditNoteDetailBean, JPanel, JPanel> {
+public class CreditNoteDetailBeanView extends AbstractDetailBeanView<CreditNoteDetailBean, JPanel, JPanel> {
 
     /**
      * Serial Version UID

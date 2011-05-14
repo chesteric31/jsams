@@ -5,7 +5,7 @@ import java.util.List;
 
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.common.bean.model.management.ProductBean;
-import be.jsams.common.bean.model.sale.EstimateDetailBean;
+import be.jsams.common.bean.model.sale.detail.EstimateDetailBean;
 
 /**
  * Customized table model for {@link EstimateDetailBean}.

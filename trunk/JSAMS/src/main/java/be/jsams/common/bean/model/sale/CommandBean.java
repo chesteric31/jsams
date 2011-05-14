@@ -6,9 +6,10 @@ import java.util.List;
 import be.jsams.common.bean.model.AbstractIdentityBean;
 import be.jsams.common.bean.model.AddressBean;
 import be.jsams.common.bean.model.management.AgentBean;
+import be.jsams.common.bean.model.sale.detail.CommandDetailBean;
 import be.jsams.common.bean.view.sale.CommandBeanView;
 import be.jsams.server.model.sale.Command;
-import be.jsams.server.model.sale.CommandDetail;
+import be.jsams.server.model.sale.detail.CommandDetail;
 
 /**
  * {@link AbstractDocumentBean} for {@link Command} object.

@@ -5,9 +5,10 @@ import java.util.List;
 
 import be.jsams.common.bean.model.AbstractIdentityBean;
 import be.jsams.common.bean.model.AddressBean;
+import be.jsams.common.bean.model.sale.detail.CreditNoteDetailBean;
 import be.jsams.common.bean.view.sale.CreditNoteBeanView;
 import be.jsams.server.model.sale.CreditNote;
-import be.jsams.server.model.sale.CreditNoteDetail;
+import be.jsams.server.model.sale.detail.CreditNoteDetail;
 
 /**
  * {@link AbstractDocumentBean} for {@link CreditNote} object.

@@ -1,6 +1,5 @@
 package be.jsams.common.bean.view.sale;
 
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -42,7 +41,7 @@ import be.jsams.common.bean.model.PeriodBean;
 import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.management.ProductBean;
 import be.jsams.common.bean.model.sale.EstimateBean;
-import be.jsams.common.bean.model.sale.EstimateDetailBean;
+import be.jsams.common.bean.model.sale.detail.EstimateDetailBean;
 import be.jsams.common.bean.view.ViewFactory;
 
 import com.jgoodies.common.collect.ArrayListModel;
@@ -204,7 +203,7 @@ public class EstimateBeanView extends AbstractDocumentBeanView<EstimateBean, JPa
                 if (e.getClickCount() == 2) {
                     if (selectedColumn == 0 || selectedColumn == 1) {
                         final JsamsDialog dialog = new JsamsDialog(null, JsamsI18nResource.TITLE_SEARCH_PRODUCT);
-                        dialog.setPreferredSize(new Dimension(800, 600));
+//                        dialog.setPreferredSize(new Dimension(800, 600));
                         ProductTableMouseListener customListener = new ProductTableMouseListener() {
                             /**
                              * {@inheritDoc}
