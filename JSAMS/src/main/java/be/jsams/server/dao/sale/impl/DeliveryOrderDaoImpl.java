@@ -18,7 +18,7 @@ import com.mysql.jdbc.StringUtils;
 /**
  * Delivery Order DAO implementation.
  *
- * @author ebinard
+ * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
 public class DeliveryOrderDaoImpl extends DaoImpl<DeliveryOrder> implements DeliveryOrderDao {

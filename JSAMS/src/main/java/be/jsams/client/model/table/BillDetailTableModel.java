@@ -10,7 +10,7 @@ import be.jsams.common.bean.model.sale.BillDetailBean;
 /**
  * Customized table model for {@link BillDetailBean}.
  *
- * @author ebinard
+ * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
 public class BillDetailTableModel extends AbstractJsamsTableModel<BillDetailBean> {

@@ -8,7 +8,7 @@ import be.jsams.server.service.Service;
 /**
  * Delivery Order service interface.
  *
- * @author ebinard
+ * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
 public interface DeliveryOrderService extends Service<DeliveryOrderBean> {

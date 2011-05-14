@@ -18,7 +18,7 @@ import be.jsams.server.model.sale.AbstractDocument;
  * @param <M> an extension of {@link AbstractDocument}
  * @param <V> an extension of {@link AbstractDocumentBeanView}
  * 
- * @author ebinard
+ * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
 public abstract class AbstractDocumentBean<M extends AbstractDocument, V extends AbstractDocumentBeanView<?, ?, ?>>

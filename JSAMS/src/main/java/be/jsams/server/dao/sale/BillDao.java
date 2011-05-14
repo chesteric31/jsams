@@ -9,7 +9,7 @@ import be.jsams.server.model.sale.Bill;
 /**
  * Bill DAO interface.
  *
- * @author ebinard
+ * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
 public interface BillDao extends Dao<Bill> {

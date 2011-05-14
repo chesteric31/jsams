@@ -12,7 +12,7 @@ import be.jsams.server.service.sale.BillService;
 /**
  * Bill service implementation
  *
- * @author ebinard
+ * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
 public class BillServiceImpl implements BillService {

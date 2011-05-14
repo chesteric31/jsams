@@ -11,7 +11,7 @@ import be.jsams.common.bean.model.sale.BillBean;
 /**
  * {@link AbstractAction} to launch {@link EditBillDialog}.
  *
- * @author ebinard
+ * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
 public class NewBillAction extends AbstractAction {

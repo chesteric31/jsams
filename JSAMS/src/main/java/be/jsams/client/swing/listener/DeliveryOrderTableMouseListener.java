@@ -11,7 +11,7 @@ import be.jsams.client.swing.component.JsamsTable;
 /**
  * Customized {@link MouseListener} for Delivery Order table double click.
  *
- * @author ebinard
+ * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
 public class DeliveryOrderTableMouseListener implements MouseListener {

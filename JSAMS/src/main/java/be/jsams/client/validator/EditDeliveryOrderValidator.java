@@ -18,7 +18,7 @@ import com.jgoodies.validation.util.ValidationUtils;
 /**
  * {@link Validator} for edit delivery order panel.
  *
- * @author ebinard
+ * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
 public class EditDeliveryOrderValidator implements Validator<DeliveryOrderBean> {

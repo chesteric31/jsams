@@ -17,7 +17,7 @@ import be.jsams.server.service.sale.DeliveryOrderService;
 /**
  * {@link AbstractSearchPanel} for {@link DeliveryOrderBean} objects. 
  *
- * @author ebinard
+ * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
 public class SearchDeliveryOrderPanel

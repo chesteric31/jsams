@@ -17,7 +17,7 @@ import be.jsams.server.service.sale.BillService;
 /**
  * {@link AbstractSearchPanel} for {@link BillBean} objects.
  *
- * @author ebinard
+ * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
 public class SearchBillPanel extends AbstractSearchPanel<BillBean,

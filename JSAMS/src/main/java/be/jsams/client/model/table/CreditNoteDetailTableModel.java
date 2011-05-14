@@ -10,7 +10,7 @@ import be.jsams.common.bean.model.sale.CreditNoteDetailBean;
 /**
  * Customized table model for {@link CreditNoteDetailBean}.
  *
- * @author ebinard
+ * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
 public class CreditNoteDetailTableModel extends AbstractJsamsTableModel<CreditNoteDetailBean> {

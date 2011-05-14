@@ -12,7 +12,7 @@ import be.jsams.server.service.sale.DeliveryOrderService;
 /**
  * Delivery Order service implementation.
  *
- * @author ebinard
+ * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
 public class DeliveryOrderServiceImpl implements DeliveryOrderService {

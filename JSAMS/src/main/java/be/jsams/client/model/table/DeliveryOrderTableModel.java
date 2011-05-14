@@ -10,7 +10,7 @@ import be.jsams.common.bean.model.sale.DeliveryOrderBean;
 /**
  * {@link AbstractJsamsTableModel} for {@link DeliveryOrderBean} object.
  *
- * @author ebinard
+ * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
 public class DeliveryOrderTableModel extends AbstractJsamsTableModel<DeliveryOrderBean> {
