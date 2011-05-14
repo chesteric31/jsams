@@ -41,7 +41,7 @@ import be.jsams.common.bean.model.PeriodBean;
 import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.management.ProductBean;
 import be.jsams.common.bean.model.sale.BillBean;
-import be.jsams.common.bean.model.sale.BillDetailBean;
+import be.jsams.common.bean.model.sale.detail.BillDetailBean;
 import be.jsams.common.bean.view.ViewFactory;
 
 import com.jgoodies.common.collect.ArrayListModel;

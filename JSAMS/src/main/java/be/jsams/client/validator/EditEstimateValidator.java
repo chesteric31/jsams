@@ -9,7 +9,7 @@ import be.jsams.common.bean.model.AddressBean;
 import be.jsams.common.bean.model.management.AgentBean;
 import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.sale.EstimateBean;
-import be.jsams.common.bean.model.sale.EstimateDetailBean;
+import be.jsams.common.bean.model.sale.detail.EstimateDetailBean;
 
 import com.jgoodies.validation.ValidationResult;
 import com.jgoodies.validation.Validator;

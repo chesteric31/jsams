@@ -7,21 +7,11 @@
 	<bean id="estimateDao" class="be.jsams.server.dao.sale.impl.EstimateDaoImpl">
 		<constructor-arg value="be.jsams.server.model.sale.Estimate" />
 	</bean>
-	<bean id="estimateDetailDao" class="be.jsams.server.dao.sale.impl.EstimateDetailDaoImpl">
-		<constructor-arg value="be.jsams.server.model.sale.EstimateDetail" />
-	</bean>
 	<bean id="commandDao" class="be.jsams.server.dao.sale.impl.CommandDaoImpl">
 		<constructor-arg value="be.jsams.server.model.sale.Command" />
 	</bean>
-	<bean id="commandDetailDao" class="be.jsams.server.dao.sale.impl.CommandDetailDaoImpl">
-		<constructor-arg value="be.jsams.server.model.sale.CommandDetail" />
-	</bean>
 	<bean id="deliveryOrderDao" class="be.jsams.server.dao.sale.impl.DeliveryOrderDaoImpl">
 		<constructor-arg value="be.jsams.server.model.sale.DeliveryOrder" />
-	</bean>
-	<bean id="deliveryOrderDetailDao"
-		class="be.jsams.server.dao.sale.impl.DeliveryOrderDetailDaoImpl">
-		<constructor-arg value="be.jsams.server.model.sale.DeliveryOrderDetail" />
 	</bean>
 	<bean id="billDao" class="be.jsams.server.dao.sale.impl.BillDaoImpl">
 		<constructor-arg value="be.jsams.server.model.sale.Bill" />

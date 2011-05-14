@@ -2,7 +2,7 @@ package be.jsams.server.dao.sale.impl;
 
 import be.jsams.server.dao.impl.DaoImpl;
 import be.jsams.server.dao.sale.CommandDetailDao;
-import be.jsams.server.model.sale.CommandDetail;
+import be.jsams.server.model.sale.detail.CommandDetail;
 
 /**
  * Command detail DAO implementation.

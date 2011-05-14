@@ -1,10 +1,9 @@
-package be.jsams.common.bean.view.sale;
+package be.jsams.common.bean.view.sale.detail;
 
 import javax.swing.JPanel;
 
 import be.jsams.client.swing.component.JsamsTable;
-import be.jsams.common.bean.model.sale.EstimateDetailBean;
-import be.jsams.common.bean.view.AbstractBeanView;
+import be.jsams.common.bean.model.sale.detail.EstimateDetailBean;
 
 /**
  * Implementation of all sorts of views for {@link EstimateDetailBean} object.
@@ -12,7 +11,7 @@ import be.jsams.common.bean.view.AbstractBeanView;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class EstimateDetailBeanView extends AbstractBeanView<EstimateDetailBean, JsamsTable, JPanel> {
+public class EstimateDetailBeanView extends AbstractDetailBeanView<EstimateDetailBean, JsamsTable, JPanel> {
 
     /**
      * Serial Version UID

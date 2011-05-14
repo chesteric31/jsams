@@ -5,9 +5,10 @@ import java.util.List;
 
 import be.jsams.common.bean.model.AbstractIdentityBean;
 import be.jsams.common.bean.model.AddressBean;
+import be.jsams.common.bean.model.sale.detail.DeliveryOrderDetailBean;
 import be.jsams.common.bean.view.sale.DeliveryOrderBeanView;
 import be.jsams.server.model.sale.DeliveryOrder;
-import be.jsams.server.model.sale.DeliveryOrderDetail;
+import be.jsams.server.model.sale.detail.DeliveryOrderDetail;
 
 /**
  * {@link AbstractDocumentBean} for {@link DeliveryOrder} object.

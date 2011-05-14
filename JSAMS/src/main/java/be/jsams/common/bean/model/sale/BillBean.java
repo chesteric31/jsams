@@ -9,10 +9,11 @@ import be.jsams.common.bean.builder.PaymentModeBeanBuilder;
 import be.jsams.common.bean.model.AbstractIdentityBean;
 import be.jsams.common.bean.model.AddressBean;
 import be.jsams.common.bean.model.PaymentModeBean;
+import be.jsams.common.bean.model.sale.detail.BillDetailBean;
 import be.jsams.common.bean.view.sale.BillBeanView;
 import be.jsams.server.model.PaymentMode;
 import be.jsams.server.model.sale.Bill;
-import be.jsams.server.model.sale.BillDetail;
+import be.jsams.server.model.sale.detail.BillDetail;
 
 /**
  * {@link AbstractDocumentBean} for {@link Bill} object.

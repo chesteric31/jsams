@@ -8,7 +8,7 @@ import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.common.bean.model.AddressBean;
 import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.sale.BillBean;
-import be.jsams.common.bean.model.sale.BillDetailBean;
+import be.jsams.common.bean.model.sale.detail.BillDetailBean;
 
 import com.jgoodies.validation.ValidationResult;
 import com.jgoodies.validation.Validator;

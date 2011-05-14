@@ -1,58 +1,53 @@
-package be.jsams.server.model.sale;
+package be.jsams.server.model.sale.detail;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.MappedSuperclass;
 
-import be.jsams.common.bean.model.sale.BillDetailBean;
+import be.jsams.common.bean.model.sale.detail.AbstractDetailBean;
 import be.jsams.server.model.AbstractIdentity;
 import be.jsams.server.model.management.Product;
 
 /**
- * Bill detail (line) entity object.
- * 
+ * {@link MappedSuperclass} abstract class to abstract all the common fields between the document detail:
+ * estimate detail, command detail, delivery order detail, bill detail and credit note detail.
+ *
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-@Entity
-@Table(name = "BILL_DETAIL")
-public class BillDetail extends AbstractIdentity {
+@MappedSuperclass
+public abstract class AbstractDetail extends AbstractIdentity {
 
     private int quantity;
     private Double price;
     private Double vatApplicable;
     private Double discountRate;
-    private boolean transferred;
 
-    private Bill bill;
     private Product product;
 
     /**
      * Constructor.
      */
-    public BillDetail() {
+    public AbstractDetail() {
         super();
     }
 
     /**
      * Constructor.
      * 
-     * @param bean the {@link BillDetailBean}
-     * @param bill the {@link Bill} model
+     * @param bean the {@link AbstractDetailBean} to use
      */
-    public BillDetail(BillDetailBean bean, final Bill bill) {
+    public AbstractDetail(final AbstractDetailBean<?, ?, ?> bean) {
         super(bean);
         setDiscountRate(bean.getDiscountRate());
-        setBill(bill);
         setPrice(bean.getPrice());
         setProduct(new Product(bean.getProduct()));
         setQuantity(bean.getQuantity());
-        setTransferred(bean.isTransferred());
         setVatApplicable(bean.getVatApplicable());
     }
+
 
     /**
      * 
@@ -124,42 +119,6 @@ public class BillDetail extends AbstractIdentity {
 
     /**
      * 
-     * @return true if the {@link BillDetail} was transferred to a credit note detail, false otherwise
-     */
-    @Column(name = "TRANSFERRED")
-    public boolean isTransferred() {
-        return transferred;
-    }
-
-    /**
-     * 
-     * @param transferred the transferred boolean to set (true, this {@link BillDetail} is transferred to a credit note
-     *            detail, false otherwise
-     */
-    public void setTransferred(boolean transferred) {
-        this.transferred = transferred;
-    }
-
-    /**
-     * 
-     * @return the {@link Bill}
-     */
-    @ManyToOne(cascade = CascadeType.REFRESH)
-    @JoinColumn(name = "FK_BILL")
-    public Bill getBill() {
-        return bill;
-    }
-
-    /**
-     * 
-     * @param bill the {@link Bill} to set
-     */
-    public void setBill(Bill bill) {
-        this.bill = bill;
-    }
-
-    /**
-     * 
      * @return the {@link Product}
      */
     @ManyToOne(cascade = CascadeType.REFRESH)
@@ -182,9 +141,7 @@ public class BillDetail extends AbstractIdentity {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        builder.append("BillDetail [bill=");
-        builder.append(bill);
-        builder.append(", discountRate=");
+        builder.append("AbstractDetail [discountRate=");
         builder.append(discountRate);
         builder.append(", price=");
         builder.append(price);
@@ -192,12 +149,10 @@ public class BillDetail extends AbstractIdentity {
         builder.append(product);
         builder.append(", quantity=");
         builder.append(quantity);
-        builder.append(", transferred=");
-        builder.append(transferred);
         builder.append(", vatApplicable=");
         builder.append(vatApplicable);
         builder.append("]");
         return builder.toString();
     }
-
+    
 }

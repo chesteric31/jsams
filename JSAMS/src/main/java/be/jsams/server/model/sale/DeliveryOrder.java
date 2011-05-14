@@ -15,8 +15,9 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Cascade;
 
 import be.jsams.common.bean.model.sale.DeliveryOrderBean;
-import be.jsams.common.bean.model.sale.DeliveryOrderDetailBean;
+import be.jsams.common.bean.model.sale.detail.DeliveryOrderDetailBean;
 import be.jsams.server.model.Address;
+import be.jsams.server.model.sale.detail.DeliveryOrderDetail;
 
 /**
  * Delivery order entity object.

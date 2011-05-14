@@ -1,7 +1,7 @@
 package be.jsams.server.dao.sale;
 
 import be.jsams.server.dao.Dao;
-import be.jsams.server.model.sale.CommandDetail;
+import be.jsams.server.model.sale.detail.CommandDetail;
 
 /**
  * Command detail DAO interface.

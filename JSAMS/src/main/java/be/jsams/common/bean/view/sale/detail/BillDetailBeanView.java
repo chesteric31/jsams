@@ -1,29 +1,28 @@
-package be.jsams.common.bean.view.sale;
+package be.jsams.common.bean.view.sale.detail;
 
 import javax.swing.JPanel;
 
-import be.jsams.common.bean.model.sale.CommandDetailBean;
-import be.jsams.common.bean.view.AbstractBeanView;
+import be.jsams.common.bean.model.sale.detail.BillDetailBean;
 
 /**
  * 
- *
+ * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class CommandDetailBeanView extends AbstractBeanView<CommandDetailBean, JPanel, JPanel> {
+public class BillDetailBeanView extends AbstractDetailBeanView<BillDetailBean, JPanel, JPanel> {
 
     /**
      * Serial Version UID
      */
-    private static final long serialVersionUID = -2106918618904840995L;
+    private static final long serialVersionUID = -6480141753894999568L;
 
     /**
      * Constructor
      * 
-     * @param bean the {@link CommandDetailBean}
+     * @param bean the {@link BillDetailBean}
      */
-    public CommandDetailBeanView(CommandDetailBean bean) {
+    public BillDetailBeanView(BillDetailBean bean) {
         super(bean);
         // TODO Auto-generated constructor stub
     }

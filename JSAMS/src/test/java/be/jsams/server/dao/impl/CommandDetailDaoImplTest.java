@@ -29,7 +29,7 @@ import be.jsams.server.model.management.Customer;
 import be.jsams.server.model.management.Product;
 import be.jsams.server.model.management.ProductCategory;
 import be.jsams.server.model.sale.Command;
-import be.jsams.server.model.sale.CommandDetail;
+import be.jsams.server.model.sale.detail.CommandDetail;
 
 /**
  * Test class for {@link CommandDetailDaoImpl}.

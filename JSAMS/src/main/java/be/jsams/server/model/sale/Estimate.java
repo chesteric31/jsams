@@ -15,9 +15,10 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Cascade;
 
 import be.jsams.common.bean.model.sale.EstimateBean;
-import be.jsams.common.bean.model.sale.EstimateDetailBean;
+import be.jsams.common.bean.model.sale.detail.EstimateDetailBean;
 import be.jsams.server.model.Address;
 import be.jsams.server.model.management.Agent;
+import be.jsams.server.model.sale.detail.EstimateDetail;
 
 /**
  * Estimate entity object.

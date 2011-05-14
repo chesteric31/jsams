@@ -2,7 +2,7 @@ package be.jsams.server.dao.sale.impl;
 
 import be.jsams.server.dao.impl.DaoImpl;
 import be.jsams.server.dao.sale.DeliveryOrderDetailDao;
-import be.jsams.server.model.sale.DeliveryOrderDetail;
+import be.jsams.server.model.sale.detail.DeliveryOrderDetail;
 
 /**
  * Delivery order detail DAO implementation.

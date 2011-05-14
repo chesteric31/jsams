@@ -6,9 +6,10 @@ import java.util.List;
 import be.jsams.common.bean.model.AbstractIdentityBean;
 import be.jsams.common.bean.model.AddressBean;
 import be.jsams.common.bean.model.management.AgentBean;
+import be.jsams.common.bean.model.sale.detail.EstimateDetailBean;
 import be.jsams.common.bean.view.sale.EstimateBeanView;
 import be.jsams.server.model.sale.Estimate;
-import be.jsams.server.model.sale.EstimateDetail;
+import be.jsams.server.model.sale.detail.EstimateDetail;
 
 /**
  * {@link AbstractDocumentBean} for {@link Estimate} object.

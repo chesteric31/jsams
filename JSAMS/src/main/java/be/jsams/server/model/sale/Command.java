@@ -15,9 +15,10 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Cascade;
 
 import be.jsams.common.bean.model.sale.CommandBean;
-import be.jsams.common.bean.model.sale.CommandDetailBean;
+import be.jsams.common.bean.model.sale.detail.CommandDetailBean;
 import be.jsams.server.model.Address;
 import be.jsams.server.model.management.Agent;
+import be.jsams.server.model.sale.detail.CommandDetail;
 
 /**
  * Command entity object.

@@ -2,7 +2,7 @@ package be.jsams.server.dao.sale.impl;
 
 import be.jsams.server.dao.impl.DaoImpl;
 import be.jsams.server.dao.sale.EstimateDetailDao;
-import be.jsams.server.model.sale.EstimateDetail;
+import be.jsams.server.model.sale.detail.EstimateDetail;
 
 /**
  * Estimate detail DAO implementation.
