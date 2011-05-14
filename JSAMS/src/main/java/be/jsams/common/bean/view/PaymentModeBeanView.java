@@ -32,8 +32,8 @@ public class PaymentModeBeanView extends AbstractBeanView<PaymentModeBean, Jsams
      * {@inheritDoc}
      */
     public JsamsComboBox createEditView() {
-        ViewFactory<PaymentModeBean> helper = new ViewFactory<PaymentModeBean>();
-        JsamsComboBox comboBox = helper.createBindingComboComponent(getBean(), true, false,
+        ViewFactory<PaymentModeBean> viewFactory = getViewFactory();
+        JsamsComboBox comboBox = viewFactory.createBindingComboComponent(getBean(), true, false,
                 new TranslatableComboBoxRenderer());
         return comboBox;
     }

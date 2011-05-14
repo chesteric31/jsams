@@ -32,7 +32,9 @@ public abstract class AbstractBeanView<B extends AbstractIdentityBean<?, ?>, J e
      * Holds the bean's list model plus a selection.
      */
     private SelectionInList<B> selectionInList;
-
+    
+    private ViewFactory<B> viewFactory;
+    
     /**
      * Constructor
      * 
@@ -40,6 +42,7 @@ public abstract class AbstractBeanView<B extends AbstractIdentityBean<?, ?>, J e
      */
     public AbstractBeanView(B bean) {
         super(bean);
+        viewFactory = new ViewFactory<B>();
         ObservableList<?> listModel = bean.getListModel();
         ValueHolder listHolder = new ValueHolder(listModel, true);
         selectionInList = new SelectionInList<B>(listHolder, getModel(B.SELECTION_PROPERTY));
@@ -51,6 +54,13 @@ public abstract class AbstractBeanView<B extends AbstractIdentityBean<?, ?>, J e
      */
     public SelectionInList<B> getSelectionInList() {
         return selectionInList;
+    }
+
+    /**
+     * @return the viewFactory
+     */
+    public ViewFactory<B> getViewFactory() {
+        return viewFactory;
     }
 
 }

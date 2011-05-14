@@ -77,11 +77,12 @@ public class CreditNoteBeanView extends AbstractDocumentBeanView<CreditNoteBean,
     public JPanel createEditView() {
         CreditNoteBean bean = getBean();
         final int three = 3;
-        ViewFactory<CreditNoteBean> helper = new ViewFactory<CreditNoteBean>();
+        ViewFactory<CreditNoteBean> viewFactory = getViewFactory();
 
-        JDateChooser creationDate = helper.createBindingDateComponent(bean, CreditNoteBean.CREATION_DATE_PROPERTY,
+        JDateChooser creationDate = viewFactory.createBindingDateComponent(bean, CreditNoteBean.CREATION_DATE_PROPERTY,
                 false, false);
-        JsamsTextField remark = helper.createBindingTextComponent(bean, CreditNoteBean.REMARK_PROPERTY, false, false);
+        JsamsTextField remark = viewFactory.createBindingTextComponent(bean, CreditNoteBean.REMARK_PROPERTY, false,
+                false);
 
         FormLayout layout = new FormLayout("right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p", "p");
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, JsamsFrame.RESOURCE_BUNDLE);
@@ -98,7 +99,7 @@ public class CreditNoteBeanView extends AbstractDocumentBeanView<CreditNoteBean,
         builder.nextLine();
         builder.appendI15d(JsamsI18nLabelResource.LABEL_REMARK.getKey(), remark, maxColumnSpan - 2);
         builder.nextLine();
-        
+
         List<CreditNoteDetailBean> details = bean.getDetails();
 
         CreditNoteDetailTableModel tableModel = new CreditNoteDetailTableModel(details);
@@ -324,15 +325,17 @@ public class CreditNoteBeanView extends AbstractDocumentBeanView<CreditNoteBean,
      */
     public JPanel createSearchView() {
         CreditNoteBean bean = getBean();
-        ViewFactory<PeriodBean> periodHelper = new ViewFactory<PeriodBean>();
-        JDateChooser startDate = periodHelper.createBindingDateComponent(bean.getPeriod(),
-                PeriodBean.START_DATE_PROPERTY, false, false);
-        JDateChooser endDate = periodHelper.createBindingDateComponent(bean.getPeriod(), PeriodBean.END_DATE_PROPERTY,
+        PeriodBean period = bean.getPeriod();
+        ViewFactory<PeriodBean> viewPeriodFactory = period.getView().getViewFactory();
+        JDateChooser startDate = viewPeriodFactory.createBindingDateComponent(period, PeriodBean.START_DATE_PROPERTY,
                 false, false);
-        ViewFactory<AddressBean> addressHelper = new ViewFactory<AddressBean>();
-        JsamsTextField textFieldCity = addressHelper.createBindingTextComponent(bean.getBillingAddress(),
+        JDateChooser endDate = viewPeriodFactory.createBindingDateComponent(period, PeriodBean.END_DATE_PROPERTY,
+                false, false);
+        AddressBean address = bean.getBillingAddress();
+        ViewFactory<AddressBean> viewAddressFactory = address.getView().getViewFactory();
+        JsamsTextField textFieldCity = viewAddressFactory.createBindingTextComponent(address,
                 AddressBean.CITY_PROPERTY, false, false);
-        JsamsTextField textFieldZipCode = addressHelper.createBindingTextComponent(bean.getBillingAddress(),
+        JsamsTextField textFieldZipCode = viewAddressFactory.createBindingTextComponent(address,
                 AddressBean.ZIP_CODE_PROPERTY, false, false);
         FormLayout layout = new FormLayout(
                 "right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow", "p");
@@ -345,7 +348,7 @@ public class CreditNoteBeanView extends AbstractDocumentBeanView<CreditNoteBean,
         builder.nextLine();
         builder.appendI15d(JsamsI18nLabelResource.LABEL_CITY.getKey(), textFieldCity);
         builder.appendI15d(JsamsI18nLabelResource.LABEL_ZIP_CODE.getKey(), textFieldZipCode);
-        
+
         return builder.getPanel();
     }
 

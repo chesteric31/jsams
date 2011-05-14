@@ -80,8 +80,9 @@ public class CustomerBeanView extends AbstractBeanView<CustomerBean, JPanel, JPa
      */
     public JPanel createSearchView() {
         CustomerBean bean = getBean();
-        ViewFactory<CustomerBean> helper = new ViewFactory<CustomerBean>();
-        JTextField textFieldName = helper.createBindingTextComponent(bean, CustomerBean.NAME_PROPERTY, false, false);
+        ViewFactory<CustomerBean> viewFactory = getViewFactory();
+        JTextField textFieldName = viewFactory.createBindingTextComponent(bean, CustomerBean.NAME_PROPERTY, false,
+                false);
         FormLayout layout = new FormLayout("right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow", "p");
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, JsamsFrame.RESOURCE_BUNDLE);
         builder.setDefaultDialogBorder();
@@ -93,11 +94,13 @@ public class CustomerBeanView extends AbstractBeanView<CustomerBean, JPanel, JPa
         builder.appendI15d(JsamsI18nLabelResource.LABEL_LEGAL_FORM.getKey(), bean.getLegalForm().getView()
                 .createEditView());
         builder.nextLine();
-        ViewFactory<AddressBean> addressHelper = new ViewFactory<AddressBean>();
-        JTextField textFieldZipCode = addressHelper.createBindingTextComponent(bean.getBillingAddress(),
+        AddressBean address = bean.getBillingAddress();
+        ViewFactory<AddressBean> viewAddressFactory = address.getView().getViewFactory();
+        JTextField textFieldZipCode = viewAddressFactory.createBindingTextComponent(address,
                 AddressBean.ZIP_CODE_PROPERTY, false, false);
-        ViewFactory<ContactInformationBean> contactHelper = new ViewFactory<ContactInformationBean>();
-        JTextField textFieldPhone = contactHelper.createBindingTextComponent(bean.getContactInformation(),
+        ContactInformationBean contactInformation = bean.getContactInformation();
+        ViewFactory<ContactInformationBean> viewContactFactory = contactInformation.getView().getViewFactory();
+        JTextField textFieldPhone = viewContactFactory.createBindingTextComponent(contactInformation,
                 ContactInformationBean.PHONE_PROPERTY, false, false);
         builder.appendI15d(JsamsI18nLabelResource.LABEL_ZIP_CODE.getKey(), textFieldZipCode, 1);
         builder.appendI15d(JsamsI18nLabelResource.LABEL_PHONE.getKey(), textFieldPhone, 1);
@@ -251,10 +254,11 @@ public class CustomerBeanView extends AbstractBeanView<CustomerBean, JPanel, JPa
         final CustomerBean bean = getBean();
         final JsamsDialog dialog = new JsamsDialog(null, JsamsI18nResource.TITLE_SEARCH_CUSTOMER,
                 IconUtil.TITLE_ICON_PREFIX + "apps/system-users.png");
-        ViewFactory<CustomerBean> helper = new ViewFactory<CustomerBean>();
+        ViewFactory<CustomerBean> viewFactory = getViewFactory();
         buttonSearchCustomer.setAction(new SearchCustomerAction("", buttonSearchCustomer.getIcon(), bean, dialog));
-        JsamsTextField textFieldName = helper.createBindingTextComponent(bean, CustomerBean.NAME_PROPERTY, false, true);
-        FormLayout layout = new FormLayout("175dlu, 3dlu, p", "p");
+        JsamsTextField textFieldName = viewFactory.createBindingTextComponent(bean, CustomerBean.NAME_PROPERTY, false,
+                true);
+        FormLayout layout = new FormLayout("p:grow, 3dlu, p", "p");
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, JsamsFrame.RESOURCE_BUNDLE);
         builder.append(textFieldName);
         builder.append(buttonSearchCustomer);

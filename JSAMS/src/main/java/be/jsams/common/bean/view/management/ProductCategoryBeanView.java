@@ -15,7 +15,7 @@ import com.jgoodies.forms.builder.DefaultFormBuilder;
 import com.jgoodies.forms.layout.FormLayout;
 
 /**
- * 
+ * Customized views for {@link ProductCategoryBean}.
  * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
@@ -42,8 +42,8 @@ public class ProductCategoryBeanView extends AbstractBeanView<ProductCategoryBea
      * @return the {@link JsamsComboBox} view
      */
     public JsamsComboBox createCustomView() {
-        ViewFactory<ProductCategoryBean> helper = new ViewFactory<ProductCategoryBean>();
-        JsamsComboBox comboBox = helper.createBindingComboComponent(getBean(), true, false,
+        ViewFactory<ProductCategoryBean> viewFactory = getViewFactory();
+        JsamsComboBox comboBox = viewFactory.createBindingComboComponent(getBean(), true, false,
                 new TranslatableComboBoxRenderer());
         return comboBox;
     }

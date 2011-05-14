@@ -78,24 +78,25 @@ public class BillBeanView extends AbstractDocumentBeanView<BillBean, JPanel, JPa
     public JPanel createEditView() {
         BillBean bean = getBean();
         final int three = 3;
-        ViewFactory<BillBean> helper = new ViewFactory<BillBean>();
+        ViewFactory<BillBean> viewFactory = getViewFactory();
 
-        JCheckBox closed = helper.createBindingBooleanComponent(bean, BillBean.CLOSED_PROPERTY, false, false);
-        JCheckBox paid = helper.createBindingBooleanComponent(bean, BillBean.PAID_PROPERTY, false, false);
-        JDateChooser creationDate = helper.createBindingDateComponent(bean, BillBean.CREATION_DATE_PROPERTY, false,
-                false);
-        JDateChooser dueDate = helper.createBindingDateComponent(bean, BillBean.DUE_DATE_PROPERTY, false, false);
-        JDateChooser firstRememberDate = helper.createBindingDateComponent(bean, BillBean.DATE_FIRST_REMEMBER_PROPERTY,
+        JCheckBox closed = viewFactory.createBindingBooleanComponent(bean, BillBean.CLOSED_PROPERTY, false, false);
+        JCheckBox paid = viewFactory.createBindingBooleanComponent(bean, BillBean.PAID_PROPERTY, false, false);
+        JDateChooser creationDate = viewFactory.createBindingDateComponent(bean, BillBean.CREATION_DATE_PROPERTY,
                 false, false);
-        JDateChooser secondRememberDate = helper.createBindingDateComponent(bean,
+        JDateChooser dueDate = viewFactory.createBindingDateComponent(bean, BillBean.DUE_DATE_PROPERTY, false, false);
+        JDateChooser firstRememberDate = viewFactory.createBindingDateComponent(bean,
+                BillBean.DATE_FIRST_REMEMBER_PROPERTY, false, false);
+        JDateChooser secondRememberDate = viewFactory.createBindingDateComponent(bean,
                 BillBean.DATE_SECOND_REMEMBER_PROPERTY, false, false);
-        JDateChooser formalNoticeDate = helper.createBindingDateComponent(bean, BillBean.DATE_FORMAL_NOTICE_PROPERTY,
-                false, false);
-        JsamsFormattedTextField discountRate = helper.createBindingDecimalComponent(bean,
+        JDateChooser formalNoticeDate = viewFactory.createBindingDateComponent(bean,
+                BillBean.DATE_FORMAL_NOTICE_PROPERTY, false, false);
+        JsamsFormattedTextField discountRate = viewFactory.createBindingDecimalComponent(bean,
                 BillBean.DISCOUNT_RATE_PROPERTY, false, false);
-        JsamsTextField remark = helper.createBindingTextComponent(bean, BillBean.REMARK_PROPERTY, false, false);
+        JsamsTextField remark = viewFactory.createBindingTextComponent(bean, BillBean.REMARK_PROPERTY, false, false);
 
-        FormLayout layout = new FormLayout("right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p", "p");
+        FormLayout layout = new FormLayout(
+                "right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow, 3dlu", "p");
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, JsamsFrame.RESOURCE_BUNDLE);
         int maxColumnSpan = builder.getColumnCount();
         builder.setDefaultDialogBorder();
@@ -104,21 +105,17 @@ public class BillBeanView extends AbstractDocumentBeanView<BillBean, JPanel, JPa
         customer.addPropertyChangeListener(handleCustomerChangeListener());
         builder.appendI15d(JsamsI18nLabelResource.LABEL_CUSTOMER_NAME.getKey(), customerPanel);
         builder.appendI15d(JsamsI18nLabelResource.LABEL_CREATION_DATE.getKey(), creationDate);
-        builder.nextLine();
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_DELIVERY_ADDRESS.getKey(), bean.getBillingAddress().getView()
-                .createEditView(), maxColumnSpan - 2);
         builder.appendI15d(JsamsI18nLabelResource.LABEL_PAYMENT_MODE.getKey(), bean.getPaymentMode().getView()
                 .createEditView());
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_BILLING_ADDRESS.getKey(), bean.getBillingAddress().getView()
+                .createEditView());
         builder.appendI15d(JsamsI18nLabelResource.LABEL_PAID.getKey(), paid);
-        builder.nextLine();
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_DEFAULT_DISCOUNT_RATE.getKey(), discountRate);
         builder.appendI15d(JsamsI18nLabelResource.LABEL_CLOSED.getKey(), closed);
-        builder.nextLine();
         builder.appendI15d(JsamsI18nLabelResource.LABEL_REMARK.getKey(), remark);
-        builder.nextLine();
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_DEFAULT_DISCOUNT_RATE.getKey(), discountRate);
         builder.appendI15d(JsamsI18nLabelResource.LABEL_DUE_DATE.getKey(), dueDate);
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_FIRST_REMEMBER_DATE.getKey(), firstRememberDate);
         builder.nextLine();
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_FIRST_REMEMBER_DATE.getKey(), firstRememberDate);
         builder.appendI15d(JsamsI18nLabelResource.LABEL_SECOND_REMEMBER_DATE.getKey(), secondRememberDate);
         builder.appendI15d(JsamsI18nLabelResource.LABEL_FORMAL_NOTICE_DATE.getKey(), formalNoticeDate);
         builder.nextLine();
@@ -348,20 +345,22 @@ public class BillBeanView extends AbstractDocumentBeanView<BillBean, JPanel, JPa
      */
     public JPanel createSearchView() {
         BillBean bean = getBean();
-        ViewFactory<BillBean> helper = new ViewFactory<BillBean>();
+        ViewFactory<BillBean> viewFactory = getViewFactory();
 
-        JCheckBox closed = helper.createBindingBooleanComponent(bean, BillBean.CLOSED_PROPERTY, false, false);
-        JCheckBox paid = helper.createBindingBooleanComponent(bean, BillBean.PAID_PROPERTY, false, false);
+        JCheckBox closed = viewFactory.createBindingBooleanComponent(bean, BillBean.CLOSED_PROPERTY, false, false);
+        JCheckBox paid = viewFactory.createBindingBooleanComponent(bean, BillBean.PAID_PROPERTY, false, false);
 
-        ViewFactory<PeriodBean> periodHelper = new ViewFactory<PeriodBean>();
-        JDateChooser startDate = periodHelper.createBindingDateComponent(bean.getPeriod(),
-                PeriodBean.START_DATE_PROPERTY, false, false);
-        JDateChooser endDate = periodHelper.createBindingDateComponent(bean.getPeriod(), PeriodBean.END_DATE_PROPERTY,
+        PeriodBean period = bean.getPeriod();
+        ViewFactory<PeriodBean> viewPeriodFactory = period.getView().getViewFactory();
+        JDateChooser startDate = viewPeriodFactory.createBindingDateComponent(period, PeriodBean.START_DATE_PROPERTY,
                 false, false);
-        ViewFactory<AddressBean> addressHelper = new ViewFactory<AddressBean>();
-        JsamsTextField textFieldCity = addressHelper.createBindingTextComponent(bean.getBillingAddress(),
+        JDateChooser endDate = viewPeriodFactory.createBindingDateComponent(period, PeriodBean.END_DATE_PROPERTY,
+                false, false);
+        AddressBean address = bean.getBillingAddress();
+        ViewFactory<AddressBean> viewAddressFactory = address.getView().getViewFactory();
+        JsamsTextField textFieldCity = viewAddressFactory.createBindingTextComponent(address,
                 AddressBean.CITY_PROPERTY, false, false);
-        JsamsTextField textFieldZipCode = addressHelper.createBindingTextComponent(bean.getBillingAddress(),
+        JsamsTextField textFieldZipCode = viewAddressFactory.createBindingTextComponent(address,
                 AddressBean.ZIP_CODE_PROPERTY, false, false);
         FormLayout layout = new FormLayout(
                 "right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow", "p");

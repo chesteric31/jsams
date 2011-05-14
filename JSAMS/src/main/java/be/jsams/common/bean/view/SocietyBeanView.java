@@ -12,7 +12,7 @@ import com.jgoodies.forms.builder.DefaultFormBuilder;
 import com.jgoodies.forms.layout.FormLayout;
 
 /**
- * 
+ * Customized views for {@link SocietyBean}.
  * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
@@ -38,16 +38,17 @@ public class SocietyBeanView extends AbstractBeanView<SocietyBean, JPanel, JPane
      */
     public JPanel createEditView() {
         SocietyBean bean = getBean();
-        ViewFactory<SocietyBean> helper = new ViewFactory<SocietyBean>();
-        JsamsTextField textFieldName = helper.createBindingTextComponent(bean, SocietyBean.NAME_PROPERTY, true, false);
-        JsamsFormattedTextField textFieldCapital = helper.createBindingDecimalComponent(bean,
-                SocietyBean.CAPITAL_PROPERTY, true, false);
-        JsamsTextField textFieldActivity = helper.createBindingTextComponent(bean, SocietyBean.ACTIVITY_PROPERTY, true,
+        ViewFactory<SocietyBean> viewFactory = getViewFactory();
+        JsamsTextField textFieldName = viewFactory.createBindingTextComponent(bean, SocietyBean.NAME_PROPERTY, true,
                 false);
-        JsamsTextField textFieldResponsible = helper.createBindingTextComponent(bean, SocietyBean.RESPONSIBLE_PROPERTY,
-                false, false);
-        JsamsTextField textFieldVatNumber = helper.createBindingTextComponent(bean, SocietyBean.VATNUMBER_PROPERTY,
-                false, false);
+        JsamsFormattedTextField textFieldCapital = viewFactory.createBindingDecimalComponent(bean,
+                SocietyBean.CAPITAL_PROPERTY, true, false);
+        JsamsTextField textFieldActivity = viewFactory.createBindingTextComponent(bean, SocietyBean.ACTIVITY_PROPERTY,
+                true, false);
+        JsamsTextField textFieldResponsible = viewFactory.createBindingTextComponent(bean,
+                SocietyBean.RESPONSIBLE_PROPERTY, false, false);
+        JsamsTextField textFieldVatNumber = viewFactory.createBindingTextComponent(bean,
+                SocietyBean.VATNUMBER_PROPERTY, false, false);
         FormLayout layout = new FormLayout("right:p, 3dlu, 262dlu", "p");
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, JsamsFrame.RESOURCE_BUNDLE);
         builder.setDefaultDialogBorder();
