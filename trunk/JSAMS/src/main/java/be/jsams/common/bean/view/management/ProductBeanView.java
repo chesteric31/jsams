@@ -41,15 +41,16 @@ public class ProductBeanView extends AbstractBeanView<ProductBean, JPanel, JPane
      */
     public JPanel createEditView() {
         ProductBean bean = getBean();
-        ViewFactory<ProductBean> helper = new ViewFactory<ProductBean>();
-        JsamsTextField textFieldName = helper.createBindingTextComponent(bean, ProductBean.NAME_PROPERTY, true, false);
-        JsamsFormattedTextField textFieldPrice = helper.createBindingDecimalComponent(bean, ProductBean.PRICE_PROPERTY,
-                true, false);
-        JsamsFormattedTextField textFieldStockQuantity = helper.createBindingIntComponent(bean,
+        ViewFactory<ProductBean> viewFactory = getViewFactory();
+        JsamsTextField textFieldName = viewFactory.createBindingTextComponent(bean, ProductBean.NAME_PROPERTY, true,
+                false);
+        JsamsFormattedTextField textFieldPrice = viewFactory.createBindingDecimalComponent(bean,
+                ProductBean.PRICE_PROPERTY, true, false);
+        JsamsFormattedTextField textFieldStockQuantity = viewFactory.createBindingIntComponent(bean,
                 ProductBean.QUANTITY_STOCK_PROPERTY, true, false);
-        JsamsFormattedTextField textFieldReorderLevel = helper.createBindingIntComponent(bean,
+        JsamsFormattedTextField textFieldReorderLevel = viewFactory.createBindingIntComponent(bean,
                 ProductBean.REORDER_LEVEL_PROPERTY, false, false);
-        JsamsFormattedTextField textFieldVatApplicable = helper.createBindingDecimalComponent(bean,
+        JsamsFormattedTextField textFieldVatApplicable = viewFactory.createBindingDecimalComponent(bean,
                 CustomerBean.VATAPPLICABLE_PROPERTY, true, false);
         FormLayout layout = new FormLayout("right:p, 3dlu, 50dlu, 3dlu, right:p, 3dlu, 50dlu", "p");
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, JsamsFrame.RESOURCE_BUNDLE);

@@ -79,16 +79,16 @@ public class DeliveryOrderBeanView extends AbstractDocumentBeanView<DeliveryOrde
     public JPanel createEditView() {
         DeliveryOrderBean bean = getBean();
         final int three = 3;
-        ViewFactory<DeliveryOrderBean> helper = new ViewFactory<DeliveryOrderBean>();
+        ViewFactory<DeliveryOrderBean> viewFactory = getViewFactory();
 
-        JCheckBox transferred = helper.createBindingBooleanComponent(bean, DeliveryOrderBean.TRANSFERRED_PROPERTY,
+        JCheckBox transferred = viewFactory.createBindingBooleanComponent(bean, DeliveryOrderBean.TRANSFERRED_PROPERTY,
                 false, false);
-        JDateChooser creationDate = helper.createBindingDateComponent(bean, DeliveryOrderBean.CREATION_DATE_PROPERTY,
-                false, false);
-        JsamsFormattedTextField discountRate = helper.createBindingDecimalComponent(bean,
+        JDateChooser creationDate = viewFactory.createBindingDateComponent(bean,
+                DeliveryOrderBean.CREATION_DATE_PROPERTY, false, false);
+        JsamsFormattedTextField discountRate = viewFactory.createBindingDecimalComponent(bean,
                 DeliveryOrderBean.DISCOUNT_RATE_PROPERTY, false, false);
-        JsamsTextField remark = helper
-                .createBindingTextComponent(bean, DeliveryOrderBean.REMARK_PROPERTY, false, false);
+        JsamsTextField remark = viewFactory.createBindingTextComponent(bean, DeliveryOrderBean.REMARK_PROPERTY, false,
+                false);
 
         FormLayout layout = new FormLayout("right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p", "p");
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, JsamsFrame.RESOURCE_BUNDLE);
@@ -337,19 +337,21 @@ public class DeliveryOrderBeanView extends AbstractDocumentBeanView<DeliveryOrde
      */
     public JPanel createSearchView() {
         DeliveryOrderBean bean = getBean();
-        ViewFactory<DeliveryOrderBean> helper = new ViewFactory<DeliveryOrderBean>();
+        ViewFactory<DeliveryOrderBean> viewFactory = getViewFactory();
 
-        JCheckBox transferred = helper.createBindingBooleanComponent(bean, CommandBean.TRANSFERRED_PROPERTY, false,
-                false);
-        ViewFactory<PeriodBean> periodHelper = new ViewFactory<PeriodBean>();
-        JDateChooser startDate = periodHelper.createBindingDateComponent(bean.getPeriod(),
-                PeriodBean.START_DATE_PROPERTY, false, false);
-        JDateChooser endDate = periodHelper.createBindingDateComponent(bean.getPeriod(), PeriodBean.END_DATE_PROPERTY,
+        JCheckBox transferred = viewFactory.createBindingBooleanComponent(bean, CommandBean.TRANSFERRED_PROPERTY,
                 false, false);
-        ViewFactory<AddressBean> addressHelper = new ViewFactory<AddressBean>();
-        JsamsTextField textFieldCity = addressHelper.createBindingTextComponent(bean.getDeliveryAddress(),
+        PeriodBean period = bean.getPeriod();
+        ViewFactory<PeriodBean> viewPeriodFactory = period.getView().getViewFactory();
+        JDateChooser startDate = viewPeriodFactory.createBindingDateComponent(period, PeriodBean.START_DATE_PROPERTY,
+                false, false);
+        JDateChooser endDate = viewPeriodFactory.createBindingDateComponent(period, PeriodBean.END_DATE_PROPERTY,
+                false, false);
+        AddressBean address = bean.getDeliveryAddress();
+        ViewFactory<AddressBean> viewAddressFactory = address.getView().getViewFactory();
+        JsamsTextField textFieldCity = viewAddressFactory.createBindingTextComponent(address,
                 AddressBean.CITY_PROPERTY, false, false);
-        JsamsTextField textFieldZipCode = addressHelper.createBindingTextComponent(bean.getDeliveryAddress(),
+        JsamsTextField textFieldZipCode = viewAddressFactory.createBindingTextComponent(address,
                 AddressBean.ZIP_CODE_PROPERTY, false, false);
         FormLayout layout = new FormLayout(
                 "right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow", "p");

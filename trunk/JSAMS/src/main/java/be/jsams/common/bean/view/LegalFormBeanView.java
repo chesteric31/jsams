@@ -32,8 +32,8 @@ public class LegalFormBeanView extends AbstractBeanView<LegalFormBean, JsamsComb
      * {@inheritDoc}
      */
     public JsamsComboBox createEditView() {
-        ViewFactory<LegalFormBean> helper = new ViewFactory<LegalFormBean>();
-        JsamsComboBox comboBox = helper.createBindingComboComponent(getBean(), true, false,
+        ViewFactory<LegalFormBean> viewFactory = getViewFactory();
+        JsamsComboBox comboBox = viewFactory.createBindingComboComponent(getBean(), true, false,
                 new TranslatableComboBoxRenderer());
         return comboBox;
     }

@@ -11,7 +11,7 @@ import com.jgoodies.forms.builder.DefaultFormBuilder;
 import com.jgoodies.forms.layout.FormLayout;
 
 /**
- * 
+ * Customized views for {@link ContactInformationBean}.
  * 
  * @author chesteric31
  * @version $Rev$ $Date::   $Author$
@@ -37,16 +37,16 @@ public class ContactInformationBeanView extends AbstractBeanView<ContactInformat
      */
     public JPanel createEditView() {
         ContactInformationBean bean = getBean();
-        ViewFactory<ContactInformationBean> helper = new ViewFactory<ContactInformationBean>();
-        JsamsTextField textFieldPhone = helper.createBindingTextComponent(bean, ContactInformationBean.PHONE_PROPERTY,
-                true, false);
-        JsamsTextField textFieldFax = helper.createBindingTextComponent(bean, ContactInformationBean.FAX_PROPERTY,
+        ViewFactory<ContactInformationBean> viewFactory = getViewFactory();
+        JsamsTextField textFieldPhone = viewFactory.createBindingTextComponent(bean,
+                ContactInformationBean.PHONE_PROPERTY, true, false);
+        JsamsTextField textFieldFax = viewFactory.createBindingTextComponent(bean, ContactInformationBean.FAX_PROPERTY,
                 false, false);
-        JsamsTextField textFieldMobile = helper.createBindingTextComponent(bean,
+        JsamsTextField textFieldMobile = viewFactory.createBindingTextComponent(bean,
                 ContactInformationBean.MOBILE_PROPERTY, false, false);
-        JsamsTextField textFieldEmail = helper.createBindingTextComponent(bean, ContactInformationBean.EMAIL_PROPERTY,
-                false, false);
-        JsamsTextField textFieldWebsite = helper.createBindingTextComponent(bean,
+        JsamsTextField textFieldEmail = viewFactory.createBindingTextComponent(bean,
+                ContactInformationBean.EMAIL_PROPERTY, false, false);
+        JsamsTextField textFieldWebsite = viewFactory.createBindingTextComponent(bean,
                 ContactInformationBean.WEBSITE_PROPERTY, false, false);
 
         FormLayout layout = new FormLayout(

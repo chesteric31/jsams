@@ -11,7 +11,7 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.toedter.calendar.JDateChooser;
 
 /**
- * 
+ * Customized views for {@link PeriodBean}.
  * 
  * @author chesteric31
  * @version $$Rev$$ $$Date::                  $$ $$Author$$
@@ -38,10 +38,10 @@ public class PeriodBeanView extends AbstractBeanView<PeriodBean, JPanel, JPanel>
     @Override
     public JPanel createEditView() {
         PeriodBean bean = getBean();
-        ViewFactory<PeriodBean> helper = new ViewFactory<PeriodBean>();
-        JDateChooser startDateChooser = helper.createBindingDateComponent(bean, PeriodBean.START_DATE_PROPERTY, false,
-                false);
-        JDateChooser endDateChooser = helper.createBindingDateComponent(bean, PeriodBean.END_DATE_PROPERTY, false,
+        ViewFactory<PeriodBean> viewFactory = getViewFactory();
+        JDateChooser startDateChooser = viewFactory.createBindingDateComponent(bean, PeriodBean.START_DATE_PROPERTY,
+                false, false);
+        JDateChooser endDateChooser = viewFactory.createBindingDateComponent(bean, PeriodBean.END_DATE_PROPERTY, false,
                 false);
         FormLayout layout = new FormLayout("right:p, 3dlu, 75dlu, 3dlu, right:p, 3dlu, p:grow", "p");
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, JsamsFrame.RESOURCE_BUNDLE);

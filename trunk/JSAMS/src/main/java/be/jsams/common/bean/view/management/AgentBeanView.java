@@ -73,10 +73,11 @@ public class AgentBeanView extends AbstractBeanView<AgentBean, JPanel, JPanel> {
      */
     private JPanel buildGeneralTab() {
         AgentBean bean = getBean();
-        ViewFactory<AgentBean> helper = new ViewFactory<AgentBean>();
-        JsamsTextField textFieldName = helper.createBindingTextComponent(bean, AgentBean.NAME_PROPERTY, true, false);
-        JsamsTextField textFieldFunction = helper.createBindingTextComponent(bean, AgentBean.FUNCTION_PROPERTY, false,
+        ViewFactory<AgentBean> viewFactory = getViewFactory();
+        JsamsTextField textFieldName = viewFactory.createBindingTextComponent(bean, AgentBean.NAME_PROPERTY, true,
                 false);
+        JsamsTextField textFieldFunction = viewFactory.createBindingTextComponent(bean, AgentBean.FUNCTION_PROPERTY,
+                false, false);
         FormLayout layout = new FormLayout("right:p, 3dlu, 75dlu, 3dlu, right:p, 3dlu, p:grow", "p");
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, JsamsFrame.RESOURCE_BUNDLE);
         final int maxColumnSpan = 5;
@@ -95,24 +96,28 @@ public class AgentBeanView extends AbstractBeanView<AgentBean, JPanel, JPanel> {
      */
     public JPanel createSearchView() {
         AgentBean bean = getBean();
-        ViewFactory<AgentBean> helper = new ViewFactory<AgentBean>();
-        JsamsTextField textFieldName = helper.createBindingTextComponent(bean, AgentBean.NAME_PROPERTY, false, false);
-        JsamsTextField textFieldFunction = helper.createBindingTextComponent(bean, AgentBean.FUNCTION_PROPERTY, false,
+        ViewFactory<AgentBean> viewFactory = getViewFactory();
+        JsamsTextField textFieldName = viewFactory.createBindingTextComponent(bean, AgentBean.NAME_PROPERTY, false,
                 false);
-        ViewFactory<AddressBean> addressHelper = new ViewFactory<AddressBean>();
-        JsamsTextField textFieldCity = addressHelper.createBindingTextComponent(bean.getAddress(),
+        JsamsTextField textFieldFunction = viewFactory.createBindingTextComponent(bean, AgentBean.FUNCTION_PROPERTY,
+                false, false);
+        AddressBean address = bean.getAddress();
+        ViewFactory<AddressBean> viewAddressFactory = address.getView().getViewFactory();
+        JsamsTextField textFieldCity = viewAddressFactory.createBindingTextComponent(address,
                 AddressBean.CITY_PROPERTY, false, false);
-        JsamsTextField textFieldZipCode = addressHelper.createBindingTextComponent(bean.getAddress(),
+        JsamsTextField textFieldZipCode = viewAddressFactory.createBindingTextComponent(address,
                 AddressBean.ZIP_CODE_PROPERTY, false, false);
-        ViewFactory<ContactInformationBean> contactHelper = new ViewFactory<ContactInformationBean>();
-        JsamsTextField textFieldPhone = contactHelper.createBindingTextComponent(bean.getContactInformation(),
+        ContactInformationBean contactInformation = bean.getContactInformation();
+        ViewFactory<ContactInformationBean> viewContactFactory = contactInformation.getView().getViewFactory();
+        JsamsTextField textFieldPhone = viewContactFactory.createBindingTextComponent(contactInformation,
                 ContactInformationBean.PHONE_PROPERTY, false, false);
         FormLayout layout = new FormLayout(
                 "right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, 50dlu", "p");
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, JsamsFrame.RESOURCE_BUNDLE);
         builder.setDefaultDialogBorder();
+        final int maxColumnSpan = 5;
         builder.appendI15d(JsamsI18nLabelResource.LABEL_NAME.getKey(), textFieldName);
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_FUNCTION.getKey(), textFieldFunction);
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_FUNCTION.getKey(), textFieldFunction, maxColumnSpan);
         builder.nextLine();
         builder.appendI15d(JsamsI18nLabelResource.LABEL_PHONE.getKey(), textFieldPhone);
         builder.appendI15d(JsamsI18nLabelResource.LABEL_CITY.getKey(), textFieldCity);
@@ -133,7 +138,7 @@ public class AgentBeanView extends AbstractBeanView<AgentBean, JPanel, JPanel> {
         ViewFactory<AgentBean> helper = new ViewFactory<AgentBean>();
         buttonSearchAgent.setAction(new SearchAgentAction("", buttonSearchAgent.getIcon(), bean, dialog));
         JsamsTextField textFieldName = helper.createBindingTextComponent(bean, AgentBean.NAME_PROPERTY, false, true);
-        FormLayout layout = new FormLayout("175dlu, 3dlu, p", "p");
+        FormLayout layout = new FormLayout("p:grow, 3dlu, p", "p");
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, JsamsFrame.RESOURCE_BUNDLE);
         builder.append(textFieldName);
         builder.append(buttonSearchAgent);

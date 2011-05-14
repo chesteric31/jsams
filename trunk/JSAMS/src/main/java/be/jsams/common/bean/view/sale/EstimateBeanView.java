@@ -1,5 +1,6 @@
 package be.jsams.common.bean.view.sale;
 
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -78,19 +79,21 @@ public class EstimateBeanView extends AbstractDocumentBeanView<EstimateBean, JPa
     public JPanel createEditView() {
         EstimateBean bean = getBean();
         final int three = 3;
-        ViewFactory<EstimateBean> helper = new ViewFactory<EstimateBean>();
+        ViewFactory<EstimateBean> viewFactory = getViewFactory();
 
-        JCheckBox transferred = helper.createBindingBooleanComponent(bean, EstimateBean.TRANSFERRED_PROPERTY, false,
-                false);
-        JDateChooser creationDate = helper.createBindingDateComponent(bean, EstimateBean.CREATION_DATE_PROPERTY, false,
-                false);
-        JsamsFormattedTextField discountRate = helper.createBindingDecimalComponent(bean,
+        JCheckBox transferred = viewFactory.createBindingBooleanComponent(bean, EstimateBean.TRANSFERRED_PROPERTY,
+                false, false);
+        JDateChooser creationDate = viewFactory.createBindingDateComponent(bean, EstimateBean.CREATION_DATE_PROPERTY,
+                false, false);
+        JsamsFormattedTextField discountRate = viewFactory.createBindingDecimalComponent(bean,
                 EstimateBean.DISCOUNT_RATE_PROPERTY, false, false);
-        JsamsTextField remark = helper.createBindingTextComponent(bean, EstimateBean.REMARK_PROPERTY, false, false);
+        JsamsTextField remark = viewFactory
+                .createBindingTextComponent(bean, EstimateBean.REMARK_PROPERTY, false, false);
 
         FormLayout layout = new FormLayout("right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p", "p");
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, JsamsFrame.RESOURCE_BUNDLE);
-        int maxColumnSpan = builder.getColumnCount();
+        final int maxColumnSpanI15d = 5;
+        final int maxColumnSpan = builder.getColumnCount();
         builder.setDefaultDialogBorder();
         CustomerBean customer = bean.getCustomer();
         JPanel customerPanel = customer.getView().createCustomView();
@@ -98,9 +101,8 @@ public class EstimateBeanView extends AbstractDocumentBeanView<EstimateBean, JPa
         builder.appendI15d(JsamsI18nLabelResource.LABEL_CUSTOMER_NAME.getKey(), customerPanel);
         builder.appendI15d(JsamsI18nLabelResource.LABEL_CREATION_DATE.getKey(), creationDate);
         builder.nextLine();
-        // -2 for column span for the label and the space
         builder.appendI15d(JsamsI18nLabelResource.LABEL_BILLING_ADDRESS.getKey(), bean.getBillingAddress().getView()
-                .createEditView(), maxColumnSpan - 2);
+                .createEditView(), maxColumnSpanI15d);
 
         builder.appendI15d(JsamsI18nLabelResource.LABEL_AGENT.getKey(), bean.getAgent().getView().createCustomView());
         builder.appendI15d(JsamsI18nLabelResource.LABEL_TRANSFERRED.getKey(), transferred);
@@ -198,11 +200,11 @@ public class EstimateBeanView extends AbstractDocumentBeanView<EstimateBean, JPa
             public void mouseClicked(MouseEvent e) {
                 Object source = e.getSource();
                 int selectedColumn = getDetailsTable().getSelectedColumn();
-                System.out.println("clickcount " + e.getClickCount());
                 // only edit dialog for product editing
                 if (e.getClickCount() == 2) {
                     if (selectedColumn == 0 || selectedColumn == 1) {
                         final JsamsDialog dialog = new JsamsDialog(null, JsamsI18nResource.TITLE_SEARCH_PRODUCT);
+                        dialog.setPreferredSize(new Dimension(800, 600));
                         ProductTableMouseListener customListener = new ProductTableMouseListener() {
                             /**
                              * {@inheritDoc}
@@ -338,19 +340,21 @@ public class EstimateBeanView extends AbstractDocumentBeanView<EstimateBean, JPa
      */
     public JPanel createSearchView() {
         EstimateBean bean = getBean();
-        ViewFactory<EstimateBean> helper = new ViewFactory<EstimateBean>();
+        ViewFactory<EstimateBean> viewFactory = getViewFactory();
 
-        JCheckBox transferred = helper.createBindingBooleanComponent(bean, EstimateBean.TRANSFERRED_PROPERTY, false,
-                false);
-        ViewFactory<PeriodBean> periodHelper = new ViewFactory<PeriodBean>();
-        JDateChooser startDate = periodHelper.createBindingDateComponent(bean.getPeriod(),
-                PeriodBean.START_DATE_PROPERTY, false, false);
-        JDateChooser endDate = periodHelper.createBindingDateComponent(bean.getPeriod(), PeriodBean.END_DATE_PROPERTY,
+        JCheckBox transferred = viewFactory.createBindingBooleanComponent(bean, EstimateBean.TRANSFERRED_PROPERTY,
                 false, false);
-        ViewFactory<AddressBean> addressHelper = new ViewFactory<AddressBean>();
-        JsamsTextField textFieldCity = addressHelper.createBindingTextComponent(bean.getBillingAddress(),
+        PeriodBean period = bean.getPeriod();
+        ViewFactory<PeriodBean> viewPeriodFactory = period.getView().getViewFactory();
+        JDateChooser startDate = viewPeriodFactory.createBindingDateComponent(period, PeriodBean.START_DATE_PROPERTY,
+                false, false);
+        JDateChooser endDate = viewPeriodFactory.createBindingDateComponent(period, PeriodBean.END_DATE_PROPERTY,
+                false, false);
+        AddressBean address = bean.getBillingAddress();
+        ViewFactory<AddressBean> viewAddressFactory = address.getView().getViewFactory();
+        JsamsTextField textFieldCity = viewAddressFactory.createBindingTextComponent(address,
                 AddressBean.CITY_PROPERTY, false, false);
-        JsamsTextField textFieldZipCode = addressHelper.createBindingTextComponent(bean.getBillingAddress(),
+        JsamsTextField textFieldZipCode = viewAddressFactory.createBindingTextComponent(address,
                 AddressBean.ZIP_CODE_PROPERTY, false, false);
         FormLayout layout = new FormLayout(
                 "right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow", "p");

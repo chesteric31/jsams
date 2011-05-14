@@ -32,8 +32,8 @@ public class CivilityBeanView extends AbstractBeanView<CivilityBean, JsamsComboB
      * {@inheritDoc}
      */
     public JsamsComboBox createEditView() {
-        ViewFactory<CivilityBean> helper = new ViewFactory<CivilityBean>();
-        JsamsComboBox comboBox = helper.createBindingComboComponent(getBean(), true, false,
+        ViewFactory<CivilityBean> viewFactory = getViewFactory();
+        JsamsComboBox comboBox = viewFactory.createBindingComboComponent(getBean(), true, false,
                 new TranslatableComboBoxRenderer());
         return comboBox;
     }
