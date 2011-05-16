@@ -92,6 +92,7 @@
 	<!-- Beans builders -->
 	<bean id="societyBeanBuilder" class="be.jsams.common.bean.builder.SocietyBeanBuilder">
 		<property name="dao" ref="societyDao" />
+		<property name="legalFormDao" ref="legalFormDao" />
 	</bean>
 
 	<import resource="i18nApplicationContext.xml" />
