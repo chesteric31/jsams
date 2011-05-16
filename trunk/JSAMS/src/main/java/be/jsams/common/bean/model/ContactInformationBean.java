@@ -42,8 +42,7 @@ public class ContactInformationBean extends AbstractIdentityBean<ContactInformat
     /**
      * Constructor
      * 
-     * @param model
-     *            the {@link ContactInformation}
+     * @param model the {@link ContactInformation}
      */
     public ContactInformationBean(ContactInformation model) {
         super(model);
@@ -62,8 +61,7 @@ public class ContactInformationBean extends AbstractIdentityBean<ContactInformat
     }
 
     /**
-     * @param phone
-     *            the phone to set
+     * @param phone the phone to set
      */
     public void setPhone(String phone) {
         String oldValue = this.phone;
@@ -79,8 +77,7 @@ public class ContactInformationBean extends AbstractIdentityBean<ContactInformat
     }
 
     /**
-     * @param fax
-     *            the fax to set
+     * @param fax the fax to set
      */
     public void setFax(String fax) {
         String oldValue = this.fax;
@@ -96,8 +93,7 @@ public class ContactInformationBean extends AbstractIdentityBean<ContactInformat
     }
 
     /**
-     * @param mobile
-     *            the mobile to set
+     * @param mobile the mobile to set
      */
     public void setMobile(String mobile) {
         String oldValue = this.mobile;
@@ -113,8 +109,7 @@ public class ContactInformationBean extends AbstractIdentityBean<ContactInformat
     }
 
     /**
-     * @param email
-     *            the email to set
+     * @param email the email to set
      */
     public void setEmail(String email) {
         String oldValue = this.email;
@@ -130,8 +125,7 @@ public class ContactInformationBean extends AbstractIdentityBean<ContactInformat
     }
 
     /**
-     * @param website
-     *            the website to set
+     * @param website the website to set
      */
     public void setWebsite(String website) {
         String oldValue = this.website;
@@ -147,8 +141,7 @@ public class ContactInformationBean extends AbstractIdentityBean<ContactInformat
     }
 
     /**
-     * @param logo
-     *            the logo to set
+     * @param logo the logo to set
      */
     public void setLogo(byte[] logo) {
         byte[] oldValue = this.logo;

@@ -45,6 +45,7 @@ public abstract class AbstractIdentityBean<M extends AbstractIdentity, V extends
      * @param model the {@link AbstractIdentity}
      */
     public AbstractIdentityBean(M model) {
+        this();
         setId(model.getId());
     }
 
