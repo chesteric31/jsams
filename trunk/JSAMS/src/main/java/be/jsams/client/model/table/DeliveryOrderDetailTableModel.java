@@ -28,8 +28,8 @@ public class DeliveryOrderDetailTableModel extends AbstractJsamsTableModel<Deliv
     public DeliveryOrderDetailTableModel(List<DeliveryOrderDetailBean> listBean) {
         super(listBean);
         setColumnNames(Arrays.asList(JsamsI18nResource.COLUMN_PRODUCT_ID, JsamsI18nResource.COLUMN_PRODUCT_NAME,
-                JsamsI18nResource.COLUMN_QUANTITY, JsamsI18nResource.COLUMN_DISCOUNT_RATE,
-                JsamsI18nResource.COLUMN_VAT_APPLICABE));
+                JsamsI18nResource.COLUMN_QUANTITY, JsamsI18nResource.COLUMN_TRANSFERRED,
+                JsamsI18nResource.COLUMN_DISCOUNT_RATE, JsamsI18nResource.COLUMN_VAT_APPLICABE));
     }
 
     /**
@@ -54,8 +54,10 @@ public class DeliveryOrderDetailTableModel extends AbstractJsamsTableModel<Deliv
         case TWO:
             return detail.getQuantity();
         case THREE:
-            return detail.getDiscountRate();
+            return detail.isTransferred();
         case FOUR:
+            return detail.getDiscountRate();
+        case FIVE:
             return detail.getVatApplicable();
         default:
             return "";
@@ -75,8 +77,10 @@ public class DeliveryOrderDetailTableModel extends AbstractJsamsTableModel<Deliv
         case TWO:
             return Integer.class;
         case THREE:
-            return Double.class;
+            return Boolean.class;
         case FOUR:
+            return Double.class;
+        case FIVE:
             return Double.class;
         default:
             return Object.class;
@@ -102,6 +106,9 @@ public class DeliveryOrderDetailTableModel extends AbstractJsamsTableModel<Deliv
             detail.setQuantity(Integer.parseInt(stringValue));
             break;
         case THREE:
+            detail.setTransferred(Boolean.parseBoolean(stringValue));
+            break;
+        case FOUR:
             detail.setDiscountRate(Double.parseDouble(stringValue));
             break;
         case FIVE:

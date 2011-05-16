@@ -19,8 +19,8 @@
 		</developer>
 	</developers>
 	<scm>
-		<connection>scm:svn:http://jsams.googlecode.com/svn</connection>
-		<developerConnection>scm:svn:https://jsams.googlecode.com/svn</developerConnection>
+		<connection>scm:svn:http://jsams.googlecode.com/svn/trunk</connection>
+		<developerConnection>scm:svn:https://jsams.googlecode.com/svn/trunk</developerConnection>
 		<url>https://jsams.googlecode.com/svn</url>
 	</scm>
 	<issueManagement>

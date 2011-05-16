@@ -25,6 +25,7 @@ import be.jsams.client.model.panel.management.SearchProductPanel;
 import be.jsams.client.model.table.AbstractJsamsTableModel;
 import be.jsams.client.model.table.BillDetailTableModel;
 import be.jsams.client.model.table.ProductTableModel;
+import be.jsams.client.renderer.JsamsBooleanTableCellRenderer;
 import be.jsams.client.renderer.JsamsTableCellRenderer;
 import be.jsams.client.swing.component.JsamsButton;
 import be.jsams.client.swing.component.JsamsDialog;
@@ -137,6 +138,7 @@ public class BillBeanView extends AbstractDocumentBeanView<BillBean, JPanel, JPa
         getDetailsTable().setDefaultRenderer(Integer.class, defaultCellRenderer);
         getDetailsTable().setDefaultRenderer(Double.class, defaultCellRenderer);
         getDetailsTable().setDefaultRenderer(String.class, defaultCellRenderer);
+        getDetailsTable().setDefaultRenderer(Boolean.class, new JsamsBooleanTableCellRenderer());
 
         builder.appendI15dSeparator(JsamsI18nResource.PANEL_BILL_DETAILS.getKey());
         builder.append(new JScrollPane(getDetailsTable()), maxColumnSpan);

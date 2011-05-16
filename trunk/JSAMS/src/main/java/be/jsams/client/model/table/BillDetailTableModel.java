@@ -9,7 +9,7 @@ import be.jsams.common.bean.model.sale.detail.BillDetailBean;
 
 /**
  * Customized table model for {@link BillDetailBean}.
- *
+ * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
@@ -29,8 +29,9 @@ public class BillDetailTableModel extends AbstractJsamsTableModel<BillDetailBean
         super(listBean);
         setColumnNames(Arrays.asList(JsamsI18nResource.COLUMN_PRODUCT_ID, JsamsI18nResource.COLUMN_PRODUCT_NAME,
                 JsamsI18nResource.COLUMN_QUANTITY, JsamsI18nResource.COLUMN_PRICE,
-                JsamsI18nResource.COLUMN_DISCOUNT_RATE, JsamsI18nResource.COLUMN_VAT_APPLICABE));
-     }
+                JsamsI18nResource.COLUMN_TRANSFERRED, JsamsI18nResource.COLUMN_DISCOUNT_RATE,
+                JsamsI18nResource.COLUMN_VAT_APPLICABE));
+    }
 
     /**
      * {@inheritDoc}
@@ -57,8 +58,10 @@ public class BillDetailTableModel extends AbstractJsamsTableModel<BillDetailBean
         case THREE:
             return detail.getPrice();
         case FOUR:
-            return detail.getDiscountRate();
+            return detail.isTransferred();
         case FIVE:
+            return detail.getDiscountRate();
+        case SIX:
             return detail.getVatApplicable();
         default:
             return "";
@@ -80,8 +83,10 @@ public class BillDetailTableModel extends AbstractJsamsTableModel<BillDetailBean
         case THREE:
             return Double.class;
         case FOUR:
-            return Double.class;
+            return Boolean.class;
         case FIVE:
+            return Double.class;
+        case SIX:
             return Double.class;
         default:
             return Object.class;
@@ -110,9 +115,12 @@ public class BillDetailTableModel extends AbstractJsamsTableModel<BillDetailBean
             detail.setPrice(Double.parseDouble(stringValue));
             break;
         case FOUR:
-            detail.setDiscountRate(Double.parseDouble(stringValue));
+            detail.setTransferred(Boolean.parseBoolean(stringValue));
             break;
         case FIVE:
+            detail.setDiscountRate(Double.parseDouble(stringValue));
+            break;
+        case SIX:
             detail.setVatApplicable(Double.parseDouble(stringValue));
             break;
         default:
