@@ -4,7 +4,6 @@ import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.common.bean.builder.LegalFormBeanBuilder;
 import be.jsams.common.bean.view.SocietyBeanView;
 import be.jsams.server.dao.LegalFormDao;
-import be.jsams.server.model.LegalForm;
 import be.jsams.server.model.Society;
 
 import com.jgoodies.common.collect.ObservableList;
@@ -44,11 +43,6 @@ public class SocietyBean extends AbstractNamedIdentityBean<Society, SocietyBeanV
     public SocietyBean() {
         super();
         address = new AddressBean();
-
-        legalFormBuilder = new LegalFormBeanBuilder();
-        legalFormBuilder.setDao(getLegalFormDao());
-        setLegalForm(legalFormBuilder.build());
-
         setContactInformation(new ContactInformationBean());
     }
 
@@ -60,15 +54,6 @@ public class SocietyBean extends AbstractNamedIdentityBean<Society, SocietyBeanV
     public SocietyBean(Society model) {
         super(model);
         address = new AddressBean();
-
-        legalFormBuilder = new LegalFormBeanBuilder();
-        legalFormBuilder.setDao(getLegalFormDao());
-        LegalForm form = model.getLegalForm();
-        if (form != null) {
-            legalFormBuilder.setModel(form);
-        }
-        setLegalForm(legalFormBuilder.build());
-
         setContactInformation(new ContactInformationBean(model.getContactInformation()));
         setActivity(model.getActivity());
         setAddress(new AddressBean(model.getAddress()));
