@@ -10,7 +10,8 @@ import be.jsams.client.i18n.I18nString;
 import be.jsams.client.swing.utils.IconUtil;
 
 /**
- * Generic {@link JFrame} with internalization, icon and native look and feel capabilities.
+ * Generic {@link JFrame} with internalization, icon and native look and feel
+ * capabilities.
  * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
@@ -48,8 +49,7 @@ public abstract class JsamsFrame extends JFrame {
     /**
      * Constructor
      * 
-     * @param title
-     *            the {@link I18nString}
+     * @param title the {@link I18nString}
      */
     public JsamsFrame(final I18nString title) {
         this();
@@ -59,10 +59,8 @@ public abstract class JsamsFrame extends JFrame {
     /**
      * Constructor
      * 
-     * @param title
-     *            the {@link I18nString}
-     * @param iconFileName
-     *            the icon path name
+     * @param title the {@link I18nString}
+     * @param iconFileName the icon path name
      */
     public JsamsFrame(final I18nString title, final String iconFileName) {
         this(title);
@@ -72,8 +70,7 @@ public abstract class JsamsFrame extends JFrame {
     /**
      * Sets the main title of the frame.
      * 
-     * @param title
-     *            the {@link I18nString} title
+     * @param title the {@link I18nString} title
      */
     public void setTitle(final I18nString title) {
         setTitle(title.getTranslation());

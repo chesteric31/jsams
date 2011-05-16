@@ -13,7 +13,7 @@ import be.jsams.client.i18n.I18nApplicationContext;
  * @version $Rev$ $Date::                  $ $Author$
  */
 public final class JsamsStart {
-    
+
     /**
      * The JSAMS application context string
      */
@@ -28,8 +28,7 @@ public final class JsamsStart {
     /**
      * Main starting method for the JSAMS Application
      * 
-     * @param args
-     *            for now, no argument are needed
+     * @param args for now, no argument are needed
      */
     public static void main(final String[] args) {
         System.setProperty("application.context", JSAMS_APPLICATION_CONTEXT);
