@@ -6,10 +6,8 @@ import be.jsams.server.model.AbstractNamedIdentity;
 /**
  * Abstract class for all beans that have an id and a name.
  * 
- * @param <M>
- *            and extension of {@link AbstractNamedIdentity}
- * @param <V>
- *            an extension of {@link AbstractBeanView}
+ * @param <M> and extension of {@link AbstractNamedIdentity}
+ * @param <V> an extension of {@link AbstractBeanView}
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
@@ -35,8 +33,7 @@ public abstract class AbstractNamedIdentityBean<M extends AbstractNamedIdentity,
     /**
      * Constructor with {@link AbstractNamedIdentity} parameter.
      * 
-     * @param model
-     *            the {@link AbstractNamedIdentity} model
+     * @param model the {@link AbstractNamedIdentity} model
      */
     public AbstractNamedIdentityBean(M model) {
         super(model);
@@ -51,8 +48,7 @@ public abstract class AbstractNamedIdentityBean<M extends AbstractNamedIdentity,
     }
 
     /**
-     * @param name
-     *            the name to set
+     * @param name the name to set
      */
     public void setName(String name) {
         String oldValue = this.name;

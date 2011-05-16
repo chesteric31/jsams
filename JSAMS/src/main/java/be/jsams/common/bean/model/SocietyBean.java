@@ -44,11 +44,11 @@ public class SocietyBean extends AbstractNamedIdentityBean<Society, SocietyBeanV
     public SocietyBean() {
         super();
         address = new AddressBean();
-        
+
         legalFormBuilder = new LegalFormBeanBuilder();
         legalFormBuilder.setDao(getLegalFormDao());
         setLegalForm(legalFormBuilder.build());
-        
+
         setContactInformation(new ContactInformationBean());
     }
 
@@ -68,7 +68,7 @@ public class SocietyBean extends AbstractNamedIdentityBean<Society, SocietyBeanV
             legalFormBuilder.setModel(form);
         }
         setLegalForm(legalFormBuilder.build());
-        
+
         setContactInformation(new ContactInformationBean(model.getContactInformation()));
         setActivity(model.getActivity());
         setAddress(new AddressBean(model.getAddress()));
@@ -85,7 +85,6 @@ public class SocietyBean extends AbstractNamedIdentityBean<Society, SocietyBeanV
      */
     public SocietyBean(ObservableList<SocietyBean> list, Society model) {
         this(model);
-        
         setListModel(list);
         setSelection(this);
     }
@@ -111,8 +110,7 @@ public class SocietyBean extends AbstractNamedIdentityBean<Society, SocietyBeanV
     }
 
     /**
-     * @param capital
-     *            the capital to set
+     * @param capital the capital to set
      */
     public void setCapital(Double capital) {
         Double oldValue = this.capital;
@@ -128,8 +126,7 @@ public class SocietyBean extends AbstractNamedIdentityBean<Society, SocietyBeanV
     }
 
     /**
-     * @param activity
-     *            the activity to set
+     * @param activity the activity to set
      */
     public void setActivity(String activity) {
         String oldValue = this.activity;
@@ -145,8 +142,7 @@ public class SocietyBean extends AbstractNamedIdentityBean<Society, SocietyBeanV
     }
 
     /**
-     * @param responsible
-     *            the responsible to set
+     * @param responsible the responsible to set
      */
     public void setResponsible(String responsible) {
         String oldValue = this.responsible;
@@ -162,8 +158,7 @@ public class SocietyBean extends AbstractNamedIdentityBean<Society, SocietyBeanV
     }
 
     /**
-     * @param vatNumber
-     *            the vatNumber to set
+     * @param vatNumber the vatNumber to set
      */
     public void setVatNumber(String vatNumber) {
         String oldValue = this.vatNumber;
@@ -179,8 +174,7 @@ public class SocietyBean extends AbstractNamedIdentityBean<Society, SocietyBeanV
     }
 
     /**
-     * @param address
-     *            the address to set
+     * @param address the address to set
      */
     public void setAddress(AddressBean address) {
         this.address = address;
@@ -194,11 +188,10 @@ public class SocietyBean extends AbstractNamedIdentityBean<Society, SocietyBeanV
     }
 
     /**
-     * @param legalForm
-     *            the legalForm to set
+     * @param legalForm the legalForm to set
      */
     public void setLegalForm(LegalFormBean legalForm) {
-         this.legalForm = legalForm;
+        this.legalForm = legalForm;
     }
 
     /**
@@ -209,8 +202,7 @@ public class SocietyBean extends AbstractNamedIdentityBean<Society, SocietyBeanV
     }
 
     /**
-     * @param contactInformation
-     *            the contactInformation to set
+     * @param contactInformation the contactInformation to set
      */
     public void setContactInformation(ContactInformationBean contactInformation) {
         this.contactInformation = contactInformation;
@@ -229,9 +221,25 @@ public class SocietyBean extends AbstractNamedIdentityBean<Society, SocietyBeanV
      */
     @Override
     public String toString() {
-        return "SocietyBean [activity=" + activity + ", address=" + address + ", capital=" + capital
-                + ", contactInformation=" + contactInformation + ", legalForm=" + legalForm + ", responsible="
-                + responsible + ", vatNumber=" + vatNumber + "]";
+        StringBuilder builder = new StringBuilder();
+        builder.append("SocietyBean [activity=");
+        builder.append(activity);
+        builder.append(", address=");
+        builder.append(address);
+        builder.append(", capital=");
+        builder.append(capital);
+        builder.append(", contactInformation=");
+        builder.append(contactInformation);
+        builder.append(", legalForm=");
+        builder.append(legalForm);
+        builder.append(", legalFormBuilder=");
+        builder.append(legalFormBuilder);
+        builder.append(", responsible=");
+        builder.append(responsible);
+        builder.append(", vatNumber=");
+        builder.append(vatNumber);
+        builder.append("]");
+        return builder.toString();
     }
 
     /**

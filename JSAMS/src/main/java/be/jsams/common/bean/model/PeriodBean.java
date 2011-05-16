@@ -41,8 +41,7 @@ public class PeriodBean extends AbstractIdentityBean<AbstractIdentity, PeriodBea
     }
 
     /**
-     * @param startDate
-     *            the startDate to set
+     * @param startDate the startDate to set
      */
     public void setStartDate(Date startDate) {
         Date oldValue = this.startDate;
@@ -58,8 +57,7 @@ public class PeriodBean extends AbstractIdentityBean<AbstractIdentity, PeriodBea
     }
 
     /**
-     * @param endDate
-     *            the endDate to set
+     * @param endDate the endDate to set
      */
     public void setEndDate(Date endDate) {
         Date oldValue = this.endDate;

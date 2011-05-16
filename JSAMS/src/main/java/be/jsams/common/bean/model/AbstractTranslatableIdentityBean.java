@@ -6,15 +6,14 @@ import be.jsams.server.model.AbstractTranslatableIdentity;
 /**
  * Abstract class for all beans that have an id and a English label, French label and Dutch label.
  * 
- * @param <M>
- *            an extension of {@link AbstractTranslatableIdentity}
- * @param <V>
- *            an extension of {@link AbstractBeanView}
+ * @param <M> an extension of {@link AbstractTranslatableIdentity}
+ * @param <V> an extension of {@link AbstractBeanView}
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public abstract class AbstractTranslatableIdentityBean<M extends AbstractTranslatableIdentity,
-        V extends AbstractBeanView<?, ?, ?>> extends AbstractIdentityBean<M, V> {
+public abstract class AbstractTranslatableIdentityBean
+        <M extends AbstractTranslatableIdentity, V extends AbstractBeanView<?, ?, ?>>
+        extends AbstractIdentityBean<M, V> {
 
     /**
      * Serial Version UID
@@ -39,8 +38,7 @@ public abstract class AbstractTranslatableIdentityBean<M extends AbstractTransla
     /**
      * Constructor with the {@link AbstractTranslatableIdentity} model
      * 
-     * @param model
-     *            the {@link AbstractTranslatableIdentity} model to use
+     * @param model the {@link AbstractTranslatableIdentity} model to use
      */
     public AbstractTranslatableIdentityBean(M model) {
         super(model);
@@ -58,8 +56,7 @@ public abstract class AbstractTranslatableIdentityBean<M extends AbstractTransla
 
     /**
      * 
-     * @param label
-     *            the label to set
+     * @param label the label to set
      */
     public void setLabel(String label) {
         String oldValue = this.label;
@@ -77,8 +74,7 @@ public abstract class AbstractTranslatableIdentityBean<M extends AbstractTransla
 
     /**
      * 
-     * @param labelFr
-     *            the French label to set
+     * @param labelFr the French label to set
      */
     public void setLabelFr(String labelFr) {
         String oldValue = this.labelFr;
@@ -96,8 +92,7 @@ public abstract class AbstractTranslatableIdentityBean<M extends AbstractTransla
 
     /**
      * 
-     * @param labelNl
-     *            the Dutch label to set
+     * @param labelNl the Dutch label to set
      */
     public void setLabelNl(String labelNl) {
         String oldValue = this.labelNl;

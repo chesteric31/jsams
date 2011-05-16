@@ -1,9 +1,8 @@
 package be.jsams.common.bean.model;
 
-
 /**
  * Interface for the refreshable beans.
- *
+ * 
  * @param <B> the bean to refresh
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$

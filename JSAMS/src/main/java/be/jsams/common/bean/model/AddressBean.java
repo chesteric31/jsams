@@ -40,8 +40,7 @@ public class AddressBean extends AbstractIdentityBean<Address, AddressBeanView> 
     /**
      * Constructor
      * 
-     * @param model
-     *            the {@link Address} to use
+     * @param model the {@link Address} to use
      */
     public AddressBean(Address model) {
         super(model);
@@ -61,8 +60,7 @@ public class AddressBean extends AbstractIdentityBean<Address, AddressBeanView> 
     }
 
     /**
-     * @param street
-     *            the street to set
+     * @param street the street to set
      */
     public void setStreet(String street) {
         String oldValue = this.street;
@@ -78,8 +76,7 @@ public class AddressBean extends AbstractIdentityBean<Address, AddressBeanView> 
     }
 
     /**
-     * @param number
-     *            the number to set
+     * @param number the number to set
      */
     public void setNumber(String number) {
         String oldValue = this.number;
@@ -95,8 +92,7 @@ public class AddressBean extends AbstractIdentityBean<Address, AddressBeanView> 
     }
 
     /**
-     * @param zipCode
-     *            the zipCode to set
+     * @param zipCode the zipCode to set
      */
     public void setZipCode(String zipCode) {
         String oldValue = this.zipCode;
@@ -112,8 +108,7 @@ public class AddressBean extends AbstractIdentityBean<Address, AddressBeanView> 
     }
 
     /**
-     * @param box
-     *            the box to set
+     * @param box the box to set
      */
     public void setBox(String box) {
         String oldValue = this.box;
@@ -129,8 +124,7 @@ public class AddressBean extends AbstractIdentityBean<Address, AddressBeanView> 
     }
 
     /**
-     * @param city
-     *            the city to set
+     * @param city the city to set
      */
     public void setCity(String city) {
         String oldValue = this.city;
@@ -146,8 +140,7 @@ public class AddressBean extends AbstractIdentityBean<Address, AddressBeanView> 
     }
 
     /**
-     * @param country
-     *            the country to set
+     * @param country the country to set
      */
     public void setCountry(String country) {
         String oldValue = this.country;
