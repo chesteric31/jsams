@@ -81,7 +81,7 @@ public abstract class AbstractEditDialog<B extends AbstractIdentityBean<?, ?>, V
      * @param title the {@link I18nString} translatable String
      */
     public AbstractEditDialog(final JsamsMainFrame parent, final I18nString title) {
-        super(parent, title);
+        super(parent, title, IconUtil.TITLE_ICON_PREFIX + "actions/document-new.png");
         buttonsPanel = new JsamsButtonsPanel(this, true, true, true);
         setDefaultKeyActions();
         add(buildSouthPanel(), BorderLayout.SOUTH);

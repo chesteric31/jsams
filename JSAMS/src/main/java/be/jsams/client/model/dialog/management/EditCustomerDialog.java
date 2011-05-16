@@ -20,7 +20,8 @@ import be.jsams.server.service.management.CustomerService;
 import com.jgoodies.validation.view.ValidationComponentUtils;
 
 /**
- * Edit Customer {@link AbstractEditDialog}, to create or update a {@link CustomerBean} object.
+ * Edit Customer {@link AbstractEditDialog}, to create or update a
+ * {@link CustomerBean} object.
  * 
  * @author chesteric31
  * @version $$Rev$$ $$Date::                  $$ $$Author$$
@@ -35,10 +36,8 @@ public class EditCustomerDialog extends AbstractEditDialog<CustomerBean, EditCus
     /**
      * Constructor
      * 
-     * @param title
-     *            the {@link I18nString} title
-     * @param model
-     *            the {@link CustomerBean} model
+     * @param title the {@link I18nString} title
+     * @param model the {@link CustomerBean} model
      */
     public EditCustomerDialog(final I18nString title, CustomerBean model) {
         super(null, title, "apps/system-users.png");
@@ -70,17 +69,17 @@ public class EditCustomerDialog extends AbstractEditDialog<CustomerBean, EditCus
         AbstractIdentityBean<LegalForm, LegalFormBeanView> legalForm = customer.getLegalForm().getSelection();
         if (legalForm != null) {
             customer.getLegalForm().refresh(legalForm);
-//            customer.setLegalForm((LegalFormBean) legalForm);
+            // customer.setLegalForm((LegalFormBean) legalForm);
         }
         AbstractIdentityBean<Civility, CivilityBeanView> civility = customer.getCivility().getSelection();
         if (civility != null) {
             customer.getCivility().refresh(civility);
-//            customer.setCivility((CivilityBean) civility);
+            // customer.setCivility((CivilityBean) civility);
         }
         AbstractIdentityBean<PaymentMode, PaymentModeBeanView> paymentMode = customer.getPaymentMode().getSelection();
         if (paymentMode != null) {
             customer.getPaymentMode().refresh(paymentMode);
-//            customer.setPaymentMode((PaymentModeBean) paymentMode);
+            // customer.setPaymentMode((PaymentModeBean) paymentMode);
         }
         super.postPerformOk(customer);
     }

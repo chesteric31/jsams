@@ -17,7 +17,8 @@ import be.jsams.server.service.management.AgentService;
 import com.jgoodies.validation.view.ValidationComponentUtils;
 
 /**
- * Edit Agent {@link AbstractEditDialog}, to create or update a {@link AgentBean} object.
+ * Edit Agent {@link AbstractEditDialog}, to create or update a
+ * {@link AgentBean} object.
  * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
@@ -32,13 +33,11 @@ public class EditAgentDialog extends AbstractEditDialog<AgentBean, EditAgentVali
     /**
      * Constructor
      * 
-     * @param title
-     *            the {@link I18nString} title
-     * @param model
-     *            the {@link AgentBean} model
+     * @param title the {@link I18nString} title
+     * @param model the {@link AgentBean} model
      */
     public EditAgentDialog(final I18nString title, AgentBean model) {
-        super(null, title, "categories/applications-development.png");
+        super(null, title);
         super.setModel(model);
         super.setValidator(new EditAgentValidator());
         super.setService(JsamsApplicationContext.getAgentService());
