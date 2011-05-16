@@ -1,13 +1,20 @@
 package be.jsams.server.model.mock;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 import be.jsams.server.model.Address;
 import be.jsams.server.model.Civility;
 import be.jsams.server.model.ContactInformation;
 import be.jsams.server.model.LegalForm;
 import be.jsams.server.model.Society;
 import be.jsams.server.model.management.Agent;
+import be.jsams.server.model.management.Customer;
 import be.jsams.server.model.management.Product;
 import be.jsams.server.model.management.ProductCategory;
+import be.jsams.server.model.sale.Command;
+import be.jsams.server.model.sale.detail.CommandDetail;
 
 /**
  * Generator of model objects.
@@ -79,7 +86,7 @@ public class MockModelGenerator {
 
     public static Agent generateMockAgent() {
         Agent agent = new Agent();
-        agent.setName("Neme");
+        agent.setName("Name");
         agent.setFunction("Contact");
 
         Address address = generateMockAddress();
@@ -105,6 +112,49 @@ public class MockModelGenerator {
         product.setReorderLevel(2);
         product.setVatApplicable(6D);
         return product;
+    }
+
+    public static Command generateMockCommand() {
+        Command command = new Command();
+        command.setAgent(generateMockAgent());
+        command.setBillingAddress(generateMockAddress());
+        command.setCreationDate(new Date());
+        command.setCustomer(generateMockCustomer());
+        command.setDeliveryAddress(generateMockAddress());
+        command.setDiscountRate(1D);
+        command.setRemark("Remark");
+        command.setTransferred(false);
+        CommandDetail detail = new CommandDetail();
+        detail.setCommand(command);
+        detail.setDiscountRate(0D);
+        detail.setPrice(15D);
+        detail.setProduct(generateMockProduct());
+        detail.setQuantity(1);
+        detail.setTransferred(false);
+        detail.setVatApplicable(21D);
+        List<CommandDetail> details = new ArrayList<CommandDetail>();
+        details.add(detail);
+        command.setDetails(details);
+        return command;
+         
+    }
+
+    public static Customer generateMockCustomer() {
+        Customer customer = new Customer();
+        customer.setAgent(generateMockAgent());
+        customer.setBank1("Bk1");
+        customer.setBank2("Bk2");
+        customer.setBillingAddress(generateMockAddress());
+        customer.setContactInformation(generateMockContactInformation());
+        customer.setCreditLimit(100D);
+        customer.setDefaultDiscountRate(0D);
+        customer.setDeliveryAddress(generateMockAddress());
+        customer.setDescription("Description");
+        customer.setName("Name");
+        customer.setSociety(generateMockSociety());
+        customer.setVatApplicable(6D);
+        customer.setVatNumber("BE1234567890");
+        return customer;
     }
     
 }
