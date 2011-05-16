@@ -22,7 +22,8 @@ import be.jsams.client.swing.component.JsamsMenuItem;
 import be.jsams.common.bean.model.SocietyBean;
 
 /**
- * JSAMS desktop that creates the {@link JsamsMainFrame} and contains the current Society.
+ * JSAMS desktop that creates the {@link JsamsMainFrame} and contains the
+ * current Society.
  * 
  * @author chesteric31
  * @version $Rev: 672 $ $Date::                  $ $Author$
@@ -111,7 +112,8 @@ public class JsamsDesktop {
     /**
      * Gets the {@link JsamsMainFrame}
      * 
-     * @return the frame in which the application appears (in MDI-mode), or the central container (in SDI-mode).
+     * @return the frame in which the application appears (in MDI-mode), or the
+     *         central container (in SDI-mode).
      */
     public JsamsMainFrame getMainWindow() {
         return frame;
@@ -137,8 +139,7 @@ public class JsamsDesktop {
     }
 
     /**
-     * @param currentSociety
-     *            the current {@link SocietyBean} to set
+     * @param currentSociety the current {@link SocietyBean} to set
      */
     public void setCurrentSociety(final SocietyBean currentSociety) {
         this.currentSociety = currentSociety;
@@ -171,10 +172,10 @@ public class JsamsDesktop {
     /**
      * Sets the default font for all swing components.
      * 
-     * ex. setUIFont (new javax.swing.plaf.FontUIResource ("Serif",Font.ITALIC,12));
+     * ex. setUIFont (new javax.swing.plaf.FontUIResource
+     * ("Serif",Font.ITALIC,12));
      * 
-     * @param fontUIResource
-     *            the {@link FontUIResource}
+     * @param fontUIResource the {@link FontUIResource}
      */
     protected void setUIFont(FontUIResource fontUIResource) {
         Enumeration<Object> keys = UIManager.getDefaults().keys();
@@ -189,8 +190,7 @@ public class JsamsDesktop {
 
     /**
      * 
-     * @param instance
-     *            the {@link JsamsDesktop} instance to set
+     * @param instance the {@link JsamsDesktop} instance to set
      */
     public static void setInstance(JsamsDesktop instance) {
         JsamsDesktop.instance = instance;
