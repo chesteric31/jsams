@@ -14,10 +14,9 @@ import be.jsams.server.service.Service;
 public interface CustomerService extends Service<CustomerBean> {
 
     /**
-     * Finds all {@link CustomerBean} following the criteria customer.
+     * Find all {@link CustomerBean} following the criteria customer.
      * 
-     * @param criteria
-     *            the criteria customer
+     * @param criteria the criteria customer
      * @return a list of {@link CustomerBean}
      */
     List<CustomerBean> findByCriteria(final CustomerBean criteria);

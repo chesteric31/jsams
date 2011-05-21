@@ -7,14 +7,14 @@ import be.jsams.server.service.Service;
 
 /**
  * Bill service interface.
- *
+ * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
 public interface BillService extends Service<BillBean> {
 
     /**
-     * Finds all {@link BillBean} following the criteria {@link BillBean}.
+     * Find all {@link BillBean} following the criteria {@link BillBean}.
      * 
      * @param criteria the criteria {@link BillBean}
      * @return a list of {@link BillBean}
