@@ -14,10 +14,9 @@ import be.jsams.server.service.Service;
 public interface AgentService extends Service<AgentBean> {
 
     /**
-     * Finds all {@link AgentBean} following the criteria agent.
+     * Find all {@link AgentBean} following the criteria agent.
      * 
-     * @param criteria
-     *            the criteria agent
+     * @param criteria the criteria agent
      * @return a list of {@link AgentBean}
      */
     List<AgentBean> findByCriteria(final AgentBean criteria);

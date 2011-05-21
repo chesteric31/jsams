@@ -14,7 +14,7 @@ import be.jsams.server.service.Service;
 public interface CommandService extends Service<CommandBean> {
 
     /**
-     * Finds all {@link CommandBean} following the criteria {@link CommandBean}.
+     * Find all {@link CommandBean} following the criteria {@link CommandBean}.
      * 
      * @param criteria the criteria {@link CommandBean}
      * @return a list of {@link CommandBean}

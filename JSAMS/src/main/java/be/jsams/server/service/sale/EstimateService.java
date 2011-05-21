@@ -14,8 +14,7 @@ import be.jsams.server.service.Service;
 public interface EstimateService extends Service<EstimateBean> {
 
     /**
-     * Finds all {@link EstimateBean} following the criteria
-     * {@link EstimateBean}.
+     * Find all {@link EstimateBean} following the criteria {@link EstimateBean}.
      * 
      * @param criteria the criteria {@link EstimateBean}
      * @return a list of {@link EstimateBean}

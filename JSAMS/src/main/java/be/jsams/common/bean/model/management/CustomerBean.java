@@ -141,9 +141,12 @@ public class CustomerBean extends AbstractNamedIdentityBean<Customer, CustomerBe
         setSociety(societyBean);
         Agent agent = model.getAgent();
         if (agent != null) {
-            setAgent(new AgentBean(agent));
+            AgentBean bean = new AgentBean(agent);
+//            bean.setSocietyBuilder(getSocietyBuilder());
+            setAgent(bean);
         } else {
-            setAgent(new AgentBean(societyBean));
+            AgentBean bean = new AgentBean(societyBean);
+            setAgent(bean);
         }
 
     }

@@ -14,12 +14,11 @@ import be.jsams.server.service.Service;
 public interface ProductCategoryService extends Service<ProductCategoryBean> {
 
     /**
-     * Finds all {@link ProductCategoryBean} following the criteria product category.
+     * Find all {@link ProductCategoryBean} following the criteria product category.
      * 
-     * @param criteria
-     *            the criteria product category
+     * @param criteria the criteria product category
      * @return a list of {@link ProductCategoryBean}
      */
     List<ProductCategoryBean> findByCriteria(final ProductCategoryBean criteria);
-    
+
 }

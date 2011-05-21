@@ -37,7 +37,7 @@ public class AgentBean extends AbstractNamedIdentityBean<Agent, AgentBeanView> {
     private ContactInformationBean contactInformation;
     private List<CustomerBean> customers;
     private SocietyBean society;
-    
+
     private CivilityBeanBuilder builder;
 
     public static final String FUNCTION_PROPERTY = "function";
@@ -60,8 +60,7 @@ public class AgentBean extends AbstractNamedIdentityBean<Agent, AgentBeanView> {
     /**
      * Constructor
      * 
-     * @param model
-     *            the {@link Agent} to use
+     * @param model the {@link Agent} to use
      */
     public AgentBean(Agent model) {
         super(model);
@@ -79,15 +78,15 @@ public class AgentBean extends AbstractNamedIdentityBean<Agent, AgentBeanView> {
         societyBuilder.setModel(model.getSociety());
         SocietyBean bean = societyBuilder.build(false);
         setSociety(bean);
-        //TODO verify this part
-//        List<CustomerBean> beans = new ArrayList<CustomerBean>();
-//        List<Customer> customers = model.getCustomers();
-//        if (customers != null && !customers.isEmpty()) {
-//            for (Customer customer : customers) {
-//                beans.add(new CustomerBean(customer));
-//            }
-//        }
-//        setCustomers(beans);
+        // TODO verify this part
+        // List<CustomerBean> beans = new ArrayList<CustomerBean>();
+        // List<Customer> customers = model.getCustomers();
+        // if (customers != null && !customers.isEmpty()) {
+        // for (Customer customer : customers) {
+        // beans.add(new CustomerBean(customer));
+        // }
+        // }
+        // setCustomers(beans);
     }
 
     /**
@@ -98,8 +97,7 @@ public class AgentBean extends AbstractNamedIdentityBean<Agent, AgentBeanView> {
     }
 
     /**
-     * @param function
-     *            the function to set
+     * @param function the function to set
      */
     public void setFunction(String function) {
         String oldValue = this.function;
@@ -115,8 +113,7 @@ public class AgentBean extends AbstractNamedIdentityBean<Agent, AgentBeanView> {
     }
 
     /**
-     * @param civility
-     *            the civility to set
+     * @param civility the civility to set
      */
     public void setCivility(CivilityBean civility) {
         this.civility = civility;
@@ -130,8 +127,7 @@ public class AgentBean extends AbstractNamedIdentityBean<Agent, AgentBeanView> {
     }
 
     /**
-     * @param address
-     *            the address to set
+     * @param address the address to set
      */
     public void setAddress(AddressBean address) {
         this.address = address;
@@ -145,8 +141,7 @@ public class AgentBean extends AbstractNamedIdentityBean<Agent, AgentBeanView> {
     }
 
     /**
-     * @param contactInformation
-     *            the contactInformationBean to set
+     * @param contactInformation the contactInformationBean to set
      */
     public void setContactInformation(ContactInformationBean contactInformation) {
         this.contactInformation = contactInformation;
@@ -180,8 +175,7 @@ public class AgentBean extends AbstractNamedIdentityBean<Agent, AgentBeanView> {
     }
 
     /**
-     * @param customers
-     *            the customers to set
+     * @param customers the customers to set
      */
     public void setCustomers(List<CustomerBean> customers) {
         this.customers = customers;
