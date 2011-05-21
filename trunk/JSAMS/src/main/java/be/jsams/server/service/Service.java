@@ -5,7 +5,7 @@ import java.util.List;
 import be.jsams.common.bean.model.AbstractIdentityBean;
 
 /**
- * Generic service for B extends of {@link AbstractIdentityBean}.
+ * Generic service for B extension of {@link AbstractIdentityBean}.
  * 
  * @param <B> an extension of {@link AbstractIdentityBean}
  * 

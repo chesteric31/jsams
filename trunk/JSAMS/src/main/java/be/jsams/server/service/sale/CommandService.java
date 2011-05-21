@@ -1,9 +1,7 @@
 package be.jsams.server.service.sale;
 
-import java.util.List;
-
 import be.jsams.common.bean.model.sale.CommandBean;
-import be.jsams.server.service.Service;
+import be.jsams.server.service.CriteriableService;
 
 /**
  * Command service interface.
@@ -11,14 +9,6 @@ import be.jsams.server.service.Service;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public interface CommandService extends Service<CommandBean> {
-
-    /**
-     * Find all {@link CommandBean} following the criteria {@link CommandBean}.
-     * 
-     * @param criteria the criteria {@link CommandBean}
-     * @return a list of {@link CommandBean}
-     */
-    List<CommandBean> findByCriteria(final CommandBean criteria);
+public interface CommandService extends CriteriableService<CommandBean> {
 
 }

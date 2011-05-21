@@ -1,9 +1,7 @@
 package be.jsams.server.service.management;
 
-import java.util.List;
-
 import be.jsams.common.bean.model.management.AgentBean;
-import be.jsams.server.service.Service;
+import be.jsams.server.service.CriteriableService;
 
 /**
  * Agent service interface.
@@ -11,14 +9,6 @@ import be.jsams.server.service.Service;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public interface AgentService extends Service<AgentBean> {
-
-    /**
-     * Find all {@link AgentBean} following the criteria agent.
-     * 
-     * @param criteria the criteria agent
-     * @return a list of {@link AgentBean}
-     */
-    List<AgentBean> findByCriteria(final AgentBean criteria);
+public interface AgentService extends CriteriableService<AgentBean> {
 
 }

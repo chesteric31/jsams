@@ -1,9 +1,7 @@
 package be.jsams.server.service.management;
 
-import java.util.List;
-
 import be.jsams.common.bean.model.management.CustomerBean;
-import be.jsams.server.service.Service;
+import be.jsams.server.service.CriteriableService;
 
 /**
  * Customer service interface.
@@ -11,14 +9,6 @@ import be.jsams.server.service.Service;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public interface CustomerService extends Service<CustomerBean> {
-
-    /**
-     * Find all {@link CustomerBean} following the criteria customer.
-     * 
-     * @param criteria the criteria customer
-     * @return a list of {@link CustomerBean}
-     */
-    List<CustomerBean> findByCriteria(final CustomerBean criteria);
+public interface CustomerService extends CriteriableService<CustomerBean> {
 
 }
