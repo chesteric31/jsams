@@ -16,7 +16,7 @@ import be.jsams.server.model.management.Product;
 public interface ProductDao extends Dao<Product> {
 
     /**
-     * Finds a list of {@link Product} following the criteria model
+     * Find a list of {@link Product} following the criteria model
      * 
      * @param criteria the criteria model
      * @return a list of {@link Product}

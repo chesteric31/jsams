@@ -27,8 +27,7 @@ public class CustomerDaoImpl extends DaoImpl<Customer> implements CustomerDao {
     /**
      * Constructor
      * 
-     * @param type
-     *            the class type
+     * @param type the class type
      */
     public CustomerDaoImpl(final Class<Customer> type) {
         super(type);
@@ -48,9 +47,9 @@ public class CustomerDaoImpl extends DaoImpl<Customer> implements CustomerDao {
         String phone = contactInformation.getPhone();
         PaymentModeBean paymentMode = (PaymentModeBean) criteria.getPaymentMode().getSelection();
         LegalFormBean legalForm = (LegalFormBean) criteria.getLegalForm().getSelection();
-        
+
         Long societyId = JsamsDesktop.getInstance().getCurrentSociety().getId();
-        
+
         queryBuilder.append(" WHERE ");
         queryBuilder.append("c.society.id = " + societyId);
 

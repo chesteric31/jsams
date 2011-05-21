@@ -25,8 +25,7 @@ public class EstimateDaoImpl extends DaoImpl<Estimate> implements EstimateDao {
     /**
      * Constructor
      * 
-     * @param type
-     *            the class type
+     * @param type the class type
      */
     public EstimateDaoImpl(final Class<Estimate> type) {
         super(type);

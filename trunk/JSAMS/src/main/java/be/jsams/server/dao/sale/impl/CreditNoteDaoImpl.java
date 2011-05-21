@@ -17,7 +17,7 @@ import com.mysql.jdbc.StringUtils;
 
 /**
  * Credit note DAO implementation.
- *
+ * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */

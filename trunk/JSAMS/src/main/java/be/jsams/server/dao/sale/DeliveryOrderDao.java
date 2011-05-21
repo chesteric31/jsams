@@ -8,18 +8,18 @@ import be.jsams.server.model.sale.DeliveryOrder;
 
 /**
  * Delivery Order DAO interface.
- *
+ * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
 public interface DeliveryOrderDao extends Dao<DeliveryOrder> {
 
     /**
-     * Finds a list of {@link DeliveryOrder} following the criteria model.
+     * Find a list of {@link DeliveryOrder} following the criteria model.
      * 
      * @param criteria the criteria model
      * @return a list of {@link DeliveryOrder}
      */
     List<DeliveryOrder> findByCriteria(final DeliveryOrderBean criteria);
-    
+
 }

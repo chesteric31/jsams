@@ -14,8 +14,7 @@ public class PaymentModeDaoImpl extends DaoImpl<PaymentMode> implements PaymentM
     /**
      * Constructor
      * 
-     * @param type
-     *            the class type
+     * @param type the class type
      */
     public PaymentModeDaoImpl(final Class<PaymentMode> type) {
         super(type);

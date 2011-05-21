@@ -5,7 +5,6 @@ import be.jsams.server.model.Address;
 /**
  * Address DAO interface.
  * 
- *
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */

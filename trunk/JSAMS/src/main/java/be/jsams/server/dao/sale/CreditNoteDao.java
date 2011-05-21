@@ -8,18 +8,18 @@ import be.jsams.server.model.sale.CreditNote;
 
 /**
  * Credit note DAO interface.
- *
+ * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
 public interface CreditNoteDao extends Dao<CreditNote> {
 
     /**
-     * Finds a list of {@link CreditNote} following the criteria model.
+     * Find a list of {@link CreditNote} following the criteria model.
      * 
      * @param criteria the criteria model
      * @return a list of {@link CreditNote}
      */
     List<CreditNote> findByCriteria(final CreditNoteBean criteria);
-    
+
 }

@@ -51,7 +51,7 @@ public class ProductBeanView extends AbstractBeanView<ProductBean, JPanel, JPane
         JsamsFormattedTextField textFieldReorderLevel = viewFactory.createBindingIntComponent(bean,
                 ProductBean.REORDER_LEVEL_PROPERTY, false, false);
         JsamsFormattedTextField textFieldVatApplicable = viewFactory.createBindingDecimalComponent(bean,
-                CustomerBean.VATAPPLICABLE_PROPERTY, true, false);
+                CustomerBean.VAT_APPLICABLE_PROPERTY, true, false);
         FormLayout layout = new FormLayout("right:p, 3dlu, 50dlu, 3dlu, right:p, 3dlu, 50dlu", "p");
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, JsamsFrame.RESOURCE_BUNDLE);
         final int maxColumnSpan = 5;

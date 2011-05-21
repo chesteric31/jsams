@@ -15,7 +15,7 @@ import be.jsams.server.model.sale.Bill;
 public interface BillDao extends Dao<Bill> {
 
     /**
-     * Finds a list of {@link Bill} following the criteria model.
+     * Find a list of {@link Bill} following the criteria model.
      * 
      * @param criteria the criteria model
      * @return a list of {@link Bill}

@@ -14,8 +14,7 @@ public class CivilityDaoImpl extends DaoImpl<Civility> implements CivilityDao {
     /**
      * Constructor
      * 
-     * @param type
-     *            the class type
+     * @param type the class type
      */
     public CivilityDaoImpl(final Class<Civility> type) {
         super(type);

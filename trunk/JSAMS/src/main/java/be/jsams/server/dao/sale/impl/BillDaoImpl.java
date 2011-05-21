@@ -18,7 +18,7 @@ import com.mysql.jdbc.StringUtils;
 
 /**
  * Bill DAO implementation.
- *
+ * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
@@ -89,5 +89,5 @@ public class BillDaoImpl extends DaoImpl<Bill> implements BillDao {
         List<Bill> result = query.getResultList();
         return result;
     }
-    
+
 }

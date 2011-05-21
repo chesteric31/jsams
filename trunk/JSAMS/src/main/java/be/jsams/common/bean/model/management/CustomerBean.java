@@ -50,16 +50,17 @@ public class CustomerBean extends AbstractNamedIdentityBean<Customer, CustomerBe
     private LegalFormBean legalForm;
     private SocietyBean society;
 
+    private SocietyBeanBuilder societyBuilder;
     private CivilityBeanBuilder civilityBuilder;
     private LegalFormBeanBuilder legalFormBuilder;
     private PaymentModeBeanBuilder paymentModeBuilder;
 
-    public static final String VATNUMBER_PROPERTY = "vatNumber";
+    public static final String VAT_NUMBER_PROPERTY = "vatNumber";
     public static final String DEFAULT_DISCOUNT_RATE_PROPERTY = "defaultDiscountRate";
     public static final String BANK1_PROPERTY = "bank1";
     public static final String BANK2_PROPERTY = "bank2";
-    public static final String CREDITLIMIT_PROPERTY = "creditLimit";
-    public static final String VATAPPLICABLE_PROPERTY = "vatApplicable";
+    public static final String CREDIT_LIMIT_PROPERTY = "creditLimit";
+    public static final String VAT_APPLICABLE_PROPERTY = "vatApplicable";
     public static final String DESCRIPTION_PROPERTY = "description";
 
     /**
@@ -134,7 +135,7 @@ public class CustomerBean extends AbstractNamedIdentityBean<Customer, CustomerBe
         setVatNumber(model.getVatNumber());
         setDescription(model.getDescription());
 
-        SocietyBeanBuilder societyBuilder = JsamsApplicationContext.getSocietyBeanBuilder();
+        societyBuilder = JsamsApplicationContext.getSocietyBeanBuilder();
         societyBuilder.setModel(model.getSociety());
         SocietyBean societyBean = societyBuilder.build(false);
         setSociety(societyBean);
@@ -160,7 +161,7 @@ public class CustomerBean extends AbstractNamedIdentityBean<Customer, CustomerBe
     public void setVatNumber(String vatNumber) {
         String oldValue = this.vatNumber;
         this.vatNumber = vatNumber;
-        firePropertyChange(VATNUMBER_PROPERTY, oldValue, this.vatNumber);
+        firePropertyChange(VAT_NUMBER_PROPERTY, oldValue, this.vatNumber);
     }
 
     /**
@@ -224,7 +225,7 @@ public class CustomerBean extends AbstractNamedIdentityBean<Customer, CustomerBe
     public void setCreditLimit(Double creditLimit) {
         Double oldValue = this.creditLimit;
         this.creditLimit = creditLimit;
-        firePropertyChange(CREDITLIMIT_PROPERTY, oldValue, this.creditLimit);
+        firePropertyChange(CREDIT_LIMIT_PROPERTY, oldValue, this.creditLimit);
     }
 
     /**
@@ -240,7 +241,7 @@ public class CustomerBean extends AbstractNamedIdentityBean<Customer, CustomerBe
     public void setVatApplicable(Double vatApplicable) {
         Double oldValue = this.vatApplicable;
         this.vatApplicable = vatApplicable;
-        firePropertyChange(VATAPPLICABLE_PROPERTY, oldValue, this.vatApplicable);
+        firePropertyChange(VAT_APPLICABLE_PROPERTY, oldValue, this.vatApplicable);
     }
 
     /**

@@ -117,16 +117,16 @@ public class CustomerBeanView extends AbstractBeanView<CustomerBean, JPanel, JPa
         CustomerBean bean = getBean();
         ViewFactory<CustomerBean> helper = new ViewFactory<CustomerBean>();
         JsamsTextField textFieldName = helper.createBindingTextComponent(bean, CustomerBean.NAME_PROPERTY, true, false);
-        JsamsTextField textFieldVatNumber = helper.createBindingTextComponent(bean, CustomerBean.VATNUMBER_PROPERTY,
+        JsamsTextField textFieldVatNumber = helper.createBindingTextComponent(bean, CustomerBean.VAT_NUMBER_PROPERTY,
                 false, false);
         JsamsTextField textFieldBank1 = helper.createBindingTextComponent(bean, CustomerBean.BANK1_PROPERTY, false,
                 false);
         JsamsTextField textFieldBank2 = helper.createBindingTextComponent(bean, CustomerBean.BANK2_PROPERTY, false,
                 false);
         JsamsFormattedTextField textFieldCreditLimit = helper.createBindingDecimalComponent(bean,
-                CustomerBean.CREDITLIMIT_PROPERTY, false, false);
+                CustomerBean.CREDIT_LIMIT_PROPERTY, false, false);
         JsamsFormattedTextField textFieldVatApplicable = helper.createBindingDecimalComponent(bean,
-                CustomerBean.VATAPPLICABLE_PROPERTY, true, false);
+                CustomerBean.VAT_APPLICABLE_PROPERTY, true, false);
         FormLayout layout = new FormLayout("right:p, 3dlu, 75dlu, 3dlu, right:p, 3dlu, 75dlu", "p");
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, JsamsFrame.RESOURCE_BUNDLE);
         final int maxColumnSpan = 5;

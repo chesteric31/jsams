@@ -14,8 +14,7 @@ public class AddressDaoImpl extends DaoImpl<Address> implements AddressDao {
     /**
      * Constructor
      * 
-     * @param type
-     *            the class type
+     * @param type the class type
      */
     public AddressDaoImpl(final Class<Address> type) {
         super(type);
