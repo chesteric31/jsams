@@ -8,11 +8,11 @@ import org.junit.runners.Suite.SuiteClasses;
 import be.jsams.server.dao.impl.AddressDaoImplTest;
 import be.jsams.server.dao.impl.AgentDaoImplTest;
 import be.jsams.server.dao.impl.CivilityDaoImplTest;
-import be.jsams.server.dao.impl.CommandDetailDaoImplTest;
 import be.jsams.server.dao.impl.ContactInformationDaoImplTest;
 import be.jsams.server.dao.impl.ProductCategoryDaoImplTest;
 import be.jsams.server.dao.impl.ProductDaoImplTest;
 import be.jsams.server.dao.impl.SocietyDaoImplTest;
+import be.jsams.server.dao.sale.impl.CommandDetailDaoImplTest;
 
 /**
  * Test suite for all JUNIT tests.

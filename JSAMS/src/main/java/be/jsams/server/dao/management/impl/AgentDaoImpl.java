@@ -21,8 +21,7 @@ public class AgentDaoImpl extends DaoImpl<Agent> implements AgentDao {
     /**
      * Constructor
      * 
-     * @param type
-     *            the class type
+     * @param type the class type
      */
     public AgentDaoImpl(final Class<Agent> type) {
         super(type);
@@ -44,10 +43,10 @@ public class AgentDaoImpl extends DaoImpl<Agent> implements AgentDao {
 
         String phone = criteria.getContactInformation().getPhone();
         CivilityBean civility = (CivilityBean) criteria.getCivility().getSelection();
-        
+
         queryBuilder.append(" WHERE ");
         queryBuilder.append("a.society.id = " + criteria.getSociety().getId());
-        
+
         if (name != null) {
             queryBuilder.append(" AND a.name LIKE '%" + name + "%'");
         }

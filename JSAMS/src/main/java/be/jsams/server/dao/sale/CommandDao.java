@@ -15,7 +15,7 @@ import be.jsams.server.model.sale.Command;
 public interface CommandDao extends Dao<Command> {
 
     /**
-     * Finds a list of {@link Command} following the criteria model.
+     * Find a list of {@link Command} following the criteria model.
      * 
      * @param criteria the criteria model
      * @return a list of {@link Command}

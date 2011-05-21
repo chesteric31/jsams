@@ -22,12 +22,11 @@ import com.mysql.jdbc.StringUtils;
 public class ProductDaoImpl extends DaoImpl<Product> implements ProductDao {
 
     private SocietyBean currentSociety;
-    
+
     /**
      * Constructor
      * 
-     * @param type
-     *            the class type
+     * @param type the class type
      */
     public ProductDaoImpl(final Class<Product> type) {
         super(type);

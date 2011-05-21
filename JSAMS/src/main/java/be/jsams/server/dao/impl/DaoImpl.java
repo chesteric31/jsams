@@ -34,8 +34,7 @@ public class DaoImpl<T> implements Dao<T> {
     /**
      * Constructor
      * 
-     * @param type
-     *            the class type
+     * @param type the class type
      */
     public DaoImpl(final Class<T> type) {
         this.type = type;
@@ -51,8 +50,7 @@ public class DaoImpl<T> implements Dao<T> {
 
     /**
      * 
-     * @param entityManager
-     *            the {@link EntityManager} to set
+     * @param entityManager the {@link EntityManager} to set
      */
     public void setEntityManager(EntityManager entityManager) {
         this.entityManager = entityManager;

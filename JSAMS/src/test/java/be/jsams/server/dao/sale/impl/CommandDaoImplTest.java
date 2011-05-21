@@ -82,7 +82,7 @@ public class CommandDaoImplTest extends AbstractJUnitTestClass {
         Product persistedProduct = productDao.add(product);
         commandDetail.setProduct(persistedProduct);
         Command persistedCommand = dao.add(command);
-        CommandBean criteria = new CommandBean(command);
+        CommandBean criteria = new CommandBean(persistedCommand);
         List<Command> founds = dao.findByCriteria(criteria);
         assertTrue(founds.contains(persistedCommand));
     }

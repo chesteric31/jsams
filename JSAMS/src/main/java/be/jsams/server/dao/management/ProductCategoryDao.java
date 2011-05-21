@@ -14,12 +14,11 @@ import be.jsams.server.model.management.ProductCategory;
  * @version $Rev$ $Date::                  $ $Author$
  */
 public interface ProductCategoryDao extends Dao<ProductCategory> {
-    
+
     /**
-     * Finds a list of {@link ProductCategory} following the criteria model
+     * Find a list of {@link ProductCategory} following the criteria model
      * 
-     * @param criteria
-     *            the criteria model
+     * @param criteria the criteria model
      * @return a list of {@link ProductCategory}
      */
     List<ProductCategory> findByCriteria(final ProductCategoryBean criteria);
@@ -28,6 +27,7 @@ public interface ProductCategoryDao extends Dao<ProductCategory> {
      * @return the currentSociety
      */
     SocietyBean getCurrentSociety();
+
     /**
      * @param currentSociety the currentSociety to set
      */

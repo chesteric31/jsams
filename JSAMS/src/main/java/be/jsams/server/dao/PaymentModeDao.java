@@ -4,7 +4,7 @@ import be.jsams.server.model.PaymentMode;
 
 /**
  * Payment mode DAO interface.
- *
+ * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
