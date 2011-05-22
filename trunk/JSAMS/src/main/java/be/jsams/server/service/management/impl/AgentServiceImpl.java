@@ -3,9 +3,12 @@ package be.jsams.server.service.management.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import be.jsams.common.bean.builder.SocietyBeanBuilder;
+import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.AgentBean;
 import be.jsams.server.dao.management.AgentDao;
 import be.jsams.server.model.management.Agent;
+import be.jsams.server.service.AbstractService;
 import be.jsams.server.service.management.AgentService;
 
 /**
@@ -14,7 +17,7 @@ import be.jsams.server.service.management.AgentService;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class AgentServiceImpl implements AgentService {
+public class AgentServiceImpl extends AbstractService implements AgentService {
 
     private AgentDao agentDao;
     
@@ -40,7 +43,7 @@ public class AgentServiceImpl implements AgentService {
     public AgentBean create(AgentBean bean) {
         Agent agent = new Agent(bean);
         agentDao.add(agent);
-        return new AgentBean(agent);
+        return new AgentBean(agent, bean.getSociety());
     }
 
     /**
@@ -64,8 +67,11 @@ public class AgentServiceImpl implements AgentService {
     public List<AgentBean> findAll() {
         List<Agent> agents = agentDao.findAll();
         List<AgentBean> beans = new ArrayList<AgentBean>();
+        SocietyBeanBuilder builder = getSocietyBeanBuilder();
         for (Agent agent : agents) {
-            beans.add(new AgentBean(agent));
+            builder.setModel(agent.getSociety());
+            SocietyBean bean = builder.build(false);
+            beans.add(new AgentBean(agent, bean));
         }
         return beans;
     }
@@ -75,7 +81,10 @@ public class AgentServiceImpl implements AgentService {
      */
     public AgentBean findById(Long id) {
         Agent agent = agentDao.findById(id);
-        AgentBean bean = new AgentBean(agent);
+        SocietyBeanBuilder builder = getSocietyBeanBuilder();
+        builder.setModel(agent.getSociety());
+        SocietyBean societyBean = builder.build(false);
+        AgentBean bean = new AgentBean(agent, societyBean);
         return bean;
     }
 
@@ -94,7 +103,7 @@ public class AgentServiceImpl implements AgentService {
         List<Agent> agents = agentDao.findByCriteria(criteria);
         List<AgentBean> beans = new ArrayList<AgentBean>();
         for (Agent agent : agents) {
-            beans.add(new AgentBean(agent));
+            beans.add(new AgentBean(agent, criteria.getSociety()));
         }
         return beans;
     }

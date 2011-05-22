@@ -87,7 +87,8 @@ public class ProductServiceImpl implements ProductService {
      * {@inheritDoc}
      */
     public List<ProductBean> findByCriteria(final ProductBean criteria) {
-        SocietyBean society = JsamsDesktop.getInstance().getCurrentSociety();
+//        SocietyBean society = JsamsDesktop.getInstance().getCurrentSociety();
+        SocietyBean society = criteria.getCategory().getSociety();
         ((ProductDaoImpl) dao).setCurrentSociety(society);
         List<Product> products = dao.findByCriteria(criteria);
         List<ProductBean> beans = new ArrayList<ProductBean>();

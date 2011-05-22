@@ -54,7 +54,7 @@ public class EstimateBean extends AbstractDocumentBean<Estimate, EstimateBeanVie
      */
     public EstimateBean(Estimate model) {
         super(model);
-        setAgent(new AgentBean(model.getAgent()));
+        setAgent(new AgentBean(model.getAgent(), getSociety()));
         setBillingAddress(new AddressBean(model.getBillingAddress()));
         List<EstimateDetailBean> beans = new ArrayList<EstimateDetailBean>();
         for (EstimateDetail detail : model.getDetails()) {

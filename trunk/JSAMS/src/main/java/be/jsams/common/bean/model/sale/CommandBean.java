@@ -56,7 +56,7 @@ public class CommandBean extends AbstractDocumentBean<Command, CommandBeanView> 
      */
     public CommandBean(Command model) {
         super(model);
-        setAgent(new AgentBean(model.getAgent()));
+        setAgent(new AgentBean(model.getAgent(), getSociety()));
         setBillingAddress(new AddressBean(model.getBillingAddress()));
         setDeliveryAddress(new AddressBean(model.getDeliveryAddress()));
         List<CommandDetailBean> beans = new ArrayList<CommandDetailBean>();
