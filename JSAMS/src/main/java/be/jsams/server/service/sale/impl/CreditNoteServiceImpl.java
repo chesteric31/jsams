@@ -3,7 +3,6 @@ package be.jsams.server.service.sale.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.common.bean.model.sale.CreditNoteBean;
 import be.jsams.server.dao.sale.CreditNoteDao;
 import be.jsams.server.model.sale.CreditNote;
@@ -84,7 +83,7 @@ public class CreditNoteServiceImpl implements CreditNoteService {
      */
     @Override
     public List<CreditNoteBean> findByCriteria(CreditNoteBean criteria) {
-        criteria.setSociety(JsamsDesktop.getInstance().getCurrentSociety());
+//        criteria.setSociety(JsamsDesktop.getInstance().getCurrentSociety());
         List<CreditNote> creditNotes = creditNoteDao.findByCriteria(criteria);
         List<CreditNoteBean> beans = new ArrayList<CreditNoteBean>();
         for (CreditNote creditNote : creditNotes) {

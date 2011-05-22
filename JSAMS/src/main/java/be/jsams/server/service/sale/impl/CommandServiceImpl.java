@@ -3,7 +3,6 @@ package be.jsams.server.service.sale.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.common.bean.model.sale.CommandBean;
 import be.jsams.server.dao.sale.CommandDao;
 import be.jsams.server.model.sale.Command;
@@ -94,7 +93,7 @@ public class CommandServiceImpl implements CommandService {
      */
     @Override
     public List<CommandBean> findByCriteria(final CommandBean criteria) {
-        criteria.setSociety(JsamsDesktop.getInstance().getCurrentSociety());
+//        criteria.setSociety(JsamsDesktop.getInstance().getCurrentSociety());
         List<Command> commands = commandDao.findByCriteria(criteria);
         List<CommandBean> beans = new ArrayList<CommandBean>();
         for (Command command : commands) {

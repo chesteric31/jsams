@@ -3,7 +3,6 @@ package be.jsams.server.service.sale.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.common.bean.model.sale.DeliveryOrderBean;
 import be.jsams.server.dao.sale.DeliveryOrderDao;
 import be.jsams.server.model.sale.DeliveryOrder;
@@ -98,7 +97,7 @@ public class DeliveryOrderServiceImpl implements DeliveryOrderService {
      */
     @Override
     public List<DeliveryOrderBean> findByCriteria(DeliveryOrderBean criteria) {
-        criteria.setSociety(JsamsDesktop.getInstance().getCurrentSociety());
+//        criteria.setSociety(JsamsDesktop.getInstance().getCurrentSociety());
         List<DeliveryOrder> deliveryOrders = deliveryOrderDao.findByCriteria(criteria);
         List<DeliveryOrderBean> beans = new ArrayList<DeliveryOrderBean>();
         for (DeliveryOrder deliveryOrder : deliveryOrders) {

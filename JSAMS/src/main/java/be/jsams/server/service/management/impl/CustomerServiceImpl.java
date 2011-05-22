@@ -3,9 +3,12 @@ package be.jsams.server.service.management.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import be.jsams.common.bean.builder.SocietyBeanBuilder;
+import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.server.dao.management.CustomerDao;
 import be.jsams.server.model.management.Customer;
+import be.jsams.server.service.AbstractService;
 import be.jsams.server.service.management.CustomerService;
 
 /**
@@ -14,7 +17,7 @@ import be.jsams.server.service.management.CustomerService;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class CustomerServiceImpl implements CustomerService {
+public class CustomerServiceImpl extends AbstractService implements CustomerService {
 
     private CustomerDao customerDao;
 
@@ -41,7 +44,7 @@ public class CustomerServiceImpl implements CustomerService {
     public CustomerBean create(final CustomerBean bean) {
         Customer customer = new Customer(bean);
         customerDao.add(customer);
-        return new CustomerBean(customer);
+        return new CustomerBean(customer, bean.getSociety());
     }
 
     /**
@@ -65,8 +68,11 @@ public class CustomerServiceImpl implements CustomerService {
     public List<CustomerBean> findAll() {
         List<Customer> customers = customerDao.findAll();
         List<CustomerBean> beans = new ArrayList<CustomerBean>();
+        SocietyBeanBuilder builder = getSocietyBeanBuilder();
         for (Customer customer : customers) {
-            beans.add(new CustomerBean(customer));
+            builder.setModel(customer.getSociety());
+            SocietyBean bean = builder.build(false);
+            beans.add(new CustomerBean(customer, bean));
         }
         return beans;
     }
@@ -76,7 +82,10 @@ public class CustomerServiceImpl implements CustomerService {
      */
     public CustomerBean findById(final Long id) {
         Customer customer = customerDao.findById(id);
-        CustomerBean bean = new CustomerBean(customer);
+        SocietyBeanBuilder builder = getSocietyBeanBuilder();
+        builder.setModel(customer.getSociety());
+        SocietyBean societyBean = builder.build(false);
+        CustomerBean bean = new CustomerBean(customer, societyBean);
         return bean;
     }
 
@@ -96,7 +105,7 @@ public class CustomerServiceImpl implements CustomerService {
         List<CustomerBean> beans = new ArrayList<CustomerBean>();
         if (customers != null && !customers.isEmpty()) {
             for (Customer customer : customers) {
-                beans.add(new CustomerBean(customer));
+                beans.add(new CustomerBean(customer, criteria.getSociety()));
             }
         }
         return beans;

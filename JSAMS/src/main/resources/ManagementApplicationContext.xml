@@ -32,7 +32,8 @@
 		<property name="target" ref="agentServiceTarget" />
 	</bean>
 	<bean id="customerServiceTarget"
-		class="be.jsams.server.service.management.impl.CustomerServiceImpl">
+		class="be.jsams.server.service.management.impl.CustomerServiceImpl"
+		parent="abstractService">
 		<property name="customerDao" ref="customerDao" />
 	</bean>
 	<bean id="customerService" parent="baseTransactionProxy">

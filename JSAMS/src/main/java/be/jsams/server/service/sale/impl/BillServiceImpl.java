@@ -3,7 +3,6 @@ package be.jsams.server.service.sale.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.common.bean.model.sale.BillBean;
 import be.jsams.server.dao.sale.BillDao;
 import be.jsams.server.model.sale.Bill;
@@ -84,7 +83,7 @@ public class BillServiceImpl implements BillService {
      */
     @Override
     public List<BillBean> findByCriteria(BillBean criteria) {
-        criteria.setSociety(JsamsDesktop.getInstance().getCurrentSociety());
+//        criteria.setSociety(JsamsDesktop.getInstance().getCurrentSociety());
         List<Bill> bills = billDao.findByCriteria(criteria);
         List<BillBean> beans = new ArrayList<BillBean>();
         for (Bill bill : bills) {

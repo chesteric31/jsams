@@ -60,10 +60,11 @@ public abstract class AbstractDocumentBean<M extends AbstractDocument, V extends
      */
     public AbstractDocumentBean(M model) {
         super(model);
+        SocietyBean society = JsamsDesktop.getInstance().getCurrentSociety();
         setCreationDate(model.getCreationDate());
-        setCustomer(new CustomerBean(model.getCustomer()));
+        setSociety(society);
+        setCustomer(new CustomerBean(model.getCustomer(), society));
         setRemark(model.getRemark());
-        setSociety(this.customer.getSociety());
     }
 
     /**

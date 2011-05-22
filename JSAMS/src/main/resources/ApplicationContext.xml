@@ -35,7 +35,10 @@
 	<bean id="txManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
-	<!-- enable the configuration of transactional behavior based on annotations -->
+	<!--
+		enable the configuration of transactional behavior based on
+		annotations
+	-->
 	<!-- <tx:annotation-driven transaction-manager="txManager" /> -->
 
 	<bean id="baseTransactionProxy"
@@ -52,15 +55,21 @@
 		</property>
 	</bean>
 
+	<bean id="abstractService" class="be.jsams.server.service.AbstractService"
+		abstract="true">
+		<property name="societyBeanBuilder" ref="societyBeanBuilder" />
+	</bean>
+
 	<bean id="societyDao" class="be.jsams.server.dao.impl.SocietyDaoImpl">
 		<constructor-arg value="be.jsams.server.model.Society" />
 	</bean>
 	<bean id="legalFormDao" class="be.jsams.server.dao.impl.LegalFormDaoImpl">
 		<constructor-arg value="be.jsams.server.model.LegalForm" />
 	</bean>
-	<bean id="societyServiceTarget" class="be.jsams.server.service.impl.SocietyServiceImpl">
+	<bean id="societyServiceTarget" class="be.jsams.server.service.impl.SocietyServiceImpl"
+		parent="abstractService">
 		<property name="societyDao" ref="societyDao" />
-		<property name="builder" ref="societyBeanBuilder" />
+<!--		<property name="builder" ref="societyBeanBuilder" />-->
 	</bean>
 	<bean id="societyService" parent="baseTransactionProxy">
 		<property name="target" ref="societyServiceTarget" />

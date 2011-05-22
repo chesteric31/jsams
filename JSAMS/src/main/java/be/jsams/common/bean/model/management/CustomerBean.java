@@ -4,7 +4,6 @@ import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.common.bean.builder.CivilityBeanBuilder;
 import be.jsams.common.bean.builder.LegalFormBeanBuilder;
 import be.jsams.common.bean.builder.PaymentModeBeanBuilder;
-import be.jsams.common.bean.builder.SocietyBeanBuilder;
 import be.jsams.common.bean.model.AbstractIdentityBean;
 import be.jsams.common.bean.model.AbstractNamedIdentityBean;
 import be.jsams.common.bean.model.AddressBean;
@@ -50,7 +49,7 @@ public class CustomerBean extends AbstractNamedIdentityBean<Customer, CustomerBe
     private LegalFormBean legalForm;
     private SocietyBean society;
 
-    private SocietyBeanBuilder societyBuilder;
+//    private SocietyBeanBuilder societyBuilder;
     private CivilityBeanBuilder civilityBuilder;
     private LegalFormBeanBuilder legalFormBuilder;
     private PaymentModeBeanBuilder paymentModeBuilder;
@@ -95,8 +94,9 @@ public class CustomerBean extends AbstractNamedIdentityBean<Customer, CustomerBe
      * Constructor
      * 
      * @param model the {@link Customer} to use
+     * @param society the {@link SocietyBean} of the model
      */
-    public CustomerBean(Customer model) {
+    public CustomerBean(Customer model, SocietyBean society) {
         super(model);
         setBillingAddress(new AddressBean(model.getBillingAddress()));
         setDeliveryAddress(new AddressBean(model.getDeliveryAddress()));
@@ -135,17 +135,19 @@ public class CustomerBean extends AbstractNamedIdentityBean<Customer, CustomerBe
         setVatNumber(model.getVatNumber());
         setDescription(model.getDescription());
 
-        societyBuilder = JsamsApplicationContext.getSocietyBeanBuilder();
-        societyBuilder.setModel(model.getSociety());
-        SocietyBean societyBean = societyBuilder.build(false);
-        setSociety(societyBean);
+//        societyBuilder = JsamsApplicationContext.getSocietyBeanBuilder();
+//        societyBuilder.setModel(model.getSociety());
+//        SocietyBean societyBean = societyBuilder.build(false);
+//        setSociety(societyBean);
+        setSociety(society);
         Agent agent = model.getAgent();
         if (agent != null) {
-            AgentBean bean = new AgentBean(agent);
+            AgentBean bean = new AgentBean(agent, society);
 //            bean.setSocietyBuilder(getSocietyBuilder());
             setAgent(bean);
         } else {
-            AgentBean bean = new AgentBean(societyBean);
+//            AgentBean bean = new AgentBean(societyBean);
+            AgentBean bean = new AgentBean(society);
             setAgent(bean);
         }
 
