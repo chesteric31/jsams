@@ -138,7 +138,7 @@ public class OpenSocietyDialog extends JsamsDialog implements JsamsButtonsInterf
         buttonNewSociety.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent e) {
-                SocietyBeanBuilder builder = new SocietyBeanBuilder();
+                SocietyBeanBuilder builder = getSocietyBeanBuilder();
                 SocietyBean societyBean = builder.build(true);
                 EditSocietyDialog dialog = new EditSocietyDialog(JsamsI18nResource.TITLE_EDIT_SOCIETY, societyBean);
                 if (dialog.isSuccess()) {
