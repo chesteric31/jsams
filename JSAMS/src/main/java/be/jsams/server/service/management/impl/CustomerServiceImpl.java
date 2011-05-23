@@ -67,13 +67,12 @@ public class CustomerServiceImpl extends AbstractService implements CustomerServ
      * {@inheritDoc}
      */
     public List<CustomerBean> findAll() {
+        SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
+        customerDao.setCurrentSociety(currentSociety);
         List<Customer> customers = customerDao.findAll();
         List<CustomerBean> beans = new ArrayList<CustomerBean>();
-        SocietyBeanBuilder builder = getSocietyBeanBuilder();
         for (Customer customer : customers) {
-            builder.setModel(customer.getSociety());
-            SocietyBean bean = builder.build(false);
-            beans.add(new CustomerBean(customer, bean));
+            beans.add(new CustomerBean(customer, currentSociety));
         }
         return beans;
     }
@@ -102,12 +101,13 @@ public class CustomerServiceImpl extends AbstractService implements CustomerServ
      * {@inheritDoc}
      */
     public List<CustomerBean> findByCriteria(final CustomerBean criteria) {
-        criteria.setSociety(JsamsDesktop.getInstance().getCurrentSociety());
+        SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
+        customerDao.setCurrentSociety(currentSociety);
         List<Customer> customers = customerDao.findByCriteria(criteria);
         List<CustomerBean> beans = new ArrayList<CustomerBean>();
         if (customers != null && !customers.isEmpty()) {
             for (Customer customer : customers) {
-                beans.add(new CustomerBean(customer, criteria.getSociety()));
+                beans.add(new CustomerBean(customer, currentSociety));
             }
         }
         return beans;

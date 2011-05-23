@@ -55,7 +55,7 @@ public class BillDaoImpl extends DaoImpl<Bill> implements BillDao {
         boolean closed = criteria.isClosed();
         boolean paid = criteria.isPaid();
 
-        Long societyId = criteria.getSociety().getId();
+        Long societyId = getCurrentSociety().getId();
 
         queryBuilder.append(" WHERE ");
         queryBuilder.append("b.customer.society.id = " + societyId);

@@ -73,6 +73,7 @@ public class CreditNoteServiceImpl implements CreditNoteService {
     @Override
     public List<CreditNoteBean> findAll() {
         SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
+        creditNoteDao.setCurrentSociety(currentSociety);
         List<CreditNote> creditNotes = creditNoteDao.findAll();
         List<CreditNoteBean> beans = new ArrayList<CreditNoteBean>();
         for (CreditNote creditNote : creditNotes) {
@@ -87,7 +88,7 @@ public class CreditNoteServiceImpl implements CreditNoteService {
     @Override
     public List<CreditNoteBean> findByCriteria(CreditNoteBean criteria) {
         SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
-        criteria.setSociety(currentSociety);
+        creditNoteDao.setCurrentSociety(currentSociety);
         List<CreditNote> creditNotes = creditNoteDao.findByCriteria(criteria);
         List<CreditNoteBean> beans = new ArrayList<CreditNoteBean>();
         for (CreditNote creditNote : creditNotes) {

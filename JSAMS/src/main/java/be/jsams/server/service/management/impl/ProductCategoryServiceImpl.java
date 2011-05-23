@@ -7,7 +7,6 @@ import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.ProductCategoryBean;
 import be.jsams.server.dao.management.ProductCategoryDao;
-import be.jsams.server.dao.management.impl.ProductCategoryDaoImpl;
 import be.jsams.server.model.management.ProductCategory;
 import be.jsams.server.service.management.ProductCategoryService;
 
@@ -67,7 +66,7 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
      */
     public List<ProductCategoryBean> findAll() {
         SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
-        ((ProductCategoryDaoImpl) productCategoryDao).setCurrentSociety(currentSociety);
+        productCategoryDao.setCurrentSociety(currentSociety);
         List<ProductCategory> categories = productCategoryDao.findAll();
         List<ProductCategoryBean> beans = new ArrayList<ProductCategoryBean>();
         for (ProductCategory category : categories) {
@@ -97,10 +96,12 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
      * {@inheritDoc}
      */
     public List<ProductCategoryBean> findByCriteria(final ProductCategoryBean criteria) {
+        SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
+        productCategoryDao.setCurrentSociety(currentSociety);
         List<ProductCategory> categories = productCategoryDao.findByCriteria(criteria);
         List<ProductCategoryBean> beans = new ArrayList<ProductCategoryBean>();
         for (ProductCategory category : categories) {
-            beans.add(new ProductCategoryBean(category, JsamsDesktop.getInstance().getCurrentSociety()));
+            beans.add(new ProductCategoryBean(category, currentSociety));
         }
         return beans;
     }

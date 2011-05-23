@@ -51,7 +51,7 @@ public class CreditNoteDaoImpl extends DaoImpl<CreditNote> implements CreditNote
         String zipCode = billingAddress.getZipCode();
         String city = billingAddress.getCity();
 
-        Long societyId = criteria.getSociety().getId();
+        Long societyId = getCurrentSociety().getId();
 
         queryBuilder.append(" WHERE ");
         queryBuilder.append("c.customer.society.id = " + societyId);

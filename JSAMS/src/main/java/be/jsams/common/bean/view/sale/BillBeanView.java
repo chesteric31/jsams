@@ -38,6 +38,7 @@ import be.jsams.client.swing.utils.IconUtil;
 import be.jsams.client.validator.SearchProductValidator;
 import be.jsams.common.bean.builder.ProductBeanBuilder;
 import be.jsams.common.bean.model.AddressBean;
+import be.jsams.common.bean.model.PaymentModeBean;
 import be.jsams.common.bean.model.PeriodBean;
 import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.management.ProductBean;
@@ -276,6 +277,8 @@ public class BillBeanView extends AbstractDocumentBeanView<BillBean, JPanel, JPa
                 AddressBean billingAddress = getBean().getBillingAddress();
                 AddressBean customerBillingAddress = source.getBillingAddress();
                 billingAddress.refresh(customerBillingAddress);
+                PaymentModeBean paymentMode = getBean().getPaymentMode();
+                paymentMode.refresh(source.getPaymentMode());
             }
         };
     }

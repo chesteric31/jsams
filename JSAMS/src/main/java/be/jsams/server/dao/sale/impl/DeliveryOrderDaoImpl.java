@@ -53,7 +53,7 @@ public class DeliveryOrderDaoImpl extends DaoImpl<DeliveryOrder> implements Deli
 
         boolean transferred = criteria.isTransferred();
 
-        Long societyId = criteria.getSociety().getId();
+        Long societyId = getCurrentSociety().getId();
 
         queryBuilder.append(" WHERE ");
         queryBuilder.append("d.customer.society.id = " + societyId);

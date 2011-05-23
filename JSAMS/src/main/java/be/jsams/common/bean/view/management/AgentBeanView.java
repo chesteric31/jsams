@@ -77,7 +77,7 @@ public class AgentBeanView extends AbstractBeanView<AgentBean, JPanel, JPanel> {
         JsamsTextField textFieldName = viewFactory.createBindingTextComponent(bean, AgentBean.NAME_PROPERTY, true,
                 false);
         JsamsTextField textFieldFunction = viewFactory.createBindingTextComponent(bean, AgentBean.FUNCTION_PROPERTY,
-                false, false);
+                true, false);
         FormLayout layout = new FormLayout("right:p, 3dlu, 75dlu, 3dlu, right:p, 3dlu, p:grow", "p");
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, JsamsFrame.RESOURCE_BUNDLE);
         final int maxColumnSpan = 5;

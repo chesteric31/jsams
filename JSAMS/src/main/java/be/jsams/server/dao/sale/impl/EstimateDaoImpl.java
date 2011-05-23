@@ -51,7 +51,7 @@ public class EstimateDaoImpl extends DaoImpl<Estimate> implements EstimateDao {
 
         boolean transferred = criteria.isTransferred();
 
-        Long societyId = criteria.getSociety().getId();
+        Long societyId = getCurrentSociety().getId();
 
         queryBuilder.append(" WHERE ");
         queryBuilder.append("e.customer.society.id = " + societyId);
