@@ -3,6 +3,7 @@ package be.jsams.server.service.management.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.common.bean.builder.SocietyBeanBuilder;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.CustomerBean;
@@ -101,6 +102,7 @@ public class CustomerServiceImpl extends AbstractService implements CustomerServ
      * {@inheritDoc}
      */
     public List<CustomerBean> findByCriteria(final CustomerBean criteria) {
+        criteria.setSociety(JsamsDesktop.getInstance().getCurrentSociety());
         List<Customer> customers = customerDao.findByCriteria(criteria);
         List<CustomerBean> beans = new ArrayList<CustomerBean>();
         if (customers != null && !customers.isEmpty()) {
