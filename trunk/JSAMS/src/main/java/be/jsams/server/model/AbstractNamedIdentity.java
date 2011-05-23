@@ -20,6 +20,7 @@ public abstract class AbstractNamedIdentity extends AbstractIdentity {
      * Constructor.
      */
     public AbstractNamedIdentity() {
+        super();
     }
 
     /**

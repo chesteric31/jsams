@@ -21,6 +21,7 @@ public abstract class AbstractIdentity implements Identity {
      * Constructor.
      */
     public AbstractIdentity() {
+        super();
     }
 
     /**

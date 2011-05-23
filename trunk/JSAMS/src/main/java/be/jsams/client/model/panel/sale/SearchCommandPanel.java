@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.model.dialog.sale.EditCommandDialog;
 import be.jsams.client.model.panel.AbstractSearchPanel;
@@ -52,7 +53,8 @@ public class SearchCommandPanel extends
      */
     @Override
     protected void performButtonAdd() {
-        new EditCommandDialog(JsamsI18nResource.TITLE_EDIT_COMMAND, new CommandBean());
+        CommandBean bean = new CommandBean(JsamsDesktop.getInstance().getCurrentSociety());
+        new EditCommandDialog(JsamsI18nResource.TITLE_EDIT_COMMAND, bean);
         updateUI();
     }
 

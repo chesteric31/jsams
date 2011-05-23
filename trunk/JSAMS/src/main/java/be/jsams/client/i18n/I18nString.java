@@ -19,8 +19,7 @@ public class I18nString {
     /**
      * Constructor
      * 
-     * @param key
-     *            the key resource bundle
+     * @param key the key resource bundle
      */
     public I18nString(final String key) {
         this(key, NO_ARGUMENTS);
@@ -29,14 +28,12 @@ public class I18nString {
     /**
      * Constructor
      * 
-     * @param key
-     *            the key resource bundle
-     * @param arguments
-     *            the table arguments
+     * @param key the key resource bundle
+     * @param arguments the table arguments
      */
     public I18nString(final String key, final Object[] arguments) {
-        setKey(key);
-        setArguments(arguments);
+        this.key = key;
+        this.arguments = arguments;
     }
 
     /**
@@ -49,8 +46,7 @@ public class I18nString {
 
     /**
      * 
-     * @param key
-     *            the key to set
+     * @param key the key to set
      */
     public void setKey(String key) {
         this.key = key;
@@ -66,8 +62,7 @@ public class I18nString {
 
     /**
      * 
-     * @param arguments
-     *            the table arguments to set
+     * @param arguments the table arguments to set
      */
     public void setArguments(Object[] arguments) {
         this.arguments = arguments;

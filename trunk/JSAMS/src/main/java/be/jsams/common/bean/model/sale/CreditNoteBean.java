@@ -5,6 +5,7 @@ import java.util.List;
 
 import be.jsams.common.bean.model.AbstractIdentityBean;
 import be.jsams.common.bean.model.AddressBean;
+import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.sale.detail.CreditNoteDetailBean;
 import be.jsams.common.bean.view.sale.CreditNoteBeanView;
 import be.jsams.server.model.sale.CreditNote;
@@ -28,9 +29,11 @@ public class CreditNoteBean extends AbstractDocumentBean<CreditNote, CreditNoteB
 
     /**
      * Default constructor
+     * 
+     * @param society the {@link SocietyBean}
      */
-    public CreditNoteBean() {
-        super();
+    public CreditNoteBean(SocietyBean society) {
+        super(society);
         this.billingAddress = new AddressBean();
         List<CreditNoteDetailBean> details = new ArrayList<CreditNoteDetailBean>();
         this.details = details;
@@ -41,9 +44,10 @@ public class CreditNoteBean extends AbstractDocumentBean<CreditNote, CreditNoteB
      * Constructor
      * 
      * @param model the {@link CreditNote}
+     * @param society the {@link SocietyBean}
      */
-    public CreditNoteBean(CreditNote model) {
-        super(model);
+    public CreditNoteBean(CreditNote model, SocietyBean society) {
+        super(model, society);
         this.billingAddress = new AddressBean(model.getBillingAddress());
         List<CreditNoteDetailBean> beans = new ArrayList<CreditNoteDetailBean>();
         for (CreditNoteDetail detail : model.getDetails()) {

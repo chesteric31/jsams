@@ -8,6 +8,7 @@ import javax.persistence.Query;
 
 import be.jsams.common.bean.model.AddressBean;
 import be.jsams.common.bean.model.PeriodBean;
+import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.sale.CreditNoteBean;
 import be.jsams.server.dao.impl.DaoImpl;
 import be.jsams.server.dao.sale.CreditNoteDao;
@@ -23,6 +24,8 @@ import com.mysql.jdbc.StringUtils;
  */
 public class CreditNoteDaoImpl extends DaoImpl<CreditNote> implements CreditNoteDao {
 
+    private SocietyBean currentSociety;
+    
     /**
      * Constructor
      * 
@@ -78,6 +81,35 @@ public class CreditNoteDaoImpl extends DaoImpl<CreditNote> implements CreditNote
         Query query = getEntityManager().createQuery(queryBuilder.toString());
         List<CreditNote> result = query.getResultList();
         return result;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @SuppressWarnings("unchecked")
+    public List<CreditNote> findAll() {
+        StringBuilder queryBuilder = new StringBuilder("FROM CreditNote c");
+
+        queryBuilder.append(" WHERE ");
+        queryBuilder.append("c.society.id = " + getCurrentSociety().getId());
+
+        Query query = getEntityManager().createQuery(queryBuilder.toString());
+        List<CreditNote> result = query.getResultList();
+        return result;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public SocietyBean getCurrentSociety() {
+        return currentSociety;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void setCurrentSociety(SocietyBean currentSociety) {
+        this.currentSociety = currentSociety;
     }
 
 }

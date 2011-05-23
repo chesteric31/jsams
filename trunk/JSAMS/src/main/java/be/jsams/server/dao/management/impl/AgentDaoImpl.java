@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.Query;
 
 import be.jsams.common.bean.model.CivilityBean;
+import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.AgentBean;
 import be.jsams.server.dao.impl.DaoImpl;
 import be.jsams.server.dao.management.AgentDao;
@@ -18,6 +19,8 @@ import be.jsams.server.model.management.Agent;
  */
 public class AgentDaoImpl extends DaoImpl<Agent> implements AgentDao {
 
+    private SocietyBean currentSociety;
+    
     /**
      * Constructor
      * 
@@ -69,6 +72,35 @@ public class AgentDaoImpl extends DaoImpl<Agent> implements AgentDao {
         Query query = getEntityManager().createQuery(queryBuilder.toString());
         List<Agent> result = query.getResultList();
         return result;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @SuppressWarnings("unchecked")
+    public List<Agent> findAll() {
+        StringBuilder queryBuilder = new StringBuilder("FROM Agent a");
+
+        queryBuilder.append(" WHERE ");
+        queryBuilder.append("a.society.id = " + getCurrentSociety().getId());
+
+        Query query = getEntityManager().createQuery(queryBuilder.toString());
+        List<Agent> result = query.getResultList();
+        return result;
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    public SocietyBean getCurrentSociety() {
+        return currentSociety;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void setCurrentSociety(SocietyBean currentSociety) {
+        this.currentSociety = currentSociety;
     }
 
 }

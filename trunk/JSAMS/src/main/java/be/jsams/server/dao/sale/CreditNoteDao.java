@@ -1,9 +1,7 @@
 package be.jsams.server.dao.sale;
 
-import java.util.List;
-
 import be.jsams.common.bean.model.sale.CreditNoteBean;
-import be.jsams.server.dao.Dao;
+import be.jsams.server.dao.CriteriableDao;
 import be.jsams.server.model.sale.CreditNote;
 
 /**
@@ -12,14 +10,6 @@ import be.jsams.server.model.sale.CreditNote;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public interface CreditNoteDao extends Dao<CreditNote> {
-
-    /**
-     * Find a list of {@link CreditNote} following the criteria model.
-     * 
-     * @param criteria the criteria model
-     * @return a list of {@link CreditNote}
-     */
-    List<CreditNote> findByCriteria(final CreditNoteBean criteria);
+public interface CreditNoteDao extends CriteriableDao<CreditNote, CreditNoteBean> {
 
 }

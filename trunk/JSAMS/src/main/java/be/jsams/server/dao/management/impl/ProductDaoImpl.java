@@ -131,15 +131,13 @@ public class ProductDaoImpl extends DaoImpl<Product> implements ProductDao {
     /**
      * {@inheritDoc}
      */
-    @Override
     public SocietyBean getCurrentSociety() {
-        return this.currentSociety;
+        return currentSociety;
     }
 
     /**
      * {@inheritDoc}
      */
-    @Override
     public void setCurrentSociety(SocietyBean currentSociety) {
         this.currentSociety = currentSociety;
     }

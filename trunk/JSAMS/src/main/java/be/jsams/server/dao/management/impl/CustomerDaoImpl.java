@@ -8,6 +8,7 @@ import be.jsams.common.bean.model.AddressBean;
 import be.jsams.common.bean.model.ContactInformationBean;
 import be.jsams.common.bean.model.LegalFormBean;
 import be.jsams.common.bean.model.PaymentModeBean;
+import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.server.dao.impl.DaoImpl;
 import be.jsams.server.dao.management.CustomerDao;
@@ -23,6 +24,8 @@ import com.mysql.jdbc.StringUtils;
  */
 public class CustomerDaoImpl extends DaoImpl<Customer> implements CustomerDao {
 
+    private SocietyBean currentSociety;
+    
     /**
      * Constructor
      * 
@@ -71,6 +74,35 @@ public class CustomerDaoImpl extends DaoImpl<Customer> implements CustomerDao {
         Query query = getEntityManager().createQuery(queryBuilder.toString());
         List<Customer> result = query.getResultList();
         return result;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @SuppressWarnings("unchecked")
+    public List<Customer> findAll() {
+        StringBuilder queryBuilder = new StringBuilder("FROM Customer c");
+
+        queryBuilder.append(" WHERE ");
+        queryBuilder.append("c.society.id = " + getCurrentSociety().getId());
+
+        Query query = getEntityManager().createQuery(queryBuilder.toString());
+        List<Customer> result = query.getResultList();
+        return result;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public SocietyBean getCurrentSociety() {
+        return currentSociety;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void setCurrentSociety(SocietyBean currentSociety) {
+        this.currentSociety = currentSociety;
     }
 
 }

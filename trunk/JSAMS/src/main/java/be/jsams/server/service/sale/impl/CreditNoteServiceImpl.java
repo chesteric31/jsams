@@ -3,6 +3,8 @@ package be.jsams.server.service.sale.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import be.jsams.client.desktop.JsamsDesktop;
+import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.sale.CreditNoteBean;
 import be.jsams.server.dao.sale.CreditNoteDao;
 import be.jsams.server.model.sale.CreditNote;
@@ -25,7 +27,7 @@ public class CreditNoteServiceImpl implements CreditNoteService {
     public CreditNoteBean create(CreditNoteBean bean) {
         CreditNote creditNote = new CreditNote(bean);
         CreditNote addingCreditNote = creditNoteDao.add(creditNote);
-        return new CreditNoteBean(addingCreditNote);
+        return new CreditNoteBean(addingCreditNote, JsamsDesktop.getInstance().getCurrentSociety());
     }
 
     /**
@@ -61,7 +63,7 @@ public class CreditNoteServiceImpl implements CreditNoteService {
     @Override
     public CreditNoteBean findById(Long id) {
         CreditNote creditNote = creditNoteDao.findById(id);
-        CreditNoteBean bean = new CreditNoteBean(creditNote);
+        CreditNoteBean bean = new CreditNoteBean(creditNote, JsamsDesktop.getInstance().getCurrentSociety());
         return bean;
     }
 
@@ -70,10 +72,11 @@ public class CreditNoteServiceImpl implements CreditNoteService {
      */
     @Override
     public List<CreditNoteBean> findAll() {
+        SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
         List<CreditNote> creditNotes = creditNoteDao.findAll();
         List<CreditNoteBean> beans = new ArrayList<CreditNoteBean>();
         for (CreditNote creditNote : creditNotes) {
-            beans.add(new CreditNoteBean(creditNote));
+            beans.add(new CreditNoteBean(creditNote, currentSociety));
         }
         return beans;
     }
@@ -83,11 +86,12 @@ public class CreditNoteServiceImpl implements CreditNoteService {
      */
     @Override
     public List<CreditNoteBean> findByCriteria(CreditNoteBean criteria) {
-//        criteria.setSociety(JsamsDesktop.getInstance().getCurrentSociety());
+        SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
+        criteria.setSociety(currentSociety);
         List<CreditNote> creditNotes = creditNoteDao.findByCriteria(criteria);
         List<CreditNoteBean> beans = new ArrayList<CreditNoteBean>();
         for (CreditNote creditNote : creditNotes) {
-            beans.add(new CreditNoteBean(creditNote));
+            beans.add(new CreditNoteBean(creditNote, currentSociety));
         }
         return beans;
     }
