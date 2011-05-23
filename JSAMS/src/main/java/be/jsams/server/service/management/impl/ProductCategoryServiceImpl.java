@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import be.jsams.client.desktop.JsamsDesktop;
+import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.ProductCategoryBean;
 import be.jsams.server.dao.management.ProductCategoryDao;
 import be.jsams.server.dao.management.impl.ProductCategoryDaoImpl;
@@ -65,11 +66,12 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
      * {@inheritDoc}
      */
     public List<ProductCategoryBean> findAll() {
-        ((ProductCategoryDaoImpl) productCategoryDao).setCurrentSociety(JsamsDesktop.getInstance().getCurrentSociety());
+        SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
+        ((ProductCategoryDaoImpl) productCategoryDao).setCurrentSociety(currentSociety);
         List<ProductCategory> categories = productCategoryDao.findAll();
         List<ProductCategoryBean> beans = new ArrayList<ProductCategoryBean>();
         for (ProductCategory category : categories) {
-            beans.add(new ProductCategoryBean(category, JsamsDesktop.getInstance().getCurrentSociety()));
+            beans.add(new ProductCategoryBean(category, currentSociety));
         }
         return beans;
     }

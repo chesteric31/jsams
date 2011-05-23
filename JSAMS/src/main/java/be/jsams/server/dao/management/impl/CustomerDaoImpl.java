@@ -4,9 +4,6 @@ import java.util.List;
 
 import javax.persistence.Query;
 
-import com.mysql.jdbc.StringUtils;
-
-import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.common.bean.model.AddressBean;
 import be.jsams.common.bean.model.ContactInformationBean;
 import be.jsams.common.bean.model.LegalFormBean;
@@ -15,6 +12,8 @@ import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.server.dao.impl.DaoImpl;
 import be.jsams.server.dao.management.CustomerDao;
 import be.jsams.server.model.management.Customer;
+
+import com.mysql.jdbc.StringUtils;
 
 /**
  * Customer DAO implementation.
@@ -48,10 +47,10 @@ public class CustomerDaoImpl extends DaoImpl<Customer> implements CustomerDao {
         PaymentModeBean paymentMode = (PaymentModeBean) criteria.getPaymentMode().getSelection();
         LegalFormBean legalForm = (LegalFormBean) criteria.getLegalForm().getSelection();
 
-        Long societyId = JsamsDesktop.getInstance().getCurrentSociety().getId();
+//        Long societyId = JsamsDesktop.getInstance().getCurrentSociety().getId();
 
         queryBuilder.append(" WHERE ");
-        queryBuilder.append("c.society.id = " + societyId);
+        queryBuilder.append("c.society.id = " + criteria.getSociety().getId());
 
         if (!StringUtils.isNullOrEmpty(name)) {
             queryBuilder.append(" AND c.name LIKE '%" + name + "%'");
