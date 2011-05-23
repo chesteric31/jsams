@@ -43,7 +43,7 @@ public class ProductCategoryDaoImpl extends DaoImpl<ProductCategory> implements 
         String nameNl = criteria.getLabelNl();
 
         queryBuilder.append(" WHERE ");
-        queryBuilder.append("c.society.id = " + criteria.getSociety().getId());
+        queryBuilder.append("c.society.id = " + getCurrentSociety().getId());
 
         if (!StringUtils.isNullOrEmpty(name)) {
             queryBuilder.append(" AND c.label LIKE '%" + name + "%'");

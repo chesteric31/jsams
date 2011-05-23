@@ -72,10 +72,12 @@ public class BillServiceImpl implements BillService {
      */
     @Override
     public List<BillBean> findAll() {
+        SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
+        billDao.setCurrentSociety(currentSociety);
         List<Bill> bills = billDao.findAll();
         List<BillBean> beans = new ArrayList<BillBean>();
         for (Bill bill : bills) {
-            beans.add(new BillBean(bill, JsamsDesktop.getInstance().getCurrentSociety()));
+            beans.add(new BillBean(bill, currentSociety));
         }
         return beans;
     }
@@ -86,7 +88,7 @@ public class BillServiceImpl implements BillService {
     @Override
     public List<BillBean> findByCriteria(BillBean criteria) {
         SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
-        criteria.setSociety(currentSociety);
+        billDao.setCurrentSociety(currentSociety);
         List<Bill> bills = billDao.findByCriteria(criteria);
         List<BillBean> beans = new ArrayList<BillBean>();
         for (Bill bill : bills) {

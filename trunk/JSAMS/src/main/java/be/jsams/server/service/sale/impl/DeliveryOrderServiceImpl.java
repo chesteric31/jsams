@@ -86,9 +86,10 @@ public class DeliveryOrderServiceImpl implements DeliveryOrderService {
      */
     @Override
     public List<DeliveryOrderBean> findAll() {
+        SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
+        deliveryOrderDao.setCurrentSociety(currentSociety);
         List<DeliveryOrder> deliveryOrders = deliveryOrderDao.findAll();
         List<DeliveryOrderBean> beans = new ArrayList<DeliveryOrderBean>();
-        SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
         for (DeliveryOrder deliveryOrder : deliveryOrders) {
             beans.add(new DeliveryOrderBean(deliveryOrder, currentSociety));
         }
@@ -101,7 +102,7 @@ public class DeliveryOrderServiceImpl implements DeliveryOrderService {
     @Override
     public List<DeliveryOrderBean> findByCriteria(DeliveryOrderBean criteria) {
         SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
-        criteria.setSociety(currentSociety);
+        deliveryOrderDao.setCurrentSociety(currentSociety);
         List<DeliveryOrder> deliveryOrders = deliveryOrderDao.findByCriteria(criteria);
         List<DeliveryOrderBean> beans = new ArrayList<DeliveryOrderBean>();
         for (DeliveryOrder deliveryOrder : deliveryOrders) {

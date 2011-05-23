@@ -48,7 +48,7 @@ public class AgentDaoImpl extends DaoImpl<Agent> implements AgentDao {
         CivilityBean civility = (CivilityBean) criteria.getCivility().getSelection();
 
         queryBuilder.append(" WHERE ");
-        queryBuilder.append("a.society.id = " + criteria.getSociety().getId());
+        queryBuilder.append("a.society.id = " + getCurrentSociety().getId());
 
         if (name != null) {
             queryBuilder.append(" AND a.name LIKE '%" + name + "%'");

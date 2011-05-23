@@ -53,7 +53,7 @@ public class CustomerDaoImpl extends DaoImpl<Customer> implements CustomerDao {
 //        Long societyId = JsamsDesktop.getInstance().getCurrentSociety().getId();
 
         queryBuilder.append(" WHERE ");
-        queryBuilder.append("c.society.id = " + criteria.getSociety().getId());
+        queryBuilder.append("c.society.id = " + getCurrentSociety().getId());
 
         if (!StringUtils.isNullOrEmpty(name)) {
             queryBuilder.append(" AND c.name LIKE '%" + name + "%'");

@@ -115,13 +115,16 @@ public abstract class AbstractTranslatableIdentityBean
     /**
      * {@inheritDoc}
      */
+    @SuppressWarnings("unchecked")
     @Override
     public void refresh(AbstractIdentityBean<?, ?> bean) {
-        AbstractTranslatableIdentityBean<?, ?> other = (AbstractTranslatableIdentityBean<?, ?>) bean;
+        AbstractTranslatableIdentityBean<M, V> other = (AbstractTranslatableIdentityBean<M, V>) bean;
         setId(other.getId());
         setLabel(other.getLabel());
         setLabelFr(other.getLabelFr());
         setLabelNl(other.getLabelNl());
+        setSelection(other.getSelection());
+        setListModel(other.getListModel());
     }
 
 }

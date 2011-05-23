@@ -53,7 +53,7 @@ public class CommandDaoImpl extends DaoImpl<Command> implements CommandDao {
 
         boolean transferred = criteria.isTransferred();
 
-        Long societyId = criteria.getSociety().getId();
+        Long societyId = getCurrentSociety().getId();
 
         queryBuilder.append(" WHERE ");
         queryBuilder.append("c.customer.society.id = " + societyId);

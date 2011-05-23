@@ -3,7 +3,7 @@ package be.jsams.server.service.management.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import be.jsams.common.bean.builder.SocietyBeanBuilder;
+import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.AgentBean;
 import be.jsams.server.dao.management.AgentDao;
@@ -65,13 +65,12 @@ public class AgentServiceImpl extends AbstractService implements AgentService {
      * {@inheritDoc}
      */
     public List<AgentBean> findAll() {
+        SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
+        agentDao.setCurrentSociety(currentSociety);
         List<Agent> agents = agentDao.findAll();
         List<AgentBean> beans = new ArrayList<AgentBean>();
-        SocietyBeanBuilder builder = getSocietyBeanBuilder();
         for (Agent agent : agents) {
-            builder.setModel(agent.getSociety());
-            SocietyBean bean = builder.build(false);
-            beans.add(new AgentBean(agent, bean));
+            beans.add(new AgentBean(agent, currentSociety));
         }
         return beans;
     }
@@ -81,10 +80,7 @@ public class AgentServiceImpl extends AbstractService implements AgentService {
      */
     public AgentBean findById(Long id) {
         Agent agent = agentDao.findById(id);
-        SocietyBeanBuilder builder = getSocietyBeanBuilder();
-        builder.setModel(agent.getSociety());
-        SocietyBean societyBean = builder.build(false);
-        AgentBean bean = new AgentBean(agent, societyBean);
+        AgentBean bean = new AgentBean(agent, JsamsDesktop.getInstance().getCurrentSociety());
         return bean;
     }
 
@@ -100,6 +96,7 @@ public class AgentServiceImpl extends AbstractService implements AgentService {
      * {@inheritDoc}
      */
     public List<AgentBean> findByCriteria(AgentBean criteria) {
+        agentDao.setCurrentSociety(JsamsDesktop.getInstance().getCurrentSociety());
         List<Agent> agents = agentDao.findByCriteria(criteria);
         List<AgentBean> beans = new ArrayList<AgentBean>();
         for (Agent agent : agents) {

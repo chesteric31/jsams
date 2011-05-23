@@ -72,9 +72,10 @@ public class EstimateServiceImpl implements EstimateService {
      * {@inheritDoc}
      */
     public List<EstimateBean> findAll() {
+        SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
+        estimateDao.setCurrentSociety(currentSociety);
         List<Estimate> estimates = estimateDao.findAll();
         List<EstimateBean> beans = new ArrayList<EstimateBean>();
-        SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
         for (Estimate estimate : estimates) {
             beans.add(new EstimateBean(estimate, currentSociety));
         }
@@ -105,7 +106,7 @@ public class EstimateServiceImpl implements EstimateService {
     public List<EstimateBean> findByCriteria(final EstimateBean criteria) {
         // necessary to have the current society in the criteria
         SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
-        criteria.setSociety(currentSociety);
+        estimateDao.setCurrentSociety(currentSociety);
         List<Estimate> estimates = estimateDao.findByCriteria(criteria);
         List<EstimateBean> beans = new ArrayList<EstimateBean>();
         for (Estimate estimate : estimates) {

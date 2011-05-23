@@ -65,9 +65,10 @@ public class CommandServiceImpl implements CommandService {
      * {@inheritDoc}
      */
     public List<CommandBean> findAll() {
+        SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
+        commandDao.setCurrentSociety(currentSociety);
         List<Command> commands = commandDao.findAll();
         List<CommandBean> beans = new ArrayList<CommandBean>();
-        SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
         for (Command command : commands) {
             beans.add(new CommandBean(command, currentSociety));
         }
@@ -97,7 +98,7 @@ public class CommandServiceImpl implements CommandService {
     @Override
     public List<CommandBean> findByCriteria(final CommandBean criteria) {
         SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
-        criteria.setSociety(currentSociety);
+        commandDao.setCurrentSociety(currentSociety);
         List<Command> commands = commandDao.findByCriteria(criteria);
         List<CommandBean> beans = new ArrayList<CommandBean>();
         for (Command command : commands) {
