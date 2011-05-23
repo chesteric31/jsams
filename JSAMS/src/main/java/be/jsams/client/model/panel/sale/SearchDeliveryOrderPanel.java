@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.model.dialog.sale.EditDeliveryOrderDialog;
 import be.jsams.client.model.panel.AbstractSearchPanel;
@@ -53,7 +54,8 @@ public class SearchDeliveryOrderPanel
      */
     @Override
     protected void performButtonAdd() {
-        new EditDeliveryOrderDialog(JsamsI18nResource.TITLE_EDIT_DELIVERY_ORDER, new DeliveryOrderBean());
+        DeliveryOrderBean bean = new DeliveryOrderBean(JsamsDesktop.getInstance().getCurrentSociety());
+        new EditDeliveryOrderDialog(JsamsI18nResource.TITLE_EDIT_DELIVERY_ORDER, bean);
         updateUI();
     }
 

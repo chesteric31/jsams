@@ -8,6 +8,7 @@ import javax.persistence.Query;
 
 import be.jsams.common.bean.model.AddressBean;
 import be.jsams.common.bean.model.PeriodBean;
+import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.sale.CommandBean;
 import be.jsams.server.dao.impl.DaoImpl;
 import be.jsams.server.dao.sale.CommandDao;
@@ -23,6 +24,8 @@ import com.mysql.jdbc.StringUtils;
  */
 public class CommandDaoImpl extends DaoImpl<Command> implements CommandDao {
 
+    private SocietyBean currentSociety;
+    
     /**
      * Constructor
      * 
@@ -81,6 +84,35 @@ public class CommandDaoImpl extends DaoImpl<Command> implements CommandDao {
         Query query = getEntityManager().createQuery(queryBuilder.toString());
         List<Command> result = query.getResultList();
         return result;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @SuppressWarnings("unchecked")
+    public List<Command> findAll() {
+        StringBuilder queryBuilder = new StringBuilder("FROM Command c");
+
+        queryBuilder.append(" WHERE ");
+        queryBuilder.append("c.society.id = " + getCurrentSociety().getId());
+
+        Query query = getEntityManager().createQuery(queryBuilder.toString());
+        List<Command> result = query.getResultList();
+        return result;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public SocietyBean getCurrentSociety() {
+        return currentSociety;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void setCurrentSociety(SocietyBean currentSociety) {
+        this.currentSociety = currentSociety;
     }
 
 }

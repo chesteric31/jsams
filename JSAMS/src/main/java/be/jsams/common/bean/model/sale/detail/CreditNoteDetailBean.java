@@ -1,6 +1,8 @@
 package be.jsams.common.bean.model.sale.detail;
 
+import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.common.bean.model.AbstractIdentityBean;
+import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.sale.BillBean;
 import be.jsams.common.bean.model.sale.CreditNoteBean;
 import be.jsams.common.bean.view.sale.detail.CreditNoteDetailBeanView;
@@ -45,7 +47,8 @@ public class CreditNoteDetailBean extends
         this.creditNote = creditNote;
         BillDetail detail = model.getBillDetail();
         if (detail != null) {
-            this.billDetail = new BillDetailBean(detail, new BillBean(detail.getBill()));
+            SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
+            this.billDetail = new BillDetailBean(detail, new BillBean(detail.getBill(), currentSociety));
         }
     }
 

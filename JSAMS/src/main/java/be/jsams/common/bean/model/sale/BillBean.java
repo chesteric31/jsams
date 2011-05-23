@@ -9,6 +9,7 @@ import be.jsams.common.bean.builder.PaymentModeBeanBuilder;
 import be.jsams.common.bean.model.AbstractIdentityBean;
 import be.jsams.common.bean.model.AddressBean;
 import be.jsams.common.bean.model.PaymentModeBean;
+import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.sale.detail.BillDetailBean;
 import be.jsams.common.bean.view.sale.BillBeanView;
 import be.jsams.server.model.PaymentMode;
@@ -53,9 +54,11 @@ public class BillBean extends AbstractDocumentBean<Bill, BillBeanView> {
 
     /**
      * Constructor.
+     * 
+     * @param society the {@link SocietyBean}
      */
-    public BillBean() {
-        super();
+    public BillBean(SocietyBean society) {
+        super(society);
         paymentModeBuilder = new PaymentModeBeanBuilder();
         paymentModeBuilder.setDao(JsamsApplicationContext.getPaymentModeDao());
         this.paymentMode = paymentModeBuilder.build();
@@ -71,9 +74,10 @@ public class BillBean extends AbstractDocumentBean<Bill, BillBeanView> {
      * Constructor.
      * 
      * @param model the {@link Bill}
+     * @param society the {@link SocietyBean}
      */
-    public BillBean(Bill model) {
-        super(model);
+    public BillBean(Bill model, SocietyBean society) {
+        super(model, society);
         this.billingAddress = new AddressBean(model.getBillingAddress());
         List<BillDetailBean> beans = new ArrayList<BillDetailBean>();
         for (BillDetail detail : model.getDetails()) {

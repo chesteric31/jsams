@@ -12,7 +12,6 @@ import be.jsams.server.dao.impl.ContactInformationDaoImplTest;
 import be.jsams.server.dao.impl.ProductCategoryDaoImplTest;
 import be.jsams.server.dao.impl.ProductDaoImplTest;
 import be.jsams.server.dao.impl.SocietyDaoImplTest;
-import be.jsams.server.dao.sale.impl.CommandDetailDaoImplTest;
 
 /**
  * Test suite for all JUNIT tests.
@@ -22,8 +21,8 @@ import be.jsams.server.dao.sale.impl.CommandDetailDaoImplTest;
  */
 @RunWith(Suite.class)
 @SuiteClasses(value = { AddressDaoImplTest.class, AgentDaoImplTest.class, CivilityDaoImplTest.class,
-        ContactInformationDaoImplTest.class, CommandDetailDaoImplTest.class, ProductCategoryDaoImplTest.class,
-        ProductDaoImplTest.class, SocietyDaoImplTest.class })
+        ContactInformationDaoImplTest.class, ProductCategoryDaoImplTest.class, ProductDaoImplTest.class,
+        SocietyDaoImplTest.class })
 public class AllTests {
 
     /**

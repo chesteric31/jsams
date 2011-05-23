@@ -2,7 +2,6 @@ package be.jsams.common.bean.model.sale;
 
 import java.util.Date;
 
-import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.client.swing.component.JsamsTable;
 import be.jsams.common.bean.model.AbstractIdentityBean;
 import be.jsams.common.bean.model.PeriodBean;
@@ -43,10 +42,11 @@ public abstract class AbstractDocumentBean<M extends AbstractDocument, V extends
 
     /**
      * Default constructor.
+     * 
+     * @param society the {@link SocietyBean}
      */
-    public AbstractDocumentBean() {
+    public AbstractDocumentBean(SocietyBean society) {
         super();
-        SocietyBean society = JsamsDesktop.getInstance().getCurrentSociety();
         this.creationDate = new Date();
         this.customer = new CustomerBean(society);
         this.period = new PeriodBean();
@@ -57,10 +57,10 @@ public abstract class AbstractDocumentBean<M extends AbstractDocument, V extends
      * Constructor
      * 
      * @param model the {@link AbstractDocument}
+     * @param society the {@link SocietyBean}
      */
-    public AbstractDocumentBean(M model) {
+    public AbstractDocumentBean(M model, SocietyBean society) {
         super(model);
-        SocietyBean society = JsamsDesktop.getInstance().getCurrentSociety();
         this.creationDate = model.getCreationDate();
         this.society = society;
         this.customer = new CustomerBean(model.getCustomer(), society);

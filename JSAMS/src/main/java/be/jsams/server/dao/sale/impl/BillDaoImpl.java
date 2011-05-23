@@ -9,6 +9,7 @@ import javax.persistence.Query;
 import be.jsams.common.bean.model.AddressBean;
 import be.jsams.common.bean.model.PaymentModeBean;
 import be.jsams.common.bean.model.PeriodBean;
+import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.sale.BillBean;
 import be.jsams.server.dao.impl.DaoImpl;
 import be.jsams.server.dao.sale.BillDao;
@@ -24,6 +25,8 @@ import com.mysql.jdbc.StringUtils;
  */
 public class BillDaoImpl extends DaoImpl<Bill> implements BillDao {
 
+    private SocietyBean currentSociety;
+    
     /**
      * Constructor
      * 
@@ -88,6 +91,35 @@ public class BillDaoImpl extends DaoImpl<Bill> implements BillDao {
         Query query = getEntityManager().createQuery(queryBuilder.toString());
         List<Bill> result = query.getResultList();
         return result;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @SuppressWarnings("unchecked")
+    public List<Bill> findAll() {
+        StringBuilder queryBuilder = new StringBuilder("FROM Bill b");
+
+        queryBuilder.append(" WHERE ");
+        queryBuilder.append("b.society.id = " + getCurrentSociety().getId());
+
+        Query query = getEntityManager().createQuery(queryBuilder.toString());
+        List<Bill> result = query.getResultList();
+        return result;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public SocietyBean getCurrentSociety() {
+        return currentSociety;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void setCurrentSociety(SocietyBean currentSociety) {
+        this.currentSociety = currentSociety;
     }
 
 }

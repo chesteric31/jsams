@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.Query;
 
 import be.jsams.common.bean.model.PeriodBean;
+import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.sale.EstimateBean;
 import be.jsams.server.dao.impl.DaoImpl;
 import be.jsams.server.dao.sale.EstimateDao;
@@ -22,6 +23,8 @@ import com.mysql.jdbc.StringUtils;
  */
 public class EstimateDaoImpl extends DaoImpl<Estimate> implements EstimateDao {
 
+    private SocietyBean currentSociety;
+    
     /**
      * Constructor
      * 
@@ -79,6 +82,35 @@ public class EstimateDaoImpl extends DaoImpl<Estimate> implements EstimateDao {
         Query query = getEntityManager().createQuery(queryBuilder.toString());
         List<Estimate> result = query.getResultList();
         return result;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @SuppressWarnings("unchecked")
+    public List<Estimate> findAll() {
+        StringBuilder queryBuilder = new StringBuilder("FROM Estimate e");
+
+        queryBuilder.append(" WHERE ");
+        queryBuilder.append("e.society.id = " + getCurrentSociety().getId());
+
+        Query query = getEntityManager().createQuery(queryBuilder.toString());
+        List<Estimate> result = query.getResultList();
+        return result;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public SocietyBean getCurrentSociety() {
+        return currentSociety;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void setCurrentSociety(SocietyBean currentSociety) {
+        this.currentSociety = currentSociety;
     }
 
 }

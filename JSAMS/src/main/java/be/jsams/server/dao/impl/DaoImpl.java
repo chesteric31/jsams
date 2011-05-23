@@ -14,7 +14,7 @@ import be.jsams.server.dao.Dao;
 /**
  * Generic DAO class implementation.
  * 
- * @param <T>
+ * @param <T> the class type
  * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$

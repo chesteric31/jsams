@@ -3,6 +3,8 @@ package be.jsams.server.service.sale.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import be.jsams.client.desktop.JsamsDesktop;
+import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.sale.DeliveryOrderBean;
 import be.jsams.server.dao.sale.DeliveryOrderDao;
 import be.jsams.server.model.sale.DeliveryOrder;
@@ -39,7 +41,7 @@ public class DeliveryOrderServiceImpl implements DeliveryOrderService {
     public DeliveryOrderBean create(DeliveryOrderBean bean) {
         DeliveryOrder deliveryOrder = new DeliveryOrder(bean);
         DeliveryOrder addingDeliveryOrder = deliveryOrderDao.add(deliveryOrder);
-        return new DeliveryOrderBean(addingDeliveryOrder);
+        return new DeliveryOrderBean(addingDeliveryOrder, JsamsDesktop.getInstance().getCurrentSociety());
     }
 
     /**
@@ -75,7 +77,7 @@ public class DeliveryOrderServiceImpl implements DeliveryOrderService {
     @Override
     public DeliveryOrderBean findById(Long id) {
         DeliveryOrder deliveryOrder = deliveryOrderDao.findById(id);
-        DeliveryOrderBean bean = new DeliveryOrderBean(deliveryOrder);
+        DeliveryOrderBean bean = new DeliveryOrderBean(deliveryOrder, JsamsDesktop.getInstance().getCurrentSociety());
         return bean;
     }
 
@@ -86,8 +88,9 @@ public class DeliveryOrderServiceImpl implements DeliveryOrderService {
     public List<DeliveryOrderBean> findAll() {
         List<DeliveryOrder> deliveryOrders = deliveryOrderDao.findAll();
         List<DeliveryOrderBean> beans = new ArrayList<DeliveryOrderBean>();
+        SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
         for (DeliveryOrder deliveryOrder : deliveryOrders) {
-            beans.add(new DeliveryOrderBean(deliveryOrder));
+            beans.add(new DeliveryOrderBean(deliveryOrder, currentSociety));
         }
         return beans;
     }
@@ -97,11 +100,12 @@ public class DeliveryOrderServiceImpl implements DeliveryOrderService {
      */
     @Override
     public List<DeliveryOrderBean> findByCriteria(DeliveryOrderBean criteria) {
-//        criteria.setSociety(JsamsDesktop.getInstance().getCurrentSociety());
+        SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
+        criteria.setSociety(currentSociety);
         List<DeliveryOrder> deliveryOrders = deliveryOrderDao.findByCriteria(criteria);
         List<DeliveryOrderBean> beans = new ArrayList<DeliveryOrderBean>();
         for (DeliveryOrder deliveryOrder : deliveryOrders) {
-            beans.add(new DeliveryOrderBean(deliveryOrder));
+            beans.add(new DeliveryOrderBean(deliveryOrder, currentSociety));
         }
         return beans;
     }

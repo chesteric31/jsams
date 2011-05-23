@@ -5,6 +5,7 @@ import java.util.List;
 
 import be.jsams.common.bean.model.AbstractIdentityBean;
 import be.jsams.common.bean.model.AddressBean;
+import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.sale.detail.DeliveryOrderDetailBean;
 import be.jsams.common.bean.view.sale.DeliveryOrderBeanView;
 import be.jsams.server.model.sale.DeliveryOrder;
@@ -34,9 +35,11 @@ public class DeliveryOrderBean extends AbstractDocumentBean<DeliveryOrder, Deliv
 
     /**
      * Default constructor.
+     * 
+     * @param society the {@link SocietyBean}
      */
-    public DeliveryOrderBean() {
-        super();
+    public DeliveryOrderBean(SocietyBean society) {
+        super(society);
         this.deliveryAddress = new AddressBean();
         this.transferred = false;
         List<DeliveryOrderDetailBean> details = new ArrayList<DeliveryOrderDetailBean>();
@@ -48,9 +51,10 @@ public class DeliveryOrderBean extends AbstractDocumentBean<DeliveryOrder, Deliv
      * Constructor
      * 
      * @param model the {@link DeliveryOrder}
+     * @param society the {@link SocietyBean}
      */
-    public DeliveryOrderBean(DeliveryOrder model) {
-        super(model);
+    public DeliveryOrderBean(DeliveryOrder model, SocietyBean society) {
+        super(model, society);
         this.deliveryAddress = new AddressBean(model.getDeliveryAddress());
         List<DeliveryOrderDetailBean> beans = new ArrayList<DeliveryOrderDetailBean>();
         for (DeliveryOrderDetail detail : model.getDetails()) {

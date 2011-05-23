@@ -8,6 +8,7 @@ import javax.persistence.Query;
 
 import be.jsams.common.bean.model.AddressBean;
 import be.jsams.common.bean.model.PeriodBean;
+import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.sale.DeliveryOrderBean;
 import be.jsams.server.dao.impl.DaoImpl;
 import be.jsams.server.dao.sale.DeliveryOrderDao;
@@ -23,6 +24,8 @@ import com.mysql.jdbc.StringUtils;
  */
 public class DeliveryOrderDaoImpl extends DaoImpl<DeliveryOrder> implements DeliveryOrderDao {
 
+    private SocietyBean currentSociety;
+    
     /**
      * Constructor
      * 
@@ -81,6 +84,35 @@ public class DeliveryOrderDaoImpl extends DaoImpl<DeliveryOrder> implements Deli
         Query query = getEntityManager().createQuery(queryBuilder.toString());
         List<DeliveryOrder> result = query.getResultList();
         return result;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @SuppressWarnings("unchecked")
+    public List<DeliveryOrder> findAll() {
+        StringBuilder queryBuilder = new StringBuilder("FROM DeliveryOrder d");
+
+        queryBuilder.append(" WHERE ");
+        queryBuilder.append("d.society.id = " + getCurrentSociety().getId());
+
+        Query query = getEntityManager().createQuery(queryBuilder.toString());
+        List<DeliveryOrder> result = query.getResultList();
+        return result;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public SocietyBean getCurrentSociety() {
+        return currentSociety;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void setCurrentSociety(SocietyBean currentSociety) {
+        this.currentSociety = currentSociety;
     }
 
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.model.dialog.sale.EditCreditNoteDialog;
 import be.jsams.client.model.panel.AbstractSearchPanel;
@@ -53,7 +54,8 @@ public class SearchCreditNotePanel extends
      */
     @Override
     protected void performButtonAdd() {
-        new EditCreditNoteDialog(JsamsI18nResource.TITLE_EDIT_CREDIT_NOTE, new CreditNoteBean());
+        CreditNoteBean bean = new CreditNoteBean(JsamsDesktop.getInstance().getCurrentSociety());
+        new EditCreditNoteDialog(JsamsI18nResource.TITLE_EDIT_CREDIT_NOTE, bean);
         updateUI();
     }
 

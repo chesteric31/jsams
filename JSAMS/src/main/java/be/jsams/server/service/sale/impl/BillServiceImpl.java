@@ -3,6 +3,8 @@ package be.jsams.server.service.sale.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import be.jsams.client.desktop.JsamsDesktop;
+import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.sale.BillBean;
 import be.jsams.server.dao.sale.BillDao;
 import be.jsams.server.model.sale.Bill;
@@ -25,7 +27,7 @@ public class BillServiceImpl implements BillService {
     public BillBean create(BillBean bean) {
         Bill bill = new Bill(bean);
         Bill addingBill = billDao.add(bill);
-        return new BillBean(addingBill);
+        return new BillBean(addingBill, bean.getSociety());
     }
 
     /**
@@ -61,7 +63,7 @@ public class BillServiceImpl implements BillService {
     @Override
     public BillBean findById(Long id) {
         Bill bill = billDao.findById(id);
-        BillBean bean = new BillBean(bill);
+        BillBean bean = new BillBean(bill, JsamsDesktop.getInstance().getCurrentSociety());
         return bean;
     }
 
@@ -73,7 +75,7 @@ public class BillServiceImpl implements BillService {
         List<Bill> bills = billDao.findAll();
         List<BillBean> beans = new ArrayList<BillBean>();
         for (Bill bill : bills) {
-            beans.add(new BillBean(bill));
+            beans.add(new BillBean(bill, JsamsDesktop.getInstance().getCurrentSociety()));
         }
         return beans;
     }
@@ -83,11 +85,12 @@ public class BillServiceImpl implements BillService {
      */
     @Override
     public List<BillBean> findByCriteria(BillBean criteria) {
-//        criteria.setSociety(JsamsDesktop.getInstance().getCurrentSociety());
+        SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
+        criteria.setSociety(currentSociety);
         List<Bill> bills = billDao.findByCriteria(criteria);
         List<BillBean> beans = new ArrayList<BillBean>();
         for (Bill bill : bills) {
-            beans.add(new BillBean(bill));
+            beans.add(new BillBean(bill, currentSociety));
         }
         return beans;
     }

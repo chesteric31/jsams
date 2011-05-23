@@ -5,6 +5,7 @@ import java.util.List;
 
 import be.jsams.common.bean.model.AbstractIdentityBean;
 import be.jsams.common.bean.model.AddressBean;
+import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.AgentBean;
 import be.jsams.common.bean.model.sale.detail.CommandDetailBean;
 import be.jsams.common.bean.view.sale.CommandBeanView;
@@ -37,9 +38,11 @@ public class CommandBean extends AbstractDocumentBean<Command, CommandBeanView> 
 
     /**
      * Default constructor.
+     * 
+     * @param society the {@link SocietyBean}
      */
-    public CommandBean() {
-        super();
+    public CommandBean(SocietyBean society) {
+        super(society);
         this.billingAddress = new AddressBean();
         this.deliveryAddress = new AddressBean();
         this.agent = new AgentBean(getSociety());
@@ -53,9 +56,10 @@ public class CommandBean extends AbstractDocumentBean<Command, CommandBeanView> 
      * Constructor.
      * 
      * @param model the {@link Command}
+     * @param society the {@link SocietyBean}
      */
-    public CommandBean(Command model) {
-        super(model);
+    public CommandBean(Command model, SocietyBean society) {
+        super(model, society);
         this.agent = new AgentBean(model.getAgent(), getSociety());
         this.billingAddress = new AddressBean(model.getBillingAddress());
         this.deliveryAddress = new AddressBean(model.getDeliveryAddress());
