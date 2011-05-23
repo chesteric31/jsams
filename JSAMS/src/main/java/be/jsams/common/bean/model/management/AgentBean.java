@@ -48,12 +48,12 @@ public class AgentBean extends AbstractNamedIdentityBean<Agent, AgentBeanView> {
      */
     public AgentBean(SocietyBean society) {
         super();
-        setAddress(new AddressBean());
-        setContactInformation(new ContactInformationBean());
+        this.address = new AddressBean();
+        this.contactInformation = new ContactInformationBean();
         builder = new CivilityBeanBuilder();
         builder.setDao(getCivilityDao());
-        setCivility(builder.build());
-        setSociety(society);
+        this.civility = builder.build();
+        this.society = society;
     }
 
     /**
@@ -64,21 +64,22 @@ public class AgentBean extends AbstractNamedIdentityBean<Agent, AgentBeanView> {
      */
     public AgentBean(Agent model, SocietyBean society) {
         super(model);
-        setAddress(new AddressBean(model.getAddress()));
+        this.address = new AddressBean(model.getAddress());
         builder = new CivilityBeanBuilder();
         builder.setDao(getCivilityDao());
         Civility temp = model.getCivility();
         if (temp != null) {
             builder.setModel(temp);
         }
-        setCivility(builder.build());
-        setContactInformation(new ContactInformationBean(model.getContactInformation()));
-        setFunction(model.getFunction());
-        setSociety(society);
-//        SocietyBeanBuilder societyBuilder = JsamsApplicationContext.getSocietyBeanBuilder();
-//        societyBuilder.setModel(model.getSociety());
-//        SocietyBean bean = societyBuilder.build(false);
-//        setSociety(bean);
+        this.civility = builder.build();
+        this.contactInformation = new ContactInformationBean(model.getContactInformation());
+        this.function = model.getFunction();
+        this.society = society;
+        // SocietyBeanBuilder societyBuilder =
+        // JsamsApplicationContext.getSocietyBeanBuilder();
+        // societyBuilder.setModel(model.getSociety());
+        // SocietyBean bean = societyBuilder.build(false);
+        // setSociety(bean);
         // TODO verify this part
         // List<CustomerBean> beans = new ArrayList<CustomerBean>();
         // List<Customer> customers = model.getCustomers();

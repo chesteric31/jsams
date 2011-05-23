@@ -24,7 +24,8 @@ public class EstimateDetailBean extends AbstractDetailBean<EstimateDetail, Estim
 
     public static final String TRANSFERRED_PROPERTY = "transferred";
 
-//    private ObservableList<EstimateDetailBean> list = new ArrayListModel<EstimateDetailBean>();
+    // private ObservableList<EstimateDetailBean> list = new
+    // ArrayListModel<EstimateDetailBean>();
 
     /**
      * Default constructor
@@ -41,8 +42,8 @@ public class EstimateDetailBean extends AbstractDetailBean<EstimateDetail, Estim
      */
     public EstimateDetailBean(EstimateDetail model, EstimateBean estimate) {
         super(model, estimate);
-        setEstimate(estimate);
-        setTransferred(model.isTransferred());
+        this.estimate = estimate;
+        this.transferred = model.isTransferred();
     }
 
     /**

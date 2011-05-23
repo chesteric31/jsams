@@ -27,7 +27,8 @@ public class DeliveryOrderDetailBean extends
 
     public static final String TRANSFERRED_PROPERTY = "transferred";
 
-//    private ObservableList<DeliveryOrderDetailBean> list = new ArrayListModel<DeliveryOrderDetailBean>();
+    // private ObservableList<DeliveryOrderDetailBean> list = new
+    // ArrayListModel<DeliveryOrderDetailBean>();
 
     /**
      * Default constructor
@@ -35,7 +36,7 @@ public class DeliveryOrderDetailBean extends
     public DeliveryOrderDetailBean() {
         super();
     }
-    
+
     /**
      * Constructor
      * 
@@ -44,8 +45,8 @@ public class DeliveryOrderDetailBean extends
      */
     public DeliveryOrderDetailBean(DeliveryOrderDetail model, DeliveryOrderBean deliveryOrder) {
         super(model, deliveryOrder);
-        setDeliveryOrder(deliveryOrder);
-        setTransferred(model.isTransferred());
+        this.deliveryOrder = deliveryOrder;
+        this.transferred = model.isTransferred();
     }
 
     /**

@@ -15,8 +15,8 @@ import com.jgoodies.common.collect.ObservableList;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public abstract class AbstractIdentityBean<M extends AbstractIdentity, V extends AbstractBeanView<?, ?, ?>> 
-        extends Model implements Refreshable<AbstractIdentityBean<?, ?>> {
+public abstract class AbstractIdentityBean<M extends AbstractIdentity, V extends AbstractBeanView<?, ?, ?>> extends
+        Model implements Refreshable<AbstractIdentityBean<?, ?>> {
     /**
      * Serial Version UID
      */
@@ -46,7 +46,7 @@ public abstract class AbstractIdentityBean<M extends AbstractIdentity, V extends
      */
     public AbstractIdentityBean(M model) {
         this();
-        setId(model.getId());
+        this.id = model.getId();
     }
 
     /**

@@ -8,7 +8,7 @@ import be.jsams.server.model.sale.detail.CommandDetail;
 
 /**
  * {@link AbstractIdentityBean} for {@link CommandDetail} object.
- *
+ * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
@@ -26,7 +26,8 @@ public class CommandDetailBean extends AbstractDetailBean<CommandDetail, Command
 
     public static final String TRANSFERRED_PROPERTY = "transferred";
 
-//    private ObservableList<CommandDetailBean> list = new ArrayListModel<CommandDetailBean>();
+    // private ObservableList<CommandDetailBean> list = new
+    // ArrayListModel<CommandDetailBean>();
 
     /**
      * Default constructor
@@ -43,9 +44,9 @@ public class CommandDetailBean extends AbstractDetailBean<CommandDetail, Command
      */
     public CommandDetailBean(CommandDetail model, CommandBean command) {
         super(model, command);
-        setTransferred(model.isTransferred());
+        this.transferred = model.isTransferred();
     }
-    
+
     /**
      * @return the transferred
      */

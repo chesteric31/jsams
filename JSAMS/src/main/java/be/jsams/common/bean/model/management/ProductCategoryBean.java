@@ -30,7 +30,7 @@ public class ProductCategoryBean extends AbstractTranslatableIdentityBean<Produc
      */
     public ProductCategoryBean(ProductCategory model, SocietyBean society) {
         super(model);
-        setSociety(society);
+        this.society = society;
     }
 
     /**
@@ -45,7 +45,7 @@ public class ProductCategoryBean extends AbstractTranslatableIdentityBean<Produc
         if (!list.isEmpty()) {
             setSelection(list.get(0));
         }
-        setSociety(society);
+        this.society = society;
     }
 
     /**

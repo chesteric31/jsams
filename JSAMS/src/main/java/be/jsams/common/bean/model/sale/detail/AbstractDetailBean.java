@@ -60,14 +60,14 @@ public abstract class AbstractDetailBean
      */
     public AbstractDetailBean(M model, D document) {
         super(model);
-        setDiscountRate(model.getDiscountRate());
-        setPrice(model.getPrice());
+        this.discountRate = model.getDiscountRate();
+        this.price = model.getPrice();
         ProductBeanBuilder builder = new ProductBeanBuilder();
         builder.setSociety(document.getSociety());
         builder.setModel(model.getProduct());
-        setProduct(builder.build(false, false));
-        setQuantity(model.getQuantity());
-        setVatApplicable(model.getVatApplicable());
+        this.product = builder.build(false, false);
+        this.quantity = model.getQuantity();
+        this.vatApplicable = model.getVatApplicable();
         list.add(this);
         setListModel(list);
         setSelection(this);

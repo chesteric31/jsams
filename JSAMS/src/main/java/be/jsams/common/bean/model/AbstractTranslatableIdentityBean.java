@@ -42,9 +42,9 @@ public abstract class AbstractTranslatableIdentityBean
      */
     public AbstractTranslatableIdentityBean(M model) {
         super(model);
-        setLabel(model.getLabel());
-        setLabelFr(model.getLabelFr());
-        setLabelNl(model.getLabelNl());
+        this.label = model.getLabel();
+        this.labelFr = model.getLabelFr();
+        this.labelNl = model.getLabelNl();
     }
 
     /**

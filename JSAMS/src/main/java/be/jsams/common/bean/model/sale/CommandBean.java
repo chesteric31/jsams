@@ -40,12 +40,12 @@ public class CommandBean extends AbstractDocumentBean<Command, CommandBeanView> 
      */
     public CommandBean() {
         super();
-        setBillingAddress(new AddressBean());
-        setDeliveryAddress(new AddressBean());
-        setAgent(new AgentBean(getSociety()));
-        setTransferred(false);
+        this.billingAddress = new AddressBean();
+        this.deliveryAddress = new AddressBean();
+        this.agent = new AgentBean(getSociety());
+        this.transferred = false;
         List<CommandDetailBean> details = new ArrayList<CommandDetailBean>();
-        setDetails(details);
+        this.details = details;
         setView(new CommandBeanView(this));
     }
 
@@ -56,16 +56,16 @@ public class CommandBean extends AbstractDocumentBean<Command, CommandBeanView> 
      */
     public CommandBean(Command model) {
         super(model);
-        setAgent(new AgentBean(model.getAgent(), getSociety()));
-        setBillingAddress(new AddressBean(model.getBillingAddress()));
-        setDeliveryAddress(new AddressBean(model.getDeliveryAddress()));
+        this.agent = new AgentBean(model.getAgent(), getSociety());
+        this.billingAddress = new AddressBean(model.getBillingAddress());
+        this.deliveryAddress = new AddressBean(model.getDeliveryAddress());
         List<CommandDetailBean> beans = new ArrayList<CommandDetailBean>();
         for (CommandDetail detail : model.getDetails()) {
             beans.add(new CommandDetailBean(detail, this));
         }
-        setDetails(beans);
-        setDiscountRate(model.getDiscountRate());
-        setTransferred(model.isTransferred());
+        this.details = beans;
+        this.discountRate = model.getDiscountRate();
+        this.transferred = model.isTransferred();
         setView(new CommandBeanView(this));
     }
 

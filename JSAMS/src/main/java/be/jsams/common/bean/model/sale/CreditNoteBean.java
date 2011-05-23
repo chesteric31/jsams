@@ -31,9 +31,9 @@ public class CreditNoteBean extends AbstractDocumentBean<CreditNote, CreditNoteB
      */
     public CreditNoteBean() {
         super();
-        setBillingAddress(new AddressBean());
+        this.billingAddress = new AddressBean();
         List<CreditNoteDetailBean> details = new ArrayList<CreditNoteDetailBean>();
-        setDetails(details);
+        this.details = details;
         setView(new CreditNoteBeanView(this));
     }
 
@@ -44,12 +44,12 @@ public class CreditNoteBean extends AbstractDocumentBean<CreditNote, CreditNoteB
      */
     public CreditNoteBean(CreditNote model) {
         super(model);
-        setBillingAddress(new AddressBean(model.getBillingAddress()));
+        this.billingAddress = new AddressBean(model.getBillingAddress());
         List<CreditNoteDetailBean> beans = new ArrayList<CreditNoteDetailBean>();
         for (CreditNoteDetail detail : model.getDetails()) {
             beans.add(new CreditNoteDetailBean(detail, this));
         }
-        setDetails(beans);
+        this.details = beans;
         setView(new CreditNoteBeanView(this));
     }
 

@@ -44,12 +44,12 @@ public class AddressBean extends AbstractIdentityBean<Address, AddressBeanView> 
      */
     public AddressBean(Address model) {
         super(model);
-        setBox(model.getBox());
-        setCity(model.getCity());
-        setCountry(model.getCountry());
-        setNumber(model.getNumber());
-        setStreet(model.getStreet());
-        setZipCode(model.getZipCode());
+        this.box = model.getBox();
+        this.city = model.getCity();
+        this.country = model.getCountry();
+        this.number = model.getNumber();
+        this.street = model.getStreet();
+        this.zipCode = model.getZipCode();
     }
 
     /**

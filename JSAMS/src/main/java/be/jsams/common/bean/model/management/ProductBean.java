@@ -50,7 +50,7 @@ public class ProductBean extends AbstractNamedIdentityBean<Product, ProductBeanV
         productCategoryBuilder = new ProductCategoryBeanBuilder(categoryCanBeNull, society);
         productCategoryBuilder.setDao(JsamsApplicationContext.getProductCategoryDao());
         ProductCategoryBean categoryBean = productCategoryBuilder.build();
-        setCategory(categoryBean);
+        this.category = categoryBean;
     }
 
     /**
@@ -72,12 +72,12 @@ public class ProductBean extends AbstractNamedIdentityBean<Product, ProductBeanV
         productCategoryBuilder.setDao(getProductCategoryDao());
         productCategoryBuilder.setSociety(society);
         ProductCategoryBean categoryBean = productCategoryBuilder.build();
-        setCategory(categoryBean);
+        this.category = categoryBean;
 
-        setPrice(model.getPrice());
-        setQuantityStock(model.getQuantityStock());
-        setReorderLevel(model.getReorderLevel());
-        setVatApplicable(model.getVatApplicable());
+        this.price = model.getPrice();
+        this.quantityStock = model.getQuantityStock();
+        this.reorderLevel = model.getReorderLevel();
+        this.vatApplicable = model.getVatApplicable();
     }
 
     /**

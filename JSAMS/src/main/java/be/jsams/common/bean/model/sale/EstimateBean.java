@@ -39,11 +39,11 @@ public class EstimateBean extends AbstractDocumentBean<Estimate, EstimateBeanVie
      */
     public EstimateBean() {
         super();
-        setBillingAddress(new AddressBean());
-        setAgent(new AgentBean(getSociety()));
-        setTransferred(false);
+        this.billingAddress = new AddressBean();
+        this.agent = new AgentBean(getSociety());
+        this.transferred = false;
         List<EstimateDetailBean> details = new ArrayList<EstimateDetailBean>();
-        setDetails(details);
+        this.details = details;
         setView(new EstimateBeanView(this));
     }
 
@@ -54,15 +54,15 @@ public class EstimateBean extends AbstractDocumentBean<Estimate, EstimateBeanVie
      */
     public EstimateBean(Estimate model) {
         super(model);
-        setAgent(new AgentBean(model.getAgent(), getSociety()));
-        setBillingAddress(new AddressBean(model.getBillingAddress()));
+        this.agent = new AgentBean(model.getAgent(), getSociety());
+        this.billingAddress = new AddressBean(model.getBillingAddress());
         List<EstimateDetailBean> beans = new ArrayList<EstimateDetailBean>();
         for (EstimateDetail detail : model.getDetails()) {
             beans.add(new EstimateDetailBean(detail, this));
         }
-        setDetails(beans);
-        setDiscountRate(model.getDiscountRate());
-        setTransferred(model.isTransferred());
+        this.details = beans;
+        this.discountRate = model.getDiscountRate();
+        this.transferred = model.isTransferred();
         setView(new EstimateBeanView(this));
     }
 
