@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import be.jsams.common.bean.model.CivilityBean;
 import be.jsams.common.bean.model.management.AgentBean;
 import be.jsams.server.model.AbstractNamedIdentity;
 import be.jsams.server.model.Address;
@@ -47,18 +48,18 @@ public class Agent extends AbstractNamedIdentity {
     /**
      * Constructor.
      * 
-     * @param bean
-     *            the {@link AgentBean}
+     * @param bean the {@link AgentBean}
      */
     public Agent(final AgentBean bean) {
         super(bean);
-        setFunction(bean.getFunction());
-        setAddress(new Address(bean.getAddress()));
-        if (bean.getCivility().getId() != null) {
-            setCivility(new Civility(bean.getCivility()));
+        this.function = bean.getFunction();
+        this.address = new Address(bean.getAddress());
+        CivilityBean civilityBean = bean.getCivility();
+        if (civilityBean.getId() != null) {
+            this.civility = new Civility(civilityBean);
         }
-        setContactInformation(new ContactInformation(bean.getContactInformation()));
-        setSociety(new Society(bean.getSociety()));
+        this.contactInformation = new ContactInformation(bean.getContactInformation());
+        this.society = new Society(bean.getSociety());
     }
 
     /**
@@ -72,8 +73,7 @@ public class Agent extends AbstractNamedIdentity {
 
     /**
      * 
-     * @param function
-     *            the function to set
+     * @param function the function to set
      */
     public void setFunction(String function) {
         this.function = function;
@@ -91,8 +91,7 @@ public class Agent extends AbstractNamedIdentity {
 
     /**
      * 
-     * @param civility
-     *            the {@link Civility} to set
+     * @param civility the {@link Civility} to set
      */
     public void setCivility(Civility civility) {
         this.civility = civility;
@@ -110,8 +109,7 @@ public class Agent extends AbstractNamedIdentity {
 
     /**
      * 
-     * @param address
-     *            the {@link Address} to set
+     * @param address the {@link Address} to set
      */
     public void setAddress(Address address) {
         this.address = address;
@@ -129,8 +127,7 @@ public class Agent extends AbstractNamedIdentity {
 
     /**
      * 
-     * @param contactInformation
-     *            the {@link ContactInformation} to set
+     * @param contactInformation the {@link ContactInformation} to set
      */
     public void setContactInformation(ContactInformation contactInformation) {
         this.contactInformation = contactInformation;
@@ -147,8 +144,7 @@ public class Agent extends AbstractNamedIdentity {
 
     /**
      * 
-     * @param customers
-     *            the list of {@link Customer}s to set
+     * @param customers the list of {@link Customer}s to set
      */
     public void setCustomers(List<Customer> customers) {
         this.customers = customers;
@@ -164,8 +160,7 @@ public class Agent extends AbstractNamedIdentity {
     }
 
     /**
-     * @param society
-     *            the society to set
+     * @param society the society to set
      */
     public void setSociety(Society society) {
         this.society = society;

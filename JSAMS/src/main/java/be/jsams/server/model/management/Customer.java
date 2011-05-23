@@ -8,6 +8,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import be.jsams.common.bean.model.CivilityBean;
+import be.jsams.common.bean.model.LegalFormBean;
+import be.jsams.common.bean.model.PaymentModeBean;
 import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.server.model.AbstractNamedIdentity;
 import be.jsams.server.model.Address;
@@ -56,32 +59,34 @@ public class Customer extends AbstractNamedIdentity {
     /**
      * Constructor
      * 
-     * @param bean
-     *            the {@link CustomerBean}
+     * @param bean the {@link CustomerBean}
      */
     public Customer(CustomerBean bean) {
         super(bean);
-        setAgent(new Agent(bean.getAgent()));
-        setBank1(bean.getBank1());
-        setBank2(bean.getBank2());
-        setBillingAddress(new Address(bean.getBillingAddress()));
-        if (bean.getCivility().getId() != null) {
-            setCivility(new Civility(bean.getCivility()));
+        this.agent = new Agent(bean.getAgent());
+        this.bank1 = bean.getBank1();
+        this.bank2 = bean.getBank2();
+        this.billingAddress = new Address(bean.getBillingAddress());
+        CivilityBean civilityBean = bean.getCivility();
+        if (civilityBean.getId() != null) {
+            this.civility = new Civility(civilityBean);
         }
-        setContactInformation(new ContactInformation(bean.getContactInformation()));
-        setCreditLimit(bean.getCreditLimit());
-        setDefaultDiscountRate(bean.getDefaultDiscountRate());
-        setDeliveryAddress(new Address(bean.getDeliveryAddress()));
-        setDescription(bean.getDescription());
-        if (bean.getLegalForm().getId() != null) {
-            setLegalForm(new LegalForm(bean.getLegalForm()));
+        this.contactInformation = new ContactInformation(bean.getContactInformation());
+        this.creditLimit = bean.getCreditLimit();
+        this.defaultDiscountRate = bean.getDefaultDiscountRate();
+        this.deliveryAddress = new Address(bean.getDeliveryAddress());
+        this.description = bean.getDescription();
+        LegalFormBean form = bean.getLegalForm();
+        if (form.getId() != null) {
+            this.legalForm = new LegalForm(form);
         }
-        if (bean.getPaymentMode().getId() != null) {
-            setPaymentMode(new PaymentMode(bean.getPaymentMode()));
+        PaymentModeBean mode = bean.getPaymentMode();
+        if (mode.getId() != null) {
+            this.paymentMode = new PaymentMode(mode);
         }
-        setVatApplicable(bean.getVatApplicable());
-        setVatNumber(bean.getVatNumber());
-        setSociety(new Society(bean.getSociety()));
+        this.vatApplicable = bean.getVatApplicable();
+        this.vatNumber = bean.getVatNumber();
+        this.society = new Society(bean.getSociety());
     }
 
     /**
@@ -95,8 +100,7 @@ public class Customer extends AbstractNamedIdentity {
 
     /**
      * 
-     * @param vatNumber
-     *            the VAT number to set
+     * @param vatNumber the VAT number to set
      */
     public void setVatNumber(String vatNumber) {
         this.vatNumber = vatNumber;
@@ -113,8 +117,7 @@ public class Customer extends AbstractNamedIdentity {
 
     /**
      * 
-     * @param defaultDiscountRate
-     *            the default discount rate
+     * @param defaultDiscountRate the default discount rate
      */
     public void setDefaultDiscountRate(Double defaultDiscountRate) {
         this.defaultDiscountRate = defaultDiscountRate;
@@ -131,8 +134,7 @@ public class Customer extends AbstractNamedIdentity {
 
     /**
      * 
-     * @param bank1
-     *            the bank 1
+     * @param bank1 the bank 1
      */
     public void setBank1(String bank1) {
         this.bank1 = bank1;
@@ -149,8 +151,7 @@ public class Customer extends AbstractNamedIdentity {
 
     /**
      * 
-     * @param bank2
-     *            the bank 2
+     * @param bank2 the bank 2
      */
     public void setBank2(String bank2) {
         this.bank2 = bank2;
@@ -167,8 +168,7 @@ public class Customer extends AbstractNamedIdentity {
 
     /**
      * 
-     * @param creditLimit
-     *            the credit limit to set
+     * @param creditLimit the credit limit to set
      */
     public void setCreditLimit(Double creditLimit) {
         this.creditLimit = creditLimit;
@@ -185,8 +185,7 @@ public class Customer extends AbstractNamedIdentity {
 
     /**
      * 
-     * @param vatApplicable
-     *            the VAT applicable
+     * @param vatApplicable the VAT applicable
      */
     public void setVatApplicable(Double vatApplicable) {
         this.vatApplicable = vatApplicable;
@@ -203,8 +202,7 @@ public class Customer extends AbstractNamedIdentity {
 
     /**
      * 
-     * @param description
-     *            the description
+     * @param description the description
      */
     public void setDescription(String description) {
         this.description = description;
@@ -222,8 +220,7 @@ public class Customer extends AbstractNamedIdentity {
 
     /**
      * 
-     * @param deliveryAddress
-     *            the default delivery {@link Address}
+     * @param deliveryAddress the default delivery {@link Address}
      */
     public void setDeliveryAddress(Address deliveryAddress) {
         this.deliveryAddress = deliveryAddress;
@@ -241,8 +238,7 @@ public class Customer extends AbstractNamedIdentity {
 
     /**
      * 
-     * @param billingAddress
-     *            the default billing {@link Address}
+     * @param billingAddress the default billing {@link Address}
      */
     public void setBillingAddress(Address billingAddress) {
         this.billingAddress = billingAddress;
@@ -260,8 +256,7 @@ public class Customer extends AbstractNamedIdentity {
 
     /**
      * 
-     * @param paymentMode
-     *            the default {@link PaymentMode} to set
+     * @param paymentMode the default {@link PaymentMode} to set
      */
     public void setPaymentMode(PaymentMode paymentMode) {
         this.paymentMode = paymentMode;
@@ -279,8 +274,7 @@ public class Customer extends AbstractNamedIdentity {
 
     /**
      * 
-     * @param contactInformation
-     *            the {@link ContactInformation} to set
+     * @param contactInformation the {@link ContactInformation} to set
      */
     public void setContactInformation(ContactInformation contactInformation) {
         this.contactInformation = contactInformation;
@@ -298,8 +292,7 @@ public class Customer extends AbstractNamedIdentity {
 
     /**
      * 
-     * @param civility
-     *            the {@link Civility} to set
+     * @param civility the {@link Civility} to set
      */
     public void setCivility(Civility civility) {
         this.civility = civility;
@@ -317,8 +310,7 @@ public class Customer extends AbstractNamedIdentity {
 
     /**
      * 
-     * @param agent
-     *            the {@link Agent} to set
+     * @param agent the {@link Agent} to set
      */
     public void setAgent(Agent agent) {
         this.agent = agent;
@@ -336,8 +328,7 @@ public class Customer extends AbstractNamedIdentity {
 
     /**
      * 
-     * @param legalForm
-     *            the {@link LegalForm} to set
+     * @param legalForm the {@link LegalForm} to set
      */
     public void setLegalForm(LegalForm legalForm) {
         this.legalForm = legalForm;
@@ -353,8 +344,7 @@ public class Customer extends AbstractNamedIdentity {
     }
 
     /**
-     * @param society
-     *            the society to set
+     * @param society the society to set
      */
     public void setSociety(Society society) {
         this.society = society;

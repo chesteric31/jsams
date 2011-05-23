@@ -46,7 +46,7 @@ public class CreditNote extends AbstractDocument {
      */
     public CreditNote(CreditNoteBean bean) {
         super(bean);
-        setBillingAddress(new Address(bean.getBillingAddress()));
+        this.billingAddress = new Address(bean.getBillingAddress());
         List<CreditNoteDetailBean> list = bean.getDetails();
         List<CreditNoteDetail> tmp = new ArrayList<CreditNoteDetail>();
         if (list != null) {
@@ -54,7 +54,7 @@ public class CreditNote extends AbstractDocument {
                 tmp.add(new CreditNoteDetail(detail, this));
             }
         }
-        setDetails(tmp);
+        this.details = tmp;
     }
 
     /**

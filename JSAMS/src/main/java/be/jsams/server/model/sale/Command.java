@@ -53,11 +53,11 @@ public class Command extends AbstractDocument {
      */
     public Command(CommandBean bean) {
         super(bean);
-        setAgent(new Agent(bean.getAgent()));
-        setBillingAddress(new Address(bean.getBillingAddress()));
-        setDeliveryAddress(new Address(bean.getDeliveryAddress()));
-        setDiscountRate(bean.getDiscountRate());
-        setTransferred(bean.isTransferred());
+        this.agent = new Agent(bean.getAgent());
+        this.billingAddress = new Address(bean.getBillingAddress());
+        this.deliveryAddress = new Address(bean.getDeliveryAddress());
+        this.discountRate = bean.getDiscountRate();
+        this.transferred = bean.isTransferred();
         List<CommandDetailBean> list = bean.getDetails();
         List<CommandDetail> tmp = new ArrayList<CommandDetail>();
         if (list != null) {
@@ -65,7 +65,7 @@ public class Command extends AbstractDocument {
                 tmp.add(new CommandDetail(detail, this));
             }
         }
-        setDetails(tmp);
+        this.details = tmp;
     }
 
     /**

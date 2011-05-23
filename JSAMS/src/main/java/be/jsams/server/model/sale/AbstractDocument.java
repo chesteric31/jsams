@@ -43,9 +43,9 @@ public abstract class AbstractDocument extends AbstractIdentity {
      */
     public AbstractDocument(final AbstractDocumentBean<?, ?> bean) {
         super(bean);
-        setCreationDate(bean.getCreationDate());
-        setCustomer(new Customer(bean.getCustomer()));
-        setRemark(bean.getRemark());
+        this.creationDate = bean.getCreationDate();
+        this.customer = new Customer(bean.getCustomer());
+        this.remark = bean.getRemark();
     }
     
     /**

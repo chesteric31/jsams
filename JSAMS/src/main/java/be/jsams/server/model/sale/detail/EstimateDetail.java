@@ -39,8 +39,8 @@ public class EstimateDetail extends AbstractDetail {
      */
     public EstimateDetail(final EstimateDetailBean bean, final Estimate estimate) {
         super(bean);
-        setEstimate(estimate);
-        setTransferred(bean.isTransferred());
+        this.estimate = estimate;
+        this.transferred = bean.isTransferred();
     }
 
     /**

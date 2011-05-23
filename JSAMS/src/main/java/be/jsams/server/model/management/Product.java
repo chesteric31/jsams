@@ -8,6 +8,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import be.jsams.common.bean.model.management.ProductBean;
+import be.jsams.common.bean.model.management.ProductCategoryBean;
 import be.jsams.server.model.AbstractNamedIdentity;
 
 /**
@@ -37,18 +38,18 @@ public class Product extends AbstractNamedIdentity {
     /**
      * Constructor
      * 
-     * @param bean
-     *            the {@link ProductBean}
+     * @param bean the {@link ProductBean}
      */
     public Product(ProductBean bean) {
         super(bean);
-        if (bean.getCategory().getId() != null) {
-            setCategory(new ProductCategory(bean.getCategory()));
+        ProductCategoryBean categoryBean = bean.getCategory();
+        if (categoryBean.getId() != null) {
+            this.category = new ProductCategory(categoryBean);
         }
-        setPrice(bean.getPrice());
-        setQuantityStock(bean.getQuantityStock());
-        setReorderLevel(bean.getReorderLevel());
-        setVatApplicable(bean.getVatApplicable());
+        this.price = bean.getPrice();
+        this.quantityStock = bean.getQuantityStock();
+        this.reorderLevel = bean.getReorderLevel();
+        this.vatApplicable = bean.getVatApplicable();
     }
 
     /**
@@ -62,8 +63,7 @@ public class Product extends AbstractNamedIdentity {
 
     /**
      * 
-     * @param price
-     *            the price to set
+     * @param price the price to set
      */
     public void setPrice(Double price) {
         this.price = price;
@@ -80,8 +80,7 @@ public class Product extends AbstractNamedIdentity {
 
     /**
      * 
-     * @param quantityStock
-     *            the stock quantity to set
+     * @param quantityStock the stock quantity to set
      */
     public void setQuantityStock(int quantityStock) {
         this.quantityStock = quantityStock;
@@ -98,8 +97,7 @@ public class Product extends AbstractNamedIdentity {
 
     /**
      * 
-     * @param reorderLevel
-     *            the reorder level to set
+     * @param reorderLevel the reorder level to set
      */
     public void setReorderLevel(int reorderLevel) {
         this.reorderLevel = reorderLevel;
@@ -116,8 +114,7 @@ public class Product extends AbstractNamedIdentity {
 
     /**
      * 
-     * @param vatApplicable
-     *            the VAT applicable to set
+     * @param vatApplicable the VAT applicable to set
      */
     public void setVatApplicable(Double vatApplicable) {
         this.vatApplicable = vatApplicable;
@@ -135,8 +132,7 @@ public class Product extends AbstractNamedIdentity {
 
     /**
      * 
-     * @param category
-     *            the {@link ProductCategory} to set
+     * @param category the {@link ProductCategory} to set
      */
     public void setCategory(ProductCategory category) {
         this.category = category;
