@@ -42,8 +42,8 @@ public class SocietyBean extends AbstractNamedIdentityBean<Society, SocietyBeanV
      */
     public SocietyBean() {
         super();
-        address = new AddressBean();
-        setContactInformation(new ContactInformationBean());
+        this.address = new AddressBean();
+        this.contactInformation = new ContactInformationBean();
     }
 
     /**
@@ -53,13 +53,12 @@ public class SocietyBean extends AbstractNamedIdentityBean<Society, SocietyBeanV
      */
     public SocietyBean(Society model) {
         super(model);
-        address = new AddressBean();
-        setContactInformation(new ContactInformationBean(model.getContactInformation()));
-        setActivity(model.getActivity());
-        setAddress(new AddressBean(model.getAddress()));
-        setCapital(model.getCapital());
-        setResponsible(model.getResponsible());
-        setVatNumber(model.getVatNumber());
+        this.contactInformation = new ContactInformationBean(model.getContactInformation());
+        this.activity = model.getActivity();
+        this.address = new AddressBean(model.getAddress());
+        this.capital = model.getCapital();
+        this.responsible = model.getResponsible();
+        this.vatNumber = model.getVatNumber();
     }
 
     /**

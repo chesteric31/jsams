@@ -46,11 +46,13 @@ public class ContactInformationBean extends AbstractIdentityBean<ContactInformat
      */
     public ContactInformationBean(ContactInformation model) {
         super(model);
-        setEmail(model.getEmail());
-        setFax(model.getFax());
-        setMobile(model.getMobile());
-        setPhone(model.getPhone());
-        setWebsite(model.getWebsite());
+        this.email = model.getEmail();
+        this.fax = model.getFax();
+        // TODO
+        // this.logo = bean.getLogo();
+        this.mobile = model.getMobile();
+        this.phone = model.getPhone();
+        this.website = model.getWebsite();
     }
 
     /**

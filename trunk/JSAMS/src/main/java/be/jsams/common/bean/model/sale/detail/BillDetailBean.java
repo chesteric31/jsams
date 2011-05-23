@@ -7,7 +7,7 @@ import be.jsams.server.model.sale.detail.BillDetail;
 
 /**
  * {@link AbstractDetailBean} for {@link BillDetail} object.
- *
+ * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
@@ -24,7 +24,8 @@ public class BillDetailBean extends AbstractDetailBean<BillDetail, BillDetailBea
 
     public static final String TRANSFERRED_PROPERTY = "transferred";
 
-//    private ObservableList<BillDetailBean> list = new ArrayListModel<BillDetailBean>();
+    // private ObservableList<BillDetailBean> list = new
+    // ArrayListModel<BillDetailBean>();
 
     /**
      * Default constructor
@@ -32,17 +33,17 @@ public class BillDetailBean extends AbstractDetailBean<BillDetail, BillDetailBea
     public BillDetailBean() {
         super();
     }
-    
+
     /**
      * Constructor.
      * 
      * @param model the {@link BillDetail}
-     * @param bill the {@link BillBean}  
+     * @param bill the {@link BillBean}
      */
     public BillDetailBean(BillDetail model, BillBean bill) {
         super(model, bill);
-        setBill(bill);
-        setTransferred(model.isTransferred());
+        this.bill = bill;
+        this.transferred = model.isTransferred();
     }
 
     /**

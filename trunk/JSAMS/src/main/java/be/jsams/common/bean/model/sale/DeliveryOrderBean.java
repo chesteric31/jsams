@@ -37,10 +37,10 @@ public class DeliveryOrderBean extends AbstractDocumentBean<DeliveryOrder, Deliv
      */
     public DeliveryOrderBean() {
         super();
-        setDeliveryAddress(new AddressBean());
-        setTransferred(false);
+        this.deliveryAddress = new AddressBean();
+        this.transferred = false;
         List<DeliveryOrderDetailBean> details = new ArrayList<DeliveryOrderDetailBean>();
-        setDetails(details);
+        this.details = details;
         setView(new DeliveryOrderBeanView(this));
     }
 
@@ -51,14 +51,14 @@ public class DeliveryOrderBean extends AbstractDocumentBean<DeliveryOrder, Deliv
      */
     public DeliveryOrderBean(DeliveryOrder model) {
         super(model);
-        setDeliveryAddress(new AddressBean(model.getDeliveryAddress()));
+        this.deliveryAddress = new AddressBean(model.getDeliveryAddress());
         List<DeliveryOrderDetailBean> beans = new ArrayList<DeliveryOrderDetailBean>();
         for (DeliveryOrderDetail detail : model.getDetails()) {
             beans.add(new DeliveryOrderDetailBean(detail, this));
         }
-        setDetails(beans);
-        setDiscountRate(model.getDiscountRate());
-        setTransferred(model.isTransferred());
+        this.details = beans;
+        this.discountRate = model.getDiscountRate();
+        this.transferred = model.isTransferred();
         setView(new DeliveryOrderBeanView(this));
     }
 

@@ -13,8 +13,8 @@ import be.jsams.server.model.sale.detail.CreditNoteDetail;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class CreditNoteDetailBean 
-        extends AbstractDetailBean<CreditNoteDetail, CreditNoteDetailBeanView, CreditNoteBean> {
+public class CreditNoteDetailBean extends
+        AbstractDetailBean<CreditNoteDetail, CreditNoteDetailBeanView, CreditNoteBean> {
 
     /**
      * Serial Version UID
@@ -24,7 +24,8 @@ public class CreditNoteDetailBean
     private CreditNoteBean creditNote;
     private BillDetailBean billDetail;
 
-//    private ObservableList<CreditNoteDetailBean> list = new ArrayListModel<CreditNoteDetailBean>();
+    // private ObservableList<CreditNoteDetailBean> list = new
+    // ArrayListModel<CreditNoteDetailBean>();
 
     /**
      * Default constructor
@@ -41,10 +42,10 @@ public class CreditNoteDetailBean
      */
     public CreditNoteDetailBean(CreditNoteDetail model, CreditNoteBean creditNote) {
         super(model, creditNote);
-        setCreditNote(creditNote);
+        this.creditNote = creditNote;
         BillDetail detail = model.getBillDetail();
         if (detail != null) {
-            setBillDetail(new BillDetailBean(detail, new BillBean(detail.getBill())));
+            this.billDetail = new BillDetailBean(detail, new BillBean(detail.getBill()));
         }
     }
 

@@ -37,7 +37,7 @@ public abstract class AbstractNamedIdentityBean<M extends AbstractNamedIdentity,
      */
     public AbstractNamedIdentityBean(M model) {
         super(model);
-        setName(model.getName());
+        this.name = model.getName();
     }
 
     /**

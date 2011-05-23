@@ -58,12 +58,12 @@ public class BillBean extends AbstractDocumentBean<Bill, BillBeanView> {
         super();
         paymentModeBuilder = new PaymentModeBeanBuilder();
         paymentModeBuilder.setDao(JsamsApplicationContext.getPaymentModeDao());
-        setPaymentMode(paymentModeBuilder.build());
-        setBillingAddress(new AddressBean());
-        setClosed(false);
-        setPaid(false);
+        this.paymentMode = paymentModeBuilder.build();
+        this.billingAddress = new AddressBean();
+        this.closed = false;
+        this.paid = false;
         List<BillDetailBean> details = new ArrayList<BillDetailBean>();
-        setDetails(details);
+        this.details = details;
         setView(new BillBeanView(this));
     }
 
@@ -74,26 +74,26 @@ public class BillBean extends AbstractDocumentBean<Bill, BillBeanView> {
      */
     public BillBean(Bill model) {
         super(model);
-        setBillingAddress(new AddressBean(model.getBillingAddress()));
+        this.billingAddress = new AddressBean(model.getBillingAddress());
         List<BillDetailBean> beans = new ArrayList<BillDetailBean>();
         for (BillDetail detail : model.getDetails()) {
             beans.add(new BillDetailBean(detail, this));
         }
-        setDetails(beans);
-        setDiscountRate(model.getDiscountRate());
-        setClosed(model.isClosed());
-        setPaid(model.isPaid());
-        setDateFirstRemember(model.getDateFirstRemember());
-        setDateSecondRemember(model.getDateSecondRemember());
-        setDateFormalNotice(model.getDateFormalNotice());
-        setDueDate(model.getDueDate());
+        this.details = beans;
+        this.discountRate = model.getDiscountRate();
+        this.closed = model.isClosed();
+        this.paid = model.isPaid();
+        this.dateFirstRemember = model.getDateFirstRemember();
+        this.dateSecondRemember = model.getDateSecondRemember();
+        this.dateFormalNotice = model.getDateFormalNotice();
+        this.dueDate = model.getDueDate();
         paymentModeBuilder = new PaymentModeBeanBuilder();
         paymentModeBuilder.setDao(JsamsApplicationContext.getPaymentModeDao());
         PaymentMode mode = model.getPaymentMode();
         if (mode != null) {
             paymentModeBuilder.setModel(mode);
         }
-        setPaymentMode(paymentModeBuilder.build());
+        this.paymentMode = paymentModeBuilder.build();
         setView(new BillBeanView(this));
     }
 
@@ -264,7 +264,7 @@ public class BillBean extends AbstractDocumentBean<Bill, BillBeanView> {
     public void setPaymentModeBuilder(PaymentModeBeanBuilder paymentModeBuilder) {
         this.paymentModeBuilder = paymentModeBuilder;
     }
-    
+
     /**
      * {@inheritDoc}
      */

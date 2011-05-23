@@ -47,10 +47,10 @@ public abstract class AbstractDocumentBean<M extends AbstractDocument, V extends
     public AbstractDocumentBean() {
         super();
         SocietyBean society = JsamsDesktop.getInstance().getCurrentSociety();
-        setCreationDate(new Date());
-        setCustomer(new CustomerBean(society));
-        setPeriod(new PeriodBean());
-        setSociety(society);
+        this.creationDate = new Date();
+        this.customer = new CustomerBean(society);
+        this.period = new PeriodBean();
+        this.society = society;
     }
 
     /**
@@ -61,10 +61,10 @@ public abstract class AbstractDocumentBean<M extends AbstractDocument, V extends
     public AbstractDocumentBean(M model) {
         super(model);
         SocietyBean society = JsamsDesktop.getInstance().getCurrentSociety();
-        setCreationDate(model.getCreationDate());
-        setSociety(society);
-        setCustomer(new CustomerBean(model.getCustomer(), society));
-        setRemark(model.getRemark());
+        this.creationDate = model.getCreationDate();
+        this.society = society;
+        this.customer = new CustomerBean(model.getCustomer(), society);
+        this.remark = model.getRemark();
     }
 
     /**
