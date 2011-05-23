@@ -25,12 +25,11 @@ public abstract class AbstractNamedIdentity extends AbstractIdentity {
     /**
      * Constructor.
      * 
-     * @param bean
-     *            the {@link AbstractNamedIdentityBean}
+     * @param bean the {@link AbstractNamedIdentityBean}
      */
     public AbstractNamedIdentity(final AbstractNamedIdentityBean<?, ?> bean) {
         super(bean);
-        setName(bean.getName());
+        this.name = bean.getName();
     }
 
     /**
@@ -44,8 +43,7 @@ public abstract class AbstractNamedIdentity extends AbstractIdentity {
 
     /**
      * 
-     * @param name
-     *            the name to set
+     * @param name the name to set
      */
     public void setName(String name) {
         this.name = name;

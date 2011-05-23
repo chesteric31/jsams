@@ -26,11 +26,10 @@ public abstract class AbstractIdentity implements Identity {
     /**
      * Constructor.
      * 
-     * @param bean
-     *            the {@link AbstractIdentityBean}
+     * @param bean the {@link AbstractIdentityBean}
      */
     public AbstractIdentity(final AbstractIdentityBean<?, ?> bean) {
-        setId(bean.getId());
+        this.id = bean.getId();
     }
 
     /**
@@ -44,8 +43,7 @@ public abstract class AbstractIdentity implements Identity {
 
     /**
      * 
-     * @param id
-     *            the id to set
+     * @param id the id to set
      */
     public void setId(Long id) {
         this.id = id;

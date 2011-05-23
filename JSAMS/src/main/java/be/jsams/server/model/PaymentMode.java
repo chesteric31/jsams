@@ -25,8 +25,7 @@ public class PaymentMode extends AbstractTranslatableIdentity {
     /**
      * Constructor
      * 
-     * @param bean
-     *            the {@link PaymentModeBean}
+     * @param bean the {@link PaymentModeBean}
      */
     public PaymentMode(PaymentModeBean bean) {
         super(bean);

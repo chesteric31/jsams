@@ -24,10 +24,8 @@ public class JsamsDialog extends JDialog {
     /**
      * Constructor
      * 
-     * @param parent
-     *            the {@link JsamsMainFrame} parent
-     * @param title
-     *            the {@link I18nString} translatable String
+     * @param parent the {@link JsamsMainFrame} parent
+     * @param title the {@link I18nString} translatable String
      */
     public JsamsDialog(final JsamsMainFrame parent, final I18nString title) {
         super(parent, title.getTranslation(), true);
@@ -36,17 +34,32 @@ public class JsamsDialog extends JDialog {
     /**
      * Constructor
      * 
-     * @param parent
-     *            the {@link JsamsMainFrame} parent
-     * @param title
-     *            the {@link I18nString} translatable String
-     * @param iconFileName
-     *            the icon path name
+     * @param parent the {@link JsamsMainFrame} parent
+     * @param title the {@link I18nString} translatable String
+     * @param iconFileName the icon path name
      */
     public JsamsDialog(final JsamsMainFrame parent, final I18nString title, final String iconFileName) {
         super(parent, title.getTranslation(), true);
         Image defaultIcon = IconUtil.buildIcon(iconFileName);
         setIconImage(defaultIcon);
+    }
+
+    /**
+     * Constructor
+     * 
+     * @param parent the {@link JsamsDialog} parent
+     */
+    public JsamsDialog(JsamsDialog parent) {
+        super(parent);
+    }
+
+    /**
+     * Constructor
+     * 
+     * @param parent the {@link JsamsFrame} parent
+     */
+    public JsamsDialog(JsamsFrame parent) {
+        super(parent);
     }
 
 }
