@@ -11,9 +11,10 @@ import be.jsams.server.model.AbstractIdentity;
 import be.jsams.server.model.management.Product;
 
 /**
- * {@link MappedSuperclass} abstract class to abstract all the common fields between the document detail:
- * estimate detail, command detail, delivery order detail, bill detail and credit note detail.
- *
+ * {@link MappedSuperclass} abstract class to abstract all the common fields
+ * between the document detail: estimate detail, command detail, delivery order
+ * detail, bill detail and credit note detail.
+ * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
@@ -41,13 +42,12 @@ public abstract class AbstractDetail extends AbstractIdentity {
      */
     public AbstractDetail(final AbstractDetailBean<?, ?, ?> bean) {
         super(bean);
-        setDiscountRate(bean.getDiscountRate());
-        setPrice(bean.getPrice());
-        setProduct(new Product(bean.getProduct()));
-        setQuantity(bean.getQuantity());
-        setVatApplicable(bean.getVatApplicable());
+        this.discountRate = bean.getDiscountRate();
+        this.price = bean.getPrice();
+        this.product = new Product(bean.getProduct());
+        this.quantity = bean.getQuantity();
+        this.vatApplicable = bean.getVatApplicable();
     }
-
 
     /**
      * 
@@ -154,5 +154,5 @@ public abstract class AbstractDetail extends AbstractIdentity {
         builder.append("]");
         return builder.toString();
     }
-    
+
 }

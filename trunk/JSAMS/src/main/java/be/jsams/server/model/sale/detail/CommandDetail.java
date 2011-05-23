@@ -39,12 +39,13 @@ public class CommandDetail extends AbstractDetail {
      */
     public CommandDetail(final CommandDetailBean bean, final Command command) {
         super(bean);
-        setTransferred(bean.isTransferred());
+        this.transferred = bean.isTransferred();
     }
 
     /**
      * 
-     * @return true if the {@link CommandDetail} was transferred to a bill detail, false otherwise
+     * @return true if the {@link CommandDetail} was transferred to a bill
+     *         detail, false otherwise
      */
     @Column(name = "TRANSFERRED")
     public boolean isTransferred() {
@@ -53,9 +54,9 @@ public class CommandDetail extends AbstractDetail {
 
     /**
      * 
-     * @param transferred
-     *            the transferred boolean to set (true, this {@link CommandDetail} is transferred to a bill detail,
-     *            false otherwise
+     * @param transferred the transferred boolean to set (true, this
+     *            {@link CommandDetail} is transferred to a bill detail, false
+     *            otherwise
      */
     public void setTransferred(boolean transferred) {
         this.transferred = transferred;
@@ -73,12 +74,10 @@ public class CommandDetail extends AbstractDetail {
 
     /**
      * 
-     * @param command
-     *            the {@link Command} to set
+     * @param command the {@link Command} to set
      */
     public void setCommand(Command command) {
         this.command = command;
     }
-
 
 }

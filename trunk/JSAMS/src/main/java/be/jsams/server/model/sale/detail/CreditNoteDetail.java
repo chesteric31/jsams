@@ -40,10 +40,10 @@ public class CreditNoteDetail extends AbstractDetail {
      */
     public CreditNoteDetail(CreditNoteDetailBean bean, final CreditNote creditNote) {
         super(bean);
-        setCreditNote(creditNote);
+        this.creditNote = creditNote;
         BillDetailBean billDetailBean = bean.getBillDetail();
         if (billDetailBean != null) {
-            setBillDetail(new BillDetail(billDetailBean, new Bill(billDetailBean.getBill())));
+            this.billDetail = new BillDetail(billDetailBean, new Bill(billDetailBean.getBill()));
         }
     }
 

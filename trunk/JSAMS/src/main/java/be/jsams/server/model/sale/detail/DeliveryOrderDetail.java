@@ -46,21 +46,22 @@ public class DeliveryOrderDetail extends AbstractDetail {
      */
     public DeliveryOrderDetail(final DeliveryOrderDetailBean bean, final DeliveryOrder deliveryOrder) {
         super(bean);
-        setDeliveryOrder(deliveryOrder);
-        setTransferred(bean.isTransferred());
+        this.deliveryOrder = deliveryOrder;
+        this.transferred = bean.isTransferred();
         CommandDetailBean commandDetail = bean.getCommandDetail();
         if (commandDetail != null) {
-            setCommandDetail(new CommandDetail(commandDetail, new Command(commandDetail.getCommand())));
+            this.commandDetail = new CommandDetail(commandDetail, new Command(commandDetail.getCommand()));
         }
         BillDetailBean billDetail = bean.getBillDetail();
         if (billDetail != null) {
-            setBillDetail(new BillDetail(billDetail, new Bill(billDetail.getBill())));
+            this.billDetail = new BillDetail(billDetail, new Bill(billDetail.getBill()));
         }
     }
 
     /**
      * 
-     * @return a boolean to indicate is the {@link DeliveryOrderDetail} is transferred to bill detail
+     * @return a boolean to indicate is the {@link DeliveryOrderDetail} is
+     *         transferred to bill detail
      */
     @Column(name = "TRANSFERRED")
     public boolean isTransferred() {
@@ -69,7 +70,8 @@ public class DeliveryOrderDetail extends AbstractDetail {
 
     /**
      * 
-     * @param transferred a boolean to indicate is the {@link DeliveryOrderDetail} is transferred to bill detail
+     * @param transferred a boolean to indicate is the
+     *            {@link DeliveryOrderDetail} is transferred to bill detail
      */
     public void setTransferred(boolean transferred) {
         this.transferred = transferred;

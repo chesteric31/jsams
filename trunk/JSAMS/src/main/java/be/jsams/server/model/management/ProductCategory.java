@@ -33,12 +33,11 @@ public class ProductCategory extends AbstractTranslatableIdentity {
     /**
      * Constructor
      * 
-     * @param bean
-     *            the {@link ProductCategoryBean}
+     * @param bean the {@link ProductCategoryBean}
      */
     public ProductCategory(ProductCategoryBean bean) {
         super(bean);
-        setSociety(new Society(bean.getSociety()));
+        this.society = new Society(bean.getSociety());
     }
 
     /**
@@ -51,8 +50,7 @@ public class ProductCategory extends AbstractTranslatableIdentity {
     }
 
     /**
-     * @param society
-     *            the society to set
+     * @param society the society to set
      */
     public void setSociety(Society society) {
         this.society = society;

@@ -50,9 +50,9 @@ public class DeliveryOrder extends AbstractDocument {
      */
     public DeliveryOrder(DeliveryOrderBean bean) {
         super(bean);
-        setDeliveryAddress(new Address(bean.getDeliveryAddress()));
-        setDiscountRate(bean.getDiscountRate());
-        setTransferred(bean.isTransferred());
+        this.deliveryAddress = new Address(bean.getDeliveryAddress());
+        this.discountRate = bean.getDiscountRate();
+        this.transferred = bean.isTransferred();
         List<DeliveryOrderDetailBean> list = bean.getDetails();
         List<DeliveryOrderDetail> tmp = new ArrayList<DeliveryOrderDetail>();
         if (list != null) {
@@ -60,7 +60,7 @@ public class DeliveryOrder extends AbstractDocument {
                 tmp.add(new DeliveryOrderDetail(detail, this));
             }
         }
-        setDetails(tmp);
+        this.details = tmp;
     }
 
     /**

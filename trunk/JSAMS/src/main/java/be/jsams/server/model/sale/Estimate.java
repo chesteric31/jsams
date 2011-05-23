@@ -52,10 +52,10 @@ public class Estimate extends AbstractDocument {
      */
     public Estimate(EstimateBean bean) {
         super(bean);
-        setAgent(new Agent(bean.getAgent()));
-        setBillingAddress(new Address(bean.getBillingAddress()));
-        setDiscountRate(bean.getDiscountRate());
-        setTransferred(bean.isTransferred());
+        this.agent = new Agent(bean.getAgent());
+        this.billingAddress = new Address(bean.getBillingAddress());
+        this.discountRate = bean.getDiscountRate();
+        this.transferred = bean.isTransferred();
         List<EstimateDetailBean> list = bean.getDetails();
         List<EstimateDetail> tmp = new ArrayList<EstimateDetail>();
         if (list != null) {
@@ -63,7 +63,7 @@ public class Estimate extends AbstractDocument {
                 tmp.add(new EstimateDetail(detail, this));
             }
         }
-        setDetails(tmp);
+        this.details = tmp;
     }
 
     /**

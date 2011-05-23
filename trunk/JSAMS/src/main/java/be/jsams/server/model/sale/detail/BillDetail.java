@@ -39,13 +39,14 @@ public class BillDetail extends AbstractDetail {
      */
     public BillDetail(BillDetailBean bean, final Bill bill) {
         super(bean);
-        setBill(bill);
-        setTransferred(bean.isTransferred());
+        this.bill = bill;
+        this.transferred = bean.isTransferred();
     }
 
     /**
      * 
-     * @return true if the {@link BillDetail} was transferred to a credit note detail, false otherwise
+     * @return true if the {@link BillDetail} was transferred to a credit note
+     *         detail, false otherwise
      */
     @Column(name = "TRANSFERRED")
     public boolean isTransferred() {
@@ -54,8 +55,9 @@ public class BillDetail extends AbstractDetail {
 
     /**
      * 
-     * @param transferred the transferred boolean to set (true, this {@link BillDetail} is transferred to a credit note
-     *            detail, false otherwise
+     * @param transferred the transferred boolean to set (true, this
+     *            {@link BillDetail} is transferred to a credit note detail,
+     *            false otherwise
      */
     public void setTransferred(boolean transferred) {
         this.transferred = transferred;
