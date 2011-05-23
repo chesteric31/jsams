@@ -9,7 +9,6 @@ package be.jsams.server.model;
 public interface Identity {
 
     /**
-     * 
      * @return the id
      */
     Long getId();

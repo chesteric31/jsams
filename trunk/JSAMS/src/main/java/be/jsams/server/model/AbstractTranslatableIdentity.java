@@ -6,7 +6,8 @@ import javax.persistence.MappedSuperclass;
 import be.jsams.common.bean.model.AbstractTranslatableIdentityBean;
 
 /**
- * {@link MappedSuperclass} for all entities that have the columns: label in English, French and Dutch.
+ * {@link MappedSuperclass} for all entities that have the columns: label in
+ * English, French and Dutch.
  * 
  * @author chesteric31
  * @version $$Rev$$ $$Date::                  $$ $$Author$$
@@ -27,14 +28,13 @@ public abstract class AbstractTranslatableIdentity extends AbstractIdentity {
     /**
      * Constructor.
      * 
-     * @param bean
-     *            the {@link AbstractTranslatableIdentityBean}
+     * @param bean the {@link AbstractTranslatableIdentityBean}
      */
     public AbstractTranslatableIdentity(final AbstractTranslatableIdentityBean<?, ?> bean) {
         super(bean);
-        setLabel(bean.getLabel());
-        setLabelFr(bean.getLabelFr());
-        setLabelNl(bean.getLabelNl());
+        this.label = bean.getLabel();
+        this.labelFr = bean.getLabelFr();
+        this.labelNl = bean.getLabelNl();
     }
 
     /**
@@ -48,8 +48,7 @@ public abstract class AbstractTranslatableIdentity extends AbstractIdentity {
 
     /**
      * 
-     * @param label
-     *            the English label to set
+     * @param label the English label to set
      */
     public void setLabel(String label) {
         this.label = label;
@@ -66,8 +65,7 @@ public abstract class AbstractTranslatableIdentity extends AbstractIdentity {
 
     /**
      * 
-     * @param labelFr
-     *            the French label to set
+     * @param labelFr the French label to set
      */
     public void setLabelFr(String labelFr) {
         this.labelFr = labelFr;
@@ -84,8 +82,7 @@ public abstract class AbstractTranslatableIdentity extends AbstractIdentity {
 
     /**
      * 
-     * @param labelNl
-     *            the Dutch label to set
+     * @param labelNl the Dutch label to set
      */
     public void setLabelNl(String labelNl) {
         this.labelNl = labelNl;

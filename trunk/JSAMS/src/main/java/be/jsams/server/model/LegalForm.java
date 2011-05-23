@@ -30,8 +30,7 @@ public class LegalForm extends AbstractTranslatableIdentity {
     /**
      * Constructor
      * 
-     * @param bean
-     *            the {@link LegalFormBean}
+     * @param bean the {@link LegalFormBean}
      */
     public LegalForm(LegalFormBean bean) {
         super(bean);

@@ -35,16 +35,17 @@ public class ContactInformation extends AbstractIdentity {
     /**
      * Constructor
      * 
-     * @param bean
-     *            the {@link ContactInformationBean}
+     * @param bean the {@link ContactInformationBean}
      */
     public ContactInformation(ContactInformationBean bean) {
         super(bean);
-        setEmail(bean.getEmail());
-        setFax(bean.getFax());
-        setMobile(bean.getMobile());
-        setPhone(bean.getPhone());
-        setWebsite(bean.getWebsite());
+        this.email = bean.getEmail();
+        this.fax = bean.getFax();
+        // TODO
+        // this.logo = bean.getLogo();
+        this.mobile = bean.getMobile();
+        this.phone = bean.getPhone();
+        this.website = bean.getWebsite();
     }
 
     /**
@@ -58,8 +59,7 @@ public class ContactInformation extends AbstractIdentity {
 
     /**
      * 
-     * @param phone
-     *            the phone to set
+     * @param phone the phone to set
      */
     public void setPhone(String phone) {
         this.phone = phone;
@@ -76,8 +76,7 @@ public class ContactInformation extends AbstractIdentity {
 
     /**
      * 
-     * @param fax
-     *            the fax to set
+     * @param fax the fax to set
      */
     public void setFax(String fax) {
         this.fax = fax;
@@ -94,8 +93,7 @@ public class ContactInformation extends AbstractIdentity {
 
     /**
      * 
-     * @param mobile
-     *            the mobile to set
+     * @param mobile the mobile to set
      */
     public void setMobile(String mobile) {
         this.mobile = mobile;
@@ -112,8 +110,7 @@ public class ContactInformation extends AbstractIdentity {
 
     /**
      * 
-     * @param email
-     *            the email to set
+     * @param email the email to set
      */
     public void setEmail(String email) {
         this.email = email;
@@ -130,8 +127,7 @@ public class ContactInformation extends AbstractIdentity {
 
     /**
      * 
-     * @param website
-     *            the web-site to set
+     * @param website the web-site to set
      */
     public void setWebsite(String website) {
         this.website = website;
@@ -148,8 +144,7 @@ public class ContactInformation extends AbstractIdentity {
 
     /**
      * 
-     * @param logo
-     *            the logo to set
+     * @param logo the logo to set
      */
     public void setLogo(byte[] logo) {
         this.logo = logo;

@@ -33,17 +33,16 @@ public class Address extends AbstractIdentity {
     /**
      * Constructor.
      * 
-     * @param bean
-     *            the {@link AddressBean}
+     * @param bean the {@link AddressBean}
      */
     public Address(final AddressBean bean) {
         super(bean);
-        setBox(bean.getBox());
-        setCity(bean.getCity());
-        setCountry(bean.getCountry());
-        setNumber(bean.getNumber());
-        setStreet(bean.getStreet());
-        setZipCode(bean.getZipCode());
+        this.box = bean.getBox();
+        this.city = bean.getCity();
+        this.country = bean.getCountry();
+        this.number = bean.getNumber();
+        this.street = bean.getStreet();
+        this.zipCode = bean.getZipCode();
     }
 
     /**
@@ -57,8 +56,7 @@ public class Address extends AbstractIdentity {
 
     /**
      * 
-     * @param street
-     *            the street to set
+     * @param street the street to set
      */
     public void setStreet(String street) {
         this.street = street;
@@ -75,8 +73,7 @@ public class Address extends AbstractIdentity {
 
     /**
      * 
-     * @param number
-     *            the house number to set
+     * @param number the house number to set
      */
     public void setNumber(String number) {
         this.number = number;
@@ -93,8 +90,7 @@ public class Address extends AbstractIdentity {
 
     /**
      * 
-     * @param zipCode
-     *            the zip code to set
+     * @param zipCode the zip code to set
      */
     public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
@@ -111,8 +107,7 @@ public class Address extends AbstractIdentity {
 
     /**
      * 
-     * @param box
-     *            the box to set
+     * @param box the box to set
      */
     public void setBox(String box) {
         this.box = box;
@@ -129,8 +124,7 @@ public class Address extends AbstractIdentity {
 
     /**
      * 
-     * @param city
-     *            the city to set
+     * @param city the city to set
      */
     public void setCity(String city) {
         this.city = city;
@@ -147,8 +141,7 @@ public class Address extends AbstractIdentity {
 
     /**
      * 
-     * @param country
-     *            the country to set
+     * @param country the country to set
      */
     public void setCountry(String country) {
         this.country = country;

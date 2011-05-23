@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import be.jsams.common.bean.model.LegalFormBean;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.server.model.management.Agent;
 import be.jsams.server.model.management.Customer;
@@ -50,21 +51,20 @@ public class Society extends AbstractNamedIdentity {
     /**
      * Constructor
      * 
-     * @param bean
-     *            the {@link SocietyBean}
+     * @param bean the {@link SocietyBean}
      */
     public Society(SocietyBean bean) {
         super(bean);
-        setActivity(bean.getActivity());
-        setAddress(new Address(bean.getAddress()));
-        setCapital(bean.getCapital());
-        setContactInformation(new ContactInformation(bean.getContactInformation()));
-        if (bean.getLegalForm().getId() != null) {
-            setLegalForm(new LegalForm(bean.getLegalForm()));
+        this.activity = bean.getActivity();
+        this.address = new Address(bean.getAddress());
+        this.capital = bean.getCapital();
+        this.contactInformation = new ContactInformation(bean.getContactInformation());
+        LegalFormBean form = bean.getLegalForm();
+        if (form.getId() != null) {
+            this.legalForm = new LegalForm(form);
         }
-        setName(bean.getName());
-        setResponsible(bean.getResponsible());
-        setVatNumber(bean.getVatNumber());
+        this.responsible = bean.getResponsible();
+        this.vatNumber = bean.getVatNumber();
     }
 
     /**
@@ -78,8 +78,7 @@ public class Society extends AbstractNamedIdentity {
 
     /**
      * 
-     * @param capital
-     *            the capital to set
+     * @param capital the capital to set
      */
     public void setCapital(Double capital) {
         this.capital = capital;
@@ -96,8 +95,7 @@ public class Society extends AbstractNamedIdentity {
 
     /**
      * 
-     * @param activity
-     *            the activity to set
+     * @param activity the activity to set
      */
     public void setActivity(String activity) {
         this.activity = activity;
@@ -114,8 +112,7 @@ public class Society extends AbstractNamedIdentity {
 
     /**
      * 
-     * @param responsible
-     *            the responsible to set
+     * @param responsible the responsible to set
      */
     public void setResponsible(String responsible) {
         this.responsible = responsible;
@@ -132,8 +129,7 @@ public class Society extends AbstractNamedIdentity {
 
     /**
      * 
-     * @param vatNumber
-     *            the VAT number to set
+     * @param vatNumber the VAT number to set
      */
     public void setVatNumber(String vatNumber) {
         this.vatNumber = vatNumber;
@@ -151,8 +147,7 @@ public class Society extends AbstractNamedIdentity {
 
     /**
      * 
-     * @param address
-     *            the {@link Address} to set
+     * @param address the {@link Address} to set
      */
     public void setAddress(Address address) {
         this.address = address;
@@ -170,8 +165,7 @@ public class Society extends AbstractNamedIdentity {
 
     /**
      * 
-     * @param legalForm
-     *            the {@link LegalForm} to set
+     * @param legalForm the {@link LegalForm} to set
      */
     public void setLegalForm(LegalForm legalForm) {
         this.legalForm = legalForm;
@@ -189,8 +183,7 @@ public class Society extends AbstractNamedIdentity {
 
     /**
      * 
-     * @param contactInformation
-     *            the {@link ContactInformation} to set
+     * @param contactInformation the {@link ContactInformation} to set
      */
     public void setContactInformation(ContactInformation contactInformation) {
         this.contactInformation = contactInformation;
@@ -206,8 +199,7 @@ public class Society extends AbstractNamedIdentity {
     }
 
     /**
-     * @param agents
-     *            the agents to set
+     * @param agents the agents to set
      */
     public void setAgents(List<Agent> agents) {
         this.agents = agents;
@@ -223,8 +215,7 @@ public class Society extends AbstractNamedIdentity {
     }
 
     /**
-     * @param customers
-     *            the customers to set
+     * @param customers the customers to set
      */
     public void setCustomers(List<Customer> customers) {
         this.customers = customers;
@@ -240,8 +231,7 @@ public class Society extends AbstractNamedIdentity {
     }
 
     /**
-     * @param productCategories
-     *            the productCategories to set
+     * @param productCategories the productCategories to set
      */
     public void setProductCategories(List<ProductCategory> productCategories) {
         this.productCategories = productCategories;
