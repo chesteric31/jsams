@@ -23,29 +23,12 @@ public class CustomerServiceImpl extends AbstractService implements CustomerServ
     private CustomerDao customerDao;
 
     /**
-     * 
-     * @return the {@link CustomerDao}
-     */
-    public CustomerDao getCustomerDao() {
-        return customerDao;
-    }
-
-    /**
-     * 
-     * @param customerDao
-     *            the {@link CustomerDao} to set
-     */
-    public void setCustomerDao(CustomerDao customerDao) {
-        this.customerDao = customerDao;
-    }
-
-    /**
      * {@inheritDoc}
      */
     public CustomerBean create(final CustomerBean bean) {
         Customer customer = new Customer(bean);
-        customerDao.add(customer);
-        return new CustomerBean(customer, bean.getSociety());
+        Customer persistedCustomer = customerDao.add(customer);
+        return getCustomerBeanBuilder().build(persistedCustomer, bean.getSociety());
     }
 
     /**
@@ -72,7 +55,7 @@ public class CustomerServiceImpl extends AbstractService implements CustomerServ
         List<Customer> customers = customerDao.findAll();
         List<CustomerBean> beans = new ArrayList<CustomerBean>();
         for (Customer customer : customers) {
-            beans.add(new CustomerBean(customer, currentSociety));
+            beans.add(getCustomerBeanBuilder().build(customer, currentSociety));
         }
         return beans;
     }
@@ -85,7 +68,7 @@ public class CustomerServiceImpl extends AbstractService implements CustomerServ
         SocietyBeanBuilder builder = getSocietyBeanBuilder();
         builder.setModel(customer.getSociety());
         SocietyBean societyBean = builder.build(false);
-        CustomerBean bean = new CustomerBean(customer, societyBean);
+        CustomerBean bean = getCustomerBeanBuilder().build(customer, societyBean);
         return bean;
     }
 
@@ -107,10 +90,24 @@ public class CustomerServiceImpl extends AbstractService implements CustomerServ
         List<CustomerBean> beans = new ArrayList<CustomerBean>();
         if (customers != null && !customers.isEmpty()) {
             for (Customer customer : customers) {
-                beans.add(new CustomerBean(customer, currentSociety));
+                beans.add(getCustomerBeanBuilder().build(customer, currentSociety));
             }
         }
         return beans;
+    }
+
+    /**
+     * @return the {@link CustomerDao}
+     */
+    public CustomerDao getCustomerDao() {
+        return customerDao;
+    }
+
+    /**
+     * @param customerDao the {@link CustomerDao} to set
+     */
+    public void setCustomerDao(CustomerDao customerDao) {
+        this.customerDao = customerDao;
     }
 
 }

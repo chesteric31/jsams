@@ -72,9 +72,10 @@ public class SearchCustomerAction extends AbstractAction {
                 }
             }
         };
-        SearchCustomerPanel searchCustomerPanel = new SearchCustomerPanel(new CustomerBean(JsamsDesktop.getInstance()
-                .getCurrentSociety()), customListener, JsamsApplicationContext.getCustomerService(),
-                new SearchCustomerValidator(), false);
+        CustomerBean customerBean = JsamsApplicationContext.getCustomerBeanBuilder().build(null,
+                JsamsDesktop.getInstance().getCurrentSociety());
+        SearchCustomerPanel searchCustomerPanel = new SearchCustomerPanel(customerBean, customListener,
+                JsamsApplicationContext.getCustomerService(), new SearchCustomerValidator(), false);
         dialog.add(searchCustomerPanel);
         dialog.pack();
         dialog.setLocationRelativeTo(((JsamsButton) e.getSource()).getRootPane());

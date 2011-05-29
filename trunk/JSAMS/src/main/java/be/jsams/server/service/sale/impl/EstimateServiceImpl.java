@@ -5,9 +5,11 @@ import java.util.List;
 
 import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.common.bean.model.SocietyBean;
+import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.sale.EstimateBean;
 import be.jsams.server.dao.sale.EstimateDao;
 import be.jsams.server.model.sale.Estimate;
+import be.jsams.server.service.AbstractService;
 import be.jsams.server.service.sale.EstimateService;
 
 /**
@@ -16,23 +18,9 @@ import be.jsams.server.service.sale.EstimateService;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class EstimateServiceImpl implements EstimateService {
+public class EstimateServiceImpl extends AbstractService implements EstimateService {
 
     private EstimateDao estimateDao;
-
-    /**
-     * @return the estimateDao
-     */
-    public EstimateDao getEstimateDao() {
-        return estimateDao;
-    }
-
-    /**
-     * @param estimateDao the estimateDao to set
-     */
-    public void setEstimateDao(EstimateDao estimateDao) {
-        this.estimateDao = estimateDao;
-    }
 
     /**
      * {@inheritDoc}
@@ -40,7 +28,7 @@ public class EstimateServiceImpl implements EstimateService {
     public EstimateBean create(final EstimateBean bean) {
         Estimate estimate = new Estimate(bean);
         Estimate addingEstimate = estimateDao.add(estimate);
-        return new EstimateBean(addingEstimate, JsamsDesktop.getInstance().getCurrentSociety());
+        return new EstimateBean(addingEstimate, JsamsDesktop.getInstance().getCurrentSociety(), bean.getCustomer());
     }
 
     /**
@@ -77,7 +65,8 @@ public class EstimateServiceImpl implements EstimateService {
         List<Estimate> estimates = estimateDao.findAll();
         List<EstimateBean> beans = new ArrayList<EstimateBean>();
         for (Estimate estimate : estimates) {
-            beans.add(new EstimateBean(estimate, currentSociety));
+            CustomerBean customer = getCustomerBeanBuilder().build(estimate.getCustomer(), currentSociety);
+            beans.add(new EstimateBean(estimate, currentSociety, customer));
         }
         return beans;
     }
@@ -86,8 +75,10 @@ public class EstimateServiceImpl implements EstimateService {
      * {@inheritDoc}
      */
     public EstimateBean findById(final Long id) {
+        SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
         Estimate estimate = estimateDao.findById(id);
-        EstimateBean bean = new EstimateBean(estimate, JsamsDesktop.getInstance().getCurrentSociety());
+        CustomerBean customer = getCustomerBeanBuilder().build(estimate.getCustomer(), currentSociety);
+        EstimateBean bean = new EstimateBean(estimate, currentSociety, customer);
         return bean;
     }
 
@@ -110,9 +101,24 @@ public class EstimateServiceImpl implements EstimateService {
         List<Estimate> estimates = estimateDao.findByCriteria(criteria);
         List<EstimateBean> beans = new ArrayList<EstimateBean>();
         for (Estimate estimate : estimates) {
-            beans.add(new EstimateBean(estimate, currentSociety));
+            CustomerBean customer = getCustomerBeanBuilder().build(estimate.getCustomer(), currentSociety);
+            beans.add(new EstimateBean(estimate, currentSociety, customer));
         }
         return beans;
+    }
+
+    /**
+     * @return the estimateDao
+     */
+    public EstimateDao getEstimateDao() {
+        return estimateDao;
+    }
+
+    /**
+     * @param estimateDao the estimateDao to set
+     */
+    public void setEstimateDao(EstimateDao estimateDao) {
+        this.estimateDao = estimateDao;
     }
 
 }

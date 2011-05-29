@@ -14,7 +14,6 @@ import be.jsams.server.dao.AbstractJUnitTestClass;
 import be.jsams.server.dao.AddressDao;
 import be.jsams.server.dao.CivilityDao;
 import be.jsams.server.dao.ContactInformationDao;
-import be.jsams.server.dao.LegalFormDao;
 import be.jsams.server.dao.MockDaoGenerator;
 import be.jsams.server.dao.SocietyDao;
 import be.jsams.server.dao.management.AgentDao;
@@ -71,13 +70,6 @@ public class AgentDaoImplTest extends AbstractJUnitTestClass {
              */
             private static final long serialVersionUID = -5835207230986956543L;
 
-            /**
-             * {@inheritDoc}
-             */
-            @Override
-            public LegalFormDao getLegalFormDao() {
-                return MockDaoGenerator.generateMockLegalForm(persistedSociety);
-            }
         };
 
         final Civility persistedCivility = civilityDao.add(agent.getCivility());

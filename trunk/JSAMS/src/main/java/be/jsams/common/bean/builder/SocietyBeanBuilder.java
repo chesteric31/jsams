@@ -3,7 +3,6 @@ package be.jsams.common.bean.builder;
 import java.util.List;
 
 import be.jsams.common.bean.model.SocietyBean;
-import be.jsams.server.dao.LegalFormDao;
 import be.jsams.server.dao.SocietyDao;
 import be.jsams.server.model.LegalForm;
 import be.jsams.server.model.Society;
@@ -12,23 +11,20 @@ import com.jgoodies.common.collect.ArrayListModel;
 import com.jgoodies.common.collect.ObservableList;
 
 /**
- * Builder that makes a {@link SocietyBean} from DAO list model and
- * entity model.
- *
+ * Builder that makes a {@link SocietyBean} from DAO list model and entity model.
+ * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
 public class SocietyBeanBuilder {
 
     private Society model;
-    
-    private ObservableList<SocietyBean> listModel;
-    
-    private SocietyDao dao;
-    
-    private LegalFormBeanBuilder legalFormBuilder = new LegalFormBeanBuilder();
 
-    private LegalFormDao legalFormDao;
+    private ObservableList<SocietyBean> listModel;
+
+    private SocietyDao dao;
+
+    private LegalFormBeanBuilder legalFormBuilder;
 
     /**
      * Build the {@link SocietyBean}.
@@ -39,7 +35,6 @@ public class SocietyBeanBuilder {
      */
     public SocietyBean build(boolean newOne) {
         SocietyBean bean;
-        legalFormBuilder.setDao(getLegalFormDao());
         if (newOne) {
             bean = new SocietyBean();
             legalFormBuilder.setModel(null);
@@ -47,13 +42,15 @@ public class SocietyBeanBuilder {
             return bean;
         } else {
             List<Society> societies = dao.findAll();
-            listModel = new ArrayListModel<SocietyBean>();
+            if (listModel == null) {
+                listModel = new ArrayListModel<SocietyBean>();
+            } else {
+                listModel.clear();
+            }
             if (societies != null && !societies.isEmpty()) {
                 for (Society society : societies) {
                     LegalForm form = society.getLegalForm();
-                    if (form != null) {
-                        legalFormBuilder.setModel(form);
-                    }
+                    legalFormBuilder.setModel(form);
                     bean = new SocietyBean(society);
                     bean.setLegalForm(legalFormBuilder.build());
                     listModel.add(bean);
@@ -65,7 +62,7 @@ public class SocietyBeanBuilder {
                 listModel.add(0, null);
                 bean = new SocietyBean(listModel);
             }
-            bean.setLegalForm(legalFormBuilder.build());
+//            bean.setLegalForm(legalFormBuilder.build());
         }
         return bean;
     }
@@ -113,17 +110,17 @@ public class SocietyBeanBuilder {
     }
 
     /**
-     * @return the {@link LegalFormDao}
+     * @return the legalFormBuilder
      */
-    public LegalFormDao getLegalFormDao() {
-        return legalFormDao;
+    public LegalFormBeanBuilder getLegalFormBuilder() {
+        return legalFormBuilder;
     }
 
     /**
-     * @param dao the {@link LegalFormDao} to set
+     * @param legalFormBuilder the legalFormBuilder to set
      */
-    public void setLegalFormDao(LegalFormDao dao) {
-        this.legalFormDao = dao;
+    public void setLegalFormBuilder(LegalFormBeanBuilder legalFormBuilder) {
+        this.legalFormBuilder = legalFormBuilder;
     }
-    
+
 }

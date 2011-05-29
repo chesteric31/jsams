@@ -21,34 +21,37 @@
 	</bean>
 
 	<!-- Services -->
-	<bean id="estimateServiceTarget" class="be.jsams.server.service.sale.impl.EstimateServiceImpl">
+	<bean id="estimateServiceTarget" class="be.jsams.server.service.sale.impl.EstimateServiceImpl"
+		parent="abstractService">
 		<property name="estimateDao" ref="estimateDao" />
 	</bean>
 	<bean id="estimateService" parent="baseTransactionProxy">
 		<property name="target" ref="estimateServiceTarget" />
 	</bean>
-	<bean id="commandServiceTarget" class="be.jsams.server.service.sale.impl.CommandServiceImpl">
+	<bean id="commandServiceTarget" class="be.jsams.server.service.sale.impl.CommandServiceImpl"
+		parent="abstractService">
 		<property name="commandDao" ref="commandDao" />
 	</bean>
 	<bean id="commandService" parent="baseTransactionProxy">
 		<property name="target" ref="commandServiceTarget" />
 	</bean>
 	<bean id="deliveryOrderServiceTarget"
-		class="be.jsams.server.service.sale.impl.DeliveryOrderServiceImpl">
+		class="be.jsams.server.service.sale.impl.DeliveryOrderServiceImpl"
+		parent="abstractService">
 		<property name="deliveryOrderDao" ref="deliveryOrderDao" />
 	</bean>
 	<bean id="deliveryOrderService" parent="baseTransactionProxy">
 		<property name="target" ref="deliveryOrderServiceTarget" />
 	</bean>
-	<bean id="billServiceTarget"
-		class="be.jsams.server.service.sale.impl.BillServiceImpl">
+	<bean id="billServiceTarget" class="be.jsams.server.service.sale.impl.BillServiceImpl"
+		parent="abstractService">
 		<property name="billDao" ref="billDao" />
 	</bean>
 	<bean id="billService" parent="baseTransactionProxy">
 		<property name="target" ref="billServiceTarget" />
 	</bean>
-	<bean id="creditNoteServiceTarget"
-		class="be.jsams.server.service.sale.impl.CreditNoteServiceImpl">
+	<bean id="creditNoteServiceTarget" class="be.jsams.server.service.sale.impl.CreditNoteServiceImpl"
+		parent="abstractService">
 		<property name="creditNoteDao" ref="creditNoteDao" />
 	</bean>
 	<bean id="creditNoteService" parent="baseTransactionProxy">

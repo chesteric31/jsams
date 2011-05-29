@@ -11,8 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.ProductCategoryBean;
 import be.jsams.server.dao.AbstractJUnitTestClass;
-import be.jsams.server.dao.LegalFormDao;
-import be.jsams.server.dao.MockDaoGenerator;
 import be.jsams.server.dao.SocietyDao;
 import be.jsams.server.dao.management.ProductCategoryDao;
 import be.jsams.server.dao.management.impl.ProductCategoryDaoImpl;
@@ -62,13 +60,6 @@ public class ProductCategoryDaoImplTest extends AbstractJUnitTestClass {
              */
             private static final long serialVersionUID = -4781433278494586047L;
 
-            /**
-             * {@inheritDoc}
-             */
-            @Override
-            public LegalFormDao getLegalFormDao() {
-                return MockDaoGenerator.generateMockLegalForm(persistedSociety);
-            }
         };
         ((ProductCategoryDaoImpl) dao).setCurrentSociety(societyBean);
         ProductCategory category = dao.add(productCategory);
@@ -90,13 +81,6 @@ public class ProductCategoryDaoImplTest extends AbstractJUnitTestClass {
              */
             private static final long serialVersionUID = -4781433278494586047L;
 
-            /**
-             * {@inheritDoc}
-             */
-            @Override
-            public LegalFormDao getLegalFormDao() {
-                return MockDaoGenerator.generateMockLegalForm(persistedSociety);
-            }
         };
         ProductCategory category = dao.add(productCategory);
         ProductCategoryBean criteria = new ProductCategoryBean(category, societyBean);

@@ -20,7 +20,6 @@ public class SocietyServiceImpl extends AbstractService implements SocietyServic
     private SocietyDao societyDao;
     
     /**
-     * 
      * @return the {@link SocietyDao}
      */
     public SocietyDao getSocietyDao() {

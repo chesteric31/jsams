@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.model.dialog.sale.EditCreditNoteDialog;
@@ -12,6 +13,8 @@ import be.jsams.client.model.panel.AbstractSearchPanel;
 import be.jsams.client.model.table.CreditNoteTableModel;
 import be.jsams.client.swing.listener.CreditNoteTableMouseListener;
 import be.jsams.client.validator.SearchCreditNoteValidator;
+import be.jsams.common.bean.model.SocietyBean;
+import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.sale.CreditNoteBean;
 import be.jsams.server.service.sale.CreditNoteService;
 
@@ -54,7 +57,9 @@ public class SearchCreditNotePanel extends
      */
     @Override
     protected void performButtonAdd() {
-        CreditNoteBean bean = new CreditNoteBean(JsamsDesktop.getInstance().getCurrentSociety());
+        SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
+        CustomerBean customerBean = JsamsApplicationContext.getCustomerBeanBuilder().build(null, currentSociety);
+        CreditNoteBean bean = new CreditNoteBean(currentSociety, customerBean);
         new EditCreditNoteDialog(JsamsI18nResource.TITLE_EDIT_CREDIT_NOTE, bean);
         updateUI();
     }

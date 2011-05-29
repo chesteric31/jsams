@@ -113,7 +113,6 @@ public class JsamsButtonsPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent arg0) {
                 parent.performOk();
-
             }
         };
         buttonOk.setAction(okAction);

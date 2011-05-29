@@ -7,6 +7,7 @@ import be.jsams.common.bean.model.AbstractIdentityBean;
 import be.jsams.common.bean.model.AddressBean;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.AgentBean;
+import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.sale.detail.EstimateDetailBean;
 import be.jsams.common.bean.view.sale.EstimateBeanView;
 import be.jsams.server.model.sale.Estimate;
@@ -39,9 +40,10 @@ public class EstimateBean extends AbstractDocumentBean<Estimate, EstimateBeanVie
      * Default constructor
      * 
      * @param society the {@link SocietyBean}
+     * @param customer the {@link CustomerBean}
      */
-    public EstimateBean(SocietyBean society) {
-        super(society);
+    public EstimateBean(SocietyBean society, CustomerBean customer) {
+        super(society, customer);
         this.billingAddress = new AddressBean();
         this.agent = new AgentBean(getSociety());
         this.transferred = false;
@@ -55,9 +57,10 @@ public class EstimateBean extends AbstractDocumentBean<Estimate, EstimateBeanVie
      * 
      * @param model the {@link Estimate}
      * @param society the {@link SocietyBean}
+     * @param customer the {@link CustomerBean}
      */
-    public EstimateBean(Estimate model, SocietyBean society) {
-        super(model, society);
+    public EstimateBean(Estimate model, SocietyBean society, CustomerBean customer) {
+        super(model, society, customer);
         this.agent = new AgentBean(model.getAgent(), getSociety());
         this.billingAddress = new AddressBean(model.getBillingAddress());
         List<EstimateDetailBean> beans = new ArrayList<EstimateDetailBean>();

@@ -2,7 +2,9 @@ package be.jsams.client.context;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import be.jsams.common.bean.builder.LegalFormBeanBuilder;
 import be.jsams.common.bean.builder.SocietyBeanBuilder;
+import be.jsams.common.bean.builder.management.CustomerBeanBuilder;
 import be.jsams.server.dao.CivilityDao;
 import be.jsams.server.dao.LegalFormDao;
 import be.jsams.server.dao.PaymentModeDao;
@@ -19,8 +21,7 @@ import be.jsams.server.service.sale.DeliveryOrderService;
 import be.jsams.server.service.sale.EstimateService;
 
 /**
- * This class provides static methods to get a reference to a specific service,
- * anywhere in this project.
+ * This class provides static methods to get a reference to a specific service, anywhere in this project.
  * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
@@ -147,6 +148,20 @@ public final class JsamsApplicationContext {
      */
     public static CreditNoteService getCreditNoteService() {
         return (CreditNoteService) context.getBean("creditNoteService");
+    }
+
+    /**
+     * @return the {@link LegalFormBeanBuilder}
+     */
+    public static LegalFormBeanBuilder getLegalFormBeanBuilder() {
+        return (LegalFormBeanBuilder) context.getBean("legalFormBeanBuilder");
+    }
+
+    /**
+     * @return the {@link CustomerBeanBuilder}
+     */
+    public static CustomerBeanBuilder getCustomerBeanBuilder() {
+        return (CustomerBeanBuilder) context.getBean("customerBeanBuilder");
     }
 
 }
