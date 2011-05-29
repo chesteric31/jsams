@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.model.dialog.sale.EditBillDialog;
@@ -12,17 +13,19 @@ import be.jsams.client.model.panel.AbstractSearchPanel;
 import be.jsams.client.model.table.BillTableModel;
 import be.jsams.client.swing.listener.BillTableMouseListener;
 import be.jsams.client.validator.SearchBillValidator;
+import be.jsams.common.bean.model.SocietyBean;
+import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.sale.BillBean;
 import be.jsams.server.service.sale.BillService;
 
 /**
  * {@link AbstractSearchPanel} for {@link BillBean} objects.
- *
+ * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class SearchBillPanel extends AbstractSearchPanel<BillBean,
-        BillTableMouseListener, BillService, SearchBillValidator> {
+public class SearchBillPanel extends
+        AbstractSearchPanel<BillBean, BillTableMouseListener, BillService, SearchBillValidator> {
 
     /**
      * Serial Version UID
@@ -40,8 +43,8 @@ public class SearchBillPanel extends AbstractSearchPanel<BillBean,
      * @param listener the {@link BillTableMouseListener}
      * @param service the {@link BillService}
      * @param validator the {@link SearchBillValidator}
-     * @param showButtons a boolean that indicates if we have to display the
-     *            buttons to manage the content: add, remove and modify
+     * @param showButtons a boolean that indicates if we have to display the buttons to manage the content: add, remove
+     *            and modify
      */
     public SearchBillPanel(BillBean bean, BillTableMouseListener listener, BillService service,
             SearchBillValidator validator, boolean showButtons) {
@@ -53,7 +56,9 @@ public class SearchBillPanel extends AbstractSearchPanel<BillBean,
      */
     @Override
     protected void performButtonAdd() {
-        BillBean bean = new BillBean(JsamsDesktop.getInstance().getCurrentSociety());
+        SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
+        CustomerBean customerBean = JsamsApplicationContext.getCustomerBeanBuilder().build(null, currentSociety);
+        BillBean bean = new BillBean(currentSociety, customerBean);
         new EditBillDialog(JsamsI18nResource.TITLE_EDIT_BILL, bean);
         updateUI();
     }
@@ -124,5 +129,5 @@ public class SearchBillPanel extends AbstractSearchPanel<BillBean,
         getResultTable().setModel(model);
         getResultTable().repaint();
     }
-    
+
 }

@@ -5,9 +5,11 @@ import java.util.List;
 
 import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.common.bean.model.SocietyBean;
+import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.sale.DeliveryOrderBean;
 import be.jsams.server.dao.sale.DeliveryOrderDao;
 import be.jsams.server.model.sale.DeliveryOrder;
+import be.jsams.server.service.AbstractService;
 import be.jsams.server.service.sale.DeliveryOrderService;
 
 /**
@@ -16,23 +18,9 @@ import be.jsams.server.service.sale.DeliveryOrderService;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class DeliveryOrderServiceImpl implements DeliveryOrderService {
+public class DeliveryOrderServiceImpl extends AbstractService implements DeliveryOrderService {
 
     private DeliveryOrderDao deliveryOrderDao;
-    
-    /**
-     * @return the deliveryOrderDao
-     */
-    public DeliveryOrderDao getDeliveryOrderDao() {
-        return deliveryOrderDao;
-    }
-
-    /**
-     * @param deliveryOrderDao the deliveryOrderDao to set
-     */
-    public void setDeliveryOrderDao(DeliveryOrderDao deliveryOrderDao) {
-        this.deliveryOrderDao = deliveryOrderDao;
-    }
 
     /**
      * {@inheritDoc}
@@ -41,7 +29,8 @@ public class DeliveryOrderServiceImpl implements DeliveryOrderService {
     public DeliveryOrderBean create(DeliveryOrderBean bean) {
         DeliveryOrder deliveryOrder = new DeliveryOrder(bean);
         DeliveryOrder addingDeliveryOrder = deliveryOrderDao.add(deliveryOrder);
-        return new DeliveryOrderBean(addingDeliveryOrder, JsamsDesktop.getInstance().getCurrentSociety());
+        return new DeliveryOrderBean(addingDeliveryOrder, JsamsDesktop.getInstance().getCurrentSociety(), bean
+                .getCustomer());
     }
 
     /**
@@ -76,8 +65,10 @@ public class DeliveryOrderServiceImpl implements DeliveryOrderService {
      */
     @Override
     public DeliveryOrderBean findById(Long id) {
+        SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
         DeliveryOrder deliveryOrder = deliveryOrderDao.findById(id);
-        DeliveryOrderBean bean = new DeliveryOrderBean(deliveryOrder, JsamsDesktop.getInstance().getCurrentSociety());
+        CustomerBean customer = getCustomerBeanBuilder().build(deliveryOrder.getCustomer(), currentSociety);
+        DeliveryOrderBean bean = new DeliveryOrderBean(deliveryOrder, currentSociety, customer);
         return bean;
     }
 
@@ -91,7 +82,8 @@ public class DeliveryOrderServiceImpl implements DeliveryOrderService {
         List<DeliveryOrder> deliveryOrders = deliveryOrderDao.findAll();
         List<DeliveryOrderBean> beans = new ArrayList<DeliveryOrderBean>();
         for (DeliveryOrder deliveryOrder : deliveryOrders) {
-            beans.add(new DeliveryOrderBean(deliveryOrder, currentSociety));
+            CustomerBean customer = getCustomerBeanBuilder().build(deliveryOrder.getCustomer(), currentSociety);
+            beans.add(new DeliveryOrderBean(deliveryOrder, currentSociety, customer));
         }
         return beans;
     }
@@ -106,9 +98,24 @@ public class DeliveryOrderServiceImpl implements DeliveryOrderService {
         List<DeliveryOrder> deliveryOrders = deliveryOrderDao.findByCriteria(criteria);
         List<DeliveryOrderBean> beans = new ArrayList<DeliveryOrderBean>();
         for (DeliveryOrder deliveryOrder : deliveryOrders) {
-            beans.add(new DeliveryOrderBean(deliveryOrder, currentSociety));
+            CustomerBean customer = getCustomerBeanBuilder().build(deliveryOrder.getCustomer(), currentSociety);
+            beans.add(new DeliveryOrderBean(deliveryOrder, currentSociety, customer));
         }
         return beans;
+    }
+
+    /**
+     * @return the deliveryOrderDao
+     */
+    public DeliveryOrderDao getDeliveryOrderDao() {
+        return deliveryOrderDao;
+    }
+
+    /**
+     * @param deliveryOrderDao the deliveryOrderDao to set
+     */
+    public void setDeliveryOrderDao(DeliveryOrderDao deliveryOrderDao) {
+        this.deliveryOrderDao = deliveryOrderDao;
     }
 
 }

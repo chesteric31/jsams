@@ -44,11 +44,12 @@ public abstract class AbstractDocumentBean<M extends AbstractDocument, V extends
      * Default constructor.
      * 
      * @param society the {@link SocietyBean}
+     * @param customer the {@link CustomerBean}
      */
-    public AbstractDocumentBean(SocietyBean society) {
+    public AbstractDocumentBean(SocietyBean society, CustomerBean customer) {
         super();
         this.creationDate = new Date();
-        this.customer = new CustomerBean(society);
+        this.customer = customer;
         this.period = new PeriodBean();
         this.society = society;
     }
@@ -58,12 +59,13 @@ public abstract class AbstractDocumentBean<M extends AbstractDocument, V extends
      * 
      * @param model the {@link AbstractDocument}
      * @param society the {@link SocietyBean}
+     * @param customer the {@link CustomerBean}
      */
-    public AbstractDocumentBean(M model, SocietyBean society) {
+    public AbstractDocumentBean(M model, SocietyBean society, CustomerBean customer) {
         super(model);
         this.creationDate = model.getCreationDate();
         this.society = society;
-        this.customer = new CustomerBean(model.getCustomer(), society);
+        this.customer = customer;
         this.remark = model.getRemark();
     }
 

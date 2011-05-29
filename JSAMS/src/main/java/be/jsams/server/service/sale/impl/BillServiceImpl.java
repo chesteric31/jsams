@@ -5,9 +5,11 @@ import java.util.List;
 
 import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.common.bean.model.SocietyBean;
+import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.sale.BillBean;
 import be.jsams.server.dao.sale.BillDao;
 import be.jsams.server.model.sale.Bill;
+import be.jsams.server.service.AbstractService;
 import be.jsams.server.service.sale.BillService;
 
 /**
@@ -16,7 +18,7 @@ import be.jsams.server.service.sale.BillService;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class BillServiceImpl implements BillService {
+public class BillServiceImpl extends AbstractService implements BillService {
 
     private BillDao billDao;
     
@@ -27,7 +29,7 @@ public class BillServiceImpl implements BillService {
     public BillBean create(BillBean bean) {
         Bill bill = new Bill(bean);
         Bill addingBill = billDao.add(bill);
-        return new BillBean(addingBill, bean.getSociety());
+        return new BillBean(addingBill, bean.getSociety(), bean.getCustomer());
     }
 
     /**
@@ -63,7 +65,9 @@ public class BillServiceImpl implements BillService {
     @Override
     public BillBean findById(Long id) {
         Bill bill = billDao.findById(id);
-        BillBean bean = new BillBean(bill, JsamsDesktop.getInstance().getCurrentSociety());
+        SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
+        CustomerBean customer = getCustomerBeanBuilder().build(bill.getCustomer(), currentSociety);
+        BillBean bean = new BillBean(bill, currentSociety, customer);
         return bean;
     }
 
@@ -77,7 +81,8 @@ public class BillServiceImpl implements BillService {
         List<Bill> bills = billDao.findAll();
         List<BillBean> beans = new ArrayList<BillBean>();
         for (Bill bill : bills) {
-            beans.add(new BillBean(bill, currentSociety));
+            CustomerBean customer = getCustomerBeanBuilder().build(bill.getCustomer(), currentSociety);
+            beans.add(new BillBean(bill, currentSociety, customer));
         }
         return beans;
     }
@@ -92,7 +97,8 @@ public class BillServiceImpl implements BillService {
         List<Bill> bills = billDao.findByCriteria(criteria);
         List<BillBean> beans = new ArrayList<BillBean>();
         for (Bill bill : bills) {
-            beans.add(new BillBean(bill, currentSociety));
+            CustomerBean customer = getCustomerBeanBuilder().build(bill.getCustomer(), currentSociety);
+            beans.add(new BillBean(bill, currentSociety, customer));
         }
         return beans;
     }

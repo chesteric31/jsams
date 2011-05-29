@@ -90,14 +90,16 @@ public class JsamsManagementMenuBuilder extends AbstractMenuBuilder {
     private Action customersAction(String text, Icon icon) {
         AbstractAction action = new AbstractAction() {
             /**
-             * Serial
+             * Serial Version UID
              */
             private static final long serialVersionUID = -8367998985097440307L;
 
             public void actionPerformed(ActionEvent event) {
-                SearchCustomerPanel searchPanel = new SearchCustomerPanel(new CustomerBean(JsamsDesktop.getInstance()
-                        .getCurrentSociety()), new CustomerTableMouseListener(),
-                        JsamsApplicationContext.getCustomerService(), new SearchCustomerValidator(), true);
+                CustomerBean customerBean = JsamsApplicationContext.getCustomerBeanBuilder().build(null,
+                        JsamsDesktop.getInstance().getCurrentSociety());
+                SearchCustomerPanel searchPanel = new SearchCustomerPanel(customerBean,
+                        new CustomerTableMouseListener(), JsamsApplicationContext.getCustomerService(),
+                        new SearchCustomerValidator(), true);
                 parent.getTabbedPane().addTab(JsamsI18nResource.TITLE_SEARCH_CUSTOMER, "apps/system-users.png",
                         searchPanel);
             }

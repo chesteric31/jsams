@@ -12,7 +12,6 @@ import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.ProductBean;
 import be.jsams.common.bean.model.management.ProductCategoryBean;
 import be.jsams.server.dao.AbstractJUnitTestClass;
-import be.jsams.server.dao.LegalFormDao;
 import be.jsams.server.dao.MockDaoGenerator;
 import be.jsams.server.dao.SocietyDao;
 import be.jsams.server.dao.management.ProductCategoryDao;
@@ -71,13 +70,6 @@ public class ProductDaoImplTest extends AbstractJUnitTestClass {
              */
             private static final long serialVersionUID = -4652699508139431069L;
 
-            /**
-             * {@inheritDoc}
-             */
-            @Override
-            public LegalFormDao getLegalFormDao() {
-                return MockDaoGenerator.generateMockLegalForm(persistedSociety);
-            }
         };
         ((ProductCategoryDaoImpl) categoryDao).setCurrentSociety(societyBean);
         ProductCategory persistedCategory = categoryDao.add(category);
@@ -104,13 +96,6 @@ public class ProductDaoImplTest extends AbstractJUnitTestClass {
              */
             private static final long serialVersionUID = 8623360287537334295L;
 
-            /**
-             * {@inheritDoc}
-             */
-            @Override
-            public LegalFormDao getLegalFormDao() {
-                return MockDaoGenerator.generateMockLegalForm(persistedSociety);
-            }
         };
         categoryDao.setCurrentSociety(societyBean);
         ProductCategory persistedCategory = categoryDao.add(category);

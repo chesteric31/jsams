@@ -8,6 +8,13 @@
 		<property name="dao" ref="productDao" />
 	</bean>
 
+	<bean id="customerBeanBuilder"
+		class="be.jsams.common.bean.builder.management.CustomerBeanBuilder">
+		<property name="civilityBeanBuilder" ref="civilityBeanBuilder" />
+		<property name="legalFormBeanBuilder" ref="legalFormBeanBuilder" />
+		<property name="paymentModeBeanBuilder" ref="paymentModeBeanBuilder" />
+	</bean>
+
 	<!-- DAOs -->
 	<bean id="productCategoryDao"
 		class="be.jsams.server.dao.management.impl.ProductCategoryDaoImpl">
@@ -35,6 +42,7 @@
 		class="be.jsams.server.service.management.impl.CustomerServiceImpl"
 		parent="abstractService">
 		<property name="customerDao" ref="customerDao" />
+		<property name="customerBeanBuilder" ref="customerBeanBuilder" />
 	</bean>
 	<bean id="customerService" parent="baseTransactionProxy">
 		<property name="target" ref="customerServiceTarget" />

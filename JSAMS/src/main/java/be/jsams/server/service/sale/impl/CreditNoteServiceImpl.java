@@ -5,9 +5,11 @@ import java.util.List;
 
 import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.common.bean.model.SocietyBean;
+import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.sale.CreditNoteBean;
 import be.jsams.server.dao.sale.CreditNoteDao;
 import be.jsams.server.model.sale.CreditNote;
+import be.jsams.server.service.AbstractService;
 import be.jsams.server.service.sale.CreditNoteService;
 
 /**
@@ -16,7 +18,7 @@ import be.jsams.server.service.sale.CreditNoteService;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class CreditNoteServiceImpl implements CreditNoteService {
+public class CreditNoteServiceImpl extends AbstractService implements CreditNoteService {
 
     private CreditNoteDao creditNoteDao;
     
@@ -27,7 +29,7 @@ public class CreditNoteServiceImpl implements CreditNoteService {
     public CreditNoteBean create(CreditNoteBean bean) {
         CreditNote creditNote = new CreditNote(bean);
         CreditNote addingCreditNote = creditNoteDao.add(creditNote);
-        return new CreditNoteBean(addingCreditNote, JsamsDesktop.getInstance().getCurrentSociety());
+        return new CreditNoteBean(addingCreditNote, JsamsDesktop.getInstance().getCurrentSociety(), bean.getCustomer());
     }
 
     /**
@@ -62,8 +64,10 @@ public class CreditNoteServiceImpl implements CreditNoteService {
      */
     @Override
     public CreditNoteBean findById(Long id) {
+        SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
         CreditNote creditNote = creditNoteDao.findById(id);
-        CreditNoteBean bean = new CreditNoteBean(creditNote, JsamsDesktop.getInstance().getCurrentSociety());
+        CustomerBean customer = getCustomerBeanBuilder().build(creditNote.getCustomer(), currentSociety);
+        CreditNoteBean bean = new CreditNoteBean(creditNote, currentSociety, customer);
         return bean;
     }
 
@@ -77,7 +81,8 @@ public class CreditNoteServiceImpl implements CreditNoteService {
         List<CreditNote> creditNotes = creditNoteDao.findAll();
         List<CreditNoteBean> beans = new ArrayList<CreditNoteBean>();
         for (CreditNote creditNote : creditNotes) {
-            beans.add(new CreditNoteBean(creditNote, currentSociety));
+            CustomerBean customer = getCustomerBeanBuilder().build(creditNote.getCustomer(), currentSociety);
+            beans.add(new CreditNoteBean(creditNote, currentSociety, customer));
         }
         return beans;
     }
@@ -92,7 +97,8 @@ public class CreditNoteServiceImpl implements CreditNoteService {
         List<CreditNote> creditNotes = creditNoteDao.findByCriteria(criteria);
         List<CreditNoteBean> beans = new ArrayList<CreditNoteBean>();
         for (CreditNote creditNote : creditNotes) {
-            beans.add(new CreditNoteBean(creditNote, currentSociety));
+            CustomerBean customer = getCustomerBeanBuilder().build(creditNote.getCustomer(), currentSociety);
+            beans.add(new CreditNoteBean(creditNote, currentSociety, customer));
         }
         return beans;
     }

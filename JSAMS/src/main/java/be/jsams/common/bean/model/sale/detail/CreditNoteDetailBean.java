@@ -26,9 +26,6 @@ public class CreditNoteDetailBean extends
     private CreditNoteBean creditNote;
     private BillDetailBean billDetail;
 
-    // private ObservableList<CreditNoteDetailBean> list = new
-    // ArrayListModel<CreditNoteDetailBean>();
-
     /**
      * Default constructor
      */
@@ -48,7 +45,8 @@ public class CreditNoteDetailBean extends
         BillDetail detail = model.getBillDetail();
         if (detail != null) {
             SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
-            this.billDetail = new BillDetailBean(detail, new BillBean(detail.getBill(), currentSociety));
+            this.billDetail = new BillDetailBean(detail, new BillBean(detail.getBill(), currentSociety, creditNote
+                    .getCustomer()));
         }
     }
 
@@ -87,6 +85,7 @@ public class CreditNoteDetailBean extends
     public void clear() {
         super.clear();
         setCreditNote(null);
+        setBillDetail(null);
     }
 
     /**
@@ -100,6 +99,9 @@ public class CreditNoteDetailBean extends
         billDetail.refresh(other.getBillDetail());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public CreditNoteDetailBeanView getView() {
         // TODO Auto-generated method stub

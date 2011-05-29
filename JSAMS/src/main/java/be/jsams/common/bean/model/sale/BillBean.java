@@ -10,6 +10,7 @@ import be.jsams.common.bean.model.AbstractIdentityBean;
 import be.jsams.common.bean.model.AddressBean;
 import be.jsams.common.bean.model.PaymentModeBean;
 import be.jsams.common.bean.model.SocietyBean;
+import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.sale.detail.BillDetailBean;
 import be.jsams.common.bean.view.sale.BillBeanView;
 import be.jsams.server.model.PaymentMode;
@@ -56,9 +57,10 @@ public class BillBean extends AbstractDocumentBean<Bill, BillBeanView> {
      * Constructor.
      * 
      * @param society the {@link SocietyBean}
+     * @param customer the {@link CustomerBean}
      */
-    public BillBean(SocietyBean society) {
-        super(society);
+    public BillBean(SocietyBean society, CustomerBean customer) {
+        super(society, customer);
         paymentModeBuilder = new PaymentModeBeanBuilder();
         paymentModeBuilder.setDao(JsamsApplicationContext.getPaymentModeDao());
         this.paymentMode = paymentModeBuilder.build();
@@ -75,9 +77,10 @@ public class BillBean extends AbstractDocumentBean<Bill, BillBeanView> {
      * 
      * @param model the {@link Bill}
      * @param society the {@link SocietyBean}
+     * @param customer the {@link CustomerBean}
      */
-    public BillBean(Bill model, SocietyBean society) {
-        super(model, society);
+    public BillBean(Bill model, SocietyBean society, CustomerBean customer) {
+        super(model, society, customer);
         this.billingAddress = new AddressBean(model.getBillingAddress());
         List<BillDetailBean> beans = new ArrayList<BillDetailBean>();
         for (BillDetail detail : model.getDetails()) {

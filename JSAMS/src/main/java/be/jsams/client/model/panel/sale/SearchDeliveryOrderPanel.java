@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.model.dialog.sale.EditDeliveryOrderDialog;
@@ -12,6 +13,8 @@ import be.jsams.client.model.panel.AbstractSearchPanel;
 import be.jsams.client.model.table.DeliveryOrderTableModel;
 import be.jsams.client.swing.listener.DeliveryOrderTableMouseListener;
 import be.jsams.client.validator.SearchDeliveryOrderValidator;
+import be.jsams.common.bean.model.SocietyBean;
+import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.sale.DeliveryOrderBean;
 import be.jsams.server.service.sale.DeliveryOrderService;
 
@@ -54,7 +57,9 @@ public class SearchDeliveryOrderPanel
      */
     @Override
     protected void performButtonAdd() {
-        DeliveryOrderBean bean = new DeliveryOrderBean(JsamsDesktop.getInstance().getCurrentSociety());
+        SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
+        CustomerBean customerBean = JsamsApplicationContext.getCustomerBeanBuilder().build(null, currentSociety);
+        DeliveryOrderBean bean = new DeliveryOrderBean(currentSociety, customerBean);
         new EditDeliveryOrderDialog(JsamsI18nResource.TITLE_EDIT_DELIVERY_ORDER, bean);
         updateUI();
     }

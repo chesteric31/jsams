@@ -5,9 +5,11 @@ import java.util.List;
 
 import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.common.bean.model.SocietyBean;
+import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.sale.CommandBean;
 import be.jsams.server.dao.sale.CommandDao;
 import be.jsams.server.model.sale.Command;
+import be.jsams.server.service.AbstractService;
 import be.jsams.server.service.sale.CommandService;
 
 /**
@@ -16,33 +18,17 @@ import be.jsams.server.service.sale.CommandService;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class CommandServiceImpl implements CommandService {
+public class CommandServiceImpl extends AbstractService implements CommandService {
 
     private CommandDao commandDao;
-
-    /**
-     * 
-     * @return the {@link CommandDao}
-     */
-    public CommandDao getCommandDao() {
-        return commandDao;
-    }
-
-    /**
-     * 
-     * @param commandDao the {@link CommandDao} to set
-     */
-    public void setCommandDao(CommandDao commandDao) {
-        this.commandDao = commandDao;
-    }
 
     /**
      * {@inheritDoc}
      */
     public CommandBean create(final CommandBean bean) {
         Command command = new Command(bean);
-        Command addingCommand = commandDao.add(command);
-        return new CommandBean(addingCommand, JsamsDesktop.getInstance().getCurrentSociety());
+        Command persistedCommand = commandDao.add(command);
+        return new CommandBean(persistedCommand, JsamsDesktop.getInstance().getCurrentSociety(), bean.getCustomer());
     }
 
     /**
@@ -70,7 +56,8 @@ public class CommandServiceImpl implements CommandService {
         List<Command> commands = commandDao.findAll();
         List<CommandBean> beans = new ArrayList<CommandBean>();
         for (Command command : commands) {
-            beans.add(new CommandBean(command, currentSociety));
+            CustomerBean customer = getCustomerBeanBuilder().build(command.getCustomer(), currentSociety);
+            beans.add(new CommandBean(command, currentSociety, customer));
         }
         return beans;
     }
@@ -79,8 +66,10 @@ public class CommandServiceImpl implements CommandService {
      * {@inheritDoc}
      */
     public CommandBean findById(final Long id) {
+        SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
         Command command = commandDao.findById(id);
-        CommandBean bean = new CommandBean(command, JsamsDesktop.getInstance().getCurrentSociety());
+        CustomerBean customer = getCustomerBeanBuilder().build(command.getCustomer(), currentSociety);
+        CommandBean bean = new CommandBean(command, currentSociety, customer);
         return bean;
     }
 
@@ -102,9 +91,24 @@ public class CommandServiceImpl implements CommandService {
         List<Command> commands = commandDao.findByCriteria(criteria);
         List<CommandBean> beans = new ArrayList<CommandBean>();
         for (Command command : commands) {
-            beans.add(new CommandBean(command, currentSociety));
+            CustomerBean customer = getCustomerBeanBuilder().build(command.getCustomer(), currentSociety);
+            beans.add(new CommandBean(command, currentSociety, customer));
         }
         return beans;
     }
 
+    /**
+     * @return the {@link CommandDao}
+     */
+    public CommandDao getCommandDao() {
+        return commandDao;
+    }
+
+    /**
+     * @param commandDao the {@link CommandDao} to set
+     */
+    public void setCommandDao(CommandDao commandDao) {
+        this.commandDao = commandDao;
+    }
+    
 }

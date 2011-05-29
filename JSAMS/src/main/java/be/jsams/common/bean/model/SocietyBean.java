@@ -1,9 +1,6 @@
 package be.jsams.common.bean.model;
 
-import be.jsams.client.context.JsamsApplicationContext;
-import be.jsams.common.bean.builder.LegalFormBeanBuilder;
 import be.jsams.common.bean.view.SocietyBeanView;
-import be.jsams.server.dao.LegalFormDao;
 import be.jsams.server.model.Society;
 
 import com.jgoodies.common.collect.ObservableList;
@@ -29,8 +26,6 @@ public class SocietyBean extends AbstractNamedIdentityBean<Society, SocietyBeanV
     private AddressBean address;
     private LegalFormBean legalForm;
     private ContactInformationBean contactInformation;
-
-    private LegalFormBeanBuilder legalFormBuilder;
 
     public static final String CAPITAL_PROPERTY = "capital";
     public static final String ACTIVITY_PROPERTY = "activity";
@@ -216,8 +211,6 @@ public class SocietyBean extends AbstractNamedIdentityBean<Society, SocietyBeanV
         builder.append(contactInformation);
         builder.append(", legalForm=");
         builder.append(legalForm);
-        builder.append(", legalFormBuilder=");
-        builder.append(legalFormBuilder);
         builder.append(", responsible=");
         builder.append(responsible);
         builder.append(", vatNumber=");
@@ -257,14 +250,6 @@ public class SocietyBean extends AbstractNamedIdentityBean<Society, SocietyBeanV
         setSelection(other.getSelection());
         setVatNumber(other.getVatNumber());
         setId(other.getId());
-    }
-
-    /**
-     * 
-     * @return the {@link LegalFormDao} necessary for test for now
-     */
-    public LegalFormDao getLegalFormDao() {
-        return JsamsApplicationContext.getLegalFormDao();
     }
 
 }
