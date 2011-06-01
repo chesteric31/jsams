@@ -27,6 +27,7 @@ import be.jsams.client.validator.SearchCreditNoteValidator;
 import be.jsams.client.validator.SearchDeliveryOrderValidator;
 import be.jsams.client.validator.SearchEstimateValidator;
 import be.jsams.common.bean.model.SocietyBean;
+import be.jsams.common.bean.model.management.AgentBean;
 import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.sale.BillBean;
 import be.jsams.common.bean.model.sale.CommandBean;
@@ -115,9 +116,9 @@ public class JsamsSalesMenuBuilder extends AbstractMenuBuilder {
 
             public void actionPerformed(ActionEvent event) {
                 SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
-                CustomerBean customerBean = JsamsApplicationContext.getCustomerBeanBuilder()
-                        .build(null, currentSociety);
-                EstimateBean bean = new EstimateBean(currentSociety, customerBean);
+                CustomerBean customer = JsamsApplicationContext.getCustomerBeanBuilder().build(null, currentSociety);
+                AgentBean agent = JsamsApplicationContext.getAgentBeanBuilder().build(null, currentSociety);
+                EstimateBean bean = new EstimateBean(currentSociety, customer, agent);
                 SearchEstimatePanel searchPanel = new SearchEstimatePanel(bean, new EstimateTableMouseListener(),
                         JsamsApplicationContext.getEstimateService(), new SearchEstimateValidator(), true);
                 parent.getTabbedPane().addTab(JsamsI18nResource.TITLE_SEARCH_ESTIMATE, null, searchPanel);
@@ -144,9 +145,9 @@ public class JsamsSalesMenuBuilder extends AbstractMenuBuilder {
 
             public void actionPerformed(ActionEvent event) {
                 SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
-                CustomerBean customerBean = JsamsApplicationContext.getCustomerBeanBuilder()
-                        .build(null, currentSociety);
-                CommandBean bean = new CommandBean(currentSociety, customerBean);
+                CustomerBean customer = JsamsApplicationContext.getCustomerBeanBuilder().build(null, currentSociety);
+                AgentBean agent = JsamsApplicationContext.getAgentBeanBuilder().build(null, currentSociety);
+                CommandBean bean = new CommandBean(currentSociety, customer, agent);
                 SearchCommandPanel searchPanel = new SearchCommandPanel(bean, new CommandTableMouseListener(),
                         JsamsApplicationContext.getCommandService(), new SearchCommandValidator(), true);
                 parent.getTabbedPane().addTab(JsamsI18nResource.TITLE_SEARCH_COMMAND, null, searchPanel);

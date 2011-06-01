@@ -13,6 +13,12 @@
 		<property name="civilityBeanBuilder" ref="civilityBeanBuilder" />
 		<property name="legalFormBeanBuilder" ref="legalFormBeanBuilder" />
 		<property name="paymentModeBeanBuilder" ref="paymentModeBeanBuilder" />
+		<property name="agentBeanBuilder" ref="agentBeanBuilder" />
+	</bean>
+
+	<bean id="agentBeanBuilder"
+		class="be.jsams.common.bean.builder.management.AgentBeanBuilder">
+		<property name="civilityBeanBuilder" ref="civilityBeanBuilder" />
 	</bean>
 
 	<!-- DAOs -->
@@ -34,6 +40,7 @@
 	<bean id="agentServiceTarget"
 		class="be.jsams.server.service.management.impl.AgentServiceImpl">
 		<property name="agentDao" ref="agentDao" />
+		<property name="agentBeanBuilder" ref="agentBeanBuilder" />
 	</bean>
 	<bean id="agentService" parent="baseTransactionProxy">
 		<property name="target" ref="agentServiceTarget" />

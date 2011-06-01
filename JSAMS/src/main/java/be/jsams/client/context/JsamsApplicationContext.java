@@ -4,6 +4,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import be.jsams.common.bean.builder.LegalFormBeanBuilder;
 import be.jsams.common.bean.builder.SocietyBeanBuilder;
+import be.jsams.common.bean.builder.management.AgentBeanBuilder;
 import be.jsams.common.bean.builder.management.CustomerBeanBuilder;
 import be.jsams.server.dao.CivilityDao;
 import be.jsams.server.dao.LegalFormDao;
@@ -162,6 +163,13 @@ public final class JsamsApplicationContext {
      */
     public static CustomerBeanBuilder getCustomerBeanBuilder() {
         return (CustomerBeanBuilder) context.getBean("customerBeanBuilder");
+    }
+
+    /**
+     * @return the {@link AgentBeanBuilder}
+     */
+    public static AgentBeanBuilder getAgentBeanBuilder() {
+        return (AgentBeanBuilder) context.getBean("agentBeanBuilder");
     }
 
 }

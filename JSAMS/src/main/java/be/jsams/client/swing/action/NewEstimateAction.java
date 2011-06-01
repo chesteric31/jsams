@@ -9,6 +9,7 @@ import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.model.dialog.sale.EditEstimateDialog;
 import be.jsams.common.bean.model.SocietyBean;
+import be.jsams.common.bean.model.management.AgentBean;
 import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.sale.EstimateBean;
 
@@ -30,8 +31,9 @@ public class NewEstimateAction extends AbstractAction {
      */
     public void actionPerformed(ActionEvent arg0) {
         SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
-        CustomerBean customerBean = JsamsApplicationContext.getCustomerBeanBuilder().build(null, currentSociety);
-        EstimateBean bean = new EstimateBean(currentSociety, customerBean);
+        CustomerBean customer = JsamsApplicationContext.getCustomerBeanBuilder().build(null, currentSociety);
+        AgentBean agent = JsamsApplicationContext.getAgentBeanBuilder().build(null, currentSociety);
+        EstimateBean bean = new EstimateBean(currentSociety, customer, agent);
         new EditEstimateDialog(JsamsI18nResource.TITLE_EDIT_ESTIMATE, bean);
     }
 

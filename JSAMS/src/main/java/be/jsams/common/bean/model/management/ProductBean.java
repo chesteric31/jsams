@@ -45,8 +45,6 @@ public class ProductBean extends AbstractNamedIdentityBean<Product, ProductBeanV
      */
     public ProductBean(boolean categoryCanBeNull, SocietyBean society) {
         super();
-        // SocietyBean currentSociety =
-        // JsamsDesktop.getInstance().getCurrentSociety();
         productCategoryBuilder = new ProductCategoryBeanBuilder(categoryCanBeNull, society);
         productCategoryBuilder.setDao(JsamsApplicationContext.getProductCategoryDao());
         ProductCategoryBean categoryBean = productCategoryBuilder.build();
@@ -62,11 +60,6 @@ public class ProductBean extends AbstractNamedIdentityBean<Product, ProductBeanV
     public ProductBean(Product model, SocietyBean society) {
         super(model);
         ProductCategory productCategory = model.getCategory();
-
-        // SocietyBeanBuilder societyBuilder =
-        // JsamsApplicationContext.getSocietyBeanBuilder();
-        // societyBuilder.setModel(productCategory.getSociety());
-        // SocietyBean currentSociety = societyBuilder.build(false);
         productCategoryBuilder = new ProductCategoryBeanBuilder(false, society);
         productCategoryBuilder.setModel(productCategory);
         productCategoryBuilder.setDao(getProductCategoryDao());

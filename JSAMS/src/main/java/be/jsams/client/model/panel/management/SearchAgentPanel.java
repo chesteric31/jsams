@@ -2,6 +2,7 @@ package be.jsams.client.model.panel.management;
 
 import java.util.List;
 
+import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.model.dialog.management.EditAgentDialog;
@@ -9,6 +10,7 @@ import be.jsams.client.model.panel.AbstractSearchPanel;
 import be.jsams.client.model.table.AgentTableModel;
 import be.jsams.client.swing.listener.AgentTableMouseListener;
 import be.jsams.client.validator.SearchAgentValidator;
+import be.jsams.common.bean.builder.management.AgentBeanBuilder;
 import be.jsams.common.bean.model.management.AgentBean;
 import be.jsams.server.service.management.AgentService;
 
@@ -46,8 +48,9 @@ public class SearchAgentPanel extends
      */
     @Override
     protected void performButtonAdd() {
-        new EditAgentDialog(JsamsI18nResource.TITLE_EDIT_AGENT, new AgentBean(JsamsDesktop.getInstance()
-                .getCurrentSociety()));
+        AgentBeanBuilder builder = JsamsApplicationContext.getAgentBeanBuilder();
+        AgentBean bean = builder.build(null, JsamsDesktop.getInstance().getCurrentSociety());
+        new EditAgentDialog(JsamsI18nResource.TITLE_EDIT_AGENT, bean);
         updateUI();
     }
 

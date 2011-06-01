@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import be.jsams.client.desktop.JsamsDesktop;
+import be.jsams.common.bean.builder.management.AgentBeanBuilder;
 import be.jsams.common.bean.model.SocietyBean;
+import be.jsams.common.bean.model.management.AgentBean;
 import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.sale.CommandBean;
 import be.jsams.server.dao.sale.CommandDao;
@@ -21,6 +23,7 @@ import be.jsams.server.service.sale.CommandService;
 public class CommandServiceImpl extends AbstractService implements CommandService {
 
     private CommandDao commandDao;
+    private AgentBeanBuilder agentBeanBuilder;
 
     /**
      * {@inheritDoc}
@@ -28,7 +31,8 @@ public class CommandServiceImpl extends AbstractService implements CommandServic
     public CommandBean create(final CommandBean bean) {
         Command command = new Command(bean);
         Command persistedCommand = commandDao.add(command);
-        return new CommandBean(persistedCommand, JsamsDesktop.getInstance().getCurrentSociety(), bean.getCustomer());
+        SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
+        return new CommandBean(persistedCommand, currentSociety, bean.getCustomer(), bean.getAgent());
     }
 
     /**
@@ -57,7 +61,8 @@ public class CommandServiceImpl extends AbstractService implements CommandServic
         List<CommandBean> beans = new ArrayList<CommandBean>();
         for (Command command : commands) {
             CustomerBean customer = getCustomerBeanBuilder().build(command.getCustomer(), currentSociety);
-            beans.add(new CommandBean(command, currentSociety, customer));
+            AgentBean agent = agentBeanBuilder.build(command.getAgent(), currentSociety);
+            beans.add(new CommandBean(command, currentSociety, customer, agent));
         }
         return beans;
     }
@@ -69,7 +74,8 @@ public class CommandServiceImpl extends AbstractService implements CommandServic
         SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
         Command command = commandDao.findById(id);
         CustomerBean customer = getCustomerBeanBuilder().build(command.getCustomer(), currentSociety);
-        CommandBean bean = new CommandBean(command, currentSociety, customer);
+        AgentBean agent = agentBeanBuilder.build(command.getAgent(), currentSociety);
+        CommandBean bean = new CommandBean(command, currentSociety, customer, agent);
         return bean;
     }
 
@@ -92,7 +98,8 @@ public class CommandServiceImpl extends AbstractService implements CommandServic
         List<CommandBean> beans = new ArrayList<CommandBean>();
         for (Command command : commands) {
             CustomerBean customer = getCustomerBeanBuilder().build(command.getCustomer(), currentSociety);
-            beans.add(new CommandBean(command, currentSociety, customer));
+            AgentBean agent = agentBeanBuilder.build(command.getAgent(), currentSociety);
+            beans.add(new CommandBean(command, currentSociety, customer, agent));
         }
         return beans;
     }
@@ -109,6 +116,20 @@ public class CommandServiceImpl extends AbstractService implements CommandServic
      */
     public void setCommandDao(CommandDao commandDao) {
         this.commandDao = commandDao;
+    }
+
+    /**
+     * @return the agentBeanBuilder
+     */
+    public AgentBeanBuilder getAgentBeanBuilder() {
+        return agentBeanBuilder;
+    }
+
+    /**
+     * @param agentBeanBuilder the agentBeanBuilder to set
+     */
+    public void setAgentBeanBuilder(AgentBeanBuilder agentBeanBuilder) {
+        this.agentBeanBuilder = agentBeanBuilder;
     }
     
 }

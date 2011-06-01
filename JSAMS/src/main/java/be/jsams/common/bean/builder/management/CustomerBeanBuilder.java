@@ -8,6 +8,7 @@ import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.server.model.Civility;
 import be.jsams.server.model.LegalForm;
 import be.jsams.server.model.PaymentMode;
+import be.jsams.server.model.management.Agent;
 import be.jsams.server.model.management.Customer;
 
 import com.jgoodies.common.collect.ArrayListModel;
@@ -28,6 +29,7 @@ public class CustomerBeanBuilder {
     private CivilityBeanBuilder civilityBeanBuilder;
     private LegalFormBeanBuilder legalFormBeanBuilder;
     private PaymentModeBeanBuilder paymentModeBeanBuilder;
+    private AgentBeanBuilder agentBeanBuilder;
 
     /**
      * Build the {@link CustomerBean}.
@@ -47,6 +49,8 @@ public class CustomerBeanBuilder {
             bean.setCivility(civilityBeanBuilder.build());
             paymentModeBeanBuilder.setModel(null);
             bean.setPaymentMode(paymentModeBeanBuilder.build());
+            agentBeanBuilder.setModel(null);
+            bean.setAgent(agentBeanBuilder.build(null, society));
             return bean;
         } else {
             if (listModel == null) {
@@ -66,10 +70,12 @@ public class CustomerBeanBuilder {
             if (mode != null) {
                 paymentModeBeanBuilder.setModel(mode);
             }
+            Agent agent = model.getAgent();
             bean = new CustomerBean(model, society);
             bean.setLegalForm(legalFormBeanBuilder.build());
             bean.setCivility(civilityBeanBuilder.build());
             bean.setPaymentMode(paymentModeBeanBuilder.build());
+            bean.setAgent(agentBeanBuilder.build(agent, society));
             listModel.add(bean);
         }
         return bean;
@@ -140,6 +146,20 @@ public class CustomerBeanBuilder {
      */
     public void setListModel(ObservableList<CustomerBean> listModel) {
         this.listModel = listModel;
+    }
+
+    /**
+     * @return the agentBeanBuilder
+     */
+    public AgentBeanBuilder getAgentBeanBuilder() {
+        return agentBeanBuilder;
+    }
+
+    /**
+     * @param agentBeanBuilder the agentBeanBuilder to set
+     */
+    public void setAgentBeanBuilder(AgentBeanBuilder agentBeanBuilder) {
+        this.agentBeanBuilder = agentBeanBuilder;
     }
 
 }
