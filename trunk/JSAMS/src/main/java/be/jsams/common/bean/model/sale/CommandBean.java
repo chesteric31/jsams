@@ -42,12 +42,13 @@ public class CommandBean extends AbstractDocumentBean<Command, CommandBeanView> 
      * 
      * @param society the {@link SocietyBean}
      * @param customer the {@link CustomerBean}
+     * @param agent the {@link AgentBean}
      */
-    public CommandBean(SocietyBean society, CustomerBean customer) {
+    public CommandBean(SocietyBean society, CustomerBean customer, AgentBean agent) {
         super(society, customer);
         this.billingAddress = new AddressBean();
         this.deliveryAddress = new AddressBean();
-        this.agent = new AgentBean(getSociety());
+        this.agent = agent;
         this.transferred = false;
         List<CommandDetailBean> details = new ArrayList<CommandDetailBean>();
         this.details = details;
@@ -60,10 +61,11 @@ public class CommandBean extends AbstractDocumentBean<Command, CommandBeanView> 
      * @param model the {@link Command}
      * @param society the {@link SocietyBean}
      * @param customer the {@link CustomerBean}
+     * @param agent the {@link AgentBean}
      */
-    public CommandBean(Command model, SocietyBean society, CustomerBean customer) {
+    public CommandBean(Command model, SocietyBean society, CustomerBean customer, AgentBean agent) {
         super(model, society, customer);
-        this.agent = new AgentBean(model.getAgent(), getSociety());
+        this.agent = agent;
         this.billingAddress = new AddressBean(model.getBillingAddress());
         this.deliveryAddress = new AddressBean(model.getDeliveryAddress());
         List<CommandDetailBean> beans = new ArrayList<CommandDetailBean>();

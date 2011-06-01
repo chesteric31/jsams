@@ -9,7 +9,6 @@ import be.jsams.common.bean.model.LegalFormBean;
 import be.jsams.common.bean.model.PaymentModeBean;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.view.management.CustomerBeanView;
-import be.jsams.server.model.management.Agent;
 import be.jsams.server.model.management.Customer;
 
 /**
@@ -59,22 +58,7 @@ public class CustomerBean extends AbstractNamedIdentityBean<Customer, CustomerBe
         super();
         this.billingAddress = new AddressBean();
         this.deliveryAddress = new AddressBean();
-
-//        legalFormBuilder = new LegalFormBeanBuilder();
-//        legalFormBuilder.setDao(JsamsApplicationContext.getLegalFormDao());
-//        this.legalForm = legalFormBuilder.build();
-
         this.contactInformation = new ContactInformationBean();
-
-//        civilityBuilder = new CivilityBeanBuilder();
-//        civilityBuilder.setDao(JsamsApplicationContext.getCivilityDao());
-//        this.civility = civilityBuilder.build();
-
-//        paymentModeBuilder = new PaymentModeBeanBuilder();
-//        paymentModeBuilder.setDao(JsamsApplicationContext.getPaymentModeDao());
-//        this.paymentMode = paymentModeBuilder.build();
-
-        this.agent = new AgentBean(society);
         this.society = society;
     }
 
@@ -88,33 +72,7 @@ public class CustomerBean extends AbstractNamedIdentityBean<Customer, CustomerBe
         super(model);
         this.billingAddress = new AddressBean(model.getBillingAddress());
         this.deliveryAddress = new AddressBean(model.getDeliveryAddress());
-
-//        legalFormBuilder = new LegalFormBeanBuilder();
-//        legalFormBuilder.setDao(JsamsApplicationContext.getLegalFormDao());
-//        LegalForm form = model.getLegalForm();
-//        if (form != null) {
-//            legalFormBuilder.setModel(form);
-//        }
-//        this.legalForm = legalFormBuilder.build();
-
         this.contactInformation = new ContactInformationBean(model.getContactInformation());
-
-//        civilityBuilder = new CivilityBeanBuilder();
-//        civilityBuilder.setDao(JsamsApplicationContext.getCivilityDao());
-//        Civility temp = model.getCivility();
-//        if (temp != null) {
-//            civilityBuilder.setModel(temp);
-//        }
-//        this.civility = civilityBuilder.build();
-
-//        paymentModeBuilder = new PaymentModeBeanBuilder();
-//        paymentModeBuilder.setDao(JsamsApplicationContext.getPaymentModeDao());
-//        PaymentMode mode = model.getPaymentMode();
-//        if (mode != null) {
-//            paymentModeBuilder.setModel(mode);
-//        }
-//        this.paymentMode = paymentModeBuilder.build();
-
         this.bank1 = model.getBank1();
         this.bank2 = model.getBank2();
         this.creditLimit = model.getCreditLimit();
@@ -122,23 +80,7 @@ public class CustomerBean extends AbstractNamedIdentityBean<Customer, CustomerBe
         this.vatApplicable = model.getVatApplicable();
         this.vatNumber = model.getVatNumber();
         this.description = model.getDescription();
-
-        // societyBuilder = JsamsApplicationContext.getSocietyBeanBuilder();
-        // societyBuilder.setModel(model.getSociety());
-        // SocietyBean societyBean = societyBuilder.build(false);
-        // setSociety(societyBean);
         this.society = society;
-        Agent agent = model.getAgent();
-        if (agent != null) {
-            AgentBean bean = new AgentBean(agent, society);
-            // bean.setSocietyBuilder(getSocietyBuilder());
-            this.agent = bean;
-        } else {
-            // AgentBean bean = new AgentBean(societyBean);
-            AgentBean bean = new AgentBean(society);
-            this.agent = bean;
-        }
-
     }
 
     /**

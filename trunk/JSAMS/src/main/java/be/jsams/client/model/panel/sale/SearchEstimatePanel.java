@@ -14,6 +14,7 @@ import be.jsams.client.model.table.EstimateTableModel;
 import be.jsams.client.swing.listener.EstimateTableMouseListener;
 import be.jsams.client.validator.SearchEstimateValidator;
 import be.jsams.common.bean.model.SocietyBean;
+import be.jsams.common.bean.model.management.AgentBean;
 import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.sale.EstimateBean;
 import be.jsams.server.service.sale.EstimateService;
@@ -57,8 +58,9 @@ public class SearchEstimatePanel extends
     @Override
     protected void performButtonAdd() {
         SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
-        CustomerBean customerBean = JsamsApplicationContext.getCustomerBeanBuilder().build(null, currentSociety);
-        EstimateBean bean = new EstimateBean(currentSociety, customerBean);
+        CustomerBean customer = JsamsApplicationContext.getCustomerBeanBuilder().build(null, currentSociety);
+        AgentBean agent = JsamsApplicationContext.getAgentBeanBuilder().build(null, currentSociety);
+        EstimateBean bean = new EstimateBean(currentSociety, customer, agent);
         new EditEstimateDialog(JsamsI18nResource.TITLE_EDIT_ESTIMATE, bean);
         updateUI();
     }

@@ -41,11 +41,12 @@ public class EstimateBean extends AbstractDocumentBean<Estimate, EstimateBeanVie
      * 
      * @param society the {@link SocietyBean}
      * @param customer the {@link CustomerBean}
+     * @param agent the {@link AgentBean}
      */
-    public EstimateBean(SocietyBean society, CustomerBean customer) {
+    public EstimateBean(SocietyBean society, CustomerBean customer, AgentBean agent) {
         super(society, customer);
         this.billingAddress = new AddressBean();
-        this.agent = new AgentBean(getSociety());
+        this.agent = agent;
         this.transferred = false;
         List<EstimateDetailBean> details = new ArrayList<EstimateDetailBean>();
         this.details = details;
@@ -58,10 +59,11 @@ public class EstimateBean extends AbstractDocumentBean<Estimate, EstimateBeanVie
      * @param model the {@link Estimate}
      * @param society the {@link SocietyBean}
      * @param customer the {@link CustomerBean}
+     * @param agent the {@link AgentBean}
      */
-    public EstimateBean(Estimate model, SocietyBean society, CustomerBean customer) {
+    public EstimateBean(Estimate model, SocietyBean society, CustomerBean customer, AgentBean agent) {
         super(model, society, customer);
-        this.agent = new AgentBean(model.getAgent(), getSociety());
+        this.agent = agent;
         this.billingAddress = new AddressBean(model.getBillingAddress());
         List<EstimateDetailBean> beans = new ArrayList<EstimateDetailBean>();
         for (EstimateDetail detail : model.getDetails()) {

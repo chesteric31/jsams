@@ -25,6 +25,7 @@ import be.jsams.client.validator.SearchProductCategoryValidator;
 import be.jsams.client.validator.SearchProductValidator;
 import be.jsams.common.bean.builder.ProductBeanBuilder;
 import be.jsams.common.bean.builder.ProductCategoryBeanBuilder;
+import be.jsams.common.bean.builder.management.AgentBeanBuilder;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.AgentBean;
 import be.jsams.common.bean.model.management.CustomerBean;
@@ -124,8 +125,9 @@ public class JsamsManagementMenuBuilder extends AbstractMenuBuilder {
             private static final long serialVersionUID = 3233472575375812337L;
 
             public void actionPerformed(ActionEvent event) {
-                SearchAgentPanel searchPanel = new SearchAgentPanel(new AgentBean(JsamsDesktop.getInstance()
-                        .getCurrentSociety()), new AgentTableMouseListener(),
+                AgentBeanBuilder builder = JsamsApplicationContext.getAgentBeanBuilder();
+                AgentBean bean = builder.build(null, JsamsDesktop.getInstance().getCurrentSociety());
+                SearchAgentPanel searchPanel = new SearchAgentPanel(bean, new AgentTableMouseListener(),
                         JsamsApplicationContext.getAgentService(), new SearchAgentValidator(), true);
                 parent.getTabbedPane().addTab(JsamsI18nResource.TITLE_SEARCH_AGENT,
                         "categories/applications-development.png", searchPanel);

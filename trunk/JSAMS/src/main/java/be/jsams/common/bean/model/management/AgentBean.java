@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import be.jsams.client.context.JsamsApplicationContext;
-import be.jsams.common.bean.builder.CivilityBeanBuilder;
 import be.jsams.common.bean.model.AbstractIdentityBean;
 import be.jsams.common.bean.model.AbstractNamedIdentityBean;
 import be.jsams.common.bean.model.AddressBean;
@@ -13,7 +12,6 @@ import be.jsams.common.bean.model.ContactInformationBean;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.view.management.AgentBeanView;
 import be.jsams.server.dao.CivilityDao;
-import be.jsams.server.model.Civility;
 import be.jsams.server.model.management.Agent;
 
 /**
@@ -37,8 +35,6 @@ public class AgentBean extends AbstractNamedIdentityBean<Agent, AgentBeanView> {
     private List<CustomerBean> customers;
     private SocietyBean society;
 
-    private CivilityBeanBuilder builder;
-
     public static final String FUNCTION_PROPERTY = "function";
 
     /**
@@ -50,9 +46,6 @@ public class AgentBean extends AbstractNamedIdentityBean<Agent, AgentBeanView> {
         super();
         this.address = new AddressBean();
         this.contactInformation = new ContactInformationBean();
-        builder = new CivilityBeanBuilder();
-        builder.setDao(getCivilityDao());
-        this.civility = builder.build();
         this.society = society;
     }
 
@@ -65,30 +58,9 @@ public class AgentBean extends AbstractNamedIdentityBean<Agent, AgentBeanView> {
     public AgentBean(Agent model, SocietyBean society) {
         super(model);
         this.address = new AddressBean(model.getAddress());
-        builder = new CivilityBeanBuilder();
-        builder.setDao(getCivilityDao());
-        Civility temp = model.getCivility();
-        if (temp != null) {
-            builder.setModel(temp);
-        }
-        this.civility = builder.build();
         this.contactInformation = new ContactInformationBean(model.getContactInformation());
         this.function = model.getFunction();
         this.society = society;
-        // SocietyBeanBuilder societyBuilder =
-        // JsamsApplicationContext.getSocietyBeanBuilder();
-        // societyBuilder.setModel(model.getSociety());
-        // SocietyBean bean = societyBuilder.build(false);
-        // setSociety(bean);
-        // TODO verify this part
-        // List<CustomerBean> beans = new ArrayList<CustomerBean>();
-        // List<Customer> customers = model.getCustomers();
-        // if (customers != null && !customers.isEmpty()) {
-        // for (Customer customer : customers) {
-        // beans.add(new CustomerBean(customer));
-        // }
-        // }
-        // setCustomers(beans);
     }
 
     /**

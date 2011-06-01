@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import be.jsams.client.desktop.JsamsDesktop;
+import be.jsams.common.bean.builder.management.AgentBeanBuilder;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.AgentBean;
 import be.jsams.server.dao.management.AgentDao;
@@ -20,30 +21,15 @@ import be.jsams.server.service.management.AgentService;
 public class AgentServiceImpl extends AbstractService implements AgentService {
 
     private AgentDao agentDao;
-    
-    /**
-     * 
-     * @return the {@link AgentDao}
-     */
-    public AgentDao getAgentDao() {
-        return agentDao;
-    }
-
-    /**
-     * 
-     * @param agentDao the {@link AgentDao} to set
-     */
-    public void setAgentDao(AgentDao agentDao) {
-        this.agentDao = agentDao;
-    }
+    private AgentBeanBuilder agentBeanBuilder;
 
     /**
      * {@inheritDoc}
      */
     public AgentBean create(AgentBean bean) {
         Agent agent = new Agent(bean);
-        agentDao.add(agent);
-        return new AgentBean(agent, bean.getSociety());
+        Agent persistedAgent = agentDao.add(agent);
+        return getAgentBeanBuilder().build(persistedAgent, bean.getSociety());
     }
 
     /**
@@ -70,7 +56,7 @@ public class AgentServiceImpl extends AbstractService implements AgentService {
         List<Agent> agents = agentDao.findAll();
         List<AgentBean> beans = new ArrayList<AgentBean>();
         for (Agent agent : agents) {
-            beans.add(new AgentBean(agent, currentSociety));
+            beans.add(getAgentBeanBuilder().build(agent, currentSociety));
         }
         return beans;
     }
@@ -80,7 +66,7 @@ public class AgentServiceImpl extends AbstractService implements AgentService {
      */
     public AgentBean findById(Long id) {
         Agent agent = agentDao.findById(id);
-        AgentBean bean = new AgentBean(agent, JsamsDesktop.getInstance().getCurrentSociety());
+        AgentBean bean = getAgentBeanBuilder().build(agent, JsamsDesktop.getInstance().getCurrentSociety());
         return bean;
     }
 
@@ -96,13 +82,44 @@ public class AgentServiceImpl extends AbstractService implements AgentService {
      * {@inheritDoc}
      */
     public List<AgentBean> findByCriteria(AgentBean criteria) {
-        agentDao.setCurrentSociety(JsamsDesktop.getInstance().getCurrentSociety());
+        SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
+        agentDao.setCurrentSociety(currentSociety);
         List<Agent> agents = agentDao.findByCriteria(criteria);
         List<AgentBean> beans = new ArrayList<AgentBean>();
         for (Agent agent : agents) {
-            beans.add(new AgentBean(agent, criteria.getSociety()));
+            beans.add(getAgentBeanBuilder().build(agent, currentSociety));
         }
         return beans;
     }
 
+    /**
+     * 
+     * @return the {@link AgentDao}
+     */
+    public AgentDao getAgentDao() {
+        return agentDao;
+    }
+
+    /**
+     * 
+     * @param agentDao the {@link AgentDao} to set
+     */
+    public void setAgentDao(AgentDao agentDao) {
+        this.agentDao = agentDao;
+    }
+
+    /**
+     * @return the agentBeanBuilder
+     */
+    public AgentBeanBuilder getAgentBeanBuilder() {
+        return agentBeanBuilder;
+    }
+
+    /**
+     * @param agentBeanBuilder the agentBeanBuilder to set
+     */
+    public void setAgentBeanBuilder(AgentBeanBuilder agentBeanBuilder) {
+        this.agentBeanBuilder = agentBeanBuilder;
+    }
+    
 }

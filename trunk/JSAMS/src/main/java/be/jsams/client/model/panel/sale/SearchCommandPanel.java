@@ -14,6 +14,7 @@ import be.jsams.client.model.table.CommandTableModel;
 import be.jsams.client.swing.listener.CommandTableMouseListener;
 import be.jsams.client.validator.SearchCommandValidator;
 import be.jsams.common.bean.model.SocietyBean;
+import be.jsams.common.bean.model.management.AgentBean;
 import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.sale.CommandBean;
 import be.jsams.server.service.sale.CommandService;
@@ -57,8 +58,9 @@ public class SearchCommandPanel extends
     @Override
     protected void performButtonAdd() {
         SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
-        CustomerBean customerBean = JsamsApplicationContext.getCustomerBeanBuilder().build(null, currentSociety);
-        CommandBean bean = new CommandBean(currentSociety, customerBean);
+        CustomerBean customer = JsamsApplicationContext.getCustomerBeanBuilder().build(null, currentSociety);
+        AgentBean agent = JsamsApplicationContext.getAgentBeanBuilder().build(null, currentSociety);
+        CommandBean bean = new CommandBean(currentSociety, customer, agent);
         new EditCommandDialog(JsamsI18nResource.TITLE_EDIT_COMMAND, bean);
         updateUI();
     }
