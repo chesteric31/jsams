@@ -25,6 +25,13 @@ public class CustomerTableModel extends AbstractJsamsTableModel<CustomerBean> {
     private static final long serialVersionUID = 5657883688442221105L;
 
     /**
+     * Default constructor.
+     */
+    public CustomerTableModel() {
+        super();
+    }
+    
+    /**
      * Constructor
      * 
      * @param listModel a list of {@link CustomerBean}

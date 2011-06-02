@@ -26,7 +26,7 @@ import be.jsams.server.service.sale.CreditNoteService;
  */
 public class SearchCreditNotePanel extends
         AbstractSearchPanel<CreditNoteBean, CreditNoteTableMouseListener,
-        CreditNoteService, SearchCreditNoteValidator> {
+        CreditNoteService, SearchCreditNoteValidator, CreditNoteTableModel> {
 
     /**
      * Serial Version UID
@@ -44,12 +44,13 @@ public class SearchCreditNotePanel extends
      * @param listener the {@link CreditNoteTableMouseListener}
      * @param service the {@link CreditNoteService}
      * @param validator the {@link SearchCreditNoteValidator}
+     * @param creditNoteTableModel the {@link CreditNoteTableModel}
      * @param showButtons a boolean that indicates if we have to display the
      *            buttons to manage the content: add, remove and modify
      */
     public SearchCreditNotePanel(CreditNoteBean bean, CreditNoteTableMouseListener listener, CreditNoteService service,
-            SearchCreditNoteValidator validator, boolean showButtons) {
-        super(bean, listener, service, validator, showButtons);
+            SearchCreditNoteValidator validator, CreditNoteTableModel creditNoteTableModel, boolean showButtons) {
+        super(bean, listener, service, validator, creditNoteTableModel, showButtons);
     }
 
     /**
@@ -82,21 +83,21 @@ public class SearchCreditNotePanel extends
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void performButtonRemove() {
-        int selectedRow = getResultTable().getSelectedRow();
-        if (selectedRow > -1) {
-            int selectedRowModel = getResultTable().convertRowIndexToModel(selectedRow);
-            CreditNoteTableModel model = (CreditNoteTableModel) getResultTable().getModel();
-            CreditNoteBean beanToDelete = model.getRow(selectedRowModel);
-            getService().delete(beanToDelete);
-            model.remove(selectedRowModel);
-            updateUI();
-        }
-    }
+//    /**
+//     * {@inheritDoc}
+//     */
+//    @Override
+//    protected void performButtonRemove() {
+//        int selectedRow = getResultTable().getSelectedRow();
+//        if (selectedRow > -1) {
+//            int selectedRowModel = getResultTable().convertRowIndexToModel(selectedRow);
+//            CreditNoteTableModel model = (CreditNoteTableModel) getResultTable().getModel();
+//            CreditNoteBean beanToDelete = model.getRow(selectedRowModel);
+//            getService().delete(beanToDelete);
+//            model.remove(selectedRowModel);
+//            updateUI();
+//        }
+//    }
 
     /**
      * {@inheritDoc}
@@ -127,7 +128,8 @@ public class SearchCreditNotePanel extends
      */
     private void fillTable(final List<CreditNoteBean> creditNotes) {
         CreditNoteTableModel model = new CreditNoteTableModel(creditNotes);
-        getResultTable().setModel(model);
+//        getResultTable().setModel(model);
+        super.setTableModel(model);
         getResultTable().repaint();
     }
 

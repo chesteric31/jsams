@@ -14,6 +14,11 @@ import be.jsams.client.model.panel.sale.SearchCommandPanel;
 import be.jsams.client.model.panel.sale.SearchCreditNotePanel;
 import be.jsams.client.model.panel.sale.SearchDeliveryOrderPanel;
 import be.jsams.client.model.panel.sale.SearchEstimatePanel;
+import be.jsams.client.model.table.BillTableModel;
+import be.jsams.client.model.table.CommandTableModel;
+import be.jsams.client.model.table.CreditNoteTableModel;
+import be.jsams.client.model.table.DeliveryOrderTableModel;
+import be.jsams.client.model.table.EstimateTableModel;
 import be.jsams.client.swing.component.JsamsMenu;
 import be.jsams.client.swing.component.JsamsMenuItem;
 import be.jsams.client.swing.listener.BillTableMouseListener;
@@ -122,7 +127,8 @@ public class JsamsSalesMenuBuilder extends AbstractMenuBuilder {
                 AgentBean agent = JsamsApplicationContext.getAgentBeanBuilder().build(null, currentSociety);
                 EstimateBean bean = new EstimateBean(currentSociety, customer, agent);
                 SearchEstimatePanel searchPanel = new SearchEstimatePanel(bean, new EstimateTableMouseListener(),
-                        JsamsApplicationContext.getEstimateService(), new SearchEstimateValidator(), true);
+                        JsamsApplicationContext.getEstimateService(), new SearchEstimateValidator(),
+                        new EstimateTableModel(), true);
                 parent.getTabbedPane().addTab(JsamsI18nResource.TITLE_SEARCH_ESTIMATE, null, searchPanel);
             }
         };
@@ -151,7 +157,8 @@ public class JsamsSalesMenuBuilder extends AbstractMenuBuilder {
                 AgentBean agent = JsamsApplicationContext.getAgentBeanBuilder().build(null, currentSociety);
                 CommandBean bean = new CommandBean(currentSociety, customer, agent);
                 SearchCommandPanel searchPanel = new SearchCommandPanel(bean, new CommandTableMouseListener(),
-                        JsamsApplicationContext.getCommandService(), new SearchCommandValidator(), true);
+                        JsamsApplicationContext.getCommandService(), new SearchCommandValidator(),
+                        new CommandTableModel(), true);
                 parent.getTabbedPane().addTab(JsamsI18nResource.TITLE_SEARCH_COMMAND, null, searchPanel);
             }
         };
@@ -181,7 +188,7 @@ public class JsamsSalesMenuBuilder extends AbstractMenuBuilder {
                 DeliveryOrderBean bean = new DeliveryOrderBean(currentSociety, customerBean);
                 SearchDeliveryOrderPanel searchPanel = new SearchDeliveryOrderPanel(bean,
                         new DeliveryOrderTableMouseListener(), JsamsApplicationContext.getDeliveryOrderService(),
-                        new SearchDeliveryOrderValidator(), true);
+                        new SearchDeliveryOrderValidator(), new DeliveryOrderTableModel(), true);
                 parent.getTabbedPane().addTab(JsamsI18nResource.TITLE_SEARCH_DELIVERY_ORDER, null, searchPanel);
             }
         };
@@ -206,13 +213,13 @@ public class JsamsSalesMenuBuilder extends AbstractMenuBuilder {
 
             public void actionPerformed(ActionEvent event) {
                 SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
-                CustomerBean customer = JsamsApplicationContext.getCustomerBeanBuilder()
-                        .build(null, currentSociety);
+                CustomerBean customer = JsamsApplicationContext.getCustomerBeanBuilder().build(null, currentSociety);
                 PaymentModeBeanBuilder builder = JsamsApplicationContext.getPaymentModeBeanBuilder();
                 PaymentModeBean mode = builder.build();
                 BillBean bean = new BillBean(currentSociety, customer, mode);
                 SearchBillPanel searchPanel = new SearchBillPanel(bean, new BillTableMouseListener(),
-                        JsamsApplicationContext.getBillService(), new SearchBillValidator(), true);
+                        JsamsApplicationContext.getBillService(), new SearchBillValidator(),
+                        new BillTableModel(), true);
                 parent.getTabbedPane().addTab(JsamsI18nResource.TITLE_SEARCH_BILL, null, searchPanel);
             }
         };
@@ -241,7 +248,8 @@ public class JsamsSalesMenuBuilder extends AbstractMenuBuilder {
                         .build(null, currentSociety);
                 CreditNoteBean bean = new CreditNoteBean(currentSociety, customerBean);
                 SearchCreditNotePanel searchPanel = new SearchCreditNotePanel(bean, new CreditNoteTableMouseListener(),
-                        JsamsApplicationContext.getCreditNoteService(), new SearchCreditNoteValidator(), true);
+                        JsamsApplicationContext.getCreditNoteService(), new SearchCreditNoteValidator(),
+                        new CreditNoteTableModel(), true);
                 parent.getTabbedPane().addTab(JsamsI18nResource.TITLE_SEARCH_CREDIT_NOTE, null, searchPanel);
             }
         };

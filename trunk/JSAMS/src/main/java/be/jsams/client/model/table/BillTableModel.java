@@ -23,6 +23,13 @@ public class BillTableModel extends AbstractJsamsTableModel<BillBean> {
     private static final long serialVersionUID = 8018300192292517259L;
 
     /**
+     * Default constructor.
+     */
+    public BillTableModel() {
+        super();
+    }
+    
+    /**
      * Constructor
      * 
      * @param listBean a list of {@link BillBean}

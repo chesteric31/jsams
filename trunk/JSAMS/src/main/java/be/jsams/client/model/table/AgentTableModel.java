@@ -22,6 +22,13 @@ public class AgentTableModel extends AbstractJsamsTableModel<AgentBean> {
     private static final long serialVersionUID = -1514081531839355887L;
 
     /**
+     * Default constructor.
+     */
+    public AgentTableModel() {
+        super();
+    }
+    
+    /**
      * Constructor
      * 
      * @param listModel a list of {@link AgentBean}
@@ -32,6 +39,7 @@ public class AgentTableModel extends AbstractJsamsTableModel<AgentBean> {
             JsamsI18nResource.COLUMN_FUNCTION, JsamsI18nResource.COLUMN_PHONE, JsamsI18nResource.COLUMN_ZIP_CODE,
             JsamsI18nResource.COLUMN_CITY));
     }
+
 
     /**
      * {@inheritDoc}

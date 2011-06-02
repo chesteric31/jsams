@@ -123,7 +123,7 @@ public class JsamsDesktop {
      * Exits the application after having shown a confirmation dialog
      */
     public void stopNow() {
-        int confirm = JOptionPane.showConfirmDialog(getMainWindow(), JsamsI18nResource.EXIT_CONFIRMATION);
+        int confirm = JOptionPane.showConfirmDialog(getMainWindow(), JsamsI18nResource.CONFIRMATION_EXIT);
         if (confirm == 0) {
             frame.dispose();
             System.exit(0);

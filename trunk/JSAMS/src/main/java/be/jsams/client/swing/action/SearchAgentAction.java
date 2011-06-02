@@ -75,8 +75,8 @@ public final class SearchAgentAction extends AbstractAction {
         };
         AgentBeanBuilder builder = JsamsApplicationContext.getAgentBeanBuilder();
         AgentBean bean = builder.build(null, JsamsDesktop.getInstance().getCurrentSociety());
-        SearchAgentPanel searchAgentPanel = new SearchAgentPanel(bean, customListener,
-                JsamsApplicationContext.getAgentService(), new SearchAgentValidator(), false);
+        SearchAgentPanel searchAgentPanel = new SearchAgentPanel(bean, customListener, JsamsApplicationContext
+                .getAgentService(), new SearchAgentValidator(), new AgentTableModel(), false);
         dialog.add(searchAgentPanel);
         dialog.pack();
         dialog.setLocationRelativeTo(((JsamsButton) e.getSource()).getRootPane());

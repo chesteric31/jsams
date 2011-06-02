@@ -25,8 +25,9 @@ import be.jsams.server.service.sale.CommandService;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class SearchCommandPanel extends
-        AbstractSearchPanel<CommandBean, CommandTableMouseListener, CommandService, SearchCommandValidator> {
+public class SearchCommandPanel
+        extends AbstractSearchPanel<CommandBean, CommandTableMouseListener,
+        CommandService, SearchCommandValidator, CommandTableModel> {
 
     /**
      * Serial Version UID
@@ -44,12 +45,13 @@ public class SearchCommandPanel extends
      * @param listener the {@link CommandTableMouseListener}
      * @param service the {@link CommandService}
      * @param validator the {@link SearchCommandValidator}
+     * @param commandTableModel the {@link CommandTableModel}
      * @param showButtons a boolean that indicates if we have to display the
      *            buttons to manage the content: add, remove and modify
      */
     public SearchCommandPanel(CommandBean model, CommandTableMouseListener listener, CommandService service,
-            SearchCommandValidator validator, final boolean showButtons) {
-        super(model, listener, service, validator, showButtons);
+            SearchCommandValidator validator, CommandTableModel commandTableModel, final boolean showButtons) {
+        super(model, listener, service, validator, commandTableModel, showButtons);
     }
 
     /**
@@ -83,21 +85,21 @@ public class SearchCommandPanel extends
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void performButtonRemove() {
-        int selectedRow = getResultTable().getSelectedRow();
-        if (selectedRow > -1) {
-            int selectedRowModel = getResultTable().convertRowIndexToModel(selectedRow);
-            CommandTableModel model = (CommandTableModel) getResultTable().getModel();
-            CommandBean beanToDelete = model.getRow(selectedRowModel);
-            getService().delete(beanToDelete);
-            model.remove(selectedRowModel);
-            updateUI();
-        }
-    }
+//    /**
+//     * {@inheritDoc}
+//     */
+//    @Override
+//    protected void performButtonRemove() {
+//        int selectedRow = getResultTable().getSelectedRow();
+//        if (selectedRow > -1) {
+//            int selectedRowModel = getResultTable().convertRowIndexToModel(selectedRow);
+//            CommandTableModel model = (CommandTableModel) getResultTable().getModel();
+//            CommandBean beanToDelete = model.getRow(selectedRowModel);
+//            getService().delete(beanToDelete);
+//            model.remove(selectedRowModel);
+//            updateUI();
+//        }
+//    }
 
     /**
      * {@inheritDoc}
@@ -128,7 +130,8 @@ public class SearchCommandPanel extends
      */
     private void fillTable(final List<CommandBean> commands) {
         CommandTableModel model = new CommandTableModel(commands);
-        getResultTable().setModel(model);
+//        getResultTable().setModel(model);
+        super.setTableModel(model);
         getResultTable().repaint();
     }
 

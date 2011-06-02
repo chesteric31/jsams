@@ -21,7 +21,8 @@ import be.jsams.server.service.management.AgentService;
  * @version $Rev: 710 $ $Date::                  $ $Author$
  */
 public class SearchAgentPanel extends
-        AbstractSearchPanel<AgentBean, AgentTableMouseListener, AgentService, SearchAgentValidator> {
+        AbstractSearchPanel<
+        AgentBean, AgentTableMouseListener, AgentService, SearchAgentValidator, AgentTableModel> {
 
     /**
      * Serial Version UID
@@ -35,12 +36,13 @@ public class SearchAgentPanel extends
      * @param listener the {@link AgentTableMouseListener}
      * @param service the {@link AgentService}
      * @param validator the {@link SearchAgentValidator}
+     * @param agentTableModel the {@link AgentTableModel}
      * @param showButtons a boolean that indicates if we have to display the
      *            buttons to manage the content: add, remove and modify
      */
     public SearchAgentPanel(AgentBean model, AgentTableMouseListener listener, AgentService service,
-            SearchAgentValidator validator, final boolean showButtons) {
-        super(model, listener, service, validator, showButtons);
+            SearchAgentValidator validator, AgentTableModel agentTableModel, final boolean showButtons) {
+        super(model, listener, service, validator, agentTableModel, showButtons);
     }
 
     /**
@@ -69,21 +71,21 @@ public class SearchAgentPanel extends
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void performButtonRemove() {
-        int selectedRow = getResultTable().getSelectedRow();
-        if (selectedRow > -1) {
-            int selectedRowModel = getResultTable().convertRowIndexToModel(selectedRow);
-            AgentTableModel model = (AgentTableModel) getResultTable().getModel();
-            AgentBean beanToDelete = model.getRow(selectedRowModel);
-            getService().delete(beanToDelete);
-            model.remove(selectedRowModel);
-            updateUI();
-        }
-    }
+//    /**
+//     * {@inheritDoc}
+//     */
+//    @Override
+//    protected void performButtonRemove() {
+//        int selectedRow = getResultTable().getSelectedRow();
+//        if (selectedRow > -1) {
+//            int selectedRowModel = getResultTable().convertRowIndexToModel(selectedRow);
+//            AgentTableModel model = (AgentTableModel) getResultTable().getModel();
+//            AgentBean beanToDelete = model.getRow(selectedRowModel);
+//            getService().delete(beanToDelete);
+//            model.remove(selectedRowModel);
+//            updateUI();
+//        }
+//    }
 
     /**
      * {@inheritDoc}
@@ -105,7 +107,8 @@ public class SearchAgentPanel extends
      */
     private void fillTable(final List<AgentBean> agents) {
         AgentTableModel model = new AgentTableModel(agents);
-        getResultTable().setModel(model);
+//      getResultTable().setModel(model);
+        super.setTableModel(model);
         getResultTable().repaint();
     }
 

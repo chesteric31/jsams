@@ -238,7 +238,7 @@ public class DeliveryOrderBeanView extends AbstractDocumentBeanView<DeliveryOrde
                         builder.setSociety(JsamsDesktop.getInstance().getCurrentSociety());
                         SearchProductPanel searchPanel = new SearchProductPanel(builder.build(true, true),
                                 customListener, JsamsApplicationContext.getProductService(),
-                                new SearchProductValidator(), false);
+                                new SearchProductValidator(), new ProductTableModel(), false);
 
                         dialog.add(searchPanel);
                         dialog.pack();

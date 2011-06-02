@@ -21,6 +21,13 @@ public class EstimateTableModel extends AbstractJsamsTableModel<EstimateBean> {
     private static final long serialVersionUID = 8310299690507417519L;
 
     /**
+     * Default constructor.
+     */
+    public EstimateTableModel() {
+        super();
+    }
+    
+    /**
      * Constructor
      * 
      * @param listBean a list of {@link EstimateBean}
