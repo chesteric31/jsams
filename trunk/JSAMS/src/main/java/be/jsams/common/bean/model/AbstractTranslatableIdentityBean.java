@@ -123,8 +123,8 @@ public abstract class AbstractTranslatableIdentityBean
         setLabel(other.getLabel());
         setLabelFr(other.getLabelFr());
         setLabelNl(other.getLabelNl());
-        setSelection(other.getSelection());
-        setListModel(other.getListModel());
+//        setSelection(other.getSelection());
+//        setListModel(other.getListModel());
     }
 
 }

@@ -1,7 +1,6 @@
 package be.jsams.common.bean.model.sale.detail;
 
 import be.jsams.common.bean.model.AbstractIdentityBean;
-import be.jsams.common.bean.model.management.ProductBean;
 import be.jsams.common.bean.model.sale.CommandBean;
 import be.jsams.common.bean.view.sale.detail.CommandDetailBeanView;
 import be.jsams.server.model.sale.detail.CommandDetail;
@@ -22,7 +21,6 @@ public class CommandDetailBean extends AbstractDetailBean<CommandDetail, Command
     private boolean transferred;
 
     private CommandBean command;
-    private ProductBean product;
 
     public static final String TRANSFERRED_PROPERTY = "transferred";
 
@@ -75,20 +73,6 @@ public class CommandDetailBean extends AbstractDetailBean<CommandDetail, Command
      */
     public void setCommand(CommandBean command) {
         this.command = command;
-    }
-
-    /**
-     * @return the product
-     */
-    public ProductBean getProduct() {
-        return product;
-    }
-
-    /**
-     * @param product the product to set
-     */
-    public void setProduct(ProductBean product) {
-        this.product = product;
     }
 
     /**
