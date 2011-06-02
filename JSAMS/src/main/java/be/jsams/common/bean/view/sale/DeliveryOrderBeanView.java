@@ -227,6 +227,7 @@ public class DeliveryOrderBeanView extends AbstractDocumentBeanView<DeliveryOrde
                                                 .getRow(detailSelectedRowModel);
                                         selectedDetailBean.setProduct(selectedBean);
                                         selectedDetailBean.setVatApplicable(selectedBean.getVatApplicable());
+                                        selectedDetailBean.setPrice(selectedBean.getPrice());
                                         getDetailsTable().repaint();
                                         dialog.dispose();
                                     }

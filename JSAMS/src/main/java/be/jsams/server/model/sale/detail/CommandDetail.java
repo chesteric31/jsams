@@ -39,6 +39,7 @@ public class CommandDetail extends AbstractDetail {
      */
     public CommandDetail(final CommandDetailBean bean, final Command command) {
         super(bean);
+        this.command = command;
         this.transferred = bean.isTransferred();
     }
 

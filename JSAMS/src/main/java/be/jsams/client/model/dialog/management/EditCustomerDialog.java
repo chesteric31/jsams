@@ -69,17 +69,14 @@ public class EditCustomerDialog extends AbstractEditDialog<CustomerBean, EditCus
         AbstractIdentityBean<LegalForm, LegalFormBeanView> legalForm = customer.getLegalForm().getSelection();
         if (legalForm != null) {
             customer.getLegalForm().refresh(legalForm);
-            // customer.setLegalForm((LegalFormBean) legalForm);
         }
         AbstractIdentityBean<Civility, CivilityBeanView> civility = customer.getCivility().getSelection();
         if (civility != null) {
             customer.getCivility().refresh(civility);
-            // customer.setCivility((CivilityBean) civility);
         }
         AbstractIdentityBean<PaymentMode, PaymentModeBeanView> paymentMode = customer.getPaymentMode().getSelection();
         if (paymentMode != null) {
             customer.getPaymentMode().refresh(paymentMode);
-            // customer.setPaymentMode((PaymentModeBean) paymentMode);
         }
         super.postPerformOk(customer);
     }

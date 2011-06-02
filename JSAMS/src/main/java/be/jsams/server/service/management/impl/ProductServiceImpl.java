@@ -46,6 +46,7 @@ public class ProductServiceImpl implements ProductService {
         Product product = new Product(bean);
         dao.add(product);
         builder.setModel(product);
+        builder.setSociety(bean.getCategory().getSociety());
         ProductBean productBean = builder.build(false, false);
         return productBean;
     }
