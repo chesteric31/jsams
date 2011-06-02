@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import be.jsams.client.context.JsamsApplicationContext;
-import be.jsams.common.bean.builder.PaymentModeBeanBuilder;
 import be.jsams.common.bean.model.AbstractIdentityBean;
 import be.jsams.common.bean.model.AddressBean;
 import be.jsams.common.bean.model.PaymentModeBean;
@@ -13,7 +11,6 @@ import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.sale.detail.BillDetailBean;
 import be.jsams.common.bean.view.sale.BillBeanView;
-import be.jsams.server.model.PaymentMode;
 import be.jsams.server.model.sale.Bill;
 import be.jsams.server.model.sale.detail.BillDetail;
 
@@ -41,8 +38,6 @@ public class BillBean extends AbstractDocumentBean<Bill, BillBeanView> {
     private PaymentModeBean paymentMode;
     private AddressBean billingAddress;
 
-    private PaymentModeBeanBuilder paymentModeBuilder;
-
     private List<BillDetailBean> details;
 
     public static final String DISCOUNT_RATE_PROPERTY = "discountRate";
@@ -58,12 +53,11 @@ public class BillBean extends AbstractDocumentBean<Bill, BillBeanView> {
      * 
      * @param society the {@link SocietyBean}
      * @param customer the {@link CustomerBean}
+     * @param mode the {@link PaymentModeBean}
      */
-    public BillBean(SocietyBean society, CustomerBean customer) {
+    public BillBean(SocietyBean society, CustomerBean customer, PaymentModeBean mode) {
         super(society, customer);
-        paymentModeBuilder = new PaymentModeBeanBuilder();
-        paymentModeBuilder.setDao(JsamsApplicationContext.getPaymentModeDao());
-        this.paymentMode = paymentModeBuilder.build();
+        this.paymentMode = mode;
         this.billingAddress = new AddressBean();
         this.closed = false;
         this.paid = false;
@@ -78,8 +72,9 @@ public class BillBean extends AbstractDocumentBean<Bill, BillBeanView> {
      * @param model the {@link Bill}
      * @param society the {@link SocietyBean}
      * @param customer the {@link CustomerBean}
+     * @param mode the {@link PaymentModeBean}
      */
-    public BillBean(Bill model, SocietyBean society, CustomerBean customer) {
+    public BillBean(Bill model, SocietyBean society, CustomerBean customer, PaymentModeBean mode) {
         super(model, society, customer);
         this.billingAddress = new AddressBean(model.getBillingAddress());
         List<BillDetailBean> beans = new ArrayList<BillDetailBean>();
@@ -94,13 +89,7 @@ public class BillBean extends AbstractDocumentBean<Bill, BillBeanView> {
         this.dateSecondRemember = model.getDateSecondRemember();
         this.dateFormalNotice = model.getDateFormalNotice();
         this.dueDate = model.getDueDate();
-        paymentModeBuilder = new PaymentModeBeanBuilder();
-        paymentModeBuilder.setDao(JsamsApplicationContext.getPaymentModeDao());
-        PaymentMode mode = model.getPaymentMode();
-        if (mode != null) {
-            paymentModeBuilder.setModel(mode);
-        }
-        this.paymentMode = paymentModeBuilder.build();
+        this.paymentMode = mode;
         setView(new BillBeanView(this));
     }
 
@@ -256,20 +245,6 @@ public class BillBean extends AbstractDocumentBean<Bill, BillBeanView> {
      */
     public void setDetails(List<BillDetailBean> details) {
         this.details = details;
-    }
-
-    /**
-     * @return the paymentModeBuilder
-     */
-    public PaymentModeBeanBuilder getPaymentModeBuilder() {
-        return paymentModeBuilder;
-    }
-
-    /**
-     * @param paymentModeBuilder the paymentModeBuilder to set
-     */
-    public void setPaymentModeBuilder(PaymentModeBeanBuilder paymentModeBuilder) {
-        this.paymentModeBuilder = paymentModeBuilder;
     }
 
     /**

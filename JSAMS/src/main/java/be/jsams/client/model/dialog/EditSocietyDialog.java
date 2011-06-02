@@ -69,7 +69,7 @@ public class EditSocietyDialog extends AbstractEditDialog<SocietyBean, EditSocie
         AbstractIdentityBean<LegalForm, LegalFormBeanView> legalForm = society.getLegalForm().getSelection();
         if (legalForm != null) {
             society.getLegalForm().refresh(legalForm);
-//            society.setLegalForm((LegalFormBean) legalForm);
+////            society.setLegalForm((LegalFormBean) legalForm);
         }
         SocietyBean persistedSociety = postPerformOk(society);
         if (persistedSociety != null) {

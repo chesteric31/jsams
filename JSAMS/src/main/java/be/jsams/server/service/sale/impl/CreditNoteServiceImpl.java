@@ -21,15 +21,16 @@ import be.jsams.server.service.sale.CreditNoteService;
 public class CreditNoteServiceImpl extends AbstractService implements CreditNoteService {
 
     private CreditNoteDao creditNoteDao;
-    
+
     /**
      * {@inheritDoc}
      */
     @Override
     public CreditNoteBean create(CreditNoteBean bean) {
         CreditNote creditNote = new CreditNote(bean);
-        CreditNote addingCreditNote = creditNoteDao.add(creditNote);
-        return new CreditNoteBean(addingCreditNote, JsamsDesktop.getInstance().getCurrentSociety(), bean.getCustomer());
+        CreditNote persistedCreditNote = creditNoteDao.add(creditNote);
+        SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
+        return new CreditNoteBean(persistedCreditNote, currentSociety, bean.getCustomer());
     }
 
     /**

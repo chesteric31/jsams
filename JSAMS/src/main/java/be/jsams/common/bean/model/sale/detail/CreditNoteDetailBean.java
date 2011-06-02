@@ -1,12 +1,8 @@
 package be.jsams.common.bean.model.sale.detail;
 
-import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.common.bean.model.AbstractIdentityBean;
-import be.jsams.common.bean.model.SocietyBean;
-import be.jsams.common.bean.model.sale.BillBean;
 import be.jsams.common.bean.model.sale.CreditNoteBean;
 import be.jsams.common.bean.view.sale.detail.CreditNoteDetailBeanView;
-import be.jsams.server.model.sale.detail.BillDetail;
 import be.jsams.server.model.sale.detail.CreditNoteDetail;
 
 /**
@@ -24,7 +20,6 @@ public class CreditNoteDetailBean extends
     private static final long serialVersionUID = 2345486313955221349L;
 
     private CreditNoteBean creditNote;
-    private BillDetailBean billDetail;
 
     /**
      * Default constructor
@@ -42,12 +37,6 @@ public class CreditNoteDetailBean extends
     public CreditNoteDetailBean(CreditNoteDetail model, CreditNoteBean creditNote) {
         super(model, creditNote);
         this.creditNote = creditNote;
-        BillDetail detail = model.getBillDetail();
-        if (detail != null) {
-            SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
-            this.billDetail = new BillDetailBean(detail, new BillBean(detail.getBill(), currentSociety, creditNote
-                    .getCustomer()));
-        }
     }
 
     /**
@@ -65,27 +54,12 @@ public class CreditNoteDetailBean extends
     }
 
     /**
-     * @return the {@link BillDetailBean}
-     */
-    public BillDetailBean getBillDetail() {
-        return billDetail;
-    }
-
-    /**
-     * @param billDetail the {@link BillDetailBean} to set
-     */
-    public void setBillDetail(BillDetailBean billDetail) {
-        this.billDetail = billDetail;
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Override
     public void clear() {
         super.clear();
         setCreditNote(null);
-        setBillDetail(null);
     }
 
     /**
@@ -96,7 +70,6 @@ public class CreditNoteDetailBean extends
         super.refresh(bean);
         CreditNoteDetailBean other = (CreditNoteDetailBean) bean;
         creditNote.refresh(other.getCreditNote());
-        billDetail.refresh(other.getBillDetail());
     }
 
     /**

@@ -26,6 +26,8 @@ import be.jsams.client.validator.SearchCommandValidator;
 import be.jsams.client.validator.SearchCreditNoteValidator;
 import be.jsams.client.validator.SearchDeliveryOrderValidator;
 import be.jsams.client.validator.SearchEstimateValidator;
+import be.jsams.common.bean.builder.PaymentModeBeanBuilder;
+import be.jsams.common.bean.model.PaymentModeBean;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.AgentBean;
 import be.jsams.common.bean.model.management.CustomerBean;
@@ -204,9 +206,11 @@ public class JsamsSalesMenuBuilder extends AbstractMenuBuilder {
 
             public void actionPerformed(ActionEvent event) {
                 SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
-                CustomerBean customerBean = JsamsApplicationContext.getCustomerBeanBuilder()
+                CustomerBean customer = JsamsApplicationContext.getCustomerBeanBuilder()
                         .build(null, currentSociety);
-                BillBean bean = new BillBean(currentSociety, customerBean);
+                PaymentModeBeanBuilder builder = JsamsApplicationContext.getPaymentModeBeanBuilder();
+                PaymentModeBean mode = builder.build();
+                BillBean bean = new BillBean(currentSociety, customer, mode);
                 SearchBillPanel searchPanel = new SearchBillPanel(bean, new BillTableMouseListener(),
                         JsamsApplicationContext.getBillService(), new SearchBillValidator(), true);
                 parent.getTabbedPane().addTab(JsamsI18nResource.TITLE_SEARCH_BILL, null, searchPanel);

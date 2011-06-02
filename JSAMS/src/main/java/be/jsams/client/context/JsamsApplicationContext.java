@@ -3,6 +3,7 @@ package be.jsams.client.context;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import be.jsams.common.bean.builder.LegalFormBeanBuilder;
+import be.jsams.common.bean.builder.PaymentModeBeanBuilder;
 import be.jsams.common.bean.builder.SocietyBeanBuilder;
 import be.jsams.common.bean.builder.management.AgentBeanBuilder;
 import be.jsams.common.bean.builder.management.CustomerBeanBuilder;
@@ -170,6 +171,13 @@ public final class JsamsApplicationContext {
      */
     public static AgentBeanBuilder getAgentBeanBuilder() {
         return (AgentBeanBuilder) context.getBean("agentBeanBuilder");
+    }
+
+    /**
+     * @return the {@link PaymentModeBeanBuilder}
+     */
+    public static PaymentModeBeanBuilder getPaymentModeBeanBuilder() {
+        return (PaymentModeBeanBuilder) context.getBean("paymentModeBeanBuilder");
     }
 
 }

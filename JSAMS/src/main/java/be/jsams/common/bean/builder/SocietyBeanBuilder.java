@@ -62,7 +62,7 @@ public class SocietyBeanBuilder {
                 listModel.add(0, null);
                 bean = new SocietyBean(listModel);
             }
-//            bean.setLegalForm(legalFormBuilder.build());
+            bean.setLegalForm(legalFormBuilder.build());
         }
         return bean;
     }

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import be.jsams.client.desktop.JsamsDesktop;
+import be.jsams.common.bean.builder.PaymentModeBeanBuilder;
+import be.jsams.common.bean.model.PaymentModeBean;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.sale.BillBean;
@@ -22,14 +24,16 @@ public class BillServiceImpl extends AbstractService implements BillService {
 
     private BillDao billDao;
     
+    private PaymentModeBeanBuilder paymentModeBeanBuilder;
+    
     /**
      * {@inheritDoc}
      */
     @Override
     public BillBean create(BillBean bean) {
         Bill bill = new Bill(bean);
-        Bill addingBill = billDao.add(bill);
-        return new BillBean(addingBill, bean.getSociety(), bean.getCustomer());
+        Bill persistedBill = billDao.add(bill);
+        return new BillBean(persistedBill, bean.getSociety(), bean.getCustomer(), bean.getPaymentMode());
     }
 
     /**
@@ -67,7 +71,9 @@ public class BillServiceImpl extends AbstractService implements BillService {
         Bill bill = billDao.findById(id);
         SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
         CustomerBean customer = getCustomerBeanBuilder().build(bill.getCustomer(), currentSociety);
-        BillBean bean = new BillBean(bill, currentSociety, customer);
+        paymentModeBeanBuilder.setModel(bill.getPaymentMode());
+        PaymentModeBean mode = paymentModeBeanBuilder.build();
+        BillBean bean = new BillBean(bill, currentSociety, customer, mode);
         return bean;
     }
 
@@ -82,7 +88,9 @@ public class BillServiceImpl extends AbstractService implements BillService {
         List<BillBean> beans = new ArrayList<BillBean>();
         for (Bill bill : bills) {
             CustomerBean customer = getCustomerBeanBuilder().build(bill.getCustomer(), currentSociety);
-            beans.add(new BillBean(bill, currentSociety, customer));
+            paymentModeBeanBuilder.setModel(bill.getPaymentMode());
+            PaymentModeBean mode = paymentModeBeanBuilder.build();
+            beans.add(new BillBean(bill, currentSociety, customer, mode));
         }
         return beans;
     }
@@ -98,7 +106,9 @@ public class BillServiceImpl extends AbstractService implements BillService {
         List<BillBean> beans = new ArrayList<BillBean>();
         for (Bill bill : bills) {
             CustomerBean customer = getCustomerBeanBuilder().build(bill.getCustomer(), currentSociety);
-            beans.add(new BillBean(bill, currentSociety, customer));
+            paymentModeBeanBuilder.setModel(bill.getPaymentMode());
+            PaymentModeBean mode = paymentModeBeanBuilder.build();
+            beans.add(new BillBean(bill, currentSociety, customer, mode));
         }
         return beans;
     }
@@ -115,6 +125,20 @@ public class BillServiceImpl extends AbstractService implements BillService {
      */
     public void setBillDao(BillDao billDao) {
         this.billDao = billDao;
+    }
+
+    /**
+     * @return the paymentModeBeanBuilder
+     */
+    public PaymentModeBeanBuilder getPaymentModeBeanBuilder() {
+        return paymentModeBeanBuilder;
+    }
+
+    /**
+     * @param paymentModeBeanBuilder the paymentModeBeanBuilder to set
+     */
+    public void setPaymentModeBeanBuilder(PaymentModeBeanBuilder paymentModeBeanBuilder) {
+        this.paymentModeBeanBuilder = paymentModeBeanBuilder;
     }
 
 }
