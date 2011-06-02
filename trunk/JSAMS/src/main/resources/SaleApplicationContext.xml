@@ -48,6 +48,7 @@
 	<bean id="billServiceTarget" class="be.jsams.server.service.sale.impl.BillServiceImpl"
 		parent="abstractService">
 		<property name="billDao" ref="billDao" />
+		<property name="paymentModeBeanBuilder" ref="paymentModeBeanBuilder" />
 	</bean>
 	<bean id="billService" parent="baseTransactionProxy">
 		<property name="target" ref="billServiceTarget" />

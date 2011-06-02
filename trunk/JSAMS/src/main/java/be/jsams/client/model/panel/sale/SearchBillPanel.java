@@ -13,6 +13,7 @@ import be.jsams.client.model.panel.AbstractSearchPanel;
 import be.jsams.client.model.table.BillTableModel;
 import be.jsams.client.swing.listener.BillTableMouseListener;
 import be.jsams.client.validator.SearchBillValidator;
+import be.jsams.common.bean.model.PaymentModeBean;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.sale.BillBean;
@@ -57,8 +58,9 @@ public class SearchBillPanel extends
     @Override
     protected void performButtonAdd() {
         SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
-        CustomerBean customerBean = JsamsApplicationContext.getCustomerBeanBuilder().build(null, currentSociety);
-        BillBean bean = new BillBean(currentSociety, customerBean);
+        CustomerBean customer = JsamsApplicationContext.getCustomerBeanBuilder().build(null, currentSociety);
+        PaymentModeBean mode = JsamsApplicationContext.getPaymentModeBeanBuilder().build();
+        BillBean bean = new BillBean(currentSociety, customer, mode);
         new EditBillDialog(JsamsI18nResource.TITLE_EDIT_BILL, bean);
         updateUI();
     }
