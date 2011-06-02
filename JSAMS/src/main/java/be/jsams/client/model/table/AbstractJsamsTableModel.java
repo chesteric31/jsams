@@ -11,8 +11,7 @@ import com.jgoodies.common.collect.ArrayListModel;
 /**
  * Customized abstract table model for all search panels.
  * 
- * @param <D>
- *            an object extension of {@link AbstractIdentityBean}
+ * @param <D> an object extension of {@link AbstractIdentityBean}
  * 
  * @author chesteric31
  * @version $$Rev: 689 $$ $$Date::                  $$ $$Author$$
@@ -44,19 +43,25 @@ public abstract class AbstractJsamsTableModel<D extends AbstractIdentityBean<?, 
     protected static final int EIGHT = 8;
     /** Column number nine for switch purpose */
     protected static final int NINE = 9;
-    
+
     private List<I18nString> columnNames;
 
     /**
+     * Default constructor
+     */
+    public AbstractJsamsTableModel() {
+        super();
+    }
+    
+    /**
      * Constructor
      * 
-     * @param listBean
-     *            a list of data bean
+     * @param listBean a list of data bean
      */
     public AbstractJsamsTableModel(final List<D> listBean) {
         super(new ArrayListModel<D>(listBean));
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -74,8 +79,7 @@ public abstract class AbstractJsamsTableModel<D extends AbstractIdentityBean<?, 
     /**
      * Removes from the ListModel the bean at index parameter.
      * 
-     * @param index
-     *            the index of the bean to delete
+     * @param index the index of the bean to delete
      */
     @SuppressWarnings("unchecked")
     public void remove(int index) {
@@ -103,5 +107,5 @@ public abstract class AbstractJsamsTableModel<D extends AbstractIdentityBean<?, 
     public void setColumnNames(List<I18nString> columnNames) {
         this.columnNames = columnNames;
     }
-    
+
 }

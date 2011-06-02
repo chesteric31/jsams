@@ -26,7 +26,8 @@ import be.jsams.server.service.sale.EstimateService;
  * @version $Rev: 711 $ $Date::                  $ $Author$
  */
 public class SearchEstimatePanel extends
-        AbstractSearchPanel<EstimateBean, EstimateTableMouseListener, EstimateService, SearchEstimateValidator> {
+        AbstractSearchPanel<EstimateBean, EstimateTableMouseListener,
+        EstimateService, SearchEstimateValidator, EstimateTableModel> {
 
     /**
      * Serial Version UID
@@ -44,12 +45,13 @@ public class SearchEstimatePanel extends
      * @param listener the {@link EstimateTableMouseListener}
      * @param service the {@link EstimateService}
      * @param validator the {@link SearchEstimateValidator} 
+     * @param estimateTableModel the {@link EstimateTableModel}
      * @param showButtons a boolean that indicates if we have to display the
      *            buttons to manage the content: add, remove and modify
      */
     public SearchEstimatePanel(EstimateBean model, EstimateTableMouseListener listener, EstimateService service,
-            SearchEstimateValidator validator, final boolean showButtons) {
-        super(model, listener, service, validator, showButtons);
+            SearchEstimateValidator validator, EstimateTableModel estimateTableModel, final boolean showButtons) {
+        super(model, listener, service, validator, estimateTableModel, showButtons);
     }
 
     /**
@@ -83,21 +85,21 @@ public class SearchEstimatePanel extends
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void performButtonRemove() {
-        int selectedRow = getResultTable().getSelectedRow();
-        if (selectedRow > -1) {
-            int selectedRowModel = getResultTable().convertRowIndexToModel(selectedRow);
-            EstimateTableModel model = (EstimateTableModel) getResultTable().getModel();
-            EstimateBean beanToDelete = model.getRow(selectedRowModel);
-            getService().delete(beanToDelete);
-            model.remove(selectedRowModel);
-            updateUI();
-        }
-    }
+//    /**
+//     * {@inheritDoc}
+//     */
+//    @Override
+//    protected void performButtonRemove() {
+//        int selectedRow = getResultTable().getSelectedRow();
+//        if (selectedRow > -1) {
+//            int selectedRowModel = getResultTable().convertRowIndexToModel(selectedRow);
+//            EstimateTableModel model = (EstimateTableModel) getResultTable().getModel();
+//            EstimateBean beanToDelete = model.getRow(selectedRowModel);
+//            getService().delete(beanToDelete);
+//            model.remove(selectedRowModel);
+//            updateUI();
+//        }
+//    }
 
     /**
      * {@inheritDoc}
@@ -119,7 +121,8 @@ public class SearchEstimatePanel extends
      */
     private void fillTable(final List<EstimateBean> estimates) {
         EstimateTableModel model = new EstimateTableModel(estimates);
-        getResultTable().setModel(model);
+//        getResultTable().setModel(model);
+        super.setTableModel(model);
         getResultTable().repaint();
     }
 

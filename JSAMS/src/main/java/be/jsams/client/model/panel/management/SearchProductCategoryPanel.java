@@ -26,7 +26,7 @@ import be.jsams.server.service.management.ProductCategoryService;
  */
 public class SearchProductCategoryPanel
         extends AbstractSearchPanel<ProductCategoryBean, ProductCategoryTableMouseListener, 
-        ProductCategoryService, SearchProductCategoryValidator> {
+        ProductCategoryService, SearchProductCategoryValidator, ProductCategoryTableModel> {
 
     /**
      * Serial Version UID
@@ -44,12 +44,14 @@ public class SearchProductCategoryPanel
      * @param listener the {@link ProductCategoryTableMouseListener}
      * @param service the {@link ProductCategoryService}
      * @param validator the {@link SearchProductCategoryValidator}
+     * @param productCategoryTableModel the {@link ProductCategoryTableModel}
      * @param showButtons the boolean to show or not the management buttons
      *            panel
      */
     public SearchProductCategoryPanel(ProductCategoryBean model, ProductCategoryTableMouseListener listener,
-            ProductCategoryService service, SearchProductCategoryValidator validator, final boolean showButtons) {
-        super(model, listener, service, validator, showButtons);
+            ProductCategoryService service, SearchProductCategoryValidator validator,
+            ProductCategoryTableModel productCategoryTableModel, final boolean showButtons) {
+        super(model, listener, service, validator, productCategoryTableModel, showButtons);
     }
 
     /**
@@ -72,7 +74,8 @@ public class SearchProductCategoryPanel
      */
     private void fillTable(final List<ProductCategoryBean> categories) {
         ProductCategoryTableModel model = new ProductCategoryTableModel(categories);
-        getResultTable().setModel(model);
+//        getResultTable().setModel(model);
+        super.setTableModel(model);
         getResultTable().repaint();
     }
 
@@ -107,24 +110,24 @@ public class SearchProductCategoryPanel
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void performButtonRemove() {
-        int selectedRow = getResultTable().getSelectedRow();
-        if (selectedRow > -1) {
-            int selectedRowModel = getResultTable().convertRowIndexToModel(selectedRow);
-            ProductCategoryTableModel model = (ProductCategoryTableModel) getResultTable().getModel();
-            ProductCategoryBean beanToDelete = model.getRow(selectedRowModel);
-            if (debug) {
-                LOGGER.debug("The product category to delete: " + beanToDelete);
-            }
-            getService().delete(beanToDelete);
-            model.remove(selectedRowModel);
-            updateUI();
-        }
-    }
+//    /**
+//     * {@inheritDoc}
+//     */
+//    @Override
+//    protected void performButtonRemove() {
+//        int selectedRow = getResultTable().getSelectedRow();
+//        if (selectedRow > -1) {
+//            int selectedRowModel = getResultTable().convertRowIndexToModel(selectedRow);
+//            ProductCategoryTableModel model = (ProductCategoryTableModel) getResultTable().getModel();
+//            ProductCategoryBean beanToDelete = model.getRow(selectedRowModel);
+//            if (debug) {
+//                LOGGER.debug("The product category to delete: " + beanToDelete);
+//            }
+//            getService().delete(beanToDelete);
+//            model.remove(selectedRowModel);
+//            updateUI();
+//        }
+//    }
 
     /**
      * {@inheritDoc}

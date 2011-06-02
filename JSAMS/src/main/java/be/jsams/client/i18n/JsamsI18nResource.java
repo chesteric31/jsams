@@ -20,7 +20,9 @@ public final class JsamsI18nResource {
 
     public static final I18nString BUTTON_OPEN_SOCIETIES_NEW = new I18nString("button.open.society_new");
 
-    public static final I18nString EXIT_CONFIRMATION = new I18nString("exit.confirmation");
+    public static final I18nString CONFIRMATION_EXIT = new I18nString("confirmation.exit");
+    
+    public static final I18nString CONFIRMATION_DELETE = new I18nString("confirmation.delete");
 
     public static final I18nString MENU_FILE = new I18nString("menu.file");
 

@@ -26,7 +26,7 @@ import be.jsams.server.service.sale.DeliveryOrderService;
  */
 public class SearchDeliveryOrderPanel
         extends AbstractSearchPanel<DeliveryOrderBean, DeliveryOrderTableMouseListener,
-        DeliveryOrderService, SearchDeliveryOrderValidator> {
+        DeliveryOrderService, SearchDeliveryOrderValidator, DeliveryOrderTableModel> {
 
     /**
      * Serial Version UID
@@ -44,12 +44,14 @@ public class SearchDeliveryOrderPanel
      * @param listener the {@link DeliveryOrderTableMouseListener}
      * @param service the {@link DeliveryOrderService}
      * @param validator the {@link SearchDeliveryOrderValidator}
-     * @param showButtons a boolean that indicates if we have to display the
-     *            buttons to manage the content: add, remove and modify
+     * @param deliveryOrderTableModel the {@link DeliveryOrderTableModel}
+     * @param showButtons a boolean that indicates if we have to display the buttons to manage the content: add, remove
+     *            and modify
      */
     public SearchDeliveryOrderPanel(DeliveryOrderBean model, DeliveryOrderTableMouseListener listener,
-            DeliveryOrderService service, SearchDeliveryOrderValidator validator, boolean showButtons) {
-        super(model, listener, service, validator, showButtons);
+            DeliveryOrderService service, SearchDeliveryOrderValidator validator,
+            DeliveryOrderTableModel deliveryOrderTableModel, boolean showButtons) {
+        super(model, listener, service, validator, deliveryOrderTableModel, showButtons);
     }
 
     /**
@@ -82,21 +84,21 @@ public class SearchDeliveryOrderPanel
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void performButtonRemove() {
-        int selectedRow = getResultTable().getSelectedRow();
-        if (selectedRow > -1) {
-            int selectedRowModel = getResultTable().convertRowIndexToModel(selectedRow);
-            DeliveryOrderTableModel model = (DeliveryOrderTableModel) getResultTable().getModel();
-            DeliveryOrderBean beanToDelete = model.getRow(selectedRowModel);
-            getService().delete(beanToDelete);
-            model.remove(selectedRowModel);
-            updateUI();
-        }
-    }
+//    /**
+//     * {@inheritDoc}
+//     */
+//    @Override
+//    protected void performButtonRemove() {
+//        int selectedRow = getResultTable().getSelectedRow();
+//        if (selectedRow > -1) {
+//            int selectedRowModel = getResultTable().convertRowIndexToModel(selectedRow);
+//            DeliveryOrderTableModel model = (DeliveryOrderTableModel) getResultTable().getModel();
+//            DeliveryOrderBean beanToDelete = model.getRow(selectedRowModel);
+//            getService().delete(beanToDelete);
+//            model.remove(selectedRowModel);
+//            updateUI();
+//        }
+//    }
 
     /**
      * {@inheritDoc}
@@ -128,7 +130,8 @@ public class SearchDeliveryOrderPanel
      */
     private void fillTable(final List<DeliveryOrderBean> deliveryOrders) {
         DeliveryOrderTableModel model = new DeliveryOrderTableModel(deliveryOrders);
-        getResultTable().setModel(model);
+//        getResultTable().setModel(model);
+        super.setTableModel(model);
         getResultTable().repaint();
     }
 

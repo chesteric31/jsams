@@ -13,6 +13,7 @@ import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.InputMap;
 import javax.swing.JComponent;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
@@ -24,6 +25,7 @@ import javax.swing.table.TableCellRenderer;
 
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.i18n.JsamsI18nResource;
+import be.jsams.client.model.table.AbstractJsamsTableModel;
 import be.jsams.client.renderer.JsamsBooleanTableCellRenderer;
 import be.jsams.client.renderer.JsamsTableCellRenderer;
 import be.jsams.client.swing.component.JsamsButton;
@@ -52,12 +54,15 @@ import com.jgoodies.validation.view.ValidationResultViewFactory;
  * @param <L> an extension of {@link MouseListener}
  * @param <S> an extension of {@link Service}
  * @param <V> an extension of {@link Validator}
+ * @param <TM> an extension of {@link AbstractJsamsTableModel}
  * 
  * @author chesteric31
  * @version $$Rev: 689 $$ $$Date::                  $$ $$Author$$
  */
-public abstract class AbstractSearchPanel<B extends AbstractIdentityBean<?, ?>, L extends MouseListener,
-        S extends Service<B>, V extends Validator<B>> extends JPanel implements JsamsButtonsInterface {
+public abstract class AbstractSearchPanel<B extends AbstractIdentityBean<?, ?>,
+        L extends MouseListener, S extends Service<B>, V extends Validator<B>,
+        TM extends AbstractJsamsTableModel<B>>
+        extends JPanel implements JsamsButtonsInterface {
 
     /**
      * Serial Version UID
@@ -88,6 +93,8 @@ public abstract class AbstractSearchPanel<B extends AbstractIdentityBean<?, ?>, 
 
     private boolean showButtons;
 
+    private TM tableModel;
+
     public static final int THREE = 3;
 
     /**
@@ -97,15 +104,17 @@ public abstract class AbstractSearchPanel<B extends AbstractIdentityBean<?, ?>, 
      * @param listener the {@link MouseListener}
      * @param service the {@link Service}
      * @param validator the {@link Validator}
+     * @param tableModel the {@link AbstractJsamsTableModel}
      * @param showButtons a boolean that indicates to show or not a management
      *            buttons (add, modify and remove)
      */
-    public AbstractSearchPanel(B bean, L listener, S service, V validator, boolean showButtons) {
+    public AbstractSearchPanel(B bean, L listener, S service, V validator, TM tableModel, boolean showButtons) {
         super();
         this.model = bean;
         this.mouseListener = listener;
         this.service = service;
         this.validator = validator;
+        this.tableModel = tableModel;
         this.showButtons = showButtons;
         setLayout(new BorderLayout());
         buttonsPanel = new JsamsButtonsPanel(this, true, true, true);
@@ -201,6 +210,21 @@ public abstract class AbstractSearchPanel<B extends AbstractIdentityBean<?, ?>, 
     }
 
     /**
+     * @return the tableModel
+     */
+    public TM getTableModel() {
+        return tableModel;
+    }
+
+    /**
+     * @param tableModel the tableModel to set
+     */
+    public void setTableModel(TM tableModel) {
+        this.tableModel = tableModel;
+        resultTable.setModel(tableModel);
+    }
+
+    /**
      * 
      * @return true, if we have to display the management buttons panel, false
      *         otherwise
@@ -279,11 +303,6 @@ public abstract class AbstractSearchPanel<B extends AbstractIdentityBean<?, ?>, 
     protected abstract void performButtonModify();
 
     /**
-     * The action to perform when click onto removing button.
-     */
-    protected abstract void performButtonRemove();
-
-    /**
      * Builds the removing button.
      * 
      * @return the removing {@link JsamsButton}
@@ -296,6 +315,23 @@ public abstract class AbstractSearchPanel<B extends AbstractIdentityBean<?, ?>, 
             }
         });
         return buttonRemove;
+    }
+
+    /**
+     * The action to perform when click onto removing button.
+     */
+    protected void performButtonRemove() {
+        int selectedRow = resultTable.getSelectedRow();
+        if (selectedRow > -1) {
+            int selectedRowModel = resultTable.convertRowIndexToModel(selectedRow);
+            B beanToDelete = tableModel.getRow(selectedRowModel);
+            int confirm = JOptionPane.showConfirmDialog(this, JsamsI18nResource.CONFIRMATION_DELETE);
+            if (confirm == 0) {
+                service.delete(beanToDelete);
+                tableModel.remove(selectedRowModel);
+                updateUI();
+            }
+        }
     }
 
     /**

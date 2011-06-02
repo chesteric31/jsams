@@ -21,6 +21,13 @@ public class CreditNoteTableModel extends AbstractJsamsTableModel<CreditNoteBean
     private static final long serialVersionUID = -1353333277828106285L;
 
     /**
+     * Default constructor.
+     */
+    public CreditNoteTableModel() {
+        super();
+    }
+    
+    /**
      * Constructor
      * 
      * @param listBean a list of {@link CreditNoteBean}

@@ -21,6 +21,13 @@ public class CommandTableModel extends AbstractJsamsTableModel<CommandBean> {
     private static final long serialVersionUID = -1772992590405438534L;
 
     /**
+     * Default constructor.
+     */
+    public CommandTableModel() {
+        super();
+    }
+    
+    /**
      * Constructor
      * 
      * @param listBean a list of {@link CommandBean}

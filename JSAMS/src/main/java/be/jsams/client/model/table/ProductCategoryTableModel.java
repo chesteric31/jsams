@@ -20,6 +20,13 @@ public class ProductCategoryTableModel extends AbstractJsamsTableModel<ProductCa
     private static final long serialVersionUID = -7016107019455922155L;
 
     /**
+     * Default constructor.
+     */
+    public ProductCategoryTableModel() {
+        super();
+    }
+    
+    /**
      * Constructor
      * 
      * @param listModel a list of {@link ProductCategoryBean}

@@ -21,6 +21,13 @@ public class DeliveryOrderTableModel extends AbstractJsamsTableModel<DeliveryOrd
     private static final long serialVersionUID = -84296226501937365L;
 
     /**
+     * Default constructor.
+     */
+    public DeliveryOrderTableModel() {
+        super();
+    }
+    
+    /**
      * Constructor
      * 
      * @param listBean a list of {@link DeliveryOrderBean}

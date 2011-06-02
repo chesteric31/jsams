@@ -24,8 +24,9 @@ import be.jsams.server.service.management.CustomerService;
  * @author chesteric31
  * @version $Rev: 710 $ $Date::                  $ $Author$
  */
-public class SearchCustomerPanel extends
-        AbstractSearchPanel<CustomerBean, CustomerTableMouseListener, CustomerService, SearchCustomerValidator> {
+public class SearchCustomerPanel
+        extends AbstractSearchPanel<CustomerBean, CustomerTableMouseListener,
+        CustomerService, SearchCustomerValidator, CustomerTableModel> {
 
     /**
      * Serial Version UID
@@ -43,12 +44,13 @@ public class SearchCustomerPanel extends
      * @param listener the {@link CustomerTableMouseListener}
      * @param service the {@link CustomerService}
      * @param validator the {@link SearchCustomerValidator}
-     * @param showButtons a boolean that indicates if we have to display the
-     *            buttons to manage the content: add, remove and modify
+     * @param customerTableModel the {@link CustomerTableModel}
+     * @param showButtons a boolean that indicates if we have to display the buttons to manage the content: add, remove
+     *            and modify
      */
     public SearchCustomerPanel(CustomerBean model, CustomerTableMouseListener listener, CustomerService service,
-            SearchCustomerValidator validator, final boolean showButtons) {
-        super(model, listener, service, validator, showButtons);
+            SearchCustomerValidator validator, CustomerTableModel customerTableModel, final boolean showButtons) {
+        super(model, listener, service, validator, customerTableModel, showButtons);
     }
 
     /**
@@ -84,25 +86,6 @@ public class SearchCustomerPanel extends
      * {@inheritDoc}
      */
     @Override
-    protected void performButtonRemove() {
-        int selectedRow = getResultTable().getSelectedRow();
-        if (selectedRow > -1) {
-            int selectedRowModel = getResultTable().convertRowIndexToModel(selectedRow);
-            CustomerTableModel model = (CustomerTableModel) getResultTable().getModel();
-            CustomerBean beanToDelete = model.getRow(selectedRowModel);
-            if (debug) {
-                LOGGER.debug("The customer to delete: " + beanToDelete);
-            }
-            getService().delete(beanToDelete);
-            model.remove(selectedRowModel);
-            updateUI();
-        }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public void performOk() {
         final CustomerBean criteria = getModel();
         if (super.prePerformOk(criteria)) {
@@ -119,7 +102,8 @@ public class SearchCustomerPanel extends
      */
     private void fillTable(final List<CustomerBean> customers) {
         CustomerTableModel model = new CustomerTableModel(customers);
-        getResultTable().setModel(model);
+//        getResultTable().setModel(model);
+        super.setTableModel(model);
         getResultTable().setRowSorter(new TableRowSorter<CustomerTableModel>(model));
         getResultTable().repaint();
     }

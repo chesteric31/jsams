@@ -248,7 +248,7 @@ public class BillBeanView extends AbstractDocumentBeanView<BillBean, JPanel, JPa
                         builder.setSociety(JsamsDesktop.getInstance().getCurrentSociety());
                         SearchProductPanel searchPanel = new SearchProductPanel(builder.build(true, true),
                                 customListener, JsamsApplicationContext.getProductService(),
-                                new SearchProductValidator(), false);
+                                new SearchProductValidator(), new ProductTableModel(), false);
 
                         dialog.add(searchPanel);
                         dialog.pack();
