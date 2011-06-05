@@ -57,7 +57,7 @@ import com.jgoodies.validation.view.ValidationResultViewFactory;
  * @param <TM> an extension of {@link AbstractJsamsTableModel}
  * 
  * @author chesteric31
- * @version $$Rev: 689 $$ $$Date::                  $$ $$Author$$
+ * @version $$Rev$$ $$Date::                  $$ $$Author$$
  */
 public abstract class AbstractSearchPanel<B extends AbstractIdentityBean<?, ?>,
         L extends MouseListener, S extends Service<B>, V extends Validator<B>,

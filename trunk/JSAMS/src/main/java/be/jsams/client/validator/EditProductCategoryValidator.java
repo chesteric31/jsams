@@ -13,7 +13,7 @@ import com.jgoodies.validation.util.ValidationUtils;
  * {@link Validator} for edit product category panel.
  * 
  * @author chesteric31
- * @version $Rev: 689 $ $Date::                  $ $Author$
+ * @version $Rev$ $Date::                  $ $Author$
  */
 public class EditProductCategoryValidator implements Validator<ProductCategoryBean> {
 

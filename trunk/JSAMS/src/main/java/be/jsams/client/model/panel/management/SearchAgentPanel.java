@@ -18,7 +18,7 @@ import be.jsams.server.service.management.AgentService;
  * {@link AbstractSearchPanel} for agents objects.
  * 
  * @author chesteric31
- * @version $Rev: 710 $ $Date::                  $ $Author$
+ * @version $Rev$ $Date::                  $ $Author$
  */
 public class SearchAgentPanel extends
         AbstractSearchPanel<

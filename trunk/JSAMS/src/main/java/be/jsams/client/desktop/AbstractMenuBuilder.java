@@ -6,7 +6,7 @@ import be.jsams.client.swing.component.JsamsMenu;
  * Abstract class to build menu.
  *
  * @author chesteric31
- * @version $Rev: 692 $ $Date::                  $ $Author$
+ * @version $Rev$ $Date::                  $ $Author$
  */
 public abstract class AbstractMenuBuilder {
 

@@ -20,7 +20,7 @@ import com.jgoodies.validation.util.ValidationUtils;
  * {@link Validator} for edit estimate panel.
  * 
  * @author chesteric31
- * @version $Rev: 689 $ $Date::                  $ $Author$
+ * @version $Rev$ $Date::                  $ $Author$
  */
 public class EditEstimateValidator implements Validator<EstimateBean> {
 

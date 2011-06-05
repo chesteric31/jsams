@@ -22,7 +22,7 @@ import be.jsams.server.service.management.CustomerService;
  * {@link AbstractSearchPanel} for Customer objects.
  * 
  * @author chesteric31
- * @version $Rev: 710 $ $Date::                  $ $Author$
+ * @version $Rev$ $Date::                  $ $Author$
  */
 public class SearchCustomerPanel
         extends AbstractSearchPanel<CustomerBean, CustomerTableMouseListener,

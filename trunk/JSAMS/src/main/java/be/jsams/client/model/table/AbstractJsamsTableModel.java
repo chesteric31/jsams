@@ -14,7 +14,7 @@ import com.jgoodies.common.collect.ArrayListModel;
  * @param <D> an object extension of {@link AbstractIdentityBean}
  * 
  * @author chesteric31
- * @version $$Rev: 689 $$ $$Date::                  $$ $$Author$$
+ * @version $$Rev$$ $$Date::                  $$ $$Author$$
  */
 public abstract class AbstractJsamsTableModel<D extends AbstractIdentityBean<?, ?>> extends AbstractTableAdapter<D> {
 

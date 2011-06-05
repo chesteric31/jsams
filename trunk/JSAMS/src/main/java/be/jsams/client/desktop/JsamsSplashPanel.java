@@ -14,7 +14,7 @@ import javax.swing.JPanel;
  * Splash Panel to background of Jsams Main frame.
  *
  * @author chesteric31
- * @version $Rev: 689 $ $Date::                  $ $Author$
+ * @version $Rev$ $Date::                  $ $Author$
  */
 public final class JsamsSplashPanel extends JPanel {
 

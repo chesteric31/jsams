@@ -17,7 +17,7 @@ import com.jgoodies.validation.view.ValidationComponentUtils;
  * {@link EstimateBean} object.
  * 
  * @author chesteric31
- * @version $Rev: 712 $ $Date::                  $ $Author$
+ * @version $Rev$ $Date::                  $ $Author$
  */
 public class EditEstimateDialog extends AbstractEditDialog<EstimateBean, EditEstimateValidator, EstimateService> {
 
