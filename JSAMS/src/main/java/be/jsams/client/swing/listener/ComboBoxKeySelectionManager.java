@@ -9,7 +9,7 @@ import org.apache.log4j.Logger;
  * 
  * 
  * @author chesteric31
- * @version $Rev: 689 $ $Date::   $Author$
+ * @version $Rev$ $Date::   $Author$
  */
 public class ComboBoxKeySelectionManager implements KeySelectionManager {
 

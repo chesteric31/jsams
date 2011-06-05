@@ -10,7 +10,7 @@ import com.jgoodies.validation.util.PropertyValidationSupport;
  * {@link Validator} for search estimate panel.
  *
  * @author chesteric31
- * @version $Rev: 689 $ $Date::                  $ $Author$
+ * @version $Rev$ $Date::                  $ $Author$
  */
 public class SearchEstimateValidator implements Validator<EstimateBean> {
 

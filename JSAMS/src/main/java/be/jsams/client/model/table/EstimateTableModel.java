@@ -11,7 +11,7 @@ import be.jsams.common.bean.model.sale.EstimateBean;
  * {@link AbstractJsamsTableModel} for {@link EstimateBean} object.
  * 
  * @author chesteric31
- * @version $Rev: 689 $ $Date::                  $ $Author$
+ * @version $Rev$ $Date::                  $ $Author$
  */
 public class EstimateTableModel extends AbstractJsamsTableModel<EstimateBean> {
 

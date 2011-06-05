@@ -14,7 +14,7 @@ import com.jgoodies.validation.util.ValidationUtils;
  * {@link Validator} for search product panel.
  *
  * @author chesteric31
- * @version $Rev: 689 $ $Date::                  $ $Author$
+ * @version $Rev$ $Date::                  $ $Author$
  */
 public class SearchProductValidator implements Validator<ProductBean> {
 

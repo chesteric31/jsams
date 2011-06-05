@@ -25,7 +25,7 @@ import be.jsams.client.swing.listener.TabbedPaneKeyListener;
  * {@link JsamsMainFrame} that contains all the components.
  * 
  * @author chesteric31
- * @version $Rev: 691 $ $Date::                  $ $Author$
+ * @version $Rev$ $Date::                  $ $Author$
  */
 public class JsamsMainFrame extends JsamsFrame {
 

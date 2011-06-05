@@ -15,7 +15,7 @@ import be.jsams.common.bean.model.management.CustomerBean;
  * {@link AbstractJsamsTableModel} for {@link CustomerBean} object.
  * 
  * @author chesteric31
- * @version $Rev: 689 $ $Date::                  $ $Author$
+ * @version $Rev$ $Date::                  $ $Author$
  */
 public class CustomerTableModel extends AbstractJsamsTableModel<CustomerBean> {
 

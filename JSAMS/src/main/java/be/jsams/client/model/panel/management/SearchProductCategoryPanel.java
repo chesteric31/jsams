@@ -22,7 +22,7 @@ import be.jsams.server.service.management.ProductCategoryService;
  * {@link AbstractSearchPanel} for Product category panel.
  * 
  * @author chesteric31
- * @version $$Rev: 710 $$ $$Date::                  $$ $$Author$$
+ * @version $$Rev$$ $$Date::                  $$ $$Author$$
  */
 public class SearchProductCategoryPanel
         extends AbstractSearchPanel<ProductCategoryBean, ProductCategoryTableMouseListener, 

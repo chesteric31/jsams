@@ -14,7 +14,7 @@ import com.jgoodies.validation.util.ValidationUtils;
  * {@link Validator} for edit society panel.
  * 
  * @author chesteric31
- * @version $$Rev: 694 $$ $$Date::                  $$ $$Author$$
+ * @version $$Rev$$ $$Date::                  $$ $$Author$$
  */
 public class EditSocietyValidator implements Validator<SocietyBean> {
 

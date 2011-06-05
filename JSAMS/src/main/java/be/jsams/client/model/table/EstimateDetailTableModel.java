@@ -11,7 +11,7 @@ import be.jsams.common.bean.model.sale.detail.EstimateDetailBean;
  * Customized table model for {@link EstimateDetailBean}.
  * 
  * @author chesteric31
- * @version $$Rev: 689 $$ $$Date::                  $$ $$Author$$
+ * @version $$Rev$$ $$Date::                  $$ $$Author$$
  */
 public class EstimateDetailTableModel extends AbstractJsamsTableModel<EstimateDetailBean> {
 

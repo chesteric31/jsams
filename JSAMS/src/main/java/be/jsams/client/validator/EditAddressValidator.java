@@ -13,7 +13,7 @@ import com.jgoodies.validation.util.ValidationUtils;
  * {@link Validator} for Address object.
  * 
  * @author chesteric31
- * @version $Rev: 689 $ $Date::                  $ $Author$
+ * @version $Rev$ $Date::                  $ $Author$
  */
 public class EditAddressValidator implements Validator<AddressBean> {
 

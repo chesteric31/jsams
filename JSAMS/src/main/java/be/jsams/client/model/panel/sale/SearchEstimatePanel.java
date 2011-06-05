@@ -23,7 +23,7 @@ import be.jsams.server.service.sale.EstimateService;
  * {@link AbstractSearchPanel} for {@link EstimateBean} objects.
  * 
  * @author chesteric31
- * @version $Rev: 711 $ $Date::                  $ $Author$
+ * @version $Rev$ $Date::                  $ $Author$
  */
 public class SearchEstimatePanel extends
         AbstractSearchPanel<EstimateBean, EstimateTableMouseListener,

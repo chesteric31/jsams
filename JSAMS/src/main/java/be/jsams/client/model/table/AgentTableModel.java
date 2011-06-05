@@ -12,7 +12,7 @@ import be.jsams.common.bean.model.management.AgentBean;
  * Customized table model for {@link AgentBean}.
  * 
  * @author chesteric31
- * @version $Rev: 689 $ $Date::                  $ $Author$
+ * @version $Rev$ $Date::                  $ $Author$
  */
 public class AgentTableModel extends AbstractJsamsTableModel<AgentBean> {
 

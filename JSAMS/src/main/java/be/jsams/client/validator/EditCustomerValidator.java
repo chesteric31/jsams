@@ -15,7 +15,7 @@ import com.jgoodies.validation.util.ValidationUtils;
  * {@link Validator} for edit customer panel.
  * 
  * @author chesteric31
- * @version $Rev: 689 $ $Date::                  $ $Author$
+ * @version $Rev$ $Date::                  $ $Author$
  */
 public class EditCustomerValidator implements Validator<CustomerBean> {
 

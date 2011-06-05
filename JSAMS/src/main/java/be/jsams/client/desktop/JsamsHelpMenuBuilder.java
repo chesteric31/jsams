@@ -10,7 +10,7 @@ import be.jsams.client.swing.component.JsamsMenuItem;
  * Specific menu builder for help menu.
  *
  * @author chesteric31
- * @version $Rev: 692 $ $Date::                  $ $Author$
+ * @version $Rev$ $Date::                  $ $Author$
  */
 public class JsamsHelpMenuBuilder extends AbstractMenuBuilder {
 

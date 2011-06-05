@@ -26,7 +26,7 @@ import be.jsams.common.bean.model.SocietyBean;
  * current Society.
  * 
  * @author chesteric31
- * @version $Rev: 672 $ $Date::                  $ $Author$
+ * @version $Rev$ $Date::                  $ $Author$
  */
 public class JsamsDesktop {
 
