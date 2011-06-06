@@ -53,7 +53,7 @@ public class SocietyBeanView extends AbstractBeanView<SocietyBean, JPanel, JPane
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, JsamsFrame.RESOURCE_BUNDLE);
         builder.setDefaultDialogBorder();
         final int maxColumnSpan = 3;
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_NAME.getKey(), textFieldName, 1);
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_NAME.getKey(), textFieldName);
         builder.nextLine();
         builder.append(bean.getAddress().getView().createEditView(), maxColumnSpan);
         builder.nextLine();
@@ -63,13 +63,13 @@ public class SocietyBeanView extends AbstractBeanView<SocietyBean, JPanel, JPane
         builder.appendI15d(JsamsI18nLabelResource.LABEL_LEGAL_FORM.getKey(), bean.getLegalForm().getView()
                 .createEditView(), 1);
         builder.nextLine();
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_CAPITAL.getKey(), textFieldCapital, 1);
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_CAPITAL.getKey(), textFieldCapital);
         builder.nextLine();
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_ACTIVITY.getKey(), textFieldActivity, 1);
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_ACTIVITY.getKey(), textFieldActivity);
         builder.nextLine();
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_RESPONSIBLE.getKey(), textFieldResponsible, 1);
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_RESPONSIBLE.getKey(), textFieldResponsible);
         builder.nextLine();
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_VAT_NUMBER.getKey(), textFieldVatNumber, 1);
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_VAT_NUMBER.getKey(), textFieldVatNumber);
         builder.nextLine();
         return builder.getPanel();
     }

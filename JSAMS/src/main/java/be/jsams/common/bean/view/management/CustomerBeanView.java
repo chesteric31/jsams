@@ -102,14 +102,14 @@ public class CustomerBeanView extends AbstractBeanView<CustomerBean, JPanel, JPa
         ViewFactory<ContactInformationBean> viewContactFactory = contactInformation.getView().getViewFactory();
         JTextField textFieldPhone = viewContactFactory.createBindingTextComponent(contactInformation,
                 ContactInformationBean.PHONE_PROPERTY, false, false);
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_ZIP_CODE.getKey(), textFieldZipCode, 1);
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_PHONE.getKey(), textFieldPhone, 1);
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_ZIP_CODE.getKey(), textFieldZipCode);
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_PHONE.getKey(), textFieldPhone);
 
         return builder.getPanel();
     }
 
     /**
-     * Builds the general tab panel.
+     * Build the general tab panel.
      * 
      * @return the general tab panel
      */
