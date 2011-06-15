@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import be.jsams.common.bean.builder.SocietyBeanBuilder;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.ProductCategoryBean;
 import be.jsams.server.dao.AbstractJUnitTestClass;
@@ -33,6 +34,9 @@ public class ProductCategoryDaoImplTest extends AbstractJUnitTestClass {
     @Autowired
     private SocietyDao societyDao;
     private Society society = MockModelGenerator.generateMockSociety();
+    
+    @Autowired
+    private SocietyBeanBuilder societyBeanBuilder;
 
     /**
      * @throws java.lang.Exception
@@ -53,14 +57,8 @@ public class ProductCategoryDaoImplTest extends AbstractJUnitTestClass {
     public void testFindAll() {
         final Society persistedSociety = societyDao.add(society);
         productCategory.setSociety(persistedSociety);
-        SocietyBean societyBean = new SocietyBean(persistedSociety) {
-
-            /**
-             * Serial Version UID
-             */
-            private static final long serialVersionUID = -4781433278494586047L;
-
-        };
+        societyBeanBuilder.setModel(persistedSociety);
+        SocietyBean societyBean = societyBeanBuilder.build(false);
         ((ProductCategoryDaoImpl) dao).setCurrentSociety(societyBean);
         ProductCategory category = dao.add(productCategory);
         List<ProductCategory> founds = dao.findAll();
@@ -75,13 +73,8 @@ public class ProductCategoryDaoImplTest extends AbstractJUnitTestClass {
     @Test
     public void testFindByCriteria() {
         final Society persistedSociety = societyDao.add(society);
-        SocietyBean societyBean = new SocietyBean(persistedSociety) {
-            /**
-             * Serial Version UID
-             */
-            private static final long serialVersionUID = -4781433278494586047L;
-
-        };
+        societyBeanBuilder.setModel(persistedSociety);
+        SocietyBean societyBean = societyBeanBuilder.build(false);
         ProductCategory category = dao.add(productCategory);
         ProductCategoryBean criteria = new ProductCategoryBean(category, societyBean);
         List<ProductCategory> founds = dao.findByCriteria(criteria);
