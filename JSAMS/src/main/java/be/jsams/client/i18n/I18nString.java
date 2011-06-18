@@ -85,7 +85,7 @@ public class I18nString {
             emptyString = new I18nString("");
         }
 
-        return (emptyString);
+        return emptyString;
     }
 
     /**
@@ -94,4 +94,5 @@ public class I18nString {
     public String toString() {
         return getTranslation();
     }
+
 }
