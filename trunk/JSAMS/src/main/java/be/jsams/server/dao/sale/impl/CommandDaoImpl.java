@@ -82,8 +82,7 @@ public class CommandDaoImpl extends DaoImpl<Command> implements CommandDao {
         queryBuilder.append(" AND c.transferred = " + transferred);
 
         Query query = getEntityManager().createQuery(queryBuilder.toString());
-        List<Command> result = query.getResultList();
-        return result;
+        return query.getResultList();
     }
 
     /**
@@ -97,8 +96,7 @@ public class CommandDaoImpl extends DaoImpl<Command> implements CommandDao {
         queryBuilder.append("c.society.id = " + getCurrentSociety().getId());
 
         Query query = getEntityManager().createQuery(queryBuilder.toString());
-        List<Command> result = query.getResultList();
-        return result;
+        return query.getResultList();
     }
 
     /**

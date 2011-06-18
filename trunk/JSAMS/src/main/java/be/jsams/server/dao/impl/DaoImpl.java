@@ -79,8 +79,7 @@ public class DaoImpl<T> implements Dao<T> {
      * {@inheritDoc}
      */
     public T findById(final Long id) {
-        T t = entityManager.find(type, id);
-        return t;
+        return entityManager.find(type, id);
     }
 
     /**

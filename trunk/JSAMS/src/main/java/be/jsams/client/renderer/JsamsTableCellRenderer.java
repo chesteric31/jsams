@@ -12,7 +12,8 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 
 /**
- * Custom Table cell renderer for JSAMS with row shading and row horizontal alignment following data type.
+ * Custom Table cell renderer for JSAMS with row shading and row horizontal
+ * alignment following data type.
  * 
  * @author chesteric31
  * @version $$Rev$$ $$Date::                  $$ $$Author$$
@@ -28,6 +29,7 @@ public class JsamsTableCellRenderer extends DefaultTableCellRenderer {
      * Constructor.
      */
     public JsamsTableCellRenderer() {
+        super();
         setOpaque(true);
     }
 
@@ -36,7 +38,6 @@ public class JsamsTableCellRenderer extends DefaultTableCellRenderer {
      */
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
             int row, int column) {
-
         Component renderer = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
 
         if (row % 2 == 0 && !isSelected) {

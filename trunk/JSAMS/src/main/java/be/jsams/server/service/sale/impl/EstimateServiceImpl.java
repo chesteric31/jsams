@@ -85,8 +85,7 @@ public class EstimateServiceImpl extends AbstractService implements EstimateServ
         Estimate estimate = estimateDao.findById(id);
         CustomerBean customer = getCustomerBeanBuilder().build(estimate.getCustomer(), currentSociety);
         AgentBean agent = agentBeanBuilder.build(estimate.getAgent(), currentSociety);
-        EstimateBean bean = new EstimateBean(estimate, currentSociety, customer, agent);
-        return bean;
+        return new EstimateBean(estimate, currentSociety, customer, agent);
     }
 
     /**

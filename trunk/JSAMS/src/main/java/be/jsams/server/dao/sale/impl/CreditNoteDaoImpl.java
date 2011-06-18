@@ -79,8 +79,7 @@ public class CreditNoteDaoImpl extends DaoImpl<CreditNote> implements CreditNote
         }
 
         Query query = getEntityManager().createQuery(queryBuilder.toString());
-        List<CreditNote> result = query.getResultList();
-        return result;
+        return query.getResultList();
     }
 
     /**
@@ -94,8 +93,7 @@ public class CreditNoteDaoImpl extends DaoImpl<CreditNote> implements CreditNote
         queryBuilder.append("c.society.id = " + getCurrentSociety().getId());
 
         Query query = getEntityManager().createQuery(queryBuilder.toString());
-        List<CreditNote> result = query.getResultList();
-        return result;
+        return query.getResultList();
     }
 
     /**

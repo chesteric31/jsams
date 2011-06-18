@@ -23,6 +23,7 @@ public abstract class AbstractTranslatableIdentity extends AbstractIdentity {
      * Constructor.
      */
     public AbstractTranslatableIdentity() {
+        super();
     }
 
     /**

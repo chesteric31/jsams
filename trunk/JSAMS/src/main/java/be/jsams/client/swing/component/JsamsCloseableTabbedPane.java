@@ -49,11 +49,11 @@ public class JsamsCloseableTabbedPane extends JTabbedPane {
 
         JsamsLabel tabTitle = null;
         ImageIcon tabIcon = null;
-        if (iconFileName != null) {
+        if (iconFileName == null) {
+            tabTitle = new JsamsLabel(title);
+        } else {
             tabIcon = new ImageIcon(IconUtil.buildIcon(IconUtil.MENU_ICON_PREFIX + iconFileName));
             tabTitle = new JsamsLabel(title, tabIcon);
-        } else {
-            tabTitle = new JsamsLabel(title);
         }
 
         JsamsButton tabCloseButton = new JsamsButton(IconUtil.MENU_ICON_PREFIX + "emblems/emblem-unreadable.png");

@@ -82,8 +82,7 @@ public class DeliveryOrderDaoImpl extends DaoImpl<DeliveryOrder> implements Deli
         queryBuilder.append(" AND d.transferred = " + transferred);
 
         Query query = getEntityManager().createQuery(queryBuilder.toString());
-        List<DeliveryOrder> result = query.getResultList();
-        return result;
+        return query.getResultList();
     }
 
     /**
@@ -97,8 +96,7 @@ public class DeliveryOrderDaoImpl extends DaoImpl<DeliveryOrder> implements Deli
         queryBuilder.append("d.society.id = " + getCurrentSociety().getId());
 
         Query query = getEntityManager().createQuery(queryBuilder.toString());
-        List<DeliveryOrder> result = query.getResultList();
-        return result;
+        return query.getResultList();
     }
 
     /**

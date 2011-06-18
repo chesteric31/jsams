@@ -68,8 +68,7 @@ public class DeliveryOrderServiceImpl extends AbstractService implements Deliver
         SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
         DeliveryOrder deliveryOrder = deliveryOrderDao.findById(id);
         CustomerBean customer = getCustomerBeanBuilder().build(deliveryOrder.getCustomer(), currentSociety);
-        DeliveryOrderBean bean = new DeliveryOrderBean(deliveryOrder, currentSociety, customer);
-        return bean;
+        return new DeliveryOrderBean(deliveryOrder, currentSociety, customer);
     }
 
     /**

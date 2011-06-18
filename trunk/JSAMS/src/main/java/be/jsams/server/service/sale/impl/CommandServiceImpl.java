@@ -75,8 +75,7 @@ public class CommandServiceImpl extends AbstractService implements CommandServic
         Command command = commandDao.findById(id);
         CustomerBean customer = getCustomerBeanBuilder().build(command.getCustomer(), currentSociety);
         AgentBean agent = agentBeanBuilder.build(command.getAgent(), currentSociety);
-        CommandBean bean = new CommandBean(command, currentSociety, customer, agent);
-        return bean;
+        return new CommandBean(command, currentSociety, customer, agent);
     }
 
     /**

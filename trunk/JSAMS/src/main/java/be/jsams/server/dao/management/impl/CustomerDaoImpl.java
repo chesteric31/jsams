@@ -72,8 +72,7 @@ public class CustomerDaoImpl extends DaoImpl<Customer> implements CustomerDao {
         }
 
         Query query = getEntityManager().createQuery(queryBuilder.toString());
-        List<Customer> result = query.getResultList();
-        return result;
+        return query.getResultList();
     }
 
     /**
@@ -87,8 +86,7 @@ public class CustomerDaoImpl extends DaoImpl<Customer> implements CustomerDao {
         queryBuilder.append("c.society.id = " + getCurrentSociety().getId());
 
         Query query = getEntityManager().createQuery(queryBuilder.toString());
-        List<Customer> result = query.getResultList();
-        return result;
+        return query.getResultList();
     }
 
     /**

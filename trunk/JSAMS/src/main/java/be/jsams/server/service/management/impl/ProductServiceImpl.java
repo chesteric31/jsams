@@ -47,8 +47,7 @@ public class ProductServiceImpl implements ProductService {
         dao.add(product);
         builder.setModel(product);
         builder.setSociety(bean.getCategory().getSociety());
-        ProductBean productBean = builder.build(false, false);
-        return productBean;
+        return builder.build(false, false);
     }
 
     /**
@@ -106,8 +105,7 @@ public class ProductServiceImpl implements ProductService {
     public ProductBean findById(final Long id) {
         Product product = dao.findById(id);
         builder.setModel(product);
-        ProductBean productBean = builder.build(false, false);
-        return productBean;
+        return builder.build(false, false);
     }
 
     /**
