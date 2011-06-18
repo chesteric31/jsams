@@ -80,8 +80,7 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
      */
     public ProductCategoryBean findById(final Long id) {
         ProductCategory category = productCategoryDao.findById(id);
-        ProductCategoryBean bean = new ProductCategoryBean(category, JsamsDesktop.getInstance().getCurrentSociety());
-        return bean;
+        return new ProductCategoryBean(category, JsamsDesktop.getInstance().getCurrentSociety());
     }
 
     /**

@@ -51,7 +51,6 @@ public class CustomerBeanBuilder {
             bean.setPaymentMode(paymentModeBeanBuilder.build());
             agentBeanBuilder.setModel(null);
             bean.setAgent(agentBeanBuilder.build(null, society));
-            return bean;
         } else {
             if (listModel == null) {
                 listModel = new ArrayListModel<CustomerBean>();

@@ -20,21 +20,20 @@ public final class IconUtil {
      */
     private IconUtil() {
     }
-    
+
     /**
      * Builds an {@link Image} icon from a path file name.
      * 
-     * @param fileName
-     *            the path file name
+     * @param fileName the path file name
      * @return the built image icon
      */
     public static Image buildIcon(final String fileName) {
+        Image image = null;
         if (fileName != null) {
-            return Toolkit.getDefaultToolkit().getImage(
+            image = Toolkit.getDefaultToolkit().getImage(
                     Thread.currentThread().getContextClassLoader().getResource(fileName));
-        } else {
-            return null;
         }
+        return image;
     }
 
 }

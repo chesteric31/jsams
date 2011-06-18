@@ -34,11 +34,11 @@ public class CivilityBeanBuilder {
         for (Civility civility : civilities) {
             listModel.add(new CivilityBean(civility));
         }
-        if (model != null) {
-            return new CivilityBean(listModel, model);
-        } else {
+        if (model == null) {
             listModel.add(0, null);
             return new CivilityBean(listModel);
+        } else {
+            return new CivilityBean(listModel, model);
         }
     }
 

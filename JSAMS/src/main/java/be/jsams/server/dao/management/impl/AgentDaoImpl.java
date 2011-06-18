@@ -70,8 +70,7 @@ public class AgentDaoImpl extends DaoImpl<Agent> implements AgentDao {
         }
 
         Query query = getEntityManager().createQuery(queryBuilder.toString());
-        List<Agent> result = query.getResultList();
-        return result;
+        return query.getResultList();
     }
 
     /**
@@ -85,8 +84,7 @@ public class AgentDaoImpl extends DaoImpl<Agent> implements AgentDao {
         queryBuilder.append("a.society.id = " + getCurrentSociety().getId());
 
         Query query = getEntityManager().createQuery(queryBuilder.toString());
-        List<Agent> result = query.getResultList();
-        return result;
+        return query.getResultList();
     }
     
     /**

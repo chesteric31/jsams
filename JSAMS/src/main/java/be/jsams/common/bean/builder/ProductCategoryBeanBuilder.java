@@ -56,10 +56,10 @@ public class ProductCategoryBeanBuilder {
         if (canBeNull) {
             listModel.add(0, null);
         }
-        if (model != null) {
-            return new ProductCategoryBean(listModel, model, society);
-        } else {
+        if (model == null) {
             return new ProductCategoryBean(listModel, society);
+        } else {
+            return new ProductCategoryBean(listModel, model, society);
         }
     }
 

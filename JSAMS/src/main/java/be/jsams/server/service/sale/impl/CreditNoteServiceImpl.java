@@ -68,8 +68,7 @@ public class CreditNoteServiceImpl extends AbstractService implements CreditNote
         SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
         CreditNote creditNote = creditNoteDao.findById(id);
         CustomerBean customer = getCustomerBeanBuilder().build(creditNote.getCustomer(), currentSociety);
-        CreditNoteBean bean = new CreditNoteBean(creditNote, currentSociety, customer);
-        return bean;
+        return new CreditNoteBean(creditNote, currentSociety, customer);
     }
 
     /**

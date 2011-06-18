@@ -53,8 +53,7 @@ public class SocietyServiceImpl extends AbstractService implements SocietyServic
     public SocietyBean findById(final Long id) {
         Society society = societyDao.findById(id);
         getSocietyBeanBuilder().setModel(society);
-        SocietyBean bean = getSocietyBeanBuilder().build(false);
-        return bean;
+        return getSocietyBeanBuilder().build(false);
     }
 
     /**

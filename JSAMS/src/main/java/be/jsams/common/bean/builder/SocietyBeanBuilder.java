@@ -39,7 +39,6 @@ public class SocietyBeanBuilder {
             bean = new SocietyBean();
             legalFormBuilder.setModel(null);
             bean.setLegalForm(legalFormBuilder.build());
-            return bean;
         } else {
             List<Society> societies = dao.findAll();
             if (listModel == null) {
@@ -56,11 +55,11 @@ public class SocietyBeanBuilder {
                     listModel.add(bean);
                 }
             }
-            if (model != null) {
-                bean = new SocietyBean(listModel, model);
-            } else {
+            if (model == null) {
                 listModel.add(0, null);
                 bean = new SocietyBean(listModel);
+            } else {
+                bean = new SocietyBean(listModel, model);
             }
             bean.setLegalForm(legalFormBuilder.build());
         }

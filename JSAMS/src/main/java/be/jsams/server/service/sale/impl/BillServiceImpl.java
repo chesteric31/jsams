@@ -73,8 +73,7 @@ public class BillServiceImpl extends AbstractService implements BillService {
         CustomerBean customer = getCustomerBeanBuilder().build(bill.getCustomer(), currentSociety);
         paymentModeBeanBuilder.setModel(bill.getPaymentMode());
         PaymentModeBean mode = paymentModeBeanBuilder.build();
-        BillBean bean = new BillBean(bill, currentSociety, customer, mode);
-        return bean;
+        return new BillBean(bill, currentSociety, customer, mode);
     }
 
     /**

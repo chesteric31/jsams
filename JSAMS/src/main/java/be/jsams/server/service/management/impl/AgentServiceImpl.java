@@ -66,8 +66,7 @@ public class AgentServiceImpl extends AbstractService implements AgentService {
      */
     public AgentBean findById(Long id) {
         Agent agent = agentDao.findById(id);
-        AgentBean bean = getAgentBeanBuilder().build(agent, JsamsDesktop.getInstance().getCurrentSociety());
-        return bean;
+        return getAgentBeanBuilder().build(agent, JsamsDesktop.getInstance().getCurrentSociety());
     }
 
     /**

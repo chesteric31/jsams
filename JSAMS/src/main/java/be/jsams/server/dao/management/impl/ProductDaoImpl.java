@@ -43,8 +43,7 @@ public class ProductDaoImpl extends DaoImpl<Product> implements ProductDao {
         queryBuilder.append("p.category.society.id = " + getCurrentSociety().getId());
 
         Query query = getEntityManager().createQuery(queryBuilder.toString());
-        List<Product> result = query.getResultList();
-        return result;
+        return query.getResultList();
     }
 
     /**
@@ -124,8 +123,7 @@ public class ProductDaoImpl extends DaoImpl<Product> implements ProductDao {
         }
 
         Query query = getEntityManager().createQuery(queryBuilder.toString());
-        List<Product> result = query.getResultList();
-        return result;
+        return query.getResultList();
     }
 
     /**

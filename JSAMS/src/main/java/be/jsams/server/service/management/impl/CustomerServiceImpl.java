@@ -68,8 +68,7 @@ public class CustomerServiceImpl extends AbstractService implements CustomerServ
         SocietyBeanBuilder builder = getSocietyBeanBuilder();
         builder.setModel(customer.getSociety());
         SocietyBean societyBean = builder.build(false);
-        CustomerBean bean = getCustomerBeanBuilder().build(customer, societyBean);
-        return bean;
+        return getCustomerBeanBuilder().build(customer, societyBean);
     }
 
     /**

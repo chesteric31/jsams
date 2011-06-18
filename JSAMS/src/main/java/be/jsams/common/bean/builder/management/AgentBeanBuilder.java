@@ -37,7 +37,6 @@ public class AgentBeanBuilder {
             bean = new AgentBean(society);
             civilityBeanBuilder.setModel(null);
             bean.setCivility(civilityBeanBuilder.build());
-            return bean;
         } else {
             if (listModel == null) {
                 listModel = new ArrayListModel<AgentBean>();

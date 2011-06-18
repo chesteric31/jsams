@@ -80,8 +80,7 @@ public class EstimateDaoImpl extends DaoImpl<Estimate> implements EstimateDao {
         queryBuilder.append(" AND e.transferred = " + transferred);
 
         Query query = getEntityManager().createQuery(queryBuilder.toString());
-        List<Estimate> result = query.getResultList();
-        return result;
+        return query.getResultList();
     }
 
     /**
@@ -95,8 +94,7 @@ public class EstimateDaoImpl extends DaoImpl<Estimate> implements EstimateDao {
         queryBuilder.append("e.society.id = " + getCurrentSociety().getId());
 
         Query query = getEntityManager().createQuery(queryBuilder.toString());
-        List<Estimate> result = query.getResultList();
-        return result;
+        return query.getResultList();
     }
 
     /**

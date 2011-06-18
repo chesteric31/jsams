@@ -89,8 +89,7 @@ public class BillDaoImpl extends DaoImpl<Bill> implements BillDao {
         queryBuilder.append(" AND b.paid = " + paid);
 
         Query query = getEntityManager().createQuery(queryBuilder.toString());
-        List<Bill> result = query.getResultList();
-        return result;
+        return query.getResultList();
     }
 
     /**
@@ -104,8 +103,7 @@ public class BillDaoImpl extends DaoImpl<Bill> implements BillDao {
         queryBuilder.append("b.society.id = " + getCurrentSociety().getId());
 
         Query query = getEntityManager().createQuery(queryBuilder.toString());
-        List<Bill> result = query.getResultList();
-        return result;
+        return query.getResultList();
     }
 
     /**
