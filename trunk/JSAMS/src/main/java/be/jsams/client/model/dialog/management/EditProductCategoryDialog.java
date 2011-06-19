@@ -13,7 +13,8 @@ import be.jsams.server.service.management.ProductCategoryService;
 import com.jgoodies.validation.view.ValidationComponentUtils;
 
 /**
- * Edit Product category {@link AbstractEditDialog}, to create or update a Product category object.
+ * Edit Product category {@link AbstractEditDialog}, to create or update a
+ * Product category object.
  * 
  * @author chesteric31
  * @version $$Rev$$ $$Date::                  $$ $$Author$$
@@ -29,16 +30,12 @@ public class EditProductCategoryDialog extends
     /**
      * Constructor
      * 
-     * @param title
-     *            the {@link I18nString} title
-     * @param model
-     *            the {@link ProductCategoryBean} model
+     * @param title the {@link I18nString} title
+     * @param model the {@link ProductCategoryBean} model
      */
     public EditProductCategoryDialog(final I18nString title, ProductCategoryBean model) {
-        super(null, title);
-        super.setModel(model);
-        super.setValidator(new EditProductCategoryValidator());
-        super.setService(JsamsApplicationContext.getProductCategoryService());
+        super(null, title, model, new EditProductCategoryValidator(), JsamsApplicationContext
+                .getProductCategoryService());
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);

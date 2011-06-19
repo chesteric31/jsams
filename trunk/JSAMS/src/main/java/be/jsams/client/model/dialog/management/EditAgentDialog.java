@@ -37,10 +37,7 @@ public class EditAgentDialog extends AbstractEditDialog<AgentBean, EditAgentVali
      * @param model the {@link AgentBean} model
      */
     public EditAgentDialog(final I18nString title, AgentBean model) {
-        super(null, title);
-        super.setModel(model);
-        super.setValidator(new EditAgentValidator());
-        super.setService(JsamsApplicationContext.getAgentService());
+        super(null, title, model, new EditAgentValidator(), JsamsApplicationContext.getAgentService());
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);

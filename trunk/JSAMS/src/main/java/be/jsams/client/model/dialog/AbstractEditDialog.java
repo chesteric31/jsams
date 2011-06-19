@@ -65,7 +65,7 @@ public abstract class AbstractEditDialog<B extends AbstractIdentityBean<?, ?>, V
      * 
      * @param parent the {@link JsamsMainFrame} parent
      * @param title the {@link I18nString} translatable String
-     * @param iconFileName the icon path file mane
+     * @param iconFileName the icon path file name
      */
     public AbstractEditDialog(final JsamsMainFrame parent, final I18nString title, final String iconFileName) {
         super(parent, title, IconUtil.TITLE_ICON_PREFIX + iconFileName);
@@ -81,10 +81,23 @@ public abstract class AbstractEditDialog<B extends AbstractIdentityBean<?, ?>, V
      * @param title the {@link I18nString} translatable String
      */
     public AbstractEditDialog(final JsamsMainFrame parent, final I18nString title) {
-        super(parent, title, IconUtil.TITLE_ICON_PREFIX + "actions/document-new.png");
-        buttonsPanel = new JsamsButtonsPanel(this, true, true, true);
-        setDefaultKeyActions();
-        add(buildSouthPanel(), BorderLayout.SOUTH);
+        this(parent, title, "actions/document-new.png");
+    }
+
+    /**
+     * Constructor
+     * 
+     * @param parent the {@link JsamsMainFrame} parent
+     * @param title the {@link I18nString} translatable String
+     * @param model the {@link AbstractIdentityBean}
+     * @param validator the {@link Validator}
+     * @param service the {@link Service}
+     */
+    public AbstractEditDialog(final JsamsMainFrame parent, I18nString title, B model, V validator, S service) {
+        this(parent, title);
+        this.model = model;
+        this.validator = validator;
+        this.service = service;
     }
 
     /**
@@ -194,7 +207,8 @@ public abstract class AbstractEditDialog<B extends AbstractIdentityBean<?, ?>, V
      * Method called by the children class for validation and persistence.
      * 
      * @param object the object to validate and to persist
-     * @return the result B object (updated or created), null if an error occurred
+     * @return the result B object (updated or created), null if an error
+     *         occurred
      */
     protected B postPerformOk(B object) {
         ValidationResult result = validator.validate(object);
@@ -206,9 +220,10 @@ public abstract class AbstractEditDialog<B extends AbstractIdentityBean<?, ?>, V
             List<ValidationMessage> messages = validationResultModel.getResult().getMessages();
             for (ValidationMessage message : messages) {
                 JsamsLabel label = new JsamsLabel(message.formattedText().replace(".", ""));
-                if (message.severity() == Severity.ERROR) {
+                Severity severity = message.severity();
+                if (severity == Severity.ERROR) {
                     label.setIcon(ValidationResultViewFactory.getErrorIcon());
-                } else if (message.severity() == Severity.WARNING) {
+                } else if (severity == Severity.WARNING) {
                     label.setIcon(ValidationResultViewFactory.getWarningIcon());
                 }
                 statusBar.addComponent(label);
@@ -228,7 +243,7 @@ public abstract class AbstractEditDialog<B extends AbstractIdentityBean<?, ?>, V
     }
 
     /**
-     * Sets the default keys actions.
+     * Set the default keys actions.
      */
     private void setDefaultKeyActions() {
         // Automatically choose OK when Enter Key is pressed

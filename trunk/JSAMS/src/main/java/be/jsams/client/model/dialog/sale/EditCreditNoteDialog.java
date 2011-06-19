@@ -34,10 +34,7 @@ public class EditCreditNoteDialog extends
      * @param model the {@link CreditNoteBean} model
      */
     public EditCreditNoteDialog(final I18nString title, CreditNoteBean model) {
-        super(null, title);
-        super.setModel(model);
-        super.setValidator(new EditCreditNoteValidator());
-        super.setService(JsamsApplicationContext.getCreditNoteService());
+        super(null, title, model, new EditCreditNoteValidator(), JsamsApplicationContext.getCreditNoteService());
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);

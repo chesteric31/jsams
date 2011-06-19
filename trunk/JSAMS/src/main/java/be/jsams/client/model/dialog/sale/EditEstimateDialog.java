@@ -33,10 +33,7 @@ public class EditEstimateDialog extends AbstractEditDialog<EstimateBean, EditEst
      * @param model the {@link EstimateBean} model
      */
     public EditEstimateDialog(final I18nString title, EstimateBean model) {
-        super(null, title);
-        super.setModel(model);
-        super.setValidator(new EditEstimateValidator());
-        super.setService(JsamsApplicationContext.getEstimateService());
+        super(null, title, model, new EditEstimateValidator(), JsamsApplicationContext.getEstimateService());
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);

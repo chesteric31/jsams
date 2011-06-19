@@ -35,10 +35,7 @@ public class EditProductDialog extends AbstractEditDialog<ProductBean, EditProdu
      * @param model the {@link ProductBean} model
      */
     public EditProductDialog(final I18nString title, ProductBean model) {
-        super(null, title, "apps/preferences-desktop-theme.png");
-        super.setModel(model);
-        super.setValidator(new EditProductValidator());
-        super.setService(JsamsApplicationContext.getProductService());
+        super(null, title, model, new EditProductValidator(), JsamsApplicationContext.getProductService());
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
@@ -64,7 +61,9 @@ public class EditProductDialog extends AbstractEditDialog<ProductBean, EditProdu
         // FIXME: workaround
         SocietyBean society = product.getCategory().getSociety();
         ProductCategoryBean selection = (ProductCategoryBean) product.getCategory().getSelection();
-        selection.setSociety(society);
+        if (selection != null) {
+            selection.setSociety(society);
+        }
         product.setCategory(selection);
         super.postPerformOk(product);
     }
