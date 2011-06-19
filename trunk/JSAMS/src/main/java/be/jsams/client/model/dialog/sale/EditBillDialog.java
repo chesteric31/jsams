@@ -18,7 +18,7 @@ import com.jgoodies.validation.view.ValidationComponentUtils;
 /**
  * Edit Command {@link AbstractEditDialog}, to create or update a
  * {@link BillBean} object.
- *
+ * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
@@ -37,10 +37,6 @@ public class EditBillDialog extends AbstractEditDialog<BillBean, EditBillValidat
      */
     public EditBillDialog(final I18nString title, BillBean model) {
         super(null, title, model, new EditBillValidator(), JsamsApplicationContext.getBillService());
-        initComponents();
-        setLocationRelativeTo(null);
-        setResizable(false);
-        setVisible(true);
     }
 
     /**

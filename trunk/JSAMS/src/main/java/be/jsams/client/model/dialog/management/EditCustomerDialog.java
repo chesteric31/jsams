@@ -41,10 +41,6 @@ public class EditCustomerDialog extends AbstractEditDialog<CustomerBean, EditCus
      */
     public EditCustomerDialog(final I18nString title, CustomerBean model) {
         super(null, title, model, new EditCustomerValidator(), JsamsApplicationContext.getCustomerService());
-        initComponents();
-        setLocationRelativeTo(null);
-        setResizable(false);
-        setVisible(true);
     }
 
     /**

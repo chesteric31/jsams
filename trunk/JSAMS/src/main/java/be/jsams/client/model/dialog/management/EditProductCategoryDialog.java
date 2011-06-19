@@ -36,10 +36,6 @@ public class EditProductCategoryDialog extends
     public EditProductCategoryDialog(final I18nString title, ProductCategoryBean model) {
         super(null, title, model, new EditProductCategoryValidator(), JsamsApplicationContext
                 .getProductCategoryService());
-        initComponents();
-        setLocationRelativeTo(null);
-        setResizable(false);
-        setVisible(true);
     }
 
     /**

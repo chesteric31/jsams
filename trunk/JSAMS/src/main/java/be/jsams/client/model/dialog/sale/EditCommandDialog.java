@@ -34,10 +34,6 @@ public class EditCommandDialog extends AbstractEditDialog<CommandBean, EditComma
      */
     public EditCommandDialog(final I18nString title, CommandBean model) {
         super(null, title, model, new EditCommandValidator(), JsamsApplicationContext.getCommandService());
-        initComponents();
-        setLocationRelativeTo(null);
-        setResizable(false);
-        setVisible(true);
     }
 
     /**

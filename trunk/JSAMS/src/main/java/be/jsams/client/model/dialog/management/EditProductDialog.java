@@ -36,10 +36,6 @@ public class EditProductDialog extends AbstractEditDialog<ProductBean, EditProdu
      */
     public EditProductDialog(final I18nString title, ProductBean model) {
         super(null, title, model, new EditProductValidator(), JsamsApplicationContext.getProductService());
-        initComponents();
-        setLocationRelativeTo(null);
-        setResizable(false);
-        setVisible(true);
     }
 
     /**

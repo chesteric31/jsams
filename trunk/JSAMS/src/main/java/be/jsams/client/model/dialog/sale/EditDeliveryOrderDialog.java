@@ -35,10 +35,6 @@ public class EditDeliveryOrderDialog extends
      */
     public EditDeliveryOrderDialog(final I18nString title, DeliveryOrderBean model) {
         super(null, title, model, new EditDeliveryOrderValidator(), JsamsApplicationContext.getDeliveryOrderService());
-        initComponents();
-        setLocationRelativeTo(null);
-        setResizable(false);
-        setVisible(true);
     }
 
     /**

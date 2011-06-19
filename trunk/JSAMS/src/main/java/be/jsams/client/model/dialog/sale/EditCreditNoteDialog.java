@@ -15,7 +15,7 @@ import com.jgoodies.validation.view.ValidationComponentUtils;
 /**
  * Edit Command {@link AbstractEditDialog}, to create or update a
  * {@link CreditNoteBean} object.
- *
+ * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
@@ -35,10 +35,6 @@ public class EditCreditNoteDialog extends
      */
     public EditCreditNoteDialog(final I18nString title, CreditNoteBean model) {
         super(null, title, model, new EditCreditNoteValidator(), JsamsApplicationContext.getCreditNoteService());
-        initComponents();
-        setLocationRelativeTo(null);
-        setResizable(false);
-        setVisible(true);
     }
 
     /**
@@ -61,5 +57,5 @@ public class EditCreditNoteDialog extends
         CreditNoteBean model = getModel();
         super.postPerformOk(model);
     }
-    
+
 }
