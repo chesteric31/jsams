@@ -47,6 +47,7 @@ public class ProductCategoryBeanBuilder {
      * @return the built {@link ProductCategoryBean}
      */
     public ProductCategoryBean build() {
+        ProductCategoryBean bean = null;
         dao.setCurrentSociety(society);
         List<ProductCategory> categories = dao.findAll();
         listModel = new ArrayListModel<ProductCategoryBean>();
@@ -57,10 +58,11 @@ public class ProductCategoryBeanBuilder {
             listModel.add(0, null);
         }
         if (model == null) {
-            return new ProductCategoryBean(listModel, society);
+            bean = new ProductCategoryBean(listModel, society);
         } else {
-            return new ProductCategoryBean(listModel, model, society);
+            bean = new ProductCategoryBean(listModel, model, society);
         }
+        return bean;
     }
 
     /**

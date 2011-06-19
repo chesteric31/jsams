@@ -3,7 +3,7 @@ package be.jsams.common.bean.view;
 import javax.swing.JPanel;
 
 import be.jsams.client.i18n.JsamsI18nLabelResource;
-import be.jsams.client.swing.component.JsamsFrame;
+import be.jsams.client.swing.component.AbstractJsamsFrame;
 import be.jsams.client.swing.component.JsamsTextField;
 import be.jsams.common.bean.model.AddressBean;
 
@@ -52,7 +52,7 @@ public class AddressBeanView extends AbstractBeanView<AddressBean, JPanel, JPane
                 true, false);
         FormLayout layout = new FormLayout(
                 "right:p, 3dlu, 70dlu, 3dlu, right:p, 3dlu, 70dlu, 3dlu, right:p, 3dlu, 70dlu", "p");
-        DefaultFormBuilder builder = new DefaultFormBuilder(layout, JsamsFrame.RESOURCE_BUNDLE);
+        DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
         final int maxColumnSpan = 9;
         // builder.setDefaultDialogBorder();
         builder.appendSeparator(JsamsI18nLabelResource.LABEL_ADDRESS.getTranslation());

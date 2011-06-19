@@ -16,7 +16,7 @@ import be.jsams.client.swing.action.SearchCustomerAction;
 import be.jsams.client.swing.component.JsamsButton;
 import be.jsams.client.swing.component.JsamsDialog;
 import be.jsams.client.swing.component.JsamsFormattedTextField;
-import be.jsams.client.swing.component.JsamsFrame;
+import be.jsams.client.swing.component.AbstractJsamsFrame;
 import be.jsams.client.swing.component.JsamsTextField;
 import be.jsams.client.swing.utils.IconUtil;
 import be.jsams.common.bean.model.AddressBean;
@@ -84,7 +84,7 @@ public class CustomerBeanView extends AbstractBeanView<CustomerBean, JPanel, JPa
         JTextField textFieldName = viewFactory.createBindingTextComponent(bean, CustomerBean.NAME_PROPERTY, false,
                 false);
         FormLayout layout = new FormLayout("right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow", "p");
-        DefaultFormBuilder builder = new DefaultFormBuilder(layout, JsamsFrame.RESOURCE_BUNDLE);
+        DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
         builder.setDefaultDialogBorder();
         final int maxColumnSpan = 5;
         builder.appendI15d(JsamsI18nLabelResource.LABEL_NAME.getKey(), textFieldName, maxColumnSpan);
@@ -128,7 +128,7 @@ public class CustomerBeanView extends AbstractBeanView<CustomerBean, JPanel, JPa
         JsamsFormattedTextField textFieldVatApplicable = helper.createBindingDecimalComponent(bean,
                 CustomerBean.VAT_APPLICABLE_PROPERTY, true, false);
         FormLayout layout = new FormLayout("right:p, 3dlu, 75dlu, 3dlu, right:p, 3dlu, 75dlu", "p");
-        DefaultFormBuilder builder = new DefaultFormBuilder(layout, JsamsFrame.RESOURCE_BUNDLE);
+        DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
         final int maxColumnSpan = 5;
         builder.setDefaultDialogBorder();
         builder.appendI15d(JsamsI18nLabelResource.LABEL_CIVILITY.getKey(), bean.getCivility().getView()
@@ -230,7 +230,7 @@ public class CustomerBeanView extends AbstractBeanView<CustomerBean, JPanel, JPa
         JTextArea textAreaDescription = helper.createBindingTextAreaComponent(bean, CustomerBean.DESCRIPTION_PROPERTY,
                 false, false);
         FormLayout layout = new FormLayout("right:p, 3dlu, p:grow", "p");
-        DefaultFormBuilder builder = new DefaultFormBuilder(layout, JsamsFrame.RESOURCE_BUNDLE);
+        DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
         builder.setDefaultDialogBorder();
         final int maxRows = 9;
         builder.appendI15d(JsamsI18nLabelResource.LABEL_DEFAULT_DISCOUNT_RATE.getKey(), textFieldDefaultDiscountRate);
@@ -259,7 +259,7 @@ public class CustomerBeanView extends AbstractBeanView<CustomerBean, JPanel, JPa
         JsamsTextField textFieldName = viewFactory.createBindingTextComponent(bean, CustomerBean.NAME_PROPERTY, false,
                 true);
         FormLayout layout = new FormLayout("p:grow, 3dlu, p", "p");
-        DefaultFormBuilder builder = new DefaultFormBuilder(layout, JsamsFrame.RESOURCE_BUNDLE);
+        DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
         builder.append(textFieldName);
         builder.append(buttonSearchCustomer);
 

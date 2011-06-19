@@ -29,11 +29,13 @@ public class ProductBeanBuilder {
      * @return the built {@link ProductBean}
      */
     public ProductBean build(boolean newOne, boolean categoryCanBeNull) {
+        ProductBean bean = null;
         if (newOne) {
-            return new ProductBean(categoryCanBeNull, society);
+            bean = new ProductBean(categoryCanBeNull, society);
         } else {
-            return new ProductBean(model, society);
+            bean = new ProductBean(model, society);
         }
+        return bean;
     }
 
     /**

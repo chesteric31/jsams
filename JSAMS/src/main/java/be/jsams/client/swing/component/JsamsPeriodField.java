@@ -39,7 +39,7 @@ public class JsamsPeriodField extends JPanel {
         startDateChooser = new JDateChooser(startDate);
         endDateChooser = new JDateChooser(endDate);
         FormLayout layout = new FormLayout("right:p, 3dlu, 75dlu, 3dlu, right:p, 3dlu, p:grow", "p");
-        DefaultFormBuilder builder = new DefaultFormBuilder(layout, JsamsFrame.RESOURCE_BUNDLE);
+        DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
         builder.setDefaultDialogBorder();
         builder.appendI15d(JsamsI18nLabelResource.LABEL_START_DATE.getKey(), startDateChooser);
         builder.appendI15d(JsamsI18nLabelResource.LABEL_END_DATE.getKey(), endDateChooser);

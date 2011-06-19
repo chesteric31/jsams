@@ -4,7 +4,7 @@ import javax.swing.JPanel;
 
 import be.jsams.client.i18n.JsamsI18nLabelResource;
 import be.jsams.client.swing.component.JsamsFormattedTextField;
-import be.jsams.client.swing.component.JsamsFrame;
+import be.jsams.client.swing.component.AbstractJsamsFrame;
 import be.jsams.client.swing.component.JsamsTextField;
 import be.jsams.common.bean.model.SocietyBean;
 
@@ -50,7 +50,7 @@ public class SocietyBeanView extends AbstractBeanView<SocietyBean, JPanel, JPane
         JsamsTextField textFieldVatNumber = viewFactory.createBindingTextComponent(bean,
                 SocietyBean.VATNUMBER_PROPERTY, false, false);
         FormLayout layout = new FormLayout("right:p, 3dlu, 262dlu", "p");
-        DefaultFormBuilder builder = new DefaultFormBuilder(layout, JsamsFrame.RESOURCE_BUNDLE);
+        DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
         builder.setDefaultDialogBorder();
         final int maxColumnSpan = 3;
         builder.appendI15d(JsamsI18nLabelResource.LABEL_NAME.getKey(), textFieldName);

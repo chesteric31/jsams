@@ -30,7 +30,7 @@ import be.jsams.client.renderer.JsamsTableCellRenderer;
 import be.jsams.client.swing.component.JsamsButton;
 import be.jsams.client.swing.component.JsamsDialog;
 import be.jsams.client.swing.component.JsamsFormattedTextField;
-import be.jsams.client.swing.component.JsamsFrame;
+import be.jsams.client.swing.component.AbstractJsamsFrame;
 import be.jsams.client.swing.component.JsamsTable;
 import be.jsams.client.swing.component.JsamsTextField;
 import be.jsams.client.swing.listener.ProductTableMouseListener;
@@ -91,7 +91,7 @@ public class EstimateBeanView extends AbstractDocumentBeanView<EstimateBean, JPa
                 .createBindingTextComponent(bean, EstimateBean.REMARK_PROPERTY, false, false);
 
         FormLayout layout = new FormLayout("right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p", "p");
-        DefaultFormBuilder builder = new DefaultFormBuilder(layout, JsamsFrame.RESOURCE_BUNDLE);
+        DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
         final int maxColumnSpanI15d = 5;
         final int maxColumnSpan = builder.getColumnCount();
         builder.setDefaultDialogBorder();
@@ -359,7 +359,7 @@ public class EstimateBeanView extends AbstractDocumentBeanView<EstimateBean, JPa
                 AddressBean.ZIP_CODE_PROPERTY, false, false);
         FormLayout layout = new FormLayout(
                 "right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow", "p");
-        DefaultFormBuilder builder = new DefaultFormBuilder(layout, JsamsFrame.RESOURCE_BUNDLE);
+        DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
         builder.setDefaultDialogBorder();
         builder.appendI15d(JsamsI18nLabelResource.LABEL_CUSTOMER_NAME.getKey(), bean.getCustomer().getView()
                 .createCustomView());
