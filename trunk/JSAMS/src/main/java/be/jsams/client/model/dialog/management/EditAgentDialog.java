@@ -47,8 +47,11 @@ public class EditAgentDialog extends AbstractEditDialog<AgentBean, EditAgentVali
         setVisible(true);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    protected void initComponents() {
+    public void initComponents() {
         AgentBeanView view = getModel().getView();
         JPanel panel = view.createEditView();
         getContentPane().add(panel);

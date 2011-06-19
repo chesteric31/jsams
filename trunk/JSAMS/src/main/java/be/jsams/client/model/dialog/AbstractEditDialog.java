@@ -90,7 +90,7 @@ public abstract class AbstractEditDialog<B extends AbstractIdentityBean<?, ?>, V
     /**
      * Initializes all the components.
      */
-    protected abstract void initComponents();
+    public abstract void initComponents();
 
     /**
      * 

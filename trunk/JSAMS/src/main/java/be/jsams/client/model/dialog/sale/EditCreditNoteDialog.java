@@ -48,7 +48,7 @@ public class EditCreditNoteDialog extends
      * {@inheritDoc}
      */
     @Override
-    protected void initComponents() {
+    public void initComponents() {
         CreditNoteBeanView view = getModel().getView();
         JPanel panel = view.createEditView();
         getContentPane().add(panel);

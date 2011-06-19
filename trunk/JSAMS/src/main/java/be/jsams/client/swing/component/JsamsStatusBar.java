@@ -73,7 +73,7 @@ public class JsamsStatusBar extends JPanel {
     /**
      * Clears all text.
      */
-    public synchronized void clearText() {
+    private synchronized void clearText() {
         labelText.setText(messageWhenEmpty);
     }
 

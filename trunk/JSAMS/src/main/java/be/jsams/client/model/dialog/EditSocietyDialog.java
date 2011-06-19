@@ -52,7 +52,7 @@ public class EditSocietyDialog extends AbstractEditDialog<SocietyBean, EditSocie
     /**
      * {@inheritDoc}
      */
-    protected void initComponents() {
+    public void initComponents() {
         SocietyBeanView view = getModel().getView();
         JPanel panel = view.createEditView();
         getContentPane().add(panel);

@@ -4,7 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import be.jsams.server.dao.AbstractJUnitTestClass;
+import be.jsams.server.dao.BaseJUnitTestClass;
 import be.jsams.server.dao.PaymentModeDao;
 import be.jsams.server.dao.SocietyDao;
 import be.jsams.server.dao.management.AgentDao;
@@ -26,7 +26,7 @@ import be.jsams.server.model.sale.detail.CommandDetail;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class CommandDaoImplTest extends AbstractJUnitTestClass {
+public class CommandDaoImplTest extends BaseJUnitTestClass {
 
     @Autowired
 //    private CommandDao dao;

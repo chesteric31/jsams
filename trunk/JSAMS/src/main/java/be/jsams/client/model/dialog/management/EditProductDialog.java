@@ -15,7 +15,8 @@ import be.jsams.server.service.management.ProductService;
 import com.jgoodies.validation.view.ValidationComponentUtils;
 
 /**
- * Edit Product {@link AbstractEditDialog}, to create or update a Product object.
+ * Edit Product {@link AbstractEditDialog}, to create or update a Product
+ * object.
  * 
  * @author chesteric31
  * @version $$Rev$$ $$Date::                  $$ $$Author$$
@@ -30,10 +31,8 @@ public class EditProductDialog extends AbstractEditDialog<ProductBean, EditProdu
     /**
      * Constructor
      * 
-     * @param title
-     *            the {@link I18nString} title
-     * @param model
-     *            the {@link ProductBean} model
+     * @param title the {@link I18nString} title
+     * @param model the {@link ProductBean} model
      */
     public EditProductDialog(final I18nString title, ProductBean model) {
         super(null, title, "apps/preferences-desktop-theme.png");
@@ -49,7 +48,7 @@ public class EditProductDialog extends AbstractEditDialog<ProductBean, EditProdu
     /**
      * {@inheritDoc}
      */
-    protected void initComponents() {
+    public void initComponents() {
         ProductBeanView view = getModel().getView();
         JPanel panel = view.createEditView();
         getContentPane().add(panel);
@@ -62,7 +61,7 @@ public class EditProductDialog extends AbstractEditDialog<ProductBean, EditProdu
      */
     public void performOk() {
         ProductBean product = getModel();
-        //FIXME: workaround
+        // FIXME: workaround
         SocietyBean society = product.getCategory().getSociety();
         ProductCategoryBean selection = (ProductCategoryBean) product.getCategory().getSelection();
         selection.setSociety(society);

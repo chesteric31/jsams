@@ -47,7 +47,7 @@ public class EditEstimateDialog extends AbstractEditDialog<EstimateBean, EditEst
      * {@inheritDoc}
      */
     @Override
-    protected void initComponents() {
+    public void initComponents() {
         EstimateBeanView view = getModel().getView();
         JPanel panel = view.createEditView();
         getContentPane().add(panel);

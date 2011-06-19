@@ -9,7 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import be.jsams.server.dao.AbstractJUnitTestClass;
+import be.jsams.server.dao.BaseJUnitTestClass;
 import be.jsams.server.dao.SocietyDao;
 import be.jsams.server.model.Society;
 import be.jsams.server.model.mock.MockModelGenerator;
@@ -20,7 +20,7 @@ import be.jsams.server.model.mock.MockModelGenerator;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class SocietyDaoImplTest extends AbstractJUnitTestClass {
+public class SocietyDaoImplTest extends BaseJUnitTestClass {
 
     @Autowired
     private SocietyDao dao;
