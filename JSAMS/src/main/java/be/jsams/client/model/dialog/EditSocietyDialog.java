@@ -16,7 +16,8 @@ import be.jsams.server.service.SocietyService;
 import com.jgoodies.validation.view.ValidationComponentUtils;
 
 /**
- * Edit society {@link AbstractEditDialog}, to create or update a {@link SocietyBean} object.
+ * Edit society {@link AbstractEditDialog}, to create or update a
+ * {@link SocietyBean} object.
  * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
@@ -33,20 +34,11 @@ public class EditSocietyDialog extends AbstractEditDialog<SocietyBean, EditSocie
     /**
      * Constructor
      * 
-     * @param title
-     *            the {@link I18nString} title
-     * @param model
-     *            the {@link SocietyBean} model
+     * @param title the {@link I18nString} title
+     * @param model the {@link SocietyBean} model
      */
     public EditSocietyDialog(final I18nString title, SocietyBean model) {
-        super(null, title);
-        super.setModel(model);
-        super.setValidator(new EditSocietyValidator());
-        super.setService(JsamsApplicationContext.getSocietyService());
-        initComponents();
-        setLocationRelativeTo(null);
-        setResizable(false);
-        setVisible(true);
+        super(null, title, model, new EditSocietyValidator(), JsamsApplicationContext.getSocietyService());
     }
 
     /**
@@ -69,7 +61,7 @@ public class EditSocietyDialog extends AbstractEditDialog<SocietyBean, EditSocie
         AbstractIdentityBean<LegalForm, LegalFormBeanView> legalForm = society.getLegalForm().getSelection();
         if (legalForm != null) {
             society.getLegalForm().refresh(legalForm);
-////            society.setLegalForm((LegalFormBean) legalForm);
+            // // society.setLegalForm((LegalFormBean) legalForm);
         }
         SocietyBean persistedSociety = postPerformOk(society);
         if (persistedSociety != null) {
@@ -95,8 +87,7 @@ public class EditSocietyDialog extends AbstractEditDialog<SocietyBean, EditSocie
     }
 
     /**
-     * @param success
-     *            the success to set
+     * @param success the success to set
      */
     public void setSuccess(boolean success) {
         this.success = success;

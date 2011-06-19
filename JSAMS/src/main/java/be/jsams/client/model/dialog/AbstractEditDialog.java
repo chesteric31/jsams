@@ -98,6 +98,10 @@ public abstract class AbstractEditDialog<B extends AbstractIdentityBean<?, ?>, V
         this.model = model;
         this.validator = validator;
         this.service = service;
+        initComponents();
+        setLocationRelativeTo(null);
+        setResizable(false);
+        setVisible(true);
     }
 
     /**
