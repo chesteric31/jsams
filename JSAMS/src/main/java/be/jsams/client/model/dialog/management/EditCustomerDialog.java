@@ -40,10 +40,7 @@ public class EditCustomerDialog extends AbstractEditDialog<CustomerBean, EditCus
      * @param model the {@link CustomerBean} model
      */
     public EditCustomerDialog(final I18nString title, CustomerBean model) {
-        super(null, title, "apps/system-users.png");
-        super.setModel(model);
-        super.setValidator(new EditCustomerValidator());
-        super.setService(JsamsApplicationContext.getCustomerService());
+        super(null, title, model, new EditCustomerValidator(), JsamsApplicationContext.getCustomerService());
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);

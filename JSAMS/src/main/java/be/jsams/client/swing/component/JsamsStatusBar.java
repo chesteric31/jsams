@@ -34,7 +34,8 @@ public class JsamsStatusBar extends JPanel {
     }
 
     /**
-     * Message to display if there is no message to display. Default to a blank string.
+     * Message to display if there is no message to display. Default to a blank
+     * string.
      */
     private String messageWhenEmpty = " ";
 
@@ -46,8 +47,7 @@ public class JsamsStatusBar extends JPanel {
     /**
      * Sets the text to display in the message label.
      * 
-     * @param text
-     *            Text to display in the message label.
+     * @param text Text to display in the message label.
      */
     public synchronized void setText(String text) {
         String textToDisplay = null;
@@ -80,8 +80,7 @@ public class JsamsStatusBar extends JPanel {
     /**
      * Sets text when empty.
      * 
-     * @param value
-     *            the value
+     * @param value the value
      */
     public synchronized void setTextWhenEmpty(String value) {
         final boolean wasEmpty = labelText.getText().equals(messageWhenEmpty);
@@ -98,8 +97,7 @@ public class JsamsStatusBar extends JPanel {
     /**
      * Adds {@link JComponent}.
      * 
-     * @param component
-     *            the {@link JComponent} to add
+     * @param component the {@link JComponent} to add
      */
     public synchronized void addComponent(JComponent component) {
         if (component == null) {
@@ -121,8 +119,8 @@ public class JsamsStatusBar extends JPanel {
      * @return a {@link Border}
      */
     public static Border createComponentBorder() {
-        return BorderFactory.createCompoundBorder(BorderFactory.createRaisedBevelBorder(), BorderFactory
-                .createLoweredBevelBorder());
+        return BorderFactory.createCompoundBorder(BorderFactory.createRaisedBevelBorder(),
+                BorderFactory.createLoweredBevelBorder());
     }
 
     /**

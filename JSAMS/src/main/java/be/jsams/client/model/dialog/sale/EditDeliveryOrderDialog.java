@@ -13,13 +13,14 @@ import be.jsams.server.service.sale.DeliveryOrderService;
 import com.jgoodies.validation.view.ValidationComponentUtils;
 
 /**
- * Edit Delivery Order {@link AbstractEditDialog}, to create or update a {@link DeliveryOrderBean} object.
- *
+ * Edit Delivery Order {@link AbstractEditDialog}, to create or update a
+ * {@link DeliveryOrderBean} object.
+ * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class EditDeliveryOrderDialog extends AbstractEditDialog<DeliveryOrderBean,
-        EditDeliveryOrderValidator, DeliveryOrderService> {
+public class EditDeliveryOrderDialog extends
+        AbstractEditDialog<DeliveryOrderBean, EditDeliveryOrderValidator, DeliveryOrderService> {
 
     /**
      * Serial Version UID
@@ -33,10 +34,7 @@ public class EditDeliveryOrderDialog extends AbstractEditDialog<DeliveryOrderBea
      * @param model the {@link DeliveryOrderBean} model
      */
     public EditDeliveryOrderDialog(final I18nString title, DeliveryOrderBean model) {
-        super(null, title);
-        super.setModel(model);
-        super.setValidator(new EditDeliveryOrderValidator());
-        super.setService(JsamsApplicationContext.getDeliveryOrderService());
+        super(null, title, model, new EditDeliveryOrderValidator(), JsamsApplicationContext.getDeliveryOrderService());
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
@@ -63,5 +61,5 @@ public class EditDeliveryOrderDialog extends AbstractEditDialog<DeliveryOrderBea
         DeliveryOrderBean command = getModel();
         super.postPerformOk(command);
     }
-    
+
 }

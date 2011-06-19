@@ -36,10 +36,7 @@ public class EditBillDialog extends AbstractEditDialog<BillBean, EditBillValidat
      * @param model the {@link BillBean} model
      */
     public EditBillDialog(final I18nString title, BillBean model) {
-        super(null, title);
-        super.setModel(model);
-        super.setValidator(new EditBillValidator());
-        super.setService(JsamsApplicationContext.getBillService());
+        super(null, title, model, new EditBillValidator(), JsamsApplicationContext.getBillService());
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
