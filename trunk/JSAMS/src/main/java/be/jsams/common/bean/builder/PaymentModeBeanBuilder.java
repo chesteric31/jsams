@@ -29,17 +29,19 @@ public class PaymentModeBeanBuilder {
      * @return the built {@link PaymentModeBean}
      */
     public PaymentModeBean build() {
+        PaymentModeBean bean = null;
         List<PaymentMode> modes = dao.findAll();
         listModel = new ArrayListModel<PaymentModeBean>();
         for (PaymentMode mode : modes) {
             listModel.add(new PaymentModeBean(mode));
         }
         if (model != null) {
-            return new PaymentModeBean(listModel, model);
+            bean = new PaymentModeBean(listModel, model);
         } else {
             listModel.add(0, null);
-            return new PaymentModeBean(listModel);
+            bean = new PaymentModeBean(listModel);
         }
+        return bean;
     }
 
     /**

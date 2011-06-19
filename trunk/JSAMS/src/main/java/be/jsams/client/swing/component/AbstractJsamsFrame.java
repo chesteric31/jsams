@@ -16,7 +16,7 @@ import be.jsams.client.swing.utils.IconUtil;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public abstract class JsamsFrame extends JFrame {
+public abstract class AbstractJsamsFrame extends JFrame {
 
     /**
      * Serial Version UID
@@ -42,7 +42,7 @@ public abstract class JsamsFrame extends JFrame {
     /**
      * Constructor
      */
-    public JsamsFrame() {
+    public AbstractJsamsFrame() {
         super();
     }
 
@@ -51,7 +51,7 @@ public abstract class JsamsFrame extends JFrame {
      * 
      * @param title the {@link I18nString}
      */
-    public JsamsFrame(final I18nString title) {
+    public AbstractJsamsFrame(final I18nString title) {
         this();
         setTitle(title);
     }
@@ -62,7 +62,7 @@ public abstract class JsamsFrame extends JFrame {
      * @param title the {@link I18nString}
      * @param iconFileName the icon path name
      */
-    public JsamsFrame(final I18nString title, final String iconFileName) {
+    public AbstractJsamsFrame(final I18nString title, final String iconFileName) {
         this(title);
         setIconImage(IconUtil.buildIcon(IconUtil.TITLE_ICON_PREFIX + iconFileName));
     }

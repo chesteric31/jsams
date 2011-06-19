@@ -56,9 +56,9 @@ public class JsamsDialog extends JDialog {
     /**
      * Constructor
      * 
-     * @param parent the {@link JsamsFrame} parent
+     * @param parent the {@link AbstractJsamsFrame} parent
      */
-    public JsamsDialog(JsamsFrame parent) {
+    public JsamsDialog(AbstractJsamsFrame parent) {
         super(parent);
     }
 

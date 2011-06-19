@@ -29,6 +29,7 @@ public class LegalFormBeanBuilder {
      * @return the built {@link LegalFormBean}
      */
     public LegalFormBean build() {
+        LegalFormBean bean = null;
         List<LegalForm> forms = dao.findAll();
         listModel = new ArrayListModel<LegalFormBean>();
         if (forms != null && !forms.isEmpty()) {
@@ -37,11 +38,12 @@ public class LegalFormBeanBuilder {
             }
         }
         if (model != null) {
-            return new LegalFormBean(listModel, model);
+            bean = new LegalFormBean(listModel, model);
         } else {
             listModel.add(0, null);
-            return new LegalFormBean(listModel);
+            bean = new LegalFormBean(listModel);
         }
+        return bean;
     }
 
     /**

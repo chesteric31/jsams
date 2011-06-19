@@ -8,7 +8,7 @@ import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.swing.action.SearchAgentAction;
 import be.jsams.client.swing.component.JsamsButton;
 import be.jsams.client.swing.component.JsamsDialog;
-import be.jsams.client.swing.component.JsamsFrame;
+import be.jsams.client.swing.component.AbstractJsamsFrame;
 import be.jsams.client.swing.component.JsamsTextField;
 import be.jsams.client.swing.utils.IconUtil;
 import be.jsams.common.bean.model.AddressBean;
@@ -79,7 +79,7 @@ public class AgentBeanView extends AbstractBeanView<AgentBean, JPanel, JPanel> {
         JsamsTextField textFieldFunction = viewFactory.createBindingTextComponent(bean, AgentBean.FUNCTION_PROPERTY,
                 true, false);
         FormLayout layout = new FormLayout("right:p, 3dlu, 75dlu, 3dlu, right:p, 3dlu, p:grow", "p");
-        DefaultFormBuilder builder = new DefaultFormBuilder(layout, JsamsFrame.RESOURCE_BUNDLE);
+        DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
         final int maxColumnSpan = 5;
         builder.setDefaultDialogBorder();
         builder.appendI15d(JsamsI18nLabelResource.LABEL_CIVILITY.getKey(), bean.getCivility().getView()
@@ -113,7 +113,7 @@ public class AgentBeanView extends AbstractBeanView<AgentBean, JPanel, JPanel> {
                 ContactInformationBean.PHONE_PROPERTY, false, false);
         FormLayout layout = new FormLayout(
                 "right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, 50dlu", "p");
-        DefaultFormBuilder builder = new DefaultFormBuilder(layout, JsamsFrame.RESOURCE_BUNDLE);
+        DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
         builder.setDefaultDialogBorder();
         final int maxColumnSpan = 5;
         builder.appendI15d(JsamsI18nLabelResource.LABEL_NAME.getKey(), textFieldName);
@@ -139,7 +139,7 @@ public class AgentBeanView extends AbstractBeanView<AgentBean, JPanel, JPanel> {
         buttonSearchAgent.setAction(new SearchAgentAction("", buttonSearchAgent.getIcon(), bean, dialog));
         JsamsTextField textFieldName = helper.createBindingTextComponent(bean, AgentBean.NAME_PROPERTY, false, true);
         FormLayout layout = new FormLayout("p:grow, 3dlu, p", "p");
-        DefaultFormBuilder builder = new DefaultFormBuilder(layout, JsamsFrame.RESOURCE_BUNDLE);
+        DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
         builder.append(textFieldName);
         builder.append(buttonSearchAgent);
 

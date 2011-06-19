@@ -29,6 +29,7 @@ public class CivilityBeanBuilder {
      * @return the built {@link CivilityBean}
      */
     public CivilityBean build() {
+        CivilityBean bean = null;
         List<Civility> civilities = dao.findAll();
         listModel = new ArrayListModel<CivilityBean>();
         for (Civility civility : civilities) {
@@ -36,10 +37,11 @@ public class CivilityBeanBuilder {
         }
         if (model == null) {
             listModel.add(0, null);
-            return new CivilityBean(listModel);
+            bean = new CivilityBean(listModel);
         } else {
-            return new CivilityBean(listModel, model);
+            bean = new CivilityBean(listModel, model);
         }
+        return bean;
     }
 
     /**

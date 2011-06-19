@@ -17,7 +17,7 @@ import be.jsams.client.swing.component.JsamsButtonsInterface;
 import be.jsams.client.swing.component.JsamsButtonsPanel;
 import be.jsams.client.swing.component.JsamsComboBox;
 import be.jsams.client.swing.component.JsamsDialog;
-import be.jsams.client.swing.component.JsamsFrame;
+import be.jsams.client.swing.component.AbstractJsamsFrame;
 import be.jsams.client.swing.component.JsamsLabel;
 import be.jsams.client.swing.component.JsamsStatusBar;
 import be.jsams.client.swing.utils.IconUtil;
@@ -68,7 +68,7 @@ public class OpenSocietyDialog extends JsamsDialog implements JsamsButtonsInterf
      */
     private void initComponents() {
         FormLayout layout = new FormLayout("right:pref, 3dlu, pref, 3dlu, pref", "pref, 5dlu");
-        DefaultFormBuilder builder = new DefaultFormBuilder(layout, JsamsFrame.RESOURCE_BUNDLE);
+        DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
         builder.setDefaultDialogBorder();
         builder.append(JsamsI18nLabelResource.LABEL_OPEN_SOCIETY.getTranslation());
         builder.nextLine();

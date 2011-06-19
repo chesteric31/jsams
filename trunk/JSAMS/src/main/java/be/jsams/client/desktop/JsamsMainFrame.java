@@ -15,7 +15,7 @@ import org.apache.commons.logging.LogFactory;
 
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.swing.component.JsamsCloseableTabbedPane;
-import be.jsams.client.swing.component.JsamsFrame;
+import be.jsams.client.swing.component.AbstractJsamsFrame;
 import be.jsams.client.swing.component.JsamsMenu;
 import be.jsams.client.swing.component.JsamsMenuItem;
 import be.jsams.client.swing.component.JsamsShortcutToolBar;
@@ -27,7 +27,7 @@ import be.jsams.client.swing.listener.TabbedPaneKeyListener;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class JsamsMainFrame extends JsamsFrame {
+public class JsamsMainFrame extends AbstractJsamsFrame {
 
     /**
      * Serial Version UID
