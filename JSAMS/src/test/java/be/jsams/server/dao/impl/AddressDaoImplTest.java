@@ -12,7 +12,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import be.jsams.server.dao.AbstractJUnitTestClass;
+import be.jsams.server.dao.BaseJUnitTestClass;
 import be.jsams.server.dao.AddressDao;
 import be.jsams.server.model.Address;
 import be.jsams.server.model.mock.MockModelGenerator;
@@ -23,7 +23,7 @@ import be.jsams.server.model.mock.MockModelGenerator;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class AddressDaoImplTest extends AbstractJUnitTestClass {
+public class AddressDaoImplTest extends BaseJUnitTestClass {
 
     @Autowired
     private AddressDao dao;

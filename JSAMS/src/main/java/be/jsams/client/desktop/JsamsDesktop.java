@@ -161,7 +161,7 @@ public class JsamsDesktop {
     /**
      * Sets the native look and feel.
      */
-    protected void setNativeLookAndFeel() {
+    private void setNativeLookAndFeel() {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (Exception e) {
@@ -170,14 +170,14 @@ public class JsamsDesktop {
     }
 
     /**
-     * Sets the default font for all swing components.
+     * Set the default font for all swing components.
      * 
      * ex. setUIFont (new javax.swing.plaf.FontUIResource
      * ("Serif",Font.ITALIC,12));
      * 
      * @param fontUIResource the {@link FontUIResource}
      */
-    protected void setUIFont(FontUIResource fontUIResource) {
+    private void setUIFont(FontUIResource fontUIResource) {
         Enumeration<Object> keys = UIManager.getDefaults().keys();
         while (keys.hasMoreElements()) {
             Object key = keys.nextElement();

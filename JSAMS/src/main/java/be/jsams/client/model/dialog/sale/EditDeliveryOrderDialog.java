@@ -47,7 +47,7 @@ public class EditDeliveryOrderDialog extends AbstractEditDialog<DeliveryOrderBea
      * {@inheritDoc}
      */
     @Override
-    protected void initComponents() {
+    public void initComponents() {
         DeliveryOrderBeanView view = getModel().getView();
         JPanel panel = view.createEditView();
         getContentPane().add(panel);

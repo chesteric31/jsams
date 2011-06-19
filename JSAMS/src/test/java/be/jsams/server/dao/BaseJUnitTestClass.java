@@ -6,13 +6,19 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 
 /**
  * Abstract class for all test classes.
- *
+ * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
 @ContextConfiguration(locations = "classpath:ApplicationContext.xml")
 @TransactionConfiguration(transactionManager = "txManager", defaultRollback = true)
-public abstract class AbstractJUnitTestClass extends
-		AbstractTransactionalJUnit4SpringContextTests {
+public class BaseJUnitTestClass extends AbstractTransactionalJUnit4SpringContextTests {
+
+    /**
+     * Constructor
+     */
+    protected BaseJUnitTestClass() {
+
+    }
 
 }

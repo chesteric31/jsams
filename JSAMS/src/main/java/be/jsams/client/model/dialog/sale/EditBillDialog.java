@@ -50,7 +50,7 @@ public class EditBillDialog extends AbstractEditDialog<BillBean, EditBillValidat
      * {@inheritDoc}
      */
     @Override
-    protected void initComponents() {
+    public void initComponents() {
         BillBeanView view = getModel().getView();
         JPanel panel = view.createEditView();
         getContentPane().add(panel);

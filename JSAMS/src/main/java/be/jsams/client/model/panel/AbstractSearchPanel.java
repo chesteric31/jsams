@@ -352,7 +352,7 @@ public abstract class AbstractSearchPanel<B extends AbstractIdentityBean<?, ?>,
     /**
      * Builds the main panel contained all the components.
      */
-    protected void buildMainPanel() {
+    private void buildMainPanel() {
         JPanel searchCriteriaPanel = new JPanel();
         GridLayout gridLayout = new GridLayout(2, 1);
         gridLayout.setVgap(DEFAULT_V_GAP);

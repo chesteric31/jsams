@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.AgentBean;
-import be.jsams.server.dao.AbstractJUnitTestClass;
+import be.jsams.server.dao.BaseJUnitTestClass;
 import be.jsams.server.dao.AddressDao;
 import be.jsams.server.dao.CivilityDao;
 import be.jsams.server.dao.ContactInformationDao;
@@ -31,7 +31,7 @@ import be.jsams.server.model.mock.MockModelGenerator;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class AgentDaoImplTest extends AbstractJUnitTestClass {
+public class AgentDaoImplTest extends BaseJUnitTestClass {
 
     @Autowired
     private AgentDao dao;

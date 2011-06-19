@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.ProductBean;
 import be.jsams.common.bean.model.management.ProductCategoryBean;
-import be.jsams.server.dao.AbstractJUnitTestClass;
+import be.jsams.server.dao.BaseJUnitTestClass;
 import be.jsams.server.dao.MockDaoGenerator;
 import be.jsams.server.dao.SocietyDao;
 import be.jsams.server.dao.management.ProductCategoryDao;
@@ -29,7 +29,7 @@ import be.jsams.server.model.mock.MockModelGenerator;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class ProductDaoImplTest extends AbstractJUnitTestClass {
+public class ProductDaoImplTest extends BaseJUnitTestClass {
 
     @Autowired
     private ProductDao dao;
