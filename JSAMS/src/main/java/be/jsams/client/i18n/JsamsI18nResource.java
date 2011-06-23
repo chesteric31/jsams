@@ -246,5 +246,13 @@ public final class JsamsI18nResource {
     public static final I18nString TITLE_EDIT_CREDIT_NOTE = new I18nString("title.edit.credit_note");
 
     public static final I18nString TITLE_SEARCH_CREDIT_NOTE = new I18nString("title.search.credit_note");
+
+    public static final I18nString WIZARD_BUTTON_BACK = new I18nString("wizard.button.back");
+    
+    public static final I18nString WIZARD_BUTTON_NEXT = new I18nString("wizard.button.next");
+    
+    public static final I18nString WIZARD_BUTTON_CANCEL = new I18nString("wizard.button.cancel");
+    
+    public static final I18nString WIZARD_BUTTON_FINISH = new I18nString("wizard.button.finish");
     
 }
