@@ -1,5 +1,7 @@
 package be.jsams.client.wizard.example;
 
+import java.awt.Toolkit;
+
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -40,9 +42,12 @@ public class SimpleLogoJWizard extends SimpleJWizardFrame {
   public static void main(String [] args) {
     try {
 
-        LOGO =
-            new ImageIcon("images/logo.jpeg");
+//        LOGO =
+//            new ImageIcon("images/logo.jpeg");
 
+            LOGO = new ImageIcon(Toolkit.getDefaultToolkit().getImage(
+                    Thread.currentThread().getContextClassLoader().getResource("images/logo.jpeg")));
+                
       SimpleLogoJWizardFrame wizardFrame = new SimpleLogoJWizardFrame(
           LOGO);
       wizardFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

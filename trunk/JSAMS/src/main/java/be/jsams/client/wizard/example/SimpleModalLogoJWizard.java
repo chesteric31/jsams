@@ -1,6 +1,7 @@
 package be.jsams.client.wizard.example;
 
 import java.awt.BorderLayout;
+import java.awt.Toolkit;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -92,8 +93,11 @@ public class SimpleModalLogoJWizard {
             mainWindow.setSize(400,  100);
             mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             
-            LOGO =
-            new ImageIcon("images/logo.jpeg");
+//            LOGO =
+//            new ImageIcon("images/logo.jpeg");
+
+            LOGO = new ImageIcon(Toolkit.getDefaultToolkit().getImage(
+                    Thread.currentThread().getContextClassLoader().getResource("images/logo.jpeg")));
             
             // show the frame
             mainWindow.show();
