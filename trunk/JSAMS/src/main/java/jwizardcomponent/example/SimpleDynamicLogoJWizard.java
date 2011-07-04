@@ -1,4 +1,4 @@
-package be.jsams.client.wizard.example;
+package jwizardcomponent.example;
 
 import java.awt.Toolkit;
 
@@ -8,9 +8,8 @@ import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
-import be.jsams.client.wizard.Utilities;
-import be.jsams.client.wizard.frame.SimpleJWizardFrame;
-import be.jsams.client.wizard.frame.SimpleLogoJWizardFrame;
+import jwizardcomponent.Utilities;
+import jwizardcomponent.frame.SimpleLogoJWizardFrame;
 
 /**
  * <p>Title: JWizardComponent</p>
@@ -35,43 +34,36 @@ import be.jsams.client.wizard.frame.SimpleLogoJWizardFrame;
  * @version 1.0
  */
 
-public class SimpleLogoJWizard extends SimpleJWizardFrame {
+public class SimpleDynamicLogoJWizard {
 
   static ImageIcon LOGO;
 
   public static void main(String [] args) {
     try {
+        LOGO = new ImageIcon(Toolkit.getDefaultToolkit().getImage(
+                Thread.currentThread().getContextClassLoader().getResource("images/transfer_left_right.png")));
+//    	LOGO =
+//			new ImageIcon(DefaultJWizardComponents.class.getResource("images/logo.jpeg"));
 
-//        LOGO =
-//            new ImageIcon("images/logo.jpeg");
-
-            LOGO = new ImageIcon(Toolkit.getDefaultToolkit().getImage(
-                    Thread.currentThread().getContextClassLoader().getResource("images/logo.jpeg")));
-                
       SimpleLogoJWizardFrame wizardFrame = new SimpleLogoJWizardFrame(
           LOGO);
       wizardFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
       UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
       SwingUtilities.updateComponentTreeUI(wizardFrame);
+      
+      wizardFrame.setTitle("Simple Logo Dynamic JWizardComponent");
 
-      wizardFrame.setTitle("Simple Logo JWizardComponent");
+      wizardFrame.getWizardComponents().addWizardPanel(
+          new SimpleLabelWizardPanel(wizardFrame.getWizardComponents(),
+          new JLabel("Dynamic Test")));
+
+      wizardFrame.getWizardComponents().addWizardPanel(
+          new SimpleDynamicWizardPanel(wizardFrame.getWizardComponents()));
 
       wizardFrame.getWizardComponents().addWizardPanel(
           new SimpleLabelWizardPanel(wizardFrame.getWizardComponents(),
-          new JLabel("Yo")));
-      wizardFrame.getWizardComponents().addWizardPanel(
-          new SimpleLabelWizardPanel(wizardFrame.getWizardComponents(),
-          new JLabel("This")));
-      wizardFrame.getWizardComponents().addWizardPanel(
-          new SimpleLabelWizardPanel(wizardFrame.getWizardComponents(),
-          new JLabel("Is")));
-      wizardFrame.getWizardComponents().addWizardPanel(
-          new SimpleLabelWizardPanel(wizardFrame.getWizardComponents(),
-          new JLabel("A")));
-      wizardFrame.getWizardComponents().addWizardPanel(
-          new SimpleLabelWizardPanel(wizardFrame.getWizardComponents(),
-          new JLabel("Test!")));
+          new JLabel("Done!")));
       wizardFrame.setSize(500, 300);
       Utilities.centerComponentOnScreen(wizardFrame);
       wizardFrame.show();

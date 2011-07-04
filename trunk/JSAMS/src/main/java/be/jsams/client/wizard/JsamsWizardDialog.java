@@ -109,4 +109,18 @@ public class JsamsWizardDialog extends JsamsDialog {
         super.setVisible(true);
     }
 
+    /**
+     * @return the component
+     */
+    public DefaultJsamsWizardComponent getComponent() {
+        return component;
+    }
+
+    /**
+     * @param component the component to set
+     */
+    public void setComponent(DefaultJsamsWizardComponent component) {
+        this.component = component;
+    }
+    
 }

@@ -1,12 +1,12 @@
-package be.jsams.client.wizard.example;
+package jwizardcomponent.example;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
-import be.jsams.client.wizard.Utilities;
-import be.jsams.client.wizard.frame.SimpleJWizardFrame;
+import jwizardcomponent.Utilities;
+import jwizardcomponent.frame.SimpleJWizardFrame;
 
 /**
  * <p>Title: JWizardComponent</p>

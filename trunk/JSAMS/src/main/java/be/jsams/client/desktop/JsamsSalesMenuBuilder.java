@@ -31,6 +31,7 @@ import be.jsams.client.validator.SearchCommandValidator;
 import be.jsams.client.validator.SearchCreditNoteValidator;
 import be.jsams.client.validator.SearchDeliveryOrderValidator;
 import be.jsams.client.validator.SearchEstimateValidator;
+import be.jsams.client.wizard.transfer.TransferWizardDialog;
 import be.jsams.common.bean.builder.PaymentModeBeanBuilder;
 import be.jsams.common.bean.model.PaymentModeBean;
 import be.jsams.common.bean.model.SocietyBean;
@@ -83,6 +84,7 @@ public class JsamsSalesMenuBuilder extends AbstractMenuBuilder {
         salesMenu.add(createDocumentsMI);
         transferDocumentsMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_TRANSFER_DOCUMENTS,
                 "actions/media-seek-forward.png");
+        transferDocumentsMI.setAction(transferAction(transferDocumentsMI.getText(), transferDocumentsMI.getIcon()));
         salesMenu.add(transferDocumentsMI);
         salesMenu.add(new JSeparator());
         listDocumentsMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_LIST_DOCUMENTS,
@@ -105,6 +107,49 @@ public class JsamsSalesMenuBuilder extends AbstractMenuBuilder {
         creditNoteMI.setAction(creditNotesAction(creditNoteMI.getText(), creditNoteMI.getIcon()));
         salesMenu.add(creditNoteMI);
         return salesMenu;
+    }
+
+    /**
+     * {@link AbstractAction} for transfer documents menu item.
+     * 
+     * @param text the text to display
+     * @param icon the {@link Icon} to display
+     * @return an {@link Action} for the transfer of documents
+     */
+    private Action transferAction(String text, Icon icon) {
+        AbstractAction action = new AbstractAction() {
+            /**
+             * Serial Version UID
+             */
+            private static final long serialVersionUID = 6779073820658986370L;
+
+            public void actionPerformed(ActionEvent event) {
+                // SocietyBean currentSociety =
+                // JsamsDesktop.getInstance().getCurrentSociety();
+                // CustomerBean customer =
+                // JsamsApplicationContext.getCustomerBeanBuilder().build(null,
+                // currentSociety);
+                // AgentBean agent =
+                // JsamsApplicationContext.getAgentBeanBuilder().build(null,
+                // currentSociety);
+                // EstimateBean bean = new EstimateBean(currentSociety,
+                // customer, agent);
+                // SearchEstimatePanel searchPanel = new
+                // SearchEstimatePanel(bean, new EstimateTableMouseListener(),
+                // JsamsApplicationContext.getEstimateService(), new
+                // SearchEstimateValidator(),
+                // new EstimateTableModel(), true);
+                // parent.getTabbedPane().addTab(JsamsI18nResource.TITLE_SEARCH_ESTIMATE,
+                // null, searchPanel);
+                TransferWizardDialog transferDialog = new TransferWizardDialog(parent,
+                        JsamsI18nResource.TITLE_EDIT_AGENT, null, null);
+                transferDialog.setVisible(true);
+            }
+        };
+        action.putValue(Action.NAME, text);
+        action.putValue(Action.SMALL_ICON, icon);
+        return action;
+
     }
 
     /**

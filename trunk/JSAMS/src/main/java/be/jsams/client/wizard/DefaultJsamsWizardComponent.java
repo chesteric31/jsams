@@ -120,7 +120,8 @@ public class DefaultJsamsWizardComponent implements JsamsWizardComponent {
         if (index < panelList.size() - 1) {
             for (int i = index + 1; i < panelList.size(); i++) {
                 JsamsWizardPanel panelToMove = panelList.get(i);
-                panelsContainer.add(panelToMove, i + "");
+                panelsContainer.add(panelToMove, i);
+//                panelsContainer.add(panelToMove, i + "");
             }
         }
     }
@@ -136,7 +137,8 @@ public class DefaultJsamsWizardComponent implements JsamsWizardComponent {
         // TODO verify this loop
         for (int i = index; i < panelList.size(); i++) {
             JsamsWizardPanel panelToMove = panelList.get(i);
-            panelsContainer.add(panelToMove, i + "");
+            panelsContainer.add(panelToMove, i);
+//            panelsContainer.add(panelToMove, i + "");
         }
         return panel;
     }
@@ -150,7 +152,8 @@ public class DefaultJsamsWizardComponent implements JsamsWizardComponent {
         JsamsWizardPanel panel = panelList.remove(index);
         for (int i = index; i < panelList.size(); i++) {
             JsamsWizardPanel panelToMove = panelList.get(i);
-            panelsContainer.add(panelToMove, i + "");
+            panelsContainer.add(panelToMove, i);
+//            panelsContainer.add(panelToMove, i + "");
         }
         return panel;
     }
@@ -397,7 +400,8 @@ public class DefaultJsamsWizardComponent implements JsamsWizardComponent {
      */
     @Override
     public boolean onLastPanel() {
-        return (getCurrentIndex() == panelList.size() - 1);
+        int size = panelList.size();
+        return (getCurrentIndex() == size - 1);
     }
 
 }

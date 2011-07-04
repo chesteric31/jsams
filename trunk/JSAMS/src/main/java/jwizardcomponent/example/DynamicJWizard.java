@@ -1,4 +1,4 @@
-package be.jsams.client.wizard.example;
+package jwizardcomponent.example;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -6,14 +6,14 @@ import java.awt.Insets;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
-import javax.swing.ButtonGroup;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
+import javax.swing.ButtonGroup;
 
-import be.jsams.client.wizard.JWizardComponents;
-import be.jsams.client.wizard.JWizardPanel;
-import be.jsams.client.wizard.Utilities;
-import be.jsams.client.wizard.frame.JWizardFrame;
+import jwizardcomponent.Utilities;
+import jwizardcomponent.JWizardPanel;
+import jwizardcomponent.JWizardComponents;
+import jwizardcomponent.frame.JWizardFrame;
 
 /**
  * <p>Title: JWizardComponent</p>
