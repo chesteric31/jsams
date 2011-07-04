@@ -1,4 +1,4 @@
-package be.jsams.client.wizard.example;
+package jwizardcomponent.example;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -10,8 +10,8 @@ import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
 
-import be.jsams.client.wizard.JWizardComponents;
-import be.jsams.client.wizard.JWizardPanel;
+import jwizardcomponent.JWizardComponents;
+import jwizardcomponent.JWizardPanel;
 
 /**
  * <p>Title: JWizardComponent</p>
