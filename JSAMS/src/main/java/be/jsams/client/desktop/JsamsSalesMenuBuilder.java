@@ -124,26 +124,9 @@ public class JsamsSalesMenuBuilder extends AbstractMenuBuilder {
             private static final long serialVersionUID = 6779073820658986370L;
 
             public void actionPerformed(ActionEvent event) {
-                // SocietyBean currentSociety =
-                // JsamsDesktop.getInstance().getCurrentSociety();
-                // CustomerBean customer =
-                // JsamsApplicationContext.getCustomerBeanBuilder().build(null,
-                // currentSociety);
-                // AgentBean agent =
-                // JsamsApplicationContext.getAgentBeanBuilder().build(null,
-                // currentSociety);
-                // EstimateBean bean = new EstimateBean(currentSociety,
-                // customer, agent);
-                // SearchEstimatePanel searchPanel = new
-                // SearchEstimatePanel(bean, new EstimateTableMouseListener(),
-                // JsamsApplicationContext.getEstimateService(), new
-                // SearchEstimateValidator(),
-                // new EstimateTableModel(), true);
-                // parent.getTabbedPane().addTab(JsamsI18nResource.TITLE_SEARCH_ESTIMATE,
-                // null, searchPanel);
                 TransferWizardDialog transferDialog = new TransferWizardDialog(parent,
-                        JsamsI18nResource.TITLE_EDIT_AGENT, null, null);
-//                transferDialog.setVisible(true);
+                        JsamsI18nResource.TITLE_TRANSFER_DOCUMENTS, "actions/media-seek-forward.png",
+                        "images/transfer_left_right.png");
                 transferDialog.display();
             }
         };

@@ -254,5 +254,7 @@ public final class JsamsI18nResource {
     public static final I18nString WIZARD_BUTTON_CANCEL = new I18nString("wizard.button.cancel");
     
     public static final I18nString WIZARD_BUTTON_FINISH = new I18nString("wizard.button.finish");
+
+    public static final I18nString TITLE_TRANSFER_DOCUMENTS = new I18nString("title.transfer.documents");
     
 }

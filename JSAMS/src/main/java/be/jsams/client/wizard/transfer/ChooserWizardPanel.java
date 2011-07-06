@@ -7,10 +7,11 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
 import javax.swing.ButtonGroup;
-import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 
 import jwizardcomponent.example.DynamicJWizard;
+import be.jsams.client.i18n.JsamsI18nLabelResource;
+import be.jsams.client.swing.component.JsamsLabel;
 import be.jsams.client.wizard.JsamsWizardComponent;
 import be.jsams.client.wizard.JsamsWizardPanel;
 
@@ -64,8 +65,8 @@ public class ChooserWizardPanel extends JsamsWizardPanel {
                 }
             }
         });
-        this.add(new JLabel("Choose option A"), new GridBagConstraints(1, 0, 1, 1, 0.0, 0.0, GridBagConstraints.WEST,
-                GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+        this.add(new JsamsLabel(JsamsI18nLabelResource.LABEL_FULL_TRANSFER), new GridBagConstraints(1, 0, 1, 1, 0.0,
+                0.0, GridBagConstraints.WEST, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
 
         this.add(partialTranferRadioButton, new GridBagConstraints(0, 1, 1, 1, 0.0, 0.0, GridBagConstraints.WEST,
                 GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
@@ -77,8 +78,8 @@ public class ChooserWizardPanel extends JsamsWizardPanel {
                 }
             }
         });
-        this.add(new JLabel("Choose option B"), new GridBagConstraints(1, 1, 1, 1, 0.0, 0.0, GridBagConstraints.WEST,
-                GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
+        this.add(new JsamsLabel(JsamsI18nLabelResource.LABEL_PARTIAL_TRANSFER), new GridBagConstraints(1, 1, 1, 1, 0.0,
+                0.0, GridBagConstraints.WEST, GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
 
     }
 

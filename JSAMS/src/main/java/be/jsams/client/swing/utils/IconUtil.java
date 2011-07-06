@@ -12,7 +12,6 @@ import java.awt.Toolkit;
 public final class IconUtil {
 
     public static final String MENU_ICON_PREFIX = "org/freedesktop/tango/16x16/";
-
     public static final String TITLE_ICON_PREFIX = "org/freedesktop/tango/32x32/";
 
     /**
@@ -22,7 +21,7 @@ public final class IconUtil {
     }
 
     /**
-     * Builds an {@link Image} icon from a path file name.
+     * Build an {@link Image} icon from a path file name.
      * 
      * @param fileName the path file name
      * @return the built image icon

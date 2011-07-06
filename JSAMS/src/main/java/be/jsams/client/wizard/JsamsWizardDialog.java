@@ -4,15 +4,18 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Image;
 import java.awt.Insets;
 
-import javax.swing.JLabel;
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 
 import be.jsams.client.desktop.JsamsMainFrame;
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.swing.component.JsamsDialog;
+import be.jsams.client.swing.component.JsamsLabel;
+import be.jsams.client.swing.utils.IconUtil;
 import be.jsams.client.wizard.action.CancelAction;
 import be.jsams.client.wizard.action.FinishAction;
 
@@ -38,11 +41,11 @@ public class JsamsWizardDialog extends JsamsDialog {
      * 
      * @param parent the {@link JsamsMainFrame} parent
      * @param title the {@link I18nString} translatable String
-     * @param iconFileName the icon path name
+     * @param iconFileName the icon path name of the dialog
      * @param logoFileName the file name to the logo to display
      */
     public JsamsWizardDialog(JsamsMainFrame parent, I18nString title, String iconFileName, String logoFileName) {
-        super(parent, title, iconFileName);
+        super(parent, title, IconUtil.TITLE_ICON_PREFIX + iconFileName);
         component = new DefaultJsamsWizardComponent();
         this.logoFileName = logoFileName;
         initComponents();
@@ -54,8 +57,9 @@ public class JsamsWizardDialog extends JsamsDialog {
     private void initComponents() {
         this.getContentPane().setLayout(new GridBagLayout());
         if (logoFileName != null) {
+            Image defaultlogo = IconUtil.buildIcon(logoFileName);
             JPanel logoPanel = new JPanel();
-            logoPanel.add(new JLabel(logoFileName), BorderLayout.CENTER);
+            logoPanel.add(new JsamsLabel(new ImageIcon(defaultlogo)), BorderLayout.CENTER);
             logoPanel.setBackground(Color.WHITE);
             this.getContentPane().add(
                     logoPanel,
