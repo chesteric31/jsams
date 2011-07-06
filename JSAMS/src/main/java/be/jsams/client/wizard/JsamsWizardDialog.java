@@ -98,13 +98,13 @@ public class JsamsWizardDialog extends JsamsDialog {
                 dispose();
             }
         });
-
+        pack();
     }
     
     /**
-     * {@inheritDoc}
+     * Display the dialog.
      */
-    public void show() {
+    public void display() {
         component.updateComponents();
         super.setVisible(true);
     }

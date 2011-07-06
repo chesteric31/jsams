@@ -143,7 +143,8 @@ public class JsamsSalesMenuBuilder extends AbstractMenuBuilder {
                 // null, searchPanel);
                 TransferWizardDialog transferDialog = new TransferWizardDialog(parent,
                         JsamsI18nResource.TITLE_EDIT_AGENT, null, null);
-                transferDialog.setVisible(true);
+//                transferDialog.setVisible(true);
+                transferDialog.display();
             }
         };
         action.putValue(Action.NAME, text);
