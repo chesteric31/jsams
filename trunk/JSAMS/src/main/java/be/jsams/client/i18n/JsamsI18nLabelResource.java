@@ -130,4 +130,8 @@ public final class JsamsI18nLabelResource {
 
     public static final I18nString LABEL_FORMAL_NOTICE_DATE = new I18nString("label.formal_notice_date");
 
+    public static final I18nString LABEL_FULL_TRANSFER = new I18nString("label.full_transfer");
+
+    public static final I18nString LABEL_PARTIAL_TRANSFER = new I18nString("label.partial_transfer");
+
 }
