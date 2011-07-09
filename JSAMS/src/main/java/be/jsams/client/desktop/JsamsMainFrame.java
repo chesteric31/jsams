@@ -1,8 +1,6 @@
 package be.jsams.client.desktop;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.Toolkit;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -14,8 +12,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import be.jsams.client.i18n.I18nString;
-import be.jsams.client.swing.component.JsamsCloseableTabbedPane;
 import be.jsams.client.swing.component.AbstractJsamsFrame;
+import be.jsams.client.swing.component.JsamsCloseableTabbedPane;
 import be.jsams.client.swing.component.JsamsMenu;
 import be.jsams.client.swing.component.JsamsMenuItem;
 import be.jsams.client.swing.component.JsamsShortcutToolBar;
@@ -35,12 +33,6 @@ public class JsamsMainFrame extends AbstractJsamsFrame {
     private static final long serialVersionUID = 8570689474653666931L;
 
     private static final Log LOGGER = LogFactory.getLog(JsamsMainFrame.class);
-
-    /** Screen dimension */
-    public static final Dimension SCREEN = Toolkit.getDefaultToolkit().getScreenSize();
-
-    /** Center dimension onto the screen */
-    public static final Dimension CENTER = new Dimension((int) SCREEN.getWidth(), (int) SCREEN.getHeight());
 
     private JMenuBar mainMenuBar;
     
@@ -68,7 +60,6 @@ public class JsamsMainFrame extends AbstractJsamsFrame {
      */
     public JsamsMainFrame(final I18nString title) {
         super(title, "categories/applications-office.png");
-        setSize(CENTER);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         initComponents();
     }
