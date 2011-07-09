@@ -1,5 +1,8 @@
 package be.jsams.client.wizard.transfer;
 
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+
 import javax.swing.ButtonGroup;
 import javax.swing.JRadioButton;
 
@@ -15,7 +18,7 @@ import com.jgoodies.forms.layout.FormLayout;
 /**
  * First wizard panel in the wizard process of transfer: first step: choose
  * between full, partial, full grouped, partial grouped transfer.
- *
+ * 
  * @author chesteric31
  * @version $Revision$ $Date::                  $ $Author$
  */
@@ -30,9 +33,7 @@ public class ChooserWizardPanel extends JsamsWizardPanel {
     private JRadioButton fullGroupedTranferRadioButton;
     private JRadioButton partialGroupedTranferRadioButton;
     private ButtonGroup buttonGroup;
-    private char selectedOption = 'N'; // 'N' is no option selected
-
-    // 'A', 'B', 'C' & 'D' stands for options
+    private int selectedOption = 0; // 0 is no selected option
 
     /**
      * Constructor.
@@ -49,83 +50,46 @@ public class ChooserWizardPanel extends JsamsWizardPanel {
      */
     private void initComponents() {
         fullTransferRadioButton = new JRadioButton();
+        fullTransferRadioButton.addItemListener(new ItemListener() {
+            public void itemStateChanged(ItemEvent e) {
+                if (e.getStateChange() == ItemEvent.SELECTED) {
+                    selectedOption = 1;
+                    update();
+                }
+            }
+        });
         partialTranferRadioButton = new JRadioButton();
+        partialTranferRadioButton.addItemListener(new ItemListener() {
+            public void itemStateChanged(ItemEvent e) {
+                if (e.getStateChange() == ItemEvent.SELECTED) {
+                    selectedOption = 2;
+                    update();
+                }
+            }
+        });
         fullGroupedTranferRadioButton = new JRadioButton();
+        fullGroupedTranferRadioButton.addItemListener(new ItemListener() {
+            public void itemStateChanged(ItemEvent e) {
+                if (e.getStateChange() == ItemEvent.SELECTED) {
+                    selectedOption = 3;
+                    update();
+                }
+            }
+        });
         partialGroupedTranferRadioButton = new JRadioButton();
+        partialGroupedTranferRadioButton.addItemListener(new ItemListener() {
+            public void itemStateChanged(ItemEvent e) {
+                if (e.getStateChange() == ItemEvent.SELECTED) {
+                    selectedOption = 4;
+                    update();
+                }
+            }
+        });
         buttonGroup = new ButtonGroup();
         buttonGroup.add(fullTransferRadioButton);
         buttonGroup.add(partialTranferRadioButton);
         buttonGroup.add(fullGroupedTranferRadioButton);
         buttonGroup.add(partialGroupedTranferRadioButton);
-        // this.setLayout(new GridBagLayout());
-        //
-        // this.add(fullTransferRadioButton, new GridBagConstraints(0, 0, 1, 1,
-        // 0.0, 0.0, GridBagConstraints.WEST,
-        // GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
-        // fullTransferRadioButton.addItemListener(new ItemListener() {
-        // public void itemStateChanged(ItemEvent e) {
-        // if (e.getStateChange() == ItemEvent.SELECTED) {
-        // selectedOption = 'A';
-        // update();
-        // }
-        // }
-        // });
-        // this.add(new JsamsLabel(JsamsI18nLabelResource.LABEL_FULL_TRANSFER),
-        // new GridBagConstraints(1, 0, 1, 1, 0.0,
-        // 0.0, GridBagConstraints.WEST, GridBagConstraints.BOTH, new Insets(0,
-        // 0, 0, 0), 0, 0));
-        //
-        // this.add(partialTranferRadioButton, new GridBagConstraints(0, 1, 1,
-        // 1, 0.0, 0.0, GridBagConstraints.WEST,
-        // GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
-        // partialTranferRadioButton.addItemListener(new ItemListener() {
-        // public void itemStateChanged(ItemEvent e) {
-        // if (e.getStateChange() == ItemEvent.SELECTED) {
-        // selectedOption = 'B';
-        // update();
-        // }
-        // }
-        // });
-        // this.add(new
-        // JsamsLabel(JsamsI18nLabelResource.LABEL_PARTIAL_TRANSFER), new
-        // GridBagConstraints(1, 1, 1, 1, 0.0,
-        // 0.0, GridBagConstraints.WEST, GridBagConstraints.BOTH, new Insets(0,
-        // 0, 0, 0), 0, 0));
-        //
-        // this.add(fullGroupedTranferRadioButton, new GridBagConstraints(0, 2,
-        // 1, 1, 0.0, 0.0, GridBagConstraints.WEST,
-        // GridBagConstraints.BOTH, new Insets(0, 0, 0, 0), 0, 0));
-        // fullGroupedTranferRadioButton.addItemListener(new ItemListener() {
-        // public void itemStateChanged(ItemEvent e) {
-        // if (e.getStateChange() == ItemEvent.SELECTED) {
-        // selectedOption = 'C';
-        // update();
-        // }
-        // }
-        // });
-        // this.add(new
-        // JsamsLabel(JsamsI18nLabelResource.LABEL_FULL_GROUPED_TRANSFER), new
-        // GridBagConstraints(1, 2, 1, 1,
-        // 0.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.BOTH, new
-        // Insets(0, 0, 0, 0), 0, 0));
-        //
-        // this.add(partialGroupedTranferRadioButton, new GridBagConstraints(0,
-        // 3, 1, 1, 0.0, 0.0,
-        // GridBagConstraints.WEST, GridBagConstraints.BOTH, new Insets(0, 0, 0,
-        // 0), 0, 0));
-        // partialGroupedTranferRadioButton.addItemListener(new ItemListener() {
-        // public void itemStateChanged(ItemEvent e) {
-        // if (e.getStateChange() == ItemEvent.SELECTED) {
-        // selectedOption = 'D';
-        // update();
-        // }
-        // }
-        // });
-        // this.add(new
-        // JsamsLabel(JsamsI18nLabelResource.LABEL_PARTIAL_GROUPED_TRANSFER),
-        // new GridBagConstraints(1, 3, 1,
-        // 1, 0.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.BOTH, new
-        // Insets(0, 0, 0, 0), 0, 0));
 
         FormLayout layout = new FormLayout("left:p, 3dlu, p", "p");
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
@@ -135,7 +99,6 @@ public class ChooserWizardPanel extends JsamsWizardPanel {
         builder.appendI15d(JsamsI18nLabelResource.LABEL_FULL_GROUPED_TRANSFER.getKey(), fullGroupedTranferRadioButton);
         builder.appendI15d(JsamsI18nLabelResource.LABEL_PARTIAL_GROUPED_TRANSFER.getKey(),
                 partialGroupedTranferRadioButton);
-        // builder.nextLine();
 
         builder.nextLine();
         this.add(builder.getPanel());
@@ -145,8 +108,13 @@ public class ChooserWizardPanel extends JsamsWizardPanel {
      * {@inheritDoc}
      */
     public void update() {
-        setNextButtonEnabled((selectedOption == 'A') || (selectedOption == 'B'));
-        setFinishButtonEnabled(selectedOption == 'F');
+        boolean nextEnabled = false;
+        if (selectedOption == 1 || selectedOption == 2 || selectedOption == 3 || selectedOption == 4) {
+            nextEnabled = true;
+        }
+        setNextButtonEnabled(nextEnabled);
+        boolean finishEnabled = selectedOption == 5;
+        setFinishButtonEnabled(finishEnabled);
         setBackButtonEnabled(false); // there is no way back
     }
 
@@ -154,9 +122,9 @@ public class ChooserWizardPanel extends JsamsWizardPanel {
      * {@inheritDoc}
      */
     public void next() {
-        if (selectedOption == 'A') {
+        if (selectedOption == 1) {
             switchPanel(DynamicJWizard.PANEL_OPTION_A);
-        } else if (selectedOption == 'B') {
+        } else if (selectedOption == 2) {
             switchPanel(DynamicJWizard.PANEL_OPTION_B);
         }
     }
