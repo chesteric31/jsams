@@ -8,7 +8,7 @@ import be.jsams.client.wizard.JsamsWizardDialog;
  * Transfer wizard dialog for documents.
  *
  * @author chesteric31
- * @version $Revision$ $Date$ $Author$
+ * @version $Revision$ $Date:: $ $Author: $
  */
 public class TransferWizardDialog extends JsamsWizardDialog {
 
