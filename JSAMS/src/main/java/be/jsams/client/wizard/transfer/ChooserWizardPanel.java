@@ -17,7 +17,7 @@ import com.jgoodies.forms.layout.FormLayout;
  * between full, partial, full grouped, partial grouped transfer.
  *
  * @author chesteric31
- * @version $Revision$ $Date:: $ $Author: $
+ * @version $Revision$ $Date::              $ $Author$
  */
 public class ChooserWizardPanel extends JsamsWizardPanel {
 
