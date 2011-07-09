@@ -2,14 +2,10 @@ package be.jsams.client.wizard;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.Image;
-import java.awt.Insets;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
-import javax.swing.JSeparator;
 
 import be.jsams.client.desktop.JsamsMainFrame;
 import be.jsams.client.i18n.I18nString;
@@ -55,43 +51,19 @@ public class JsamsWizardDialog extends JsamsDialog {
      * Initialize all the components.
      */
     private void initComponents() {
-        this.getContentPane().setLayout(new GridBagLayout());
+        this.setLayout(new BorderLayout());
+        JPanel centerPanel = new JPanel();
         if (logoFileName != null) {
             Image defaultlogo = IconUtil.buildIcon(logoFileName);
             JPanel logoPanel = new JPanel();
-            logoPanel.add(new JsamsLabel(new ImageIcon(defaultlogo)), BorderLayout.CENTER);
+            logoPanel.add(new JsamsLabel(new ImageIcon(defaultlogo)));
             logoPanel.setBackground(Color.WHITE);
-            this.getContentPane().add(
-                    logoPanel,
-                    new GridBagConstraints(0, 0, 1, 1, 0.3, 0.9, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-                            new Insets(0, 0, 0, 0), 0, 0));
-            this.getContentPane().add(
-                    component.getPanelsContainer(),
-                    new GridBagConstraints(1, 0, 1, 1, 0.7, 0.9, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-                            new Insets(0, 0, 0, 0), 0, 0));
-
-            this.getContentPane().add(
-                    new JSeparator(),
-                    new GridBagConstraints(0, 1, 2, 0, 1.0, .01, GridBagConstraints.WEST, GridBagConstraints.BOTH,
-                            new Insets(1, 1, 1, 1), 0, 0));
-        } else {
-            this.getContentPane().add(
-                    component.getPanelsContainer(),
-                    new GridBagConstraints(0, 0, 1, 1, 1.0, 0.9, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-                            new Insets(0, 0, 0, 0), 0, 0));
-
-            this.getContentPane().add(
-                    new JSeparator(),
-                    new GridBagConstraints(0, 1, 1, 0, 1.0, 0.01, GridBagConstraints.WEST, GridBagConstraints.BOTH,
-                            new Insets(1, 1, 1, 1), 0, 0));
+            centerPanel.add(logoPanel);
         }
-
+        centerPanel.add(component.getPanelsContainer());
+        add(centerPanel, BorderLayout.CENTER);
+        
         buttonPanel = new JsamsWizardButtonPanel(component);
-        this.getContentPane().add(
-                buttonPanel,
-                new GridBagConstraints(0, 2, 1, 1, 1.0, 0.9, GridBagConstraints.WEST, GridBagConstraints.BOTH,
-                        new Insets(0, 0, 0, 0), 0, 0));
-
         component.setFinishAction(new FinishAction(component) {
             public void performAction() {
                 dispose();
@@ -102,7 +74,7 @@ public class JsamsWizardDialog extends JsamsDialog {
                 dispose();
             }
         });
-        pack();
+        add(buttonPanel, BorderLayout.SOUTH);
     }
     
     /**

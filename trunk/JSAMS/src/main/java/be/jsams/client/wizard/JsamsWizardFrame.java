@@ -39,9 +39,11 @@ public class JsamsWizardFrame extends AbstractJsamsFrame {
     
     /**
      * Constructor.
+     * 
+     * @param title the {@link I18nString} title
      */
-    public JsamsWizardFrame() {
-        super();
+    public JsamsWizardFrame(final I18nString title) {
+        super(title);
         initComponents();
     }
 
