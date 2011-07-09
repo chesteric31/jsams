@@ -134,4 +134,8 @@ public final class JsamsI18nLabelResource {
 
     public static final I18nString LABEL_PARTIAL_TRANSFER = new I18nString("label.partial_transfer");
 
+    public static final I18nString LABEL_FULL_GROUPED_TRANSFER = new I18nString("label.full_grouped_transfer");
+
+    public static final I18nString LABEL_PARTIAL_GROUPED_TRANSFER = new I18nString("label.partial_grouped_transfer");
+
 }

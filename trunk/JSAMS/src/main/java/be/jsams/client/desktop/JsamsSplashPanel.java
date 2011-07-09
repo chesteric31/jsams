@@ -2,7 +2,6 @@ package be.jsams.client.desktop;
 
 import java.awt.AlphaComposite;
 import java.awt.Composite;
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -44,13 +43,13 @@ public final class JsamsSplashPanel extends JPanel {
     private JsamsSplashPanel(Image image) {
         super();
         this.image = image;
-        Dimension size = JsamsMainFrame.CENTER;
+        // Dimension size = JsamsMainFrame.CENTER;
         // Dimension size = new Dimension(image.getWidth(null),
         // image.getHeight(null));
-        setPreferredSize(size);
-        setMinimumSize(size);
-        setMaximumSize(size);
-        setSize(size);
+        // setPreferredSize(size);
+        // setMinimumSize(size);
+        // setMaximumSize(size);
+        // setSize(size);
         setLayout(null);
     }
 
