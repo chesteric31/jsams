@@ -15,22 +15,21 @@ import com.jgoodies.forms.builder.DefaultFormBuilder;
 import com.jgoodies.forms.layout.FormLayout;
 
 /**
- * First wizard panel in the wizard process of transfer: first step: choose
- * between full, partial, full grouped, partial grouped transfer.
  * 
+ *
  * @author chesteric31
  * @version $Revision$ $Date::                  $ $Author$
  */
-public class ChooserWizardPanel extends JsamsWizardPanel {
+public class SourceChooserWizardPanel extends JsamsWizardPanel {
 
     /**
      * Serial Version UID
      */
-    private static final long serialVersionUID = -6391869347344419550L;
-    private JRadioButton fullTransferRadioButton;
-    private JRadioButton partialTranferRadioButton;
-    private JRadioButton fullGroupedTranferRadioButton;
-    private JRadioButton partialGroupedTranferRadioButton;
+    private static final long serialVersionUID = -4364616680816295101L;
+    private JRadioButton estimateRadioButton;
+    private JRadioButton commandRadioButton;
+    private JRadioButton deliveryOrderRadioButton;
+    private JRadioButton billRadioButton;
     private ButtonGroup buttonGroup;
     private int selectedOption = 0; // 0 is no selected option
 
@@ -39,8 +38,8 @@ public class ChooserWizardPanel extends JsamsWizardPanel {
      * 
      * @param component the {@link JsamsWizardComponent}
      */
-    public ChooserWizardPanel(JsamsWizardComponent component) {
-        super(component, JsamsI18nLabelResource.LABEL_TRANSFER_CHOOSE_TRANSFER_MODE);
+    public SourceChooserWizardPanel(JsamsWizardComponent component) {
+        super(component, JsamsI18nLabelResource.LABEL_TRANSFER_CHOOSE_SOURCE);
         initComponents();
     }
 
@@ -48,8 +47,8 @@ public class ChooserWizardPanel extends JsamsWizardPanel {
      * Initialize the components.
      */
     private void initComponents() {
-        fullTransferRadioButton = new JRadioButton();
-        fullTransferRadioButton.addItemListener(new ItemListener() {
+        estimateRadioButton = new JRadioButton();
+        estimateRadioButton.addItemListener(new ItemListener() {
             public void itemStateChanged(ItemEvent e) {
                 if (e.getStateChange() == ItemEvent.SELECTED) {
                     selectedOption = 1;
@@ -57,8 +56,8 @@ public class ChooserWizardPanel extends JsamsWizardPanel {
                 }
             }
         });
-        partialTranferRadioButton = new JRadioButton();
-        partialTranferRadioButton.addItemListener(new ItemListener() {
+        commandRadioButton = new JRadioButton();
+        commandRadioButton.addItemListener(new ItemListener() {
             public void itemStateChanged(ItemEvent e) {
                 if (e.getStateChange() == ItemEvent.SELECTED) {
                     selectedOption = 2;
@@ -66,8 +65,8 @@ public class ChooserWizardPanel extends JsamsWizardPanel {
                 }
             }
         });
-        fullGroupedTranferRadioButton = new JRadioButton();
-        fullGroupedTranferRadioButton.addItemListener(new ItemListener() {
+        deliveryOrderRadioButton = new JRadioButton();
+        deliveryOrderRadioButton.addItemListener(new ItemListener() {
             public void itemStateChanged(ItemEvent e) {
                 if (e.getStateChange() == ItemEvent.SELECTED) {
                     selectedOption = 3;
@@ -75,8 +74,8 @@ public class ChooserWizardPanel extends JsamsWizardPanel {
                 }
             }
         });
-        partialGroupedTranferRadioButton = new JRadioButton();
-        partialGroupedTranferRadioButton.addItemListener(new ItemListener() {
+        billRadioButton = new JRadioButton();
+        billRadioButton.addItemListener(new ItemListener() {
             public void itemStateChanged(ItemEvent e) {
                 if (e.getStateChange() == ItemEvent.SELECTED) {
                     selectedOption = 4;
@@ -85,19 +84,18 @@ public class ChooserWizardPanel extends JsamsWizardPanel {
             }
         });
         buttonGroup = new ButtonGroup();
-        buttonGroup.add(fullTransferRadioButton);
-        buttonGroup.add(partialTranferRadioButton);
-        buttonGroup.add(fullGroupedTranferRadioButton);
-        buttonGroup.add(partialGroupedTranferRadioButton);
+        buttonGroup.add(estimateRadioButton);
+        buttonGroup.add(commandRadioButton);
+        buttonGroup.add(deliveryOrderRadioButton);
+        buttonGroup.add(billRadioButton);
 
         FormLayout layout = new FormLayout("left:p, 3dlu, p", "p");
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
         builder.setDefaultDialogBorder();
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_FULL_TRANSFER.getKey(), fullTransferRadioButton);
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_PARTIAL_TRANSFER.getKey(), partialTranferRadioButton);
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_FULL_GROUPED_TRANSFER.getKey(), fullGroupedTranferRadioButton);
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_PARTIAL_GROUPED_TRANSFER.getKey(),
-                partialGroupedTranferRadioButton);
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_ESTIMATE.getKey(), estimateRadioButton);
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_COMMAND.getKey(), commandRadioButton);
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_DELIVERY_ORDER.getKey(), deliveryOrderRadioButton);
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_BILL.getKey(), billRadioButton);
 
         builder.nextLine();
         this.add(builder.getPanel());
@@ -108,21 +106,23 @@ public class ChooserWizardPanel extends JsamsWizardPanel {
      */
     public void update() {
         boolean nextEnabled = false;
-        if (selectedOption == 1 || selectedOption == 2 || selectedOption == 3 || selectedOption == 4) {
+        if (selectedOption == 1 || selectedOption == 2 || selectedOption == 3 || selectedOption == 4
+                || selectedOption == 5) {
             nextEnabled = true;
         }
         setNextButtonEnabled(nextEnabled);
-        boolean finishEnabled = selectedOption == 5;
+        boolean finishEnabled = selectedOption == 6;
         setFinishButtonEnabled(finishEnabled);
-        setBackButtonEnabled(false); // there is no way back
+        setBackButtonEnabled(true);
     }
 
     /**
      * {@inheritDoc}
      */
     public void next() {
-        if (selectedOption == 1 || selectedOption == 2 || selectedOption == 3 || selectedOption == 4) {
-            switchPanel(TransferWizardDialog.SECOND_PANEL);
+        if (selectedOption == 1 || selectedOption == 2 || selectedOption == 3 || selectedOption == 4
+                || selectedOption == 5) {
+            switchPanel(TransferWizardDialog.THIRD_PANEL);
         }
     }
 
@@ -130,6 +130,9 @@ public class ChooserWizardPanel extends JsamsWizardPanel {
      * {@inheritDoc}
      */
     public void back() {
+        if (selectedOption == 0) {
+            switchPanel(TransferWizardDialog.FIRST_PANEL);
+        }
     }
 
 }

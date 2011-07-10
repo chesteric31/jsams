@@ -63,4 +63,12 @@ public class JsamsLabel extends JLabel {
         super(icon, SwingConstants.LEFT);
     }
 
+    /**
+     * 
+     * @param text set the text label
+     */
+    public void setText(I18nString text) {
+        super.setText(text.getTranslation());
+    }
+    
 }

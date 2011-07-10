@@ -6,8 +6,8 @@ import be.jsams.client.i18n.I18nString;
 
 /**
  * 
- *
- * @author ebinard
+ * 
+ * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
 public abstract class JsamsWizardPanel extends JPanel {
@@ -24,19 +24,9 @@ public abstract class JsamsWizardPanel extends JPanel {
      * Constructor.
      * 
      * @param wizardComponent the {@link JsamsWizardComponent}
-     */
-    public JsamsWizardPanel(JsamsWizardComponent wizardComponent) {
-        this(wizardComponent, null);
-    }
-
-    /**
-     * Constructor.
-     * 
-     * @param wizardComponent the {@link JsamsWizardComponent}
      * @param title the {@link I18nString} title
      */
     public JsamsWizardPanel(JsamsWizardComponent wizardComponent, final I18nString title) {
-        this.title = title;
         this.wizardComponent = wizardComponent;
     }
 

@@ -138,4 +138,22 @@ public final class JsamsI18nLabelResource {
 
     public static final I18nString LABEL_PARTIAL_GROUPED_TRANSFER = new I18nString("label.partial_grouped_transfer");
 
+    public static final I18nString LABEL_ESTIMATE = new I18nString("label.estimate");
+
+    public static final I18nString LABEL_COMMAND = new I18nString("label.command");
+
+    public static final I18nString LABEL_DELIVERY_ORDER = new I18nString("label.delivery_order");
+    
+    public static final I18nString LABEL_BILL = new I18nString("label.bill");
+
+    public static final I18nString LABEL_CREDIT_NOTE = new I18nString("label.credit_note");
+
+    public static final I18nString LABEL_TRANSFER_CHOOSE_TRANSFER_MODE = new I18nString(
+            "label.transfer.choose_transfer_mode");
+
+    public static final I18nString LABEL_TRANSFER_CHOOSE_SOURCE = new I18nString("label.transfer.choose_source");
+
+    public static final I18nString LABEL_TRANSFER_CHOOSE_DESTINATION = new I18nString(
+            "label.transfer.choose_destination");
+
 }
