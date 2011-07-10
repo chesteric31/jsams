@@ -6,6 +6,7 @@ import java.awt.Image;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
+import javax.swing.JSeparator;
 
 import be.jsams.client.desktop.JsamsMainFrame;
 import be.jsams.client.i18n.I18nString;
@@ -29,8 +30,10 @@ public class JsamsWizardDialog extends JsamsDialog {
     private static final long serialVersionUID = 2855036709879288192L;
 
     private DefaultJsamsWizardComponent component;
+    private I18nString title;
     private JPanel buttonPanel;
     private String logoFileName;
+    private JsamsLabel label;
     
     /**
      * Constructor.
@@ -52,6 +55,12 @@ public class JsamsWizardDialog extends JsamsDialog {
      */
     private void initComponents() {
         this.setLayout(new BorderLayout());
+        JPanel titlePanel = new JPanel(new BorderLayout());
+        label = new JsamsLabel();
+        label.setAlignmentY(CENTER_ALIGNMENT);
+        titlePanel.add(label, BorderLayout.CENTER);
+        titlePanel.add(new JSeparator(), BorderLayout.SOUTH);
+        add(titlePanel, BorderLayout.NORTH);
         JPanel centerPanel = new JPanel();
         if (logoFileName != null) {
             Image defaultlogo = IconUtil.buildIcon(logoFileName);
@@ -97,6 +106,20 @@ public class JsamsWizardDialog extends JsamsDialog {
      */
     public void setComponent(DefaultJsamsWizardComponent component) {
         this.component = component;
+    }
+
+    /**
+     * @return the title
+     */
+    public I18nString getPanelTitle() {
+        return title;
+    }
+
+    /**
+     * @param title the title to set
+     */
+    public void setPanelTitle(I18nString title) {
+        label.setText(title);
     }
     
 }

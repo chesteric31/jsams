@@ -6,7 +6,7 @@ import be.jsams.client.wizard.JsamsWizardDialog;
 
 /**
  * Transfer wizard dialog for documents.
- *
+ * 
  * @author chesteric31
  * @version $Revision$ $Date::                  $ $Author$
  */
@@ -16,6 +16,25 @@ public class TransferWizardDialog extends JsamsWizardDialog {
      * Serial Version UID
      */
     private static final long serialVersionUID = -721106898877741343L;
+
+    /** First panel to choose the transfer mode */
+    public static final int FIRST_PANEL = 0;
+    /** Second panel to choose the source document */
+    public static final int SECOND_PANEL = 1;
+    /** Third panel to choose the destination document */
+    public static final int THIRD_PANEL = 2;
+    /** Firth panel for the full mode transfer */
+    public static final int FIRTH_PANEL_FULL_MODE = 3;
+    /** Firth panel for the partial mode transfer */
+    public static final int FIRTH_PANEL_PARTIAL_MODE = 4;
+    /** Firth panel for the full grouped mode transfer */
+    public static final int FIRTH_PANEL_FULL_GROUPED_MODE = 5;
+    /** Firth panel for the partial grouped mode transfer */
+    public static final int FIRTH_PANEL_PARTIAL_GROUPED_MODE = 6;
+    /** Fifth panel for the partial mode transfer */
+    public static final int FIFTH_PANEL_PARTIAL_MODE = 7;
+    /** Fifth panel for the partial grouped mode transfer */
+    public static final int FIFTH_PANEL_PARTIAL_GROUPED_MODE = 8;
 
     /**
      * Constructor.
@@ -34,8 +53,12 @@ public class TransferWizardDialog extends JsamsWizardDialog {
      * Build panels.
      */
     private void buildPanels() {
-        ChooserWizardPanel panel = new ChooserWizardPanel(getComponent());
-        getComponent().addPanel(0, panel);
+        ChooserWizardPanel chooserPanel = new ChooserWizardPanel(getComponent());
+        getComponent().addPanel(FIRST_PANEL, chooserPanel);
+        SourceChooserWizardPanel sourceChooserPanel = new SourceChooserWizardPanel(getComponent());
+        getComponent().addPanel(SECOND_PANEL, sourceChooserPanel);
+        DestinationChooserWizardPanel destinationChooserPanel = new DestinationChooserWizardPanel(getComponent());
+        getComponent().addPanel(THIRD_PANEL, destinationChooserPanel);
         pack();
         setLocationRelativeTo(null);
     }
