@@ -18,16 +18,17 @@ public abstract class JsamsWizardPanel extends JPanel {
     private static final long serialVersionUID = -7161061264822020315L;
 
     private JsamsWizardComponent wizardComponent;
-    private I18nString title;
+    private I18nString panelTitle;
     
     /**
      * Constructor.
      * 
      * @param wizardComponent the {@link JsamsWizardComponent}
-     * @param title the {@link I18nString} title
+     * @param panelTitle the {@link I18nString} title
      */
-    public JsamsWizardPanel(JsamsWizardComponent wizardComponent, final I18nString title) {
+    public JsamsWizardPanel(JsamsWizardComponent wizardComponent, final I18nString panelTitle) {
         this.wizardComponent = wizardComponent;
+        this.panelTitle = panelTitle;
     }
 
     /**
@@ -136,15 +137,15 @@ public abstract class JsamsWizardPanel extends JPanel {
     /**
      * @return the title
      */
-    public I18nString getTitle() {
-        return title;
+    public I18nString getPanelTitle() {
+        return this.panelTitle;
     }
 
     /**
-     * @param title the title to set
+     * @param panelTitle the title to set
      */
-    public void setTitle(I18nString title) {
-        this.title = title;
+    public void setPanelTitle(I18nString panelTitle) {
+        this.panelTitle = panelTitle;
     }
 
 }
