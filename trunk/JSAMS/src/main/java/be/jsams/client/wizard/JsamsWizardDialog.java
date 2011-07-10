@@ -3,6 +3,8 @@ package be.jsams.client.wizard;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Image;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
@@ -55,8 +57,8 @@ public class JsamsWizardDialog extends JsamsDialog {
      */
     private void initComponents() {
         this.setLayout(new BorderLayout());
-        JPanel titlePanel = new JPanel(new BorderLayout());
         label = new JsamsLabel();
+        JPanel titlePanel = new JPanel(new BorderLayout());
         label.setAlignmentY(CENTER_ALIGNMENT);
         titlePanel.add(label, BorderLayout.CENTER);
         titlePanel.add(new JSeparator(), BorderLayout.SOUTH);
@@ -84,6 +86,13 @@ public class JsamsWizardDialog extends JsamsDialog {
             }
         });
         add(buttonPanel, BorderLayout.SOUTH);
+
+        // set automatically the new title
+        component.addPropertyChangeListener(new PropertyChangeListener() {
+            public void propertyChange(PropertyChangeEvent event) {
+                setPanelTitle(((JsamsWizardPanel) event.getNewValue()).getPanelTitle());
+            }
+        });
     }
     
     /**
@@ -121,5 +130,5 @@ public class JsamsWizardDialog extends JsamsDialog {
     public void setPanelTitle(I18nString title) {
         label.setText(title);
     }
-    
+
 }
