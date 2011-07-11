@@ -15,7 +15,7 @@ import com.jgoodies.forms.builder.DefaultFormBuilder;
 import com.jgoodies.forms.layout.FormLayout;
 
 /**
- * 
+ * {@link JsamsWizardPanel} to choose the source document to transfer.
  *
  * @author chesteric31
  * @version $Revision$ $Date::                  $ $Author$
@@ -31,7 +31,13 @@ public class SourceChooserWizardPanel extends JsamsWizardPanel {
     private JRadioButton deliveryOrderRadioButton;
     private JRadioButton billRadioButton;
     private ButtonGroup buttonGroup;
-    private int selectedOption = 0; // 0 is no selected option
+    private final int noOneSelected = 0;
+    private final int estimateSelected = 1;
+    private final int commandSelected = 2;
+    private final int deliveryOrderSelected = 3;
+    private final int billSelected = 4;
+    private final int finishSelected = 5;
+    private int selectedOption = noOneSelected; // 0 is no selected option
 
     /**
      * Constructor.
@@ -51,7 +57,7 @@ public class SourceChooserWizardPanel extends JsamsWizardPanel {
         estimateRadioButton.addItemListener(new ItemListener() {
             public void itemStateChanged(ItemEvent e) {
                 if (e.getStateChange() == ItemEvent.SELECTED) {
-                    selectedOption = 1;
+                    selectedOption = estimateSelected;
                     update();
                 }
             }
@@ -60,7 +66,7 @@ public class SourceChooserWizardPanel extends JsamsWizardPanel {
         commandRadioButton.addItemListener(new ItemListener() {
             public void itemStateChanged(ItemEvent e) {
                 if (e.getStateChange() == ItemEvent.SELECTED) {
-                    selectedOption = 2;
+                    selectedOption = commandSelected;
                     update();
                 }
             }
@@ -69,7 +75,7 @@ public class SourceChooserWizardPanel extends JsamsWizardPanel {
         deliveryOrderRadioButton.addItemListener(new ItemListener() {
             public void itemStateChanged(ItemEvent e) {
                 if (e.getStateChange() == ItemEvent.SELECTED) {
-                    selectedOption = 3;
+                    selectedOption = deliveryOrderSelected;
                     update();
                 }
             }
@@ -78,7 +84,7 @@ public class SourceChooserWizardPanel extends JsamsWizardPanel {
         billRadioButton.addItemListener(new ItemListener() {
             public void itemStateChanged(ItemEvent e) {
                 if (e.getStateChange() == ItemEvent.SELECTED) {
-                    selectedOption = 4;
+                    selectedOption = billSelected;
                     update();
                 }
             }
@@ -106,12 +112,11 @@ public class SourceChooserWizardPanel extends JsamsWizardPanel {
      */
     public void update() {
         boolean nextEnabled = false;
-        if (selectedOption == 1 || selectedOption == 2 || selectedOption == 3 || selectedOption == 4
-                || selectedOption == 5) {
+        if (isRadioSelected()) {
             nextEnabled = true;
         }
         setNextButtonEnabled(nextEnabled);
-        boolean finishEnabled = selectedOption == 6;
+        boolean finishEnabled = selectedOption == finishSelected;
         setFinishButtonEnabled(finishEnabled);
         setBackButtonEnabled(true);
     }
@@ -120,8 +125,7 @@ public class SourceChooserWizardPanel extends JsamsWizardPanel {
      * {@inheritDoc}
      */
     public void next() {
-        if (selectedOption == 1 || selectedOption == 2 || selectedOption == 3 || selectedOption == 4
-                || selectedOption == 5) {
+        if (isRadioSelected()) {
             switchPanel(TransferWizardDialog.THIRD_PANEL);
         }
     }
@@ -130,9 +134,15 @@ public class SourceChooserWizardPanel extends JsamsWizardPanel {
      * {@inheritDoc}
      */
     public void back() {
-        if (selectedOption == 0) {
-            switchPanel(TransferWizardDialog.FIRST_PANEL);
-        }
+        switchPanel(TransferWizardDialog.FIRST_PANEL);
+    }
+
+    /**
+     * @return true if one radio is selected, false otherwise
+     */
+    private boolean isRadioSelected() {
+        return selectedOption == estimateSelected || selectedOption == commandSelected
+                || selectedOption == deliveryOrderSelected || selectedOption == billSelected;
     }
 
 }
