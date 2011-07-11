@@ -32,7 +32,14 @@ public class ChooserWizardPanel extends JsamsWizardPanel {
     private JRadioButton fullGroupedTranferRadioButton;
     private JRadioButton partialGroupedTranferRadioButton;
     private ButtonGroup buttonGroup;
-    private int selectedOption = 0; // 0 is no selected option
+    
+    private final int noOneSelected = 0;
+    private final int fullModeSelected = 1;
+    private final int partialModeSelected = 2;
+    private final int fullGroupedModeSelected = 3;
+    private final int partialGroupedModeSelected = 4;
+    private final int finishSelected = 5;
+    private int selectedOption = noOneSelected; // 0 is no selected option
 
     /**
      * Constructor.
@@ -52,7 +59,7 @@ public class ChooserWizardPanel extends JsamsWizardPanel {
         fullTransferRadioButton.addItemListener(new ItemListener() {
             public void itemStateChanged(ItemEvent e) {
                 if (e.getStateChange() == ItemEvent.SELECTED) {
-                    selectedOption = 1;
+                    selectedOption = fullModeSelected;
                     update();
                 }
             }
@@ -61,7 +68,7 @@ public class ChooserWizardPanel extends JsamsWizardPanel {
         partialTranferRadioButton.addItemListener(new ItemListener() {
             public void itemStateChanged(ItemEvent e) {
                 if (e.getStateChange() == ItemEvent.SELECTED) {
-                    selectedOption = 2;
+                    selectedOption = partialModeSelected;
                     update();
                 }
             }
@@ -70,7 +77,7 @@ public class ChooserWizardPanel extends JsamsWizardPanel {
         fullGroupedTranferRadioButton.addItemListener(new ItemListener() {
             public void itemStateChanged(ItemEvent e) {
                 if (e.getStateChange() == ItemEvent.SELECTED) {
-                    selectedOption = 3;
+                    selectedOption = fullGroupedModeSelected;
                     update();
                 }
             }
@@ -79,7 +86,7 @@ public class ChooserWizardPanel extends JsamsWizardPanel {
         partialGroupedTranferRadioButton.addItemListener(new ItemListener() {
             public void itemStateChanged(ItemEvent e) {
                 if (e.getStateChange() == ItemEvent.SELECTED) {
-                    selectedOption = 4;
+                    selectedOption = partialGroupedModeSelected;
                     update();
                 }
             }
@@ -108,20 +115,28 @@ public class ChooserWizardPanel extends JsamsWizardPanel {
      */
     public void update() {
         boolean nextEnabled = false;
-        if (selectedOption == 1 || selectedOption == 2 || selectedOption == 3 || selectedOption == 4) {
+        if (isRadioSelected()) {
             nextEnabled = true;
         }
         setNextButtonEnabled(nextEnabled);
-        boolean finishEnabled = selectedOption == 5;
+        boolean finishEnabled = selectedOption == finishSelected;
         setFinishButtonEnabled(finishEnabled);
         setBackButtonEnabled(false); // there is no way back
+    }
+
+    /**
+     * @return true if one radio is selected, false otherwise
+     */
+    private boolean isRadioSelected() {
+        return selectedOption == fullModeSelected || selectedOption == partialModeSelected
+                || selectedOption == fullGroupedModeSelected || selectedOption == partialGroupedModeSelected;
     }
 
     /**
      * {@inheritDoc}
      */
     public void next() {
-        if (selectedOption == 1 || selectedOption == 2 || selectedOption == 3 || selectedOption == 4) {
+        if (isRadioSelected()) {
             switchPanel(TransferWizardDialog.SECOND_PANEL);
         }
     }

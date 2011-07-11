@@ -15,8 +15,8 @@ import com.jgoodies.forms.builder.DefaultFormBuilder;
 import com.jgoodies.forms.layout.FormLayout;
 
 /**
+ * {@link JsamsWizardPanel} to choose the destination document transferred.
  * 
- *
  * @author chesteric31
  * @version $Revision$ $Date::                  $ $Author$
  */
@@ -31,7 +31,13 @@ public class DestinationChooserWizardPanel extends JsamsWizardPanel {
     private JRadioButton billRadioButton;
     private JRadioButton creditNoteRadioButton;
     private ButtonGroup buttonGroup;
-    private int selectedOption = 0; // 0 is no selected option
+    private final int noOneSelected = 0;
+    private final int commandSelected = 1;
+    private final int deliveryOrderSelected = 2;
+    private final int billSelected = 3;
+    private final int creditNoteSelected = 4;
+    private final int finishSelected = 5;
+    private int selectedOption = noOneSelected; // 0 is no selected option
 
     /**
      * Constructor.
@@ -51,7 +57,7 @@ public class DestinationChooserWizardPanel extends JsamsWizardPanel {
         commandRadioButton.addItemListener(new ItemListener() {
             public void itemStateChanged(ItemEvent e) {
                 if (e.getStateChange() == ItemEvent.SELECTED) {
-                    selectedOption = 1;
+                    selectedOption = commandSelected;
                     update();
                 }
             }
@@ -60,7 +66,7 @@ public class DestinationChooserWizardPanel extends JsamsWizardPanel {
         deliveryOrderRadioButton.addItemListener(new ItemListener() {
             public void itemStateChanged(ItemEvent e) {
                 if (e.getStateChange() == ItemEvent.SELECTED) {
-                    selectedOption = 2;
+                    selectedOption = deliveryOrderSelected;
                     update();
                 }
             }
@@ -69,7 +75,7 @@ public class DestinationChooserWizardPanel extends JsamsWizardPanel {
         billRadioButton.addItemListener(new ItemListener() {
             public void itemStateChanged(ItemEvent e) {
                 if (e.getStateChange() == ItemEvent.SELECTED) {
-                    selectedOption = 3;
+                    selectedOption = billSelected;
                     update();
                 }
             }
@@ -78,7 +84,7 @@ public class DestinationChooserWizardPanel extends JsamsWizardPanel {
         creditNoteRadioButton.addItemListener(new ItemListener() {
             public void itemStateChanged(ItemEvent e) {
                 if (e.getStateChange() == ItemEvent.SELECTED) {
-                    selectedOption = 4;
+                    selectedOption = creditNoteSelected;
                     update();
                 }
             }
@@ -106,12 +112,11 @@ public class DestinationChooserWizardPanel extends JsamsWizardPanel {
      */
     public void update() {
         boolean nextEnabled = false;
-        if (selectedOption == 1 || selectedOption == 2 || selectedOption == 3 || selectedOption == 4
-                || selectedOption == 5) {
+        if (isRadioSelected()) {
             nextEnabled = true;
         }
         setNextButtonEnabled(nextEnabled);
-        boolean finishEnabled = selectedOption == 6;
+        boolean finishEnabled = selectedOption == finishSelected;
         setFinishButtonEnabled(finishEnabled);
         setBackButtonEnabled(true);
     }
@@ -126,9 +131,15 @@ public class DestinationChooserWizardPanel extends JsamsWizardPanel {
      * {@inheritDoc}
      */
     public void back() {
-        if (selectedOption == 0) {
-            switchPanel(TransferWizardDialog.SECOND_PANEL);
-        }
+        switchPanel(TransferWizardDialog.SECOND_PANEL);
+    }
+
+    /**
+     * @return true if one radio is selected, false otherwise
+     */
+    private boolean isRadioSelected() {
+        return selectedOption == commandSelected || selectedOption == deliveryOrderSelected
+                || selectedOption == billSelected || selectedOption == creditNoteSelected;
     }
 
 }
