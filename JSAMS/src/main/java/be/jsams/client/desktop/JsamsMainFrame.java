@@ -60,7 +60,6 @@ public class JsamsMainFrame extends AbstractJsamsFrame {
      */
     public JsamsMainFrame(final I18nString title) {
         super(title, "categories/applications-office.png");
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
         initComponents();
     }
 
@@ -101,6 +100,8 @@ public class JsamsMainFrame extends AbstractJsamsFrame {
             // and opening menu item...
             add(tabbedPane);
             // add(JsamsSpashPanel.getInstance());
+            pack();
+            setExtendedState(JFrame.MAXIMIZED_BOTH);
         } catch (Exception e) {
             LOGGER.error(e);
         }
