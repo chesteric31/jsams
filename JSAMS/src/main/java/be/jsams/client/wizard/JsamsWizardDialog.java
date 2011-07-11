@@ -2,6 +2,7 @@ package be.jsams.client.wizard;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Image;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -9,6 +10,7 @@ import java.beans.PropertyChangeListener;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
+import javax.swing.plaf.FontUIResource;
 
 import be.jsams.client.desktop.JsamsMainFrame;
 import be.jsams.client.i18n.I18nString;
@@ -58,6 +60,7 @@ public class JsamsWizardDialog extends JsamsDialog {
     private void initComponents() {
         this.setLayout(new BorderLayout());
         label = new JsamsLabel();
+        label.setFont(new FontUIResource(Font.SANS_SERIF, Font.BOLD, 12));
         JPanel titlePanel = new JPanel(new BorderLayout());
         label.setAlignmentY(CENTER_ALIGNMENT);
         titlePanel.add(label, BorderLayout.CENTER);

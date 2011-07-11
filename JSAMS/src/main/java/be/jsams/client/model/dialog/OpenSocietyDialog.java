@@ -1,10 +1,12 @@
 package be.jsams.client.model.dialog;
 
 import java.awt.BorderLayout;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
+import javax.swing.plaf.FontUIResource;
 
 import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.desktop.JsamsDesktop;
@@ -12,12 +14,12 @@ import be.jsams.client.i18n.I18nString;
 import be.jsams.client.i18n.JsamsI18nLabelResource;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.renderer.NamedComboBoxRenderer;
+import be.jsams.client.swing.component.AbstractJsamsFrame;
 import be.jsams.client.swing.component.JsamsButton;
 import be.jsams.client.swing.component.JsamsButtonsInterface;
 import be.jsams.client.swing.component.JsamsButtonsPanel;
 import be.jsams.client.swing.component.JsamsComboBox;
 import be.jsams.client.swing.component.JsamsDialog;
-import be.jsams.client.swing.component.AbstractJsamsFrame;
 import be.jsams.client.swing.component.JsamsLabel;
 import be.jsams.client.swing.component.JsamsStatusBar;
 import be.jsams.client.swing.utils.IconUtil;
@@ -70,7 +72,9 @@ public class OpenSocietyDialog extends JsamsDialog implements JsamsButtonsInterf
         FormLayout layout = new FormLayout("right:pref, 3dlu, pref, 3dlu, pref", "pref, 5dlu");
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
         builder.setDefaultDialogBorder();
-        builder.append(JsamsI18nLabelResource.LABEL_OPEN_SOCIETY.getTranslation());
+        JsamsLabel label = new JsamsLabel(JsamsI18nLabelResource.LABEL_OPEN_SOCIETY);
+        label.setFont(new FontUIResource(Font.SANS_SERIF, Font.BOLD, 12));
+        builder.append(label);
         builder.nextLine();
         builder.appendSeparator();
         ViewFactory<SocietyBean> helper = new ViewFactory<SocietyBean>();
