@@ -39,7 +39,7 @@ public class DestinationChooserWizardPanel extends JsamsWizardPanel {
      * @param component the {@link JsamsWizardComponent}
      */
     public DestinationChooserWizardPanel(JsamsWizardComponent component) {
-        super(component, JsamsI18nLabelResource.LABEL_TRANSFER_CHOOSE_SOURCE);
+        super(component, JsamsI18nLabelResource.LABEL_TRANSFER_CHOOSE_DESTINATION);
         initComponents();
     }
 
