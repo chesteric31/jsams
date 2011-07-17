@@ -53,7 +53,7 @@ public class TransferWizardDialog extends JsamsWizardDialog {
      * Build panels.
      */
     private void buildPanels() {
-        ChooserWizardPanel chooserPanel = new ChooserWizardPanel(getComponent());
+        TransferModeChooserWizardPanel chooserPanel = new TransferModeChooserWizardPanel(getComponent());
         getComponent().addPanel(FIRST_PANEL, chooserPanel);
         SourceChooserWizardPanel sourceChooserPanel = new SourceChooserWizardPanel(getComponent());
         getComponent().addPanel(SECOND_PANEL, sourceChooserPanel);

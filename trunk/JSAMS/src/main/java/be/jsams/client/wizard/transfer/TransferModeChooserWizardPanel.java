@@ -21,7 +21,7 @@ import com.jgoodies.forms.layout.FormLayout;
  * @author chesteric31
  * @version $Revision$ $Date::                  $ $Author$
  */
-public class ChooserWizardPanel extends JsamsWizardPanel {
+public class TransferModeChooserWizardPanel extends JsamsWizardPanel {
 
     /**
      * Serial Version UID
@@ -46,7 +46,7 @@ public class ChooserWizardPanel extends JsamsWizardPanel {
      * 
      * @param component the {@link JsamsWizardComponent}
      */
-    public ChooserWizardPanel(JsamsWizardComponent component) {
+    public TransferModeChooserWizardPanel(JsamsWizardComponent component) {
         super(component, JsamsI18nLabelResource.LABEL_TRANSFER_CHOOSE_TRANSFER_MODE);
         initComponents();
     }
