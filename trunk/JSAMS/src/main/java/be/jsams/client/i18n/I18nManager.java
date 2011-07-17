@@ -25,11 +25,11 @@ public class I18nManager {
      */
     private static final I18nManager INSTANCE = new I18nManager();
 
-//    /**
-//     * Constructor
-//     */
-//    public I18nManager() {
-//    }
+    // /**
+    // * Constructor
+    // */
+    // public I18nManager() {
+    // }
 
     /**
      * Gets the instance.
@@ -50,18 +50,17 @@ public class I18nManager {
 
     /**
      * 
-     * @param locale
-     *            the {@link Locale} to set
+     * @param locale the {@link Locale} to set
      */
     public void setLocale(Locale locale) {
         this.locale = locale;
     }
 
     /**
-     * Translates into a {@link String} the {@link I18nString} parameter with the default {@link Locale}.
+     * Translate into a {@link String} the {@link I18nString} parameter with
+     * the default {@link Locale}.
      * 
-     * @param i18nString
-     *            the {@link I18nString} to translate
+     * @param i18nString the {@link I18nString} to translate
      * @return the translated {@link String}
      */
     public String translate(I18nString i18nString) {
@@ -69,12 +68,11 @@ public class I18nManager {
     }
 
     /**
-     * Translates into a {@link String} the {@link I18nString} parameter with the parameter {@link Locale}.
+     * Translate into a {@link String} the {@link I18nString} parameter with
+     * the parameter {@link Locale}.
      * 
-     * @param i18nString
-     *            the {@link I18nString} to translate
-     * @param locale
-     *            the {@link Locale} to use
+     * @param i18nString the {@link I18nString} to translate
+     * @param locale the {@link Locale} to use
      * @return the translated {@link String}
      */
     public String translate(I18nString i18nString, Locale locale) {
@@ -82,13 +80,11 @@ public class I18nManager {
     }
 
     /**
-     * Translates into a {@link String} the key resource bundle key parameter with the default {@link Locale} and the
-     * arguments table.
+     * Translate into a {@link String} the key resource bundle key parameter
+     * with the default {@link Locale} and the arguments table.
      * 
-     * @param key
-     *            the key resource bundle to use
-     * @param arguments
-     *            the table arguments
+     * @param key the key resource bundle to use
+     * @param arguments the table arguments
      * @return the translated {@link String}
      */
     public String translate(String key, Object[] arguments) {
@@ -96,10 +92,10 @@ public class I18nManager {
     }
 
     /**
-     * Translates into a {@link String} the key resource bundle key parameter with the default {@link Locale}.
+     * Translate into a {@link String} the key resource bundle key parameter
+     * with the default {@link Locale}.
      * 
-     * @param key
-     *            the key resource bundle to use
+     * @param key the key resource bundle to use
      * @return the translated {@link String}
      */
     public String translate(String key) {
@@ -107,12 +103,11 @@ public class I18nManager {
     }
 
     /**
-     * Translates into a {@link String} the key resource bundle key parameter and the parameter {@link Locale}.
+     * Translate into a {@link String} the key resource bundle key parameter
+     * and the parameter {@link Locale}.
      * 
-     * @param key
-     *            the key resource bundle to use
-     * @param locale
-     *            the {@link Locale} to use
+     * @param key the key resource bundle to use
+     * @param locale the {@link Locale} to use
      * @return the translated {@link String}
      */
     public String translate(String key, Locale locale) {
@@ -120,14 +115,12 @@ public class I18nManager {
     }
 
     /**
-     * Translates into a {@link String} the key resource bundle with table arguments and defined {@link Locale}.
+     * Translate into a {@link String} the key resource bundle with table
+     * arguments and defined {@link Locale}.
      * 
-     * @param key
-     *            the key resource bundle
-     * @param arguments
-     *            the table arguments
-     * @param locale
-     *            the {@link Locale} to use
+     * @param key the key resource bundle
+     * @param arguments the table arguments
+     * @param locale the {@link Locale} to use
      * @return the translated {@link String}
      */
     private String translate(String key, Object[] arguments, Locale locale) {

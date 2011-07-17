@@ -125,13 +125,17 @@ public class DestinationChooserWizardPanel extends JsamsWizardPanel {
      * {@inheritDoc}
      */
     public void next() {
+        if (isRadioSelected()) {
+            ((TransferWizardComponent) getWizardComponent()).setDestination(selectedOption);
+            switchPanel(TransferWizardDialog.THIRD_PANEL);
+        }
     }
 
     /**
      * {@inheritDoc}
      */
     public void back() {
-        switchPanel(TransferWizardDialog.SECOND_PANEL);
+        switchPanel(TransferWizardDialog.FIRST_PANEL);
     }
 
     /**

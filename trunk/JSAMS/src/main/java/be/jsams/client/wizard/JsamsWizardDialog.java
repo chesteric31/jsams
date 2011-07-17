@@ -33,12 +33,12 @@ public class JsamsWizardDialog extends JsamsDialog {
      */
     private static final long serialVersionUID = 2855036709879288192L;
 
-    private DefaultJsamsWizardComponent component;
+    private JsamsWizardComponent component;
     private I18nString title;
     private JPanel buttonPanel;
     private String logoFileName;
     private JsamsLabel label;
-    
+
     /**
      * Constructor.
      * 
@@ -46,10 +46,17 @@ public class JsamsWizardDialog extends JsamsDialog {
      * @param title the {@link I18nString} translatable String
      * @param iconFileName the icon path name of the dialog
      * @param logoFileName the file name to the logo to display
+     * @param component the {@link JsamsWizardComponent} to use, if null, we new
+     *            one {@link DefaultJsamsWizardComponent} will be created
      */
-    public JsamsWizardDialog(JsamsMainFrame parent, I18nString title, String iconFileName, String logoFileName) {
+    public JsamsWizardDialog(JsamsMainFrame parent, I18nString title, String iconFileName, String logoFileName,
+            JsamsWizardComponent component) {
         super(parent, title, IconUtil.TITLE_ICON_PREFIX + iconFileName);
-        component = new DefaultJsamsWizardComponent();
+        if (component == null) {
+            this.component = new DefaultJsamsWizardComponent();
+        } else {
+            this.component = component;
+        }
         this.logoFileName = logoFileName;
         initComponents();
     }
@@ -109,14 +116,14 @@ public class JsamsWizardDialog extends JsamsDialog {
     /**
      * @return the component
      */
-    public DefaultJsamsWizardComponent getComponent() {
+    public JsamsWizardComponent getComponent() {
         return component;
     }
 
     /**
      * @param component the component to set
      */
-    public void setComponent(DefaultJsamsWizardComponent component) {
+    public void setComponent(JsamsWizardComponent component) {
         this.component = component;
     }
 
