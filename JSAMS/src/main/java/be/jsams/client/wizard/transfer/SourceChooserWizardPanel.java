@@ -118,7 +118,7 @@ public class SourceChooserWizardPanel extends JsamsWizardPanel {
         setNextButtonEnabled(nextEnabled);
         boolean finishEnabled = selectedOption == finishSelected;
         setFinishButtonEnabled(finishEnabled);
-        setBackButtonEnabled(true);
+        setBackButtonEnabled(false);
     }
 
     /**
@@ -126,7 +126,8 @@ public class SourceChooserWizardPanel extends JsamsWizardPanel {
      */
     public void next() {
         if (isRadioSelected()) {
-            switchPanel(TransferWizardDialog.THIRD_PANEL);
+            ((TransferWizardComponent) getWizardComponent()).setSource(selectedOption);
+            switchPanel(TransferWizardDialog.SECOND_PANEL);
         }
     }
 
@@ -134,7 +135,6 @@ public class SourceChooserWizardPanel extends JsamsWizardPanel {
      * {@inheritDoc}
      */
     public void back() {
-        switchPanel(TransferWizardDialog.FIRST_PANEL);
     }
 
     /**

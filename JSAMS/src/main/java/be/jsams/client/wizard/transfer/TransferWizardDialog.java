@@ -45,7 +45,7 @@ public class TransferWizardDialog extends JsamsWizardDialog {
      * @param logoFileName the logo file name for the wizard panel
      */
     public TransferWizardDialog(JsamsMainFrame parent, I18nString title, String iconFileName, String logoFileName) {
-        super(parent, title, iconFileName, logoFileName);
+        super(parent, title, iconFileName, logoFileName, new TransferWizardComponent());
         buildPanels();
     }
 
@@ -53,12 +53,26 @@ public class TransferWizardDialog extends JsamsWizardDialog {
      * Build panels.
      */
     private void buildPanels() {
-        TransferModeChooserWizardPanel chooserPanel = new TransferModeChooserWizardPanel(getComponent());
-        getComponent().addPanel(FIRST_PANEL, chooserPanel);
         SourceChooserWizardPanel sourceChooserPanel = new SourceChooserWizardPanel(getComponent());
-        getComponent().addPanel(SECOND_PANEL, sourceChooserPanel);
+        getComponent().addPanel(FIRST_PANEL, sourceChooserPanel);
         DestinationChooserWizardPanel destinationChooserPanel = new DestinationChooserWizardPanel(getComponent());
-        getComponent().addPanel(THIRD_PANEL, destinationChooserPanel);
+        getComponent().addPanel(SECOND_PANEL, destinationChooserPanel);
+        TransferModeChooserWizardPanel chooserPanel = new TransferModeChooserWizardPanel(getComponent());
+        getComponent().addPanel(THIRD_PANEL, chooserPanel);
+        DocumentChooserWizardPanel documentChooserPanel = new DocumentChooserWizardPanel(getComponent());
+        getComponent().addPanel(FIRTH_PANEL_FULL_MODE, documentChooserPanel);
+        DocumentChooserWizardPanel documentChooserPanel2 = new DocumentChooserWizardPanel(getComponent());
+        getComponent().addPanel(FIRTH_PANEL_PARTIAL_MODE, documentChooserPanel2);
+        DocumentsChooserWizardPanel documentsChooserPanel = new DocumentsChooserWizardPanel(getComponent());
+        getComponent().addPanel(FIRTH_PANEL_FULL_GROUPED_MODE, documentsChooserPanel);
+        DocumentsChooserWizardPanel documentsChooserPanel2 = new DocumentsChooserWizardPanel(getComponent());
+        getComponent().addPanel(FIRTH_PANEL_PARTIAL_GROUPED_MODE, documentsChooserPanel2);
+        DocumentDetailsChooserWizardPanel documentDetailsChooserPanel = new DocumentDetailsChooserWizardPanel(
+                getComponent());
+        getComponent().addPanel(FIFTH_PANEL_PARTIAL_MODE, documentDetailsChooserPanel);
+        DocumentDetailsChooserWizardPanel documentDetailsChooserPanel2 = new DocumentDetailsChooserWizardPanel(
+                getComponent());
+        getComponent().addPanel(FIFTH_PANEL_PARTIAL_GROUPED_MODE, documentDetailsChooserPanel2);
         pack();
         setLocationRelativeTo(null);
     }

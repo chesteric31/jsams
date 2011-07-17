@@ -121,7 +121,7 @@ public class TransferModeChooserWizardPanel extends JsamsWizardPanel {
         setNextButtonEnabled(nextEnabled);
         boolean finishEnabled = selectedOption == finishSelected;
         setFinishButtonEnabled(finishEnabled);
-        setBackButtonEnabled(false); // there is no way back
+        setBackButtonEnabled(true);
     }
 
     /**
@@ -136,8 +136,22 @@ public class TransferModeChooserWizardPanel extends JsamsWizardPanel {
      * {@inheritDoc}
      */
     public void next() {
-        if (isRadioSelected()) {
-            switchPanel(TransferWizardDialog.SECOND_PANEL);
+        ((TransferWizardComponent) getWizardComponent()).setMode(selectedOption);
+        switch (selectedOption) {
+        case fullModeSelected:
+            switchPanel(TransferWizardDialog.FIRTH_PANEL_FULL_MODE);
+            break;
+        case partialModeSelected:
+            switchPanel(TransferWizardDialog.FIRTH_PANEL_PARTIAL_MODE);
+            break;
+        case fullGroupedModeSelected:
+            switchPanel(TransferWizardDialog.FIRTH_PANEL_FULL_GROUPED_MODE);
+            break;
+        case partialGroupedModeSelected:
+            switchPanel(TransferWizardDialog.FIRTH_PANEL_PARTIAL_GROUPED_MODE);
+            break;
+        default:
+            break;
         }
     }
 
@@ -145,6 +159,7 @@ public class TransferModeChooserWizardPanel extends JsamsWizardPanel {
      * {@inheritDoc}
      */
     public void back() {
+        switchPanel(TransferWizardDialog.SECOND_PANEL);
     }
 
 }

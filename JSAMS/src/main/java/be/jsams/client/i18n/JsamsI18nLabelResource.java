@@ -156,4 +156,11 @@ public final class JsamsI18nLabelResource {
     public static final I18nString LABEL_TRANSFER_CHOOSE_DESTINATION = new I18nString(
             "label.transfer.choose_destination");
 
+    public static final I18nString LABEL_TRANSFER_CHOOSE_DOCUMENT = new I18nString("label.transfer.choose_document");
+
+    public static final I18nString LABEL_TRANSFER_CHOOSE_DOCUMENTS = new I18nString("label.transfer.choose_documents");
+
+    public static final I18nString LABEL_TRANSFER_CHOOSE_DOCUMENT_DETAILS = new I18nString(
+            "label.transfer.choose_document_details");
+
 }
