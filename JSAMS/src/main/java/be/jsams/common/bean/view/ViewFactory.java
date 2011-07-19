@@ -36,7 +36,7 @@ import com.toedter.calendar.JDateChooser;
 public class ViewFactory<B extends AbstractIdentityBean<?, ?>> {
 
     /**
-     * Creates {@link JsamsTextField} and binds this component to the bean
+     * Create {@link JsamsTextField} and bind this component to the bean
      * parameter.
      * 
      * @param bean the bean
@@ -56,7 +56,7 @@ public class ViewFactory<B extends AbstractIdentityBean<?, ?>> {
     }
 
     /**
-     * Creates {@link JsamsComboBox} and binds this component to the bean
+     * Create {@link JsamsComboBox} and bind this component to the bean
      * parameter.
      * 
      * @param bean the Bean object to bind
@@ -79,7 +79,7 @@ public class ViewFactory<B extends AbstractIdentityBean<?, ?>> {
     }
 
     /**
-     * Creates {@link JsamsFormattedTextField} and binds this component to the
+     * Create {@link JsamsFormattedTextField} and bind this component to the
      * bean parameter.
      * 
      * @param bean the bean
@@ -101,7 +101,7 @@ public class ViewFactory<B extends AbstractIdentityBean<?, ?>> {
     }
 
     /**
-     * Creates {@link JDateChooser} and binds this component to the bean
+     * Create {@link JDateChooser} and bind this component to the bean
      * parameter.
      * 
      * @param bean the bean
@@ -115,14 +115,13 @@ public class ViewFactory<B extends AbstractIdentityBean<?, ?>> {
         PropertyAdapter<B> adapter = new PropertyAdapter<B>(bean, property, true);
         JDateChooser dateField = new JDateChooser();
         Bindings.bind((JComponent) dateField, "date", adapter);
-
         ValidationComponentUtils.setMandatory(dateField, mandatory);
         dateField.setEnabled(!readOnly);
         return dateField;
     }
 
     /**
-     * Creates {@link JsamsFormattedTextField} and binds this component to the
+     * Create {@link JsamsFormattedTextField} and bind this component to the
      * bean parameter.
      * 
      * @param bean the bean
@@ -151,8 +150,7 @@ public class ViewFactory<B extends AbstractIdentityBean<?, ?>> {
     }
 
     /**
-     * Creates a {@link JTextArea} and binds this component to the bean
-     * parameter.
+     * Create a {@link JTextArea} and bind this component to the bean parameter.
      * 
      * @param bean the bean
      * @param property the property
@@ -170,9 +168,7 @@ public class ViewFactory<B extends AbstractIdentityBean<?, ?>> {
     }
 
     /**
-     * 
-     * Creates a {@link JCheckBox} and binds this component to the bean
-     * parameter.
+     * Create a {@link JCheckBox} and bind this component to the bean parameter.
      * 
      * @param bean the bean
      * @param property the property
@@ -190,7 +186,7 @@ public class ViewFactory<B extends AbstractIdentityBean<?, ?>> {
     }
 
     /**
-     * Creates a {@link JsamsTable} and binds this component to the bean.
+     * Create a {@link JsamsTable} and bind this component to the bean.
      * 
      * @param tableModel the {@link AbstractJsamsTableModel} to set
      * @param mandatory mandatory boolean
