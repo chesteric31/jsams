@@ -51,11 +51,12 @@ public class DocumentChooserWizardPanel extends JsamsWizardPanel<TransferBean> {
     /**
      * Constructor.
      * 
+     * @param parent the {@link TransferWizardDialog} parent
      * @param component the {@link JsamsWizardComponent}
      * @param model the model
      */
-    public DocumentChooserWizardPanel(JsamsWizardComponent component, TransferBean model) {
-        super(component, model, JsamsI18nLabelResource.LABEL_TRANSFER_CHOOSE_DOCUMENT);
+    public DocumentChooserWizardPanel(TransferWizardDialog parent, JsamsWizardComponent component, TransferBean model) {
+        super(parent, component, model, JsamsI18nLabelResource.LABEL_TRANSFER_CHOOSE_DOCUMENT);
         initComponents();
     }
 
@@ -63,44 +64,6 @@ public class DocumentChooserWizardPanel extends JsamsWizardPanel<TransferBean> {
      * Initialize the components.
      */
     private void initComponents() {
-        int source = getModel().getSourceType();
-        SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
-        CustomerBean customer = JsamsApplicationContext.getCustomerBeanBuilder().build(null, currentSociety);
-        AgentBean agent = JsamsApplicationContext.getAgentBeanBuilder().build(null, currentSociety);
-
-        switch (source) {
-        case 1:
-            EstimateBean estimate = new EstimateBean(currentSociety, customer, agent);
-            SearchEstimatePanel estimatePanel = new SearchEstimatePanel(estimate, new EstimateTableMouseListener(),
-                    JsamsApplicationContext.getEstimateService(), new SearchEstimateValidator(),
-                    new EstimateTableModel(), true);
-            this.add(estimatePanel);
-            break;
-        case 2:
-            CommandBean command = new CommandBean(currentSociety, customer, agent);
-            SearchCommandPanel commandPanel = new SearchCommandPanel(command, new CommandTableMouseListener(),
-                    JsamsApplicationContext.getCommandService(), new SearchCommandValidator(), new CommandTableModel(),
-                    true);
-            this.add(commandPanel);
-            break;
-        case 3:
-            DeliveryOrderBean deliveryOrder = new DeliveryOrderBean(currentSociety, customer);
-            SearchDeliveryOrderPanel deliveryOrderPanel = new SearchDeliveryOrderPanel(deliveryOrder,
-                    new DeliveryOrderTableMouseListener(), JsamsApplicationContext.getDeliveryOrderService(),
-                    new SearchDeliveryOrderValidator(), new DeliveryOrderTableModel(), true);
-            this.add(deliveryOrderPanel);
-            break;
-        case 4:
-            PaymentModeBeanBuilder builder = JsamsApplicationContext.getPaymentModeBeanBuilder();
-            PaymentModeBean mode = builder.build();
-            BillBean bill = new BillBean(currentSociety, customer, mode);
-            SearchBillPanel billPanel = new SearchBillPanel(bill, new BillTableMouseListener(),
-                    JsamsApplicationContext.getBillService(), new SearchBillValidator(), new BillTableModel(), true);
-            this.add(billPanel);
-            break;
-        default:
-            break;
-        }
     }
 
     /**
@@ -115,6 +78,52 @@ public class DocumentChooserWizardPanel extends JsamsWizardPanel<TransferBean> {
         boolean finishEnabled = selectedOption == finishSelected;
         setFinishButtonEnabled(finishEnabled);
         setBackButtonEnabled(true);
+        updateContainer();
+        super.update();
+    }
+    
+    /**
+     * Update the panel container. 
+     */
+    private void updateContainer() {
+        int source = getModel().getSourceType();
+        SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
+        CustomerBean customer = JsamsApplicationContext.getCustomerBeanBuilder().build(null, currentSociety);
+        AgentBean agent = JsamsApplicationContext.getAgentBeanBuilder().build(null, currentSociety);
+
+        switch (source) {
+        case 1:
+            EstimateBean estimate = new EstimateBean(currentSociety, customer, agent);
+            SearchEstimatePanel estimatePanel = new SearchEstimatePanel(estimate, new EstimateTableMouseListener(),
+                    JsamsApplicationContext.getEstimateService(), new SearchEstimateValidator(),
+                    new EstimateTableModel(), false);
+            this.add(estimatePanel);
+            break;
+        case 2:
+            CommandBean command = new CommandBean(currentSociety, customer, agent);
+            SearchCommandPanel commandPanel = new SearchCommandPanel(command, new CommandTableMouseListener(),
+                    JsamsApplicationContext.getCommandService(), new SearchCommandValidator(), new CommandTableModel(),
+                    false);
+            this.add(commandPanel);
+            break;
+        case 3:
+            DeliveryOrderBean deliveryOrder = new DeliveryOrderBean(currentSociety, customer);
+            SearchDeliveryOrderPanel deliveryOrderPanel = new SearchDeliveryOrderPanel(deliveryOrder,
+                    new DeliveryOrderTableMouseListener(), JsamsApplicationContext.getDeliveryOrderService(),
+                    new SearchDeliveryOrderValidator(), new DeliveryOrderTableModel(), false);
+            this.add(deliveryOrderPanel);
+            break;
+        case 4:
+            PaymentModeBeanBuilder builder = JsamsApplicationContext.getPaymentModeBeanBuilder();
+            PaymentModeBean mode = builder.build();
+            BillBean bill = new BillBean(currentSociety, customer, mode);
+            SearchBillPanel billPanel = new SearchBillPanel(bill, new BillTableMouseListener(),
+                    JsamsApplicationContext.getBillService(), new SearchBillValidator(), new BillTableModel(), false);
+            this.add(billPanel);
+            break;
+        default:
+            break;
+        }
     }
 
     /**
@@ -127,6 +136,7 @@ public class DocumentChooserWizardPanel extends JsamsWizardPanel<TransferBean> {
      * {@inheritDoc}
      */
     public void back() {
+        remove(getComponentCount() - 1);
         switchPanel(TransferWizardDialog.THIRD_PANEL);
     }
     

@@ -4,8 +4,13 @@ import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 
+import javax.swing.BoxLayout;
+import javax.swing.InputMap;
+import javax.swing.JComponent;
 import javax.swing.JPanel;
+import javax.swing.KeyStroke;
 import javax.swing.plaf.FontUIResource;
 
 import be.jsams.client.context.JsamsApplicationContext;
@@ -46,12 +51,10 @@ public class OpenSocietyDialog extends JsamsDialog implements JsamsButtonsInterf
     private static final long serialVersionUID = 237617341189579756L;
 
     private JsamsComboBox comboBox = null;
-
     private JsamsButtonsPanel buttonsPanel;
-
     private SocietyBean bean;
-
     private JsamsStatusBar statusBar;
+    private JPanel southPanel;
 
     /**
      * Constructor
@@ -60,11 +63,11 @@ public class OpenSocietyDialog extends JsamsDialog implements JsamsButtonsInterf
      */
     public OpenSocietyDialog(final I18nString title) {
         super(null, title, IconUtil.TITLE_ICON_PREFIX + "categories/applications-office.png");
-        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         buttonsPanel = new JsamsButtonsPanel(this, true, false, false);
-        add(buttonsPanel, BorderLayout.SOUTH);
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+        setDefaultKeyActions();
+        add(buildSouthPanel(), BorderLayout.SOUTH);
         initComponents();
-        DialogUtil.centerComponentOnScreen(this);
     }
 
     /**
@@ -90,13 +93,10 @@ public class OpenSocietyDialog extends JsamsDialog implements JsamsButtonsInterf
         JPanel panel = builder.getPanel();
         JPanel mainPanel = new JPanel(new BorderLayout());
         mainPanel.add(panel, BorderLayout.CENTER);
-
-        statusBar = new JsamsStatusBar();
-        mainPanel.add(statusBar, BorderLayout.SOUTH);
-
         add(mainPanel);
         pack();
-        setLocationRelativeTo(null);
+        DialogUtil.centerComponentOnScreen(this);
+//        setLocationRelativeTo(null);
         setVisible(true);
         setResizable(false);
     }
@@ -161,6 +161,33 @@ public class OpenSocietyDialog extends JsamsDialog implements JsamsButtonsInterf
      */
     public SocietyBeanBuilder getSocietyBeanBuilder() {
         return JsamsApplicationContext.getSocietyBeanBuilder();
+    }
+    
+
+    /**
+     * Build the 'south panel' composed by a {@link JsamsButtonsPanel} {@link JsamsStatusBar}
+     * 
+     * @return the 'south panel'
+     */
+    private JPanel buildSouthPanel() {
+        statusBar = new JsamsStatusBar();
+        southPanel = new JPanel();
+        southPanel.setLayout(new BoxLayout(southPanel, BoxLayout.PAGE_AXIS));
+        southPanel.add(buttonsPanel);
+        southPanel.add(statusBar);
+        return southPanel;
+    }
+
+    /**
+     * Set the default keys actions.
+     */
+    private void setDefaultKeyActions() {
+        // Automatically choose OK when Enter Key is pressed
+        int noModifiers = 0;
+        KeyStroke okKey = KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, noModifiers, false);
+        InputMap inputMap = rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
+        inputMap.put(okKey, JsamsButtonsPanel.OK_ACTION_KEY);
+        rootPane.getActionMap().put(JsamsButtonsPanel.OK_ACTION_KEY, buttonsPanel.getButtonOk().getAction());
     }
     
 }

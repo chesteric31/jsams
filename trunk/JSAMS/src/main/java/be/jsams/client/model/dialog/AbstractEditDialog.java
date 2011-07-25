@@ -17,6 +17,7 @@ import be.jsams.client.swing.component.JsamsButtonsPanel;
 import be.jsams.client.swing.component.JsamsDialog;
 import be.jsams.client.swing.component.JsamsLabel;
 import be.jsams.client.swing.component.JsamsStatusBar;
+import be.jsams.client.swing.utils.DialogUtil;
 import be.jsams.client.swing.utils.IconUtil;
 import be.jsams.common.bean.model.AbstractIdentityBean;
 import be.jsams.server.service.Service;
@@ -93,7 +94,8 @@ public abstract class AbstractEditDialog<B extends AbstractIdentityBean<?, ?>, V
         this.validator = validator;
         this.service = service;
         initComponents();
-        setLocationRelativeTo(null);
+        DialogUtil.centerComponentOnScreen(this);
+//        setLocationRelativeTo(null);
         setResizable(false);
         setVisible(true);
     }
@@ -168,7 +170,7 @@ public abstract class AbstractEditDialog<B extends AbstractIdentityBean<?, ?>, V
     }
 
     /**
-     * Builds the 'south panel' composed by a {@link JsamsButtonsPanel} {@link JsamsStatusBar}
+     * Build the 'south panel' composed by a {@link JsamsButtonsPanel} {@link JsamsStatusBar}
      * 
      * @return the 'south panel'
      */

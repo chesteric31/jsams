@@ -21,11 +21,13 @@ public class DocumentDetailsChooserWizardPanel extends JsamsWizardPanel<Transfer
     /**
      * Constructor.
      * 
+     * @param parent the {@link TransferWizardDialog} parent
      * @param component the {@link JsamsWizardComponent}
      * @param model the model
      */
-    public DocumentDetailsChooserWizardPanel(JsamsWizardComponent component, TransferBean model) {
-        super(component, model, JsamsI18nLabelResource.LABEL_TRANSFER_CHOOSE_DOCUMENT_DETAILS);
+    public DocumentDetailsChooserWizardPanel(TransferWizardDialog parent, JsamsWizardComponent component,
+            TransferBean model) {
+        super(parent, component, model, JsamsI18nLabelResource.LABEL_TRANSFER_CHOOSE_DOCUMENT_DETAILS);
         initComponents();
     }
 

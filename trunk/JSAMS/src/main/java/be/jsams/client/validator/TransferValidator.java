@@ -1,5 +1,7 @@
 package be.jsams.client.validator;
 
+import be.jsams.client.i18n.JsamsI18nLabelResource;
+import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.common.bean.model.transfer.TransferBean;
 
 import com.jgoodies.validation.ValidationResult;
@@ -20,51 +22,64 @@ public class TransferValidator implements Validator<TransferBean> {
     @Override
     public ValidationResult validate(TransferBean bean) {
         PropertyValidationSupport support = new PropertyValidationSupport(bean, "");
-
-//        String name = customer.getName();
-//        if (ValidationUtils.isBlank(name)) {
-//            support.addError(JsamsI18nLabelResource.LABEL_NAME.getTranslation(), JsamsI18nResource.ERROR_IS_MANDATORY
-//                    .getTranslation());
-//        } else if (!ValidationUtils.isAlphanumericSpace(name)) {
-//            support.addError(JsamsI18nLabelResource.LABEL_NAME.getTranslation(),
-//                    JsamsI18nResource.ERROR_IS_ALPHANUMERIC.getTranslation());
-//        }
-//
-//        if (customer.getPaymentMode().getLabel() == null) {
-//            support.addError(JsamsI18nLabelResource.LABEL_PAYMENT_MODE.getTranslation(),
-//                    JsamsI18nResource.ERROR_IS_MANDATORY.getTranslation());
-//        }
-//
-//        String phone = customer.getContactInformation().getPhone();
-//        if (ValidationUtils.isBlank(phone)) {
-//            support.addError(JsamsI18nLabelResource.LABEL_PHONE.getTranslation(), JsamsI18nResource.ERROR_IS_MANDATORY
-//                    .getTranslation());
-//        } else if (!ValidationUtils.isAlphanumericSpace(phone)) {
-//            support.addError(JsamsI18nLabelResource.LABEL_PHONE.getTranslation(),
-//                    JsamsI18nResource.ERROR_IS_ALPHANUMERIC.getTranslation());
-//        }
-//
-//        Double vatApplicable = customer.getVatApplicable();
-//        if (vatApplicable == null || ValidationUtils.isBlank(vatApplicable.toString())) {
-//            support.addError(JsamsI18nLabelResource.LABEL_VAT_APPLICABLE.getTranslation(),
-//                    JsamsI18nResource.ERROR_IS_MANDATORY.getTranslation());
-//        }
-//
-//        AgentBean agent = customer.getAgent();
-//        if (agent == null || ValidationUtils.isBlank(agent.getName())) {
-//            support.addError(JsamsI18nLabelResource.LABEL_AGENT.getTranslation(),
-//                    JsamsI18nResource.ERROR_IS_MANDATORY.getTranslation());
-//        }
-//
-//        Validator<AddressBean> billingAddressValidator = new EditAddressValidator();
-//        ValidationResult billingAddressResult = billingAddressValidator.validate(customer.getBillingAddress());
-//        Validator<AddressBean> deliveryAddressValidator = new EditAddressValidator();
-//        ValidationResult deliveryAddressResult = deliveryAddressValidator.validate(customer.getDeliveryAddress());
-//
+        int sourceType = bean.getSourceType();
+        int destinationType = bean.getDestinationType();
+        if (sourceType != 0 && destinationType != 0) {
+            switch (sourceType) {
+            case 2:
+                checkCommand(destinationType, support);
+                break;
+            case 3:
+                checkDeliveryOrder(destinationType, support);
+                break;
+            case 4:
+                checkBill(destinationType, support);
+                break;
+            default:
+                break;
+            }
+        }
         ValidationResult result = support.getResult();
-//        result.addAllFrom(billingAddressResult);
-//        result.addAllFrom(deliveryAddressResult);
         return result;
+    }
+    
+    /**
+     * Check the command selecting.
+     * 
+     * @param destinationType the selected destination type
+     * @param support the {@link PropertyValidationSupport}
+     */
+    private void checkCommand(int destinationType, PropertyValidationSupport support) {
+        if (destinationType == 1) {
+            support.addError(JsamsI18nLabelResource.LABEL_DESTINATION_TYPE.getTranslation(),
+                    JsamsI18nResource.ERROR_SOURCE_DESTINATION.getTranslation());
+        }
+    }
+
+    /**
+     * Check the delivery order selecting.
+     * 
+     * @param destinationType the selected destination type
+     * @param support the {@link PropertyValidationSupport}
+     */
+    private void checkDeliveryOrder(int destinationType, PropertyValidationSupport support) {
+        if (destinationType < 3) {
+            support.addError(JsamsI18nLabelResource.LABEL_DESTINATION_TYPE.getTranslation(),
+                    JsamsI18nResource.ERROR_SOURCE_DESTINATION.getTranslation());
+        }
+    }
+
+    /**
+     * Check the bill selecting.
+     * 
+     * @param destinationType the selected destination type
+     * @param support the {@link PropertyValidationSupport}
+     */
+    private void checkBill(int destinationType, PropertyValidationSupport support) {
+        if (destinationType != 4) {
+            support.addError(JsamsI18nLabelResource.LABEL_DESTINATION_TYPE.getTranslation(),
+                    JsamsI18nResource.ERROR_SOURCE_DESTINATION.getTranslation());
+        }
     }
 
 }

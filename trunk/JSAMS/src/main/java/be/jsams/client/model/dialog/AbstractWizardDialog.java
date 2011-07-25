@@ -7,6 +7,7 @@ import java.awt.Image;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
@@ -17,6 +18,7 @@ import be.jsams.client.i18n.I18nString;
 import be.jsams.client.swing.component.JsamsDialog;
 import be.jsams.client.swing.component.JsamsLabel;
 import be.jsams.client.swing.component.JsamsStatusBar;
+import be.jsams.client.swing.utils.DialogUtil;
 import be.jsams.client.swing.utils.IconUtil;
 import be.jsams.client.wizard.DefaultJsamsWizardComponent;
 import be.jsams.client.wizard.JsamsWizardButtonPanel;
@@ -51,13 +53,14 @@ public abstract class AbstractWizardDialog<B extends AbstractIdentityBean<?, ?>,
 
     private JsamsWizardComponent component;
     private I18nString title;
-    private JPanel buttonPanel;
+    private JPanel buttonsPanel;
     private String logoFileName;
     private JsamsLabel label;
     
     private B model;
     private ValidationResultModel validationResultModel = new DefaultValidationResultModel();
     private JsamsStatusBar statusBar;
+    private JPanel southPanel;
     private Validator<B> validator;
     private TransferService service;
 
@@ -82,7 +85,7 @@ public abstract class AbstractWizardDialog<B extends AbstractIdentityBean<?, ?>,
         this.logoFileName = logoFileName;
         preInitComponents();
         initComponents();
-        setLocationRelativeTo(null);
+//        setLocationRelativeTo(null);
         setResizable(false);
         component.updateComponents();
         setVisible(true);
@@ -108,7 +111,7 @@ public abstract class AbstractWizardDialog<B extends AbstractIdentityBean<?, ?>,
         JPanel centerPanel = new JPanel();
         if (logoFileName != null) {
             Image defaultlogo = IconUtil.buildIcon(logoFileName);
-            JPanel logoPanel = new JPanel();
+            JPanel logoPanel = new JPanel(new BorderLayout());
             logoPanel.add(new JsamsLabel(new ImageIcon(defaultlogo)));
             logoPanel.setBackground(Color.WHITE);
             centerPanel.add(logoPanel);
@@ -116,7 +119,7 @@ public abstract class AbstractWizardDialog<B extends AbstractIdentityBean<?, ?>,
         centerPanel.add(component.getPanelsContainer());
         add(centerPanel, BorderLayout.CENTER);
         
-        buttonPanel = new JsamsWizardButtonPanel(component);
+        buttonsPanel = new JsamsWizardButtonPanel(component);
         component.setFinishAction(new FinishAction(component) {
             public void performAction() {
                 dispose();
@@ -127,7 +130,12 @@ public abstract class AbstractWizardDialog<B extends AbstractIdentityBean<?, ?>,
                 dispose();
             }
         });
-        add(buttonPanel, BorderLayout.SOUTH);
+        statusBar = new JsamsStatusBar();
+        southPanel = new JPanel();
+        southPanel.setLayout(new BoxLayout(southPanel, BoxLayout.PAGE_AXIS));
+        southPanel.add(buttonsPanel);
+        southPanel.add(statusBar);
+        add(southPanel, BorderLayout.SOUTH);
 
         // set automatically the new title
         component.addPropertyChangeListener(new PropertyChangeListener() {
@@ -135,15 +143,17 @@ public abstract class AbstractWizardDialog<B extends AbstractIdentityBean<?, ?>,
                 setPanelTitle(((JsamsWizardPanel<?>) event.getNewValue()).getPanelTitle());
             }
         });
+        this.pack();
+        DialogUtil.centerComponentOnScreen(this);
     }
     
-    /**
-     * Display the dialog.
-     */
-    public void display() {
-        component.updateComponents();
-        super.setVisible(true);
-    }
+//    /**
+//     * Display the dialog.
+//     */
+//    public void display() {
+//        component.updateComponents();
+//        super.setVisible(true);
+//    }
 
     /**
      * @return the component
