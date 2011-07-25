@@ -80,16 +80,23 @@ public abstract class AbstractWizardDialog<B extends AbstractIdentityBean<?, ?>,
         this.service = service;
         this.component = new DefaultJsamsWizardComponent();
         this.logoFileName = logoFileName;
+        preInitComponents();
         initComponents();
         setLocationRelativeTo(null);
         setResizable(false);
+        component.updateComponents();
         setVisible(true);
     }
+    
+    /**
+     * Initializes all the components.
+     */
+    public abstract void initComponents();
 
     /**
-     * Initialize all the components.
+     * Pre-Initialize all the components.
      */
-    private void initComponents() {
+    private void preInitComponents() {
         this.setLayout(new BorderLayout());
         label = new JsamsLabel();
         label.setFont(new FontUIResource(Font.SANS_SERIF, Font.BOLD, 12));

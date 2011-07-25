@@ -1,5 +1,7 @@
 package be.jsams.client.wizard.transfer;
 
+import com.jgoodies.validation.view.ValidationComponentUtils;
+
 import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.desktop.JsamsMainFrame;
 import be.jsams.client.i18n.I18nString;
@@ -51,13 +53,13 @@ public class TransferWizardDialog extends AbstractWizardDialog<TransferBean, Tra
     public TransferWizardDialog(JsamsMainFrame parent, I18nString title, String iconFileName, String logoFileName) {
         super(parent, title, iconFileName, logoFileName, new TransferBean(), new TransferValidator(),
                 JsamsApplicationContext.getTransferService());
-        buildPanels();
     }
 
     /**
-     * Build panels.
+     * {@inheritDoc}
      */
-    private void buildPanels() {
+    @Override
+    public void initComponents() {
         SourceChooserWizardPanel sourceChooserPanel = new SourceChooserWizardPanel(getComponent(), getModel());
         getComponent().addPanel(FIRST_PANEL, sourceChooserPanel);
         DestinationChooserWizardPanel destinationChooserPanel = new DestinationChooserWizardPanel(getComponent(),
@@ -80,8 +82,8 @@ public class TransferWizardDialog extends AbstractWizardDialog<TransferBean, Tra
         DocumentDetailsChooserWizardPanel documentDetailsChooserPanel2 = new DocumentDetailsChooserWizardPanel(
                 getComponent(), getModel());
         getComponent().addPanel(FIFTH_PANEL_PARTIAL_GROUPED_MODE, documentDetailsChooserPanel2);
+        ValidationComponentUtils.updateComponentTreeMandatoryBorder(this);
         pack();
-        setLocationRelativeTo(null);
     }
 
 }

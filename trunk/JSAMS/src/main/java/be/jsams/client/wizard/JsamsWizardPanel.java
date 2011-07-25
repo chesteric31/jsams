@@ -4,8 +4,10 @@ import javax.swing.JPanel;
 
 import be.jsams.client.i18n.I18nString;
 import be.jsams.common.bean.model.AbstractIdentityBean;
+import be.jsams.common.bean.view.ViewFactory;
 
 /**
+ * Abstract wizard panel.
  * 
  * @param <B> the {@link AbstractIdentityBean} model
  * 
@@ -165,6 +167,14 @@ public abstract class JsamsWizardPanel<B extends AbstractIdentityBean<?, ?>> ext
      */
     public void setModel(B model) {
         this.model = model;
+    }
+    
+    /**
+     * @return the {@link ViewFactory}
+     */
+    @SuppressWarnings("unchecked")
+    public ViewFactory<B> getViewFactory() {
+        return (ViewFactory<B>) getModel().getView().getViewFactory();
     }
     
 }
