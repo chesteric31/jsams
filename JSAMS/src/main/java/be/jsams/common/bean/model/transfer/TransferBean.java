@@ -12,7 +12,6 @@ import be.jsams.server.model.AbstractIdentity;
  * destination: 1 for command, 2 for delivery order, 3 for bill and 4 for credit note
  * mode: 1 for full mode, 2 for partial mode, 3 for full grouped mode and 4 for partial grouped mode
  *
- *
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
