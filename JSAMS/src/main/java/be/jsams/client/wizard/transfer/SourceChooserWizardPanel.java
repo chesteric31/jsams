@@ -39,11 +39,12 @@ public class SourceChooserWizardPanel extends JsamsWizardPanel<TransferBean> {
     /**
      * Constructor.
      * 
+     * @param parent the {@link TransferWizardDialog}
      * @param component the {@link JsamsWizardComponent}
      * @param model the model
      */
-    public SourceChooserWizardPanel(JsamsWizardComponent component, TransferBean model) {
-        super(component, model, JsamsI18nLabelResource.LABEL_TRANSFER_CHOOSE_SOURCE);
+    public SourceChooserWizardPanel(TransferWizardDialog parent, JsamsWizardComponent component, TransferBean model) {
+        super(parent, component, model, JsamsI18nLabelResource.LABEL_TRANSFER_CHOOSE_SOURCE);
         initComponents();
     }
 
@@ -112,13 +113,14 @@ public class SourceChooserWizardPanel extends JsamsWizardPanel<TransferBean> {
         setNextButtonEnabled(nextEnabled);
         setFinishButtonEnabled(false);
         setBackButtonEnabled(false);
+        super.update();
     }
 
     /**
      * {@inheritDoc}
      */
     public void next() {
-        if (sourceTypeIsSelected()) {
+        if (sourceTypeIsSelected() && prePerformNext(getModel())) {
             switchPanel(TransferWizardDialog.SECOND_PANEL);
         }
     }

@@ -11,7 +11,7 @@ import be.jsams.client.wizard.action.FinishAction;
 /**
  * 
  *
- * @author ebinard
+ * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
 public interface JsamsWizardComponent extends JsamsWizard {

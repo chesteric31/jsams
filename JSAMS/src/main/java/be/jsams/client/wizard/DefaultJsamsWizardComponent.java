@@ -56,7 +56,7 @@ public class DefaultJsamsWizardComponent implements JsamsWizardComponent {
         
         panelList = new ArrayList<JsamsWizardPanel<?>>();
         currentIndex = 0;
-        panelsContainer = new JPanel();
+        panelsContainer = new JPanel(new CardLayout());
 
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -81,8 +81,6 @@ public class DefaultJsamsWizardComponent implements JsamsWizardComponent {
                 getFinishAction().performAction();
             }
         });
-
-        panelsContainer.setLayout(new CardLayout());
     }
     
     /**

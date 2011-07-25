@@ -1,10 +1,24 @@
 package be.jsams.client.wizard;
 
+import java.util.List;
+
 import javax.swing.JPanel;
 
 import be.jsams.client.i18n.I18nString;
+import be.jsams.client.model.dialog.AbstractWizardDialog;
+import be.jsams.client.swing.component.JsamsLabel;
+import be.jsams.client.swing.component.JsamsStatusBar;
+import be.jsams.client.swing.utils.DialogUtil;
+import be.jsams.client.wizard.transfer.TransferWizardDialog;
 import be.jsams.common.bean.model.AbstractIdentityBean;
 import be.jsams.common.bean.view.ViewFactory;
+
+import com.jgoodies.validation.Severity;
+import com.jgoodies.validation.ValidationMessage;
+import com.jgoodies.validation.ValidationResult;
+import com.jgoodies.validation.ValidationResultModel;
+import com.jgoodies.validation.Validator;
+import com.jgoodies.validation.view.ValidationResultViewFactory;
 
 /**
  * Abstract wizard panel.
@@ -24,15 +38,19 @@ public abstract class JsamsWizardPanel<B extends AbstractIdentityBean<?, ?>> ext
     private JsamsWizardComponent wizardComponent;
     private I18nString panelTitle;
     private B model;
-    
+    private AbstractWizardDialog<?, ?, ?> parent;
+
     /**
      * Constructor.
      * 
+     * @param parent the {@link AbstractWizardDialog} parent
      * @param wizardComponent the {@link JsamsWizardComponent}
      * @param model the {@link AbstractIdentityBean} model
      * @param panelTitle the {@link I18nString} title
      */
-    public JsamsWizardPanel(JsamsWizardComponent wizardComponent, B model, final I18nString panelTitle) {
+    public JsamsWizardPanel(AbstractWizardDialog<?, ?, ?> parent, JsamsWizardComponent wizardComponent, B model,
+            final I18nString panelTitle) {
+        this.parent = parent;
         this.wizardComponent = wizardComponent;
         this.model = model;
         this.panelTitle = panelTitle;
@@ -42,22 +60,25 @@ public abstract class JsamsWizardPanel<B extends AbstractIdentityBean<?, ?>> ext
      * Updating
      */
     public void update() {
+        TransferWizardDialog parent = (TransferWizardDialog) this.getRootPane().getParent();
+        parent.pack();
+        DialogUtil.centerComponentOnScreen(parent);
     }
-    
+
     /**
      * Go next.
      */
     public void next() {
         goNext();
     }
-    
+
     /**
      * Go back.
      */
     public void back() {
         goBack();
     }
-    
+
     /**
      * @return the wizardComponent
      */
@@ -103,17 +124,17 @@ public abstract class JsamsWizardPanel<B extends AbstractIdentityBean<?, ?>> ext
             return false;
         }
     }
-    
+
     /**
      * Change the current index with the panel index.
-     *  
+     * 
      * @param panelIndex the panel index
      */
     protected void switchPanel(int panelIndex) {
         wizardComponent.setCurrentIndex(panelIndex);
         wizardComponent.updateComponents();
     }
-    
+
     /**
      * Set the back button to enabled/disabled.
      * 
@@ -168,7 +189,7 @@ public abstract class JsamsWizardPanel<B extends AbstractIdentityBean<?, ?>> ext
     public void setModel(B model) {
         this.model = model;
     }
-    
+
     /**
      * @return the {@link ViewFactory}
      */
@@ -176,5 +197,39 @@ public abstract class JsamsWizardPanel<B extends AbstractIdentityBean<?, ?>> ext
     public ViewFactory<B> getViewFactory() {
         return (ViewFactory<B>) getModel().getView().getViewFactory();
     }
-    
+
+    /**
+     * Method called by the children class for validation.
+     * 
+     * @param bean the bean to validate
+     * @return true if all is OK to continue, false otherwise
+     */
+    @SuppressWarnings("unchecked")
+    public boolean prePerformNext(B bean) {
+        boolean toContinue = true;
+        Validator<B> validator = (Validator<B>) parent.getValidator();
+        ValidationResult result = validator.validate((B) bean);
+        ValidationResultModel validationResultModel = parent.getValidationResultModel();
+        validationResultModel.setResult(result);
+        if (result.hasMessages()) {
+            JsamsStatusBar statusBar = parent.getStatusBar();
+            statusBar.removeAll();
+            statusBar.repaint();
+            List<ValidationMessage> messages = validationResultModel.getResult().getMessages();
+            for (ValidationMessage message : messages) {
+                JsamsLabel label = new JsamsLabel(message.formattedText().replace(".", ""));
+                Severity severity = message.severity();
+                if (severity == Severity.ERROR) {
+                    label.setIcon(ValidationResultViewFactory.getErrorIcon());
+                } else if (severity == Severity.WARNING) {
+                    label.setIcon(ValidationResultViewFactory.getWarningIcon());
+                }
+                statusBar.addComponent(label);
+            }
+            statusBar.validate();
+            toContinue = false;
+        }
+        return toContinue;
+    }
+
 }

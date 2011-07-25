@@ -39,11 +39,13 @@ public class DestinationChooserWizardPanel extends JsamsWizardPanel<TransferBean
     /**
      * Constructor.
      * 
+     * @param parent the {@link TransferWizardDialog} parent
      * @param component the {@link JsamsWizardComponent}
      * @param model the model
      */
-    public DestinationChooserWizardPanel(JsamsWizardComponent component, TransferBean model) {
-        super(component, model, JsamsI18nLabelResource.LABEL_TRANSFER_CHOOSE_DESTINATION);
+    public DestinationChooserWizardPanel(TransferWizardDialog parent,
+            JsamsWizardComponent component, TransferBean model) {
+        super(parent, component, model, JsamsI18nLabelResource.LABEL_TRANSFER_CHOOSE_DESTINATION);
         initComponents();
     }
 
@@ -112,13 +114,14 @@ public class DestinationChooserWizardPanel extends JsamsWizardPanel<TransferBean
         setNextButtonEnabled(nextEnabled);
         setFinishButtonEnabled(false);
         setBackButtonEnabled(true);
+        super.update();
     }
 
     /**
      * {@inheritDoc}
      */
     public void next() {
-        if (destinationTypeIsSelected()) {
+        if (destinationTypeIsSelected() && prePerformNext(getModel())) {
             switchPanel(TransferWizardDialog.THIRD_PANEL);
         }
     }

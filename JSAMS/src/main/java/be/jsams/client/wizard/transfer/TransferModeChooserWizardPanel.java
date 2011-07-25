@@ -40,11 +40,13 @@ public class TransferModeChooserWizardPanel extends JsamsWizardPanel<TransferBea
     /**
      * Constructor.
      * 
+     * @param parent the {@link TransferWizardDialog} parent
      * @param component the {@link JsamsWizardComponent}
      * @param model the model
      */
-    public TransferModeChooserWizardPanel(JsamsWizardComponent component, TransferBean model) {
-        super(component, model, JsamsI18nLabelResource.LABEL_TRANSFER_CHOOSE_TRANSFER_MODE);
+    public TransferModeChooserWizardPanel(TransferWizardDialog parent, JsamsWizardComponent component,
+            TransferBean model) {
+        super(parent, component, model, JsamsI18nLabelResource.LABEL_TRANSFER_CHOOSE_TRANSFER_MODE);
         initComponents();
     }
 
@@ -114,27 +116,30 @@ public class TransferModeChooserWizardPanel extends JsamsWizardPanel<TransferBea
         setNextButtonEnabled(nextEnabled);
         setFinishButtonEnabled(false);
         setBackButtonEnabled(true);
+        super.update();
     }
 
     /**
      * {@inheritDoc}
      */
     public void next() {
-        switch (getModel().getTransferMode()) {
-        case fullModeSelected:
-            switchPanel(TransferWizardDialog.FIRTH_PANEL_FULL_MODE);
-            break;
-        case partialModeSelected:
-            switchPanel(TransferWizardDialog.FIRTH_PANEL_PARTIAL_MODE);
-            break;
-        case fullGroupedModeSelected:
-            switchPanel(TransferWizardDialog.FIRTH_PANEL_FULL_GROUPED_MODE);
-            break;
-        case partialGroupedModeSelected:
-            switchPanel(TransferWizardDialog.FIRTH_PANEL_PARTIAL_GROUPED_MODE);
-            break;
-        default:
-            break;
+        if (transferModeIsSelected() && prePerformNext(getModel())) {
+            switch (getModel().getTransferMode()) {
+            case fullModeSelected:
+                switchPanel(TransferWizardDialog.FIRTH_PANEL_FULL_MODE);
+                break;
+            case partialModeSelected:
+                switchPanel(TransferWizardDialog.FIRTH_PANEL_PARTIAL_MODE);
+                break;
+            case fullGroupedModeSelected:
+                switchPanel(TransferWizardDialog.FIRTH_PANEL_FULL_GROUPED_MODE);
+                break;
+            case partialGroupedModeSelected:
+                switchPanel(TransferWizardDialog.FIRTH_PANEL_PARTIAL_GROUPED_MODE);
+                break;
+            default:
+                break;
+            }
         }
     }
 

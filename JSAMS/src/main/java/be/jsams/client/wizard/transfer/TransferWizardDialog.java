@@ -60,30 +60,34 @@ public class TransferWizardDialog extends AbstractWizardDialog<TransferBean, Tra
      */
     @Override
     public void initComponents() {
-        SourceChooserWizardPanel sourceChooserPanel = new SourceChooserWizardPanel(getComponent(), getModel());
+        SourceChooserWizardPanel sourceChooserPanel = new SourceChooserWizardPanel(this, getComponent(), getModel());
         getComponent().addPanel(FIRST_PANEL, sourceChooserPanel);
-        DestinationChooserWizardPanel destinationChooserPanel = new DestinationChooserWizardPanel(getComponent(),
+        DestinationChooserWizardPanel destinationChooserPanel = new DestinationChooserWizardPanel(this, getComponent(),
                 getModel());
         getComponent().addPanel(SECOND_PANEL, destinationChooserPanel);
-        TransferModeChooserWizardPanel chooserPanel = new TransferModeChooserWizardPanel(getComponent(), getModel());
+        TransferModeChooserWizardPanel chooserPanel = new TransferModeChooserWizardPanel(this, getComponent(),
+                getModel());
         getComponent().addPanel(THIRD_PANEL, chooserPanel);
-        DocumentChooserWizardPanel documentChooserPanel = new DocumentChooserWizardPanel(getComponent(), getModel());
+        DocumentChooserWizardPanel documentChooserPanel = new DocumentChooserWizardPanel(this, getComponent(),
+                getModel());
         getComponent().addPanel(FIRTH_PANEL_FULL_MODE, documentChooserPanel);
-        DocumentChooserWizardPanel documentChooserPanel2 = new DocumentChooserWizardPanel(getComponent(), getModel());
+        DocumentChooserWizardPanel documentChooserPanel2 = new DocumentChooserWizardPanel(this, getComponent(),
+                getModel());
         getComponent().addPanel(FIRTH_PANEL_PARTIAL_MODE, documentChooserPanel2);
-        DocumentsChooserWizardPanel documentsChooserPanel = new DocumentsChooserWizardPanel(getComponent(), getModel());
+        DocumentsChooserWizardPanel documentsChooserPanel = new DocumentsChooserWizardPanel(this, getComponent(),
+                getModel());
         getComponent().addPanel(FIRTH_PANEL_FULL_GROUPED_MODE, documentsChooserPanel);
-        DocumentsChooserWizardPanel documentsChooserPanel2 = new DocumentsChooserWizardPanel(getComponent(),
+        DocumentsChooserWizardPanel documentsChooserPanel2 = new DocumentsChooserWizardPanel(this, getComponent(),
                 getModel());
         getComponent().addPanel(FIRTH_PANEL_PARTIAL_GROUPED_MODE, documentsChooserPanel2);
-        DocumentDetailsChooserWizardPanel documentDetailsChooserPanel = new DocumentDetailsChooserWizardPanel(
+        DocumentDetailsChooserWizardPanel documentDetailsChooserPanel = new DocumentDetailsChooserWizardPanel(this,
                 getComponent(), getModel());
         getComponent().addPanel(FIFTH_PANEL_PARTIAL_MODE, documentDetailsChooserPanel);
-        DocumentDetailsChooserWizardPanel documentDetailsChooserPanel2 = new DocumentDetailsChooserWizardPanel(
+        DocumentDetailsChooserWizardPanel documentDetailsChooserPanel2 = new DocumentDetailsChooserWizardPanel(this,
                 getComponent(), getModel());
         getComponent().addPanel(FIFTH_PANEL_PARTIAL_GROUPED_MODE, documentDetailsChooserPanel2);
         ValidationComponentUtils.updateComponentTreeMandatoryBorder(this);
-        pack();
+//        pack();
     }
 
 }

@@ -35,7 +35,6 @@ public class SearchEstimatePanel extends
     private static final long serialVersionUID = -7701480812937524634L;
 
     private static final Log LOGGER = LogFactory.getLog(SearchEstimatePanel.class);
-
     private final boolean debug = LOGGER.isDebugEnabled();
 
     /**

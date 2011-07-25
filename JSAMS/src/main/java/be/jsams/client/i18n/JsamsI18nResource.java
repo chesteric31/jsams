@@ -256,5 +256,7 @@ public final class JsamsI18nResource {
     public static final I18nString WIZARD_BUTTON_FINISH = new I18nString("wizard.button.finish");
 
     public static final I18nString TITLE_TRANSFER_DOCUMENTS = new I18nString("title.transfer.documents");
+
+    public static final I18nString ERROR_SOURCE_DESTINATION = new I18nString("error.source_destination_combination");
     
 }
