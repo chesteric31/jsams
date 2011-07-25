@@ -94,6 +94,7 @@ public class DocumentChooserWizardPanel extends JsamsWizardPanel<TransferBean> {
         switch (source) {
         case 1:
             EstimateBean estimate = new EstimateBean(currentSociety, customer, agent);
+            estimate.setTransferred(false);
             SearchEstimatePanel estimatePanel = new SearchEstimatePanel(estimate, new EstimateTableMouseListener(),
                     JsamsApplicationContext.getEstimateService(), new SearchEstimateValidator(),
                     new EstimateTableModel(), false);
@@ -101,6 +102,7 @@ public class DocumentChooserWizardPanel extends JsamsWizardPanel<TransferBean> {
             break;
         case 2:
             CommandBean command = new CommandBean(currentSociety, customer, agent);
+            command.setTransferred(false);
             SearchCommandPanel commandPanel = new SearchCommandPanel(command, new CommandTableMouseListener(),
                     JsamsApplicationContext.getCommandService(), new SearchCommandValidator(), new CommandTableModel(),
                     false);
@@ -108,6 +110,7 @@ public class DocumentChooserWizardPanel extends JsamsWizardPanel<TransferBean> {
             break;
         case 3:
             DeliveryOrderBean deliveryOrder = new DeliveryOrderBean(currentSociety, customer);
+            deliveryOrder.setTransferred(false);
             SearchDeliveryOrderPanel deliveryOrderPanel = new SearchDeliveryOrderPanel(deliveryOrder,
                     new DeliveryOrderTableMouseListener(), JsamsApplicationContext.getDeliveryOrderService(),
                     new SearchDeliveryOrderValidator(), new DeliveryOrderTableModel(), false);
@@ -117,6 +120,7 @@ public class DocumentChooserWizardPanel extends JsamsWizardPanel<TransferBean> {
             PaymentModeBeanBuilder builder = JsamsApplicationContext.getPaymentModeBeanBuilder();
             PaymentModeBean mode = builder.build();
             BillBean bill = new BillBean(currentSociety, customer, mode);
+//            bill.setTransferred(false);
             SearchBillPanel billPanel = new SearchBillPanel(bill, new BillTableMouseListener(),
                     JsamsApplicationContext.getBillService(), new SearchBillValidator(), new BillTableModel(), false);
             this.add(billPanel);

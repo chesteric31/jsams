@@ -34,7 +34,6 @@ import be.jsams.client.swing.component.JsamsFormattedTextField;
 import be.jsams.client.swing.component.JsamsTable;
 import be.jsams.client.swing.component.JsamsTextField;
 import be.jsams.client.swing.listener.ProductTableMouseListener;
-import be.jsams.client.swing.utils.DialogUtil;
 import be.jsams.client.swing.utils.IconUtil;
 import be.jsams.client.validator.SearchProductValidator;
 import be.jsams.common.bean.builder.ProductBeanBuilder;
@@ -245,8 +244,8 @@ public class DeliveryOrderBeanView extends AbstractDocumentBeanView<DeliveryOrde
 
                         dialog.add(searchPanel);
                         dialog.pack();
-                        DialogUtil.centerComponentOnScreen(((JsamsTable) e.getSource()).getRootPane());
-//                        dialog.setLocationRelativeTo(((JsamsTable) source).getRootPane());
+//                        DialogUtil.centerComponentOnScreen(((JsamsTable) e.getSource()).getRootPane());
+                        dialog.setLocationRelativeTo(((JsamsTable) e.getSource()).getRootPane());
                         dialog.setVisible(true);
                     }
                 }
