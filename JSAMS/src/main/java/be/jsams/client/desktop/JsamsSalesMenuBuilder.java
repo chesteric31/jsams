@@ -124,10 +124,10 @@ public class JsamsSalesMenuBuilder extends AbstractMenuBuilder {
             private static final long serialVersionUID = 6779073820658986370L;
 
             public void actionPerformed(ActionEvent event) {
-                TransferWizardDialog transferDialog = new TransferWizardDialog(parent,
+                new TransferWizardDialog(parent,
                         JsamsI18nResource.TITLE_TRANSFER_DOCUMENTS, "actions/media-seek-forward.png",
                         "images/transfer_left_right.png");
-                transferDialog.display();
+//                transferDialog.display();
             }
         };
         action.putValue(Action.NAME, text);

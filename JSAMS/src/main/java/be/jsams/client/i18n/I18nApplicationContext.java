@@ -14,7 +14,7 @@ public final class I18nApplicationContext {
     /**
      * Classpath resource containing the configuration file.
      */
-    public static final String CONFIG = "i18nApplicationContext.xml";
+    public static final String CONFIG = "I18nApplicationContext.xml";
 
     /**
      * The application context.

@@ -25,7 +25,7 @@ import be.jsams.client.wizard.JsamsWizardPanel;
 import be.jsams.client.wizard.action.CancelAction;
 import be.jsams.client.wizard.action.FinishAction;
 import be.jsams.common.bean.model.AbstractIdentityBean;
-import be.jsams.server.service.Service;
+import be.jsams.server.service.transfer.TransferService;
 
 import com.jgoodies.validation.ValidationResultModel;
 import com.jgoodies.validation.Validator;
@@ -36,13 +36,13 @@ import com.jgoodies.validation.util.DefaultValidationResultModel;
  * 
  * @param <B> an extension of {@link AbstractIdentityBean}
  * @param <V> an extension of {@link Validator}
- * @param <S> an extension of {@link Service}
+ * @param <S> an extension of {@link TransferService}
  *
- * @author ebinard
+ * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public abstract class AbstractWizardDialog<B extends AbstractIdentityBean<?, ?>, V extends Validator<B>,
-        S extends Service<B>> extends JsamsDialog {
+public abstract class AbstractWizardDialog<B extends AbstractIdentityBean<?, ?>,
+        V extends Validator<B>, S extends TransferService> extends JsamsDialog {
 
     /**
      * Serial Version UID
@@ -59,7 +59,7 @@ public abstract class AbstractWizardDialog<B extends AbstractIdentityBean<?, ?>,
     private ValidationResultModel validationResultModel = new DefaultValidationResultModel();
     private JsamsStatusBar statusBar;
     private Validator<B> validator;
-    private Service<B> service;
+    private TransferService service;
 
     /**
      * Constructor.
@@ -68,23 +68,17 @@ public abstract class AbstractWizardDialog<B extends AbstractIdentityBean<?, ?>,
      * @param title the {@link I18nString} translatable String
      * @param iconFileName the icon path name of the dialog
      * @param logoFileName the file name to the logo to display
-     * @param component the {@link JsamsWizardComponent} to use, if null, we new
-     *            one {@link DefaultJsamsWizardComponent} will be created
      * @param model the {@link AbstractIdentityBean} to use as wrapper
      * @param validator the {@link Validator} as validator
-     * @param service the {@link Service} to use to persist/update entities
+     * @param service the {@link TransferService} to use to persist/update entities
      */
     public AbstractWizardDialog(final JsamsMainFrame parent, I18nString title, String iconFileName,
-            String logoFileName, JsamsWizardComponent component, B model, V validator, S service) {
+            String logoFileName, B model, V validator, TransferService service) {
         super(parent, title, IconUtil.TITLE_ICON_PREFIX + iconFileName);
         this.model = model;
         this.validator = validator;
         this.service = service;
-        if (component == null) {
-            this.component = new DefaultJsamsWizardComponent();
-        } else {
-            this.component = component;
-        }
+        this.component = new DefaultJsamsWizardComponent();
         this.logoFileName = logoFileName;
         initComponents();
         setLocationRelativeTo(null);
@@ -131,7 +125,7 @@ public abstract class AbstractWizardDialog<B extends AbstractIdentityBean<?, ?>,
         // set automatically the new title
         component.addPropertyChangeListener(new PropertyChangeListener() {
             public void propertyChange(PropertyChangeEvent event) {
-                setPanelTitle(((JsamsWizardPanel) event.getNewValue()).getPanelTitle());
+                setPanelTitle(((JsamsWizardPanel<?>) event.getNewValue()).getPanelTitle());
             }
         });
     }
@@ -217,15 +211,29 @@ public abstract class AbstractWizardDialog<B extends AbstractIdentityBean<?, ?>,
     /**
      * @return the service
      */
-    public Service<B> getService() {
+    public TransferService getService() {
         return service;
     }
 
     /**
      * @param service the service to set
      */
-    public void setService(Service<B> service) {
+    public void setService(TransferService service) {
         this.service = service;
+    }
+
+    /**
+     * @return the statusBar
+     */
+    public JsamsStatusBar getStatusBar() {
+        return statusBar;
+    }
+
+    /**
+     * @param statusBar the statusBar to set
+     */
+    public void setStatusBar(JsamsStatusBar statusBar) {
+        this.statusBar = statusBar;
     }
     
 }

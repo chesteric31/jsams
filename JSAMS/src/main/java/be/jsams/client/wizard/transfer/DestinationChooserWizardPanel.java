@@ -10,6 +10,7 @@ import be.jsams.client.i18n.JsamsI18nLabelResource;
 import be.jsams.client.swing.component.AbstractJsamsFrame;
 import be.jsams.client.wizard.JsamsWizardComponent;
 import be.jsams.client.wizard.JsamsWizardPanel;
+import be.jsams.common.bean.model.transfer.TransferBean;
 
 import com.jgoodies.forms.builder.DefaultFormBuilder;
 import com.jgoodies.forms.layout.FormLayout;
@@ -20,7 +21,7 @@ import com.jgoodies.forms.layout.FormLayout;
  * @author chesteric31
  * @version $Revision$ $Date::                  $ $Author$
  */
-public class DestinationChooserWizardPanel extends JsamsWizardPanel {
+public class DestinationChooserWizardPanel extends JsamsWizardPanel<TransferBean> {
 
     /**
      * Serial Version UID
@@ -43,9 +44,10 @@ public class DestinationChooserWizardPanel extends JsamsWizardPanel {
      * Constructor.
      * 
      * @param component the {@link JsamsWizardComponent}
+     * @param model the model
      */
-    public DestinationChooserWizardPanel(JsamsWizardComponent component) {
-        super(component, JsamsI18nLabelResource.LABEL_TRANSFER_CHOOSE_DESTINATION);
+    public DestinationChooserWizardPanel(JsamsWizardComponent component, TransferBean model) {
+        super(component, model, JsamsI18nLabelResource.LABEL_TRANSFER_CHOOSE_DESTINATION);
         initComponents();
     }
 
@@ -126,7 +128,7 @@ public class DestinationChooserWizardPanel extends JsamsWizardPanel {
      */
     public void next() {
         if (isRadioSelected()) {
-            ((TransferWizardComponent) getWizardComponent()).setDestination(selectedOption);
+            getModel().setDestinationType(selectedOption);
             switchPanel(TransferWizardDialog.THIRD_PANEL);
         }
     }

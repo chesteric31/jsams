@@ -3,6 +3,7 @@ package be.jsams.client.wizard.transfer;
 import be.jsams.client.i18n.JsamsI18nLabelResource;
 import be.jsams.client.wizard.JsamsWizardComponent;
 import be.jsams.client.wizard.JsamsWizardPanel;
+import be.jsams.common.bean.model.transfer.TransferBean;
 
 /**
  * {@link JsamsWizardPanel} to choose the document details to transfer. 
@@ -10,7 +11,7 @@ import be.jsams.client.wizard.JsamsWizardPanel;
  * @author chesteric31
  * @version $Revision$ $Date::                  $ $Author$
  */
-public class DocumentDetailsChooserWizardPanel extends JsamsWizardPanel {
+public class DocumentDetailsChooserWizardPanel extends JsamsWizardPanel<TransferBean> {
 
     /**
      * Serial Version UID
@@ -21,9 +22,10 @@ public class DocumentDetailsChooserWizardPanel extends JsamsWizardPanel {
      * Constructor.
      * 
      * @param component the {@link JsamsWizardComponent}
+     * @param model the model
      */
-    public DocumentDetailsChooserWizardPanel(JsamsWizardComponent component) {
-        super(component, JsamsI18nLabelResource.LABEL_TRANSFER_CHOOSE_DOCUMENT_DETAILS);
+    public DocumentDetailsChooserWizardPanel(JsamsWizardComponent component, TransferBean model) {
+        super(component, model, JsamsI18nLabelResource.LABEL_TRANSFER_CHOOSE_DOCUMENT_DETAILS);
         initComponents();
     }
 

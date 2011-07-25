@@ -21,6 +21,7 @@ import be.jsams.server.service.sale.CommandService;
 import be.jsams.server.service.sale.CreditNoteService;
 import be.jsams.server.service.sale.DeliveryOrderService;
 import be.jsams.server.service.sale.EstimateService;
+import be.jsams.server.service.transfer.TransferService;
 
 /**
  * This class provides static methods to get a reference to a specific service, anywhere in this project.
@@ -178,6 +179,13 @@ public final class JsamsApplicationContext {
      */
     public static PaymentModeBeanBuilder getPaymentModeBeanBuilder() {
         return (PaymentModeBeanBuilder) context.getBean("paymentModeBeanBuilder");
+    }
+
+    /**
+     * @return the {@link TransferService}
+     */
+    public static TransferService getTransferService() {
+        return (TransferService) context.getBean("transferService");
     }
 
 }

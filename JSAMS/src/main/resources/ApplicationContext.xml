@@ -117,8 +117,9 @@
 		<property name="dao" ref="civilityDao" />
 	</bean>
 
-	<import resource="i18nApplicationContext.xml" />
+	<import resource="I18nApplicationContext.xml" />
 	<import resource="ManagementApplicationContext.xml" />
 	<import resource="SaleApplicationContext.xml" />
+	<import resource="TransferApplicationContext.xml" />
 
 </beans>
