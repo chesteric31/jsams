@@ -18,6 +18,7 @@ import be.jsams.client.swing.component.JsamsMenu;
 import be.jsams.client.swing.component.JsamsMenuItem;
 import be.jsams.client.swing.component.JsamsShortcutToolBar;
 import be.jsams.client.swing.listener.TabbedPaneKeyListener;
+import be.jsams.client.swing.utils.DialogUtil;
 
 /**
  * {@link JsamsMainFrame} that contains all the components.
@@ -101,6 +102,7 @@ public class JsamsMainFrame extends AbstractJsamsFrame {
             add(tabbedPane);
             // add(JsamsSpashPanel.getInstance());
             pack();
+            DialogUtil.centerComponentOnScreen(this);
             setExtendedState(JFrame.MAXIMIZED_BOTH);
         } catch (Exception e) {
             LOGGER.error(e);
