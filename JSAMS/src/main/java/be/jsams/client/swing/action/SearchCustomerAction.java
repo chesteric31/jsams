@@ -14,7 +14,6 @@ import be.jsams.client.swing.component.JsamsButton;
 import be.jsams.client.swing.component.JsamsDialog;
 import be.jsams.client.swing.component.JsamsTable;
 import be.jsams.client.swing.listener.CustomerTableMouseListener;
-import be.jsams.client.swing.utils.DialogUtil;
 import be.jsams.client.validator.SearchCustomerValidator;
 import be.jsams.common.bean.model.management.CustomerBean;
 
@@ -80,8 +79,8 @@ public class SearchCustomerAction extends AbstractAction {
                 false);
         dialog.add(searchCustomerPanel);
         dialog.pack();
-        DialogUtil.centerComponentOnScreen(((JsamsButton) e.getSource()).getRootPane());
-//        dialog.setLocationRelativeTo(((JsamsButton) e.getSource()).getRootPane());
+//        DialogUtil.centerComponentOnScreen(((JsamsButton) e.getSource()).getRootPane());
+        dialog.setLocationRelativeTo(((JsamsButton) e.getSource()).getRootPane());
         dialog.setVisible(true);
     }
 
