@@ -22,6 +22,7 @@ import be.jsams.client.swing.component.JsamsComboBox;
 import be.jsams.client.swing.component.JsamsDialog;
 import be.jsams.client.swing.component.JsamsLabel;
 import be.jsams.client.swing.component.JsamsStatusBar;
+import be.jsams.client.swing.utils.DialogUtil;
 import be.jsams.client.swing.utils.IconUtil;
 import be.jsams.common.bean.builder.SocietyBeanBuilder;
 import be.jsams.common.bean.model.SocietyBean;
@@ -63,6 +64,7 @@ public class OpenSocietyDialog extends JsamsDialog implements JsamsButtonsInterf
         buttonsPanel = new JsamsButtonsPanel(this, true, false, false);
         add(buttonsPanel, BorderLayout.SOUTH);
         initComponents();
+        DialogUtil.centerComponentOnScreen(this);
     }
 
     /**
