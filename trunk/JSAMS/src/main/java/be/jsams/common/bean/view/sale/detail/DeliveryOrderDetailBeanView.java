@@ -1,7 +1,5 @@
 package be.jsams.common.bean.view.sale.detail;
 
-import javax.swing.JPanel;
-
 import be.jsams.common.bean.model.sale.detail.DeliveryOrderDetailBean;
 
 /**
@@ -10,7 +8,7 @@ import be.jsams.common.bean.model.sale.detail.DeliveryOrderDetailBean;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class DeliveryOrderDetailBeanView extends AbstractDetailBeanView<DeliveryOrderDetailBean, JPanel, JPanel> {
+public class DeliveryOrderDetailBeanView extends AbstractDetailBeanView<DeliveryOrderDetailBean> {
 
     /**
      * Serial Version UID
@@ -24,23 +22,6 @@ public class DeliveryOrderDetailBeanView extends AbstractDetailBeanView<Delivery
      */
     public DeliveryOrderDetailBeanView(DeliveryOrderDetailBean bean) {
         super(bean);
-        // TODO Auto-generated constructor stub
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public JPanel createEditView() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public JPanel createSearchView() {
-        // TODO Auto-generated method stub
-        return null;
     }
 
 }

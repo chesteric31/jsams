@@ -1,18 +1,16 @@
 package be.jsams.common.bean.view;
 
-import javax.swing.JPanel;
-
 import be.jsams.client.renderer.TranslatableComboBoxRenderer;
 import be.jsams.client.swing.component.JsamsComboBox;
 import be.jsams.common.bean.model.CivilityBean;
 
 /**
- * Implementation of all sorts of views for {@link CivilityBean} object.
+ * Implementation of view for {@link CivilityBean} object.
  * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class CivilityBeanView extends AbstractBeanView<CivilityBean, JsamsComboBox, JPanel> {
+public class CivilityBeanView extends AbstractBeanView<CivilityBean> implements Editable<JsamsComboBox> {
 
     /**
      * Serial Version UID
@@ -36,14 +34,6 @@ public class CivilityBeanView extends AbstractBeanView<CivilityBean, JsamsComboB
         JsamsComboBox comboBox = viewFactory.createBindingComboComponent(getBean(), true, false,
                 new TranslatableComboBoxRenderer());
         return comboBox;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public JPanel createSearchView() {
-        // TODO Auto-generated method stub
-        return null;
     }
 
 }

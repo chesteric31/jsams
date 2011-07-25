@@ -1,8 +1,5 @@
 package be.jsams.common.bean.view;
 
-import javax.swing.JComponent;
-import javax.swing.JPanel;
-
 import be.jsams.common.bean.model.AbstractIdentityBean;
 
 import com.jgoodies.binding.PresentationModel;
@@ -14,14 +11,11 @@ import com.jgoodies.common.collect.ObservableList;
  * Abstract class for the viewing of a bean.
  * 
  * @param <B> an extension of {@link AbstractIdentityBean}
- * @param <J> an extension of {@link JComponent} for editing
- * @param <K> an extension of {@link JPanel} for searching
  * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public abstract class AbstractBeanView<B extends AbstractIdentityBean<?, ?>, J extends JComponent, K extends JPanel>
-        extends PresentationModel<B> implements Viewable<J, K> {
+public abstract class AbstractBeanView<B extends AbstractIdentityBean<?, ?>> extends PresentationModel<B> {
 
     /**
      * Serial Version UID
@@ -32,9 +26,9 @@ public abstract class AbstractBeanView<B extends AbstractIdentityBean<?, ?>, J e
      * Holds the bean's list model plus a selection.
      */
     private SelectionInList<B> selectionInList;
-    
+
     private ViewFactory<B> viewFactory;
-    
+
     /**
      * Constructor
      * 

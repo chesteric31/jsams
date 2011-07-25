@@ -21,7 +21,7 @@ import com.jgoodies.common.collect.ObservableList;
  * @version $Rev$ $Date::                  $ $Author$
  */
 public abstract class AbstractDetailBean
-        <M extends AbstractDetail, V extends AbstractDetailBeanView<?, ?, ?>, D extends AbstractDocumentBean<?, ?>>
+        <M extends AbstractDetail, V extends AbstractDetailBeanView<?>, D extends AbstractDocumentBean<?, ?>>
         extends AbstractIdentityBean<M, V> {
 
     /**

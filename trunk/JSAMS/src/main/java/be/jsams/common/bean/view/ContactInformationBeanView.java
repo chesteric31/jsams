@@ -11,12 +11,12 @@ import com.jgoodies.forms.builder.DefaultFormBuilder;
 import com.jgoodies.forms.layout.FormLayout;
 
 /**
- * Customized views for {@link ContactInformationBean}.
+ * Customized view for {@link ContactInformationBean}.
  * 
  * @author chesteric31
  * @version $Rev$ $Date::   $Author$
  */
-public class ContactInformationBeanView extends AbstractBeanView<ContactInformationBean, JPanel, JPanel> {
+public class ContactInformationBeanView extends AbstractBeanView<ContactInformationBean> implements Editable<JPanel> {
 
     /**
      * Serial Version UID
@@ -62,14 +62,6 @@ public class ContactInformationBeanView extends AbstractBeanView<ContactInformat
         builder.appendI15d(JsamsI18nLabelResource.LABEL_EMAIL.getKey(), textFieldEmail);
         builder.appendI15d(JsamsI18nLabelResource.LABEL_WEBSITE.getKey(), textFieldWebsite, maxColumnSpan);
         return builder.getPanel();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public JPanel createSearchView() {
-        // TODO Auto-generated method stub
-        return null;
     }
 
 }

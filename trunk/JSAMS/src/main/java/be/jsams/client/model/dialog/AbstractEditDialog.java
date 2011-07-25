@@ -30,7 +30,7 @@ import com.jgoodies.validation.util.DefaultValidationResultModel;
 import com.jgoodies.validation.view.ValidationResultViewFactory;
 
 /**
- * Edit generic panel.
+ * Edit generic dialog.
  * 
  * @param <B> an extension of {@link AbstractIdentityBean}
  * @param <V> an extension of {@link Validator}
@@ -47,17 +47,11 @@ public abstract class AbstractEditDialog<B extends AbstractIdentityBean<?, ?>, V
     private static final long serialVersionUID = 5146784638798425733L;
 
     private B model;
-
     private JsamsButtonsPanel buttonsPanel;
-
     private ValidationResultModel validationResultModel = new DefaultValidationResultModel();
-
     private JsamsStatusBar statusBar;
-
     private JPanel southPanel;
-
     private Validator<B> validator;
-
     private Service<B> service;
 
     /**

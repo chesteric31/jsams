@@ -23,6 +23,8 @@ import be.jsams.common.bean.model.AddressBean;
 import be.jsams.common.bean.model.ContactInformationBean;
 import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.view.AbstractBeanView;
+import be.jsams.common.bean.view.Editable;
+import be.jsams.common.bean.view.Searchable;
 import be.jsams.common.bean.view.ViewFactory;
 
 import com.jgoodies.forms.builder.DefaultFormBuilder;
@@ -36,7 +38,7 @@ import com.jgoodies.forms.layout.FormLayout;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class CustomerBeanView extends AbstractBeanView<CustomerBean, JPanel, JPanel> {
+public class CustomerBeanView extends AbstractBeanView<CustomerBean> implements Editable<JPanel>, Searchable<JPanel> {
 
     /**
      * Serial Version UID

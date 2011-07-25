@@ -2,7 +2,7 @@ package be.jsams.client.wizard.transfer;
 
 import be.jsams.client.desktop.JsamsMainFrame;
 import be.jsams.client.i18n.I18nString;
-import be.jsams.client.wizard.JsamsWizardDialog;
+import be.jsams.client.model.dialog.AbstractWizardDialog;
 
 /**
  * Transfer wizard dialog for documents.
@@ -10,7 +10,7 @@ import be.jsams.client.wizard.JsamsWizardDialog;
  * @author chesteric31
  * @version $Revision$ $Date::                  $ $Author$
  */
-public class TransferWizardDialog extends JsamsWizardDialog {
+public class TransferWizardDialog extends AbstractWizardDialog {
 
     /**
      * Serial Version UID
@@ -45,7 +45,7 @@ public class TransferWizardDialog extends JsamsWizardDialog {
      * @param logoFileName the logo file name for the wizard panel
      */
     public TransferWizardDialog(JsamsMainFrame parent, I18nString title, String iconFileName, String logoFileName) {
-        super(parent, title, iconFileName, logoFileName, new TransferWizardComponent());
+        super(parent, title, iconFileName, logoFileName, new TransferWizardComponent(), null, null, null);
         buildPanels();
     }
 

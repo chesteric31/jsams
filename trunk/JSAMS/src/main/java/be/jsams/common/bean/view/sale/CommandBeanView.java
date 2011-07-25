@@ -27,10 +27,10 @@ import be.jsams.client.model.table.CommandDetailTableModel;
 import be.jsams.client.model.table.ProductTableModel;
 import be.jsams.client.renderer.JsamsBooleanTableCellRenderer;
 import be.jsams.client.renderer.JsamsTableCellRenderer;
+import be.jsams.client.swing.component.AbstractJsamsFrame;
 import be.jsams.client.swing.component.JsamsButton;
 import be.jsams.client.swing.component.JsamsDialog;
 import be.jsams.client.swing.component.JsamsFormattedTextField;
-import be.jsams.client.swing.component.AbstractJsamsFrame;
 import be.jsams.client.swing.component.JsamsTable;
 import be.jsams.client.swing.component.JsamsTextField;
 import be.jsams.client.swing.listener.ProductTableMouseListener;
@@ -43,6 +43,8 @@ import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.management.ProductBean;
 import be.jsams.common.bean.model.sale.CommandBean;
 import be.jsams.common.bean.model.sale.detail.CommandDetailBean;
+import be.jsams.common.bean.view.Editable;
+import be.jsams.common.bean.view.Searchable;
 import be.jsams.common.bean.view.ViewFactory;
 
 import com.jgoodies.common.collect.ArrayListModel;
@@ -57,7 +59,8 @@ import com.toedter.calendar.JDateChooser;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class CommandBeanView extends AbstractDocumentBeanView<CommandBean, JPanel, JPanel> {
+public class CommandBeanView extends AbstractDocumentBeanView<CommandBean> implements Editable<JPanel>,
+        Searchable<JPanel> {
 
     /**
      * Serial Version UID
@@ -219,8 +222,8 @@ public class CommandBeanView extends AbstractDocumentBeanView<CommandBean, JPane
                                         int detailSelectedRow = getDetailsTable().getSelectedRow();
                                         int detailSelectedRowModel = getDetailsTable().convertRowIndexToModel(
                                                 detailSelectedRow);
-                                        CommandDetailTableModel detailModel
-                                            = (CommandDetailTableModel) getDetailsTable().getModel();
+                                        CommandDetailTableModel
+                                            detailModel = (CommandDetailTableModel) getDetailsTable().getModel();
                                         CommandDetailBean selectedDetailBean = detailModel
                                                 .getRow(detailSelectedRowModel);
                                         selectedDetailBean.setPrice(selectedBean.getPrice());

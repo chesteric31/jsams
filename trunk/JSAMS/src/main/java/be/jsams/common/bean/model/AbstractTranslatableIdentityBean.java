@@ -4,15 +4,17 @@ import be.jsams.common.bean.view.AbstractBeanView;
 import be.jsams.server.model.AbstractTranslatableIdentity;
 
 /**
- * Abstract class for all beans that have an id and a English label, French label and Dutch label.
+ * Abstract class for all beans that have an id and a English label, French
+ * label and Dutch label.
  * 
  * @param <M> an extension of {@link AbstractTranslatableIdentity}
  * @param <V> an extension of {@link AbstractBeanView}
+ * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
 public abstract class AbstractTranslatableIdentityBean
-        <M extends AbstractTranslatableIdentity, V extends AbstractBeanView<?, ?, ?>>
+        <M extends AbstractTranslatableIdentity, V extends AbstractBeanView<?>>
         extends AbstractIdentityBean<M, V> {
 
     /**
@@ -123,8 +125,8 @@ public abstract class AbstractTranslatableIdentityBean
         setLabel(other.getLabel());
         setLabelFr(other.getLabelFr());
         setLabelNl(other.getLabelNl());
-//        setSelection(other.getSelection());
-//        setListModel(other.getListModel());
+        // setSelection(other.getSelection());
+        // setListModel(other.getListModel());
     }
 
 }
