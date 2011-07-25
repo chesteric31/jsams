@@ -16,7 +16,7 @@ import com.jgoodies.forms.layout.FormLayout;
  * @author chesteric31
  * @version $$Rev$$ $$Date::                  $$ $$Author$$
  */
-public class AddressBeanView extends AbstractBeanView<AddressBean, JPanel, JPanel> {
+public class AddressBeanView extends AbstractBeanView<AddressBean> implements Editable<JPanel> {
 
     /**
      * Serial Version UID
@@ -66,14 +66,6 @@ public class AddressBeanView extends AbstractBeanView<AddressBean, JPanel, JPane
         builder.nextLine();
         builder.appendI15d(JsamsI18nLabelResource.LABEL_COUNTRY.getKey(), textFieldCountry, maxColumnSpan);
         return builder.getPanel();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public JPanel createSearchView() {
-        // TODO Auto-generated method stub
-        return null;
     }
 
 }

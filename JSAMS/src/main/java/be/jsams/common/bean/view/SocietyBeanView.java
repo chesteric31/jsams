@@ -3,8 +3,8 @@ package be.jsams.common.bean.view;
 import javax.swing.JPanel;
 
 import be.jsams.client.i18n.JsamsI18nLabelResource;
-import be.jsams.client.swing.component.JsamsFormattedTextField;
 import be.jsams.client.swing.component.AbstractJsamsFrame;
+import be.jsams.client.swing.component.JsamsFormattedTextField;
 import be.jsams.client.swing.component.JsamsTextField;
 import be.jsams.common.bean.model.SocietyBean;
 
@@ -12,12 +12,12 @@ import com.jgoodies.forms.builder.DefaultFormBuilder;
 import com.jgoodies.forms.layout.FormLayout;
 
 /**
- * Customized views for {@link SocietyBean}.
+ * Customized view for {@link SocietyBean}.
  * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class SocietyBeanView extends AbstractBeanView<SocietyBean, JPanel, JPanel> {
+public class SocietyBeanView extends AbstractBeanView<SocietyBean> implements Editable<JPanel> {
 
     /**
      * Serial Version UID
@@ -72,14 +72,6 @@ public class SocietyBeanView extends AbstractBeanView<SocietyBean, JPanel, JPane
         builder.appendI15d(JsamsI18nLabelResource.LABEL_VAT_NUMBER.getKey(), textFieldVatNumber);
         builder.nextLine();
         return builder.getPanel();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public JPanel createSearchView() {
-        // TODO Auto-generated method stub
-        return null;
     }
 
 }

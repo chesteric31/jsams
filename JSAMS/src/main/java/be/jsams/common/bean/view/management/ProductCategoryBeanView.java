@@ -4,11 +4,13 @@ import javax.swing.JPanel;
 
 import be.jsams.client.i18n.JsamsI18nLabelResource;
 import be.jsams.client.renderer.TranslatableComboBoxRenderer;
-import be.jsams.client.swing.component.JsamsComboBox;
 import be.jsams.client.swing.component.AbstractJsamsFrame;
+import be.jsams.client.swing.component.JsamsComboBox;
 import be.jsams.client.swing.component.JsamsTextField;
 import be.jsams.common.bean.model.management.ProductCategoryBean;
 import be.jsams.common.bean.view.AbstractBeanView;
+import be.jsams.common.bean.view.Editable;
+import be.jsams.common.bean.view.Searchable;
 import be.jsams.common.bean.view.ViewFactory;
 
 import com.jgoodies.forms.builder.DefaultFormBuilder;
@@ -20,7 +22,8 @@ import com.jgoodies.forms.layout.FormLayout;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class ProductCategoryBeanView extends AbstractBeanView<ProductCategoryBean, JPanel, JPanel> {
+public class ProductCategoryBeanView extends AbstractBeanView<ProductCategoryBean> implements Editable<JPanel>,
+        Searchable<JPanel> {
 
     /**
      * Serial Version UID

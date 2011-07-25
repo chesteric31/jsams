@@ -1,16 +1,14 @@
 package be.jsams.common.bean.view.sale.detail;
 
-import javax.swing.JPanel;
-
 import be.jsams.common.bean.model.sale.detail.CommandDetailBean;
 
 /**
  * 
- *
+ * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class CommandDetailBeanView extends AbstractDetailBeanView<CommandDetailBean, JPanel, JPanel> {
+public class CommandDetailBeanView extends AbstractDetailBeanView<CommandDetailBean> {
 
     /**
      * Serial Version UID
@@ -24,23 +22,6 @@ public class CommandDetailBeanView extends AbstractDetailBeanView<CommandDetailB
      */
     public CommandDetailBeanView(CommandDetailBean bean) {
         super(bean);
-        // TODO Auto-generated constructor stub
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public JPanel createEditView() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public JPanel createSearchView() {
-        // TODO Auto-generated method stub
-        return null;
     }
 
 }

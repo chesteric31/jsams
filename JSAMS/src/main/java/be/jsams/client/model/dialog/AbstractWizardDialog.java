@@ -1,4 +1,4 @@
-package be.jsams.client.wizard;
+package be.jsams.client.model.dialog;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -16,17 +16,33 @@ import be.jsams.client.desktop.JsamsMainFrame;
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.swing.component.JsamsDialog;
 import be.jsams.client.swing.component.JsamsLabel;
+import be.jsams.client.swing.component.JsamsStatusBar;
 import be.jsams.client.swing.utils.IconUtil;
+import be.jsams.client.wizard.DefaultJsamsWizardComponent;
+import be.jsams.client.wizard.JsamsWizardButtonPanel;
+import be.jsams.client.wizard.JsamsWizardComponent;
+import be.jsams.client.wizard.JsamsWizardPanel;
 import be.jsams.client.wizard.action.CancelAction;
 import be.jsams.client.wizard.action.FinishAction;
+import be.jsams.common.bean.model.AbstractIdentityBean;
+import be.jsams.server.service.Service;
+
+import com.jgoodies.validation.ValidationResultModel;
+import com.jgoodies.validation.Validator;
+import com.jgoodies.validation.util.DefaultValidationResultModel;
 
 /**
+ * Wizard generic dialog.
  * 
+ * @param <B> an extension of {@link AbstractIdentityBean}
+ * @param <V> an extension of {@link Validator}
+ * @param <S> an extension of {@link Service}
  *
  * @author ebinard
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class JsamsWizardDialog extends JsamsDialog {
+public abstract class AbstractWizardDialog<B extends AbstractIdentityBean<?, ?>, V extends Validator<B>,
+        S extends Service<B>> extends JsamsDialog {
 
     /**
      * Serial Version UID
@@ -38,6 +54,12 @@ public class JsamsWizardDialog extends JsamsDialog {
     private JPanel buttonPanel;
     private String logoFileName;
     private JsamsLabel label;
+    
+    private B model;
+    private ValidationResultModel validationResultModel = new DefaultValidationResultModel();
+    private JsamsStatusBar statusBar;
+    private Validator<B> validator;
+    private Service<B> service;
 
     /**
      * Constructor.
@@ -48,10 +70,16 @@ public class JsamsWizardDialog extends JsamsDialog {
      * @param logoFileName the file name to the logo to display
      * @param component the {@link JsamsWizardComponent} to use, if null, we new
      *            one {@link DefaultJsamsWizardComponent} will be created
+     * @param model the {@link AbstractIdentityBean} to use as wrapper
+     * @param validator the {@link Validator} as validator
+     * @param service the {@link Service} to use to persist/update entities
      */
-    public JsamsWizardDialog(JsamsMainFrame parent, I18nString title, String iconFileName, String logoFileName,
-            JsamsWizardComponent component) {
+    public AbstractWizardDialog(final JsamsMainFrame parent, I18nString title, String iconFileName,
+            String logoFileName, JsamsWizardComponent component, B model, V validator, S service) {
         super(parent, title, IconUtil.TITLE_ICON_PREFIX + iconFileName);
+        this.model = model;
+        this.validator = validator;
+        this.service = service;
         if (component == null) {
             this.component = new DefaultJsamsWizardComponent();
         } else {
@@ -59,6 +87,9 @@ public class JsamsWizardDialog extends JsamsDialog {
         }
         this.logoFileName = logoFileName;
         initComponents();
+        setLocationRelativeTo(null);
+        setResizable(false);
+        setVisible(true);
     }
 
     /**
@@ -141,4 +172,60 @@ public class JsamsWizardDialog extends JsamsDialog {
         label.setText(title);
     }
 
+    /**
+     * @return the model
+     */
+    public B getModel() {
+        return model;
+    }
+
+    /**
+     * @param model the model to set
+     */
+    public void setModel(B model) {
+        this.model = model;
+    }
+
+    /**
+     * @return the validationResultModel
+     */
+    public ValidationResultModel getValidationResultModel() {
+        return validationResultModel;
+    }
+
+    /**
+     * @param validationResultModel the validationResultModel to set
+     */
+    public void setValidationResultModel(ValidationResultModel validationResultModel) {
+        this.validationResultModel = validationResultModel;
+    }
+
+    /**
+     * @return the validator
+     */
+    public Validator<B> getValidator() {
+        return validator;
+    }
+
+    /**
+     * @param validator the validator to set
+     */
+    public void setValidator(Validator<B> validator) {
+        this.validator = validator;
+    }
+
+    /**
+     * @return the service
+     */
+    public Service<B> getService() {
+        return service;
+    }
+
+    /**
+     * @param service the service to set
+     */
+    public void setService(Service<B> service) {
+        this.service = service;
+    }
+    
 }

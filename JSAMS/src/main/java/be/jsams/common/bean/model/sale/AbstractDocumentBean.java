@@ -20,8 +20,8 @@ import be.jsams.server.model.sale.AbstractDocument;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public abstract class AbstractDocumentBean<M extends AbstractDocument, V extends AbstractDocumentBeanView<?, ?, ?>>
-        extends AbstractIdentityBean<M, V> {
+public abstract class AbstractDocumentBean<M extends AbstractDocument, V extends AbstractDocumentBeanView<?>> extends
+        AbstractIdentityBean<M, V> {
 
     /**
      * Serial Version UID

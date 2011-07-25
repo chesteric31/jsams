@@ -1,8 +1,5 @@
 package be.jsams.common.bean.view.sale.detail;
 
-import javax.swing.JPanel;
-
-import be.jsams.client.swing.component.JsamsTable;
 import be.jsams.common.bean.model.sale.detail.EstimateDetailBean;
 
 /**
@@ -11,7 +8,7 @@ import be.jsams.common.bean.model.sale.detail.EstimateDetailBean;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class EstimateDetailBeanView extends AbstractDetailBeanView<EstimateDetailBean, JsamsTable, JPanel> {
+public class EstimateDetailBeanView extends AbstractDetailBeanView<EstimateDetailBean> {
 
     /**
      * Serial Version UID
@@ -26,22 +23,6 @@ public class EstimateDetailBeanView extends AbstractDetailBeanView<EstimateDetai
      */
     public EstimateDetailBeanView(EstimateDetailBean bean) {
         super(bean);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public JsamsTable createEditView() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public JPanel createSearchView() {
-        // TODO Auto-generated method stub
-        return null;
     }
 
 }

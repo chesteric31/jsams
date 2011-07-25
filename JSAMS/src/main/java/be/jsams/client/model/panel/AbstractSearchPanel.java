@@ -36,6 +36,7 @@ import be.jsams.client.swing.component.JsamsStatusBar;
 import be.jsams.client.swing.component.JsamsTable;
 import be.jsams.client.swing.utils.IconUtil;
 import be.jsams.common.bean.model.AbstractIdentityBean;
+import be.jsams.common.bean.view.Searchable;
 import be.jsams.server.service.Service;
 
 import com.jgoodies.forms.factories.ButtonBarFactory;
@@ -358,7 +359,7 @@ public abstract class AbstractSearchPanel<B extends AbstractIdentityBean<?, ?>,
         gridLayout.setVgap(DEFAULT_V_GAP);
         searchCriteriaPanel.setLayout(gridLayout);
         // adding search criteria panel
-        searchCriteriaPanel.add(this.model.getView().createSearchView());
+        searchCriteriaPanel.add((((Searchable<?>) this.model.getView())).createSearchView());
 
         JPanel northPanel = new JPanel();
         BorderLayout buttonsLayout = new BorderLayout();

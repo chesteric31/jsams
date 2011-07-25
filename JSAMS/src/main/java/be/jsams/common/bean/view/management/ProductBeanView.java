@@ -3,12 +3,14 @@ package be.jsams.common.bean.view.management;
 import javax.swing.JPanel;
 
 import be.jsams.client.i18n.JsamsI18nLabelResource;
-import be.jsams.client.swing.component.JsamsFormattedTextField;
 import be.jsams.client.swing.component.AbstractJsamsFrame;
+import be.jsams.client.swing.component.JsamsFormattedTextField;
 import be.jsams.client.swing.component.JsamsTextField;
 import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.management.ProductBean;
 import be.jsams.common.bean.view.AbstractBeanView;
+import be.jsams.common.bean.view.Editable;
+import be.jsams.common.bean.view.Searchable;
 import be.jsams.common.bean.view.ViewFactory;
 
 import com.jgoodies.forms.builder.DefaultFormBuilder;
@@ -20,7 +22,7 @@ import com.jgoodies.forms.layout.FormLayout;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class ProductBeanView extends AbstractBeanView<ProductBean, JPanel, JPanel> {
+public class ProductBeanView extends AbstractBeanView<ProductBean> implements Editable<JPanel>, Searchable<JPanel> {
 
     /**
      * Serial Version UID

@@ -11,12 +11,12 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.toedter.calendar.JDateChooser;
 
 /**
- * Customized views for {@link PeriodBean}.
+ * Customized view for {@link PeriodBean}.
  * 
  * @author chesteric31
  * @version $$Rev$$ $$Date::                  $$ $$Author$$
  */
-public class PeriodBeanView extends AbstractBeanView<PeriodBean, JPanel, JPanel> implements Viewable<JPanel, JPanel> {
+public class PeriodBeanView extends AbstractBeanView<PeriodBean> implements Editable<JPanel> {
 
     /**
      * Serial Version UID
@@ -49,15 +49,6 @@ public class PeriodBeanView extends AbstractBeanView<PeriodBean, JPanel, JPanel>
         builder.appendI15d(JsamsI18nLabelResource.LABEL_START_DATE.getKey(), startDateChooser);
         builder.appendI15d(JsamsI18nLabelResource.LABEL_END_DATE.getKey(), endDateChooser);
         return builder.getPanel();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public JPanel createSearchView() {
-        // TODO Auto-generated method stub
-        return null;
     }
 
 }

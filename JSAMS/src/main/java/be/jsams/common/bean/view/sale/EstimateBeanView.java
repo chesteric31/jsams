@@ -27,10 +27,10 @@ import be.jsams.client.model.table.EstimateDetailTableModel;
 import be.jsams.client.model.table.ProductTableModel;
 import be.jsams.client.renderer.JsamsBooleanTableCellRenderer;
 import be.jsams.client.renderer.JsamsTableCellRenderer;
+import be.jsams.client.swing.component.AbstractJsamsFrame;
 import be.jsams.client.swing.component.JsamsButton;
 import be.jsams.client.swing.component.JsamsDialog;
 import be.jsams.client.swing.component.JsamsFormattedTextField;
-import be.jsams.client.swing.component.AbstractJsamsFrame;
 import be.jsams.client.swing.component.JsamsTable;
 import be.jsams.client.swing.component.JsamsTextField;
 import be.jsams.client.swing.listener.ProductTableMouseListener;
@@ -43,6 +43,8 @@ import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.management.ProductBean;
 import be.jsams.common.bean.model.sale.EstimateBean;
 import be.jsams.common.bean.model.sale.detail.EstimateDetailBean;
+import be.jsams.common.bean.view.Editable;
+import be.jsams.common.bean.view.Searchable;
 import be.jsams.common.bean.view.ViewFactory;
 
 import com.jgoodies.common.collect.ArrayListModel;
@@ -57,7 +59,8 @@ import com.toedter.calendar.JDateChooser;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class EstimateBeanView extends AbstractDocumentBeanView<EstimateBean, JPanel, JPanel> {
+public class EstimateBeanView extends AbstractDocumentBeanView<EstimateBean> implements Editable<JPanel>,
+        Searchable<JPanel> {
 
     /**
      * Serial Version UID
@@ -205,7 +208,7 @@ public class EstimateBeanView extends AbstractDocumentBeanView<EstimateBean, JPa
                 if (e.getClickCount() == 2) {
                     if (selectedColumn == 0 || selectedColumn == 1) {
                         final JsamsDialog dialog = new JsamsDialog(null, JsamsI18nResource.TITLE_SEARCH_PRODUCT);
-//                        dialog.setPreferredSize(new Dimension(800, 600));
+                        // dialog.setPreferredSize(new Dimension(800, 600));
                         ProductTableMouseListener customListener = new ProductTableMouseListener() {
                             /**
                              * {@inheritDoc}
@@ -222,8 +225,8 @@ public class EstimateBeanView extends AbstractDocumentBeanView<EstimateBean, JPa
                                         int detailSelectedRow = getDetailsTable().getSelectedRow();
                                         int detailSelectedRowModel = getDetailsTable().convertRowIndexToModel(
                                                 detailSelectedRow);
-                                        EstimateDetailTableModel detailModel
-                                            = (EstimateDetailTableModel) getDetailsTable().getModel();
+                                        EstimateDetailTableModel
+                                            detailModel = (EstimateDetailTableModel) getDetailsTable().getModel();
                                         EstimateDetailBean selectedDetailBean = detailModel
                                                 .getRow(detailSelectedRowModel);
                                         selectedDetailBean.setPrice(selectedBean.getPrice());

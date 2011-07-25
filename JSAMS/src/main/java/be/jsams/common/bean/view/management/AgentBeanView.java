@@ -15,6 +15,8 @@ import be.jsams.common.bean.model.AddressBean;
 import be.jsams.common.bean.model.ContactInformationBean;
 import be.jsams.common.bean.model.management.AgentBean;
 import be.jsams.common.bean.view.AbstractBeanView;
+import be.jsams.common.bean.view.Editable;
+import be.jsams.common.bean.view.Searchable;
 import be.jsams.common.bean.view.ViewFactory;
 
 import com.jgoodies.forms.builder.DefaultFormBuilder;
@@ -27,7 +29,7 @@ import com.jgoodies.forms.layout.FormLayout;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class AgentBeanView extends AbstractBeanView<AgentBean, JPanel, JPanel> {
+public class AgentBeanView extends AbstractBeanView<AgentBean> implements Editable<JPanel>, Searchable<JPanel> {
 
     /**
      * Serial Version UID
@@ -127,7 +129,7 @@ public class AgentBeanView extends AbstractBeanView<AgentBean, JPanel, JPanel> {
     }
 
     /**
-     * Creates a custom view
+     * Create a custom view
      * 
      * @return a {@link JPanel}
      */

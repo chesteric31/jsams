@@ -27,10 +27,10 @@ import be.jsams.client.model.table.BillDetailTableModel;
 import be.jsams.client.model.table.ProductTableModel;
 import be.jsams.client.renderer.JsamsBooleanTableCellRenderer;
 import be.jsams.client.renderer.JsamsTableCellRenderer;
+import be.jsams.client.swing.component.AbstractJsamsFrame;
 import be.jsams.client.swing.component.JsamsButton;
 import be.jsams.client.swing.component.JsamsDialog;
 import be.jsams.client.swing.component.JsamsFormattedTextField;
-import be.jsams.client.swing.component.AbstractJsamsFrame;
 import be.jsams.client.swing.component.JsamsTable;
 import be.jsams.client.swing.component.JsamsTextField;
 import be.jsams.client.swing.listener.ProductTableMouseListener;
@@ -44,6 +44,8 @@ import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.management.ProductBean;
 import be.jsams.common.bean.model.sale.BillBean;
 import be.jsams.common.bean.model.sale.detail.BillDetailBean;
+import be.jsams.common.bean.view.Editable;
+import be.jsams.common.bean.view.Searchable;
 import be.jsams.common.bean.view.ViewFactory;
 
 import com.jgoodies.common.collect.ArrayListModel;
@@ -58,7 +60,7 @@ import com.toedter.calendar.JDateChooser;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class BillBeanView extends AbstractDocumentBeanView<BillBean, JPanel, JPanel> {
+public class BillBeanView extends AbstractDocumentBeanView<BillBean> implements Editable<JPanel>, Searchable<JPanel> {
 
     /**
      * Serial Version UID

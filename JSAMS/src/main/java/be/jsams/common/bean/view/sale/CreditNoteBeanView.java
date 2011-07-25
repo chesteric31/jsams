@@ -26,9 +26,9 @@ import be.jsams.client.model.table.BillDetailTableModel;
 import be.jsams.client.model.table.CreditNoteDetailTableModel;
 import be.jsams.client.model.table.ProductTableModel;
 import be.jsams.client.renderer.JsamsTableCellRenderer;
+import be.jsams.client.swing.component.AbstractJsamsFrame;
 import be.jsams.client.swing.component.JsamsButton;
 import be.jsams.client.swing.component.JsamsDialog;
-import be.jsams.client.swing.component.AbstractJsamsFrame;
 import be.jsams.client.swing.component.JsamsTable;
 import be.jsams.client.swing.component.JsamsTextField;
 import be.jsams.client.swing.listener.ProductTableMouseListener;
@@ -41,6 +41,8 @@ import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.management.ProductBean;
 import be.jsams.common.bean.model.sale.CreditNoteBean;
 import be.jsams.common.bean.model.sale.detail.CreditNoteDetailBean;
+import be.jsams.common.bean.view.Editable;
+import be.jsams.common.bean.view.Searchable;
 import be.jsams.common.bean.view.ViewFactory;
 
 import com.jgoodies.common.collect.ArrayListModel;
@@ -55,7 +57,8 @@ import com.toedter.calendar.JDateChooser;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class CreditNoteBeanView extends AbstractDocumentBeanView<CreditNoteBean, JPanel, JPanel> {
+public class CreditNoteBeanView extends AbstractDocumentBeanView<CreditNoteBean> implements Editable<JPanel>,
+        Searchable<JPanel> {
 
     /**
      * Serial Version UID
@@ -209,8 +212,8 @@ public class CreditNoteBeanView extends AbstractDocumentBeanView<CreditNoteBean,
                                         int detailSelectedRow = getDetailsTable().getSelectedRow();
                                         int detailSelectedRowModel = getDetailsTable().convertRowIndexToModel(
                                                 detailSelectedRow);
-                                        CreditNoteDetailTableModel detailModel
-                                            = (CreditNoteDetailTableModel) getDetailsTable().getModel();
+                                        CreditNoteDetailTableModel
+                                            detailModel = (CreditNoteDetailTableModel) getDetailsTable().getModel();
                                         CreditNoteDetailBean selectedDetailBean = detailModel
                                                 .getRow(detailSelectedRowModel);
                                         selectedDetailBean.setPrice(selectedBean.getPrice());
