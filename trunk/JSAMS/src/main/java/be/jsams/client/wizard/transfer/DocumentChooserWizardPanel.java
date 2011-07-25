@@ -30,6 +30,7 @@ import be.jsams.common.bean.model.sale.BillBean;
 import be.jsams.common.bean.model.sale.CommandBean;
 import be.jsams.common.bean.model.sale.DeliveryOrderBean;
 import be.jsams.common.bean.model.sale.EstimateBean;
+import be.jsams.common.bean.model.transfer.TransferBean;
 
 /**
  * {@link JsamsWizardPanel} to choose the document to transfer. 
@@ -37,7 +38,7 @@ import be.jsams.common.bean.model.sale.EstimateBean;
  * @author chesteric31
  * @version $Revision$ $Date::                  $ $Author$
  */
-public class DocumentChooserWizardPanel extends JsamsWizardPanel {
+public class DocumentChooserWizardPanel extends JsamsWizardPanel<TransferBean> {
 
     /**
      * Serial Version UID
@@ -51,9 +52,10 @@ public class DocumentChooserWizardPanel extends JsamsWizardPanel {
      * Constructor.
      * 
      * @param component the {@link JsamsWizardComponent}
+     * @param model the model
      */
-    public DocumentChooserWizardPanel(JsamsWizardComponent component) {
-        super(component, JsamsI18nLabelResource.LABEL_TRANSFER_CHOOSE_DOCUMENT);
+    public DocumentChooserWizardPanel(JsamsWizardComponent component, TransferBean model) {
+        super(component, model, JsamsI18nLabelResource.LABEL_TRANSFER_CHOOSE_DOCUMENT);
         initComponents();
     }
 
@@ -61,7 +63,7 @@ public class DocumentChooserWizardPanel extends JsamsWizardPanel {
      * Initialize the components.
      */
     private void initComponents() {
-        int source = ((TransferWizardComponent) getWizardComponent()).getSource();
+        int source = getModel().getSourceType();
         SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
         CustomerBean customer = JsamsApplicationContext.getCustomerBeanBuilder().build(null, currentSociety);
         AgentBean agent = JsamsApplicationContext.getAgentBeanBuilder().build(null, currentSociety);

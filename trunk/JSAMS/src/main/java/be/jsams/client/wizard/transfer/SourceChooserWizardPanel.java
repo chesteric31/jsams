@@ -10,17 +10,18 @@ import be.jsams.client.i18n.JsamsI18nLabelResource;
 import be.jsams.client.swing.component.AbstractJsamsFrame;
 import be.jsams.client.wizard.JsamsWizardComponent;
 import be.jsams.client.wizard.JsamsWizardPanel;
+import be.jsams.common.bean.model.transfer.TransferBean;
 
 import com.jgoodies.forms.builder.DefaultFormBuilder;
 import com.jgoodies.forms.layout.FormLayout;
 
 /**
  * {@link JsamsWizardPanel} to choose the source document to transfer.
- *
+ * 
  * @author chesteric31
  * @version $Revision$ $Date::                  $ $Author$
  */
-public class SourceChooserWizardPanel extends JsamsWizardPanel {
+public class SourceChooserWizardPanel extends JsamsWizardPanel<TransferBean> {
 
     /**
      * Serial Version UID
@@ -43,9 +44,10 @@ public class SourceChooserWizardPanel extends JsamsWizardPanel {
      * Constructor.
      * 
      * @param component the {@link JsamsWizardComponent}
+     * @param model the model
      */
-    public SourceChooserWizardPanel(JsamsWizardComponent component) {
-        super(component, JsamsI18nLabelResource.LABEL_TRANSFER_CHOOSE_SOURCE);
+    public SourceChooserWizardPanel(JsamsWizardComponent component, TransferBean model) {
+        super(component, model, JsamsI18nLabelResource.LABEL_TRANSFER_CHOOSE_SOURCE);
         initComponents();
     }
 
@@ -126,7 +128,7 @@ public class SourceChooserWizardPanel extends JsamsWizardPanel {
      */
     public void next() {
         if (isRadioSelected()) {
-            ((TransferWizardComponent) getWizardComponent()).setSource(selectedOption);
+            getModel().setSourceType(selectedOption);
             switchPanel(TransferWizardDialog.SECOND_PANEL);
         }
     }

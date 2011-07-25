@@ -19,11 +19,9 @@ public class PeriodBean extends AbstractIdentityBean<AbstractIdentity, PeriodBea
     private static final long serialVersionUID = -4056201513294539437L;
 
     private Date startDate;
-
     private Date endDate;
 
     public static final String START_DATE_PROPERTY = "startDate";
-
     public static final String END_DATE_PROPERTY = "endDate";
 
     /**

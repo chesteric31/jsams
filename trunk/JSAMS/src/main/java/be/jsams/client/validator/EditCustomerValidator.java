@@ -12,7 +12,7 @@ import com.jgoodies.validation.util.PropertyValidationSupport;
 import com.jgoodies.validation.util.ValidationUtils;
 
 /**
- * {@link Validator} for edit customer panel.
+ * {@link Validator} for edit customer dialog.
  * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$

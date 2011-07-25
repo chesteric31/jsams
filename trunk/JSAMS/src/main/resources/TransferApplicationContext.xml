@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<!-- Service -->
+	<bean id="transferServiceTarget"
+		class="be.jsams.server.service.transfer.impl.TransferServiceImpl">
+		<property name="estimateDao" ref="estimateDao" />
+		<property name="commandDao" ref="commandDao" />
+		<property name="deliveryOrderDao" ref="deliveryOrderDao" />
+		<property name="billDao" ref="billDao" />
+		<property name="creditNoteDao" ref="creditNoteDao" />
+	</bean>
+	<bean id="transferService" parent="baseTransactionProxy">
+		<property name="target" ref="transferServiceTarget" />
+	</bean>
+
+</beans>

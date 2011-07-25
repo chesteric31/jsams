@@ -3,14 +3,16 @@ package be.jsams.client.wizard;
 import javax.swing.JPanel;
 
 import be.jsams.client.i18n.I18nString;
+import be.jsams.common.bean.model.AbstractIdentityBean;
 
 /**
  * 
+ * @param <B> the {@link AbstractIdentityBean} model
  * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public abstract class JsamsWizardPanel extends JPanel {
+public abstract class JsamsWizardPanel<B extends AbstractIdentityBean<?, ?>> extends JPanel {
 
     /**
      * Serial Version UID
@@ -19,15 +21,18 @@ public abstract class JsamsWizardPanel extends JPanel {
 
     private JsamsWizardComponent wizardComponent;
     private I18nString panelTitle;
+    private B model;
     
     /**
      * Constructor.
      * 
      * @param wizardComponent the {@link JsamsWizardComponent}
+     * @param model the {@link AbstractIdentityBean} model
      * @param panelTitle the {@link I18nString} title
      */
-    public JsamsWizardPanel(JsamsWizardComponent wizardComponent, final I18nString panelTitle) {
+    public JsamsWizardPanel(JsamsWizardComponent wizardComponent, B model, final I18nString panelTitle) {
         this.wizardComponent = wizardComponent;
+        this.model = model;
         this.panelTitle = panelTitle;
     }
 
@@ -148,4 +153,18 @@ public abstract class JsamsWizardPanel extends JPanel {
         this.panelTitle = panelTitle;
     }
 
+    /**
+     * @return the model
+     */
+    public B getModel() {
+        return model;
+    }
+
+    /**
+     * @param model the model to set
+     */
+    public void setModel(B model) {
+        this.model = model;
+    }
+    
 }
