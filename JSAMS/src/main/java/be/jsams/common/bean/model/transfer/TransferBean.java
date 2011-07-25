@@ -45,6 +45,7 @@ public class TransferBean extends AbstractIdentityBean<AbstractIdentity, Transfe
         int oldValue = this.transferMode;
         this.transferMode = transferMode;
         firePropertyChange(TRANSFER_MODE_PROPERTY, oldValue, this.transferMode);
+        System.out.println("transfer is: " + this.transferMode);
     }
 
     /**
@@ -61,6 +62,7 @@ public class TransferBean extends AbstractIdentityBean<AbstractIdentity, Transfe
         int oldValue = this.sourceType;
         this.sourceType = sourceType;
         firePropertyChange(SOURCE_TYPE_PROPERTY, oldValue, this.sourceType);
+        System.out.println("source is: " + this.sourceType);
     }
 
     /**
@@ -77,6 +79,7 @@ public class TransferBean extends AbstractIdentityBean<AbstractIdentity, Transfe
         int oldValue = this.destinationType;
         this.destinationType = destinationType;
         firePropertyChange(DESTINATION_TYPE_PROPERTY, oldValue, this.destinationType);
+        System.out.println("destination is: " + this.destinationType);
     }
 
     /**

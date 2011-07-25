@@ -3,7 +3,6 @@ package be.jsams.client.wizard.transfer;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
-import javax.swing.ButtonGroup;
 import javax.swing.JRadioButton;
 
 import be.jsams.client.i18n.JsamsI18nLabelResource;
@@ -11,6 +10,7 @@ import be.jsams.client.swing.component.AbstractJsamsFrame;
 import be.jsams.client.wizard.JsamsWizardComponent;
 import be.jsams.client.wizard.JsamsWizardPanel;
 import be.jsams.common.bean.model.transfer.TransferBean;
+import be.jsams.common.bean.view.ViewFactory;
 
 import com.jgoodies.forms.builder.DefaultFormBuilder;
 import com.jgoodies.forms.layout.FormLayout;
@@ -31,14 +31,10 @@ public class DestinationChooserWizardPanel extends JsamsWizardPanel<TransferBean
     private JRadioButton deliveryOrderRadioButton;
     private JRadioButton billRadioButton;
     private JRadioButton creditNoteRadioButton;
-    private ButtonGroup buttonGroup;
-    private final int noOneSelected = 0;
     private final int commandSelected = 1;
     private final int deliveryOrderSelected = 2;
     private final int billSelected = 3;
     private final int creditNoteSelected = 4;
-    private final int finishSelected = 5;
-    private int selectedOption = noOneSelected; // 0 is no selected option
 
     /**
      * Constructor.
@@ -55,47 +51,43 @@ public class DestinationChooserWizardPanel extends JsamsWizardPanel<TransferBean
      * Initialize the components.
      */
     private void initComponents() {
-        commandRadioButton = new JRadioButton();
+        ViewFactory<TransferBean> viewFactory = getViewFactory();
+        commandRadioButton = viewFactory.createBindingRadioComponent(getModel(), TransferBean.DESTINATION_TYPE_PROPERTY,
+                commandSelected, true, false);
         commandRadioButton.addItemListener(new ItemListener() {
             public void itemStateChanged(ItemEvent e) {
                 if (e.getStateChange() == ItemEvent.SELECTED) {
-                    selectedOption = commandSelected;
                     update();
                 }
             }
         });
-        deliveryOrderRadioButton = new JRadioButton();
+        deliveryOrderRadioButton = viewFactory.createBindingRadioComponent(getModel(),
+                TransferBean.DESTINATION_TYPE_PROPERTY, deliveryOrderSelected, true, false);
         deliveryOrderRadioButton.addItemListener(new ItemListener() {
             public void itemStateChanged(ItemEvent e) {
                 if (e.getStateChange() == ItemEvent.SELECTED) {
-                    selectedOption = deliveryOrderSelected;
                     update();
                 }
             }
         });
-        billRadioButton = new JRadioButton();
+        billRadioButton = viewFactory.createBindingRadioComponent(getModel(), TransferBean.DESTINATION_TYPE_PROPERTY,
+                billSelected, true, false);
         billRadioButton.addItemListener(new ItemListener() {
             public void itemStateChanged(ItemEvent e) {
                 if (e.getStateChange() == ItemEvent.SELECTED) {
-                    selectedOption = billSelected;
                     update();
                 }
             }
         });
-        creditNoteRadioButton = new JRadioButton();
+        creditNoteRadioButton = viewFactory.createBindingRadioComponent(getModel(),
+                TransferBean.DESTINATION_TYPE_PROPERTY, creditNoteSelected, true, false);
         creditNoteRadioButton.addItemListener(new ItemListener() {
             public void itemStateChanged(ItemEvent e) {
                 if (e.getStateChange() == ItemEvent.SELECTED) {
-                    selectedOption = creditNoteSelected;
                     update();
                 }
             }
         });
-        buttonGroup = new ButtonGroup();
-        buttonGroup.add(commandRadioButton);
-        buttonGroup.add(deliveryOrderRadioButton);
-        buttonGroup.add(billRadioButton);
-        buttonGroup.add(creditNoteRadioButton);
 
         FormLayout layout = new FormLayout("left:p, 3dlu, p", "p");
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
@@ -114,12 +106,11 @@ public class DestinationChooserWizardPanel extends JsamsWizardPanel<TransferBean
      */
     public void update() {
         boolean nextEnabled = false;
-        if (isRadioSelected()) {
+        if (destinationTypeIsSelected()) {
             nextEnabled = true;
         }
         setNextButtonEnabled(nextEnabled);
-        boolean finishEnabled = selectedOption == finishSelected;
-        setFinishButtonEnabled(finishEnabled);
+        setFinishButtonEnabled(false);
         setBackButtonEnabled(true);
     }
 
@@ -127,8 +118,7 @@ public class DestinationChooserWizardPanel extends JsamsWizardPanel<TransferBean
      * {@inheritDoc}
      */
     public void next() {
-        if (isRadioSelected()) {
-            getModel().setDestinationType(selectedOption);
+        if (destinationTypeIsSelected()) {
             switchPanel(TransferWizardDialog.THIRD_PANEL);
         }
     }
@@ -141,11 +131,10 @@ public class DestinationChooserWizardPanel extends JsamsWizardPanel<TransferBean
     }
 
     /**
-     * @return true if one radio is selected, false otherwise
+     * @return true if a destination type is selected, false otherwise
      */
-    private boolean isRadioSelected() {
-        return selectedOption == commandSelected || selectedOption == deliveryOrderSelected
-                || selectedOption == billSelected || selectedOption == creditNoteSelected;
+    private boolean destinationTypeIsSelected() {
+        return getModel().getDestinationType() != 0;
     }
 
 }

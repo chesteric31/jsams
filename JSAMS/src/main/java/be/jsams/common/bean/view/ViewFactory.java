@@ -5,6 +5,7 @@ import java.text.NumberFormat;
 
 import javax.swing.JCheckBox;
 import javax.swing.JComponent;
+import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
 import javax.swing.ListCellRenderer;
 import javax.swing.text.DefaultFormatterFactory;
@@ -201,6 +202,26 @@ public class ViewFactory<B extends AbstractIdentityBean<?, ?>> {
         ValidationComponentUtils.setMandatory(table, mandatory);
         table.setEnabled(!readOnly);
         return table;
+    }
+
+    /**
+     * Create a {@link JRadioButton} and bind this component to the bean
+     * parameter.
+     * 
+     * @param bean the bean
+     * @param property the property
+     * @param choice the choice
+     * @param mandatory mandatory boolean
+     * @param readOnly read only boolean
+     * @return the {@link JRadioButton}
+     */
+    public JRadioButton createBindingRadioComponent(final B bean, final String property, final int choice,
+            final boolean mandatory, final boolean readOnly) {
+        PropertyAdapter<B> adapter = new PropertyAdapter<B>(bean, property, true);
+        JRadioButton radioButton = BasicComponentFactory.createRadioButton(adapter, choice, "");
+        ValidationComponentUtils.setMandatory(radioButton, mandatory);
+        radioButton.setEnabled(!readOnly);
+        return radioButton;
     }
 
 }

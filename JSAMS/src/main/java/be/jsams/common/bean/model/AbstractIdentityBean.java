@@ -139,13 +139,12 @@ public abstract class AbstractIdentityBean<M extends AbstractIdentity, V extends
     }
 
     /**
-     * 
      * @return the {@link AbstractBeanView} of this class
      */
     public abstract V getView();
 
     /**
-     * Clears the value.
+     * Clear the value.
      */
     public abstract void clear();
 
