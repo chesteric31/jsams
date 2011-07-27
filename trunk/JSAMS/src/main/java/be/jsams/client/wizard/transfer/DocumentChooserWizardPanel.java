@@ -19,7 +19,7 @@ import be.jsams.client.swing.component.JsamsTextField;
 import be.jsams.client.swing.listener.BillTableMouseListener;
 import be.jsams.client.swing.listener.CommandTableMouseListener;
 import be.jsams.client.swing.listener.DeliveryOrderTableMouseListener;
-import be.jsams.client.swing.listener.EstimateTableMouseListener;
+import be.jsams.client.swing.listener.EstimateWizardTableMouseListener;
 import be.jsams.client.validator.SearchBillValidator;
 import be.jsams.client.validator.SearchCommandValidator;
 import be.jsams.client.validator.SearchDeliveryOrderValidator;
@@ -86,11 +86,6 @@ public class DocumentChooserWizardPanel extends JsamsWizardPanel<TransferBean> {
      * {@inheritDoc}
      */
     public void update() {
-        boolean nextEnabled = false;
-        if (isRadioSelected()) {
-            nextEnabled = true;
-        }
-        setNextButtonEnabled(nextEnabled);
         boolean finishEnabled = selectedOption == finishSelected;
         setFinishButtonEnabled(finishEnabled);
         setBackButtonEnabled(true);
@@ -112,7 +107,9 @@ public class DocumentChooserWizardPanel extends JsamsWizardPanel<TransferBean> {
             EstimateBean estimate = new EstimateBean(currentSociety, customer, agent);
             estimate.setTransferred(false);
             estimate.setView(buildEstimateView(estimate));
-            SearchEstimatePanel estimatePanel = new SearchEstimatePanel(estimate, new EstimateTableMouseListener(),
+            SearchEstimatePanel<EstimateWizardTableMouseListener> estimatePanel
+                = new SearchEstimatePanel<EstimateWizardTableMouseListener>(
+                    estimate, new EstimateWizardTableMouseListener(getModel()),
                     JsamsApplicationContext.getEstimateService(), new SearchEstimateValidator(),
                     new EstimateTableModel(), false);
             this.add(estimatePanel);
@@ -361,14 +358,6 @@ public class DocumentChooserWizardPanel extends JsamsWizardPanel<TransferBean> {
     public void back() {
         remove(getComponentCount() - 1);
         switchPanel(TransferWizardDialog.THIRD_PANEL);
-    }
-    
-
-    /**
-     * @return true if one radio is selected, false otherwise
-     */
-    private boolean isRadioSelected() {
-        return true;
     }
 
 }

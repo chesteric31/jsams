@@ -1,6 +1,10 @@
 package be.jsams.common.bean.model.transfer;
 
+import java.util.List;
+
 import be.jsams.common.bean.model.AbstractIdentityBean;
+import be.jsams.common.bean.model.sale.AbstractDocumentBean;
+import be.jsams.common.bean.model.sale.detail.AbstractDetailBean;
 import be.jsams.common.bean.view.transfer.TransferBeanView;
 import be.jsams.server.model.AbstractIdentity;
 
@@ -26,10 +30,13 @@ public class TransferBean extends AbstractIdentityBean<AbstractIdentity, Transfe
     private int sourceType;
     private int destinationType;
 
+    private List<? extends AbstractDocumentBean<?, ?>> documents;
+    private List<? extends AbstractDetailBean<?, ?, ?>> details;
+
     public static final String TRANSFER_MODE_PROPERTY = "transferMode";
     public static final String SOURCE_TYPE_PROPERTY = "sourceType";
     public static final String DESTINATION_TYPE_PROPERTY = "destinationType";
-    
+
     /**
      * @return the transferMode
      */
@@ -44,7 +51,6 @@ public class TransferBean extends AbstractIdentityBean<AbstractIdentity, Transfe
         int oldValue = this.transferMode;
         this.transferMode = transferMode;
         firePropertyChange(TRANSFER_MODE_PROPERTY, oldValue, this.transferMode);
-        System.out.println("transfer is: " + this.transferMode);
     }
 
     /**
@@ -61,7 +67,6 @@ public class TransferBean extends AbstractIdentityBean<AbstractIdentity, Transfe
         int oldValue = this.sourceType;
         this.sourceType = sourceType;
         firePropertyChange(SOURCE_TYPE_PROPERTY, oldValue, this.sourceType);
-        System.out.println("source is: " + this.sourceType);
     }
 
     /**
@@ -78,7 +83,6 @@ public class TransferBean extends AbstractIdentityBean<AbstractIdentity, Transfe
         int oldValue = this.destinationType;
         this.destinationType = destinationType;
         firePropertyChange(DESTINATION_TYPE_PROPERTY, oldValue, this.destinationType);
-        System.out.println("destination is: " + this.destinationType);
     }
 
     /**
@@ -90,6 +94,8 @@ public class TransferBean extends AbstractIdentityBean<AbstractIdentity, Transfe
         setTransferMode(other.getTransferMode());
         setSourceType(other.getSourceType());
         setDestinationType(other.getDestinationType());
+        setDetails(other.getDetails());
+        setDocuments(other.getDocuments());
     }
 
     /**
@@ -108,6 +114,36 @@ public class TransferBean extends AbstractIdentityBean<AbstractIdentity, Transfe
         setTransferMode(0);
         setSourceType(0);
         setDestinationType(0);
+        setDetails(null);
+        setDocuments(null);
     }
 
+    /**
+     * @return the documents
+     */
+    public List<? extends AbstractDocumentBean<?, ?>> getDocuments() {
+        return documents;
+    }
+
+    /**
+     * @param documents the documents to set
+     */
+    public void setDocuments(List<? extends AbstractDocumentBean<?, ?>> documents) {
+        this.documents = documents;
+    }
+
+    /**
+     * @return the details
+     */
+    public List<? extends AbstractDetailBean<?, ?, ?>> getDetails() {
+        return details;
+    }
+
+    /**
+     * @param details the details to set
+     */
+    public void setDetails(List<? extends AbstractDetailBean<?, ?, ?>> details) {
+        this.details = details;
+    }
+    
 }

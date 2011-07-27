@@ -1,5 +1,6 @@
 package be.jsams.client.model.panel.sale;
 
+import java.awt.event.MouseListener;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -11,7 +12,6 @@ import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.model.dialog.sale.EditEstimateDialog;
 import be.jsams.client.model.panel.AbstractSearchPanel;
 import be.jsams.client.model.table.EstimateTableModel;
-import be.jsams.client.swing.listener.EstimateTableMouseListener;
 import be.jsams.client.validator.SearchEstimateValidator;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.AgentBean;
@@ -22,12 +22,13 @@ import be.jsams.server.service.sale.EstimateService;
 /**
  * {@link AbstractSearchPanel} for {@link EstimateBean} objects.
  * 
+ * @param <L> a customized {@link MouseListener}
+ * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class SearchEstimatePanel extends
-        AbstractSearchPanel<EstimateBean, EstimateTableMouseListener,
-        EstimateService, SearchEstimateValidator, EstimateTableModel> {
+public class SearchEstimatePanel<L extends MouseListener> extends
+        AbstractSearchPanel<EstimateBean, L, EstimateService, SearchEstimateValidator, EstimateTableModel> {
 
     /**
      * Serial Version UID
@@ -41,14 +42,14 @@ public class SearchEstimatePanel extends
      * Constructor.
      * 
      * @param model the {@link EstimateBean}
-     * @param listener the {@link EstimateTableMouseListener}
+     * @param listener the {@link MouseListener}
      * @param service the {@link EstimateService}
      * @param validator the {@link SearchEstimateValidator} 
      * @param estimateTableModel the {@link EstimateTableModel}
      * @param showButtons a boolean that indicates if we have to display the
      *            buttons to manage the content: add, remove and modify
      */
-    public SearchEstimatePanel(EstimateBean model, EstimateTableMouseListener listener, EstimateService service,
+    public SearchEstimatePanel(EstimateBean model, L listener, EstimateService service,
             SearchEstimateValidator validator, EstimateTableModel estimateTableModel, final boolean showButtons) {
         super(model, listener, service, validator, estimateTableModel, showButtons);
     }
