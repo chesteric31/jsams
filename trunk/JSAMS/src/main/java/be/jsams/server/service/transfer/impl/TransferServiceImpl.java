@@ -92,8 +92,12 @@ public class TransferServiceImpl implements TransferService {
             CustomerBean customer = estimate.getCustomer();
             CommandBean newBean = new CommandBean(estimate.getSociety(), customer, estimate.getAgent());
             newBean.setBillingAddress(estimate.getBillingAddress());
+            // to force  to create a new billing address
+            newBean.getBillingAddress().setId(null);
             newBean.setCreationDate(new Date());
             newBean.setDeliveryAddress(customer.getDeliveryAddress());
+            // to force  to create a new delivery address
+            newBean.getDeliveryAddress().setId(null);
             List<CommandDetailBean> details = new ArrayList<CommandDetailBean>();
             for (EstimateDetailBean detail : estimate.getDetails()) {
                 CommandDetailBean bean = new CommandDetailBean();
@@ -112,6 +116,9 @@ public class TransferServiceImpl implements TransferService {
             newBean.setTransferred(false);
             commandService.create(newBean);
             estimate.setTransferred(true);
+            for (EstimateDetailBean bean : estimate.getDetails()) {
+                bean.setTransferred(true);
+            }
             estimateService.update(estimate);
             break;
         case 2:
