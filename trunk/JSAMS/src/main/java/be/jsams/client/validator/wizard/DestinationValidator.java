@@ -26,6 +26,9 @@ public class DestinationValidator implements Validator<TransferBean> {
         int destinationType = bean.getDestinationType();
         if (destinationType != 0) {
             switch (sourceType) {
+            case 1:
+                checkEstimate(destinationType, support);
+                break;
             case 2:
                 checkCommand(destinationType, support);
                 break;
@@ -45,6 +48,19 @@ public class DestinationValidator implements Validator<TransferBean> {
         ValidationResult result = support.getResult();
         return result;
     }
+
+    /**
+     * Check the estimate selecting.
+     * 
+     * @param destinationType the selected destination type
+     * @param support the {@link PropertyValidationSupport}
+     */
+    private void checkEstimate(int destinationType, PropertyValidationSupport support) {
+        if (destinationType == 2 || destinationType == 4) {
+            support.addError(JsamsI18nLabelResource.LABEL_DESTINATION_TYPE.getTranslation(),
+                    JsamsI18nResource.ERROR_SOURCE_DESTINATION.getTranslation());
+        }
+    }
     
     /**
      * Check the command selecting.
@@ -53,7 +69,7 @@ public class DestinationValidator implements Validator<TransferBean> {
      * @param support the {@link PropertyValidationSupport}
      */
     private void checkCommand(int destinationType, PropertyValidationSupport support) {
-        if (destinationType == 1) {
+        if (destinationType == 1 || destinationType == 4) {
             support.addError(JsamsI18nLabelResource.LABEL_DESTINATION_TYPE.getTranslation(),
                     JsamsI18nResource.ERROR_SOURCE_DESTINATION.getTranslation());
         }
@@ -66,7 +82,7 @@ public class DestinationValidator implements Validator<TransferBean> {
      * @param support the {@link PropertyValidationSupport}
      */
     private void checkDeliveryOrder(int destinationType, PropertyValidationSupport support) {
-        if (destinationType < 3) {
+        if (destinationType != 3) {
             support.addError(JsamsI18nLabelResource.LABEL_DESTINATION_TYPE.getTranslation(),
                     JsamsI18nResource.ERROR_SOURCE_DESTINATION.getTranslation());
         }
