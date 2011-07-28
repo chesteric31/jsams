@@ -1,4 +1,4 @@
-package be.jsams.client.swing.listener;
+package be.jsams.client.swing.listener.wizard;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;

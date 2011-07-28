@@ -7,6 +7,7 @@ import javax.swing.JRadioButton;
 
 import be.jsams.client.i18n.JsamsI18nLabelResource;
 import be.jsams.client.swing.component.AbstractJsamsFrame;
+import be.jsams.client.validator.wizard.SourceValidator;
 import be.jsams.client.wizard.JsamsWizardComponent;
 import be.jsams.client.wizard.JsamsWizardPanel;
 import be.jsams.common.bean.model.transfer.TransferBean;
@@ -21,7 +22,7 @@ import com.jgoodies.forms.layout.FormLayout;
  * @author chesteric31
  * @version $Revision$ $Date::                  $ $Author$
  */
-public class SourceChooserWizardPanel extends JsamsWizardPanel<TransferBean> {
+public class SourceChooserWizardPanel extends JsamsWizardPanel<TransferBean, SourceValidator> {
 
     /**
      * Serial Version UID
@@ -42,9 +43,11 @@ public class SourceChooserWizardPanel extends JsamsWizardPanel<TransferBean> {
      * @param parent the {@link TransferWizardDialog}
      * @param component the {@link JsamsWizardComponent}
      * @param model the model
+     * @param validator the {@link SourceValidator}
      */
-    public SourceChooserWizardPanel(TransferWizardDialog parent, JsamsWizardComponent component, TransferBean model) {
-        super(parent, component, model, JsamsI18nLabelResource.LABEL_TRANSFER_CHOOSE_SOURCE);
+    public SourceChooserWizardPanel(TransferWizardDialog parent, JsamsWizardComponent component, TransferBean model,
+            SourceValidator validator) {
+        super(parent, component, model, JsamsI18nLabelResource.LABEL_TRANSFER_CHOOSE_SOURCE, validator);
         initComponents();
     }
 
@@ -106,11 +109,6 @@ public class SourceChooserWizardPanel extends JsamsWizardPanel<TransferBean> {
      * {@inheritDoc}
      */
     public void update() {
-        boolean nextEnabled = false;
-        if (sourceTypeIsSelected()) {
-            nextEnabled = true;
-        }
-        setNextButtonEnabled(nextEnabled);
         setFinishButtonEnabled(false);
         setBackButtonEnabled(false);
         super.update();
@@ -120,16 +118,9 @@ public class SourceChooserWizardPanel extends JsamsWizardPanel<TransferBean> {
      * {@inheritDoc}
      */
     public void next() {
-        if (sourceTypeIsSelected() && prePerformNext(getModel())) {
+        if (prePerformNext()) {
             switchPanel(TransferWizardDialog.SECOND_PANEL);
         }
-    }
-
-    /**
-     * @return true if a source type is selected, false otherwise
-     */
-    private boolean sourceTypeIsSelected() {
-        return getModel().getSourceType() != 0;
     }
 
     /**

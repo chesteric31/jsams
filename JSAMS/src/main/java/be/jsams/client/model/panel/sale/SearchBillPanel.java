@@ -1,5 +1,6 @@
 package be.jsams.client.model.panel.sale;
 
+import java.awt.event.MouseListener;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -11,8 +12,7 @@ import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.model.dialog.sale.EditBillDialog;
 import be.jsams.client.model.panel.AbstractSearchPanel;
 import be.jsams.client.model.table.BillTableModel;
-import be.jsams.client.swing.listener.BillTableMouseListener;
-import be.jsams.client.validator.SearchBillValidator;
+import be.jsams.client.validator.search.SearchBillValidator;
 import be.jsams.common.bean.model.PaymentModeBean;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.CustomerBean;
@@ -22,11 +22,13 @@ import be.jsams.server.service.sale.BillService;
 /**
  * {@link AbstractSearchPanel} for {@link BillBean} objects.
  * 
+ * @param <L> a customized {@link MouseListener}
+ * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class SearchBillPanel extends
-        AbstractSearchPanel<BillBean, BillTableMouseListener, BillService, SearchBillValidator, BillTableModel> {
+public class SearchBillPanel<L extends MouseListener> extends
+        AbstractSearchPanel<BillBean, L, BillService, SearchBillValidator, BillTableModel> {
 
     /**
      * Serial Version UID
@@ -41,14 +43,14 @@ public class SearchBillPanel extends
      * Constructor
      * 
      * @param bean the {@link BillBean}
-     * @param listener the {@link BillTableMouseListener}
+     * @param listener the {@link MouseListener}
      * @param service the {@link BillService}
      * @param validator the {@link SearchBillValidator}
      * @param billTableModel the {@link BillTableModel}
      * @param showButtons a boolean that indicates if we have to display the buttons to manage the content: add, remove
      *            and modify
      */
-    public SearchBillPanel(BillBean bean, BillTableMouseListener listener, BillService service,
+    public SearchBillPanel(BillBean bean, L listener, BillService service,
             SearchBillValidator validator, BillTableModel billTableModel, boolean showButtons) {
         super(bean, listener, service, validator, billTableModel, showButtons);
     }

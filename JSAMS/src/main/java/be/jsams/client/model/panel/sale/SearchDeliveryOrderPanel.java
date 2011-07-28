@@ -1,5 +1,6 @@
 package be.jsams.client.model.panel.sale;
 
+import java.awt.event.MouseListener;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -11,21 +12,22 @@ import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.model.dialog.sale.EditDeliveryOrderDialog;
 import be.jsams.client.model.panel.AbstractSearchPanel;
 import be.jsams.client.model.table.DeliveryOrderTableModel;
-import be.jsams.client.swing.listener.DeliveryOrderTableMouseListener;
-import be.jsams.client.validator.SearchDeliveryOrderValidator;
+import be.jsams.client.validator.search.SearchDeliveryOrderValidator;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.sale.DeliveryOrderBean;
 import be.jsams.server.service.sale.DeliveryOrderService;
 
 /**
- * {@link AbstractSearchPanel} for {@link DeliveryOrderBean} objects. 
+ * {@link AbstractSearchPanel} for {@link DeliveryOrderBean} objects.
+ * 
+ * @param <L> a customized {@link MouseListener}
  *
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class SearchDeliveryOrderPanel
-        extends AbstractSearchPanel<DeliveryOrderBean, DeliveryOrderTableMouseListener,
+public class SearchDeliveryOrderPanel<L extends MouseListener> 
+        extends AbstractSearchPanel<DeliveryOrderBean, L,
         DeliveryOrderService, SearchDeliveryOrderValidator, DeliveryOrderTableModel> {
 
     /**
@@ -41,14 +43,14 @@ public class SearchDeliveryOrderPanel
      * Constructor.
      * 
      * @param model the {@link DeliveryOrderBean}
-     * @param listener the {@link DeliveryOrderTableMouseListener}
+     * @param listener the {@link MouseListener}
      * @param service the {@link DeliveryOrderService}
      * @param validator the {@link SearchDeliveryOrderValidator}
      * @param deliveryOrderTableModel the {@link DeliveryOrderTableModel}
      * @param showButtons a boolean that indicates if we have to display the buttons to manage the content: add, remove
      *            and modify
      */
-    public SearchDeliveryOrderPanel(DeliveryOrderBean model, DeliveryOrderTableMouseListener listener,
+    public SearchDeliveryOrderPanel(DeliveryOrderBean model, L listener,
             DeliveryOrderService service, SearchDeliveryOrderValidator validator,
             DeliveryOrderTableModel deliveryOrderTableModel, boolean showButtons) {
         super(model, listener, service, validator, deliveryOrderTableModel, showButtons);

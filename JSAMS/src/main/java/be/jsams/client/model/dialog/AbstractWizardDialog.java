@@ -29,22 +29,17 @@ import be.jsams.client.wizard.action.FinishAction;
 import be.jsams.common.bean.model.AbstractIdentityBean;
 import be.jsams.server.service.transfer.TransferService;
 
-import com.jgoodies.validation.ValidationResultModel;
-import com.jgoodies.validation.Validator;
-import com.jgoodies.validation.util.DefaultValidationResultModel;
-
 /**
  * Wizard generic dialog.
  * 
  * @param <B> an extension of {@link AbstractIdentityBean}
- * @param <V> an extension of {@link Validator}
  * @param <S> an extension of {@link TransferService}
  *
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public abstract class AbstractWizardDialog<B extends AbstractIdentityBean<?, ?>,
-        V extends Validator<B>, S extends TransferService> extends JsamsDialog {
+public abstract class AbstractWizardDialog<B extends AbstractIdentityBean<?, ?>, S extends TransferService> extends
+        JsamsDialog {
 
     /**
      * Serial Version UID
@@ -58,10 +53,8 @@ public abstract class AbstractWizardDialog<B extends AbstractIdentityBean<?, ?>,
     private JsamsLabel label;
     
     private B model;
-    private ValidationResultModel validationResultModel = new DefaultValidationResultModel();
     private JsamsStatusBar statusBar;
     private JPanel southPanel;
-    private Validator<B> validator;
     private TransferService service;
 
     /**
@@ -72,14 +65,12 @@ public abstract class AbstractWizardDialog<B extends AbstractIdentityBean<?, ?>,
      * @param iconFileName the icon path name of the dialog
      * @param logoFileName the file name to the logo to display
      * @param model the {@link AbstractIdentityBean} to use as wrapper
-     * @param validator the {@link Validator} as validator
      * @param service the {@link TransferService} to use to persist/update entities
      */
     public AbstractWizardDialog(final JsamsMainFrame parent, I18nString title, String iconFileName,
-            String logoFileName, B model, V validator, TransferService service) {
+            String logoFileName, B model, TransferService service) {
         super(parent, title, IconUtil.TITLE_ICON_PREFIX + iconFileName);
         this.model = model;
-        this.validator = validator;
         this.service = service;
         this.component = new DefaultJsamsWizardComponent();
         this.logoFileName = logoFileName;
@@ -140,7 +131,7 @@ public abstract class AbstractWizardDialog<B extends AbstractIdentityBean<?, ?>,
         // set automatically the new title
         component.addPropertyChangeListener(new PropertyChangeListener() {
             public void propertyChange(PropertyChangeEvent event) {
-                setPanelTitle(((JsamsWizardPanel<?>) event.getNewValue()).getPanelTitle());
+                setPanelTitle(((JsamsWizardPanel<?, ?>) event.getNewValue()).getPanelTitle());
             }
         });
         this.pack();
@@ -195,34 +186,6 @@ public abstract class AbstractWizardDialog<B extends AbstractIdentityBean<?, ?>,
      */
     public void setModel(B model) {
         this.model = model;
-    }
-
-    /**
-     * @return the validationResultModel
-     */
-    public ValidationResultModel getValidationResultModel() {
-        return validationResultModel;
-    }
-
-    /**
-     * @param validationResultModel the validationResultModel to set
-     */
-    public void setValidationResultModel(ValidationResultModel validationResultModel) {
-        this.validationResultModel = validationResultModel;
-    }
-
-    /**
-     * @return the validator
-     */
-    public Validator<B> getValidator() {
-        return validator;
-    }
-
-    /**
-     * @param validator the validator to set
-     */
-    public void setValidator(Validator<B> validator) {
-        this.validator = validator;
     }
 
     /**

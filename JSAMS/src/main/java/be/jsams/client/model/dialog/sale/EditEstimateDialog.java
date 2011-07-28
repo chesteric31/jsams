@@ -5,7 +5,7 @@ import javax.swing.JPanel;
 import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.model.dialog.AbstractEditDialog;
-import be.jsams.client.validator.EditEstimateValidator;
+import be.jsams.client.validator.edit.EditEstimateValidator;
 import be.jsams.common.bean.model.sale.EstimateBean;
 import be.jsams.common.bean.view.sale.EstimateBeanView;
 import be.jsams.server.service.sale.EstimateService;

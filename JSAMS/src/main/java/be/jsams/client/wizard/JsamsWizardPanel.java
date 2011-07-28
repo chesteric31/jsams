@@ -18,17 +18,19 @@ import com.jgoodies.validation.ValidationMessage;
 import com.jgoodies.validation.ValidationResult;
 import com.jgoodies.validation.ValidationResultModel;
 import com.jgoodies.validation.Validator;
+import com.jgoodies.validation.util.DefaultValidationResultModel;
 import com.jgoodies.validation.view.ValidationResultViewFactory;
 
 /**
  * Abstract wizard panel.
  * 
  * @param <B> the {@link AbstractIdentityBean} model
+ * @param <V> the {@link Validator} for the click onto next button
  * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public abstract class JsamsWizardPanel<B extends AbstractIdentityBean<?, ?>> extends JPanel {
+public abstract class JsamsWizardPanel<B extends AbstractIdentityBean<?, ?>, V extends Validator<B>> extends JPanel {
 
     /**
      * Serial Version UID
@@ -38,7 +40,9 @@ public abstract class JsamsWizardPanel<B extends AbstractIdentityBean<?, ?>> ext
     private JsamsWizardComponent wizardComponent;
     private I18nString panelTitle;
     private B model;
-    private AbstractWizardDialog<?, ?, ?> parent;
+    private AbstractWizardDialog<?, ?> parent;
+    private V validator;
+    private ValidationResultModel validationResultModel = new DefaultValidationResultModel();
 
     /**
      * Constructor.
@@ -47,13 +51,15 @@ public abstract class JsamsWizardPanel<B extends AbstractIdentityBean<?, ?>> ext
      * @param wizardComponent the {@link JsamsWizardComponent}
      * @param model the {@link AbstractIdentityBean} model
      * @param panelTitle the {@link I18nString} title
+     * @param validator the {@link Validator} for the next button click
      */
-    public JsamsWizardPanel(AbstractWizardDialog<?, ?, ?> parent, JsamsWizardComponent wizardComponent, B model,
-            final I18nString panelTitle) {
+    public JsamsWizardPanel(AbstractWizardDialog<?, ?> parent, JsamsWizardComponent wizardComponent, B model,
+            final I18nString panelTitle, V validator) {
         this.parent = parent;
         this.wizardComponent = wizardComponent;
         this.model = model;
         this.panelTitle = panelTitle;
+        this.validator = validator;
     }
 
     /**
@@ -199,22 +205,16 @@ public abstract class JsamsWizardPanel<B extends AbstractIdentityBean<?, ?>> ext
     }
 
     /**
-     * Method called by the children class for validation.
+     * Method called before the next button click to validate the data.
      * 
-     * @param bean the bean to validate
      * @return true if all is OK to continue, false otherwise
      */
-    @SuppressWarnings("unchecked")
-    public boolean prePerformNext(B bean) {
+    protected boolean prePerformNext() {
         boolean toContinue = true;
-        Validator<B> validator = (Validator<B>) parent.getValidator();
-        ValidationResult result = validator.validate((B) bean);
-        ValidationResultModel validationResultModel = parent.getValidationResultModel();
+        ValidationResult result = validator.validate(getModel());
         validationResultModel.setResult(result);
+        JsamsStatusBar statusBar = parent.getStatusBar();
         if (result.hasMessages()) {
-            JsamsStatusBar statusBar = parent.getStatusBar();
-            statusBar.removeAll();
-            statusBar.repaint();
             List<ValidationMessage> messages = validationResultModel.getResult().getMessages();
             for (ValidationMessage message : messages) {
                 JsamsLabel label = new JsamsLabel(message.formattedText().replace(".", ""));
@@ -224,12 +224,42 @@ public abstract class JsamsWizardPanel<B extends AbstractIdentityBean<?, ?>> ext
                 } else if (severity == Severity.WARNING) {
                     label.setIcon(ValidationResultViewFactory.getWarningIcon());
                 }
-                statusBar.addComponent(label);
+//                statusBar.addComponent(label);
+                statusBar.setTextWithIcon(label);
             }
-            statusBar.validate();
             toContinue = false;
+        } else {
+            statusBar.clear();
         }
         return toContinue;
+    }
+
+    /**
+     * @return the validationResultModel
+     */
+    public ValidationResultModel getValidationResultModel() {
+        return validationResultModel;
+    }
+
+    /**
+     * @param validationResultModel the validationResultModel to set
+     */
+    public void setValidationResultModel(ValidationResultModel validationResultModel) {
+        this.validationResultModel = validationResultModel;
+    }
+
+    /**
+     * @return the validator
+     */
+    public V getValidator() {
+        return validator;
+    }
+
+    /**
+     * @param validator the validator to set
+     */
+    public void setValidator(V validator) {
+        this.validator = validator;
     }
 
 }

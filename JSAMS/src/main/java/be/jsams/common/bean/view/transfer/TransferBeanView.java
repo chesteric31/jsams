@@ -20,7 +20,7 @@ public class TransferBeanView extends AbstractBeanView<TransferBean> implements 
     private static final long serialVersionUID = -2879683877037752402L;
 
     /**
-     * @param bean
+     * @param bean the {@link TransferBean}
      */
     public TransferBeanView(TransferBean bean) {
         super(bean);

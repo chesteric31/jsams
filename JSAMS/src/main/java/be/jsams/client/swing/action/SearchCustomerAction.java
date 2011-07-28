@@ -13,8 +13,8 @@ import be.jsams.client.model.table.CustomerTableModel;
 import be.jsams.client.swing.component.JsamsButton;
 import be.jsams.client.swing.component.JsamsDialog;
 import be.jsams.client.swing.component.JsamsTable;
-import be.jsams.client.swing.listener.CustomerTableMouseListener;
-import be.jsams.client.validator.SearchCustomerValidator;
+import be.jsams.client.swing.listener.search.CustomerTableMouseListener;
+import be.jsams.client.validator.search.SearchCustomerValidator;
 import be.jsams.common.bean.model.management.CustomerBean;
 
 /**

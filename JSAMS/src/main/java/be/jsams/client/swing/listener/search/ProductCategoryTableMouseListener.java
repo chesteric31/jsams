@@ -1,20 +1,20 @@
-package be.jsams.client.swing.listener;
+package be.jsams.client.swing.listener.search;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import be.jsams.client.i18n.JsamsI18nResource;
-import be.jsams.client.model.dialog.management.EditProductDialog;
-import be.jsams.client.model.table.ProductTableModel;
+import be.jsams.client.model.dialog.management.EditProductCategoryDialog;
+import be.jsams.client.model.table.ProductCategoryTableModel;
 import be.jsams.client.swing.component.JsamsTable;
 
 /**
- * Customized {@link MouseListener} for Product table double click.
+ * Customized {@link MouseListener} for Product category table double click.
  * 
  * @author chesteric31
- * @version $Rev$ $Date::                  $ $Author$
+ * @version $$Rev$$ $$Date::                  $$ $$Author$$
  */
-public class ProductTableMouseListener implements MouseListener {
+public class ProductCategoryTableMouseListener implements MouseListener {
 
     /**
      * {@inheritDoc}
@@ -25,8 +25,9 @@ public class ProductTableMouseListener implements MouseListener {
             int selectedRow = table.getSelectedRow();
             if (selectedRow > -1) {
                 int selectedRowModel = table.convertRowIndexToModel(selectedRow);
-                ProductTableModel model = (ProductTableModel) table.getModel();
-                new EditProductDialog(JsamsI18nResource.TITLE_EDIT_PRODUCT, model.getRow(selectedRowModel));
+                ProductCategoryTableModel model = (ProductCategoryTableModel) table.getModel();
+                new EditProductCategoryDialog(JsamsI18nResource.TITLE_EDIT_PRODUCT_CATEGORY, model
+                        .getRow(selectedRowModel));
                 table.updateUI();
             }
         }

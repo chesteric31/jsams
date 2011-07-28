@@ -32,7 +32,7 @@ public class DefaultJsamsWizardComponent implements JsamsWizardComponent {
     private FinishAction finishAction;
     private CancelAction cancelAction;
 
-    private List<JsamsWizardPanel<?>> panelList;
+    private List<JsamsWizardPanel<?, ?>> panelList;
     private int currentIndex;
     private JPanel panelsContainer;
     private PropertyChangeSupport propertyChangeListeners;
@@ -54,7 +54,7 @@ public class DefaultJsamsWizardComponent implements JsamsWizardComponent {
         cancelButton = new JsamsButton(JsamsI18nResource.WIZARD_BUTTON_CANCEL);
         finishButton = new JsamsButton(JsamsI18nResource.WIZARD_BUTTON_FINISH);
         
-        panelList = new ArrayList<JsamsWizardPanel<?>>();
+        panelList = new ArrayList<JsamsWizardPanel<?, ?>>();
         currentIndex = 0;
         panelsContainer = new JPanel(new CardLayout());
 
@@ -87,7 +87,7 @@ public class DefaultJsamsWizardComponent implements JsamsWizardComponent {
      * {@inheritDoc}
      */
     @Override
-    public List<JsamsWizardPanel<?>> getPanelList() {
+    public List<JsamsWizardPanel<?, ?>> getPanelList() {
         return this.getPanelList();
     }
 
@@ -95,7 +95,7 @@ public class DefaultJsamsWizardComponent implements JsamsWizardComponent {
      * {@inheritDoc}
      */
     @Override
-    public void setWizardPanelList(List<JsamsWizardPanel<?>> panelList) {
+    public void setWizardPanelList(List<JsamsWizardPanel<?, ?>> panelList) {
         this.panelList = panelList;
     }
 
@@ -103,7 +103,7 @@ public class DefaultJsamsWizardComponent implements JsamsWizardComponent {
      * {@inheritDoc}
      */
     @Override
-    public void addPanel(JsamsWizardPanel<?> panel) {
+    public void addPanel(JsamsWizardPanel<?, ?> panel) {
         panelList.add(panel);
         panelsContainer.add(panel, panelList.size() - 1 + "");
     }
@@ -112,12 +112,12 @@ public class DefaultJsamsWizardComponent implements JsamsWizardComponent {
      * {@inheritDoc}
      */
     @Override
-    public void addPanel(int index, JsamsWizardPanel<?> panel) {
+    public void addPanel(int index, JsamsWizardPanel<?, ?> panel) {
         panelList.add(index, panel);
         panelsContainer.add(panel, index + "", index);
         if (index < panelList.size() - 1) {
             for (int i = index + 1; i < panelList.size(); i++) {
-                JsamsWizardPanel<?> panelToMove = panelList.get(i);
+                JsamsWizardPanel<?, ?> panelToMove = panelList.get(i);
                 panelsContainer.add(panelToMove, i);
 //                panelsContainer.add(panelToMove, i + "");
             }
@@ -128,13 +128,13 @@ public class DefaultJsamsWizardComponent implements JsamsWizardComponent {
      * {@inheritDoc}
      */
     @Override
-    public JsamsWizardPanel<?> removePanel(JsamsWizardPanel<?> panel) {
+    public JsamsWizardPanel<?, ?> removePanel(JsamsWizardPanel<?, ?> panel) {
         int index = panelList.indexOf(panel);
         panelList.remove(panel);
         panelsContainer.remove(panel);
         // TODO verify this loop
         for (int i = index; i < panelList.size(); i++) {
-            JsamsWizardPanel<?> panelToMove = panelList.get(i);
+            JsamsWizardPanel<?, ?> panelToMove = panelList.get(i);
             panelsContainer.add(panelToMove, i);
 //            panelsContainer.add(panelToMove, i + "");
         }
@@ -145,11 +145,11 @@ public class DefaultJsamsWizardComponent implements JsamsWizardComponent {
      * {@inheritDoc}
      */
     @Override
-    public JsamsWizardPanel<?> removePanel(int index) {
+    public JsamsWizardPanel<?, ?> removePanel(int index) {
         panelsContainer.remove(index);
-        JsamsWizardPanel<?> panel = panelList.remove(index);
+        JsamsWizardPanel<?, ?> panel = panelList.remove(index);
         for (int i = index; i < panelList.size(); i++) {
-            JsamsWizardPanel<?> panelToMove = panelList.get(i);
+            JsamsWizardPanel<?, ?> panelToMove = panelList.get(i);
             panelsContainer.add(panelToMove, i);
 //            panelsContainer.add(panelToMove, i + "");
         }
@@ -160,7 +160,7 @@ public class DefaultJsamsWizardComponent implements JsamsWizardComponent {
      * {@inheritDoc}
      */
     @Override
-    public JsamsWizardPanel<?> getPanel(int index) {
+    public JsamsWizardPanel<?, ?> getPanel(int index) {
         return getPanelList().get(index);
     }
 
@@ -184,7 +184,7 @@ public class DefaultJsamsWizardComponent implements JsamsWizardComponent {
      * {@inheritDoc}
      */
     @Override
-    public void addPanelAfter(JsamsWizardPanel<?> panelToBePlacedAfter, JsamsWizardPanel<?> panel) {
+    public void addPanelAfter(JsamsWizardPanel<?, ?> panelToBePlacedAfter, JsamsWizardPanel<?, ?> panel) {
         addPanel(panelList.indexOf(panelToBePlacedAfter) + 1, panel);
     }
 
@@ -192,7 +192,7 @@ public class DefaultJsamsWizardComponent implements JsamsWizardComponent {
      * {@inheritDoc}
      */
     @Override
-    public void addPanelBefore(JsamsWizardPanel<?> panelToBePlacedBefore, JsamsWizardPanel<?> panel) {
+    public void addPanelBefore(JsamsWizardPanel<?, ?> panelToBePlacedBefore, JsamsWizardPanel<?, ?> panel) {
         addPanel(panelList.indexOf(panelToBePlacedBefore) - 1, panel);
     }
 
@@ -200,7 +200,7 @@ public class DefaultJsamsWizardComponent implements JsamsWizardComponent {
      * {@inheritDoc}
      */
     @Override
-    public void addPanelAfterCurrent(JsamsWizardPanel<?> panel) {
+    public void addPanelAfterCurrent(JsamsWizardPanel<?, ?> panel) {
         addPanel(currentIndex + 1, panel);
     }
 
@@ -208,7 +208,7 @@ public class DefaultJsamsWizardComponent implements JsamsWizardComponent {
      * {@inheritDoc}
      */
     @Override
-    public JsamsWizardPanel<?> removeWizardPanelAfter(JsamsWizardPanel<?> panel) {
+    public JsamsWizardPanel<?, ?> removeWizardPanelAfter(JsamsWizardPanel<?, ?> panel) {
         return removePanel(panelList.indexOf(panel) + 1);
     }
 
@@ -216,7 +216,7 @@ public class DefaultJsamsWizardComponent implements JsamsWizardComponent {
      * {@inheritDoc}
      */
     @Override
-    public JsamsWizardPanel<?> removeWizardPanelBefore(JsamsWizardPanel<?> panel) {
+    public JsamsWizardPanel<?, ?> removeWizardPanelBefore(JsamsWizardPanel<?, ?> panel) {
         return removePanel(panelList.indexOf(panel) - 1);
     }
 
@@ -224,7 +224,7 @@ public class DefaultJsamsWizardComponent implements JsamsWizardComponent {
      * {@inheritDoc}
      */
     @Override
-    public int getIndexOfPanel(JsamsWizardPanel<?> panel) {
+    public int getIndexOfPanel(JsamsWizardPanel<?, ?> panel) {
         return panelList.indexOf(panel);
     }
 
@@ -261,7 +261,7 @@ public class DefaultJsamsWizardComponent implements JsamsWizardComponent {
      * {@inheritDoc}
      */
     @Override
-    public JsamsWizardPanel<?> getCurrentPanel() {
+    public JsamsWizardPanel<?, ?> getCurrentPanel() {
         return panelList.get(currentIndex);
     }
 

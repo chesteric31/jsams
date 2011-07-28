@@ -5,7 +5,7 @@ import javax.swing.JPanel;
 import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.model.dialog.AbstractEditDialog;
-import be.jsams.client.validator.EditCreditNoteValidator;
+import be.jsams.client.validator.edit.EditCreditNoteValidator;
 import be.jsams.common.bean.model.sale.CreditNoteBean;
 import be.jsams.common.bean.view.sale.CreditNoteBeanView;
 import be.jsams.server.service.sale.CreditNoteService;

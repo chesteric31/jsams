@@ -7,6 +7,7 @@ import javax.swing.JRadioButton;
 
 import be.jsams.client.i18n.JsamsI18nLabelResource;
 import be.jsams.client.swing.component.AbstractJsamsFrame;
+import be.jsams.client.validator.wizard.DestinationValidator;
 import be.jsams.client.wizard.JsamsWizardComponent;
 import be.jsams.client.wizard.JsamsWizardPanel;
 import be.jsams.common.bean.model.transfer.TransferBean;
@@ -21,7 +22,7 @@ import com.jgoodies.forms.layout.FormLayout;
  * @author chesteric31
  * @version $Revision$ $Date::                  $ $Author$
  */
-public class DestinationChooserWizardPanel extends JsamsWizardPanel<TransferBean> {
+public class DestinationChooserWizardPanel extends JsamsWizardPanel<TransferBean, DestinationValidator> {
 
     /**
      * Serial Version UID
@@ -42,10 +43,11 @@ public class DestinationChooserWizardPanel extends JsamsWizardPanel<TransferBean
      * @param parent the {@link TransferWizardDialog} parent
      * @param component the {@link JsamsWizardComponent}
      * @param model the model
+     * @param validator the {@link DestinationValidator}
      */
     public DestinationChooserWizardPanel(TransferWizardDialog parent,
-            JsamsWizardComponent component, TransferBean model) {
-        super(parent, component, model, JsamsI18nLabelResource.LABEL_TRANSFER_CHOOSE_DESTINATION);
+            JsamsWizardComponent component, TransferBean model, DestinationValidator validator) {
+        super(parent, component, model, JsamsI18nLabelResource.LABEL_TRANSFER_CHOOSE_DESTINATION, validator);
         initComponents();
     }
 
@@ -107,11 +109,6 @@ public class DestinationChooserWizardPanel extends JsamsWizardPanel<TransferBean
      * {@inheritDoc}
      */
     public void update() {
-        boolean nextEnabled = false;
-        if (destinationTypeIsSelected()) {
-            nextEnabled = true;
-        }
-        setNextButtonEnabled(nextEnabled);
         setFinishButtonEnabled(false);
         setBackButtonEnabled(true);
         super.update();
@@ -121,7 +118,7 @@ public class DestinationChooserWizardPanel extends JsamsWizardPanel<TransferBean
      * {@inheritDoc}
      */
     public void next() {
-        if (destinationTypeIsSelected() && prePerformNext(getModel())) {
+        if (prePerformNext()) {
             switchPanel(TransferWizardDialog.THIRD_PANEL);
         }
     }
@@ -131,13 +128,6 @@ public class DestinationChooserWizardPanel extends JsamsWizardPanel<TransferBean
      */
     public void back() {
         switchPanel(TransferWizardDialog.FIRST_PANEL);
-    }
-
-    /**
-     * @return true if a destination type is selected, false otherwise
-     */
-    private boolean destinationTypeIsSelected() {
-        return getModel().getDestinationType() != 0;
     }
 
 }
