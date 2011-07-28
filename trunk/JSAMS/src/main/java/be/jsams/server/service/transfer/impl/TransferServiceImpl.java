@@ -85,41 +85,11 @@ public class TransferServiceImpl implements TransferService {
      */
     private void estimateToCommandTransfer(TransferBean model) {
         int transferMode = model.getTransferMode();
+        List<? extends AbstractDocumentBean<?, ?>> documents = model.getDocuments();
         switch (transferMode) {
         case 1:
-            List<? extends AbstractDocumentBean<?, ?>> documents = model.getDocuments();
             EstimateBean estimate = (EstimateBean) documents.get(0);
-            CustomerBean customer = estimate.getCustomer();
-            CommandBean newBean = new CommandBean(estimate.getSociety(), customer, estimate.getAgent());
-            newBean.setBillingAddress(estimate.getBillingAddress());
-            // to force  to create a new billing address
-            newBean.getBillingAddress().setId(null);
-            newBean.setCreationDate(new Date());
-            newBean.setDeliveryAddress(customer.getDeliveryAddress());
-            // to force  to create a new delivery address
-            newBean.getDeliveryAddress().setId(null);
-            List<CommandDetailBean> details = new ArrayList<CommandDetailBean>();
-            for (EstimateDetailBean detail : estimate.getDetails()) {
-                CommandDetailBean bean = new CommandDetailBean();
-                bean.setCommand(newBean);
-                bean.setDiscountRate(detail.getDiscountRate());
-                bean.setPrice(detail.getPrice());
-                bean.setProduct(detail.getProduct());
-                bean.setQuantity(detail.getQuantity());
-                bean.setTransferred(false);
-                bean.setVatApplicable(detail.getVatApplicable());
-                details.add(bean);
-            }
-            newBean.setDetails(details);
-            newBean.setDiscountRate(estimate.getDiscountRate());
-            newBean.setRemark(estimate.getRemark());
-            newBean.setTransferred(false);
-            commandService.create(newBean);
-            estimate.setTransferred(true);
-            for (EstimateDetailBean bean : estimate.getDetails()) {
-                bean.setTransferred(true);
-            }
-            estimateService.update(estimate);
+            estimateToCommandFullTransfer(estimate);
             break;
         case 2:
 //            estimateToCommandPartialTransfer(model);
@@ -133,6 +103,45 @@ public class TransferServiceImpl implements TransferService {
         default:
             break;
         }
+    }
+
+    /**
+     * Transfer an estimate to command in full transfer.
+     * 
+     * @param estimate the {@link EstimateBean} to transfer
+     */
+    private void estimateToCommandFullTransfer(EstimateBean estimate) {
+        CustomerBean customer = estimate.getCustomer();
+        CommandBean newBean = new CommandBean(estimate.getSociety(), customer, estimate.getAgent());
+        newBean.setBillingAddress(estimate.getBillingAddress());
+        // to force to create a new billing address
+        newBean.getBillingAddress().setId(null);
+        newBean.setCreationDate(new Date());
+        newBean.setDeliveryAddress(customer.getDeliveryAddress());
+        // to force to create a new delivery address
+        newBean.getDeliveryAddress().setId(null);
+        List<CommandDetailBean> details = new ArrayList<CommandDetailBean>();
+        for (EstimateDetailBean detail : estimate.getDetails()) {
+            CommandDetailBean bean = new CommandDetailBean();
+            bean.setCommand(newBean);
+            bean.setDiscountRate(detail.getDiscountRate());
+            bean.setPrice(detail.getPrice());
+            bean.setProduct(detail.getProduct());
+            bean.setQuantity(detail.getQuantity());
+            bean.setTransferred(false);
+            bean.setVatApplicable(detail.getVatApplicable());
+            details.add(bean);
+        }
+        newBean.setDetails(details);
+        newBean.setDiscountRate(estimate.getDiscountRate());
+        newBean.setRemark(estimate.getRemark());
+        newBean.setTransferred(false);
+        commandService.create(newBean);
+        estimate.setTransferred(true);
+        for (EstimateDetailBean bean : estimate.getDetails()) {
+            bean.setTransferred(true);
+        }
+        estimateService.update(estimate);
     }
 
     /**
