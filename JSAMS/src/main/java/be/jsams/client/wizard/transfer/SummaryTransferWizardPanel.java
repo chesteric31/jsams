@@ -14,6 +14,7 @@ import be.jsams.client.validator.wizard.SummaryTransferValidator;
 import be.jsams.client.wizard.JsamsWizardComponent;
 import be.jsams.client.wizard.JsamsWizardPanel;
 import be.jsams.common.bean.model.sale.AbstractDocumentBean;
+import be.jsams.common.bean.model.sale.detail.AbstractDetailBean;
 import be.jsams.common.bean.model.transfer.TransferBean;
 
 /**
@@ -89,6 +90,15 @@ public class SummaryTransferWizardPanel extends JsamsWizardPanel<TransferBean, S
             area.append(doublePointSeparator);
             for (AbstractDocumentBean<?, ?> doc : documents) {
                 area.append(tab + doc.getId() + newLine);
+            }
+        }
+
+        List<? extends AbstractDetailBean<?, ?, ?>> details = getModel().getDetails();
+        if (details != null && !details.isEmpty()) {
+            area.append(sourceTypeTranslation);
+            area.append(doublePointSeparator);
+            for (AbstractDetailBean<?, ?, ?> detail : details) {
+                area.append(tab + detail.getId() + newLine);
             }
         }
         

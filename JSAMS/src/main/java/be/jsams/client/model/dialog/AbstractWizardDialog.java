@@ -113,6 +113,7 @@ public abstract class AbstractWizardDialog<B extends AbstractIdentityBean<?, ?>,
         buttonsPanel = new JsamsWizardButtonPanel(component);
         component.setFinishAction(new FinishAction(component) {
             public void performAction() {
+                performFinish();
                 dispose();
             }
         });
@@ -138,13 +139,10 @@ public abstract class AbstractWizardDialog<B extends AbstractIdentityBean<?, ?>,
         DialogUtil.centerComponentOnScreen(this);
     }
     
-//    /**
-//     * Display the dialog.
-//     */
-//    public void display() {
-//        component.updateComponents();
-//        super.setVisible(true);
-//    }
+    /**
+     * Perform the finish action.
+     */
+    protected abstract void performFinish();
 
     /**
      * @return the component

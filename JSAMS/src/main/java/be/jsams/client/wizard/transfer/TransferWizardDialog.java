@@ -101,4 +101,12 @@ public class TransferWizardDialog extends AbstractWizardDialog<TransferBean, Tra
         getComponent().addPanel(SUMMARY_PANEL, summaryPanel);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void performFinish() {
+        getService().transfer(getModel());
+    }
+
 }

@@ -6,11 +6,11 @@
 	<!-- Service -->
 	<bean id="transferServiceTarget"
 		class="be.jsams.server.service.transfer.impl.TransferServiceImpl">
-		<property name="estimateDao" ref="estimateDao" />
-		<property name="commandDao" ref="commandDao" />
-		<property name="deliveryOrderDao" ref="deliveryOrderDao" />
-		<property name="billDao" ref="billDao" />
-		<property name="creditNoteDao" ref="creditNoteDao" />
+		<property name="estimateService" ref="estimateService" />
+		<property name="commandService" ref="commandService" />
+		<property name="deliveryOrderService" ref="deliveryOrderService" />
+		<property name="billService" ref="billService" />
+		<property name="creditNoteService" ref="creditNoteService" />
 	</bean>
 	<bean id="transferService" parent="baseTransactionProxy">
 		<property name="target" ref="transferServiceTarget" />

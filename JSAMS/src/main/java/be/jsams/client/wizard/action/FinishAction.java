@@ -5,7 +5,7 @@ import be.jsams.client.wizard.JsamsWizardComponent;
 /**
  * 
  *
- * @author ebinard
+ * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
 public abstract class FinishAction implements Action {
