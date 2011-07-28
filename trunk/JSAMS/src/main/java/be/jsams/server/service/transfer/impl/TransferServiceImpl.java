@@ -7,8 +7,10 @@ import java.util.List;
 import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.sale.AbstractDocumentBean;
 import be.jsams.common.bean.model.sale.CommandBean;
+import be.jsams.common.bean.model.sale.DeliveryOrderBean;
 import be.jsams.common.bean.model.sale.EstimateBean;
 import be.jsams.common.bean.model.sale.detail.CommandDetailBean;
+import be.jsams.common.bean.model.sale.detail.DeliveryOrderDetailBean;
 import be.jsams.common.bean.model.sale.detail.EstimateDetailBean;
 import be.jsams.common.bean.model.transfer.TransferBean;
 import be.jsams.server.service.sale.BillService;
@@ -152,17 +154,24 @@ public class TransferServiceImpl implements TransferService {
     /**
      * @param model the wrapper contains all the beans to be transferred
      */
+    @SuppressWarnings("unchecked")
     private void estimateToDeliveryOrderTransfer(TransferBean model) {
         int transferMode = model.getTransferMode();
+        List<? extends AbstractDocumentBean<?, ?>> documents = model.getDocuments();
         switch (transferMode) {
         case 1:
-//            estimateToDeliveryOrderFullTransfer(model);
+            EstimateBean estimate = (EstimateBean) documents.get(0);
+            estimateToDeliveryOrderFullTransfer(estimate);
             break;
         case 2:
 //            estimateToDeliveryOrderPartialTransfer(model);
             break;
         case 3:
-//            estimateToDeliveryOrderFullGroupedTransfer(model);
+            List<EstimateBean> estimates = new ArrayList<EstimateBean>();
+            estimates.addAll((List<EstimateBean>) documents);
+            for (EstimateBean bean : estimates) {
+                estimateToDeliveryOrderFullTransfer(bean);
+            }
             break;
         case 4:
 //            estimateToDeliveryOrderPartialGroupedTransfer(model);
@@ -170,6 +179,42 @@ public class TransferServiceImpl implements TransferService {
         default:
             break;
         }
+    }
+
+    /**
+     * Transfer an estimate to delivery order in full transfer.
+     * 
+     * @param estimate the {@link EstimateBean} to transfer
+     */
+    private void estimateToDeliveryOrderFullTransfer(EstimateBean estimate) {
+        CustomerBean customer = estimate.getCustomer();
+        DeliveryOrderBean newBean = new DeliveryOrderBean(estimate.getSociety(), customer);
+        newBean.setCreationDate(new Date());
+        newBean.setDeliveryAddress(customer.getDeliveryAddress());
+        // to force to create a new delivery address
+        newBean.getDeliveryAddress().setId(null);
+        List<DeliveryOrderDetailBean> details = new ArrayList<DeliveryOrderDetailBean>();
+        for (EstimateDetailBean detail : estimate.getDetails()) {
+            DeliveryOrderDetailBean bean = new DeliveryOrderDetailBean();
+            bean.setDeliveryOrder(newBean);
+            bean.setDiscountRate(detail.getDiscountRate());
+            bean.setPrice(detail.getPrice());
+            bean.setProduct(detail.getProduct());
+            bean.setQuantity(detail.getQuantity());
+            bean.setTransferred(false);
+            bean.setVatApplicable(detail.getVatApplicable());
+            details.add(bean);
+        }
+        newBean.setDetails(details);
+        newBean.setDiscountRate(estimate.getDiscountRate());
+        newBean.setRemark(estimate.getRemark());
+        newBean.setTransferred(false);
+        deliveryOrderService.create(newBean);
+        estimate.setTransferred(true);
+        for (EstimateDetailBean bean : estimate.getDetails()) {
+            bean.setTransferred(true);
+        }
+        estimateService.update(estimate);
     }
 
     /**
