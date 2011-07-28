@@ -5,9 +5,9 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import be.jsams.client.model.table.DeliveryOrderTableModel;
+import be.jsams.client.model.table.CommandTableModel;
 import be.jsams.client.swing.component.JsamsTable;
-import be.jsams.common.bean.model.sale.DeliveryOrderBean;
+import be.jsams.common.bean.model.sale.CommandBean;
 import be.jsams.common.bean.model.transfer.TransferBean;
 
 /**
@@ -16,7 +16,7 @@ import be.jsams.common.bean.model.transfer.TransferBean;
  * @author chesteric31
  * @version $Revision$ $Date::                  $ $Author$
  */
-public class DeliveryOrderWizardTableMouseListener implements MouseListener {
+public class CommandWizardSingleSelectionTableML implements MouseListener {
 
     private TransferBean bean;
 
@@ -25,7 +25,7 @@ public class DeliveryOrderWizardTableMouseListener implements MouseListener {
      * 
      * @param bean the {@link TransferBean}
      */
-    public DeliveryOrderWizardTableMouseListener(TransferBean bean) {
+    public CommandWizardSingleSelectionTableML(TransferBean bean) {
         this.bean = bean;
     }
 
@@ -39,8 +39,8 @@ public class DeliveryOrderWizardTableMouseListener implements MouseListener {
             int selectedRow = table.getSelectedRow();
             if (selectedRow > -1) {
                 int selectedRowModel = table.convertRowIndexToModel(selectedRow);
-                DeliveryOrderTableModel model = (DeliveryOrderTableModel) table.getModel();
-                List<DeliveryOrderBean> beans = new ArrayList<DeliveryOrderBean>();
+                CommandTableModel model = (CommandTableModel) table.getModel();
+                List<CommandBean> beans = new ArrayList<CommandBean>();
                 beans.add(model.getRow(selectedRowModel));
                 bean.setDocuments(beans);
             }

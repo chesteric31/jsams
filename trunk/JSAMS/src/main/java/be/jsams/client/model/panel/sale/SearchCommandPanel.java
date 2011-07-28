@@ -3,6 +3,8 @@ package be.jsams.client.model.panel.sale;
 import java.awt.event.MouseListener;
 import java.util.List;
 
+import javax.swing.ListSelectionModel;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -36,7 +38,6 @@ public class SearchCommandPanel<L extends MouseListener> extends
     private static final long serialVersionUID = -494667273780356685L;
 
     private static final Log LOGGER = LogFactory.getLog(SearchCommandPanel.class);
-
     private final boolean debug = LOGGER.isDebugEnabled();
 
     /**
@@ -49,10 +50,25 @@ public class SearchCommandPanel<L extends MouseListener> extends
      * @param commandTableModel the {@link CommandTableModel}
      * @param showButtons a boolean that indicates if we have to display the
      *            buttons to manage the content: add, remove and modify
+     * @param selectionMode the selection mode to use
      */
-    public SearchCommandPanel(CommandBean model, L listener, CommandService service,
-            SearchCommandValidator validator, CommandTableModel commandTableModel, final boolean showButtons) {
-        super(model, listener, service, validator, commandTableModel, showButtons);
+    public SearchCommandPanel(CommandBean model, L listener, CommandService service, SearchCommandValidator validator,
+            CommandTableModel commandTableModel, final boolean showButtons, int selectionMode) {
+        super(model, listener, service, validator, commandTableModel, showButtons, selectionMode);
+    }
+
+    /**
+     * Constructor
+     * 
+     * @param bean the {@link CommandBean}
+     * @param listener the {@link MouseListener}
+     * @param service the {@link CommandService}
+     * @param validator the {@link SearchCommandValidator}
+     * @param commandTableModel the {@link CommandTableModel}
+     */
+    public SearchCommandPanel(CommandBean bean, L listener, CommandService service,
+            SearchCommandValidator validator, CommandTableModel commandTableModel) {
+        super(bean, listener, service, validator, commandTableModel, true, ListSelectionModel.SINGLE_SELECTION);
     }
 
     /**

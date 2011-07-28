@@ -12,6 +12,7 @@ import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellRenderer;
@@ -211,8 +212,8 @@ public class CreditNoteBeanView extends AbstractDocumentBeanView<CreditNoteBean>
                                         int detailSelectedRow = getDetailsTable().getSelectedRow();
                                         int detailSelectedRowModel = getDetailsTable().convertRowIndexToModel(
                                                 detailSelectedRow);
-                                        CreditNoteDetailTableModel
-                                            detailModel = (CreditNoteDetailTableModel) getDetailsTable().getModel();
+                                        CreditNoteDetailTableModel detailModel
+                                            = (CreditNoteDetailTableModel) getDetailsTable().getModel();
                                         CreditNoteDetailBean selectedDetailBean = detailModel
                                                 .getRow(detailSelectedRowModel);
                                         selectedDetailBean.setPrice(selectedBean.getPrice());
@@ -228,11 +229,12 @@ public class CreditNoteBeanView extends AbstractDocumentBeanView<CreditNoteBean>
                         builder.setSociety(JsamsDesktop.getInstance().getCurrentSociety());
                         SearchProductPanel searchPanel = new SearchProductPanel(builder.build(true, true),
                                 customListener, JsamsApplicationContext.getProductService(),
-                                new SearchProductValidator(), new ProductTableModel(), false);
-
+                                new SearchProductValidator(), new ProductTableModel(), false,
+                                ListSelectionModel.SINGLE_SELECTION);
                         dialog.add(searchPanel);
                         dialog.pack();
-//                        DialogUtil.centerComponentOnScreen(((JsamsTable) e.getSource()).getRootPane());
+                        // DialogUtil.centerComponentOnScreen(((JsamsTable)
+                        // e.getSource()).getRootPane());
                         dialog.setLocationRelativeTo(((JsamsTable) e.getSource()).getRootPane());
                         dialog.setVisible(true);
                     }

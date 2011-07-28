@@ -3,6 +3,8 @@ package be.jsams.client.model.panel.sale;
 import java.awt.event.MouseListener;
 import java.util.List;
 
+import javax.swing.ListSelectionModel;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -47,12 +49,27 @@ public class SearchBillPanel<L extends MouseListener> extends
      * @param service the {@link BillService}
      * @param validator the {@link SearchBillValidator}
      * @param billTableModel the {@link BillTableModel}
-     * @param showButtons a boolean that indicates if we have to display the buttons to manage the content: add, remove
-     *            and modify
+     * @param showButtons a boolean that indicates if we have to display the
+     *            buttons to manage the content: add, remove and modify
+     * @param selectionMode the selection mode to use
      */
-    public SearchBillPanel(BillBean bean, L listener, BillService service,
-            SearchBillValidator validator, BillTableModel billTableModel, boolean showButtons) {
-        super(bean, listener, service, validator, billTableModel, showButtons);
+    public SearchBillPanel(BillBean bean, L listener, BillService service, SearchBillValidator validator,
+            BillTableModel billTableModel, boolean showButtons, int selectionMode) {
+        super(bean, listener, service, validator, billTableModel, showButtons, selectionMode);
+    }
+
+    /**
+     * Constructor
+     * 
+     * @param bean the {@link BillBean}
+     * @param listener the {@link MouseListener}
+     * @param service the {@link BillService}
+     * @param validator the {@link SearchBillValidator}
+     * @param billTableModel the {@link BillTableModel}
+     */
+    public SearchBillPanel(BillBean bean, L listener, BillService service, SearchBillValidator validator,
+            BillTableModel billTableModel) {
+        super(bean, listener, service, validator, billTableModel, true, ListSelectionModel.SINGLE_SELECTION);
     }
 
     /**
@@ -86,21 +103,22 @@ public class SearchBillPanel<L extends MouseListener> extends
         }
     }
 
-//    /**
-//     * {@inheritDoc}
-//     */
-//    @Override
-//    protected void performButtonRemove() {
-//        int selectedRow = getResultTable().getSelectedRow();
-//        if (selectedRow > -1) {
-//            int selectedRowModel = getResultTable().convertRowIndexToModel(selectedRow);
-//            BillTableModel model = (BillTableModel) getResultTable().getModel();
-//            BillBean beanToDelete = model.getRow(selectedRowModel);
-//            getService().delete(beanToDelete);
-//            model.remove(selectedRowModel);
-//            updateUI();
-//        }
-//    }
+    // /**
+    // * {@inheritDoc}
+    // */
+    // @Override
+    // protected void performButtonRemove() {
+    // int selectedRow = getResultTable().getSelectedRow();
+    // if (selectedRow > -1) {
+    // int selectedRowModel =
+    // getResultTable().convertRowIndexToModel(selectedRow);
+    // BillTableModel model = (BillTableModel) getResultTable().getModel();
+    // BillBean beanToDelete = model.getRow(selectedRowModel);
+    // getService().delete(beanToDelete);
+    // model.remove(selectedRowModel);
+    // updateUI();
+    // }
+    // }
 
     /**
      * {@inheritDoc}
@@ -131,7 +149,7 @@ public class SearchBillPanel<L extends MouseListener> extends
      */
     private void fillTable(final List<BillBean> bills) {
         BillTableModel model = new BillTableModel(bills);
-//        getResultTable().setModel(model);
+        // getResultTable().setModel(model);
         super.setTableModel(model);
         getResultTable().repaint();
     }

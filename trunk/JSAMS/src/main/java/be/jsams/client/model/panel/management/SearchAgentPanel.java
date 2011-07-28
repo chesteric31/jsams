@@ -2,6 +2,8 @@ package be.jsams.client.model.panel.management;
 
 import java.util.List;
 
+import javax.swing.ListSelectionModel;
+
 import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.client.i18n.JsamsI18nResource;
@@ -39,10 +41,26 @@ public class SearchAgentPanel extends
      * @param agentTableModel the {@link AgentTableModel}
      * @param showButtons a boolean that indicates if we have to display the
      *            buttons to manage the content: add, remove and modify
+     * @param selectionMode the selection mode to use
      */
     public SearchAgentPanel(AgentBean model, AgentTableMouseListener listener, AgentService service,
-            SearchAgentValidator validator, AgentTableModel agentTableModel, final boolean showButtons) {
-        super(model, listener, service, validator, agentTableModel, showButtons);
+            SearchAgentValidator validator, AgentTableModel agentTableModel, final boolean showButtons,
+            int selectionMode) {
+        super(model, listener, service, validator, agentTableModel, showButtons, selectionMode);
+    }
+
+    /**
+     * Constructor.
+     * 
+     * @param model the {@link AgentBean}
+     * @param listener the {@link AgentTableMouseListener}
+     * @param service the {@link AgentService}
+     * @param validator the {@link SearchAgentValidator}
+     * @param agentTableModel the {@link AgentTableModel}
+     */
+    public SearchAgentPanel(AgentBean model, AgentTableMouseListener listener, AgentService service,
+            SearchAgentValidator validator, AgentTableModel agentTableModel) {
+        this(model, listener, service, validator, agentTableModel, true, ListSelectionModel.SINGLE_SELECTION);
     }
 
     /**

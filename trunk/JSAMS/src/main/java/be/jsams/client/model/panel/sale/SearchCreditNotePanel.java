@@ -1,6 +1,9 @@
 package be.jsams.client.model.panel.sale;
 
+import java.awt.event.MouseListener;
 import java.util.List;
+
+import javax.swing.ListSelectionModel;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -11,7 +14,6 @@ import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.model.dialog.sale.EditCreditNoteDialog;
 import be.jsams.client.model.panel.AbstractSearchPanel;
 import be.jsams.client.model.table.CreditNoteTableModel;
-import be.jsams.client.swing.listener.search.CreditNoteTableMouseListener;
 import be.jsams.client.validator.search.SearchCreditNoteValidator;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.CustomerBean;
@@ -21,12 +23,13 @@ import be.jsams.server.service.sale.CreditNoteService;
 /**
  * {@link AbstractSearchPanel} for {@link CreditNoteBean} objects.
  *
+ * @param <L> a customized {@link MouseListener}
+ * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class SearchCreditNotePanel extends
-        AbstractSearchPanel<CreditNoteBean, CreditNoteTableMouseListener,
-        CreditNoteService, SearchCreditNoteValidator, CreditNoteTableModel> {
+public class SearchCreditNotePanel<L extends MouseListener> extends
+        AbstractSearchPanel<CreditNoteBean, L, CreditNoteService, SearchCreditNoteValidator, CreditNoteTableModel> {
 
     /**
      * Serial Version UID
@@ -34,23 +37,38 @@ public class SearchCreditNotePanel extends
     private static final long serialVersionUID = 2354692292285708027L;
     
     private static final Log LOGGER = LogFactory.getLog(SearchCreditNotePanel.class);
-
     private final boolean debug = LOGGER.isDebugEnabled();
 
     /**
      * Constructor
      * 
      * @param bean the {@link CreditNoteBean}
-     * @param listener the {@link CreditNoteTableMouseListener}
+     * @param listener the {@link MouseListener}
      * @param service the {@link CreditNoteService}
      * @param validator the {@link SearchCreditNoteValidator}
      * @param creditNoteTableModel the {@link CreditNoteTableModel}
      * @param showButtons a boolean that indicates if we have to display the
      *            buttons to manage the content: add, remove and modify
+     * @param selectionMode the selection mode to use
      */
-    public SearchCreditNotePanel(CreditNoteBean bean, CreditNoteTableMouseListener listener, CreditNoteService service,
-            SearchCreditNoteValidator validator, CreditNoteTableModel creditNoteTableModel, boolean showButtons) {
-        super(bean, listener, service, validator, creditNoteTableModel, showButtons);
+    public SearchCreditNotePanel(CreditNoteBean bean, L listener, CreditNoteService service,
+            SearchCreditNoteValidator validator, CreditNoteTableModel creditNoteTableModel, boolean showButtons,
+            int selectionMode) {
+        super(bean, listener, service, validator, creditNoteTableModel, showButtons, selectionMode);
+    }
+
+    /**
+     * Constructor
+     * 
+     * @param bean the {@link CreditNoteBean}
+     * @param listener the {@link MouseListener}
+     * @param service the {@link CreditNoteService}
+     * @param validator the {@link SearchCreditNoteValidator}
+     * @param creditNoteTableModel the {@link CreditNoteTableModel}
+     */
+    public SearchCreditNotePanel(CreditNoteBean bean, L listener, CreditNoteService service,
+            SearchCreditNoteValidator validator, CreditNoteTableModel creditNoteTableModel) {
+        this(bean, listener, service, validator, creditNoteTableModel, true, ListSelectionModel.SINGLE_SELECTION);
     }
 
     /**

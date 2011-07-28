@@ -1,13 +1,19 @@
 package be.jsams.client.wizard.transfer;
 
+import java.awt.Font;
+import java.util.List;
+
+import javax.swing.BoxLayout;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.plaf.FontUIResource;
 
 import be.jsams.client.i18n.JsamsI18nLabelResource;
 import be.jsams.client.model.dialog.AbstractWizardDialog;
 import be.jsams.client.validator.wizard.SummaryTransferValidator;
 import be.jsams.client.wizard.JsamsWizardComponent;
 import be.jsams.client.wizard.JsamsWizardPanel;
+import be.jsams.common.bean.model.sale.AbstractDocumentBean;
 import be.jsams.common.bean.model.transfer.TransferBean;
 
 /**
@@ -58,12 +64,16 @@ public class SummaryTransferWizardPanel extends JsamsWizardPanel<TransferBean, S
      * Update the panel container. 
      */
     private void updateContainer() {
-        JTextArea area = new JTextArea(5, 20);
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        JTextArea area = new JTextArea();
+        area.setFont(new FontUIResource(Font.SANS_SERIF, Font.BOLD, 12));
         area.append(JsamsI18nLabelResource.LABEL_SOURCE_TYPE.getTranslation());
         String doublePointSeparator = " : ";
         area.append(doublePointSeparator);
         String newLine = "\n";
-        area.append(getSourceTypeTranslation(getModel().getSourceType()) + newLine);
+        String tab = "\t";
+        String sourceTypeTranslation = getSourceTypeTranslation(getModel().getSourceType());
+        area.append(sourceTypeTranslation + newLine);
 
         area.append(JsamsI18nLabelResource.LABEL_DESTINATION_TYPE.getTranslation());
         area.append(doublePointSeparator);
@@ -72,8 +82,17 @@ public class SummaryTransferWizardPanel extends JsamsWizardPanel<TransferBean, S
         area.append(JsamsI18nLabelResource.LABEL_TRANSFER_MODE.getTranslation());
         area.append(doublePointSeparator);
         area.append(getTransferModeTranslation(getModel().getTransferMode()) + newLine);
+
+        List<? extends AbstractDocumentBean<?, ?>> documents = getModel().getDocuments();
+        if (documents != null && !documents.isEmpty()) {
+            area.append(sourceTypeTranslation);
+            area.append(doublePointSeparator);
+            for (AbstractDocumentBean<?, ?> doc : documents) {
+                area.append(tab + doc.getId() + newLine);
+            }
+        }
         
-        JScrollPane scrollPane = new JScrollPane(area); 
+        JScrollPane scrollPane = new JScrollPane(area);
         area.setEditable(false);
         this.add(scrollPane);
     }

@@ -2,6 +2,8 @@ package be.jsams.client.model.panel.management;
 
 import java.util.List;
 
+import javax.swing.ListSelectionModel;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -32,7 +34,6 @@ public class SearchProductPanel extends
     private static final long serialVersionUID = 2222078506888522042L;
 
     private static final Log LOGGER = LogFactory.getLog(SearchProductPanel.class);
-
     private final boolean debug = LOGGER.isDebugEnabled();
 
     /**
@@ -45,10 +46,26 @@ public class SearchProductPanel extends
      * @param productTableModel the {@link ProductTableModel}
      * @param showButtons the boolean to show or not the management buttons
      *            panel
+     * @param selectionMode the selection mode to use
      */
     public SearchProductPanel(ProductBean model, ProductTableMouseListener listener, ProductService service,
-            SearchProductValidator validator, ProductTableModel productTableModel, final boolean showButtons) {
-        super(model, listener, service, validator, productTableModel, showButtons);
+            SearchProductValidator validator, ProductTableModel productTableModel, final boolean showButtons,
+            int selectionMode) {
+        super(model, listener, service, validator, productTableModel, showButtons, selectionMode);
+    }
+
+    /**
+     * Constructor.
+     * 
+     * @param model the {@link ProductBean}
+     * @param listener the {@link ProductTableMouseListener}
+     * @param service the {@link ProductService}
+     * @param validator the {@link SearchProductValidator}
+     * @param productTableModel the {@link ProductTableModel}
+     */
+    public SearchProductPanel(ProductBean model, ProductTableMouseListener listener, ProductService service,
+            SearchProductValidator validator, ProductTableModel productTableModel) {
+        this(model, listener, service, validator, productTableModel, true, ListSelectionModel.SINGLE_SELECTION);
     }
 
     /**

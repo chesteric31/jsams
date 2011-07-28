@@ -104,7 +104,7 @@ public class JsamsManagementMenuBuilder extends AbstractMenuBuilder {
                         JsamsDesktop.getInstance().getCurrentSociety());
                 SearchCustomerPanel searchPanel = new SearchCustomerPanel(customerBean,
                         new CustomerTableMouseListener(), JsamsApplicationContext.getCustomerService(),
-                        new SearchCustomerValidator(), new CustomerTableModel(), true);
+                        new SearchCustomerValidator(), new CustomerTableModel());
                 parent.getTabbedPane().addTab(JsamsI18nResource.TITLE_SEARCH_CUSTOMER, "apps/system-users.png",
                         searchPanel);
             }
@@ -132,8 +132,7 @@ public class JsamsManagementMenuBuilder extends AbstractMenuBuilder {
                 AgentBeanBuilder builder = JsamsApplicationContext.getAgentBeanBuilder();
                 AgentBean bean = builder.build(null, JsamsDesktop.getInstance().getCurrentSociety());
                 SearchAgentPanel searchPanel = new SearchAgentPanel(bean, new AgentTableMouseListener(),
-                        JsamsApplicationContext.getAgentService(), new SearchAgentValidator(), new AgentTableModel(),
-                        true);
+                        JsamsApplicationContext.getAgentService(), new SearchAgentValidator(), new AgentTableModel());
                 parent.getTabbedPane().addTab(JsamsI18nResource.TITLE_SEARCH_AGENT,
                         "categories/applications-development.png", searchPanel);
             }
@@ -162,7 +161,7 @@ public class JsamsManagementMenuBuilder extends AbstractMenuBuilder {
                 builder.setSociety(JsamsDesktop.getInstance().getCurrentSociety());
                 SearchProductPanel searchPanel = new SearchProductPanel(builder.build(true, true),
                         new ProductTableMouseListener(), JsamsApplicationContext.getProductService(),
-                        new SearchProductValidator(), new ProductTableModel(), true);
+                        new SearchProductValidator(), new ProductTableModel());
                 parent.getTabbedPane().addTab(JsamsI18nResource.TITLE_SEARCH_PRODUCT,
                         "apps/preferences-desktop-theme.png", searchPanel);
             }
@@ -193,7 +192,7 @@ public class JsamsManagementMenuBuilder extends AbstractMenuBuilder {
                 ProductCategoryBean categoryBean = builder.build();
                 SearchProductCategoryPanel searchPanel = new SearchProductCategoryPanel(categoryBean,
                         new ProductCategoryTableMouseListener(), JsamsApplicationContext.getProductCategoryService(),
-                        new SearchProductCategoryValidator(), new ProductCategoryTableModel(), true);
+                        new SearchProductCategoryValidator(), new ProductCategoryTableModel());
                 parent.getTabbedPane().addTab(JsamsI18nResource.TITLE_SEARCH_PRODUCT_CATEGORY, null, searchPanel);
             }
         };

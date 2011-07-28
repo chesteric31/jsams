@@ -44,14 +44,30 @@ public class SearchEstimatePanel<L extends MouseListener> extends
      * @param model the {@link EstimateBean}
      * @param listener the {@link MouseListener}
      * @param service the {@link EstimateService}
-     * @param validator the {@link SearchEstimateValidator} 
+     * @param validator the {@link SearchEstimateValidator}
      * @param estimateTableModel the {@link EstimateTableModel}
      * @param showButtons a boolean that indicates if we have to display the
      *            buttons to manage the content: add, remove and modify
+     * @param selectionMode the selection mode to use
      */
     public SearchEstimatePanel(EstimateBean model, L listener, EstimateService service,
-            SearchEstimateValidator validator, EstimateTableModel estimateTableModel, final boolean showButtons) {
-        super(model, listener, service, validator, estimateTableModel, showButtons);
+            SearchEstimateValidator validator, EstimateTableModel estimateTableModel, final boolean showButtons,
+            int selectionMode) {
+        super(model, listener, service, validator, estimateTableModel, showButtons, selectionMode);
+    }
+
+    /**
+     * Constructor.
+     * 
+     * @param model the {@link EstimateBean}
+     * @param listener the {@link MouseListener}
+     * @param service the {@link EstimateService}
+     * @param validator the {@link SearchEstimateValidator}
+     * @param estimateTableModel the {@link EstimateTableModel}
+     */
+    public SearchEstimatePanel(EstimateBean model, L listener, EstimateService service,
+            SearchEstimateValidator validator, EstimateTableModel estimateTableModel) {
+        super(model, listener, service, validator, estimateTableModel);
     }
 
     /**
