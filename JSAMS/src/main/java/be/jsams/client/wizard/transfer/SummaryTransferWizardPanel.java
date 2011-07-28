@@ -60,16 +60,18 @@ public class SummaryTransferWizardPanel extends JsamsWizardPanel<TransferBean, S
     private void updateContainer() {
         JTextArea area = new JTextArea(5, 20);
         area.append(JsamsI18nLabelResource.LABEL_SOURCE_TYPE.getTranslation());
-        area.append(" : ");
-        area.append(getSourceTypeTranslation(getModel().getSourceType()) + "\n");
+        String doublePointSeparator = " : ";
+        area.append(doublePointSeparator);
+        String newLine = "\n";
+        area.append(getSourceTypeTranslation(getModel().getSourceType()) + newLine);
 
         area.append(JsamsI18nLabelResource.LABEL_DESTINATION_TYPE.getTranslation());
-        area.append(" : ");
-        area.append(getDestinationTypeTranslation(getModel().getDestinationType()) + "\n");
+        area.append(doublePointSeparator);
+        area.append(getDestinationTypeTranslation(getModel().getDestinationType()) + newLine);
 
         area.append(JsamsI18nLabelResource.LABEL_TRANSFER_MODE.getTranslation());
-        area.append(" : ");
-        area.append(getTransferModeTranslation(getModel().getTransferMode()) + "\n");
+        area.append(doublePointSeparator);
+        area.append(getTransferModeTranslation(getModel().getTransferMode()) + newLine);
         
         JScrollPane scrollPane = new JScrollPane(area); 
         area.setEditable(false);
@@ -167,7 +169,25 @@ public class SummaryTransferWizardPanel extends JsamsWizardPanel<TransferBean, S
      * {@inheritDoc}
      */
     public void back() {
-//        switchPanel(TransferWizardDialog.FIRST_PANEL);
+        remove(getComponentCount() - 1);
+        int panelToSwitch = 0;
+        switch (getModel().getTransferMode()) {
+        case 1:
+            panelToSwitch = TransferWizardDialog.FIRTH_PANEL_FULL_MODE;
+            break;
+        case 2:
+            panelToSwitch = TransferWizardDialog.FIFTH_PANEL_PARTIAL_MODE;
+            break;
+        case 3:
+            panelToSwitch = TransferWizardDialog.FIRTH_PANEL_FULL_GROUPED_MODE;
+            break;
+        case 4:
+            panelToSwitch = TransferWizardDialog.FIFTH_PANEL_PARTIAL_GROUPED_MODE;
+            break;
+        default:
+            break;
+        }
+        switchPanel(panelToSwitch);
     }
 
 }
