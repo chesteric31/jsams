@@ -1,6 +1,7 @@
 package be.jsams.client.wizard.transfer;
 
 import be.jsams.client.i18n.JsamsI18nLabelResource;
+import be.jsams.client.validator.wizard.DocumentsValidator;
 import be.jsams.client.wizard.JsamsWizardComponent;
 import be.jsams.client.wizard.JsamsWizardPanel;
 import be.jsams.common.bean.model.transfer.TransferBean;
@@ -11,7 +12,7 @@ import be.jsams.common.bean.model.transfer.TransferBean;
  * @author chesteric31
  * @version $Revision$ $Date::                  $ $Author$
  */
-public class DocumentsChooserWizardPanel extends JsamsWizardPanel<TransferBean> {
+public class DocumentsChooserWizardPanel extends JsamsWizardPanel<TransferBean, DocumentsValidator> {
 
     /**
      * Serial Version UID
@@ -24,10 +25,11 @@ public class DocumentsChooserWizardPanel extends JsamsWizardPanel<TransferBean> 
      * @param parent the {@link TransferWizardDialog} parent
      * @param component the {@link JsamsWizardComponent}
      * @param model the model
+     * @param validator the {@link DocumentsValidator}
      */
     public DocumentsChooserWizardPanel(TransferWizardDialog parent,
-            JsamsWizardComponent component, TransferBean model) {
-        super(parent, component, model, JsamsI18nLabelResource.LABEL_TRANSFER_CHOOSE_DOCUMENTS);
+            JsamsWizardComponent component, TransferBean model, DocumentsValidator validator) {
+        super(parent, component, model, JsamsI18nLabelResource.LABEL_TRANSFER_CHOOSE_DOCUMENTS, validator);
         initComponents();
     }
 

@@ -165,4 +165,16 @@ public final class JsamsI18nLabelResource {
 
     public static final I18nString LABEL_DESTINATION_TYPE = new I18nString("label.transfer.destination_type");
 
+    public static final I18nString LABEL_SOURCE_TYPE = new I18nString("label.transfer.source_type");
+
+    public static final I18nString LABEL_TRANSFER_MODE = new I18nString("label.transfer.transfer_mode");
+
+    public static final I18nString LABEL_DOCUMENT = new I18nString("label.transfer.document");
+
+    public static final I18nString LABEL_DOCUMENT_DETAILS = new I18nString("label.transfer.document_details");
+
+    public static final I18nString LABEL_DOCUMENTS = new I18nString("label.transfer.documents");
+
+    public static final I18nString LABEL_TRANSFER_SUMMARY = new I18nString("label.transfer.summary");
+
 }

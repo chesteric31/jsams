@@ -13,8 +13,8 @@ import be.jsams.client.model.table.AgentTableModel;
 import be.jsams.client.swing.component.JsamsButton;
 import be.jsams.client.swing.component.JsamsDialog;
 import be.jsams.client.swing.component.JsamsTable;
-import be.jsams.client.swing.listener.AgentTableMouseListener;
-import be.jsams.client.validator.SearchAgentValidator;
+import be.jsams.client.swing.listener.search.AgentTableMouseListener;
+import be.jsams.client.validator.search.SearchAgentValidator;
 import be.jsams.common.bean.builder.management.AgentBeanBuilder;
 import be.jsams.common.bean.model.management.AgentBean;
 

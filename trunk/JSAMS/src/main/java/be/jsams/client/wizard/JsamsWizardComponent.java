@@ -10,7 +10,7 @@ import be.jsams.client.wizard.action.FinishAction;
 
 /**
  * 
- *
+ * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
@@ -31,14 +31,14 @@ public interface JsamsWizardComponent extends JsamsWizard {
      * @param listener the {@link PropertyChangeListener} to remove
      */
     void removePropertyChangeListener(PropertyChangeListener listener);
-    
+
     /**
      * Add a {@link JsamsWizardPanel} after an another one.
      * 
      * @param panelToBePlacedAfter the {@link JsamsWizardPanel} to place after
      * @param panel the referenced {@link JsamsWizardPanel}
      */
-    void addPanelAfter(JsamsWizardPanel<?> panelToBePlacedAfter, JsamsWizardPanel<?> panel);
+    void addPanelAfter(JsamsWizardPanel<?, ?> panelToBePlacedAfter, JsamsWizardPanel<?, ?> panel);
 
     /**
      * Add a {@link JsamsWizardPanel} before an another one.
@@ -46,14 +46,15 @@ public interface JsamsWizardComponent extends JsamsWizard {
      * @param panelToBePlacedBefore the {@link JsamsWizardPanel} to place before
      * @param panel the referenced {@link JsamsWizardPanel}
      */
-    void addPanelBefore(JsamsWizardPanel<?> panelToBePlacedBefore, JsamsWizardPanel<?> panel);
+    void addPanelBefore(JsamsWizardPanel<?, ?> panelToBePlacedBefore, JsamsWizardPanel<?, ?> panel);
 
     /**
-     * Add a {@link JsamsWizardPanel} after the current {@link JsamsWizardPanel}.
+     * Add a {@link JsamsWizardPanel} after the current {@link JsamsWizardPanel}
+     * .
      * 
      * @param panel the {@link JsamsWizardPanel} to add
      */
-    void addPanelAfterCurrent(JsamsWizardPanel<?> panel);
+    void addPanelAfterCurrent(JsamsWizardPanel<?, ?> panel);
 
     /**
      * Remove a {@link JsamsWizardPanel} after an another one.
@@ -61,8 +62,7 @@ public interface JsamsWizardComponent extends JsamsWizard {
      * @param panel the {@link JsamsWizardPanel} after to remove
      * @return the removed {@link JsamsWizardPanel}
      */
-    JsamsWizardPanel<?> removeWizardPanelAfter(JsamsWizardPanel<?> panel);
-    
+    JsamsWizardPanel<?, ?> removeWizardPanelAfter(JsamsWizardPanel<?, ?> panel);
 
     /**
      * Remove a {@link JsamsWizardPanel} before an another one.
@@ -70,15 +70,15 @@ public interface JsamsWizardComponent extends JsamsWizard {
      * @param panel the {@link JsamsWizardPanel} before to remove
      * @return the removed {@link JsamsWizardPanel}
      */
-    JsamsWizardPanel<?> removeWizardPanelBefore(JsamsWizardPanel<?> panel);
+    JsamsWizardPanel<?, ?> removeWizardPanelBefore(JsamsWizardPanel<?, ?> panel);
 
     /**
      * Get the index of the panel.
      * 
      * @param panel the {@link JsamsWizardPanel} to identify the index
-     * @return the index of the {@link JsamsWizardPanel} 
+     * @return the index of the {@link JsamsWizardPanel}
      */
-    int getIndexOfPanel(JsamsWizardPanel<?> panel);
+    int getIndexOfPanel(JsamsWizardPanel<?, ?> panel);
 
     /**
      * Update the components.
@@ -90,7 +90,7 @@ public interface JsamsWizardComponent extends JsamsWizard {
      * 
      * @return the current {@link JsamsWizardPanel}
      */
-    JsamsWizardPanel<?> getCurrentPanel();
+    JsamsWizardPanel<?, ?> getCurrentPanel();
 
     /**
      * @return the {@link FinishAction}
@@ -123,7 +123,7 @@ public interface JsamsWizardComponent extends JsamsWizard {
     void setCurrentIndex(int aCurrentIndex);
 
     /**
-     * @return the panel containers of the {@link JsamsWizardPanel} 
+     * @return the panel containers of the {@link JsamsWizardPanel}
      */
     JPanel getPanelsContainer();
 
@@ -174,7 +174,7 @@ public interface JsamsWizardComponent extends JsamsWizard {
 
     /**
      * Boolean to indicate if we are onto the last panel.
-     *  
+     * 
      * @return true if we are onto the last panel, false otherwise
      */
     boolean onLastPanel();

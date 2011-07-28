@@ -1,5 +1,6 @@
 package be.jsams.client.model.panel.sale;
 
+import java.awt.event.MouseListener;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -11,8 +12,7 @@ import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.model.dialog.sale.EditCommandDialog;
 import be.jsams.client.model.panel.AbstractSearchPanel;
 import be.jsams.client.model.table.CommandTableModel;
-import be.jsams.client.swing.listener.CommandTableMouseListener;
-import be.jsams.client.validator.SearchCommandValidator;
+import be.jsams.client.validator.search.SearchCommandValidator;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.AgentBean;
 import be.jsams.common.bean.model.management.CustomerBean;
@@ -22,12 +22,13 @@ import be.jsams.server.service.sale.CommandService;
 /**
  * {@link AbstractSearchPanel} for {@link CommandBean} objects.
  * 
+ * @param <L> a customized {@link MouseListener}
+ * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class SearchCommandPanel
-        extends AbstractSearchPanel<CommandBean, CommandTableMouseListener,
-        CommandService, SearchCommandValidator, CommandTableModel> {
+public class SearchCommandPanel<L extends MouseListener> extends
+        AbstractSearchPanel<CommandBean, L, CommandService, SearchCommandValidator, CommandTableModel> {
 
     /**
      * Serial Version UID
@@ -42,14 +43,14 @@ public class SearchCommandPanel
      * Constructor.
      * 
      * @param model the {@link CommandBean}
-     * @param listener the {@link CommandTableMouseListener}
+     * @param listener the {@link MouseListener}
      * @param service the {@link CommandService}
      * @param validator the {@link SearchCommandValidator}
      * @param commandTableModel the {@link CommandTableModel}
      * @param showButtons a boolean that indicates if we have to display the
      *            buttons to manage the content: add, remove and modify
      */
-    public SearchCommandPanel(CommandBean model, CommandTableMouseListener listener, CommandService service,
+    public SearchCommandPanel(CommandBean model, L listener, CommandService service,
             SearchCommandValidator validator, CommandTableModel commandTableModel, final boolean showButtons) {
         super(model, listener, service, validator, commandTableModel, showButtons);
     }

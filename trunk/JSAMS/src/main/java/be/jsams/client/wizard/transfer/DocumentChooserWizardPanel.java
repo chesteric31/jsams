@@ -16,14 +16,15 @@ import be.jsams.client.model.table.DeliveryOrderTableModel;
 import be.jsams.client.model.table.EstimateTableModel;
 import be.jsams.client.swing.component.AbstractJsamsFrame;
 import be.jsams.client.swing.component.JsamsTextField;
-import be.jsams.client.swing.listener.BillTableMouseListener;
-import be.jsams.client.swing.listener.CommandTableMouseListener;
-import be.jsams.client.swing.listener.DeliveryOrderTableMouseListener;
-import be.jsams.client.swing.listener.EstimateWizardTableMouseListener;
-import be.jsams.client.validator.SearchBillValidator;
-import be.jsams.client.validator.SearchCommandValidator;
-import be.jsams.client.validator.SearchDeliveryOrderValidator;
-import be.jsams.client.validator.SearchEstimateValidator;
+import be.jsams.client.swing.listener.wizard.BillWizardTableMouseListener;
+import be.jsams.client.swing.listener.wizard.CommandWizardTableMouseListener;
+import be.jsams.client.swing.listener.wizard.DeliveryOrderWizardTableMouseListener;
+import be.jsams.client.swing.listener.wizard.EstimateWizardTableMouseListener;
+import be.jsams.client.validator.search.SearchBillValidator;
+import be.jsams.client.validator.search.SearchCommandValidator;
+import be.jsams.client.validator.search.SearchDeliveryOrderValidator;
+import be.jsams.client.validator.search.SearchEstimateValidator;
+import be.jsams.client.validator.wizard.DocumentValidator;
 import be.jsams.client.wizard.JsamsWizardComponent;
 import be.jsams.client.wizard.JsamsWizardPanel;
 import be.jsams.common.bean.builder.PaymentModeBeanBuilder;
@@ -54,7 +55,7 @@ import com.toedter.calendar.JDateChooser;
  * @author chesteric31
  * @version $Revision$ $Date::                  $ $Author$
  */
-public class DocumentChooserWizardPanel extends JsamsWizardPanel<TransferBean> {
+public class DocumentChooserWizardPanel extends JsamsWizardPanel<TransferBean, DocumentValidator> {
 
     /**
      * Serial Version UID
@@ -70,9 +71,11 @@ public class DocumentChooserWizardPanel extends JsamsWizardPanel<TransferBean> {
      * @param parent the {@link TransferWizardDialog} parent
      * @param component the {@link JsamsWizardComponent}
      * @param model the model
+     * @param validator the DocumentValidator
      */
-    public DocumentChooserWizardPanel(TransferWizardDialog parent, JsamsWizardComponent component, TransferBean model) {
-        super(parent, component, model, JsamsI18nLabelResource.LABEL_TRANSFER_CHOOSE_DOCUMENT);
+    public DocumentChooserWizardPanel(TransferWizardDialog parent, JsamsWizardComponent component, TransferBean model,
+            DocumentValidator validator) {
+        super(parent, component, model, JsamsI18nLabelResource.LABEL_TRANSFER_CHOOSE_DOCUMENT, validator);
         initComponents();
     }
 
@@ -118,7 +121,9 @@ public class DocumentChooserWizardPanel extends JsamsWizardPanel<TransferBean> {
             CommandBean command = new CommandBean(currentSociety, customer, agent);
             command.setTransferred(false);
             command.setView(buildCommandView(command));
-            SearchCommandPanel commandPanel = new SearchCommandPanel(command, new CommandTableMouseListener(),
+            SearchCommandPanel<CommandWizardTableMouseListener> commandPanel
+                = new SearchCommandPanel<CommandWizardTableMouseListener>(
+                    command, new CommandWizardTableMouseListener(getModel()),
                     JsamsApplicationContext.getCommandService(), new SearchCommandValidator(), new CommandTableModel(),
                     false);
             this.add(commandPanel);
@@ -127,9 +132,11 @@ public class DocumentChooserWizardPanel extends JsamsWizardPanel<TransferBean> {
             DeliveryOrderBean deliveryOrder = new DeliveryOrderBean(currentSociety, customer);
             deliveryOrder.setTransferred(false);
             deliveryOrder.setView(buildDeliveryOrderView(deliveryOrder));
-            SearchDeliveryOrderPanel deliveryOrderPanel = new SearchDeliveryOrderPanel(deliveryOrder,
-                    new DeliveryOrderTableMouseListener(), JsamsApplicationContext.getDeliveryOrderService(),
-                    new SearchDeliveryOrderValidator(), new DeliveryOrderTableModel(), false);
+            SearchDeliveryOrderPanel<DeliveryOrderWizardTableMouseListener> deliveryOrderPanel
+                = new SearchDeliveryOrderPanel<DeliveryOrderWizardTableMouseListener>(
+                    deliveryOrder, new DeliveryOrderWizardTableMouseListener(getModel()),
+                    JsamsApplicationContext.getDeliveryOrderService(), new SearchDeliveryOrderValidator(),
+                    new DeliveryOrderTableModel(), false);
             this.add(deliveryOrderPanel);
             break;
         case 4:
@@ -137,9 +144,11 @@ public class DocumentChooserWizardPanel extends JsamsWizardPanel<TransferBean> {
             PaymentModeBean mode = builder.build();
             BillBean bill = new BillBean(currentSociety, customer, mode);
             bill.setView(buildBillView(bill));
-//            bill.setTransferred(false);
-            SearchBillPanel billPanel = new SearchBillPanel(bill, new BillTableMouseListener(),
-                    JsamsApplicationContext.getBillService(), new SearchBillValidator(), new BillTableModel(), false);
+            // bill.setTransferred(false);
+            SearchBillPanel<BillWizardTableMouseListener> billPanel
+                = new SearchBillPanel<BillWizardTableMouseListener>(
+                    bill, new BillWizardTableMouseListener(getModel()), JsamsApplicationContext.getBillService(),
+                    new SearchBillValidator(), new BillTableModel(), false);
             this.add(billPanel);
             break;
         default:
@@ -350,6 +359,10 @@ public class DocumentChooserWizardPanel extends JsamsWizardPanel<TransferBean> {
      * {@inheritDoc}
      */
     public void next() {
+        if (prePerformNext()) {
+            remove(getComponentCount() - 1);
+            switchPanel(TransferWizardDialog.SUMMARY_PANEL);
+        }
     }
 
     /**

@@ -1,20 +1,20 @@
-package be.jsams.client.swing.listener;
+package be.jsams.client.swing.listener.search;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import be.jsams.client.i18n.JsamsI18nResource;
-import be.jsams.client.model.dialog.sale.EditBillDialog;
-import be.jsams.client.model.table.BillTableModel;
+import be.jsams.client.model.dialog.sale.EditDeliveryOrderDialog;
+import be.jsams.client.model.table.DeliveryOrderTableModel;
 import be.jsams.client.swing.component.JsamsTable;
 
 /**
- * Customized {@link MouseListener} for Bill table double click.
+ * Customized {@link MouseListener} for Delivery Order table double click.
  *
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class BillTableMouseListener implements MouseListener {
+public class DeliveryOrderTableMouseListener implements MouseListener {
 
     /**
      * {@inheritDoc}
@@ -26,8 +26,9 @@ public class BillTableMouseListener implements MouseListener {
             int selectedRow = table.getSelectedRow();
             if (selectedRow > -1) {
                 int selectedRowModel = table.convertRowIndexToModel(selectedRow);
-                BillTableModel model = (BillTableModel) table.getModel();
-                new EditBillDialog(JsamsI18nResource.TITLE_EDIT_BILL, model.getRow(selectedRowModel));
+                DeliveryOrderTableModel model = (DeliveryOrderTableModel) table.getModel();
+                new EditDeliveryOrderDialog(JsamsI18nResource.TITLE_EDIT_DELIVERY_ORDER,
+                        model.getRow(selectedRowModel));
                 table.updateUI();
             }
         }

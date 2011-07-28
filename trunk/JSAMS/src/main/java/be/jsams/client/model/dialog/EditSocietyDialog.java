@@ -5,7 +5,7 @@ import javax.swing.JPanel;
 import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.client.i18n.I18nString;
-import be.jsams.client.validator.EditSocietyValidator;
+import be.jsams.client.validator.edit.EditSocietyValidator;
 import be.jsams.common.bean.model.AbstractIdentityBean;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.view.LegalFormBeanView;

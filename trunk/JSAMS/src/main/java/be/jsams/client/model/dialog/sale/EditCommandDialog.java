@@ -5,7 +5,7 @@ import javax.swing.JPanel;
 import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.model.dialog.AbstractEditDialog;
-import be.jsams.client.validator.EditCommandValidator;
+import be.jsams.client.validator.edit.EditCommandValidator;
 import be.jsams.common.bean.model.sale.CommandBean;
 import be.jsams.common.bean.view.sale.CommandBeanView;
 import be.jsams.server.service.sale.CommandService;

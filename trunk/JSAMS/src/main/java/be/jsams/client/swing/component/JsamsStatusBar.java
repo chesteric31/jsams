@@ -78,6 +78,13 @@ public class JsamsStatusBar extends JPanel {
     }
 
     /**
+     * Clears all icon.
+     */
+    private synchronized void clearIcon() {
+        labelText.setIcon(null);
+    }
+
+    /**
      * Sets text when empty.
      * 
      * @param value the value
@@ -128,6 +135,7 @@ public class JsamsStatusBar extends JPanel {
      */
     private void initComponents() {
         clearText();
+        clearIcon();
         removeAll();
 
         labelPanel.setLayout(new GridLayout(1, 1));
@@ -151,4 +159,14 @@ public class JsamsStatusBar extends JPanel {
         addComponent(labelPanel);
     }
 
+    /**
+     * Set the text and the icon of the {@link JsamsLabel}.
+     * 
+     * @param label the {@link JsamsLabel} to use
+     */
+    public synchronized void setTextWithIcon(JsamsLabel label) {
+        this.setText(label.getText());
+        labelText.setIcon(label.getIcon());
+    }
+    
 }

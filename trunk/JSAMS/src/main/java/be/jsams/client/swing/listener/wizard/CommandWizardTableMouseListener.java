@@ -1,20 +1,33 @@
-package be.jsams.client.swing.listener;
+package be.jsams.client.swing.listener.wizard;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
+import java.util.List;
 
-import be.jsams.client.i18n.JsamsI18nResource;
-import be.jsams.client.model.dialog.sale.EditDeliveryOrderDialog;
-import be.jsams.client.model.table.DeliveryOrderTableModel;
+import be.jsams.client.model.table.CommandTableModel;
 import be.jsams.client.swing.component.JsamsTable;
+import be.jsams.common.bean.model.sale.CommandBean;
+import be.jsams.common.bean.model.transfer.TransferBean;
 
 /**
- * Customized {@link MouseListener} for Delivery Order table double click.
+ * 
  *
  * @author chesteric31
- * @version $Rev$ $Date::                  $ $Author$
+ * @version $Revision$ $Date::                  $ $Author$
  */
-public class DeliveryOrderTableMouseListener implements MouseListener {
+public class CommandWizardTableMouseListener implements MouseListener {
+
+    private TransferBean bean;
+
+    /**
+     * Constructor
+     * 
+     * @param bean the {@link TransferBean}
+     */
+    public CommandWizardTableMouseListener(TransferBean bean) {
+        this.bean = bean;
+    }
 
     /**
      * {@inheritDoc}
@@ -22,14 +35,14 @@ public class DeliveryOrderTableMouseListener implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         JsamsTable table = (JsamsTable) e.getSource();
-        if (e.getClickCount() == 2) {
+        if (e.getClickCount() == 1) {
             int selectedRow = table.getSelectedRow();
             if (selectedRow > -1) {
                 int selectedRowModel = table.convertRowIndexToModel(selectedRow);
-                DeliveryOrderTableModel model = (DeliveryOrderTableModel) table.getModel();
-                new EditDeliveryOrderDialog(JsamsI18nResource.TITLE_EDIT_DELIVERY_ORDER,
-                        model.getRow(selectedRowModel));
-                table.updateUI();
+                CommandTableModel model = (CommandTableModel) table.getModel();
+                List<CommandBean> beans = new ArrayList<CommandBean>();
+                beans.add(model.getRow(selectedRowModel));
+                bean.setDocuments(beans);
             }
         }
     }

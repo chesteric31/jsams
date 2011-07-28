@@ -7,6 +7,7 @@ import javax.swing.JRadioButton;
 
 import be.jsams.client.i18n.JsamsI18nLabelResource;
 import be.jsams.client.swing.component.AbstractJsamsFrame;
+import be.jsams.client.validator.wizard.TransferModeValidator;
 import be.jsams.client.wizard.JsamsWizardComponent;
 import be.jsams.client.wizard.JsamsWizardPanel;
 import be.jsams.common.bean.model.transfer.TransferBean;
@@ -22,7 +23,7 @@ import com.jgoodies.forms.layout.FormLayout;
  * @author chesteric31
  * @version $Revision$ $Date::                  $ $Author$
  */
-public class TransferModeChooserWizardPanel extends JsamsWizardPanel<TransferBean> {
+public class TransferModeChooserWizardPanel extends JsamsWizardPanel<TransferBean, TransferModeValidator> {
 
     /**
      * Serial Version UID
@@ -43,10 +44,11 @@ public class TransferModeChooserWizardPanel extends JsamsWizardPanel<TransferBea
      * @param parent the {@link TransferWizardDialog} parent
      * @param component the {@link JsamsWizardComponent}
      * @param model the model
+     * @param validator the {@link TransferModeValidator}
      */
     public TransferModeChooserWizardPanel(TransferWizardDialog parent, JsamsWizardComponent component,
-            TransferBean model) {
-        super(parent, component, model, JsamsI18nLabelResource.LABEL_TRANSFER_CHOOSE_TRANSFER_MODE);
+            TransferBean model, TransferModeValidator validator) {
+        super(parent, component, model, JsamsI18nLabelResource.LABEL_TRANSFER_CHOOSE_TRANSFER_MODE, validator);
         initComponents();
     }
 
@@ -109,11 +111,6 @@ public class TransferModeChooserWizardPanel extends JsamsWizardPanel<TransferBea
      * {@inheritDoc}
      */
     public void update() {
-        boolean nextEnabled = false;
-        if (transferModeIsSelected()) {
-            nextEnabled = true;
-        }
-        setNextButtonEnabled(nextEnabled);
         setFinishButtonEnabled(false);
         setBackButtonEnabled(true);
         super.update();
@@ -123,7 +120,7 @@ public class TransferModeChooserWizardPanel extends JsamsWizardPanel<TransferBea
      * {@inheritDoc}
      */
     public void next() {
-        if (transferModeIsSelected() && prePerformNext(getModel())) {
+        if (prePerformNext()) {
             switch (getModel().getTransferMode()) {
             case fullModeSelected:
                 switchPanel(TransferWizardDialog.FIRTH_PANEL_FULL_MODE);
@@ -148,13 +145,6 @@ public class TransferModeChooserWizardPanel extends JsamsWizardPanel<TransferBea
      */
     public void back() {
         switchPanel(TransferWizardDialog.SECOND_PANEL);
-    }
-
-    /**
-     * @return true if a transfer mode is selected, false otherwise
-     */
-    private boolean transferModeIsSelected() {
-        return getModel().getTransferMode() != 0;
     }
 
 }
