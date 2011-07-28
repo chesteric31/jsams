@@ -2,6 +2,8 @@ package be.jsams.client.model.panel.management;
 
 import java.util.List;
 
+import javax.swing.ListSelectionModel;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -34,7 +36,6 @@ public class SearchProductCategoryPanel
     private static final long serialVersionUID = -2569005952852992437L;
 
     private static final Log LOGGER = LogFactory.getLog(SearchProductCategoryPanel.class);
-
     private final boolean debug = LOGGER.isDebugEnabled();
 
     /**
@@ -47,11 +48,27 @@ public class SearchProductCategoryPanel
      * @param productCategoryTableModel the {@link ProductCategoryTableModel}
      * @param showButtons the boolean to show or not the management buttons
      *            panel
+     * @param selectionMode the selection mode to use
      */
     public SearchProductCategoryPanel(ProductCategoryBean model, ProductCategoryTableMouseListener listener,
             ProductCategoryService service, SearchProductCategoryValidator validator,
-            ProductCategoryTableModel productCategoryTableModel, final boolean showButtons) {
-        super(model, listener, service, validator, productCategoryTableModel, showButtons);
+            ProductCategoryTableModel productCategoryTableModel, final boolean showButtons, int selectionMode) {
+        super(model, listener, service, validator, productCategoryTableModel, showButtons, selectionMode);
+    }
+
+    /**
+     * Constructor.
+     * 
+     * @param model the {@link ProductCategoryBean}
+     * @param listener the {@link ProductCategoryTableMouseListener}
+     * @param service the {@link ProductCategoryService}
+     * @param validator the {@link SearchProductCategoryValidator}
+     * @param productCategoryTableModel the {@link ProductCategoryTableModel}
+     */
+    public SearchProductCategoryPanel(ProductCategoryBean model, ProductCategoryTableMouseListener listener,
+            ProductCategoryService service, SearchProductCategoryValidator validator,
+            ProductCategoryTableModel productCategoryTableModel) {
+        this(model, listener, service, validator, productCategoryTableModel, true, ListSelectionModel.SINGLE_SELECTION);
     }
 
     /**

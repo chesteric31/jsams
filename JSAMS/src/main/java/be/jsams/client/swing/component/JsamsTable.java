@@ -3,6 +3,7 @@ package be.jsams.client.swing.component;
 import java.awt.Component;
 
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
@@ -10,7 +11,8 @@ import javax.swing.table.TableColumn;
 import be.jsams.client.model.table.AbstractJsamsTableModel;
 
 /**
- * Specific {@link JTable} for JSAMS with auto resize capabilities when the call to setModel method.
+ * Specific {@link JTable} for JSAMS with auto resize capabilities when the call
+ * to setModel method.
  * 
  * @author chesteric31
  * @version $$Rev$$ $$Date::                  $$ $$Author$$
@@ -26,13 +28,41 @@ public class JsamsTable extends JTable {
 
     /**
      * Constructor.
+     */
+    public JsamsTable() {
+        this(true);
+    }
+
+    /**
+     * Constructor.
      * 
-     * @param autoResizeColumnWidth
-     *            true to auto resize the column width, false otherwise
+     * @param selectionMode selection mode to use
+     */
+    public JsamsTable(int selectionMode) {
+        this(true, selectionMode);
+    }
+    
+    /**
+     * Constructor.
+     * 
+     * @param autoResizeColumnWidth true to auto resize the column width, false
+     *            otherwise
      */
     public JsamsTable(final boolean autoResizeColumnWidth) {
+        this(autoResizeColumnWidth, ListSelectionModel.SINGLE_SELECTION);
+    }
+    
+    /**
+     * Constructor.
+     * 
+     * @param autoResizeColumnWidth true to auto resize the column width, false
+     *            otherwise
+     * @param selectionMode selection mode to use
+     */
+    public JsamsTable(final boolean autoResizeColumnWidth, int selectionMode) {
         super();
         this.autoResizeColumnWidth = autoResizeColumnWidth;
+        setSelectionMode(selectionMode);
     }
 
     /**
@@ -44,7 +74,7 @@ public class JsamsTable extends JTable {
             autoResizeColumnWidth();
         }
     }
-    
+
     /**
      * Methods that auto resize the column width following the size of the data.
      */
@@ -86,7 +116,6 @@ public class JsamsTable extends JTable {
         getTableHeader().setReorderingAllowed(false);
     }
 
-
     /**
      * Clears the table. (remove all rows)
      */
@@ -97,5 +126,5 @@ public class JsamsTable extends JTable {
             model.clear();
         }
     }
-    
+
 }

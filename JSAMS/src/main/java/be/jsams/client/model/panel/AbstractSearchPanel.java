@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.KeyStroke;
+import javax.swing.ListSelectionModel;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
@@ -87,6 +88,7 @@ public abstract class AbstractSearchPanel<B extends AbstractIdentityBean<?, ?>,
     private JsamsButtonsPanel buttonsPanel;
 
     private JsamsTable resultTable = null;
+    private int selectionMode;
 
     private JsamsButton buttonAdd = null;
     private JsamsButton buttonRemove = null;
@@ -106,10 +108,25 @@ public abstract class AbstractSearchPanel<B extends AbstractIdentityBean<?, ?>,
      * @param service the {@link Service}
      * @param validator the {@link Validator}
      * @param tableModel the {@link AbstractJsamsTableModel}
+     */
+    public AbstractSearchPanel(B bean, L listener, S service, V validator, TM tableModel) {
+        this(bean, listener, service, validator, tableModel, true, ListSelectionModel.SINGLE_SELECTION);
+    }
+    
+    /**
+     * Constructor.
+     * 
+     * @param bean the {@link AbstractIdentityBean}
+     * @param listener the {@link MouseListener}
+     * @param service the {@link Service}
+     * @param validator the {@link Validator}
+     * @param tableModel the {@link AbstractJsamsTableModel}
      * @param showButtons a boolean that indicates to show or not a management
      *            buttons (add, modify and remove)
+     * @param selectionMode the selection mode for the result table
      */
-    public AbstractSearchPanel(B bean, L listener, S service, V validator, TM tableModel, boolean showButtons) {
+    public AbstractSearchPanel(B bean, L listener, S service, V validator, TM tableModel, boolean showButtons,
+            int selectionMode) {
         super();
         this.model = bean;
         this.mouseListener = listener;
@@ -117,6 +134,7 @@ public abstract class AbstractSearchPanel<B extends AbstractIdentityBean<?, ?>,
         this.validator = validator;
         this.tableModel = tableModel;
         this.showButtons = showButtons;
+        this.selectionMode = selectionMode;
         setLayout(new BorderLayout());
         buttonsPanel = new JsamsButtonsPanel(this, true, true, true);
         buildMainPanel();
@@ -371,7 +389,7 @@ public abstract class AbstractSearchPanel<B extends AbstractIdentityBean<?, ?>,
 
         this.add(searchCriteriaPanel, BorderLayout.NORTH);
 
-        resultTable = new JsamsTable(true);
+        resultTable = new JsamsTable(selectionMode);
         resultTable.addMouseListener(mouseListener);
         JScrollPane scrollPane = new JScrollPane(resultTable);
         scrollPane.setBorder(new TitledBorder(JsamsI18nResource.SEARCH_RESULTS.getTranslation()));

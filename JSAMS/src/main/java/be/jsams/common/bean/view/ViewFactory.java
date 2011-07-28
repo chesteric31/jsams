@@ -196,7 +196,7 @@ public class ViewFactory<B extends AbstractIdentityBean<?, ?>> {
      */
     public JsamsTable createBindingTableComponent(final AbstractJsamsTableModel<?> tableModel, final boolean mandatory,
             final boolean readOnly) {
-        JsamsTable table = new JsamsTable(true);
+        JsamsTable table = new JsamsTable();
         table.setModel(tableModel);
         Bindings.bind(table, tableModel.getListModel(), table.getSelectionModel());
         ValidationComponentUtils.setMandatory(table, mandatory);

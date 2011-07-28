@@ -5,6 +5,7 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.AbstractAction;
 import javax.swing.Icon;
+import javax.swing.ListSelectionModel;
 
 import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.desktop.JsamsDesktop;
@@ -75,8 +76,9 @@ public final class SearchAgentAction extends AbstractAction {
         };
         AgentBeanBuilder builder = JsamsApplicationContext.getAgentBeanBuilder();
         AgentBean bean = builder.build(null, JsamsDesktop.getInstance().getCurrentSociety());
-        SearchAgentPanel searchAgentPanel = new SearchAgentPanel(bean, customListener, JsamsApplicationContext
-                .getAgentService(), new SearchAgentValidator(), new AgentTableModel(), false);
+        SearchAgentPanel searchAgentPanel = new SearchAgentPanel(bean, customListener,
+                JsamsApplicationContext.getAgentService(), new SearchAgentValidator(), new AgentTableModel(), false,
+                ListSelectionModel.SINGLE_SELECTION);
         dialog.add(searchAgentPanel);
         dialog.pack();
 //        DialogUtil.centerComponentOnScreen(((JsamsButton) e.getSource()).getRootPane());

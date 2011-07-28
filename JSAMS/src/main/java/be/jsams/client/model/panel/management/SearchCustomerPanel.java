@@ -2,6 +2,7 @@ package be.jsams.client.model.panel.management;
 
 import java.util.List;
 
+import javax.swing.ListSelectionModel;
 import javax.swing.table.TableRowSorter;
 
 import org.apache.commons.logging.Log;
@@ -34,7 +35,6 @@ public class SearchCustomerPanel
     private static final long serialVersionUID = 2222078506888522042L;
 
     private static final Log LOGGER = LogFactory.getLog(SearchCustomerPanel.class);
-
     private final boolean debug = LOGGER.isDebugEnabled();
 
     /**
@@ -45,12 +45,28 @@ public class SearchCustomerPanel
      * @param service the {@link CustomerService}
      * @param validator the {@link SearchCustomerValidator}
      * @param customerTableModel the {@link CustomerTableModel}
-     * @param showButtons a boolean that indicates if we have to display the buttons to manage the content: add, remove
-     *            and modify
+     * @param showButtons a boolean that indicates if we have to display the
+     *            buttons to manage the content: add, remove and modify
+     * @param selectionMode the selection mode to use
      */
     public SearchCustomerPanel(CustomerBean model, CustomerTableMouseListener listener, CustomerService service,
-            SearchCustomerValidator validator, CustomerTableModel customerTableModel, final boolean showButtons) {
-        super(model, listener, service, validator, customerTableModel, showButtons);
+            SearchCustomerValidator validator, CustomerTableModel customerTableModel, final boolean showButtons,
+            int selectionMode) {
+        super(model, listener, service, validator, customerTableModel, showButtons, selectionMode);
+    }
+
+    /**
+     * Constructor.
+     * 
+     * @param model the {@link CustomerBean}
+     * @param listener the {@link CustomerTableMouseListener}
+     * @param service the {@link CustomerService}
+     * @param validator the {@link SearchCustomerValidator}
+     * @param customerTableModel the {@link CustomerTableModel}
+     */
+    public SearchCustomerPanel(CustomerBean model, CustomerTableMouseListener listener, CustomerService service,
+            SearchCustomerValidator validator, CustomerTableModel customerTableModel) {
+        this(model, listener, service, validator, customerTableModel, true, ListSelectionModel.SINGLE_SELECTION);
     }
 
     /**

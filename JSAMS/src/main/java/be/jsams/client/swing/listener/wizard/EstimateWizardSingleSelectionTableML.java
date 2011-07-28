@@ -16,7 +16,7 @@ import be.jsams.common.bean.model.transfer.TransferBean;
  * @author chesteric31
  * @version $Revision$ $Date::                  $ $Author$
  */
-public class EstimateWizardTableMouseListener implements MouseListener {
+public class EstimateWizardSingleSelectionTableML implements MouseListener {
 
     private TransferBean bean;
 
@@ -25,7 +25,7 @@ public class EstimateWizardTableMouseListener implements MouseListener {
      * 
      * @param bean the {@link TransferBean}
      */
-    public EstimateWizardTableMouseListener(TransferBean bean) {
+    public EstimateWizardSingleSelectionTableML(TransferBean bean) {
         this.bean = bean;
     }
 

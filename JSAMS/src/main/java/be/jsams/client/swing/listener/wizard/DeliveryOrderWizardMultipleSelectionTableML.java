@@ -5,18 +5,18 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import be.jsams.client.model.table.BillTableModel;
+import be.jsams.client.model.table.DeliveryOrderTableModel;
 import be.jsams.client.swing.component.JsamsTable;
-import be.jsams.common.bean.model.sale.BillBean;
+import be.jsams.common.bean.model.sale.DeliveryOrderBean;
 import be.jsams.common.bean.model.transfer.TransferBean;
 
 /**
  * 
  *
  * @author chesteric31
- * @version $Revision$ $Date::                  $ $Author$
+ * @version $Rev$ $Date::                  $ $Author$
  */
-public class BillWizardTableMouseListener implements MouseListener {
+public class DeliveryOrderWizardMultipleSelectionTableML implements MouseListener {
 
     private TransferBean bean;
 
@@ -25,7 +25,7 @@ public class BillWizardTableMouseListener implements MouseListener {
      * 
      * @param bean the {@link TransferBean}
      */
-    public BillWizardTableMouseListener(TransferBean bean) {
+    public DeliveryOrderWizardMultipleSelectionTableML(TransferBean bean) {
         this.bean = bean;
     }
 
@@ -36,12 +36,16 @@ public class BillWizardTableMouseListener implements MouseListener {
     public void mouseClicked(MouseEvent e) {
         JsamsTable table = (JsamsTable) e.getSource();
         if (e.getClickCount() == 1) {
-            int selectedRow = table.getSelectedRow();
-            if (selectedRow > -1) {
-                int selectedRowModel = table.convertRowIndexToModel(selectedRow);
-                BillTableModel model = (BillTableModel) table.getModel();
-                List<BillBean> beans = new ArrayList<BillBean>();
-                beans.add(model.getRow(selectedRowModel));
+            int[] selectedRows = table.getSelectedRows();
+            if (selectedRows != null && selectedRows.length > 0) {
+                List<DeliveryOrderBean> beans = new ArrayList<DeliveryOrderBean>();
+                for (int selectedRow : selectedRows) {
+                    if (selectedRow > -1) {
+                        int selectedRowModel = table.convertRowIndexToModel(selectedRow);
+                        DeliveryOrderTableModel model = (DeliveryOrderTableModel) table.getModel();
+                        beans.add(model.getRow(selectedRowModel));
+                    }
+                }
                 bean.setDocuments(beans);
             }
         }

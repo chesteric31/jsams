@@ -3,6 +3,8 @@ package be.jsams.client.model.panel.sale;
 import java.awt.event.MouseListener;
 import java.util.List;
 
+import javax.swing.ListSelectionModel;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -36,7 +38,6 @@ public class SearchDeliveryOrderPanel<L extends MouseListener>
     private static final long serialVersionUID = 6215987110609750527L;
 
     private static final Log LOGGER = LogFactory.getLog(SearchDeliveryOrderPanel.class);
-
     private final boolean debug = LOGGER.isDebugEnabled();
 
     /**
@@ -47,13 +48,28 @@ public class SearchDeliveryOrderPanel<L extends MouseListener>
      * @param service the {@link DeliveryOrderService}
      * @param validator the {@link SearchDeliveryOrderValidator}
      * @param deliveryOrderTableModel the {@link DeliveryOrderTableModel}
-     * @param showButtons a boolean that indicates if we have to display the buttons to manage the content: add, remove
-     *            and modify
+     * @param showButtons a boolean that indicates if we have to display the
+     *            buttons to manage the content: add, remove and modify
+     * @param selectionMode the selection mode to use
      */
-    public SearchDeliveryOrderPanel(DeliveryOrderBean model, L listener,
-            DeliveryOrderService service, SearchDeliveryOrderValidator validator,
-            DeliveryOrderTableModel deliveryOrderTableModel, boolean showButtons) {
-        super(model, listener, service, validator, deliveryOrderTableModel, showButtons);
+    public SearchDeliveryOrderPanel(DeliveryOrderBean model, L listener, DeliveryOrderService service,
+            SearchDeliveryOrderValidator validator, DeliveryOrderTableModel deliveryOrderTableModel,
+            boolean showButtons, int selectionMode) {
+        super(model, listener, service, validator, deliveryOrderTableModel, showButtons, selectionMode);
+    }
+
+    /**
+     * Constructor.
+     * 
+     * @param model the {@link DeliveryOrderBean}
+     * @param listener the {@link MouseListener}
+     * @param service the {@link DeliveryOrderService}
+     * @param validator the {@link SearchDeliveryOrderValidator}
+     * @param deliveryOrderTableModel the {@link DeliveryOrderTableModel}
+     */
+    public SearchDeliveryOrderPanel(DeliveryOrderBean model, L listener, DeliveryOrderService service,
+            SearchDeliveryOrderValidator validator, DeliveryOrderTableModel deliveryOrderTableModel) {
+        this(model, listener, service, validator, deliveryOrderTableModel, true, ListSelectionModel.SINGLE_SELECTION);
     }
 
     /**

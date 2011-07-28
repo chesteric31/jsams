@@ -99,8 +99,6 @@ public class TransferWizardDialog extends AbstractWizardDialog<TransferBean, Tra
         SummaryTransferWizardPanel summaryPanel = new SummaryTransferWizardPanel(this,
                 getComponent(), getModel(), new SummaryTransferValidator());
         getComponent().addPanel(SUMMARY_PANEL, summaryPanel);
-//        ValidationComponentUtils.updateComponentTreeMandatoryBorder(this);
-        // pack();
     }
 
 }
