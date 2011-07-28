@@ -6,10 +6,14 @@ import java.util.List;
 
 import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.sale.AbstractDocumentBean;
+import be.jsams.common.bean.model.sale.BillBean;
 import be.jsams.common.bean.model.sale.CommandBean;
+import be.jsams.common.bean.model.sale.CreditNoteBean;
 import be.jsams.common.bean.model.sale.DeliveryOrderBean;
 import be.jsams.common.bean.model.sale.EstimateBean;
+import be.jsams.common.bean.model.sale.detail.BillDetailBean;
 import be.jsams.common.bean.model.sale.detail.CommandDetailBean;
+import be.jsams.common.bean.model.sale.detail.CreditNoteDetailBean;
 import be.jsams.common.bean.model.sale.detail.DeliveryOrderDetailBean;
 import be.jsams.common.bean.model.sale.detail.EstimateDetailBean;
 import be.jsams.common.bean.model.transfer.TransferBean;
@@ -220,17 +224,24 @@ public class TransferServiceImpl implements TransferService {
     /**
      * @param model the wrapper contains all the beans to be transferred
      */
+    @SuppressWarnings("unchecked")
     private void estimateToBillTransfer(TransferBean model) {
         int transferMode = model.getTransferMode();
+        List<? extends AbstractDocumentBean<?, ?>> documents = model.getDocuments();
         switch (transferMode) {
         case 1:
-//            estimateToBillFullTransfer(model);
+            EstimateBean estimate = (EstimateBean) documents.get(0);
+            estimateToBillFullTransfer(estimate);
             break;
         case 2:
 //            estimateToDeliveryOrderPartialTransfer(model);
             break;
         case 3:
-//            estimateToDeliveryOrderFullGroupedTransfer(model);
+            List<EstimateBean> estimates = new ArrayList<EstimateBean>();
+            estimates.addAll((List<EstimateBean>) documents);
+            for (EstimateBean bean : estimates) {
+                estimateToBillFullTransfer(bean);
+            }
             break;
         case 4:
 //            estimateToDeliveryOrderPartialGroupedTransfer(model);
@@ -241,19 +252,67 @@ public class TransferServiceImpl implements TransferService {
     }
 
     /**
+     * Transfer an estimate to bill in full transfer.
+     * 
+     * @param estimate the {@link EstimateBean} to transfer
+     */
+    private void estimateToBillFullTransfer(EstimateBean estimate) {
+        CustomerBean customer = estimate.getCustomer();
+        BillBean newBean = new BillBean(estimate.getSociety(), customer, customer.getPaymentMode());
+        newBean.setBillingAddress(estimate.getBillingAddress());
+        newBean.getBillingAddress().setId(null);
+        newBean.setClosed(false);
+        newBean.setCreationDate(new Date());
+        // TODO implement the dates management
+//        newBean.setDateFirstRemember(dateFirstRemember);
+//        newBean.setDateFormalNotice(dateFormalNotice);
+//        newBean.setDateSecondRemember(dateSecondRemember);
+        List<BillDetailBean> details = new ArrayList<BillDetailBean>();
+        for (EstimateDetailBean detail : estimate.getDetails()) {
+            BillDetailBean bean = new BillDetailBean();
+            bean.setBill(newBean);
+            bean.setDiscountRate(detail.getDiscountRate());
+            bean.setPrice(detail.getPrice());
+            bean.setProduct(detail.getProduct());
+            bean.setQuantity(detail.getQuantity());
+            bean.setTransferred(false);
+            bean.setVatApplicable(detail.getVatApplicable());
+            details.add(bean);
+        }
+        newBean.setDetails(details);
+        newBean.setDiscountRate(estimate.getDiscountRate());
+//        newBean.setDueDate(dueDate);
+        newBean.setPaid(false);
+        newBean.setRemark(estimate.getRemark());
+        billService.create(newBean);
+        estimate.setTransferred(true);
+        for (EstimateDetailBean bean : estimate.getDetails()) {
+            bean.setTransferred(true);
+        }
+        estimateService.update(estimate);
+    }
+
+    /**
      * @param model the wrapper contains all the beans to be transferred
      */
+    @SuppressWarnings("unchecked")
     private void estimateToCreditNoteTransfer(TransferBean model) {
         int transferMode = model.getTransferMode();
+        List<? extends AbstractDocumentBean<?, ?>> documents = model.getDocuments();
         switch (transferMode) {
         case 1:
-//            estimateToCreditNoteFullTransfer(model);
+            EstimateBean estimate = (EstimateBean) documents.get(0);
+            estimateToCreditNoteFullTransfer(estimate);
             break;
         case 2:
 //            estimateToCreditNotePartialTransfer(model);
             break;
         case 3:
-//            estimateToCreditNoteFullGroupedTransfer(model);
+            List<EstimateBean> estimates = new ArrayList<EstimateBean>();
+            estimates.addAll((List<EstimateBean>) documents);
+            for (EstimateBean bean : estimates) {
+                estimateToCreditNoteFullTransfer(bean);
+            }
             break;
         case 4:
 //            estimateToCreditNotePartialGroupedTransfer(model);
@@ -261,6 +320,38 @@ public class TransferServiceImpl implements TransferService {
         default:
             break;
         }
+    }
+
+    /**
+     * Transfer an estimate to credit note in full transfer.
+     * 
+     * @param estimate the {@link EstimateBean} to transfer
+     */
+    private void estimateToCreditNoteFullTransfer(EstimateBean estimate) {
+        CustomerBean customer = estimate.getCustomer();
+        CreditNoteBean newBean = new CreditNoteBean(estimate.getSociety(), customer);
+        newBean.setBillingAddress(estimate.getBillingAddress());
+        newBean.getBillingAddress().setId(null);
+        newBean.setCreationDate(new Date());
+        List<CreditNoteDetailBean> details = new ArrayList<CreditNoteDetailBean>();
+        for (EstimateDetailBean detail : estimate.getDetails()) {
+            CreditNoteDetailBean bean = new CreditNoteDetailBean();
+            bean.setCreditNote(newBean);
+            bean.setDiscountRate(detail.getDiscountRate());
+            bean.setPrice(detail.getPrice());
+            bean.setProduct(detail.getProduct());
+            bean.setQuantity(detail.getQuantity());
+            bean.setVatApplicable(detail.getVatApplicable());
+            details.add(bean);
+        }
+        newBean.setDetails(details);
+        newBean.setRemark(estimate.getRemark());
+        creditNoteService.create(newBean);
+        estimate.setTransferred(true);
+        for (EstimateDetailBean bean : estimate.getDetails()) {
+            bean.setTransferred(true);
+        }
+        estimateService.update(estimate);
     }
 
     /**
