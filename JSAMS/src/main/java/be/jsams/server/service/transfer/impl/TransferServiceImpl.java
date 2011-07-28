@@ -83,6 +83,7 @@ public class TransferServiceImpl implements TransferService {
     /**
      * @param model the wrapper contains all the beans to be transferred
      */
+    @SuppressWarnings("unchecked")
     private void estimateToCommandTransfer(TransferBean model) {
         int transferMode = model.getTransferMode();
         List<? extends AbstractDocumentBean<?, ?>> documents = model.getDocuments();
@@ -95,7 +96,11 @@ public class TransferServiceImpl implements TransferService {
 //            estimateToCommandPartialTransfer(model);
             break;
         case 3:
-//            estimateToCommandFullGroupedTransfer(model);
+            List<EstimateBean> estimates = new ArrayList<EstimateBean>();
+            estimates.addAll((List<EstimateBean>) documents);
+            for (EstimateBean bean : estimates) {
+                estimateToCommandFullTransfer(bean);
+            }
             break;
         case 4:
 //            estimateToCommandPartialGroupedTransfer(model);
