@@ -42,6 +42,7 @@ public class CommandDetailBean extends AbstractDetailBean<CommandDetail, Command
      */
     public CommandDetailBean(CommandDetail model, CommandBean command) {
         super(model, command);
+        this.command = command;
         this.transferred = model.isTransferred();
     }
 

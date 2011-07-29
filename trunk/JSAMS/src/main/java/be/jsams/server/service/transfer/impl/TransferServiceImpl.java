@@ -44,7 +44,6 @@ public class TransferServiceImpl implements TransferService {
     @Override
     public void transfer(TransferBean model) {
         int sourceType = model.getSourceType();
-
         switch (sourceType) {
         case 1:
             estimateTransfer(model);
@@ -72,14 +71,8 @@ public class TransferServiceImpl implements TransferService {
         case 1:
             estimateToCommandTransfer(model);
             break;
-        case 2:
-            estimateToDeliveryOrderTransfer(model);
-            break;
         case 3:
             estimateToBillTransfer(model);
-            break;
-        case 4:
-            estimateToCreditNoteTransfer(model);
             break;
         default:
             break;
@@ -148,72 +141,6 @@ public class TransferServiceImpl implements TransferService {
         newBean.setRemark(estimate.getRemark());
         newBean.setTransferred(false);
         commandService.create(newBean);
-        estimate.setTransferred(true);
-        for (EstimateDetailBean bean : estimate.getDetails()) {
-            bean.setTransferred(true);
-        }
-        estimateService.update(estimate);
-    }
-
-    /**
-     * @param model the wrapper contains all the beans to be transferred
-     */
-    @SuppressWarnings("unchecked")
-    private void estimateToDeliveryOrderTransfer(TransferBean model) {
-        int transferMode = model.getTransferMode();
-        List<? extends AbstractDocumentBean<?, ?>> documents = model.getDocuments();
-        switch (transferMode) {
-        case 1:
-            EstimateBean estimate = (EstimateBean) documents.get(0);
-            estimateToDeliveryOrderFullTransfer(estimate);
-            break;
-        case 2:
-//            estimateToDeliveryOrderPartialTransfer(model);
-            break;
-        case 3:
-            List<EstimateBean> estimates = new ArrayList<EstimateBean>();
-            estimates.addAll((List<EstimateBean>) documents);
-            for (EstimateBean bean : estimates) {
-                estimateToDeliveryOrderFullTransfer(bean);
-            }
-            break;
-        case 4:
-//            estimateToDeliveryOrderPartialGroupedTransfer(model);
-            break;
-        default:
-            break;
-        }
-    }
-
-    /**
-     * Transfer an estimate to delivery order in full transfer.
-     * 
-     * @param estimate the {@link EstimateBean} to transfer
-     */
-    private void estimateToDeliveryOrderFullTransfer(EstimateBean estimate) {
-        CustomerBean customer = estimate.getCustomer();
-        DeliveryOrderBean newBean = new DeliveryOrderBean(estimate.getSociety(), customer);
-        newBean.setCreationDate(new Date());
-        newBean.setDeliveryAddress(customer.getDeliveryAddress());
-        // to force to create a new delivery address
-        newBean.getDeliveryAddress().setId(null);
-        List<DeliveryOrderDetailBean> details = new ArrayList<DeliveryOrderDetailBean>();
-        for (EstimateDetailBean detail : estimate.getDetails()) {
-            DeliveryOrderDetailBean bean = new DeliveryOrderDetailBean();
-            bean.setDeliveryOrder(newBean);
-            bean.setDiscountRate(detail.getDiscountRate());
-            bean.setPrice(detail.getPrice());
-            bean.setProduct(detail.getProduct());
-            bean.setQuantity(detail.getQuantity());
-            bean.setTransferred(false);
-            bean.setVatApplicable(detail.getVatApplicable());
-            details.add(bean);
-        }
-        newBean.setDetails(details);
-        newBean.setDiscountRate(estimate.getDiscountRate());
-        newBean.setRemark(estimate.getRemark());
-        newBean.setTransferred(false);
-        deliveryOrderService.create(newBean);
         estimate.setTransferred(true);
         for (EstimateDetailBean bean : estimate.getDetails()) {
             bean.setTransferred(true);
@@ -295,27 +222,14 @@ public class TransferServiceImpl implements TransferService {
     /**
      * @param model the wrapper contains all the beans to be transferred
      */
-    @SuppressWarnings("unchecked")
-    private void estimateToCreditNoteTransfer(TransferBean model) {
-        int transferMode = model.getTransferMode();
-        List<? extends AbstractDocumentBean<?, ?>> documents = model.getDocuments();
-        switch (transferMode) {
-        case 1:
-            EstimateBean estimate = (EstimateBean) documents.get(0);
-            estimateToCreditNoteFullTransfer(estimate);
-            break;
+    private void commandTransfer(TransferBean model) {
+        int destinationType = model.getDestinationType();
+        switch (destinationType) {
         case 2:
-//            estimateToCreditNotePartialTransfer(model);
+            commandToDeliveryOrderTransfer(model);
             break;
         case 3:
-            List<EstimateBean> estimates = new ArrayList<EstimateBean>();
-            estimates.addAll((List<EstimateBean>) documents);
-            for (EstimateBean bean : estimates) {
-                estimateToCreditNoteFullTransfer(bean);
-            }
-            break;
-        case 4:
-//            estimateToCreditNotePartialGroupedTransfer(model);
+            commandToBillTransfer(model);
             break;
         default:
             break;
@@ -323,18 +237,201 @@ public class TransferServiceImpl implements TransferService {
     }
 
     /**
-     * Transfer an estimate to credit note in full transfer.
-     * 
-     * @param estimate the {@link EstimateBean} to transfer
+     * @param model the wrapper contains all the beans to be transferred
      */
-    private void estimateToCreditNoteFullTransfer(EstimateBean estimate) {
-        CustomerBean customer = estimate.getCustomer();
-        CreditNoteBean newBean = new CreditNoteBean(estimate.getSociety(), customer);
-        newBean.setBillingAddress(estimate.getBillingAddress());
-        newBean.getBillingAddress().setId(null);
+    @SuppressWarnings("unchecked")
+    private void commandToDeliveryOrderTransfer(TransferBean model) {
+        int transferMode = model.getTransferMode();
+        List<? extends AbstractDocumentBean<?, ?>> documents = model.getDocuments();
+        switch (transferMode) {
+        case 1:
+            CommandBean command = (CommandBean) documents.get(0);
+            commandToDeliveryOrderFullTransfer(command);
+            break;
+        case 2:
+//            commandToDeliveryOrderPartialTransfer(model);
+            break;
+        case 3:
+            List<CommandBean> commands = new ArrayList<CommandBean>();
+            commands.addAll((List<CommandBean>) documents);
+            for (CommandBean bean : commands) {
+                commandToDeliveryOrderFullTransfer(bean);
+            }
+            break;
+        case 4:
+//            estimateToCommandPartialGroupedTransfer(model);
+            break;
+        default:
+            break;
+        }
+    }
+
+    /**
+     * Transfer a command to delivery order in full transfer.
+     * 
+     * @param command the {@link CommandBean} to transfer
+     */
+    private void commandToDeliveryOrderFullTransfer(CommandBean command) {
+        CustomerBean customer = command.getCustomer();
+        DeliveryOrderBean newBean = new DeliveryOrderBean(command.getSociety(), customer);
         newBean.setCreationDate(new Date());
+        newBean.setDeliveryAddress(customer.getDeliveryAddress());
+        // to force to create a new delivery address
+        newBean.getDeliveryAddress().setId(null);
+        List<DeliveryOrderDetailBean> details = new ArrayList<DeliveryOrderDetailBean>();
+        for (CommandDetailBean detail : command.getDetails()) {
+            DeliveryOrderDetailBean bean = new DeliveryOrderDetailBean();
+            bean.setCommandDetail(detail);
+            bean.setDeliveryOrder(newBean);
+            bean.setDiscountRate(detail.getDiscountRate());
+            bean.setPrice(detail.getPrice());
+            bean.setProduct(detail.getProduct());
+            bean.setQuantity(detail.getQuantity());
+            bean.setTransferred(false);
+            bean.setVatApplicable(detail.getVatApplicable());
+            details.add(bean);
+        }
+        newBean.setDetails(details);
+        newBean.setDiscountRate(command.getDiscountRate());
+        newBean.setRemark(command.getRemark());
+        newBean.setTransferred(false);
+        deliveryOrderService.create(newBean);
+        command.setTransferred(true);
+        for (CommandDetailBean bean : command.getDetails()) {
+            bean.setTransferred(true);
+        }
+        commandService.update(command);
+    }
+    
+    /**
+     * @param model the wrapper contains all the beans to be transferred
+     */
+    @SuppressWarnings("unchecked")
+    private void commandToBillTransfer(TransferBean model) {
+        int transferMode = model.getTransferMode();
+        List<? extends AbstractDocumentBean<?, ?>> documents = model.getDocuments();
+        switch (transferMode) {
+        case 1:
+            CommandBean command = (CommandBean) documents.get(0);
+            commandToBillFullTransfer(command);
+            break;
+        case 2:
+//            commandToDeliveryOrderPartialTransfer(model);
+            break;
+        case 3:
+            List<CommandBean> commands = new ArrayList<CommandBean>();
+            commands.addAll((List<CommandBean>) documents);
+            for (CommandBean bean : commands) {
+                commandToBillFullTransfer(bean);
+            }
+            break;
+        case 4:
+//            estimateToCommandPartialGroupedTransfer(model);
+            break;
+        default:
+            break;
+        }
+    }
+
+    /**
+     * Transfer a command to bill in full transfer.
+     * 
+     * @param command the {@link CommandBean} to transfer
+     */
+    private void commandToBillFullTransfer(CommandBean command) {
+        CustomerBean customer = command.getCustomer();
+        BillBean newBean = new BillBean(command.getSociety(), customer, customer.getPaymentMode());
+        newBean.setBillingAddress(command.getBillingAddress());
+        newBean.getBillingAddress().setId(null);
+        newBean.setClosed(false);
+        newBean.setCreationDate(new Date());
+        // TODO implement the dates management
+//        newBean.setDateFirstRemember(dateFirstRemember);
+//        newBean.setDateFormalNotice(dateFormalNotice);
+//        newBean.setDateSecondRemember(dateSecondRemember);
+        List<BillDetailBean> details = new ArrayList<BillDetailBean>();
+        for (CommandDetailBean detail : command.getDetails()) {
+            BillDetailBean bean = new BillDetailBean();
+            bean.setBill(newBean);
+            bean.setDiscountRate(detail.getDiscountRate());
+            bean.setPrice(detail.getPrice());
+            bean.setProduct(detail.getProduct());
+            bean.setQuantity(detail.getQuantity());
+            bean.setTransferred(false);
+            bean.setVatApplicable(detail.getVatApplicable());
+            details.add(bean);
+        }
+        newBean.setDetails(details);
+        newBean.setDiscountRate(command.getDiscountRate());
+//        newBean.setDueDate(dueDate);
+        newBean.setPaid(false);
+        newBean.setRemark(command.getRemark());
+        billService.create(newBean);
+        command.setTransferred(true);
+        for (CommandDetailBean bean : command.getDetails()) {
+            bean.setTransferred(true);
+        }
+        commandService.update(command);
+    }
+
+    /**
+     * @param model the wrapper contains all the beans to be transferred
+     */
+    private void billTransfer(TransferBean model) {
+        int destinationType = model.getDestinationType();
+        switch (destinationType) {
+        case 4:
+            billToCreditNoteTransfer(model);
+            break;
+        default:
+            break;
+        }
+    }
+
+    /**
+     * @param model the wrapper contains all the beans to be transferred
+     */
+    @SuppressWarnings("unchecked")
+    private void billToCreditNoteTransfer(TransferBean model) {
+        int transferMode = model.getTransferMode();
+        List<? extends AbstractDocumentBean<?, ?>> documents = model.getDocuments();
+        switch (transferMode) {
+        case 1:
+            BillBean bill = (BillBean) documents.get(0);
+            billToCreditNoteFullTransfer(bill);
+            break;
+        case 2:
+//            billToCreditNotePartialTransfer(model);
+            break;
+        case 3:
+            List<BillBean> bills = new ArrayList<BillBean>();
+            bills.addAll((List<BillBean>) documents);
+            for (BillBean bean : bills) {
+                billToCreditNoteFullTransfer(bean);
+            }
+            break;
+        case 4:
+//            billToCreditNotePartialGroupedTransfer(model);
+            break;
+        default:
+            break;
+        }
+    }
+
+    /**
+     * Transfer a bill to credit note in full transfer.
+     * 
+     * @param bill the {@link BillBean} to transfer
+     */
+    private void billToCreditNoteFullTransfer(BillBean bill) {
+        CustomerBean customer = bill.getCustomer();
+        CreditNoteBean newBean = new CreditNoteBean(bill.getSociety(), customer);
+        newBean.setCreationDate(new Date());
+        newBean.setBillingAddress(bill.getBillingAddress());
+        // to force to create a new billing address
+        newBean.getBillingAddress().setId(null);
         List<CreditNoteDetailBean> details = new ArrayList<CreditNoteDetailBean>();
-        for (EstimateDetailBean detail : estimate.getDetails()) {
+        for (BillDetailBean detail : bill.getDetails()) {
             CreditNoteDetailBean bean = new CreditNoteDetailBean();
             bean.setCreditNote(newBean);
             bean.setDiscountRate(detail.getDiscountRate());
@@ -345,35 +442,19 @@ public class TransferServiceImpl implements TransferService {
             details.add(bean);
         }
         newBean.setDetails(details);
-        newBean.setRemark(estimate.getRemark());
+        newBean.setRemark(bill.getRemark());
         creditNoteService.create(newBean);
-        estimate.setTransferred(true);
-        for (EstimateDetailBean bean : estimate.getDetails()) {
+//        bill.setClosed(true);
+        for (BillDetailBean bean : bill.getDetails()) {
             bean.setTransferred(true);
         }
-        estimateService.update(estimate);
-    }
-
-    /**
-     * @param model the wrapper contains all the beans to be transferred
-     */
-    private void billTransfer(TransferBean model) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException();
+        billService.update(bill);
     }
 
     /**
      * @param model the wrapper contains all the beans to be transferred
      */
     private void deliveryOrderTransfer(TransferBean model) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException();
-    }
-
-    /**
-     * @param model the wrapper contains all the beans to be transferred
-     */
-    private void commandTransfer(TransferBean model) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException();
     }
