@@ -17,7 +17,7 @@ import com.jgoodies.validation.util.PropertyValidationSupport;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class DocumentDetailsValidator implements Validator<TransferBean> {
+public class DetailsValidator implements Validator<TransferBean> {
 
     /**
      * {@inheritDoc}

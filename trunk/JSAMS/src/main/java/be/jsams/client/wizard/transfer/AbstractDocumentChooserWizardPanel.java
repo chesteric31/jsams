@@ -1,5 +1,8 @@
 package be.jsams.client.wizard.transfer;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 
@@ -15,6 +18,10 @@ import be.jsams.common.bean.model.sale.BillBean;
 import be.jsams.common.bean.model.sale.CommandBean;
 import be.jsams.common.bean.model.sale.DeliveryOrderBean;
 import be.jsams.common.bean.model.sale.EstimateBean;
+import be.jsams.common.bean.model.sale.detail.BillDetailBean;
+import be.jsams.common.bean.model.sale.detail.CommandDetailBean;
+import be.jsams.common.bean.model.sale.detail.DeliveryOrderDetailBean;
+import be.jsams.common.bean.model.sale.detail.EstimateDetailBean;
 import be.jsams.common.bean.model.transfer.TransferBean;
 import be.jsams.common.bean.view.ViewFactory;
 import be.jsams.common.bean.view.sale.BillBeanView;
@@ -284,8 +291,85 @@ public abstract class AbstractDocumentChooserWizardPanel<V extends Validator<Tra
     public void next() {
         if (prePerformNext()) {
             remove(getComponentCount() - 1);
-            switchPanel(TransferWizardDialog.SUMMARY_PANEL);
+            int transferMode = getModel().getTransferMode();
+            if (transferMode == 1 || transferMode == 3) {
+                switchPanel(TransferWizardDialog.SUMMARY_PANEL);
+            } else {
+                fillDetails();
+                if (transferMode == 2) {
+                    switchPanel(TransferWizardDialog.FIFTH_PANEL_PARTIAL_MODE);
+                } else {
+                    switchPanel(TransferWizardDialog.FIFTH_PANEL_PARTIAL_GROUPED_MODE);
+                }
+            }
         }
+    }
+    
+    private void fillDetails() {
+        switch(getModel().getSourceType()) {
+        case 1:
+            fillEstimateDetails();
+            break;
+        case 2:
+            fillCommandDetails();
+            break;
+        case 3:
+            fillDeliveryOrderDetails();
+            break;
+        case 4:
+            fillBillDetails();
+            break;
+        default:
+            break;
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    private void fillEstimateDetails() {
+        List<EstimateBean> beans = (List<EstimateBean>) getModel().getDocuments();
+        List<EstimateDetailBean> details = new ArrayList<EstimateDetailBean>();
+        for (EstimateBean bean : beans) {
+            for (EstimateDetailBean detail : bean.getDetails()) {
+                details.add(detail);
+            }
+        }
+        getModel().setDetails(details);
+    }
+
+    @SuppressWarnings("unchecked")
+    private void fillCommandDetails() {
+        List<CommandBean> beans = (List<CommandBean>) getModel().getDocuments();
+        List<CommandDetailBean> details = new ArrayList<CommandDetailBean>();
+        for (CommandBean bean : beans) {
+            for (CommandDetailBean detail : bean.getDetails()) {
+                details.add(detail);
+            }
+        }
+        getModel().setDetails(details);
+    }
+
+    @SuppressWarnings("unchecked")
+    private void fillDeliveryOrderDetails() {
+        List<DeliveryOrderBean> beans = (List<DeliveryOrderBean>) getModel().getDocuments();
+        List<DeliveryOrderDetailBean> details = new ArrayList<DeliveryOrderDetailBean>();
+        for (DeliveryOrderBean bean : beans) {
+            for (DeliveryOrderDetailBean detail : bean.getDetails()) {
+                details.add(detail);
+            }
+        }
+        getModel().setDetails(details);
+    }
+
+    @SuppressWarnings("unchecked")
+    private void fillBillDetails() {
+        List<BillBean> beans = (List<BillBean>) getModel().getDocuments();
+        List<BillDetailBean> details = new ArrayList<BillDetailBean>();
+        for (BillBean bean : beans) {
+            for (BillDetailBean detail : bean.getDetails()) {
+                details.add(detail);
+            }
+        }
+        getModel().setDetails(details);
     }
 
     /**

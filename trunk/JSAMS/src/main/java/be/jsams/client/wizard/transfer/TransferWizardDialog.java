@@ -5,7 +5,7 @@ import be.jsams.client.desktop.JsamsMainFrame;
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.model.dialog.AbstractWizardDialog;
 import be.jsams.client.validator.wizard.DestinationValidator;
-import be.jsams.client.validator.wizard.DocumentDetailsValidator;
+import be.jsams.client.validator.wizard.DetailsValidator;
 import be.jsams.client.validator.wizard.DocumentValidator;
 import be.jsams.client.validator.wizard.DocumentsValidator;
 import be.jsams.client.validator.wizard.SourceValidator;
@@ -89,11 +89,11 @@ public class TransferWizardDialog extends AbstractWizardDialog<TransferBean, Tra
                 getModel(), new DocumentsValidator());
         getComponent().addPanel(FIRTH_PANEL_PARTIAL_GROUPED_MODE, documentsChooserPanel2);
         
-        DocumentDetailsChooserWizardPanel documentDetailsChooserPanel = new DocumentDetailsChooserWizardPanel(this,
-                getComponent(), getModel(), new DocumentDetailsValidator());
-        getComponent().addPanel(FIFTH_PANEL_PARTIAL_MODE, documentDetailsChooserPanel);
-        DocumentDetailsChooserWizardPanel documentDetailsChooserPanel2 = new DocumentDetailsChooserWizardPanel(this,
-                getComponent(), getModel(), new DocumentDetailsValidator());
+        DetailsChooserWizardPanel detailsChooserPanel = new DetailsChooserWizardPanel(this,
+                getComponent(), getModel(), new DetailsValidator());
+        getComponent().addPanel(FIFTH_PANEL_PARTIAL_MODE, detailsChooserPanel);
+        DetailsChooserWizardPanel documentDetailsChooserPanel2 = new DetailsChooserWizardPanel(this,
+                getComponent(), getModel(), new DetailsValidator());
         getComponent().addPanel(FIFTH_PANEL_PARTIAL_GROUPED_MODE, documentDetailsChooserPanel2);
 
         SummaryTransferWizardPanel summaryPanel = new SummaryTransferWizardPanel(this,

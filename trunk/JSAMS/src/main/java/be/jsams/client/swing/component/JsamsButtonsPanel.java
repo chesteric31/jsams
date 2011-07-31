@@ -46,14 +46,10 @@ public class JsamsButtonsPanel extends JPanel {
     /**
      * Constructor.
      * 
-     * @param parent
-     *            the parent frame
-     * @param okToAdd
-     *            boolean to add button ok or not
-     * @param cancelToAdd
-     *            boolean to add button cancel or not
-     * @param resetToAdd
-     *            boolean to add button reset or not
+     * @param parent the parent frame
+     * @param okToAdd boolean to add button ok or not
+     * @param cancelToAdd boolean to add button cancel or not
+     * @param resetToAdd boolean to add button reset or not
      */
     public JsamsButtonsPanel(final JsamsButtonsInterface parent, final boolean okToAdd, final boolean cancelToAdd,
             final boolean resetToAdd) {
@@ -177,8 +173,7 @@ public class JsamsButtonsPanel extends JPanel {
 
     /**
      * 
-     * @param buttonOk
-     *            the {@link JsamsButton} OK to set
+     * @param buttonOk the {@link JsamsButton} OK to set
      */
     public void setButtonOk(JsamsButton buttonOk) {
         this.buttonOk = buttonOk;
@@ -194,8 +189,7 @@ public class JsamsButtonsPanel extends JPanel {
 
     /**
      * 
-     * @param buttonCancel
-     *            the {@link JsamsButton} cancel to set
+     * @param buttonCancel the {@link JsamsButton} cancel to set
      */
     public void setButtonCancel(JsamsButton buttonCancel) {
         this.buttonCancel = buttonCancel;
@@ -211,8 +205,7 @@ public class JsamsButtonsPanel extends JPanel {
 
     /**
      * 
-     * @param buttonReset
-     *            the {@link JsamsButton} reset
+     * @param buttonReset the {@link JsamsButton} reset
      */
     public void setButtonReset(JsamsButton buttonReset) {
         this.buttonReset = buttonReset;

@@ -260,5 +260,7 @@ public final class JsamsI18nResource {
     public static final I18nString ERROR_SOURCE_DESTINATION = new I18nString("error.source_destination_combination");
 
     public static final I18nString ERROR_IS_MANDATORY_TO_SELECT = new I18nString("error.is_mandatory_to_select");
+
+    public static final I18nString COLUMN_ESTIMATE_ID = new I18nString("column.estimate.id");
     
 }
