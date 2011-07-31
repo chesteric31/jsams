@@ -32,6 +32,7 @@ public class TransferBean extends AbstractIdentityBean<AbstractIdentity, Transfe
 
     private List<? extends AbstractDocumentBean<?, ?>> documents;
     private List<? extends AbstractDetailBean<?, ?, ?>> details;
+    private List<? extends AbstractDetailBean<?, ?, ?>> selectableDetails;
 
     public static final String TRANSFER_MODE_PROPERTY = "transferMode";
     public static final String SOURCE_TYPE_PROPERTY = "sourceType";
@@ -144,6 +145,20 @@ public class TransferBean extends AbstractIdentityBean<AbstractIdentity, Transfe
      */
     public void setDetails(List<? extends AbstractDetailBean<?, ?, ?>> details) {
         this.details = details;
+    }
+
+    /**
+     * @return the selectableDetails
+     */
+    public List<? extends AbstractDetailBean<?, ?, ?>> getSelectableDetails() {
+        return selectableDetails;
+    }
+
+    /**
+     * @param selectableDetails the selectableDetails to set
+     */
+    public void setSelectableDetails(List<? extends AbstractDetailBean<?, ?, ?>> selectableDetails) {
+        this.selectableDetails = selectableDetails;
     }
     
 }

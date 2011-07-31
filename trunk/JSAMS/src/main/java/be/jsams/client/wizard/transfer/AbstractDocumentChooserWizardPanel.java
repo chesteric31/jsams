@@ -295,7 +295,7 @@ public abstract class AbstractDocumentChooserWizardPanel<V extends Validator<Tra
             if (transferMode == 1 || transferMode == 3) {
                 switchPanel(TransferWizardDialog.SUMMARY_PANEL);
             } else {
-                fillDetails();
+                fillSelectableDetails();
                 if (transferMode == 2) {
                     switchPanel(TransferWizardDialog.FIFTH_PANEL_PARTIAL_MODE);
                 } else {
@@ -305,7 +305,10 @@ public abstract class AbstractDocumentChooserWizardPanel<V extends Validator<Tra
         }
     }
     
-    private void fillDetails() {
+    /**
+     * Fill the selectable details beans.
+     */
+    private void fillSelectableDetails() {
         switch(getModel().getSourceType()) {
         case 1:
             fillEstimateDetails();
@@ -324,6 +327,9 @@ public abstract class AbstractDocumentChooserWizardPanel<V extends Validator<Tra
         }
     }
 
+    /**
+     * Fill selectable details for estimate.
+     */
     @SuppressWarnings("unchecked")
     private void fillEstimateDetails() {
         List<EstimateBean> beans = (List<EstimateBean>) getModel().getDocuments();
@@ -333,9 +339,12 @@ public abstract class AbstractDocumentChooserWizardPanel<V extends Validator<Tra
                 details.add(detail);
             }
         }
-        getModel().setDetails(details);
+        getModel().setSelectableDetails(details);
     }
 
+    /**
+     * Fill selectable details for command.
+     */
     @SuppressWarnings("unchecked")
     private void fillCommandDetails() {
         List<CommandBean> beans = (List<CommandBean>) getModel().getDocuments();
@@ -345,9 +354,12 @@ public abstract class AbstractDocumentChooserWizardPanel<V extends Validator<Tra
                 details.add(detail);
             }
         }
-        getModel().setDetails(details);
+        getModel().setSelectableDetails(details);
     }
 
+    /**
+     * Fill selectable details for delivery order.
+     */
     @SuppressWarnings("unchecked")
     private void fillDeliveryOrderDetails() {
         List<DeliveryOrderBean> beans = (List<DeliveryOrderBean>) getModel().getDocuments();
@@ -357,9 +369,12 @@ public abstract class AbstractDocumentChooserWizardPanel<V extends Validator<Tra
                 details.add(detail);
             }
         }
-        getModel().setDetails(details);
+        getModel().setSelectableDetails(details);
     }
 
+    /**
+     * Fill selectable details for bill.
+     */
     @SuppressWarnings("unchecked")
     private void fillBillDetails() {
         List<BillBean> beans = (List<BillBean>) getModel().getDocuments();
@@ -369,7 +384,7 @@ public abstract class AbstractDocumentChooserWizardPanel<V extends Validator<Tra
                 details.add(detail);
             }
         }
-        getModel().setDetails(details);
+        getModel().setSelectableDetails(details);
     }
 
     /**
