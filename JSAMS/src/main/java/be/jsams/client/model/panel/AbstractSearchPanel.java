@@ -77,7 +77,7 @@ public abstract class AbstractSearchPanel<B extends AbstractIdentityBean<?, ?>,
 
     private JsamsStatusBar statusBar = new JsamsStatusBar();
 
-    private Validator<B> validator;
+    private V validator;
 
     private B model;
 
@@ -194,7 +194,7 @@ public abstract class AbstractSearchPanel<B extends AbstractIdentityBean<?, ?>,
      * 
      * @return the {@link Validator}
      */
-    public Validator<B> getValidator() {
+    public V getValidator() {
         return validator;
     }
 
@@ -202,7 +202,7 @@ public abstract class AbstractSearchPanel<B extends AbstractIdentityBean<?, ?>,
      * 
      * @param validator the {@link Validator} to set
      */
-    public void setValidator(Validator<B> validator) {
+    public void setValidator(V validator) {
         this.validator = validator;
     }
 
