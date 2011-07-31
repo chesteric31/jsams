@@ -74,7 +74,7 @@ public class DetailsChooserWizardPanel extends JsamsWizardPanel<TransferBean, De
         switch (source) {
         case 1:
             EstimateDetailWizardTableModel estimateTM = new EstimateDetailWizardTableModel(
-                    (List<EstimateDetailBean>) getModel().getDetails());
+                    (List<EstimateDetailBean>) getModel().getSelectableDetails());
             table = new JsamsTable();
             table.setModel(estimateTM);
             JTableHeader tableHeader = table.getTableHeader();
