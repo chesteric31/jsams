@@ -15,6 +15,7 @@ import be.jsams.client.model.table.EstimateDetailWizardTableModel;
 import be.jsams.client.renderer.JsamsBooleanTableCellRenderer;
 import be.jsams.client.renderer.JsamsTableCellRenderer;
 import be.jsams.client.swing.component.JsamsTable;
+import be.jsams.client.swing.listener.wizard.EstimateDetailWizardTableMouseListener;
 import be.jsams.client.validator.wizard.DetailsValidator;
 import be.jsams.client.wizard.JsamsWizardComponent;
 import be.jsams.client.wizard.JsamsWizardPanel;
@@ -71,49 +72,106 @@ public class DetailsChooserWizardPanel extends JsamsWizardPanel<TransferBean, De
     public void updateContainer() {
         int source = getModel().getSourceType();
         JsamsTable table = null;
+        JScrollPane scrollPane = new JScrollPane();
         switch (source) {
         case 1:
             EstimateDetailWizardTableModel estimateTM = new EstimateDetailWizardTableModel(
                     (List<EstimateDetailBean>) getModel().getSelectableDetails());
             table = new JsamsTable();
             table.setModel(estimateTM);
-            JTableHeader tableHeader = table.getTableHeader();
-            TableCellRenderer headerRenderer = tableHeader.getDefaultRenderer();
-
-            ((DefaultTableCellRenderer) headerRenderer).setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
-            table.setAutoCreateRowSorter(true);
-            JsamsTableCellRenderer defaultCellRenderer = new JsamsTableCellRenderer();
-            table.setDefaultRenderer(Long.class, defaultCellRenderer);
-            table.setDefaultRenderer(Integer.class, defaultCellRenderer);
-            table.setDefaultRenderer(Double.class, defaultCellRenderer);
-            table.setDefaultRenderer(String.class, defaultCellRenderer);
-            table.setDefaultRenderer(Boolean.class, new JsamsBooleanTableCellRenderer());
-            table.setDefaultRenderer(Date.class, defaultCellRenderer);
-            JScrollPane scrollPane = new JScrollPane(table);
+            table.addMouseListener(new EstimateDetailWizardTableMouseListener(getModel()));
+            
+            setTableRenderer(table);
+            
+            scrollPane.add(table);
             scrollPane.setBorder(new TitledBorder(JsamsI18nResource.SEARCH_RESULTS.getTranslation()));
             this.add(scrollPane);
             break;
         case 2:
+            //TODO
+//            CommandDetailWizardTableModel commandTM = new CommandDetailWizardTableModel(
+//                    (List<CommandDetailBean>) getModel().getSelectableDetails());
+//            table = new JsamsTable();
+//            table.setModel(commandTM);
+//            table.addMouseListener(new CommandDetailWizardTableMouseListener(getModel()));
+//            
+//            setTableRenderer(table);
+//            
+//            scrollPane.add(table);
+//            scrollPane.setBorder(new TitledBorder(JsamsI18nResource.SEARCH_RESULTS.getTranslation()));
+//            this.add(scrollPane);
             break;
         case 3:
+//            DeliveryOrderDetailWizardTableModel deliveryOrderTM = new DeliveryOrderDetailWizardTableModel(
+//                    (List<DeliveryOrderDetailBean>) getModel().getSelectableDetails());
+//            table = new JsamsTable();
+//            table.setModel(deliveryOrderTM);
+//            table.addMouseListener(new DeliveryOrderDetailWizardTableMouseListener(getModel()));
+//            
+//            setTableRenderer(table);
+//
+//            scrollPane.add(table);
+//            scrollPane.setBorder(new TitledBorder(JsamsI18nResource.SEARCH_RESULTS.getTranslation()));
+//            this.add(scrollPane);
             break;
         case 4:
+//            BillDetailWizardTableModel billTM = new BillDetailWizardTableModel(
+//                    (List<BillDetailBean>) getModel().getSelectableDetails());
+//            table = new JsamsTable();
+//            table.setModel(billTM);
+//            table.addMouseListener(new BillDetailWizardTableMouseListener(getModel()));
+//            
+//            setTableRenderer(table);
+//
+//            scrollPane.add(table);
+//            scrollPane.setBorder(new TitledBorder(JsamsI18nResource.SEARCH_RESULTS.getTranslation()));
+//            this.add(scrollPane);
             break;
         default:
             break;
         }
+    }
+    
+    /**
+     * Set default table renderer
+     * 
+     * @param table the table to set the default renderer
+     */
+    private void setTableRenderer(JsamsTable table) {
+        JTableHeader tableHeader = table.getTableHeader();
+        TableCellRenderer headerRenderer = tableHeader.getDefaultRenderer();
+
+        ((DefaultTableCellRenderer) headerRenderer).setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
+        table.setAutoCreateRowSorter(true);
+        JsamsTableCellRenderer defaultCellRenderer = new JsamsTableCellRenderer();
+        table.setDefaultRenderer(Long.class, defaultCellRenderer);
+        table.setDefaultRenderer(Integer.class, defaultCellRenderer);
+        table.setDefaultRenderer(Double.class, defaultCellRenderer);
+        table.setDefaultRenderer(String.class, defaultCellRenderer);
+        table.setDefaultRenderer(Boolean.class, new JsamsBooleanTableCellRenderer());
+        table.setDefaultRenderer(Date.class, defaultCellRenderer);
     }
 
     /**
      * {@inheritDoc}
      */
     public void next() {
+        if (prePerformNext()) {
+            remove(getComponentCount() - 1);
+            switchPanel(TransferWizardDialog.SUMMARY_PANEL);
+        }
     }
 
     /**
      * {@inheritDoc}
      */
     public void back() {
+        int transferMode = getModel().getTransferMode();
+        if (transferMode == 2) {
+            switchPanel(TransferWizardDialog.FIRTH_PANEL_PARTIAL_MODE);
+        } else {
+            switchPanel(TransferWizardDialog.FIRTH_PANEL_PARTIAL_GROUPED_MODE);
+        }
     }
 
 }

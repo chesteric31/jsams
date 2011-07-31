@@ -38,7 +38,7 @@ import com.toedter.calendar.JDateChooser;
  * {@link JsamsWizardPanel} to choose the document to transfer.
  * 
  * @param <V> the {@link Validator}
- *
+ * 
  * @author chesteric31
  * @version $Revision$ $Date::                  $ $Author$
  */
@@ -82,7 +82,7 @@ public abstract class AbstractDocumentChooserWizardPanel<V extends Validator<Tra
     }
 
     /**
-     * Update the panel container. 
+     * Update the panel container.
      */
     public abstract void updateContainer();
 
@@ -99,7 +99,7 @@ public abstract class AbstractDocumentChooserWizardPanel<V extends Validator<Tra
              * Serial Version UID
              */
             private static final long serialVersionUID = -7161723746961251878L;
-            
+
             /**
              * {@inheritDoc}
              */
@@ -153,7 +153,7 @@ public abstract class AbstractDocumentChooserWizardPanel<V extends Validator<Tra
              * Serial Version UID
              */
             private static final long serialVersionUID = 5909517403817126700L;
-            
+
             /**
              * {@inheritDoc}
              */
@@ -249,7 +249,7 @@ public abstract class AbstractDocumentChooserWizardPanel<V extends Validator<Tra
              * Serial Version UID
              */
             private static final long serialVersionUID = 3895840413879361058L;
-            
+
             /**
              * {@inheritDoc}
              */
@@ -304,12 +304,12 @@ public abstract class AbstractDocumentChooserWizardPanel<V extends Validator<Tra
             }
         }
     }
-    
+
     /**
      * Fill the selectable details beans.
      */
     private void fillSelectableDetails() {
-        switch(getModel().getSourceType()) {
+        switch (getModel().getSourceType()) {
         case 1:
             fillEstimateDetails();
             break;
