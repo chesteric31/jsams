@@ -163,6 +163,7 @@ public class JsamsDesktop {
      */
     private void setNativeLookAndFeel() {
         try {
+//            UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (Exception e) {
             LOGGER.error(e);
