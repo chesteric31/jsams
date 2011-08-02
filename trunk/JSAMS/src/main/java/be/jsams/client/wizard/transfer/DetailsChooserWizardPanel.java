@@ -72,7 +72,7 @@ public class DetailsChooserWizardPanel extends JsamsWizardPanel<TransferBean, De
     public void updateContainer() {
         int source = getModel().getSourceType();
         JsamsTable table = null;
-        JScrollPane scrollPane = null;
+        JScrollPane scrollPane = new JScrollPane();
         switch (source) {
         case 1:
             EstimateDetailWizardTableModel estimateTM = new EstimateDetailWizardTableModel(
@@ -82,7 +82,8 @@ public class DetailsChooserWizardPanel extends JsamsWizardPanel<TransferBean, De
             table.addMouseListener(new EstimateDetailWizardTableMouseListener(getModel()));
             
             setTableRenderer(table);
-            scrollPane = new JScrollPane(table);
+            
+            scrollPane.setViewportView(table);
             scrollPane.setBorder(new TitledBorder(JsamsI18nResource.SEARCH_RESULTS.getTranslation()));
             this.add(scrollPane);
             break;
