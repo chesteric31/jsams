@@ -141,7 +141,7 @@ public final class JsamsI18nResource {
 
     public static final I18nString COLUMN_NAME = new I18nString("column.name");
 
-    public static final I18nString COLUMN_VAT_APPLICABE = new I18nString("column.vat_applicable");
+    public static final I18nString COLUMN_VAT_APPLICABLE = new I18nString("column.vat_applicable");
 
     public static final I18nString COLUMN_PRICE = new I18nString("column.price");
 
@@ -262,5 +262,11 @@ public final class JsamsI18nResource {
     public static final I18nString ERROR_IS_MANDATORY_TO_SELECT = new I18nString("error.is_mandatory_to_select");
 
     public static final I18nString COLUMN_ESTIMATE_ID = new I18nString("column.estimate.id");
+
+    public static final I18nString COLUMN_COMMAND_ID = new I18nString("column.command.id");
+
+    public static final I18nString COLUMN_DELIVERY_ORDER_ID = new I18nString("column.delivery_order.id");
+
+    public static final I18nString COLUMN_BILL_ID = new I18nString("column.bill.id");
     
 }

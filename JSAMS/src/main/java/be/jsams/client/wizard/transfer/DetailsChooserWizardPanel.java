@@ -1,24 +1,28 @@
 package be.jsams.client.wizard.transfer;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.swing.JScrollPane;
+import javax.swing.ListSelectionModel;
 import javax.swing.border.TitledBorder;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.JTableHeader;
-import javax.swing.table.TableCellRenderer;
 
 import be.jsams.client.i18n.JsamsI18nLabelResource;
 import be.jsams.client.i18n.JsamsI18nResource;
+import be.jsams.client.model.table.BillDetailWizardTableModel;
+import be.jsams.client.model.table.CommandDetailWizardTableModel;
+import be.jsams.client.model.table.DeliveryOrderDetailWizardTableModel;
 import be.jsams.client.model.table.EstimateDetailWizardTableModel;
-import be.jsams.client.renderer.JsamsBooleanTableCellRenderer;
-import be.jsams.client.renderer.JsamsTableCellRenderer;
 import be.jsams.client.swing.component.JsamsTable;
+import be.jsams.client.swing.listener.wizard.BillDetailWizardTableMouseListener;
+import be.jsams.client.swing.listener.wizard.CommandDetailWizardTableMouseListener;
+import be.jsams.client.swing.listener.wizard.DeliveryOrderDetailWizardTableMouseListener;
 import be.jsams.client.swing.listener.wizard.EstimateDetailWizardTableMouseListener;
 import be.jsams.client.validator.wizard.DetailsValidator;
 import be.jsams.client.wizard.JsamsWizardComponent;
 import be.jsams.client.wizard.JsamsWizardPanel;
+import be.jsams.common.bean.model.sale.detail.BillDetailBean;
+import be.jsams.common.bean.model.sale.detail.CommandDetailBean;
+import be.jsams.common.bean.model.sale.detail.DeliveryOrderDetailBean;
 import be.jsams.common.bean.model.sale.detail.EstimateDetailBean;
 import be.jsams.common.bean.model.transfer.TransferBean;
 
@@ -73,84 +77,75 @@ public class DetailsChooserWizardPanel extends JsamsWizardPanel<TransferBean, De
         int source = getModel().getSourceType();
         JsamsTable table = null;
         JScrollPane scrollPane = new JScrollPane();
+        int selectionMode = ListSelectionModel.SINGLE_SELECTION;
+        if (getModel().getTransferMode() == 4) {
+            selectionMode = ListSelectionModel.MULTIPLE_INTERVAL_SELECTION;
+        }
         switch (source) {
         case 1:
             EstimateDetailWizardTableModel estimateTM = new EstimateDetailWizardTableModel(
                     (List<EstimateDetailBean>) getModel().getSelectableDetails());
-            table = new JsamsTable();
+            table = new JsamsTable(selectionMode);
             table.setModel(estimateTM);
             table.addMouseListener(new EstimateDetailWizardTableMouseListener(getModel()));
-            
-            setTableRenderer(table);
-            
             scrollPane.setViewportView(table);
             scrollPane.setBorder(new TitledBorder(JsamsI18nResource.SEARCH_RESULTS.getTranslation()));
             this.add(scrollPane);
             break;
         case 2:
-            //TODO
-//            CommandDetailWizardTableModel commandTM = new CommandDetailWizardTableModel(
-//                    (List<CommandDetailBean>) getModel().getSelectableDetails());
-//            table = new JsamsTable();
-//            table.setModel(commandTM);
-//            table.addMouseListener(new CommandDetailWizardTableMouseListener(getModel()));
-//            
-//            setTableRenderer(table);
-//            
-//            scrollPane.add(table);
-//            scrollPane.setBorder(new TitledBorder(JsamsI18nResource.SEARCH_RESULTS.getTranslation()));
-//            this.add(scrollPane);
+            CommandDetailWizardTableModel commandTM = new CommandDetailWizardTableModel(
+                    (List<CommandDetailBean>) getModel().getSelectableDetails());
+            table = new JsamsTable(selectionMode);
+            table.setModel(commandTM);
+            table.addMouseListener(new CommandDetailWizardTableMouseListener(getModel()));
+            scrollPane.add(table);
+            scrollPane.setBorder(new TitledBorder(JsamsI18nResource.SEARCH_RESULTS.getTranslation()));
+            this.add(scrollPane);
             break;
         case 3:
-//            DeliveryOrderDetailWizardTableModel deliveryOrderTM = new DeliveryOrderDetailWizardTableModel(
-//                    (List<DeliveryOrderDetailBean>) getModel().getSelectableDetails());
-//            table = new JsamsTable();
-//            table.setModel(deliveryOrderTM);
-//            table.addMouseListener(new DeliveryOrderDetailWizardTableMouseListener(getModel()));
-//            
-//            setTableRenderer(table);
-//
-//            scrollPane.add(table);
-//            scrollPane.setBorder(new TitledBorder(JsamsI18nResource.SEARCH_RESULTS.getTranslation()));
-//            this.add(scrollPane);
+            DeliveryOrderDetailWizardTableModel deliveryOrderTM = new DeliveryOrderDetailWizardTableModel(
+                    (List<DeliveryOrderDetailBean>) getModel().getSelectableDetails());
+            table = new JsamsTable(selectionMode);
+            table.setModel(deliveryOrderTM);
+            table.addMouseListener(new DeliveryOrderDetailWizardTableMouseListener(getModel()));
+            scrollPane.add(table);
+            scrollPane.setBorder(new TitledBorder(JsamsI18nResource.SEARCH_RESULTS.getTranslation()));
+            this.add(scrollPane);
             break;
         case 4:
-//            BillDetailWizardTableModel billTM = new BillDetailWizardTableModel(
-//                    (List<BillDetailBean>) getModel().getSelectableDetails());
-//            table = new JsamsTable();
-//            table.setModel(billTM);
-//            table.addMouseListener(new BillDetailWizardTableMouseListener(getModel()));
-//            
-//            setTableRenderer(table);
-//
-//            scrollPane.add(table);
-//            scrollPane.setBorder(new TitledBorder(JsamsI18nResource.SEARCH_RESULTS.getTranslation()));
-//            this.add(scrollPane);
+            BillDetailWizardTableModel billTM = new BillDetailWizardTableModel(
+                    (List<BillDetailBean>) getModel().getSelectableDetails());
+            table = new JsamsTable(selectionMode);
+            table.setModel(billTM);
+            table.addMouseListener(new BillDetailWizardTableMouseListener(getModel()));
+            scrollPane.add(table);
+            scrollPane.setBorder(new TitledBorder(JsamsI18nResource.SEARCH_RESULTS.getTranslation()));
+            this.add(scrollPane);
             break;
         default:
             break;
         }
     }
     
-    /**
-     * Set default table renderer
-     * 
-     * @param table the table to set the default renderer
-     */
-    private void setTableRenderer(JsamsTable table) {
-        JTableHeader tableHeader = table.getTableHeader();
-        TableCellRenderer headerRenderer = tableHeader.getDefaultRenderer();
-
-        ((DefaultTableCellRenderer) headerRenderer).setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
-        table.setAutoCreateRowSorter(true);
-        JsamsTableCellRenderer defaultCellRenderer = new JsamsTableCellRenderer();
-        table.setDefaultRenderer(Long.class, defaultCellRenderer);
-        table.setDefaultRenderer(Integer.class, defaultCellRenderer);
-        table.setDefaultRenderer(Double.class, defaultCellRenderer);
-        table.setDefaultRenderer(String.class, defaultCellRenderer);
-        table.setDefaultRenderer(Boolean.class, new JsamsBooleanTableCellRenderer());
-        table.setDefaultRenderer(Date.class, defaultCellRenderer);
-    }
+//    /**
+//     * Set default table renderer
+//     * 
+//     * @param table the table to set the default renderer
+//     */
+//    private void setTableRenderer(JsamsTable table) {
+//        JTableHeader tableHeader = table.getTableHeader();
+//        TableCellRenderer headerRenderer = tableHeader.getDefaultRenderer();
+//
+//        ((DefaultTableCellRenderer) headerRenderer).setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
+//        table.setAutoCreateRowSorter(true);
+//        JsamsTableCellRenderer defaultCellRenderer = new JsamsTableCellRenderer();
+//        table.setDefaultRenderer(Long.class, defaultCellRenderer);
+//        table.setDefaultRenderer(Integer.class, defaultCellRenderer);
+//        table.setDefaultRenderer(Double.class, defaultCellRenderer);
+//        table.setDefaultRenderer(String.class, defaultCellRenderer);
+//        table.setDefaultRenderer(Boolean.class, new JsamsBooleanTableCellRenderer());
+//        table.setDefaultRenderer(Date.class, defaultCellRenderer);
+//    }
 
     /**
      * {@inheritDoc}
