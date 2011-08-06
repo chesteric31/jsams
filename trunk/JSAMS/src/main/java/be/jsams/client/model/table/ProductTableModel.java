@@ -37,7 +37,7 @@ public class ProductTableModel extends AbstractJsamsTableModel<ProductBean> {
         super(listModel);
         setColumnNames(Arrays.asList(JsamsI18nResource.COLUMN_ID, JsamsI18nResource.COLUMN_NAME,
                 JsamsI18nResource.COLUMN_PRICE, JsamsI18nResource.COLUMN_STOCK_QUANTITY,
-                JsamsI18nResource.COLUMN_REORDER_LEVEL, JsamsI18nResource.COLUMN_VAT_APPLICABE,
+                JsamsI18nResource.COLUMN_REORDER_LEVEL, JsamsI18nResource.COLUMN_VAT_APPLICABLE,
                 JsamsI18nResource.COLUMN_PRODUCT_CATEGORY));
     }
 

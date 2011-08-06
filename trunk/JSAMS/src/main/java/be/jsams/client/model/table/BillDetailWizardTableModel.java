@@ -5,29 +5,29 @@ import java.util.List;
 
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.common.bean.model.management.ProductBean;
-import be.jsams.common.bean.model.sale.detail.EstimateDetailBean;
+import be.jsams.common.bean.model.sale.detail.BillDetailBean;
 
 /**
- * Customized table model for {@link EstimateDetailBean} wizard purpose
+ * Customized table model for {@link BillDetailBean} wizard purpose
  * 
  * @author chesteric31
  * @version $$Rev: 794 $$ $$Date:: 2011-06-05 18:01#$$ $$Author: chesteric31 $$
  */
-public class EstimateDetailWizardTableModel extends AbstractJsamsTableModel<EstimateDetailBean> {
+public class BillDetailWizardTableModel extends AbstractJsamsTableModel<BillDetailBean> {
 
     /**
      * Serial Version UID
      */
-    private static final long serialVersionUID = 7809823846324140033L;
+    private static final long serialVersionUID = 6723240746447143729L;
 
     /**
      * Constructor
      * 
-     * @param listBean a list of {@link EstimateDetailBean}
+     * @param listBean a list of {@link BillDetailBean}
      */
-    public EstimateDetailWizardTableModel(List<EstimateDetailBean> listBean) {
+    public BillDetailWizardTableModel(List<BillDetailBean> listBean) {
         super(listBean);
-        setColumnNames(Arrays.asList(JsamsI18nResource.COLUMN_ESTIMATE_ID, JsamsI18nResource.COLUMN_PRODUCT_ID,
+        setColumnNames(Arrays.asList(JsamsI18nResource.COLUMN_BILL_ID, JsamsI18nResource.COLUMN_PRODUCT_ID,
                 JsamsI18nResource.COLUMN_PRODUCT_NAME, JsamsI18nResource.COLUMN_QUANTITY,
                 JsamsI18nResource.COLUMN_PRICE, JsamsI18nResource.COLUMN_DISCOUNT_RATE,
                 JsamsI18nResource.COLUMN_VAT_APPLICABLE));
@@ -37,11 +37,11 @@ public class EstimateDetailWizardTableModel extends AbstractJsamsTableModel<Esti
      * {@inheritDoc}
      */
     public Object getValueAt(int rowIndex, int columnIndex) {
-        EstimateDetailBean detail = (EstimateDetailBean) getRow(rowIndex);
+        BillDetailBean detail = (BillDetailBean) getRow(rowIndex);
         ProductBean product = detail.getProduct();
         switch (columnIndex) {
         case ZERO:
-            return detail.getEstimate().getId();
+            return detail.getBill().getId();
         case ONE:
             if (product != null) {
                 return product.getId();

@@ -5,43 +5,42 @@ import java.util.List;
 
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.common.bean.model.management.ProductBean;
-import be.jsams.common.bean.model.sale.detail.EstimateDetailBean;
+import be.jsams.common.bean.model.sale.detail.DeliveryOrderDetailBean;
 
 /**
- * Customized table model for {@link EstimateDetailBean} wizard purpose
+ * Customized table model for {@link DeliveryOrderDetailBean} wizard purpose
  * 
  * @author chesteric31
  * @version $$Rev: 794 $$ $$Date:: 2011-06-05 18:01#$$ $$Author: chesteric31 $$
  */
-public class EstimateDetailWizardTableModel extends AbstractJsamsTableModel<EstimateDetailBean> {
+public class DeliveryOrderDetailWizardTableModel extends AbstractJsamsTableModel<DeliveryOrderDetailBean> {
 
     /**
      * Serial Version UID
      */
-    private static final long serialVersionUID = 7809823846324140033L;
+    private static final long serialVersionUID = 6723240746447143729L;
 
     /**
      * Constructor
      * 
-     * @param listBean a list of {@link EstimateDetailBean}
+     * @param listBean a list of {@link DeliveryOrderDetailBean}
      */
-    public EstimateDetailWizardTableModel(List<EstimateDetailBean> listBean) {
+    public DeliveryOrderDetailWizardTableModel(List<DeliveryOrderDetailBean> listBean) {
         super(listBean);
-        setColumnNames(Arrays.asList(JsamsI18nResource.COLUMN_ESTIMATE_ID, JsamsI18nResource.COLUMN_PRODUCT_ID,
+        setColumnNames(Arrays.asList(JsamsI18nResource.COLUMN_DELIVERY_ORDER_ID, JsamsI18nResource.COLUMN_PRODUCT_ID,
                 JsamsI18nResource.COLUMN_PRODUCT_NAME, JsamsI18nResource.COLUMN_QUANTITY,
-                JsamsI18nResource.COLUMN_PRICE, JsamsI18nResource.COLUMN_DISCOUNT_RATE,
-                JsamsI18nResource.COLUMN_VAT_APPLICABLE));
+                JsamsI18nResource.COLUMN_DISCOUNT_RATE, JsamsI18nResource.COLUMN_VAT_APPLICABLE));
     }
 
     /**
      * {@inheritDoc}
      */
     public Object getValueAt(int rowIndex, int columnIndex) {
-        EstimateDetailBean detail = (EstimateDetailBean) getRow(rowIndex);
+        DeliveryOrderDetailBean detail = (DeliveryOrderDetailBean) getRow(rowIndex);
         ProductBean product = detail.getProduct();
         switch (columnIndex) {
         case ZERO:
-            return detail.getEstimate().getId();
+            return detail.getDeliveryOrder().getId();
         case ONE:
             if (product != null) {
                 return product.getId();
@@ -57,10 +56,8 @@ public class EstimateDetailWizardTableModel extends AbstractJsamsTableModel<Esti
         case THREE:
             return detail.getQuantity();
         case FOUR:
-            return detail.getPrice();
-        case FIVE:
             return detail.getDiscountRate();
-        case SIX:
+        case FIVE:
             return detail.getVatApplicable();
         default:
             return "";
@@ -84,8 +81,6 @@ public class EstimateDetailWizardTableModel extends AbstractJsamsTableModel<Esti
         case FOUR:
             return Double.class;
         case FIVE:
-            return Double.class;
-        case SIX:
             return Double.class;
         default:
             return Object.class;

@@ -30,13 +30,7 @@ import be.jsams.common.bean.model.SocietyBean;
  */
 public class JsamsDesktop {
 
-    /**
-     * Serial Version UID
-     */
-    private static final long serialVersionUID = 4428593979427620070L;
-
     private static final Log LOGGER = LogFactory.getLog(JsamsDesktop.class);
-
     private final boolean debug = LOGGER.isDebugEnabled();
 
     private SocietyBean currentSociety = null;
@@ -164,7 +158,8 @@ public class JsamsDesktop {
     private void setNativeLookAndFeel() {
         try {
 //            UIManager.setLookAndFeel("com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+//            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
         } catch (Exception e) {
             LOGGER.error(e);
         }
