@@ -14,6 +14,7 @@ import be.jsams.common.bean.model.sale.CommandBean;
 import be.jsams.common.bean.model.sale.CreditNoteBean;
 import be.jsams.common.bean.model.sale.DeliveryOrderBean;
 import be.jsams.common.bean.model.sale.EstimateBean;
+import be.jsams.common.bean.model.sale.detail.AbstractDetailBean;
 import be.jsams.common.bean.model.sale.detail.BillDetailBean;
 import be.jsams.common.bean.model.sale.detail.CommandDetailBean;
 import be.jsams.common.bean.model.sale.detail.CreditNoteDetailBean;
@@ -89,13 +90,19 @@ public class TransferServiceImpl implements TransferService {
     private void estimateToCommandTransfer(TransferBean model) {
         int transferMode = model.getTransferMode();
         List<? extends AbstractDocumentBean<?, ?>> documents = model.getDocuments();
+        List<? extends AbstractDetailBean<?, ?, ?>> details = model
+                .getDetails();
         switch (transferMode) {
         case 1:
             EstimateBean estimate = (EstimateBean) documents.get(0);
             estimateToCommandFullTransfer(estimate);
             break;
         case 2:
-//            estimateToCommandPartialTransfer(model);
+        case 4:
+//            Set<EstimateBean> docs = (Set<EstimateBean>) details.keySet();
+//            for (EstimateBean doc : docs) {
+//                estimateToCommandPartialTransfer(doc.getDetails());
+//            }
             break;
         case 3:
             List<EstimateBean> estimates = new ArrayList<EstimateBean>();
@@ -104,12 +111,57 @@ public class TransferServiceImpl implements TransferService {
                 estimateToCommandFullTransfer(bean);
             }
             break;
-        case 4:
-//            estimateToCommandPartialGroupedTransfer(model);
-            break;
         default:
             break;
         }
+    }
+    
+    /**
+     * Transfer an estimate detail to command in partial transfer.
+     * 
+     * @param list a list of {@link EstimateDetailBean} to transfer
+     */
+    private void estimateToCommandPartialTransfer(List<EstimateDetailBean> list) {
+        EstimateBean estimate = list.get(0).getEstimate();
+        CustomerBean customer = estimate.getCustomer();
+        CommandBean newBean = new CommandBean(estimate.getSociety(), customer, estimate.getAgent());
+        newBean.setBillingAddress(estimate.getBillingAddress());
+        // to force to create a new billing address
+        newBean.getBillingAddress().setId(null);
+        newBean.setCreationDate(new Date());
+        newBean.setDeliveryAddress(customer.getDeliveryAddress());
+        // to force to create a new delivery address
+        newBean.getDeliveryAddress().setId(null);
+        List<CommandDetailBean> details = new ArrayList<CommandDetailBean>();
+        for (EstimateDetailBean detail : list) {
+            CommandDetailBean bean = new CommandDetailBean();
+            bean.setCommand(newBean);
+            bean.setDiscountRate(detail.getDiscountRate());
+            bean.setPrice(detail.getPrice());
+            bean.setProduct(detail.getProduct());
+            bean.setQuantity(detail.getQuantity());
+            bean.setTransferred(false);
+            bean.setVatApplicable(detail.getVatApplicable());
+            details.add(bean);
+            detail.setTransferred(true);
+        }
+        newBean.setDetails(details);
+        newBean.setDiscountRate(estimate.getDiscountRate());
+        newBean.setRemark(estimate.getRemark());
+        newBean.setTransferred(false);
+        commandService.create(newBean);
+        // TODO review
+        boolean allDetailTransferred = true;
+        for (EstimateDetailBean detailBean : estimate.getDetails()) {
+            if (!detailBean.isTransferred()) {
+                allDetailTransferred = false;
+                break;
+            }
+        }
+        if (allDetailTransferred) {
+            estimate.setTransferred(true);
+        }
+        estimateService.update(estimate);
     }
 
     /**

@@ -336,7 +336,9 @@ public abstract class AbstractDocumentChooserWizardPanel<V extends Validator<Tra
         List<EstimateDetailBean> details = new ArrayList<EstimateDetailBean>();
         for (EstimateBean bean : beans) {
             for (EstimateDetailBean detail : bean.getDetails()) {
-                details.add(detail);
+                if (!detail.isTransferred()) {
+                    details.add(detail);
+                }
             }
         }
         getModel().setSelectableDetails(details);
@@ -351,7 +353,9 @@ public abstract class AbstractDocumentChooserWizardPanel<V extends Validator<Tra
         List<CommandDetailBean> details = new ArrayList<CommandDetailBean>();
         for (CommandBean bean : beans) {
             for (CommandDetailBean detail : bean.getDetails()) {
-                details.add(detail);
+                if (!detail.isTransferred()) {
+                    details.add(detail);
+                }
             }
         }
         getModel().setSelectableDetails(details);
@@ -366,7 +370,9 @@ public abstract class AbstractDocumentChooserWizardPanel<V extends Validator<Tra
         List<DeliveryOrderDetailBean> details = new ArrayList<DeliveryOrderDetailBean>();
         for (DeliveryOrderBean bean : beans) {
             for (DeliveryOrderDetailBean detail : bean.getDetails()) {
-                details.add(detail);
+                if (!detail.isTransferred()) {
+                    details.add(detail);
+                }
             }
         }
         getModel().setSelectableDetails(details);
@@ -381,7 +387,9 @@ public abstract class AbstractDocumentChooserWizardPanel<V extends Validator<Tra
         List<BillDetailBean> details = new ArrayList<BillDetailBean>();
         for (BillBean bean : beans) {
             for (BillDetailBean detail : bean.getDetails()) {
-                details.add(detail);
+                if (!detail.isTransferred()) {
+                    details.add(detail);
+                }
             }
         }
         getModel().setSelectableDetails(details);

@@ -38,13 +38,15 @@ public class DeliveryOrderDetailWizardTableMouseListener implements MouseListene
         if (e.getClickCount() == 1) {
             int[] selectedRows = table.getSelectedRows();
             if (selectedRows != null && selectedRows.length > 0) {
-                List<DeliveryOrderDetailBean> beans = new ArrayList<DeliveryOrderDetailBean>();
+                List<DeliveryOrderDetailBean> beans
+                    = new ArrayList<DeliveryOrderDetailBean>();
                 for (int selectedRow : selectedRows) {
                     if (selectedRow > -1) {
                         int selectedRowModel = table.convertRowIndexToModel(selectedRow);
                         DeliveryOrderDetailWizardTableModel model = (DeliveryOrderDetailWizardTableModel) table
                                 .getModel();
-                        beans.add(model.getRow(selectedRowModel));
+                        DeliveryOrderDetailBean row = model.getRow(selectedRowModel);
+                        beans.add(row);
                     }
                 }
                 bean.setDetails(beans);

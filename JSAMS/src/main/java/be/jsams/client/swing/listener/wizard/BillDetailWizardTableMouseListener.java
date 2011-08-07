@@ -43,7 +43,8 @@ public class BillDetailWizardTableMouseListener implements MouseListener {
                     if (selectedRow > -1) {
                         int selectedRowModel = table.convertRowIndexToModel(selectedRow);
                         BillDetailWizardTableModel model = (BillDetailWizardTableModel) table.getModel();
-                        beans.add(model.getRow(selectedRowModel));
+                        BillDetailBean row = model.getRow(selectedRowModel);
+                        beans.add(row);
                     }
                 }
                 bean.setDetails(beans);

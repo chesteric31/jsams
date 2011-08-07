@@ -43,7 +43,8 @@ public class CommandDetailWizardTableMouseListener implements MouseListener {
                     if (selectedRow > -1) {
                         int selectedRowModel = table.convertRowIndexToModel(selectedRow);
                         CommandDetailWizardTableModel model = (CommandDetailWizardTableModel) table.getModel();
-                        beans.add(model.getRow(selectedRowModel));
+                        CommandDetailBean row = model.getRow(selectedRowModel);
+                        beans.add(row);
                     }
                 }
                 bean.setDetails(beans);

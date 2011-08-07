@@ -56,9 +56,7 @@ public class JsamsBooleanTableCellRenderer extends JCheckBox implements TableCel
         } else {
             setBorder(NO_FOCUS_BORDER);
         }
-        System.out.println(getBackground());
         setBackground(Color.RED);
-        System.out.println(getBackground());
         return this;
     }
 
