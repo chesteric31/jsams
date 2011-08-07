@@ -119,6 +119,7 @@ public abstract class AbstractWizardDialog<B extends AbstractIdentityBean<?, ?>,
         });
         component.setCancelAction(new CancelAction(component) {
             public void performAction() {
+                model.clear();
                 dispose();
             }
         });

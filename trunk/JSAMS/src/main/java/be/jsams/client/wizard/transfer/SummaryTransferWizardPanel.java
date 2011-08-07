@@ -2,6 +2,7 @@ package be.jsams.client.wizard.transfer;
 
 import java.awt.Font;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.BoxLayout;
 import javax.swing.JScrollPane;
@@ -74,6 +75,7 @@ public class SummaryTransferWizardPanel extends JsamsWizardPanel<TransferBean, S
         String newLine = "\n";
         String tab = "\t";
         String sourceTypeTranslation = getSourceTypeTranslation(getModel().getSourceType());
+        String detailsTypeTranslation = JsamsI18nLabelResource.LABEL_DETAILS.getTranslation();
         area.append(sourceTypeTranslation + newLine);
 
         area.append(JsamsI18nLabelResource.LABEL_DESTINATION_TYPE.getTranslation());
@@ -93,13 +95,14 @@ public class SummaryTransferWizardPanel extends JsamsWizardPanel<TransferBean, S
             }
         }
 
-        List<? extends AbstractDetailBean<?, ?, ?>> details = getModel().getDetails();
+        List<? extends AbstractDetailBean<?, ?, ?>> details = getModel()
+                .getDetails();
         if (details != null && !details.isEmpty()) {
-            area.append(sourceTypeTranslation);
+            area.append(detailsTypeTranslation);
             area.append(doublePointSeparator);
-            for (AbstractDetailBean<?, ?, ?> detail : details) {
-                area.append(tab + detail.getId() + newLine);
-            }
+//            for (AbstractDetailBean<?, ?, ?> detail : details.values()) {
+//                area.append(tab + detail.getId() + newLine);
+//            }
         }
         
         JScrollPane scrollPane = new JScrollPane(area);

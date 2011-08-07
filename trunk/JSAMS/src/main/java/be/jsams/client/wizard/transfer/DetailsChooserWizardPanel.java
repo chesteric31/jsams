@@ -1,5 +1,6 @@
 package be.jsams.client.wizard.transfer;
 
+import java.awt.BorderLayout;
 import java.util.List;
 
 import javax.swing.JScrollPane;
@@ -74,13 +75,11 @@ public class DetailsChooserWizardPanel extends JsamsWizardPanel<TransferBean, De
      */
     @SuppressWarnings("unchecked")
     public void updateContainer() {
+        setLayout(new BorderLayout());
         int source = getModel().getSourceType();
         JsamsTable table = null;
         JScrollPane scrollPane = new JScrollPane();
-        int selectionMode = ListSelectionModel.SINGLE_SELECTION;
-        if (getModel().getTransferMode() == 4) {
-            selectionMode = ListSelectionModel.MULTIPLE_INTERVAL_SELECTION;
-        }
+        int selectionMode = ListSelectionModel.MULTIPLE_INTERVAL_SELECTION;
         switch (source) {
         case 1:
             EstimateDetailWizardTableModel estimateTM = new EstimateDetailWizardTableModel(
@@ -90,7 +89,7 @@ public class DetailsChooserWizardPanel extends JsamsWizardPanel<TransferBean, De
             table.addMouseListener(new EstimateDetailWizardTableMouseListener(getModel()));
             scrollPane.setViewportView(table);
             scrollPane.setBorder(new TitledBorder(JsamsI18nResource.SEARCH_RESULTS.getTranslation()));
-            this.add(scrollPane);
+            this.add(scrollPane, BorderLayout.CENTER);
             break;
         case 2:
             CommandDetailWizardTableModel commandTM = new CommandDetailWizardTableModel(
@@ -100,7 +99,7 @@ public class DetailsChooserWizardPanel extends JsamsWizardPanel<TransferBean, De
             table.addMouseListener(new CommandDetailWizardTableMouseListener(getModel()));
             scrollPane.add(table);
             scrollPane.setBorder(new TitledBorder(JsamsI18nResource.SEARCH_RESULTS.getTranslation()));
-            this.add(scrollPane);
+            this.add(scrollPane, BorderLayout.CENTER);
             break;
         case 3:
             DeliveryOrderDetailWizardTableModel deliveryOrderTM = new DeliveryOrderDetailWizardTableModel(
@@ -110,7 +109,7 @@ public class DetailsChooserWizardPanel extends JsamsWizardPanel<TransferBean, De
             table.addMouseListener(new DeliveryOrderDetailWizardTableMouseListener(getModel()));
             scrollPane.add(table);
             scrollPane.setBorder(new TitledBorder(JsamsI18nResource.SEARCH_RESULTS.getTranslation()));
-            this.add(scrollPane);
+            this.add(scrollPane, BorderLayout.CENTER);
             break;
         case 4:
             BillDetailWizardTableModel billTM = new BillDetailWizardTableModel(
@@ -120,7 +119,7 @@ public class DetailsChooserWizardPanel extends JsamsWizardPanel<TransferBean, De
             table.addMouseListener(new BillDetailWizardTableMouseListener(getModel()));
             scrollPane.add(table);
             scrollPane.setBorder(new TitledBorder(JsamsI18nResource.SEARCH_RESULTS.getTranslation()));
-            this.add(scrollPane);
+            this.add(scrollPane, BorderLayout.CENTER);
             break;
         default:
             break;

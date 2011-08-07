@@ -38,15 +38,20 @@ public class EstimateDetailWizardTableMouseListener implements MouseListener {
         if (e.getClickCount() == 1) {
             int[] selectedRows = table.getSelectedRows();
             if (selectedRows != null && selectedRows.length > 0) {
-                List<EstimateDetailBean> beans = new ArrayList<EstimateDetailBean>();
+                List<EstimateDetailBean> list = new ArrayList<EstimateDetailBean>();
                 for (int selectedRow : selectedRows) {
                     if (selectedRow > -1) {
                         int selectedRowModel = table.convertRowIndexToModel(selectedRow);
                         EstimateDetailWizardTableModel model = (EstimateDetailWizardTableModel) table.getModel();
-                        beans.add(model.getRow(selectedRowModel));
+                        EstimateDetailBean row = model.getRow(selectedRowModel);
+//                        List<EstimateDetailBean> list = map.get(row.getEstimate());
+//                        if (list == null) {
+//                            list = new ArrayList<EstimateDetailBean>();
+//                        }
+                        list.add(row);
                     }
                 }
-                bean.setDetails(beans);
+                bean.setDetails(list);
             }
         }
     }
