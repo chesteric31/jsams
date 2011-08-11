@@ -160,6 +160,8 @@ public class DetailsChooserWizardPanel extends JsamsWizardPanel<TransferBean, De
      * {@inheritDoc}
      */
     public void back() {
+        remove(getComponentCount() - 1);
+        getModel().getSelectableDetails().clear();
         int transferMode = getModel().getTransferMode();
         if (transferMode == 2) {
             switchPanel(TransferWizardDialog.FIRTH_PANEL_PARTIAL_MODE);

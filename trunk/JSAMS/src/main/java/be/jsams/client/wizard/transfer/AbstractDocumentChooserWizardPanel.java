@@ -400,6 +400,7 @@ public abstract class AbstractDocumentChooserWizardPanel<V extends Validator<Tra
      */
     public void back() {
         remove(getComponentCount() - 1);
+        getModel().getDocuments().clear();
         switchPanel(TransferWizardDialog.THIRD_PANEL);
     }
 

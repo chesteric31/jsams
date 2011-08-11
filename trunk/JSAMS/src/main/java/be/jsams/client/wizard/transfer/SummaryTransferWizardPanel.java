@@ -15,12 +15,15 @@ import be.jsams.client.validator.wizard.SummaryTransferValidator;
 import be.jsams.client.wizard.JsamsWizardComponent;
 import be.jsams.client.wizard.JsamsWizardPanel;
 import be.jsams.common.bean.model.sale.AbstractDocumentBean;
-import be.jsams.common.bean.model.sale.detail.AbstractDetailBean;
+import be.jsams.common.bean.model.sale.detail.BillDetailBean;
+import be.jsams.common.bean.model.sale.detail.CommandDetailBean;
+import be.jsams.common.bean.model.sale.detail.DeliveryOrderDetailBean;
+import be.jsams.common.bean.model.sale.detail.EstimateDetailBean;
 import be.jsams.common.bean.model.transfer.TransferBean;
 
 /**
  * 
- *
+ * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
@@ -63,7 +66,7 @@ public class SummaryTransferWizardPanel extends JsamsWizardPanel<TransferBean, S
     }
 
     /**
-     * Update the panel container. 
+     * Update the panel container.
      */
     private void updateContainer() {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -95,16 +98,59 @@ public class SummaryTransferWizardPanel extends JsamsWizardPanel<TransferBean, S
             }
         }
 
-        List<? extends AbstractDetailBean<?, ?, ?>> details = getModel()
-                .getDetails();
-        if (details != null && !details.isEmpty()) {
-            area.append(detailsTypeTranslation);
-            area.append(doublePointSeparator);
-//            for (AbstractDetailBean<?, ?, ?> detail : details.values()) {
-//                area.append(tab + detail.getId() + newLine);
-//            }
+        switch (getModel().getSourceType()) {
+        case 1:
+            Map<Long, List<EstimateDetailBean>> estimates = getModel().getEstimateDetails();
+            if (estimates != null && !estimates.isEmpty()) {
+                area.append(detailsTypeTranslation);
+                area.append(doublePointSeparator);
+                for (List<EstimateDetailBean> list : estimates.values()) {
+                    for (EstimateDetailBean bean : list) {
+                        area.append(tab + bean.getId() + newLine);
+                    }
+                }
+            }
+            break;
+        case 2:
+            Map<Long, List<CommandDetailBean>> commands = getModel().getCommandDetails();
+            if (commands != null && !commands.isEmpty()) {
+                area.append(detailsTypeTranslation);
+                area.append(doublePointSeparator);
+                for (List<CommandDetailBean> list : commands.values()) {
+                    for (CommandDetailBean bean : list) {
+                        area.append(tab + bean.getId() + newLine);
+                    }
+                }
+            }
+            break;
+        case 3:
+            Map<Long, List<DeliveryOrderDetailBean>> orders = getModel().getDeliveryOrderDetails();
+            if (orders != null && !orders.isEmpty()) {
+                area.append(detailsTypeTranslation);
+                area.append(doublePointSeparator);
+                for (List<DeliveryOrderDetailBean> list : orders.values()) {
+                    for (DeliveryOrderDetailBean bean : list) {
+                        area.append(tab + bean.getId() + newLine);
+                    }
+                }
+            }
+            break;
+        case 4:
+            Map<Long, List<BillDetailBean>> bills = getModel().getBillDetails();
+            if (bills != null && !bills.isEmpty()) {
+                area.append(detailsTypeTranslation);
+                area.append(doublePointSeparator);
+                for (List<BillDetailBean> list : bills.values()) {
+                    for (BillDetailBean bean : list) {
+                        area.append(tab + bean.getId() + newLine);
+                    }
+                }
+            }
+            break;
+        default:
+            break;
         }
-        
+
         JScrollPane scrollPane = new JScrollPane(area);
         area.setEditable(false);
         this.add(scrollPane);

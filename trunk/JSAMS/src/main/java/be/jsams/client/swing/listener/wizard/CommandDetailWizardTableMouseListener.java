@@ -3,7 +3,9 @@ package be.jsams.client.swing.listener.wizard;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import be.jsams.client.model.table.CommandDetailWizardTableModel;
 import be.jsams.client.swing.component.JsamsTable;
@@ -39,15 +41,23 @@ public class CommandDetailWizardTableMouseListener implements MouseListener {
             int[] selectedRows = table.getSelectedRows();
             if (selectedRows != null && selectedRows.length > 0) {
                 List<CommandDetailBean> beans = new ArrayList<CommandDetailBean>();
+                Map<Long, List<CommandDetailBean>> map = new HashMap<Long, List<CommandDetailBean>>();
                 for (int selectedRow : selectedRows) {
                     if (selectedRow > -1) {
                         int selectedRowModel = table.convertRowIndexToModel(selectedRow);
                         CommandDetailWizardTableModel model = (CommandDetailWizardTableModel) table.getModel();
                         CommandDetailBean row = model.getRow(selectedRowModel);
                         beans.add(row);
+                        Long id = row.getCommand().getId();
+                        List<CommandDetailBean> list = map.get(id);
+                        if (list == null) {
+                            list = new ArrayList<CommandDetailBean>();
+                        }
+                        list.add(row);
+                        map.put(id, list);
                     }
                 }
-                bean.setDetails(beans);
+                bean.setCommandDetails(map);
             }
         }
     }

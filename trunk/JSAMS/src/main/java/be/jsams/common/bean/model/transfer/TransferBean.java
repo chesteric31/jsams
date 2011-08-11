@@ -1,10 +1,15 @@
 package be.jsams.common.bean.model.transfer;
 
 import java.util.List;
+import java.util.Map;
 
 import be.jsams.common.bean.model.AbstractIdentityBean;
 import be.jsams.common.bean.model.sale.AbstractDocumentBean;
 import be.jsams.common.bean.model.sale.detail.AbstractDetailBean;
+import be.jsams.common.bean.model.sale.detail.BillDetailBean;
+import be.jsams.common.bean.model.sale.detail.CommandDetailBean;
+import be.jsams.common.bean.model.sale.detail.DeliveryOrderDetailBean;
+import be.jsams.common.bean.model.sale.detail.EstimateDetailBean;
 import be.jsams.common.bean.view.transfer.TransferBeanView;
 import be.jsams.server.model.AbstractIdentity;
 
@@ -31,8 +36,12 @@ public class TransferBean extends AbstractIdentityBean<AbstractIdentity, Transfe
     private int destinationType;
 
     private List<? extends AbstractDocumentBean<?, ?>> documents;
-    private List<? extends AbstractDetailBean<?, ?, ?>> details;
     private List<? extends AbstractDetailBean<?, ?, ?>> selectableDetails;
+
+    private Map<Long, List<EstimateDetailBean>> estimateDetails;
+    private Map<Long, List<CommandDetailBean>> commandDetails;
+    private Map<Long, List<DeliveryOrderDetailBean>> deliveryOrderDetails;
+    private Map<Long, List<BillDetailBean>> billDetails;
 
     public static final String TRANSFER_MODE_PROPERTY = "transferMode";
     public static final String SOURCE_TYPE_PROPERTY = "sourceType";
@@ -95,7 +104,10 @@ public class TransferBean extends AbstractIdentityBean<AbstractIdentity, Transfe
         setTransferMode(other.getTransferMode());
         setSourceType(other.getSourceType());
         setDestinationType(other.getDestinationType());
-        setDetails(other.getDetails());
+        setEstimateDetails(other.getEstimateDetails());
+        setCommandDetails(other.getCommandDetails());
+        setDeliveryOrderDetails(other.getDeliveryOrderDetails());
+        setBillDetails(other.getBillDetails());
         setDocuments(other.getDocuments());
     }
 
@@ -115,7 +127,10 @@ public class TransferBean extends AbstractIdentityBean<AbstractIdentity, Transfe
         setTransferMode(0);
         setSourceType(0);
         setDestinationType(0);
-        setDetails(null);
+        setEstimateDetails(null);
+        setCommandDetails(null);
+        setDeliveryOrderDetails(null);
+        setBillDetails(null);
         setDocuments(null);
     }
 
@@ -134,20 +149,6 @@ public class TransferBean extends AbstractIdentityBean<AbstractIdentity, Transfe
     }
 
     /**
-     * @return the details
-     */
-    public List<? extends AbstractDetailBean<?, ?, ?>> getDetails() {
-        return details;
-    }
-
-    /**
-     * @param details the details to set
-     */
-    public void setDetails(List<? extends AbstractDetailBean<?, ?, ?>> details) {
-        this.details = details;
-    }
-
-    /**
      * @return the selectableDetails
      */
     public List<? extends AbstractDetailBean<?, ?, ?>> getSelectableDetails() {
@@ -160,5 +161,61 @@ public class TransferBean extends AbstractIdentityBean<AbstractIdentity, Transfe
     public void setSelectableDetails(List<? extends AbstractDetailBean<?, ?, ?>> selectableDetails) {
         this.selectableDetails = selectableDetails;
     }
-    
+
+    /**
+     * @return the estimateDetails
+     */
+    public Map<Long, List<EstimateDetailBean>> getEstimateDetails() {
+        return estimateDetails;
+    }
+
+    /**
+     * @param estimateDetails the estimateDetails to set
+     */
+    public void setEstimateDetails(Map<Long, List<EstimateDetailBean>> estimateDetails) {
+        this.estimateDetails = estimateDetails;
+    }
+
+    /**
+     * @return the commandDetails
+     */
+    public Map<Long, List<CommandDetailBean>> getCommandDetails() {
+        return commandDetails;
+    }
+
+    /**
+     * @param commandDetails the commandDetails to set
+     */
+    public void setCommandDetails(Map<Long, List<CommandDetailBean>> commandDetails) {
+        this.commandDetails = commandDetails;
+    }
+
+    /**
+     * @return the deliveryOrderDetails
+     */
+    public Map<Long, List<DeliveryOrderDetailBean>> getDeliveryOrderDetails() {
+        return deliveryOrderDetails;
+    }
+
+    /**
+     * @param deliveryOrderDetails the deliveryOrderDetails to set
+     */
+    public void setDeliveryOrderDetails(Map<Long, List<DeliveryOrderDetailBean>> deliveryOrderDetails) {
+        this.deliveryOrderDetails = deliveryOrderDetails;
+    }
+
+    /**
+     * @return the billDetails
+     */
+    public Map<Long, List<BillDetailBean>> getBillDetails() {
+        return billDetails;
+    }
+
+    /**
+     * @param billDetails the billDetails to set
+     */
+    public void setBillDetails(Map<Long, List<BillDetailBean>> billDetails) {
+        this.billDetails = billDetails;
+    }
+
 }
