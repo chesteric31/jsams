@@ -3,7 +3,9 @@ package be.jsams.client.swing.listener.wizard;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import be.jsams.client.model.table.EstimateDetailWizardTableModel;
 import be.jsams.client.swing.component.JsamsTable;
@@ -38,20 +40,24 @@ public class EstimateDetailWizardTableMouseListener implements MouseListener {
         if (e.getClickCount() == 1) {
             int[] selectedRows = table.getSelectedRows();
             if (selectedRows != null && selectedRows.length > 0) {
-                List<EstimateDetailBean> list = new ArrayList<EstimateDetailBean>();
+                List<EstimateDetailBean> beans = new ArrayList<EstimateDetailBean>();
+                Map<Long, List<EstimateDetailBean>> map = new HashMap<Long, List<EstimateDetailBean>>();
                 for (int selectedRow : selectedRows) {
                     if (selectedRow > -1) {
                         int selectedRowModel = table.convertRowIndexToModel(selectedRow);
                         EstimateDetailWizardTableModel model = (EstimateDetailWizardTableModel) table.getModel();
                         EstimateDetailBean row = model.getRow(selectedRowModel);
-//                        List<EstimateDetailBean> list = map.get(row.getEstimate());
-//                        if (list == null) {
-//                            list = new ArrayList<EstimateDetailBean>();
-//                        }
+                        beans.add(row);
+                        Long id = row.getEstimate().getId();
+                        List<EstimateDetailBean> list = map.get(id);
+                        if (list == null) {
+                            list = new ArrayList<EstimateDetailBean>();
+                        }
                         list.add(row);
+                        map.put(id, list);
                     }
                 }
-                bean.setDetails(list);
+                bean.setEstimateDetails(map);
             }
         }
     }

@@ -5,6 +5,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import be.jsams.common.bean.model.PaymentModeBean;
 import be.jsams.common.bean.model.management.CustomerBean;
@@ -14,7 +16,6 @@ import be.jsams.common.bean.model.sale.CommandBean;
 import be.jsams.common.bean.model.sale.CreditNoteBean;
 import be.jsams.common.bean.model.sale.DeliveryOrderBean;
 import be.jsams.common.bean.model.sale.EstimateBean;
-import be.jsams.common.bean.model.sale.detail.AbstractDetailBean;
 import be.jsams.common.bean.model.sale.detail.BillDetailBean;
 import be.jsams.common.bean.model.sale.detail.CommandDetailBean;
 import be.jsams.common.bean.model.sale.detail.CreditNoteDetailBean;
@@ -30,18 +31,18 @@ import be.jsams.server.service.transfer.TransferService;
 
 /**
  * 
- *
+ * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
 public class TransferServiceImpl implements TransferService {
-    
+
     private EstimateService estimateService;
     private CommandService commandService;
     private DeliveryOrderService deliveryOrderService;
     private BillService billService;
     private CreditNoteService creditNoteService;
-    
+
     /**
      * {@inheritDoc}
      */
@@ -90,8 +91,7 @@ public class TransferServiceImpl implements TransferService {
     private void estimateToCommandTransfer(TransferBean model) {
         int transferMode = model.getTransferMode();
         List<? extends AbstractDocumentBean<?, ?>> documents = model.getDocuments();
-        List<? extends AbstractDetailBean<?, ?, ?>> details = model
-                .getDetails();
+        Map<Long, List<EstimateDetailBean>> details = model.getEstimateDetails();
         switch (transferMode) {
         case 1:
             EstimateBean estimate = (EstimateBean) documents.get(0);
@@ -99,10 +99,10 @@ public class TransferServiceImpl implements TransferService {
             break;
         case 2:
         case 4:
-//            Set<EstimateBean> docs = (Set<EstimateBean>) details.keySet();
-//            for (EstimateBean doc : docs) {
-//                estimateToCommandPartialTransfer(doc.getDetails());
-//            }
+            Set<Long> ids = (Set<Long>) details.keySet();
+            for (Long id : ids) {
+                estimateToCommandPartialTransfer(details.get(id));
+            }
             break;
         case 3:
             List<EstimateBean> estimates = new ArrayList<EstimateBean>();
@@ -115,9 +115,9 @@ public class TransferServiceImpl implements TransferService {
             break;
         }
     }
-    
+
     /**
-     * Transfer an estimate detail to command in partial transfer.
+     * Transfer a list of {@link EstimateDetailBean} to command in partial transfer.
      * 
      * @param list a list of {@link EstimateDetailBean} to transfer
      */
@@ -210,13 +210,18 @@ public class TransferServiceImpl implements TransferService {
     private void estimateToBillTransfer(TransferBean model) {
         int transferMode = model.getTransferMode();
         List<? extends AbstractDocumentBean<?, ?>> documents = model.getDocuments();
+        Map<Long, List<EstimateDetailBean>> details = model.getEstimateDetails();
         switch (transferMode) {
         case 1:
             EstimateBean estimate = (EstimateBean) documents.get(0);
             estimateToBillFullTransfer(estimate);
             break;
         case 2:
-//            estimateToDeliveryOrderPartialTransfer(model);
+        case 4:
+            Set<Long> ids = (Set<Long>) details.keySet();
+            for (Long id : ids) {
+                estimateToBillPartialTransfer(details.get(id));
+            }
             break;
         case 3:
             List<EstimateBean> estimates = new ArrayList<EstimateBean>();
@@ -225,12 +230,62 @@ public class TransferServiceImpl implements TransferService {
                 estimateToBillFullTransfer(bean);
             }
             break;
-        case 4:
-//            estimateToDeliveryOrderPartialGroupedTransfer(model);
-            break;
         default:
             break;
         }
+    }
+
+    /**
+     * Transfer a list of {@link EstimateDetailBean} to bill in partial transfer.
+     * 
+     * @param list a list of {@link EstimateDetailBean} to transfer
+     */
+    private void estimateToBillPartialTransfer(List<EstimateDetailBean> list) {
+        EstimateBean estimate = list.get(0).getEstimate();
+        CustomerBean customer = estimate.getCustomer();
+        PaymentModeBean paymentMode = customer.getPaymentMode();
+        BillBean newBean = new BillBean(estimate.getSociety(), customer, paymentMode);
+        newBean.setBillingAddress(estimate.getBillingAddress());
+        newBean.getBillingAddress().setId(null);
+        newBean.setClosed(false);
+        newBean.setCreationDate(new Date());
+        // TODO implement the dates management
+        // newBean.setDateFirstRemember(dateFirstRemember);
+        // newBean.setDateFormalNotice(dateFormalNotice);
+        // newBean.setDateSecondRemember(dateSecondRemember);
+        List<BillDetailBean> details = new ArrayList<BillDetailBean>();
+        for (EstimateDetailBean detail : list) {
+            BillDetailBean bean = new BillDetailBean();
+            bean.setBill(newBean);
+            bean.setDiscountRate(detail.getDiscountRate());
+            bean.setPrice(detail.getPrice());
+            bean.setProduct(detail.getProduct());
+            bean.setQuantity(detail.getQuantity());
+            bean.setTransferred(false);
+            bean.setVatApplicable(detail.getVatApplicable());
+            detail.setTransferred(true);
+            details.add(bean);
+        }
+        newBean.setDetails(details);
+        newBean.setDiscountRate(estimate.getDiscountRate());
+        Date dueDate = calculateDueDate(newBean.getCreationDate(), paymentMode.getDaysNumber(),
+                paymentMode.isMonthEnd(), paymentMode.getAdditionalDays());
+        newBean.setDueDate(dueDate);
+        newBean.setPaid(false);
+        newBean.setRemark(estimate.getRemark());
+        billService.create(newBean);
+        // TODO review
+        boolean allDetailTransferred = true;
+        for (EstimateDetailBean detailBean : estimate.getDetails()) {
+            if (!detailBean.isTransferred()) {
+                allDetailTransferred = false;
+                break;
+            }
+        }
+        if (allDetailTransferred) {
+            estimate.setTransferred(true);
+        }
+        estimateService.update(estimate);
     }
 
     /**
@@ -247,9 +302,9 @@ public class TransferServiceImpl implements TransferService {
         newBean.setClosed(false);
         newBean.setCreationDate(new Date());
         // TODO implement the dates management
-//        newBean.setDateFirstRemember(dateFirstRemember);
-//        newBean.setDateFormalNotice(dateFormalNotice);
-//        newBean.setDateSecondRemember(dateSecondRemember);
+        // newBean.setDateFirstRemember(dateFirstRemember);
+        // newBean.setDateFormalNotice(dateFormalNotice);
+        // newBean.setDateSecondRemember(dateSecondRemember);
         List<BillDetailBean> details = new ArrayList<BillDetailBean>();
         for (EstimateDetailBean detail : estimate.getDetails()) {
             BillDetailBean bean = new BillDetailBean();
@@ -260,6 +315,7 @@ public class TransferServiceImpl implements TransferService {
             bean.setQuantity(detail.getQuantity());
             bean.setTransferred(false);
             bean.setVatApplicable(detail.getVatApplicable());
+            detail.setTransferred(true);
             details.add(bean);
         }
         newBean.setDetails(details);
@@ -271,15 +327,12 @@ public class TransferServiceImpl implements TransferService {
         newBean.setRemark(estimate.getRemark());
         billService.create(newBean);
         estimate.setTransferred(true);
-        for (EstimateDetailBean bean : estimate.getDetails()) {
-            bean.setTransferred(true);
-        }
         estimateService.update(estimate);
     }
 
     /**
-     * Calculate due date following the creation date of the {@link BillBean}, the days number,
-     * the boolean endMonth and the additional days.
+     * Calculate due date following the creation date of the {@link BillBean},
+     * the days number, the boolean endMonth and the additional days.
      * 
      * @param creationDate the creation date of the {@link BillBean}
      * @param daysNumber the days number
@@ -327,13 +380,18 @@ public class TransferServiceImpl implements TransferService {
     private void commandToDeliveryOrderTransfer(TransferBean model) {
         int transferMode = model.getTransferMode();
         List<? extends AbstractDocumentBean<?, ?>> documents = model.getDocuments();
+        Map<Long, List<CommandDetailBean>> details = model.getCommandDetails();
         switch (transferMode) {
         case 1:
             CommandBean command = (CommandBean) documents.get(0);
             commandToDeliveryOrderFullTransfer(command);
             break;
         case 2:
-//            commandToDeliveryOrderPartialTransfer(model);
+        case 4:
+            Set<Long> ids = (Set<Long>) details.keySet();
+            for (Long id : ids) {
+                commandToDeliveryOrderPartialTransfer(details.get(id));
+            }
             break;
         case 3:
             List<CommandBean> commands = new ArrayList<CommandBean>();
@@ -342,12 +400,52 @@ public class TransferServiceImpl implements TransferService {
                 commandToDeliveryOrderFullTransfer(bean);
             }
             break;
-        case 4:
-//            estimateToCommandPartialGroupedTransfer(model);
-            break;
         default:
             break;
         }
+    }
+    
+    /**
+     * Transfer a list of {@link CommandDetailBean} to delivery order in partial transfer.
+     * 
+     * @param list a list of {@link CommandDetailBean} to transfer
+     */
+    private void commandToDeliveryOrderPartialTransfer(List<CommandDetailBean> list) {
+        CommandBean command = list.get(0).getCommand();
+        CustomerBean customer = command.getCustomer();
+        DeliveryOrderBean newBean = new DeliveryOrderBean(command.getSociety(), customer);
+        newBean.setCustomer(customer);
+        newBean.setCreationDate(new Date());
+        newBean.setDeliveryAddress(command.getDeliveryAddress());
+        List<DeliveryOrderDetailBean> details = new ArrayList<DeliveryOrderDetailBean>();
+        for (CommandDetailBean detail : list) {
+            DeliveryOrderDetailBean bean = new DeliveryOrderDetailBean();
+            bean.setDeliveryOrder(newBean);
+            bean.setDiscountRate(detail.getDiscountRate());
+            bean.setPrice(detail.getPrice());
+            bean.setProduct(detail.getProduct());
+            bean.setQuantity(detail.getQuantity());
+            bean.setTransferred(false);
+            bean.setVatApplicable(detail.getVatApplicable());
+            detail.setTransferred(true);
+            details.add(bean);
+        }
+        newBean.setDetails(details);
+        newBean.setDiscountRate(command.getDiscountRate());
+        newBean.setRemark(command.getRemark());
+        deliveryOrderService.create(newBean);
+        // TODO review
+        boolean allDetailTransferred = true;
+        for (CommandDetailBean detailBean : command.getDetails()) {
+            if (!detailBean.isTransferred()) {
+                allDetailTransferred = false;
+                break;
+            }
+        }
+        if (allDetailTransferred) {
+            command.setTransferred(true);
+        }
+        commandService.update(command);
     }
 
     /**
@@ -386,7 +484,7 @@ public class TransferServiceImpl implements TransferService {
         }
         commandService.update(command);
     }
-    
+
     /**
      * @param model the wrapper contains all the beans to be transferred
      */
@@ -394,13 +492,18 @@ public class TransferServiceImpl implements TransferService {
     private void commandToBillTransfer(TransferBean model) {
         int transferMode = model.getTransferMode();
         List<? extends AbstractDocumentBean<?, ?>> documents = model.getDocuments();
+        Map<Long, List<CommandDetailBean>> details = model.getCommandDetails();
         switch (transferMode) {
         case 1:
             CommandBean command = (CommandBean) documents.get(0);
             commandToBillFullTransfer(command);
             break;
         case 2:
-//            commandToDeliveryOrderPartialTransfer(model);
+        case 4:
+            Set<Long> ids = (Set<Long>) details.keySet();
+            for (Long id : ids) {
+                commandToBillPartialTransfer(details.get(id));
+            }
             break;
         case 3:
             List<CommandBean> commands = new ArrayList<CommandBean>();
@@ -409,12 +512,62 @@ public class TransferServiceImpl implements TransferService {
                 commandToBillFullTransfer(bean);
             }
             break;
-        case 4:
-//            estimateToCommandPartialGroupedTransfer(model);
-            break;
         default:
             break;
         }
+    }
+    
+    /**
+     * Transfer a list of {@link CommandDetailBean} to bill in partial transfer.
+     * 
+     * @param list a list of {@link CommandDetailBean} to transfer
+     */
+    private void commandToBillPartialTransfer(List<CommandDetailBean> list) {
+        CommandBean command = list.get(0).getCommand();
+        CustomerBean customer = command.getCustomer();
+        PaymentModeBean paymentMode = customer.getPaymentMode();
+        BillBean newBean = new BillBean(command.getSociety(), customer, paymentMode);
+        newBean.setBillingAddress(command.getBillingAddress());
+        newBean.getBillingAddress().setId(null);
+        newBean.setClosed(false);
+        newBean.setCreationDate(new Date());
+        // TODO implement the dates management
+        // newBean.setDateFirstRemember(dateFirstRemember);
+        // newBean.setDateFormalNotice(dateFormalNotice);
+        // newBean.setDateSecondRemember(dateSecondRemember);
+        List<BillDetailBean> details = new ArrayList<BillDetailBean>();
+        for (CommandDetailBean detail : list) {
+            BillDetailBean bean = new BillDetailBean();
+            bean.setBill(newBean);
+            bean.setDiscountRate(detail.getDiscountRate());
+            bean.setPrice(detail.getPrice());
+            bean.setProduct(detail.getProduct());
+            bean.setQuantity(detail.getQuantity());
+            bean.setTransferred(false);
+            bean.setVatApplicable(detail.getVatApplicable());
+            detail.setTransferred(true);
+            details.add(bean);
+        }
+        newBean.setDetails(details);
+        newBean.setDiscountRate(command.getDiscountRate());
+        Date dueDate = calculateDueDate(newBean.getCreationDate(), paymentMode.getDaysNumber(),
+                paymentMode.isMonthEnd(), paymentMode.getAdditionalDays());
+        newBean.setDueDate(dueDate);
+        newBean.setPaid(false);
+        newBean.setRemark(command.getRemark());
+        billService.create(newBean);
+        // TODO review
+        boolean allDetailTransferred = true;
+        for (CommandDetailBean detailBean : command.getDetails()) {
+            if (!detailBean.isTransferred()) {
+                allDetailTransferred = false;
+                break;
+            }
+        }
+        if (allDetailTransferred) {
+            command.setTransferred(true);
+        }
+        commandService.update(command);
     }
 
     /**
@@ -431,9 +584,9 @@ public class TransferServiceImpl implements TransferService {
         newBean.setClosed(false);
         newBean.setCreationDate(new Date());
         // TODO implement the dates management
-//        newBean.setDateFirstRemember(dateFirstRemember);
-//        newBean.setDateFormalNotice(dateFormalNotice);
-//        newBean.setDateSecondRemember(dateSecondRemember);
+        // newBean.setDateFirstRemember(dateFirstRemember);
+        // newBean.setDateFormalNotice(dateFormalNotice);
+        // newBean.setDateSecondRemember(dateSecondRemember);
         List<BillDetailBean> details = new ArrayList<BillDetailBean>();
         for (CommandDetailBean detail : command.getDetails()) {
             BillDetailBean bean = new BillDetailBean();
@@ -482,13 +635,18 @@ public class TransferServiceImpl implements TransferService {
     private void billToCreditNoteTransfer(TransferBean model) {
         int transferMode = model.getTransferMode();
         List<? extends AbstractDocumentBean<?, ?>> documents = model.getDocuments();
+        Map<Long, List<BillDetailBean>> details = model.getBillDetails();
         switch (transferMode) {
         case 1:
             BillBean bill = (BillBean) documents.get(0);
             billToCreditNoteFullTransfer(bill);
             break;
         case 2:
-//            billToCreditNotePartialTransfer(model);
+        case 4:
+            Set<Long> ids = (Set<Long>) details.keySet();
+            for (Long id : ids) {
+                billToCreditNotePartialTransfer(details.get(id));
+            }
             break;
         case 3:
             List<BillBean> bills = new ArrayList<BillBean>();
@@ -497,12 +655,41 @@ public class TransferServiceImpl implements TransferService {
                 billToCreditNoteFullTransfer(bean);
             }
             break;
-        case 4:
-//            billToCreditNotePartialGroupedTransfer(model);
-            break;
         default:
             break;
         }
+    }
+    
+    /**
+     * Transfer a list of {@link BillDetailBean} to credit note in full transfer.
+     * 
+     * @param list the list of {@link BillDetailBean} to transfer
+     */
+    private void billToCreditNotePartialTransfer(List<BillDetailBean> list) {
+        BillBean bill = list.get(0).getBill();
+        CustomerBean customer = bill.getCustomer();
+        CreditNoteBean newBean = new CreditNoteBean(bill.getSociety(), customer);
+        newBean.setCreationDate(new Date());
+        newBean.setBillingAddress(bill.getBillingAddress());
+        // to force to create a new billing address
+        newBean.getBillingAddress().setId(null);
+        List<CreditNoteDetailBean> details = new ArrayList<CreditNoteDetailBean>();
+        for (BillDetailBean detail : list) {
+            CreditNoteDetailBean bean = new CreditNoteDetailBean();
+            bean.setCreditNote(newBean);
+            bean.setDiscountRate(detail.getDiscountRate());
+            bean.setPrice(detail.getPrice());
+            bean.setProduct(detail.getProduct());
+            bean.setQuantity(detail.getQuantity());
+            bean.setVatApplicable(detail.getVatApplicable());
+            detail.setTransferred(true);
+            details.add(bean);
+        }
+        newBean.setDetails(details);
+        newBean.setRemark(bill.getRemark());
+        creditNoteService.create(newBean);
+        // bill.setClosed(true);
+        billService.update(bill);
     }
 
     /**
@@ -526,91 +713,90 @@ public class TransferServiceImpl implements TransferService {
             bean.setProduct(detail.getProduct());
             bean.setQuantity(detail.getQuantity());
             bean.setVatApplicable(detail.getVatApplicable());
+            detail.setTransferred(true);
             details.add(bean);
         }
         newBean.setDetails(details);
         newBean.setRemark(bill.getRemark());
         creditNoteService.create(newBean);
-//        bill.setClosed(true);
-        for (BillDetailBean bean : bill.getDetails()) {
-            bean.setTransferred(true);
-        }
+        // bill.setClosed(true);
         billService.update(bill);
     }
-    
-//    public static void main(String[] args) {
-//        TransferServiceImpl serviceImpl = new TransferServiceImpl();
-//        Date today = new Date();
-//        Date date = serviceImpl.calculateDueDate(today, 0, false, 0);
-//        System.out.println(serviceImpl.dateEquals(date, today));
-//        Date date2 = serviceImpl.calculateDueDate(today, 30, false, 0);
-//        Calendar instance = GregorianCalendar.getInstance();
-//        instance.set(Calendar.DAY_OF_MONTH, 29);
-//        instance.set(Calendar.MONTH, 7);
-//        instance.set(Calendar.YEAR, 2011);
-//        Date time = instance.getTime();
-//        System.out.println(serviceImpl.dateEquals(date2, time));
-//        Date date3 = serviceImpl.calculateDueDate(today, 60, false, 0);
-//        instance.set(Calendar.DAY_OF_MONTH, 28);
-//        instance.set(Calendar.MONTH, 8);
-//        instance.set(Calendar.YEAR, 2011);
-//        time = instance.getTime();
-//        System.out.println(serviceImpl.dateEquals(date3, time));
-//        Date date4 = serviceImpl.calculateDueDate(today, 90, false, 0);
-//        instance.set(Calendar.DAY_OF_MONTH, 28);
-//        instance.set(Calendar.MONTH, 9);
-//        instance.set(Calendar.YEAR, 2011);
-//        time = instance.getTime();
-//        System.out.println(serviceImpl.dateEquals(date4, time));
-//        Date date5 = serviceImpl.calculateDueDate(today, 30, true, 0);
-//        instance.set(Calendar.DAY_OF_MONTH, 31);
-//        instance.set(Calendar.MONTH, 7);
-//        instance.set(Calendar.YEAR, 2011);
-//        time = instance.getTime();
-//        System.out.println(serviceImpl.dateEquals(date5, time));
-//        Date date6 = serviceImpl.calculateDueDate(today, 60, true, 0);
-//        instance.set(Calendar.DAY_OF_MONTH, 30);
-//        instance.set(Calendar.MONTH, 8);
-//        instance.set(Calendar.YEAR, 2011);
-//        time = instance.getTime();
-//        System.out.println(serviceImpl.dateEquals(date6, time));
-//        Date date7 = serviceImpl.calculateDueDate(today, 90, true, 0);
-//        instance.set(Calendar.DAY_OF_MONTH, 31);
-//        instance.set(Calendar.MONTH, 9);
-//        instance.set(Calendar.YEAR, 2011);
-//        time = instance.getTime();
-//        System.out.println(serviceImpl.dateEquals(date7, time));
-//
-//        Date date8 = serviceImpl.calculateDueDate(today, 30, true, 10);
-//        instance.set(Calendar.DAY_OF_MONTH, 10);
-//        instance.set(Calendar.MONTH, 8);
-//        instance.set(Calendar.YEAR, 2011);
-//        time = instance.getTime();
-//        System.out.println(serviceImpl.dateEquals(date8, time));
-//        Date date9 = serviceImpl.calculateDueDate(today, 60, true, 10);
-//        instance.set(Calendar.DAY_OF_MONTH, 10);
-//        instance.set(Calendar.MONTH, 9);
-//        instance.set(Calendar.YEAR, 2011);
-//        time = instance.getTime();
-//        System.out.println(serviceImpl.dateEquals(date9, time));
-//        Date date10 = serviceImpl.calculateDueDate(today, 90, true, 10);
-//        instance.set(Calendar.DAY_OF_MONTH, 10);
-//        instance.set(Calendar.MONTH, 10);
-//        instance.set(Calendar.YEAR, 2011);
-//        time = instance.getTime();
-//        System.out.println(serviceImpl.dateEquals(date10, time));
-//    }
-//
-//    /**
-//     * Checks the day, month and year are equal.
-//     */
-//    public boolean dateEquals(Date d1, Date d2) {
-//        if (d1 == null || d2 == null) {
-//            return false;
-//        }
-//        return d1.getDate() == d2.getDate() && d1.getMonth() == d2.getMonth() && d1.getYear() == d2.getYear();
-//    }
-    
+
+    // public static void main(String[] args) {
+    // TransferServiceImpl serviceImpl = new TransferServiceImpl();
+    // Date today = new Date();
+    // Date date = serviceImpl.calculateDueDate(today, 0, false, 0);
+    // System.out.println(serviceImpl.dateEquals(date, today));
+    // Date date2 = serviceImpl.calculateDueDate(today, 30, false, 0);
+    // Calendar instance = GregorianCalendar.getInstance();
+    // instance.set(Calendar.DAY_OF_MONTH, 29);
+    // instance.set(Calendar.MONTH, 7);
+    // instance.set(Calendar.YEAR, 2011);
+    // Date time = instance.getTime();
+    // System.out.println(serviceImpl.dateEquals(date2, time));
+    // Date date3 = serviceImpl.calculateDueDate(today, 60, false, 0);
+    // instance.set(Calendar.DAY_OF_MONTH, 28);
+    // instance.set(Calendar.MONTH, 8);
+    // instance.set(Calendar.YEAR, 2011);
+    // time = instance.getTime();
+    // System.out.println(serviceImpl.dateEquals(date3, time));
+    // Date date4 = serviceImpl.calculateDueDate(today, 90, false, 0);
+    // instance.set(Calendar.DAY_OF_MONTH, 28);
+    // instance.set(Calendar.MONTH, 9);
+    // instance.set(Calendar.YEAR, 2011);
+    // time = instance.getTime();
+    // System.out.println(serviceImpl.dateEquals(date4, time));
+    // Date date5 = serviceImpl.calculateDueDate(today, 30, true, 0);
+    // instance.set(Calendar.DAY_OF_MONTH, 31);
+    // instance.set(Calendar.MONTH, 7);
+    // instance.set(Calendar.YEAR, 2011);
+    // time = instance.getTime();
+    // System.out.println(serviceImpl.dateEquals(date5, time));
+    // Date date6 = serviceImpl.calculateDueDate(today, 60, true, 0);
+    // instance.set(Calendar.DAY_OF_MONTH, 30);
+    // instance.set(Calendar.MONTH, 8);
+    // instance.set(Calendar.YEAR, 2011);
+    // time = instance.getTime();
+    // System.out.println(serviceImpl.dateEquals(date6, time));
+    // Date date7 = serviceImpl.calculateDueDate(today, 90, true, 0);
+    // instance.set(Calendar.DAY_OF_MONTH, 31);
+    // instance.set(Calendar.MONTH, 9);
+    // instance.set(Calendar.YEAR, 2011);
+    // time = instance.getTime();
+    // System.out.println(serviceImpl.dateEquals(date7, time));
+    //
+    // Date date8 = serviceImpl.calculateDueDate(today, 30, true, 10);
+    // instance.set(Calendar.DAY_OF_MONTH, 10);
+    // instance.set(Calendar.MONTH, 8);
+    // instance.set(Calendar.YEAR, 2011);
+    // time = instance.getTime();
+    // System.out.println(serviceImpl.dateEquals(date8, time));
+    // Date date9 = serviceImpl.calculateDueDate(today, 60, true, 10);
+    // instance.set(Calendar.DAY_OF_MONTH, 10);
+    // instance.set(Calendar.MONTH, 9);
+    // instance.set(Calendar.YEAR, 2011);
+    // time = instance.getTime();
+    // System.out.println(serviceImpl.dateEquals(date9, time));
+    // Date date10 = serviceImpl.calculateDueDate(today, 90, true, 10);
+    // instance.set(Calendar.DAY_OF_MONTH, 10);
+    // instance.set(Calendar.MONTH, 10);
+    // instance.set(Calendar.YEAR, 2011);
+    // time = instance.getTime();
+    // System.out.println(serviceImpl.dateEquals(date10, time));
+    // }
+    //
+    // /**
+    // * Checks the day, month and year are equal.
+    // */
+    // public boolean dateEquals(Date d1, Date d2) {
+    // if (d1 == null || d2 == null) {
+    // return false;
+    // }
+    // return d1.getDate() == d2.getDate() && d1.getMonth() == d2.getMonth() &&
+    // d1.getYear() == d2.getYear();
+    // }
+
     /**
      * @param model the wrapper contains all the beans to be transferred
      */
@@ -634,7 +820,7 @@ public class TransferServiceImpl implements TransferService {
             deliveryOrderToBillFullTransfer(deliveryOrder);
             break;
         case 2:
-//            commandToDeliveryOrderPartialTransfer(model);
+            // commandToDeliveryOrderPartialTransfer(model);
             break;
         case 3:
             List<DeliveryOrderBean> deliveryOrders = new ArrayList<DeliveryOrderBean>();
@@ -644,12 +830,13 @@ public class TransferServiceImpl implements TransferService {
             }
             break;
         case 4:
-//            estimateToCommandPartialGroupedTransfer(model);
+            // estimateToCommandPartialGroupedTransfer(model);
             break;
         default:
             break;
         }
     }
+
     /**
      * Transfer a delivery order to bill in full transfer.
      * 
@@ -664,9 +851,9 @@ public class TransferServiceImpl implements TransferService {
         newBean.setClosed(false);
         newBean.setCreationDate(new Date());
         // TODO implement the dates management
-//        newBean.setDateFirstRemember(dateFirstRemember);
-//        newBean.setDateFormalNotice(dateFormalNotice);
-//        newBean.setDateSecondRemember(dateSecondRemember);
+        // newBean.setDateFirstRemember(dateFirstRemember);
+        // newBean.setDateFormalNotice(dateFormalNotice);
+        // newBean.setDateSecondRemember(dateSecondRemember);
         List<BillDetailBean> details = new ArrayList<BillDetailBean>();
         for (DeliveryOrderDetailBean detail : deliveryOrder.getDetails()) {
             BillDetailBean bean = new BillDetailBean();
@@ -693,7 +880,6 @@ public class TransferServiceImpl implements TransferService {
         }
         deliveryOrderService.update(deliveryOrder);
     }
-
 
     /**
      * @return the estimateService

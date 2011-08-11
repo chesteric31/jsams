@@ -16,11 +16,6 @@ import be.jsams.common.bean.model.LegalFormBean;
 public class LegalForm extends AbstractTranslatableIdentity {
 
     /**
-     * Serial Version UID
-     */
-    private static final long serialVersionUID = 7811347200401042583L;
-
-    /**
      * Constructor.
      */
     public LegalForm() {
