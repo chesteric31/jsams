@@ -814,13 +814,18 @@ public class TransferServiceImpl implements TransferService {
     private void deliveryOrderToBillTransfer(TransferBean model) {
         int transferMode = model.getTransferMode();
         List<? extends AbstractDocumentBean<?, ?>> documents = model.getDocuments();
+        Map<Long, List<DeliveryOrderDetailBean>> details = model.getDeliveryOrderDetails();
         switch (transferMode) {
         case 1:
             DeliveryOrderBean deliveryOrder = (DeliveryOrderBean) documents.get(0);
             deliveryOrderToBillFullTransfer(deliveryOrder);
             break;
         case 2:
-            // commandToDeliveryOrderPartialTransfer(model);
+        case 4:
+            Set<Long> ids = (Set<Long>) details.keySet();
+            for (Long id : ids) {
+                deliveryOrderToBillPartialTransfer(details.get(id));
+            }
             break;
         case 3:
             List<DeliveryOrderBean> deliveryOrders = new ArrayList<DeliveryOrderBean>();
@@ -829,12 +834,52 @@ public class TransferServiceImpl implements TransferService {
                 deliveryOrderToBillFullTransfer(bean);
             }
             break;
-        case 4:
-            // estimateToCommandPartialGroupedTransfer(model);
-            break;
         default:
             break;
         }
+    }
+    
+    /**
+     * Transfer a list of {@link DeliveryOrderDetailBean} to bill in full transfer.
+     * 
+     * @param list the list of {@link DeliveryOrderDetailBean} to transfer
+     */
+    private void deliveryOrderToBillPartialTransfer(List<DeliveryOrderDetailBean> list) {
+        DeliveryOrderBean deliveryOrder = list.get(0).getDeliveryOrder();
+        CustomerBean customer = deliveryOrder.getCustomer();
+        PaymentModeBean paymentMode = customer.getPaymentMode();
+        BillBean newBean = new BillBean(deliveryOrder.getSociety(), customer, paymentMode);
+        newBean.setBillingAddress(customer.getBillingAddress());
+        newBean.getBillingAddress().setId(null);
+        newBean.setClosed(false);
+        newBean.setCreationDate(new Date());
+        // TODO implement the dates management
+        // newBean.setDateFirstRemember(dateFirstRemember);
+        // newBean.setDateFormalNotice(dateFormalNotice);
+        // newBean.setDateSecondRemember(dateSecondRemember);
+        List<BillDetailBean> details = new ArrayList<BillDetailBean>();
+        for (DeliveryOrderDetailBean detail : list) {
+            BillDetailBean bean = new BillDetailBean();
+            bean.setBill(newBean);
+            bean.setDiscountRate(detail.getDiscountRate());
+            bean.setPrice(detail.getPrice());
+            bean.setProduct(detail.getProduct());
+            bean.setQuantity(detail.getQuantity());
+            bean.setTransferred(false);
+            bean.setVatApplicable(detail.getVatApplicable());
+            detail.setTransferred(true);
+            details.add(bean);
+        }
+        newBean.setDetails(details);
+        newBean.setDiscountRate(deliveryOrder.getDiscountRate());
+        Date dueDate = calculateDueDate(newBean.getCreationDate(), paymentMode.getDaysNumber(),
+                paymentMode.isMonthEnd(), paymentMode.getAdditionalDays());
+        newBean.setDueDate(dueDate);
+        newBean.setPaid(false);
+        newBean.setRemark(deliveryOrder.getRemark());
+        billService.create(newBean);
+        deliveryOrder.setTransferred(true);
+        deliveryOrderService.update(deliveryOrder);
     }
 
     /**
@@ -864,6 +909,7 @@ public class TransferServiceImpl implements TransferService {
             bean.setQuantity(detail.getQuantity());
             bean.setTransferred(false);
             bean.setVatApplicable(detail.getVatApplicable());
+            detail.setTransferred(true);
             details.add(bean);
         }
         newBean.setDetails(details);
@@ -875,9 +921,6 @@ public class TransferServiceImpl implements TransferService {
         newBean.setRemark(deliveryOrder.getRemark());
         billService.create(newBean);
         deliveryOrder.setTransferred(true);
-        for (DeliveryOrderDetailBean bean : deliveryOrder.getDetails()) {
-            bean.setTransferred(true);
-        }
         deliveryOrderService.update(deliveryOrder);
     }
 
