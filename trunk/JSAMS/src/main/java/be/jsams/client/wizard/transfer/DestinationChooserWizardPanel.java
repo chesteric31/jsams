@@ -1,8 +1,5 @@
 package be.jsams.client.wizard.transfer;
 
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-
 import javax.swing.JRadioButton;
 
 import be.jsams.client.i18n.JsamsI18nLabelResource;
@@ -58,50 +55,22 @@ public class DestinationChooserWizardPanel extends JsamsWizardPanel<TransferBean
         ViewFactory<TransferBean> viewFactory = getViewFactory();
         commandRadioButton = viewFactory.createBindingRadioComponent(getModel(), TransferBean.DESTINATION_TYPE_PROPERTY,
                 commandSelected, true, false);
-        commandRadioButton.addItemListener(new ItemListener() {
-            public void itemStateChanged(ItemEvent e) {
-                if (e.getStateChange() == ItemEvent.SELECTED) {
-                    update();
-                }
-            }
-        });
+
         deliveryOrderRadioButton = viewFactory.createBindingRadioComponent(getModel(),
                 TransferBean.DESTINATION_TYPE_PROPERTY, deliveryOrderSelected, true, false);
-        deliveryOrderRadioButton.addItemListener(new ItemListener() {
-            public void itemStateChanged(ItemEvent e) {
-                if (e.getStateChange() == ItemEvent.SELECTED) {
-                    update();
-                }
-            }
-        });
+
         billRadioButton = viewFactory.createBindingRadioComponent(getModel(), TransferBean.DESTINATION_TYPE_PROPERTY,
                 billSelected, true, false);
-        billRadioButton.addItemListener(new ItemListener() {
-            public void itemStateChanged(ItemEvent e) {
-                if (e.getStateChange() == ItemEvent.SELECTED) {
-                    update();
-                }
-            }
-        });
+
         creditNoteRadioButton = viewFactory.createBindingRadioComponent(getModel(),
                 TransferBean.DESTINATION_TYPE_PROPERTY, creditNoteSelected, true, false);
-        creditNoteRadioButton.addItemListener(new ItemListener() {
-            public void itemStateChanged(ItemEvent e) {
-                if (e.getStateChange() == ItemEvent.SELECTED) {
-                    update();
-                }
-            }
-        });
 
         FormLayout layout = new FormLayout("left:p, 3dlu, p", "p");
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
-        builder.setDefaultDialogBorder();
         builder.appendI15d(JsamsI18nLabelResource.LABEL_COMMAND.getKey(), commandRadioButton);
         builder.appendI15d(JsamsI18nLabelResource.LABEL_DELIVERY_ORDER.getKey(), deliveryOrderRadioButton);
         builder.appendI15d(JsamsI18nLabelResource.LABEL_BILL.getKey(), billRadioButton);
         builder.appendI15d(JsamsI18nLabelResource.LABEL_CREDIT_NOTE.getKey(), creditNoteRadioButton);
-
-        builder.nextLine();
         this.add(builder.getPanel());
     }
 
@@ -109,8 +78,8 @@ public class DestinationChooserWizardPanel extends JsamsWizardPanel<TransferBean
      * {@inheritDoc}
      */
     public void update() {
-        setFinishButtonEnabled(false);
-        setBackButtonEnabled(true);
+//        setFinishButtonEnabled(false);
+//        setBackButtonEnabled(true);
         super.update();
     }
 

@@ -64,8 +64,8 @@ public class DetailsChooserWizardPanel extends JsamsWizardPanel<TransferBean, De
      * {@inheritDoc}
      */
     public void update() {
-        setFinishButtonEnabled(false);
-        setBackButtonEnabled(true);
+//        setFinishButtonEnabled(false);
+//        setBackButtonEnabled(true);
         updateContainer();
         super.update();
     }
@@ -125,26 +125,6 @@ public class DetailsChooserWizardPanel extends JsamsWizardPanel<TransferBean, De
             break;
         }
     }
-    
-//    /**
-//     * Set default table renderer
-//     * 
-//     * @param table the table to set the default renderer
-//     */
-//    private void setTableRenderer(JsamsTable table) {
-//        JTableHeader tableHeader = table.getTableHeader();
-//        TableCellRenderer headerRenderer = tableHeader.getDefaultRenderer();
-//
-//        ((DefaultTableCellRenderer) headerRenderer).setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
-//        table.setAutoCreateRowSorter(true);
-//        JsamsTableCellRenderer defaultCellRenderer = new JsamsTableCellRenderer();
-//        table.setDefaultRenderer(Long.class, defaultCellRenderer);
-//        table.setDefaultRenderer(Integer.class, defaultCellRenderer);
-//        table.setDefaultRenderer(Double.class, defaultCellRenderer);
-//        table.setDefaultRenderer(String.class, defaultCellRenderer);
-//        table.setDefaultRenderer(Boolean.class, new JsamsBooleanTableCellRenderer());
-//        table.setDefaultRenderer(Date.class, defaultCellRenderer);
-//    }
 
     /**
      * {@inheritDoc}

@@ -1,8 +1,5 @@
 package be.jsams.client.wizard.transfer;
 
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-
 import javax.swing.JRadioButton;
 
 import be.jsams.client.i18n.JsamsI18nLabelResource;
@@ -59,51 +56,23 @@ public class TransferModeChooserWizardPanel extends JsamsWizardPanel<TransferBea
         ViewFactory<TransferBean> viewFactory = getViewFactory();
         fullTransferRadioButton = viewFactory.createBindingRadioComponent(getModel(),
                 TransferBean.TRANSFER_MODE_PROPERTY, fullModeSelected, true, false);
-        fullTransferRadioButton.addItemListener(new ItemListener() {
-            public void itemStateChanged(ItemEvent e) {
-                if (e.getStateChange() == ItemEvent.SELECTED) {
-                    update();
-                }
-            }
-        });
+
         partialTranferRadioButton = viewFactory.createBindingRadioComponent(getModel(),
                 TransferBean.TRANSFER_MODE_PROPERTY, partialModeSelected, true, false);
-        partialTranferRadioButton.addItemListener(new ItemListener() {
-            public void itemStateChanged(ItemEvent e) {
-                if (e.getStateChange() == ItemEvent.SELECTED) {
-                    update();
-                }
-            }
-        });
+
         fullGroupedTranferRadioButton = viewFactory.createBindingRadioComponent(getModel(),
                 TransferBean.TRANSFER_MODE_PROPERTY, fullGroupedModeSelected, true, false);
-        fullGroupedTranferRadioButton.addItemListener(new ItemListener() {
-            public void itemStateChanged(ItemEvent e) {
-                if (e.getStateChange() == ItemEvent.SELECTED) {
-                    update();
-                }
-            }
-        });
+
         partialGroupedTranferRadioButton = viewFactory.createBindingRadioComponent(getModel(),
                 TransferBean.TRANSFER_MODE_PROPERTY, partialGroupedModeSelected, true, false);
-        partialGroupedTranferRadioButton.addItemListener(new ItemListener() {
-            public void itemStateChanged(ItemEvent e) {
-                if (e.getStateChange() == ItemEvent.SELECTED) {
-                    update();
-                }
-            }
-        });
 
         FormLayout layout = new FormLayout("left:p, 3dlu, p", "p");
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
-        builder.setDefaultDialogBorder();
         builder.appendI15d(JsamsI18nLabelResource.LABEL_FULL_TRANSFER.getKey(), fullTransferRadioButton);
         builder.appendI15d(JsamsI18nLabelResource.LABEL_PARTIAL_TRANSFER.getKey(), partialTranferRadioButton);
         builder.appendI15d(JsamsI18nLabelResource.LABEL_FULL_GROUPED_TRANSFER.getKey(), fullGroupedTranferRadioButton);
         builder.appendI15d(JsamsI18nLabelResource.LABEL_PARTIAL_GROUPED_TRANSFER.getKey(),
                 partialGroupedTranferRadioButton);
-
-        builder.nextLine();
         this.add(builder.getPanel());
     }
 
@@ -111,8 +80,6 @@ public class TransferModeChooserWizardPanel extends JsamsWizardPanel<TransferBea
      * {@inheritDoc}
      */
     public void update() {
-        setFinishButtonEnabled(false);
-        setBackButtonEnabled(true);
         super.update();
     }
 

@@ -18,7 +18,6 @@ import be.jsams.client.i18n.I18nString;
 import be.jsams.client.swing.component.JsamsDialog;
 import be.jsams.client.swing.component.JsamsLabel;
 import be.jsams.client.swing.component.JsamsStatusBar;
-import be.jsams.client.swing.utils.DialogUtil;
 import be.jsams.client.swing.utils.IconUtil;
 import be.jsams.client.wizard.DefaultJsamsWizardComponent;
 import be.jsams.client.wizard.JsamsWizardButtonPanel;
@@ -76,7 +75,6 @@ public abstract class AbstractWizardDialog<B extends AbstractIdentityBean<?, ?>,
         this.logoFileName = logoFileName;
         preInitComponents();
         initComponents();
-//        setLocationRelativeTo(null);
         setResizable(false);
         component.updateComponents();
         setVisible(true);
@@ -136,8 +134,8 @@ public abstract class AbstractWizardDialog<B extends AbstractIdentityBean<?, ?>,
                 setPanelTitle(((JsamsWizardPanel<?, ?>) event.getNewValue()).getPanelTitle());
             }
         });
-        this.pack();
-        DialogUtil.centerComponentOnScreen(this);
+//        this.pack();
+//        DialogUtil.centerComponentOnScreen(this);
     }
     
     /**
@@ -171,6 +169,7 @@ public abstract class AbstractWizardDialog<B extends AbstractIdentityBean<?, ?>,
      */
     public void setPanelTitle(I18nString title) {
         label.setText(title);
+        pack();
     }
 
     /**
