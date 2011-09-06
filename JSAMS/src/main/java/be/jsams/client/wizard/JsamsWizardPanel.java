@@ -9,7 +9,6 @@ import be.jsams.client.model.dialog.AbstractWizardDialog;
 import be.jsams.client.swing.component.JsamsLabel;
 import be.jsams.client.swing.component.JsamsStatusBar;
 import be.jsams.client.swing.utils.DialogUtil;
-import be.jsams.client.wizard.transfer.TransferWizardDialog;
 import be.jsams.common.bean.model.AbstractIdentityBean;
 import be.jsams.common.bean.view.ViewFactory;
 
@@ -66,7 +65,6 @@ public abstract class JsamsWizardPanel<B extends AbstractIdentityBean<?, ?>, V e
      * Updating
      */
     public void update() {
-        TransferWizardDialog parent = (TransferWizardDialog) this.getRootPane().getParent();
         parent.pack();
         DialogUtil.centerComponentOnScreen(parent);
     }

@@ -54,7 +54,6 @@ public class ProductCategoryDaoImpl extends DaoImpl<ProductCategory> implements 
         if (!StringUtils.isNullOrEmpty(nameNl)) {
             queryBuilder.append(" AND c.labelNl LIKE '%" + nameNl + "%'");
         }
-
         Query query = getEntityManager().createQuery(queryBuilder.toString());
         return query.getResultList();
     }
