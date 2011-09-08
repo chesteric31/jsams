@@ -260,4 +260,18 @@ public abstract class JsamsWizardPanel<B extends AbstractIdentityBean<?, ?>, V e
         this.validator = validator;
     }
 
+    /**
+     * @return the parent
+     */
+    public AbstractWizardDialog<?, ?> getParentDialog() {
+        return parent;
+    }
+
+    /**
+     * @param parent the parent to set
+     */
+    public void setParentDialog(AbstractWizardDialog<?, ?> parent) {
+        this.parent = parent;
+    }
+    
 }

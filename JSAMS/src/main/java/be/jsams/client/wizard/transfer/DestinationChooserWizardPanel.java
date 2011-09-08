@@ -96,6 +96,7 @@ public class DestinationChooserWizardPanel extends JsamsWizardPanel<TransferBean
      * {@inheritDoc}
      */
     public void back() {
+        getParentDialog().getStatusBar().clear();
         switchPanel(TransferWizardDialog.FIRST_PANEL);
     }
 
