@@ -247,6 +247,7 @@ public class SummaryTransferWizardPanel extends JsamsWizardPanel<TransferBean, S
      * {@inheritDoc}
      */
     public void back() {
+        getParentDialog().getStatusBar().clear();
         remove(getComponentCount() - 1);
         int panelToSwitch = 0;
         switch (getModel().getTransferMode()) {

@@ -402,6 +402,7 @@ public abstract class AbstractDocumentChooserWizardPanel<V extends Validator<Tra
      * {@inheritDoc}
      */
     public void back() {
+        getParentDialog().getStatusBar().clear();
         remove(getComponentCount() - 1);
         List<? extends AbstractDocumentBean<?, ?>> documents = getModel().getDocuments();
         if (documents != null) {

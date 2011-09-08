@@ -33,6 +33,7 @@ public class JsamsBooleanTableCellRenderer extends JCheckBox implements TableCel
         super();
         setHorizontalAlignment(JLabel.CENTER);
         setBorderPainted(true);
+        setOpaque(true);
     }
 
     /**
@@ -40,14 +41,23 @@ public class JsamsBooleanTableCellRenderer extends JCheckBox implements TableCel
      */
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
             int row, int column) {
-
-        if (row % 2 == 0 && !isSelected) {
-            setBackground(Color.YELLOW);
-        } else if (isSelected) {
+        if (isSelected) {
             setBackground(table.getSelectionBackground());
         } else {
-            setBackground(Color.WHITE);
+            if (row % 2 == 0) {
+                setBackground(Color.WHITE);
+            } else {
+                setBackground(UIManager.getColor("Table.alternateRowColor"));
+            }
         }
+
+//        if (row % 2 == 0 && !isSelected) {
+//            setBackground(Color.YELLOW);
+//        } else if (isSelected) {
+//            setBackground(table.getSelectionBackground());
+//        } else {
+//            setBackground(Color.WHITE);
+//        }
         
         setSelected((value != null && ((Boolean) value).booleanValue()));
 
@@ -56,7 +66,6 @@ public class JsamsBooleanTableCellRenderer extends JCheckBox implements TableCel
         } else {
             setBorder(NO_FOCUS_BORDER);
         }
-        setBackground(Color.RED);
         return this;
     }
 

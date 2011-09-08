@@ -140,6 +140,7 @@ public class DetailsChooserWizardPanel extends JsamsWizardPanel<TransferBean, De
      * {@inheritDoc}
      */
     public void back() {
+        getParentDialog().getStatusBar().clear();
         remove(getComponentCount() - 1);
         getModel().getSelectableDetails().clear();
         int transferMode = getModel().getTransferMode();

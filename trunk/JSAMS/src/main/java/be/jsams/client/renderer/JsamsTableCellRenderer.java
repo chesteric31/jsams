@@ -1,6 +1,5 @@
 package be.jsams.client.renderer;
 
-import java.awt.Color;
 import java.awt.Component;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
@@ -38,13 +37,7 @@ public class JsamsTableCellRenderer extends DefaultTableCellRenderer {
      */
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
             int row, int column) {
-        Component renderer = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-
-        if (row % 2 == 0 && !isSelected) {
-            renderer.setBackground(Color.YELLOW);
-        } else if (!isSelected) {
-            renderer.setBackground(Color.WHITE);
-        }
+        super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
 
         if (value instanceof Long) {
             this.setHorizontalAlignment(SwingConstants.RIGHT);
