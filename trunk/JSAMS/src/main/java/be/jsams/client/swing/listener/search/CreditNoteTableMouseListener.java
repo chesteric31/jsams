@@ -28,7 +28,7 @@ public class CreditNoteTableMouseListener implements MouseListener {
                 int selectedRowModel = table.convertRowIndexToModel(selectedRow);
                 CreditNoteTableModel model = (CreditNoteTableModel) table.getModel();
                 new EditCreditNoteDialog(JsamsI18nResource.TITLE_EDIT_CREDIT_NOTE, model.getRow(selectedRowModel));
-                table.updateUI();
+                table.repaint();
             }
         }
     }

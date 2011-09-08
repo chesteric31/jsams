@@ -27,7 +27,7 @@ public class CustomerTableMouseListener implements MouseListener {
                 int selectedRowModel = table.convertRowIndexToModel(selectedRow);
                 CustomerTableModel model = (CustomerTableModel) table.getModel();
                 new EditCustomerDialog(JsamsI18nResource.TITLE_EDIT_CUSTOMER, model.getRow(selectedRowModel));
-                table.updateUI();
+                table.repaint();
             }
         }
     }

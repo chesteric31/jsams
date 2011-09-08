@@ -102,22 +102,6 @@ public class SearchCommandPanel<L extends MouseListener> extends
         }
     }
 
-//    /**
-//     * {@inheritDoc}
-//     */
-//    @Override
-//    protected void performButtonRemove() {
-//        int selectedRow = getResultTable().getSelectedRow();
-//        if (selectedRow > -1) {
-//            int selectedRowModel = getResultTable().convertRowIndexToModel(selectedRow);
-//            CommandTableModel model = (CommandTableModel) getResultTable().getModel();
-//            CommandBean beanToDelete = model.getRow(selectedRowModel);
-//            getService().delete(beanToDelete);
-//            model.remove(selectedRowModel);
-//            updateUI();
-//        }
-//    }
-
     /**
      * {@inheritDoc}
      */

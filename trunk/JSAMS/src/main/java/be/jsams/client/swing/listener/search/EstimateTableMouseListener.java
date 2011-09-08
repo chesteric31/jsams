@@ -27,7 +27,7 @@ public class EstimateTableMouseListener implements MouseListener {
                 int selectedRowModel = table.convertRowIndexToModel(selectedRow);
                 EstimateTableModel model = (EstimateTableModel) table.getModel();
                 new EditEstimateDialog(JsamsI18nResource.TITLE_EDIT_ESTIMATE, model.getRow(selectedRowModel));
-                table.updateUI();
+                table.repaint();
             }
         }
     }

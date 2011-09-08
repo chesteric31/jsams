@@ -29,7 +29,7 @@ public class DeliveryOrderTableMouseListener implements MouseListener {
                 DeliveryOrderTableModel model = (DeliveryOrderTableModel) table.getModel();
                 new EditDeliveryOrderDialog(JsamsI18nResource.TITLE_EDIT_DELIVERY_ORDER,
                         model.getRow(selectedRowModel));
-                table.updateUI();
+                table.repaint();
             }
         }
     }

@@ -28,7 +28,7 @@ public class ProductCategoryTableMouseListener implements MouseListener {
                 ProductCategoryTableModel model = (ProductCategoryTableModel) table.getModel();
                 new EditProductCategoryDialog(JsamsI18nResource.TITLE_EDIT_PRODUCT_CATEGORY, model
                         .getRow(selectedRowModel));
-                table.updateUI();
+                table.repaint();
             }
         }
     }
