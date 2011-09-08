@@ -27,7 +27,7 @@ public class AgentTableMouseListener implements MouseListener {
                 int selectedRowModel = table.convertRowIndexToModel(selectedRow);
                 AgentTableModel model = (AgentTableModel) table.getModel();
                 new EditAgentDialog(JsamsI18nResource.TITLE_EDIT_AGENT, model.getRow(selectedRowModel));
-                table.updateUI();
+                table.repaint();
             }
         }
     }

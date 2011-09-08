@@ -28,7 +28,7 @@ public class CommandTableMouseListener implements MouseListener {
                 int selectedRowModel = table.convertRowIndexToModel(selectedRow);
                 CommandTableModel model = (CommandTableModel) table.getModel();
                 new EditCommandDialog(JsamsI18nResource.TITLE_EDIT_COMMAND, model.getRow(selectedRowModel));
-                table.updateUI();
+                table.repaint();
             }
         }
     }

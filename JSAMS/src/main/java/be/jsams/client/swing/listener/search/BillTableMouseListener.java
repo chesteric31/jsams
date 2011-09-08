@@ -28,7 +28,7 @@ public class BillTableMouseListener implements MouseListener {
                 int selectedRowModel = table.convertRowIndexToModel(selectedRow);
                 BillTableModel model = (BillTableModel) table.getModel();
                 new EditBillDialog(JsamsI18nResource.TITLE_EDIT_BILL, model.getRow(selectedRowModel));
-                table.updateUI();
+                table.repaint();
             }
         }
     }
