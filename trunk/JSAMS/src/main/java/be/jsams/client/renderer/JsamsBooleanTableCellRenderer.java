@@ -45,9 +45,9 @@ public class JsamsBooleanTableCellRenderer extends JCheckBox implements TableCel
             setBackground(table.getSelectionBackground());
         } else {
             if (row % 2 == 0) {
-                setBackground(Color.WHITE);
-            } else {
                 setBackground(UIManager.getColor("Table.alternateRowColor"));
+            } else {
+                setBackground(Color.WHITE);
             }
         }
 
