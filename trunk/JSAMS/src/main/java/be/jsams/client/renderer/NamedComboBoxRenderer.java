@@ -15,21 +15,21 @@ import be.jsams.common.bean.model.AbstractNamedIdentityBean;
  * @author chesteric31
  * @version $$Rev$$ $$Date::                  $$ $$Author$$
  */
-public class NamedComboBoxRenderer implements ListCellRenderer<AbstractNamedIdentityBean<?, ?>> {
+public class NamedComboBoxRenderer implements ListCellRenderer {
 
     private DefaultListCellRenderer defaultRenderer = new DefaultListCellRenderer();
 
     /**
      * {@inheritDoc}
      */
-    public Component getListCellRendererComponent(JList<? extends AbstractNamedIdentityBean<?, ?>> list,
-            AbstractNamedIdentityBean<?, ?> value, int index, boolean isSelected, boolean cellHasFocus) {
+    public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected,
+            boolean cellHasFocus) {
         String theText = " ";
 
         JLabel renderer = (JLabel) defaultRenderer.getListCellRendererComponent(list, value, index, isSelected,
                 cellHasFocus);
         if (value != null) {
-            theText = value.getName();
+            theText = ((AbstractNamedIdentityBean<?, ?>) value).getName();
         }
         renderer.setText(theText);
         return renderer;

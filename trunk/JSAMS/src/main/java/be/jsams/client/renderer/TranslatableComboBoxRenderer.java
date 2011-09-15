@@ -16,26 +16,26 @@ import be.jsams.common.bean.model.AbstractTranslatableIdentityBean;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class TranslatableComboBoxRenderer implements ListCellRenderer<AbstractTranslatableIdentityBean<?, ?>> {
+public class TranslatableComboBoxRenderer implements ListCellRenderer {
 
     private DefaultListCellRenderer defaultRenderer = new DefaultListCellRenderer();
 
     /**
      * {@inheritDoc}
      */
-    public Component getListCellRendererComponent(JList<? extends AbstractTranslatableIdentityBean<?, ?>> list,
-            AbstractTranslatableIdentityBean<?, ?> value, int index, boolean isSelected, boolean cellHasFocus) {
+    public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected,
+            boolean cellHasFocus) {
         String theText = " ";
 
         JLabel renderer = (JLabel) defaultRenderer.getListCellRendererComponent(list, value, index, isSelected,
                 cellHasFocus);
         if (value != null) {
             if (UserContext.isFrench()) {
-                theText = value.getLabelFr();
+                theText = ((AbstractTranslatableIdentityBean<?, ?>) value).getLabelFr();
             } else if (UserContext.isDutch()) {
-                theText = value.getLabelNl();
+                theText = ((AbstractTranslatableIdentityBean<?, ?>) value).getLabelNl();
             } else {
-                theText = value.getLabel();
+                theText = ((AbstractTranslatableIdentityBean<?, ?>) value).getLabel();
             }
         }
         renderer.setText(theText);
