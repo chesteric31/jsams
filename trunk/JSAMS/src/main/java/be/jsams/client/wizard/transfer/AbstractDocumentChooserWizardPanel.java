@@ -2,7 +2,6 @@ package be.jsams.client.wizard.transfer;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import javax.swing.JCheckBox;
 import javax.swing.JPanel;
@@ -20,7 +19,6 @@ import be.jsams.common.bean.model.sale.BillBean;
 import be.jsams.common.bean.model.sale.CommandBean;
 import be.jsams.common.bean.model.sale.DeliveryOrderBean;
 import be.jsams.common.bean.model.sale.EstimateBean;
-import be.jsams.common.bean.model.sale.detail.AbstractDetailBean;
 import be.jsams.common.bean.model.sale.detail.BillDetailBean;
 import be.jsams.common.bean.model.sale.detail.CommandDetailBean;
 import be.jsams.common.bean.model.sale.detail.DeliveryOrderDetailBean;
@@ -407,26 +405,6 @@ public abstract class AbstractDocumentChooserWizardPanel<V extends Validator<Tra
         List<? extends AbstractDocumentBean<?, ?>> documents = getModel().getDocuments();
         if (documents != null) {
             documents.clear();
-        }
-        Map<Long, List<BillDetailBean>> billDetails = getModel().getBillDetails();
-        if (billDetails != null) {
-            billDetails.clear();
-        }
-        Map<Long, List<DeliveryOrderDetailBean>> deliveryOrderDetails = getModel().getDeliveryOrderDetails();
-        if (deliveryOrderDetails != null) {
-            deliveryOrderDetails.clear();
-        }
-        Map<Long, List<CommandDetailBean>> commandDetails = getModel().getCommandDetails();
-        if (commandDetails != null) {
-            commandDetails.clear();
-        }
-        Map<Long, List<EstimateDetailBean>> estimateDetails = getModel().getEstimateDetails();
-        if (estimateDetails != null) {
-            estimateDetails.clear();
-        }
-        List<? extends AbstractDetailBean<?, ?, ?>> selectableDetails = getModel().getSelectableDetails();
-        if (selectableDetails != null) {
-            selectableDetails.clear();
         }
         switchPanel(TransferWizardDialog.THIRD_PANEL);
     }

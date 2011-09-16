@@ -111,6 +111,7 @@ public class TransferModeChooserWizardPanel extends JsamsWizardPanel<TransferBea
      * {@inheritDoc}
      */
     public void back() {
+        getModel().setTransferMode(0);
         getParentDialog().getStatusBar().clear();
         switchPanel(TransferWizardDialog.SECOND_PANEL);
     }

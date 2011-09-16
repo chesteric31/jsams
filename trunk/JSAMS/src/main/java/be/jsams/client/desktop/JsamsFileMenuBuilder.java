@@ -9,6 +9,7 @@ import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.swing.action.ChooseSocietyAction;
 import be.jsams.client.swing.action.EditSocietyAction;
 import be.jsams.client.swing.action.ExitAction;
+import be.jsams.client.swing.action.GeneralParametersAction;
 import be.jsams.client.swing.action.PrinterParametersAction;
 import be.jsams.client.swing.component.JsamsMenu;
 import be.jsams.client.swing.component.JsamsMenuItem;
@@ -27,6 +28,7 @@ public class JsamsFileMenuBuilder extends AbstractMenuBuilder {
     private JsamsMenuItem closeMI;
     private JsamsMenuItem societyParametersMI;
     private JsamsMenuItem printerParametersMI;
+    private JsamsMenuItem generalParametersMI;
     private JsamsMenuItem exitMI;
     
     /**
@@ -55,6 +57,11 @@ public class JsamsFileMenuBuilder extends AbstractMenuBuilder {
         printerParametersMI.setAction(new PrinterParametersAction(printerParametersMI.getText(), printerParametersMI
                 .getIcon()));
         fileMenu.add(printerParametersMI);
+        generalParametersMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_GENERAL_PARAMETERS,
+                "actions/system-shutdown.png");
+        generalParametersMI.setAction(new GeneralParametersAction(generalParametersMI.getText(), generalParametersMI
+                .getIcon()));
+        fileMenu.add(generalParametersMI);
         fileMenu.add(new JSeparator());
         exitMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_EXIT_APPLICATION, "actions/system-log-out.png");
         exitMI.setAction(new ExitAction(exitMI.getText(), exitMI.getIcon()));
