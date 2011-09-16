@@ -162,7 +162,6 @@ public class OpenSocietyDialog extends JsamsDialog implements JsamsButtonsInterf
     public SocietyBeanBuilder getSocietyBeanBuilder() {
         return JsamsApplicationContext.getSocietyBeanBuilder();
     }
-    
 
     /**
      * Build the 'south panel' composed by a {@link JsamsButtonsPanel} {@link JsamsStatusBar}

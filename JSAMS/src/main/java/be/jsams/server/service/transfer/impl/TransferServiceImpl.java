@@ -30,7 +30,7 @@ import be.jsams.server.service.sale.EstimateService;
 import be.jsams.server.service.transfer.TransferService;
 
 /**
- * 
+ * Implementation the documents transfer service.
  * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$

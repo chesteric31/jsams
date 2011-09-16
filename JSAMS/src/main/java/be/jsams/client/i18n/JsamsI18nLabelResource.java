@@ -177,4 +177,10 @@ public final class JsamsI18nLabelResource {
 
     public static final I18nString LABEL_TRANSFER_SUMMARY = new I18nString("label.transfer.summary");
 
+    public static final I18nString LABEL_FIRST_REMEMBER_DAYS = new I18nString("label.first_remember_days");
+    
+    public static final I18nString LABEL_SECOND_REMEMBER_DAYS = new I18nString("label.second_remember_days");
+    
+    public static final I18nString LABEL_FORMAL_NOTICE_DAYS = new I18nString("label.formal_notice_days");
+
 }

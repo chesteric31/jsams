@@ -135,6 +135,29 @@ public class TransferBean extends AbstractIdentityBean<AbstractIdentity, Transfe
     }
 
     /**
+     * Removes all of the mappings from these maps.
+     * The map will be empty after this call returns.
+     */
+    public void clearDetails() {
+        if (billDetails != null) {
+            billDetails.clear();
+        }
+        if (deliveryOrderDetails != null) {
+            deliveryOrderDetails.clear();
+        }
+        if (commandDetails != null) {
+            commandDetails.clear();
+        }
+        if (estimateDetails != null) {
+            estimateDetails.clear();
+        }
+        if (selectableDetails != null) {
+            selectableDetails.clear();
+        }
+    }
+    
+
+    /**
      * @return the documents
      */
     public List<? extends AbstractDocumentBean<?, ?>> getDocuments() {

@@ -266,6 +266,11 @@ public class SummaryTransferWizardPanel extends JsamsWizardPanel<TransferBean, S
         default:
             break;
         }
+        getModel().clearDetails();
+        List<? extends AbstractDocumentBean<?, ?>> documents = getModel().getDocuments();
+        if (documents != null) {
+            documents.clear();
+        }
         switchPanel(panelToSwitch);
     }
 

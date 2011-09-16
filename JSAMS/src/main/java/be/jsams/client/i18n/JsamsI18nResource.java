@@ -268,5 +268,9 @@ public final class JsamsI18nResource {
     public static final I18nString COLUMN_DELIVERY_ORDER_ID = new I18nString("column.delivery_order.id");
 
     public static final I18nString COLUMN_BILL_ID = new I18nString("column.bill.id");
+
+    public static final I18nString MENU_ITEM_GENERAL_PARAMETERS = new I18nString("menu.item.general_parameters");
+    
+    public static final I18nString TITLE_EDIT_GENERAL_PARAMETERS = new I18nString("title.edit.general_parameters");
     
 }
