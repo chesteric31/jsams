@@ -7,6 +7,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.prefs.Preferences;
 
 import be.jsams.common.bean.model.PaymentModeBean;
 import be.jsams.common.bean.model.management.CustomerBean;
@@ -248,11 +249,15 @@ public class TransferServiceImpl implements TransferService {
         newBean.setBillingAddress(estimate.getBillingAddress());
         newBean.getBillingAddress().setId(null);
         newBean.setClosed(false);
-        newBean.setCreationDate(new Date());
-        // TODO implement the dates management
-        // newBean.setDateFirstRemember(dateFirstRemember);
-        // newBean.setDateFormalNotice(dateFormalNotice);
-        // newBean.setDateSecondRemember(dateSecondRemember);
+        Date creationDate = new Date();
+        newBean.setCreationDate(creationDate);
+        Date firstRemember = calculateDate(creationDate, getDays("firstRememberDays"));
+        newBean.setDateFirstRemember(firstRemember);
+        Date secondRemember = calculateDate(creationDate, getDays("firstRememberDays") + getDays("secondRememberDays"));
+        newBean.setDateSecondRemember(secondRemember);
+        Date formalNotice = calculateDate(creationDate, getDays("firstRememberDays") + getDays("secondRememberDays")
+                + getDays("formalNoticeDays"));
+        newBean.setDateFormalNotice(formalNotice);
         List<BillDetailBean> details = new ArrayList<BillDetailBean>();
         for (EstimateDetailBean detail : list) {
             BillDetailBean bean = new BillDetailBean();
@@ -300,11 +305,15 @@ public class TransferServiceImpl implements TransferService {
         newBean.setBillingAddress(estimate.getBillingAddress());
         newBean.getBillingAddress().setId(null);
         newBean.setClosed(false);
-        newBean.setCreationDate(new Date());
-        // TODO implement the dates management
-        // newBean.setDateFirstRemember(dateFirstRemember);
-        // newBean.setDateFormalNotice(dateFormalNotice);
-        // newBean.setDateSecondRemember(dateSecondRemember);
+        Date creationDate = new Date();
+        newBean.setCreationDate(creationDate);
+        Date firstRemember = calculateDate(creationDate, getDays("firstRememberDays"));
+        newBean.setDateFirstRemember(firstRemember);
+        Date secondRemember = calculateDate(creationDate, getDays("firstRememberDays") + getDays("secondRememberDays"));
+        newBean.setDateSecondRemember(secondRemember);
+        Date formalNotice = calculateDate(creationDate, getDays("firstRememberDays") + getDays("secondRememberDays")
+                + getDays("formalNoticeDays"));
+        newBean.setDateFormalNotice(formalNotice);
         List<BillDetailBean> details = new ArrayList<BillDetailBean>();
         for (EstimateDetailBean detail : estimate.getDetails()) {
             BillDetailBean bean = new BillDetailBean();
@@ -352,6 +361,23 @@ public class TransferServiceImpl implements TransferService {
             instance.add(Calendar.DAY_OF_YEAR, daysToAdd);
         }
         instance.add(Calendar.DAY_OF_YEAR, additionalDays);
+        dueDate = instance.getTime();
+        return dueDate;
+    }
+
+    /**
+     * Calculate a date following the initial date of the {@link BillBean},
+     * the days number, the boolean endMonth and the additional days.
+     * 
+     * @param initialDate the initial date to use
+     * @param daysNumber the days number
+     * @return the calculated date with the days number to add
+     */
+    private Date calculateDate(Date initialDate, int daysNumber) {
+        Date dueDate = null;
+        Calendar instance = GregorianCalendar.getInstance();
+        instance.setTime(initialDate);
+        instance.add(Calendar.DAY_OF_MONTH, daysNumber);
         dueDate = instance.getTime();
         return dueDate;
     }
@@ -530,11 +556,15 @@ public class TransferServiceImpl implements TransferService {
         newBean.setBillingAddress(command.getBillingAddress());
         newBean.getBillingAddress().setId(null);
         newBean.setClosed(false);
-        newBean.setCreationDate(new Date());
-        // TODO implement the dates management
-        // newBean.setDateFirstRemember(dateFirstRemember);
-        // newBean.setDateFormalNotice(dateFormalNotice);
-        // newBean.setDateSecondRemember(dateSecondRemember);
+        Date creationDate = new Date();
+        newBean.setCreationDate(creationDate);
+        Date firstRemember = calculateDate(creationDate, getDays("firstRememberDays"));
+        newBean.setDateFirstRemember(firstRemember);
+        Date secondRemember = calculateDate(creationDate, getDays("firstRememberDays") + getDays("secondRememberDays"));
+        newBean.setDateSecondRemember(secondRemember);
+        Date formalNotice = calculateDate(creationDate, getDays("firstRememberDays") + getDays("secondRememberDays")
+                + getDays("formalNoticeDays"));
+        newBean.setDateFormalNotice(formalNotice);
         List<BillDetailBean> details = new ArrayList<BillDetailBean>();
         for (CommandDetailBean detail : list) {
             BillDetailBean bean = new BillDetailBean();
@@ -582,11 +612,15 @@ public class TransferServiceImpl implements TransferService {
         newBean.setBillingAddress(command.getBillingAddress());
         newBean.getBillingAddress().setId(null);
         newBean.setClosed(false);
-        newBean.setCreationDate(new Date());
-        // TODO implement the dates management
-        // newBean.setDateFirstRemember(dateFirstRemember);
-        // newBean.setDateFormalNotice(dateFormalNotice);
-        // newBean.setDateSecondRemember(dateSecondRemember);
+        Date creationDate = new Date();
+        newBean.setCreationDate(creationDate);
+        Date firstRemember = calculateDate(creationDate, getDays("firstRememberDays"));
+        newBean.setDateFirstRemember(firstRemember);
+        Date secondRemember = calculateDate(creationDate, getDays("firstRememberDays") + getDays("secondRememberDays"));
+        newBean.setDateSecondRemember(secondRemember);
+        Date formalNotice = calculateDate(creationDate, getDays("firstRememberDays") + getDays("secondRememberDays")
+                + getDays("formalNoticeDays"));
+        newBean.setDateFormalNotice(formalNotice);
         List<BillDetailBean> details = new ArrayList<BillDetailBean>();
         for (CommandDetailBean detail : command.getDetails()) {
             BillDetailBean bean = new BillDetailBean();
@@ -852,11 +886,15 @@ public class TransferServiceImpl implements TransferService {
         newBean.setBillingAddress(customer.getBillingAddress());
         newBean.getBillingAddress().setId(null);
         newBean.setClosed(false);
-        newBean.setCreationDate(new Date());
-        // TODO implement the dates management
-        // newBean.setDateFirstRemember(dateFirstRemember);
-        // newBean.setDateFormalNotice(dateFormalNotice);
-        // newBean.setDateSecondRemember(dateSecondRemember);
+        Date creationDate = new Date();
+        newBean.setCreationDate(creationDate);
+        Date firstRemember = calculateDate(creationDate, getDays("firstRememberDays"));
+        newBean.setDateFirstRemember(firstRemember);
+        Date secondRemember = calculateDate(creationDate, getDays("firstRememberDays") + getDays("secondRememberDays"));
+        newBean.setDateSecondRemember(secondRemember);
+        Date formalNotice = calculateDate(creationDate, getDays("firstRememberDays") + getDays("secondRememberDays")
+                + getDays("formalNoticeDays"));
+        newBean.setDateFormalNotice(formalNotice);
         List<BillDetailBean> details = new ArrayList<BillDetailBean>();
         for (DeliveryOrderDetailBean detail : list) {
             BillDetailBean bean = new BillDetailBean();
@@ -894,11 +932,15 @@ public class TransferServiceImpl implements TransferService {
         newBean.setBillingAddress(customer.getBillingAddress());
         newBean.getBillingAddress().setId(null);
         newBean.setClosed(false);
-        newBean.setCreationDate(new Date());
-        // TODO implement the dates management
-        // newBean.setDateFirstRemember(dateFirstRemember);
-        // newBean.setDateFormalNotice(dateFormalNotice);
-        // newBean.setDateSecondRemember(dateSecondRemember);
+        Date creationDate = new Date();
+        newBean.setCreationDate(creationDate);
+        Date firstRemember = calculateDate(creationDate, getDays("firstRememberDays"));
+        newBean.setDateFirstRemember(firstRemember);
+        Date secondRemember = calculateDate(creationDate, getDays("firstRememberDays") + getDays("secondRememberDays"));
+        newBean.setDateSecondRemember(secondRemember);
+        Date formalNotice = calculateDate(creationDate, getDays("firstRememberDays") + getDays("secondRememberDays")
+                + getDays("formalNoticeDays"));
+        newBean.setDateFormalNotice(formalNotice);
         List<BillDetailBean> details = new ArrayList<BillDetailBean>();
         for (DeliveryOrderDetailBean detail : deliveryOrder.getDetails()) {
             BillDetailBean bean = new BillDetailBean();
@@ -922,6 +964,18 @@ public class TransferServiceImpl implements TransferService {
         billService.create(newBean);
         deliveryOrder.setTransferred(true);
         deliveryOrderService.update(deliveryOrder);
+    }
+
+    /**
+     * 
+     * @param key the key to use, firstRememberDays, secondRememberDays or formalNoticeDays 
+     * @return the number of days for the first remember, second remember &
+     *         formal notice following the stored preferences
+     */
+    private int getDays(final String key) {
+        Preferences prefsRoot = Preferences.userRoot();
+        Preferences jsamsPrefs = prefsRoot.node("be.jsams");
+        return Integer.valueOf(jsamsPrefs.get(key, "0"));
     }
 
     /**
