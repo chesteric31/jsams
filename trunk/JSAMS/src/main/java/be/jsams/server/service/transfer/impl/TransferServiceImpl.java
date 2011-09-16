@@ -443,6 +443,8 @@ public class TransferServiceImpl implements TransferService {
         newBean.setCustomer(customer);
         newBean.setCreationDate(new Date());
         newBean.setDeliveryAddress(command.getDeliveryAddress());
+        // to force to create a new delivery address
+        newBean.getDeliveryAddress().setId(null);
         List<DeliveryOrderDetailBean> details = new ArrayList<DeliveryOrderDetailBean>();
         for (CommandDetailBean detail : list) {
             DeliveryOrderDetailBean bean = new DeliveryOrderDetailBean();
