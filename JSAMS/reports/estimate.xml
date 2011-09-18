@@ -2,46 +2,46 @@
 <estimate xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:noNamespaceSchemaLocation="estimate.xsd">
 	<society>
-		<name></name>
-		<vat_number></vat_number>
+		<name>BTS</name>
+		<vat_number>BE123-456-789</vat_number>
 		<address>
-			<number></number>
-			<street></street>
-			<zip></zip>
-			<city></city>
+			<number>20</number>
+			<street>Rue du loup</street>
+			<zip>1000</zip>
+			<city>Bruxelles</city>
 		</address>
 		<contact_info>
-			<phone></phone>
-			<fax></fax>
+			<phone>0212457852</phone>
+			<fax>02124578963</fax>
 			<mobile></mobile>
-			<email></email>
+			<email>mail@mail.be</email>
 			<website></website>
 		</contact_info>
 	</society>
 	<customer>
-		<name></name>
-		<first_name></first_name>
+		<name>Leclient</name>
+		<first_name>Jean</first_name>
 		<address>
-			<number></number>
-			<street></street>
-			<zip></zip>
-			<city></city>
+			<number>1</number>
+			<street>Rue neuve</street>
+			<zip>1000</zip>
+			<city>Bruxelles</city>
 		</address>
 	</customer>
-	<creation_date></creation_date>
-	<number></number>
+	<creation_date>1970-01-01</creation_date>
+	<number>1</number>
 	<details>
 		<detail>
 			<product>
-				<number></number>
-				<name></name>
+				<number>1</number>
+				<name>prod1</name>
 			</product>
-			<quantity></quantity>
-			<price></price>
-			<total_et></total_et>
+			<quantity>2</quantity>
+			<price>12</price>
+			<total_et>24</total_et>
 		</detail>
 	</details>
-	<total_et></total_et>
-	<vat></vat>
-	<total_ati></total_ati>
+	<total_et>24</total_et>
+	<vat>2</vat>
+	<total_ati>26</total_ati>
 </estimate>
