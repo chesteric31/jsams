@@ -1,4 +1,4 @@
-package be.jsams.pdf;
+package be.jsams.server.pdf;
 
 import com.lowagie.text.Document;
 import com.lowagie.text.Header;

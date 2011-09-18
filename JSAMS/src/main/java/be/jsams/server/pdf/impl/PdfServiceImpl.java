@@ -1,6 +1,6 @@
-package be.jsams.pdf.impl;
+package be.jsams.server.pdf.impl;
 
-import be.jsams.pdf.PdfService;
+import be.jsams.server.pdf.PdfService;
 
 import com.lowagie.text.Document;
 import com.lowagie.text.Header;
