@@ -25,9 +25,7 @@
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
-	<xs:element name="vat_number" type="xs:string">
-		<xs:complexType />
-	</xs:element>
+	<xs:element name="vat_number" type="xs:string" />
 	<xs:element name="contact_info">
 		<xs:complexType>
 			<xs:sequence>
@@ -39,21 +37,11 @@
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
-	<xs:element name="phone">
-		<xs:complexType />
-	</xs:element>
-	<xs:element name="fax">
-		<xs:complexType />
-	</xs:element>
-	<xs:element name="mobile">
-		<xs:complexType />
-	</xs:element>
-	<xs:element name="email">
-		<xs:complexType />
-	</xs:element>
-	<xs:element name="website">
-		<xs:complexType />
-	</xs:element>
+	<xs:element name="phone" />
+	<xs:element name="fax" />
+	<xs:element name="mobile" />
+	<xs:element name="email" />
+	<xs:element name="website" />
 	<xs:element name="customer">
 		<xs:complexType>
 			<xs:sequence>
@@ -63,12 +51,8 @@
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
-	<xs:element name="first_name">
-		<xs:complexType />
-	</xs:element>
-	<xs:element name="creation_date" type="xs:date">
-		<xs:complexType />
-	</xs:element>
+	<xs:element name="first_name" />
+	<xs:element name="creation_date" type="xs:date" />
 	<xs:element name="details">
 		<xs:complexType>
 			<xs:sequence>
@@ -94,21 +78,11 @@
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
-	<xs:element name="quantity">
-		<xs:complexType />
-	</xs:element>
-	<xs:element name="price">
-		<xs:complexType />
-	</xs:element>
-	<xs:element name="vat">
-		<xs:complexType />
-	</xs:element>
-	<xs:element name="total_ati">
-		<xs:complexType />
-	</xs:element>
-	<xs:element name="name">
-		<xs:complexType />
-	</xs:element>
+	<xs:element name="quantity" />
+	<xs:element name="price" />
+	<xs:element name="vat" />
+	<xs:element name="total_ati" />
+	<xs:element name="name" />
 	<xs:element name="address">
 		<xs:complexType>
 			<xs:sequence>
@@ -119,19 +93,9 @@
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
-	<xs:element name="street">
-		<xs:complexType />
-	</xs:element>
-	<xs:element name="zip">
-		<xs:complexType />
-	</xs:element>
-	<xs:element name="city">
-		<xs:complexType />
-	</xs:element>
-	<xs:element name="number">
-		<xs:complexType />
-	</xs:element>
-	<xs:element name="total_et">
-		<xs:complexType />
-	</xs:element>
+	<xs:element name="street" />
+	<xs:element name="zip" />
+	<xs:element name="city" />
+	<xs:element name="number" />
+	<xs:element name="total_et" />
 </xs:schema>
