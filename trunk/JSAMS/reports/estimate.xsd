@@ -51,7 +51,7 @@
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
-	<xs:element name="first_name" />
+	<xs:element name="first_name" type="xs:string" />
 	<xs:element name="creation_date" type="xs:date" />
 	<xs:element name="details">
 		<xs:complexType>
@@ -78,11 +78,11 @@
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
-	<xs:element name="quantity" />
-	<xs:element name="price" />
-	<xs:element name="vat" />
-	<xs:element name="total_ati" />
-	<xs:element name="name" />
+	<xs:element name="quantity" type="xs:short" />
+	<xs:element name="price" type="xs:double" />
+	<xs:element name="vat" type="xs:double" />
+	<xs:element name="total_ati" type="xs:double" />
+	<xs:element name="name" type="xs:string" />
 	<xs:element name="address">
 		<xs:complexType>
 			<xs:sequence>
@@ -93,9 +93,9 @@
 			</xs:sequence>
 		</xs:complexType>
 	</xs:element>
-	<xs:element name="street" />
+	<xs:element name="street" type="xs:string" />
 	<xs:element name="zip" />
-	<xs:element name="city" />
-	<xs:element name="number" />
-	<xs:element name="total_et" />
+	<xs:element name="city" type="xs:string" />
+	<xs:element name="number" type="xs:int" />
+	<xs:element name="total_et" type="xs:double" />
 </xs:schema>
