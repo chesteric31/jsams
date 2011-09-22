@@ -40,6 +40,15 @@
 			<price>12</price>
 			<total_et>24</total_et>
 		</detail>
+		<detail>
+			<product>
+				<number>2</number>
+				<name>prod2</name>
+			</product>
+			<quantity>1</quantity>
+			<price>9.99</price>
+			<total_et>9.99</total_et>
+		</detail>
 	</details>
 	<total_et>24</total_et>
 	<vat>2</vat>
