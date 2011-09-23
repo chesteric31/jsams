@@ -6,7 +6,7 @@
 //
 
 
-package be.jsams.server.xml.estimate;
+package be.jsams.server.model.xml.estimate;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -26,9 +26,7 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element ref="{}number"/>
- *         &lt;element ref="{}street"/>
- *         &lt;element ref="{}zip"/>
- *         &lt;element ref="{}city"/>
+ *         &lt;element ref="{}name"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -40,20 +38,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
     "number",
-    "street",
-    "zip",
-    "city"
+    "name"
 })
-@XmlRootElement(name = "address")
-public class AddressXml {
+@XmlRootElement(name = "product")
+public class ProductXml {
 
     protected int number;
     @XmlElement(required = true)
-    protected String street;
-    @XmlElement(required = true)
-    protected Object zip;
-    @XmlElement(required = true)
-    protected String city;
+    protected String name;
 
     /**
      * Gets the value of the number property.
@@ -72,75 +64,27 @@ public class AddressXml {
     }
 
     /**
-     * Gets the value of the street property.
+     * Gets the value of the name property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getStreet() {
-        return street;
+    public String getName() {
+        return name;
     }
 
     /**
-     * Sets the value of the street property.
+     * Sets the value of the name property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setStreet(String value) {
-        this.street = value;
-    }
-
-    /**
-     * Gets the value of the zip property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link Object }
-     *     
-     */
-    public Object getZip() {
-        return zip;
-    }
-
-    /**
-     * Sets the value of the zip property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link Object }
-     *     
-     */
-    public void setZip(Object value) {
-        this.zip = value;
-    }
-
-    /**
-     * Gets the value of the city property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getCity() {
-        return city;
-    }
-
-    /**
-     * Sets the value of the city property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setCity(String value) {
-        this.city = value;
+    public void setName(String value) {
+        this.name = value;
     }
 
 }

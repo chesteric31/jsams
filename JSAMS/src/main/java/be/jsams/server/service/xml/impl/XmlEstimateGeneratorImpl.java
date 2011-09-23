@@ -1,11 +1,11 @@
-package be.jsams.server.xml.service.impl;
+package be.jsams.server.service.xml.impl;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 
-import be.jsams.server.xml.estimate.EstimateXml;
-import be.jsams.server.xml.service.XmlGenerator;
+import be.jsams.server.model.xml.estimate.EstimateXml;
+import be.jsams.server.service.xml.XmlGenerator;
 
 /**
  * Service to generate a Xml from a {@link EstimateXml} object.
