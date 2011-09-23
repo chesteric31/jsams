@@ -1,4 +1,4 @@
-package be.jsams.server.xml.service;
+package be.jsams.server.service.xml;
 
 /**
  * Generic service interface to generate a Xml as output.
