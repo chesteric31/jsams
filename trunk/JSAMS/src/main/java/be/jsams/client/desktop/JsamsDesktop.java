@@ -9,6 +9,7 @@ import java.util.Enumeration;
 
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.plaf.FontUIResource;
 
 import org.apache.commons.logging.Log;
@@ -157,14 +158,12 @@ public class JsamsDesktop {
      */
     private void setNativeLookAndFeel() {
         try {
-            String javaVersion = System.getProperty("java.specification.version");
-            String lookAndFeel = UIManager.getSystemLookAndFeelClassName();
-            if ("1.6".equalsIgnoreCase(javaVersion)) {
-                lookAndFeel = "com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel";
-            } else if ("1.7".equalsIgnoreCase(javaVersion)) {
-                lookAndFeel = "javax.swing.plaf.nimbus.NimbusLookAndFeel";
+            LookAndFeelInfo[] installedLookAndFeels = UIManager.getInstalledLookAndFeels();
+            for (LookAndFeelInfo lookAndFeelInfo : installedLookAndFeels) {
+                if ("Nimbus".equals(lookAndFeelInfo.getName())) {
+                    UIManager.setLookAndFeel(lookAndFeelInfo.getClassName());
+                }
             }
-            UIManager.setLookAndFeel(lookAndFeel);
         } catch (Exception e) {
             LOGGER.error(e);
         }
