@@ -79,7 +79,7 @@
 	<field name="total_ati" class="java.lang.Double">
 		<fieldDescription><![CDATA[total_ati]]></fieldDescription>
 	</field>
-	<field name="creation_date" class="java.lang.String">
+	<field name="creation_date" class="java.util.Date">
 		<fieldDescription><![CDATA[creation_date]]></fieldDescription>
 	</field>
 	<field name="number" class="java.lang.Long">
@@ -106,8 +106,8 @@
 					</textElement>
 					<textFieldExpression><![CDATA[$F{number}]]></textFieldExpression>
 				</textField>
-				<textField pattern="dd/MM/yyyy">
-					<reportElement x="160" y="46" width="106" height="25" forecolor="#FFFFFF"/>
+				<textField pattern="dd-MMM-yyyy">
+					<reportElement mode="Transparent" x="160" y="46" width="106" height="25" forecolor="#FFFFFF" backcolor="#FFFFFF"/>
 					<textElement/>
 					<textFieldExpression><![CDATA[$F{creation_date}]]></textFieldExpression>
 				</textField>
@@ -119,9 +119,9 @@
 	</pageHeader>
 	<detail>
 		<band height="121" splitType="Stretch">
-			<subreport>
+			<subreport isUsingCache="true" runToBottom="false">
 				<reportElement mode="Transparent" x="0" y="0" width="555" height="121"/>
-				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<dataSourceExpression><![CDATA[((net.sf.jasperreports.engine.data.JRXmlDataSource)$P{REPORT_DATA_SOURCE}).subDataSource("//details/detail")]]></dataSourceExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "estimate_subreport1.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
