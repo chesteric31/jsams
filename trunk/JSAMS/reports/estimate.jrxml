@@ -64,6 +64,9 @@
 			<pen lineWidth="0.5" lineColor="#000000"/>
 		</box>
 	</style>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["/home/chesteric31/Dev/workspace-jsams/JSAMS/reports/"]]></defaultValueExpression>
+	</parameter>
 	<queryString language="xPath">
 		<![CDATA[/estimate]]>
 	</queryString>
@@ -79,32 +82,14 @@
 	<field name="creation_date" class="java.lang.String">
 		<fieldDescription><![CDATA[creation_date]]></fieldDescription>
 	</field>
-	<field name="productNumber" class="java.lang.Long">
-		<fieldDescription><![CDATA[details/detail/product/number]]></fieldDescription>
-	</field>
-	<field name="productName" class="java.lang.String">
-		<fieldDescription><![CDATA[details/detail/product/name]]></fieldDescription>
-	</field>
-	<field name="productQuantity" class="java.lang.Long">
-		<fieldDescription><![CDATA[details/detail/quantity]]></fieldDescription>
-	</field>
-	<field name="productPrice" class="java.lang.Double">
-		<fieldDescription><![CDATA[details/detail/price]]></fieldDescription>
-	</field>
-	<field name="productTotalEt" class="java.lang.Double">
-		<fieldDescription><![CDATA[details/detail/total_et]]></fieldDescription>
-	</field>
 	<field name="number" class="java.lang.Long">
 		<fieldDescription><![CDATA[number]]></fieldDescription>
 	</field>
-	<variable name="details_1" class="java.lang.Integer" resetType="Page" calculation="Count">
-		<variableExpression><![CDATA[]]></variableExpression>
-	</variable>
 	<background>
-		<band/>
+		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="72">
+		<band height="72" splitType="Stretch">
 			<frame>
 				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699"/>
 				<textField>
@@ -130,77 +115,22 @@
 		</band>
 	</title>
 	<pageHeader>
-		<band height="75"/>
+		<band height="75" splitType="Stretch"/>
 	</pageHeader>
-	<columnHeader>
-		<band height="27">
-			<line>
-				<reportElement x="-20" y="20" width="595" height="1" forecolor="#666666"/>
-			</line>
-			<textField>
-				<reportElement x="23" y="2" width="100" height="20"/>
-				<textElement markup="none"/>
-				<textFieldExpression><![CDATA[$R{column.product_id}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="123" y="2" width="100" height="20"/>
-				<textElement markup="none"/>
-				<textFieldExpression><![CDATA[$R{column.product_name}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="223" y="2" width="100" height="20"/>
-				<textElement markup="none"/>
-				<textFieldExpression><![CDATA[$R{column.quantity}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="323" y="2" width="100" height="20"/>
-				<textElement markup="none"/>
-				<textFieldExpression><![CDATA[$R{column.price}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="423" y="2" width="100" height="20"/>
-				<textElement markup="none"/>
-				<textFieldExpression><![CDATA["total_et"]]></textFieldExpression>
-			</textField>
-		</band>
-	</columnHeader>
 	<detail>
-		<band height="121">
-			<textField>
-				<reportElement x="23" y="0" width="100" height="20"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{productNumber}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="123" y="0" width="100" height="20"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{productName}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="223" y="0" width="100" height="20"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{productQuantity}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="323" y="0" width="100" height="20"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{productPrice}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="423" y="0" width="100" height="20"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{productTotalEt}]]></textFieldExpression>
-			</textField>
+		<band height="121" splitType="Stretch">
 			<subreport>
-				<reportElement x="46" y="20" width="200" height="100"/>
+				<reportElement mode="Transparent" x="0" y="0" width="555" height="121"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "estimate_subreport1.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
 	</detail>
 	<columnFooter>
-		<band/>
+		<band splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
-		<band height="41">
+		<band height="41" splitType="Stretch">
 			<textField>
 				<reportElement mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6"/>
 				<textElement textAlignment="Right"/>
@@ -219,6 +149,6 @@
 		</band>
 	</pageFooter>
 	<summary>
-		<band/>
+		<band splitType="Stretch"/>
 	</summary>
 </jasperReport>
