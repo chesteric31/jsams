@@ -28,7 +28,7 @@ import com.jgoodies.validation.Validator;
  * @param <TM> an extension of {@link AbstractJsamsTableModel}
  * 
  * @author chesteric31
- * @version $Revision$ $Date:: $ $Author$
+ * @version $$Revision$$ $$Date::                  $$ $$Author$$
  */
 public abstract class AbstractSaleSearchPanel<B extends AbstractDocumentBean<?, ?>,
         L extends MouseListener, S extends Service<B>, V extends Validator<B>, TM extends AbstractJsamsTableModel<B>>
