@@ -3,6 +3,12 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<style name="style1">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 ==0]]></conditionExpression>
+			<style mode="Opaque" forecolor="#808080" backcolor="#375AF4"/>
+		</conditionalStyle>
+	</style>
 	<queryString language="xPath">
 		<![CDATA[/estimate/details/detail]]>
 	</queryString>
@@ -27,59 +33,131 @@
 	<columnHeader>
 		<band height="25" splitType="Stretch">
 			<textField>
-				<reportElement x="100" y="0" width="100" height="20"/>
-				<textElement markup="none"/>
-				<textFieldExpression><![CDATA[$R{column.product_name}]]></textFieldExpression>
+				<reportElement x="49" y="0" width="206" height="25"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" markup="none"/>
+				<textFieldExpression><![CDATA[$R{report.product_name}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="300" y="0" width="100" height="20"/>
-				<textElement markup="none"/>
-				<textFieldExpression><![CDATA[$R{column.quantity}]]></textFieldExpression>
+				<reportElement x="355" y="0" width="100" height="25"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" markup="none"/>
+				<textFieldExpression><![CDATA[$R{report.quantity}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="200" y="0" width="100" height="20"/>
-				<textElement markup="none"/>
-				<textFieldExpression><![CDATA[$R{column.price}]]></textFieldExpression>
+				<reportElement x="255" y="0" width="100" height="25"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" markup="none"/>
+				<textFieldExpression><![CDATA[$R{report.price}]]></textFieldExpression>
 			</textField>
-			<staticText>
-				<reportElement x="400" y="0" width="100" height="20"/>
-				<textElement/>
-				<text><![CDATA[detail/total_et]]></text>
-			</staticText>
 			<textField>
-				<reportElement x="0" y="0" width="100" height="20"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$R{column.product_id}]]></textFieldExpression>
+				<reportElement x="455" y="0" width="75" height="25"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" markup="none"/>
+				<textFieldExpression><![CDATA[$R{report.total_et}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="-20" y="0" width="69" height="25"/>
+				<box>
+					<pen lineWidth="1.0"/>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$R{report.lign_id}]]></textFieldExpression>
 			</textField>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="31" splitType="Stretch">
-			<textField>
-				<reportElement mode="Transparent" x="0" y="1" width="100" height="30" backcolor="#FFFFFF"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{number}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="100" y="0" width="100" height="31"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="300" y="1" width="100" height="30"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{quantity}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="200" y="0" width="100" height="31"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{price}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="400" y="0" width="100" height="30"/>
-				<textElement/>
-				<textFieldExpression><![CDATA[$F{total_et}]]></textFieldExpression>
-			</textField>
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="0" width="550" height="31" backcolor="#FFC800"/>
+				<textField>
+					<reportElement x="375" y="0" width="100" height="29"/>
+					<box leftPadding="1" rightPadding="1">
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="1.0" lineStyle="Double"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$F{quantity}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="475" y="0" width="75" height="29"/>
+					<box leftPadding="1" rightPadding="1">
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="1.0" lineStyle="Double"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$F{total_et}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Transparent" x="0" y="0" width="69" height="29" backcolor="#FFFFFF"/>
+					<box leftPadding="1" rightPadding="1">
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="1.0" lineStyle="Double"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="275" y="0" width="100" height="29"/>
+					<box leftPadding="1" rightPadding="1">
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="1.0" lineStyle="Double"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$F{price}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="69" y="0" width="206" height="29"/>
+					<box leftPadding="1" rightPadding="1">
+						<pen lineWidth="1.0"/>
+						<topPen lineWidth="0.0"/>
+						<leftPen lineWidth="0.0"/>
+						<bottomPen lineWidth="1.0" lineStyle="Double"/>
+						<rightPen lineWidth="0.0"/>
+					</box>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+				</textField>
+			</frame>
 		</band>
 	</detail>
 </jasperReport>
