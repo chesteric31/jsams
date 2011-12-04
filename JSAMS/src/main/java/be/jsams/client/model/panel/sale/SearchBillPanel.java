@@ -12,7 +12,6 @@ import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.model.dialog.sale.EditBillDialog;
-import be.jsams.client.model.panel.AbstractSearchPanel;
 import be.jsams.client.model.table.BillTableModel;
 import be.jsams.client.validator.search.SearchBillValidator;
 import be.jsams.common.bean.model.PaymentModeBean;
@@ -22,7 +21,7 @@ import be.jsams.common.bean.model.sale.BillBean;
 import be.jsams.server.service.sale.BillService;
 
 /**
- * {@link AbstractSearchPanel} for {@link BillBean} objects.
+ * {@link AbstractSaleSearchPanel} for {@link BillBean} objects.
  * 
  * @param <L> a customized {@link MouseListener}
  * 
@@ -30,7 +29,7 @@ import be.jsams.server.service.sale.BillService;
  * @version $Rev$ $Date::                  $ $Author$
  */
 public class SearchBillPanel<L extends MouseListener> extends
-        AbstractSearchPanel<BillBean, L, BillService, SearchBillValidator, BillTableModel> {
+        AbstractSaleSearchPanel<BillBean, L, BillService, SearchBillValidator, BillTableModel> {
 
     /**
      * Serial Version UID
@@ -152,6 +151,15 @@ public class SearchBillPanel<L extends MouseListener> extends
         // getResultTable().setModel(model);
         super.setTableModel(model);
         getResultTable().repaint();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void performButtonPdf() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException();
     }
 
 }

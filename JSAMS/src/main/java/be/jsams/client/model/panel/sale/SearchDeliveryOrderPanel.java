@@ -12,7 +12,6 @@ import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.model.dialog.sale.EditDeliveryOrderDialog;
-import be.jsams.client.model.panel.AbstractSearchPanel;
 import be.jsams.client.model.table.DeliveryOrderTableModel;
 import be.jsams.client.validator.search.SearchDeliveryOrderValidator;
 import be.jsams.common.bean.model.SocietyBean;
@@ -21,7 +20,7 @@ import be.jsams.common.bean.model.sale.DeliveryOrderBean;
 import be.jsams.server.service.sale.DeliveryOrderService;
 
 /**
- * {@link AbstractSearchPanel} for {@link DeliveryOrderBean} objects.
+ * {@link AbstractSaleSearchPanel} for {@link DeliveryOrderBean} objects.
  * 
  * @param <L> a customized {@link MouseListener}
  *
@@ -29,7 +28,7 @@ import be.jsams.server.service.sale.DeliveryOrderService;
  * @version $Rev$ $Date::                  $ $Author$
  */
 public class SearchDeliveryOrderPanel<L extends MouseListener> 
-        extends AbstractSearchPanel<DeliveryOrderBean, L,
+        extends AbstractSaleSearchPanel<DeliveryOrderBean, L,
         DeliveryOrderService, SearchDeliveryOrderValidator, DeliveryOrderTableModel> {
 
     /**
@@ -151,6 +150,15 @@ public class SearchDeliveryOrderPanel<L extends MouseListener>
 //        getResultTable().setModel(model);
         super.setTableModel(model);
         getResultTable().repaint();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void performButtonPdf() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException();
     }
 
 }

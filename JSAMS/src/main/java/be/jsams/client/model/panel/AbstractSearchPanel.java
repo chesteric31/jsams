@@ -301,7 +301,7 @@ public abstract class AbstractSearchPanel<B extends AbstractIdentityBean<?, ?>,
      * 
      * @return the adding {@link JsamsButton}
      */
-    private JsamsButton buildButtonAdd() {
+    protected JsamsButton buildButtonAdd() {
         JsamsButton buttonAdd = new JsamsButton(IconUtil.MENU_ICON_PREFIX + "actions/list-add.png");
         buttonAdd.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -326,7 +326,7 @@ public abstract class AbstractSearchPanel<B extends AbstractIdentityBean<?, ?>,
      * 
      * @return the removing {@link JsamsButton}
      */
-    private JsamsButton buildButtonRemove() {
+    protected JsamsButton buildButtonRemove() {
         JsamsButton buttonRemove = new JsamsButton(IconUtil.MENU_ICON_PREFIX + "actions/list-remove.png");
         buttonRemove.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -358,7 +358,7 @@ public abstract class AbstractSearchPanel<B extends AbstractIdentityBean<?, ?>,
      * 
      * @return the modifying {@link JsamsButton}
      */
-    private JsamsButton buildButtonModify() {
+    protected JsamsButton buildButtonModify() {
         JsamsButton buttonModify = new JsamsButton(IconUtil.MENU_ICON_PREFIX + "apps/accessories-text-editor.png");
         buttonModify.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -371,14 +371,64 @@ public abstract class AbstractSearchPanel<B extends AbstractIdentityBean<?, ?>,
     /**
      * Builds the main panel contained all the components.
      */
-    private void buildMainPanel() {
+    protected void buildMainPanel() {
+        JPanel searchCriteriaPanel = buildCriteriaPanel();
+        this.add(searchCriteriaPanel, BorderLayout.NORTH);
+        JScrollPane scrollPane = buildResultPanel();
+        this.add(scrollPane, BorderLayout.CENTER);
+        JPanel southPanel = buildSouthPanel();
+        this.add(southPanel, BorderLayout.SOUTH);
+    }
+
+    /**
+     * Builds the south panel with buttons and status bar.
+     * 
+     * @return the south panel with buttons and status bar.
+     */
+    protected JPanel buildSouthPanel() {
+        JPanel southPanel = new JPanel();
+        southPanel.setLayout(new BoxLayout(southPanel, BoxLayout.PAGE_AXIS));
+        southPanel.setBorder(BorderFactory.createEtchedBorder());
+
+        if (showButtons) {
+            setButtonAdd(buildButtonAdd());
+            setButtonRemove(buildButtonRemove());
+            setButtonModify(buildButtonModify());
+            JsamsButton[] buttons = new JsamsButton[THREE];
+            buttons[0] = getButtonAdd();
+            buttons[1] = getButtonRemove();
+            buttons[2] = getButtonModify();
+            southPanel.add(ButtonBarFactory.buildCenteredBar(buttons));
+        }
+        southPanel.add(statusBar);
+        return southPanel;
+    }
+
+    /**
+     * Builds the {@link JScrollPane} contained the result panel.
+     * 
+     * @return the {@link JScrollPane} contained the result panel
+     */
+    protected JScrollPane buildResultPanel() {
+        resultTable = new JsamsTable(selectionMode);
+        resultTable.addMouseListener(mouseListener);
+        JScrollPane scrollPane = new JScrollPane(resultTable);
+        scrollPane.setBorder(new TitledBorder(JsamsI18nResource.SEARCH_RESULTS.getTranslation()));
+        return scrollPane;
+    }
+
+    /**
+     * Builds the criteria panel.
+     * 
+     * @return the built criteria panel
+     */
+    protected JPanel buildCriteriaPanel() {
         JPanel searchCriteriaPanel = new JPanel();
         GridLayout gridLayout = new GridLayout(2, 1);
         gridLayout.setVgap(DEFAULT_V_GAP);
         searchCriteriaPanel.setLayout(gridLayout);
         // adding search criteria panel
         searchCriteriaPanel.add((((Searchable<?>) this.model.getView())).createSearchView());
-
         JPanel northPanel = new JPanel();
         BorderLayout buttonsLayout = new BorderLayout();
         buttonsLayout.setVgap(DEFAULT_V_GAP);
@@ -386,32 +436,7 @@ public abstract class AbstractSearchPanel<B extends AbstractIdentityBean<?, ?>,
         northPanel.add(new JSeparator(), BorderLayout.NORTH);
         northPanel.add(buttonsPanel);
         searchCriteriaPanel.add(buttonsPanel);
-
-        this.add(searchCriteriaPanel, BorderLayout.NORTH);
-
-        resultTable = new JsamsTable(selectionMode);
-        resultTable.addMouseListener(mouseListener);
-        JScrollPane scrollPane = new JScrollPane(resultTable);
-        scrollPane.setBorder(new TitledBorder(JsamsI18nResource.SEARCH_RESULTS.getTranslation()));
-        this.add(scrollPane, BorderLayout.CENTER);
-
-        JPanel southPanel = new JPanel();
-        southPanel.setLayout(new BoxLayout(southPanel, BoxLayout.PAGE_AXIS));
-        southPanel.setBorder(BorderFactory.createEtchedBorder());
-
-        if (showButtons) {
-            buttonAdd = buildButtonAdd();
-            buttonRemove = buildButtonRemove();
-            buttonModify = buildButtonModify();
-            JsamsButton[] buttons = new JsamsButton[THREE];
-            buttons[0] = buttonAdd;
-            buttons[1] = buttonRemove;
-            buttons[2] = buttonModify;
-            southPanel.add(ButtonBarFactory.buildCenteredBar(buttons));
-        }
-        southPanel.add(statusBar);
-
-        this.add(southPanel, BorderLayout.SOUTH);
+        return searchCriteriaPanel;
     }
 
     /**
@@ -501,6 +526,48 @@ public abstract class AbstractSearchPanel<B extends AbstractIdentityBean<?, ?>,
         resultTable.setDefaultRenderer(String.class, defaultCellRenderer);
         resultTable.setDefaultRenderer(Boolean.class, new JsamsBooleanTableCellRenderer());
         resultTable.setDefaultRenderer(Date.class, defaultCellRenderer);
+    }
+
+    /**
+     * @return the buttonAdd
+     */
+    public JsamsButton getButtonAdd() {
+        return buttonAdd;
+    }
+
+    /**
+     * @param buttonAdd the buttonAdd to set
+     */
+    public void setButtonAdd(JsamsButton buttonAdd) {
+        this.buttonAdd = buttonAdd;
+    }
+
+    /**
+     * @return the buttonRemove
+     */
+    public JsamsButton getButtonRemove() {
+        return buttonRemove;
+    }
+
+    /**
+     * @param buttonRemove the buttonRemove to set
+     */
+    public void setButtonRemove(JsamsButton buttonRemove) {
+        this.buttonRemove = buttonRemove;
+    }
+
+    /**
+     * @return the buttonModify
+     */
+    public JsamsButton getButtonModify() {
+        return buttonModify;
+    }
+
+    /**
+     * @param buttonModify the buttonModify to set
+     */
+    public void setButtonModify(JsamsButton buttonModify) {
+        this.buttonModify = buttonModify;
     }
 
 }

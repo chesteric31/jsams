@@ -12,7 +12,6 @@ import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.model.dialog.sale.EditCreditNoteDialog;
-import be.jsams.client.model.panel.AbstractSearchPanel;
 import be.jsams.client.model.table.CreditNoteTableModel;
 import be.jsams.client.validator.search.SearchCreditNoteValidator;
 import be.jsams.common.bean.model.SocietyBean;
@@ -21,7 +20,7 @@ import be.jsams.common.bean.model.sale.CreditNoteBean;
 import be.jsams.server.service.sale.CreditNoteService;
 
 /**
- * {@link AbstractSearchPanel} for {@link CreditNoteBean} objects.
+ * {@link AbstractSaleSearchPanel} for {@link CreditNoteBean} objects.
  *
  * @param <L> a customized {@link MouseListener}
  * 
@@ -29,7 +28,7 @@ import be.jsams.server.service.sale.CreditNoteService;
  * @version $Rev$ $Date::                  $ $Author$
  */
 public class SearchCreditNotePanel<L extends MouseListener> extends
-        AbstractSearchPanel<CreditNoteBean, L, CreditNoteService, SearchCreditNoteValidator, CreditNoteTableModel> {
+        AbstractSaleSearchPanel<CreditNoteBean, L, CreditNoteService, SearchCreditNoteValidator, CreditNoteTableModel> {
 
     /**
      * Serial Version UID
@@ -149,6 +148,15 @@ public class SearchCreditNotePanel<L extends MouseListener> extends
 //        getResultTable().setModel(model);
         super.setTableModel(model);
         getResultTable().repaint();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void performButtonPdf() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException();
     }
 
 }
