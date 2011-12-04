@@ -10,7 +10,6 @@ import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.model.dialog.sale.EditEstimateDialog;
-import be.jsams.client.model.panel.AbstractSearchPanel;
 import be.jsams.client.model.table.EstimateTableModel;
 import be.jsams.client.validator.search.SearchEstimateValidator;
 import be.jsams.common.bean.model.SocietyBean;
@@ -20,7 +19,7 @@ import be.jsams.common.bean.model.sale.EstimateBean;
 import be.jsams.server.service.sale.EstimateService;
 
 /**
- * {@link AbstractSearchPanel} for {@link EstimateBean} objects.
+ * {@link AbstractSaleSearchPanel} for {@link EstimateBean} objects.
  * 
  * @param <L> a customized {@link MouseListener}
  * 
@@ -28,7 +27,7 @@ import be.jsams.server.service.sale.EstimateService;
  * @version $Rev$ $Date::                  $ $Author$
  */
 public class SearchEstimatePanel<L extends MouseListener> extends
-        AbstractSearchPanel<EstimateBean, L, EstimateService, SearchEstimateValidator, EstimateTableModel> {
+        AbstractSaleSearchPanel<EstimateBean, L, EstimateService, SearchEstimateValidator, EstimateTableModel> {
 
     /**
      * Serial Version UID
@@ -149,6 +148,15 @@ public class SearchEstimatePanel<L extends MouseListener> extends
     public void performCancel() {
         // TODO Auto-generated method stub
 
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void performButtonPdf() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException();
     }
 
 }

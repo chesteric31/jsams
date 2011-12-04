@@ -12,7 +12,6 @@ import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.model.dialog.sale.EditCommandDialog;
-import be.jsams.client.model.panel.AbstractSearchPanel;
 import be.jsams.client.model.table.CommandTableModel;
 import be.jsams.client.validator.search.SearchCommandValidator;
 import be.jsams.common.bean.model.SocietyBean;
@@ -22,7 +21,7 @@ import be.jsams.common.bean.model.sale.CommandBean;
 import be.jsams.server.service.sale.CommandService;
 
 /**
- * {@link AbstractSearchPanel} for {@link CommandBean} objects.
+ * {@link AbstractSaleSearchPanel} for {@link CommandBean} objects.
  * 
  * @param <L> a customized {@link MouseListener}
  * 
@@ -30,7 +29,7 @@ import be.jsams.server.service.sale.CommandService;
  * @version $Rev$ $Date::                  $ $Author$
  */
 public class SearchCommandPanel<L extends MouseListener> extends
-        AbstractSearchPanel<CommandBean, L, CommandService, SearchCommandValidator, CommandTableModel> {
+        AbstractSaleSearchPanel<CommandBean, L, CommandService, SearchCommandValidator, CommandTableModel> {
 
     /**
      * Serial Version UID
@@ -134,6 +133,15 @@ public class SearchCommandPanel<L extends MouseListener> extends
 //        getResultTable().setModel(model);
         super.setTableModel(model);
         getResultTable().repaint();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void performButtonPdf() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException();
     }
 
 }
