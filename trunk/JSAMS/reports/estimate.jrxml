@@ -76,75 +76,272 @@
 	<field name="vat" class="java.lang.String">
 		<fieldDescription><![CDATA[vat]]></fieldDescription>
 	</field>
-	<field name="total_ati" class="java.lang.Double">
-		<fieldDescription><![CDATA[total_ati]]></fieldDescription>
-	</field>
 	<field name="creation_date" class="java.util.Date">
 		<fieldDescription><![CDATA[creation_date]]></fieldDescription>
 	</field>
 	<field name="number" class="java.lang.Long">
 		<fieldDescription><![CDATA[number]]></fieldDescription>
 	</field>
+	<field name="name" class="java.lang.String">
+		<fieldDescription><![CDATA[society/name]]></fieldDescription>
+	</field>
+	<field name="vat_number" class="java.lang.String">
+		<fieldDescription><![CDATA[society/vat_number]]></fieldDescription>
+	</field>
+	<field name="societyAddressNumber" class="java.lang.String">
+		<fieldDescription><![CDATA[society/address/number]]></fieldDescription>
+	</field>
+	<field name="street" class="java.lang.String">
+		<fieldDescription><![CDATA[society/address/street]]></fieldDescription>
+	</field>
+	<field name="zip" class="java.lang.String">
+		<fieldDescription><![CDATA[society/address/zip]]></fieldDescription>
+	</field>
+	<field name="city" class="java.lang.String">
+		<fieldDescription><![CDATA[society/address/city]]></fieldDescription>
+	</field>
+	<field name="phone" class="java.lang.String">
+		<fieldDescription><![CDATA[society/contact_info/phone]]></fieldDescription>
+	</field>
+	<field name="total_ati" class="java.lang.String">
+		<fieldDescription><![CDATA[total_ati]]></fieldDescription>
+	</field>
+	<field name="customerName" class="java.lang.String">
+		<fieldDescription><![CDATA[customer/name]]></fieldDescription>
+	</field>
+	<field name="first_name" class="java.lang.String">
+		<fieldDescription><![CDATA[customer/first_name]]></fieldDescription>
+	</field>
+	<field name="customerAddressNumber" class="java.lang.String">
+		<fieldDescription><![CDATA[customer/address/number]]></fieldDescription>
+	</field>
+	<field name="customerAddressStreet" class="java.lang.String">
+		<fieldDescription><![CDATA[customer/address/street]]></fieldDescription>
+	</field>
+	<field name="customerAddressZip" class="java.lang.String">
+		<fieldDescription><![CDATA[customer/address/zip]]></fieldDescription>
+	</field>
+	<field name="customerAddressCity" class="java.lang.String">
+		<fieldDescription><![CDATA[customer/address/city]]></fieldDescription>
+	</field>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
 		<band height="72" splitType="Stretch">
-			<frame>
-				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699"/>
-				<textField>
-					<reportElement x="20" y="20" width="140" height="26" forecolor="#FFFFFF"/>
-					<textElement>
-						<font size="20"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$R{label.estimate}]]></textFieldExpression>
-				</textField>
-				<textField>
-					<reportElement x="20" y="46" width="140" height="25" forecolor="#FFFFFF"/>
-					<textElement>
-						<font size="20"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$F{number}]]></textFieldExpression>
-				</textField>
-				<textField pattern="dd-MMM-yyyy">
-					<reportElement mode="Transparent" x="160" y="46" width="106" height="25" forecolor="#FFFFFF" backcolor="#FFFFFF"/>
-					<textElement/>
-					<textFieldExpression><![CDATA[$F{creation_date}]]></textFieldExpression>
-				</textField>
-			</frame>
+			<rectangle radius="10">
+				<reportElement x="386" y="0" width="169" height="72"/>
+			</rectangle>
+			<textField>
+				<reportElement x="400" y="0" width="144" height="21"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="400" y="21" width="30" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{societyAddressNumber}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="429" y="20" width="115" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{street}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="400" y="40" width="39" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{zip}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="439" y="40" width="105" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{city}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="400" y="60" width="100" height="12"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{phone}]]></textFieldExpression>
+			</textField>
+			<line direction="BottomUp">
+				<reportElement x="400" y="15" width="144" height="1" forecolor="#E11F32"/>
+			</line>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="75" splitType="Stretch"/>
+		<band height="110" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy">
+				<reportElement mode="Transparent" x="386" y="70" width="106" height="14" forecolor="#000000" backcolor="#FFFFFF"/>
+				<textElement>
+					<font size="12" isBold="true" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{creation_date}]]></textFieldExpression>
+			</textField>
+			<frame>
+				<reportElement mode="Opaque" x="0" y="84" width="555" height="26" backcolor="#196F99"/>
+				<textField>
+					<reportElement x="0" y="0" width="140" height="26" forecolor="#FFFFFF"/>
+					<textElement>
+						<font size="16"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$R{report.estimate}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="140" y="0" width="140" height="25" forecolor="#FFFFFF"/>
+					<textElement>
+						<font size="16"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{number}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<rectangle radius="10">
+				<reportElement x="386" y="11" width="169" height="59"/>
+			</rectangle>
+			<line direction="BottomUp">
+				<reportElement x="399" y="25" width="144" height="1" forecolor="#E11F32"/>
+			</line>
+			<textField>
+				<reportElement x="399" y="11" width="65" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{customerName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="464" y="11" width="80" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{first_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="399" y="31" width="31" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{customerAddressNumber}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="430" y="31" width="114" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{customerAddressStreet}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="400" y="50" width="39" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{customerAddressZip}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="439" y="50" width="105" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{customerAddressCity}]]></textFieldExpression>
+			</textField>
+		</band>
 	</pageHeader>
 	<detail>
-		<band height="121" splitType="Stretch">
+		<band height="105" splitType="Stretch">
 			<subreport isUsingCache="true" runToBottom="false">
-				<reportElement mode="Transparent" x="0" y="0" width="555" height="121"/>
+				<reportElement mode="Transparent" x="0" y="0" width="555" height="105"/>
 				<dataSourceExpression><![CDATA[((net.sf.jasperreports.engine.data.JRXmlDataSource)$P{REPORT_DATA_SOURCE}).subDataSource("//details/detail")]]></dataSourceExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "estimate_subreport1.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
 	</detail>
 	<columnFooter>
-		<band splitType="Stretch"/>
+		<band height="66" splitType="Stretch">
+			<rectangle radius="10">
+				<reportElement x="326" y="0" width="229" height="66"/>
+			</rectangle>
+			<textField>
+				<reportElement x="439" y="6" width="100" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{total_et}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="339" y="6" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$R{report.full_total_et}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="439" y="26" width="100" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{vat}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="339" y="26" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$R{report.full_total_vat}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="439" y="46" width="100" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{total_ati}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="339" y="46" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$R{report.full_total_ati}]]></textFieldExpression>
+			</textField>
+		</band>
 	</columnFooter>
 	<pageFooter>
-		<band height="41" splitType="Stretch">
+		<band height="45" splitType="Stretch">
 			<textField>
-				<reportElement mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6"/>
+				<reportElement mode="Opaque" x="0" y="19" width="515" height="13" backcolor="#E6E6E6"/>
 				<textElement textAlignment="Right"/>
-				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$R{report.page}+" "+$V{PAGE_NUMBER}+" "+$R{report.page_of}]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">
-				<reportElement mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6"/>
+				<reportElement mode="Opaque" x="515" y="19" width="40" height="13" backcolor="#E6E6E6"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<textField pattern="EEEEE dd MMMMM yyyy">
-				<reportElement x="0" y="4" width="100" height="13"/>
+				<reportElement x="0" y="19" width="100" height="13"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="32" width="100" height="12"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="33" width="22" height="12"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{societyAddressNumber}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="122" y="33" width="94" height="12"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{street}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="216" y="32" width="29" height="12"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{zip}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="245" y="32" width="81" height="12"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{city}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="326" y="33" width="74" height="12"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{phone}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="392" y="32" width="100" height="12"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vat_number}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageFooter>
