@@ -136,7 +136,6 @@ public class SearchEstimatePanel<L extends MouseListener> extends
      */
     private void fillTable(final List<EstimateBean> estimates) {
         EstimateTableModel model = new EstimateTableModel(estimates);
-//        getResultTable().setModel(model);
         super.setTableModel(model);
         getResultTable().repaint();
     }
@@ -155,8 +154,12 @@ public class SearchEstimatePanel<L extends MouseListener> extends
      */
     @Override
     protected void performButtonPdf() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException();
+        int selectedRow = getResultTable().getSelectedRow();
+        if (selectedRow > -1) {
+            int selectedRowModel = getResultTable().convertRowIndexToModel(selectedRow);
+            EstimateTableModel model = (EstimateTableModel) getResultTable().getModel();
+            EstimateBean beanToPdf = model.getRow(selectedRowModel);
+        }
     }
 
 }
