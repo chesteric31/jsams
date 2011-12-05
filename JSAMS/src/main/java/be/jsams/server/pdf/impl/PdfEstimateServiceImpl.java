@@ -10,14 +10,14 @@ import be.jsams.common.bean.model.management.ProductBean;
 import be.jsams.common.bean.model.sale.EstimateBean;
 import be.jsams.common.bean.model.sale.detail.EstimateDetailBean;
 import be.jsams.server.pdf.PdfService;
-import be.jsams.server.xml.estimate.AddressXml;
-import be.jsams.server.xml.estimate.ContactInfoXml;
-import be.jsams.server.xml.estimate.CustomerXml;
-import be.jsams.server.xml.estimate.DetailXml;
-import be.jsams.server.xml.estimate.EstimateXml;
-import be.jsams.server.xml.estimate.ObjectFactory;
-import be.jsams.server.xml.estimate.ProductXml;
-import be.jsams.server.xml.estimate.SocietyXml;
+import be.jsams.server.xml.model.estimate.AddressXml;
+import be.jsams.server.xml.model.estimate.ContactInfoXml;
+import be.jsams.server.xml.model.estimate.CustomerXml;
+import be.jsams.server.xml.model.estimate.DetailXml;
+import be.jsams.server.xml.model.estimate.EstimateXml;
+import be.jsams.server.xml.model.estimate.ObjectFactory;
+import be.jsams.server.xml.model.estimate.ProductXml;
+import be.jsams.server.xml.model.estimate.SocietyXml;
 
 /**
  * PDF service implementation for an {@link EstimateBean}.
