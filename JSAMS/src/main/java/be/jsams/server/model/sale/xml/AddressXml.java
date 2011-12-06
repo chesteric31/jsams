@@ -6,7 +6,7 @@
 //
 
 
-package be.jsams.server.model.xml.estimate;
+package be.jsams.server.model.sale.xml;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -25,9 +25,10 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element ref="{}name"/>
- *         &lt;element ref="{}first_name"/>
- *         &lt;element ref="{}address"/>
+ *         &lt;element ref="{}number"/>
+ *         &lt;element ref="{}street"/>
+ *         &lt;element ref="{}zip"/>
+ *         &lt;element ref="{}city"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -38,90 +39,108 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "name",
-    "firstName",
-    "address"
+    "number",
+    "street",
+    "zip",
+    "city"
 })
-@XmlRootElement(name = "customer")
-public class CustomerXml {
+@XmlRootElement(name = "address")
+public class AddressXml {
 
+    protected int number;
     @XmlElement(required = true)
-    protected String name;
-    @XmlElement(name = "first_name", required = true)
-    protected String firstName;
+    protected String street;
     @XmlElement(required = true)
-    protected AddressXml address;
+    protected Object zip;
+    @XmlElement(required = true)
+    protected String city;
 
     /**
-     * Gets the value of the name property.
+     * Gets the value of the number property.
+     * 
+     */
+    public int getNumber() {
+        return number;
+    }
+
+    /**
+     * Sets the value of the number property.
+     * 
+     */
+    public void setNumber(int value) {
+        this.number = value;
+    }
+
+    /**
+     * Gets the value of the street property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getName() {
-        return name;
+    public String getStreet() {
+        return street;
     }
 
     /**
-     * Sets the value of the name property.
+     * Sets the value of the street property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setName(String value) {
-        this.name = value;
+    public void setStreet(String value) {
+        this.street = value;
     }
 
     /**
-     * Gets the value of the firstName property.
+     * Gets the value of the zip property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link Object }
+     *     
+     */
+    public Object getZip() {
+        return zip;
+    }
+
+    /**
+     * Sets the value of the zip property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link Object }
+     *     
+     */
+    public void setZip(Object value) {
+        this.zip = value;
+    }
+
+    /**
+     * Gets the value of the city property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getFirstName() {
-        return firstName;
+    public String getCity() {
+        return city;
     }
 
     /**
-     * Sets the value of the firstName property.
+     * Sets the value of the city property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setFirstName(String value) {
-        this.firstName = value;
-    }
-
-    /**
-     * Gets the value of the address property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link AddressXml }
-     *     
-     */
-    public AddressXml getAddress() {
-        return address;
-    }
-
-    /**
-     * Sets the value of the address property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link AddressXml }
-     *     
-     */
-    public void setAddress(AddressXml value) {
-        this.address = value;
+    public void setCity(String value) {
+        this.city = value;
     }
 
 }

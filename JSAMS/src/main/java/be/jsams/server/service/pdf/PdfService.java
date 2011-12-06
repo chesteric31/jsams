@@ -1,4 +1,4 @@
-package be.jsams.server.pdf;
+package be.jsams.server.service.pdf;
 
 /**
  * PDF service interface.
