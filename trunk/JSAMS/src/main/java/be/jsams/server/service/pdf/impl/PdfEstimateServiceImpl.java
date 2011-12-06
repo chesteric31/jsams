@@ -1,4 +1,4 @@
-package be.jsams.server.pdf.impl;
+package be.jsams.server.service.pdf.impl;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -9,15 +9,15 @@ import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.management.ProductBean;
 import be.jsams.common.bean.model.sale.EstimateBean;
 import be.jsams.common.bean.model.sale.detail.EstimateDetailBean;
-import be.jsams.server.pdf.PdfService;
-import be.jsams.server.xml.model.estimate.AddressXml;
-import be.jsams.server.xml.model.estimate.ContactInfoXml;
-import be.jsams.server.xml.model.estimate.CustomerXml;
-import be.jsams.server.xml.model.estimate.DetailXml;
-import be.jsams.server.xml.model.estimate.EstimateXml;
-import be.jsams.server.xml.model.estimate.ObjectFactory;
-import be.jsams.server.xml.model.estimate.ProductXml;
-import be.jsams.server.xml.model.estimate.SocietyXml;
+import be.jsams.server.model.sale.xml.AddressXml;
+import be.jsams.server.model.sale.xml.ContactInfoXml;
+import be.jsams.server.model.sale.xml.CustomerXml;
+import be.jsams.server.model.sale.xml.DetailXml;
+import be.jsams.server.model.sale.xml.EstimateXml;
+import be.jsams.server.model.sale.xml.ObjectFactory;
+import be.jsams.server.model.sale.xml.ProductXml;
+import be.jsams.server.model.sale.xml.SocietyXml;
+import be.jsams.server.service.pdf.PdfService;
 
 /**
  * PDF service implementation for an {@link EstimateBean}.

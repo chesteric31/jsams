@@ -4,7 +4,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 
-import be.jsams.server.model.xml.estimate.EstimateXml;
+import be.jsams.server.model.sale.xml.EstimateXml;
 import be.jsams.server.service.xml.XmlGenerator;
 
 /**

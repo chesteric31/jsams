@@ -6,7 +6,7 @@
 //
 
 
-package be.jsams.server.model.xml.estimate;
+package be.jsams.server.model.sale.xml;
 
 import java.util.Date;
 

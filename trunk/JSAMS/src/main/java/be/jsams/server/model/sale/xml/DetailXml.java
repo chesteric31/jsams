@@ -6,7 +6,7 @@
 //
 
 
-package be.jsams.server.xml.model.estimate;
+package be.jsams.server.model.sale.xml;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

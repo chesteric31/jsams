@@ -6,7 +6,7 @@
 //
 
 
-package be.jsams.server.model.xml.estimate;
+package be.jsams.server.model.sale.xml;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -26,9 +26,8 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element ref="{}name"/>
- *         &lt;element ref="{}vat_number"/>
+ *         &lt;element ref="{}first_name"/>
  *         &lt;element ref="{}address"/>
- *         &lt;element ref="{}contact_info"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -40,21 +39,18 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
     "name",
-    "vatNumber",
-    "address",
-    "contactInfo"
+    "firstName",
+    "address"
 })
-@XmlRootElement(name = "society")
-public class SocietyXml {
+@XmlRootElement(name = "customer")
+public class CustomerXml {
 
     @XmlElement(required = true)
     protected String name;
-    @XmlElement(name = "vat_number", required = true)
-    protected String vatNumber;
+    @XmlElement(name = "first_name", required = true)
+    protected String firstName;
     @XmlElement(required = true)
     protected AddressXml address;
-    @XmlElement(name = "contact_info", required = true)
-    protected ContactInfoXml contactInfo;
 
     /**
      * Gets the value of the name property.
@@ -81,27 +77,27 @@ public class SocietyXml {
     }
 
     /**
-     * Gets the value of the vatNumber property.
+     * Gets the value of the firstName property.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getVatNumber() {
-        return vatNumber;
+    public String getFirstName() {
+        return firstName;
     }
 
     /**
-     * Sets the value of the vatNumber property.
+     * Sets the value of the firstName property.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setVatNumber(String value) {
-        this.vatNumber = value;
+    public void setFirstName(String value) {
+        this.firstName = value;
     }
 
     /**
@@ -126,30 +122,6 @@ public class SocietyXml {
      */
     public void setAddress(AddressXml value) {
         this.address = value;
-    }
-
-    /**
-     * Gets the value of the contactInfo property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link ContactInfoXml }
-     *     
-     */
-    public ContactInfoXml getContactInfo() {
-        return contactInfo;
-    }
-
-    /**
-     * Sets the value of the contactInfo property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link ContactInfoXml }
-     *     
-     */
-    public void setContactInfo(ContactInfoXml value) {
-        this.contactInfo = value;
     }
 
 }
