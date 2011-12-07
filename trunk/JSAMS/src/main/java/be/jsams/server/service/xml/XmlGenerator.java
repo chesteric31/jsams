@@ -1,8 +1,9 @@
 package be.jsams.server.service.xml;
 
 /**
- * Generic service interface to generate a Xml as output.
- *
+ * Generic service interface to generate a XML as output.
+ * 
+ * @param <M> the model object
  * @author chesteric31
  * @version $Revision$ $Date::                  $ $Author$
  */
@@ -11,9 +12,8 @@ public interface XmlGenerator<M> {
     /**
      * Generate a Xml file from a class type and an object.
      * 
-     * @param clazz the class type
      * @param object the object to generate in Xml
      */
-    public void generateXml(Class<M> clazz, M object);
-    
+    void generateXml(M object);
+
 }

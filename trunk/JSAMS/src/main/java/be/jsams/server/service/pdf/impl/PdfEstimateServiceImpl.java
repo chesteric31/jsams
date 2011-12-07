@@ -1,6 +1,7 @@
 package be.jsams.server.service.pdf.impl;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.List;
 
 import be.jsams.common.bean.model.AddressBean;
@@ -40,50 +41,50 @@ public class PdfEstimateServiceImpl implements PdfService<EstimateBean> {
         AddressXml addressXml = factory.createAddress();
         AddressBean billingAddress = customer.getBillingAddress();
         addressXml.setCity(billingAddress.getCity());
-        addressXml.setNumber(Integer.valueOf(billingAddress.getNumber()));
+        addressXml.setNumber(new BigInteger(billingAddress.getNumber()));
         addressXml.setStreet(billingAddress.getStreet());
-        addressXml.setZip(billingAddress.getZipCode());
+        addressXml.setZip(new BigInteger(billingAddress.getZipCode()));
         customerXml.setAddress(addressXml);
         customerXml.setName(customer.getName());
         xml.setCustomer(customerXml);
         List<EstimateDetailBean> details = object.getDetails();
-        Double fullTotalEt = 0D;
-        Double fullVat = 0D;
+        BigDecimal fullTotalEt = new BigDecimal(0D);
+        BigDecimal fullVat = new BigDecimal(0D);
         for (EstimateDetailBean bean : details) {
             DetailXml detailXml = factory.createDetail();
-            detailXml.setPrice(bean.getPrice());
+            detailXml.setPrice(BigDecimal.valueOf(bean.getPrice()));
             ProductXml productXml = factory.createProduct();
             ProductBean product = bean.getProduct();
             productXml.setName(product.getName());
-            productXml.setNumber(Integer.valueOf(product.getId().toString()));
+            productXml.setNumber(new BigInteger(product.getId().toString()));
             detailXml.setProduct(productXml);
-            detailXml.setQuantity((short) bean.getQuantity());
+            detailXml.setQuantity(BigInteger.valueOf(bean.getQuantity()));
             bean.getDiscountRate();
             BigDecimal totalEt = BigDecimal.valueOf(bean.getPrice() * bean.getQuantity()
                     * (1 - (bean.getDiscountRate() / 100)));
-            BigDecimal vat = BigDecimal.valueOf(totalEt.doubleValue() * (bean.getVatApplicable() / 100));
-            fullVat += vat.doubleValue();
-            fullTotalEt += totalEt.doubleValue();
-            detailXml.setTotalEt(totalEt.doubleValue());
+            BigDecimal vat = totalEt.multiply(BigDecimal.valueOf(bean.getVatApplicable() / 100));
+            fullVat.add(vat);
+            fullTotalEt.add(totalEt);
+            detailXml.setTotalEt(totalEt);
             xml.getDetails().getDetail().add(detailXml);
         }
-        xml.setNumber(Integer.valueOf(object.getId().toString()));
+        xml.setNumber(new BigInteger(object.getId().toString()));
         SocietyXml societyXml = factory.createSociety();
         SocietyBean society = object.getSociety();
         AddressXml value = factory.createAddress();
         AddressBean address = society.getAddress();
         value.setCity(address.getCity());
-        value.setNumber(Integer.valueOf(address.getNumber()));
+        value.setNumber(new BigInteger(address.getNumber()));
         value.setStreet(address.getStreet());
-        value.setZip(address.getZipCode());
+        value.setZip(new BigInteger(address.getZipCode()));
         societyXml.setAddress(value);
         ContactInfoXml contactInfoXml = factory.createContactInfo();
-        contactInfoXml.setPhone(society.getContactInformation().getPhone());
+        contactInfoXml.setPhone(new BigInteger(society.getContactInformation().getPhone()));
         societyXml.setContactInfo(contactInfoXml);
         societyXml.setName(society.getName());
         societyXml.setVatNumber(society.getVatNumber());
         xml.setSociety(societyXml);
-        xml.setTotalAti(fullTotalEt + fullVat);
+        xml.setTotalAti(fullTotalEt.add(fullVat));
         xml.setTotalEt(fullTotalEt);
         xml.setVat(fullVat);
     }

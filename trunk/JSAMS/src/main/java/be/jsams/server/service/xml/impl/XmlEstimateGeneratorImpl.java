@@ -8,7 +8,7 @@ import be.jsams.server.model.sale.xml.EstimateXml;
 import be.jsams.server.service.xml.XmlGenerator;
 
 /**
- * Service to generate a Xml from a {@link EstimateXml} object.
+ * Service to generate a XML from a {@link EstimateXml} object.
  *
  * @author chesteric31
  * @version $Revision$ $Date::                  $ $Author$
@@ -19,9 +19,9 @@ public class XmlEstimateGeneratorImpl implements XmlGenerator<EstimateXml> {
      * {@inheritDoc}
      */
     @Override
-    public void generateXml(Class<EstimateXml> clazz, EstimateXml object) {
+    public void generateXml(EstimateXml object) {
         try {
-            JAXBContext context = JAXBContext.newInstance(clazz);
+            JAXBContext context = JAXBContext.newInstance(EstimateXml.class);
             Marshaller marshaller = context.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
             marshaller.marshal(object, System.out);
