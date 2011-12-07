@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jaxb:bindings version="2.1" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+	jaxb:extensionBindingPrefixes="xjc">
+	<jaxb:globalBindings>
+		<!-- use date instead of XMLGregorianCalendar -->
+		<jaxb:javaType name="java.util.Date" xmlType="xs:date"
+			parseMethod="be.jsams.server.model.utils.xml.JsamsDateAdapter.parseDate"
+			printMethod="be.jsams.server.model.utils.xml.JsamsDateAdapter.printDate" />
+	</jaxb:globalBindings>
+	<jaxb:bindings schemaLocation="../../../reports/estimate.xsd"
+		node="/xs:schema">
+		<jaxb:schemaBindings>
+			<jaxb:package name="be.jsams.server.model.sale.xml" />
+		</jaxb:schemaBindings>
+	</jaxb:bindings>
+</jaxb:bindings>
