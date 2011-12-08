@@ -16,6 +16,7 @@ import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.AgentBean;
 import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.sale.EstimateBean;
+import be.jsams.server.service.pdf.impl.PdfEstimateServiceImpl;
 import be.jsams.server.service.sale.EstimateService;
 
 /**
@@ -159,6 +160,8 @@ public class SearchEstimatePanel<L extends MouseListener> extends
             int selectedRowModel = getResultTable().convertRowIndexToModel(selectedRow);
             EstimateTableModel model = (EstimateTableModel) getResultTable().getModel();
             EstimateBean beanToPdf = model.getRow(selectedRowModel);
+            PdfEstimateServiceImpl pdfService = new PdfEstimateServiceImpl();
+            pdfService.generatePdf(beanToPdf);
         }
     }
 
