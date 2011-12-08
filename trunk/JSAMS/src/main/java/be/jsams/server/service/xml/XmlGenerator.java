@@ -1,19 +1,21 @@
 package be.jsams.server.service.xml;
 
 /**
- * Generic service interface to generate a XML as output.
+ * Generic service interface to generate a XML pojo as output.
  * 
  * @param <M> the model object
+ * @param <X> the XML pojo type
  * @author chesteric31
  * @version $Revision$ $Date::                  $ $Author$
  */
-public interface XmlGenerator<M> {
+public interface XmlGenerator<M, X> {
 
     /**
-     * Generate a Xml file from a class type and an object.
+     * Generates a XML pojo from a a bean object.
      * 
-     * @param object the object to generate in Xml
+     * @param object the object to generate in XML pojo
+     * @return the generated XML pojo
      */
-    void generateXml(M object);
+    X generateXml(M object);
 
 }
