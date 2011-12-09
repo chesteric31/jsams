@@ -67,10 +67,10 @@
 	<queryString language="xPath">
 		<![CDATA[/estimate]]>
 	</queryString>
-	<field name="total_et" class="java.lang.Double">
+	<field name="total_et" class="java.math.BigDecimal">
 		<fieldDescription><![CDATA[total_et]]></fieldDescription>
 	</field>
-	<field name="vat" class="java.lang.String">
+	<field name="vat" class="java.math.BigDecimal">
 		<fieldDescription><![CDATA[vat]]></fieldDescription>
 	</field>
 	<field name="creation_date" class="java.util.Date">
@@ -100,7 +100,7 @@
 	<field name="phone" class="java.lang.String">
 		<fieldDescription><![CDATA[society/contact_info/phone]]></fieldDescription>
 	</field>
-	<field name="total_ati" class="java.lang.String">
+	<field name="total_ati" class="java.math.BigDecimal">
 		<fieldDescription><![CDATA[total_ati]]></fieldDescription>
 	</field>
 	<field name="customerName" class="java.lang.String">
@@ -201,7 +201,7 @@
 				<textElement/>
 				<textFieldExpression><![CDATA[$F{customerName}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField isBlankWhenNull="true">
 				<reportElement x="464" y="11" width="80" height="20"/>
 				<textElement/>
 				<textFieldExpression><![CDATA[$F{first_name}]]></textFieldExpression>
@@ -242,7 +242,7 @@
 			<rectangle radius="10">
 				<reportElement x="326" y="0" width="229" height="66"/>
 			</rectangle>
-			<textField>
+			<textField pattern="¤ #,##0.00">
 				<reportElement x="439" y="6" width="100" height="20"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$F{total_et}]]></textFieldExpression>
@@ -252,7 +252,7 @@
 				<textElement/>
 				<textFieldExpression><![CDATA[$R{report.full_total_et}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="¤ #,##0.00">
 				<reportElement x="439" y="26" width="100" height="20"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$F{vat}]]></textFieldExpression>
@@ -262,7 +262,7 @@
 				<textElement/>
 				<textFieldExpression><![CDATA[$R{report.full_total_vat}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="¤ #,##0.00">
 				<reportElement x="439" y="46" width="100" height="20"/>
 				<textElement textAlignment="Right"/>
 				<textFieldExpression><![CDATA[$F{total_ati}]]></textFieldExpression>
