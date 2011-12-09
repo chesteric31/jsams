@@ -64,9 +64,6 @@
 			<pen lineWidth="0.5" lineColor="#000000"/>
 		</box>
 	</style>
-	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
-		<defaultValueExpression><![CDATA["/home/chesteric31/Dev/workspace-jsams/JSAMS/reports/"]]></defaultValueExpression>
-	</parameter>
 	<queryString language="xPath">
 		<![CDATA[/estimate]]>
 	</queryString>
@@ -236,7 +233,7 @@
 			<subreport isUsingCache="true" runToBottom="false">
 				<reportElement mode="Transparent" x="0" y="0" width="555" height="105"/>
 				<dataSourceExpression><![CDATA[((net.sf.jasperreports.engine.data.JRXmlDataSource)$P{REPORT_DATA_SOURCE}).subDataSource("//details/detail")]]></dataSourceExpression>
-				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "estimate_subreport1.jasper"]]></subreportExpression>
+				<subreportExpression><![CDATA["estimate_subreport1.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
 	</detail>
