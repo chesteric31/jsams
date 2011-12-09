@@ -4,46 +4,55 @@
         <name>BTS</name>
         <address>
             <number>20</number>
-            <street>Rue du pâturage</street>
+            <street>Rue du patûrage</street>
             <zip>1120</zip>
             <city>Bruxelles</city>
         </address>
         <contact_info>
-            <phone>236547893</phone>
+            <phone>2124578596</phone>
         </contact_info>
     </society>
     <customer>
         <name>Leclient</name>
         <address>
-            <number>9</number>
-            <street>Rue du pays</street>
+            <number>999</number>
+            <street>Rue Neuve</street>
             <zip>1000</zip>
             <city>Bruxelles</city>
         </address>
     </customer>
-    <creation_date>2011-07-28+02:00</creation_date>
-    <number>2</number>
+    <creation_date>2011-12-08+01:00</creation_date>
+    <number>1</number>
     <details>
         <detail>
             <product>
-                <number>2</number>
+                <number>205</number>
                 <name>Game of Thrones</name>
             </product>
             <quantity>1</quantity>
             <price>12.5</price>
-            <total_et>9.875</total_et>
+            <total_et>12.25</total_et>
         </detail>
         <detail>
             <product>
-                <number>10</number>
-                <name>The BFG</name>
+                <number>223</number>
+                <name>Charlie and the Chocolate Factory</name>
             </product>
-            <quantity>1</quantity>
+            <quantity>2</quantity>
             <price>10.0</price>
-            <total_et>7.900</total_et>
+            <total_et>20.00</total_et>
+        </detail>
+        <detail>
+            <product>
+                <number>206</number>
+                <name>La peste</name>
+            </product>
+            <quantity>3</quantity>
+            <price>10.0</price>
+            <total_et>30.00</total_et>
         </detail>
     </details>
-    <total_et>17.775</total_et>
-    <vat>1.06650</vat>
-    <total_ati>18.84150</total_ati>
+    <total_et>62.25</total_et>
+    <vat>3.74</vat>
+    <total_ati>65.99</total_ati>
 </estimate>

@@ -2,6 +2,7 @@ package be.jsams.server.service.pdf.impl;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.Locale;
 
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRExporter;
@@ -45,6 +46,8 @@ public class PdfEstimateServiceImpl implements PdfService<EstimateBean> {
         try {
             JRXmlDataSource jrxmlds = new JRXmlDataSource(xmlFileName, recordPath);
             jrxmlds.setDatePattern("yyyy-mm-dd");
+            jrxmlds.setLocale(Locale.ENGLISH);
+            jrxmlds.setNumberPattern("###0.00");
             HashMap<String, Object> params = new HashMap<String, Object>();
             String subReportsDirectory = generatedXmlFile.getParentFile().getAbsolutePath();
             File reportsDir = new File(subReportsDirectory);

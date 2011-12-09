@@ -70,7 +70,7 @@ public class XmlEstimateGeneratorImpl implements XmlGenerator<EstimateBean, Esti
             BigDecimal vat = totalEt.multiply(BigDecimal.valueOf(bean.getVatApplicable() / 100));
             fullVat = fullVat.add(vat);
             fullTotalEt = fullTotalEt.add(totalEt);
-            detailXml.setTotalEt(totalEt);
+            detailXml.setTotalEt(totalEt.setScale(2, BigDecimal.ROUND_UP));
             List<DetailXml> detail = xml.getDetails().getDetail();
             detail.add(detailXml);
         }
@@ -90,9 +90,10 @@ public class XmlEstimateGeneratorImpl implements XmlGenerator<EstimateBean, Esti
         societyXml.setName(society.getName());
         societyXml.setVatNumber(society.getVatNumber());
         xml.setSociety(societyXml);
-        xml.setTotalAti(fullTotalEt.add(fullVat));
-        xml.setTotalEt(fullTotalEt);
-        xml.setVat(fullVat);
+        BigDecimal fullTotalAti = fullTotalEt.add(fullVat);
+        xml.setTotalAti(fullTotalAti.setScale(2, BigDecimal.ROUND_UP));
+        xml.setTotalEt(fullTotalEt.setScale(2, BigDecimal.ROUND_UP));
+        xml.setVat(fullVat.setScale(2, BigDecimal.ROUND_UP));
         return xml;
     }
 
