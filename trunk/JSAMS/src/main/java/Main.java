@@ -1,45 +1,101 @@
-import java.util.HashMap;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
 
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JRExporter;
-import net.sf.jasperreports.engine.JRExporterParameter;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.data.JRXmlDataSource;
-import net.sf.jasperreports.engine.export.JRPdfExporter;
-import net.sf.jasperreports.view.JasperViewer;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
-
-public class Main {
-
-    /**
-     * @param args
-     */
-    public static void main(String[] args) {
-        String reportFileName = "reports/estimate.jasper";
-        String outFileName = "reports/estimate.pdf";
-        String xmlFileName = "reports/estimate.xml";
-        String recordPath = "estimate";
-
-        try {
-            JRXmlDataSource jrxmlds = new JRXmlDataSource(xmlFileName, recordPath);
-            jrxmlds.setDatePattern("yyyy-mm-dd");
-            HashMap<String, Object> hm = new HashMap<String, Object>();
-            JasperPrint print = JasperFillManager.fillReport(reportFileName, hm, jrxmlds);
-
-            JRExporter exporter = new JRPdfExporter();
-
-            exporter.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outFileName);
-            exporter.setParameter(JRExporterParameter.JASPER_PRINT, print);
-
-            exporter.exportReport();
-            JasperViewer.viewReport(print);
-            System.out.println("Created file: " + outFileName);
-        } catch (JRException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+public class Main extends JFrame {
+    Main() {
+        setTitle("IMAGES");
+        setSize(800, 500);
+        pan = new Panel();
+        getContentPane().add(pan);
     }
 
+    private JPanel pan;
+}
+
+class Panel extends JPanel {
+
+    private JLabel photo;
+    private JButton browse;
+
+    public Panel() {
+        super();
+        photo = new JLabel();
+        browse = new JButton("Browse");
+        browse.addActionListener(new ActionListener() {
+            
+            /**
+             * {@inheritDoc}
+             */
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                JFileChooser chooser = new JFileChooser();
+                int returnValue = chooser.showOpenDialog(null);
+                if (returnValue == JFileChooser.APPROVE_OPTION) {
+                    File file = chooser.getSelectedFile();
+                    System.out.println("Opening: " + file.getName());
+                    photo.setIcon(new ImageIcon(file.getAbsolutePath()));
+                }
+            }
+        });
+        this.add(photo);
+        this.add(browse);
+        // photo = getToolkit().getImage("/home/chesteric31/Images/BTS.png");
+    }
+
+    /**
+     * 
+     * @return
+     */
+    public JLabel getPhoto() {
+        return this.photo;
+    }
+
+    /**
+     * 
+     * @param photo
+     */
+    public void setPhoto(JLabel photo) {
+        this.photo = photo;
+    }
+
+    //
+    // public void paintComponent(Graphics g) {
+    // super.paintComponent(g);
+    // int x = 10, y = 10;
+    // if (photo != null) {
+    // g.drawImage(photo, x, y, this);
+    // System.out.println("photo");
+    // }
+    // }
+    //
+    // private Image photo = null;
+
+    /**
+     * @return the browse
+     */
+    public JButton getBrowse() {
+        return browse;
+    }
+
+    /**
+     * @param browse the browse to set
+     */
+    public void setBrowse(JButton browse) {
+        this.browse = browse;
+    }
+}
+
+class TestMenu {
+    public static void main(String args[]) {
+        Main fen = new Main();
+        fen.setVisible(true);
+    }
 }
