@@ -15,6 +15,7 @@ import be.jsams.client.formatter.DoubleFormatter;
 import be.jsams.client.model.table.AbstractJsamsTableModel;
 import be.jsams.client.swing.component.JsamsComboBox;
 import be.jsams.client.swing.component.JsamsFormattedTextField;
+import be.jsams.client.swing.component.JsamsLabel;
 import be.jsams.client.swing.component.JsamsTable;
 import be.jsams.client.swing.component.JsamsTextField;
 import be.jsams.common.bean.model.AbstractIdentityBean;
@@ -37,7 +38,7 @@ import com.toedter.calendar.JDateChooser;
 public class ViewFactory<B extends AbstractIdentityBean<?, ?>> {
 
     /**
-     * Create {@link JsamsTextField} and bind this component to the bean
+     * Creates {@link JsamsTextField} and binds this component to the bean
      * parameter.
      * 
      * @param bean the bean
@@ -57,7 +58,7 @@ public class ViewFactory<B extends AbstractIdentityBean<?, ?>> {
     }
 
     /**
-     * Create {@link JsamsComboBox} and bind this component to the bean
+     * Creates {@link JsamsComboBox} and binds this component to the bean
      * parameter.
      * 
      * @param bean the Bean object to bind
@@ -80,7 +81,7 @@ public class ViewFactory<B extends AbstractIdentityBean<?, ?>> {
     }
 
     /**
-     * Create {@link JsamsFormattedTextField} and bind this component to the
+     * Creates {@link JsamsFormattedTextField} and binds this component to the
      * bean parameter.
      * 
      * @param bean the bean
@@ -102,7 +103,7 @@ public class ViewFactory<B extends AbstractIdentityBean<?, ?>> {
     }
 
     /**
-     * Create {@link JDateChooser} and bind this component to the bean
+     * Creates {@link JDateChooser} and binds this component to the bean
      * parameter.
      * 
      * @param bean the bean
@@ -122,7 +123,7 @@ public class ViewFactory<B extends AbstractIdentityBean<?, ?>> {
     }
 
     /**
-     * Create {@link JsamsFormattedTextField} and bind this component to the
+     * Creates {@link JsamsFormattedTextField} and binds this component to the
      * bean parameter.
      * 
      * @param bean the bean
@@ -151,7 +152,7 @@ public class ViewFactory<B extends AbstractIdentityBean<?, ?>> {
     }
 
     /**
-     * Create a {@link JTextArea} and bind this component to the bean parameter.
+     * Creates a {@link JTextArea} and binds this component to the bean parameter.
      * 
      * @param bean the bean
      * @param property the property
@@ -169,7 +170,7 @@ public class ViewFactory<B extends AbstractIdentityBean<?, ?>> {
     }
 
     /**
-     * Create a {@link JCheckBox} and bind this component to the bean parameter.
+     * Creates a {@link JCheckBox} and binds this component to the bean parameter.
      * 
      * @param bean the bean
      * @param property the property
@@ -187,7 +188,7 @@ public class ViewFactory<B extends AbstractIdentityBean<?, ?>> {
     }
 
     /**
-     * Create a {@link JsamsTable} and bind this component to the bean.
+     * Creates a {@link JsamsTable} and binds this component to the bean.
      * 
      * @param tableModel the {@link AbstractJsamsTableModel} to set
      * @param mandatory mandatory boolean
@@ -205,7 +206,7 @@ public class ViewFactory<B extends AbstractIdentityBean<?, ?>> {
     }
 
     /**
-     * Create a {@link JRadioButton} and bind this component to the bean
+     * Creates a {@link JRadioButton} and binds this component to the bean
      * parameter.
      * 
      * @param bean the bean
@@ -222,6 +223,26 @@ public class ViewFactory<B extends AbstractIdentityBean<?, ?>> {
         ValidationComponentUtils.setMandatory(radioButton, mandatory);
         radioButton.setEnabled(!readOnly);
         return radioButton;
+    }
+
+    /**
+     * Creates a {@link JsamsLabel} and binds this component to the bean
+     * parameter.
+     * 
+     * @param bean the bean
+     * @param property the property
+     * @param mandatory mandatory boolean
+     * @param readOnly read only boolean
+     * @return the {@link JsamsLabel}
+     */
+    public JsamsLabel createBindingLabelComponent(final B bean, final String property,
+            final boolean mandatory, final boolean readOnly) {
+        PropertyAdapter<B> adapter = new PropertyAdapter<B>(bean, property, true);
+        JsamsLabel label = new JsamsLabel();
+        Bindings.bind(label, adapter);
+        ValidationComponentUtils.setMandatory(label, mandatory);
+        label.setEnabled(!readOnly);
+        return label;
     }
 
 }

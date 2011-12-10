@@ -96,7 +96,7 @@ public abstract class AbstractEditDialog<B extends AbstractIdentityBean<?, ?>, V
         initComponents();
         DialogUtil.centerComponentOnScreen(this);
 //        setLocationRelativeTo(null);
-        setResizable(false);
+        setResizable(true);
         setVisible(true);
     }
 

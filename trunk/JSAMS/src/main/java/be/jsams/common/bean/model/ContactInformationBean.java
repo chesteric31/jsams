@@ -40,7 +40,7 @@ public class ContactInformationBean extends AbstractIdentityBean<ContactInformat
     }
 
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param model the {@link ContactInformation}
      */
@@ -48,8 +48,7 @@ public class ContactInformationBean extends AbstractIdentityBean<ContactInformat
         super(model);
         this.email = model.getEmail();
         this.fax = model.getFax();
-        // TODO
-        // this.logo = bean.getLogo();
+        this.logo = model.getLogo();
         this.mobile = model.getMobile();
         this.phone = model.getPhone();
         this.website = model.getWebsite();

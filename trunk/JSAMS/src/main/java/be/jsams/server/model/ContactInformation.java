@@ -41,8 +41,7 @@ public class ContactInformation extends AbstractIdentity {
         super(bean);
         this.email = bean.getEmail();
         this.fax = bean.getFax();
-        // TODO
-        // this.logo = bean.getLogo();
+        this.logo = bean.getLogo();
         this.mobile = bean.getMobile();
         this.phone = bean.getPhone();
         this.website = bean.getWebsite();

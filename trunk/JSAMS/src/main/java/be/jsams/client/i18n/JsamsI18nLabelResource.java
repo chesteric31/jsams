@@ -183,4 +183,6 @@ public final class JsamsI18nLabelResource {
     
     public static final I18nString LABEL_FORMAL_NOTICE_DAYS = new I18nString("label.formal_notice_days");
 
+    public static final I18nString LABEL_LOGO = new I18nString("label.logo");
+
 }
