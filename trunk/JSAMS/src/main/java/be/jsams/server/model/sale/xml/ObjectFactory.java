@@ -32,6 +32,7 @@ import org.w3._2001.xmlschema.Adapter1;
 public class ObjectFactory {
 
     private static final QName _Zip_QNAME = new QName("", "zip");
+    private static final QName _Logo_QNAME = new QName("", "logo");
     private static final QName _Phone_QNAME = new QName("", "phone");
     private static final QName _Fax_QNAME = new QName("", "fax");
     private static final QName _Website_QNAME = new QName("", "website");
@@ -130,6 +131,15 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "", name = "zip")
     public JAXBElement<BigInteger> createZip(BigInteger value) {
         return new JAXBElement<BigInteger>(_Zip_QNAME, BigInteger.class, null, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String}{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "", name = "logo")
+    public JAXBElement<String> createLogo(String value) {
+        return new JAXBElement<String>(_Logo_QNAME, String.class, null, value);
     }
 
     /**

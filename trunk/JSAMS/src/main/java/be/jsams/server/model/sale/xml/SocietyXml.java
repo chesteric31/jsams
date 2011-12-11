@@ -28,6 +28,7 @@ import javax.xml.bind.annotation.XmlType;
  *       &lt;sequence>
  *         &lt;element ref="{}name"/>
  *         &lt;element ref="{}vat_number"/>
+ *         &lt;element ref="{}logo"/>
  *         &lt;element ref="{}address"/>
  *         &lt;element ref="{}contact_info"/>
  *       &lt;/sequence>
@@ -39,7 +40,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = { "name", "vatNumber", "address", "contactInfo" })
+@XmlType(name = "", propOrder = { "name", "vatNumber", "logo", "address", "contactInfo" })
 @XmlRootElement(name = "society")
 public class SocietyXml {
 
@@ -47,6 +48,8 @@ public class SocietyXml {
     private String name;
     @XmlElement(name = "vat_number", required = true)
     private String vatNumber;
+    @XmlElement(name = "logo", required = true)
+    private String logo;
     @XmlElement(required = true)
     private AddressXml address;
     @XmlElement(name = "contact_info", required = true)
@@ -90,6 +93,24 @@ public class SocietyXml {
      */
     public void setVatNumber(String value) {
         this.vatNumber = value;
+    }
+
+    /**
+     * Gets the value of the logo property.
+     * 
+     * @return possible object is String
+     */
+    public String getLogo() {
+        return logo;
+    }
+
+    /**
+     * Sets the value of the logo property.
+     * 
+     * @param value allowed object is String
+     */
+    public void setLogo(String value) {
+        this.logo = value;
     }
 
     /**

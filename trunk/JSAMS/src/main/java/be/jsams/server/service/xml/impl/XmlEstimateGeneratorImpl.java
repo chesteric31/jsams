@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.List;
 
+import org.apache.commons.codec.binary.Base64;
+
 import be.jsams.common.bean.model.AddressBean;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.CustomerBean;
@@ -90,6 +92,10 @@ public class XmlEstimateGeneratorImpl implements XmlGenerator<EstimateBean, Esti
         societyXml.setContactInfo(contactInfoXml);
         societyXml.setName(society.getName());
         societyXml.setVatNumber(society.getVatNumber());
+        // obtain an encoded string from the byte array, which will be written
+        // inside the XML
+        String base64Image = Base64.encodeBase64String(society.getLogo());
+        societyXml.setLogo(base64Image);
         xml.setSociety(societyXml);
         BigDecimal fullTotalAti = fullTotalEt.add(fullVat);
         xml.setTotalAti(fullTotalAti.setScale(2, BigDecimal.ROUND_UP));
