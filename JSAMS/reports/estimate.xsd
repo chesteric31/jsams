@@ -20,12 +20,14 @@
       <xs:sequence>
         <xs:element ref="name"/>
         <xs:element ref="vat_number"/>
+        <xs:element ref="logo"/>
         <xs:element ref="address"/>
         <xs:element ref="contact_info"/>
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="vat_number" type="xs:string"/>
+  <xs:element name="logo" type="xs:string"/>
   <xs:element name="contact_info">
     <xs:complexType>
       <xs:sequence>
