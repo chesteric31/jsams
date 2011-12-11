@@ -68,6 +68,7 @@
         <xs:element ref="product"/>
         <xs:element ref="quantity"/>
         <xs:element ref="price"/>
+        <xs:element ref="discount_rate"/>
         <xs:element ref="total_et"/>
       </xs:sequence>
     </xs:complexType>
@@ -83,6 +84,7 @@
   <xs:element name="quantity" type="xs:integer"/>
   <xs:element name="price" type="xs:decimal"/>
   <xs:element name="vat" type="xs:decimal"/>
+  <xs:element name="discount_rate" type="xs:decimal"/>
   <xs:element name="total_ati" type="xs:decimal"/>
   <xs:element name="name" type="xs:string"/>
   <xs:element name="address">

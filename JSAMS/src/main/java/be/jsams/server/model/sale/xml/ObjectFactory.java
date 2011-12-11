@@ -44,6 +44,7 @@ public class ObjectFactory {
     private static final QName _CreationDate_QNAME = new QName("", "creation_date");
     private static final QName _FirstName_QNAME = new QName("", "first_name");
     private static final QName _Price_QNAME = new QName("", "price");
+    private static final QName _DiscountRate_QNAME = new QName("", "discount_rate");
     private static final QName _VatNumber_QNAME = new QName("", "vat_number");
     private static final QName _Email_QNAME = new QName("", "email");
     private static final QName _Name_QNAME = new QName("", "name");
@@ -246,6 +247,16 @@ public class ObjectFactory {
     @XmlElementDecl(namespace = "", name = "price")
     public JAXBElement<BigDecimal> createPrice(BigDecimal value) {
         return new JAXBElement<BigDecimal>(_Price_QNAME, BigDecimal.class, null, value);
+    }
+    
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link BigDecimal }
+     * {@code >}
+     * 
+     */
+    @XmlElementDecl(namespace = "", name = "discount_rate")
+    public JAXBElement<BigDecimal> createDiscountRate(BigDecimal value) {
+        return new JAXBElement<BigDecimal>(_DiscountRate_QNAME, BigDecimal.class, null, value);
     }
 
     /**
