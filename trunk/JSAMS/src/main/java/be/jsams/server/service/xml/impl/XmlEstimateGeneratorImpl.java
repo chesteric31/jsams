@@ -68,7 +68,9 @@ public class XmlEstimateGeneratorImpl implements XmlGenerator<EstimateBean, Esti
             BigDecimal totalEt = BigDecimal.valueOf(bean.getPrice() * bean.getQuantity());
             Double discountRate = bean.getDiscountRate();
             if (discountRate != null) {
-                totalEt = totalEt.multiply(BigDecimal.valueOf(1 - (discountRate / 100)));
+                double percentage = discountRate / 100;
+                totalEt = totalEt.multiply(BigDecimal.valueOf(1 - percentage));
+                detailXml.setDiscountRate(BigDecimal.valueOf(percentage).setScale(2, BigDecimal.ROUND_UP));
             }
             BigDecimal vat = totalEt.multiply(BigDecimal.valueOf(bean.getVatApplicable() / 100));
             fullVat = fullVat.add(vat);

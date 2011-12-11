@@ -34,6 +34,7 @@
             </product>
             <quantity>1</quantity>
             <price>12.5</price>
+            <discount_rate>0.02</discount_rate>
             <total_et>12.25</total_et>
         </detail>
         <detail>

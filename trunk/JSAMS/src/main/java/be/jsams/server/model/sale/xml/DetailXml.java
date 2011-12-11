@@ -31,6 +31,7 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element ref="{}product"/>
  *         &lt;element ref="{}quantity"/>
  *         &lt;element ref="{}price"/>
+ *         &lt;element ref="{}discount_rate"/>
  *         &lt;element ref="{}total_et"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
@@ -41,7 +42,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = { "product", "quantity", "price", "totalEt" })
+@XmlType(name = "", propOrder = { "product", "quantity", "price", "discountRate", "totalEt" })
 @XmlRootElement(name = "detail")
 public class DetailXml {
 
@@ -51,6 +52,8 @@ public class DetailXml {
     private BigInteger quantity;
     @XmlElement(required = true)
     private BigDecimal price;
+    @XmlElement(name = "discount_rate", required = true)
+    private BigDecimal discountRate;
     @XmlElement(name = "total_et", required = true)
     private BigDecimal totalEt;
 
@@ -102,6 +105,25 @@ public class DetailXml {
      */
     public BigDecimal getPrice() {
         return price;
+    }
+
+    /**
+     * Sets the value of the discount rate property.
+     * 
+     * @param value allowed object is {@link BigDecimal }
+     * 
+     */
+    public void setDiscountRate(BigDecimal value) {
+        this.discountRate = value;
+    }
+    /**
+     * Gets the value of the discount rate property.
+     * 
+     * @return possible object is {@link BigDecimal }
+     * 
+     */
+    public BigDecimal getDiscountRate() {
+        return discountRate;
     }
 
     /**
