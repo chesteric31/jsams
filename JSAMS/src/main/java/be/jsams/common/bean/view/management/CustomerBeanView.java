@@ -119,6 +119,8 @@ public class CustomerBeanView extends AbstractBeanView<CustomerBean> implements 
         CustomerBean bean = getBean();
         ViewFactory<CustomerBean> helper = new ViewFactory<CustomerBean>();
         JsamsTextField textFieldName = helper.createBindingTextComponent(bean, CustomerBean.NAME_PROPERTY, true, false);
+        JsamsTextField textFieldFirstName = helper.createBindingTextComponent(bean, CustomerBean.FIRST_NAME_PROPERTY,
+                false, false);
         JsamsTextField textFieldVatNumber = helper.createBindingTextComponent(bean, CustomerBean.VAT_NUMBER_PROPERTY,
                 false, false);
         JsamsTextField textFieldBank1 = helper.createBindingTextComponent(bean, CustomerBean.BANK1_PROPERTY, false,
@@ -137,6 +139,8 @@ public class CustomerBeanView extends AbstractBeanView<CustomerBean> implements 
                 .createEditView());
         builder.nextLine();
         builder.appendI15d(JsamsI18nLabelResource.LABEL_NAME.getKey(), textFieldName, maxColumnSpan);
+        builder.nextLine();
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_FIRST_NAME.getKey(), textFieldFirstName, maxColumnSpan);
         builder.nextLine();
         builder.appendI15d(JsamsI18nLabelResource.LABEL_LEGAL_FORM.getKey(), bean.getLegalForm().getView()
                 .createEditView(), maxColumnSpan);

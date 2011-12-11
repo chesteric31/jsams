@@ -1,7 +1,5 @@
 package be.jsams.common.bean.model;
 
-import java.util.Arrays;
-
 import be.jsams.common.bean.view.ContactInformationBeanView;
 import be.jsams.server.model.ContactInformation;
 
@@ -23,14 +21,12 @@ public class ContactInformationBean extends AbstractIdentityBean<ContactInformat
     private String mobile;
     private String email;
     private String website;
-    private byte[] logo;
 
     public static final String PHONE_PROPERTY = "phone";
     public static final String FAX_PROPERTY = "fax";
     public static final String MOBILE_PROPERTY = "mobile";
     public static final String EMAIL_PROPERTY = "email";
     public static final String WEBSITE_PROPERTY = "website";
-    public static final String LOGO_PROPERTY = "logo";
 
     /**
      * Default constructor
@@ -48,7 +44,6 @@ public class ContactInformationBean extends AbstractIdentityBean<ContactInformat
         super(model);
         this.email = model.getEmail();
         this.fax = model.getFax();
-        this.logo = model.getLogo();
         this.mobile = model.getMobile();
         this.phone = model.getPhone();
         this.website = model.getWebsite();
@@ -135,22 +130,6 @@ public class ContactInformationBean extends AbstractIdentityBean<ContactInformat
     }
 
     /**
-     * @return the logo
-     */
-    public byte[] getLogo() {
-        return logo;
-    }
-
-    /**
-     * @param logo the logo to set
-     */
-    public void setLogo(byte[] logo) {
-        byte[] oldValue = this.logo;
-        this.logo = logo;
-        firePropertyChange(LOGO_PROPERTY, oldValue, this.logo);
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Override
@@ -164,7 +143,6 @@ public class ContactInformationBean extends AbstractIdentityBean<ContactInformat
     public void clear() {
         setEmail(null);
         setFax(null);
-        setLogo(null);
         setMobile(null);
         setPhone(null);
         setWebsite(null);
@@ -180,8 +158,6 @@ public class ContactInformationBean extends AbstractIdentityBean<ContactInformat
         builder.append(email);
         builder.append(", fax=");
         builder.append(fax);
-        builder.append(", logo=");
-        builder.append(Arrays.toString(logo));
         builder.append(", mobile=");
         builder.append(mobile);
         builder.append(", phone=");
@@ -201,7 +177,6 @@ public class ContactInformationBean extends AbstractIdentityBean<ContactInformat
         setEmail(other.getEmail());
         setFax(other.getFax());
         setListModel(other.getListModel());
-        setLogo(other.getLogo());
         setMobile(other.getMobile());
         setPhone(other.getPhone());
         setSelection(other.getSelection());

@@ -185,4 +185,6 @@ public final class JsamsI18nLabelResource {
 
     public static final I18nString LABEL_LOGO = new I18nString("label.logo");
 
+    public static final I18nString LABEL_FIRST_NAME = new I18nString("label.first_name");
+
 }

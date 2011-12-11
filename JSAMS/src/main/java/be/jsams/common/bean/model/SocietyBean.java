@@ -1,5 +1,7 @@
 package be.jsams.common.bean.model;
 
+import java.util.Arrays;
+
 import be.jsams.common.bean.view.SocietyBeanView;
 import be.jsams.server.model.Society;
 
@@ -22,6 +24,7 @@ public class SocietyBean extends AbstractNamedIdentityBean<Society, SocietyBeanV
     private String activity;
     private String responsible;
     private String vatNumber;
+    private byte[] logo;
 
     private AddressBean address;
     private LegalFormBean legalForm;
@@ -30,7 +33,8 @@ public class SocietyBean extends AbstractNamedIdentityBean<Society, SocietyBeanV
     public static final String CAPITAL_PROPERTY = "capital";
     public static final String ACTIVITY_PROPERTY = "activity";
     public static final String RESPONSIBLE_PROPERTY = "responsible";
-    public static final String VATNUMBER_PROPERTY = "vatNumber";
+    public static final String VAT_NUMBER_PROPERTY = "vatNumber";
+    public static final String LOGO_PROPERTY = "logo";
 
     /**
      * Default constructor
@@ -54,6 +58,7 @@ public class SocietyBean extends AbstractNamedIdentityBean<Society, SocietyBeanV
         this.capital = model.getCapital();
         this.responsible = model.getResponsible();
         this.vatNumber = model.getVatNumber();
+        this.logo = model.getLogo();
     }
 
     /**
@@ -128,6 +133,22 @@ public class SocietyBean extends AbstractNamedIdentityBean<Society, SocietyBeanV
         this.responsible = responsible;
         firePropertyChange(RESPONSIBLE_PROPERTY, oldValue, this.responsible);
     }
+    
+    /**
+     * @return the logo
+     */
+    public byte[] getLogo() {
+        return logo;
+    }
+
+    /**
+     * @param logo the logo to set
+     */
+    public void setLogo(byte[] logo) {
+        byte[] oldValue = this.logo;
+        this.logo = logo;
+        firePropertyChange(LOGO_PROPERTY, oldValue, this.logo);
+    }
 
     /**
      * @return the vatNumber
@@ -142,7 +163,7 @@ public class SocietyBean extends AbstractNamedIdentityBean<Society, SocietyBeanV
     public void setVatNumber(String vatNumber) {
         String oldValue = this.vatNumber;
         this.vatNumber = vatNumber;
-        firePropertyChange(VATNUMBER_PROPERTY, oldValue, this.vatNumber);
+        firePropertyChange(VAT_NUMBER_PROPERTY, oldValue, this.vatNumber);
     }
 
     /**
@@ -215,6 +236,8 @@ public class SocietyBean extends AbstractNamedIdentityBean<Society, SocietyBeanV
         builder.append(responsible);
         builder.append(", vatNumber=");
         builder.append(vatNumber);
+        builder.append(", logo=");
+        builder.append(Arrays.toString(logo));
         builder.append("]");
         return builder.toString();
     }
@@ -231,6 +254,7 @@ public class SocietyBean extends AbstractNamedIdentityBean<Society, SocietyBeanV
         legalForm.clear();
         setResponsible(null);
         setVatNumber(null);
+        setLogo(null);
     }
 
     /**
@@ -249,6 +273,7 @@ public class SocietyBean extends AbstractNamedIdentityBean<Society, SocietyBeanV
         setResponsible(other.getResponsible());
         setSelection(other.getSelection());
         setVatNumber(other.getVatNumber());
+        setLogo(other.getLogo());
         setId(other.getId());
     }
 

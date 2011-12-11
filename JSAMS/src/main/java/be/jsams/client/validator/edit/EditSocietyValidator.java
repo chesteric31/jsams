@@ -45,6 +45,11 @@ public class EditSocietyValidator implements Validator<SocietyBean> {
             support.addError(JsamsI18nLabelResource.LABEL_CAPITAL.getTranslation(),
                     JsamsI18nResource.ERROR_IS_MANDATORY.getTranslation());
         }
+        String vatNumber = society.getVatNumber();
+        if (ValidationUtils.isBlank(vatNumber)) {
+            support.addError(JsamsI18nLabelResource.LABEL_VAT_NUMBER.getTranslation(),
+                    JsamsI18nResource.ERROR_IS_MANDATORY.getTranslation());
+        }
         String phone = society.getContactInformation().getPhone();
         if (ValidationUtils.isBlank(phone)) {
             support.addError(JsamsI18nLabelResource.LABEL_PHONE.getTranslation(), JsamsI18nResource.ERROR_IS_MANDATORY
