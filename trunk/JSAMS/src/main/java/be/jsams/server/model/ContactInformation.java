@@ -1,7 +1,5 @@
 package be.jsams.server.model;
 
-import java.util.Arrays;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -23,7 +21,6 @@ public class ContactInformation extends AbstractIdentity {
     private String mobile;
     private String email;
     private String website;
-    private byte[] logo;
 
     /**
      * Constructor.
@@ -41,7 +38,6 @@ public class ContactInformation extends AbstractIdentity {
         super(bean);
         this.email = bean.getEmail();
         this.fax = bean.getFax();
-        this.logo = bean.getLogo();
         this.mobile = bean.getMobile();
         this.phone = bean.getPhone();
         this.website = bean.getWebsite();
@@ -133,23 +129,6 @@ public class ContactInformation extends AbstractIdentity {
     }
 
     /**
-     * 
-     * @return the logo
-     */
-    @Column(name = "LOGO")
-    public byte[] getLogo() {
-        return logo;
-    }
-
-    /**
-     * 
-     * @param logo the logo to set
-     */
-    public void setLogo(byte[] logo) {
-        this.logo = logo;
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Override
@@ -159,8 +138,6 @@ public class ContactInformation extends AbstractIdentity {
         builder.append(email);
         builder.append(", fax=");
         builder.append(fax);
-        builder.append(", logo=");
-        builder.append(Arrays.toString(logo));
         builder.append(", mobile=");
         builder.append(mobile);
         builder.append(", phone=");

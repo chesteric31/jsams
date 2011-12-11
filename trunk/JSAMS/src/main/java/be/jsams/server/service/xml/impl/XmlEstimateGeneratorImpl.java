@@ -47,6 +47,7 @@ public class XmlEstimateGeneratorImpl implements XmlGenerator<EstimateBean, Esti
         addressXml.setZip(new BigInteger(billingAddress.getZipCode()));
         customerXml.setAddress(addressXml);
         customerXml.setName(customer.getName());
+        customerXml.setFirstName(customer.getFirstName());
         xml.setCustomer(customerXml);
         List<EstimateDetailBean> details = object.getDetails();
         BigDecimal fullTotalEt = new BigDecimal(0D);

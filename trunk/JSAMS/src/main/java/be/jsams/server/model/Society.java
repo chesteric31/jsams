@@ -1,5 +1,6 @@
 package be.jsams.server.model;
 
+import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -32,6 +33,7 @@ public class Society extends AbstractNamedIdentity {
     private String activity;
     private String responsible;
     private String vatNumber;
+    private byte[] logo;
 
     private Address address;
     private LegalForm legalForm;
@@ -65,6 +67,7 @@ public class Society extends AbstractNamedIdentity {
         }
         this.responsible = bean.getResponsible();
         this.vatNumber = bean.getVatNumber();
+        this.logo = bean.getLogo();
     }
 
     /**
@@ -236,6 +239,23 @@ public class Society extends AbstractNamedIdentity {
     public void setProductCategories(List<ProductCategory> productCategories) {
         this.productCategories = productCategories;
     }
+    
+    /**
+     * 
+     * @return the logo
+     */
+    @Column(name = "LOGO")
+    public byte[] getLogo() {
+        return logo;
+    }
+
+    /**
+     * 
+     * @param logo the logo to set
+     */
+    public void setLogo(byte[] logo) {
+        this.logo = logo;
+    }
 
     /**
      * {@inheritDoc}
@@ -263,6 +283,8 @@ public class Society extends AbstractNamedIdentity {
         builder.append(responsible);
         builder.append(", vatNumber=");
         builder.append(vatNumber);
+        builder.append(", logo=");
+        builder.append(Arrays.toString(logo));
         builder.append("]");
         return builder.toString();
     }

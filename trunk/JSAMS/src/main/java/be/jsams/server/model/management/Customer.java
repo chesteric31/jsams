@@ -37,6 +37,7 @@ public class Customer extends AbstractNamedIdentity {
     private Double creditLimit;
     private Double vatApplicable;
     private String description;
+    private String firstName;
 
     private Address deliveryAddress;
     private Address billingAddress;
@@ -87,6 +88,7 @@ public class Customer extends AbstractNamedIdentity {
         this.vatApplicable = bean.getVatApplicable();
         this.vatNumber = bean.getVatNumber();
         this.society = new Society(bean.getSociety());
+        this.firstName = bean.getFirstName();
     }
 
     /**
@@ -206,6 +208,23 @@ public class Customer extends AbstractNamedIdentity {
      */
     public void setDescription(String description) {
         this.description = description;
+    }
+    
+    /**
+     * 
+     * @return the first name
+     */
+    @Column(name = "FIRST_NAME")
+    public String getFirstName() {
+        return firstName;
+    }
+
+    /**
+     * 
+     * @param firstName the first name
+     */
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     /**
@@ -386,6 +405,8 @@ public class Customer extends AbstractNamedIdentity {
         builder.append(vatApplicable);
         builder.append(", vatNumber=");
         builder.append(vatNumber);
+        builder.append(", firstName=");
+        builder.append(firstName);
         builder.append("]");
         return builder.toString();
     }

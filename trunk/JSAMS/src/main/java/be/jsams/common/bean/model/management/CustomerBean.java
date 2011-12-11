@@ -31,6 +31,7 @@ public class CustomerBean extends AbstractNamedIdentityBean<Customer, CustomerBe
     private Double creditLimit;
     private Double vatApplicable;
     private String description;
+    private String firstName;
 
     private AddressBean deliveryAddress;
     private AddressBean billingAddress;
@@ -48,6 +49,7 @@ public class CustomerBean extends AbstractNamedIdentityBean<Customer, CustomerBe
     public static final String CREDIT_LIMIT_PROPERTY = "creditLimit";
     public static final String VAT_APPLICABLE_PROPERTY = "vatApplicable";
     public static final String DESCRIPTION_PROPERTY = "description";
+    public static final String FIRST_NAME_PROPERTY = "firstName";
 
     /**
      * Constructor
@@ -81,6 +83,7 @@ public class CustomerBean extends AbstractNamedIdentityBean<Customer, CustomerBe
         this.vatNumber = model.getVatNumber();
         this.description = model.getDescription();
         this.society = society;
+        this.firstName = model.getFirstName();
     }
 
     /**
@@ -193,6 +196,22 @@ public class CustomerBean extends AbstractNamedIdentityBean<Customer, CustomerBe
         String oldValue = this.description;
         this.description = description;
         firePropertyChange(DESCRIPTION_PROPERTY, oldValue, this.description);
+    }
+
+    /**
+     * @return the first name
+     */
+    public String getFirstName() {
+        return firstName;
+    }
+
+    /**
+     * @param firstName the first name to set
+     */
+    public void setFirstName(String firstName) {
+        String oldValue = this.firstName;
+        this.firstName = firstName;
+        firePropertyChange(FIRST_NAME_PROPERTY, oldValue, this.firstName);
     }
 
     /**
@@ -320,6 +339,7 @@ public class CustomerBean extends AbstractNamedIdentityBean<Customer, CustomerBe
         paymentMode.clear();
         setVatApplicable(null);
         setVatNumber(null);
+        setFirstName(null);
     }
 
     /**
@@ -361,6 +381,7 @@ public class CustomerBean extends AbstractNamedIdentityBean<Customer, CustomerBe
         setVatApplicable(other.getVatApplicable());
         setVatNumber(other.getVatNumber());
         setId(other.getId());
+        setFirstName(other.getFirstName());
     }
 
 }
