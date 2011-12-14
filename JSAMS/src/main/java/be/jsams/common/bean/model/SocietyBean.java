@@ -212,7 +212,7 @@ public class SocietyBean extends AbstractNamedIdentityBean<Society, SocietyBeanV
      * {@inheritDoc}
      */
     @Override
-    public SocietyBeanView getView() {
+    public SocietyBeanView buildView() {
         return new SocietyBeanView(this);
     }
 

@@ -152,7 +152,7 @@ public class AddressBean extends AbstractIdentityBean<Address, AddressBeanView> 
      * {@inheritDoc}
      */
     @Override
-    public AddressBeanView getView() {
+    public AddressBeanView buildView() {
         return new AddressBeanView(this);
     }
 

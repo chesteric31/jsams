@@ -154,4 +154,12 @@ public class DeliveryOrderBean extends AbstractDocumentBean<DeliveryOrder, Deliv
         setTransferred(other.isTransferred());
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public DeliveryOrderBeanView buildView() {
+        return new DeliveryOrderBeanView(this);
+    }
+
 }

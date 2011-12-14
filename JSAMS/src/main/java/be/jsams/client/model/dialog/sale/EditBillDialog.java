@@ -44,7 +44,7 @@ public class EditBillDialog extends AbstractEditDialog<BillBean, EditBillValidat
      */
     @Override
     public void initComponents() {
-        BillBeanView view = getModel().getView();
+        BillBeanView view = getModel().buildView();
         JPanel panel = view.createEditView();
         getContentPane().add(panel);
         ValidationComponentUtils.updateComponentTreeMandatoryBorder(this);

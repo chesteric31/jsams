@@ -109,4 +109,12 @@ public class CreditNoteBean extends AbstractDocumentBean<CreditNote, CreditNoteB
         details.addAll(other.getDetails());
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public CreditNoteBeanView buildView() {
+        return new CreditNoteBeanView(this);
+    }
+
 }

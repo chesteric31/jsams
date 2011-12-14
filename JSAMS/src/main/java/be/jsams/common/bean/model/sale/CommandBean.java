@@ -195,4 +195,12 @@ public class CommandBean extends AbstractDocumentBean<Command, CommandBeanView> 
         setTransferred(other.isTransferred());
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public CommandBeanView buildView() {
+        return new CommandBeanView(this);
+    }
+
 }

@@ -284,4 +284,12 @@ public class BillBean extends AbstractDocumentBean<Bill, BillBeanView> {
         setPaymentMode(other.getPaymentMode());
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public BillBeanView buildView() {
+        return new BillBeanView(this);
+    }
+
 }

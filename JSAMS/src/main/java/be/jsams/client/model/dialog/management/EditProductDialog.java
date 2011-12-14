@@ -42,7 +42,7 @@ public class EditProductDialog extends AbstractEditDialog<ProductBean, EditProdu
      * {@inheritDoc}
      */
     public void initComponents() {
-        ProductBeanView view = getModel().getView();
+        ProductBeanView view = getModel().buildView();
         JPanel panel = view.createEditView();
         getContentPane().add(panel);
         ValidationComponentUtils.updateComponentTreeMandatoryBorder(this);

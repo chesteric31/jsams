@@ -316,7 +316,7 @@ public class CustomerBean extends AbstractNamedIdentityBean<Customer, CustomerBe
      * {@inheritDoc}
      */
     @Override
-    public CustomerBeanView getView() {
+    public CustomerBeanView buildView() {
         return new CustomerBeanView(this);
     }
 

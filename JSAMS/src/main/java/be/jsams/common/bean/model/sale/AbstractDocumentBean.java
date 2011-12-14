@@ -38,8 +38,6 @@ public abstract class AbstractDocumentBean<M extends AbstractDocument, V extends
     public static final String CREATION_DATE_PROPERTY = "creationDate";
     public static final String REMARK_PROPERTY = "remark";
 
-    private V view;
-
     /**
      * Default constructor.
      * 
@@ -144,20 +142,6 @@ public abstract class AbstractDocumentBean<M extends AbstractDocument, V extends
     }
 
     /**
-     * @return the view
-     */
-    public V getView() {
-        return view;
-    }
-
-    /**
-     * @param view the view to set
-     */
-    public void setView(V view) {
-        this.view = view;
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Override
@@ -173,7 +157,7 @@ public abstract class AbstractDocumentBean<M extends AbstractDocument, V extends
         if (society != null) {
             society.clear();
         }
-        JsamsTable detailsTable = view.getDetailsTable();
+        JsamsTable detailsTable = getView().getDetailsTable();
         if (detailsTable != null) {
             detailsTable.clear();
         }

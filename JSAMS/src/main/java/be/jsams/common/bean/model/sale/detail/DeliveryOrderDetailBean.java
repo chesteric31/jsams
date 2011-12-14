@@ -135,7 +135,7 @@ public class DeliveryOrderDetailBean extends
      * {@inheritDoc}
      */
     @Override
-    public DeliveryOrderDetailBeanView getView() {
+    public DeliveryOrderDetailBeanView buildView() {
         // TODO Auto-generated method stub
         return null;
     }

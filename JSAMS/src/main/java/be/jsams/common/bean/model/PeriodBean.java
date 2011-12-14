@@ -69,7 +69,7 @@ public class PeriodBean extends AbstractIdentityBean<AbstractIdentity, PeriodBea
      * {@inheritDoc}
      */
     @Override
-    public PeriodBeanView getView() {
+    public PeriodBeanView buildView() {
         return new PeriodBeanView(this);
     }
 

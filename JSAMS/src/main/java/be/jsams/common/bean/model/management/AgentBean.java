@@ -125,7 +125,7 @@ public class AgentBean extends AbstractNamedIdentityBean<Agent, AgentBeanView> {
      * {@inheritDoc}
      */
     @Override
-    public AgentBeanView getView() {
+    public AgentBeanView buildView() {
         return new AgentBeanView(this);
     }
 

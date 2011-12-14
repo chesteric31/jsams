@@ -155,7 +155,7 @@ public class ProductBean extends AbstractNamedIdentityBean<Product, ProductBeanV
      * {@inheritDoc}
      */
     @Override
-    public ProductBeanView getView() {
+    public ProductBeanView buildView() {
         return new ProductBeanView(this);
     }
 

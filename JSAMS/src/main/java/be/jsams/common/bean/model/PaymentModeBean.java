@@ -113,7 +113,7 @@ public class PaymentModeBean extends AbstractTranslatableIdentityBean<PaymentMod
      * {@inheritDoc}
      */
     @Override
-    public PaymentModeBeanView getView() {
+    public PaymentModeBeanView buildView() {
         return new PaymentModeBeanView(this);
     }
     

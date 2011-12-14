@@ -115,7 +115,7 @@ public class TransferBean extends AbstractIdentityBean<AbstractIdentity, Transfe
      * {@inheritDoc}
      */
     @Override
-    public TransferBeanView getView() {
+    public TransferBeanView buildView() {
         return new TransferBeanView(this);
     }
 
