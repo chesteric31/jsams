@@ -59,7 +59,7 @@ public class ProductBeanView extends AbstractBeanView<ProductBean> implements Ed
         final int maxColumnSpan = 5;
         builder.setDefaultDialogBorder();
         builder.appendI15d(JsamsI18nLabelResource.LABEL_PRODUCT_LABEL.getKey(), textFieldName, maxColumnSpan);
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_PRODUCT_CATEGORY.getKey(), bean.getCategory().getView()
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_PRODUCT_CATEGORY.getKey(), bean.getCategory().buildView()
                 .createCustomView(), maxColumnSpan);
         builder.nextLine();
         builder.appendI15d(JsamsI18nLabelResource.LABEL_PRODUCT_PRICE.getKey(), textFieldPrice);
@@ -91,7 +91,7 @@ public class ProductBeanView extends AbstractBeanView<ProductBean> implements Ed
         builder.setDefaultDialogBorder();
         final int maxColumnSpan = 5;
         builder.appendI15d(JsamsI18nLabelResource.LABEL_PRODUCT_LABEL.getKey(), textFieldName, maxColumnSpan);
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_PRODUCT_CATEGORY.getKey(), bean.getCategory().getView()
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_PRODUCT_CATEGORY.getKey(), bean.getCategory().buildView()
                 .createCustomView(), maxColumnSpan);
         builder.nextLine();
         builder.appendI15d(JsamsI18nLabelResource.LABEL_PRODUCT_PRICE.getKey(), textFieldPrice);

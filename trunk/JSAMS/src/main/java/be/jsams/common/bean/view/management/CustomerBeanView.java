@@ -91,17 +91,17 @@ public class CustomerBeanView extends AbstractBeanView<CustomerBean> implements 
         final int maxColumnSpan = 5;
         builder.appendI15d(JsamsI18nLabelResource.LABEL_NAME.getKey(), textFieldName, maxColumnSpan);
         builder.nextLine();
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_PAYMENT_MODE.getKey(), bean.getPaymentMode().getView()
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_PAYMENT_MODE.getKey(), bean.getPaymentMode().buildView()
                 .createEditView());
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_LEGAL_FORM.getKey(), bean.getLegalForm().getView()
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_LEGAL_FORM.getKey(), bean.getLegalForm().buildView()
                 .createEditView());
         builder.nextLine();
         AddressBean address = bean.getBillingAddress();
-        ViewFactory<AddressBean> viewAddressFactory = address.getView().getViewFactory();
+        ViewFactory<AddressBean> viewAddressFactory = address.buildView().getViewFactory();
         JTextField textFieldZipCode = viewAddressFactory.createBindingTextComponent(address,
                 AddressBean.ZIP_CODE_PROPERTY, false, false);
         ContactInformationBean contactInformation = bean.getContactInformation();
-        ViewFactory<ContactInformationBean> viewContactFactory = contactInformation.getView().getViewFactory();
+        ViewFactory<ContactInformationBean> viewContactFactory = contactInformation.buildView().getViewFactory();
         JTextField textFieldPhone = viewContactFactory.createBindingTextComponent(contactInformation,
                 ContactInformationBean.PHONE_PROPERTY, false, false);
         builder.appendI15d(JsamsI18nLabelResource.LABEL_ZIP_CODE.getKey(), textFieldZipCode);
@@ -135,14 +135,14 @@ public class CustomerBeanView extends AbstractBeanView<CustomerBean> implements 
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
         final int maxColumnSpan = 5;
         builder.setDefaultDialogBorder();
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_CIVILITY.getKey(), bean.getCivility().getView()
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_CIVILITY.getKey(), bean.getCivility().buildView()
                 .createEditView());
         builder.nextLine();
         builder.appendI15d(JsamsI18nLabelResource.LABEL_NAME.getKey(), textFieldName, maxColumnSpan);
         builder.nextLine();
         builder.appendI15d(JsamsI18nLabelResource.LABEL_FIRST_NAME.getKey(), textFieldFirstName, maxColumnSpan);
         builder.nextLine();
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_LEGAL_FORM.getKey(), bean.getLegalForm().getView()
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_LEGAL_FORM.getKey(), bean.getLegalForm().buildView()
                 .createEditView(), maxColumnSpan);
         builder.nextLine();
         builder.appendI15d(JsamsI18nLabelResource.LABEL_VAT_NUMBER.getKey(), textFieldVatNumber, maxColumnSpan);
@@ -154,10 +154,10 @@ public class CustomerBeanView extends AbstractBeanView<CustomerBean> implements 
         builder.appendI15d(JsamsI18nLabelResource.LABEL_CREDIT_LIMIT.getKey(), textFieldCreditLimit);
         builder.appendI15d(JsamsI18nLabelResource.LABEL_VAT_APPLICABLE.getKey(), textFieldVatApplicable);
         builder.nextLine();
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_PAYMENT_MODE.getKey(), bean.getPaymentMode().getView()
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_PAYMENT_MODE.getKey(), bean.getPaymentMode().buildView()
                 .createEditView(), maxColumnSpan);
         builder.nextLine();
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_AGENT.getKey(), bean.getAgent().getView().createCustomView(),
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_AGENT.getKey(), bean.getAgent().buildView().createCustomView(),
                 maxColumnSpan);
         return builder.getPanel();
     }
@@ -170,7 +170,7 @@ public class CustomerBeanView extends AbstractBeanView<CustomerBean> implements 
     private JPanel buildBillingAddressTab() {
         JPanel mainPanel = new JPanel(new BorderLayout());
         final AddressBean billingAddress = getBean().getBillingAddress();
-        JPanel addressPanel = billingAddress.getView().createEditView();
+        JPanel addressPanel = billingAddress.buildView().createEditView();
         JsamsButton copyButton = new JsamsButton(JsamsI18nResource.BUTTON_COPY_BILLING_TO_DELIVERY);
         copyButton.setAction(new AbstractAction(copyButton.getText()) {
 
@@ -206,7 +206,7 @@ public class CustomerBeanView extends AbstractBeanView<CustomerBean> implements 
      */
     private JPanel buildDeliveryAddressTab() {
         AddressBean deliveryAddress = getBean().getDeliveryAddress();
-        JPanel panel = deliveryAddress.getView().createEditView();
+        JPanel panel = deliveryAddress.buildView().createEditView();
         panel.setBorder(Borders.DIALOG_BORDER);
         return panel;
     }
@@ -218,7 +218,7 @@ public class CustomerBeanView extends AbstractBeanView<CustomerBean> implements 
      */
     private JPanel buildContactInformationsTab() {
         ContactInformationBean contactInformation = getBean().getContactInformation();
-        JPanel panel = contactInformation.getView().createEditView();
+        JPanel panel = contactInformation.buildView().createEditView();
         panel.setBorder(Borders.DIALOG_BORDER);
         return panel;
     }

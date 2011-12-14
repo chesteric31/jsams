@@ -125,12 +125,12 @@ public class SocietyBeanView extends AbstractBeanView<SocietyBean> implements Ed
         final int maxColumnSpan = 3;
         builder.appendI15d(JsamsI18nLabelResource.LABEL_NAME.getKey(), textFieldName);
         builder.nextLine();
-        builder.append(bean.getAddress().getView().createEditView(), maxColumnSpan);
+        builder.append(bean.getAddress().buildView().createEditView(), maxColumnSpan);
         builder.nextLine();
-        builder.append(bean.getContactInformation().getView().createEditView(), maxColumnSpan);
+        builder.append(bean.getContactInformation().buildView().createEditView(), maxColumnSpan);
         builder.nextLine();
         builder.appendSeparator(JsamsI18nLabelResource.LABEL_MISC.getTranslation());
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_LEGAL_FORM.getKey(), bean.getLegalForm().getView()
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_LEGAL_FORM.getKey(), bean.getLegalForm().buildView()
                 .createEditView(), 1);
         builder.nextLine();
         builder.appendI15d(JsamsI18nLabelResource.LABEL_CAPITAL.getKey(), textFieldCapital);

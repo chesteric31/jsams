@@ -47,13 +47,13 @@ public class EstimateDetailBeanView extends AbstractDetailBeanView<EstimateDetai
         EstimateDetailBean bean = getBean();
         EstimateBean estimate = bean.getEstimate();
         PeriodBean period = estimate.getPeriod();
-        ViewFactory<PeriodBean> viewPeriodFactory = period.getView().getViewFactory();
+        ViewFactory<PeriodBean> viewPeriodFactory = period.buildView().getViewFactory();
         JDateChooser startDate = viewPeriodFactory.createBindingDateComponent(period, PeriodBean.START_DATE_PROPERTY,
                 false, false);
         JDateChooser endDate = viewPeriodFactory.createBindingDateComponent(period, PeriodBean.END_DATE_PROPERTY,
                 false, false);
         AddressBean address = estimate.getBillingAddress();
-        ViewFactory<AddressBean> viewAddressFactory = address.getView().getViewFactory();
+        ViewFactory<AddressBean> viewAddressFactory = address.buildView().getViewFactory();
         JsamsTextField textFieldCity = viewAddressFactory.createBindingTextComponent(address,
                 AddressBean.CITY_PROPERTY, false, false);
         JsamsTextField textFieldZipCode = viewAddressFactory.createBindingTextComponent(address,
@@ -62,7 +62,7 @@ public class EstimateDetailBeanView extends AbstractDetailBeanView<EstimateDetai
                 "right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow", "p");
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
         builder.setDefaultDialogBorder();
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_CUSTOMER_NAME.getKey(), estimate.getCustomer().getView()
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_CUSTOMER_NAME.getKey(), estimate.getCustomer().buildView()
                 .createCustomView());
         builder.appendI15d(JsamsI18nLabelResource.LABEL_START_DATE.getKey(), startDate);
         builder.appendI15d(JsamsI18nLabelResource.LABEL_END_DATE.getKey(), endDate);
