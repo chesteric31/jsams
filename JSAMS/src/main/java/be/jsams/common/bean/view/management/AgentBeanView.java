@@ -56,10 +56,10 @@ public class AgentBeanView extends AbstractBeanView<AgentBean> implements Editab
         JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.LEFT);
         JPanel generalPanel = buildGeneralTab();
         tabbedPane.add(JsamsI18nResource.PANEL_GENERAL.getTranslation(), generalPanel);
-        JPanel addressPanel = getBean().getAddress().getView().createEditView();
+        JPanel addressPanel = getBean().getAddress().buildView().createEditView();
         addressPanel.setBorder(Borders.DIALOG_BORDER);
         tabbedPane.add(JsamsI18nResource.PANEL_ADDRESS.getTranslation(), addressPanel);
-        JPanel contactPanel = getBean().getContactInformation().getView().createEditView();
+        JPanel contactPanel = getBean().getContactInformation().buildView().createEditView();
         contactPanel.setBorder(Borders.DIALOG_BORDER);
         tabbedPane.add(JsamsI18nResource.PANEL_CONTACT_INFORMATIONS.getTranslation(), contactPanel);
 
@@ -84,7 +84,7 @@ public class AgentBeanView extends AbstractBeanView<AgentBean> implements Editab
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
         final int maxColumnSpan = 5;
         builder.setDefaultDialogBorder();
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_CIVILITY.getKey(), bean.getCivility().getView()
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_CIVILITY.getKey(), bean.getCivility().buildView()
                 .createEditView());
         builder.nextLine();
         builder.appendI15d(JsamsI18nLabelResource.LABEL_NAME.getKey(), textFieldName, maxColumnSpan);
@@ -104,13 +104,13 @@ public class AgentBeanView extends AbstractBeanView<AgentBean> implements Editab
         JsamsTextField textFieldFunction = viewFactory.createBindingTextComponent(bean, AgentBean.FUNCTION_PROPERTY,
                 false, false);
         AddressBean address = bean.getAddress();
-        ViewFactory<AddressBean> viewAddressFactory = address.getView().getViewFactory();
+        ViewFactory<AddressBean> viewAddressFactory = address.buildView().getViewFactory();
         JsamsTextField textFieldCity = viewAddressFactory.createBindingTextComponent(address,
                 AddressBean.CITY_PROPERTY, false, false);
         JsamsTextField textFieldZipCode = viewAddressFactory.createBindingTextComponent(address,
                 AddressBean.ZIP_CODE_PROPERTY, false, false);
         ContactInformationBean contactInformation = bean.getContactInformation();
-        ViewFactory<ContactInformationBean> viewContactFactory = contactInformation.getView().getViewFactory();
+        ViewFactory<ContactInformationBean> viewContactFactory = contactInformation.buildView().getViewFactory();
         JsamsTextField textFieldPhone = viewContactFactory.createBindingTextComponent(contactInformation,
                 ContactInformationBean.PHONE_PROPERTY, false, false);
         FormLayout layout = new FormLayout(
