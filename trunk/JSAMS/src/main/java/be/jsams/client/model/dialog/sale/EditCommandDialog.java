@@ -41,7 +41,7 @@ public class EditCommandDialog extends AbstractEditDialog<CommandBean, EditComma
      */
     @Override
     public void initComponents() {
-        CommandBeanView view = getModel().getView();
+        CommandBeanView view = getModel().buildView();
         JPanel panel = view.createEditView();
         getContentPane().add(panel);
         ValidationComponentUtils.updateComponentTreeMandatoryBorder(this);

@@ -47,7 +47,7 @@ public class EditCustomerDialog extends AbstractEditDialog<CustomerBean, EditCus
      * {@inheritDoc}
      */
     public void initComponents() {
-        CustomerBeanView view = getModel().getView();
+        CustomerBeanView view = getModel().buildView();
         JPanel panel = view.createEditView();
         getContentPane().add(panel);
         ValidationComponentUtils.updateComponentTreeMandatoryBorder(this);

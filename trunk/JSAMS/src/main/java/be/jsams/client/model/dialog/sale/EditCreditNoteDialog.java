@@ -42,7 +42,7 @@ public class EditCreditNoteDialog extends
      */
     @Override
     public void initComponents() {
-        CreditNoteBeanView view = getModel().getView();
+        CreditNoteBeanView view = getModel().buildView();
         JPanel panel = view.createEditView();
         getContentPane().add(panel);
         ValidationComponentUtils.updateComponentTreeMandatoryBorder(this);

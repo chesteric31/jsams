@@ -54,7 +54,7 @@ public class CivilityBean extends AbstractTranslatableIdentityBean<Civility, Civ
      * {@inheritDoc}
      */
     @Override
-    public CivilityBeanView getView() {
+    public CivilityBeanView buildView() {
         return new CivilityBeanView(this);
     }
 

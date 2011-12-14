@@ -109,13 +109,13 @@ public abstract class AbstractDocumentChooserWizardPanel<V extends Validator<Tra
                 ViewFactory<BillBean> viewFactory = getViewFactory();
                 JCheckBox paid = viewFactory.createBindingBooleanComponent(bean, BillBean.PAID_PROPERTY, false, false);
                 PeriodBean period = bean.getPeriod();
-                ViewFactory<PeriodBean> viewPeriodFactory = period.getView().getViewFactory();
+                ViewFactory<PeriodBean> viewPeriodFactory = period.buildView().getViewFactory();
                 JDateChooser startDate = viewPeriodFactory.createBindingDateComponent(period,
                         PeriodBean.START_DATE_PROPERTY, false, false);
                 JDateChooser endDate = viewPeriodFactory.createBindingDateComponent(period,
                         PeriodBean.END_DATE_PROPERTY, false, false);
                 AddressBean address = bean.getBillingAddress();
-                ViewFactory<AddressBean> viewAddressFactory = address.getView().getViewFactory();
+                ViewFactory<AddressBean> viewAddressFactory = address.buildView().getViewFactory();
                 JsamsTextField textFieldCity = viewAddressFactory.createBindingTextComponent(address,
                         AddressBean.CITY_PROPERTY, false, false);
                 JsamsTextField textFieldZipCode = viewAddressFactory.createBindingTextComponent(address,
@@ -124,14 +124,14 @@ public abstract class AbstractDocumentChooserWizardPanel<V extends Validator<Tra
                         "right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow", "p");
                 DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
 //                builder.setDefaultDialogBorder();
-                builder.appendI15d(JsamsI18nLabelResource.LABEL_CUSTOMER_NAME.getKey(), bean.getCustomer().getView()
+                builder.appendI15d(JsamsI18nLabelResource.LABEL_CUSTOMER_NAME.getKey(), bean.getCustomer().buildView()
                         .createCustomView());
                 builder.appendI15d(JsamsI18nLabelResource.LABEL_START_DATE.getKey(), startDate);
                 builder.appendI15d(JsamsI18nLabelResource.LABEL_END_DATE.getKey(), endDate);
                 builder.nextLine();
                 builder.appendI15d(JsamsI18nLabelResource.LABEL_CITY.getKey(), textFieldCity);
                 builder.appendI15d(JsamsI18nLabelResource.LABEL_ZIP_CODE.getKey(), textFieldZipCode);
-                builder.appendI15d(JsamsI18nLabelResource.LABEL_PAYMENT_MODE.getKey(), bean.getPaymentMode().getView()
+                builder.appendI15d(JsamsI18nLabelResource.LABEL_PAYMENT_MODE.getKey(), bean.getPaymentMode().buildView()
                         .createEditView());
                 builder.nextLine();
                 builder.appendI15d(JsamsI18nLabelResource.LABEL_PAID.getKey(), paid);
@@ -161,13 +161,13 @@ public abstract class AbstractDocumentChooserWizardPanel<V extends Validator<Tra
             public JPanel createSearchView() {
                 DeliveryOrderBean bean = getBean();
                 PeriodBean period = bean.getPeriod();
-                ViewFactory<PeriodBean> viewPeriodFactory = period.getView().getViewFactory();
+                ViewFactory<PeriodBean> viewPeriodFactory = period.buildView().getViewFactory();
                 JDateChooser startDate = viewPeriodFactory.createBindingDateComponent(period,
                         PeriodBean.START_DATE_PROPERTY, false, false);
                 JDateChooser endDate = viewPeriodFactory.createBindingDateComponent(period,
                         PeriodBean.END_DATE_PROPERTY, false, false);
                 AddressBean address = bean.getDeliveryAddress();
-                ViewFactory<AddressBean> viewAddressFactory = address.getView().getViewFactory();
+                ViewFactory<AddressBean> viewAddressFactory = address.buildView().getViewFactory();
                 JsamsTextField textFieldCity = viewAddressFactory.createBindingTextComponent(address,
                         AddressBean.CITY_PROPERTY, false, false);
                 JsamsTextField textFieldZipCode = viewAddressFactory.createBindingTextComponent(address,
@@ -176,7 +176,7 @@ public abstract class AbstractDocumentChooserWizardPanel<V extends Validator<Tra
                         "right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow", "p");
                 DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
 //                builder.setDefaultDialogBorder();
-                builder.appendI15d(JsamsI18nLabelResource.LABEL_CUSTOMER_NAME.getKey(), bean.getCustomer().getView()
+                builder.appendI15d(JsamsI18nLabelResource.LABEL_CUSTOMER_NAME.getKey(), bean.getCustomer().buildView()
                         .createCustomView());
                 builder.appendI15d(JsamsI18nLabelResource.LABEL_START_DATE.getKey(), startDate);
                 builder.appendI15d(JsamsI18nLabelResource.LABEL_END_DATE.getKey(), endDate);
@@ -209,13 +209,13 @@ public abstract class AbstractDocumentChooserWizardPanel<V extends Validator<Tra
             public JPanel createSearchView() {
                 CommandBean bean = getBean();
                 PeriodBean period = bean.getPeriod();
-                ViewFactory<PeriodBean> viewPeriodFactory = period.getView().getViewFactory();
+                ViewFactory<PeriodBean> viewPeriodFactory = period.buildView().getViewFactory();
                 JDateChooser startDate = viewPeriodFactory.createBindingDateComponent(period,
                         PeriodBean.START_DATE_PROPERTY, false, false);
                 JDateChooser endDate = viewPeriodFactory.createBindingDateComponent(period,
                         PeriodBean.END_DATE_PROPERTY, false, false);
                 AddressBean address = bean.getBillingAddress();
-                ViewFactory<AddressBean> viewAddressFactory = address.getView().getViewFactory();
+                ViewFactory<AddressBean> viewAddressFactory = address.buildView().getViewFactory();
                 JsamsTextField textFieldCity = viewAddressFactory.createBindingTextComponent(address,
                         AddressBean.CITY_PROPERTY, false, false);
                 JsamsTextField textFieldZipCode = viewAddressFactory.createBindingTextComponent(address,
@@ -224,7 +224,7 @@ public abstract class AbstractDocumentChooserWizardPanel<V extends Validator<Tra
                         "right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow", "p");
                 DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
 //                builder.setDefaultDialogBorder();
-                builder.appendI15d(JsamsI18nLabelResource.LABEL_CUSTOMER_NAME.getKey(), bean.getCustomer().getView()
+                builder.appendI15d(JsamsI18nLabelResource.LABEL_CUSTOMER_NAME.getKey(), bean.getCustomer().buildView()
                         .createCustomView());
                 builder.appendI15d(JsamsI18nLabelResource.LABEL_START_DATE.getKey(), startDate);
                 builder.appendI15d(JsamsI18nLabelResource.LABEL_END_DATE.getKey(), endDate);
@@ -258,13 +258,13 @@ public abstract class AbstractDocumentChooserWizardPanel<V extends Validator<Tra
                 EstimateBean bean = getBean();
 
                 PeriodBean period = bean.getPeriod();
-                ViewFactory<PeriodBean> viewPeriodFactory = period.getView().getViewFactory();
+                ViewFactory<PeriodBean> viewPeriodFactory = period.buildView().getViewFactory();
                 JDateChooser startDate = viewPeriodFactory.createBindingDateComponent(period,
                         PeriodBean.START_DATE_PROPERTY, false, false);
                 JDateChooser endDate = viewPeriodFactory.createBindingDateComponent(period,
                         PeriodBean.END_DATE_PROPERTY, false, false);
                 AddressBean address = bean.getBillingAddress();
-                ViewFactory<AddressBean> viewAddressFactory = address.getView().getViewFactory();
+                ViewFactory<AddressBean> viewAddressFactory = address.buildView().getViewFactory();
                 JsamsTextField textFieldCity = viewAddressFactory.createBindingTextComponent(address,
                         AddressBean.CITY_PROPERTY, false, false);
                 JsamsTextField textFieldZipCode = viewAddressFactory.createBindingTextComponent(address,
@@ -273,7 +273,7 @@ public abstract class AbstractDocumentChooserWizardPanel<V extends Validator<Tra
                         "right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow", "p");
                 DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
 //                builder.setDefaultDialogBorder();
-                builder.appendI15d(JsamsI18nLabelResource.LABEL_CUSTOMER_NAME.getKey(), bean.getCustomer().getView()
+                builder.appendI15d(JsamsI18nLabelResource.LABEL_CUSTOMER_NAME.getKey(), bean.getCustomer().buildView()
                         .createCustomView());
                 builder.appendI15d(JsamsI18nLabelResource.LABEL_START_DATE.getKey(), startDate);
                 builder.appendI15d(JsamsI18nLabelResource.LABEL_END_DATE.getKey(), endDate);

@@ -80,7 +80,7 @@ public class CommandDetailBean extends AbstractDetailBean<CommandDetail, Command
      * {@inheritDoc}
      */
     @Override
-    public CommandDetailBeanView getView() {
+    public CommandDetailBeanView buildView() {
         return new CommandDetailBeanView(this);
     }
 

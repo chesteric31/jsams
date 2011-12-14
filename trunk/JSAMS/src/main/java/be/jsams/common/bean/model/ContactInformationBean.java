@@ -133,7 +133,7 @@ public class ContactInformationBean extends AbstractIdentityBean<ContactInformat
      * {@inheritDoc}
      */
     @Override
-    public ContactInformationBeanView getView() {
+    public ContactInformationBeanView buildView() {
         return new ContactInformationBeanView(this);
     }
 

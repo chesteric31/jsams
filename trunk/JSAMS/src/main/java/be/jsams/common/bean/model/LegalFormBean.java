@@ -54,7 +54,7 @@ public class LegalFormBean extends AbstractTranslatableIdentityBean<LegalForm, L
      * {@inheritDoc}
      */
     @Override
-    public LegalFormBeanView getView() {
+    public LegalFormBeanView buildView() {
         return new LegalFormBeanView(this);
     }
 

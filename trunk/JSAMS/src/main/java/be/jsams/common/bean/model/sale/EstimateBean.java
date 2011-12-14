@@ -179,4 +179,12 @@ public class EstimateBean extends AbstractDocumentBean<Estimate, EstimateBeanVie
         setTransferred(other.isTransferred());
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public EstimateBeanView buildView() {
+        return new EstimateBeanView(this);
+    }
+
 }

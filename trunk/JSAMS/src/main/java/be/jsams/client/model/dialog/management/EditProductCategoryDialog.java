@@ -42,7 +42,7 @@ public class EditProductCategoryDialog extends
      * {@inheritDoc}
      */
     public void initComponents() {
-        ProductCategoryBeanView view = getModel().getView();
+        ProductCategoryBeanView view = getModel().buildView();
         JPanel panel = view.createEditView();
         getContentPane().add(panel);
         ValidationComponentUtils.updateComponentTreeMandatoryBorder(this);

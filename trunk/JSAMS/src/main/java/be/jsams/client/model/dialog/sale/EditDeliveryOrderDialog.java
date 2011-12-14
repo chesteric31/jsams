@@ -42,7 +42,7 @@ public class EditDeliveryOrderDialog extends
      */
     @Override
     public void initComponents() {
-        DeliveryOrderBeanView view = getModel().getView();
+        DeliveryOrderBeanView view = getModel().buildView();
         JPanel panel = view.createEditView();
         getContentPane().add(panel);
         ValidationComponentUtils.updateComponentTreeMandatoryBorder(this);

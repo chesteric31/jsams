@@ -24,20 +24,21 @@ public abstract class AbstractIdentityBean<M extends AbstractIdentity, V extends
     private static final long serialVersionUID = -4948491302164990763L;
 
     private Long id;
-
     public static final String ID_PROPERTY = "id";
 
     private ObservableList<? extends AbstractIdentityBean<M, V>> listModel;
-    private AbstractIdentityBean<M, V> selection;
-
-    public static final String SELECTION_PROPERTY = "selection";
     public static final String LIST_MODEL_PROPERTY = "listModel";
+    private AbstractIdentityBean<M, V> selection;
+    public static final String SELECTION_PROPERTY = "selection";
+    
+    private V view;
 
     /**
      * Constructor.
      */
     public AbstractIdentityBean() {
         super();
+        view = buildView();
     }
 
     /**
@@ -139,13 +140,29 @@ public abstract class AbstractIdentityBean<M extends AbstractIdentity, V extends
     }
 
     /**
-     * @return the {@link AbstractBeanView} of this class
+     * Builds the view of the bean.
+     * 
+     * @return the built {@link AbstractBeanView} for this bean
      */
-    public abstract V getView();
+    public abstract V buildView();
 
     /**
-     * Clear the value.
+     * Clears the value.
      */
     public abstract void clear();
+
+    /**
+     * @return the view
+     */
+    public V getView() {
+        return view;
+    }
+
+    /**
+     * @param view the view to set
+     */
+    public void setView(V view) {
+        this.view = view;
+    }
 
 }

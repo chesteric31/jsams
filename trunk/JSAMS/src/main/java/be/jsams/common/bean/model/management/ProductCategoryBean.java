@@ -65,7 +65,7 @@ public class ProductCategoryBean extends AbstractTranslatableIdentityBean<Produc
      * {@inheritDoc}
      */
     @Override
-    public ProductCategoryBeanView getView() {
+    public ProductCategoryBeanView buildView() {
         return new ProductCategoryBeanView(this);
     }
 

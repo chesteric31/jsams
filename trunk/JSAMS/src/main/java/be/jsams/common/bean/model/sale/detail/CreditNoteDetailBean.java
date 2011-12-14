@@ -76,7 +76,7 @@ public class CreditNoteDetailBean extends
      * {@inheritDoc}
      */
     @Override
-    public CreditNoteDetailBeanView getView() {
+    public CreditNoteDetailBeanView buildView() {
         // TODO Auto-generated method stub
         return null;
     }
