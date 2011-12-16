@@ -43,6 +43,7 @@ public class SocietyBean extends AbstractNamedIdentityBean<Society, SocietyBeanV
         super();
         this.address = new AddressBean();
         this.contactInformation = new ContactInformationBean();
+        setView(buildView());
     }
 
     /**
@@ -59,6 +60,7 @@ public class SocietyBean extends AbstractNamedIdentityBean<Society, SocietyBeanV
         this.responsible = model.getResponsible();
         this.vatNumber = model.getVatNumber();
         this.logo = model.getLogo();
+        setView(buildView());
     }
 
     /**
@@ -71,6 +73,7 @@ public class SocietyBean extends AbstractNamedIdentityBean<Society, SocietyBeanV
         this(model);
         setListModel(list);
         setSelection(this);
+        setView(buildView());
     }
 
     /**
@@ -84,6 +87,7 @@ public class SocietyBean extends AbstractNamedIdentityBean<Society, SocietyBeanV
         if (list != null && !list.isEmpty()) {
             setSelection(list.get(0));
         }
+        setView(buildView());
     }
 
     /**

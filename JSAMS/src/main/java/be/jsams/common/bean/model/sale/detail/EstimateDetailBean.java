@@ -32,6 +32,7 @@ public class EstimateDetailBean extends AbstractDetailBean<EstimateDetail, Estim
      */
     public EstimateDetailBean() {
         super();
+        setView(buildView());
     }
 
     /**
@@ -44,6 +45,7 @@ public class EstimateDetailBean extends AbstractDetailBean<EstimateDetail, Estim
         super(model, estimate);
         this.estimate = estimate;
         this.transferred = model.isTransferred();
+        setView(buildView());
     }
 
     /**

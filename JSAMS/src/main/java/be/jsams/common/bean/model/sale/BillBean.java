@@ -63,7 +63,7 @@ public class BillBean extends AbstractDocumentBean<Bill, BillBeanView> {
         this.paid = false;
         List<BillDetailBean> details = new ArrayList<BillDetailBean>();
         this.details = details;
-        setView(new BillBeanView(this));
+        setView(buildView());
     }
 
     /**
@@ -90,7 +90,7 @@ public class BillBean extends AbstractDocumentBean<Bill, BillBeanView> {
         this.dateFormalNotice = model.getDateFormalNotice();
         this.dueDate = model.getDueDate();
         this.paymentMode = mode;
-        setView(new BillBeanView(this));
+        setView(buildView());
     }
 
     /**

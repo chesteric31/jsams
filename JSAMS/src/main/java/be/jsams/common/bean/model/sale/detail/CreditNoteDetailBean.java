@@ -26,6 +26,7 @@ public class CreditNoteDetailBean extends
      */
     public CreditNoteDetailBean() {
         super();
+        setView(buildView());
     }
 
     /**
@@ -37,6 +38,7 @@ public class CreditNoteDetailBean extends
     public CreditNoteDetailBean(CreditNoteDetail model, CreditNoteBean creditNote) {
         super(model, creditNote);
         this.creditNote = creditNote;
+        setView(buildView());
     }
 
     /**

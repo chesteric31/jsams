@@ -50,7 +50,7 @@ public class EstimateBean extends AbstractDocumentBean<Estimate, EstimateBeanVie
         this.transferred = false;
         List<EstimateDetailBean> details = new ArrayList<EstimateDetailBean>();
         this.details = details;
-        setView(new EstimateBeanView(this));
+        setView(buildView());
     }
 
     /**
@@ -72,7 +72,7 @@ public class EstimateBean extends AbstractDocumentBean<Estimate, EstimateBeanVie
         this.details = beans;
         this.discountRate = model.getDiscountRate();
         this.transferred = model.isTransferred();
-        setView(new EstimateBeanView(this));
+        setView(buildView());
     }
 
     /**

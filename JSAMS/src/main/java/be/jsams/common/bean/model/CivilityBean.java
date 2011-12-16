@@ -25,6 +25,7 @@ public class CivilityBean extends AbstractTranslatableIdentityBean<Civility, Civ
      */
     public CivilityBean(Civility model) {
         super(model);
+        setView(buildView());
     }
 
     /**
@@ -36,6 +37,7 @@ public class CivilityBean extends AbstractTranslatableIdentityBean<Civility, Civ
         super();
         setListModel(list);
         setSelection(list.get(0));
+        setView(buildView());
     }
 
     /**
@@ -48,6 +50,7 @@ public class CivilityBean extends AbstractTranslatableIdentityBean<Civility, Civ
         this(model);
         setListModel(list);
         setSelection(this);
+        setView(buildView());
     }
 
     /**

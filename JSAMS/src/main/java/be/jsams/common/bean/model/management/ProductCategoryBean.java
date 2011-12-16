@@ -31,6 +31,7 @@ public class ProductCategoryBean extends AbstractTranslatableIdentityBean<Produc
     public ProductCategoryBean(ProductCategory model, SocietyBean society) {
         super(model);
         this.society = society;
+        setView(buildView());
     }
 
     /**
@@ -46,6 +47,7 @@ public class ProductCategoryBean extends AbstractTranslatableIdentityBean<Produc
             setSelection(list.get(0));
         }
         this.society = society;
+        setView(buildView());
     }
 
     /**
@@ -59,6 +61,7 @@ public class ProductCategoryBean extends AbstractTranslatableIdentityBean<Produc
         this(model, society);
         setListModel(list);
         setSelection(this);
+        setView(buildView());
     }
 
     /**

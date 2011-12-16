@@ -32,6 +32,7 @@ public class BillDetailBean extends AbstractDetailBean<BillDetail, BillDetailBea
      */
     public BillDetailBean() {
         super();
+        setView(buildView());
     }
 
     /**
@@ -44,6 +45,7 @@ public class BillDetailBean extends AbstractDetailBean<BillDetail, BillDetailBea
         super(model, bill);
         this.bill = bill;
         this.transferred = model.isTransferred();
+        setView(buildView());
     }
 
     /**

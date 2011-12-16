@@ -33,6 +33,7 @@ public class ContactInformationBean extends AbstractIdentityBean<ContactInformat
      */
     public ContactInformationBean() {
         super();
+        setView(buildView());
     }
 
     /**
@@ -47,6 +48,7 @@ public class ContactInformationBean extends AbstractIdentityBean<ContactInformat
         this.mobile = model.getMobile();
         this.phone = model.getPhone();
         this.website = model.getWebsite();
+        setView(buildView());
     }
 
     /**

@@ -36,6 +36,7 @@ public class PaymentModeBean extends AbstractTranslatableIdentityBean<PaymentMod
         this.daysNumber = model.getAdditionalDays();
         this.monthEnd = model.isMonthEnd();
         this.additionalDays = model.getAdditionalDays();
+        setView(buildView());
     }
 
     /**
@@ -47,6 +48,7 @@ public class PaymentModeBean extends AbstractTranslatableIdentityBean<PaymentMod
         super();
         setListModel(list);
         setSelection(list.get(0));
+        setView(buildView());
     }
 
     /**
@@ -59,6 +61,7 @@ public class PaymentModeBean extends AbstractTranslatableIdentityBean<PaymentMod
         this(model);
         setListModel(list);
         setSelection(this);
+        setView(buildView());
     }
 
     /**

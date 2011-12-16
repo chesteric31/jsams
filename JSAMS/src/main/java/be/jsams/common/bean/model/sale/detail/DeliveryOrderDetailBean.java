@@ -35,6 +35,7 @@ public class DeliveryOrderDetailBean extends
      */
     public DeliveryOrderDetailBean() {
         super();
+        setView(buildView());
     }
 
     /**
@@ -47,6 +48,7 @@ public class DeliveryOrderDetailBean extends
         super(model, deliveryOrder);
         this.deliveryOrder = deliveryOrder;
         this.transferred = model.isTransferred();
+        setView(buildView());
     }
 
     /**

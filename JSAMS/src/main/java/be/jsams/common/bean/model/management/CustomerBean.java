@@ -62,6 +62,7 @@ public class CustomerBean extends AbstractNamedIdentityBean<Customer, CustomerBe
         this.deliveryAddress = new AddressBean();
         this.contactInformation = new ContactInformationBean();
         this.society = society;
+        setView(buildView());
     }
 
     /**
@@ -84,6 +85,7 @@ public class CustomerBean extends AbstractNamedIdentityBean<Customer, CustomerBe
         this.description = model.getDescription();
         this.society = society;
         this.firstName = model.getFirstName();
+        setView(buildView());
     }
 
     /**

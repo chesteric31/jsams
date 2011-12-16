@@ -38,7 +38,6 @@ public abstract class AbstractIdentityBean<M extends AbstractIdentity, V extends
      */
     public AbstractIdentityBean() {
         super();
-        view = buildView();
     }
 
     /**

@@ -35,6 +35,7 @@ public class AddressBean extends AbstractIdentityBean<Address, AddressBeanView> 
      */
     public AddressBean() {
         super();
+        setView(buildView());
     }
 
     /**
@@ -50,6 +51,7 @@ public class AddressBean extends AbstractIdentityBean<Address, AddressBeanView> 
         this.number = model.getNumber();
         this.street = model.getStreet();
         this.zipCode = model.getZipCode();
+        setView(buildView());
     }
 
     /**
