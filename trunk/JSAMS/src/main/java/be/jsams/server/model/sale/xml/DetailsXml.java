@@ -65,6 +65,7 @@ public class DetailsXml {
      * <p>
      * Objects of the following type(s) are allowed in the list
      * {@link DetailXml }
+     * @return a list of {@link DetailXml}
      * 
      * 
      */
