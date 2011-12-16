@@ -25,6 +25,7 @@ public class LegalFormBean extends AbstractTranslatableIdentityBean<LegalForm, L
      */
     public LegalFormBean(LegalForm model) {
         super(model);
+        setView(buildView());
     }
 
     /**
@@ -36,6 +37,7 @@ public class LegalFormBean extends AbstractTranslatableIdentityBean<LegalForm, L
         super();
         setListModel(list);
         setSelection(list.get(0));
+        setView(buildView());
     }
 
     /**
@@ -48,6 +50,7 @@ public class LegalFormBean extends AbstractTranslatableIdentityBean<LegalForm, L
         this(model);
         setListModel(list);
         setSelection(this);
+        setView(buildView());
     }
 
     /**

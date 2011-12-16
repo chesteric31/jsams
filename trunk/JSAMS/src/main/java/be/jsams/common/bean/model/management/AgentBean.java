@@ -47,6 +47,7 @@ public class AgentBean extends AbstractNamedIdentityBean<Agent, AgentBeanView> {
         this.address = new AddressBean();
         this.contactInformation = new ContactInformationBean();
         this.society = society;
+        setView(buildView());
     }
 
     /**
@@ -61,6 +62,7 @@ public class AgentBean extends AbstractNamedIdentityBean<Agent, AgentBeanView> {
         this.contactInformation = new ContactInformationBean(model.getContactInformation());
         this.function = model.getFunction();
         this.society = society;
+        setView(buildView());
     }
 
     /**

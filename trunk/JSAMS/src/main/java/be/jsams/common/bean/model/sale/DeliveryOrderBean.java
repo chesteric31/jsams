@@ -46,7 +46,7 @@ public class DeliveryOrderBean extends AbstractDocumentBean<DeliveryOrder, Deliv
         this.transferred = false;
         List<DeliveryOrderDetailBean> details = new ArrayList<DeliveryOrderDetailBean>();
         this.details = details;
-        setView(new DeliveryOrderBeanView(this));
+        setView(buildView());
     }
 
     /**
@@ -66,7 +66,7 @@ public class DeliveryOrderBean extends AbstractDocumentBean<DeliveryOrder, Deliv
         this.details = beans;
         this.discountRate = model.getDiscountRate();
         this.transferred = model.isTransferred();
-        setView(new DeliveryOrderBeanView(this));
+        setView(buildView());
     }
 
     /**

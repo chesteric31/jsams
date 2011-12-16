@@ -32,6 +32,7 @@ public class CommandDetailBean extends AbstractDetailBean<CommandDetail, Command
      */
     public CommandDetailBean() {
         super();
+        setView(buildView());
     }
 
     /**
@@ -44,6 +45,7 @@ public class CommandDetailBean extends AbstractDetailBean<CommandDetail, Command
         super(model, command);
         this.command = command;
         this.transferred = model.isTransferred();
+        setView(buildView());
     }
 
     /**

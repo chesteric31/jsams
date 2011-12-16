@@ -52,7 +52,7 @@ public class CommandBean extends AbstractDocumentBean<Command, CommandBeanView> 
         this.transferred = false;
         List<CommandDetailBean> details = new ArrayList<CommandDetailBean>();
         this.details = details;
-        setView(new CommandBeanView(this));
+        setView(buildView());
     }
 
     /**
@@ -75,7 +75,7 @@ public class CommandBean extends AbstractDocumentBean<Command, CommandBeanView> 
         this.details = beans;
         this.discountRate = model.getDiscountRate();
         this.transferred = model.isTransferred();
-        setView(new CommandBeanView(this));
+        setView(buildView());
     }
 
     /**

@@ -49,6 +49,7 @@ public class ProductBean extends AbstractNamedIdentityBean<Product, ProductBeanV
         productCategoryBuilder.setDao(JsamsApplicationContext.getProductCategoryDao());
         ProductCategoryBean categoryBean = productCategoryBuilder.build();
         this.category = categoryBean;
+        setView(buildView());
     }
 
     /**
@@ -71,6 +72,7 @@ public class ProductBean extends AbstractNamedIdentityBean<Product, ProductBeanV
         this.quantityStock = model.getQuantityStock();
         this.reorderLevel = model.getReorderLevel();
         this.vatApplicable = model.getVatApplicable();
+        setView(buildView());
     }
 
     /**
