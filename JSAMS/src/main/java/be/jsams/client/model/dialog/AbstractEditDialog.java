@@ -48,6 +48,7 @@ public abstract class AbstractEditDialog<B extends AbstractIdentityBean<?, ?>, V
     private static final long serialVersionUID = 5146784638798425733L;
 
     private B model;
+    private B originalModel;
     private JsamsButtonsPanel buttonsPanel;
     private ValidationResultModel validationResultModel = new DefaultValidationResultModel();
     private JsamsStatusBar statusBar;
@@ -95,7 +96,6 @@ public abstract class AbstractEditDialog<B extends AbstractIdentityBean<?, ?>, V
         this.service = service;
         initComponents();
         DialogUtil.centerComponentOnScreen(this);
-//        setLocationRelativeTo(null);
         setResizable(true);
         setVisible(true);
     }
@@ -187,7 +187,7 @@ public abstract class AbstractEditDialog<B extends AbstractIdentityBean<?, ?>, V
      * {@inheritDoc}
      */
     public void performCancel() {
-        // TODO use memento pattern for undo of reset
+        getModel().refresh(this.originalModel);
         this.dispose();
     }
 
@@ -272,6 +272,20 @@ public abstract class AbstractEditDialog<B extends AbstractIdentityBean<?, ?>, V
      */
     public void setStatusBar(JsamsStatusBar statusBar) {
         this.statusBar = statusBar;
+    }
+
+    /**
+     * @return the originalModel, this is the model before any modifications, a sort of backup
+     */
+    public B getOriginalModel() {
+        return originalModel;
+    }
+
+    /**
+     * @param originalModel the originalModel to set
+     */
+    public void setOriginalModel(B originalModel) {
+        this.originalModel = originalModel;
     }
 
 }

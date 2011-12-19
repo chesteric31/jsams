@@ -269,8 +269,14 @@ public class SocietyBean extends AbstractNamedIdentityBean<Society, SocietyBeanV
         super.refresh(bean);
         SocietyBean other = (SocietyBean) bean;
         setActivity(other.getActivity());
+        if (address == null) {
+            address = new AddressBean();
+        }
         address.refresh(other.getAddress());
         setCapital(other.getCapital());
+        if (contactInformation == null) {
+            contactInformation = new ContactInformationBean();
+        }
         contactInformation.refresh(other.getContactInformation());
         legalForm.refresh(other.getLegalForm());
         setListModel(other.getListModel());
