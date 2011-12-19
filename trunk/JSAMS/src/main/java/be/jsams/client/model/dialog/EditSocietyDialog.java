@@ -6,11 +6,9 @@ import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.validator.edit.EditSocietyValidator;
-import be.jsams.common.bean.model.AbstractIdentityBean;
+import be.jsams.common.bean.model.LegalFormBean;
 import be.jsams.common.bean.model.SocietyBean;
-import be.jsams.common.bean.view.LegalFormBeanView;
 import be.jsams.common.bean.view.SocietyBeanView;
-import be.jsams.server.model.LegalForm;
 import be.jsams.server.service.SocietyService;
 
 import com.jgoodies.validation.view.ValidationComponentUtils;
@@ -45,6 +43,8 @@ public class EditSocietyDialog extends AbstractEditDialog<SocietyBean, EditSocie
      * {@inheritDoc}
      */
     public void initComponents() {
+        setOriginalModel(JsamsApplicationContext.getSocietyBeanBuilder().build(false));
+        getOriginalModel().refresh(getModel());
         SocietyBeanView view = getModel().buildView();
         JPanel panel = view.createEditView();
         getContentPane().add(panel);
@@ -58,10 +58,9 @@ public class EditSocietyDialog extends AbstractEditDialog<SocietyBean, EditSocie
     public void performOk() {
         SocietyBean society = getModel();
         // set to the object the selection
-        AbstractIdentityBean<LegalForm, LegalFormBeanView> legalForm = society.getLegalForm().getSelection();
+        LegalFormBean legalForm = (LegalFormBean) society.getLegalForm().getSelection();
         if (legalForm != null) {
             society.getLegalForm().refresh(legalForm);
-            // // society.setLegalForm((LegalFormBean) legalForm);
         }
         SocietyBean persistedSociety = postPerformOk(society);
         if (persistedSociety != null) {
