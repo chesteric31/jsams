@@ -23,6 +23,14 @@ public class ProductCategoryBean extends AbstractTranslatableIdentityBean<Produc
     private SocietyBean society;
 
     /**
+     * Default constructor.
+     */
+    public ProductCategoryBean() {
+        super();
+        setView(buildView());
+    }
+    
+    /**
      * Constructor.
      * 
      * @param model the {@link ProductCategory}

@@ -42,6 +42,8 @@ public class EditProductCategoryDialog extends
      * {@inheritDoc}
      */
     public void initComponents() {
+        setOriginalModel(new ProductCategoryBean());
+        getOriginalModel().refresh(getModel());
         ProductCategoryBeanView view = getModel().buildView();
         JPanel panel = view.createEditView();
         getContentPane().add(panel);

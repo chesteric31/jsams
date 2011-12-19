@@ -2,6 +2,7 @@ package be.jsams.common.bean.model.management;
 
 import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.common.bean.builder.ProductCategoryBeanBuilder;
+import be.jsams.common.bean.model.AbstractIdentityBean;
 import be.jsams.common.bean.model.AbstractNamedIdentityBean;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.view.management.ProductBeanView;
@@ -36,6 +37,14 @@ public class ProductBean extends AbstractNamedIdentityBean<Product, ProductBeanV
     public static final String REORDER_LEVEL_PROPERTY = "reorderLevel";
     public static final String VAT_APPLICABLE_PROPERTY = "vatApplicable";
 
+    /**
+     * Default constructor.
+     */
+    public ProductBean() {
+        super();
+        setView(buildView());
+    }
+    
     /**
      * Default constructor
      * 
@@ -188,6 +197,22 @@ public class ProductBean extends AbstractNamedIdentityBean<Product, ProductBeanV
      */
     public ProductCategoryDao getProductCategoryDao() {
         return JsamsApplicationContext.getProductCategoryDao();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void refresh(AbstractIdentityBean<?, ?> bean) {
+        ProductBean other = (ProductBean) bean;
+        setPrice(other.getPrice());
+        if (category == null) {
+            category = new ProductCategoryBean();
+        }
+        category.refresh(other.getCategory());
+        setQuantityStock(other.getQuantityStock());
+        setReorderLevel(other.getReorderLevel());
+        setVatApplicable(other.getVatApplicable());
     }
 
 }
