@@ -45,6 +45,8 @@ public class EditAgentDialog extends AbstractEditDialog<AgentBean, EditAgentVali
      */
     @Override
     public void initComponents() {
+        setOriginalModel(JsamsApplicationContext.getAgentBeanBuilder().build(null, getModel().getSociety()));
+        getOriginalModel().refresh(getModel());
         AgentBeanView view = getModel().buildView();
         JPanel panel = view.createEditView();
         getContentPane().add(panel);
@@ -60,7 +62,7 @@ public class EditAgentDialog extends AbstractEditDialog<AgentBean, EditAgentVali
         AgentBean bean = getModel();
         AbstractIdentityBean<Civility, CivilityBeanView> civility = bean.getCivility().getSelection();
         if (civility != null) {
-            bean.setCivility((CivilityBean) civility);
+            bean.getCivility().refresh((CivilityBean) civility);
         }
         super.postPerformOk(bean);
     }

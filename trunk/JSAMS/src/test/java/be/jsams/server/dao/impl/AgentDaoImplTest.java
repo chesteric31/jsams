@@ -10,11 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.AgentBean;
-import be.jsams.server.dao.BaseJUnitTestClass;
 import be.jsams.server.dao.AddressDao;
+import be.jsams.server.dao.BaseJUnitTestClass;
 import be.jsams.server.dao.CivilityDao;
 import be.jsams.server.dao.ContactInformationDao;
-import be.jsams.server.dao.MockDaoGenerator;
 import be.jsams.server.dao.SocietyDao;
 import be.jsams.server.dao.management.AgentDao;
 import be.jsams.server.dao.management.impl.AgentDaoImpl;
@@ -86,13 +85,6 @@ public class AgentDaoImplTest extends BaseJUnitTestClass {
              */
             private static final long serialVersionUID = -3429748354389589805L;
 
-            /**
-             * {@inheritDoc}
-             */
-            @Override
-            public CivilityDao getCivilityDao() {
-                return MockDaoGenerator.generateMockCivility(persistedAgent);
-            }
         };
 
         criteria.setSociety(societyBean);

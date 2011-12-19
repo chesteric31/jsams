@@ -42,6 +42,8 @@ public class EditProductDialog extends AbstractEditDialog<ProductBean, EditProdu
      * {@inheritDoc}
      */
     public void initComponents() {
+        setOriginalModel(new ProductBean());
+        getOriginalModel().refresh(getModel());
         ProductBeanView view = getModel().buildView();
         JPanel panel = view.createEditView();
         getContentPane().add(panel);

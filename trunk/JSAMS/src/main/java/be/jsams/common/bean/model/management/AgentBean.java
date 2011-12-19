@@ -3,7 +3,6 @@ package be.jsams.common.bean.model.management;
 import java.util.ArrayList;
 import java.util.List;
 
-import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.common.bean.model.AbstractIdentityBean;
 import be.jsams.common.bean.model.AbstractNamedIdentityBean;
 import be.jsams.common.bean.model.AddressBean;
@@ -11,7 +10,6 @@ import be.jsams.common.bean.model.CivilityBean;
 import be.jsams.common.bean.model.ContactInformationBean;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.view.management.AgentBeanView;
-import be.jsams.server.dao.CivilityDao;
 import be.jsams.server.model.management.Agent;
 
 /**
@@ -186,14 +184,6 @@ public class AgentBean extends AbstractNamedIdentityBean<Agent, AgentBeanView> {
         setListModel(other.getListModel());
         setSelection(other.getSelection());
         society.refresh(other.getSociety());
-    }
-
-    /**
-     * 
-     * @return the {@link CivilityDao} necessary for test for now
-     */
-    public CivilityDao getCivilityDao() {
-        return JsamsApplicationContext.getCivilityDao();
     }
 
 }
