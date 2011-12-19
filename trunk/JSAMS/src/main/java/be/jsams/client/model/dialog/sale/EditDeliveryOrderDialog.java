@@ -42,6 +42,8 @@ public class EditDeliveryOrderDialog extends
      */
     @Override
     public void initComponents() {
+        setOriginalModel(new DeliveryOrderBean(getModel().getSociety(), getModel().getCustomer()));
+        getOriginalModel().refresh(getModel());
         DeliveryOrderBeanView view = getModel().buildView();
         JPanel panel = view.createEditView();
         getContentPane().add(panel);

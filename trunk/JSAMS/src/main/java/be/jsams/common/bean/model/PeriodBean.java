@@ -79,8 +79,10 @@ public class PeriodBean extends AbstractIdentityBean<AbstractIdentity, PeriodBea
     @Override
     public void refresh(AbstractIdentityBean<?, ?> bean) {
         PeriodBean other = (PeriodBean) bean;
-        setStartDate(other.getStartDate());
-        setEndDate(other.getEndDate());
+        if (other != null) {
+            setStartDate(other.getStartDate());
+            setEndDate(other.getEndDate());
+        }
     }
 
 }

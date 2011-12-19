@@ -176,6 +176,9 @@ public abstract class AbstractDocumentBean<M extends AbstractDocument, V extends
         setRemark(other.getRemark());
         setSelection(other.getSelection());
         society.refresh(other.getSociety());
+        if (period == null) {
+            period = new PeriodBean();
+        }
         period.refresh(other.getPeriod());
     }
 
