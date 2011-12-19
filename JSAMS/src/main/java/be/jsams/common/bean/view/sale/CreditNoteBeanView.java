@@ -23,7 +23,6 @@ import be.jsams.client.i18n.JsamsI18nLabelResource;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.model.panel.management.SearchProductPanel;
 import be.jsams.client.model.table.AbstractJsamsTableModel;
-import be.jsams.client.model.table.BillDetailTableModel;
 import be.jsams.client.model.table.CreditNoteDetailTableModel;
 import be.jsams.client.model.table.ProductTableModel;
 import be.jsams.client.renderer.JsamsTableCellRenderer;
@@ -300,7 +299,7 @@ public class CreditNoteBeanView extends AbstractDocumentBeanView<CreditNoteBean>
                 List<CreditNoteDetailBean> details = getBean().getDetails();
                 if (selectedRow > -1) {
                     int selectedRowModel = getDetailsTable().convertRowIndexToModel(selectedRow);
-                    BillDetailTableModel model = (BillDetailTableModel) getDetailsTable().getModel();
+                    CreditNoteDetailTableModel model = (CreditNoteDetailTableModel) getDetailsTable().getModel();
                     details.remove(model.getRow(selectedRowModel));
                     getBean().setDetails(details);
                     model.setListModel(new ArrayListModel<CreditNoteDetailBean>(details));

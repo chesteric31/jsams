@@ -42,6 +42,8 @@ public class EditCreditNoteDialog extends
      */
     @Override
     public void initComponents() {
+        setOriginalModel(new CreditNoteBean(getModel().getSociety(), getModel().getCustomer()));
+        getOriginalModel().refresh(getModel());
         CreditNoteBeanView view = getModel().buildView();
         JPanel panel = view.createEditView();
         getContentPane().add(panel);
