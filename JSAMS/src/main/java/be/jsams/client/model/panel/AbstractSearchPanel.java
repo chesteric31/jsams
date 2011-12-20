@@ -428,7 +428,7 @@ public abstract class AbstractSearchPanel<B extends AbstractIdentityBean<?, ?>,
         gridLayout.setVgap(DEFAULT_V_GAP);
         searchCriteriaPanel.setLayout(gridLayout);
         // adding search criteria panel
-        searchCriteriaPanel.add((((Searchable<?>) this.model.buildView())).createSearchView());
+        searchCriteriaPanel.add((((Searchable<?>) this.model.getView())).createSearchView());
         JPanel northPanel = new JPanel();
         BorderLayout buttonsLayout = new BorderLayout();
         buttonsLayout.setVgap(DEFAULT_V_GAP);

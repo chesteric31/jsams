@@ -56,5 +56,5 @@ public abstract class AbstractBeanView<B extends AbstractIdentityBean<?, ?>> ext
     public ViewFactory<B> getViewFactory() {
         return viewFactory;
     }
-
+    
 }

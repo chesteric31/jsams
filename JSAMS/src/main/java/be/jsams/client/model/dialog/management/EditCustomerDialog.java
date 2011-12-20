@@ -49,7 +49,7 @@ public class EditCustomerDialog extends AbstractEditDialog<CustomerBean, EditCus
     public void initComponents() {
         setOriginalModel(JsamsApplicationContext.getCustomerBeanBuilder().build(null, getModel().getSociety()));
         getOriginalModel().refresh(getModel());
-        CustomerBeanView view = getModel().buildView();
+        CustomerBeanView view = getModel().getView();
         JPanel panel = view.createEditView();
         getContentPane().add(panel);
         ValidationComponentUtils.updateComponentTreeMandatoryBorder(this);

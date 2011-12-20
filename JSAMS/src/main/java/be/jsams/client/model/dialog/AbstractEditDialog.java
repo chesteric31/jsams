@@ -187,6 +187,7 @@ public abstract class AbstractEditDialog<B extends AbstractIdentityBean<?, ?>, V
      * {@inheritDoc}
      */
     public void performCancel() {
+        getModel().getView().release();
         getModel().refresh(this.originalModel);
         this.dispose();
     }
@@ -211,6 +212,7 @@ public abstract class AbstractEditDialog<B extends AbstractIdentityBean<?, ?>, V
      *         occurred
      */
     protected B postPerformOk(B object) {
+        getModel().getView().release();
         ValidationResult result = validator.validate(object);
         validationResultModel.setResult(result);
         B persistedObject = null;

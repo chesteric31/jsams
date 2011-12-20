@@ -281,7 +281,7 @@ public class BillBean extends AbstractDocumentBean<Bill, BillBeanView> {
         setDateFirstRemember(other.getDateFirstRemember());
         setDateSecondRemember(other.getDateSecondRemember());
         setDateFormalNotice(other.getDateFormalNotice());
-        setPaymentMode(other.getPaymentMode());
+        paymentMode.refresh(other.getPaymentMode());
     }
 
     /**

@@ -23,6 +23,14 @@ public class PeriodBean extends AbstractIdentityBean<AbstractIdentity, PeriodBea
 
     public static final String START_DATE_PROPERTY = "startDate";
     public static final String END_DATE_PROPERTY = "endDate";
+    
+    /**
+     * Constructor
+     */
+    public PeriodBean() {
+        super();
+        setView(buildView());
+    }
 
     /**
      * @return the startDate

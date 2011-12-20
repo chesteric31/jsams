@@ -143,7 +143,7 @@ public abstract class AbstractIdentityBean<M extends AbstractIdentity, V extends
      * 
      * @return the built {@link AbstractBeanView} for this bean
      */
-    public abstract V buildView();
+    protected abstract V buildView();
 
     /**
      * Clears the value.

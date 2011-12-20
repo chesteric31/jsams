@@ -69,7 +69,7 @@ public class ViewFactory<B extends AbstractIdentityBean<?, ?>> {
      */
     public JsamsComboBox createBindingComboComponent(B bean, final boolean mandatory, final boolean readOnly,
             final ListCellRenderer renderer) {
-        AbstractBeanView<?> view = bean.buildView();
+        AbstractBeanView<?> view = bean.getView();
         JsamsComboBox comboBox = new JsamsComboBox();
         Bindings.bind(comboBox, view.getSelectionInList());
         if (renderer != null) {
