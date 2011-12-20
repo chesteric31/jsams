@@ -160,7 +160,7 @@ public class SearchEstimatePanel<L extends MouseListener> extends
             int selectedRowModel = getResultTable().convertRowIndexToModel(selectedRow);
             EstimateTableModel model = (EstimateTableModel) getResultTable().getModel();
             EstimateBean beanToPdf = model.getRow(selectedRowModel);
-            PdfEstimateServiceImpl pdfService = new PdfEstimateServiceImpl();
+            PdfEstimateServiceImpl pdfService = JsamsApplicationContext.getPdfEstimateService();
             pdfService.generatePdf(beanToPdf);
         }
     }

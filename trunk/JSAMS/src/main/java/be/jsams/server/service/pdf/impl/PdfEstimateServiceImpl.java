@@ -27,15 +27,16 @@ import be.jsams.server.service.xml.impl.XmlFileEstimateGeneratorImpl;
  * @version $Rev$ $Date::                  $ $Author$
  */
 public class PdfEstimateServiceImpl implements PdfService<EstimateBean> {
+    
+    private XmlEstimateGeneratorImpl xmlGenerator;
+    private XmlFileEstimateGeneratorImpl fileEstimateGeneratorImpl;
 
     /**
      * {@inheritDoc}
      */
     @Override
     public void generatePdf(EstimateBean object) {
-        XmlEstimateGeneratorImpl xmlGenerator = new XmlEstimateGeneratorImpl();
         EstimateXml estimateXml = xmlGenerator.generateXml(object);
-        XmlFileEstimateGeneratorImpl fileEstimateGeneratorImpl = new XmlFileEstimateGeneratorImpl();
         File generatedXmlFile = fileEstimateGeneratorImpl.generateXmlFile(estimateXml);
 
         String reportFileName = "reports/estimate.jasper";
@@ -45,15 +46,12 @@ public class PdfEstimateServiceImpl implements PdfService<EstimateBean> {
 
         try {
             JRXmlDataSource jrxmlds = new JRXmlDataSource(xmlFileName, recordPath);
-            jrxmlds.setDatePattern("yyyy-mm-dd");
+            jrxmlds.setDatePattern("yyyy-MM-dd");
             jrxmlds.setLocale(Locale.ENGLISH);
             jrxmlds.setNumberPattern("###0.00");
             HashMap<String, Object> params = new HashMap<String, Object>();
             String subReportsDirectory = generatedXmlFile.getParentFile().getAbsolutePath();
             File reportsDir = new File(subReportsDirectory);
-//            if (!reportsDir.exists()) {
-//                throw new FileNotFoundException(String.valueOf(reportsDir));
-//            }
             params.put(JRParameter.REPORT_FILE_RESOLVER, new SimpleFileResolver(reportsDir));
 
             JasperPrint print = JasperFillManager.fillReport(reportFileName, params, jrxmlds);
@@ -67,10 +65,38 @@ public class PdfEstimateServiceImpl implements PdfService<EstimateBean> {
             JasperViewer.viewReport(print, false);
             System.out.println("Created file: " + outFileName);
         } catch (JRException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
+    }
+
+    /**
+     * @return the xmlGenerator
+     */
+    public XmlEstimateGeneratorImpl getXmlGenerator() {
+        return xmlGenerator;
+    }
+
+    /**
+     * @param xmlGenerator the xmlGenerator to set
+     */
+    public void setXmlGenerator(XmlEstimateGeneratorImpl xmlGenerator) {
+        this.xmlGenerator = xmlGenerator;
+    }
+
+    /**
+     * @return the fileEstimateGeneratorImpl
+     */
+    public XmlFileEstimateGeneratorImpl getFileEstimateGeneratorImpl() {
+        return fileEstimateGeneratorImpl;
+    }
+
+    /**
+     * @param fileEstimateGeneratorImpl the fileEstimateGeneratorImpl to set
+     */
+    public void setFileEstimateGeneratorImpl(XmlFileEstimateGeneratorImpl fileEstimateGeneratorImpl) {
+        this.fileEstimateGeneratorImpl = fileEstimateGeneratorImpl;
     }
 
 }
