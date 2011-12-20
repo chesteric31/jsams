@@ -44,6 +44,7 @@ import be.jsams.common.bean.model.sale.detail.CreditNoteDetailBean;
 import be.jsams.common.bean.view.Editable;
 import be.jsams.common.bean.view.Searchable;
 import be.jsams.common.bean.view.ViewFactory;
+import be.jsams.common.bean.view.management.CustomerBeanView;
 
 import com.jgoodies.common.collect.ArrayListModel;
 import com.jgoodies.forms.builder.DefaultFormBuilder;
@@ -92,12 +93,13 @@ public class CreditNoteBeanView extends AbstractDocumentBeanView<CreditNoteBean>
         int maxColumnSpan = builder.getColumnCount();
         builder.setDefaultDialogBorder();
         CustomerBean customer = bean.getCustomer();
-        JPanel customerPanel = customer.buildView().createCustomView();
+        CustomerBeanView customerView = customer.getView();
+        JPanel customerPanel = customerView.createCustomView();
         customer.addPropertyChangeListener(handleCustomerChangeListener());
         builder.appendI15d(JsamsI18nLabelResource.LABEL_CUSTOMER_NAME.getKey(), customerPanel);
         builder.appendI15d(JsamsI18nLabelResource.LABEL_CREATION_DATE.getKey(), creationDate);
         builder.nextLine();
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_DELIVERY_ADDRESS.getKey(), bean.getBillingAddress().buildView()
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_DELIVERY_ADDRESS.getKey(), bean.getBillingAddress().getView()
                 .createEditView(), maxColumnSpan - 2);
         builder.nextLine();
         builder.appendI15d(JsamsI18nLabelResource.LABEL_REMARK.getKey(), remark, maxColumnSpan - 2);
@@ -330,13 +332,13 @@ public class CreditNoteBeanView extends AbstractDocumentBeanView<CreditNoteBean>
     public JPanel createSearchView() {
         CreditNoteBean bean = getBean();
         PeriodBean period = bean.getPeriod();
-        ViewFactory<PeriodBean> viewPeriodFactory = period.buildView().getViewFactory();
+        ViewFactory<PeriodBean> viewPeriodFactory = period.getView().getViewFactory();
         JDateChooser startDate = viewPeriodFactory.createBindingDateComponent(period, PeriodBean.START_DATE_PROPERTY,
                 false, false);
         JDateChooser endDate = viewPeriodFactory.createBindingDateComponent(period, PeriodBean.END_DATE_PROPERTY,
                 false, false);
         AddressBean address = bean.getBillingAddress();
-        ViewFactory<AddressBean> viewAddressFactory = address.buildView().getViewFactory();
+        ViewFactory<AddressBean> viewAddressFactory = address.getView().getViewFactory();
         JsamsTextField textFieldCity = viewAddressFactory.createBindingTextComponent(address,
                 AddressBean.CITY_PROPERTY, false, false);
         JsamsTextField textFieldZipCode = viewAddressFactory.createBindingTextComponent(address,
@@ -345,7 +347,7 @@ public class CreditNoteBeanView extends AbstractDocumentBeanView<CreditNoteBean>
                 "right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow", "p");
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
         builder.setDefaultDialogBorder();
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_CUSTOMER_NAME.getKey(), bean.getCustomer().buildView()
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_CUSTOMER_NAME.getKey(), bean.getCustomer().getView()
                 .createCustomView());
         builder.appendI15d(JsamsI18nLabelResource.LABEL_START_DATE.getKey(), startDate);
         builder.appendI15d(JsamsI18nLabelResource.LABEL_END_DATE.getKey(), endDate);
@@ -354,6 +356,16 @@ public class CreditNoteBeanView extends AbstractDocumentBeanView<CreditNoteBean>
         builder.appendI15d(JsamsI18nLabelResource.LABEL_ZIP_CODE.getKey(), textFieldZipCode);
 
         return builder.getPanel();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void release() {
+        for (PropertyChangeListener listener : getBean().getCustomer().getPropertyChangeListeners()) {
+            getBean().getCustomer().removePropertyChangeListener(listener);
+        }
     }
 
 }

@@ -204,6 +204,7 @@ public class ProductBean extends AbstractNamedIdentityBean<Product, ProductBeanV
      */
     @Override
     public void refresh(AbstractIdentityBean<?, ?> bean) {
+        super.refresh(bean);
         ProductBean other = (ProductBean) bean;
         setPrice(other.getPrice());
         if (category == null) {

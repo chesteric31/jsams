@@ -199,7 +199,7 @@ public abstract class JsamsWizardPanel<B extends AbstractIdentityBean<?, ?>, V e
      */
     @SuppressWarnings("unchecked")
     public ViewFactory<B> getViewFactory() {
-        return (ViewFactory<B>) getModel().buildView().getViewFactory();
+        return (ViewFactory<B>) getModel().getView().getViewFactory();
     }
 
     /**

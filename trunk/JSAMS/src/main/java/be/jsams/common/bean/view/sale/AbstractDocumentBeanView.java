@@ -45,4 +45,9 @@ public abstract class AbstractDocumentBeanView<B extends AbstractDocumentBean<?,
         this.detailsTable = detailsTable;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    public abstract void release();
+
 }

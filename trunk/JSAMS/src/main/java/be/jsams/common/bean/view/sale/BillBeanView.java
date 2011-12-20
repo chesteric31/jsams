@@ -48,6 +48,7 @@ import be.jsams.common.bean.model.sale.detail.BillDetailBean;
 import be.jsams.common.bean.view.Editable;
 import be.jsams.common.bean.view.Searchable;
 import be.jsams.common.bean.view.ViewFactory;
+import be.jsams.common.bean.view.management.CustomerBeanView;
 
 import com.jgoodies.common.collect.ArrayListModel;
 import com.jgoodies.forms.builder.DefaultFormBuilder;
@@ -106,7 +107,8 @@ public class BillBeanView extends AbstractDocumentBeanView<BillBean> implements 
         int maxColumnSpan = builder.getColumnCount();
         builder.setDefaultDialogBorder();
         CustomerBean customer = bean.getCustomer();
-        JPanel customerPanel = customer.buildView().createCustomView();
+        CustomerBeanView customerView = customer.getView();
+        JPanel customerPanel = customerView.createCustomView();
         customer.addPropertyChangeListener(handleCustomerChangeListener());
         builder.appendI15d(JsamsI18nLabelResource.LABEL_CUSTOMER_NAME.getKey(), customerPanel);
         builder.appendI15d(JsamsI18nLabelResource.LABEL_CREATION_DATE.getKey(), creationDate);
@@ -375,7 +377,7 @@ public class BillBeanView extends AbstractDocumentBeanView<BillBean> implements 
                 "right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow", "p");
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
         builder.setDefaultDialogBorder();
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_CUSTOMER_NAME.getKey(), bean.getCustomer().buildView()
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_CUSTOMER_NAME.getKey(), bean.getCustomer().getView()
                 .createCustomView());
         builder.appendI15d(JsamsI18nLabelResource.LABEL_START_DATE.getKey(), startDate);
         builder.appendI15d(JsamsI18nLabelResource.LABEL_END_DATE.getKey(), endDate);
@@ -389,6 +391,16 @@ public class BillBeanView extends AbstractDocumentBeanView<BillBean> implements 
         builder.appendI15d(JsamsI18nLabelResource.LABEL_PAID.getKey(), paid);
 
         return builder.getPanel();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void release() {
+        for (PropertyChangeListener listener : getBean().getCustomer().getPropertyChangeListeners()) {
+            getBean().getCustomer().removePropertyChangeListener(listener);
+        }
     }
 
 }

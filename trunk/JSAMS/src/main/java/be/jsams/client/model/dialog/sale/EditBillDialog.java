@@ -7,6 +7,7 @@ import be.jsams.client.i18n.I18nString;
 import be.jsams.client.model.dialog.AbstractEditDialog;
 import be.jsams.client.validator.edit.EditBillValidator;
 import be.jsams.common.bean.model.AbstractIdentityBean;
+import be.jsams.common.bean.model.PaymentModeBean;
 import be.jsams.common.bean.model.sale.BillBean;
 import be.jsams.common.bean.view.PaymentModeBeanView;
 import be.jsams.common.bean.view.sale.BillBeanView;
@@ -44,8 +45,11 @@ public class EditBillDialog extends AbstractEditDialog<BillBean, EditBillValidat
      */
     @Override
     public void initComponents() {
-        setOriginalModel(new BillBean(getModel().getSociety(), getModel().getCustomer(), getModel().getCustomer()
-                .getPaymentMode()));
+        PaymentModeBean paymentMode = JsamsApplicationContext.getPaymentModeBeanBuilder().build();
+        if (getModel().getId() == null) {
+            paymentMode.refresh(getModel().getCustomer().getPaymentMode());
+        }
+        setOriginalModel(new BillBean(getModel().getSociety(), getModel().getCustomer(), paymentMode));
         getOriginalModel().refresh(getModel());
         BillBeanView view = getModel().buildView();
         JPanel panel = view.createEditView();
