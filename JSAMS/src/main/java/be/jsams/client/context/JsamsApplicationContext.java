@@ -16,6 +16,7 @@ import be.jsams.server.service.management.AgentService;
 import be.jsams.server.service.management.CustomerService;
 import be.jsams.server.service.management.ProductCategoryService;
 import be.jsams.server.service.management.ProductService;
+import be.jsams.server.service.pdf.impl.PdfEstimateServiceImpl;
 import be.jsams.server.service.sale.BillService;
 import be.jsams.server.service.sale.CommandService;
 import be.jsams.server.service.sale.CreditNoteService;
@@ -187,5 +188,13 @@ public final class JsamsApplicationContext {
     public static TransferService getTransferService() {
         return (TransferService) context.getBean("transferService");
     }
+
+    /**
+     * @return the {@link PdfEstimateServiceImpl}
+     */
+    public static PdfEstimateServiceImpl getPdfEstimateService() {
+        return (PdfEstimateServiceImpl) context.getBean("pdfEstimateServiceImpl");
+    }
+
 
 }
