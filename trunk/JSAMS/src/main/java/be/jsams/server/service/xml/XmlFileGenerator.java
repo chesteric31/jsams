@@ -1,4 +1,4 @@
-package be.jsams.server.service.xml.impl;
+package be.jsams.server.service.xml;
 
 import java.io.File;
 

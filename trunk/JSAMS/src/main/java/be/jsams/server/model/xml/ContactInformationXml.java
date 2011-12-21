@@ -42,7 +42,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = { "phone", "fax", "mobile", "email", "website" })
-@XmlRootElement(name = "contact_info")
+@XmlRootElement(name = "contact_information")
 public class ContactInformationXml {
 
     @XmlElement(required = true)

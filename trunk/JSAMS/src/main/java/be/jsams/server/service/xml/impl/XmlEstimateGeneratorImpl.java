@@ -91,7 +91,7 @@ public class XmlEstimateGeneratorImpl implements XmlGenerator<EstimateBean, Esti
         value.setStreet(address.getStreet());
         value.setZip(new BigInteger(address.getZipCode()));
         societyXml.setAddress(value);
-        ContactInformationXml contactInfoXml = factory.createContactInfo();
+        ContactInformationXml contactInfoXml = factory.createContactInformation();
         contactInfoXml.setPhone(new BigInteger(society.getContactInformation().getPhone()));
         societyXml.setContactInfo(contactInfoXml);
         societyXml.setName(society.getName());

@@ -19,11 +19,11 @@ import javax.xml.namespace.QName;
 
 import org.w3._2001.xmlschema.Adapter1;
 
-import be.jsams.server.model.Society;
-import be.jsams.server.model.management.Customer;
-import be.jsams.server.model.management.Product;
 import be.jsams.server.model.xml.AddressXml;
 import be.jsams.server.model.xml.ContactInformationXml;
+import be.jsams.server.model.xml.CustomerXml;
+import be.jsams.server.model.xml.ProductXml;
+import be.jsams.server.model.xml.SocietyXml;
 
 /**
  * This object contains factory methods for each Java content interface and Java
@@ -76,19 +76,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Product }
+     * Create an instance of {@link ProductXml }
      * 
      */
-    public Product createProduct() {
-        return new Product();
+    public ProductXml createProduct() {
+        return new ProductXml();
     }
 
     /**
-     * Create an instance of {@link Customer }
+     * Create an instance of {@link CustomerXml }
      * 
      */
-    public Customer createCustomer() {
-        return new Customer();
+    public CustomerXml createCustomer() {
+        return new CustomerXml();
     }
 
     /**
@@ -124,11 +124,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Society }
+     * Create an instance of {@link SocietyXml }
      * 
      */
-    public Society createSociety() {
-        return new Society();
+    public SocietyXml createSociety() {
+        return new SocietyXml();
     }
 
     /**
