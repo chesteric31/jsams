@@ -119,7 +119,7 @@ public class ObjectFactory {
      * Create an instance of {@link ContactInformationXml }
      * 
      */
-    public ContactInformationXml createContactInfo() {
+    public ContactInformationXml createContactInformation() {
         return new ContactInformationXml();
     }
 

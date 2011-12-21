@@ -20,9 +20,9 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.w3._2001.xmlschema.Adapter1;
 
-import be.jsams.server.model.Society;
 import be.jsams.server.model.xml.AddressXml;
 import be.jsams.server.model.xml.CustomerXml;
+import be.jsams.server.model.xml.SocietyXml;
 
 /**
  * <p>
@@ -57,7 +57,7 @@ import be.jsams.server.model.xml.CustomerXml;
 public class DeliveryOrderXml {
 
     @XmlElement(required = true)
-    private Society society;
+    private SocietyXml society;
     @XmlElement(required = true)
     private CustomerXml customer;
     @XmlElement(name = "creation_date", required = true, type = String.class)
@@ -74,20 +74,20 @@ public class DeliveryOrderXml {
     /**
      * Gets the value of the society property.
      * 
-     * @return possible object is {@link Society }
+     * @return possible object is {@link SocietyXml }
      * 
      */
-    public Society getSociety() {
+    public SocietyXml getSociety() {
         return society;
     }
 
     /**
      * Sets the value of the society property.
      * 
-     * @param value allowed object is {@link Society }
+     * @param value allowed object is {@link SocietyXml }
      * 
      */
-    public void setSociety(Society value) {
+    public void setSociety(SocietyXml value) {
         this.society = value;
     }
 

@@ -8,6 +8,7 @@
         <xs:element ref="customer"/>
         <xs:element ref="creation_date"/>
         <xs:element ref="number"/>
+        <xs:element ref="address"/>
         <xs:element ref="details"/>
         <xs:element ref="total_et"/>
         <xs:element ref="vat"/>

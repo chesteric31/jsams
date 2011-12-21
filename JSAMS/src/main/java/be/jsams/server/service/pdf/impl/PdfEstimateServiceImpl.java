@@ -6,8 +6,8 @@ import be.jsams.common.bean.model.sale.EstimateBean;
 import be.jsams.server.model.xml.estimate.EstimateXml;
 import be.jsams.server.service.pdf.PdfMerger;
 import be.jsams.server.service.pdf.PdfService;
+import be.jsams.server.service.xml.XmlFileGenerator;
 import be.jsams.server.service.xml.impl.XmlEstimateGeneratorImpl;
-import be.jsams.server.service.xml.impl.XmlFileGenerator;
 
 /**
  * PDF service implementation for an {@link EstimateBean}.
@@ -18,7 +18,7 @@ import be.jsams.server.service.xml.impl.XmlFileGenerator;
 public class PdfEstimateServiceImpl implements PdfService<EstimateBean> {
 
     private XmlEstimateGeneratorImpl xmlGenerator;
-    private XmlFileGenerator fileGenerator;
+    private XmlFileGenerator xmlFileGenerator;
     private PdfMerger merger;
     private String rootReportsPath;
     private String recordPath;
@@ -30,7 +30,7 @@ public class PdfEstimateServiceImpl implements PdfService<EstimateBean> {
     public void generatePdf(EstimateBean object) {
         EstimateXml estimateXml = xmlGenerator.generateXml(object);
         String path = rootReportsPath + recordPath;
-        File generatedXmlFile = fileGenerator.generateXmlFile(estimateXml, path + ".xml", EstimateBean.class);
+        File generatedXmlFile = xmlFileGenerator.generateXmlFile(estimateXml, path + ".xml", EstimateBean.class);
 
         String reportFileName = path + ".jasper";
         String outFileName = path + ".pdf";
@@ -53,17 +53,17 @@ public class PdfEstimateServiceImpl implements PdfService<EstimateBean> {
     }
 
     /**
-     * @return the fileEstimateGeneratorImpl
+     * @return the XmlFileGenerator
      */
-    public XmlFileGenerator getFileEstimateGeneratorImpl() {
-        return fileGenerator;
+    public XmlFileGenerator getXmlFileGenerator() {
+        return xmlFileGenerator;
     }
 
     /**
-     * @param fileEstimateGeneratorImpl the fileEstimateGeneratorImpl to set
+     * @param xmlFileGenerator the XmlFileGenerator to set
      */
-    public void setFileEstimateGeneratorImpl(XmlFileGenerator fileEstimateGeneratorImpl) {
-        this.fileGenerator = fileEstimateGeneratorImpl;
+    public void setXmlFileGenerator(XmlFileGenerator xmlFileGenerator) {
+        this.xmlFileGenerator = xmlFileGenerator;
     }
 
     /**
