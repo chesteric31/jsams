@@ -1,24 +1,13 @@
 package be.jsams.server.service.pdf.impl;
 
 import java.io.File;
-import java.util.HashMap;
-import java.util.Locale;
 
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JRExporter;
-import net.sf.jasperreports.engine.JRExporterParameter;
-import net.sf.jasperreports.engine.JRParameter;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.data.JRXmlDataSource;
-import net.sf.jasperreports.engine.export.JRPdfExporter;
-import net.sf.jasperreports.engine.util.SimpleFileResolver;
-import net.sf.jasperreports.view.JasperViewer;
 import be.jsams.common.bean.model.sale.EstimateBean;
 import be.jsams.server.model.xml.estimate.EstimateXml;
+import be.jsams.server.service.pdf.PdfMerger;
 import be.jsams.server.service.pdf.PdfService;
 import be.jsams.server.service.xml.impl.XmlEstimateGeneratorImpl;
-import be.jsams.server.service.xml.impl.XmlFileEstimateGeneratorImpl;
+import be.jsams.server.service.xml.impl.XmlFileGenerator;
 
 /**
  * PDF service implementation for an {@link EstimateBean}.
@@ -27,9 +16,12 @@ import be.jsams.server.service.xml.impl.XmlFileEstimateGeneratorImpl;
  * @version $Rev$ $Date::                  $ $Author$
  */
 public class PdfEstimateServiceImpl implements PdfService<EstimateBean> {
-    
+
     private XmlEstimateGeneratorImpl xmlGenerator;
-    private XmlFileEstimateGeneratorImpl fileEstimateGeneratorImpl;
+    private XmlFileGenerator fileGenerator;
+    private PdfMerger merger;
+    private String rootReportsPath;
+    private String recordPath;
 
     /**
      * {@inheritDoc}
@@ -37,38 +29,13 @@ public class PdfEstimateServiceImpl implements PdfService<EstimateBean> {
     @Override
     public void generatePdf(EstimateBean object) {
         EstimateXml estimateXml = xmlGenerator.generateXml(object);
-        File generatedXmlFile = fileEstimateGeneratorImpl.generateXmlFile(estimateXml);
+        String path = rootReportsPath + recordPath;
+        File generatedXmlFile = fileGenerator.generateXmlFile(estimateXml, path + ".xml", EstimateBean.class);
 
-        String reportFileName = "reports/estimate/estimate.jasper";
-        String outFileName = "reports/estimate/estimate.pdf";
-        String xmlFileName = generatedXmlFile.getAbsolutePath();
-        String recordPath = "estimate";
+        String reportFileName = path + ".jasper";
+        String outFileName = path + ".pdf";
 
-        try {
-            JRXmlDataSource jrxmlds = new JRXmlDataSource(xmlFileName, recordPath);
-            jrxmlds.setDatePattern("yyyy-MM-dd");
-            jrxmlds.setLocale(Locale.ENGLISH);
-            jrxmlds.setNumberPattern("###0.00");
-            HashMap<String, Object> params = new HashMap<String, Object>();
-            String subReportsDirectory = generatedXmlFile.getParentFile().getAbsolutePath();
-            File reportsDir = new File(subReportsDirectory);
-            params.put(JRParameter.REPORT_FILE_RESOLVER, new SimpleFileResolver(reportsDir));
-
-            JasperPrint print = JasperFillManager.fillReport(reportFileName, params, jrxmlds);
-
-            JRExporter exporter = new JRPdfExporter();
-
-            exporter.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outFileName);
-            exporter.setParameter(JRExporterParameter.JASPER_PRINT, print);
-
-            exporter.exportReport();
-            JasperViewer.viewReport(print, false);
-            System.out.println("Created file: " + outFileName);
-        } catch (JRException e) {
-            throw new RuntimeException(e);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        merger.merge(generatedXmlFile, recordPath, reportFileName, outFileName);
     }
 
     /**
@@ -88,15 +55,57 @@ public class PdfEstimateServiceImpl implements PdfService<EstimateBean> {
     /**
      * @return the fileEstimateGeneratorImpl
      */
-    public XmlFileEstimateGeneratorImpl getFileEstimateGeneratorImpl() {
-        return fileEstimateGeneratorImpl;
+    public XmlFileGenerator getFileEstimateGeneratorImpl() {
+        return fileGenerator;
     }
 
     /**
      * @param fileEstimateGeneratorImpl the fileEstimateGeneratorImpl to set
      */
-    public void setFileEstimateGeneratorImpl(XmlFileEstimateGeneratorImpl fileEstimateGeneratorImpl) {
-        this.fileEstimateGeneratorImpl = fileEstimateGeneratorImpl;
+    public void setFileEstimateGeneratorImpl(XmlFileGenerator fileEstimateGeneratorImpl) {
+        this.fileGenerator = fileEstimateGeneratorImpl;
+    }
+
+    /**
+     * @return the merger
+     */
+    public PdfMerger getMerger() {
+        return merger;
+    }
+
+    /**
+     * @param merger the merger to set
+     */
+    public void setMerger(PdfMerger merger) {
+        this.merger = merger;
+    }
+
+    /**
+     * @return the rootReportsPath
+     */
+    public String getRootReportsPath() {
+        return rootReportsPath;
+    }
+
+    /**
+     * @param rootReportsPath the rootReportsPath to set
+     */
+    public void setRootReportsPath(String rootReportsPath) {
+        this.rootReportsPath = rootReportsPath;
+    }
+
+    /**
+     * @return the recordPath
+     */
+    public String getRecordPath() {
+        return recordPath;
+    }
+
+    /**
+     * @param recordPath the recordPath to set
+     */
+    public void setRecordPath(String recordPath) {
+        this.recordPath = recordPath;
     }
 
 }

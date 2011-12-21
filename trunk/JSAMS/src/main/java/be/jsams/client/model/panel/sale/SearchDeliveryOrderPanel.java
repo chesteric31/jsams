@@ -17,6 +17,7 @@ import be.jsams.client.validator.search.SearchDeliveryOrderValidator;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.sale.DeliveryOrderBean;
+import be.jsams.server.service.pdf.impl.PdfDeliveryOrderServiceImpl;
 import be.jsams.server.service.sale.DeliveryOrderService;
 
 /**
@@ -157,8 +158,14 @@ public class SearchDeliveryOrderPanel<L extends MouseListener>
      */
     @Override
     protected void performButtonPdf() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException();
+        int selectedRow = getResultTable().getSelectedRow();
+        if (selectedRow > -1) {
+            int selectedRowModel = getResultTable().convertRowIndexToModel(selectedRow);
+            DeliveryOrderTableModel model = (DeliveryOrderTableModel) getResultTable().getModel();
+            DeliveryOrderBean beanToPdf = model.getRow(selectedRowModel);
+            PdfDeliveryOrderServiceImpl pdfService = JsamsApplicationContext.getPdfDeliveryOrderService();
+            pdfService.generatePdf(beanToPdf);
+        }
     }
 
 }

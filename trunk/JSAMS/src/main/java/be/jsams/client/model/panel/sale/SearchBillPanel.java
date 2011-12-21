@@ -18,6 +18,7 @@ import be.jsams.common.bean.model.PaymentModeBean;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.sale.BillBean;
+import be.jsams.server.service.pdf.impl.PdfBillServiceImpl;
 import be.jsams.server.service.sale.BillService;
 
 /**
@@ -158,8 +159,14 @@ public class SearchBillPanel<L extends MouseListener> extends
      */
     @Override
     protected void performButtonPdf() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException();
+        int selectedRow = getResultTable().getSelectedRow();
+        if (selectedRow > -1) {
+            int selectedRowModel = getResultTable().convertRowIndexToModel(selectedRow);
+            BillTableModel model = (BillTableModel) getResultTable().getModel();
+            BillBean beanToPdf = model.getRow(selectedRowModel);
+            PdfBillServiceImpl pdfService = JsamsApplicationContext.getPdfBillService();
+            pdfService.generatePdf(beanToPdf);
+        }
     }
 
 }

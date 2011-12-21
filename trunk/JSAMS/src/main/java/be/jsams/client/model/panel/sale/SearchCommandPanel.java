@@ -18,6 +18,7 @@ import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.AgentBean;
 import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.sale.CommandBean;
+import be.jsams.server.service.pdf.impl.PdfCommandServiceImpl;
 import be.jsams.server.service.sale.CommandService;
 
 /**
@@ -140,8 +141,14 @@ public class SearchCommandPanel<L extends MouseListener> extends
      */
     @Override
     protected void performButtonPdf() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException();
+        int selectedRow = getResultTable().getSelectedRow();
+        if (selectedRow > -1) {
+            int selectedRowModel = getResultTable().convertRowIndexToModel(selectedRow);
+            CommandTableModel model = (CommandTableModel) getResultTable().getModel();
+            CommandBean beanToPdf = model.getRow(selectedRowModel);
+            PdfCommandServiceImpl pdfService = JsamsApplicationContext.getPdfCommandService();
+            pdfService.generatePdf(beanToPdf);
+        }
     }
 
 }

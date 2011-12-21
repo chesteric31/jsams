@@ -10,9 +10,9 @@ package be.jsams.server.service.pdf;
 public interface PdfService<M> {
 
     /**
-     * Generates a PDF view from a class type and an object.
+     * Generates a PDF view from an object.
      * 
-     * @param object the object to generate in Pdf
+     * @param object the object to generate in PDF
      */
     void generatePdf(M object);
 
