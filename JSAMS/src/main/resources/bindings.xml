@@ -19,22 +19,23 @@
 	<!-- <jaxb:schemaBindings> -->
 	<!-- <jaxb:package name="be.jsams.server.model.xml.command" /> -->
 	<!-- </jaxb:schemaBindings> -->
-<!-- 	<jaxb:bindings schemaLocation="../../../reports/deliveryOrder/delivery_order.xsd" -->
-<!-- 		node="/xs:schema"> -->
-<!-- 		<jaxb:schemaBindings> -->
-<!-- 			<jaxb:package name="be.jsams.server.model.xml.deliveryOrder" /> -->
-<!-- 		</jaxb:schemaBindings> -->
-<!-- 	</jaxb:bindings> -->
-<!-- 	<jaxb:bindings schemaLocation="../../../reports/bill/bill.xsd" -->
-<!-- 		node="/xs:schema"> -->
-<!-- 		<jaxb:schemaBindings> -->
-<!-- 			<jaxb:package name="be.jsams.server.model.xml.bill" /> -->
-<!-- 		</jaxb:schemaBindings> -->
-<!-- 	</jaxb:bindings> -->
-	<jaxb:bindings schemaLocation="../../../reports/creditNote/credit_note.xsd"
+	<!-- </jaxb:bindings> -->
+	<jaxb:bindings schemaLocation="../../../reports/deliveryOrder/delivery_order.xsd"
 		node="/xs:schema">
 		<jaxb:schemaBindings>
-			<jaxb:package name="be.jsams.server.model.xml.creditNote" />
+			<jaxb:package name="be.jsams.server.model.xml.deliveryOrder" />
 		</jaxb:schemaBindings>
 	</jaxb:bindings>
+	<!-- <jaxb:bindings schemaLocation="../../../reports/bill/bill.xsd" -->
+	<!-- node="/xs:schema"> -->
+	<!-- <jaxb:schemaBindings> -->
+	<!-- <jaxb:package name="be.jsams.server.model.xml.bill" /> -->
+	<!-- </jaxb:schemaBindings> -->
+	<!-- </jaxb:bindings> -->
+	<!-- <jaxb:bindings schemaLocation="../../../reports/creditNote/credit_note.xsd" -->
+	<!-- node="/xs:schema"> -->
+	<!-- <jaxb:schemaBindings> -->
+	<!-- <jaxb:package name="be.jsams.server.model.xml.creditNote" /> -->
+	<!-- </jaxb:schemaBindings> -->
+	<!-- </jaxb:bindings> -->
 </jaxb:bindings>

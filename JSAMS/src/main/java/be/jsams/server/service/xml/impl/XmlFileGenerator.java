@@ -6,26 +6,27 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 
-import be.jsams.server.model.xml.estimate.EstimateXml;
-import be.jsams.server.service.xml.XmlFileGenerator;
-
 /**
  * 
  *
  * @author chesteric31
  * @version $Revision$ $Date::                  $ $Author$
  */
-public class XmlFileEstimateGeneratorImpl implements XmlFileGenerator<EstimateXml> {
+public class XmlFileGenerator {
 
     /**
-     * {@inheritDoc}
+     * Generates a file with the XML and class type input.
+     * 
+     * @param xml the JAXB object
+     * @param xmlFilePath the file path for the built XML
+     * @param classType the class type
+     * @return the built XML file
      */
-    @Override
-    public File generateXmlFile(EstimateXml xml) {
+    public File generateXmlFile(Object xml, String xmlFilePath, Class<?> classType) {
         File output = null;
         try {
-            output = new File("reports/estimate/estimate.xml");
-            JAXBContext context = JAXBContext.newInstance(EstimateXml.class);
+            output = new File(xmlFilePath);
+            JAXBContext context = JAXBContext.newInstance(classType);
             Marshaller marshaller = context.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
             marshaller.marshal(xml, output);

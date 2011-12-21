@@ -16,6 +16,10 @@ import be.jsams.server.service.management.AgentService;
 import be.jsams.server.service.management.CustomerService;
 import be.jsams.server.service.management.ProductCategoryService;
 import be.jsams.server.service.management.ProductService;
+import be.jsams.server.service.pdf.impl.PdfBillServiceImpl;
+import be.jsams.server.service.pdf.impl.PdfCommandServiceImpl;
+import be.jsams.server.service.pdf.impl.PdfCreditNoteServiceImpl;
+import be.jsams.server.service.pdf.impl.PdfDeliveryOrderServiceImpl;
 import be.jsams.server.service.pdf.impl.PdfEstimateServiceImpl;
 import be.jsams.server.service.sale.BillService;
 import be.jsams.server.service.sale.CommandService;
@@ -196,5 +200,29 @@ public final class JsamsApplicationContext {
         return (PdfEstimateServiceImpl) context.getBean("pdfEstimateServiceImpl");
     }
 
+    /**
+     * @return the {@link PdfCommandServiceImpl}
+     */
+    public static PdfCommandServiceImpl getPdfCommandService() {
+        return (PdfCommandServiceImpl) context.getBean("pdfCommandServiceImpl");
+    }
+    /**
+     * @return the {@link PdfDeliveryOrderServiceImpl}
+     */
+    public static PdfDeliveryOrderServiceImpl getPdfDeliveryOrderService() {
+        return (PdfDeliveryOrderServiceImpl) context.getBean("pdfDeliveryOrderServiceImpl");
+    }
+    /**
+     * @return the {@link PdfBillServiceImpl}
+     */
+    public static PdfBillServiceImpl getPdfBillService() {
+        return (PdfBillServiceImpl) context.getBean("pdfBillServiceImpl");
+    }
+    /**
+     * @return the {@link PdfCreditNoteServiceImpl}
+     */
+    public static PdfCreditNoteServiceImpl getPdfCreditNoteService() {
+        return (PdfCreditNoteServiceImpl) context.getBean("pdfCreditNoteServiceImpl");
+    }
 
 }

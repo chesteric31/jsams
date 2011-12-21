@@ -17,6 +17,7 @@ import be.jsams.client.validator.search.SearchCreditNoteValidator;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.sale.CreditNoteBean;
+import be.jsams.server.service.pdf.impl.PdfCreditNoteServiceImpl;
 import be.jsams.server.service.sale.CreditNoteService;
 
 /**
@@ -155,8 +156,14 @@ public class SearchCreditNotePanel<L extends MouseListener> extends
      */
     @Override
     protected void performButtonPdf() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException();
+        int selectedRow = getResultTable().getSelectedRow();
+        if (selectedRow > -1) {
+            int selectedRowModel = getResultTable().convertRowIndexToModel(selectedRow);
+            CreditNoteTableModel model = (CreditNoteTableModel) getResultTable().getModel();
+            CreditNoteBean beanToPdf = model.getRow(selectedRowModel);
+            PdfCreditNoteServiceImpl pdfService = JsamsApplicationContext.getPdfCreditNoteService();
+            pdfService.generatePdf(beanToPdf);
+        }
     }
 
 }
