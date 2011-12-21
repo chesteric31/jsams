@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <xs:import namespace="http://www.w3.org/2001/XMLSchema-instance"/>
+  <xs:element name="bill">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="society"/>
+        <xs:element ref="customer"/>
+        <xs:element ref="creation_date"/>
+        <xs:element ref="due_date"/>
+        <xs:element ref="number"/>
+        <xs:element ref="details"/>
+        <xs:element ref="total_et"/>
+        <xs:element ref="vat"/>
+        <xs:element ref="total_ati"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="society">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="name"/>
+        <xs:element ref="vat_number"/>
+        <xs:element ref="logo"/>
+        <xs:element ref="address"/>
+        <xs:element ref="contact_information"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="vat_number" type="xs:string"/>
+  <xs:element name="logo" type="xs:string"/>
+  <xs:element name="contact_information">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="phone"/>
+        <xs:element ref="fax"/>
+        <xs:element ref="mobile"/>
+        <xs:element ref="email"/>
+        <xs:element ref="website"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="phone" type="xs:integer"/>
+  <xs:element name="fax" type="xs:integer"/>
+  <xs:element name="mobile" type="xs:string"/>
+  <xs:element name="email" type="xs:string"/>
+  <xs:element name="website" type="xs:string"/>
+  <xs:element name="customer">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="name"/>
+        <xs:element ref="first_name"/>
+        <xs:element ref="address"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="first_name" type="xs:string"/>
+  <xs:element name="creation_date" type="xs:date"/>
+  <xs:element name="due_date" type="xs:date"/>
+  <xs:element name="details">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="detail"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="detail">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="product"/>
+        <xs:element ref="quantity"/>
+        <xs:element ref="price"/>
+        <xs:element ref="discount_rate"/>
+        <xs:element ref="total_et"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="product">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="number"/>
+        <xs:element ref="name"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="quantity" type="xs:integer"/>
+  <xs:element name="price" type="xs:decimal"/>
+  <xs:element name="vat" type="xs:decimal"/>
+  <xs:element name="discount_rate" type="xs:decimal"/>
+  <xs:element name="total_ati" type="xs:decimal"/>
+  <xs:element name="name" type="xs:string"/>
+  <xs:element name="address">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="number"/>
+        <xs:element ref="street"/>
+        <xs:element ref="zip"/>
+        <xs:element ref="city"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="street" type="xs:string"/>
+  <xs:element name="zip" type="xs:integer"/>
+  <xs:element name="city" type="xs:string"/>
+  <xs:element name="number" type="xs:integer"/>
+  <xs:element name="total_et" type="xs:decimal"/>
+</xs:schema>
