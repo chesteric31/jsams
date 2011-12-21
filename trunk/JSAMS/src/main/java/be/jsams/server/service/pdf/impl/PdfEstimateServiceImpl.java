@@ -15,7 +15,7 @@ import net.sf.jasperreports.engine.export.JRPdfExporter;
 import net.sf.jasperreports.engine.util.SimpleFileResolver;
 import net.sf.jasperreports.view.JasperViewer;
 import be.jsams.common.bean.model.sale.EstimateBean;
-import be.jsams.server.model.sale.xml.EstimateXml;
+import be.jsams.server.model.xml.estimate.EstimateXml;
 import be.jsams.server.service.pdf.PdfService;
 import be.jsams.server.service.xml.impl.XmlEstimateGeneratorImpl;
 import be.jsams.server.service.xml.impl.XmlFileEstimateGeneratorImpl;
@@ -39,8 +39,8 @@ public class PdfEstimateServiceImpl implements PdfService<EstimateBean> {
         EstimateXml estimateXml = xmlGenerator.generateXml(object);
         File generatedXmlFile = fileEstimateGeneratorImpl.generateXmlFile(estimateXml);
 
-        String reportFileName = "reports/estimate.jasper";
-        String outFileName = "reports/estimate.pdf";
+        String reportFileName = "reports/estimate/estimate.jasper";
+        String outFileName = "reports/estimate/estimate.pdf";
         String xmlFileName = generatedXmlFile.getAbsolutePath();
         String recordPath = "estimate";
 
