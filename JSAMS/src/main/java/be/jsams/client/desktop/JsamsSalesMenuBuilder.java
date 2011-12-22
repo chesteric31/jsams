@@ -52,9 +52,7 @@ import be.jsams.common.bean.model.sale.EstimateBean;
 public class JsamsSalesMenuBuilder extends AbstractMenuBuilder {
 
     private JsamsMenu salesMenu;
-    private JsamsMenuItem createDocumentsMI;
     private JsamsMenuItem transferDocumentsMI;
-    private JsamsMenuItem listDocumentsMI;
     private JsamsMenuItem estimateMI;
     private JsamsMenuItem commandMI;
     private JsamsMenuItem deliveryOrderMI;
@@ -78,18 +76,10 @@ public class JsamsSalesMenuBuilder extends AbstractMenuBuilder {
     @Override
     public JsamsMenu build() {
         salesMenu = new JsamsMenu(JsamsI18nResource.MENU_SALES);
-        // per default: false, true if a current society is set
-        // salesMenu.setEnabled(false);
-        createDocumentsMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_CREATE_DOCUMENTS, "actions/document-new.png");
-        salesMenu.add(createDocumentsMI);
         transferDocumentsMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_TRANSFER_DOCUMENTS,
                 "actions/media-seek-forward.png");
         transferDocumentsMI.setAction(transferAction(transferDocumentsMI.getText(), transferDocumentsMI.getIcon()));
         salesMenu.add(transferDocumentsMI);
-        salesMenu.add(new JSeparator());
-        listDocumentsMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_LIST_DOCUMENTS,
-                "apps/internet-news-reader.png");
-        salesMenu.add(listDocumentsMI);
         salesMenu.add(new JSeparator());
         estimateMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_ESTIMATE);
         estimateMI.setAction(estimatesAction(estimateMI.getText(), estimateMI.getIcon()));
