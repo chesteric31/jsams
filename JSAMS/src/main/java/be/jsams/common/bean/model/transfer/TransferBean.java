@@ -48,6 +48,14 @@ public class TransferBean extends AbstractIdentityBean<AbstractIdentity, Transfe
     public static final String DESTINATION_TYPE_PROPERTY = "destinationType";
 
     /**
+     * Constructor.
+     */
+    public TransferBean() {
+        super();
+        setView(buildView());
+    }
+
+    /**
      * @return the transferMode
      */
     public int getTransferMode() {
@@ -115,7 +123,7 @@ public class TransferBean extends AbstractIdentityBean<AbstractIdentity, Transfe
      * {@inheritDoc}
      */
     @Override
-    public TransferBeanView buildView() {
+    protected TransferBeanView buildView() {
         return new TransferBeanView(this);
     }
 
