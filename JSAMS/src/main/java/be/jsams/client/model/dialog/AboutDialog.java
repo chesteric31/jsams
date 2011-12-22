@@ -23,7 +23,7 @@ import com.jgoodies.forms.layout.FormLayout;
 
 /**
  * 
- *
+ * 
  * @author chesteric31
  * @version $Revision$ $Date::                  $ $Author$
  */
@@ -59,12 +59,13 @@ public class AboutDialog extends JsamsDialog {
         builder.appendSeparator();
         builder.nextLine();
         I18nString translation = JsamsI18nLabelResource.LABEL_VERSION;
-        translation.setArguments(new Object[] {JsamsStart.class.getPackage().getImplementationVersion()});
+        String version = JsamsStart.class.getPackage().getImplementationVersion();
+        translation.setArguments(new Object[] {version});
         JsamsLabel versionLabel = new JsamsLabel(translation);
         versionLabel.setFont(new FontUIResource(Font.SANS_SERIF, Font.BOLD, 11));
         builder.append(versionLabel);
         builder.nextLine();
-        JEditorPane area = new JEditorPane("text/html", "<HTML><H1>This is good</H1></HTML>");
+        JEditorPane area = new JEditorPane("text/html", retrieveAboutText());
         area.setEditable(false);
         builder.append(area);
         builder.nextLine();
@@ -79,6 +80,20 @@ public class AboutDialog extends JsamsDialog {
         DialogUtil.centerComponentOnScreen(this);
         setVisible(true);
         setResizable(false);
+    }
+
+    /**
+     * @return a small about text
+     */
+    private String retrieveAboutText() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("<i>This program came from an idea of 2005.<br>");
+        builder.append("The goal was to explore the possibilities of Java world.<br>");
+        builder.append("With its old, new technologies and the current design patterns.<br>");
+        builder.append("<p>In one word, this project is a lab.<br>");
+        builder.append("<p>Feel free to explore, modify and improve this project...");
+        builder.append("<p>Finally, I would like to thank all my parents and especially my wife.</i>");
+        return builder.toString();
     }
 
 }
