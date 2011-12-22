@@ -274,5 +274,7 @@ public final class JsamsI18nResource {
     public static final I18nString TITLE_EDIT_GENERAL_PARAMETERS = new I18nString("title.edit.general_parameters");
 
     public static final I18nString BUTTON_BROWSE_LOGO = new I18nString("button.browse_logo");
+
+    public static final I18nString TITLE_ABOUT = new I18nString("title.about");
     
 }

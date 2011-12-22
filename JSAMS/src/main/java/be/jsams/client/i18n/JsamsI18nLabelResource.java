@@ -187,4 +187,8 @@ public final class JsamsI18nLabelResource {
 
     public static final I18nString LABEL_FIRST_NAME = new I18nString("label.first_name");
 
+    public static final I18nString LABEL_APPLICATION = new I18nString("label.application");
+
+    public static final I18nString LABEL_VERSION = new I18nString("label.version");
+
 }
