@@ -11,6 +11,7 @@ import be.jsams.client.swing.action.EditSocietyAction;
 import be.jsams.client.swing.action.ExitAction;
 import be.jsams.client.swing.action.GeneralParametersAction;
 import be.jsams.client.swing.action.PrinterParametersAction;
+import be.jsams.client.swing.action.RestartAction;
 import be.jsams.client.swing.component.JsamsMenu;
 import be.jsams.client.swing.component.JsamsMenuItem;
 
@@ -46,6 +47,7 @@ public class JsamsFileMenuBuilder extends AbstractMenuBuilder {
         openMI.setAction(new ChooseSocietyAction(openMI.getText(), openMI.getIcon()));
         fileMenu.add(openMI);
         closeMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_CLOSE, "status/folder-visiting.png");
+        closeMI.setAction(new RestartAction(closeMI.getText(), closeMI.getIcon()));
         fileMenu.add(closeMI);
         fileMenu.add(new JSeparator());
         societyParametersMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_SOCIETY_PARAMETERS,

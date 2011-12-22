@@ -124,6 +124,27 @@ public class JsamsDesktop {
             System.exit(0);
         }
     }
+    
+    /**
+     * Closes the society file and restarts the process.
+     */
+    public void restart() {
+        frame.getTabbedPane().removeAll();
+        frame.dispose();
+        new OpenSocietyDialog(JsamsI18nResource.TITLE_OPEN_SOCIETY);
+        Object[] parameters = new Object[1];
+        parameters[0] = this.currentSociety.getName();
+        I18nString newTitle = new I18nString("title.application", parameters);
+        frame.setTitle(newTitle);
+        frame.toFront();
+        frame.setVisible(true);
+//        frame = new JsamsMainFrame(newTitle);
+//        frame.addWindowListener(new WindowAdapter() {
+//            public void windowClosing(WindowEvent we) {
+//                stopNow();
+//            }
+//        });
+    }
 
     /**
      * 
