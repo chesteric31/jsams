@@ -69,7 +69,7 @@
 			installGroups="New install">
 			<description>New server installation of the selected database as required by the application.
 			</description>
-			<fileset dir="db" targetdir="$INSTALL_PATH/db" />
+			<fileset dir="scripts" targetdir="$INSTALL_PATH/scripts" />
 			<fileset dir="mysql-5.1.60-win32" targetdir="$INSTALL_PATH/mysql-5.1.60-win32" />
 			<file src="script.bat" targetdir="$INSTALL_PATH" />
 			<parsable targetfile="$INSTALL_PATH/script.bat" /> <!-- The file will be parsed -->
