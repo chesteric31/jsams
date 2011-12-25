@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element ref="{}vat_number"/>
  *         &lt;element ref="{}logo"/>
  *         &lt;element ref="{}address"/>
- *         &lt;element ref="{}contact_info"/>
+ *         &lt;element ref="{}contact_information"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -40,7 +40,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = { "name", "vatNumber", "logo", "address", "contactInfo" })
+@XmlType(name = "", propOrder = { "name", "vatNumber", "logo", "address", "contactInformation" })
 @XmlRootElement(name = "society")
 public class SocietyXml {
 
@@ -52,8 +52,8 @@ public class SocietyXml {
     private String logo;
     @XmlElement(required = true)
     private AddressXml address;
-    @XmlElement(name = "contact_info", required = true)
-    private ContactInformationXml contactInfo;
+    @XmlElement(name = "contact_information", required = true)
+    private ContactInformationXml contactInformation;
 
     /**
      * Gets the value of the name property.
@@ -141,8 +141,8 @@ public class SocietyXml {
      * @return possible object is {@link ContactInformationXml }
      * 
      */
-    public ContactInformationXml getContactInfo() {
-        return contactInfo;
+    public ContactInformationXml getContactInformation() {
+        return contactInformation;
     }
 
     /**
@@ -151,8 +151,8 @@ public class SocietyXml {
      * @param value allowed object is {@link ContactInformationXml }
      * 
      */
-    public void setContactInfo(ContactInformationXml value) {
-        this.contactInfo = value;
+    public void setContactInformation(ContactInformationXml value) {
+        this.contactInformation = value;
     }
 
 }

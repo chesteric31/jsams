@@ -30,7 +30,7 @@ public class PdfEstimateServiceImpl implements PdfService<EstimateBean> {
     public void generatePdf(EstimateBean object) {
         EstimateXml estimateXml = xmlGenerator.generateXml(object);
         String path = rootReportsPath + recordPath;
-        File generatedXmlFile = xmlFileGenerator.generateXmlFile(estimateXml, path + ".xml", EstimateBean.class);
+        File generatedXmlFile = xmlFileGenerator.generateXmlFile(estimateXml, path + ".xml", EstimateXml.class);
 
         String reportFileName = path + ".jasper";
         String outFileName = path + ".pdf";
