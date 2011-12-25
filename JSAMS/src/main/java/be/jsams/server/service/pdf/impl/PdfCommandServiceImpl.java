@@ -3,7 +3,6 @@ package be.jsams.server.service.pdf.impl;
 import java.io.File;
 
 import be.jsams.common.bean.model.sale.CommandBean;
-import be.jsams.common.bean.model.sale.EstimateBean;
 import be.jsams.server.model.xml.command.CommandXml;
 import be.jsams.server.service.pdf.PdfMerger;
 import be.jsams.server.service.pdf.PdfService;
@@ -31,7 +30,7 @@ public class PdfCommandServiceImpl implements PdfService<CommandBean> {
     public void generatePdf(CommandBean object) {
         CommandXml commandXml = xmlGenerator.generateXml(object);
         String path = rootReportsPath + recordPath;
-        File generatedXmlFile = xmlFileGenerator.generateXmlFile(commandXml, path + ".xml", EstimateBean.class);
+        File generatedXmlFile = xmlFileGenerator.generateXmlFile(commandXml, path + ".xml", CommandXml.class);
 
         String reportFileName = path + ".jasper";
         String outFileName = path + ".pdf";

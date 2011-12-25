@@ -76,7 +76,7 @@ public class XmlDeliveryOrderGeneratorImpl implements XmlGenerator<DeliveryOrder
         societyXml.setAddress(value);
         ContactInformationXml contactInfoXml = factory.createContactInformation();
         contactInfoXml.setPhone(new BigInteger(society.getContactInformation().getPhone()));
-        societyXml.setContactInfo(contactInfoXml);
+        societyXml.setContactInformation(contactInfoXml);
         societyXml.setName(society.getName());
         societyXml.setVatNumber(society.getVatNumber());
         // obtain an encoded string from the byte array, which will be written

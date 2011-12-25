@@ -3,7 +3,6 @@ package be.jsams.server.service.pdf.impl;
 import java.io.File;
 
 import be.jsams.common.bean.model.sale.CreditNoteBean;
-import be.jsams.common.bean.model.sale.EstimateBean;
 import be.jsams.server.model.xml.creditNote.CreditNoteXml;
 import be.jsams.server.service.pdf.PdfMerger;
 import be.jsams.server.service.pdf.PdfService;
@@ -31,7 +30,7 @@ public class PdfCreditNoteServiceImpl implements PdfService<CreditNoteBean> {
     public void generatePdf(CreditNoteBean object) {
         CreditNoteXml creditNoteXml = xmlGenerator.generateXml(object);
         String path = rootReportsPath + recordPath;
-        File generatedXmlFile = xmlFileGenerator.generateXmlFile(creditNoteXml, path + ".xml", EstimateBean.class);
+        File generatedXmlFile = xmlFileGenerator.generateXmlFile(creditNoteXml, path + ".xml", CreditNoteXml.class);
 
         String reportFileName = path + ".jasper";
         String outFileName = path + ".pdf";
