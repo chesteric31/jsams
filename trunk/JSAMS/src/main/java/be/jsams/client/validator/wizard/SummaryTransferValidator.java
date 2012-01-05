@@ -20,8 +20,7 @@ public class SummaryTransferValidator implements Validator<TransferBean> {
     @Override
     public ValidationResult validate(TransferBean bean) {
         PropertyValidationSupport support = new PropertyValidationSupport(bean, "");
-        ValidationResult result = support.getResult();
-        return result;
+        return support.getResult();
     }
     
 }

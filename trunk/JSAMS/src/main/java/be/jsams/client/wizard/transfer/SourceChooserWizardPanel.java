@@ -78,13 +78,6 @@ public class SourceChooserWizardPanel extends JsamsWizardPanel<TransferBean, Sou
     /**
      * {@inheritDoc}
      */
-    public void update() {
-        super.update();
-    }
-    
-    /**
-     * {@inheritDoc}
-     */
     public void next() {
         if (prePerformNext()) {
             switchPanel(TransferWizardDialog.SECOND_PANEL);

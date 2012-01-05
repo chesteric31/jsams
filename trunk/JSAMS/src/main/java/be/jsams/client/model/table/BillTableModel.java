@@ -82,7 +82,6 @@ public class BillTableModel extends AbstractJsamsTableModel<BillBean> {
         case ONE:
             return Date.class;
         case TWO:
-            return Boolean.class;
         case THREE:
             return Boolean.class;
         case FOUR:

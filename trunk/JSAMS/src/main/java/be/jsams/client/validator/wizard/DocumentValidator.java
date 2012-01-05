@@ -30,8 +30,7 @@ public class DocumentValidator implements Validator<TransferBean> {
             support.addError(JsamsI18nLabelResource.LABEL_DOCUMENT.getTranslation(),
                     JsamsI18nResource.ERROR_IS_MANDATORY_TO_SELECT.getTranslation());
         }
-        ValidationResult result = support.getResult();
-        return result;
+        return support.getResult();
     }
 
 }

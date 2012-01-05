@@ -30,6 +30,9 @@ public class DaoImpl<T> implements Dao<T> {
 
     /** The class type */
     private Class<T> type;
+    
+    protected static final String AND = " AND ";
+    protected static final String WHERE = " WHERE ";
 
     /**
      * Constructor

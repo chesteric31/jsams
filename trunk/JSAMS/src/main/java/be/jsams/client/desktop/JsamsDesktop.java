@@ -40,7 +40,7 @@ public class JsamsDesktop {
 
     private static JsamsDesktop instance = null;
 
-    private final int defaultFontSize = 13;
+    private static final int DEFAULT_FONT_SIZE = 13;
 
     /**
      * Default constructor
@@ -61,7 +61,7 @@ public class JsamsDesktop {
      */
     private void initComponents() {
         setNativeLookAndFeel();
-        setUIFont(new FontUIResource(Font.SANS_SERIF, Font.PLAIN, defaultFontSize));
+        setUIFont(new FontUIResource(Font.SANS_SERIF, Font.PLAIN, DEFAULT_FONT_SIZE));
 
         new OpenSocietyDialog(JsamsI18nResource.TITLE_OPEN_SOCIETY);
         Object[] parameters = new Object[1];

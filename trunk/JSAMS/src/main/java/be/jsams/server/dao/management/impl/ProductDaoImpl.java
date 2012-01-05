@@ -39,7 +39,7 @@ public class ProductDaoImpl extends DaoImpl<Product> implements ProductDao {
     public List<Product> findAll() {
         StringBuilder queryBuilder = new StringBuilder("FROM Product p");
 
-        queryBuilder.append(" WHERE ");
+        queryBuilder.append(WHERE);
         queryBuilder.append("p.category.society.id = " + getCurrentSociety().getId());
 
         Query query = getEntityManager().createQuery(queryBuilder.toString());
@@ -63,61 +63,61 @@ public class ProductDaoImpl extends DaoImpl<Product> implements ProductDao {
         Double vatApplicable = criteria.getVatApplicable();
         if (!StringUtils.isNullOrEmpty(name)) {
             if (isFirst) {
-                queryBuilder.append(" WHERE");
+                queryBuilder.append(WHERE);
                 isFirst = false;
             }
             queryBuilder.append(" p.name LIKE '%" + name + "%'");
         }
         if (price != null) {
             if (isFirst) {
-                queryBuilder.append(" WHERE");
+                queryBuilder.append(WHERE);
                 isFirst = false;
             } else {
-                queryBuilder.append(" AND");
+                queryBuilder.append(AND);
             }
             queryBuilder.append(" p.price = " + price);
         }
         if (reorderLevel != 0) {
             if (isFirst) {
-                queryBuilder.append(" WHERE");
+                queryBuilder.append(WHERE);
                 isFirst = false;
             } else {
-                queryBuilder.append(" AND");
+                queryBuilder.append(AND);
             }
             queryBuilder.append(" p.reorderLevel = " + reorderLevel);
         }
         if (quantityStock != 0) {
             if (isFirst) {
-                queryBuilder.append(" WHERE");
+                queryBuilder.append(WHERE);
                 isFirst = false;
             } else {
-                queryBuilder.append(" AND");
+                queryBuilder.append(AND);
             }
             queryBuilder.append(" p.quantityStock = " + quantityStock);
         }
         if (vatApplicable != null) {
             if (isFirst) {
-                queryBuilder.append(" WHERE");
+                queryBuilder.append(WHERE);
                 isFirst = false;
             } else {
-                queryBuilder.append(" AND");
+                queryBuilder.append(AND);
             }
             queryBuilder.append(" p.vatApplicable = " + vatApplicable);
         }
         if (category != null) {
             if (isFirst) {
-                queryBuilder.append(" WHERE");
+                queryBuilder.append(WHERE);
                 isFirst = false;
             } else {
-                queryBuilder.append(" AND");
+                queryBuilder.append(AND);
             }
             queryBuilder.append(" p.category.id = " + category.getId());
         } else {
             if (isFirst) {
-                queryBuilder.append(" WHERE");
+                queryBuilder.append(WHERE);
                 isFirst = false;
             } else {
-                queryBuilder.append(" AND");
+                queryBuilder.append(AND);
             }
             queryBuilder.append(" p.category.society.id = " + getCurrentSociety().getId());
         }

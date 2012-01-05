@@ -45,8 +45,7 @@ public class DestinationValidator implements Validator<TransferBean> {
             support.addError(JsamsI18nLabelResource.LABEL_DESTINATION_TYPE.getTranslation(),
                     JsamsI18nResource.ERROR_IS_MANDATORY.getTranslation());
         }
-        ValidationResult result = support.getResult();
-        return result;
+        return support.getResult();
     }
 
     /**

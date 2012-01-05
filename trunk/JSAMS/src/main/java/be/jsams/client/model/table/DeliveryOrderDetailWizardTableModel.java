@@ -71,7 +71,6 @@ public class DeliveryOrderDetailWizardTableModel extends AbstractJsamsTableModel
     public Class<?> getColumnClass(int columnIndex) {
         switch (columnIndex) {
         case ZERO:
-            return Long.class;
         case ONE:
             return Long.class;
         case TWO:
@@ -79,7 +78,6 @@ public class DeliveryOrderDetailWizardTableModel extends AbstractJsamsTableModel
         case THREE:
             return Integer.class;
         case FOUR:
-            return Double.class;
         case FIVE:
             return Double.class;
         default:

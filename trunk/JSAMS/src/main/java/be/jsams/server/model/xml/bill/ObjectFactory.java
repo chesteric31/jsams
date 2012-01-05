@@ -72,6 +72,7 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link DetailXml }
      * 
+     * @return the instance of {@link DetailXml}
      */
     public DetailXml createDetail() {
         return new DetailXml();
@@ -80,6 +81,7 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link ProductXml }
      * 
+     * @return the instance of {@link ProductXml}
      */
     public ProductXml createProduct() {
         return new ProductXml();
@@ -88,6 +90,7 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link BillXml }
      * 
+     * @return the instance of {@link BillXml}
      */
     public BillXml createBill() {
         return new BillXml();
@@ -96,6 +99,7 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link SocietyXml }
      * 
+     * @return the instance of {@link SocietyXml}
      */
     public SocietyXml createSociety() {
         return new SocietyXml();
@@ -104,6 +108,7 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link AddressXml }
      * 
+     * @return the instance of {@link AddressXml}
      */
     public AddressXml createAddress() {
         return new AddressXml();
@@ -112,6 +117,8 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link ContactInformationXml }
      * 
+     * 
+     * @return the instance of {@link ContactInformationXml}
      */
     public ContactInformationXml createContactInformation() {
         return new ContactInformationXml();
@@ -120,6 +127,7 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link CustomerXml }
      * 
+     * @return the instance of {@link CustomerXml}
      */
     public CustomerXml createCustomer() {
         return new CustomerXml();
@@ -128,6 +136,7 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link DetailsXml }
      * 
+     * @return the instance of {@link DetailsXml}
      */
     public DetailsXml createDetails() {
         return new DetailsXml();
@@ -137,6 +146,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link BigDecimal }
      * {@code >}
      * 
+     * @return the instance of discount rate
      */
     @XmlElementDecl(namespace = "", name = "discount_rate")
     public JAXBElement<BigDecimal> createDiscountRate(BigDecimal value) {
@@ -146,6 +156,7 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}
      * 
+     * @return the instance of logo
      */
     @XmlElementDecl(namespace = "", name = "logo")
     public JAXBElement<String> createLogo(String value) {
@@ -156,6 +167,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link BigInteger }
      * {@code >}
      * 
+     * @return the instance of zip
      */
     @XmlElementDecl(namespace = "", name = "zip")
     public JAXBElement<BigInteger> createZip(BigInteger value) {
@@ -166,6 +178,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link BigInteger }
      * {@code >}
      * 
+     * @return the instance of phone
      */
     @XmlElementDecl(namespace = "", name = "phone")
     public JAXBElement<BigInteger> createPhone(BigInteger value) {
@@ -176,6 +189,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link BigInteger }
      * {@code >}
      * 
+     * @return the instance of fax
      */
     @XmlElementDecl(namespace = "", name = "fax")
     public JAXBElement<BigInteger> createFax(BigInteger value) {
@@ -185,6 +199,7 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}
      * 
+     * @return the instance of web site
      */
     @XmlElementDecl(namespace = "", name = "website")
     public JAXBElement<String> createWebsite(String value) {
@@ -194,6 +209,7 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}
      * 
+     * @return the instance of street
      */
     @XmlElementDecl(namespace = "", name = "street")
     public JAXBElement<String> createStreet(String value) {
@@ -204,6 +220,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link BigDecimal }
      * {@code >}
      * 
+     * @return the instance of vat
      */
     @XmlElementDecl(namespace = "", name = "vat")
     public JAXBElement<BigDecimal> createVat(BigDecimal value) {
@@ -214,6 +231,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link BigDecimal }
      * {@code >}
      * 
+     * @return the instance of total ET
      */
     @XmlElementDecl(namespace = "", name = "total_et")
     public JAXBElement<BigDecimal> createTotalEt(BigDecimal value) {
@@ -224,6 +242,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link BigInteger }
      * {@code >}
      * 
+     * @return the instance of number
      */
     @XmlElementDecl(namespace = "", name = "number")
     public JAXBElement<BigInteger> createNumber(BigInteger value) {
@@ -233,6 +252,7 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}
      * 
+     * @return the instance of city
      */
     @XmlElementDecl(namespace = "", name = "city")
     public JAXBElement<String> createCity(String value) {
@@ -242,6 +262,7 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link Date }{@code >}
      * 
+     * @return the instance of creation date
      */
     @XmlElementDecl(namespace = "", name = "creation_date")
     @XmlJavaTypeAdapter(Adapter1.class)
@@ -252,6 +273,7 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}
      * 
+     * @return the instance of first name
      */
     @XmlElementDecl(namespace = "", name = "first_name")
     public JAXBElement<String> createFirstName(String value) {
@@ -262,6 +284,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link BigDecimal }
      * {@code >}
      * 
+     * @return the instance of price
      */
     @XmlElementDecl(namespace = "", name = "price")
     public JAXBElement<BigDecimal> createPrice(BigDecimal value) {
@@ -271,6 +294,7 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}
      * 
+     * @return the instance of VAT number
      */
     @XmlElementDecl(namespace = "", name = "vat_number")
     public JAXBElement<String> createVatNumber(String value) {
@@ -280,6 +304,7 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}
      * 
+     * @return the instance of email
      */
     @XmlElementDecl(namespace = "", name = "email")
     public JAXBElement<String> createEmail(String value) {
@@ -289,6 +314,7 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}
      * 
+     * @return the instance of name
      */
     @XmlElementDecl(namespace = "", name = "name")
     public JAXBElement<String> createName(String value) {
@@ -299,6 +325,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link BigDecimal }
      * {@code >}
      * 
+     * @return the instance of total ATI
      */
     @XmlElementDecl(namespace = "", name = "total_ati")
     public JAXBElement<BigDecimal> createTotalAti(BigDecimal value) {
@@ -308,6 +335,7 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link Date }{@code >}
      * 
+     * @return the instance of due date
      */
     @XmlElementDecl(namespace = "", name = "due_date")
     @XmlJavaTypeAdapter(Adapter1.class)
@@ -319,6 +347,7 @@ public class ObjectFactory {
      * Create an instance of {@link JAXBElement }{@code <}{@link BigInteger }
      * {@code >}
      * 
+     * @return the instance of quantity
      */
     @XmlElementDecl(namespace = "", name = "quantity")
     public JAXBElement<BigInteger> createQuantity(BigInteger value) {
@@ -328,6 +357,7 @@ public class ObjectFactory {
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}
      * 
+     * @return the instance of mobile
      */
     @XmlElementDecl(namespace = "", name = "mobile")
     public JAXBElement<String> createMobile(String value) {

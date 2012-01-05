@@ -76,15 +76,12 @@ public class BillDetailWizardTableModel extends AbstractJsamsTableModel<BillDeta
         case ZERO:
             return Long.class;
         case ONE:
-            return Long.class;
         case TWO:
             return String.class;
         case THREE:
             return Integer.class;
         case FOUR:
-            return Double.class;
         case FIVE:
-            return Double.class;
         case SIX:
             return Double.class;
         default:
