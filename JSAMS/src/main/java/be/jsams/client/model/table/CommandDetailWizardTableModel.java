@@ -74,7 +74,6 @@ public class CommandDetailWizardTableModel extends AbstractJsamsTableModel<Comma
     public Class<?> getColumnClass(int columnIndex) {
         switch (columnIndex) {
         case ZERO:
-            return Long.class;
         case ONE:
             return Long.class;
         case TWO:
@@ -82,9 +81,7 @@ public class CommandDetailWizardTableModel extends AbstractJsamsTableModel<Comma
         case THREE:
             return Integer.class;
         case FOUR:
-            return Double.class;
         case FIVE:
-            return Double.class;
         case SIX:
             return Double.class;
         default:

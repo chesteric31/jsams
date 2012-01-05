@@ -38,26 +38,26 @@ import be.jsams.server.model.xml.SocietyXml;
 @XmlRegistry
 public class ObjectFactory {
 
-    private final static QName _DiscountRate_QNAME = new QName("", "discount_rate");
-    private final static QName _Logo_QNAME = new QName("", "logo");
-    private final static QName _Zip_QNAME = new QName("", "zip");
-    private final static QName _Phone_QNAME = new QName("", "phone");
-    private final static QName _Fax_QNAME = new QName("", "fax");
-    private final static QName _Website_QNAME = new QName("", "website");
-    private final static QName _Street_QNAME = new QName("", "street");
-    private final static QName _TotalEt_QNAME = new QName("", "total_et");
-    private final static QName _Vat_QNAME = new QName("", "vat");
-    private final static QName _Number_QNAME = new QName("", "number");
-    private final static QName _City_QNAME = new QName("", "city");
-    private final static QName _CreationDate_QNAME = new QName("", "creation_date");
-    private final static QName _FirstName_QNAME = new QName("", "first_name");
-    private final static QName _Price_QNAME = new QName("", "price");
-    private final static QName _VatNumber_QNAME = new QName("", "vat_number");
-    private final static QName _Email_QNAME = new QName("", "email");
-    private final static QName _Name_QNAME = new QName("", "name");
-    private final static QName _TotalAti_QNAME = new QName("", "total_ati");
-    private final static QName _Quantity_QNAME = new QName("", "quantity");
-    private final static QName _Mobile_QNAME = new QName("", "mobile");
+    private static final QName _DiscountRate_QNAME = new QName("", "discount_rate");
+    private static final QName _Logo_QNAME = new QName("", "logo");
+    private static final QName _Zip_QNAME = new QName("", "zip");
+    private static final QName _Phone_QNAME = new QName("", "phone");
+    private static final QName _Fax_QNAME = new QName("", "fax");
+    private static final QName _Website_QNAME = new QName("", "website");
+    private static final QName _Street_QNAME = new QName("", "street");
+    private static final QName _TotalEt_QNAME = new QName("", "total_et");
+    private static final QName _Vat_QNAME = new QName("", "vat");
+    private static final QName _Number_QNAME = new QName("", "number");
+    private static final QName _City_QNAME = new QName("", "city");
+    private static final QName _CreationDate_QNAME = new QName("", "creation_date");
+    private static final QName _FirstName_QNAME = new QName("", "first_name");
+    private static final QName _Price_QNAME = new QName("", "price");
+    private static final QName _VatNumber_QNAME = new QName("", "vat_number");
+    private static final QName _Email_QNAME = new QName("", "email");
+    private static final QName _Name_QNAME = new QName("", "name");
+    private static final QName _TotalAti_QNAME = new QName("", "total_ati");
+    private static final QName _Quantity_QNAME = new QName("", "quantity");
+    private static final QName _Mobile_QNAME = new QName("", "mobile");
 
     /**
      * Create a new ObjectFactory that can be used to create new instances of

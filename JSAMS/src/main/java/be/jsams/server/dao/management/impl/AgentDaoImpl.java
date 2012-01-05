@@ -20,7 +20,7 @@ import be.jsams.server.model.management.Agent;
 public class AgentDaoImpl extends DaoImpl<Agent> implements AgentDao {
 
     private SocietyBean currentSociety;
-    
+
     /**
      * Constructor
      * 
@@ -47,26 +47,26 @@ public class AgentDaoImpl extends DaoImpl<Agent> implements AgentDao {
         String phone = criteria.getContactInformation().getPhone();
         CivilityBean civility = (CivilityBean) criteria.getCivility().getSelection();
 
-        queryBuilder.append(" WHERE ");
+        queryBuilder.append(WHERE);
         queryBuilder.append("a.society.id = " + getCurrentSociety().getId());
 
         if (name != null) {
-            queryBuilder.append(" AND a.name LIKE '%" + name + "%'");
+            queryBuilder.append(AND + "a.name LIKE '%" + name + "%'");
         }
         if (function != null) {
-            queryBuilder.append(" AND a.function LIKE '%" + function + "%'");
+            queryBuilder.append(AND + "a.function LIKE '%" + function + "%'");
         }
         if (zipCode != null) {
-            queryBuilder.append(" AND a.address.zipCode = " + zipCode);
+            queryBuilder.append(AND + "a.address.zipCode = " + zipCode);
         }
         if (city != null) {
-            queryBuilder.append(" AND a.address.city LIKE '%" + city + "%'");
+            queryBuilder.append(AND + "a.address.city LIKE '%" + city + "%'");
         }
         if (civility != null) {
-            queryBuilder.append(" AND a.civility.id = " + civility.getId());
+            queryBuilder.append(AND + "a.civility.id = " + civility.getId());
         }
         if (phone != null) {
-            queryBuilder.append(" AND a.contactInformation.phone LIKE '%" + phone + "%'");
+            queryBuilder.append(AND + "a.contactInformation.phone LIKE '%" + phone + "%'");
         }
 
         Query query = getEntityManager().createQuery(queryBuilder.toString());
@@ -80,13 +80,13 @@ public class AgentDaoImpl extends DaoImpl<Agent> implements AgentDao {
     public List<Agent> findAll() {
         StringBuilder queryBuilder = new StringBuilder("FROM Agent a");
 
-        queryBuilder.append(" WHERE ");
+        queryBuilder.append(WHERE);
         queryBuilder.append("a.society.id = " + getCurrentSociety().getId());
 
         Query query = getEntityManager().createQuery(queryBuilder.toString());
         return query.getResultList();
     }
-    
+
     /**
      * {@inheritDoc}
      */

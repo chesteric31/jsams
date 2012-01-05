@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import java.util.prefs.Preferences;
 
@@ -100,9 +101,9 @@ public class TransferServiceImpl implements TransferService {
             break;
         case 2:
         case 4:
-            Set<Long> ids = (Set<Long>) details.keySet();
-            for (Long id : ids) {
-                estimateToCommandPartialTransfer(details.get(id));
+            Set<Entry<Long, List<EstimateDetailBean>>> set = details.entrySet();
+            for (Entry<Long, List<EstimateDetailBean>> item : set) {
+                estimateToCommandPartialTransfer(details.get(item.getKey()));
             }
             break;
         case 3:
@@ -219,9 +220,9 @@ public class TransferServiceImpl implements TransferService {
             break;
         case 2:
         case 4:
-            Set<Long> ids = (Set<Long>) details.keySet();
-            for (Long id : ids) {
-                estimateToBillPartialTransfer(details.get(id));
+            Set<Entry<Long, List<EstimateDetailBean>>> set = details.entrySet();
+            for (Entry<Long, List<EstimateDetailBean>> item : set) {
+                estimateToBillPartialTransfer(details.get(item.getKey()));
             }
             break;
         case 3:
@@ -414,9 +415,9 @@ public class TransferServiceImpl implements TransferService {
             break;
         case 2:
         case 4:
-            Set<Long> ids = (Set<Long>) details.keySet();
-            for (Long id : ids) {
-                commandToDeliveryOrderPartialTransfer(details.get(id));
+            Set<Entry<Long, List<CommandDetailBean>>> set = details.entrySet();
+            for (Entry<Long, List<CommandDetailBean>> item : set) {
+                commandToDeliveryOrderPartialTransfer(details.get(item.getKey()));
             }
             break;
         case 3:
@@ -528,9 +529,9 @@ public class TransferServiceImpl implements TransferService {
             break;
         case 2:
         case 4:
-            Set<Long> ids = (Set<Long>) details.keySet();
-            for (Long id : ids) {
-                commandToBillPartialTransfer(details.get(id));
+            Set<Entry<Long, List<CommandDetailBean>>> set = details.entrySet();
+            for (Entry<Long, List<CommandDetailBean>> item : set) {
+                commandToBillPartialTransfer(details.get(item.getKey()));
             }
             break;
         case 3:
@@ -679,9 +680,9 @@ public class TransferServiceImpl implements TransferService {
             break;
         case 2:
         case 4:
-            Set<Long> ids = (Set<Long>) details.keySet();
-            for (Long id : ids) {
-                billToCreditNotePartialTransfer(details.get(id));
+            Set<Entry<Long, List<BillDetailBean>>> set = details.entrySet();
+            for (Entry<Long, List<BillDetailBean>> item : set) {
+                billToCreditNotePartialTransfer(details.get(item.getKey()));
             }
             break;
         case 3:
@@ -858,9 +859,9 @@ public class TransferServiceImpl implements TransferService {
             break;
         case 2:
         case 4:
-            Set<Long> ids = (Set<Long>) details.keySet();
-            for (Long id : ids) {
-                deliveryOrderToBillPartialTransfer(details.get(id));
+            Set<Entry<Long, List<DeliveryOrderDetailBean>>> set = details.entrySet();
+            for (Entry<Long, List<DeliveryOrderDetailBean>> item : set) {
+                deliveryOrderToBillPartialTransfer(details.get(item.getKey()));
             }
             break;
         case 3:
@@ -918,7 +919,17 @@ public class TransferServiceImpl implements TransferService {
         newBean.setPaid(false);
         newBean.setRemark(deliveryOrder.getRemark());
         billService.create(newBean);
-        deliveryOrder.setTransferred(true);
+        // TODO review
+        boolean allDetailTransferred = true;
+        for (DeliveryOrderDetailBean detailBean : deliveryOrder.getDetails()) {
+            if (!detailBean.isTransferred()) {
+                allDetailTransferred = false;
+                break;
+            }
+        }
+        if (allDetailTransferred) {
+            deliveryOrder.setTransferred(true);
+        }
         deliveryOrderService.update(deliveryOrder);
     }
 
@@ -964,7 +975,6 @@ public class TransferServiceImpl implements TransferService {
         newBean.setPaid(false);
         newBean.setRemark(deliveryOrder.getRemark());
         billService.create(newBean);
-        deliveryOrder.setTransferred(true);
         deliveryOrderService.update(deliveryOrder);
     }
 

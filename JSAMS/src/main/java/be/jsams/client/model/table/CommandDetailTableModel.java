@@ -84,7 +84,6 @@ public class CommandDetailTableModel extends AbstractJsamsTableModel<CommandDeta
         case FOUR:
             return Boolean.class;
         case FIVE:
-            return Double.class;
         case SIX:
             return Double.class;
         default:

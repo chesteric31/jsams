@@ -25,7 +25,7 @@ import com.mysql.jdbc.StringUtils;
 public class CustomerDaoImpl extends DaoImpl<Customer> implements CustomerDao {
 
     private SocietyBean currentSociety;
-    
+
     /**
      * Constructor
      * 
@@ -50,25 +50,23 @@ public class CustomerDaoImpl extends DaoImpl<Customer> implements CustomerDao {
         PaymentModeBean paymentMode = (PaymentModeBean) criteria.getPaymentMode().getSelection();
         LegalFormBean legalForm = (LegalFormBean) criteria.getLegalForm().getSelection();
 
-//        Long societyId = JsamsDesktop.getInstance().getCurrentSociety().getId();
-
-        queryBuilder.append(" WHERE ");
+        queryBuilder.append(WHERE);
         queryBuilder.append("c.society.id = " + getCurrentSociety().getId());
 
         if (!StringUtils.isNullOrEmpty(name)) {
-            queryBuilder.append(" AND c.name LIKE '%" + name + "%'");
+            queryBuilder.append(AND + "c.name LIKE '%" + name + "%'");
         }
         if (!StringUtils.isNullOrEmpty(zipCode)) {
-            queryBuilder.append(" AND c.billingAddress.zipCode = " + zipCode);
+            queryBuilder.append(AND + "c.billingAddress.zipCode = " + zipCode);
         }
         if (paymentMode != null) {
-            queryBuilder.append(" AND c.paymentMode.id = " + paymentMode.getId());
+            queryBuilder.append(AND + "c.paymentMode.id = " + paymentMode.getId());
         }
         if (legalForm != null) {
-            queryBuilder.append(" AND c.legalForm.id = " + legalForm.getId());
+            queryBuilder.append(AND + "c.legalForm.id = " + legalForm.getId());
         }
         if (!StringUtils.isNullOrEmpty(phone)) {
-            queryBuilder.append(" AND c.contactInformation.phone LIKE '%" + phone + "%'");
+            queryBuilder.append(AND + "c.contactInformation.phone LIKE '%" + phone + "%'");
         }
 
         Query query = getEntityManager().createQuery(queryBuilder.toString());
@@ -82,7 +80,7 @@ public class CustomerDaoImpl extends DaoImpl<Customer> implements CustomerDao {
     public List<Customer> findAll() {
         StringBuilder queryBuilder = new StringBuilder("FROM Customer c");
 
-        queryBuilder.append(" WHERE ");
+        queryBuilder.append(WHERE);
         queryBuilder.append("c.society.id = " + getCurrentSociety().getId());
 
         Query query = getEntityManager().createQuery(queryBuilder.toString());

@@ -79,7 +79,6 @@ public class DeliveryOrderDetailTableModel extends AbstractJsamsTableModel<Deliv
         case THREE:
             return Boolean.class;
         case FOUR:
-            return Double.class;
         case FIVE:
             return Double.class;
         default:

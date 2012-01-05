@@ -77,15 +77,6 @@ public class DestinationChooserWizardPanel extends JsamsWizardPanel<TransferBean
     /**
      * {@inheritDoc}
      */
-    public void update() {
-//        setFinishButtonEnabled(false);
-//        setBackButtonEnabled(true);
-        super.update();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     public void next() {
         if (prePerformNext()) {
             switchPanel(TransferWizardDialog.THIRD_PANEL);

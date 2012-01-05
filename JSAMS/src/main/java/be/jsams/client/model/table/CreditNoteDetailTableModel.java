@@ -78,9 +78,7 @@ public class CreditNoteDetailTableModel extends AbstractJsamsTableModel<CreditNo
         case TWO:
             return Integer.class;
         case THREE:
-            return Double.class;
         case FOUR:
-            return Double.class;
         case FIVE:
             return Double.class;
         default:

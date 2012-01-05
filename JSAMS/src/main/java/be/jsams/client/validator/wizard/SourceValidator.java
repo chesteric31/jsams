@@ -27,8 +27,7 @@ public class SourceValidator implements Validator<TransferBean> {
             support.addError(JsamsI18nLabelResource.LABEL_SOURCE_TYPE.getTranslation(),
                     JsamsI18nResource.ERROR_IS_MANDATORY.getTranslation());
         }
-        ValidationResult result = support.getResult();
-        return result;
+        return support.getResult();
     }
 
 }

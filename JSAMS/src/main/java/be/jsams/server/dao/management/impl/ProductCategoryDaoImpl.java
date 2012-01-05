@@ -42,17 +42,17 @@ public class ProductCategoryDaoImpl extends DaoImpl<ProductCategory> implements 
         String nameFr = criteria.getLabelFr();
         String nameNl = criteria.getLabelNl();
 
-        queryBuilder.append(" WHERE ");
+        queryBuilder.append(WHERE);
         queryBuilder.append("c.society.id = " + getCurrentSociety().getId());
 
         if (!StringUtils.isNullOrEmpty(name)) {
-            queryBuilder.append(" AND c.label LIKE '%" + name + "%'");
+            queryBuilder.append(AND + "c.label LIKE '%" + name + "%'");
         }
         if (!StringUtils.isNullOrEmpty(nameFr)) {
-            queryBuilder.append(" AND c.labelFr LIKE '%" + nameFr + "%'");
+            queryBuilder.append(AND + "c.labelFr LIKE '%" + nameFr + "%'");
         }
         if (!StringUtils.isNullOrEmpty(nameNl)) {
-            queryBuilder.append(" AND c.labelNl LIKE '%" + nameNl + "%'");
+            queryBuilder.append(AND + "c.labelNl LIKE '%" + nameNl + "%'");
         }
         Query query = getEntityManager().createQuery(queryBuilder.toString());
         return query.getResultList();
@@ -65,7 +65,7 @@ public class ProductCategoryDaoImpl extends DaoImpl<ProductCategory> implements 
     public List<ProductCategory> findAll() {
         StringBuilder queryBuilder = new StringBuilder("FROM ProductCategory c");
 
-        queryBuilder.append(" WHERE ");
+        queryBuilder.append(WHERE);
         queryBuilder.append("c.society.id = " + getCurrentSociety().getId());
 
         Query query = getEntityManager().createQuery(queryBuilder.toString());

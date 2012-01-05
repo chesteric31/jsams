@@ -66,9 +66,9 @@ public class EditGeneralParametersDialog extends JsamsDialog implements JsamsBut
         builder.setDefaultDialogBorder();
         Preferences prefsRoot = Preferences.userRoot();
         Preferences jsamsPrefs = prefsRoot.node("be.jsams");
-        int firstRememberDays = Integer.valueOf(jsamsPrefs.get("firstRememberDays", "0").toString());
-        int secondRememberDays = Integer.valueOf(jsamsPrefs.get("secondRememberDays", "0").toString());
-        int formalNoticeDays = Integer.valueOf(jsamsPrefs.get("formalNoticeDays", "0").toString());
+        int firstRememberDays = Integer.valueOf(jsamsPrefs.get("firstRememberDays", "0"));
+        int secondRememberDays = Integer.valueOf(jsamsPrefs.get("secondRememberDays", "0"));
+        int formalNoticeDays = Integer.valueOf(jsamsPrefs.get("formalNoticeDays", "0"));
         spinnerModelFirst = new SpinnerNumberModel(firstRememberDays, 0, null, 1);
         spinnerModelSecond = new SpinnerNumberModel(secondRememberDays, 0, null, 1);
         spinnerModelNotice = new SpinnerNumberModel(formalNoticeDays, 0, null, 1);

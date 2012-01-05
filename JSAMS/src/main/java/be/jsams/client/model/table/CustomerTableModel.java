@@ -101,13 +101,9 @@ public class CustomerTableModel extends AbstractJsamsTableModel<CustomerBean> {
         case ZERO:
             return Long.class;
         case ONE:
-            return String.class;
         case TWO:
-            return String.class;
         case THREE:
-            return String.class;
         case FOUR:
-            return String.class;
         case FIVE:
             return String.class;
         default:

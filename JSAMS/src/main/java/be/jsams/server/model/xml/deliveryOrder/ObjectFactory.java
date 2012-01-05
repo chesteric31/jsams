@@ -62,7 +62,9 @@ public class ObjectFactory {
     private static final QName _Mobile_QNAME = new QName("", "mobile");
 
     /**
-     * Create a new ObjectFactory that can be used to create new instances of schema derived classes for package: be.jsams.server.model.xml.deliveryOrder
+     * Create a new ObjectFactory that can be used to create new instances of
+     * schema derived classes for package:
+     * be.jsams.server.model.xml.deliveryOrder
      * 
      */
     public ObjectFactory() {

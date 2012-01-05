@@ -79,13 +79,6 @@ public class TransferModeChooserWizardPanel extends JsamsWizardPanel<TransferBea
     /**
      * {@inheritDoc}
      */
-    public void update() {
-        super.update();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     public void next() {
         if (prePerformNext()) {
             switch (getModel().getTransferMode()) {

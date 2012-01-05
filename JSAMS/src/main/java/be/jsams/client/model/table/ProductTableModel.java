@@ -86,7 +86,6 @@ public class ProductTableModel extends AbstractJsamsTableModel<ProductBean> {
         case TWO:
             return Double.class;
         case THREE:
-            return Integer.class;
         case FOUR:
             return Integer.class;
         case FIVE:
