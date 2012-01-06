@@ -1,14 +1,19 @@
 package be.jsams.client.swing.component;
 
 import java.awt.Component;
+import java.util.Date;
 
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableColumnModel;
+import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 
 import be.jsams.client.model.table.AbstractJsamsTableModel;
+import be.jsams.client.renderer.JsamsBooleanTableCellRenderer;
+import be.jsams.client.renderer.JsamsTableCellRenderer;
 
 /**
  * Specific {@link JTable} for JSAMS with auto resize capabilities when the call
@@ -63,6 +68,7 @@ public class JsamsTable extends JTable {
         super();
         this.autoResizeColumnWidth = autoResizeColumnWidth;
         setSelectionMode(selectionMode);
+        setTableRenderer();
     }
 
     /**
@@ -125,6 +131,24 @@ public class JsamsTable extends JTable {
             AbstractJsamsTableModel<?> model = (AbstractJsamsTableModel<?>) getModel();
             model.clear();
         }
+    }
+
+    /**
+     * Sets the default JSAMS renderer for result table.
+     */
+    private void setTableRenderer() {
+        JTableHeader tableHeader = this.getTableHeader();
+        TableCellRenderer headerRenderer = tableHeader.getDefaultRenderer();
+
+        ((DefaultTableCellRenderer) headerRenderer).setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
+        this.setAutoCreateRowSorter(true);
+        JsamsTableCellRenderer defaultCellRenderer = new JsamsTableCellRenderer();
+        this.setDefaultRenderer(Long.class, defaultCellRenderer);
+        this.setDefaultRenderer(Integer.class, defaultCellRenderer);
+        this.setDefaultRenderer(Double.class, defaultCellRenderer);
+        this.setDefaultRenderer(String.class, defaultCellRenderer);
+        this.setDefaultRenderer(Boolean.class, new JsamsBooleanTableCellRenderer());
+        this.setDefaultRenderer(Date.class, defaultCellRenderer);
     }
 
 }

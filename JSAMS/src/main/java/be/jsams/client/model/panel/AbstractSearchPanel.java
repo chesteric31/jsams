@@ -6,7 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseListener;
-import java.util.Date;
 import java.util.List;
 
 import javax.swing.BorderFactory;
@@ -20,15 +19,10 @@ import javax.swing.JSeparator;
 import javax.swing.KeyStroke;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.TitledBorder;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.JTableHeader;
-import javax.swing.table.TableCellRenderer;
 
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.model.table.AbstractJsamsTableModel;
-import be.jsams.client.renderer.JsamsBooleanTableCellRenderer;
-import be.jsams.client.renderer.JsamsTableCellRenderer;
 import be.jsams.client.swing.component.JsamsButton;
 import be.jsams.client.swing.component.JsamsButtonsInterface;
 import be.jsams.client.swing.component.JsamsButtonsPanel;
@@ -139,7 +133,6 @@ public abstract class AbstractSearchPanel<B extends AbstractIdentityBean<?, ?>,
         buttonsPanel = new JsamsButtonsPanel(this, true, true, true);
         buildMainPanel();
         setDefaultKeyActions();
-        setTableRenderer();
     }
 
     /**
@@ -508,24 +501,6 @@ public abstract class AbstractSearchPanel<B extends AbstractIdentityBean<?, ?>,
         } else {
             statusBar.clear();
         }
-    }
-
-    /**
-     * Sets the default JSAMS renderer for result table.
-     */
-    private void setTableRenderer() {
-        JTableHeader tableHeader = resultTable.getTableHeader();
-        TableCellRenderer headerRenderer = tableHeader.getDefaultRenderer();
-
-        ((DefaultTableCellRenderer) headerRenderer).setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
-        resultTable.setAutoCreateRowSorter(true);
-        JsamsTableCellRenderer defaultCellRenderer = new JsamsTableCellRenderer();
-        resultTable.setDefaultRenderer(Long.class, defaultCellRenderer);
-        resultTable.setDefaultRenderer(Integer.class, defaultCellRenderer);
-        resultTable.setDefaultRenderer(Double.class, defaultCellRenderer);
-        resultTable.setDefaultRenderer(String.class, defaultCellRenderer);
-        resultTable.setDefaultRenderer(Boolean.class, new JsamsBooleanTableCellRenderer());
-        resultTable.setDefaultRenderer(Date.class, defaultCellRenderer);
     }
 
     /**
