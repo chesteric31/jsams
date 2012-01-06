@@ -24,7 +24,7 @@ public class DoubleFormatter extends NumberFormatter {
         Number number = (Number) object;
         if (number != null) {
             double doubleValue = number.doubleValue();
-            number = new Double(doubleValue);
+            number = Double.valueOf(doubleValue);
         }
         return super.valueToString(number);
     }
@@ -36,7 +36,7 @@ public class DoubleFormatter extends NumberFormatter {
         Number number = (Number) super.stringToValue(string);
         if (number != null) {
             double doubleValue = number.doubleValue();
-            number = new Double(doubleValue);
+            number = Double.valueOf(doubleValue);
         }
         return number;
     }
