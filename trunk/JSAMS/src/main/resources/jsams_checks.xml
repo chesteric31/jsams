@@ -33,6 +33,9 @@
 <module name="Checker">
 
 	<property name="severity" value="warning" />
+	<module name="SuppressionFilter">
+		<property name="file" value="${config_loc}/jsams_checks_suppressions.xml" />
+	</module>
 	<!--
 		If you set the basedir property below, then all reported file names
 		will be relative to the specified directory. See
