@@ -2,16 +2,22 @@ package be.jsams.client.model.dialog;
 
 import java.awt.BorderLayout;
 import java.awt.Font;
+import java.io.IOException;
+import java.net.URL;
 
 import javax.swing.ImageIcon;
 import javax.swing.JEditorPane;
 import javax.swing.JPanel;
 import javax.swing.plaf.FontUIResource;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import be.jsams.JsamsStart;
 import be.jsams.client.desktop.JsamsMainFrame;
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.i18n.JsamsI18nLabelResource;
+import be.jsams.client.i18n.UserContext;
 import be.jsams.client.swing.component.AbstractJsamsFrame;
 import be.jsams.client.swing.component.JsamsDialog;
 import be.jsams.client.swing.component.JsamsLabel;
@@ -33,6 +39,8 @@ public class AboutDialog extends JsamsDialog {
      * Serial Version UID
      */
     private static final long serialVersionUID = -659086180402913537L;
+
+    private static final Log LOGGER = LogFactory.getLog(AboutDialog.class);
 
     /**
      * Constructor.
@@ -65,7 +73,21 @@ public class AboutDialog extends JsamsDialog {
         versionLabel.setFont(new FontUIResource(Font.SANS_SERIF, Font.BOLD, 11));
         builder.append(versionLabel);
         builder.nextLine();
-        JEditorPane area = new JEditorPane("text/html", retrieveAboutText());
+        URL aboutUrl = null;
+        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+        if (UserContext.isEnglish()) {
+            aboutUrl = classLoader.getResource("pages/about.html");
+        } else {
+            aboutUrl = classLoader.getResource("pages/about_fr.html");
+        }
+        
+        JEditorPane area = null;
+        try {
+            area = new JEditorPane(aboutUrl);
+        } catch (IOException e) {
+            LOGGER.error(e);
+            return;
+        }
         area.setEditable(false);
         builder.append(area);
         builder.nextLine();
@@ -80,20 +102,6 @@ public class AboutDialog extends JsamsDialog {
         DialogUtil.centerComponentOnScreen(this);
         setVisible(true);
         setResizable(false);
-    }
-
-    /**
-     * @return a small about text
-     */
-    private String retrieveAboutText() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("<i>This program came from an idea of 2005.<br>");
-        builder.append("The goal was to explore the possibilities of Java world.<br>");
-        builder.append("With its old, new technologies and the current design patterns.<br>");
-        builder.append("<p>In one word, this project is a lab.<br>");
-        builder.append("<p>Feel free to explore, modify and improve this project...");
-        builder.append("<p>Finally, I would like to thank all my parents and especially my wife.</i>");
-        return builder.toString();
     }
 
 }

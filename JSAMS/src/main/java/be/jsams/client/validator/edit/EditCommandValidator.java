@@ -6,7 +6,6 @@ import java.util.List;
 import be.jsams.client.i18n.JsamsI18nLabelResource;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.common.bean.model.AddressBean;
-import be.jsams.common.bean.model.management.AgentBean;
 import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.sale.CommandBean;
 import be.jsams.common.bean.model.sale.detail.CommandDetailBean;
@@ -45,11 +44,6 @@ public class EditCommandValidator implements Validator<CommandBean> {
         CustomerBean customer = command.getCustomer();
         if (ValidationUtils.isBlank(customer.getName())) {
             support.addError(JsamsI18nLabelResource.LABEL_CUSTOMER.getTranslation(),
-                    JsamsI18nResource.ERROR_IS_MANDATORY.getTranslation());
-        }
-        AgentBean agent = command.getAgent();
-        if (ValidationUtils.isBlank(agent.getName())) {
-            support.addError(JsamsI18nLabelResource.LABEL_AGENT.getTranslation(),
                     JsamsI18nResource.ERROR_IS_MANDATORY.getTranslation());
         }
         
