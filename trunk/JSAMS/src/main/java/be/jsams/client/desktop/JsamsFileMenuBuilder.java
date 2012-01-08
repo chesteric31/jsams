@@ -10,7 +10,6 @@ import be.jsams.client.swing.action.ChooseSocietyAction;
 import be.jsams.client.swing.action.EditSocietyAction;
 import be.jsams.client.swing.action.ExitAction;
 import be.jsams.client.swing.action.GeneralParametersAction;
-import be.jsams.client.swing.action.PrinterParametersAction;
 import be.jsams.client.swing.action.RestartAction;
 import be.jsams.client.swing.component.JsamsMenu;
 import be.jsams.client.swing.component.JsamsMenuItem;
@@ -28,7 +27,6 @@ public class JsamsFileMenuBuilder extends AbstractMenuBuilder {
     private JsamsMenuItem openMI;
     private JsamsMenuItem closeMI;
     private JsamsMenuItem societyParametersMI;
-    private JsamsMenuItem printerParametersMI;
     private JsamsMenuItem generalParametersMI;
     private JsamsMenuItem exitMI;
     
@@ -55,10 +53,6 @@ public class JsamsFileMenuBuilder extends AbstractMenuBuilder {
         societyParametersMI.setAction(new EditSocietyAction(societyParametersMI.getText(), societyParametersMI
                 .getIcon(), EditSocietyAction.CURRENT_SOCIETY_MODE));
         fileMenu.add(societyParametersMI);
-        printerParametersMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_PRINTER_PARAMETERS, "devices/printer.png");
-        printerParametersMI.setAction(new PrinterParametersAction(printerParametersMI.getText(), printerParametersMI
-                .getIcon()));
-        fileMenu.add(printerParametersMI);
         generalParametersMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_GENERAL_PARAMETERS,
                 "actions/system-shutdown.png");
         generalParametersMI.setAction(new GeneralParametersAction(generalParametersMI.getText(), generalParametersMI

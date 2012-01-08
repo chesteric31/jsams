@@ -52,7 +52,9 @@ public class Estimate extends AbstractDocument {
      */
     public Estimate(EstimateBean bean) {
         super(bean);
-        this.agent = new Agent(bean.getAgent());
+        if (bean.getAgent() != null) {
+            this.agent = new Agent(bean.getAgent());
+        }
         this.billingAddress = new Address(bean.getBillingAddress());
         this.discountRate = bean.getDiscountRate();
         this.transferred = bean.isTransferred();

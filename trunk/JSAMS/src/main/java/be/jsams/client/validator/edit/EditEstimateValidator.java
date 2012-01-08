@@ -6,7 +6,6 @@ import java.util.List;
 import be.jsams.client.i18n.JsamsI18nLabelResource;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.common.bean.model.AddressBean;
-import be.jsams.common.bean.model.management.AgentBean;
 import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.sale.EstimateBean;
 import be.jsams.common.bean.model.sale.detail.EstimateDetailBean;
@@ -44,11 +43,6 @@ public class EditEstimateValidator implements Validator<EstimateBean> {
         CustomerBean customer = estimate.getCustomer();
         if (ValidationUtils.isBlank(customer.getName())) {
             support.addError(JsamsI18nLabelResource.LABEL_CUSTOMER.getTranslation(),
-                    JsamsI18nResource.ERROR_IS_MANDATORY.getTranslation());
-        }
-        AgentBean agent = estimate.getAgent();
-        if (ValidationUtils.isBlank(agent.getName())) {
-            support.addError(JsamsI18nLabelResource.LABEL_AGENT.getTranslation(),
                     JsamsI18nResource.ERROR_IS_MANDATORY.getTranslation());
         }
 

@@ -53,7 +53,9 @@ public class Command extends AbstractDocument {
      */
     public Command(CommandBean bean) {
         super(bean);
-        this.agent = new Agent(bean.getAgent());
+        if (bean.getAgent() != null) {
+            this.agent = new Agent(bean.getAgent());
+        }
         this.billingAddress = new Address(bean.getBillingAddress());
         this.deliveryAddress = new Address(bean.getDeliveryAddress());
         this.discountRate = bean.getDiscountRate();
