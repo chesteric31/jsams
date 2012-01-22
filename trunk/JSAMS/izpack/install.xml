@@ -11,7 +11,7 @@
 	<info>
 		<appname>JSAMS - Java Simplified Accounting Management System
 		</appname>
-		<appversion>1.0.1-SNAPSHOT</appversion>
+		<appversion>1.0.2-SNAPSHOT</appversion>
 		<authors>
 			<author name="Eric Binard" email="chesteric31@gmail.com" />
 		</authors>
@@ -78,7 +78,7 @@
 		</pack>
 		<pack name="JSAMS" required="yes" installGroups="New install">
 			<description>The application launcher file</description>
-			<file src="JSAMS-1.0.1-SNAPSHOT.jar" targetdir="$INSTALL_PATH" />
+			<file src="JSAMS-1.0.2-SNAPSHOT.jar" targetdir="$INSTALL_PATH" />
 			<fileset dir="lib" targetdir="$INSTALL_PATH/lib" />
 		</pack>
 	</packs>
