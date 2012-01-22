@@ -3,17 +3,51 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-	<!-- Service -->
-	<bean id="transferServiceTarget"
-		class="be.jsams.server.service.transfer.impl.TransferServiceImpl">
+	<!-- Transfer services -->
+	<bean id="estimateTransferServiceTarget"
+		class="be.jsams.server.service.transfer.impl.EstimateTransferServiceImpl">
 		<property name="estimateService" ref="estimateService" />
+		<property name="commandService" ref="commandService" />
+		<property name="billService" ref="billService" />
+	</bean>
+	<bean id="estimateTransferService" parent="baseTransactionProxy">
+		<property name="target" ref="estimateTransferServiceTarget" />
+	</bean>
+
+	<bean id="commandTransferServiceTarget"
+		class="be.jsams.server.service.transfer.impl.CommandTransferServiceImpl">
 		<property name="commandService" ref="commandService" />
 		<property name="deliveryOrderService" ref="deliveryOrderService" />
 		<property name="billService" ref="billService" />
+	</bean>
+	<bean id="commandTransferService" parent="baseTransactionProxy">
+		<property name="target" ref="commandTransferServiceTarget" />
+	</bean>
+	
+	<bean id="deliveryOrderTransferServiceTarget"
+		class="be.jsams.server.service.transfer.impl.DeliveryOrderTransferServiceImpl">
+		<property name="deliveryOrderService" ref="deliveryOrderService" />
+		<property name="billService" ref="billService" />
+	</bean>
+	<bean id="deliveryOrderTransferService" parent="baseTransactionProxy">
+		<property name="target" ref="deliveryOrderTransferServiceTarget" />
+	</bean>
+	
+	<bean id="billTransferServiceTarget"
+		class="be.jsams.server.service.transfer.impl.BillTransferServiceImpl">
+		<property name="billService" ref="billService" />
 		<property name="creditNoteService" ref="creditNoteService" />
 	</bean>
-	<bean id="transferService" parent="baseTransactionProxy">
-		<property name="target" ref="transferServiceTarget" />
+	<bean id="billTransferService" parent="baseTransactionProxy">
+		<property name="target" ref="billTransferServiceTarget" />
+	</bean>
+
+	<bean id="transferService"
+		class="be.jsams.server.service.transfer.impl.TransferServiceImpl">
+		<property name="estimateTransferService" ref="estimateTransferService" />
+		<property name="commandTransferService" ref="commandTransferService" />
+		<property name="deliveryOrderTransferService" ref="deliveryOrderTransferService" />
+		<property name="billTransferService" ref="billTransferService" />
 	</bean>
 
 </beans>
