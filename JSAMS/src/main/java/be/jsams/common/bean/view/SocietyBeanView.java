@@ -6,6 +6,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 
 import javax.imageio.stream.FileImageInputStream;
 import javax.swing.ImageIcon;
@@ -152,26 +153,30 @@ public class SocietyBeanView extends AbstractBeanView<SocietyBean> implements Ed
      * @return the generated temporary image file
      */
     private File buildImageFromByteArray(byte[] bytes) {
-        FileOutputStream fos = null;
-        byte[] buf = null;
+        FileOutputStream outputStream = null;
+        byte[] buffer = null;
         int read = 0;
         ByteArrayInputStream input = null;
         File fileOut = null;
         try {
             fileOut = File.createTempFile("tmp", ".png");
-            fos = new FileOutputStream(fileOut);
-            buf = new byte[512];
+            outputStream = new FileOutputStream(fileOut);
+            buffer = new byte[512];
 
             input = new ByteArrayInputStream(bytes);
-            while ((read = input.read(buf)) != -1) {
-                fos.write(buf, 0, read);
+            while ((read = input.read(buffer)) != -1) {
+                outputStream.write(buffer, 0, read);
             }
-
-            fos.flush();
-            fos.close();
-
+            outputStream.flush();
+            outputStream.close();
         } catch (Exception e) {
             throw new RuntimeException(e);
+        } finally {
+            try {
+                outputStream.close();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
         return fileOut;
     }

@@ -30,10 +30,10 @@ public class TransferModeChooserWizardPanel extends JsamsWizardPanel<TransferBea
     private JRadioButton partialTranferRadioButton;
     private JRadioButton fullGroupedTranferRadioButton;
     private JRadioButton partialGroupedTranferRadioButton;
-    private final int fullModeSelected = 1;
-    private final int partialModeSelected = 2;
-    private final int fullGroupedModeSelected = 3;
-    private final int partialGroupedModeSelected = 4;
+    private static final int FULL_MODE_SELECTED = 1;
+    private static final int PARTIAL_MODE_SELECTED = 2;
+    private static final int FULL_GROUPED_MODE_SELECTED = 3;
+    private static final int PARTIAL_GROUPED_MODE_SELECTED = 4;
 
     /**
      * Constructor.
@@ -55,16 +55,16 @@ public class TransferModeChooserWizardPanel extends JsamsWizardPanel<TransferBea
     private void initComponents() {
         ViewFactory<TransferBean> viewFactory = getViewFactory();
         fullTransferRadioButton = viewFactory.createBindingRadioComponent(getModel(),
-                TransferBean.TRANSFER_MODE_PROPERTY, fullModeSelected, true, false);
+                TransferBean.TRANSFER_MODE_PROPERTY, FULL_MODE_SELECTED, true, false);
 
         partialTranferRadioButton = viewFactory.createBindingRadioComponent(getModel(),
-                TransferBean.TRANSFER_MODE_PROPERTY, partialModeSelected, true, false);
+                TransferBean.TRANSFER_MODE_PROPERTY, PARTIAL_MODE_SELECTED, true, false);
 
         fullGroupedTranferRadioButton = viewFactory.createBindingRadioComponent(getModel(),
-                TransferBean.TRANSFER_MODE_PROPERTY, fullGroupedModeSelected, true, false);
+                TransferBean.TRANSFER_MODE_PROPERTY, FULL_GROUPED_MODE_SELECTED, true, false);
 
         partialGroupedTranferRadioButton = viewFactory.createBindingRadioComponent(getModel(),
-                TransferBean.TRANSFER_MODE_PROPERTY, partialGroupedModeSelected, true, false);
+                TransferBean.TRANSFER_MODE_PROPERTY, PARTIAL_GROUPED_MODE_SELECTED, true, false);
 
         FormLayout layout = new FormLayout("left:p, 3dlu, p", "p");
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
@@ -82,16 +82,16 @@ public class TransferModeChooserWizardPanel extends JsamsWizardPanel<TransferBea
     public void next() {
         if (prePerformNext()) {
             switch (getModel().getTransferMode()) {
-            case fullModeSelected:
+            case FULL_MODE_SELECTED:
                 switchPanel(TransferWizardDialog.FIRTH_PANEL_FULL_MODE);
                 break;
-            case partialModeSelected:
+            case PARTIAL_MODE_SELECTED:
                 switchPanel(TransferWizardDialog.FIRTH_PANEL_PARTIAL_MODE);
                 break;
-            case fullGroupedModeSelected:
+            case FULL_GROUPED_MODE_SELECTED:
                 switchPanel(TransferWizardDialog.FIRTH_PANEL_FULL_GROUPED_MODE);
                 break;
-            case partialGroupedModeSelected:
+            case PARTIAL_GROUPED_MODE_SELECTED:
                 switchPanel(TransferWizardDialog.FIRTH_PANEL_PARTIAL_GROUPED_MODE);
                 break;
             default:

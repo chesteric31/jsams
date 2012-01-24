@@ -49,7 +49,7 @@ public class JsamsDesktop {
         setInstance(this);
         try {
             initComponents();
-        } catch (Throwable e) {
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getCause(), JsamsI18nResource.ERROR_TITLE.getTranslation(),
                     JOptionPane.ERROR_MESSAGE);
             System.exit(0);

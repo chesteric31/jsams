@@ -83,11 +83,10 @@ public class AgentTableModel extends AbstractJsamsTableModel<AgentBean> {
         case ONE:
         case TWO:
         case THREE:
+        case FIVE:
             return String.class;
         case FOUR:
             return Integer.class;
-        case FIVE:
-            return String.class;
         default:
             return Object.class;
         }

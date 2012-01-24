@@ -80,10 +80,9 @@ public class BillDetailTableModel extends AbstractJsamsTableModel<BillDetailBean
             return String.class;
         case TWO:
             return Integer.class;
-        case THREE:
-            return Double.class;
         case FOUR:
             return Boolean.class;
+        case THREE:
         case FIVE:
         case SIX:
             return Double.class;

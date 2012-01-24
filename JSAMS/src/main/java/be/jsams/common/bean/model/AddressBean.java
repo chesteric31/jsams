@@ -197,15 +197,19 @@ public class AddressBean extends AbstractIdentityBean<Address, AddressBeanView> 
      */
     @Override
     public void refresh(AbstractIdentityBean<?, ?> bean) {
-        AddressBean other = (AddressBean) bean;
-        setBox(other.getBox());
-        setCity(other.getCity());
-        setCountry(other.getCountry());
-        setListModel(other.getListModel());
-        setNumber(other.getNumber());
-        setSelection(other.getSelection());
-        setStreet(other.getStreet());
-        setZipCode(other.getZipCode());
+        if (bean instanceof AddressBean) {
+            AddressBean other = (AddressBean) bean;
+            setBox(other.getBox());
+            setCity(other.getCity());
+            setCountry(other.getCountry());
+            setListModel(other.getListModel());
+            setNumber(other.getNumber());
+            setSelection(other.getSelection());
+            setStreet(other.getStreet());
+            setZipCode(other.getZipCode());
+        } else {
+            throw new RuntimeException("This bean cannot be refreshed.");
+        }
     }
 
 }
