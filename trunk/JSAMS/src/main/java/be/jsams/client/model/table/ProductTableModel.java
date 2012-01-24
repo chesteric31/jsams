@@ -81,15 +81,13 @@ public class ProductTableModel extends AbstractJsamsTableModel<ProductBean> {
         switch (columnIndex) {
         case ZERO:
             return Long.class;
-        case ONE:
-            return String.class;
-        case TWO:
-            return Double.class;
         case THREE:
         case FOUR:
             return Integer.class;
+        case TWO:
         case FIVE:
             return Double.class;
+        case ONE:
         case SIX:
             return String.class;
         default:

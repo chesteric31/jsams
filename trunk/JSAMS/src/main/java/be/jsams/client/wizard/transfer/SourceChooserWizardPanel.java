@@ -29,10 +29,10 @@ public class SourceChooserWizardPanel extends JsamsWizardPanel<TransferBean, Sou
     private JRadioButton commandRadioButton;
     private JRadioButton deliveryOrderRadioButton;
     private JRadioButton billRadioButton;
-    private final int estimateSelected = 1;
-    private final int commandSelected = 2;
-    private final int deliveryOrderSelected = 3;
-    private final int billSelected = 4;
+    private static final int ESTIMATE_SELECTED = 1;
+    private static final int COMMAND_SELECTED = 2;
+    private static final int DELIVERY_ORDER_SELECTED = 3;
+    private static final int BILL_SELECTED = 4;
 
     /**
      * Constructor.
@@ -54,16 +54,16 @@ public class SourceChooserWizardPanel extends JsamsWizardPanel<TransferBean, Sou
     private void initComponents() {
         ViewFactory<TransferBean> viewFactory = getViewFactory();
         estimateRadioButton = viewFactory.createBindingRadioComponent(getModel(), TransferBean.SOURCE_TYPE_PROPERTY,
-                estimateSelected, true, false);
+                ESTIMATE_SELECTED, true, false);
         
         commandRadioButton = viewFactory.createBindingRadioComponent(getModel(), TransferBean.SOURCE_TYPE_PROPERTY,
-                commandSelected, true, false);
+                COMMAND_SELECTED, true, false);
         
         deliveryOrderRadioButton = viewFactory.createBindingRadioComponent(getModel(),
-                TransferBean.SOURCE_TYPE_PROPERTY, deliveryOrderSelected, true, false);
+                TransferBean.SOURCE_TYPE_PROPERTY, DELIVERY_ORDER_SELECTED, true, false);
         
         billRadioButton = viewFactory.createBindingRadioComponent(getModel(), TransferBean.SOURCE_TYPE_PROPERTY,
-                billSelected, true, false);
+                BILL_SELECTED, true, false);
 
         FormLayout layout = new FormLayout("left:p, 3dlu, p", "p");
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
