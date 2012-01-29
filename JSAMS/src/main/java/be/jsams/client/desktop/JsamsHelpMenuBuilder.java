@@ -20,20 +20,17 @@ import be.jsams.client.swing.component.JsamsMenuItem;
  */
 public class JsamsHelpMenuBuilder extends AbstractMenuBuilder {
 
-    private JsamsMenu helpMenu;
-    private JsamsMenuItem helpMI;
-    private JsamsMenuItem aboutMI;
-    
     /**
      * {@inheritDoc}
      */
     @Override
     public JsamsMenu build() {
-        helpMenu = new JsamsMenu(JsamsI18nResource.MENU_HELP);
-        helpMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_HELP, "apps/help-browser.png");
+        JsamsMenu helpMenu = new JsamsMenu(JsamsI18nResource.MENU_HELP);
+        JsamsMenuItem helpMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_HELP, "apps/help-browser.png");
         helpMenu.add(helpMI);
         helpMenu.add(new JSeparator());
-        aboutMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_ABOUT, "categories/applications-office.png");
+        JsamsMenuItem aboutMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_ABOUT,
+                "categories/applications-office.png");
         aboutMI.setAction(aboutAction(aboutMI.getText(), aboutMI.getIcon()));
         helpMenu.add(aboutMI);
         return helpMenu;
