@@ -18,7 +18,7 @@ import be.jsams.client.wizard.action.CancelAction;
 import be.jsams.client.wizard.action.FinishAction;
 
 /**
- * 
+ * Default implementation of {@link JsamsWizardComponent} interface.
  *
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
@@ -97,7 +97,7 @@ public class DefaultJsamsWizardComponent implements JsamsWizardComponent {
      */
     @Override
     public List<JsamsWizardPanel<?, ?>> getPanelList() {
-        return this.getPanelList();
+        return this.panelList;
     }
 
     /**
