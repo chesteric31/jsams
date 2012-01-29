@@ -20,29 +20,24 @@ import be.jsams.client.swing.component.JsamsMenuItem;
  */
 public class JsamsWindowsMenuBuilder extends AbstractMenuBuilder {
 
-    private JsamsMenu windowsMenu;
-    private JsamsMenuItem closeWindowMI;
-    private JsamsMenuItem closeAllWindowsMI;
-    private JsamsMenuItem nextMI;
-    private JsamsMenuItem previousMI;
-    
     /**
      * {@inheritDoc}
      */
     @Override
     public JsamsMenu build() {
-        windowsMenu = new JsamsMenu(JsamsI18nResource.MENU_WINDOWS);
-        closeWindowMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_CLOSE_WINDOW, "emblems/emblem-unreadable.png");
+        JsamsMenu windowsMenu = new JsamsMenu(JsamsI18nResource.MENU_WINDOWS);
+        JsamsMenuItem closeWindowMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_CLOSE_WINDOW,
+                "emblems/emblem-unreadable.png");
         closeWindowMI.setAction(closeWindowAction(closeWindowMI.getText(), closeWindowMI.getIcon()));
         windowsMenu.add(closeWindowMI);
-        closeAllWindowsMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_CLOSE_ALL_WINDOWS);
+        JsamsMenuItem closeAllWindowsMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_CLOSE_ALL_WINDOWS);
         closeAllWindowsMI.setAction(closeAllWindowsAction(closeAllWindowsMI.getText(), closeAllWindowsMI.getIcon()));
         windowsMenu.add(closeAllWindowsMI);
         windowsMenu.add(new JSeparator());
-        nextMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_NEXT, "actions/go-next.png");
+        JsamsMenuItem nextMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_NEXT, "actions/go-next.png");
         nextMI.setAction(nextAction(nextMI.getText(), nextMI.getIcon()));
         windowsMenu.add(nextMI);
-        previousMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_PREVIOUS, "actions/go-previous.png");
+        JsamsMenuItem previousMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_PREVIOUS, "actions/go-previous.png");
         previousMI.setAction(previousAction(previousMI.getText(), previousMI.getIcon()));
         windowsMenu.add(previousMI);
         return windowsMenu;

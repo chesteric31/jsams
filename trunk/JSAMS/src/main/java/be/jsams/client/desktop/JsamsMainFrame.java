@@ -38,15 +38,10 @@ public class JsamsMainFrame extends AbstractJsamsFrame {
     private JMenuBar mainMenuBar;
     
     private JsamsFileMenuBuilder fileMenuBuilder;
-    
     private JsamsEditMenuBuilder editMenuBuilder;
-    
     private JsamsManagementMenuBuilder managementMenuBuilder;
-    
     private JsamsSalesMenuBuilder salesMenuBuilder;
-    
     private JsamsWindowsMenuBuilder windowsMenuBuilder;
-    
     private JsamsHelpMenuBuilder helpMenuBuilder;
 
     private JsamsShortcutToolBar shortcutToolBar;
