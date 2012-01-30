@@ -66,8 +66,6 @@ public class JsamsManagementMenuBuilder extends AbstractMenuBuilder {
     @Override
     public JsamsMenu build() {
         managementMenu = new JsamsMenu(JsamsI18nResource.MENU_MANAGEMENT);
-        // per default: false, true if a current society is set
-        // managementMenu.setEnabled(false);
         customersMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_CUSTOMERS, "apps/system-users.png");
         customersMI.setAction(customersAction(customersMI.getText(), customersMI.getIcon()));
         managementMenu.add(customersMI);
@@ -82,6 +80,9 @@ public class JsamsManagementMenuBuilder extends AbstractMenuBuilder {
         productsMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_PRODUCTS, "apps/preferences-desktop-theme.png");
         productsMI.setAction(productsAction(productsMI.getText(), productsMI.getIcon()));
         managementMenu.add(productsMI);
+        
+        enableMenuItems(false);
+        
         return managementMenu;
     }
 
@@ -206,6 +207,17 @@ public class JsamsManagementMenuBuilder extends AbstractMenuBuilder {
      */
     public JsamsMenu getMenu() {
         return managementMenu;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void enableMenuItems(boolean value) {
+        customersMI.setEnabled(value);
+        agentsMI.setEnabled(value);
+        productsCategoryMI.setEnabled(value);
+        productsMI.setEnabled(value);
     }
 
 }

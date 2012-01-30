@@ -14,7 +14,7 @@ public final class JsamsI18nResource {
     private JsamsI18nResource() {
     }
 
-    public static final I18nString TITLE_NO_ARGUMENTS = new I18nString("title.application_no_arguments");
+    public static final I18nString TITLE_APPLICATION_NO_ARGUMENTS = new I18nString("title.application_no_arguments");
     
     public static final I18nString TITLE_OPEN_SOCIETY = new I18nString("title.open.society");
 

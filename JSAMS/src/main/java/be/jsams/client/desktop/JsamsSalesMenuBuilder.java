@@ -96,6 +96,9 @@ public class JsamsSalesMenuBuilder extends AbstractMenuBuilder {
         creditNoteMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_CREDIT_NOTE);
         creditNoteMI.setAction(creditNotesAction(creditNoteMI.getText(), creditNoteMI.getIcon()));
         salesMenu.add(creditNoteMI);
+        
+        enableMenuItems(false);
+        
         return salesMenu;
     }
 
@@ -286,6 +289,19 @@ public class JsamsSalesMenuBuilder extends AbstractMenuBuilder {
      */
     public JsamsMenu getMenu() {
         return salesMenu;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void enableMenuItems(boolean value) {
+        transferDocumentsMI.setEnabled(value);
+        estimateMI.setEnabled(value);
+        commandMI.setEnabled(value);
+        deliveryOrderMI.setEnabled(value);
+        billMI.setEnabled(value);
+        creditNoteMI.setEnabled(value);
     }
 
 }

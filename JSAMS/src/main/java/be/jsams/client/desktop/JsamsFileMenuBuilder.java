@@ -63,6 +63,8 @@ public class JsamsFileMenuBuilder extends AbstractMenuBuilder {
         exitMI.setAction(new ExitAction(exitMI.getText(), exitMI.getIcon()));
         fileMenu.add(exitMI);
         
+        enableMenuItems(false);
+        
         return fileMenu;
     }
     
@@ -72,5 +74,14 @@ public class JsamsFileMenuBuilder extends AbstractMenuBuilder {
     public JsamsMenuItem getSocietyParametersMI() {
         return societyParametersMI;
     }
-    
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void enableMenuItems(boolean value) {
+        closeMI.setEnabled(value);
+        societyParametersMI.setEnabled(value);
+    }
+
 }

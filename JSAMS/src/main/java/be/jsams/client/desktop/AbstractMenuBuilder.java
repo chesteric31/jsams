@@ -11,10 +11,17 @@ import be.jsams.client.swing.component.JsamsMenu;
 public abstract class AbstractMenuBuilder {
 
     /**
-     * Build the {@link JsamsMenu}.
+     * Builds the {@link JsamsMenu}.
      * 
      * @return the created {@link JsamsMenu}
      */
     public abstract JsamsMenu build();
+    
+    /**
+     * Enables/disables some menu items not yet active/already active.
+     * 
+     * @param value the boolean value, true if enable, false if disable
+     */
+    public abstract void enableMenuItems(boolean value);
 
 }

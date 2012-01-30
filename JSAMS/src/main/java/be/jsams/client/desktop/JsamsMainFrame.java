@@ -38,7 +38,6 @@ public class JsamsMainFrame extends AbstractJsamsFrame {
     private JMenuBar mainMenuBar;
     
     private JsamsFileMenuBuilder fileMenuBuilder;
-    private JsamsEditMenuBuilder editMenuBuilder;
     private JsamsManagementMenuBuilder managementMenuBuilder;
     private JsamsSalesMenuBuilder salesMenuBuilder;
     private JsamsWindowsMenuBuilder windowsMenuBuilder;
@@ -69,9 +68,6 @@ public class JsamsMainFrame extends AbstractJsamsFrame {
 
             fileMenuBuilder = new JsamsFileMenuBuilder();
             mainMenuBar.add(fileMenuBuilder.build());
-
-            editMenuBuilder = new JsamsEditMenuBuilder();
-            mainMenuBar.add(editMenuBuilder.build());
 
             managementMenuBuilder = new JsamsManagementMenuBuilder(this);
             mainMenuBar.add(managementMenuBuilder.build());
@@ -145,6 +141,17 @@ public class JsamsMainFrame extends AbstractJsamsFrame {
      */
     public JsamsMenuItem getSocietyParametersMI() {
         return fileMenuBuilder.getSocietyParametersMI();
+    }
+
+    /**
+     * Enables/disables all menu items.
+     * 
+     * @param value the boolean value
+     */
+    public void enableAllMenuItems(boolean value) {
+        fileMenuBuilder.enableMenuItems(value);
+        managementMenuBuilder.enableMenuItems(value);
+        salesMenuBuilder.enableMenuItems(value);
     }
 
 }
