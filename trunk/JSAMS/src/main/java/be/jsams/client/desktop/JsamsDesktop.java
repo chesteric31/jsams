@@ -15,9 +15,7 @@ import javax.swing.plaf.FontUIResource;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import be.jsams.client.i18n.I18nString;
 import be.jsams.client.i18n.JsamsI18nResource;
-import be.jsams.client.model.dialog.OpenSocietyDialog;
 import be.jsams.client.swing.action.EditSocietyAction;
 import be.jsams.client.swing.component.JsamsMenuItem;
 import be.jsams.common.bean.model.SocietyBean;
@@ -62,12 +60,7 @@ public class JsamsDesktop {
     private void initComponents() {
         setNativeLookAndFeel();
         setUIFont(new FontUIResource(Font.SANS_SERIF, Font.PLAIN, DEFAULT_FONT_SIZE));
-
-        new OpenSocietyDialog(JsamsI18nResource.TITLE_OPEN_SOCIETY);
-        Object[] parameters = new Object[1];
-        parameters[0] = this.currentSociety.getName();
-        I18nString newTitle = new I18nString("title.application", parameters);
-        frame = new JsamsMainFrame(newTitle);
+        frame = new JsamsMainFrame(JsamsI18nResource.TITLE_APPLICATION_NO_ARGUMENTS);
         frame.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent we) {
                 stopNow();
@@ -130,20 +123,8 @@ public class JsamsDesktop {
      */
     public void restart() {
         frame.getTabbedPane().removeAll();
-        frame.dispose();
-        new OpenSocietyDialog(JsamsI18nResource.TITLE_OPEN_SOCIETY);
-        Object[] parameters = new Object[1];
-        parameters[0] = this.currentSociety.getName();
-        I18nString newTitle = new I18nString("title.application", parameters);
-        frame.setTitle(newTitle);
-        frame.toFront();
-        frame.setVisible(true);
-//        frame = new JsamsMainFrame(newTitle);
-//        frame.addWindowListener(new WindowAdapter() {
-//            public void windowClosing(WindowEvent we) {
-//                stopNow();
-//            }
-//        });
+        frame.setTitle(JsamsI18nResource.TITLE_APPLICATION_NO_ARGUMENTS);
+        frame.enableAllMenuItems(false);
     }
 
     /**
@@ -162,16 +143,10 @@ public class JsamsDesktop {
 
         // TODO review this if
         if (frame != null) {
-            Object[] parameters = new Object[1];
-            parameters[0] = this.currentSociety.getName();
-            I18nString newTitle = new I18nString("title.application", parameters);
-            frame.setTitle(newTitle);
             JsamsMenuItem societyParametersMI = frame.getSocietyParametersMI();
             societyParametersMI.setAction(new EditSocietyAction(societyParametersMI.getText(), societyParametersMI
                     .getIcon(), 1));
         }
-        // frame.getManagementMenu().setEnabled(true);
-        // frame.getSalesMenu().setEnabled(true);
     }
 
     /**

@@ -96,7 +96,6 @@ public class OpenSocietyDialog extends JsamsDialog implements JsamsButtonsInterf
         add(mainPanel);
         pack();
         DialogUtil.centerComponentOnScreen(this);
-//        setLocationRelativeTo(null);
         setVisible(true);
         setResizable(false);
     }
@@ -107,7 +106,13 @@ public class OpenSocietyDialog extends JsamsDialog implements JsamsButtonsInterf
     public void performOk() {
         SocietyBean selectedSociety = (SocietyBean) bean.getSelection();
         if (selectedSociety != null) {
-            JsamsDesktop.getInstance().setCurrentSociety(selectedSociety);
+            JsamsDesktop jsamsDesktop = JsamsDesktop.getInstance();
+            jsamsDesktop.setCurrentSociety(selectedSociety);
+            Object[] parameters = new Object[1];
+            parameters[0] = selectedSociety.getName();
+            I18nString newTitle = new I18nString("title.application", parameters);
+            jsamsDesktop.getMainWindow().setTitle(newTitle);
+            jsamsDesktop.getMainWindow().enableAllMenuItems(true);
             dispose();
         } else {
             statusBar.removeAll();
@@ -164,7 +169,7 @@ public class OpenSocietyDialog extends JsamsDialog implements JsamsButtonsInterf
     }
 
     /**
-     * Build the 'south panel' composed by a {@link JsamsButtonsPanel} {@link JsamsStatusBar}
+     * Builds the 'south panel' composed by a {@link JsamsButtonsPanel} {@link JsamsStatusBar}
      * 
      * @return the 'south panel'
      */
@@ -178,7 +183,7 @@ public class OpenSocietyDialog extends JsamsDialog implements JsamsButtonsInterf
     }
 
     /**
-     * Set the default keys actions.
+     * Sets the default keys actions.
      */
     private void setDefaultKeyActions() {
         // Automatically choose OK when Enter Key is pressed
