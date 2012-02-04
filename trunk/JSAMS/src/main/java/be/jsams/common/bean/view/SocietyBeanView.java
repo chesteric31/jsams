@@ -22,6 +22,7 @@ import be.jsams.client.swing.component.JsamsLabel;
 import be.jsams.client.swing.component.JsamsTextField;
 import be.jsams.common.bean.model.SocietyBean;
 
+import com.jgoodies.forms.builder.ButtonBarBuilder2;
 import com.jgoodies.forms.builder.DefaultFormBuilder;
 import com.jgoodies.forms.layout.FormLayout;
 
@@ -51,7 +52,7 @@ public class SocietyBeanView extends AbstractBeanView<SocietyBean> implements Ed
      * {@inheritDoc}
      */
     public JPanel createEditView() {
-        SocietyBean bean = getBean();
+        final SocietyBean bean = getBean();
         ViewFactory<SocietyBean> viewFactory = getViewFactory();
         JsamsTextField textFieldName = viewFactory.createBindingTextComponent(bean, SocietyBean.NAME_PROPERTY, true,
                 false);
@@ -120,6 +121,20 @@ public class SocietyBeanView extends AbstractBeanView<SocietyBean> implements Ed
             }
         });
 
+        JsamsButton buttonResetLogo = new JsamsButton(JsamsI18nResource.BUTTON_RESET_LOGO);
+        buttonResetLogo.addActionListener(new ActionListener() {
+
+            /**
+             * {@inheritDoc}
+             */
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                bean.setLogo(null);
+                labelLogo.setIcon(null);
+//                labelLogo.updateUI();
+            }
+        });
+
         FormLayout layout = new FormLayout("right:p, 3dlu, 262dlu", "p");
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
         builder.setDefaultDialogBorder();
@@ -142,7 +157,12 @@ public class SocietyBeanView extends AbstractBeanView<SocietyBean> implements Ed
         builder.nextLine();
         builder.appendI15d(JsamsI18nLabelResource.LABEL_VAT_NUMBER.getKey(), textFieldVatNumber);
         builder.nextLine();
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_LOGO.getKey(), labelLogo, buttonBrowseLogo);
+        ButtonBarBuilder2 barBuilder = new ButtonBarBuilder2();
+        barBuilder.addButton(buttonBrowseLogo);
+        barBuilder.addButton(buttonResetLogo);
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_LOGO.getKey(), labelLogo);
+        builder.nextLine();
+        builder.append(barBuilder.getPanel(), 3);
         return builder.getPanel();
     }
 

@@ -276,5 +276,7 @@ public final class JsamsI18nResource {
     public static final I18nString BUTTON_BROWSE_LOGO = new I18nString("button.browse_logo");
 
     public static final I18nString TITLE_ABOUT = new I18nString("title.about");
+
+    public static final I18nString BUTTON_RESET_LOGO = new I18nString("button.reset_logo");
     
 }
