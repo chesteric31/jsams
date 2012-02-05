@@ -36,7 +36,7 @@
            commandLine=""
            iconFile="%SystemRoot%\system32\SHELL32.dll"
            iconIndex="31"
-           description="JSAMS Example">
+           description="Java Simplified Accounting Management System Uninstaller">
 
         <createForPack name="JSAMS"/>
     </shortcut>
