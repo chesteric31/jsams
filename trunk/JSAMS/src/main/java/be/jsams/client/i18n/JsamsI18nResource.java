@@ -278,5 +278,7 @@ public final class JsamsI18nResource {
     public static final I18nString TITLE_ABOUT = new I18nString("title.about");
 
     public static final I18nString BUTTON_RESET_LOGO = new I18nString("button.reset_logo");
+
+    public static final I18nString ERROR_IS_INVALID = new I18nString("error.is_invalid");
     
 }

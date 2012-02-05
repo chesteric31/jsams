@@ -7,7 +7,7 @@ import com.jgoodies.validation.Validator;
 import com.jgoodies.validation.util.PropertyValidationSupport;
 
 /**
- * 
+ * {@link Validator} for search details panel.
  *
  * @author chesteric31
  * @version $Revision$ $Date::                  $ $Author$

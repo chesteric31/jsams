@@ -7,8 +7,8 @@ import com.jgoodies.validation.Validator;
 import com.jgoodies.validation.util.PropertyValidationSupport;
 
 /**
+ * {@link Validator} for the step: summary in the transfer wizard dialog.
  * 
- *
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
@@ -22,5 +22,5 @@ public class SummaryTransferValidator implements Validator<TransferBean> {
         PropertyValidationSupport support = new PropertyValidationSupport(bean, "");
         return support.getResult();
     }
-    
+
 }

@@ -4,6 +4,7 @@ import be.jsams.client.i18n.JsamsI18nLabelResource;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.common.bean.model.management.ProductBean;
 import be.jsams.common.bean.model.management.ProductCategoryBean;
+import be.jsams.common.bean.validator.StringValidator;
 
 import com.jgoodies.validation.ValidationResult;
 import com.jgoodies.validation.Validator;
@@ -33,7 +34,7 @@ public class EditProductValidator implements Validator<ProductBean> {
         if (ValidationUtils.isBlank(name)) {
             support.addError(JsamsI18nLabelResource.LABEL_PRODUCT_LABEL.getTranslation(),
                     JsamsI18nResource.ERROR_IS_MANDATORY.getTranslation());
-        } else if (!ValidationUtils.isAlphanumericSpace(name)) {
+        } else if (!ValidationUtils.isAlphanumericSpace(name) && !StringValidator.validate(name)) {
             support.addError(JsamsI18nLabelResource.LABEL_PRODUCT_LABEL.getTranslation(),
                     JsamsI18nResource.ERROR_IS_ALPHANUMERIC.getTranslation());
         }

@@ -9,8 +9,9 @@ import com.jgoodies.validation.Validator;
 import com.jgoodies.validation.util.PropertyValidationSupport;
 
 /**
- * {@link Validator} for transfer wizard dialog.
- *
+ * {@link Validator} for the step: destination chooser in the transfer wizard
+ * dialog.
+ * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
@@ -49,7 +50,7 @@ public class DestinationValidator implements Validator<TransferBean> {
     }
 
     /**
-     * Check the estimate selecting.
+     * Checks the estimate selecting.
      * 
      * @param destinationType the selected destination type
      * @param support the {@link PropertyValidationSupport}
@@ -62,7 +63,7 @@ public class DestinationValidator implements Validator<TransferBean> {
     }
     
     /**
-     * Check the command selecting.
+     * Checks the command selecting.
      * 
      * @param destinationType the selected destination type
      * @param support the {@link PropertyValidationSupport}
@@ -75,7 +76,7 @@ public class DestinationValidator implements Validator<TransferBean> {
     }
 
     /**
-     * Check the delivery order selecting.
+     * Checks the delivery order selecting.
      * 
      * @param destinationType the selected destination type
      * @param support the {@link PropertyValidationSupport}
@@ -88,7 +89,7 @@ public class DestinationValidator implements Validator<TransferBean> {
     }
 
     /**
-     * Check the bill selecting.
+     * Checks the bill selecting.
      * 
      * @param destinationType the selected destination type
      * @param support the {@link PropertyValidationSupport}
