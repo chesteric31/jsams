@@ -3,6 +3,7 @@ package be.jsams.client.validator.edit;
 import be.jsams.client.i18n.JsamsI18nLabelResource;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.common.bean.model.AddressBean;
+import be.jsams.common.bean.validator.StringValidator;
 
 import com.jgoodies.validation.ValidationResult;
 import com.jgoodies.validation.Validator;
@@ -10,7 +11,7 @@ import com.jgoodies.validation.util.PropertyValidationSupport;
 import com.jgoodies.validation.util.ValidationUtils;
 
 /**
- * {@link Validator} for Address object.
+ * {@link Validator} for address edition.
  * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
@@ -27,7 +28,7 @@ public class EditAddressValidator implements Validator<AddressBean> {
         if (ValidationUtils.isBlank(city)) {
             support.addError(JsamsI18nLabelResource.LABEL_CITY.getTranslation(), JsamsI18nResource.ERROR_IS_MANDATORY
                     .getTranslation());
-        } else if (!ValidationUtils.isAlphanumericSpace(city)) {
+        } else if (!ValidationUtils.isAlphanumericSpace(city) && !StringValidator.validate(city)) {
             support.addError(JsamsI18nLabelResource.LABEL_CITY.getTranslation(),
                     JsamsI18nResource.ERROR_IS_ALPHANUMERIC.getTranslation());
         }
@@ -51,7 +52,7 @@ public class EditAddressValidator implements Validator<AddressBean> {
         if (ValidationUtils.isBlank(street)) {
             support.addError(JsamsI18nLabelResource.LABEL_STREET.getTranslation(), JsamsI18nResource.ERROR_IS_MANDATORY
                     .getTranslation());
-        } else if (!ValidationUtils.isAlphanumericSpace(street)) {
+        } else if (!ValidationUtils.isAlphanumericSpace(street) && !StringValidator.validate(street)) {
             support.addError(JsamsI18nLabelResource.LABEL_STREET.getTranslation(),
                     JsamsI18nResource.ERROR_IS_ALPHANUMERIC.getTranslation());
         }

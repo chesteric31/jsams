@@ -12,7 +12,8 @@ import com.jgoodies.validation.Validator;
 import com.jgoodies.validation.util.PropertyValidationSupport;
 
 /**
- * 
+ * {@link Validator} for the step: documents chooser in the transfer wizard
+ * dialog.
  *
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
