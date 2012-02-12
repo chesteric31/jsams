@@ -2,8 +2,7 @@
 
 <!-- JSAMS installation file. To compile it : - go in the bin directory where 
 	you installed IzPack - call "compile ../JSAMS-installer/install.xml -b ../JSAMS-installer" 
-	NOTE: the folder: mysql-5.1.60-win32 is not into SVN cause too big
-	-->
+	NOTE: the folder: mysql-5.1.60-win32 is not into SVN cause too big -->
 
 <installation version="1.0">
 
@@ -44,14 +43,14 @@
 	<!-- The resources section. The ids must be these ones if you want to use 
 		the LicencePanel and/or the InfoPanel. -->
 	<resources>
-        <res id="shortcutSpec.xml" src="shortcutSpec.xml"/>
+		<res id="shortcutSpec.xml" src="shortcutSpec.xml" />
 		<res id="LicencePanel.licence" src="LICENSE.txt" />
 	</resources>
 
 	<variables>
 		<variable name="DB_SCHEMA" value="BTS" />
 		<variable name="DB_PASSWORD" value="thatsmypassword" />
-        <variable name="DesktopShortcutCheckboxEnabled" value="true"/>
+		<variable name="DesktopShortcutCheckboxEnabled" value="true" />
 	</variables>
 
 	<!-- The panels section. We indicate here which panels we want to use. The 
@@ -62,14 +61,36 @@
 		<panel classname="TargetPanel" />
 		<panel classname="PacksPanel" />
 		<panel classname="InstallPanel" />
-        <panel classname="ShortcutPanel"/>
+		<panel classname="ShortcutPanel" />
 		<panel classname="FinishPanel" />
 	</panels>
+	
+	<conditions>
+		<condition type="variable" id="newInstallation">
+			<name>setup.type</name>
+			<value>new</value>
+		</condition>
+		<condition type="variable" id="updateInstall">
+			<name>setup.type</name>
+			<value>update</value>
+		</condition>
+		<condition type="java" id="ismysqlthere">
+			<java>
+				<class>be.jsams.izpack.util.MySqlChecker</class>
+				<field>IS_INSTALLED</field>
+			</java>
+			<returnvalue type="boolean">true</returnvalue>
+		</condition>
+<!-- 		<condition type="and" id="standardinstallation.onwindows"> -->
+<!-- 			<condition type="ref" refid="standardinstallation" /> -->
+<!-- 			<condition type="ref" refid="installonwindows" /> -->
+<!-- 		</condition> -->
+	</conditions>
 
 	<!-- The packs section. We specify here our packs. -->
 	<packs>
 		<pack name="MySQL Database Server" required="no" preselected="yes"
-			installGroups="New install">
+			installGroups="New install" condition="!ismysqlthere">
 			<description>New server installation of the selected database as required by the application.
 			</description>
 			<fileset dir="scripts" targetdir="$INSTALL_PATH/scripts" />
@@ -83,7 +104,7 @@
 			<description>The application launcher file</description>
 			<file src="JSAMS-1.0.2-SNAPSHOT.jar" targetdir="$INSTALL_PATH" />
 			<fileset dir="lib" targetdir="$INSTALL_PATH/lib" />
-			<file src="jsams.ico" targetdir="$INSTALL_PATH"/>
+			<file src="jsams.ico" targetdir="$INSTALL_PATH" />
 		</pack>
 	</packs>
 
