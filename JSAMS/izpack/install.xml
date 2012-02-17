@@ -56,7 +56,7 @@
 	<!-- The panels section. We indicate here which panels we want to use. The 
 		order will be respected. -->
 	<panels>
-		<panel classname="HelloPanel" />
+		<panel classname="CheckedHelloPanel" />
 		<panel classname="LicencePanel" />
 		<panel classname="TargetPanel" />
 		<panel classname="PacksPanel" />
@@ -64,41 +64,35 @@
 		<panel classname="ShortcutPanel" />
 		<panel classname="FinishPanel" />
 	</panels>
-	
-	<conditions>
-		<condition type="variable" id="newInstallation">
-			<name>setup.type</name>
-			<value>new</value>
-		</condition>
-		<condition type="variable" id="updateInstall">
-			<name>setup.type</name>
-			<value>update</value>
-		</condition>
-		<condition type="java" id="ismysqlthere">
-			<java>
-				<class>be.jsams.izpack.util.MySqlChecker</class>
-				<field>IS_INSTALLED</field>
-			</java>
-			<returnvalue type="boolean">true</returnvalue>
-		</condition>
-<!-- 		<condition type="and" id="standardinstallation.onwindows"> -->
-<!-- 			<condition type="ref" refid="standardinstallation" /> -->
-<!-- 			<condition type="ref" refid="installonwindows" /> -->
-<!-- 		</condition> -->
-	</conditions>
+
+	<listeners>
+		<listener installer="RegistryInstallerListener" uninstaller="RegistryUninstallerListener">
+			<os family="windows" />
+		</listener>
+	</listeners>
 
 	<!-- The packs section. We specify here our packs. -->
 	<packs>
 		<pack name="MySQL Database Server" required="no" preselected="yes"
-			installGroups="New install" condition="!ismysqlthere">
+			installGroups="New install">
 			<description>New server installation of the selected database as required by the application.
 			</description>
 			<fileset dir="scripts" targetdir="$INSTALL_PATH/scripts" />
 			<fileset dir="mysql-5.1.60-win32" targetdir="$INSTALL_PATH/mysql-5.1.60-win32" />
-			<file src="script.bat" targetdir="$INSTALL_PATH" />
-			<parsable targetfile="$INSTALL_PATH/script.bat" /> <!-- The file will be parsed -->
-			<executable targetfile="$INSTALL_PATH/script.bat" type="shell"
-				stage="postinstall" os="windows" keep="true" failure="abort" />
+			<file src="install_db_service.bat" targetdir="$INSTALL_PATH" />
+			<file src="create_db.bat" targetdir="$INSTALL_PATH" />
+			<file src="install_db_scripts.bat" targetdir="$INSTALL_PATH" />
+			<parsable targetfile="$INSTALL_PATH/install_db_service.bat" />
+			<parsable targetfile="$INSTALL_PATH/create_db.bat" />
+			<parsable targetfile="$INSTALL_PATH/install_db_scripts.bat" />
+			<executable targetfile="$INSTALL_PATH/install_db_service.bat"
+				type="shell" stage="postinstall" os="windows" keep="false" failure="abort" />
+			<executable targetfile="$INSTALL_PATH/create_db.bat" type="shell"
+				stage="postinstall" os="windows" keep="false" failure="abort" />
+			<executable targetfile="$INSTALL_PATH/install_db_scripts.bat"
+				type="shell" stage="postinstall" os="windows" keep="false" failure="abort" />
+			<executable targetfile="$INSTALL_PATH/uninstall-db-service.bat"
+				type="shell" stage="uninstall" os="windows" keep="false" failure="abort" />
 		</pack>
 		<pack name="JSAMS" required="yes" installGroups="New install">
 			<description>The application launcher file</description>
@@ -111,5 +105,9 @@
 	<!-- The native libraries to add. This is required for creating shortcuts 
 		on Windows -->
 	<native type="izpack" name="ShellLink.dll" />
+	<!-- the native part JNI needs the dll -->
+	<native type="3rdparty" name="COIOSHelper.dll" stage="both">
+		<os family="windows" />
+	</native>
 
 </installation>
