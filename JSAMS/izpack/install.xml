@@ -43,7 +43,8 @@
 	<!-- The resources section. The ids must be these ones if you want to use 
 		the LicencePanel and/or the InfoPanel. -->
 	<resources>
-		<res id="shortcutSpec.xml" src="shortcutSpec.xml" />
+		<res id="RegistrySpec.xml" src="specs/registrySpec.xml" />
+		<res id="shortcutSpec.xml" src="specs/shortcutSpec.xml" />
 		<res id="LicencePanel.licence" src="LICENSE.txt" />
 	</resources>
 
@@ -77,28 +78,25 @@
 			installGroups="New install">
 			<description>New server installation of the selected database as required by the application.
 			</description>
-			<fileset dir="scripts" targetdir="$INSTALL_PATH/scripts" />
-			<fileset dir="mysql-5.1.60-win32" targetdir="$INSTALL_PATH/mysql-5.1.60-win32" />
-			<file src="install_db_service.bat" targetdir="$INSTALL_PATH" />
-			<file src="create_db.bat" targetdir="$INSTALL_PATH" />
-			<file src="install_db_scripts.bat" targetdir="$INSTALL_PATH" />
-			<parsable targetfile="$INSTALL_PATH/install_db_service.bat" />
-			<parsable targetfile="$INSTALL_PATH/create_db.bat" />
-			<parsable targetfile="$INSTALL_PATH/install_db_scripts.bat" />
-			<executable targetfile="$INSTALL_PATH/install_db_service.bat"
+			<fileset dir="scripts" targetdir="$INSTALL_PATH/scripts" override="true" />
+			<fileset dir="win" targetdir="$INSTALL_PATH/win" os="windows" override="true" />
+			<parsable targetfile="$INSTALL_PATH/win/install_db_service.bat" />
+			<parsable targetfile="$INSTALL_PATH/win/create_db.bat" />
+			<parsable targetfile="$INSTALL_PATH/win/install_db_scripts.bat" />
+			<executable targetfile="$INSTALL_PATH/win/install_db_service.bat"
 				type="shell" stage="postinstall" os="windows" keep="false" failure="abort" />
-			<executable targetfile="$INSTALL_PATH/create_db.bat" type="shell"
-				stage="postinstall" os="windows" keep="false" failure="abort" />
-			<executable targetfile="$INSTALL_PATH/install_db_scripts.bat"
+			<executable targetfile="$INSTALL_PATH/win/create_db.bat"
 				type="shell" stage="postinstall" os="windows" keep="false" failure="abort" />
-			<executable targetfile="$INSTALL_PATH/uninstall-db-service.bat"
+			<executable targetfile="$INSTALL_PATH/win/install_db_scripts.bat"
+				type="shell" stage="postinstall" os="windows" keep="false" failure="abort" />
+			<executable targetfile="$INSTALL_PATH/win/uninstall-db-service.bat"
 				type="shell" stage="uninstall" os="windows" keep="false" failure="abort" />
 		</pack>
 		<pack name="JSAMS" required="yes" installGroups="New install">
 			<description>The application launcher file</description>
-			<file src="JSAMS-1.0.2-SNAPSHOT.jar" targetdir="$INSTALL_PATH" />
-			<fileset dir="lib" targetdir="$INSTALL_PATH/lib" />
-			<file src="jsams.ico" targetdir="$INSTALL_PATH" />
+			<file src="JSAMS-1.0.2-SNAPSHOT.jar" targetdir="$INSTALL_PATH" override="true" />
+			<fileset dir="lib" targetdir="$INSTALL_PATH/lib" override="true"/>
+			<file src="jsams.ico" targetdir="$INSTALL_PATH" os="windows" />
 		</pack>
 	</packs>
 
