@@ -78,8 +78,8 @@
 			installGroups="New install">
 			<description>New server installation of the selected database as required by the application.
 			</description>
-			<fileset dir="scripts" targetdir="$INSTALL_PATH/scripts" override="true" />
-			<fileset dir="win" targetdir="$INSTALL_PATH/win" os="windows" override="true" />
+			<fileset dir="scripts" targetdir="$INSTALL_PATH/scripts" />
+			<fileset dir="win" targetdir="$INSTALL_PATH/win" os="windows" />
 			<parsable targetfile="$INSTALL_PATH/win/install_db_service.bat" />
 			<parsable targetfile="$INSTALL_PATH/win/create_db.bat" />
 			<parsable targetfile="$INSTALL_PATH/win/install_db_scripts.bat" />
