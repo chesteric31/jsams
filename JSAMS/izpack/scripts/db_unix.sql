@@ -627,4 +627,60 @@ ALTER TABLE BTS.PRODUCT_CATEGORY
 ;
 
 
+INSERT INTO BTS.CIVILITY (LABEL, LABEL_FR, LABEL_NL)
+VALUES ("Mr.", "M.", "Dhr.");
+INSERT INTO BTS.CIVILITY (LABEL, LABEL_FR, LABEL_NL)
+VALUES ("Ms.", "Mlle.", "Mej.");
+INSERT INTO BTS.CIVILITY (LABEL, LABEL_FR, LABEL_NL)
+VALUES ("Mrs.", "Mme.", "Mw.");
+INSERT INTO BTS.CIVILITY (LABEL, LABEL_FR, LABEL_NL)
+VALUES ("Dr.", "Dr.", "Dr.");
+INSERT INTO BTS.CIVILITY (LABEL, LABEL_FR, LABEL_NL)
+VALUES ("Att.", "Me.", "Mr.");
+INSERT INTO BTS.CIVILITY (LABEL, LABEL_FR, LABEL_NL)
+VALUES ("Prof.", "Pr.", "Prof.");
+
+INSERT INTO BTS.LEGAL_FORM (LABEL, LABEL_FR, LABEL_NL)
+VALUES ("Public Limited Company", "Entreprise individuelle", "Eenmanszaak");
+INSERT INTO BTS.LEGAL_FORM (LABEL, LABEL_FR, LABEL_NL)
+VALUES ("Limited Company", "SociÃ©tÃ© PrivÃ©e Ã  ResponsabilitÃ© LimitÃ©e (Unipersonnelle) (SPRL)", "Besloten Vennootschap met Veperkte Aansprakelijkheid (BVBA)");
+INSERT INTO BTS.LEGAL_FORM (LABEL, LABEL_FR, LABEL_NL)
+VALUES ("Limited Company Starter", "SPRL Starter (SPRL-S)", "Personenvennootschap met Beperkte Aansprakelijkheid (PVBA Starter)");
+INSERT INTO BTS.LEGAL_FORM (LABEL, LABEL_FR, LABEL_NL)
+VALUES ("Private Limited Company (LTD)", "SociÃ©tÃ© Anonyme (SA)", "Naamloze vennootschap (NV)");
+INSERT INTO BTS.LEGAL_FORM (LABEL, LABEL_FR, LABEL_NL)
+VALUES ("Partnership Limited By Shares", "SociÃ©tÃ© en Commandite par Actions (SCA)", "Commanditaire Vennootschap op Aandelen (CVA)");
+INSERT INTO BTS.LEGAL_FORM (LABEL, LABEL_FR, LABEL_NL)
+VALUES ("Limited Liability Partnership (LLP)", "SociÃ©tÃ© CoopÃ©rative Ã  ResponsabilitÃ© LimitÃ©e (SCRL)", "CoÃ¶peratieve Vennootschap met Beperkte Aansprakelijkheid (CVBA)");
+INSERT INTO BTS.LEGAL_FORM (LABEL, LABEL_FR, LABEL_NL)
+VALUES ("Illimited Liability Partnership", "SociÃ©tÃ© CoopÃ©rative Ã  ResponsabilitÃ© IllimitÃ©e (SCRI)", "CoÃ¶peratieve Vennootschap met Onbeperkte en Hoofdelijke Aansprakelijkheid (CVOA)");
+INSERT INTO BTS.LEGAL_FORM (LABEL, LABEL_FR, LABEL_NL)
+VALUES ("General Partnership", "SociÃ©tÃ© en Nom Collectif (SNC)", "Vennootschap onder Firma (VOF)");
+INSERT INTO BTS.LEGAL_FORM (LABEL, LABEL_FR, LABEL_NL)
+VALUES ("Limited Partnership", "SociÃ©tÃ© en Commandite Simple (SCS)", "Commanditaire Vennootschap (CV)");
+
+INSERT INTO BTS.PAYMENT_MODE (LABEL, LABEL_FR, LABEL_NL, DAYS_NUMBER, MONTH_END, ADDITIONAL_DAYS)
+VALUES ("CASH", "COMPTANT", "CONTANT", 0, 0, 0);
+INSERT INTO BTS.PAYMENT_MODE (LABEL, LABEL_FR, LABEL_NL, DAYS_NUMBER, MONTH_END, ADDITIONAL_DAYS)
+VALUES ("TRANSFER", "VIREMENT", "OVERSCHRIJVING", 0, 0, 0);
+INSERT INTO BTS.PAYMENT_MODE (LABEL, LABEL_FR, LABEL_NL, DAYS_NUMBER, MONTH_END, ADDITIONAL_DAYS)
+VALUES ("CHECK", "CHEQUE", "BANKCHEQUE", 0, 0, 0);
+INSERT INTO BTS.PAYMENT_MODE (LABEL, LABEL_FR, LABEL_NL, DAYS_NUMBER, MONTH_END, ADDITIONAL_DAYS)
+VALUES ("30 days", "30 jours", "30 dagen", 30, 0, 0);
+INSERT INTO BTS.PAYMENT_MODE (LABEL, LABEL_FR, LABEL_NL, DAYS_NUMBER, MONTH_END, ADDITIONAL_DAYS)
+VALUES ("60 days", "60 jours", "60 dagen", 60, 0, 0);
+INSERT INTO BTS.PAYMENT_MODE (LABEL, LABEL_FR, LABEL_NL, DAYS_NUMBER, MONTH_END, ADDITIONAL_DAYS)
+VALUES ("90 days", "90 jours", "90 dagen", 90, 0, 0);
+INSERT INTO BTS.PAYMENT_MODE (LABEL, LABEL_FR, LABEL_NL, DAYS_NUMBER, MONTH_END, ADDITIONAL_DAYS)
+VALUES ("30 days end of month", "30 jours fin du mois", "30 dagen einde of mand", 30, 1, 0);
+INSERT INTO BTS.PAYMENT_MODE (LABEL, LABEL_FR, LABEL_NL, DAYS_NUMBER, MONTH_END, ADDITIONAL_DAYS)
+VALUES ("60 days end of month", "60 jours fin du mois", "60 dagen einde of mand", 60, 1, 0);
+INSERT INTO BTS.PAYMENT_MODE (LABEL, LABEL_FR, LABEL_NL, DAYS_NUMBER, MONTH_END, ADDITIONAL_DAYS)
+VALUES ("90 days end of month", "90 jours fin du mois", "90 dagen einde of mand", 90, 1, 0);
+INSERT INTO BTS.PAYMENT_MODE (LABEL, LABEL_FR, LABEL_NL, DAYS_NUMBER, MONTH_END, ADDITIONAL_DAYS)
+VALUES ("30 days end of month the 10", "30 jours fin du mois le 10", "30 dagen einde of mand de 10", 30, 1, 10);
+INSERT INTO BTS.PAYMENT_MODE (LABEL, LABEL_FR, LABEL_NL, DAYS_NUMBER, MONTH_END, ADDITIONAL_DAYS)
+VALUES ("60 days end of month the 10", "60 jours fin du mois le 10", "60 dagen einde of mand de 10", 60, 1, 10);
+INSERT INTO BTS.PAYMENT_MODE (LABEL, LABEL_FR, LABEL_NL, DAYS_NUMBER, MONTH_END, ADDITIONAL_DAYS)
+VALUES ("90 days end of month the 10", "90 jours fin du mois le 10", "90 dagen einde of mand de 10", 70, 1, 10);
 
