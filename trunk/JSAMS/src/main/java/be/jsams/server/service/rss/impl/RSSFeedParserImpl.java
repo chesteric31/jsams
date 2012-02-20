@@ -17,7 +17,7 @@ import be.jsams.server.service.rss.RSSFeedParser;
 /**
  * RSS feed parse implementation.
  *
- * @author ebinard
+ * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
 public class RSSFeedParserImpl implements RSSFeedParser {

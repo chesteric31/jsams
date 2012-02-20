@@ -3,7 +3,7 @@ package be.jsams.server.model.rss;
 /**
  * RSS message for auto-update module.
  *
- * @author ebinard
+ * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
 public class FeedMessage {

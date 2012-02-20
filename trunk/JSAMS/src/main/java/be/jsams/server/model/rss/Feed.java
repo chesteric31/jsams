@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * RSS feed for auto-update module.
  *
- * @author ebinard
+ * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
 public class Feed {
