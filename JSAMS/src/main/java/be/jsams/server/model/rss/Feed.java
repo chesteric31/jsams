@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * RSS feed for auto-update module.
- *
+ * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
@@ -15,10 +15,8 @@ public class Feed {
     private String description;
     private String link;
     private String author;
-    private String version;
-    private String releaseDate;
     private List<FeedMessage> messages = new ArrayList<FeedMessage>();
-    
+
     /**
      * Constructor.
      * 
@@ -26,18 +24,13 @@ public class Feed {
      * @param description the description
      * @param link the link
      * @param author the author
-     * @param version the version
-     * @param releaseDate the release date
      */
-    public Feed(String title, String description, String link, String author, String version,
-            String releaseDate) {
+    public Feed(String title, String description, String link, String author) {
         super();
         this.title = title;
         this.description = description;
         this.link = link;
         this.author = author;
-        this.version = version;
-        this.releaseDate = releaseDate;
     }
 
     /**
@@ -97,34 +90,6 @@ public class Feed {
     }
 
     /**
-     * @return the version
-     */
-    public String getVersion() {
-        return version;
-    }
-
-    /**
-     * @param version the version to set
-     */
-    public void setVersion(String version) {
-        this.version = version;
-    }
-
-    /**
-     * @return the releaseDate
-     */
-    public String getReleaseDate() {
-        return releaseDate;
-    }
-
-    /**
-     * @param releaseDate the releaseDate to set
-     */
-    public void setReleaseDate(String releaseDate) {
-        this.releaseDate = releaseDate;
-    }
-
-    /**
      * @return the messages
      */
     public List<FeedMessage> getMessages() {
@@ -144,7 +109,7 @@ public class Feed {
     @Override
     public String toString() {
         return "Feed [title=" + title + ", description=" + description + ", link=" + link + ", author=" + author
-                + ", version=" + version + ", releaseDate=" + releaseDate + ", messages=" + messages + "]";
+                + ", messages=" + messages + "]";
     }
-    
+
 }
