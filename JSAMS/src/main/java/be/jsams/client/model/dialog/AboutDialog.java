@@ -57,7 +57,7 @@ public class AboutDialog extends JsamsDialog {
      * Initializes all the components
      */
     private void initComponents() {
-        FormLayout layout = new FormLayout("left:pref, 3dlu", "pref, 5dlu");
+        FormLayout layout = new FormLayout("left:pref", "pref, 5dlu");
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
         builder.setDefaultDialogBorder();
         JsamsLabel applicationLabel = new JsamsLabel(JsamsI18nLabelResource.LABEL_APPLICATION);
@@ -83,7 +83,8 @@ public class AboutDialog extends JsamsDialog {
         
         JEditorPane area = null;
         try {
-            area = new JEditorPane(aboutUrl);
+            area = new JEditorPane();
+            area.setPage(aboutUrl);
         } catch (IOException e) {
             LOGGER.error(e);
             return;
