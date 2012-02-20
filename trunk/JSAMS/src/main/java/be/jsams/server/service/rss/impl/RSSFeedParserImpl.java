@@ -29,6 +29,7 @@ public class RSSFeedParserImpl implements RSSFeedParser {
     private static final String ITEM = "item";
     private static final String RELEASE_DATE = "releaseDate";
     private static final String VERSION = "version";
+    private static final String GUID = "guid";
 
     private URL url;
 
@@ -76,7 +77,7 @@ public class RSSFeedParserImpl implements RSSFeedParser {
                     if (event.asStartElement().getName().getLocalPart() == (ITEM)) {
                         if (isFeedHeader) {
                             isFeedHeader = false;
-                            feed = new Feed(title, description, link, author, version, releaseDate);
+                            feed = new Feed(title, description, link, author);
                         }
                         event = eventReader.nextEvent();
                         continue;
@@ -114,6 +115,11 @@ public class RSSFeedParserImpl implements RSSFeedParser {
                         author = event.asCharacters().getData();
                         continue;
                     }
+                    if (event.asStartElement().getName().getLocalPart() == (GUID)) {
+                        event = eventReader.nextEvent();
+                        guid = event.asCharacters().getData();
+                        continue;
+                    }
                 } else if (event.isEndElement()) {
                     if (event.asEndElement().getName().getLocalPart() == (ITEM)) {
                         FeedMessage message = new FeedMessage();
@@ -122,6 +128,8 @@ public class RSSFeedParserImpl implements RSSFeedParser {
                         message.setGuid(guid);
                         message.setLink(link);
                         message.setTitle(title);
+                        message.setReleaseDate(releaseDate);
+                        message.setVersion(version);
                         feed.getMessages().add(message);
                         event = eventReader.nextEvent();
                         continue;
