@@ -208,4 +208,10 @@ public final class JsamsI18nLabelResource {
     
     public static final I18nString LABEL_SETTINGS_PROXY_PASS = new I18nString("label.settings.proxy.pass");
 
+    public static final I18nString LABEL_APPLICATION_VERSION_INSTALLED = new I18nString(
+            "label.application.version.installed");
+
+    public static final I18nString LABEL_APPLICATION_VERSION_AVAILABLE = new I18nString(
+            "label.application.version.available");
+
 }

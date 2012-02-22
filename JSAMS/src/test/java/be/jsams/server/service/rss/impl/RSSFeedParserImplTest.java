@@ -8,7 +8,7 @@ import be.jsams.server.service.rss.RSSFeedParser;
 
 /**
  * Test class for {@link RSSFeedParserImpl}.
- *
+ * 
  * @author chesteric31
  * @version $Revision$ $Date::                  $ $Author$
  */
@@ -20,12 +20,14 @@ public class RSSFeedParserImplTest {
      */
     @Test
     public void testReadFeed() {
+        System.getProperties().put("proxySet", "true");
+        System.getProperties().put("proxyHost", "10.16.0.25");
+        System.getProperties().put("proxyPort", "8080");
         RSSFeedParser parser = new RSSFeedParserImpl("http://jsams.googlecode.com/files/updates.rss");
         Feed feed = parser.readFeed();
         System.out.println(feed);
         for (FeedMessage message : feed.getMessages()) {
             System.out.println(message);
-
         }
     }
 
