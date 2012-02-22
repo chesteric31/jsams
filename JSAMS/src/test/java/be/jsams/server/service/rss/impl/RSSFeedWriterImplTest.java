@@ -14,27 +14,30 @@ import be.jsams.server.service.rss.RSSFeedWriter;
 
 /**
  * Test class for {@link RSSFeedWriterImpl}.
- *
+ * 
  * @author chesteric31
  * @version $Revision$ $Date::                  $ $Author$
  */
 public class RSSFeedWriterImplTest {
 
     /**
-     * Test method for {@link be.jsams.server.service.rss.impl.RSSFeedWriterImpl#writeFeed()}.
+     * Test method for
+     * {@link be.jsams.server.service.rss.impl.RSSFeedWriterImpl#writeFeed()}.
      */
     @Test
     public void testWriteFeed() {
+//        System.getProperties().put("proxySet", "true");
+//        System.getProperties().put("proxyHost", "10.16.0.25");
+//        System.getProperties().put("proxyPort", "8080");
         // Create the rss feed
         String author = "chesteric31";
         String title = "JSAMS";
-        String description = "Java Simplified Accouting Management System";
+        String description = "Java Simplified Accounting Management System";
         String version = "1.0.2-SNAPSHOT";
-        String link = "http://code.google.com/feeds/p/jsams/updates/";
+        String link = "http://jsams.googlecode.com/files/";
         Calendar cal = new GregorianCalendar();
         Date creationDate = cal.getTime();
-        SimpleDateFormat date_format = new SimpleDateFormat(
-                "EEE', 'dd' 'MMM' 'yyyy' 'HH:mm:ss' 'Z", Locale.US);
+        SimpleDateFormat date_format = new SimpleDateFormat("EEE', 'dd' 'MMM' 'yyyy' 'HH:mm:ss' 'Z", Locale.US);
         String releaseDate = date_format.format(creationDate);
         Feed rssFeeder = new Feed(title, description, link, author);
 
@@ -43,8 +46,8 @@ public class RSSFeedWriterImplTest {
         feed.setTitle("JSAMS update");
         feed.setDescription("This is a description");
         feed.setAuthor("chesteric31");
-        feed.setGuid("http://code.google.com/feeds/p/jsams/updates/");
-        feed.setLink("http://code.google.com/feeds/p/jsams/updates/");
+        feed.setGuid("http://jsams.googlecode.com/files/");
+        feed.setLink("http://jsams.googlecode.com/files/");
         feed.setReleaseDate(releaseDate);
         feed.setVersion(version);
         rssFeeder.getMessages().add(feed);

@@ -191,4 +191,21 @@ public final class JsamsI18nLabelResource {
 
     public static final I18nString LABEL_VERSION = new I18nString("label.version");
 
+    public static final I18nString LABEL_SETTINGS_PROXY = new I18nString("label.settings.proxy");
+    
+    public static final I18nString LABEL_SETTINGS_BILL = new I18nString("label.settings.bill");
+
+    public static final I18nString LABEL_SETTINGS_PROXY_TO_SET = new I18nString("label.settings.proxy.to_set");;
+
+    public static final I18nString LABEL_SETTINGS_PROXY_HOST = new I18nString("label.settings.proxy.host");
+    
+    public static final I18nString LABEL_SETTINGS_PROXY_PORT = new I18nString("label.settings.proxy.port");
+    
+    public static final I18nString LABEL_SETTINGS_PROXY_TO_AUTHENTICATE = new I18nString(
+            "label.settings.proxy.to_authenticate");
+
+    public static final I18nString LABEL_SETTINGS_PROXY_USER = new I18nString("label.settings.proxy.user");
+    
+    public static final I18nString LABEL_SETTINGS_PROXY_PASS = new I18nString("label.settings.proxy.pass");
+
 }
