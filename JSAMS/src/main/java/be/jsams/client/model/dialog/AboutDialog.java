@@ -2,8 +2,10 @@ package be.jsams.client.model.dialog;
 
 import java.awt.BorderLayout;
 import java.awt.Font;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Properties;
 
 import javax.swing.ImageIcon;
 import javax.swing.JEditorPane;
@@ -13,7 +15,6 @@ import javax.swing.plaf.FontUIResource;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import be.jsams.JsamsStart;
 import be.jsams.client.desktop.JsamsMainFrame;
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.i18n.JsamsI18nLabelResource;
@@ -28,7 +29,7 @@ import com.jgoodies.forms.builder.DefaultFormBuilder;
 import com.jgoodies.forms.layout.FormLayout;
 
 /**
- * 
+ * About dialog.
  * 
  * @author chesteric31
  * @version $Revision$ $Date::                  $ $Author$
@@ -39,6 +40,16 @@ public class AboutDialog extends JsamsDialog {
      * Serial Version UID
      */
     private static final long serialVersionUID = -659086180402913537L;
+    
+    /**
+     * JSAMS application version properties
+     */
+    private static final String JSAMS_APPLICATION_VERSION_PROPERTIES = "jsams-application-version.properties";
+
+    /**
+     * JSAMS application internal version identifier
+     */
+    private static final String APPLICATION_INTERNALVERSION_IDENTIFIER = "application.internalversion.identifier";
 
     private static final Log LOGGER = LogFactory.getLog(AboutDialog.class);
 
@@ -57,7 +68,7 @@ public class AboutDialog extends JsamsDialog {
      * Initializes all the components
      */
     private void initComponents() {
-        FormLayout layout = new FormLayout("left:pref", "pref, 5dlu");
+        FormLayout layout = new FormLayout("left:pref, 3dlu", "pref, 5dlu");
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
         builder.setDefaultDialogBorder();
         JsamsLabel applicationLabel = new JsamsLabel(JsamsI18nLabelResource.LABEL_APPLICATION);
@@ -66,15 +77,27 @@ public class AboutDialog extends JsamsDialog {
         builder.nextLine();
         builder.appendSeparator();
         builder.nextLine();
+        
+        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
         I18nString translation = JsamsI18nLabelResource.LABEL_VERSION;
-        String version = JsamsStart.class.getPackage().getImplementationVersion();
+//        String version = JsamsStart.class.getPackage().getImplementationVersion();
+        Properties properties = new Properties();
+        try {
+            properties.load(classLoader.getResourceAsStream(JSAMS_APPLICATION_VERSION_PROPERTIES));
+        } catch (FileNotFoundException e) {
+            LOGGER.error(e);
+            return;
+        } catch (IOException e) {
+            LOGGER.error(e);
+            return;
+        }
+        String version = String.valueOf(properties.get(APPLICATION_INTERNALVERSION_IDENTIFIER));
         translation.setArguments(new Object[] {version});
         JsamsLabel versionLabel = new JsamsLabel(translation);
         versionLabel.setFont(new FontUIResource(Font.SANS_SERIF, Font.BOLD, 11));
         builder.append(versionLabel);
         builder.nextLine();
         URL aboutUrl = null;
-        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
         if (UserContext.isEnglish()) {
             aboutUrl = classLoader.getResource("pages/about.html");
         } else {
