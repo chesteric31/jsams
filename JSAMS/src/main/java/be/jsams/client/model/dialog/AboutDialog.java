@@ -80,11 +80,10 @@ public class AboutDialog extends JsamsDialog {
         } else {
             aboutUrl = classLoader.getResource("pages/about_fr.html");
         }
-        
+
         JEditorPane area = null;
         try {
-            area = new JEditorPane();
-            area.setPage(aboutUrl);
+            area = new JEditorPane(aboutUrl);
         } catch (IOException e) {
             LOGGER.error(e);
             return;
