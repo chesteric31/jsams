@@ -44,12 +44,11 @@ public class JsamsMainFrame extends AbstractJsamsFrame {
     private JsamsHelpMenuBuilder helpMenuBuilder;
 
     private JsamsShortcutToolBar shortcutToolBar;
-    // private JsamsStatusBar statusBar;
 
     private JsamsCloseableTabbedPane tabbedPane;
 
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param title the {@link I18nString} title
      */
@@ -59,7 +58,7 @@ public class JsamsMainFrame extends AbstractJsamsFrame {
     }
 
     /**
-     * Initializes all the components
+     * Initializes all the components.
      */
     private void initComponents() {
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
