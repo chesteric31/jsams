@@ -284,5 +284,7 @@ public final class JsamsI18nResource {
     public static final I18nString MENU_ITEM_UPDATE = new I18nString("menu.item.update");
 
     public static final I18nString TITLE_UPDATE = new I18nString("title.update");
+
+    public static final I18nString CONFIRMATION_UPDATE = new I18nString("confirmation.update");
     
 }

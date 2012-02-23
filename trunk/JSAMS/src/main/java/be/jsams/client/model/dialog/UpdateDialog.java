@@ -17,6 +17,7 @@ import be.jsams.client.desktop.JsamsMainFrame;
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.i18n.JsamsI18nLabelResource;
 import be.jsams.client.swing.component.AbstractJsamsFrame;
+import be.jsams.client.swing.component.JsamsButton;
 import be.jsams.client.swing.component.JsamsDialog;
 import be.jsams.client.swing.component.JsamsLabel;
 import be.jsams.client.swing.utils.DialogUtil;
@@ -30,8 +31,9 @@ import com.jgoodies.forms.builder.DefaultFormBuilder;
 import com.jgoodies.forms.layout.FormLayout;
 
 /**
- * Update dialog, to search if a update is available for the current version application.
- *
+ * Update dialog, to search if a update is available for the current version
+ * application.
+ * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
@@ -69,10 +71,10 @@ public class UpdateDialog extends JsamsDialog {
      * Initializes all the components.
      */
     private void initComponents() {
-        FormLayout layout = new FormLayout("left:pref, 3dlu, pref", "pref, 5dlu");
+        FormLayout layout = new FormLayout("left:pref, 3dlu, pref", "pref");
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
         builder.setDefaultDialogBorder();
-        
+
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
         Properties properties = new Properties();
         try {
@@ -84,24 +86,36 @@ public class UpdateDialog extends JsamsDialog {
             LOGGER.error(e);
             return;
         }
-        String version = String.valueOf(properties.get(APPLICATION_INTERNALVERSION_IDENTIFIER));
-        JsamsLabel installedVersion = new JsamsLabel(version);
-        installedVersion.setFont(new FontUIResource(Font.SANS_SERIF, Font.BOLD, 11));
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_APPLICATION_VERSION_INSTALLED.getKey(), installedVersion);
-        JsamsLabel availableVersion = new JsamsLabel(getAvailableVersion());
-         builder.appendI15d(JsamsI18nLabelResource.LABEL_APPLICATION_VERSION_AVAILABLE.getKey(),
-                 availableVersion);
+        String installedVersion = String.valueOf(properties.get(APPLICATION_INTERNALVERSION_IDENTIFIER));
+        String availableVersion = getAvailableVersion();
+        JsamsLabel labelInstalled = new JsamsLabel(installedVersion);
+        FontUIResource font = new FontUIResource(Font.SANS_SERIF, Font.BOLD, 13);
+        labelInstalled.setFont(font);
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_APPLICATION_VERSION_INSTALLED.getKey(), labelInstalled);
+        JsamsLabel labelAvailable = new JsamsLabel(availableVersion);
+        labelAvailable.setFont(font);
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_APPLICATION_VERSION_AVAILABLE.getKey(), labelAvailable);
         builder.nextLine();
+        boolean updateAvailable = !installedVersion.equalsIgnoreCase(availableVersion);
+        if (!updateAvailable) {
+            builder.appendI15d(JsamsI18nLabelResource.LABEL_APPLICATION_VERSION_UP_TO_DATE.getKey());
+        } else {
+            JsamsButton updateButton = new JsamsButton(JsamsI18nLabelResource.LABEL_APPLICATION_VERSION_TO_UPDATE);
+            builder.appendI15d("", updateButton);
+//            int confirm = JOptionPane.showConfirmDialog(null, JsamsI18nResource.CONFIRMATION_UPDATE);
+        }
         JPanel panel = builder.getPanel();
         JPanel mainPanel = new JPanel(new BorderLayout());
         mainPanel.add(panel, BorderLayout.CENTER);
         add(mainPanel);
         pack();
         DialogUtil.centerComponentOnScreen(this);
+        
         setVisible(true);
         setResizable(false);
+        
     }
-    
+
     /**
      * 
      * @return the available version
@@ -110,11 +124,13 @@ public class UpdateDialog extends JsamsDialog {
         String version = "";
         Preferences prefsRoot = Preferences.userRoot();
         Preferences jsamsPrefs = prefsRoot.node("be.jsams");
-        
+
         System.getProperties().put("proxySet", jsamsPrefs.get("proxySet", "false"));
         System.getProperties().put("proxyHost", jsamsPrefs.get("proxyHost", ""));
         System.getProperties().put("proxyPort", jsamsPrefs.get("proxyPort", ""));
-        RSSFeedParser parser = new RSSFeedParserImpl("http://jsams.googlecode.com/files/updates.rss");
+        RSSFeedParser parser = new RSSFeedParserImpl(
+        // "http://jsams.googlecode.com/files/updates.rss"
+                "file:\\C:\\Tools\\workspace-jsams\\JSAMS\\updates.rss");
         Feed feed = parser.readFeed();
         for (FeedMessage message : feed.getMessages()) {
             version = message.getVersion();

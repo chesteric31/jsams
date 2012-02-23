@@ -214,4 +214,10 @@ public final class JsamsI18nLabelResource {
     public static final I18nString LABEL_APPLICATION_VERSION_AVAILABLE = new I18nString(
             "label.application.version.available");
 
+    public static final I18nString LABEL_APPLICATION_VERSION_UP_TO_DATE = new I18nString(
+            "label.application.version.up_to_date");
+
+    public static final I18nString LABEL_APPLICATION_VERSION_TO_UPDATE = new I18nString(
+            "label.application.version.to_update");
+
 }
