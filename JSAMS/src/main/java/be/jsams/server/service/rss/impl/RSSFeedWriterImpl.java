@@ -82,12 +82,9 @@ public class RSSFeedWriterImpl implements RSSFeedWriter {
                 createNode(eventWriter, "version", entry.getVersion());
                 createNode(eventWriter, "author", entry.getAuthor());
                 createNode(eventWriter, "releaseDate", entry.getReleaseDate());
-                eventWriter.add(end);
                 eventWriter.add(eventFactory.createEndElement("", "", "item"));
                 eventWriter.add(end);
             }
-            eventWriter.add(end);
-            eventWriter.add(end);
             eventWriter.add(eventFactory.createEndElement("", "", "rss"));
             eventWriter.add(end);
 

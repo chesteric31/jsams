@@ -26,31 +26,32 @@ public class RSSFeedWriterImplTest {
      */
     @Test
     public void testWriteFeed() {
-//        System.getProperties().put("proxySet", "true");
-//        System.getProperties().put("proxyHost", "10.16.0.25");
-//        System.getProperties().put("proxyPort", "8080");
+        // System.getProperties().put("proxySet", "true");
+        // System.getProperties().put("proxyHost", "10.16.0.25");
+        // System.getProperties().put("proxyPort", "8080");
         // Create the rss feed
         String author = "chesteric31";
         String title = "JSAMS";
         String description = "Java Simplified Accounting Management System";
-        String version = "1.0.2-SNAPSHOT";
-        String link = "http://jsams.googlecode.com/files/";
+        String link = "http://code.google.com/p/jsams/";
         Calendar cal = new GregorianCalendar();
         Date creationDate = cal.getTime();
-        SimpleDateFormat date_format = new SimpleDateFormat("EEE', 'dd' 'MMM' 'yyyy' 'HH:mm:ss' 'Z", Locale.US);
-        String releaseDate = date_format.format(creationDate);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEE', 'dd' 'MMM' 'yyyy' 'HH:mm:ss' 'Z", Locale.US);
+        String releaseDate = simpleDateFormat.format(creationDate);
         Feed rssFeeder = new Feed(title, description, link, author);
 
-        // Now add one example entry
-        FeedMessage feed = new FeedMessage();
-        feed.setTitle("JSAMS update");
-        feed.setDescription("This is a description");
-        feed.setAuthor("chesteric31");
-        feed.setGuid("http://jsams.googlecode.com/files/");
-        feed.setLink("http://jsams.googlecode.com/files/");
-        feed.setReleaseDate(releaseDate);
-        feed.setVersion(version);
-        rssFeeder.getMessages().add(feed);
+        for (int i = 2; i <= 3; i++) {
+            // Now add one example entry
+            FeedMessage feed = new FeedMessage();
+            feed.setTitle("JSAMS update");
+            feed.setDescription("This is a description");
+            feed.setAuthor("chesteric31");
+            feed.setGuid("http://jsams.googlecode.com/files/JSAMS-1.0." + i + "-SNAPSHOT-update.jar");
+            feed.setLink("http://jsams.googlecode.com/files/JSAMS-1.0." + i + "-SNAPSHOT-update.jar");
+            feed.setReleaseDate(releaseDate);
+            feed.setVersion("1.0." + i + "-SNAPSHOT");
+            rssFeeder.getMessages().add(feed);
+        }
 
         // Now write the file
         RSSFeedWriter writer = new RSSFeedWriterImpl(rssFeeder, "updates.rss");
@@ -60,5 +61,4 @@ public class RSSFeedWriterImplTest {
             e.printStackTrace();
         }
     }
-
 }
