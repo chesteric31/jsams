@@ -153,4 +153,18 @@ public class JsamsMainFrame extends AbstractJsamsFrame {
         salesMenuBuilder.enableMenuItems(value);
     }
 
+    /**
+     * @return the shortcutToolBar
+     */
+    public JsamsShortcutToolBar getShortcutToolBar() {
+        return shortcutToolBar;
+    }
+
+    /**
+     * @param shortcutToolBar the shortcutToolBar to set
+     */
+    public void setShortcutToolBar(JsamsShortcutToolBar shortcutToolBar) {
+        this.shortcutToolBar = shortcutToolBar;
+    }
+    
 }

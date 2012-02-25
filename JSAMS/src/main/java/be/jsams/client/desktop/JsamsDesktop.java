@@ -125,6 +125,7 @@ public class JsamsDesktop {
         frame.getTabbedPane().removeAll();
         frame.setTitle(JsamsI18nResource.TITLE_APPLICATION_NO_ARGUMENTS);
         frame.enableAllMenuItems(false);
+        frame.getShortcutToolBar().enableButtons(false);
     }
 
     /**
