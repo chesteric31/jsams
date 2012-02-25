@@ -44,20 +44,37 @@ public class JsamsShortcutToolBar extends JPanel {
         panel.setBorder(new TitledBorder(JsamsI18nResource.PANEL_SHORTCUT_TOOLBAR.getTranslation()));
         newCustomerButton = new JsamsButton(JsamsI18nResource.BUTTON_NEW_CUSTOMER);
         newCustomerButton.addActionListener(new NewCustomerAction());
+        newCustomerButton.setEnabled(false);
         newEstimateButton = new JsamsButton(JsamsI18nResource.BUTTON_NEW_ESTIMATE);
         newEstimateButton.addActionListener(new NewEstimateAction());
+        newEstimateButton.setEnabled(false);
         newBillButton = new JsamsButton(JsamsI18nResource.BUTTON_NEW_BILL);
         newBillButton.addActionListener(new NewBillAction());
+        newBillButton.setEnabled(false);
         newProductButton = new JsamsButton(JsamsI18nResource.BUTTON_NEW_PRODUCT);
         newProductButton.addActionListener(new NewProductAction());
+        newProductButton.setEnabled(false);
         statisticsButton = new JsamsButton(JsamsI18nResource.BUTTON_STATISTICS);
-
+        statisticsButton.setEnabled(false);
         panel.add(newCustomerButton);
         panel.add(newEstimateButton);
         panel.add(newBillButton);
         panel.add(newProductButton);
         panel.add(statisticsButton);
         this.add(panel);
+    }
+    
+    /**
+     * Enables/disables the buttons.
+     * 
+     * @param value true to enable, false to disable
+     */
+    public void enableButtons(boolean value) {
+        newCustomerButton.setEnabled(value);
+        newEstimateButton.setEnabled(value);
+        newBillButton.setEnabled(value);
+        newProductButton.setEnabled(value);
+        statisticsButton.setEnabled(value);
     }
     
 }

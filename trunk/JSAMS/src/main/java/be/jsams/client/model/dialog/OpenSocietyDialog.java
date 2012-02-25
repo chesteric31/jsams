@@ -15,6 +15,7 @@ import javax.swing.plaf.FontUIResource;
 
 import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.desktop.JsamsDesktop;
+import be.jsams.client.desktop.JsamsMainFrame;
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.i18n.JsamsI18nLabelResource;
 import be.jsams.client.i18n.JsamsI18nResource;
@@ -111,8 +112,10 @@ public class OpenSocietyDialog extends JsamsDialog implements JsamsButtonsInterf
             Object[] parameters = new Object[1];
             parameters[0] = selectedSociety.getName();
             I18nString newTitle = new I18nString("title.application", parameters);
-            jsamsDesktop.getMainWindow().setTitle(newTitle);
-            jsamsDesktop.getMainWindow().enableAllMenuItems(true);
+            JsamsMainFrame mainWindow = jsamsDesktop.getMainWindow();
+            mainWindow.setTitle(newTitle);
+            mainWindow.enableAllMenuItems(true);
+            mainWindow.getShortcutToolBar().enableButtons(true);
             dispose();
         } else {
             statusBar.removeAll();
