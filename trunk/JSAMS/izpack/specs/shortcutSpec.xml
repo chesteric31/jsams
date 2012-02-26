@@ -8,7 +8,7 @@
 
 	<shortcut name="JSAMS" programGroup="yes" desktop="yes"
 		applications="no" startMenu="yes" startup="no"
-		target="$INSTALL_PATH\JSAMS-1.0.2-SNAPSHOT.jar" commandLine=""
+		target="$INSTALL_PATH\JSAMS.jar" commandLine=""
 		description="Java Simplified Accounting Management System" iconFile="$INSTALL_PATH\jsams.ico"
 		iconIndex="0" initialState="noShow">
 		<createForPack name="JSAMS" />
