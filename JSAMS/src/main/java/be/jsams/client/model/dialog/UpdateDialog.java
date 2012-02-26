@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Font;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.LinkedList;
 import java.util.Properties;
 import java.util.prefs.Preferences;
 
@@ -102,7 +103,8 @@ public class UpdateDialog extends JsamsDialog {
         } else {
             JsamsButton updateButton = new JsamsButton(JsamsI18nLabelResource.LABEL_APPLICATION_VERSION_TO_UPDATE);
             builder.appendI15d("", updateButton);
-//            int confirm = JOptionPane.showConfirmDialog(null, JsamsI18nResource.CONFIRMATION_UPDATE);
+            // int confirm = JOptionPane.showConfirmDialog(null,
+            // JsamsI18nResource.CONFIRMATION_UPDATE);
         }
         JPanel panel = builder.getPanel();
         JPanel mainPanel = new JPanel(new BorderLayout());
@@ -110,10 +112,10 @@ public class UpdateDialog extends JsamsDialog {
         add(mainPanel);
         pack();
         DialogUtil.centerComponentOnScreen(this);
-        
+
         setVisible(true);
         setResizable(false);
-        
+
     }
 
     /**
@@ -130,11 +132,11 @@ public class UpdateDialog extends JsamsDialog {
         System.getProperties().put("proxyPort", jsamsPrefs.get("proxyPort", ""));
         RSSFeedParser parser = new RSSFeedParserImpl(
         // "http://jsams.googlecode.com/files/updates.rss"
-                "file:\\C:\\Tools\\workspace-jsams\\JSAMS\\updates.rss");
+        // "file:\\C:\\Tools\\workspace-jsams\\JSAMS\\updates.rss"
+                "file:///home//chesteric31//Dev//workspace-jsams//JSAMS//updates.rss");
         Feed feed = parser.readFeed();
-        for (FeedMessage message : feed.getMessages()) {
-            version = message.getVersion();
-        }
+        LinkedList<FeedMessage> feedMessages = new LinkedList<FeedMessage>(feed.getMessages());
+        version = feedMessages.getLast().getVersion();
         return version;
     }
 
