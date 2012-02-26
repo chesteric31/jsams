@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+
+<!--  updater xml -->
+<installation version="1.0">
+
+	<info>
+		<appname>JSAMS - Java Simplified Accounting Management System
+		</appname>
+		<appversion>1.0.2-SNAPSHOT</appversion>
+		<authors>
+			<author name="Eric Binard" email="chesteric31@gmail.com" />
+		</authors>
+		<url>http://www.code.google.com/p/jsams/</url>
+		<javaversion>1.6</javaversion>
+		<requiresjdk>no</requiresjdk>
+		<!-- <pack200 /> -->
+	</info>
+
+	<!-- The gui preferences indication. Sets the updater window to 640x480. 
+		It will not be able to change the size. -->
+	<guiprefs width="640" height="480" resizable="yes">
+		<laf name="metouia">
+			<os family="unix" />
+		</laf>
+		<laf name="looks">
+			<os family="windows" />
+			<param name="variant" value="extwin" />
+		</laf>
+		<modifier key="headingPanelCounter" value="progressbar" />
+		<modifier key="headingPanelCounterPos" value="inNavigationPanel" />
+	</guiprefs>
+
+	<!-- The locale section. Asks here to include the English and French langpacks. -->
+	<locale>
+		<langpack iso3="eng" />
+		<langpack iso3="fra" />
+	</locale>
+
+	<!-- The resources section. The ids must be these ones if you want to use 
+		the LicencePanel and/or the InfoPanel. -->
+	<resources>
+		<res id="RegistrySpec.xml" src="specs/registrySpec.xml" />
+		<res id="shortcutSpec.xml" src="specs/shortcutSpec.xml" />
+		<res id="LicencePanel.licence" src="LICENSE.txt" />
+	</resources>
+
+	<variables>
+		<variable name="DB_SCHEMA" value="BTS" />
+		<variable name="DB_PASSWORD" value="thatsmypassword" />
+		<variable name="DesktopShortcutCheckboxEnabled" value="true" />
+	</variables>
+
+	<!-- The panels section. We indicate here which panels we want to use. The 
+		order will be respected. -->
+	<panels>
+		<panel classname="HelloPanel" />
+		<panel classname="LicencePanel" />
+		<panel classname="TargetPanel" />
+		<panel classname="PacksPanel" />
+		<panel classname="InstallPanel" />
+		<panel classname="ShortcutPanel" />
+		<panel classname="FinishPanel" />
+	</panels>
+
+	<listeners>
+		<listener installer="RegistryInstallerListener" uninstaller="RegistryUninstallerListener">
+			<os family="windows" />
+		</listener>
+	</listeners>
+
+	<!-- The packs section. We specify here our packs. -->
+	<packs>
+		<pack name="MySQL Database scripts - 1.0.2 updates" required="yes" preselected="yes"
+			installGroups="Update existing install">
+			<description>New sql scripts updates for the version 1.0.2</description>
+			<fileset dir="scripts/1.0.2" targetdir="$INSTALL_PATH/scripts/1.0.2/" />
+			<fileset dir="win/1.0.2" targetdir="$INSTALL_PATH/win/1.0.2/" os="windows" />
+			<parsable targetfile="$INSTALL_PATH/win/1.0.2/update_db_scripts.bat" />
+			<parsable targetfile="$INSTALL_PATH/win/1.0.2/uninstall_db_service.bat" />
+			<executable targetfile="$INSTALL_PATH/win/1.0.2/update_db_scripts.bat"
+				type="shell" stage="postinstall" os="windows" keep="false" failure="abort" />
+			<executable targetfile="$INSTALL_PATH/win/1.0.2/uninstall_db_service.bat"
+				type="shell" stage="uninstall" os="windows" keep="false" failure="abort" />
+		</pack>
+		<pack name="JSAMS" required="yes" installGroups="Update existing install">
+			<description>The application launcher file</description>
+			<file src="../JSAMS.jar" targetdir="$INSTALL_PATH" override="true" />
+			<fileset dir="../lib" targetdir="$INSTALL_PATH/lib" override="true"/>
+			<file src="jsams.ico" targetdir="$INSTALL_PATH" os="windows" />
+		</pack>
+	</packs>
+
+	<!-- The native libraries to add. This is required for creating shortcuts 
+		on Windows -->
+	<native type="izpack" name="ShellLink.dll" />
+	<!-- the native part JNI needs the dll -->
+	<native type="3rdparty" name="COIOSHelper.dll" stage="both">
+		<os family="windows" />
+	</native>
+
+</installation>
