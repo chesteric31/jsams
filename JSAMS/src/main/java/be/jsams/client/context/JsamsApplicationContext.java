@@ -11,6 +11,7 @@ import be.jsams.server.dao.CivilityDao;
 import be.jsams.server.dao.LegalFormDao;
 import be.jsams.server.dao.PaymentModeDao;
 import be.jsams.server.dao.management.ProductCategoryDao;
+import be.jsams.server.property.service.PropertyHolder;
 import be.jsams.server.service.SocietyService;
 import be.jsams.server.service.management.AgentService;
 import be.jsams.server.service.management.CustomerService;
@@ -29,7 +30,8 @@ import be.jsams.server.service.sale.EstimateService;
 import be.jsams.server.service.transfer.TransferService;
 
 /**
- * This class provides static methods to get a reference to a specific service, anywhere in this project.
+ * This class provides static methods to get a reference to a specific service,
+ * anywhere in this project.
  * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
@@ -206,23 +208,33 @@ public final class JsamsApplicationContext {
     public static PdfCommandServiceImpl getPdfCommandService() {
         return (PdfCommandServiceImpl) context.getBean("pdfCommandServiceImpl");
     }
+
     /**
      * @return the {@link PdfDeliveryOrderServiceImpl}
      */
     public static PdfDeliveryOrderServiceImpl getPdfDeliveryOrderService() {
         return (PdfDeliveryOrderServiceImpl) context.getBean("pdfDeliveryOrderServiceImpl");
     }
+
     /**
      * @return the {@link PdfBillServiceImpl}
      */
     public static PdfBillServiceImpl getPdfBillService() {
         return (PdfBillServiceImpl) context.getBean("pdfBillServiceImpl");
     }
+
     /**
      * @return the {@link PdfCreditNoteServiceImpl}
      */
     public static PdfCreditNoteServiceImpl getPdfCreditNoteService() {
         return (PdfCreditNoteServiceImpl) context.getBean("pdfCreditNoteServiceImpl");
+    }
+
+    /**
+     * @return the {@link PropertyHolder}
+     */
+    public static PropertyHolder getPropertyHolder() {
+        return (PropertyHolder) context.getBean("propertyHolder");
     }
 
 }

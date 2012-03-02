@@ -2,18 +2,13 @@ package be.jsams.client.model.dialog;
 
 import java.awt.BorderLayout;
 import java.awt.Font;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.LinkedList;
-import java.util.Properties;
 import java.util.prefs.Preferences;
 
 import javax.swing.JPanel;
 import javax.swing.plaf.FontUIResource;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
+import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.desktop.JsamsMainFrame;
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.i18n.JsamsI18nLabelResource;
@@ -45,18 +40,6 @@ public class UpdateDialog extends JsamsDialog {
      */
     private static final long serialVersionUID = -1586475516079019236L;
 
-    private static final Log LOGGER = LogFactory.getLog(UpdateDialog.class);
-
-    /**
-     * JSAMS application version properties
-     */
-    private static final String JSAMS_APPLICATION_VERSION_PROPERTIES = "jsams-application-version.properties";
-
-    /**
-     * JSAMS application internal version identifier
-     */
-    private static final String APPLICATION_INTERNALVERSION_IDENTIFIER = "application.internalversion.identifier";
-
     /**
      * Constructor.
      * 
@@ -76,18 +59,7 @@ public class UpdateDialog extends JsamsDialog {
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
         builder.setDefaultDialogBorder();
 
-        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        Properties properties = new Properties();
-        try {
-            properties.load(classLoader.getResourceAsStream(JSAMS_APPLICATION_VERSION_PROPERTIES));
-        } catch (FileNotFoundException e) {
-            LOGGER.error(e);
-            return;
-        } catch (IOException e) {
-            LOGGER.error(e);
-            return;
-        }
-        String installedVersion = String.valueOf(properties.get(APPLICATION_INTERNALVERSION_IDENTIFIER));
+        String installedVersion = JsamsApplicationContext.getPropertyHolder().getInstalledVersion();
         String availableVersion = getAvailableVersion();
         JsamsLabel labelInstalled = new JsamsLabel(installedVersion);
         FontUIResource font = new FontUIResource(Font.SANS_SERIF, Font.BOLD, 13);
@@ -115,7 +87,6 @@ public class UpdateDialog extends JsamsDialog {
 
         setVisible(true);
         setResizable(false);
-
     }
 
     /**

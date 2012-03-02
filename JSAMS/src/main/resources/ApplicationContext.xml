@@ -116,6 +116,10 @@
 	<bean id="civilityBeanBuilder" class="be.jsams.common.bean.builder.CivilityBeanBuilder">
 		<property name="dao" ref="civilityDao" />
 	</bean>
+	
+	<bean id="propertyHolder"
+		class="be.jsams.server.property.service.impl.PropertyHolderImpl">
+	</bean>
 
 	<import resource="I18nApplicationContext.xml" />
 	<import resource="ManagementApplicationContext.xml" />
