@@ -10,7 +10,7 @@ import be.jsams.server.service.xml.XmlFileGenerator;
 import be.jsams.server.service.xml.impl.XmlBillGeneratorImpl;
 
 /**
- * 
+ * PDF bill service implementation.
  *
  * @author chesteric31
  * @version $Revision$ $Date::                  $ $Author$

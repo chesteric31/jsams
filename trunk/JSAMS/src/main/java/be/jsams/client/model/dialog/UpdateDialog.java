@@ -2,8 +2,6 @@ package be.jsams.client.model.dialog;
 
 import java.awt.BorderLayout;
 import java.awt.Font;
-import java.util.LinkedList;
-import java.util.prefs.Preferences;
 
 import javax.swing.JPanel;
 import javax.swing.plaf.FontUIResource;
@@ -12,16 +10,13 @@ import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.desktop.JsamsMainFrame;
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.i18n.JsamsI18nLabelResource;
+import be.jsams.client.swing.action.DownloadUpdateAction;
 import be.jsams.client.swing.component.AbstractJsamsFrame;
 import be.jsams.client.swing.component.JsamsButton;
 import be.jsams.client.swing.component.JsamsDialog;
 import be.jsams.client.swing.component.JsamsLabel;
 import be.jsams.client.swing.utils.DialogUtil;
 import be.jsams.client.swing.utils.IconUtil;
-import be.jsams.server.model.rss.Feed;
-import be.jsams.server.model.rss.FeedMessage;
-import be.jsams.server.service.rss.RSSFeedParser;
-import be.jsams.server.service.rss.impl.RSSFeedParserImpl;
 
 import com.jgoodies.forms.builder.DefaultFormBuilder;
 import com.jgoodies.forms.layout.FormLayout;
@@ -59,8 +54,8 @@ public class UpdateDialog extends JsamsDialog {
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
         builder.setDefaultDialogBorder();
 
-        String installedVersion = JsamsApplicationContext.getPropertyHolder().getInstalledVersion();
-        String availableVersion = getAvailableVersion();
+        String installedVersion = JsamsApplicationContext.getPropertyHolder().retrieveInstalledVersion();
+        String availableVersion = JsamsApplicationContext.getDownloaderService().retrieveAvailableUpdateVersion();
         JsamsLabel labelInstalled = new JsamsLabel(installedVersion);
         FontUIResource font = new FontUIResource(Font.SANS_SERIF, Font.BOLD, 13);
         labelInstalled.setFont(font);
@@ -74,6 +69,7 @@ public class UpdateDialog extends JsamsDialog {
             builder.appendI15d(JsamsI18nLabelResource.LABEL_APPLICATION_VERSION_UP_TO_DATE.getKey());
         } else {
             JsamsButton updateButton = new JsamsButton(JsamsI18nLabelResource.LABEL_APPLICATION_VERSION_TO_UPDATE);
+            updateButton.setAction(new DownloadUpdateAction(updateButton.getText(), updateButton.getIcon()));
             builder.appendI15d("", updateButton);
             // int confirm = JOptionPane.showConfirmDialog(null,
             // JsamsI18nResource.CONFIRMATION_UPDATE);
@@ -87,28 +83,6 @@ public class UpdateDialog extends JsamsDialog {
 
         setVisible(true);
         setResizable(false);
-    }
-
-    /**
-     * 
-     * @return the available version
-     */
-    private String getAvailableVersion() {
-        String version = "";
-        Preferences prefsRoot = Preferences.userRoot();
-        Preferences jsamsPrefs = prefsRoot.node("be.jsams");
-
-        System.getProperties().put("proxySet", jsamsPrefs.get("proxySet", "false"));
-        System.getProperties().put("proxyHost", jsamsPrefs.get("proxyHost", ""));
-        System.getProperties().put("proxyPort", jsamsPrefs.get("proxyPort", ""));
-        RSSFeedParser parser = new RSSFeedParserImpl(
-        // "http://jsams.googlecode.com/files/updates.rss"
-        // "file:\\C:\\Tools\\workspace-jsams\\JSAMS\\updates.rss"
-                "file:///home//chesteric31//Dev//workspace-jsams//JSAMS//updates.rss");
-        Feed feed = parser.readFeed();
-        LinkedList<FeedMessage> feedMessages = new LinkedList<FeedMessage>(feed.getMessages());
-        version = feedMessages.getLast().getVersion();
-        return version;
     }
 
 }

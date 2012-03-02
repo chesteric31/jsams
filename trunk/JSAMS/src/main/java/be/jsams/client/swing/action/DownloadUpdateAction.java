@@ -8,17 +8,17 @@ import javax.swing.Icon;
 import be.jsams.client.desktop.JsamsDesktop;
 
 /**
- * Exit action to quit the application. 
+ * Download update action to download an update from the net.
  *
  * @author chesteric31
- * @version $Rev$ $Date::                  $ $Author$
+ * @version $Revision$ $Date::                  $ $Author$
  */
-public class ExitAction extends AbstractAction {
+public class DownloadUpdateAction extends AbstractAction {
 
     /**
-     * Serial Version UID
+     * Serial
      */
-    private static final long serialVersionUID = -8518161605125192287L;
+    private static final long serialVersionUID = 4858347392507840243L;
 
     /**
      * Constructor.
@@ -26,15 +26,16 @@ public class ExitAction extends AbstractAction {
      * @param text the action text
      * @param icon the icon to display
      */
-    public ExitAction(String text, Icon icon) {
+    public DownloadUpdateAction(String text, Icon icon) {
         super(text, icon);
     }
-
+    
     /**
      * {@inheritDoc}
      */
     @Override
     public void actionPerformed(ActionEvent arg0) {
+//        JsamsApplicationContext.getDownloaderService().retrieveAvailableUpdateFile();
         JsamsDesktop.getInstance().stopNow();
     }
 

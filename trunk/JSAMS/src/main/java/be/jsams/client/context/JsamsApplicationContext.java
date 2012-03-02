@@ -11,7 +11,6 @@ import be.jsams.server.dao.CivilityDao;
 import be.jsams.server.dao.LegalFormDao;
 import be.jsams.server.dao.PaymentModeDao;
 import be.jsams.server.dao.management.ProductCategoryDao;
-import be.jsams.server.property.service.PropertyHolder;
 import be.jsams.server.service.SocietyService;
 import be.jsams.server.service.management.AgentService;
 import be.jsams.server.service.management.CustomerService;
@@ -22,12 +21,15 @@ import be.jsams.server.service.pdf.impl.PdfCommandServiceImpl;
 import be.jsams.server.service.pdf.impl.PdfCreditNoteServiceImpl;
 import be.jsams.server.service.pdf.impl.PdfDeliveryOrderServiceImpl;
 import be.jsams.server.service.pdf.impl.PdfEstimateServiceImpl;
+import be.jsams.server.service.property.PropertyHolder;
+import be.jsams.server.service.rss.RSSFeedParser;
 import be.jsams.server.service.sale.BillService;
 import be.jsams.server.service.sale.CommandService;
 import be.jsams.server.service.sale.CreditNoteService;
 import be.jsams.server.service.sale.DeliveryOrderService;
 import be.jsams.server.service.sale.EstimateService;
 import be.jsams.server.service.transfer.TransferService;
+import be.jsams.server.service.update.DownloaderService;
 
 /**
  * This class provides static methods to get a reference to a specific service,
@@ -235,6 +237,20 @@ public final class JsamsApplicationContext {
      */
     public static PropertyHolder getPropertyHolder() {
         return (PropertyHolder) context.getBean("propertyHolder");
+    }
+
+    /**
+     * @return the {@link RSSFeedParser}
+     */
+    public static RSSFeedParser getRSSFeedParser() {
+        return (RSSFeedParser) context.getBean("rssFeedParser");
+    }
+    
+    /**
+     * @return the {@link DownloaderService}
+     */
+    public static DownloaderService getDownloaderService() {
+        return (DownloaderService) context.getBean("downloaderService");
     }
 
 }

@@ -31,6 +31,7 @@ public class RSSFeedParserImpl implements RSSFeedParser {
     private static final String RELEASE_DATE = "releaseDate";
     private static final String VERSION = "version";
     private static final String GUID = "guid";
+    private static final String VERSION_SEQUENCE = "versionSequence";
 
     private URL url;
 
@@ -64,6 +65,7 @@ public class RSSFeedParserImpl implements RSSFeedParser {
             String releaseDate = "";
             String version = "";
             String guid = "";
+            String versionSequence = "";
 
             // First create a new XMLInputFactory
             XMLInputFactory inputFactory = XMLInputFactory.newInstance();
@@ -123,6 +125,11 @@ public class RSSFeedParserImpl implements RSSFeedParser {
                         guid = event.asCharacters().getData();
                         continue;
                     }
+                    if (VERSION_SEQUENCE.equals(localPart)) {
+                        event = eventReader.nextEvent();
+                        versionSequence = event.asCharacters().getData();
+                        continue;
+                    }
                 } else if (event.isEndElement()) {
                     String localPart = event.asEndElement().getName().getLocalPart();
                     if (ITEM.equals(localPart)) {
@@ -134,6 +141,7 @@ public class RSSFeedParserImpl implements RSSFeedParser {
                         message.setTitle(title);
                         message.setReleaseDate(releaseDate);
                         message.setVersion(version);
+                        message.setVersionSequence(versionSequence);
                         feed.getMessages().add(message);
                         event = eventReader.nextEvent();
                         continue;
