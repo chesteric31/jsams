@@ -44,6 +44,7 @@ public class DownloadUpdateAction extends AbstractAction {
         if (confirm == 0) {
             List<String> updateJars = JsamsApplicationContext.getDownloaderService().downloadUpdate();
             executeUpdates(updateJars);
+            JsamsDesktop.getInstance().stopNow();
         }
     }
 
@@ -66,7 +67,6 @@ public class DownloadUpdateAction extends AbstractAction {
                 throw new RuntimeException(e);
             }
         }
-        JsamsDesktop.getInstance().stopNow();
     }
     
 //    public static void main(String... args) {
