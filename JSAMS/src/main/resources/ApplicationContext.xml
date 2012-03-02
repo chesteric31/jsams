@@ -120,7 +120,7 @@
 	<bean id="rssFeedParser" class="be.jsams.server.service.rss.impl.RSSFeedParserImpl">
 		<!-- // "file:\\C:\\Tools\\workspace-jsams\\JSAMS\\updates.rss" -->
 		<!-- "file:///home//chesteric31//Dev//workspace-jsams//JSAMS//updates.rss" -->
-		<constructor-arg value="http:/jsams.googlecode.com/files/updates.rss" />
+		<constructor-arg value="http://jsams.googlecode.com/files/updates.rss" />
 	</bean>
 
 	<bean id="downloaderService"
