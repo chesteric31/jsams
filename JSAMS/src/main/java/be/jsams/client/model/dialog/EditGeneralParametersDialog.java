@@ -26,6 +26,7 @@ import be.jsams.client.swing.component.JsamsStatusBar;
 import be.jsams.client.swing.component.JsamsTextField;
 import be.jsams.client.swing.utils.DialogUtil;
 import be.jsams.client.swing.utils.IconUtil;
+import be.jsams.common.util.JsamsConstants;
 
 import com.jgoodies.forms.builder.DefaultFormBuilder;
 import com.jgoodies.forms.layout.FormLayout;
@@ -42,11 +43,6 @@ public class EditGeneralParametersDialog extends JsamsDialog implements JsamsBut
      * Serial Version UID
      */
     private static final long serialVersionUID = -2631309171029588421L;
-    
-    /**
-     * properties path name
-     */
-    private static final String BE_JSAMS = "be.jsams";
 
     /**
      * constant for first remember days
@@ -62,36 +58,6 @@ public class EditGeneralParametersDialog extends JsamsDialog implements JsamsBut
      * constant for formal notice days
      */
     private static final String FORMAL_NOTICE_DAYS = "formalNoticeDays";
-
-    /**
-     * constant for proxy to set
-     */
-    private static final String PROXY_TO_SET = "proxyToSet";
-
-    /**
-     * constant for proxy host
-     */
-    private static final String PROXY_HOST = "proxyHost";
-
-    /**
-     * constant for proxy port
-     */
-    private static final String PROXY_PORT = "proxyPort";
-
-    /**
-     * constant for proxy to authenticate
-     */
-    private static final String PROXY_TO_AUTHENTICATE = "proxyToAuthenticate";
-
-    /**
-     * constant for proxy user
-     */
-    private static final String PROXY_USER = "proxyUser";
-
-    /**
-     * constant for proxy pass
-     */
-    private static final String PROXY_PASS = "proxyPass";
 
     private JsamsButtonsPanel buttonsPanel;
     private JsamsStatusBar statusBar;
@@ -126,16 +92,17 @@ public class EditGeneralParametersDialog extends JsamsDialog implements JsamsBut
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
         builder.setDefaultDialogBorder();
         Preferences prefsRoot = Preferences.userRoot();
-        Preferences jsamsPrefs = prefsRoot.node(BE_JSAMS);
+        Preferences jsamsPrefs = prefsRoot.node(JsamsConstants.PACKAGE_ROOT_NAME);
 
-        Boolean proxyToSetProp = Boolean.valueOf(jsamsPrefs.get(PROXY_TO_SET, "false"));
-        String proxyHostProp = String.valueOf(jsamsPrefs.get(PROXY_HOST, ""));
-        String proxyPortProp = String.valueOf(jsamsPrefs.get(PROXY_PORT, ""));
+        Boolean proxyToSetProp = Boolean.valueOf(jsamsPrefs.get(JsamsConstants.PROXY_TO_SET, "false"));
+        String proxyHostProp = String.valueOf(jsamsPrefs.get(JsamsConstants.PROXY_HOST, ""));
+        String proxyPortProp = String.valueOf(jsamsPrefs.get(JsamsConstants.PROXY_PORT, ""));
 
-        Boolean proxyToAuthenticateProp = Boolean.valueOf(jsamsPrefs.get(PROXY_TO_AUTHENTICATE, "false"));
-        String proxyUserProp = String.valueOf(jsamsPrefs.get(PROXY_USER, ""));
-        String proxyPassProp = String.valueOf(jsamsPrefs.get(PROXY_PASS, ""));
-        
+        Boolean proxyToAuthenticateProp = Boolean
+                .valueOf(jsamsPrefs.get(JsamsConstants.PROXY_TO_AUTHENTICATE, "false"));
+        String proxyUserProp = String.valueOf(jsamsPrefs.get(JsamsConstants.PROXY_USER, ""));
+        String proxyPassProp = String.valueOf(jsamsPrefs.get(JsamsConstants.PROXY_PASS, ""));
+
         int firstRememberDays = Integer.valueOf(jsamsPrefs.get(FIRST_REMEMBER_DAYS, "0"));
         int secondRememberDays = Integer.valueOf(jsamsPrefs.get(SECOND_REMEMBER_DAYS, "0"));
         int formalNoticeDays = Integer.valueOf(jsamsPrefs.get(FORMAL_NOTICE_DAYS, "0"));
@@ -216,13 +183,13 @@ public class EditGeneralParametersDialog extends JsamsDialog implements JsamsBut
     @Override
     public void performOk() {
         Preferences prefsRoot = Preferences.userRoot();
-        Preferences jsamsPrefs = prefsRoot.node(BE_JSAMS);
-        jsamsPrefs.putBoolean(PROXY_TO_SET, proxyToSet.isSelected());
-        jsamsPrefs.put(PROXY_HOST, proxyHost.getText());
-        jsamsPrefs.put(PROXY_PORT, proxyPort.getText());
-        jsamsPrefs.putBoolean(PROXY_TO_AUTHENTICATE, proxyToAuthenticate.isSelected());
-        jsamsPrefs.put(PROXY_USER, proxyUser.getText());
-        jsamsPrefs.put(PROXY_PASS, proxyPass.getPassword().toString());
+        Preferences jsamsPrefs = prefsRoot.node(JsamsConstants.PACKAGE_ROOT_NAME);
+        jsamsPrefs.putBoolean(JsamsConstants.PROXY_TO_SET, proxyToSet.isSelected());
+        jsamsPrefs.put(JsamsConstants.PROXY_HOST, proxyHost.getText());
+        jsamsPrefs.put(JsamsConstants.PROXY_PORT, proxyPort.getText());
+        jsamsPrefs.putBoolean(JsamsConstants.PROXY_TO_AUTHENTICATE, proxyToAuthenticate.isSelected());
+        jsamsPrefs.put(JsamsConstants.PROXY_USER, proxyUser.getText());
+        jsamsPrefs.put(JsamsConstants.PROXY_PASS, proxyPass.getPassword().toString());
         jsamsPrefs.put(FIRST_REMEMBER_DAYS, spinnerModelFirst.getValue().toString());
         jsamsPrefs.put(SECOND_REMEMBER_DAYS, spinnerModelSecond.getValue().toString());
         jsamsPrefs.put(FORMAL_NOTICE_DAYS, spinnerModelNotice.getValue().toString());

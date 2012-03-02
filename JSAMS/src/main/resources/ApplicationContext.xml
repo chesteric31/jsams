@@ -35,10 +35,7 @@
 	<bean id="txManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
-	<!--
-		enable the configuration of transactional behavior based on
-		annotations
-	-->
+	<!-- enable the configuration of transactional behavior based on annotations -->
 	<!-- <tx:annotation-driven transaction-manager="txManager" /> -->
 
 	<bean id="baseTransactionProxy"
@@ -70,7 +67,7 @@
 	<bean id="societyServiceTarget" class="be.jsams.server.service.impl.SocietyServiceImpl"
 		parent="abstractService">
 		<property name="societyDao" ref="societyDao" />
-<!--		<property name="builder" ref="societyBeanBuilder" />-->
+		<!-- <property name="builder" ref="societyBeanBuilder" /> -->
 	</bean>
 	<bean id="societyService" parent="baseTransactionProxy">
 		<property name="target" ref="societyServiceTarget" />
@@ -104,21 +101,32 @@
 		<property name="dao" ref="societyDao" />
 		<property name="legalFormBuilder" ref="legalFormBeanBuilder" />
 	</bean>
-	
+
 	<bean id="legalFormBeanBuilder" class="be.jsams.common.bean.builder.LegalFormBeanBuilder">
 		<property name="dao" ref="legalFormDao" />
 	</bean>
-	
+
 	<bean id="paymentModeBeanBuilder" class="be.jsams.common.bean.builder.PaymentModeBeanBuilder">
 		<property name="dao" ref="paymentModeDao" />
 	</bean>
-	
+
 	<bean id="civilityBeanBuilder" class="be.jsams.common.bean.builder.CivilityBeanBuilder">
 		<property name="dao" ref="civilityDao" />
 	</bean>
-	
+
 	<bean id="propertyHolder"
-		class="be.jsams.server.property.service.impl.PropertyHolderImpl">
+		class="be.jsams.server.service.property.impl.PropertyHolderImpl">
+	</bean>
+	<bean id="rssFeedParser" class="be.jsams.server.service.rss.impl.RSSFeedParserImpl">
+		<!-- // "file:\\C:\\Tools\\workspace-jsams\\JSAMS\\updates.rss" -->
+		<!-- "file:///home//chesteric31//Dev//workspace-jsams//JSAMS//updates.rss" -->
+		<constructor-arg value="http:/jsams.googlecode.com/files/updates.rss" />
+	</bean>
+
+	<bean id="downloaderService"
+		class="be.jsams.server.service.update.impl.DownloaderServiceImpl">
+		<property name="rssFeedParser" ref="rssFeedParser" />
+		<property name="propertyHolder" ref="propertyHolder" />
 	</bean>
 
 	<import resource="I18nApplicationContext.xml" />

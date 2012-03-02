@@ -31,7 +31,7 @@ public class EditSocietyAction extends AbstractAction {
     private int editionMode;
 
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param text the action text
      * @param icon the icon to display

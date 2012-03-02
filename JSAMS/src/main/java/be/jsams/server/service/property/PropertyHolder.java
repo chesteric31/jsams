@@ -1,4 +1,4 @@
-package be.jsams.server.property.service;
+package be.jsams.server.service.property;
 
 /**
  * Service that manages the read/write of properties into properties files.
@@ -14,6 +14,6 @@ public interface PropertyHolder {
      * 
      * @return the installed version
      */
-    String getInstalledVersion();
+    String retrieveInstalledVersion();
 
 }

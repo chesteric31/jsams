@@ -1,4 +1,4 @@
-package be.jsams.server.property.service.impl;
+package be.jsams.server.service.property.impl;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -7,7 +7,7 @@ import java.util.Properties;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import be.jsams.server.property.service.PropertyHolder;
+import be.jsams.server.service.property.PropertyHolder;
 
 /**
  * Implementation for the property holder service.
@@ -33,7 +33,7 @@ public class PropertyHolderImpl implements PropertyHolder {
      * {@inheritDoc}
      */
     @Override
-    public String getInstalledVersion() {
+    public String retrieveInstalledVersion() {
         String result = "";
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
         Properties properties = new Properties();
