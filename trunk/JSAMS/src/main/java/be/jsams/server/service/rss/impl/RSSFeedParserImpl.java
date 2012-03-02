@@ -8,6 +8,7 @@ import java.net.URL;
 import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
 import be.jsams.server.model.rss.Feed;
@@ -74,7 +75,9 @@ public class RSSFeedParserImpl implements RSSFeedParser {
                 XMLEvent event = eventReader.nextEvent();
 
                 if (event.isStartElement()) {
-                    if (event.asStartElement().getName().getLocalPart() == (ITEM)) {
+                    StartElement asStartElement = event.asStartElement();
+                    String localPart = asStartElement.getName().getLocalPart();
+                    if (ITEM.equals(localPart)) {
                         if (isFeedHeader) {
                             isFeedHeader = false;
                             feed = new Feed(title, description, link, author);
@@ -83,45 +86,46 @@ public class RSSFeedParserImpl implements RSSFeedParser {
                         continue;
                     }
 
-                    if (event.asStartElement().getName().getLocalPart() == (TITLE)) {
+                    if (TITLE.equals(localPart)) {
                         event = eventReader.nextEvent();
                         title = event.asCharacters().getData();
                         continue;
                     }
-                    if (event.asStartElement().getName().getLocalPart() == (DESCRIPTION)) {
+                    if (DESCRIPTION.equals(localPart)) {
                         event = eventReader.nextEvent();
                         description = event.asCharacters().getData();
                         continue;
                     }
 
-                    if (event.asStartElement().getName().getLocalPart() == (LINK)) {
+                    if (LINK.equals(localPart)) {
                         event = eventReader.nextEvent();
                         link = event.asCharacters().getData();
                         continue;
                     }
 
-                    if (event.asStartElement().getName().getLocalPart() == (VERSION)) {
+                    if (VERSION.equals(localPart)) {
                         event = eventReader.nextEvent();
                         version = event.asCharacters().getData();
                         continue;
                     }
-                    if (event.asStartElement().getName().getLocalPart() == (RELEASE_DATE)) {
+                    if (RELEASE_DATE.equals(localPart)) {
                         event = eventReader.nextEvent();
                         releaseDate = event.asCharacters().getData();
                         continue;
                     }
-                    if (event.asStartElement().getName().getLocalPart() == (AUTHOR)) {
+                    if (AUTHOR.equals(localPart)) {
                         event = eventReader.nextEvent();
                         author = event.asCharacters().getData();
                         continue;
                     }
-                    if (event.asStartElement().getName().getLocalPart() == (GUID)) {
+                    if (GUID.equals(localPart)) {
                         event = eventReader.nextEvent();
                         guid = event.asCharacters().getData();
                         continue;
                     }
                 } else if (event.isEndElement()) {
-                    if (event.asEndElement().getName().getLocalPart() == (ITEM)) {
+                    String localPart = event.asEndElement().getName().getLocalPart();
+                    if (ITEM.equals(localPart)) {
                         FeedMessage message = new FeedMessage();
                         message.setAuthor(author);
                         message.setDescription(description);
