@@ -40,7 +40,7 @@ public class RSSFeedWriterImplTest {
         String releaseDate = simpleDateFormat.format(creationDate);
         Feed rssFeeder = new Feed(title, description, link, author);
 
-        for (int i = 2; i <= 3; i++) {
+        for (int i = 2; i <= 4; i++) {
             // Now add one example entry
             FeedMessage feed = new FeedMessage();
             feed.setTitle("JSAMS update");

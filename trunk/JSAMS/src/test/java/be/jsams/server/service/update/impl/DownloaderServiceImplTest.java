@@ -28,7 +28,7 @@ public class DownloaderServiceImplTest {
     }
 
     /**
-     * Test method for {@link be.jsams.server.service.update.impl.DownloaderServiceImpl#retrieveAvailableUpdateFile(java.lang.String)}.
+     * Test method for {@link be.jsams.server.service.update.impl.DownloaderServiceImpl#downloadAvailableUpdateFile(java.lang.String)}.
      */
     @Test
     public void testRetrieveAvailableUpdateFile() {
@@ -47,6 +47,9 @@ public class DownloaderServiceImplTest {
                 "file:///home//chesteric31//Dev//workspace-jsams//JSAMS//updates.rss");
         downloaderService.setRssFeedParser(rssFeedParser);
         List<String> stringForUpdates = downloaderService.retrieveHostStringForUpdates();
+        for (String string: stringForUpdates) {
+            System.out.println(string);
+        }
     }
 
 }
