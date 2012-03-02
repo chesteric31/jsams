@@ -15,7 +15,6 @@ public class FeedMessage {
     private String guid;
     private String version;
     private String releaseDate;
-    private String versionSequence;
 
     /**
      * @return the title
@@ -116,27 +115,12 @@ public class FeedMessage {
     }
 
     /**
-     * @return the versionSequence
-     */
-    public String getVersionSequence() {
-        return versionSequence;
-    }
-
-    /**
-     * @param versionSequence the versionSequence to set
-     */
-    public void setVersionSequence(String versionSequence) {
-        this.versionSequence = versionSequence;
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Override
     public String toString() {
         return "FeedMessage [title=" + title + ", description=" + description + ", link=" + link + ", author=" + author
-                + ", guid=" + guid + ", version=" + version + ", releaseDate=" + releaseDate + ", versionSequence="
-                + versionSequence + "]";
+                + ", guid=" + guid + ", version=" + version + ", releaseDate=" + releaseDate + "]";
     }
 
 }

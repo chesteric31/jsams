@@ -1,6 +1,5 @@
 package be.jsams.server.service.update;
 
-import java.io.File;
 import java.util.List;
 
 /**
@@ -19,12 +18,13 @@ public interface DownloaderService {
     String retrieveAvailableUpdateVersion();
     
     /**
-     * Returns the downloaded last available version of the JSAMS application.
+     * Retrieves the downloaded update file of the JSAMS application.
      * 
      * @param host the host URL to use for download
-     * @return the downloaded last available version of the JSAMS application.
+     * 
+     * @return a path name of download update jar
      */
-    File retrieveAvailableUpdateFile(String host);
+    String downloadAvailableUpdateFile(String host);
     
     /**
      * Retrieves a list of string host to use for the download of updates files.
@@ -32,5 +32,12 @@ public interface DownloaderService {
      * @return a list of string host
      */
     List<String> retrieveHostStringForUpdates();
+
+    /**
+     * Downloads update files into current directory.
+     * 
+     * @return a list of path names of download update jar
+     */
+    List<String> downloadUpdate();
     
 }

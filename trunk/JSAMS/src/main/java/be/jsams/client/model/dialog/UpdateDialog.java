@@ -71,8 +71,6 @@ public class UpdateDialog extends JsamsDialog {
             JsamsButton updateButton = new JsamsButton(JsamsI18nLabelResource.LABEL_APPLICATION_VERSION_TO_UPDATE);
             updateButton.setAction(new DownloadUpdateAction(updateButton.getText(), updateButton.getIcon()));
             builder.appendI15d("", updateButton);
-            // int confirm = JOptionPane.showConfirmDialog(null,
-            // JsamsI18nResource.CONFIRMATION_UPDATE);
         }
         JPanel panel = builder.getPanel();
         JPanel mainPanel = new JPanel(new BorderLayout());

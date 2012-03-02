@@ -1,6 +1,5 @@
 package be.jsams.server.service.update.impl;
 
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -53,13 +52,13 @@ public class DownloaderServiceImpl implements DownloaderService {
      * {@inheritDoc}
      */
     @Override
-    public File retrieveAvailableUpdateFile(String host) {
+    public String downloadAvailableUpdateFile(String host) {
         if (host == null || host.isEmpty()) {
             throw new IllegalArgumentException("Empty URL or file.");
         }
         InputStream input = null;
         FileOutputStream writeFile = null;
-
+        String fileName = null;
         try {
             URL url = new URL(host);
             URLConnection connection = url.openConnection();
@@ -70,7 +69,7 @@ public class DownloaderServiceImpl implements DownloaderService {
             }
 
             input = connection.getInputStream();
-            String fileName = url.getFile().substring(url.getFile().lastIndexOf('/') + 1);
+            fileName = url.getFile().substring(url.getFile().lastIndexOf('/') + 1);
             writeFile = new FileOutputStream(fileName);
             byte[] buffer = new byte[1024];
             int read;
@@ -89,7 +88,7 @@ public class DownloaderServiceImpl implements DownloaderService {
                 throw new IllegalArgumentException(e);
             }
         }
-        return null;
+        return fileName;
     }
     
     /**
@@ -99,14 +98,32 @@ public class DownloaderServiceImpl implements DownloaderService {
     public List<String> retrieveHostStringForUpdates() {
         List<String> hostForUpdates = new ArrayList<String>();
         String installedVersion = propertyHolder.retrieveInstalledVersion();
-        String[] splitInstalledVersion = installedVersion.split(".");
-        String availableUpdateVersion = retrieveAvailableUpdateVersion();
-        String[] splitUpdateVersion = availableUpdateVersion.split(".");
         LinkedList<FeedMessage> feedMessages = new LinkedList<FeedMessage>(rssFeedParser.readFeed().getMessages());
+        boolean toKeep = false;
         for (FeedMessage feedMessage : feedMessages) {
             String version = feedMessage.getVersion();
+            if (toKeep) {
+                hostForUpdates.add(feedMessage.getLink());
+            }
+            if (version.equals(installedVersion)) {
+                toKeep = true;
+                // the next one will be to keep its link
+            }
         }
         return hostForUpdates;
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<String> downloadUpdate() {
+        List<String> pathNamesToUpdateJar = new ArrayList<String>();
+        List<String> forUpdates = retrieveHostStringForUpdates();
+        for (String update : forUpdates) {
+            pathNamesToUpdateJar.add(downloadAvailableUpdateFile(update));
+        }
+        return pathNamesToUpdateJar;
     }
 
     /**
