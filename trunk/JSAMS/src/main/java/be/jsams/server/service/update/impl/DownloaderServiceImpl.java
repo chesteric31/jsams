@@ -72,12 +72,11 @@ public class DownloaderServiceImpl implements DownloaderService {
             fileName = url.getFile().substring(url.getFile().lastIndexOf('/') + 1);
             writeFile = new FileOutputStream(fileName);
             byte[] buffer = new byte[1024];
-            int read;
-            do {
-                read = input.read(buffer);
-                writeFile.write(buffer, 0, read);
-            } while (read > 0);
-            writeFile.flush();
+            int in = input.read(buffer);
+            while (in > 0) {
+                writeFile.write(buffer, 0, in);
+                in = input.read(buffer);
+            }
         } catch (IOException e) {
             throw new IllegalArgumentException("Error while trying to download the file.");
         } finally {
@@ -85,7 +84,7 @@ public class DownloaderServiceImpl implements DownloaderService {
                 writeFile.close();
                 input.close();
             } catch (IOException e) {
-                throw new IllegalArgumentException(e);
+                throw new RuntimeException(e);
             }
         }
         return fileName;

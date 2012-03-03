@@ -8,6 +8,9 @@ import javax.swing.AbstractAction;
 import javax.swing.Icon;
 import javax.swing.JOptionPane;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.client.i18n.JsamsI18nResource;
@@ -24,6 +27,9 @@ public class DownloadUpdateAction extends AbstractAction {
      * Serial
      */
     private static final long serialVersionUID = 4858347392507840243L;
+
+    private static final Log LOGGER = LogFactory.getLog(DownloadUpdateAction.class);
+    private final boolean info = LOGGER.isInfoEnabled();
 
     /**
      * Constructor.
@@ -59,6 +65,9 @@ public class DownloadUpdateAction extends AbstractAction {
     private void executeUpdates(List<String> updateJars) {
         for (String updateJar : updateJars) {
             try {
+                if (info) {
+                    LOGGER.info("java -jar with:" + updateJar);
+                }
                 Process process = Runtime.getRuntime().exec("java -jar " + updateJar);
                 process.waitFor();
             } catch (IOException e) {
