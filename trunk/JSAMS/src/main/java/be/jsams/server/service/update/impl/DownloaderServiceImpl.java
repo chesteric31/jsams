@@ -11,6 +11,9 @@ import java.util.List;
 import java.util.Properties;
 import java.util.prefs.Preferences;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import be.jsams.common.util.JsamsConstants;
 import be.jsams.server.model.rss.Feed;
 import be.jsams.server.model.rss.FeedMessage;
@@ -25,6 +28,9 @@ import be.jsams.server.service.update.DownloaderService;
  * @version $Revision$ $Date::                  $ $Author$
  */
 public class DownloaderServiceImpl implements DownloaderService {
+
+    private static final Log LOGGER = LogFactory.getLog(DownloaderServiceImpl.class);
+    private static boolean info = LOGGER.isInfoEnabled();
 
     private RSSFeedParser rssFeedParser;
     private PropertyHolder propertyHolder;
@@ -67,9 +73,11 @@ public class DownloaderServiceImpl implements DownloaderService {
             if (fileLength == -1) {
                 throw new IllegalArgumentException("Invalid URL or file.");
             }
-
             input = connection.getInputStream();
             fileName = url.getFile().substring(url.getFile().lastIndexOf('/') + 1);
+            if (info) {
+                LOGGER.info("File to download: " + fileName);
+            }
             writeFile = new FileOutputStream(fileName);
             byte[] buffer = new byte[1024];
             int in = input.read(buffer);
@@ -78,11 +86,15 @@ public class DownloaderServiceImpl implements DownloaderService {
                 in = input.read(buffer);
             }
         } catch (IOException e) {
-            throw new IllegalArgumentException("Error while trying to download the file.");
+            throw new IllegalArgumentException(e);
         } finally {
             try {
-                writeFile.close();
-                input.close();
+                if (writeFile != null) {
+                    writeFile.close();
+                }
+                if (input != null) {
+                    input.close();
+                }
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

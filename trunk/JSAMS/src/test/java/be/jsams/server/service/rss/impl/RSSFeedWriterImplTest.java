@@ -40,21 +40,34 @@ public class RSSFeedWriterImplTest {
         String releaseDate = simpleDateFormat.format(creationDate);
         Feed rssFeeder = new Feed(title, description, link, author);
 
+        // Now add one example entry
+        FeedMessage feedOld = new FeedMessage();
+        feedOld.setTitle("JSAMS update");
+        feedOld.setDescription("This is a description");
+        feedOld.setAuthor("chesteric31");
+        feedOld.setGuid("");
+        feedOld.setLink("");
+        cal.set(2011, 11, 25);
+        feedOld.setReleaseDate(simpleDateFormat.format(cal.getTime()));
+        String version = "1.0.1-SNAPSHOT";
+        feedOld.setVersion(version);
+        rssFeeder.getMessages().add(feedOld);
         for (int i = 2; i <= 4; i++) {
             // Now add one example entry
             FeedMessage feed = new FeedMessage();
             feed.setTitle("JSAMS update");
             feed.setDescription("This is a description");
             feed.setAuthor("chesteric31");
-            feed.setGuid("http://jsams.googlecode.com/files/JSAMS-1.0." + i + "-SNAPSHOT-update.jar");
-            feed.setLink("http://jsams.googlecode.com/files/JSAMS-1.0." + i + "-SNAPSHOT-update.jar");
+            String guidLink = "http://jsams.googlecode.com/files/JSAMS-1.0." + i + "-SNAPSHOT-updater.jar";
+            feed.setGuid(guidLink);
+            feed.setLink(guidLink);
             feed.setReleaseDate(releaseDate);
             feed.setVersion("1.0." + i + "-SNAPSHOT");
             rssFeeder.getMessages().add(feed);
         }
 
         // Now write the file
-        RSSFeedWriter writer = new RSSFeedWriterImpl(rssFeeder, "updates.rss");
+        RSSFeedWriter writer = new RSSFeedWriterImpl(rssFeeder, "Updates.rss");
         try {
             writer.writeFeed();
         } catch (Exception e) {
