@@ -24,14 +24,4 @@
 	<author>chesteric31</author>
 	<releaseDate>Sun, 11 Mar 2012 20:13:31 +0100</releaseDate>
 </item>
-<item>
-	<title>JSAMS update</title>
-	<description>This is a description</description>
-	<link>http://jsams.googlecode.com/files/JSAMS-1.0.3-SNAPSHOT-updater.jar</link>
-	<author>chesteric31</author>
-	<guid>http://jsams.googlecode.com/files/JSAMS-1.0.3-SNAPSHOT-updater.jar</guid>
-	<version>1.0.3-SNAPSHOT</version>
-	<author>chesteric31</author>
-	<releaseDate>Sun, 11 Mar 2012 20:13:31 +0100</releaseDate>
-</item>
 </rss>
