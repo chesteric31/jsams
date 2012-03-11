@@ -4,7 +4,7 @@ import be.jsams.client.i18n.JsamsI18nLabelResource;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.common.bean.model.management.ProductBean;
 import be.jsams.common.bean.model.management.ProductCategoryBean;
-import be.jsams.common.validator.StringValidator;
+import be.jsams.common.bean.validator.StringValidator;
 
 import com.jgoodies.validation.ValidationResult;
 import com.jgoodies.validation.Validator;

@@ -4,8 +4,6 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import be.jsams.common.validator.StringValidator;
-
 /**
  * Test the {@link StringValidator} class.
  *
