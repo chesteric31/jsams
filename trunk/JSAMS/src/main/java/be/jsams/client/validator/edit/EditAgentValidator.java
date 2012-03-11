@@ -5,8 +5,8 @@ import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.common.bean.model.AddressBean;
 import be.jsams.common.bean.model.ContactInformationBean;
 import be.jsams.common.bean.model.management.AgentBean;
-import be.jsams.common.bean.validator.EmailValidator;
-import be.jsams.common.bean.validator.StringValidator;
+import be.jsams.common.validator.EmailValidator;
+import be.jsams.common.validator.StringValidator;
 
 import com.jgoodies.validation.ValidationResult;
 import com.jgoodies.validation.Validator;

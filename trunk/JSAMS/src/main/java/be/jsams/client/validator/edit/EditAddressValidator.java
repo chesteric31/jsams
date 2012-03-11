@@ -3,7 +3,7 @@ package be.jsams.client.validator.edit;
 import be.jsams.client.i18n.JsamsI18nLabelResource;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.common.bean.model.AddressBean;
-import be.jsams.common.bean.validator.StringValidator;
+import be.jsams.common.validator.StringValidator;
 
 import com.jgoodies.validation.ValidationResult;
 import com.jgoodies.validation.Validator;
