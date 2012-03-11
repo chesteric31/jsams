@@ -5,8 +5,7 @@ import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.common.bean.model.AddressBean;
 import be.jsams.common.bean.model.ContactInformationBean;
 import be.jsams.common.bean.model.management.AgentBean;
-import be.jsams.common.validator.EmailValidator;
-import be.jsams.common.validator.StringValidator;
+import be.jsams.common.bean.validator.StringValidator;
 
 import com.jgoodies.validation.ValidationResult;
 import com.jgoodies.validation.Validator;
@@ -55,7 +54,7 @@ public class EditAgentValidator implements Validator<AgentBean> {
         }
         String email = contactInformation.getEmail();
         if (!ValidationUtils.isBlank(email)) {
-            if (!EmailValidator.validate(email)) {
+            if (!be.jsams.common.bean.validator.EmailValidator.validate(email)) {
                 support.addError(JsamsI18nLabelResource.LABEL_EMAIL.getTranslation(),
                         JsamsI18nResource.ERROR_IS_INVALID.getTranslation());
             }
