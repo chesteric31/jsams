@@ -23,7 +23,7 @@ public class RSSFeedParserImplTest {
         System.getProperties().put("proxySet", "true");
         System.getProperties().put("proxyHost", "10.16.0.25");
         System.getProperties().put("proxyPort", "8080");
-        RSSFeedParser parser = new RSSFeedParserImpl("http://jsams.googlecode.com/files/updates.rss");
+        RSSFeedParser parser = new RSSFeedParserImpl("http://jsams.googlecode.com/files/Updates.rss");
         Feed feed = parser.readFeed();
         System.out.println(feed);
         for (FeedMessage message : feed.getMessages()) {
