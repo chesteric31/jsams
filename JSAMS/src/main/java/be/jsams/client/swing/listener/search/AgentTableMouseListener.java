@@ -36,32 +36,24 @@ public class AgentTableMouseListener implements MouseListener {
      * {@inheritDoc}
      */
     public void mouseEntered(MouseEvent arg0) {
-        // TODO Auto-generated method stub
-
     }
 
     /**
      * {@inheritDoc}
      */
     public void mouseExited(MouseEvent arg0) {
-        // TODO Auto-generated method stub
-
     }
 
     /**
      * {@inheritDoc}
      */
     public void mousePressed(MouseEvent arg0) {
-        // TODO Auto-generated method stub
-
     }
 
     /**
      * {@inheritDoc}
      */
     public void mouseReleased(MouseEvent arg0) {
-        // TODO Auto-generated method stub
-
     }
 
 }

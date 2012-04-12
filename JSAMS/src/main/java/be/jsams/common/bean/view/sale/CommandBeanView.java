@@ -167,8 +167,6 @@ public class CommandBeanView extends AbstractDocumentBeanView<CommandBean> imple
              */
             @Override
             public void mouseReleased(MouseEvent e) {
-                // TODO Auto-generated method stub
-
             }
 
             /**
@@ -176,8 +174,6 @@ public class CommandBeanView extends AbstractDocumentBeanView<CommandBean> imple
              */
             @Override
             public void mousePressed(MouseEvent e) {
-                // TODO Auto-generated method stub
-
             }
 
             /**
@@ -185,8 +181,6 @@ public class CommandBeanView extends AbstractDocumentBeanView<CommandBean> imple
              */
             @Override
             public void mouseExited(MouseEvent e) {
-                // TODO Auto-generated method stub
-
             }
 
             /**
@@ -194,8 +188,6 @@ public class CommandBeanView extends AbstractDocumentBeanView<CommandBean> imple
              */
             @Override
             public void mouseEntered(MouseEvent e) {
-                // TODO Auto-generated method stub
-
             }
 
             /**

@@ -91,10 +91,8 @@ public class RSSFeedWriterImpl implements RSSFeedWriter {
             eventWriter.add(eventFactory.createEndDocument());
             eventWriter.close();
         } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
             throw new RuntimeException(e);
         } catch (XMLStreamException e) {
-            // TODO Auto-generated catch block
             throw new RuntimeException(e);
         }
     }

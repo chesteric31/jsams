@@ -79,7 +79,6 @@ public class CreditNoteDetailBean extends
      */
     @Override
     public CreditNoteDetailBeanView buildView() {
-        // TODO Auto-generated method stub
         return null;
     }
 

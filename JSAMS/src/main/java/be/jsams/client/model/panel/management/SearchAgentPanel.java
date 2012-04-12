@@ -23,8 +23,7 @@ import be.jsams.server.service.management.AgentService;
  * @version $Rev$ $Date::                  $ $Author$
  */
 public class SearchAgentPanel extends
-        AbstractSearchPanel<
-        AgentBean, AgentTableMouseListener, AgentService, SearchAgentValidator, AgentTableModel> {
+        AbstractSearchPanel<AgentBean, AgentTableMouseListener, AgentService, SearchAgentValidator, AgentTableModel> {
 
     /**
      * Serial Version UID
@@ -125,7 +124,6 @@ public class SearchAgentPanel extends
      */
     private void fillTable(final List<AgentBean> agents) {
         AgentTableModel model = new AgentTableModel(agents);
-//      getResultTable().setModel(model);
         super.setTableModel(model);
         getResultTable().repaint();
     }
@@ -135,8 +133,6 @@ public class SearchAgentPanel extends
      */
     @Override
     public void performCancel() {
-        // TODO Auto-generated method stub
-
     }
 
 }

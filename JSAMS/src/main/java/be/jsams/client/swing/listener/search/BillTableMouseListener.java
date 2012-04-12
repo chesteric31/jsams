@@ -10,7 +10,7 @@ import be.jsams.client.swing.component.JsamsTable;
 
 /**
  * Customized {@link MouseListener} for Bill table double click.
- *
+ * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
@@ -38,7 +38,6 @@ public class BillTableMouseListener implements MouseListener {
      */
     @Override
     public void mousePressed(MouseEvent e) {
-        // TODO Auto-generated method stub
     }
 
     /**
@@ -46,7 +45,6 @@ public class BillTableMouseListener implements MouseListener {
      */
     @Override
     public void mouseReleased(MouseEvent e) {
-        // TODO Auto-generated method stub
     }
 
     /**
@@ -54,7 +52,6 @@ public class BillTableMouseListener implements MouseListener {
      */
     @Override
     public void mouseEntered(MouseEvent e) {
-        // TODO Auto-generated method stub
     }
 
     /**
@@ -62,7 +59,6 @@ public class BillTableMouseListener implements MouseListener {
      */
     @Override
     public void mouseExited(MouseEvent e) {
-        // TODO Auto-generated method stub
     }
 
 }

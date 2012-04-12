@@ -107,8 +107,6 @@ public class SearchCommandPanel<L extends MouseListener> extends
      */
     @Override
     public void performCancel() {
-        // TODO Auto-generated method stub
-
     }
 
     /**
@@ -131,7 +129,6 @@ public class SearchCommandPanel<L extends MouseListener> extends
      */
     private void fillTable(final List<CommandBean> commands) {
         CommandTableModel model = new CommandTableModel(commands);
-//        getResultTable().setModel(model);
         super.setTableModel(model);
         getResultTable().repaint();
     }

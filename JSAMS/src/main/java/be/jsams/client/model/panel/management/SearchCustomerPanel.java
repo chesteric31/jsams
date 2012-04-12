@@ -118,7 +118,6 @@ public class SearchCustomerPanel
      */
     private void fillTable(final List<CustomerBean> customers) {
         CustomerTableModel model = new CustomerTableModel(customers);
-//        getResultTable().setModel(model);
         super.setTableModel(model);
         getResultTable().setRowSorter(new TableRowSorter<CustomerTableModel>(model));
         getResultTable().repaint();
@@ -129,8 +128,6 @@ public class SearchCustomerPanel
      */
     @Override
     public void performCancel() {
-        // TODO Auto-generated method stub
-
     }
 
 }

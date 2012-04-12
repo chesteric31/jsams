@@ -25,19 +25,14 @@ public class MockDaoGenerator {
 
             @Override
             public void update(LegalForm transientObject) {
-                // TODO Auto-generated method stub
-
             }
 
             @Override
             public void flush() {
-                // TODO Auto-generated method stub
-
             }
 
             @Override
             public LegalForm findById(Long id) {
-                // TODO Auto-generated method stub
                 return null;
             }
 
@@ -53,19 +48,14 @@ public class MockDaoGenerator {
 
             @Override
             public void delete(Long id) {
-                // TODO Auto-generated method stub
-
             }
 
             @Override
             public void delete(LegalForm persistentObject) {
-                // TODO Auto-generated method stub
-
             }
 
             @Override
             public LegalForm add(LegalForm newInstance) {
-                // TODO Auto-generated method stub
                 return null;
             }
         };
@@ -76,19 +66,14 @@ public class MockDaoGenerator {
             
             @Override
             public void update(Civility transientObject) {
-                // TODO Auto-generated method stub
-                
             }
             
             @Override
             public void flush() {
-                // TODO Auto-generated method stub
-                
             }
             
             @Override
             public Civility findById(Long id) {
-                // TODO Auto-generated method stub
                 return null;
             }
             
@@ -104,19 +89,14 @@ public class MockDaoGenerator {
             
             @Override
             public void delete(Long id) {
-                // TODO Auto-generated method stub
-                
             }
             
             @Override
             public void delete(Civility persistentObject) {
-                // TODO Auto-generated method stub
-                
             }
             
             @Override
             public Civility add(Civility newInstance) {
-                // TODO Auto-generated method stub
                 return null;
             }
         };
@@ -127,19 +107,14 @@ public class MockDaoGenerator {
             
             @Override
             public void update(ProductCategory transientObject) {
-                // TODO Auto-generated method stub
-                
             }
             
             @Override
             public void flush() {
-                // TODO Auto-generated method stub
-                
             }
             
             @Override
             public ProductCategory findById(Long id) {
-                // TODO Auto-generated method stub
                 return null;
             }
             
@@ -152,37 +127,29 @@ public class MockDaoGenerator {
             
             @Override
             public void delete(Long id) {
-                // TODO Auto-generated method stub
-                
             }
             
             @Override
             public void delete(ProductCategory persistentObject) {
-                // TODO Auto-generated method stub
-                
             }
             
             @Override
             public ProductCategory add(ProductCategory newInstance) {
-                // TODO Auto-generated method stub
                 return null;
             }
             
             @Override
             public List<ProductCategory> findByCriteria(ProductCategoryBean criteria) {
-                // TODO Auto-generated method stub
                 return null;
             }
 
             @Override
             public SocietyBean getCurrentSociety() {
-                // TODO Auto-generated method stub
                 return null;
             }
 
             @Override
             public void setCurrentSociety(SocietyBean currentSociety) {
-                // TODO Auto-generated method stub
             }
         };
     }

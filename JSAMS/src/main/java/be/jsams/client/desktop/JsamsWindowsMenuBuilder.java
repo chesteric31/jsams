@@ -162,7 +162,6 @@ public class JsamsWindowsMenuBuilder extends AbstractMenuBuilder {
      */
     @Override
     public void enableMenuItems(boolean value) {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException();
     }
 

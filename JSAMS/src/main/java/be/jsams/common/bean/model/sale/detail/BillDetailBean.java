@@ -104,7 +104,6 @@ public class BillDetailBean extends AbstractDetailBean<BillDetail, BillDetailBea
      */
     @Override
     public BillDetailBeanView buildView() {
-        // TODO Auto-generated method stub
         return null;
     }
 

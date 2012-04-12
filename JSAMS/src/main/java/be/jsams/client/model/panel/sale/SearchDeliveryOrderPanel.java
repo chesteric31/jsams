@@ -102,29 +102,11 @@ public class SearchDeliveryOrderPanel<L extends MouseListener>
         }
     }
 
-//    /**
-//     * {@inheritDoc}
-//     */
-//    @Override
-//    protected void performButtonRemove() {
-//        int selectedRow = getResultTable().getSelectedRow();
-//        if (selectedRow > -1) {
-//            int selectedRowModel = getResultTable().convertRowIndexToModel(selectedRow);
-//            DeliveryOrderTableModel model = (DeliveryOrderTableModel) getResultTable().getModel();
-//            DeliveryOrderBean beanToDelete = model.getRow(selectedRowModel);
-//            getService().delete(beanToDelete);
-//            model.remove(selectedRowModel);
-//            updateUI();
-//        }
-//    }
-
     /**
      * {@inheritDoc}
      */
     @Override
     public void performCancel() {
-        // TODO Auto-generated method stub
-
     }
 
     /**

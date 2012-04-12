@@ -104,7 +104,6 @@ public class EstimateDetailBean extends AbstractDetailBean<EstimateDetail, Estim
      */
     @Override
     public EstimateDetailBeanView buildView() {
-        // TODO Auto-generated method stub
         return null;
     }
 
