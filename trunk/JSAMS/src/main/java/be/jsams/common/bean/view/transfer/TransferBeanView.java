@@ -8,7 +8,7 @@ import be.jsams.common.bean.view.Wizardable;
 
 /**
  * 
- *
+ * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
@@ -24,7 +24,6 @@ public class TransferBeanView extends AbstractBeanView<TransferBean> implements 
      */
     public TransferBeanView(TransferBean bean) {
         super(bean);
-        // TODO Auto-generated constructor stub
     }
 
     /**
@@ -32,7 +31,7 @@ public class TransferBeanView extends AbstractBeanView<TransferBean> implements 
      */
     @Override
     public JPanel createWizardView() {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException();
     }
+
 }

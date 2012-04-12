@@ -36,32 +36,24 @@ public class ProductTableMouseListener implements MouseListener {
      * {@inheritDoc}
      */
     public void mouseEntered(MouseEvent e) {
-        // TODO Auto-generated method stub
-
     }
 
     /**
      * {@inheritDoc}
      */
     public void mouseExited(MouseEvent e) {
-        // TODO Auto-generated method stub
-
     }
 
     /**
      * {@inheritDoc}
      */
     public void mousePressed(MouseEvent e) {
-        // TODO Auto-generated method stub
-
     }
 
     /**
      * {@inheritDoc}
      */
     public void mouseReleased(MouseEvent e) {
-        // TODO Auto-generated method stub
-
     }
 
 }

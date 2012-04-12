@@ -103,30 +103,11 @@ public class SearchBillPanel<L extends MouseListener> extends
         }
     }
 
-    // /**
-    // * {@inheritDoc}
-    // */
-    // @Override
-    // protected void performButtonRemove() {
-    // int selectedRow = getResultTable().getSelectedRow();
-    // if (selectedRow > -1) {
-    // int selectedRowModel =
-    // getResultTable().convertRowIndexToModel(selectedRow);
-    // BillTableModel model = (BillTableModel) getResultTable().getModel();
-    // BillBean beanToDelete = model.getRow(selectedRowModel);
-    // getService().delete(beanToDelete);
-    // model.remove(selectedRowModel);
-    // updateUI();
-    // }
-    // }
-
     /**
      * {@inheritDoc}
      */
     @Override
     public void performCancel() {
-        // TODO Auto-generated method stub
-
     }
 
     /**
@@ -149,7 +130,6 @@ public class SearchBillPanel<L extends MouseListener> extends
      */
     private void fillTable(final List<BillBean> bills) {
         BillTableModel model = new BillTableModel(bills);
-        // getResultTable().setModel(model);
         super.setTableModel(model);
         getResultTable().repaint();
     }

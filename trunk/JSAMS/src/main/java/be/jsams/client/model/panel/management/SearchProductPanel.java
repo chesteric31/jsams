@@ -142,8 +142,6 @@ public class SearchProductPanel extends
 
     @Override
     public void performCancel() {
-        // TODO Auto-generated method stub
-
     }
 
 }

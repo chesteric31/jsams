@@ -101,22 +101,6 @@ public class SearchEstimatePanel<L extends MouseListener> extends
         }
     }
 
-//    /**
-//     * {@inheritDoc}
-//     */
-//    @Override
-//    protected void performButtonRemove() {
-//        int selectedRow = getResultTable().getSelectedRow();
-//        if (selectedRow > -1) {
-//            int selectedRowModel = getResultTable().convertRowIndexToModel(selectedRow);
-//            EstimateTableModel model = (EstimateTableModel) getResultTable().getModel();
-//            EstimateBean beanToDelete = model.getRow(selectedRowModel);
-//            getService().delete(beanToDelete);
-//            model.remove(selectedRowModel);
-//            updateUI();
-//        }
-//    }
-
     /**
      * {@inheritDoc}
      */
@@ -146,8 +130,6 @@ public class SearchEstimatePanel<L extends MouseListener> extends
      */
     @Override
     public void performCancel() {
-        // TODO Auto-generated method stub
-
     }
 
     /**

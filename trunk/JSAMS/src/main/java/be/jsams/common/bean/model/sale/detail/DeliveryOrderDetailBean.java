@@ -138,7 +138,6 @@ public class DeliveryOrderDetailBean extends
      */
     @Override
     public DeliveryOrderDetailBeanView buildView() {
-        // TODO Auto-generated method stub
         return null;
     }
 

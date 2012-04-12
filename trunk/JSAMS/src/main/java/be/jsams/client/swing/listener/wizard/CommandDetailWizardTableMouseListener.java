@@ -67,7 +67,6 @@ public class CommandDetailWizardTableMouseListener implements MouseListener {
      */
     @Override
     public void mousePressed(MouseEvent e) {
-        // TODO Auto-generated method stub
     }
 
     /**
@@ -75,7 +74,6 @@ public class CommandDetailWizardTableMouseListener implements MouseListener {
      */
     @Override
     public void mouseReleased(MouseEvent e) {
-        // TODO Auto-generated method stub
     }
 
     /**
@@ -83,7 +81,6 @@ public class CommandDetailWizardTableMouseListener implements MouseListener {
      */
     @Override
     public void mouseEntered(MouseEvent e) {
-        // TODO Auto-generated method stub
     }
 
     /**
@@ -91,7 +88,6 @@ public class CommandDetailWizardTableMouseListener implements MouseListener {
      */
     @Override
     public void mouseExited(MouseEvent e) {
-        // TODO Auto-generated method stub
     }
 
 }
