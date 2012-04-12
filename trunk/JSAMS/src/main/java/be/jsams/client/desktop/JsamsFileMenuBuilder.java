@@ -41,8 +41,8 @@ public class JsamsFileMenuBuilder extends AbstractMenuBuilder {
         newMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, KeyEvent.CTRL_MASK));
         fileMenu.add(newMI);
         openMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_OPEN, "actions/document-open.png");
-        openMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, KeyEvent.CTRL_MASK));
         openMI.setAction(new ChooseSocietyAction(openMI.getText(), openMI.getIcon()));
+        openMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, KeyEvent.CTRL_MASK));
         fileMenu.add(openMI);
         closeMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_CLOSE, "status/folder-visiting.png");
         closeMI.setAction(new RestartAction(closeMI.getText(), closeMI.getIcon()));
