@@ -22,7 +22,7 @@ import be.jsams.common.bean.model.sale.detail.EstimateDetailBean;
 import be.jsams.common.bean.model.transfer.TransferBean;
 
 /**
- * 
+ * Summary {@link JsamsWizardPanel} to show the transfers to do.
  * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$

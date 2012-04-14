@@ -30,10 +30,9 @@ public class EstimateDetailBeanView extends AbstractDetailBeanView<EstimateDetai
     private static final long serialVersionUID = 1156444686459091375L;
 
     /**
-     * Constructor
+     * Constructor.
      * 
-     * @param bean
-     *            the {@link EstimateDetailBean}
+     * @param bean the {@link EstimateDetailBean}
      */
     public EstimateDetailBeanView(EstimateDetailBean bean) {
         super(bean);

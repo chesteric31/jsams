@@ -35,7 +35,7 @@ import be.jsams.common.bean.model.sale.EstimateBean;
 import be.jsams.common.bean.model.transfer.TransferBean;
 
 /**
- * 
+ * {@link AbstractDocumentChooserWizardPanel} to choose the document to transfer.
  *
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$

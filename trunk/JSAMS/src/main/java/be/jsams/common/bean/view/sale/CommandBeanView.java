@@ -70,7 +70,7 @@ public class CommandBeanView extends AbstractDocumentBeanView<CommandBean> imple
     private static final long serialVersionUID = 7008183975354064256L;
 
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param bean the {@link CommandBean}
      */

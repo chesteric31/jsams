@@ -70,7 +70,7 @@ public class BillBeanView extends AbstractDocumentBeanView<BillBean> implements 
     private static final long serialVersionUID = 3539403170916423778L;
 
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param bean the {@link BillBean}
      */

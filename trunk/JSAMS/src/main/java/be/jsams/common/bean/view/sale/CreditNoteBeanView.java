@@ -67,7 +67,7 @@ public class CreditNoteBeanView extends AbstractDocumentBeanView<CreditNoteBean>
     private static final long serialVersionUID = 1286822483256587871L;
 
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param bean the {@link CreditNoteBean}
      */
