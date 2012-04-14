@@ -70,7 +70,7 @@ public class EstimateBeanView extends AbstractDocumentBeanView<EstimateBean> imp
     private static final long serialVersionUID = -1438658754345137680L;
 
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param bean the {@link EstimateBean}
      */

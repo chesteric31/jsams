@@ -23,7 +23,7 @@ public abstract class AbstractDocumentBeanView<B extends AbstractDocumentBean<?,
     private JsamsTable detailsTable;
 
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param bean the {@link AbstractDocumentBean}
      */

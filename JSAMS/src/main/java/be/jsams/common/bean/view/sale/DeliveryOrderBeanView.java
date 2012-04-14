@@ -71,7 +71,7 @@ public class DeliveryOrderBeanView extends AbstractDocumentBeanView<DeliveryOrde
     private static final long serialVersionUID = 4995396899905110598L;
 
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param bean the {@link DeliveryOrderBean}
      */
