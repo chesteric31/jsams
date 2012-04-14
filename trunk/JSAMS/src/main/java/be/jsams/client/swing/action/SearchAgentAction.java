@@ -10,12 +10,12 @@ import javax.swing.ListSelectionModel;
 import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.client.model.panel.management.SearchAgentPanel;
-import be.jsams.client.model.table.AgentTableModel;
+import be.jsams.client.model.table.management.AgentTableModel;
 import be.jsams.client.swing.component.JsamsButton;
 import be.jsams.client.swing.component.JsamsDialog;
 import be.jsams.client.swing.component.JsamsTable;
 import be.jsams.client.swing.listener.search.management.AgentTableMouseListener;
-import be.jsams.client.validator.search.SearchAgentValidator;
+import be.jsams.client.validator.search.management.SearchAgentValidator;
 import be.jsams.common.bean.builder.management.AgentBeanBuilder;
 import be.jsams.common.bean.model.management.AgentBean;
 
@@ -36,7 +36,7 @@ public final class SearchAgentAction extends AbstractAction {
     private static final long serialVersionUID = -4903401985131831848L;
 
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param name the name
      * @param icon the icon
@@ -81,7 +81,6 @@ public final class SearchAgentAction extends AbstractAction {
                 ListSelectionModel.SINGLE_SELECTION);
         dialog.add(searchAgentPanel);
         dialog.pack();
-//        DialogUtil.centerComponentOnScreen(((JsamsButton) e.getSource()).getRootPane());
         dialog.setLocationRelativeTo(((JsamsButton) e.getSource()).getRootPane());
         dialog.setVisible(true);
     }

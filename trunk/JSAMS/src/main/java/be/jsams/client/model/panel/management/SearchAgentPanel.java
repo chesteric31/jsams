@@ -9,9 +9,9 @@ import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.model.dialog.management.EditAgentDialog;
 import be.jsams.client.model.panel.AbstractSearchPanel;
-import be.jsams.client.model.table.AgentTableModel;
+import be.jsams.client.model.table.management.AgentTableModel;
 import be.jsams.client.swing.listener.search.management.AgentTableMouseListener;
-import be.jsams.client.validator.search.SearchAgentValidator;
+import be.jsams.client.validator.search.management.SearchAgentValidator;
 import be.jsams.common.bean.builder.management.AgentBeanBuilder;
 import be.jsams.common.bean.model.management.AgentBean;
 import be.jsams.server.service.management.AgentService;
@@ -87,22 +87,6 @@ public class SearchAgentPanel extends
             updateUI();
         }
     }
-
-//    /**
-//     * {@inheritDoc}
-//     */
-//    @Override
-//    protected void performButtonRemove() {
-//        int selectedRow = getResultTable().getSelectedRow();
-//        if (selectedRow > -1) {
-//            int selectedRowModel = getResultTable().convertRowIndexToModel(selectedRow);
-//            AgentTableModel model = (AgentTableModel) getResultTable().getModel();
-//            AgentBean beanToDelete = model.getRow(selectedRowModel);
-//            getService().delete(beanToDelete);
-//            model.remove(selectedRowModel);
-//            updateUI();
-//        }
-//    }
 
     /**
      * {@inheritDoc}

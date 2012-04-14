@@ -13,13 +13,14 @@ import javax.swing.plaf.UIResource;
 import javax.swing.table.TableCellRenderer;
 
 /**
- * Custom Table cell renderer for JSAMS with row shading and row horizontal alignment for Boolean data type.
- *
+ * Custom Table cell renderer for JSAMS with row shading and row horizontal
+ * alignment for Boolean data type.
+ * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
 public class JsamsBooleanTableCellRenderer extends JCheckBox implements TableCellRenderer, UIResource {
-    
+
     /**
      * Serial Version UID
      */
@@ -27,7 +28,7 @@ public class JsamsBooleanTableCellRenderer extends JCheckBox implements TableCel
     private static final Border NO_FOCUS_BORDER = new EmptyBorder(1, 1, 1, 1);
 
     /**
-     * Constructor
+     * Constructor.
      */
     public JsamsBooleanTableCellRenderer() {
         super();
@@ -51,14 +52,6 @@ public class JsamsBooleanTableCellRenderer extends JCheckBox implements TableCel
             }
         }
 
-//        if (row % 2 == 0 && !isSelected) {
-//            setBackground(Color.YELLOW);
-//        } else if (isSelected) {
-//            setBackground(table.getSelectionBackground());
-//        } else {
-//            setBackground(Color.WHITE);
-//        }
-        
         setSelected((value != null && ((Boolean) value).booleanValue()));
 
         if (hasFocus) {

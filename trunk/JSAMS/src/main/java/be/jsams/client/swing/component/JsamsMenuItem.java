@@ -7,7 +7,7 @@ import be.jsams.client.i18n.I18nString;
 import be.jsams.client.swing.utils.IconUtil;
 
 /**
- * Menu Item with internationalization.
+ * {@link JMenuItem} with internationalization.
  * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
@@ -29,8 +29,7 @@ public class JsamsMenuItem extends JMenuItem {
     /**
      * Constructor.
      * 
-     * @param text
-     *            the translatable {@link I18nString}
+     * @param text the translatable {@link I18nString}
      */
     public JsamsMenuItem(final I18nString text) {
         super(text.getTranslation());
@@ -39,10 +38,8 @@ public class JsamsMenuItem extends JMenuItem {
     /**
      * Constructor.
      * 
-     * @param text
-     *            the translatable {@link I18nString}
-     * @param iconFileName
-     *            the icon file name
+     * @param text the translatable {@link I18nString}
+     * @param iconFileName the icon file name
      */
     public JsamsMenuItem(final I18nString text, final String iconFileName) {
         this(text);

@@ -12,8 +12,8 @@ import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.model.dialog.sale.EditBillDialog;
-import be.jsams.client.model.table.BillTableModel;
-import be.jsams.client.validator.search.SearchBillValidator;
+import be.jsams.client.model.table.sale.BillTableModel;
+import be.jsams.client.validator.search.sale.SearchBillValidator;
 import be.jsams.common.bean.model.PaymentModeBean;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.CustomerBean;
@@ -42,7 +42,7 @@ public class SearchBillPanel<L extends MouseListener> extends
     private final boolean debug = LOGGER.isDebugEnabled();
 
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param bean the {@link BillBean}
      * @param listener the {@link MouseListener}
@@ -59,7 +59,7 @@ public class SearchBillPanel<L extends MouseListener> extends
     }
 
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param bean the {@link BillBean}
      * @param listener the {@link MouseListener}

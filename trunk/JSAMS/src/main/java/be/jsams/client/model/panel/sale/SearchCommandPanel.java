@@ -12,8 +12,8 @@ import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.model.dialog.sale.EditCommandDialog;
-import be.jsams.client.model.table.CommandTableModel;
-import be.jsams.client.validator.search.SearchCommandValidator;
+import be.jsams.client.model.table.sale.CommandTableModel;
+import be.jsams.client.validator.search.sale.SearchCommandValidator;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.AgentBean;
 import be.jsams.common.bean.model.management.CustomerBean;
@@ -58,7 +58,7 @@ public class SearchCommandPanel<L extends MouseListener> extends
     }
 
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param bean the {@link CommandBean}
      * @param listener the {@link MouseListener}

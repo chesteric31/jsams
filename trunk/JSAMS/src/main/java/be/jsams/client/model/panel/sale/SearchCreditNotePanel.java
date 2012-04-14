@@ -12,8 +12,8 @@ import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.model.dialog.sale.EditCreditNoteDialog;
-import be.jsams.client.model.table.CreditNoteTableModel;
-import be.jsams.client.validator.search.SearchCreditNoteValidator;
+import be.jsams.client.model.table.sale.CreditNoteTableModel;
+import be.jsams.client.validator.search.sale.SearchCreditNoteValidator;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.sale.CreditNoteBean;
@@ -40,7 +40,7 @@ public class SearchCreditNotePanel<L extends MouseListener> extends
     private final boolean debug = LOGGER.isDebugEnabled();
 
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param bean the {@link CreditNoteBean}
      * @param listener the {@link MouseListener}
@@ -58,7 +58,7 @@ public class SearchCreditNotePanel<L extends MouseListener> extends
     }
 
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param bean the {@link CreditNoteBean}
      * @param listener the {@link MouseListener}
@@ -128,7 +128,6 @@ public class SearchCreditNotePanel<L extends MouseListener> extends
      */
     private void fillTable(final List<CreditNoteBean> creditNotes) {
         CreditNoteTableModel model = new CreditNoteTableModel(creditNotes);
-//        getResultTable().setModel(model);
         super.setTableModel(model);
         getResultTable().repaint();
     }

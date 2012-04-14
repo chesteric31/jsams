@@ -39,7 +39,6 @@ public abstract class AbstractTableMouseListener implements MouseListener {
         }
     }
 
-
     /**
      * {@inheritDoc}
      */

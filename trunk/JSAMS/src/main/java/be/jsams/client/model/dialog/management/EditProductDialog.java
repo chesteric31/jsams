@@ -5,7 +5,7 @@ import javax.swing.JPanel;
 import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.model.dialog.AbstractEditDialog;
-import be.jsams.client.validator.edit.EditProductValidator;
+import be.jsams.client.validator.edit.management.EditProductValidator;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.ProductBean;
 import be.jsams.common.bean.model.management.ProductCategoryBean;
@@ -29,7 +29,7 @@ public class EditProductDialog extends AbstractEditDialog<ProductBean, EditProdu
     private static final long serialVersionUID = -5931469580616365674L;
 
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param title the {@link I18nString} title
      * @param model the {@link ProductBean} model

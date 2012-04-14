@@ -9,10 +9,10 @@ import javax.swing.border.TitledBorder;
 
 import be.jsams.client.i18n.JsamsI18nLabelResource;
 import be.jsams.client.i18n.JsamsI18nResource;
-import be.jsams.client.model.table.BillDetailWizardTableModel;
-import be.jsams.client.model.table.CommandDetailWizardTableModel;
-import be.jsams.client.model.table.DeliveryOrderDetailWizardTableModel;
-import be.jsams.client.model.table.EstimateDetailWizardTableModel;
+import be.jsams.client.model.table.sale.BillDetailWizardTableModel;
+import be.jsams.client.model.table.sale.CommandDetailWizardTableModel;
+import be.jsams.client.model.table.sale.DeliveryOrderDetailWizardTableModel;
+import be.jsams.client.model.table.sale.EstimateDetailWizardTableModel;
 import be.jsams.client.swing.component.JsamsTable;
 import be.jsams.client.swing.listener.wizard.BillDetailWizardTableMouseListener;
 import be.jsams.client.swing.listener.wizard.CommandDetailWizardTableMouseListener;

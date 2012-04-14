@@ -22,7 +22,7 @@ public class JsamsDialog extends JDialog {
     private static final long serialVersionUID = 707067802180334657L;
 
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param parent the {@link JsamsMainFrame} parent
      * @param title the {@link I18nString} translatable String
@@ -32,7 +32,7 @@ public class JsamsDialog extends JDialog {
     }
 
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param parent the {@link JsamsMainFrame} parent
      * @param title the {@link I18nString} translatable String
@@ -45,7 +45,7 @@ public class JsamsDialog extends JDialog {
     }
 
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param parent the {@link JsamsDialog} parent
      */
@@ -54,7 +54,7 @@ public class JsamsDialog extends JDialog {
     }
 
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param parent the {@link AbstractJsamsFrame} parent
      */

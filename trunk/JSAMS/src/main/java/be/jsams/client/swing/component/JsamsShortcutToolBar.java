@@ -10,7 +10,7 @@ import be.jsams.client.swing.action.NewEstimateAction;
 import be.jsams.client.swing.action.NewProductAction;
 
 /**
- * A customized {@link JPanel} to have some shortcuts to more used functions.
+ * A customized {@link JPanel} to have some shortcuts for more used functions.
  * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$

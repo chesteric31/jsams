@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import be.jsams.client.model.table.CommandDetailWizardTableModel;
+import be.jsams.client.model.table.sale.CommandDetailWizardTableModel;
 import be.jsams.client.swing.component.JsamsTable;
 import be.jsams.common.bean.model.sale.detail.CommandDetailBean;
 import be.jsams.common.bean.model.transfer.TransferBean;

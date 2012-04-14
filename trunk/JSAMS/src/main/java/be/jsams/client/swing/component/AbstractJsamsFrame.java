@@ -40,14 +40,14 @@ public abstract class AbstractJsamsFrame extends JFrame {
     };
 
     /**
-     * Constructor
+     * Constructor.
      */
     public AbstractJsamsFrame() {
         super();
     }
 
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param title the {@link I18nString}
      */
@@ -57,7 +57,7 @@ public abstract class AbstractJsamsFrame extends JFrame {
     }
 
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param title the {@link I18nString}
      * @param iconFileName the icon path name

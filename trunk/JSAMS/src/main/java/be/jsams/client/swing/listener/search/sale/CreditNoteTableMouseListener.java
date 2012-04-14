@@ -2,7 +2,7 @@ package be.jsams.client.swing.listener.search.sale;
 
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.model.dialog.sale.EditCreditNoteDialog;
-import be.jsams.client.model.table.CreditNoteTableModel;
+import be.jsams.client.model.table.sale.CreditNoteTableModel;
 import be.jsams.client.swing.component.JsamsTable;
 import be.jsams.client.swing.listener.search.AbstractTableMouseListener;
 

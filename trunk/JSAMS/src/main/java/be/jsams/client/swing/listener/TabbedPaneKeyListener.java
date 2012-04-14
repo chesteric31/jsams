@@ -37,14 +37,12 @@ public class TabbedPaneKeyListener implements KeyListener {
      * {@inheritDoc}
      */
     public void keyReleased(KeyEvent e) {
-
     }
 
     /**
      * {@inheritDoc}
      */
     public void keyTyped(KeyEvent e) {
-
     }
 
 }

@@ -5,7 +5,7 @@ import javax.swing.JPanel;
 import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.model.dialog.AbstractEditDialog;
-import be.jsams.client.validator.edit.EditDeliveryOrderValidator;
+import be.jsams.client.validator.edit.sale.EditDeliveryOrderValidator;
 import be.jsams.common.bean.model.sale.DeliveryOrderBean;
 import be.jsams.common.bean.view.sale.DeliveryOrderBeanView;
 import be.jsams.server.service.sale.DeliveryOrderService;
@@ -28,7 +28,7 @@ public class EditDeliveryOrderDialog extends
     private static final long serialVersionUID = 6891067908001649339L;
 
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param title the {@link I18nString} title
      * @param model the {@link DeliveryOrderBean} model
@@ -56,8 +56,8 @@ public class EditDeliveryOrderDialog extends
      */
     @Override
     public void performOk() {
-        DeliveryOrderBean command = getModel();
-        super.postPerformOk(command);
+        DeliveryOrderBean model = getModel();
+        super.postPerformOk(model);
     }
 
 }

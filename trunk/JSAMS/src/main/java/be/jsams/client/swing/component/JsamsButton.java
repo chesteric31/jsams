@@ -20,29 +20,26 @@ public class JsamsButton extends JButton {
     private static final long serialVersionUID = 4932686000771764506L;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public JsamsButton() {
         super();
     }
 
     /**
-     * Constructor
+     * Constructor.
      * 
-     * @param text
-     *            the {@link I18nString} translatable String
+     * @param text the {@link I18nString} translatable String
      */
     public JsamsButton(final I18nString text) {
         super(text.getTranslation());
     }
 
     /**
-     * Constructor
+     * Constructor.
      * 
-     * @param text
-     *            the {@link I18nString} translatable String
-     * @param iconFileName
-     *            the icon path file name
+     * @param text the {@link I18nString} translatable String
+     * @param iconFileName the icon path file name
      */
     public JsamsButton(final I18nString text, final String iconFileName) {
         this(text);
@@ -50,13 +47,12 @@ public class JsamsButton extends JButton {
     }
 
     /**
-     * Constructor
+     * Constructor.
      * 
-     * @param iconFileName
-     *            the icon path file name
+     * @param iconFileName the icon path file name
      */
     public JsamsButton(final String iconFileName) {
         super(new ImageIcon(IconUtil.buildIcon(iconFileName)));
     }
-    
+
 }
