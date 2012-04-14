@@ -5,7 +5,7 @@ import java.text.ParseException;
 import javax.swing.text.NumberFormatter;
 
 /**
- * 
+ * Custom {@link NumberFormatter} for double object.
  *
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
@@ -33,8 +33,9 @@ public class DoubleFormatter extends NumberFormatter {
      * {@inheritDoc}
      */
     public Object stringToValue(final String string) throws ParseException {
-        Number number = (Number) super.stringToValue(string);
-        if (number != null) {
+        Number number = null;
+        if (string != null) {
+            number = (Number) super.stringToValue(string);
             double doubleValue = number.doubleValue();
             number = Double.valueOf(doubleValue);
         }

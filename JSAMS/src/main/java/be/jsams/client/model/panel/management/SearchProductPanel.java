@@ -12,7 +12,7 @@ import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.model.dialog.management.EditProductDialog;
 import be.jsams.client.model.panel.AbstractSearchPanel;
 import be.jsams.client.model.table.ProductTableModel;
-import be.jsams.client.swing.listener.search.ProductTableMouseListener;
+import be.jsams.client.swing.listener.search.management.ProductTableMouseListener;
 import be.jsams.client.validator.search.SearchProductValidator;
 import be.jsams.common.bean.builder.ProductBeanBuilder;
 import be.jsams.common.bean.model.management.ProductBean;
