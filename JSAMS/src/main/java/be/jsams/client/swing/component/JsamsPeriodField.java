@@ -11,7 +11,7 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.toedter.calendar.JDateChooser;
 
 /**
- * 
+ * {@link JPanel} to represent a period with two {@link JDateChooser}s.
  *
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
@@ -32,7 +32,7 @@ public class JsamsPeriodField extends JPanel {
     private JDateChooser endDateChooser;
     
     /**
-     * Constructor
+     * Constructor.
      */
     public JsamsPeriodField() {
         super();

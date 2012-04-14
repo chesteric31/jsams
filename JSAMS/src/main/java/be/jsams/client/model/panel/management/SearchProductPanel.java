@@ -11,9 +11,9 @@ import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.model.dialog.management.EditProductDialog;
 import be.jsams.client.model.panel.AbstractSearchPanel;
-import be.jsams.client.model.table.ProductTableModel;
+import be.jsams.client.model.table.management.ProductTableModel;
 import be.jsams.client.swing.listener.search.management.ProductTableMouseListener;
-import be.jsams.client.validator.search.SearchProductValidator;
+import be.jsams.client.validator.search.management.SearchProductValidator;
 import be.jsams.common.bean.builder.ProductBeanBuilder;
 import be.jsams.common.bean.model.management.ProductBean;
 import be.jsams.server.service.management.ProductService;
@@ -75,7 +75,6 @@ public class SearchProductPanel extends
      */
     private void fillTable(final List<ProductBean> products) {
         ProductTableModel model = new ProductTableModel(products);
-//        getResultTable().setModel(model);
         super.setTableModel(model);
         getResultTable().repaint();
     }
@@ -120,25 +119,6 @@ public class SearchProductPanel extends
             updateUI();
         }
     }
-
-//    /**
-//     * {@inheritDoc}
-//     */
-//    @Override
-//    protected void performButtonRemove() {
-//        int selectedRow = getResultTable().getSelectedRow();
-//        if (selectedRow > -1) {
-//            int selectedRowModel = getResultTable().convertRowIndexToModel(selectedRow);
-//            ProductTableModel model = (ProductTableModel) getResultTable().getModel();
-//            ProductBean beanToDelete = model.getRow(selectedRowModel);
-//            if (debug) {
-//                LOGGER.debug("The product to delete: " + beanToDelete);
-//            }
-//            getService().delete(beanToDelete);
-//            model.remove(selectedRowModel);
-//            updateUI();
-//        }
-//    }
 
     @Override
     public void performCancel() {

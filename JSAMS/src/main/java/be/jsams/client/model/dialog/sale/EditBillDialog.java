@@ -5,7 +5,7 @@ import javax.swing.JPanel;
 import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.model.dialog.AbstractEditDialog;
-import be.jsams.client.validator.edit.EditBillValidator;
+import be.jsams.client.validator.edit.sale.EditBillValidator;
 import be.jsams.common.bean.model.AbstractIdentityBean;
 import be.jsams.common.bean.model.PaymentModeBean;
 import be.jsams.common.bean.model.sale.BillBean;
@@ -17,7 +17,7 @@ import be.jsams.server.service.sale.BillService;
 import com.jgoodies.validation.view.ValidationComponentUtils;
 
 /**
- * Edit Command {@link AbstractEditDialog}, to create or update a
+ * Edit Bill {@link AbstractEditDialog}, to create or update a
  * {@link BillBean} object.
  * 
  * @author chesteric31
@@ -31,7 +31,7 @@ public class EditBillDialog extends AbstractEditDialog<BillBean, EditBillValidat
     private static final long serialVersionUID = 1751391551336992500L;
 
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param title the {@link I18nString} title
      * @param model the {@link BillBean} model

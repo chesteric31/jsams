@@ -5,7 +5,7 @@ import javax.swing.JPanel;
 import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.model.dialog.AbstractEditDialog;
-import be.jsams.client.validator.edit.EditEstimateValidator;
+import be.jsams.client.validator.edit.sale.EditEstimateValidator;
 import be.jsams.common.bean.model.sale.EstimateBean;
 import be.jsams.common.bean.view.sale.EstimateBeanView;
 import be.jsams.server.service.sale.EstimateService;
@@ -27,7 +27,7 @@ public class EditEstimateDialog extends AbstractEditDialog<EstimateBean, EditEst
     private static final long serialVersionUID = 646774314391865523L;
 
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param title the {@link I18nString} title
      * @param model the {@link EstimateBean} model
@@ -55,8 +55,8 @@ public class EditEstimateDialog extends AbstractEditDialog<EstimateBean, EditEst
      */
     @Override
     public void performOk() {
-        EstimateBean estimate = getModel();
-        super.postPerformOk(estimate);
+        EstimateBean model = getModel();
+        super.postPerformOk(model);
     }
 
 }

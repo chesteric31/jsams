@@ -5,7 +5,7 @@ import javax.swing.JPanel;
 import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.model.dialog.AbstractEditDialog;
-import be.jsams.client.validator.edit.EditCommandValidator;
+import be.jsams.client.validator.edit.sale.EditCommandValidator;
 import be.jsams.common.bean.model.sale.CommandBean;
 import be.jsams.common.bean.view.sale.CommandBeanView;
 import be.jsams.server.service.sale.CommandService;
@@ -27,7 +27,7 @@ public class EditCommandDialog extends AbstractEditDialog<CommandBean, EditComma
     private static final long serialVersionUID = -5020990836528415188L;
 
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param title the {@link I18nString} title
      * @param model the {@link CommandBean} model

@@ -22,7 +22,7 @@ public class ChooseSocietyAction extends AbstractAction {
     private static final long serialVersionUID = 7443911457561542259L;
 
     /**
-     * Constructor
+     * Constructor.
      *  
      * @param text the action text
      * @param icon the icon to display

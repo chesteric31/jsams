@@ -12,9 +12,9 @@ import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.model.dialog.management.EditProductCategoryDialog;
 import be.jsams.client.model.panel.AbstractSearchPanel;
-import be.jsams.client.model.table.ProductCategoryTableModel;
+import be.jsams.client.model.table.management.ProductCategoryTableModel;
 import be.jsams.client.swing.listener.search.management.ProductCategoryTableMouseListener;
-import be.jsams.client.validator.search.SearchProductCategoryValidator;
+import be.jsams.client.validator.search.management.SearchProductCategoryValidator;
 import be.jsams.common.bean.builder.ProductCategoryBeanBuilder;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.ProductCategoryBean;
@@ -126,27 +126,6 @@ public class SearchProductCategoryPanel extends
             updateUI();
         }
     }
-
-    // /**
-    // * {@inheritDoc}
-    // */
-    // @Override
-    // protected void performButtonRemove() {
-    // int selectedRow = getResultTable().getSelectedRow();
-    // if (selectedRow > -1) {
-    // int selectedRowModel =
-    // getResultTable().convertRowIndexToModel(selectedRow);
-    // ProductCategoryTableModel model = (ProductCategoryTableModel)
-    // getResultTable().getModel();
-    // ProductCategoryBean beanToDelete = model.getRow(selectedRowModel);
-    // if (debug) {
-    // LOGGER.debug("The product category to delete: " + beanToDelete);
-    // }
-    // getService().delete(beanToDelete);
-    // model.remove(selectedRowModel);
-    // updateUI();
-    // }
-    // }
 
     /**
      * {@inheritDoc}

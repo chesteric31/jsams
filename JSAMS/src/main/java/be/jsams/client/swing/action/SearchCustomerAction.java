@@ -10,12 +10,12 @@ import javax.swing.ListSelectionModel;
 import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.client.model.panel.management.SearchCustomerPanel;
-import be.jsams.client.model.table.CustomerTableModel;
+import be.jsams.client.model.table.management.CustomerTableModel;
 import be.jsams.client.swing.component.JsamsButton;
 import be.jsams.client.swing.component.JsamsDialog;
 import be.jsams.client.swing.component.JsamsTable;
 import be.jsams.client.swing.listener.search.management.CustomerTableMouseListener;
-import be.jsams.client.validator.search.SearchCustomerValidator;
+import be.jsams.client.validator.search.management.SearchCustomerValidator;
 import be.jsams.common.bean.model.management.CustomerBean;
 
 /**
@@ -35,7 +35,7 @@ public class SearchCustomerAction extends AbstractAction {
     private static final long serialVersionUID = 5028730923752573568L;
 
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param name the name
      * @param icon the icon
@@ -80,7 +80,6 @@ public class SearchCustomerAction extends AbstractAction {
                 false, ListSelectionModel.SINGLE_SELECTION);
         dialog.add(searchCustomerPanel);
         dialog.pack();
-//        DialogUtil.centerComponentOnScreen(((JsamsButton) e.getSource()).getRootPane());
         dialog.setLocationRelativeTo(((JsamsButton) e.getSource()).getRootPane());
         dialog.setVisible(true);
     }

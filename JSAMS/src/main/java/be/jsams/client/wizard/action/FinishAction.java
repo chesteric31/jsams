@@ -3,7 +3,7 @@ package be.jsams.client.wizard.action;
 import be.jsams.client.wizard.JsamsWizardComponent;
 
 /**
- * 
+ * Abstract class to to perform finish action in wizard context.
  *
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$

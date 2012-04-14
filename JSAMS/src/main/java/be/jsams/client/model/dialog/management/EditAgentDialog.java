@@ -5,7 +5,7 @@ import javax.swing.JPanel;
 import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.model.dialog.AbstractEditDialog;
-import be.jsams.client.validator.edit.EditAgentValidator;
+import be.jsams.client.validator.edit.management.EditAgentValidator;
 import be.jsams.common.bean.model.AbstractIdentityBean;
 import be.jsams.common.bean.model.CivilityBean;
 import be.jsams.common.bean.model.management.AgentBean;
@@ -31,7 +31,7 @@ public class EditAgentDialog extends AbstractEditDialog<AgentBean, EditAgentVali
     private static final long serialVersionUID = 2514472162732492120L;
 
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param title the {@link I18nString} title
      * @param model the {@link AgentBean} model

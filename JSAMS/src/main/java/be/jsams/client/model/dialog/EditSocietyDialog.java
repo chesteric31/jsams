@@ -30,7 +30,7 @@ public class EditSocietyDialog extends AbstractEditDialog<SocietyBean, EditSocie
     private boolean success = false;
 
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param title the {@link I18nString} title
      * @param model the {@link SocietyBean} model

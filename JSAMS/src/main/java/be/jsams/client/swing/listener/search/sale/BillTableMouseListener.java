@@ -2,7 +2,7 @@ package be.jsams.client.swing.listener.search.sale;
 
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.model.dialog.sale.EditBillDialog;
-import be.jsams.client.model.table.BillTableModel;
+import be.jsams.client.model.table.sale.BillTableModel;
 import be.jsams.client.swing.component.JsamsTable;
 import be.jsams.client.swing.listener.search.AbstractTableMouseListener;
 

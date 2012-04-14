@@ -12,8 +12,8 @@ import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.model.dialog.sale.EditDeliveryOrderDialog;
-import be.jsams.client.model.table.DeliveryOrderTableModel;
-import be.jsams.client.validator.search.SearchDeliveryOrderValidator;
+import be.jsams.client.model.table.sale.DeliveryOrderTableModel;
+import be.jsams.client.validator.search.sale.SearchDeliveryOrderValidator;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.sale.DeliveryOrderBean;
@@ -130,7 +130,6 @@ public class SearchDeliveryOrderPanel<L extends MouseListener>
      */
     private void fillTable(final List<DeliveryOrderBean> deliveryOrders) {
         DeliveryOrderTableModel model = new DeliveryOrderTableModel(deliveryOrders);
-//        getResultTable().setModel(model);
         super.setTableModel(model);
         getResultTable().repaint();
     }

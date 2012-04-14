@@ -5,7 +5,7 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import be.jsams.client.model.table.EstimateTableModel;
+import be.jsams.client.model.table.sale.EstimateTableModel;
 import be.jsams.client.swing.component.JsamsTable;
 import be.jsams.common.bean.model.sale.EstimateBean;
 import be.jsams.common.bean.model.transfer.TransferBean;

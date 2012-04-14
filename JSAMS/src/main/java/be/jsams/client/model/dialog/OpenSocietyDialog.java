@@ -58,7 +58,7 @@ public class OpenSocietyDialog extends JsamsDialog implements JsamsButtonsInterf
     private JPanel southPanel;
 
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param title the {@link I18nString} title
      */
@@ -72,7 +72,7 @@ public class OpenSocietyDialog extends JsamsDialog implements JsamsButtonsInterf
     }
 
     /**
-     * Initializes all the components
+     * Initializes all the components.
      */
     private void initComponents() {
         FormLayout layout = new FormLayout("right:pref, 3dlu, pref, 3dlu, pref", "pref, 5dlu");
@@ -172,7 +172,7 @@ public class OpenSocietyDialog extends JsamsDialog implements JsamsButtonsInterf
     }
 
     /**
-     * Builds the 'south panel' composed by a {@link JsamsButtonsPanel} {@link JsamsStatusBar}
+     * Builds the 'south panel' composed by a {@link JsamsButtonsPanel} {@link JsamsStatusBar}.
      * 
      * @return the 'south panel'
      */

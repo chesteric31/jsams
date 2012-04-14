@@ -47,14 +47,14 @@ public abstract class AbstractJsamsTableModel<D extends AbstractIdentityBean<?, 
     private List<I18nString> columnNames;
 
     /**
-     * Default constructor
+     * Default constructor.
      */
     public AbstractJsamsTableModel() {
         super();
     }
     
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param listBean a list of data bean
      */

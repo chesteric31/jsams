@@ -5,7 +5,7 @@ import javax.swing.JPanel;
 import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.model.dialog.AbstractEditDialog;
-import be.jsams.client.validator.edit.EditCreditNoteValidator;
+import be.jsams.client.validator.edit.sale.EditCreditNoteValidator;
 import be.jsams.common.bean.model.sale.CreditNoteBean;
 import be.jsams.common.bean.view.sale.CreditNoteBeanView;
 import be.jsams.server.service.sale.CreditNoteService;
@@ -13,7 +13,7 @@ import be.jsams.server.service.sale.CreditNoteService;
 import com.jgoodies.validation.view.ValidationComponentUtils;
 
 /**
- * Edit Command {@link AbstractEditDialog}, to create or update a
+ * Edit Credit Note {@link AbstractEditDialog}, to create or update a
  * {@link CreditNoteBean} object.
  * 
  * @author chesteric31
@@ -28,7 +28,7 @@ public class EditCreditNoteDialog extends
     private static final long serialVersionUID = 7339240296875394194L;
 
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param title the {@link I18nString} title
      * @param model the {@link CreditNoteBean} model

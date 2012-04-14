@@ -21,7 +21,7 @@ public final class IconUtil {
     }
 
     /**
-     * Build an {@link Image} icon from a path file name.
+     * Builds an {@link Image} icon from a path file name.
      * 
      * @param fileName the path file name
      * @return the built image icon

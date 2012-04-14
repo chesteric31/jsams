@@ -21,7 +21,7 @@ public class GeneralParametersAction extends AbstractAction {
     private static final long serialVersionUID = 2558055247303262035L;
 
     /**
-     * Constructor
+     * Constructor.
      *  
      * @param text the action text
      * @param icon the icon to display

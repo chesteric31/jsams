@@ -21,7 +21,7 @@ public class RestartAction extends AbstractAction {
     private static final long serialVersionUID = 3368161354924539915L;
 
     /**
-     * Constructor
+     * Constructor.
      *  
      * @param text the action text
      * @param icon the icon to display

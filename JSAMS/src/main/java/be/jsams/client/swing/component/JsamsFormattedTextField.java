@@ -20,37 +20,34 @@ public class JsamsFormattedTextField extends JFormattedTextField {
     private static final long serialVersionUID = -3209976333589745967L;
 
     /**
-     * Default constructor
+     * Default constructor.
      */
     public JsamsFormattedTextField() {
         this(DecimalFormat.getInstance());
     }
 
     /**
-     * Constructor
+     * Constructor.
      * 
-     * @param format
-     *            the {@link Format} to use
+     * @param format the {@link Format} to use
      */
     public JsamsFormattedTextField(final Format format) {
         super(format);
     }
 
     /**
-     * Constructor
+     * Constructor.
      * 
-     * @param formatter
-     *            the {@link AbstractFormatter} to use
+     * @param formatter the {@link AbstractFormatter} to use
      */
     public JsamsFormattedTextField(final AbstractFormatter formatter) {
         super(formatter);
     }
 
     /**
-     * Constructor
+     * Constructor.
      * 
-     * @param factory
-     *            the {@link DefaultFormatterFactory}
+     * @param factory the {@link DefaultFormatterFactory}
      */
     public JsamsFormattedTextField(DefaultFormatterFactory factory) {
         super(factory);
