@@ -1,5 +1,7 @@
 package be.jsams.client.i18n;
 
+import be.jsams.common.util.JsamsConstants;
+
 /**
  * An i18n String / message.
  * 
@@ -17,7 +19,7 @@ public class I18nString {
     private Object[] arguments = NO_ARGUMENTS;
 
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param key the key resource bundle
      */
@@ -26,7 +28,7 @@ public class I18nString {
     }
 
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param key the key resource bundle
      * @param arguments the table arguments
@@ -82,7 +84,7 @@ public class I18nString {
      */
     public static synchronized I18nString getEmptyString() {
         if (emptyString == null) {
-            emptyString = new I18nString("");
+            emptyString = new I18nString(JsamsConstants.EMPTY_STRING);
         }
 
         return emptyString;

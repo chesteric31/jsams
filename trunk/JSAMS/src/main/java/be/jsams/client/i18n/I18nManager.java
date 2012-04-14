@@ -4,19 +4,15 @@ import java.util.Locale;
 
 import org.springframework.context.MessageSource;
 
+import be.jsams.common.util.JsamsConstants;
+
 /**
  * Responsible for handling all i18n related tasks.
- * 
  * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
 public class I18nManager {
-
-    /**
-     * Empty string.
-     */
-    private static final String EMPTY_STRING = "";
 
     private Locale locale = Locale.getDefault();
 
@@ -24,12 +20,6 @@ public class I18nManager {
      * The singleton I18nManager instance.
      */
     private static final I18nManager INSTANCE = new I18nManager();
-
-    // /**
-    // * Constructor
-    // */
-    // public I18nManager() {
-    // }
 
     /**
      * Gets the instance.
@@ -57,7 +47,7 @@ public class I18nManager {
     }
 
     /**
-     * Translate into a {@link String} the {@link I18nString} parameter with
+     * Translates into a {@link String} the {@link I18nString} parameter with
      * the default {@link Locale}.
      * 
      * @param i18nString the {@link I18nString} to translate
@@ -68,7 +58,7 @@ public class I18nManager {
     }
 
     /**
-     * Translate into a {@link String} the {@link I18nString} parameter with
+     * Translates into a {@link String} the {@link I18nString} parameter with
      * the parameter {@link Locale}.
      * 
      * @param i18nString the {@link I18nString} to translate
@@ -80,7 +70,7 @@ public class I18nManager {
     }
 
     /**
-     * Translate into a {@link String} the key resource bundle key parameter
+     * Translates into a {@link String} the key resource bundle key parameter
      * with the default {@link Locale} and the arguments table.
      * 
      * @param key the key resource bundle to use
@@ -92,7 +82,7 @@ public class I18nManager {
     }
 
     /**
-     * Translate into a {@link String} the key resource bundle key parameter
+     * Translates into a {@link String} the key resource bundle key parameter
      * with the default {@link Locale}.
      * 
      * @param key the key resource bundle to use
@@ -103,8 +93,8 @@ public class I18nManager {
     }
 
     /**
-     * Translate into a {@link String} the key resource bundle key parameter
-     * and the parameter {@link Locale}.
+     * Translate into a {@link String} the key resource bundle key parameter and
+     * the parameter {@link Locale}.
      * 
      * @param key the key resource bundle to use
      * @param locale the {@link Locale} to use
@@ -115,7 +105,7 @@ public class I18nManager {
     }
 
     /**
-     * Translate into a {@link String} the key resource bundle with table
+     * Translates into a {@link String} the key resource bundle with table
      * arguments and defined {@link Locale}.
      * 
      * @param key the key resource bundle
@@ -125,12 +115,13 @@ public class I18nManager {
      */
     private String translate(String key, Object[] arguments, Locale locale) {
         String translation = null;
-        if (key.equals(EMPTY_STRING)) {
-            translation = EMPTY_STRING;
+        if (key.equals(JsamsConstants.EMPTY_STRING)) {
+            translation = JsamsConstants.EMPTY_STRING;
         } else {
             MessageSource messageSource = I18nApplicationContext.getMessageSource();
             translation = messageSource.getMessage(key, arguments, locale);
         }
         return translation;
     }
+
 }

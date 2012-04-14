@@ -15,6 +15,8 @@ public final class JsamsConstants {
         
     }
 
+    public static final String EMPTY_STRING = "";
+
     public static final String PROXY_TO_SET = "proxyToSet";
     public static final String PROXY_HOST = "proxyHost";
     public static final String PROXY_PORT = "proxyPort";
