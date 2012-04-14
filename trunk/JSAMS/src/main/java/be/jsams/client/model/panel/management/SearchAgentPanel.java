@@ -10,7 +10,7 @@ import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.model.dialog.management.EditAgentDialog;
 import be.jsams.client.model.panel.AbstractSearchPanel;
 import be.jsams.client.model.table.AgentTableModel;
-import be.jsams.client.swing.listener.search.AgentTableMouseListener;
+import be.jsams.client.swing.listener.search.management.AgentTableMouseListener;
 import be.jsams.client.validator.search.SearchAgentValidator;
 import be.jsams.common.bean.builder.management.AgentBeanBuilder;
 import be.jsams.common.bean.model.management.AgentBean;

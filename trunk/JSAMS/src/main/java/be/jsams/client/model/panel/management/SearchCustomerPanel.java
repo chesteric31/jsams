@@ -14,7 +14,7 @@ import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.model.dialog.management.EditCustomerDialog;
 import be.jsams.client.model.panel.AbstractSearchPanel;
 import be.jsams.client.model.table.CustomerTableModel;
-import be.jsams.client.swing.listener.search.CustomerTableMouseListener;
+import be.jsams.client.swing.listener.search.management.CustomerTableMouseListener;
 import be.jsams.client.validator.search.SearchCustomerValidator;
 import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.server.service.management.CustomerService;

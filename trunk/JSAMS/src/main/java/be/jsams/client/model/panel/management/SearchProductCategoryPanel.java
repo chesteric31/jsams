@@ -13,7 +13,7 @@ import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.model.dialog.management.EditProductCategoryDialog;
 import be.jsams.client.model.panel.AbstractSearchPanel;
 import be.jsams.client.model.table.ProductCategoryTableModel;
-import be.jsams.client.swing.listener.search.ProductCategoryTableMouseListener;
+import be.jsams.client.swing.listener.search.management.ProductCategoryTableMouseListener;
 import be.jsams.client.validator.search.SearchProductCategoryValidator;
 import be.jsams.common.bean.builder.ProductCategoryBeanBuilder;
 import be.jsams.common.bean.model.SocietyBean;
@@ -26,8 +26,9 @@ import be.jsams.server.service.management.ProductCategoryService;
  * @author chesteric31
  * @version $$Rev$$ $$Date::                  $$ $$Author$$
  */
-public class SearchProductCategoryPanel
-        extends AbstractSearchPanel<ProductCategoryBean, ProductCategoryTableMouseListener, ProductCategoryService, SearchProductCategoryValidator, ProductCategoryTableModel> {
+public class SearchProductCategoryPanel extends
+        AbstractSearchPanel<ProductCategoryBean, ProductCategoryTableMouseListener,
+        ProductCategoryService, SearchProductCategoryValidator, ProductCategoryTableModel> {
 
     /**
      * Serial Version UID

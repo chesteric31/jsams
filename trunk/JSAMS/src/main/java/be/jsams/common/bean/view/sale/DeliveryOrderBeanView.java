@@ -34,7 +34,7 @@ import be.jsams.client.swing.component.JsamsDialog;
 import be.jsams.client.swing.component.JsamsFormattedTextField;
 import be.jsams.client.swing.component.JsamsTable;
 import be.jsams.client.swing.component.JsamsTextField;
-import be.jsams.client.swing.listener.search.ProductTableMouseListener;
+import be.jsams.client.swing.listener.search.management.ProductTableMouseListener;
 import be.jsams.client.swing.utils.IconUtil;
 import be.jsams.client.validator.search.SearchProductValidator;
 import be.jsams.common.bean.builder.ProductBeanBuilder;
