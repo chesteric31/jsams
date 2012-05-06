@@ -10,6 +10,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
+import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.swing.utils.IconUtil;
 
@@ -55,14 +56,32 @@ public class JsamsCloseableTabbedPane extends JTabbedPane {
             public void actionPerformed(ActionEvent e) {
                 int closeTabNumber = indexOfComponent(component);
                 removeTabAt(closeTabNumber);
+                if (getTabCount() == 0) {
+                    JsamsDesktop.getInstance().getMainWindow().enableTabbedPane(false);
+                }
             }
         });
 
         tab.add(tabTitle);
         tab.add(tabCloseButton);
 
+        if (getTabCount() == 0) {
+            JsamsDesktop.getInstance().getMainWindow().enableTabbedPane(true);
+        }
         super.addTab(null, component);
         setTabComponentAt(getTabCount() - 1, tab);
         setSelectedComponent(component);
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void removeTabAt(int index) {
+        super.removeTabAt(index);
+        if (getTabCount() == 0) {
+            JsamsDesktop.getInstance().getMainWindow().enableTabbedPane(false);
+        }
+    }
+
 }

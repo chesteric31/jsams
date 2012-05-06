@@ -115,6 +115,7 @@ public class OpenSocietyDialog extends JsamsDialog implements JsamsButtonsInterf
             JsamsMainFrame mainWindow = jsamsDesktop.getMainWindow();
             mainWindow.setTitle(newTitle);
             mainWindow.enableAllMenuItems(true);
+            mainWindow.enableTabbedPane(true);
             mainWindow.getShortcutToolBar().enableButtons(true);
             dispose();
         } else {

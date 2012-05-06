@@ -87,7 +87,9 @@ public class JsamsWindowsMenuBuilder extends AbstractMenuBuilder {
             private static final long serialVersionUID = -6678049688631891662L;
 
             public void actionPerformed(ActionEvent event) {
-                JsamsDesktop.getInstance().getMainWindow().getTabbedPane().removeAll();
+                JsamsMainFrame mainFrame = JsamsDesktop.getInstance().getMainWindow();
+                mainFrame.getTabbedPane().removeAll();
+                mainFrame.enableTabbedPane(false);
             }
         };
         action.putValue(Action.NAME, text);
