@@ -6,6 +6,7 @@ import java.awt.event.KeyListener;
 
 import javax.swing.KeyStroke;
 
+import be.jsams.client.desktop.JsamsDesktop;
 import be.jsams.client.swing.component.JsamsCloseableTabbedPane;
 
 /**
@@ -29,6 +30,9 @@ public class TabbedPaneKeyListener implements KeyListener {
             int selectedIndex = tabbedPane.getSelectedIndex();
             if (selectedIndex > -1) {
                 tabbedPane.removeTabAt(selectedIndex);
+            }
+            if (tabbedPane.getTabCount() == 0) {
+                JsamsDesktop.getInstance().getMainWindow().enableTabbedPane(false);
             }
         }
     }

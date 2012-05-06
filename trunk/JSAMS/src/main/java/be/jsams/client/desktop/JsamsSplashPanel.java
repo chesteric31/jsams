@@ -43,13 +43,6 @@ public final class JsamsSplashPanel extends JPanel {
     private JsamsSplashPanel(Image image) {
         super();
         this.image = image;
-        // Dimension size = JsamsMainFrame.CENTER;
-        // Dimension size = new Dimension(image.getWidth(null),
-        // image.getHeight(null));
-        // setPreferredSize(size);
-        // setMinimumSize(size);
-        // setMaximumSize(size);
-        // setSize(size);
         setLayout(null);
     }
 
@@ -102,6 +95,13 @@ public final class JsamsSplashPanel extends JPanel {
 
             g2d.setComposite(oldComp);
         }
+    }
+
+    /**
+     * @return the image
+     */
+    public Image getImage() {
+        return image;
     }
 
 }

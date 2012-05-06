@@ -17,7 +17,6 @@ import be.jsams.client.swing.component.JsamsCloseableTabbedPane;
 import be.jsams.client.swing.component.JsamsMenu;
 import be.jsams.client.swing.component.JsamsMenuItem;
 import be.jsams.client.swing.component.JsamsShortcutToolBar;
-import be.jsams.client.swing.listener.TabbedPaneKeyListener;
 import be.jsams.client.swing.utils.DialogUtil;
 
 /**
@@ -45,7 +44,7 @@ public class JsamsMainFrame extends AbstractJsamsFrame {
 
     private JsamsShortcutToolBar shortcutToolBar;
 
-    private JsamsCloseableTabbedPane tabbedPane;
+    private JsamsMainPanel mainPanel = new JsamsMainPanel();
 
     /**
      * Constructor.
@@ -82,15 +81,11 @@ public class JsamsMainFrame extends AbstractJsamsFrame {
 
             add(buildSouthPanel(), BorderLayout.SOUTH);
 
-            tabbedPane = new JsamsCloseableTabbedPane();
-            tabbedPane.addKeyListener(new TabbedPaneKeyListener());
-
             setJMenuBar(mainMenuBar);
 
-            // TODO correct the components with splash panel, with the closing
-            // and opening menu item...
-            add(tabbedPane);
-            // add(JsamsSpashPanel.getInstance());
+            mainPanel.setOpaque(true);
+            add(mainPanel, BorderLayout.CENTER);
+
             pack();
             DialogUtil.centerComponentOnScreen(this);
             setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -132,7 +127,7 @@ public class JsamsMainFrame extends AbstractJsamsFrame {
      * @return the tabbedPane
      */
     public JsamsCloseableTabbedPane getTabbedPane() {
-        return tabbedPane;
+        return mainPanel.getTabbedPane();
     }
 
     /**
@@ -151,6 +146,15 @@ public class JsamsMainFrame extends AbstractJsamsFrame {
         fileMenuBuilder.enableMenuItems(value);
         managementMenuBuilder.enableMenuItems(value);
         salesMenuBuilder.enableMenuItems(value);
+    }
+    
+    /**
+     * Enables/disables the tabbed pane.
+     * 
+     * @param value the boolean value
+     */
+    public void enableTabbedPane(boolean value) {
+        mainPanel.enableTabbedPane(value);
     }
 
     /**
