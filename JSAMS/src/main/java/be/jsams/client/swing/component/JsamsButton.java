@@ -21,15 +21,8 @@ public class JsamsButton extends JButton {
 
     /**
      * Constructor.
-     */
-    public JsamsButton() {
-        super();
-    }
-
-    /**
-     * Constructor.
      * 
-     * @param text the {@link I18nString} translatable String
+     * @param text the {@link I18nString} translatable label
      */
     public JsamsButton(final I18nString text) {
         super(text.getTranslation());
@@ -38,7 +31,19 @@ public class JsamsButton extends JButton {
     /**
      * Constructor.
      * 
-     * @param text the {@link I18nString} translatable String
+     * @param text the {@link I18nString} translatable label
+     * @param toolTip the {@link I18nString} translatable tool tip
+     */
+    public JsamsButton(final I18nString text, final I18nString toolTip) {
+        this(text);
+        setToolTipText(toolTip);
+    }
+    
+
+    /**
+     * Constructor.
+     * 
+     * @param text the {@link I18nString} translatable label
      * @param iconFileName the icon path file name
      */
     public JsamsButton(final I18nString text, final String iconFileName) {
@@ -53,6 +58,15 @@ public class JsamsButton extends JButton {
      */
     public JsamsButton(final String iconFileName) {
         super(new ImageIcon(IconUtil.buildIcon(iconFileName)));
+    }
+
+    /**
+     * Sets the tool tip for this button.
+     * 
+     * @param toolTip the {@link I18nString} tool tip
+     */
+    public void setToolTipText(I18nString toolTip) {
+        setToolTipText(toolTip.getTranslation());
     }
 
 }
