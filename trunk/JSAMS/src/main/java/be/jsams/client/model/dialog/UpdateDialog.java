@@ -10,6 +10,7 @@ import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.desktop.JsamsMainFrame;
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.i18n.JsamsI18nLabelResource;
+import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.swing.action.DownloadUpdateAction;
 import be.jsams.client.swing.component.AbstractJsamsFrame;
 import be.jsams.client.swing.component.JsamsButton;
@@ -68,7 +69,7 @@ public class UpdateDialog extends JsamsDialog {
         if (!updateAvailable) {
             builder.appendI15d(JsamsI18nLabelResource.LABEL_APPLICATION_VERSION_UP_TO_DATE.getKey());
         } else {
-            JsamsButton updateButton = new JsamsButton(JsamsI18nLabelResource.LABEL_APPLICATION_VERSION_TO_UPDATE);
+            JsamsButton updateButton = new JsamsButton(JsamsI18nResource.BUTTON_APPLICATION_VERSION_TO_UPDATE);
             updateButton.setAction(new DownloadUpdateAction(updateButton.getText(), updateButton.getIcon()));
             builder.appendI15d("", updateButton);
         }
