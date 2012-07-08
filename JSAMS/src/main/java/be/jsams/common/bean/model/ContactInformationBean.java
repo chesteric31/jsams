@@ -185,4 +185,93 @@ public class ContactInformationBean extends AbstractIdentityBean<ContactInformat
         setWebsite(other.getWebsite());
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = super.hashCode();
+        result = prime * result;
+        if (email == null) {
+            result += 0;
+        } else {
+            result += email.hashCode();
+        }
+        if (fax == null) {
+            result += 0;
+        } else {
+            result += fax.hashCode();
+        }
+        if (mobile == null) {
+            result += 0;
+        } else {
+            result += mobile.hashCode();
+        }
+        if (phone == null) {
+            result += 0;
+        } else {
+            result += phone.hashCode();
+        }
+        if (website == null) {
+            result += 0;
+        } else {
+            result += website.hashCode();
+        }
+        return result;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(Object obj) {
+//        if (this == obj) {
+//            return true;
+//        }
+        if (!super.equals(obj)) {
+            return false;
+        }
+        if (!(obj instanceof ContactInformationBean)) {
+            return false;
+        }
+        ContactInformationBean other = (ContactInformationBean) obj;
+        if (email == null) {
+            if (other.email != null) {
+                return false;
+            }
+        } else if (!email.equals(other.email)) {
+            return false;
+        }
+        if (fax == null) {
+            if (other.fax != null) {
+                return false;
+            }
+        } else if (!fax.equals(other.fax)) {
+            return false;
+        }
+        if (mobile == null) {
+            if (other.mobile != null) {
+                return false;
+            }
+        } else if (!mobile.equals(other.mobile)) {
+            return false;
+        }
+        if (phone == null) {
+            if (other.phone != null) {
+                return false;
+            }
+        } else if (!phone.equals(other.phone)) {
+            return false;
+        }
+        if (website == null) {
+            if (other.website != null) {
+                return false;
+            }
+        } else if (!website.equals(other.website)) {
+            return false;
+        }
+        return true;
+    }
+
 }
