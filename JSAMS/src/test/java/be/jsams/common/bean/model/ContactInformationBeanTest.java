@@ -28,12 +28,7 @@ public class ContactInformationBeanTest {
      */
     @Test
     public void testRefreshEquals() {
-        ContactInformationBean otherBean = new ContactInformationBean();
-        otherBean.setEmail("mail@mail.com");
-        otherBean.setFax("0123456789");
-        otherBean.setMobile("1234567890");
-        otherBean.setPhone("0123456788");
-        otherBean.setWebsite("www.website.com");
+        ContactInformationBean otherBean = MockBeanGenerator.generateMockContactInformation();
         bean.refresh(otherBean);
         assertTrue(bean.equals(otherBean));
     }
