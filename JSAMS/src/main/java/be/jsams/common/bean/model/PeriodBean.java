@@ -93,4 +93,57 @@ public class PeriodBean extends AbstractIdentityBean<AbstractIdentity, PeriodBea
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = super.hashCode();
+        result = prime * result;
+        if (startDate == null) {
+            result += 0;
+        } else {
+            result += startDate.hashCode();
+        }
+        if (endDate == null) {
+            result += 0;
+        } else {
+            result += endDate.hashCode();
+        }
+        return result;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(Object obj) {
+//        if (this == obj) {
+//            return true;
+//        }
+        if (!super.equals(obj)) {
+            return false;
+        }
+        if (!(obj instanceof PeriodBean)) {
+            return false;
+        }
+        PeriodBean other = (PeriodBean) obj;
+        if (endDate == null) {
+            if (other.endDate != null) {
+                return false;
+            }
+        } else if (!endDate.equals(other.endDate)) {
+            return false;
+        }
+        if (startDate == null) {
+            if (other.startDate != null) {
+                return false;
+            }
+        } else if (!startDate.equals(other.startDate)) {
+            return false;
+        }
+        return true;
+    }
+    
 }
