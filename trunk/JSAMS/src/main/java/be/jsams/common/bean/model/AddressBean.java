@@ -212,4 +212,105 @@ public class AddressBean extends AbstractIdentityBean<Address, AddressBeanView> 
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = super.hashCode();
+        result = prime * result;
+        if (box == null) {
+            result += 0;
+        } else {
+            result += box.hashCode();
+        }
+        if (city == null) {
+            result += 0;
+        } else {
+            result += city.hashCode();
+        }
+        if (country == null) {
+            result += 0;
+        } else {
+            result += country.hashCode();
+        }
+        if (number == null) {
+            result += 0;
+        } else {
+            result += number.hashCode();
+        }
+        if (street == null) {
+            result += 0;
+        } else {
+            result += street.hashCode();
+        }
+        if (zipCode == null) {
+            result += 0;
+        } else {
+            result += zipCode.hashCode();
+        }
+        return result;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(Object obj) {
+//        if (this == obj) {
+//            return true;
+//        }
+        if (!super.equals(obj)) {
+            return false;
+        }
+        if (!(obj instanceof AddressBean)) {
+            return false;
+        }
+        AddressBean other = (AddressBean) obj;
+        if (box == null) {
+            if (other.box != null) {
+                return false;
+            }
+        } else if (!box.equals(other.box)) {
+            return false;
+        }
+        if (city == null) {
+            if (other.city != null) {
+                return false;
+            }
+        } else if (!city.equals(other.city)) {
+            return false;
+        }
+        if (country == null) {
+            if (other.country != null) {
+                return false;
+            }
+        } else if (!country.equals(other.country)) {
+            return false;
+        }
+        if (number == null) {
+            if (other.number != null) {
+                return false;
+            }
+        } else if (!number.equals(other.number)) {
+            return false;
+        }
+        if (street == null) {
+            if (other.street != null) {
+                return false;
+            }
+        } else if (!street.equals(other.street)) {
+            return false;
+        }
+        if (zipCode == null) {
+            if (other.zipCode != null) {
+                return false;
+            }
+        } else if (!zipCode.equals(other.zipCode)) {
+            return false;
+        }
+        return true;
+    }
+
 }
