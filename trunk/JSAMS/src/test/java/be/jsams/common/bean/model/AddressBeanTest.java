@@ -28,13 +28,7 @@ public class AddressBeanTest {
      */
     @Test
     public void testRefreshEquals() {
-        AddressBean otherBean = new AddressBean();
-        otherBean.setBox("B");
-        otherBean.setCity("Brussels");
-        otherBean.setCountry("Belgium");
-        otherBean.setNumber("2");
-        otherBean.setStreet("Rue Neuve");
-        otherBean.setZipCode("1000");
+        AddressBean otherBean = MockBeanGenerator.generateMockAddress();
         bean.refresh(otherBean);
         assertTrue(bean.equals(otherBean));
     }

@@ -3,8 +3,6 @@ package be.jsams.common.bean.model;
 import static org.junit.Assert.assertTrue;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -30,12 +28,7 @@ public class PeriodBeanTest {
      */
     @Test
     public void testRefreshEquals() throws ParseException {
-        PeriodBean otherBean = new PeriodBean();
-        String pattern = "dd/MM/yyyy";
-        Date startDate = new SimpleDateFormat(pattern).parse("01/01/2000");
-        Date endDate = new SimpleDateFormat(pattern).parse("31/12/2001");
-        otherBean.setStartDate(startDate);
-        otherBean.setEndDate(endDate);
+        PeriodBean otherBean = MockBeanGenerator.generateMockPeriod();
         bean.refresh(otherBean);
         assertTrue(bean.equals(otherBean));
     }

@@ -287,4 +287,125 @@ public class SocietyBean extends AbstractNamedIdentityBean<Society, SocietyBeanV
         setId(other.getId());
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = super.hashCode();
+        result = prime * result;
+        if (activity == null) {
+            result += 0;
+        } else {
+            result += activity.hashCode();
+        }
+        if (address == null) {
+            result += 0;
+        } else {
+            result += address.hashCode();
+        }
+        if (capital == null) {
+            result += 0;
+        } else {
+            result += capital.hashCode();
+        }
+        if (contactInformation == null) {
+            result += 0;
+        } else {
+            result += contactInformation.hashCode();
+        }
+        if (legalForm == null) {
+            result += 0;
+        } else {
+            result += legalForm.hashCode();
+        }
+        if (logo == null) {
+            result += 0;
+        } else {
+            result += Arrays.hashCode(logo);
+        }
+        if (responsible == null) {
+            result += 0;
+        } else {
+            result += responsible.hashCode();
+        }
+        if (vatNumber == null) {
+            result += 0;
+        } else {
+            result += vatNumber.hashCode();
+        }
+        return result;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(Object obj) {
+//        if (this == obj) {
+//            return true;
+//        }
+        if (!super.equals(obj)) {
+            return false;
+        }
+        if (!(obj instanceof SocietyBean)) {
+            return false;
+        }
+        SocietyBean other = (SocietyBean) obj;
+        if (activity == null) {
+            if (other.activity != null) {
+                return false;
+            }
+        } else if (!activity.equals(other.activity)) {
+            return false;
+        }
+        if (address == null) {
+            if (other.address != null) {
+                return false;
+            }
+        } else if (!address.equals(other.address)) {
+            return false;
+        }
+        if (capital == null) {
+            if (other.capital != null) {
+                return false;
+            }
+        } else if (!capital.equals(other.capital)) {
+            return false;
+        }
+        if (contactInformation == null) {
+            if (other.contactInformation != null) {
+                return false;
+            }
+        } else if (!contactInformation.equals(other.contactInformation)) {
+            return false;
+        }
+        if (legalForm == null) {
+            if (other.legalForm != null) {
+                return false;
+            }
+        } else if (!legalForm.equals(other.legalForm)) {
+            return false;
+        }
+        if (!Arrays.equals(logo, other.logo)) {
+            return false;
+        }
+        if (responsible == null) {
+            if (other.responsible != null) {
+                return false;
+            }
+        } else if (!responsible.equals(other.responsible)) {
+            return false;
+        }
+        if (vatNumber == null) {
+            if (other.vatNumber != null) {
+                return false;
+            }
+        } else if (!vatNumber.equals(other.vatNumber)) {
+            return false;
+        }
+        return true;
+    }
+
 }
