@@ -97,9 +97,9 @@ public abstract class AbstractNamedIdentityBean<M extends AbstractNamedIdentity,
      */
     @Override
     public boolean equals(Object obj) {
-//        if (this == obj) {
-//            return true;
-//        }
+        // if (this == obj) {
+        // return true;
+        // }
         if (!super.equals(obj)) {
             return false;
         }
@@ -117,5 +117,4 @@ public abstract class AbstractNamedIdentityBean<M extends AbstractNamedIdentity,
         return true;
     }
 
-    
 }

@@ -300,36 +300,43 @@ public class SocietyBean extends AbstractNamedIdentityBean<Society, SocietyBeanV
         } else {
             result += activity.hashCode();
         }
+        result = prime * result;
         if (address == null) {
             result += 0;
         } else {
             result += address.hashCode();
         }
+        result = prime * result;
         if (capital == null) {
             result += 0;
         } else {
             result += capital.hashCode();
         }
+        result = prime * result;
         if (contactInformation == null) {
             result += 0;
         } else {
             result += contactInformation.hashCode();
         }
+        result = prime * result;
         if (legalForm == null) {
             result += 0;
         } else {
             result += legalForm.hashCode();
         }
+        result = prime * result;
         if (logo == null) {
             result += 0;
         } else {
             result += Arrays.hashCode(logo);
         }
+        result = prime * result;
         if (responsible == null) {
             result += 0;
         } else {
             result += responsible.hashCode();
         }
+        result = prime * result;
         if (vatNumber == null) {
             result += 0;
         } else {

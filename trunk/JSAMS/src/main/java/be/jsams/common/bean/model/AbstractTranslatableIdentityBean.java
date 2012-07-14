@@ -144,11 +144,13 @@ public abstract class AbstractTranslatableIdentityBean
         } else {
             result += label.hashCode();
         }
+        result = prime * result;
         if (labelFr == null) {
             result += 0;
         } else {
             result += labelFr.hashCode();
         }
+        result = prime * result;
         if (labelNl == null) {
             result += 0;
         } else {
@@ -162,9 +164,9 @@ public abstract class AbstractTranslatableIdentityBean
      */
     @Override
     public boolean equals(Object obj) {
-//        if (this == obj) {
-//            return true;
-//        }
+        // if (this == obj) {
+        // return true;
+        // }
         if (!super.equals(obj)) {
             return false;
         }

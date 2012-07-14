@@ -44,7 +44,7 @@ public class ProductBean extends AbstractNamedIdentityBean<Product, ProductBeanV
         super();
         setView(buildView());
     }
-    
+
     /**
      * Default constructor
      * 
@@ -214,6 +214,83 @@ public class ProductBean extends AbstractNamedIdentityBean<Product, ProductBeanV
         setQuantityStock(other.getQuantityStock());
         setReorderLevel(other.getReorderLevel());
         setVatApplicable(other.getVatApplicable());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = super.hashCode();
+        result = prime * result;
+        if (category == null) {
+            result += 0;
+        } else {
+            result += category.hashCode();
+        }
+        result = prime * result;
+        if (price == null) {
+            result += 0;
+        } else {
+            result += price.hashCode();
+        }
+        result = prime * result;
+        result += quantityStock;
+        result = prime * result;
+        result += reorderLevel;
+        result = prime * result;
+        if (vatApplicable == null) {
+            result += 0;
+        } else {
+            result += vatApplicable.hashCode();
+        }
+        return result;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(Object obj) {
+        // if (this == obj) {
+        // return true;
+        // }
+        if (!super.equals(obj)) {
+            return false;
+        }
+        if (!(obj instanceof ProductBean)) {
+            return false;
+        }
+        ProductBean other = (ProductBean) obj;
+        if (category == null) {
+            if (other.category != null) {
+                return false;
+            }
+        } else if (!category.equals(other.category)) {
+            return false;
+        }
+        if (price == null) {
+            if (other.price != null) {
+                return false;
+            }
+        } else if (!price.equals(other.price)) {
+            return false;
+        }
+        if (quantityStock != other.quantityStock) {
+            return false;
+        }
+        if (reorderLevel != other.reorderLevel) {
+            return false;
+        }
+        if (vatApplicable == null) {
+            if (other.vatApplicable != null) {
+                return false;
+            }
+        } else if (!vatApplicable.equals(other.vatApplicable)) {
+            return false;
+        }
+        return true;
     }
 
 }

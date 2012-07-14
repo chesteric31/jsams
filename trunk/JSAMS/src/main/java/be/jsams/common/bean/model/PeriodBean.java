@@ -106,6 +106,7 @@ public class PeriodBean extends AbstractIdentityBean<AbstractIdentity, PeriodBea
         } else {
             result += startDate.hashCode();
         }
+        result = prime * result;
         if (endDate == null) {
             result += 0;
         } else {

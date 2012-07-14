@@ -17,7 +17,7 @@ import com.jgoodies.common.collect.ObservableList;
  */
 public abstract class AbstractIdentityBean<M extends AbstractIdentity, V extends AbstractBeanView<?>> extends Model
         implements Refreshable<AbstractIdentityBean<?, ?>> {
-    
+
     /**
      * Serial Version UID
      */
@@ -30,7 +30,7 @@ public abstract class AbstractIdentityBean<M extends AbstractIdentity, V extends
     public static final String LIST_MODEL_PROPERTY = "listModel";
     private AbstractIdentityBean<M, V> selection;
     public static final String SELECTION_PROPERTY = "selection";
-    
+
     private V view;
 
     /**
@@ -129,7 +129,7 @@ public abstract class AbstractIdentityBean<M extends AbstractIdentity, V extends
         if (obj == null) {
             return false;
         }
-        if (!(obj instanceof AbstractIdentityBean<?, ?>)) {
+        if (!(obj instanceof AbstractIdentityBean)) {
             return false;
         }
         AbstractIdentityBean<?, ?> other = (AbstractIdentityBean<?, ?>) obj;
