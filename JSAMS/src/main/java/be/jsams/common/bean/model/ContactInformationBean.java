@@ -198,21 +198,25 @@ public class ContactInformationBean extends AbstractIdentityBean<ContactInformat
         } else {
             result += email.hashCode();
         }
+        result = prime * result;
         if (fax == null) {
             result += 0;
         } else {
             result += fax.hashCode();
         }
+        result = prime * result;
         if (mobile == null) {
             result += 0;
         } else {
             result += mobile.hashCode();
         }
+        result = prime * result;
         if (phone == null) {
             result += 0;
         } else {
             result += phone.hashCode();
         }
+        result = prime * result;
         if (website == null) {
             result += 0;
         } else {

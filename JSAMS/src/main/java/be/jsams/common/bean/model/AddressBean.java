@@ -225,26 +225,31 @@ public class AddressBean extends AbstractIdentityBean<Address, AddressBeanView> 
         } else {
             result += box.hashCode();
         }
+        result = prime * result;
         if (city == null) {
             result += 0;
         } else {
             result += city.hashCode();
         }
+        result = prime * result;
         if (country == null) {
             result += 0;
         } else {
             result += country.hashCode();
         }
+        result = prime * result;
         if (number == null) {
             result += 0;
         } else {
             result += number.hashCode();
         }
+        result = prime * result;
         if (street == null) {
             result += 0;
         } else {
             result += street.hashCode();
         }
+        result = prime * result;
         if (zipCode == null) {
             result += 0;
         } else {

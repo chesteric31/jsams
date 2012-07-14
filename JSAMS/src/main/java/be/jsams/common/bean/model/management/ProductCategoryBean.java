@@ -94,4 +94,45 @@ public class ProductCategoryBean extends AbstractTranslatableIdentityBean<Produc
         this.society = society;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = super.hashCode();
+        result = prime * result;
+        if (society == null) {
+            result += 0;
+        } else {
+            result += society.hashCode();
+        }
+        return result;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(Object obj) {
+//        if (this == obj) {
+//            return true;
+//        }
+        if (!super.equals(obj)) {
+            return false;
+        }
+        if (!(obj instanceof ProductCategoryBean)) {
+            return false;
+        }
+        ProductCategoryBean other = (ProductCategoryBean) obj;
+        if (society == null) {
+            if (other.society != null) {
+                return false;
+            }
+        } else if (!society.equals(other.society)) {
+            return false;
+        }
+        return true;
+    }
+
 }
