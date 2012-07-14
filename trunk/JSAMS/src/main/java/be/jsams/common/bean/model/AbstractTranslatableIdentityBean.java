@@ -131,4 +131,69 @@ public abstract class AbstractTranslatableIdentityBean
         // setListModel(other.getListModel());
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = super.hashCode();
+        result = prime * result;
+        if (label == null) {
+            result += 0;
+        } else {
+            result += label.hashCode();
+        }
+        if (labelFr == null) {
+            result += 0;
+        } else {
+            result += labelFr.hashCode();
+        }
+        if (labelNl == null) {
+            result += 0;
+        } else {
+            result += labelNl.hashCode();
+        }
+        return result;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(Object obj) {
+//        if (this == obj) {
+//            return true;
+//        }
+        if (!super.equals(obj)) {
+            return false;
+        }
+        if (!(obj instanceof AbstractTranslatableIdentityBean)) {
+            return false;
+        }
+        AbstractTranslatableIdentityBean<?, ?> other = (AbstractTranslatableIdentityBean<?, ?>) obj;
+        if (label == null) {
+            if (other.label != null) {
+                return false;
+            }
+        } else if (!label.equals(other.label)) {
+            return false;
+        }
+        if (labelFr == null) {
+            if (other.labelFr != null) {
+                return false;
+            }
+        } else if (!labelFr.equals(other.labelFr)) {
+            return false;
+        }
+        if (labelNl == null) {
+            if (other.labelNl != null) {
+                return false;
+            }
+        } else if (!labelNl.equals(other.labelNl)) {
+            return false;
+        }
+        return true;
+    }
+
 }
