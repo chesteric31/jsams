@@ -4,6 +4,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import be.jsams.common.bean.model.management.ProductBean;
+import be.jsams.common.bean.model.management.ProductCategoryBean;
 import be.jsams.server.model.mock.MockModelGenerator;
 
 /**
@@ -66,6 +68,26 @@ public final class MockBeanGenerator {
     public static LegalFormBean generateMockLegalForm() {
         LegalFormBean form = new LegalFormBean(MockModelGenerator.generateMockLegalForm());
         return form;
+    }
+
+    public static ProductBean generateMockProduct() {
+        ProductBean bean = new ProductBean();
+        bean.setCategory(generateMockProductCategory());
+        bean.setName("name");
+        bean.setPrice(15D);
+        bean.setQuantityStock(1);
+        bean.setReorderLevel(1);
+        bean.setVatApplicable(21D);
+        return bean;
+    }
+
+    public static ProductCategoryBean generateMockProductCategory() {
+        ProductCategoryBean bean = new ProductCategoryBean();
+        bean.setLabel("label");
+        bean.setLabelFr("labelFr");
+        bean.setLabelNl("labelNl");
+//        bean.setSociety(generateMockSociety());
+        return bean;
     }
 
 }
