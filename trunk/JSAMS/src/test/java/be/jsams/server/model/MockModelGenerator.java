@@ -208,5 +208,21 @@ public final class MockModelGenerator {
         customer.setVatNumber("BE1234567890");
         return customer;
     }
+
+    /**
+     * Generates mock {@link PaymentMode}.
+     * 
+     * @return the built {@link PaymentMode}
+     */
+    public static PaymentMode generateMockPaymentMode() {
+        PaymentMode paymentMode = new PaymentMode();
+        paymentMode.setAdditionalDays(15);
+        paymentMode.setDaysNumber(30);
+        paymentMode.setLabel("EXTENSION");
+        paymentMode.setLabelFr("PROLONGATION");
+        paymentMode.setLabelNl("VERLENGING");
+        paymentMode.setMonthEnd(true);
+        return paymentMode;
+    }
     
 }
