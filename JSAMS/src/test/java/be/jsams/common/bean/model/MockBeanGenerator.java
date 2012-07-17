@@ -133,4 +133,14 @@ public final class MockBeanGenerator {
         return bean;
     }
 
+    /**
+     * Generates mock {@link PaymentModeBean}.
+     * 
+     * @return the built {@link PaymentModeBean}
+     */
+    public static PaymentModeBean generateMockPaymentMode() {
+        PaymentModeBean bean = new PaymentModeBean(MockModelGenerator.generateMockPaymentMode());
+        return bean;
+    }
+
 }
