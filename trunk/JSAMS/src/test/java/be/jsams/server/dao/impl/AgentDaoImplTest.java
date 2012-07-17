@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import be.jsams.common.bean.model.CivilityBean;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.AgentBean;
 import be.jsams.server.dao.AddressDao;
@@ -16,17 +17,16 @@ import be.jsams.server.dao.CivilityDao;
 import be.jsams.server.dao.ContactInformationDao;
 import be.jsams.server.dao.SocietyDao;
 import be.jsams.server.dao.management.AgentDao;
-import be.jsams.server.dao.management.impl.AgentDaoImpl;
 import be.jsams.server.model.Address;
 import be.jsams.server.model.Civility;
 import be.jsams.server.model.ContactInformation;
+import be.jsams.server.model.MockModelGenerator;
 import be.jsams.server.model.Society;
 import be.jsams.server.model.management.Agent;
-import be.jsams.server.model.mock.MockModelGenerator;
 
 /**
- * Test class for {@link AgentDaoImpl}.
- *
+ * Test class for {@link AgentDao}.
+ * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
@@ -47,9 +47,9 @@ public class AgentDaoImplTest extends BaseJUnitTestClass {
 
     @Autowired
     private ContactInformationDao contactInformationDao;
-    
+
     /**
-     * @throws java.lang.Exception
+     * @throws java.lang.Exception a possible {@link Exception}
      */
     @Before
     public void setUp() throws Exception {
@@ -57,7 +57,10 @@ public class AgentDaoImplTest extends BaseJUnitTestClass {
     }
 
     /**
-     * Test method for {@link be.jsams.server.dao.management.impl.AgentDaoImpl#findByCriteria(be.jsams.common.bean.model.management.AgentBean)}.
+     * Test method for
+     * {@link be.jsams.server.dao.management.impl.AgentDaoImpl#findByCriteria(
+     * be.jsams.common.bean.model.management.AgentBean)}
+     * .
      */
     @Test
     public void testFindByCriteria() {
@@ -88,6 +91,16 @@ public class AgentDaoImplTest extends BaseJUnitTestClass {
         };
 
         criteria.setSociety(societyBean);
+        CivilityBean civilityBean = new CivilityBean(persistedCivility) {
+
+            /**
+             * Serial Version UID
+             */
+            private static final long serialVersionUID = -4476727993398758872L;
+
+        };
+        criteria.setCivility(civilityBean);
+        dao.setCurrentSociety(societyBean);
         List<Agent> founds = dao.findByCriteria(criteria);
         assertTrue(founds.contains(persistedAgent));
     }

@@ -11,8 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import be.jsams.server.dao.BaseJUnitTestClass;
 import be.jsams.server.dao.SocietyDao;
+import be.jsams.server.model.MockModelGenerator;
 import be.jsams.server.model.Society;
-import be.jsams.server.model.mock.MockModelGenerator;
 
 /**
  * Test class for {@link SocietyDaoImpl}.
@@ -27,7 +27,7 @@ public class SocietyDaoImplTest extends BaseJUnitTestClass {
     private Society society;
     
     /**
-     * @throws java.lang.Exception
+     * @throws java.lang.Exception a possible {@link Exception}
      */
     @Before
     public void setUp() throws Exception {

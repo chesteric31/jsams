@@ -13,14 +13,16 @@ import be.jsams.server.service.rss.impl.RSSFeedParserImpl;
 
 /**
  * 
- *
+ * 
  * @author chesteric31
  * @version $Revision$ $Date::                  $ $Author$
  */
 public class DownloaderServiceImplTest {
 
     /**
-     * Test method for {@link be.jsams.server.service.update.impl.DownloaderServiceImpl#retrieveAvailableUpdateVersion()}.
+     * Test method for
+     * {@link be.jsams.server.service.update.impl.DownloaderServiceImpl#retrieveAvailableUpdateVersion()}
+     * .
      */
     @Test
     public void testRetrieveAvailableUpdateVersion() {
@@ -28,7 +30,9 @@ public class DownloaderServiceImplTest {
     }
 
     /**
-     * Test method for {@link be.jsams.server.service.update.impl.DownloaderServiceImpl#downloadAvailableUpdateFile(java.lang.String)}.
+     * Test method for
+     * {@link be.jsams.server.service.update.impl.DownloaderServiceImpl#downloadAvailableUpdateFile(java.lang.String)}
+     * .
      */
     @Test
     public void testRetrieveAvailableUpdateFile() {
@@ -36,7 +40,9 @@ public class DownloaderServiceImplTest {
     }
 
     /**
-     * Test method for {@link be.jsams.server.service.update.impl.DownloaderServiceImpl#retrieveHostStringForUpdates()}.
+     * Test method for
+     * {@link be.jsams.server.service.update.impl.DownloaderServiceImpl#retrieveHostStringForUpdates()}
+     * .
      */
     @Test
     public void testRetrieveHostStringForUpdates() {
@@ -47,7 +53,7 @@ public class DownloaderServiceImplTest {
                 "file:///home//chesteric31//Dev//workspace-jsams//JSAMS//updates.rss");
         downloaderService.setRssFeedParser(rssFeedParser);
         List<String> stringForUpdates = downloaderService.retrieveHostStringForUpdates();
-        for (String string: stringForUpdates) {
+        for (String string : stringForUpdates) {
             System.out.println(string);
         }
     }

@@ -12,10 +12,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import be.jsams.server.dao.BaseJUnitTestClass;
 import be.jsams.server.dao.AddressDao;
+import be.jsams.server.dao.BaseJUnitTestClass;
 import be.jsams.server.model.Address;
-import be.jsams.server.model.mock.MockModelGenerator;
+import be.jsams.server.model.MockModelGenerator;
 
 /**
  * Test class for {@link AddressDaoImpl}.
@@ -29,42 +29,63 @@ public class AddressDaoImplTest extends BaseJUnitTestClass {
     private AddressDao dao;
 
     private Address address;
-
+    
+    /**
+     * Setup method.
+     */
     @Before
     public void setUp() {
         address = MockModelGenerator.generateMockAddress();
     }
 
+    /**
+     * Test method for add method.
+     */
     @Test
     public void testAdd() {
         dao.add(address);
         assertNotNull(address.getId());
     }
 
+    /**
+     * Test method for add method with null city.
+     */
     @Test(expected = EntityExistsException.class)
     public void testAddNullCity() {
         address.setCity(null);
         dao.add(address);
     }
 
+    /**
+     * Test method for add method with null country.
+     */
     @Test(expected = EntityExistsException.class)
     public void testAddNullCountry() {
         address.setCountry(null);
         dao.add(address);
     }
 
+    /**
+     * Test method for add method with null number.
+     */
     @Test(expected = EntityExistsException.class)
     public void testAddNullNumber() {
         address.setNumber(null);
         dao.add(address);
     }
 
+    /**
+     * Test method for add method with null street.
+     */
     @Test(expected = EntityExistsException.class)
     public void testAddNullStreet() {
         address.setStreet(null);
         dao.add(address);
     }
 
+    /**
+     * Test method for findAll method.
+     */
     @Test
     public void testFindAll() {
         int sizeBefore = dao.findAll().size();
@@ -84,6 +105,9 @@ public class AddressDaoImplTest extends BaseJUnitTestClass {
         }
     }
 
+    /**
+     * Test method for findById method.
+     */
     @Test
     public void testFindById() {
         dao.add(address);
@@ -91,6 +115,9 @@ public class AddressDaoImplTest extends BaseJUnitTestClass {
         assertNotNull(foundAddress);
     }
 
+    /**
+     * Test method for delete method.
+     */
     @Test
     public void testDelete() {
         dao.add(address);
@@ -99,6 +126,9 @@ public class AddressDaoImplTest extends BaseJUnitTestClass {
         assertNull(foundAddress);
     }
 
+    /**
+     * Test method for update method.
+     */
     @Test
     public void testUpdate() {
         dao.add(address);

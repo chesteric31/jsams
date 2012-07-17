@@ -104,7 +104,7 @@ public class DoubleFormatterTest {
      * {@link be.jsams.client.formatter.DoubleFormatter#stringToValue(java.lang.String)}
      * .
      * 
-     * @throws ParseException
+     * @throws ParseException the expected {@link ParseException}
      */
     @Test(expected = ParseException.class)
     public void testStringToValueStringForEmpty() throws ParseException {

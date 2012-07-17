@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import be.jsams.server.dao.BaseJUnitTestClass;
 import be.jsams.server.dao.ContactInformationDao;
 import be.jsams.server.model.ContactInformation;
-import be.jsams.server.model.mock.MockModelGenerator;
+import be.jsams.server.model.MockModelGenerator;
 
 /**
  * Test class for {@link ContactInformationDaoImpl}.
@@ -31,7 +31,7 @@ public class ContactInformationDaoImplTest extends BaseJUnitTestClass {
     private ContactInformation contactInformation;
     
     /**
-     * @throws java.lang.Exception
+     * @throws java.lang.Exception a possible {@link Exception}
      */
     @Before
     public void setUp() throws Exception {
@@ -99,6 +99,9 @@ public class ContactInformationDaoImplTest extends BaseJUnitTestClass {
         assertTrue(foundInformation.getPhone().equals(fakePhone));
     }
 
+    /**
+     * Test method for null phone.
+     */
     @Test(expected = EntityExistsException.class)
     public void testAddNullPhone() {
         contactInformation.setPhone(null);

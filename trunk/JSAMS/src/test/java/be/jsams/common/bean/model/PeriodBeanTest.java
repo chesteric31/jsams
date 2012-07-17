@@ -8,23 +8,30 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * Test class for {@link PeriodBean} class. 
- *
+ * Test class for {@link PeriodBean} class.
+ * 
  * @author chesteric31
  * @version $Revision$ $Date::                  $ $Author$
  */
 public class PeriodBeanTest {
-    
+
     private PeriodBean bean;
 
+    /**
+     * 
+     * @throws Exception a possible {@link Exception}
+     */
     @Before
     public void setUp() throws Exception {
         bean = new PeriodBean();
     }
 
     /**
-     * Test method for {@link be.jsams.common.bean.model.PeriodBean#refresh(be.jsams.common.bean.model.AbstractIdentityBean)}.
-     * @throws ParseException a {@link ParseException}
+     * Test method for
+     * {@link be.jsams.common.bean.model.PeriodBean#refresh(be.jsams.common.bean.model.AbstractIdentityBean)}
+     * .
+     * 
+     * @throws ParseException a possible {@link ParseException}
      */
     @Test
     public void testRefreshEquals() throws ParseException {

@@ -6,16 +6,28 @@ import java.util.Date;
 
 import be.jsams.common.bean.model.management.ProductBean;
 import be.jsams.common.bean.model.management.ProductCategoryBean;
-import be.jsams.server.model.mock.MockModelGenerator;
+import be.jsams.server.model.MockModelGenerator;
 
 /**
  * Generator of bean objects.
- *
+ * 
  * @author chesteric31
  * @version $Revision$ $Date::                  $ $Author$
  */
 public final class MockBeanGenerator {
 
+    /**
+     * Default private constructor for utility class.
+     */
+    private MockBeanGenerator() {
+
+    }
+
+    /**
+     * Generates mock {@link AddressBean}.
+     * 
+     * @return the built {@link AddressBean}
+     */
     public static AddressBean generateMockAddress() {
         AddressBean address = new AddressBean();
         address.setCity("Brussels");
@@ -26,6 +38,11 @@ public final class MockBeanGenerator {
         return address;
     }
 
+    /**
+     * Generates mock {@link ContactInformationBean}.
+     * 
+     * @return the built {@link ContactInformationBean}
+     */
     public static ContactInformationBean generateMockContactInformation() {
         ContactInformationBean contactInformation = new ContactInformationBean();
         contactInformation.setEmail("mail@mail.com");
@@ -36,6 +53,12 @@ public final class MockBeanGenerator {
         return contactInformation;
     }
 
+    /**
+     * Generates mock {@link PeriodBean}.
+     * 
+     * @return the built {@link PeriodBean}
+     * @throws ParseException a possible {@link ParseException}
+     */
     public static PeriodBean generateMockPeriod() throws ParseException {
         PeriodBean period = new PeriodBean();
         String pattern = "dd/MM/yyyy";
@@ -45,7 +68,12 @@ public final class MockBeanGenerator {
         period.setEndDate(endDate);
         return period;
     }
-    
+
+    /**
+     * Generates mock {@link SocietyBean}.
+     * 
+     * @return the built {@link SocietyBean}
+     */
     public static SocietyBean generateMockSociety() {
         SocietyBean society = new SocietyBean();
         society.setActivity("Activity");
@@ -55,21 +83,31 @@ public final class MockBeanGenerator {
 
         AddressBean address = generateMockAddress();
         society.setAddress(address);
-        
+
         ContactInformationBean contactInformation = generateMockContactInformation();
         society.setContactInformation(contactInformation);
-        
+
         LegalFormBean legalForm = generateMockLegalForm();
         society.setLegalForm(legalForm);
 
         return society;
     }
 
+    /**
+     * Generates mock {@link LegalFormBean}.
+     * 
+     * @return the built {@link LegalFormBean}
+     */
     public static LegalFormBean generateMockLegalForm() {
         LegalFormBean form = new LegalFormBean(MockModelGenerator.generateMockLegalForm());
         return form;
     }
 
+    /**
+     * Generates mock {@link ProductBean}.
+     * 
+     * @return the built {@link ProductBean}
+     */
     public static ProductBean generateMockProduct() {
         ProductBean bean = new ProductBean();
         bean.setCategory(generateMockProductCategory());
@@ -81,12 +119,17 @@ public final class MockBeanGenerator {
         return bean;
     }
 
+    /**
+     * Generates mock {@link ProductCategoryBean}.
+     * 
+     * @return the built {@link ProductCategoryBean}
+     */
     public static ProductCategoryBean generateMockProductCategory() {
         ProductCategoryBean bean = new ProductCategoryBean();
         bean.setLabel("label");
         bean.setLabelFr("labelFr");
         bean.setLabelNl("labelNl");
-//        bean.setSociety(generateMockSociety());
+        // bean.setSociety(generateMockSociety());
         return bean;
     }
 

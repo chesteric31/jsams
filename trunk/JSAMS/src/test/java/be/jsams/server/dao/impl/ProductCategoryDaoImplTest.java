@@ -14,13 +14,12 @@ import be.jsams.common.bean.model.management.ProductCategoryBean;
 import be.jsams.server.dao.BaseJUnitTestClass;
 import be.jsams.server.dao.SocietyDao;
 import be.jsams.server.dao.management.ProductCategoryDao;
-import be.jsams.server.dao.management.impl.ProductCategoryDaoImpl;
+import be.jsams.server.model.MockModelGenerator;
 import be.jsams.server.model.Society;
 import be.jsams.server.model.management.ProductCategory;
-import be.jsams.server.model.mock.MockModelGenerator;
 
 /**
- * Test class for {@link ProductCategoryDaoImpl}.
+ * Test class for {@link ProductCategoryDao}.
  * 
  * @author chesteric31
  * @version $$Rev$$ $$Date::                  $$ $$Author$$
@@ -39,7 +38,7 @@ public class ProductCategoryDaoImplTest extends BaseJUnitTestClass {
     private SocietyBeanBuilder societyBeanBuilder;
 
     /**
-     * @throws java.lang.Exception
+     * @throws java.lang.Exception a possible {@link Exception}
      */
     @Before
     public void setUp() throws Exception {
@@ -59,7 +58,7 @@ public class ProductCategoryDaoImplTest extends BaseJUnitTestClass {
         productCategory.setSociety(persistedSociety);
         societyBeanBuilder.setModel(persistedSociety);
         SocietyBean societyBean = societyBeanBuilder.build(false);
-        ((ProductCategoryDaoImpl) dao).setCurrentSociety(societyBean);
+        dao.setCurrentSociety(societyBean);
         ProductCategory category = dao.add(productCategory);
         List<ProductCategory> founds = dao.findAll();
         assertTrue(founds.contains(category));
@@ -67,7 +66,8 @@ public class ProductCategoryDaoImplTest extends BaseJUnitTestClass {
 
     /**
      * Test method for
-     * {@link be.jsams.server.dao.management.impl.ProductCategoryDaoImpl#findByCriteria(be.jsams.common.bean.model.management.ProductCategoryBean)}
+     * {@link be.jsams.server.dao.management.impl.ProductCategoryDaoImpl#findByCriteria(
+     * be.jsams.common.bean.model.management.ProductCategoryBean)}
      * .
      */
     @Test
@@ -76,6 +76,7 @@ public class ProductCategoryDaoImplTest extends BaseJUnitTestClass {
         societyBeanBuilder.setModel(persistedSociety);
         SocietyBean societyBean = societyBeanBuilder.build(false);
         ProductCategory category = dao.add(productCategory);
+        dao.setCurrentSociety(societyBean);
         ProductCategoryBean criteria = new ProductCategoryBean(category, societyBean);
         List<ProductCategory> founds = dao.findByCriteria(criteria);
         assertTrue(founds.contains(category));
