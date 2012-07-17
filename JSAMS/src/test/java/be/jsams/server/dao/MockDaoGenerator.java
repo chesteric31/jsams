@@ -18,9 +18,22 @@ import be.jsams.server.model.management.ProductCategory;
  * @author chesteric31
  * @version $Revision$ $Date$ $Author$
  */
-public class MockDaoGenerator {
+public final class MockDaoGenerator {
+    
+    /**
+     * Default private constructor for utility class. 
+     */
+    private MockDaoGenerator() {
+        
+    }
 
-    public static LegalFormDao generateMockLegalForm(final Society society) {
+    /**
+     * Generates mock {@link LegalFormDao}.
+     * 
+     * @param society the {@link Society} to link
+     * @return the built {@link LegalFormDao}
+     */
+    public static LegalFormDao generateMockLegalFormDao(final Society society) {
         return new LegalFormDao() {
 
             @Override
@@ -61,7 +74,13 @@ public class MockDaoGenerator {
         };
     }
 
-    public static CivilityDao generateMockCivility(final Agent agent) {
+    /**
+     * Generates mock {@link CivilityDao}.
+     * 
+     * @param agent the {@link Agent} to link
+     * @return the built {@link CivilityDao}
+     */
+    public static CivilityDao generateMockCivilityDao(final Agent agent) {
         return new CivilityDao() {
             
             @Override
@@ -101,43 +120,49 @@ public class MockDaoGenerator {
             }
         };
     }
-    
-    public static ProductCategoryDao generateMockProductCategory(final ProductCategory category) {
+
+    /**
+     * Generates mock {@link ProductCategoryDao}.
+     * 
+     * @param category the {@link ProductCategory} to link
+     * @return the built {@link ProductCategoryDao}
+     */
+    public static ProductCategoryDao generateMockProductCategoryDao(final ProductCategory category) {
         return new ProductCategoryDao() {
-            
+
             @Override
             public void update(ProductCategory transientObject) {
             }
-            
+
             @Override
             public void flush() {
             }
-            
+
             @Override
             public ProductCategory findById(Long id) {
                 return null;
             }
-            
+
             @Override
             public List<ProductCategory> findAll() {
                 List<ProductCategory> categories = new ArrayList<ProductCategory>();
                 categories.add(category);
                 return categories;
             }
-            
+
             @Override
             public void delete(Long id) {
             }
-            
+
             @Override
             public void delete(ProductCategory persistentObject) {
             }
-            
+
             @Override
             public ProductCategory add(ProductCategory newInstance) {
                 return null;
             }
-            
+
             @Override
             public List<ProductCategory> findByCriteria(ProductCategoryBean criteria) {
                 return null;

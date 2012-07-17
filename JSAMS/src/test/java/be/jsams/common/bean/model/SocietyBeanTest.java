@@ -13,20 +13,20 @@ import be.jsams.common.bean.builder.SocietyBeanBuilder;
 
 /**
  * Test class for {@link SocietyBean} class.
- *
+ * 
  * @author chesteric31
  * @version $Revision$ $Date::                  $ $Author$
  */
 @ContextConfiguration(locations = "classpath:ApplicationContext.xml")
 @TransactionConfiguration(transactionManager = "txManager", defaultRollback = true)
 public class SocietyBeanTest extends AbstractTransactionalJUnit4SpringContextTests {
-    
+
     private SocietyBean bean;
     @Autowired
     private SocietyBeanBuilder builder;
 
     /**
-     * @throws java.lang.Exception
+     * @throws java.lang.Exception a possible {@link Exception}
      */
     @Before
     public void setUp() throws Exception {
@@ -34,7 +34,9 @@ public class SocietyBeanTest extends AbstractTransactionalJUnit4SpringContextTes
     }
 
     /**
-     * Test method for {@link be.jsams.common.bean.model.SocietyBean#refresh(be.jsams.common.bean.model.AbstractIdentityBean)}.
+     * Test method for
+     * {@link be.jsams.common.bean.model.SocietyBean#refresh(be.jsams.common.bean.model.AbstractIdentityBean)}
+     * .
      */
     @Test
     public void testRefreshEquals() {

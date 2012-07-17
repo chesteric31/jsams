@@ -1,22 +1,22 @@
 package be.jsams.common.bean.model;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
 
 /**
  * Test class for {@link AddressBean} class.
- *
+ * 
  * @author chesteric31
  * @version $Revision$ $Date::                  $ $Author$
  */
 public class AddressBeanTest {
 
     private AddressBean bean;
-    
+
     /**
-     * @throws java.lang.Exception
+     * @throws java.lang.Exception a possible {@link Exception}
      */
     @Before
     public void setUp() throws Exception {
@@ -24,7 +24,9 @@ public class AddressBeanTest {
     }
 
     /**
-     * Test method for {@link be.jsams.common.bean.model.AddressBean#refresh(be.jsams.common.bean.model.AbstractIdentityBean)}.
+     * Test method for
+     * {@link be.jsams.common.bean.model.AddressBean#refresh(be.jsams.common.bean.model.AbstractIdentityBean)}
+     * .
      */
     @Test
     public void testRefreshEquals() {

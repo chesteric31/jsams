@@ -18,10 +18,10 @@ import be.jsams.server.dao.management.ProductCategoryDao;
 import be.jsams.server.dao.management.ProductDao;
 import be.jsams.server.dao.management.impl.ProductCategoryDaoImpl;
 import be.jsams.server.dao.management.impl.ProductDaoImpl;
+import be.jsams.server.model.MockModelGenerator;
 import be.jsams.server.model.Society;
 import be.jsams.server.model.management.Product;
 import be.jsams.server.model.management.ProductCategory;
-import be.jsams.server.model.mock.MockModelGenerator;
 
 /**
  * Test class for {@link ProductDaoImpl}.
@@ -44,7 +44,7 @@ public class ProductDaoImplTest extends BaseJUnitTestClass {
     private Society society = MockModelGenerator.generateMockSociety();
 
     /**
-     * @throws java.lang.Exception
+     * @throws java.lang.Exception a possible {@link Exception}
      */
     @Before
     public void setUp() throws Exception {
@@ -82,7 +82,8 @@ public class ProductDaoImplTest extends BaseJUnitTestClass {
 
     /**
      * Test method for
-     * {@link be.jsams.server.dao.management.impl.ProductDaoImpl#findByCriteria(be.jsams.common.bean.model.management.ProductBean)}
+     * {@link be.jsams.server.dao.management.impl.ProductDaoImpl#findByCriteria(
+     * be.jsams.common.bean.model.management.ProductBean)}
      * .
      */
     @Test
@@ -114,7 +115,7 @@ public class ProductDaoImplTest extends BaseJUnitTestClass {
              */
             @Override
             public ProductCategoryDao getProductCategoryDao() {
-                return MockDaoGenerator.generateMockProductCategory(category);
+                return MockDaoGenerator.generateMockProductCategoryDao(category);
             }
 
             /**

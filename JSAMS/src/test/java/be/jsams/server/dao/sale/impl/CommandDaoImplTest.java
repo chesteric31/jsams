@@ -11,12 +11,13 @@ import be.jsams.server.dao.management.AgentDao;
 import be.jsams.server.dao.management.CustomerDao;
 import be.jsams.server.dao.management.ProductCategoryDao;
 import be.jsams.server.dao.management.ProductDao;
+import be.jsams.server.dao.sale.CommandDao;
+import be.jsams.server.model.MockModelGenerator;
 import be.jsams.server.model.Society;
 import be.jsams.server.model.management.Agent;
 import be.jsams.server.model.management.Customer;
 import be.jsams.server.model.management.Product;
 import be.jsams.server.model.management.ProductCategory;
-import be.jsams.server.model.mock.MockModelGenerator;
 import be.jsams.server.model.sale.Command;
 import be.jsams.server.model.sale.detail.CommandDetail;
 
@@ -29,7 +30,7 @@ import be.jsams.server.model.sale.detail.CommandDetail;
 public class CommandDaoImplTest extends BaseJUnitTestClass {
 
     @Autowired
-//    private CommandDao dao;
+    private CommandDao dao;
     private Command command;
 
     @Autowired
@@ -49,7 +50,10 @@ public class CommandDaoImplTest extends BaseJUnitTestClass {
 
     @Autowired
     private ProductCategoryDao productCategoryDao;
-
+    
+    /**
+     * Setup method.
+     */
     @Before
     public void setUp() {
         command = MockModelGenerator.generateMockCommand();
