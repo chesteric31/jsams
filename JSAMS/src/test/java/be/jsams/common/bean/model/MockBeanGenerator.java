@@ -2,12 +2,16 @@ package be.jsams.common.bean.model;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 import be.jsams.common.bean.model.management.AgentBean;
 import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.management.ProductBean;
 import be.jsams.common.bean.model.management.ProductCategoryBean;
+import be.jsams.common.bean.model.sale.EstimateBean;
+import be.jsams.common.bean.model.sale.detail.EstimateDetailBean;
 import be.jsams.server.model.MockModelGenerator;
 
 /**
@@ -193,6 +197,31 @@ public final class MockBeanGenerator {
         bean.setPaymentMode(generateMockPaymentMode());
         bean.setVatApplicable(6D);
         bean.setVatNumber("BE1234567890");
+        return bean;
+    }
+
+    /**
+     * Generates mock {@link EstimateBean}.
+     * 
+     * @return the built {@link EstimateBean}
+     */
+    public static EstimateBean generateMockEstimate() {
+        EstimateBean bean = new EstimateBean(generateMockSociety(), generateMockCustomer(), generateMockAgent());
+        bean.setBillingAddress(generateMockAddress());
+        Date today = new Date();
+        bean.setCreationDate(today);
+        bean.setDetails(new ArrayList<EstimateDetailBean>());
+        bean.setDiscountRate(5D);
+        PeriodBean period = new PeriodBean();
+        period.setStartDate(today);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(today);
+        calendar.add(Calendar.DAY_OF_MONTH, 30);
+        Date todayPlus30Days = calendar.getTime();
+        period.setEndDate(todayPlus30Days);
+        bean.setPeriod(period);
+        bean.setRemark("remark");
+        bean.setTransferred(false);
         return bean;
     }
 

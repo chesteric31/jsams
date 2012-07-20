@@ -182,4 +182,97 @@ public abstract class AbstractDocumentBean<M extends AbstractDocument, V extends
         period.refresh(other.getPeriod());
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = super.hashCode();
+        result = prime * result;
+        if (creationDate == null) {
+            result += 0;
+        } else {
+            result += creationDate.hashCode();
+        }
+        result = prime * result;
+        if (customer == null) {
+            result += 0;
+        } else {
+            result += customer.hashCode();
+        }
+        result = prime * result;
+        if (period == null) {
+            result += 0;
+        } else {
+            result += period.hashCode();
+        }
+        result = prime * result;
+        if (remark == null) {
+            result += 0;
+        } else {
+            result += remark.hashCode();
+        }
+        result = prime * result;
+        if (society == null) {
+            result += 0;
+        } else {
+            result += society.hashCode();
+        }
+        return result;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(Object obj) {
+//        if (this == obj) {
+//            return true;
+//        }
+        if (!super.equals(obj)) {
+            return false;
+        }
+        if (!(obj instanceof AbstractDocumentBean)) {
+            return false;
+        }
+        AbstractDocumentBean<?, ?> other = (AbstractDocumentBean<?, ?>) obj;
+        if (creationDate == null) {
+            if (other.creationDate != null) {
+                return false;
+            }
+        } else if (!creationDate.equals(other.creationDate)) {
+            return false;
+        }
+        if (customer == null) {
+            if (other.customer != null) {
+                return false;
+            }
+        } else if (!customer.equals(other.customer)) {
+            return false;
+        }
+        if (period == null) {
+            if (other.period != null) {
+                return false;
+            }
+        } else if (!period.equals(other.period)) {
+            return false;
+        }
+        if (remark == null) {
+            if (other.remark != null) {
+                return false;
+            }
+        } else if (!remark.equals(other.remark)) {
+            return false;
+        }
+        if (society == null) {
+            if (other.society != null) {
+                return false;
+            }
+        } else if (!society.equals(other.society)) {
+            return false;
+        }
+        return true;
+    }
+
 }
