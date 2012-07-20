@@ -622,4 +622,46 @@ public class CustomerBean extends AbstractNamedIdentityBean<Customer, CustomerBe
         return true;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("CustomerBean [vatNumber=");
+        builder.append(vatNumber);
+        builder.append(", defaultDiscountRate=");
+        builder.append(defaultDiscountRate);
+        builder.append(", bank1=");
+        builder.append(bank1);
+        builder.append(", bank2=");
+        builder.append(bank2);
+        builder.append(", creditLimit=");
+        builder.append(creditLimit);
+        builder.append(", vatApplicable=");
+        builder.append(vatApplicable);
+        builder.append(", description=");
+        builder.append(description);
+        builder.append(", firstName=");
+        builder.append(firstName);
+        builder.append(", deliveryAddress=");
+        builder.append(deliveryAddress);
+        builder.append(", billingAddress=");
+        builder.append(billingAddress);
+        builder.append(", paymentMode=");
+        builder.append(paymentMode);
+        builder.append(", contactInformation=");
+        builder.append(contactInformation);
+        builder.append(", civility=");
+        builder.append(civility);
+        builder.append(", agent=");
+        builder.append(agent);
+        builder.append(", legalForm=");
+        builder.append(legalForm);
+        builder.append(", society=");
+        builder.append(society);
+        builder.append("]");
+        return builder.toString();
+    }
+
 }

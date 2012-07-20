@@ -146,5 +146,19 @@ public class PeriodBean extends AbstractIdentityBean<AbstractIdentity, PeriodBea
         }
         return true;
     }
-    
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("PeriodBean [startDate=");
+        builder.append(startDate);
+        builder.append(", endDate=");
+        builder.append(endDate);
+        builder.append("]");
+        return builder.toString();
+    }
+
 }

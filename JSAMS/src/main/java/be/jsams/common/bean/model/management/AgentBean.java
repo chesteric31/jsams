@@ -292,4 +292,26 @@ public class AgentBean extends AbstractNamedIdentityBean<Agent, AgentBeanView> {
         return true;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("AgentBean [function=");
+        builder.append(function);
+        builder.append(", civility=");
+        builder.append(civility);
+        builder.append(", address=");
+        builder.append(address);
+        builder.append(", contactInformation=");
+        builder.append(contactInformation);
+        builder.append(", customers=");
+        builder.append(customers);
+        builder.append(", society=");
+        builder.append(society);
+        builder.append("]");
+        return builder.toString();
+    }
+
 }
