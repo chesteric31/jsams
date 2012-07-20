@@ -4,6 +4,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import be.jsams.common.bean.model.management.AgentBean;
+import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.management.ProductBean;
 import be.jsams.common.bean.model.management.ProductCategoryBean;
 import be.jsams.server.model.MockModelGenerator;
@@ -150,6 +152,47 @@ public final class MockBeanGenerator {
      */
     public static PaymentModeBean generateMockPaymentMode() {
         PaymentModeBean bean = new PaymentModeBean(MockModelGenerator.generateMockPaymentMode());
+        return bean;
+    }
+
+    /**
+     * Generates mock {@link AgentBean}.
+     * 
+     * @return the built {@link AgentBean}
+     */
+    public static AgentBean generateMockAgent() {
+        AgentBean bean = new AgentBean(generateMockSociety());
+        bean.setAddress(generateMockAddress());
+        bean.setCivility(generateMockCivility());
+        bean.setContactInformation(generateMockContactInformation());
+        bean.setFunction("function");
+        bean.setName("name");
+        return bean;
+    }
+
+    /**
+     * Generates mock {@link CustomerBean}.
+     * 
+     * @return the built {@link CustomerBean}
+     */
+    public static CustomerBean generateMockCustomer() {
+        CustomerBean bean = new CustomerBean(generateMockSociety());
+        bean.setAgent(generateMockAgent());
+        bean.setBank1("bank1");
+        bean.setBank2("bank2");
+        bean.setBillingAddress(generateMockAddress());
+        bean.setCivility(generateMockCivility());
+        bean.setContactInformation(generateMockContactInformation());
+        bean.setCreditLimit(100D);
+        bean.setDefaultDiscountRate(10D);
+        bean.setDeliveryAddress(generateMockAddress());
+        bean.setDescription("description");
+        bean.setFirstName("firstName");
+        bean.setLegalForm(generateMockLegalForm());
+        bean.setName("name");
+        bean.setPaymentMode(generateMockPaymentMode());
+        bean.setVatApplicable(6D);
+        bean.setVatNumber("BE1234567890");
         return bean;
     }
 

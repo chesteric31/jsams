@@ -32,7 +32,7 @@ public class LegalFormBeanTest {
      * .
      */
     @Test
-    public void testRefresh() {
+    public void testRefreshEquals() {
         LegalFormBean otherBean = MockBeanGenerator.generateMockLegalForm();
         bean.refresh(otherBean);
         assertTrue(bean.equals(otherBean));
