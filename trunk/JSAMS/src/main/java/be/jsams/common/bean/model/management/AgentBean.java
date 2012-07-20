@@ -186,4 +186,110 @@ public class AgentBean extends AbstractNamedIdentityBean<Agent, AgentBeanView> {
         society.refresh(other.getSociety());
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = super.hashCode();
+        result = prime * result;
+        if (address == null) {
+            result += 0;
+        } else {
+            result += address.hashCode();
+        }
+        result = prime * result;
+        if (civility == null) {
+            result += 0;
+        } else {
+            result += civility.hashCode();
+        }
+        result = prime * result;
+        if (contactInformation == null) {
+            result += 0;
+        } else {
+            result += contactInformation.hashCode();
+        }
+        result = prime * result;
+        if (customers == null) {
+            result += 0;
+        } else {
+            result += customers.hashCode();
+        }
+        result = prime * result;
+        if (function == null) {
+            result += 0;
+        } else {
+            result += function.hashCode();
+        }
+        result = prime * result;
+        if (society == null) {
+            result += 0;
+        } else {
+            result += society.hashCode();
+        }
+        return result;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(Object obj) {
+//        if (this == obj) {
+//            return true;
+//        }
+        if (!super.equals(obj)) {
+            return false;
+        }
+        if (!(obj instanceof AgentBean)) {
+            return false;
+        }
+        AgentBean other = (AgentBean) obj;
+        if (address == null) {
+            if (other.address != null) {
+                return false;
+            }
+        } else if (!address.equals(other.address)) {
+            return false;
+        }
+        if (civility == null) {
+            if (other.civility != null) {
+                return false;
+            }
+        } else if (!civility.equals(other.civility)) {
+            return false;
+        }
+        if (contactInformation == null) {
+            if (other.contactInformation != null) {
+                return false;
+            }
+        } else if (!contactInformation.equals(other.contactInformation)) {
+            return false;
+        }
+        if (customers == null) {
+            if (other.customers != null) {
+                return false;
+            }
+        } else if (!customers.equals(other.customers)) {
+            return false;
+        }
+        if (function == null) {
+            if (other.function != null) {
+                return false;
+            }
+        } else if (!function.equals(other.function)) {
+            return false;
+        }
+        if (society == null) {
+            if (other.society != null) {
+                return false;
+            }
+        } else if (!society.equals(other.society)) {
+            return false;
+        }
+        return true;
+    }
+
 }

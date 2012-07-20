@@ -13,6 +13,8 @@ import be.jsams.common.bean.model.LegalFormBeanTest;
 import be.jsams.common.bean.model.PaymentModeBeanTest;
 import be.jsams.common.bean.model.PeriodBeanTest;
 import be.jsams.common.bean.model.SocietyBeanTest;
+import be.jsams.common.bean.model.management.AgentBeanTest;
+import be.jsams.common.bean.model.management.CustomerBeanTest;
 import be.jsams.common.bean.model.management.ProductBeanTest;
 import be.jsams.common.bean.model.management.ProductCategoryBeanTest;
 import be.jsams.common.bean.validator.StringValidatorTest;
@@ -34,10 +36,10 @@ import be.jsams.server.dao.sale.impl.CommandDaoImplTest;
 @RunWith(Suite.class)
 @SuiteClasses(value = { DoubleFormatterTest.class, AddressBeanTest.class, CivilityBeanTest.class,
         LegalFormBeanTest.class, ContactInformationBeanTest.class, PaymentModeBeanTest.class, PeriodBeanTest.class,
-        SocietyBeanTest.class, ProductBeanTest.class, ProductCategoryBeanTest.class, StringValidatorTest.class,
-        AddressDaoImplTest.class, AgentDaoImplTest.class, CivilityDaoImplTest.class,
-        ContactInformationDaoImplTest.class, ProductCategoryDaoImplTest.class, ProductDaoImplTest.class,
-        SocietyDaoImplTest.class, CommandDaoImplTest.class })
+        SocietyBeanTest.class, AgentBeanTest.class, CustomerBeanTest.class, ProductBeanTest.class,
+        ProductCategoryBeanTest.class, StringValidatorTest.class, AddressDaoImplTest.class, AgentDaoImplTest.class,
+        CivilityDaoImplTest.class, ContactInformationDaoImplTest.class, ProductCategoryDaoImplTest.class,
+        ProductDaoImplTest.class, SocietyDaoImplTest.class, CommandDaoImplTest.class })
 public class AllTests {
 
     /**

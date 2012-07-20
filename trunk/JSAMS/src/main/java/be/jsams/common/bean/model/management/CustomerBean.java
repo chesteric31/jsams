@@ -386,4 +386,240 @@ public class CustomerBean extends AbstractNamedIdentityBean<Customer, CustomerBe
         setFirstName(other.getFirstName());
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = super.hashCode();
+        result = prime * result;
+        if (agent == null) {
+            result += 0;
+        } else {
+            result += agent.hashCode();
+        }
+        result = prime * result;
+        if (bank1 == null) {
+            result += 0;
+        } else {
+            result += bank1.hashCode();
+        }
+        result = prime * result;
+        if (bank2 == null) {
+            result += 0;
+        } else {
+            result += bank2.hashCode();
+        }
+        result = prime * result;
+        if (billingAddress == null) {
+            result += 0;
+        } else {
+            result += billingAddress.hashCode();
+        }
+        result = prime * result;
+        if (civility == null) {
+            result += 0;
+        } else {
+            result += civility.hashCode();
+        }
+        result = prime * result;
+        if (contactInformation == null) {
+            result += 0;
+        } else {
+            result += contactInformation.hashCode();
+        }
+        result = prime * result;
+        if (creditLimit == null) {
+            result += 0;
+        } else {
+            result += creditLimit.hashCode();
+        }
+        result = prime * result;
+        if (defaultDiscountRate == null) {
+            result += 0;
+        } else {
+            result += defaultDiscountRate.hashCode();
+        }
+        result = prime * result;
+        if (deliveryAddress == null) {
+            result += 0;
+        } else {
+            result += deliveryAddress.hashCode();
+        }
+        result = prime * result;
+        if (description == null) {
+            result += 0;
+        } else {
+            result += description.hashCode();
+        }
+        result = prime * result;
+        if (firstName == null) {
+            result += 0;
+        } else {
+            result += firstName.hashCode();
+        }
+        result = prime * result;
+        if (legalForm == null) {
+            result += 0;
+        } else {
+            result += legalForm.hashCode();
+        }
+        result = prime * result;
+        if (paymentMode == null) {
+            result += 0;
+        } else {
+            result += paymentMode.hashCode();
+        }
+        result = prime * result;
+        if (society == null) {
+            result += 0;
+        } else {
+            result += society.hashCode();
+        }
+        result = prime * result;
+        if (vatApplicable == null) {
+            result += 0;
+        } else {
+            result += vatApplicable.hashCode();
+        }
+        result = prime * result;
+        if (vatNumber == null) {
+            result += 0;
+        } else {
+            result += vatNumber.hashCode();
+        }
+        return result;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(Object obj) {
+//        if (this == obj) {
+//            return true;
+//        }
+        if (!super.equals(obj)) {
+            return false;
+        }
+        if (!(obj instanceof CustomerBean)) {
+            return false;
+        }
+        CustomerBean other = (CustomerBean) obj;
+        if (agent == null) {
+            if (other.agent != null) {
+                return false;
+            }
+        } else if (!agent.equals(other.agent)) {
+            return false;
+        }
+        if (bank1 == null) {
+            if (other.bank1 != null) {
+                return false;
+            }
+        } else if (!bank1.equals(other.bank1)) {
+            return false;
+        }
+        if (bank2 == null) {
+            if (other.bank2 != null) {
+                return false;
+            }
+        } else if (!bank2.equals(other.bank2)) {
+            return false;
+        }
+        if (billingAddress == null) {
+            if (other.billingAddress != null) {
+                return false;
+            }
+        } else if (!billingAddress.equals(other.billingAddress)) {
+            return false;
+        }
+        if (civility == null) {
+            if (other.civility != null) {
+                return false;
+            }
+        } else if (!civility.equals(other.civility)) {
+            return false;
+        }
+        if (contactInformation == null) {
+            if (other.contactInformation != null) {
+                return false;
+            }
+        } else if (!contactInformation.equals(other.contactInformation)) {
+            return false;
+        }
+        if (creditLimit == null) {
+            if (other.creditLimit != null) {
+                return false;
+            }
+        } else if (!creditLimit.equals(other.creditLimit)) {
+            return false;
+        }
+        if (defaultDiscountRate == null) {
+            if (other.defaultDiscountRate != null) {
+                return false;
+            }
+        } else if (!defaultDiscountRate.equals(other.defaultDiscountRate)) {
+            return false;
+        }
+        if (deliveryAddress == null) {
+            if (other.deliveryAddress != null) {
+                return false;
+            }
+        } else if (!deliveryAddress.equals(other.deliveryAddress)) {
+            return false;
+        }
+        if (description == null) {
+            if (other.description != null) {
+                return false;
+            }
+        } else if (!description.equals(other.description)) {
+            return false;
+        }
+        if (firstName == null) {
+            if (other.firstName != null) {
+                return false;
+            }
+        } else if (!firstName.equals(other.firstName)) {
+            return false;
+        }
+        if (legalForm == null) {
+            if (other.legalForm != null) {
+                return false;
+            }
+        } else if (!legalForm.equals(other.legalForm)) {
+            return false;
+        }
+        if (paymentMode == null) {
+            if (other.paymentMode != null) {
+                return false;
+            }
+        } else if (!paymentMode.equals(other.paymentMode)) {
+            return false;
+        }
+        if (society == null) {
+            if (other.society != null) {
+                return false;
+            }
+        } else if (!society.equals(other.society)) {
+            return false;
+        }
+        if (vatApplicable == null) {
+            if (other.vatApplicable != null) {
+                return false;
+            }
+        } else if (!vatApplicable.equals(other.vatApplicable)) {
+            return false;
+        }
+        if (vatNumber == null) {
+            if (other.vatNumber != null) {
+                return false;
+            }
+        } else if (!vatNumber.equals(other.vatNumber)) {
+            return false;
+        }
+        return true;
+    }
+
 }
