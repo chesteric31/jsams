@@ -10,10 +10,14 @@ import be.jsams.common.bean.model.management.AgentBean;
 import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.management.ProductBean;
 import be.jsams.common.bean.model.management.ProductCategoryBean;
+import be.jsams.common.bean.model.sale.BillBean;
 import be.jsams.common.bean.model.sale.CommandBean;
+import be.jsams.common.bean.model.sale.CreditNoteBean;
 import be.jsams.common.bean.model.sale.DeliveryOrderBean;
 import be.jsams.common.bean.model.sale.EstimateBean;
+import be.jsams.common.bean.model.sale.detail.BillDetailBean;
 import be.jsams.common.bean.model.sale.detail.CommandDetailBean;
+import be.jsams.common.bean.model.sale.detail.CreditNoteDetailBean;
 import be.jsams.common.bean.model.sale.detail.DeliveryOrderDetailBean;
 import be.jsams.common.bean.model.sale.detail.EstimateDetailBean;
 import be.jsams.server.model.MockModelGenerator;
@@ -276,6 +280,72 @@ public final class MockBeanGenerator {
         bean.setPeriod(period);
         bean.setRemark("remark");
         bean.setTransferred(false);
+        return bean;
+    }
+
+    /**
+     * Generates mock {@link BillBean}.
+     * 
+     * @return the built {@link BillBean}
+     */
+    public static BillBean generateMockBill() {
+        BillBean bean = new BillBean(generateMockSociety(), generateMockCustomer(), generateMockPaymentMode());
+        bean.setBillingAddress(generateMockAddress());
+        bean.setClosed(false);
+        Date today = new Date();
+        bean.setCreationDate(today);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(today);
+        calendar.add(Calendar.DAY_OF_MONTH, 30);
+        Date dateFirstRemember = calendar.getTime();
+        bean.setDateFirstRemember(dateFirstRemember);
+        calendar.setTime(dateFirstRemember);
+        calendar.add(Calendar.DAY_OF_MONTH, 30);
+        Date dateSecondRemember = calendar.getTime();
+        bean.setDateSecondRemember(dateSecondRemember);
+        calendar.setTime(dateSecondRemember);
+        calendar.add(Calendar.DAY_OF_MONTH, 15);
+        Date dateFormalNotice = calendar.getTime();
+        bean.setDateFormalNotice(dateFormalNotice);
+        bean.setDetails(new ArrayList<BillDetailBean>());
+        bean.setDiscountRate(1D);
+        calendar.setTime(today);
+        calendar.add(Calendar.DAY_OF_MONTH, 1);
+        Date dueDate = calendar.getTime();
+        bean.setDueDate(dueDate);
+        bean.setPaid(true);
+        PeriodBean period = new PeriodBean();
+        period.setStartDate(today);
+        Calendar periodCalendar = Calendar.getInstance();
+        periodCalendar.setTime(today);
+        periodCalendar.add(Calendar.DAY_OF_MONTH, 60);
+        Date todayPlus60Days = periodCalendar.getTime();
+        period.setEndDate(todayPlus60Days);
+        bean.setPeriod(period);
+        bean.setRemark("remark");
+        return bean;
+    }
+
+    /**
+     * Generates mock {@link CreditNoteBean}.
+     * 
+     * @return the built {@link CreditNoteBean}
+     */
+    public static CreditNoteBean generateMockCreditNote() {
+        CreditNoteBean bean = new CreditNoteBean(generateMockSociety(), generateMockCustomer());
+        bean.setBillingAddress(generateMockAddress());
+        Date today = new Date();
+        bean.setCreationDate(today);
+        bean.setDetails(new ArrayList<CreditNoteDetailBean>());
+        PeriodBean period = new PeriodBean();
+        period.setStartDate(today);
+        Calendar periodCalendar = Calendar.getInstance();
+        periodCalendar.setTime(today);
+        periodCalendar.add(Calendar.DAY_OF_MONTH, 60);
+        Date todayPlus60Days = periodCalendar.getTime();
+        period.setEndDate(todayPlus60Days);
+        bean.setPeriod(period);
+        bean.setRemark("remark");
         return bean;
     }
 

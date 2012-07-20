@@ -117,4 +117,58 @@ public class CreditNoteBean extends AbstractDocumentBean<CreditNote, CreditNoteB
         return new CreditNoteBeanView(this);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = super.hashCode();
+        result = prime * result;
+        if (billingAddress == null) {
+            result += 0;
+        } else {
+            result += billingAddress.hashCode();
+        }
+        result = prime * result;
+        if (details == null) {
+            result += 0;
+        } else {
+            result += details.hashCode();
+        }
+        return result;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(Object obj) {
+//        if (this == obj) {
+//            return true;
+//        }
+        if (!super.equals(obj)) {
+            return false;
+        }
+        if (!(obj instanceof CreditNoteBean)) {
+            return false;
+        }
+        CreditNoteBean other = (CreditNoteBean) obj;
+        if (billingAddress == null) {
+            if (other.billingAddress != null) {
+                return false;
+            }
+        } else if (!billingAddress.equals(other.billingAddress)) {
+            return false;
+        }
+        if (details == null) {
+            if (other.details != null) {
+                return false;
+            }
+        } else if (!details.equals(other.details)) {
+            return false;
+        }
+        return true;
+    }
+
 }

@@ -292,4 +292,154 @@ public class BillBean extends AbstractDocumentBean<Bill, BillBeanView> {
         return new BillBeanView(this);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = super.hashCode();
+        result = prime * result;
+        if (billingAddress == null) {
+            result += 0;
+        } else {
+            result += billingAddress.hashCode();
+        }
+        result = prime * result;
+        if (closed) {
+            result += 1231;
+        } else {
+            result += 1237;
+        }
+        result = prime * result;
+        if (dateFirstRemember == null) {
+            result += 0;
+        } else {
+            result += dateFirstRemember.hashCode();
+        }
+        result = prime * result;
+        if (dateFormalNotice == null) {
+            result += 0;
+        } else {
+            result += dateFormalNotice.hashCode();
+        }
+        result = prime * result;
+        if (dateSecondRemember == null) {
+            result += 0;
+        } else {
+            result += dateSecondRemember.hashCode();
+        }
+        result = prime * result;
+        if (details == null) {
+            result += 0;
+        } else {
+            result += details.hashCode();
+        }
+        result = prime * result;
+        if (discountRate == null) {
+            result += 0;
+        } else {
+            result += discountRate.hashCode();
+        }
+        result = prime * result;
+        if (dueDate == null) {
+            result += 0;
+        } else {
+            result += dueDate.hashCode();
+        }
+        result = prime * result;
+        if (paid) {
+            result += 1231;
+        } else {
+            result += 1237;
+        }
+        result = prime * result;
+        if (paymentMode == null) {
+            result += 0;
+        } else {
+            result += paymentMode.hashCode();
+        }
+        return result;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(Object obj) {
+//        if (this == obj) {
+//            return true;
+//        }
+        if (!super.equals(obj)) {
+            return false;
+        }
+        if (!(obj instanceof BillBean)) {
+            return false;
+        }
+        BillBean other = (BillBean) obj;
+        if (billingAddress == null) {
+            if (other.billingAddress != null) {
+                return false;
+            }
+        } else if (!billingAddress.equals(other.billingAddress)) {
+            return false;
+        }
+        if (closed != other.closed) {
+            return false;
+        }
+        if (dateFirstRemember == null) {
+            if (other.dateFirstRemember != null) {
+                return false;
+            }
+        } else if (!dateFirstRemember.equals(other.dateFirstRemember)) {
+            return false;
+        }
+        if (dateFormalNotice == null) {
+            if (other.dateFormalNotice != null) {
+                return false;
+            }
+        } else if (!dateFormalNotice.equals(other.dateFormalNotice)) {
+            return false;
+        }
+        if (dateSecondRemember == null) {
+            if (other.dateSecondRemember != null) {
+                return false;
+            }
+        } else if (!dateSecondRemember.equals(other.dateSecondRemember)) {
+            return false;
+        }
+        if (details == null) {
+            if (other.details != null) {
+                return false;
+            }
+        } else if (!details.equals(other.details)) {
+            return false;
+        }
+        if (discountRate == null) {
+            if (other.discountRate != null) {
+                return false;
+            }
+        } else if (!discountRate.equals(other.discountRate)) {
+            return false;
+        }
+        if (dueDate == null) {
+            if (other.dueDate != null) {
+                return false;
+            }
+        } else if (!dueDate.equals(other.dueDate)) {
+            return false;
+        }
+        if (paid != other.paid) {
+            return false;
+        }
+        if (paymentMode == null) {
+            if (other.paymentMode != null) {
+                return false;
+            }
+        } else if (!paymentMode.equals(other.paymentMode)) {
+            return false;
+        }
+        return true;
+    }
+
 }
