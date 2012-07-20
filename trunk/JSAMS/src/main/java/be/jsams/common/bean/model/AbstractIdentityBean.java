@@ -119,7 +119,9 @@ public abstract class AbstractIdentityBean<M extends AbstractIdentity, V extends
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritDoc} <br />
+     * The comment onto the first 'if' is mandatory cause we don't check
+     * reference instance in memory but data for the bean and the child bean.
      */
     @Override
     public boolean equals(Object obj) {

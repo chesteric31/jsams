@@ -187,4 +187,93 @@ public class EstimateBean extends AbstractDocumentBean<Estimate, EstimateBeanVie
         return new EstimateBeanView(this);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = super.hashCode();
+        result = prime * result;
+        if (agent == null) {
+            result += 0;
+        } else {
+            result += agent.hashCode();
+        }
+        result = prime * result;
+        if (billingAddress == null) {
+            result += 0;
+        } else {
+            result += billingAddress.hashCode();
+        }
+        result = prime * result;
+        if (details == null) {
+            result += 0;
+        } else {
+            result += details.hashCode();
+        }
+        result = prime * result;
+        if (discountRate == null) {
+            result += 0;
+        } else {
+            result += discountRate.hashCode();
+        }
+        result = prime * result;
+        if (transferred) {
+            result += 1231;
+        } else {
+            result += 1237;
+        }
+        return result;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(Object obj) {
+//        if (this == obj) {
+//            return true;
+//        }
+        if (!super.equals(obj)) {
+            return false;
+        }
+        if (!(obj instanceof EstimateBean)) {
+            return false;
+        }
+        EstimateBean other = (EstimateBean) obj;
+        if (agent == null) {
+            if (other.agent != null) {
+                return false;
+            }
+        } else if (!agent.equals(other.agent)) {
+            return false;
+        }
+        if (billingAddress == null) {
+            if (other.billingAddress != null) {
+                return false;
+            }
+        } else if (!billingAddress.equals(other.billingAddress)) {
+            return false;
+        }
+        if (details == null) {
+            if (other.details != null) {
+                return false;
+            }
+        } else if (!details.equals(other.details)) {
+            return false;
+        }
+        if (discountRate == null) {
+            if (other.discountRate != null) {
+                return false;
+            }
+        } else if (!discountRate.equals(other.discountRate)) {
+            return false;
+        }
+        if (transferred != other.transferred) {
+            return false;
+        }
+        return true;
+    }
+
 }
