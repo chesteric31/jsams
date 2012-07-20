@@ -104,6 +104,16 @@ public final class MockBeanGenerator {
     }
 
     /**
+     * Generates mock {@link CivilityBean}.
+     * 
+     * @return the built {@link CivilityBean}
+     */
+    public static CivilityBean generateMockCivility() {
+        CivilityBean civility = new CivilityBean(MockModelGenerator.generateMockCivility());
+        return civility;
+    }
+
+    /**
      * Generates mock {@link ProductBean}.
      * 
      * @return the built {@link ProductBean}
