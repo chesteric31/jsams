@@ -8,32 +8,32 @@ import org.junit.Test;
 import be.jsams.common.bean.model.MockBeanGenerator;
 
 /**
- * Test class for {@link EstimateBean} class.
+ * Test class for {@link CommandBean} class.
  *
  * @author chesteric31
  * @version $Revision$ $Date::                  $ $Author$
  */
-public class EstimateBeanTest {
+public class CommandBeanTest {
 
-    private EstimateBean bean;
+    private CommandBean bean;
 
     /**
      * @throws java.lang.Exception a possible {@link Exception}
      */
     @Before
     public void setUp() throws Exception {
-        bean = new EstimateBean(MockBeanGenerator.generateMockSociety(), MockBeanGenerator.generateMockCustomer(),
+        bean = new CommandBean(MockBeanGenerator.generateMockSociety(), MockBeanGenerator.generateMockCustomer(),
                 MockBeanGenerator.generateMockAgent());
     }
 
     /**
      * Test method for
-     * {@link be.jsams.common.bean.model.sale.EstimateBean#refresh(be.jsams.common.bean.model.AbstractIdentityBean)}
+     * {@link be.jsams.common.bean.model.sale.CommandBean#refresh(be.jsams.common.bean.model.AbstractIdentityBean)}
      * .
      */
     @Test
     public void testRefreshEquals() {
-        EstimateBean otherBean = MockBeanGenerator.generateMockEstimate();
+        CommandBean otherBean = MockBeanGenerator.generateMockCommand();
         bean.refresh(otherBean);
         assertTrue(bean.equals(otherBean));
     }

@@ -10,7 +10,9 @@ import be.jsams.common.bean.model.management.AgentBean;
 import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.management.ProductBean;
 import be.jsams.common.bean.model.management.ProductCategoryBean;
+import be.jsams.common.bean.model.sale.CommandBean;
 import be.jsams.common.bean.model.sale.EstimateBean;
+import be.jsams.common.bean.model.sale.detail.CommandDetailBean;
 import be.jsams.common.bean.model.sale.detail.EstimateDetailBean;
 import be.jsams.server.model.MockModelGenerator;
 
@@ -219,6 +221,32 @@ public final class MockBeanGenerator {
         calendar.add(Calendar.DAY_OF_MONTH, 30);
         Date todayPlus30Days = calendar.getTime();
         period.setEndDate(todayPlus30Days);
+        bean.setPeriod(period);
+        bean.setRemark("remark");
+        bean.setTransferred(false);
+        return bean;
+    }
+
+
+    /**
+     * Generates mock {@link CommandBean}.
+     * 
+     * @return the built {@link CommandBean}
+     */
+    public static CommandBean generateMockCommand() {
+        CommandBean bean = new CommandBean(generateMockSociety(), generateMockCustomer(), generateMockAgent());
+        bean.setBillingAddress(generateMockAddress());
+        Date today = new Date();
+        bean.setCreationDate(today);
+        bean.setDetails(new ArrayList<CommandDetailBean>());
+        bean.setDiscountRate(1D);
+        PeriodBean period = new PeriodBean();
+        period.setStartDate(today);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(today);
+        calendar.add(Calendar.DAY_OF_MONTH, 60);
+        Date todayPlus60Days = calendar.getTime();
+        period.setEndDate(todayPlus60Days);
         bean.setPeriod(period);
         bean.setRemark("remark");
         bean.setTransferred(false);
