@@ -11,8 +11,10 @@ import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.management.ProductBean;
 import be.jsams.common.bean.model.management.ProductCategoryBean;
 import be.jsams.common.bean.model.sale.CommandBean;
+import be.jsams.common.bean.model.sale.DeliveryOrderBean;
 import be.jsams.common.bean.model.sale.EstimateBean;
 import be.jsams.common.bean.model.sale.detail.CommandDetailBean;
+import be.jsams.common.bean.model.sale.detail.DeliveryOrderDetailBean;
 import be.jsams.common.bean.model.sale.detail.EstimateDetailBean;
 import be.jsams.server.model.MockModelGenerator;
 
@@ -227,7 +229,6 @@ public final class MockBeanGenerator {
         return bean;
     }
 
-
     /**
      * Generates mock {@link CommandBean}.
      * 
@@ -247,6 +248,31 @@ public final class MockBeanGenerator {
         calendar.add(Calendar.DAY_OF_MONTH, 60);
         Date todayPlus60Days = calendar.getTime();
         period.setEndDate(todayPlus60Days);
+        bean.setPeriod(period);
+        bean.setRemark("remark");
+        bean.setTransferred(false);
+        return bean;
+    }
+
+    /**
+     * Generates mock {@link DeliveryOrderBean}.
+     * 
+     * @return the built {@link DeliveryOrderBean}
+     */
+    public static DeliveryOrderBean generateMockDeliveryOrder() {
+        DeliveryOrderBean bean = new DeliveryOrderBean(generateMockSociety(), generateMockCustomer());
+        bean.setDeliveryAddress(generateMockAddress());
+        Date today = new Date();
+        bean.setCreationDate(today);
+        bean.setDetails(new ArrayList<DeliveryOrderDetailBean>());
+        bean.setDiscountRate(1D);
+        PeriodBean period = new PeriodBean();
+        period.setStartDate(today);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(today);
+        calendar.add(Calendar.DAY_OF_MONTH, 90);
+        Date todayPlus90Days = calendar.getTime();
+        period.setEndDate(todayPlus90Days);
         bean.setPeriod(period);
         bean.setRemark("remark");
         bean.setTransferred(false);
