@@ -1,5 +1,7 @@
 package be.jsams.common.bean.model;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
@@ -23,7 +25,6 @@ public class PaymentModeBeanTest {
      */
     @Before
     public void setUp() throws Exception {
-        bean = new PaymentModeBean(new PaymentMode());
     }
     
     /**
@@ -33,9 +34,27 @@ public class PaymentModeBeanTest {
      */
     @Test
     public void testRefreshEquals() {
+        bean = new PaymentModeBean(new PaymentMode());
         PaymentModeBean otherBean = MockBeanGenerator.generateMockPaymentMode();
         bean.refresh(otherBean);
         assertTrue(bean.equals(otherBean));
     }
+    
+    /**
+     * Test method for
+     * {@link be.jsams.common.bean.model.PaymentModeBean#clear()}.
+     */
+    @Test
+    public void testClear() {
+        bean = MockBeanGenerator.generateMockPaymentMode();
+        bean.clear();
+        assertNull(bean.getLabel());
+        assertNull(bean.getLabelFr());
+        assertNull(bean.getLabelNl());
+        assertNull(bean.getAdditionalDays());
+        assertNull(bean.getDaysNumber());
+        assertFalse(bean.isMonthEnd());
+    }
+
 
 }

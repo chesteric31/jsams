@@ -1,5 +1,6 @@
 package be.jsams.common.bean.model;
 
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
@@ -22,7 +23,6 @@ public class LegalFormBeanTest {
      */
     @Before
     public void setUp() throws Exception {
-        bean = new LegalFormBean(new LegalForm());
     }
 
     /**
@@ -33,9 +33,23 @@ public class LegalFormBeanTest {
      */
     @Test
     public void testRefreshEquals() {
+        bean = new LegalFormBean(new LegalForm());
         LegalFormBean otherBean = MockBeanGenerator.generateMockLegalForm();
         bean.refresh(otherBean);
         assertTrue(bean.equals(otherBean));
+    }
+
+    /**
+     * Test method for
+     * {@link be.jsams.common.bean.model.AbstractTranslatableIdentityBean#clear()}.
+     */
+    @Test
+    public void testClear() {
+        bean = MockBeanGenerator.generateMockLegalForm();
+        bean.clear();
+        assertNull(bean.getLabel());
+        assertNull(bean.getLabelFr());
+        assertNull(bean.getLabelNl());
     }
 
 }

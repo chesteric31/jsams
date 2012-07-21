@@ -1,5 +1,6 @@
 package be.jsams.common.bean.model;
 
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
@@ -22,7 +23,6 @@ public class CivilityBeanTest {
      */
     @Before
     public void setUp() throws Exception {
-        bean = new CivilityBean(new Civility());
     }
     
     /**
@@ -33,9 +33,23 @@ public class CivilityBeanTest {
      */
     @Test
     public void testRefreshEquals() {
+        bean = new CivilityBean(new Civility());
         CivilityBean otherBean = MockBeanGenerator.generateMockCivility();
         bean.refresh(otherBean);
         assertTrue(bean.equals(otherBean));
+    }
+
+    /**
+     * Test method for
+     * {@link be.jsams.common.bean.model.AbstractTranslatableIdentityBean#clear()}.
+     */
+    @Test
+    public void testClear() {
+        bean = MockBeanGenerator.generateMockCivility();
+        bean.clear();
+        assertNull(bean.getLabel());
+        assertNull(bean.getLabelFr());
+        assertNull(bean.getLabelNl());
     }
 
 }
