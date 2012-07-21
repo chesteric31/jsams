@@ -1,5 +1,6 @@
 package be.jsams.common.bean.model;
 
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import java.text.ParseException;
@@ -23,7 +24,6 @@ public class PeriodBeanTest {
      */
     @Before
     public void setUp() throws Exception {
-        bean = new PeriodBean();
     }
 
     /**
@@ -35,9 +35,23 @@ public class PeriodBeanTest {
      */
     @Test
     public void testRefreshEquals() throws ParseException {
+        bean = new PeriodBean();
         PeriodBean otherBean = MockBeanGenerator.generateMockPeriod();
         bean.refresh(otherBean);
         assertTrue(bean.equals(otherBean));
+    }
+
+    /**
+     * Test method for {@link be.jsams.common.bean.model.PeriodBean#clear()}.
+     * 
+     * @throws ParseException a possible {@link ParseException}
+     */
+    @Test
+    public void testClear() throws ParseException {
+        bean = MockBeanGenerator.generateMockPeriod();
+        bean.clear();
+        assertNull(bean.getStartDate());
+        assertNull(bean.getEndDate());
     }
 
 }

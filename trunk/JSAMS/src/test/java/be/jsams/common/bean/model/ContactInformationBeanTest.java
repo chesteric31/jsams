@@ -1,5 +1,6 @@
 package be.jsams.common.bean.model;
 
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
@@ -20,7 +21,6 @@ public class ContactInformationBeanTest {
      */
     @Before
     public void setUp() throws Exception {
-        bean = new ContactInformationBean();
     }
 
     /**
@@ -31,9 +31,25 @@ public class ContactInformationBeanTest {
      */
     @Test
     public void testRefreshEquals() {
+        bean = new ContactInformationBean();
         ContactInformationBean otherBean = MockBeanGenerator.generateMockContactInformation();
         bean.refresh(otherBean);
         assertTrue(bean.equals(otherBean));
+    }
+
+    /**
+     * Test method for
+     * {@link be.jsams.common.bean.model.ContactInformationBean#clear()}.
+     */
+    @Test
+    public void testClear() {
+        bean = MockBeanGenerator.generateMockContactInformation();
+        bean.clear();
+        assertNull(bean.getEmail());
+        assertNull(bean.getFax());
+        assertNull(bean.getMobile());
+        assertNull(bean.getPhone());
+        assertNull(bean.getWebsite());
     }
 
 }
