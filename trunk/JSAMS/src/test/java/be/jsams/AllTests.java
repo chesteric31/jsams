@@ -33,6 +33,7 @@ import be.jsams.server.dao.management.impl.CustomerDaoImplTest;
 import be.jsams.server.dao.management.impl.ProductCategoryDaoImplTest;
 import be.jsams.server.dao.management.impl.ProductDaoImplTest;
 import be.jsams.server.dao.sale.impl.CommandDaoImplTest;
+import be.jsams.server.model.utils.xml.JsamsDateAdapterTest;
 
 /**
  * Test suite for all JUNIT tests.
@@ -48,7 +49,7 @@ import be.jsams.server.dao.sale.impl.CommandDaoImplTest;
         DeliveryOrderBeanTest.class, EstimateBeanTest.class, EmailValidatorTest.class, StringValidatorTest.class,
         AddressDaoImplTest.class, CivilityDaoImplTest.class, ContactInformationDaoImplTest.class,
         SocietyDaoImplTest.class, AgentDaoImplTest.class, CustomerDaoImplTest.class, ProductCategoryDaoImplTest.class,
-        ProductDaoImplTest.class, CommandDaoImplTest.class })
+        ProductDaoImplTest.class, CommandDaoImplTest.class, JsamsDateAdapterTest.class })
 public class AllTests {
 
     /**
