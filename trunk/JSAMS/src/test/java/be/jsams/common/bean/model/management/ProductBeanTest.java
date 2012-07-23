@@ -1,5 +1,6 @@
 package be.jsams.common.bean.model.management;
 
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
@@ -22,7 +23,6 @@ public class ProductBeanTest {
      */
     @Before
     public void setUp() throws Exception {
-        bean = new ProductBean();
     }
 
     /**
@@ -33,9 +33,29 @@ public class ProductBeanTest {
      */
     @Test
     public void testRefreshEquals() {
+        bean = new ProductBean();
         ProductBean otherBean = MockBeanGenerator.generateMockProduct();
         bean.refresh(otherBean);
         assertTrue(bean.equals(otherBean));
+    }
+
+    /**
+     * Test method for
+     * {@link be.jsams.common.bean.model.management.ProductBean#clear()}.
+     */
+    @Test
+    public void testClear() {
+        bean = MockBeanGenerator.generateMockProduct();
+        bean.clear();
+        ProductCategoryBean category = bean.getCategory();
+        assertNull(category.getLabel());
+        assertNull(category.getLabelFr());
+        assertNull(category.getLabelNl());
+        assertNull(bean.getName());
+        assertNull(bean.getPrice());
+        assertTrue(bean.getQuantityStock() == 0);
+        assertTrue(bean.getReorderLevel() == 0);
+        assertNull(bean.getVatApplicable());
     }
 
 }
