@@ -197,13 +197,16 @@ public final class MockModelGenerator {
         customer.setBank1("Bk1");
         customer.setBank2("Bk2");
         customer.setBillingAddress(generateMockAddress());
+        customer.setCivility(generateMockCivility());
         customer.setContactInformation(generateMockContactInformation());
         customer.setCreditLimit(100D);
         customer.setDefaultDiscountRate(0D);
         customer.setDeliveryAddress(generateMockAddress());
         customer.setDescription("Description");
+        customer.setLegalForm(generateMockLegalForm());
         customer.setName("Name");
         customer.setSociety(generateMockSociety());
+        customer.setPaymentMode(generateMockPaymentMode());
         customer.setVatApplicable(6D);
         customer.setVatNumber("BE1234567890");
         return customer;

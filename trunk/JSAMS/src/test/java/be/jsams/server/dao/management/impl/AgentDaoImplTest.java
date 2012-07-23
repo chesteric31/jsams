@@ -1,4 +1,4 @@
-package be.jsams.server.dao.impl;
+package be.jsams.server.dao.management.impl;
 
 import static org.junit.Assert.assertTrue;
 

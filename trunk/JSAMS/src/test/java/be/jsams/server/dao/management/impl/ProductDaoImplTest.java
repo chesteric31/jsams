@@ -1,4 +1,4 @@
-package be.jsams.server.dao.impl;
+package be.jsams.server.dao.management.impl;
 
 import static org.junit.Assert.assertTrue;
 
@@ -16,8 +16,6 @@ import be.jsams.server.dao.MockDaoGenerator;
 import be.jsams.server.dao.SocietyDao;
 import be.jsams.server.dao.management.ProductCategoryDao;
 import be.jsams.server.dao.management.ProductDao;
-import be.jsams.server.dao.management.impl.ProductCategoryDaoImpl;
-import be.jsams.server.dao.management.impl.ProductDaoImpl;
 import be.jsams.server.model.MockModelGenerator;
 import be.jsams.server.model.Society;
 import be.jsams.server.model.management.Product;
