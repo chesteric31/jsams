@@ -1,5 +1,6 @@
 package be.jsams.common.bean.model.management;
 
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
@@ -22,7 +23,6 @@ public class ProductCategoryBeanTest {
      */
     @Before
     public void setUp() throws Exception {
-        bean = new ProductCategoryBean();
     }
 
     /**
@@ -33,9 +33,23 @@ public class ProductCategoryBeanTest {
      */
     @Test
     public void testRefreshEquals() {
+        bean = new ProductCategoryBean();
         ProductCategoryBean otherBean = MockBeanGenerator.generateMockProductCategory();
         bean.refresh(otherBean);
         assertTrue(bean.equals(otherBean));
     }
 
+    /**
+     * Test method for
+     * {@link be.jsams.common.bean.model.management.ProductCategoryBean#clear()}.
+     */
+    @Test
+    public void testClear() {
+        bean = MockBeanGenerator.generateMockProductCategory();
+        bean.clear();
+        assertNull(bean.getLabel());
+        assertNull(bean.getLabelFr());
+        assertNull(bean.getLabelNl());
+    }
+    
 }

@@ -1,11 +1,15 @@
 package be.jsams.common.bean.model.sale;
 
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import be.jsams.common.bean.model.AddressBean;
 import be.jsams.common.bean.model.MockBeanGenerator;
+import be.jsams.common.bean.model.PaymentModeBean;
+import be.jsams.common.bean.model.PeriodBean;
 
 /**
  * Test class for {@link BillBean} class.
@@ -22,8 +26,6 @@ public class BillBeanTest {
      */
     @Before
     public void setUp() throws Exception {
-        bean = new BillBean(MockBeanGenerator.generateMockSociety(), MockBeanGenerator.generateMockCustomer(),
-                MockBeanGenerator.generateMockPaymentMode());
     }
 
     /**
@@ -33,9 +35,41 @@ public class BillBeanTest {
      */
     @Test
     public void testRefreshEquals() {
+        bean = new BillBean(MockBeanGenerator.generateMockSociety(), MockBeanGenerator.generateMockCustomer(),
+                MockBeanGenerator.generateMockPaymentMode());
         BillBean otherBean = MockBeanGenerator.generateMockBill();
         bean.refresh(otherBean);
         assertTrue(bean.equals(otherBean));
+    }
+
+    /**
+     * Test method for {@link be.jsams.common.bean.model.sale.BillBean#clear()}.
+     */
+    @Test
+    public void testClear() {
+        bean = MockBeanGenerator.generateMockBill();
+        bean.clear();
+        AddressBean billingAddress = bean.getBillingAddress();
+        assertNull(billingAddress.getBox());
+        assertNull(billingAddress.getCity());
+        assertNull(billingAddress.getCountry());
+        assertNull(billingAddress.getNumber());
+        assertNull(billingAddress.getStreet());
+        assertNull(billingAddress.getZipCode());
+        assertNull(bean.getCreationDate());
+        assertNull(bean.getDateFirstRemember());
+        assertNull(bean.getDateFormalNotice());
+        assertNull(bean.getDateSecondRemember());
+        assertNull(bean.getDiscountRate());
+        assertNull(bean.getDueDate());
+        PaymentModeBean paymentMode = bean.getPaymentMode();
+        assertNull(paymentMode.getLabel());
+        assertNull(paymentMode.getLabelFr());
+        assertNull(paymentMode.getLabelNl());
+        PeriodBean period = bean.getPeriod();
+        assertNull(period.getStartDate());
+        assertNull(period.getEndDate());
+        assertNull(bean.getRemark());
     }
 
 }
