@@ -47,6 +47,10 @@ public class AgentDaoImplTest extends BaseJUnitTestClass {
 
     @Autowired
     private ContactInformationDao contactInformationDao;
+    
+    private SocietyBean societyBean;
+    private Agent persistedAgent;
+    private Civility persistedCivility;
 
     /**
      * @throws java.lang.Exception a possible {@link Exception}
@@ -54,6 +58,24 @@ public class AgentDaoImplTest extends BaseJUnitTestClass {
     @Before
     public void setUp() throws Exception {
         agent = MockModelGenerator.generateMockAgent();
+        final Society persistedSociety = societyDao.add(agent.getSociety());
+        societyBean = new SocietyBean(persistedSociety) {
+
+            /**
+             * Serial Version UID
+             */
+            private static final long serialVersionUID = -5835207230986956543L;
+
+        };
+
+        persistedCivility = civilityDao.add(agent.getCivility());
+        agent.setCivility(persistedCivility);
+        final ContactInformation persistedContactInformation = contactInformationDao.add(agent.getContactInformation());
+        agent.setContactInformation(persistedContactInformation);
+        final Address persistedAddress = addressDao.add(agent.getAddress());
+        agent.setAddress(persistedAddress);
+        persistedAgent = dao.add(agent);
+        dao.setCurrentSociety(societyBean);
     }
 
     /**
@@ -64,23 +86,6 @@ public class AgentDaoImplTest extends BaseJUnitTestClass {
      */
     @Test
     public void testFindByCriteria() {
-        final Society persistedSociety = societyDao.add(agent.getSociety());
-        SocietyBean societyBean = new SocietyBean(persistedSociety) {
-
-            /**
-             * Serial Version UID
-             */
-            private static final long serialVersionUID = -5835207230986956543L;
-
-        };
-
-        final Civility persistedCivility = civilityDao.add(agent.getCivility());
-        agent.setCivility(persistedCivility);
-        final ContactInformation persistedContactInformation = contactInformationDao.add(agent.getContactInformation());
-        agent.setContactInformation(persistedContactInformation);
-        final Address persistedAddress = addressDao.add(agent.getAddress());
-        agent.setAddress(persistedAddress);
-        final Agent persistedAgent = dao.add(agent);
         AgentBean criteria = new AgentBean(societyBean) {
 
             /**
@@ -100,8 +105,19 @@ public class AgentDaoImplTest extends BaseJUnitTestClass {
 
         };
         criteria.setCivility(civilityBean);
-        dao.setCurrentSociety(societyBean);
+        criteria.setFunction(persistedAgent.getFunction());
+        criteria.setName(persistedAgent.getName());
         List<Agent> founds = dao.findByCriteria(criteria);
+        assertTrue(founds.contains(persistedAgent));
+    }
+
+    /**
+     * Test method for
+     * {@link be.jsams.server.dao.management.impl.AgentDaoImpl#findAll()}.
+     */
+    @Test
+    public void testFindAll() {
+        List<Agent> founds = dao.findAll();
         assertTrue(founds.contains(persistedAgent));
     }
 
