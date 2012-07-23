@@ -44,4 +44,5 @@ public final class EmailValidator {
                 "$"; // end of the line
         return email.matches(pattern);
     }
+
 }
