@@ -12,7 +12,7 @@ import com.jgoodies.common.collect.ObservableList;
 /**
  * Builder that makes a {@link AgentBean} from entity model. 
  *
- * @author ebinard
+ * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
 public class AgentBeanBuilder {
