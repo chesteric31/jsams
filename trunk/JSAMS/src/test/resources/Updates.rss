@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+	<title>JSAMS</title>
+	<link>http://code.google.com/p/jsams/</link>
+	<description>Java Simplified Accounting Management System</description>
+	<author>chesteric31</author>
+<item>
+	<title>JSAMS update</title>
+	<description>This is a description</description>
+	<link>null</link>
+	<author>chesteric31</author>
+	<guid>null</guid>
+	<version>1.0.1-SNAPSHOT</version>
+	<author>chesteric31</author>
+	<releaseDate>Sun, 25 Dec 2011 14:51:51 +0100</releaseDate>
+</item>
+<item>
+	<title>JSAMS update</title>
+	<description>This is a description</description>
+	<link>http://jsams.googlecode.com/files/JSAMS-1.0.2-SNAPSHOT-updater.jar</link>
+	<author>chesteric31</author>
+	<guid>http://jsams.googlecode.com/files/JSAMS-1.0.2-SNAPSHOT-updater.jar</guid>
+	<version>1.0.2-SNAPSHOT</version>
+	<author>chesteric31</author>
+	<releaseDate>Tue, 24 Jul 2012 14:51:51 +0200</releaseDate>
+</item>
+<item>
+	<title>JSAMS update</title>
+	<description>This is a description</description>
+	<link>http://jsams.googlecode.com/files/JSAMS-1.0.3-SNAPSHOT-updater.jar</link>
+	<author>chesteric31</author>
+	<guid>http://jsams.googlecode.com/files/JSAMS-1.0.3-SNAPSHOT-updater.jar</guid>
+	<version>1.0.3-SNAPSHOT</version>
+	<author>chesteric31</author>
+	<releaseDate>Tue, 24 Jul 2012 14:51:51 +0200</releaseDate>
+</item>
+<item>
+	<title>JSAMS update</title>
+	<description>This is a description</description>
+	<link>http://jsams.googlecode.com/files/JSAMS-1.0.4-SNAPSHOT-updater.jar</link>
+	<author>chesteric31</author>
+	<guid>http://jsams.googlecode.com/files/JSAMS-1.0.4-SNAPSHOT-updater.jar</guid>
+	<version>1.0.4-SNAPSHOT</version>
+	<author>chesteric31</author>
+	<releaseDate>Tue, 24 Jul 2012 14:51:51 +0200</releaseDate>
+</item>
+</rss>
