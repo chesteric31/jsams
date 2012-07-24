@@ -6,6 +6,7 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 import be.jsams.client.formatter.DoubleFormatterTest;
+import be.jsams.client.validator.edit.EditAddressValidatorTest;
 import be.jsams.common.bean.model.AddressBeanTest;
 import be.jsams.common.bean.model.CivilityBeanTest;
 import be.jsams.common.bean.model.ContactInformationBeanTest;
@@ -46,15 +47,16 @@ import be.jsams.server.model.utils.xml.JsamsDateAdapterTest;
  * @version $Rev$ $Date::                  $ $Author$
  */
 @RunWith(Suite.class)
-@SuiteClasses(value = { DoubleFormatterTest.class, AddressBeanTest.class, CivilityBeanTest.class,
-        LegalFormBeanTest.class, ContactInformationBeanTest.class, PaymentModeBeanTest.class, PeriodBeanTest.class,
-        SocietyBeanTest.class, AgentBeanTest.class, CustomerBeanTest.class, ProductBeanTest.class,
-        ProductCategoryBeanTest.class, BillBeanTest.class, CommandBeanTest.class, CreditNoteBeanTest.class,
-        DeliveryOrderBeanTest.class, EstimateBeanTest.class, EmailValidatorTest.class, StringValidatorTest.class,
-        AddressDaoImplTest.class, CivilityDaoImplTest.class, ContactInformationDaoImplTest.class,
-        SocietyDaoImplTest.class, AgentDaoImplTest.class, CustomerDaoImplTest.class, ProductCategoryDaoImplTest.class,
-        ProductDaoImplTest.class, BillDaoImplTest.class, CommandDaoImplTest.class, CreditNoteDaoImplTest.class,
-        DeliveryOrderDaoImplTest.class, EstimateDaoImplTest.class, JsamsDateAdapterTest.class })
+@SuiteClasses(value = { DoubleFormatterTest.class, EditAddressValidatorTest.class, AddressBeanTest.class,
+        CivilityBeanTest.class, LegalFormBeanTest.class, ContactInformationBeanTest.class, PaymentModeBeanTest.class,
+        PeriodBeanTest.class, SocietyBeanTest.class, AgentBeanTest.class, CustomerBeanTest.class,
+        ProductBeanTest.class, ProductCategoryBeanTest.class, BillBeanTest.class, CommandBeanTest.class,
+        CreditNoteBeanTest.class, DeliveryOrderBeanTest.class, EstimateBeanTest.class, EmailValidatorTest.class,
+        StringValidatorTest.class, AddressDaoImplTest.class, CivilityDaoImplTest.class,
+        ContactInformationDaoImplTest.class, SocietyDaoImplTest.class, AgentDaoImplTest.class,
+        CustomerDaoImplTest.class, ProductCategoryDaoImplTest.class, ProductDaoImplTest.class, BillDaoImplTest.class,
+        CommandDaoImplTest.class, CreditNoteDaoImplTest.class, DeliveryOrderDaoImplTest.class,
+        EstimateDaoImplTest.class, JsamsDateAdapterTest.class })
 public class AllTests {
 
     /**
