@@ -41,9 +41,12 @@ import be.jsams.server.dao.sale.impl.DeliveryOrderDaoImplTest;
 import be.jsams.server.dao.sale.impl.EstimateDaoImplTest;
 import be.jsams.server.model.utils.xml.JsamsDateAdapterTest;
 import be.jsams.server.service.rss.impl.RSSFeedParserImplTest;
+import be.jsams.server.service.rss.impl.RSSFeedWriterImplTest;
 
 /**
- * Test suite for all JUNIT tests.
+ * Test suite for all JUNIT tests. <br />
+ * NOTE: {@link RSSFeedWriterImplTest} has to be before
+ * {@link RSSFeedParserImplTest} to parse the output of the writer.
  * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
@@ -58,7 +61,8 @@ import be.jsams.server.service.rss.impl.RSSFeedParserImplTest;
         ContactInformationDaoImplTest.class, SocietyDaoImplTest.class, AgentDaoImplTest.class,
         CustomerDaoImplTest.class, ProductCategoryDaoImplTest.class, ProductDaoImplTest.class, BillDaoImplTest.class,
         CommandDaoImplTest.class, CreditNoteDaoImplTest.class, DeliveryOrderDaoImplTest.class,
-        EstimateDaoImplTest.class, JsamsDateAdapterTest.class, RSSFeedParserImplTest.class })
+        EstimateDaoImplTest.class, JsamsDateAdapterTest.class, RSSFeedWriterImplTest.class,
+        RSSFeedParserImplTest.class })
 public class AllTests {
 
     /**

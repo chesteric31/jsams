@@ -1,5 +1,6 @@
 package be.jsams.server.service.rss.impl;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
 import java.util.List;
@@ -27,12 +28,15 @@ public class RSSFeedParserImplTest {
         System.getProperties().put("proxySet", "true");
         System.getProperties().put("proxyHost", "10.16.0.25");
         System.getProperties().put("proxyPort", "8080");
-        RSSFeedParser parser = new RSSFeedParserImpl("http://jsams.googlecode.com/files/Updates.rss");
+//        RSSFeedParser parser = new RSSFeedParserImpl("http://jsams.googlecode.com/files/Updates.rss");
+        RSSFeedParser parser = new RSSFeedParserImpl(
+                "file:\\C:\\Tools\\workspace-jsams\\JSAMS\\src\\test\\resources\\Updates.rss");
         Feed feed = parser.readFeed();
         System.out.println(feed);
         List<FeedMessage> messages = feed.getMessages();
         for (FeedMessage message : messages) {
             System.out.println(message);
+            assertEquals("chesteric31", message.getAuthor());
         }
         assertFalse(messages.isEmpty());
     }

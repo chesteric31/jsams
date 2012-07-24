@@ -1,5 +1,6 @@
 package be.jsams.server.service.rss.impl;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -45,8 +46,8 @@ public class RSSFeedWriterImplTest {
         feedOld.setTitle("JSAMS update");
         feedOld.setDescription("This is a description");
         feedOld.setAuthor("chesteric31");
-        feedOld.setGuid("");
-        feedOld.setLink("");
+        feedOld.setGuid("null");
+        feedOld.setLink("null");
         cal.set(2011, 11, 25);
         feedOld.setReleaseDate(simpleDateFormat.format(cal.getTime()));
         String version = "1.0.1-SNAPSHOT";
@@ -66,12 +67,17 @@ public class RSSFeedWriterImplTest {
             rssFeeder.getMessages().add(feed);
         }
 
-        // Now write the file
-        RSSFeedWriter writer = new RSSFeedWriterImpl(rssFeeder, "Updates.rss");
+        // Now writes the file
         try {
+            File path = new File(".");
+            String separator = File.separator;
+            String pathString = path.getCanonicalPath() + separator + "src" + separator + "test" + separator
+                    + "resources" + separator;
+            RSSFeedWriter writer = new RSSFeedWriterImpl(rssFeeder, pathString + "Updates.rss");
             writer.writeFeed();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
 }
