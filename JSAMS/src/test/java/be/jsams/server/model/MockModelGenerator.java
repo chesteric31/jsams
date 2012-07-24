@@ -9,9 +9,11 @@ import be.jsams.server.model.management.Customer;
 import be.jsams.server.model.management.Product;
 import be.jsams.server.model.management.ProductCategory;
 import be.jsams.server.model.sale.Command;
+import be.jsams.server.model.sale.CreditNote;
 import be.jsams.server.model.sale.DeliveryOrder;
 import be.jsams.server.model.sale.Estimate;
 import be.jsams.server.model.sale.detail.CommandDetail;
+import be.jsams.server.model.sale.detail.CreditNoteDetail;
 import be.jsams.server.model.sale.detail.DeliveryOrderDetail;
 import be.jsams.server.model.sale.detail.EstimateDetail;
 
@@ -284,6 +286,30 @@ public final class MockModelGenerator {
         details.add(detail);
         deliveryOrder.setDetails(details);
         return deliveryOrder;
+    }
+
+    /**
+     * Generates mock {@link CreditNote}.
+     * 
+     * @return the built {@link CreditNote}
+     */
+    public static CreditNote generateMockCreditNote() {
+        CreditNote creditNote = new CreditNote();
+        creditNote.setBillingAddress(generateMockAddress());
+        creditNote.setCreationDate(new Date());
+        creditNote.setCustomer(generateMockCustomer());
+        creditNote.setRemark("Remark");
+        CreditNoteDetail detail = new CreditNoteDetail();
+        detail.setCreditNote(creditNote);
+        detail.setDiscountRate(0D);
+        detail.setPrice(1000D);
+        detail.setProduct(generateMockProduct());
+        detail.setQuantity(3);
+        detail.setVatApplicable(5D);
+        List<CreditNoteDetail> details = new ArrayList<CreditNoteDetail>();
+        details.add(detail);
+        creditNote.setDetails(details);
+        return creditNote;
     }
     
 }

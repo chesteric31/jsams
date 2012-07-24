@@ -44,8 +44,12 @@ public class CreditNoteDaoImpl extends DaoImpl<CreditNote> implements CreditNote
         StringBuilder queryBuilder = new StringBuilder("FROM CreditNote c");
 
         PeriodBean period = criteria.getPeriod();
-        Date startDate = period.getStartDate();
-        Date endDate = period.getEndDate();
+        Date startDate = null;
+        Date endDate = null;
+        if (period != null) {
+            startDate = period.getStartDate();
+            endDate = period.getEndDate();
+        }
 
         AddressBean billingAddress = criteria.getBillingAddress();
         String zipCode = billingAddress.getZipCode();
@@ -90,7 +94,7 @@ public class CreditNoteDaoImpl extends DaoImpl<CreditNote> implements CreditNote
         StringBuilder queryBuilder = new StringBuilder("FROM CreditNote c");
 
         queryBuilder.append(" WHERE ");
-        queryBuilder.append("c.society.id = " + getCurrentSociety().getId());
+        queryBuilder.append("c.customer.society.id = " + getCurrentSociety().getId());
 
         Query query = getEntityManager().createQuery(queryBuilder.toString());
         return query.getResultList();
