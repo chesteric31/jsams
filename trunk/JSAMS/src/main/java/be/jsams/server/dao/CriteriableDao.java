@@ -7,18 +7,18 @@ import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.server.model.AbstractIdentity;
 
 /**
- * Generic DAO interface for object that can be searched by criteria
+ * Generic DAO interface for object that can be searched by criteria.
  * 
  * @param <T> the object type
  * @param <B> the bean object type
- *
+ * 
  * @author ebinard
  * @version $Rev$ $Date::                  $ $Author$
  */
 public interface CriteriableDao<T extends AbstractIdentity, B extends AbstractIdentityBean<T, ?>> extends Dao<T> {
 
     /**
-     * Find a list of models following the criteria model
+     * Findq a list of models following the criteria model.
      * 
      * @param criteria the criteria bean
      * @return a list of models
@@ -35,5 +35,4 @@ public interface CriteriableDao<T extends AbstractIdentity, B extends AbstractId
      */
     void setCurrentSociety(SocietyBean currentSociety);
 
-    
 }
