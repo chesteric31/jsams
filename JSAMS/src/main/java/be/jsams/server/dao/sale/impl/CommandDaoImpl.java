@@ -96,7 +96,7 @@ public class CommandDaoImpl extends DaoImpl<Command> implements CommandDao {
         StringBuilder queryBuilder = new StringBuilder("FROM Command c");
 
         queryBuilder.append(" WHERE ");
-        queryBuilder.append("c.society.id = " + getCurrentSociety().getId());
+        queryBuilder.append("c.customer.society.id = " + getCurrentSociety().getId());
 
         Query query = getEntityManager().createQuery(queryBuilder.toString());
         return query.getResultList();

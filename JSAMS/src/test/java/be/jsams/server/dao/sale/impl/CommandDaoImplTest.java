@@ -45,6 +45,8 @@ public class CommandDaoImplTest extends BaseJUnitTestClass {
     private CommandDao dao;
     private Command command;
 
+    private Command persistedCommand;
+
     @Autowired
     private CustomerDao customerDao;
 
@@ -66,6 +68,10 @@ public class CommandDaoImplTest extends BaseJUnitTestClass {
 
     @Autowired
     private ProductCategoryDao productCategoryDao;
+    
+    private SocietyBean societyBean;
+    private CustomerBean customerBean;
+    private AgentBean agentBean;
 
     /**
      * Setup method.
@@ -73,15 +79,6 @@ public class CommandDaoImplTest extends BaseJUnitTestClass {
     @Before
     public void setUp() {
         command = MockModelGenerator.generateMockCommand();
-    }
-
-    /**
-     * Test method for
-     * {@link be.jsams.server.dao.sale.impl.CommandDaoImpl#findByCriteria(be.jsams.common.bean.model.sale.CommandBean)}
-     * .
-     */
-    @Test
-    public void testFindByCriteria() {
         Customer customer = command.getCustomer();
         
         Agent customerAgent = customer.getAgent();
@@ -110,17 +107,35 @@ public class CommandDaoImplTest extends BaseJUnitTestClass {
         Product persistedProduct = productDao.add(product);
         commandDetail.setProduct(persistedProduct);
 
-        SocietyBean societyBean = new SocietyBean(persistedSociety);
-        CustomerBean customerBean = new CustomerBean(persistedCustomer, societyBean);
-        AgentBean agentBean = new AgentBean(persistedAgent, societyBean);
+        societyBean = new SocietyBean(persistedSociety);
+        customerBean = new CustomerBean(persistedCustomer, societyBean);
+        agentBean = new AgentBean(persistedAgent, societyBean);
         
-        Command persistedCommand = dao.add(command);
+        persistedCommand = dao.add(command);
         dao.setCurrentSociety(societyBean);
-        
         // necessary to avoid to have the details, not interesting here
         persistedCommand.setDetails(new ArrayList<CommandDetail>());
+    }
+
+    /**
+     * Test method for
+     * {@link be.jsams.server.dao.sale.impl.CommandDaoImpl#findByCriteria(be.jsams.common.bean.model.sale.CommandBean)}
+     * .
+     */
+    @Test
+    public void testFindByCriteria() {
         CommandBean criteria = new CommandBean(persistedCommand, societyBean, customerBean, agentBean);
         List<Command> founds = dao.findByCriteria(criteria);
+        assertTrue(founds.contains(persistedCommand));
+    }
+
+    /**
+     * Test method for
+     * {@link be.jsams.server.dao.sale.impl.CommandDaoImpl#findAll()}.
+     */
+    @Test
+    public void testFindAll() {
+        List<Command> founds = dao.findAll();
         assertTrue(founds.contains(persistedCommand));
     }
 
