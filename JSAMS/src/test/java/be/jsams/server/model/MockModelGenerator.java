@@ -9,8 +9,10 @@ import be.jsams.server.model.management.Customer;
 import be.jsams.server.model.management.Product;
 import be.jsams.server.model.management.ProductCategory;
 import be.jsams.server.model.sale.Command;
+import be.jsams.server.model.sale.DeliveryOrder;
 import be.jsams.server.model.sale.Estimate;
 import be.jsams.server.model.sale.detail.CommandDetail;
+import be.jsams.server.model.sale.detail.DeliveryOrderDetail;
 import be.jsams.server.model.sale.detail.EstimateDetail;
 
 /**
@@ -255,6 +257,33 @@ public final class MockModelGenerator {
         details.add(detail);
         estimate.setDetails(details);
         return estimate;
+    }
+
+    /**
+     * Generates mock {@link DeliveryOrder}.
+     * 
+     * @return the built {@link DeliveryOrder}
+     */
+    public static DeliveryOrder generateMockDeliveryOrder() {
+        DeliveryOrder deliveryOrder = new DeliveryOrder();
+        deliveryOrder.setCreationDate(new Date());
+        deliveryOrder.setCustomer(generateMockCustomer());
+        deliveryOrder.setDeliveryAddress(generateMockAddress());
+        deliveryOrder.setDiscountRate(3D);
+        deliveryOrder.setRemark("Remark");
+        deliveryOrder.setTransferred(false);
+        DeliveryOrderDetail detail = new DeliveryOrderDetail();
+        detail.setDeliveryOrder(deliveryOrder);
+        detail.setDiscountRate(2D);
+        detail.setPrice(20D);
+        detail.setProduct(generateMockProduct());
+        detail.setQuantity(5);
+        detail.setTransferred(false);
+        detail.setVatApplicable(15D);
+        List<DeliveryOrderDetail> details = new ArrayList<DeliveryOrderDetail>();
+        details.add(detail);
+        deliveryOrder.setDetails(details);
+        return deliveryOrder;
     }
     
 }
