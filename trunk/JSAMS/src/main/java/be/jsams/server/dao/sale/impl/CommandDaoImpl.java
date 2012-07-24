@@ -50,6 +50,7 @@ public class CommandDaoImpl extends DaoImpl<Command> implements CommandDao {
             startDate = period.getStartDate();
             endDate = period.getEndDate();
         }
+        
         AddressBean billingAddress = criteria.getBillingAddress();
         String zipCode = billingAddress.getZipCode();
         String city = billingAddress.getCity();
