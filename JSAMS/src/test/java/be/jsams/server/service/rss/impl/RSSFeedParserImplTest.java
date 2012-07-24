@@ -3,6 +3,8 @@ package be.jsams.server.service.rss.impl;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import org.junit.Test;
@@ -22,15 +24,21 @@ public class RSSFeedParserImplTest {
     /**
      * Test method for
      * {@link be.jsams.server.service.rss.impl.RSSFeedParserImpl#readFeed()}.
+     * 
+     * @throws IOException an {@link IOException}
      */
     @Test
-    public void testReadFeed() {
+    public void testReadFeed() throws IOException {
         System.getProperties().put("proxySet", "true");
         System.getProperties().put("proxyHost", "10.16.0.25");
         System.getProperties().put("proxyPort", "8080");
-//        RSSFeedParser parser = new RSSFeedParserImpl("http://jsams.googlecode.com/files/Updates.rss");
-        RSSFeedParser parser = new RSSFeedParserImpl(
-                "file:\\C:\\Tools\\workspace-jsams\\JSAMS\\src\\test\\resources\\Updates.rss");
+        File path = new File(".");
+        String separator = File.separator;
+        String pathString = path.getCanonicalPath() + separator + "src" + separator + "test" + separator + "resources"
+                + separator;
+        // RSSFeedParser parser = new
+        // RSSFeedParserImpl("http://jsams.googlecode.com/files/Updates.rss");
+        RSSFeedParser parser = new RSSFeedParserImpl("file:\\" + pathString + "Updates.rss");
         Feed feed = parser.readFeed();
         System.out.println(feed);
         List<FeedMessage> messages = feed.getMessages();
