@@ -7,7 +7,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 
 /**
- * 
+ * Generator of XML physical file from a XML JAXB object, a class type.
  *
  * @author chesteric31
  * @version $Revision$ $Date::                  $ $Author$
