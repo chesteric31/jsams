@@ -33,6 +33,7 @@ import be.jsams.server.dao.management.impl.CustomerDaoImplTest;
 import be.jsams.server.dao.management.impl.ProductCategoryDaoImplTest;
 import be.jsams.server.dao.management.impl.ProductDaoImplTest;
 import be.jsams.server.dao.sale.impl.CommandDaoImplTest;
+import be.jsams.server.dao.sale.impl.DeliveryOrderDaoImplTest;
 import be.jsams.server.dao.sale.impl.EstimateDaoImplTest;
 import be.jsams.server.model.utils.xml.JsamsDateAdapterTest;
 
@@ -50,7 +51,8 @@ import be.jsams.server.model.utils.xml.JsamsDateAdapterTest;
         DeliveryOrderBeanTest.class, EstimateBeanTest.class, EmailValidatorTest.class, StringValidatorTest.class,
         AddressDaoImplTest.class, CivilityDaoImplTest.class, ContactInformationDaoImplTest.class,
         SocietyDaoImplTest.class, AgentDaoImplTest.class, CustomerDaoImplTest.class, ProductCategoryDaoImplTest.class,
-        ProductDaoImplTest.class, CommandDaoImplTest.class, EstimateDaoImplTest.class, JsamsDateAdapterTest.class })
+        ProductDaoImplTest.class, CommandDaoImplTest.class, DeliveryOrderDaoImplTest.class, EstimateDaoImplTest.class,
+        JsamsDateAdapterTest.class })
 public class AllTests {
 
     /**

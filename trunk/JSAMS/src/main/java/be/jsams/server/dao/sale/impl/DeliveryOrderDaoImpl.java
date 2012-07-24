@@ -44,9 +44,13 @@ public class DeliveryOrderDaoImpl extends DaoImpl<DeliveryOrder> implements Deli
         StringBuilder queryBuilder = new StringBuilder("FROM DeliveryOrder d");
 
         PeriodBean period = criteria.getPeriod();
-        Date startDate = period.getStartDate();
-        Date endDate = period.getEndDate();
-
+        Date startDate = null;
+        Date endDate = null;
+        if (period != null) {
+            startDate = period.getStartDate();
+            endDate = period.getEndDate();
+        }
+        
         AddressBean deliveryAddress = criteria.getDeliveryAddress();
         String zipCode = deliveryAddress.getZipCode();
         String city = deliveryAddress.getCity();
@@ -93,7 +97,7 @@ public class DeliveryOrderDaoImpl extends DaoImpl<DeliveryOrder> implements Deli
         StringBuilder queryBuilder = new StringBuilder("FROM DeliveryOrder d");
 
         queryBuilder.append(" WHERE ");
-        queryBuilder.append("d.society.id = " + getCurrentSociety().getId());
+        queryBuilder.append("d.customer.society.id = " + getCurrentSociety().getId());
 
         Query query = getEntityManager().createQuery(queryBuilder.toString());
         return query.getResultList();
