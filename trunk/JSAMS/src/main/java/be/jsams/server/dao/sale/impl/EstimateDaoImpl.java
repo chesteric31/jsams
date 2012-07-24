@@ -43,8 +43,12 @@ public class EstimateDaoImpl extends DaoImpl<Estimate> implements EstimateDao {
         StringBuilder queryBuilder = new StringBuilder("FROM Estimate e");
 
         PeriodBean period = criteria.getPeriod();
-        Date startDate = period.getStartDate();
-        Date endDate = period.getEndDate();
+        Date startDate = null;
+        Date endDate = null;
+        if (period != null) {
+            startDate = period.getStartDate();
+            endDate = period.getEndDate();
+        }
 
         String zipCode = criteria.getBillingAddress().getZipCode();
         String city = criteria.getBillingAddress().getCity();
@@ -91,7 +95,7 @@ public class EstimateDaoImpl extends DaoImpl<Estimate> implements EstimateDao {
         StringBuilder queryBuilder = new StringBuilder("FROM Estimate e");
 
         queryBuilder.append(" WHERE ");
-        queryBuilder.append("e.society.id = " + getCurrentSociety().getId());
+        queryBuilder.append("e.customer.society.id = " + getCurrentSociety().getId());
 
         Query query = getEntityManager().createQuery(queryBuilder.toString());
         return query.getResultList();

@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.AgentBean;
 import be.jsams.common.bean.model.management.CustomerBean;
-import be.jsams.common.bean.model.sale.CommandBean;
+import be.jsams.common.bean.model.sale.EstimateBean;
 import be.jsams.server.dao.BaseJUnitTestClass;
 import be.jsams.server.dao.CivilityDao;
 import be.jsams.server.dao.LegalFormDao;
@@ -22,7 +22,7 @@ import be.jsams.server.dao.management.AgentDao;
 import be.jsams.server.dao.management.CustomerDao;
 import be.jsams.server.dao.management.ProductCategoryDao;
 import be.jsams.server.dao.management.ProductDao;
-import be.jsams.server.dao.sale.CommandDao;
+import be.jsams.server.dao.sale.EstimateDao;
 import be.jsams.server.model.MockModelGenerator;
 import be.jsams.server.model.PaymentMode;
 import be.jsams.server.model.Society;
@@ -30,22 +30,22 @@ import be.jsams.server.model.management.Agent;
 import be.jsams.server.model.management.Customer;
 import be.jsams.server.model.management.Product;
 import be.jsams.server.model.management.ProductCategory;
-import be.jsams.server.model.sale.Command;
-import be.jsams.server.model.sale.detail.CommandDetail;
+import be.jsams.server.model.sale.Estimate;
+import be.jsams.server.model.sale.detail.EstimateDetail;
 
 /**
- * Test class for {@link CommandDao} class.
- * 
+ * Test class for {@link EstimateDao} class.
+ *
  * @author chesteric31
- * @version $Rev$ $Date::                  $ $Author$
+ * @version $Revision$ $Date::                  $ $Author$
  */
-public class CommandDaoImplTest extends BaseJUnitTestClass {
+public class EstimateDaoImplTest extends BaseJUnitTestClass {
 
     @Autowired
-    private CommandDao dao;
-    private Command command;
+    private EstimateDao dao;
+    private Estimate estimate;
 
-    private Command persistedCommand;
+    private Estimate persistedEstimate;
 
     @Autowired
     private CustomerDao customerDao;
@@ -78,8 +78,8 @@ public class CommandDaoImplTest extends BaseJUnitTestClass {
      */
     @Before
     public void setUp() {
-        command = MockModelGenerator.generateMockCommand();
-        Customer customer = command.getCustomer();
+        estimate = MockModelGenerator.generateMockEstimate();
+        Customer customer = estimate.getCustomer();
         
         Agent customerAgent = customer.getAgent();
         civilityDao.add(customerAgent.getCivility());
@@ -93,50 +93,50 @@ public class CommandDaoImplTest extends BaseJUnitTestClass {
         legalFormDao.add(customer.getLegalForm());
         Customer persistedCustomer = customerDao.add(customer);
         
-        Agent agent = command.getAgent();
+        Agent agent = estimate.getAgent();
         agent.setSociety(persistedSociety);
         civilityDao.add(agent.getCivility());
         Agent persistedAgent = agentDao.add(agent);
         
-        CommandDetail commandDetail = command.getDetails().get(0);
-        Product product = commandDetail.getProduct();
+        EstimateDetail estimateDetail = estimate.getDetails().get(0);
+        Product product = estimateDetail.getProduct();
         ProductCategory category = product.getCategory();
         category.setSociety(persistedSociety);
         ProductCategory persistedCategory = productCategoryDao.add(category);
         product.setCategory(persistedCategory);
         Product persistedProduct = productDao.add(product);
-        commandDetail.setProduct(persistedProduct);
+        estimateDetail.setProduct(persistedProduct);
 
         societyBean = new SocietyBean(persistedSociety);
         customerBean = new CustomerBean(persistedCustomer, societyBean);
         agentBean = new AgentBean(persistedAgent, societyBean);
         
-        persistedCommand = dao.add(command);
+        persistedEstimate = dao.add(estimate);
         dao.setCurrentSociety(societyBean);
         // necessary to avoid to have the details, not interesting here
-        persistedCommand.setDetails(new ArrayList<CommandDetail>());
+        persistedEstimate.setDetails(new ArrayList<EstimateDetail>());
     }
-
+    
     /**
      * Test method for
-     * {@link be.jsams.server.dao.sale.impl.CommandDaoImpl#findByCriteria(be.jsams.common.bean.model.sale.CommandBean)}
+     * {@link be.jsams.server.dao.sale.impl.EstimateDaoImpl#findByCriteria(
+     * be.jsams.common.bean.model.sale.EstimateBean)}
      * .
      */
     @Test
     public void testFindByCriteria() {
-        CommandBean criteria = new CommandBean(persistedCommand, societyBean, customerBean, agentBean);
-        List<Command> founds = dao.findByCriteria(criteria);
-        assertTrue(founds.contains(persistedCommand));
+        EstimateBean criteria = new EstimateBean(persistedEstimate, societyBean, customerBean, agentBean);
+        List<Estimate> founds = dao.findByCriteria(criteria);
+        assertTrue(founds.contains(persistedEstimate));
     }
 
     /**
-     * Test method for
-     * {@link be.jsams.server.dao.sale.impl.CommandDaoImpl#findAll()}.
+     * Test method for {@link be.jsams.server.dao.sale.impl.EstimateDaoImpl#findAll()}.
      */
     @Test
     public void testFindAll() {
-        List<Command> founds = dao.findAll();
-        assertTrue(founds.contains(persistedCommand));
+        List<Estimate> founds = dao.findAll();
+        assertTrue(founds.contains(persistedEstimate));
     }
 
 }
