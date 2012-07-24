@@ -1,6 +1,7 @@
 package be.jsams.server.model;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -8,10 +9,12 @@ import be.jsams.server.model.management.Agent;
 import be.jsams.server.model.management.Customer;
 import be.jsams.server.model.management.Product;
 import be.jsams.server.model.management.ProductCategory;
+import be.jsams.server.model.sale.Bill;
 import be.jsams.server.model.sale.Command;
 import be.jsams.server.model.sale.CreditNote;
 import be.jsams.server.model.sale.DeliveryOrder;
 import be.jsams.server.model.sale.Estimate;
+import be.jsams.server.model.sale.detail.BillDetail;
 import be.jsams.server.model.sale.detail.CommandDetail;
 import be.jsams.server.model.sale.detail.CreditNoteDetail;
 import be.jsams.server.model.sale.detail.DeliveryOrderDetail;
@@ -310,6 +313,53 @@ public final class MockModelGenerator {
         details.add(detail);
         creditNote.setDetails(details);
         return creditNote;
+    }
+
+    /**
+     * Generates mock {@link Bill}.
+     * 
+     * @return the built {@link Bill}
+     */
+    public static Bill generateMockBill() {
+        Bill bill = new Bill();
+        bill.setBillingAddress(generateMockAddress());
+        bill.setClosed(false);
+        Date today = new Date();
+        bill.setCreationDate(today);
+        bill.setCustomer(generateMockCustomer());
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(today);
+        calendar.add(Calendar.DAY_OF_MONTH, 30);
+        Date dateFirstRemember = calendar.getTime();
+        bill.setDateFirstRemember(dateFirstRemember);
+        calendar.setTime(dateFirstRemember);
+        calendar.add(Calendar.DAY_OF_MONTH, 30);
+        Date dateSecondRemember = calendar.getTime();
+        bill.setDateSecondRemember(dateSecondRemember);
+        calendar.setTime(dateSecondRemember);
+        calendar.add(Calendar.DAY_OF_MONTH, 15);
+        Date dateFormalNotice = calendar.getTime();
+        bill.setDateFormalNotice(dateFormalNotice);
+        bill.setDiscountRate(25D);
+        calendar.setTime(today);
+        calendar.add(Calendar.DAY_OF_MONTH, 1);
+        Date dueDate = calendar.getTime();
+        bill.setDueDate(dueDate);
+        bill.setPaid(true);
+        bill.setPaymentMode(generateMockPaymentMode());
+        bill.setRemark("Remark");
+        BillDetail detail = new BillDetail();
+        detail.setBill(bill);
+        detail.setDiscountRate(0D);
+        detail.setPrice(15D);
+        detail.setProduct(generateMockProduct());
+        detail.setQuantity(1);
+        detail.setTransferred(false);
+        detail.setVatApplicable(21D);
+        List<BillDetail> details = new ArrayList<BillDetail>();
+        details.add(detail);
+        bill.setDetails(details);
+        return bill;
     }
     
 }

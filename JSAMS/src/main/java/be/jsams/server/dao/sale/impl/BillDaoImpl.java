@@ -45,8 +45,12 @@ public class BillDaoImpl extends DaoImpl<Bill> implements BillDao {
         StringBuilder queryBuilder = new StringBuilder("FROM Bill b");
 
         PeriodBean period = criteria.getPeriod();
-        Date startDate = period.getStartDate();
-        Date endDate = period.getEndDate();
+        Date startDate = null;
+        Date endDate = null;
+        if (period != null) {
+            startDate = period.getStartDate();
+            endDate = period.getEndDate();
+        }
 
         AddressBean billingAddress = criteria.getBillingAddress();
         String zipCode = billingAddress.getZipCode();
@@ -100,7 +104,7 @@ public class BillDaoImpl extends DaoImpl<Bill> implements BillDao {
         StringBuilder queryBuilder = new StringBuilder("FROM Bill b");
 
         queryBuilder.append(" WHERE ");
-        queryBuilder.append("b.society.id = " + getCurrentSociety().getId());
+        queryBuilder.append("b.customer.society.id = " + getCurrentSociety().getId());
 
         Query query = getEntityManager().createQuery(queryBuilder.toString());
         return query.getResultList();
