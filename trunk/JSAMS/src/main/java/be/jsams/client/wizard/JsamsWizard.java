@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * 
  *
- * @author ebinard
+ * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
 public interface JsamsWizard {

@@ -11,7 +11,7 @@ import be.jsams.client.swing.component.JsamsLabel;
 /**
  * 
  *
- * @author ebinard
+ * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
 public class JsamsWizardButtonPanel extends JPanel {

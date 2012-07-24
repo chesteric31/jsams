@@ -12,7 +12,7 @@ import be.jsams.server.model.AbstractIdentity;
  * @param <T> the object type
  * @param <B> the bean object type
  * 
- * @author ebinard
+ * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
 public interface CriteriableDao<T extends AbstractIdentity, B extends AbstractIdentityBean<T, ?>> extends Dao<T> {
