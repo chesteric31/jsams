@@ -22,7 +22,7 @@ import be.jsams.server.model.management.Product;
 import be.jsams.server.model.management.ProductCategory;
 
 /**
- * Test class for {@link ProductDaoImpl}.
+ * Test class for {@link ProductDao}.
  * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$

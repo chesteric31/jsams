@@ -9,7 +9,9 @@ import be.jsams.server.model.management.Customer;
 import be.jsams.server.model.management.Product;
 import be.jsams.server.model.management.ProductCategory;
 import be.jsams.server.model.sale.Command;
+import be.jsams.server.model.sale.Estimate;
 import be.jsams.server.model.sale.detail.CommandDetail;
+import be.jsams.server.model.sale.detail.EstimateDetail;
 
 /**
  * Generator of model objects.
@@ -183,7 +185,6 @@ public final class MockModelGenerator {
         details.add(detail);
         command.setDetails(details);
         return command;
-         
     }
 
     /**
@@ -226,6 +227,34 @@ public final class MockModelGenerator {
         paymentMode.setLabelNl("VERLENGING");
         paymentMode.setMonthEnd(true);
         return paymentMode;
+    }
+
+    /**
+     * Generates mock {@link Estimate}.
+     * 
+     * @return the built {@link Estimate}
+     */
+    public static Estimate generateMockEstimate() {
+        Estimate estimate = new Estimate();
+        estimate.setAgent(generateMockAgent());
+        estimate.setBillingAddress(generateMockAddress());
+        estimate.setCreationDate(new Date());
+        estimate.setCustomer(generateMockCustomer());
+        estimate.setDiscountRate(1D);
+        estimate.setRemark("Remark");
+        estimate.setTransferred(false);
+        EstimateDetail detail = new EstimateDetail();
+        detail.setEstimate(estimate);
+        detail.setDiscountRate(1D);
+        detail.setPrice(25D);
+        detail.setProduct(generateMockProduct());
+        detail.setQuantity(2);
+        detail.setTransferred(false);
+        detail.setVatApplicable(6D);
+        List<EstimateDetail> details = new ArrayList<EstimateDetail>();
+        details.add(detail);
+        estimate.setDetails(details);
+        return estimate;
     }
     
 }
