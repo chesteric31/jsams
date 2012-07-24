@@ -44,9 +44,12 @@ public class CommandDaoImpl extends DaoImpl<Command> implements CommandDao {
         StringBuilder queryBuilder = new StringBuilder("FROM Command c");
 
         PeriodBean period = criteria.getPeriod();
-        Date startDate = period.getStartDate();
-        Date endDate = period.getEndDate();
-
+        Date startDate = null;
+        Date endDate = null;
+        if (period != null) {
+            startDate = period.getStartDate();
+            endDate = period.getEndDate();
+        }
         AddressBean billingAddress = criteria.getBillingAddress();
         String zipCode = billingAddress.getZipCode();
         String city = billingAddress.getCity();
