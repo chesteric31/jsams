@@ -1,10 +1,21 @@
 package be.jsams.server.dao.sale.impl;
 
+import static org.junit.Assert.assertTrue;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import be.jsams.common.bean.model.SocietyBean;
+import be.jsams.common.bean.model.management.AgentBean;
+import be.jsams.common.bean.model.management.CustomerBean;
+import be.jsams.common.bean.model.sale.CommandBean;
 import be.jsams.server.dao.BaseJUnitTestClass;
+import be.jsams.server.dao.CivilityDao;
+import be.jsams.server.dao.LegalFormDao;
 import be.jsams.server.dao.PaymentModeDao;
 import be.jsams.server.dao.SocietyDao;
 import be.jsams.server.dao.management.AgentDao;
@@ -13,6 +24,7 @@ import be.jsams.server.dao.management.ProductCategoryDao;
 import be.jsams.server.dao.management.ProductDao;
 import be.jsams.server.dao.sale.CommandDao;
 import be.jsams.server.model.MockModelGenerator;
+import be.jsams.server.model.PaymentMode;
 import be.jsams.server.model.Society;
 import be.jsams.server.model.management.Agent;
 import be.jsams.server.model.management.Customer;
@@ -38,6 +50,10 @@ public class CommandDaoImplTest extends BaseJUnitTestClass {
 
     @Autowired
     private PaymentModeDao paymentModeDao;
+    @Autowired
+    private CivilityDao civilityDao;
+    @Autowired
+    private LegalFormDao legalFormDao;
 
     @Autowired
     private SocietyDao societyDao;
@@ -50,7 +66,7 @@ public class CommandDaoImplTest extends BaseJUnitTestClass {
 
     @Autowired
     private ProductCategoryDao productCategoryDao;
-    
+
     /**
      * Setup method.
      */
@@ -67,12 +83,24 @@ public class CommandDaoImplTest extends BaseJUnitTestClass {
     @Test
     public void testFindByCriteria() {
         Customer customer = command.getCustomer();
-        customer.setPaymentMode(paymentModeDao.findById(1L));
+        
+        Agent customerAgent = customer.getAgent();
+        civilityDao.add(customerAgent.getCivility());
+        societyDao.add(customerAgent.getSociety());
+        agentDao.add(customerAgent);
+        
+        PaymentMode persistedPaymentMode = paymentModeDao.add(customer.getPaymentMode());
+        customer.setPaymentMode(persistedPaymentMode);
         Society persistedSociety = societyDao.add(customer.getSociety());
-        customerDao.add(customer);
+        civilityDao.add(customer.getCivility());
+        legalFormDao.add(customer.getLegalForm());
+        Customer persistedCustomer = customerDao.add(customer);
+        
         Agent agent = command.getAgent();
         agent.setSociety(persistedSociety);
-        agentDao.add(agent);
+        civilityDao.add(agent.getCivility());
+        Agent persistedAgent = agentDao.add(agent);
+        
         CommandDetail commandDetail = command.getDetails().get(0);
         Product product = commandDetail.getProduct();
         ProductCategory category = product.getCategory();
@@ -81,11 +109,19 @@ public class CommandDaoImplTest extends BaseJUnitTestClass {
         product.setCategory(persistedCategory);
         Product persistedProduct = productDao.add(product);
         commandDetail.setProduct(persistedProduct);
-        // TODO
-        // Command persistedCommand = dao.add(command);
-        // CommandBean criteria = new CommandBean(persistedCommand);
-        // List<Command> founds = dao.findByCriteria(criteria);
-        // assertTrue(founds.contains(persistedCommand));
+
+        SocietyBean societyBean = new SocietyBean(persistedSociety);
+        CustomerBean customerBean = new CustomerBean(persistedCustomer, societyBean);
+        AgentBean agentBean = new AgentBean(persistedAgent, societyBean);
+        
+        Command persistedCommand = dao.add(command);
+        dao.setCurrentSociety(societyBean);
+        
+        // necessary to avoid to have the details, not interesting here
+        persistedCommand.setDetails(new ArrayList<CommandDetail>());
+        CommandBean criteria = new CommandBean(persistedCommand, societyBean, customerBean, agentBean);
+        List<Command> founds = dao.findByCriteria(criteria);
+        assertTrue(founds.contains(persistedCommand));
     }
 
 }
