@@ -14,13 +14,30 @@ import be.jsams.common.bean.view.transfer.TransferBeanView;
 import be.jsams.server.model.AbstractIdentity;
 
 /**
- * {@link AbstractIdentityBean} for a transfer wrapper bean.
+ * {@link AbstractIdentityBean} for a transfer wrapper bean. <p>
+ * The wizard stores the source, destination and transfer mode selections. <p>
+ * <b>source: </b>
+ * <ol>
+ * <li>for estimate,</li>
+ * <li>for command,</li>
+ * <li>for delivery order,</li>
+ * <li>for bill</li>
+ * </ol>
+ * <b>destination: </b>
+ * <ol>
+ * <li>for command,</li>
+ * <li>for delivery order,</li>
+ * <li>for bill,</li>
+ * <li>for credit note</li>
+ * </ol>
+ * <b>mode: </b>
+ * <ol>
+ * <li>for full mode,</li>
+ * <li>for partial mode,</li>
+ * <li>for full grouped mode,</li>
+ * <li>for partial grouped mode</li>
+ * </ol>
  * 
- * Kind of memory of the wizard to store the source, destination and transfer mode selections.
- * source: 1 for estimate, 2 for command, 3 for delivery order and 4 for bill
- * destination: 1 for command, 2 for delivery order, 3 for bill and 4 for credit note
- * mode: 1 for full mode, 2 for partial mode, 3 for full grouped mode and 4 for partial grouped mode
- *
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
