@@ -1,4 +1,4 @@
-package be.jsams.server.service.rss.impl;
+package be.jsams.server.service.rss.model;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -7,26 +7,32 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
-import org.junit.Test;
-
 import be.jsams.server.model.rss.Feed;
 import be.jsams.server.model.rss.FeedMessage;
 import be.jsams.server.service.rss.RSSFeedWriter;
+import be.jsams.server.service.rss.impl.RSSFeedWriterImpl;
 
 /**
- * Test class for {@link RSSFeedWriterImpl}.
- * 
+ * Generator of RSS fluxes.
+ *
  * @author chesteric31
  * @version $Revision$ $Date::                  $ $Author$
  */
-public class RSSFeedWriterImplTest {
+public final class MockRssGenerator {
 
     /**
-     * Test method for
-     * {@link be.jsams.server.service.rss.impl.RSSFeedWriterImpl#writeFeed()}.
+     * Default private constructor for utility class.
      */
-    @Test
-    public void testWriteFeed() {
+    private MockRssGenerator() {
+    }
+
+    /**
+     * Generates mock RSS flux file.
+     * 
+     * @return the path name to the generated RSS flux file 
+     */
+    public static String generateRss() {
+        String pathName = "";
         // System.getProperties().put("proxySet", "true");
         // System.getProperties().put("proxyHost", "10.16.0.25");
         // System.getProperties().put("proxyPort", "8080");
@@ -71,13 +77,14 @@ public class RSSFeedWriterImplTest {
         try {
             File path = new File(".");
             String separator = File.separator;
-            String pathString = path.getCanonicalPath() + separator + "src" + separator + "test" + separator
-                    + "resources" + separator;
-            RSSFeedWriter writer = new RSSFeedWriterImpl(rssFeeder, pathString + "Updates.rss");
+            pathName = path.getCanonicalPath() + separator + "src" + separator + "test" + separator
+                    + "resources" + separator + "Updates.rss";
+            RSSFeedWriter writer = new RSSFeedWriterImpl(rssFeeder, pathName);
             writer.writeFeed();
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return pathName;
     }
 
 }
