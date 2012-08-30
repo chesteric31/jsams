@@ -21,10 +21,11 @@ import com.jgoodies.validation.ValidationResult;
  * @author chesteric31
  * @version $Revision$ $Date::                  $ $Author$
  */
-public class EditAddressValidatorTest {
+public class EditAddressValidatorTest extends AbstractEditValidatorTest {
     
     private EditAddressValidator validator;
-
+    private AddressBean bean;
+    
     /**
      * Setup method.
      */
@@ -32,6 +33,7 @@ public class EditAddressValidatorTest {
     public void setUp() {
         I18nApplicationContext.setContext(new ClassPathXmlApplicationContext(I18nApplicationContext.CONFIG));
         validator = new EditAddressValidator();
+        bean = MockBeanGenerator.generateMockAddress();
     }
 
     /**
@@ -41,7 +43,6 @@ public class EditAddressValidatorTest {
      */
     @Test
     public void testValidate() {
-        AddressBean bean = MockBeanGenerator.generateMockAddress();
         ValidationResult result = validator.validate(bean);
         assertTrue(result.isEmpty());
     }
@@ -53,11 +54,9 @@ public class EditAddressValidatorTest {
      */
     @Test
     public void testValidateBlankCity() {
-        AddressBean bean = MockBeanGenerator.generateMockAddress();
         bean.setCity(null);
         ValidationResult result = validator.validate(bean);
-        ValidationMessage message = result.getMessages().get(0);
-        String formattedText = message.formattedText();
+        String formattedText = retrieveFormattedText(result);
         assertTrue(formattedText.contains(JsamsI18nResource.ERROR_IS_MANDATORY.getTranslation()));
         assertTrue(formattedText.contains(JsamsI18nLabelResource.LABEL_CITY.getTranslation()));
     }
@@ -68,12 +67,24 @@ public class EditAddressValidatorTest {
      * .
      */
     @Test
+    public void testValidateWrongCity() {
+        bean.setCity("@#|");
+        ValidationResult result = validator.validate(bean);
+        String formattedText = retrieveFormattedText(result);
+        assertTrue(formattedText.contains(JsamsI18nResource.ERROR_IS_ALPHANUMERIC.getTranslation()));
+        assertTrue(formattedText.contains(JsamsI18nLabelResource.LABEL_CITY.getTranslation()));
+    }
+
+    /**
+     * Test method for
+     * {@link be.jsams.client.validator.edit.EditAddressValidator#validate(be.jsams.common.bean.model.AddressBean)}
+     * .
+     */
+    @Test
     public void testValidateBlankCountry() {
-        AddressBean bean = MockBeanGenerator.generateMockAddress();
         bean.setCountry(null);
         ValidationResult result = validator.validate(bean);
-        ValidationMessage message = result.getMessages().get(0);
-        String formattedText = message.formattedText();
+        String formattedText = retrieveFormattedText(result);
         assertTrue(formattedText.contains(JsamsI18nResource.ERROR_IS_MANDATORY.getTranslation()));
         assertTrue(formattedText.contains(JsamsI18nLabelResource.LABEL_COUNTRY.getTranslation()));
     }
@@ -84,12 +95,25 @@ public class EditAddressValidatorTest {
      * .
      */
     @Test
-    public void testValidateBlankNumber() {
-        AddressBean bean = MockBeanGenerator.generateMockAddress();
-        bean.setNumber(null);
+    public void testValidateWrongCountry() {
+        bean.setCountry("@#|");
         ValidationResult result = validator.validate(bean);
         ValidationMessage message = result.getMessages().get(0);
         String formattedText = message.formattedText();
+        assertTrue(formattedText.contains(JsamsI18nResource.ERROR_IS_ALPHANUMERIC.getTranslation()));
+        assertTrue(formattedText.contains(JsamsI18nLabelResource.LABEL_COUNTRY.getTranslation()));
+    }
+
+    /**
+     * Test method for
+     * {@link be.jsams.client.validator.edit.EditAddressValidator#validate(be.jsams.common.bean.model.AddressBean)}
+     * .
+     */
+    @Test
+    public void testValidateBlankNumber() {
+        bean.setNumber(null);
+        ValidationResult result = validator.validate(bean);
+        String formattedText = retrieveFormattedText(result);
         assertTrue(formattedText.contains(JsamsI18nResource.ERROR_IS_MANDATORY.getTranslation()));
         assertTrue(formattedText.contains(JsamsI18nLabelResource.LABEL_NUMBER.getTranslation()));
     }
@@ -100,12 +124,24 @@ public class EditAddressValidatorTest {
      * .
      */
     @Test
+    public void testValidateWrongNumber() {
+        bean.setNumber("a");
+        ValidationResult result = validator.validate(bean);
+        String formattedText = retrieveFormattedText(result);
+        assertTrue(formattedText.contains(JsamsI18nResource.ERROR_IS_NUMERIC.getTranslation()));
+        assertTrue(formattedText.contains(JsamsI18nLabelResource.LABEL_NUMBER.getTranslation()));
+    }
+
+    /**
+     * Test method for
+     * {@link be.jsams.client.validator.edit.EditAddressValidator#validate(be.jsams.common.bean.model.AddressBean)}
+     * .
+     */
+    @Test
     public void testValidateBlankStreet() {
-        AddressBean bean = MockBeanGenerator.generateMockAddress();
         bean.setStreet(null);
         ValidationResult result = validator.validate(bean);
-        ValidationMessage message = result.getMessages().get(0);
-        String formattedText = message.formattedText();
+        String formattedText = retrieveFormattedText(result);
         assertTrue(formattedText.contains(JsamsI18nResource.ERROR_IS_MANDATORY.getTranslation()));
         assertTrue(formattedText.contains(JsamsI18nLabelResource.LABEL_STREET.getTranslation()));
     }
@@ -116,13 +152,39 @@ public class EditAddressValidatorTest {
      * .
      */
     @Test
+    public void testValidateWrongStreet() {
+        bean.setStreet("#@|");
+        ValidationResult result = validator.validate(bean);
+        String formattedText = retrieveFormattedText(result);
+        assertTrue(formattedText.contains(JsamsI18nResource.ERROR_IS_ALPHANUMERIC.getTranslation()));
+        assertTrue(formattedText.contains(JsamsI18nLabelResource.LABEL_STREET.getTranslation()));
+    }
+
+    /**
+     * Test method for
+     * {@link be.jsams.client.validator.edit.EditAddressValidator#validate(be.jsams.common.bean.model.AddressBean)}
+     * .
+     */
+    @Test
     public void testValidateBlankZipCode() {
-        AddressBean bean = MockBeanGenerator.generateMockAddress();
         bean.setZipCode(null);
         ValidationResult result = validator.validate(bean);
-        ValidationMessage message = result.getMessages().get(0);
-        String formattedText = message.formattedText();
+        String formattedText = retrieveFormattedText(result);
         assertTrue(formattedText.contains(JsamsI18nResource.ERROR_IS_MANDATORY.getTranslation()));
+        assertTrue(formattedText.contains(JsamsI18nLabelResource.LABEL_ZIP_CODE.getTranslation()));
+    }
+
+    /**
+     * Test method for
+     * {@link be.jsams.client.validator.edit.EditAddressValidator#validate(be.jsams.common.bean.model.AddressBean)}
+     * .
+     */
+    @Test
+    public void testValidateWrongZipCode() {
+        bean.setZipCode("çà");
+        ValidationResult result = validator.validate(bean);
+        String formattedText = retrieveFormattedText(result);
+        assertTrue(formattedText.contains(JsamsI18nResource.ERROR_IS_ALPHANUMERIC.getTranslation()));
         assertTrue(formattedText.contains(JsamsI18nLabelResource.LABEL_ZIP_CODE.getTranslation()));
     }
 
