@@ -52,6 +52,22 @@ public class EditSocietyValidatorTest {
      * .
      */
     @Test
+    public void testValidateWrongName() {
+        SocietyBean bean = MockBeanGenerator.generateMockSociety();
+        bean.setName("#");
+        ValidationResult result = validator.validate(bean);
+        ValidationMessage message = result.getMessages().get(0);
+        String formattedText = message.formattedText();
+        assertTrue(formattedText.contains(JsamsI18nResource.ERROR_IS_ALPHANUMERIC.getTranslation()));
+        assertTrue(formattedText.contains(JsamsI18nLabelResource.LABEL_NAME.getTranslation()));
+    }
+
+    /**
+     * Test method for
+     * {@link be.jsams.client.validator.edit.EditSocietyValidator#validate(be.jsams.common.bean.model.SocietyBean)}
+     * .
+     */
+    @Test
     public void testValidateBlankName() {
         SocietyBean bean = MockBeanGenerator.generateMockSociety();
         bean.setName(null);
@@ -75,6 +91,22 @@ public class EditSocietyValidatorTest {
         ValidationMessage message = result.getMessages().get(0);
         String formattedText = message.formattedText();
         assertTrue(formattedText.contains(JsamsI18nResource.ERROR_IS_MANDATORY.getTranslation()));
+        assertTrue(formattedText.contains(JsamsI18nLabelResource.LABEL_ACTIVITY.getTranslation()));
+    }
+
+    /**
+     * Test method for
+     * {@link be.jsams.client.validator.edit.EditSocietyValidator#validate(be.jsams.common.bean.model.SocietyBean)}
+     * .
+     */
+    @Test
+    public void testValidateWrongActivity() {
+        SocietyBean bean = MockBeanGenerator.generateMockSociety();
+        bean.setActivity("@");
+        ValidationResult result = validator.validate(bean);
+        ValidationMessage message = result.getMessages().get(0);
+        String formattedText = message.formattedText();
+        assertTrue(formattedText.contains(JsamsI18nResource.ERROR_IS_ALPHANUMERIC.getTranslation()));
         assertTrue(formattedText.contains(JsamsI18nLabelResource.LABEL_ACTIVITY.getTranslation()));
     }
 
@@ -124,6 +156,38 @@ public class EditSocietyValidatorTest {
         String formattedText = message.formattedText();
         assertTrue(formattedText.contains(JsamsI18nResource.ERROR_IS_MANDATORY.getTranslation()));
         assertTrue(formattedText.contains(JsamsI18nLabelResource.LABEL_PHONE.getTranslation()));
+    }
+
+    /**
+     * Test method for
+     * {@link be.jsams.client.validator.edit.EditSocietyValidator#validate(be.jsams.common.bean.model.SocietyBean)}
+     * .
+     */
+    @Test
+    public void testValidateWrongPhone() {
+        SocietyBean bean = MockBeanGenerator.generateMockSociety();
+        bean.getContactInformation().setPhone("!");
+        ValidationResult result = validator.validate(bean);
+        ValidationMessage message = result.getMessages().get(0);
+        String formattedText = message.formattedText();
+        assertTrue(formattedText.contains(JsamsI18nResource.ERROR_IS_ALPHANUMERIC.getTranslation()));
+        assertTrue(formattedText.contains(JsamsI18nLabelResource.LABEL_PHONE.getTranslation()));
+    }
+
+    /**
+     * Test method for
+     * {@link be.jsams.client.validator.edit.EditSocietyValidator#validate(be.jsams.common.bean.model.SocietyBean)}
+     * .
+     */
+    @Test
+    public void testValidateWrongEmail() {
+        SocietyBean bean = MockBeanGenerator.generateMockSociety();
+        bean.getContactInformation().setEmail("not a good email!!!");
+        ValidationResult result = validator.validate(bean);
+        ValidationMessage message = result.getMessages().get(0);
+        String formattedText = message.formattedText();
+        assertTrue(formattedText.contains(JsamsI18nResource.ERROR_IS_INVALID.getTranslation()));
+        assertTrue(formattedText.contains(JsamsI18nLabelResource.LABEL_EMAIL.getTranslation()));
     }
 
 }
