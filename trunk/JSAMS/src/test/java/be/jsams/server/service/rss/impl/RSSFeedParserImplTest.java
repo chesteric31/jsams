@@ -43,9 +43,17 @@ public class RSSFeedParserImplTest {
         System.getProperties().put("proxySet", "true");
         System.getProperties().put("proxyHost", "10.16.0.25");
         System.getProperties().put("proxyPort", "8080");
-        // RSSFeedParser parser = new
-        // RSSFeedParserImpl("http://jsams.googlecode.com/files/Updates.rss");
-        RSSFeedParser parser = new RSSFeedParserImpl("file:\\" + pathName);
+
+        
+        String os = System.getProperty("os.name").toLowerCase();
+        String root = null;
+        // windows
+        if (os.indexOf("win") >= 0) {
+            root = "file:\\";
+        } else if ((os.indexOf("mac") >= 0) || (os.indexOf("nix") >= 0 || os.indexOf("nux") >= 0)) {
+            root = "file://";
+        }
+        RSSFeedParser parser = new RSSFeedParserImpl(root + pathName);
         Feed feed = parser.readFeed();
         System.out.println(feed);
         List<FeedMessage> messages = feed.getMessages();
