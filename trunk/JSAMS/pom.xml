@@ -214,7 +214,7 @@
 							<installFile>${staging.dir}/install/install.xml</installFile>
 							<kind>standard</kind>
 							<output>${staging.dir}/install/</output>
-							<descriptorEncoding>${application-encoding}</descriptorEncoding>
+							<descriptorEncoding>${project.build.sourceEncoding</descriptorEncoding>
 							<installerFile>${project.artifactId}-${application-version}-installer.jar</installerFile>
 						</configuration>
 						<goals>
@@ -229,7 +229,7 @@
 							<installFile>${staging.dir}/update/install.xml</installFile>
 							<kind>standard</kind>
 							<output>${staging.dir}/update</output>
-							<descriptorEncoding>${application-encoding}</descriptorEncoding>
+							<descriptorEncoding>${project.build.sourceEncoding}</descriptorEncoding>
 							<installerFile>${project.artifactId}-${application-version}-updater.jar</installerFile>
 						</configuration>
 						<goals>
@@ -380,7 +380,7 @@
 		</dependency>
 	</dependencies>
 	<properties>
-		<project.build.sourceEncoding>${application-encoding}</project.build.sourceEncoding>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<staging.dir>${project.build.directory}/staging</staging.dir>
 	</properties>
 </project>
