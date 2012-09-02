@@ -29,74 +29,59 @@ public class DoubleFormatterTest {
      * Test method for
      * {@link be.jsams.client.formatter.DoubleFormatter#valueToString(java.lang.Object)}
      * .
+     * @throws ParseException 
      */
     @Test
-    public void testValueToStringObjectForNull() {
-        try {
-            String string = formatter.valueToString(null);
-            assertEquals("", string);
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
+    public void testValueToStringObjectForNull() throws ParseException {
+        String string = formatter.valueToString(null);
+        assertEquals("", string);
     }
 
     /**
      * Test method for
      * {@link be.jsams.client.formatter.DoubleFormatter#valueToString(java.lang.Object)}
      * .
+     * @throws ParseException 
      */
     @Test(expected = ClassCastException.class)
-    public void testValueToStringObjectForStringValue() {
-        try {
-            formatter.valueToString("string");
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
+    public void testValueToStringObjectForStringValue() throws ParseException {
+        formatter.valueToString("string");
     }
 
     /**
      * Test method for
      * {@link be.jsams.client.formatter.DoubleFormatter#valueToString(java.lang.Object)}
      * .
+     * @throws ParseException 
      */
     @Test
-    public void testValueToStringObjectForDecimalValue() {
-        try {
-            String string = formatter.valueToString(2.5);
-            assertEquals("2,5", string);
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
+    public void testValueToStringObjectForDecimalValue() throws ParseException {
+        String string = formatter.valueToString(2.5);
+        assertEquals("2,5", string);
     }
 
     /**
      * Test method for
      * {@link be.jsams.client.formatter.DoubleFormatter#valueToString(java.lang.Object)}
      * .
+     * @throws ParseException 
      */
     @Test
-    public void testValueToStringObjectForIntValue() {
-        try {
-            String string = formatter.valueToString(2);
-            assertEquals("2", string);
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
+    public void testValueToStringObjectForIntValue() throws ParseException {
+        String string = formatter.valueToString(2);
+        assertEquals("2", string);
     }
 
     /**
      * Test method for
      * {@link be.jsams.client.formatter.DoubleFormatter#stringToValue(java.lang.String)}
      * .
+     * @throws ParseException 
      */
     @Test
-    public void testStringToValueStringForNull() {
-        try {
-            Object value = formatter.stringToValue(null);
-            assertEquals(null, value);
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
+    public void testStringToValueStringForNull() throws ParseException {
+        Object value = formatter.stringToValue(null);
+        assertEquals(null, value);
     }
 
     /**
@@ -115,30 +100,24 @@ public class DoubleFormatterTest {
      * Test method for
      * {@link be.jsams.client.formatter.DoubleFormatter#stringToValue(java.lang.String)}
      * .
+     * @throws ParseException 
      */
     @Test
-    public void testStringToValueStringForDecimalValue() {
-        try {
-            Object value = formatter.stringToValue("2,523");
-            assertEquals(2.523, value);
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
+    public void testStringToValueStringForDecimalValue() throws ParseException {
+        Object value = formatter.stringToValue("2,523");
+        assertEquals(2.523, value);
     }
 
     /**
      * Test method for
      * {@link be.jsams.client.formatter.DoubleFormatter#stringToValue(java.lang.String)}
      * .
+     * @throws ParseException 
      */
     @Test
-    public void testStringToValueStringForIntValue() {
-        try {
-            Object value = formatter.stringToValue("2");
-            assertEquals(2.0, value);
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
+    public void testStringToValueStringForIntValue() throws ParseException {
+        Object value = formatter.stringToValue("2");
+        assertEquals(2.0, value);
     }
 
 }
