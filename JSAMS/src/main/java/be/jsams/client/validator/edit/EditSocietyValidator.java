@@ -31,7 +31,7 @@ public class EditSocietyValidator implements Validator<SocietyBean> {
         if (ValidationUtils.isBlank(name)) {
             support.addError(JsamsI18nLabelResource.LABEL_NAME.getTranslation(), JsamsI18nResource.ERROR_IS_MANDATORY
                     .getTranslation());
-        } else if (!ValidationUtils.isAlphanumericSpace(name) && StringValidator.validate(name)) {
+        } else if (!ValidationUtils.isAlphanumericSpace(name) && !StringValidator.validate(name)) {
             support.addError(JsamsI18nLabelResource.LABEL_NAME.getTranslation(),
                     JsamsI18nResource.ERROR_IS_ALPHANUMERIC.getTranslation());
         }

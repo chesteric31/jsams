@@ -1,5 +1,6 @@
 package be.jsams.common.bean.validator;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
@@ -20,7 +21,7 @@ public class StringValidatorTest {
         String toValidate = "BTS-Concept";
         assertTrue(StringValidator.validate(toValidate));
         toValidate = "BTS_Concept";
-        assertTrue(StringValidator.validate(toValidate));
+        assertFalse(StringValidator.validate(toValidate));
         toValidate = "Rue de mois d'août";
         assertTrue(StringValidator.validate(toValidate));
         toValidate = "ça alors?! & toi tu as parlé ? (ou pas)";
