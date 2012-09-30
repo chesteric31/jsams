@@ -26,6 +26,7 @@ import be.jsams.common.bean.model.sale.CommandBeanTest;
 import be.jsams.common.bean.model.sale.CreditNoteBeanTest;
 import be.jsams.common.bean.model.sale.DeliveryOrderBeanTest;
 import be.jsams.common.bean.model.sale.EstimateBeanTest;
+import be.jsams.common.bean.model.sale.detail.EstimateDetailBeanTest;
 import be.jsams.common.bean.validator.EmailValidatorTest;
 import be.jsams.common.bean.validator.StringValidatorTest;
 import be.jsams.server.dao.impl.AddressDaoImplTest;
@@ -57,12 +58,13 @@ import be.jsams.server.service.update.impl.DownloaderServiceImplTest;
         LegalFormBeanTest.class, ContactInformationBeanTest.class, PaymentModeBeanTest.class, PeriodBeanTest.class,
         SocietyBeanTest.class, AgentBeanTest.class, CustomerBeanTest.class, ProductBeanTest.class,
         ProductCategoryBeanTest.class, BillBeanTest.class, CommandBeanTest.class, CreditNoteBeanTest.class,
-        DeliveryOrderBeanTest.class, EstimateBeanTest.class, EmailValidatorTest.class, StringValidatorTest.class,
-        AddressDaoImplTest.class, CivilityDaoImplTest.class, ContactInformationDaoImplTest.class,
-        SocietyDaoImplTest.class, AgentDaoImplTest.class, CustomerDaoImplTest.class, ProductCategoryDaoImplTest.class,
-        ProductDaoImplTest.class, BillDaoImplTest.class, CommandDaoImplTest.class, CreditNoteDaoImplTest.class,
-        DeliveryOrderDaoImplTest.class, EstimateDaoImplTest.class, JsamsDateAdapterTest.class,
-        RSSFeedParserImplTest.class, DownloaderServiceImplTest.class })
+        DeliveryOrderBeanTest.class, EstimateBeanTest.class, EstimateDetailBeanTest.class, EmailValidatorTest.class,
+        StringValidatorTest.class, AddressDaoImplTest.class, CivilityDaoImplTest.class,
+        ContactInformationDaoImplTest.class, SocietyDaoImplTest.class, AgentDaoImplTest.class,
+        CustomerDaoImplTest.class, ProductCategoryDaoImplTest.class, ProductDaoImplTest.class, BillDaoImplTest.class,
+        CommandDaoImplTest.class, CreditNoteDaoImplTest.class, DeliveryOrderDaoImplTest.class,
+        EstimateDaoImplTest.class, JsamsDateAdapterTest.class, RSSFeedParserImplTest.class,
+        DownloaderServiceImplTest.class })
 public class AllTests {
 
     /**

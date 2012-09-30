@@ -232,6 +232,23 @@ public final class MockBeanGenerator {
         bean.setTransferred(false);
         return bean;
     }
+    
+    /**
+     * Generates mock {@link EstimateDetailBean}.
+     * 
+     * @return the built {@link EstimateDetailBean}
+     */
+    public static EstimateDetailBean generateMockEstimateDetail() {
+        EstimateDetailBean detailBean = new EstimateDetailBean();
+        detailBean.setDiscountRate(25D);
+        detailBean.setEstimate(generateMockEstimate());
+        detailBean.setPrice(15D);
+        detailBean.setProduct(generateMockProduct());
+        detailBean.setQuantity(1);
+        detailBean.setTransferred(false);
+        detailBean.setVatApplicable(21D);
+        return detailBean;
+    }
 
     /**
      * Generates mock {@link CommandBean}.
