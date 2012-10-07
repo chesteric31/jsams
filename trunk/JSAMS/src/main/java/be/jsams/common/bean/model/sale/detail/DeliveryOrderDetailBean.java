@@ -118,6 +118,7 @@ public class DeliveryOrderDetailBean extends
         setTransferred(false);
         setCommandDetail(null);
         setBillDetail(null);
+        setDeliveryOrder(null);
     }
 
     /**
@@ -129,7 +130,13 @@ public class DeliveryOrderDetailBean extends
         DeliveryOrderDetailBean other = (DeliveryOrderDetailBean) bean;
         deliveryOrder.refresh(other.getDeliveryOrder());
         setTransferred(other.isTransferred());
+        if (commandDetailBean == null) {
+            commandDetailBean = new CommandDetailBean();
+        }
         commandDetailBean.refresh(other.getCommandDetail());
+        if (billDetailBean == null) {
+            billDetailBean = new BillDetailBean();
+        }
         billDetailBean.refresh(other.getBillDetail());
     }
 

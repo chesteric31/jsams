@@ -95,8 +95,10 @@ public class BillDetailBean extends AbstractDetailBean<BillDetail, BillDetailBea
     public void refresh(AbstractIdentityBean<?, ?> bean) {
         super.refresh(bean);
         BillDetailBean other = (BillDetailBean) bean;
-        bill.refresh(other.getBill());
-        setTransferred(other.isTransferred());
+        if (other != null) {
+            bill.refresh(other.getBill());
+            setTransferred(other.isTransferred());
+        }
     }
 
     /**

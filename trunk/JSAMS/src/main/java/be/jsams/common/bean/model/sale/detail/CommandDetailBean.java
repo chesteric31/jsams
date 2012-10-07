@@ -103,8 +103,10 @@ public class CommandDetailBean extends AbstractDetailBean<CommandDetail, Command
     public void refresh(AbstractIdentityBean<?, ?> bean) {
         super.refresh(bean);
         CommandDetailBean other = (CommandDetailBean) bean;
-        command.refresh(other.getCommand());
-        setTransferred(other.isTransferred());
+        if (other != null) {
+            command.refresh(other.getCommand());
+            setTransferred(other.isTransferred());
+        }
     }
 
 }
