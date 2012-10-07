@@ -24,7 +24,6 @@ public final class MockDaoGenerator {
      * Default private constructor for utility class. 
      */
     private MockDaoGenerator() {
-        
     }
 
     /**

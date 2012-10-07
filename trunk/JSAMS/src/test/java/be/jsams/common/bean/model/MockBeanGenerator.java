@@ -419,4 +419,20 @@ public final class MockBeanGenerator {
         return detailBean;
     }
 
+    /**
+     * Generates mock {@link CreditNoteDetailBean}.
+     * 
+     * @return the built {@link CreditNoteDetailBean}
+     */
+    public static CreditNoteDetailBean generateMockCreditNoteDetail() {
+        CreditNoteDetailBean detailBean = new CreditNoteDetailBean();
+        detailBean.setCreditNote(generateMockCreditNote());
+        detailBean.setDiscountRate(12D);
+        detailBean.setPrice(21D);
+        detailBean.setProduct(generateMockProduct());
+        detailBean.setQuantity(1);
+        detailBean.setVatApplicable(21D);
+        return detailBean;
+    }
+
 }
