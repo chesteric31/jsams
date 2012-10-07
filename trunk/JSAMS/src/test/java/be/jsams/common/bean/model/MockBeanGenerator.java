@@ -402,4 +402,21 @@ public final class MockBeanGenerator {
         return detailBean;
     }
 
+    /**
+     * Generates mock {@link BillDetailBean}.
+     * 
+     * @return the built {@link BillDetailBean}
+     */
+    public static BillDetailBean generateMockBillDetail() {
+        BillDetailBean detailBean = new BillDetailBean();
+        detailBean.setBill(generateMockBill());
+        detailBean.setDiscountRate(10D);
+        detailBean.setPrice(20D);
+        detailBean.setProduct(generateMockProduct());
+        detailBean.setQuantity(3);
+        detailBean.setTransferred(true);
+        detailBean.setVatApplicable(21D);
+        return detailBean;
+    }
+
 }
