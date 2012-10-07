@@ -4,7 +4,6 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
 
 import org.junit.Before;
@@ -75,11 +74,9 @@ public class DownloaderServiceImplTest {
      * Test method for
      * {@link be.jsams.server.service.update.impl.DownloaderServiceImpl#retrieveHostStringForUpdates()}
      * .
-     * 
-     * @throws IOException
      */
     @Test
-    public void testRetrieveHostStringForUpdates() throws IOException {
+    public void testRetrieveHostStringForUpdates() {
         List<String> stringForUpdates = downloaderService.retrieveHostStringForUpdates();
         assertFalse(stringForUpdates.isEmpty());
     }
