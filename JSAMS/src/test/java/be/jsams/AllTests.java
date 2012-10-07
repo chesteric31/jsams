@@ -1,6 +1,5 @@
 package be.jsams;
 
-import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
@@ -28,6 +27,7 @@ import be.jsams.common.bean.model.sale.DeliveryOrderBeanTest;
 import be.jsams.common.bean.model.sale.EstimateBeanTest;
 import be.jsams.common.bean.model.sale.detail.BillDetailBeanTest;
 import be.jsams.common.bean.model.sale.detail.CommandDetailBeanTest;
+import be.jsams.common.bean.model.sale.detail.CreditNoteDetailBeanTest;
 import be.jsams.common.bean.model.sale.detail.DeliveryOrderDetailBeanTest;
 import be.jsams.common.bean.model.sale.detail.EstimateDetailBeanTest;
 import be.jsams.common.bean.validator.EmailValidatorTest;
@@ -62,20 +62,13 @@ import be.jsams.server.service.update.impl.DownloaderServiceImplTest;
         SocietyBeanTest.class, AgentBeanTest.class, CustomerBeanTest.class, ProductBeanTest.class,
         ProductCategoryBeanTest.class, BillBeanTest.class, CommandBeanTest.class, CreditNoteBeanTest.class,
         DeliveryOrderBeanTest.class, EstimateBeanTest.class, EstimateDetailBeanTest.class, CommandDetailBeanTest.class,
-        DeliveryOrderDetailBeanTest.class, BillDetailBeanTest.class, EmailValidatorTest.class,
-        StringValidatorTest.class, AddressDaoImplTest.class, CivilityDaoImplTest.class,
+        DeliveryOrderDetailBeanTest.class, BillDetailBeanTest.class, CreditNoteDetailBeanTest.class,
+        EmailValidatorTest.class, StringValidatorTest.class, AddressDaoImplTest.class, CivilityDaoImplTest.class,
         ContactInformationDaoImplTest.class, SocietyDaoImplTest.class, AgentDaoImplTest.class,
         CustomerDaoImplTest.class, ProductCategoryDaoImplTest.class, ProductDaoImplTest.class, BillDaoImplTest.class,
         CommandDaoImplTest.class, CreditNoteDaoImplTest.class, DeliveryOrderDaoImplTest.class,
         EstimateDaoImplTest.class, JsamsDateAdapterTest.class, RSSFeedParserImplTest.class,
         DownloaderServiceImplTest.class })
 public class AllTests {
-
-    /**
-     * @throws java.lang.Exception a possible {@link Exception}
-     */
-    @Before
-    public void setUp() throws Exception {
-    }
 
 }
