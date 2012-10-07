@@ -366,4 +366,21 @@ public final class MockBeanGenerator {
         return bean;
     }
 
+    /**
+     * Generates mock {@link CommandDetailBean}.
+     * 
+     * @return the built {@link CommandDetailBean}
+     */
+    public static CommandDetailBean generateMockCommandDetail() {
+        CommandDetailBean detailBean = new CommandDetailBean();
+        detailBean.setDiscountRate(15D);
+        detailBean.setCommand(generateMockCommand());
+        detailBean.setPrice(3.5D);
+        detailBean.setProduct(generateMockProduct());
+        detailBean.setQuantity(2);
+        detailBean.setTransferred(false);
+        detailBean.setVatApplicable(15D);
+        return detailBean;
+    }
+
 }

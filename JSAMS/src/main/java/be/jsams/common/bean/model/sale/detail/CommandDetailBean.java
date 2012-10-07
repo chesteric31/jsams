@@ -93,6 +93,7 @@ public class CommandDetailBean extends AbstractDetailBean<CommandDetail, Command
     public void clear() {
         super.clear();
         setTransferred(false);
+        setCommand(null);
     }
 
     /**
