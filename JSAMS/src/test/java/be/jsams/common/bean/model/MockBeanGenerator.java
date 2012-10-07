@@ -383,4 +383,23 @@ public final class MockBeanGenerator {
         return detailBean;
     }
 
+    /**
+     * Generates mock {@link DeliveryOrderDetailBean}.
+     * 
+     * @return the built {@link DeliveryOrderDetailBean}
+     */
+    public static DeliveryOrderDetailBean generateMockDeliveryOrderDetail() {
+        DeliveryOrderDetailBean detailBean = new DeliveryOrderDetailBean();
+        detailBean.setBillDetail(null);
+        detailBean.setCommandDetail(null);
+        detailBean.setDeliveryOrder(generateMockDeliveryOrder());
+        detailBean.setDiscountRate(5D);
+        detailBean.setPrice(20D);
+        detailBean.setProduct(generateMockProduct());
+        detailBean.setQuantity(1);
+        detailBean.setTransferred(true);
+        detailBean.setVatApplicable(1D);
+        return detailBean;
+    }
+
 }

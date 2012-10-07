@@ -181,13 +181,15 @@ public abstract class AbstractDetailBean
     @Override
     public void refresh(AbstractIdentityBean<?, ?> bean) {
         AbstractDetailBean<M, V, D> other = (AbstractDetailBean<M, V, D>) bean;
-        setDiscountRate(other.getDiscountRate());
-        setListModel(other.getListModel());
-        setPrice(other.getPrice());
-        product.refresh(other.getProduct());
-        setQuantity(other.getQuantity());
-        setSelection(other.getSelection());
-        setVatApplicable(other.getVatApplicable());
+        if (other != null) {
+            setDiscountRate(other.getDiscountRate());
+            setListModel(other.getListModel());
+            setPrice(other.getPrice());
+            product.refresh(other.getProduct());
+            setQuantity(other.getQuantity());
+            setSelection(other.getSelection());
+            setVatApplicable(other.getVatApplicable());
+        }
     }
     
 }
