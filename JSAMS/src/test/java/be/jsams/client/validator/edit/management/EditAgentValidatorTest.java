@@ -70,6 +70,21 @@ public class EditAgentValidatorTest extends AbstractEditValidatorTest {
      * .
      */
     @Test
+    public void testValidateBlankFunction() {
+        bean.setFunction("");
+        ValidationResult result = validator.validate(bean);
+        String formattedText = retrieveFormattedText(result);
+        assertTrue(formattedText.contains(JsamsI18nResource.ERROR_IS_MANDATORY.getTranslation()));
+        assertTrue(formattedText.contains(JsamsI18nLabelResource.LABEL_FUNCTION.getTranslation()));
+    }
+    
+    /**
+     * Test method for
+     * {@link be.jsams.client.validator.edit.management.EditAgentValidator
+     * #validate(be.jsams.common.bean.model.management.AgentBean)}
+     * .
+     */
+    @Test
     public void testValidateWrongFunction() {
         bean.setFunction("#");
         ValidationResult result = validator.validate(bean);

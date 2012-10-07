@@ -93,4 +93,49 @@ public class EditProductCategoryValidatorTest extends AbstractEditValidatorTest 
         assertTrue(formattedText.contains(JsamsI18nLabelResource.LABEL_PRODUCT_CATEGORY_NL.getTranslation()));
     }
 
+    /**
+     * Test method for
+     * {@link be.jsams.client.validator.edit.management.EditProductCategoryValidator
+     * #validate(be.jsams.common.bean.model.management.ProductCategoryBean)}
+     * .
+     */
+    @Test
+    public void testValidateBlankLabel() {
+        bean.setLabel("");
+        ValidationResult result = validator.validate(bean);
+        String formattedText = retrieveFormattedText(result);
+        assertTrue(formattedText.contains(JsamsI18nResource.ERROR_IS_MANDATORY.getTranslation()));
+        assertTrue(formattedText.contains(JsamsI18nLabelResource.LABEL_PRODUCT_CATEGORY_EN.getTranslation()));
+    }
+
+    /**
+     * Test method for
+     * {@link be.jsams.client.validator.edit.management.EditProductCategoryValidator
+     * #validate(be.jsams.common.bean.model.management.ProductCategoryBean)}
+     * .
+     */
+    @Test
+    public void testValidateBlankLabelFr() {
+        bean.setLabelFr("");
+        ValidationResult result = validator.validate(bean);
+        String formattedText = retrieveFormattedText(result);
+        assertTrue(formattedText.contains(JsamsI18nResource.ERROR_IS_MANDATORY.getTranslation()));
+        assertTrue(formattedText.contains(JsamsI18nLabelResource.LABEL_PRODUCT_CATEGORY_FR.getTranslation()));
+    }
+
+    /**
+     * Test method for
+     * {@link be.jsams.client.validator.edit.management.EditProductCategoryValidator
+     * #validate(be.jsams.common.bean.model.management.ProductCategoryBean)}
+     * .
+     */
+    @Test
+    public void testValidateBlankLabelNl() {
+        bean.setLabelNl("");
+        ValidationResult result = validator.validate(bean);
+        String formattedText = retrieveFormattedText(result);
+        assertTrue(formattedText.contains(JsamsI18nResource.ERROR_IS_MANDATORY.getTranslation()));
+        assertTrue(formattedText.contains(JsamsI18nLabelResource.LABEL_PRODUCT_CATEGORY_NL.getTranslation()));
+    }
+
 }
