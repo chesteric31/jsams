@@ -12,6 +12,7 @@ import be.jsams.client.validator.edit.management.EditAgentValidatorTest;
 import be.jsams.client.validator.edit.management.EditCustomerValidatorTest;
 import be.jsams.client.validator.edit.management.EditProductCategoryValidatorTest;
 import be.jsams.client.validator.edit.management.EditProductValidatorTest;
+import be.jsams.client.validator.edit.sale.EditBillValidatorTest;
 import be.jsams.common.bean.model.AddressBeanTest;
 import be.jsams.common.bean.model.CivilityBeanTest;
 import be.jsams.common.bean.model.ContactInformationBeanTest;
@@ -61,18 +62,18 @@ import be.jsams.server.service.update.impl.DownloaderServiceImplTest;
 @RunWith(Suite.class)
 @SuiteClasses(value = { DoubleFormatterTest.class, UserContextTest.class, EditAddressValidatorTest.class,
         EditSocietyValidatorTest.class, EditAgentValidatorTest.class, EditCustomerValidatorTest.class,
-        EditProductValidatorTest.class, EditProductCategoryValidatorTest.class, AddressBeanTest.class,
-        CivilityBeanTest.class, LegalFormBeanTest.class, ContactInformationBeanTest.class, PaymentModeBeanTest.class,
-        PeriodBeanTest.class, SocietyBeanTest.class, AgentBeanTest.class, CustomerBeanTest.class,
-        ProductBeanTest.class, ProductCategoryBeanTest.class, BillBeanTest.class, CommandBeanTest.class,
-        CreditNoteBeanTest.class, DeliveryOrderBeanTest.class, EstimateBeanTest.class, EstimateDetailBeanTest.class,
-        CommandDetailBeanTest.class, DeliveryOrderDetailBeanTest.class, BillDetailBeanTest.class,
-        CreditNoteDetailBeanTest.class, EmailValidatorTest.class, StringValidatorTest.class, AddressDaoImplTest.class,
-        CivilityDaoImplTest.class, ContactInformationDaoImplTest.class, SocietyDaoImplTest.class,
-        AgentDaoImplTest.class, CustomerDaoImplTest.class, ProductCategoryDaoImplTest.class, ProductDaoImplTest.class,
-        BillDaoImplTest.class, CommandDaoImplTest.class, CreditNoteDaoImplTest.class, DeliveryOrderDaoImplTest.class,
-        EstimateDaoImplTest.class, JsamsDateAdapterTest.class, RSSFeedParserImplTest.class,
-        DownloaderServiceImplTest.class })
+        EditProductValidatorTest.class, EditProductCategoryValidatorTest.class, EditBillValidatorTest.class,
+        AddressBeanTest.class, CivilityBeanTest.class, LegalFormBeanTest.class, ContactInformationBeanTest.class,
+        PaymentModeBeanTest.class, PeriodBeanTest.class, SocietyBeanTest.class, AgentBeanTest.class,
+        CustomerBeanTest.class, ProductBeanTest.class, ProductCategoryBeanTest.class, BillBeanTest.class,
+        CommandBeanTest.class, CreditNoteBeanTest.class, DeliveryOrderBeanTest.class, EstimateBeanTest.class,
+        EstimateDetailBeanTest.class, CommandDetailBeanTest.class, DeliveryOrderDetailBeanTest.class,
+        BillDetailBeanTest.class, CreditNoteDetailBeanTest.class, EmailValidatorTest.class, StringValidatorTest.class,
+        AddressDaoImplTest.class, CivilityDaoImplTest.class, ContactInformationDaoImplTest.class,
+        SocietyDaoImplTest.class, AgentDaoImplTest.class, CustomerDaoImplTest.class, ProductCategoryDaoImplTest.class,
+        ProductDaoImplTest.class, BillDaoImplTest.class, CommandDaoImplTest.class, CreditNoteDaoImplTest.class,
+        DeliveryOrderDaoImplTest.class, EstimateDaoImplTest.class, JsamsDateAdapterTest.class,
+        RSSFeedParserImplTest.class, DownloaderServiceImplTest.class })
 public class AllTests {
 
 }

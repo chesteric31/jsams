@@ -324,7 +324,9 @@ public final class MockBeanGenerator {
         calendar.add(Calendar.DAY_OF_MONTH, 15);
         Date dateFormalNotice = calendar.getTime();
         bean.setDateFormalNotice(dateFormalNotice);
-        bean.setDetails(new ArrayList<BillDetailBean>());
+        ArrayList<BillDetailBean> details = new ArrayList<BillDetailBean>();
+        details.add(generateMockBillDetail(bean));
+        bean.setDetails(details);
         bean.setDiscountRate(1D);
         calendar.setTime(today);
         calendar.add(Calendar.DAY_OF_MONTH, 1);
@@ -405,11 +407,12 @@ public final class MockBeanGenerator {
     /**
      * Generates mock {@link BillDetailBean}.
      * 
+     * @param bill the {@link BillBean} parent
      * @return the built {@link BillDetailBean}
      */
-    public static BillDetailBean generateMockBillDetail() {
+    public static BillDetailBean generateMockBillDetail(BillBean bill) {
         BillDetailBean detailBean = new BillDetailBean();
-        detailBean.setBill(generateMockBill());
+        detailBean.setBill(bill);
         detailBean.setDiscountRate(10D);
         detailBean.setPrice(20D);
         detailBean.setProduct(generateMockProduct());
