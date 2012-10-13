@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import be.jsams.common.bean.model.MockBeanGenerator;
 import be.jsams.common.bean.model.management.ProductBean;
+import be.jsams.common.bean.model.sale.EstimateBean;
 
 /**
  * Test class for {@link EstimateDetailBean} class.
@@ -32,7 +33,7 @@ public class EstimateDetailBeanTest {
      */
     @Test
     public void testClear() {
-        bean = MockBeanGenerator.generateMockEstimateDetail();
+        bean = MockBeanGenerator.generateMockEstimateDetail(MockBeanGenerator.generateMockEstimate());
         bean.clear();
         assertNull(bean.getDiscountRate());
         assertNull(bean.getEstimate());
@@ -50,9 +51,10 @@ public class EstimateDetailBeanTest {
     public void testRefreshEquals() {
         bean = new EstimateDetailBean();
         // we test only the detail here and not the estimate
-        bean.setEstimate(MockBeanGenerator.generateMockEstimate());
+        EstimateBean estimate = MockBeanGenerator.generateMockEstimate();
+        bean.setEstimate(estimate);
         bean.setProduct(new ProductBean());
-        EstimateDetailBean otherBean = MockBeanGenerator.generateMockEstimateDetail();
+        EstimateDetailBean otherBean = MockBeanGenerator.generateMockEstimateDetail(estimate);
         bean.refresh(otherBean);
         assertTrue(bean.equals(otherBean));
     }
