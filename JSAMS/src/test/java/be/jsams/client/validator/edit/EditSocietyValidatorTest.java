@@ -9,6 +9,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import be.jsams.client.i18n.I18nApplicationContext;
 import be.jsams.client.i18n.JsamsI18nLabelResource;
 import be.jsams.client.i18n.JsamsI18nResource;
+import be.jsams.client.validator.AbstractValidatorTest;
 import be.jsams.common.bean.model.MockBeanGenerator;
 import be.jsams.common.bean.model.SocietyBean;
 
@@ -20,7 +21,7 @@ import com.jgoodies.validation.ValidationResult;
  * @author chesteric31
  * @version $Revision$ $Date::                  $ $Author$
  */
-public class EditSocietyValidatorTest extends AbstractEditValidatorTest {
+public class EditSocietyValidatorTest extends AbstractValidatorTest {
     
     private EditSocietyValidator validator;
     private SocietyBean bean;
