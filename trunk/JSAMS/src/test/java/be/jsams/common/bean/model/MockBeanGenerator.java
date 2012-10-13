@@ -293,7 +293,9 @@ public final class MockBeanGenerator {
         bean.setDeliveryAddress(generateMockAddress());
         Date today = new Date();
         bean.setCreationDate(today);
-        bean.setDetails(new ArrayList<DeliveryOrderDetailBean>());
+        List<DeliveryOrderDetailBean> details = new ArrayList<DeliveryOrderDetailBean>();
+        details.add(generateMockDeliveryOrderDetail(bean));
+        bean.setDetails(details);
         bean.setDiscountRate(1D);
         PeriodBean period = new PeriodBean();
         period.setStartDate(today);
@@ -397,13 +399,14 @@ public final class MockBeanGenerator {
     /**
      * Generates mock {@link DeliveryOrderDetailBean}.
      * 
+     * @param deliveryOrder the {@link DeliveryOrderBean} to use
      * @return the built {@link DeliveryOrderDetailBean}
      */
-    public static DeliveryOrderDetailBean generateMockDeliveryOrderDetail() {
+    public static DeliveryOrderDetailBean generateMockDeliveryOrderDetail(DeliveryOrderBean deliveryOrder) {
         DeliveryOrderDetailBean detailBean = new DeliveryOrderDetailBean();
         detailBean.setBillDetail(null);
         detailBean.setCommandDetail(null);
-        detailBean.setDeliveryOrder(generateMockDeliveryOrder());
+        detailBean.setDeliveryOrder(deliveryOrder);
         detailBean.setDiscountRate(5D);
         detailBean.setPrice(20D);
         detailBean.setProduct(generateMockProduct());

@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import be.jsams.common.bean.model.MockBeanGenerator;
 import be.jsams.common.bean.model.management.ProductBean;
+import be.jsams.common.bean.model.sale.DeliveryOrderBean;
 
 /**
  * Test class for {@link DeliveryOrderDetailBean} class.
@@ -34,7 +35,7 @@ public class DeliveryOrderDetailBeanTest {
      */
     @Test
     public void testClear() {
-        bean = MockBeanGenerator.generateMockDeliveryOrderDetail();
+        bean = MockBeanGenerator.generateMockDeliveryOrderDetail(null);
         bean.clear();
         assertNull(bean.getBillDetail());
         assertNull(bean.getCommandDetail());
@@ -54,9 +55,10 @@ public class DeliveryOrderDetailBeanTest {
     public void testRefreshEquals() {
         bean = new DeliveryOrderDetailBean();
         // we test only the detail here and not the delivery order
-        bean.setDeliveryOrder(MockBeanGenerator.generateMockDeliveryOrder());
+        DeliveryOrderBean deliveryOrder = MockBeanGenerator.generateMockDeliveryOrder();
+        bean.setDeliveryOrder(deliveryOrder);
         bean.setProduct(new ProductBean());
-        DeliveryOrderDetailBean otherBean = MockBeanGenerator.generateMockDeliveryOrderDetail();
+        DeliveryOrderDetailBean otherBean = MockBeanGenerator.generateMockDeliveryOrderDetail(deliveryOrder);
         bean.refresh(otherBean);
         assertTrue(bean.equals(otherBean));
     }
