@@ -41,6 +41,7 @@ import be.jsams.common.bean.model.sale.detail.CommandDetailBeanTest;
 import be.jsams.common.bean.model.sale.detail.CreditNoteDetailBeanTest;
 import be.jsams.common.bean.model.sale.detail.DeliveryOrderDetailBeanTest;
 import be.jsams.common.bean.model.sale.detail.EstimateDetailBeanTest;
+import be.jsams.common.bean.model.transfer.TransferBeanTest;
 import be.jsams.common.bean.validator.EmailValidatorTest;
 import be.jsams.common.bean.validator.StringValidatorTest;
 import be.jsams.server.dao.impl.AddressDaoImplTest;
@@ -78,10 +79,10 @@ import be.jsams.server.service.update.impl.DownloaderServiceImplTest;
         BillBeanTest.class, CommandBeanTest.class, CreditNoteBeanTest.class, DeliveryOrderBeanTest.class,
         EstimateBeanTest.class, EstimateDetailBeanTest.class, CommandDetailBeanTest.class,
         DeliveryOrderDetailBeanTest.class, BillDetailBeanTest.class, CreditNoteDetailBeanTest.class,
-        EmailValidatorTest.class, StringValidatorTest.class, AddressDaoImplTest.class, CivilityDaoImplTest.class,
-        ContactInformationDaoImplTest.class, SocietyDaoImplTest.class, AgentDaoImplTest.class,
-        CustomerDaoImplTest.class, ProductCategoryDaoImplTest.class, ProductDaoImplTest.class, BillDaoImplTest.class,
-        CommandDaoImplTest.class, CreditNoteDaoImplTest.class, DeliveryOrderDaoImplTest.class,
+        TransferBeanTest.class, EmailValidatorTest.class, StringValidatorTest.class, AddressDaoImplTest.class,
+        CivilityDaoImplTest.class, ContactInformationDaoImplTest.class, SocietyDaoImplTest.class,
+        AgentDaoImplTest.class, CustomerDaoImplTest.class, ProductCategoryDaoImplTest.class, ProductDaoImplTest.class,
+        BillDaoImplTest.class, CommandDaoImplTest.class, CreditNoteDaoImplTest.class, DeliveryOrderDaoImplTest.class,
         EstimateDaoImplTest.class, JsamsDateAdapterTest.class, RSSFeedParserImplTest.class,
         DownloaderServiceImplTest.class })
 public class AllTests {
