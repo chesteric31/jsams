@@ -40,7 +40,7 @@ public class SearchCustomerValidator implements Validator<CustomerBean> {
         String zipCode = billingAddress.getZipCode();
         if (zipCode != null && !ValidationUtils.isNumeric(zipCode)) {
             support.addError(JsamsI18nLabelResource.LABEL_ZIP_CODE.getTranslation(),
-                    JsamsI18nResource.ERROR_IS_NUMERIC.getTranslation());
+                    JsamsI18nResource.ERROR_IS_ALPHANUMERIC.getTranslation());
         }
 
         return support.getResult();
