@@ -365,7 +365,9 @@ public final class MockBeanGenerator {
         bean.setBillingAddress(generateMockAddress());
         Date today = new Date();
         bean.setCreationDate(today);
-        bean.setDetails(new ArrayList<CreditNoteDetailBean>());
+        List<CreditNoteDetailBean> details = new ArrayList<CreditNoteDetailBean>();
+        details.add(generateMockCreditNoteDetail(bean));
+        bean.setDetails(details);
         PeriodBean period = new PeriodBean();
         period.setStartDate(today);
         Calendar periodCalendar = Calendar.getInstance();
@@ -437,11 +439,12 @@ public final class MockBeanGenerator {
     /**
      * Generates mock {@link CreditNoteDetailBean}.
      * 
+     * @param creditNote the {@link CreditNoteBean} to use
      * @return the built {@link CreditNoteDetailBean}
      */
-    public static CreditNoteDetailBean generateMockCreditNoteDetail() {
+    public static CreditNoteDetailBean generateMockCreditNoteDetail(CreditNoteBean creditNote) {
         CreditNoteDetailBean detailBean = new CreditNoteDetailBean();
-        detailBean.setCreditNote(generateMockCreditNote());
+        detailBean.setCreditNote(creditNote);
         detailBean.setDiscountRate(12D);
         detailBean.setPrice(21D);
         detailBean.setProduct(generateMockProduct());

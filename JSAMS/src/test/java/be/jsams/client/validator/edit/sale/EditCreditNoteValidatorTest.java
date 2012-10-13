@@ -10,21 +10,21 @@ import be.jsams.client.i18n.JsamsI18nLabelResource;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.validator.edit.AbstractEditValidatorTest;
 import be.jsams.common.bean.model.MockBeanGenerator;
-import be.jsams.common.bean.model.sale.DeliveryOrderBean;
+import be.jsams.common.bean.model.sale.CreditNoteBean;
 
 import com.jgoodies.validation.ValidationResult;
 
 
 /**
- * Test class for {@link EditDeliveryOrderValidator} class.
+ * Test class for {@link EditCreditNoteValidator} class.
  *
  * @author chesteric31
  * @version $Revision$ $Date::                  $ $Author$
  */
-public class EditDeliveryOrderValidatorTest extends AbstractEditValidatorTest {
+public class EditCreditNoteValidatorTest extends AbstractEditValidatorTest {
 
-    private EditDeliveryOrderValidator validator;
-    private DeliveryOrderBean bean;
+    private EditCreditNoteValidator validator;
+    private CreditNoteBean bean;
 
     /**
      * Setup method.
@@ -32,14 +32,14 @@ public class EditDeliveryOrderValidatorTest extends AbstractEditValidatorTest {
     @Before
     public void setUp() {
         I18nApplicationContext.setContext(new ClassPathXmlApplicationContext(I18nApplicationContext.CONFIG));
-        validator = new EditDeliveryOrderValidator();
-        bean = MockBeanGenerator.generateMockDeliveryOrder();
+        validator = new EditCreditNoteValidator();
+        bean = MockBeanGenerator.generateMockCreditNote();
     }
     
     /**
      * Test method for
-     * {@link be.jsams.client.validator.edit.sale.EditDeliveryOrderValidator
-     * #validate(be.jsams.common.bean.model.sale.DeliveryOrderBean)}
+     * {@link be.jsams.client.validator.edit.sale.EditCreditNoteValidator
+     * #validate(be.jsams.common.bean.model.sale.CreditNoteBean)}
      * .
      */
     @Test
@@ -50,8 +50,8 @@ public class EditDeliveryOrderValidatorTest extends AbstractEditValidatorTest {
 
     /**
      * Test method for
-     * {@link be.jsams.client.validator.edit.sale.EditDeliveryOrderValidator
-     * #validate(be.jsams.common.bean.model.sale.DeliveryOrderBean)}
+     * {@link be.jsams.client.validator.edit.sale.EditCreditNoteValidator
+     * #validate(be.jsams.common.bean.model.sale.CreditNoteBean)}
      * .
      */
     @Test
@@ -65,8 +65,8 @@ public class EditDeliveryOrderValidatorTest extends AbstractEditValidatorTest {
 
     /**
      * Test method for
-     * {@link be.jsams.client.validator.edit.sale.EditDeliveryOrderValidator
-     * #validate(be.jsams.common.bean.model.sale.DeliveryOrderBean)}
+     * {@link be.jsams.client.validator.edit.sale.EditCreditNoteValidator
+     * #validate(be.jsams.common.bean.model.sale.CreditNoteBean)}
      * .
      */
     @Test
