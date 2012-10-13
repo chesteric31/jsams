@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import be.jsams.common.bean.model.management.AgentBean;
 import be.jsams.common.bean.model.management.CustomerBean;
@@ -218,7 +219,9 @@ public final class MockBeanGenerator {
         bean.setBillingAddress(generateMockAddress());
         Date today = new Date();
         bean.setCreationDate(today);
-        bean.setDetails(new ArrayList<EstimateDetailBean>());
+        List<EstimateDetailBean> details = new ArrayList<EstimateDetailBean>();
+        details.add(generateMockEstimateDetail(bean));
+        bean.setDetails(details);
         bean.setDiscountRate(5D);
         PeriodBean period = new PeriodBean();
         period.setStartDate(today);
@@ -236,12 +239,13 @@ public final class MockBeanGenerator {
     /**
      * Generates mock {@link EstimateDetailBean}.
      * 
+     * @param estimate the {@link EstimateBean} to use
      * @return the built {@link EstimateDetailBean}
      */
-    public static EstimateDetailBean generateMockEstimateDetail() {
+    public static EstimateDetailBean generateMockEstimateDetail(EstimateBean estimate) {
         EstimateDetailBean detailBean = new EstimateDetailBean();
         detailBean.setDiscountRate(25D);
-        detailBean.setEstimate(generateMockEstimate());
+        detailBean.setEstimate(estimate);
         detailBean.setPrice(15D);
         detailBean.setProduct(generateMockProduct());
         detailBean.setQuantity(1);
@@ -324,7 +328,7 @@ public final class MockBeanGenerator {
         calendar.add(Calendar.DAY_OF_MONTH, 15);
         Date dateFormalNotice = calendar.getTime();
         bean.setDateFormalNotice(dateFormalNotice);
-        ArrayList<BillDetailBean> details = new ArrayList<BillDetailBean>();
+        List<BillDetailBean> details = new ArrayList<BillDetailBean>();
         details.add(generateMockBillDetail(bean));
         bean.setDetails(details);
         bean.setDiscountRate(1D);
