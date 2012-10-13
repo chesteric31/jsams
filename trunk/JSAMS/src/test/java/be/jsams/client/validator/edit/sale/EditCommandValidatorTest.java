@@ -8,7 +8,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import be.jsams.client.i18n.I18nApplicationContext;
 import be.jsams.client.i18n.JsamsI18nLabelResource;
 import be.jsams.client.i18n.JsamsI18nResource;
-import be.jsams.client.validator.edit.AbstractEditValidatorTest;
+import be.jsams.client.validator.AbstractValidatorTest;
 import be.jsams.common.bean.model.MockBeanGenerator;
 import be.jsams.common.bean.model.sale.CommandBean;
 
@@ -20,7 +20,7 @@ import com.jgoodies.validation.ValidationResult;
  * @author chesteric31
  * @version $Revision$ $Date::                  $ $Author$
  */
-public class EditCommandValidatorTest extends AbstractEditValidatorTest {
+public class EditCommandValidatorTest extends AbstractValidatorTest {
 
     private EditCommandValidator validator;
     private CommandBean bean;

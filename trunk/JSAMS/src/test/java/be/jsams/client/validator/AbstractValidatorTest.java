@@ -1,15 +1,15 @@
-package be.jsams.client.validator.edit;
+package be.jsams.client.validator;
 
 import com.jgoodies.validation.ValidationMessage;
 import com.jgoodies.validation.ValidationResult;
 
 /**
- * Abstract class to generalize all common methods of some edit validator test.
+ * Abstract class to generalize all common methods of some validator test.
  *
  * @author chesteric31
  * @version $Revision$ $Date::                  $ $Author$
  */
-public abstract class AbstractEditValidatorTest {
+public abstract class AbstractValidatorTest {
 
     /**
      * @param result the {@link ValidationResult} to parse

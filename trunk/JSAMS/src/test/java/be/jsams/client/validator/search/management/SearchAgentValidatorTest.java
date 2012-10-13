@@ -1,4 +1,4 @@
-package be.jsams.client.validator.edit.management;
+package be.jsams.client.validator.search.management;
 
 import static org.junit.Assert.assertTrue;
 
@@ -16,14 +16,14 @@ import be.jsams.common.bean.model.management.AgentBean;
 import com.jgoodies.validation.ValidationResult;
 
 /**
- * Test class for {@link EditAgentValidator} class.
+ * Test class for {@link SearchAgentValidator} class.
  *
  * @author chesteric31
  * @version $Revision$ $Date::                  $ $Author$
  */
-public class EditAgentValidatorTest extends AbstractValidatorTest {
-
-    private EditAgentValidator validator;
+public class SearchAgentValidatorTest extends AbstractValidatorTest {
+     
+    private SearchAgentValidator validator;
     private AgentBean bean;
 
     /**
@@ -32,15 +32,13 @@ public class EditAgentValidatorTest extends AbstractValidatorTest {
     @Before
     public void setUp() {
         I18nApplicationContext.setContext(new ClassPathXmlApplicationContext(I18nApplicationContext.CONFIG));
-        validator = new EditAgentValidator();
+        validator = new SearchAgentValidator();
         bean = MockBeanGenerator.generateMockAgent();
     }
-    
+
     /**
-     * Test method for
-     * {@link be.jsams.client.validator.edit.management.EditAgentValidator
-     * #validate(be.jsams.common.bean.model.management.AgentBean)}
-     * .
+     * Test method for {@link be.jsams.client.validator.search.management.SearchAgentValidator
+     * #validate(be.jsams.common.bean.model.management.AgentBean)}.
      */
     @Test
     public void testValidate() {
@@ -50,7 +48,7 @@ public class EditAgentValidatorTest extends AbstractValidatorTest {
 
     /**
      * Test method for
-     * {@link be.jsams.client.validator.edit.management.EditAgentValidator
+     * {@link be.jsams.client.validator.search.management.SearchAgentValidator
      * #validate(be.jsams.common.bean.model.management.AgentBean)}
      * .
      */
@@ -65,22 +63,7 @@ public class EditAgentValidatorTest extends AbstractValidatorTest {
 
     /**
      * Test method for
-     * {@link be.jsams.client.validator.edit.management.EditAgentValidator
-     * #validate(be.jsams.common.bean.model.management.AgentBean)}
-     * .
-     */
-    @Test
-    public void testValidateBlankFunction() {
-        bean.setFunction("");
-        ValidationResult result = validator.validate(bean);
-        String formattedText = retrieveFormattedText(result);
-        assertTrue(formattedText.contains(JsamsI18nResource.ERROR_IS_MANDATORY.getTranslation()));
-        assertTrue(formattedText.contains(JsamsI18nLabelResource.LABEL_FUNCTION.getTranslation()));
-    }
-    
-    /**
-     * Test method for
-     * {@link be.jsams.client.validator.edit.management.EditAgentValidator
+     * {@link be.jsams.client.validator.search.management.SearchAgentValidator
      * #validate(be.jsams.common.bean.model.management.AgentBean)}
      * .
      */
@@ -95,37 +78,7 @@ public class EditAgentValidatorTest extends AbstractValidatorTest {
     
     /**
      * Test method for
-     * {@link be.jsams.client.validator.edit.management.EditAgentValidator
-     * #validate(be.jsams.common.bean.model.management.AgentBean)}
-     * .
-     */
-    @Test
-    public void testValidateBlankName() {
-        bean.setName(null);
-        ValidationResult result = validator.validate(bean);
-        String formattedText = retrieveFormattedText(result);
-        assertTrue(formattedText.contains(JsamsI18nResource.ERROR_IS_MANDATORY.getTranslation()));
-        assertTrue(formattedText.contains(JsamsI18nLabelResource.LABEL_NAME.getTranslation()));
-    }
-
-    /**
-     * Test method for
-     * {@link be.jsams.client.validator.edit.management.EditAgentValidator
-     * #validate(be.jsams.common.bean.model.management.AgentBean)}
-     * .
-     */
-    @Test
-    public void testValidateBlankPhone() {
-        bean.getContactInformation().setPhone(null);
-        ValidationResult result = validator.validate(bean);
-        String formattedText = retrieveFormattedText(result);
-        assertTrue(formattedText.contains(JsamsI18nResource.ERROR_IS_MANDATORY.getTranslation()));
-        assertTrue(formattedText.contains(JsamsI18nLabelResource.LABEL_PHONE.getTranslation()));
-    }
-
-    /**
-     * Test method for
-     * {@link be.jsams.client.validator.edit.management.EditAgentValidator
+     * {@link be.jsams.client.validator.search.management.SearchAgentValidator
      * #validate(be.jsams.common.bean.model.management.AgentBean)}
      * .
      */
@@ -140,17 +93,33 @@ public class EditAgentValidatorTest extends AbstractValidatorTest {
 
     /**
      * Test method for
-     * {@link be.jsams.client.validator.edit.management.EditAgentValidator
+     * {@link be.jsams.client.validator.search.management.SearchAgentValidator
      * #validate(be.jsams.common.bean.model.management.AgentBean)}
      * .
      */
     @Test
-    public void testValidateWrongEmail() {
-        bean.getContactInformation().setEmail("not a good email!!!");
+    public void testValidateWrongZipCode() {
+        bean.getAddress().setZipCode("!");
         ValidationResult result = validator.validate(bean);
         String formattedText = retrieveFormattedText(result);
-        assertTrue(formattedText.contains(JsamsI18nResource.ERROR_IS_INVALID.getTranslation()));
-        assertTrue(formattedText.contains(JsamsI18nLabelResource.LABEL_EMAIL.getTranslation()));
+        assertTrue(formattedText.contains(JsamsI18nResource.ERROR_IS_ALPHANUMERIC.getTranslation()));
+        assertTrue(formattedText.contains(JsamsI18nLabelResource.LABEL_ZIP_CODE.getTranslation()));
     }
+
+    /**
+     * Test method for
+     * {@link be.jsams.client.validator.search.management.SearchAgentValidator
+     * #validate(be.jsams.common.bean.model.management.AgentBean)}
+     * .
+     */
+    @Test
+    public void testValidateWrongCity() {
+        bean.getAddress().setCity("#");
+        ValidationResult result = validator.validate(bean);
+        String formattedText = retrieveFormattedText(result);
+        assertTrue(formattedText.contains(JsamsI18nResource.ERROR_IS_ALPHANUMERIC.getTranslation()));
+        assertTrue(formattedText.contains(JsamsI18nLabelResource.LABEL_CITY.getTranslation()));
+    }
+
 
 }
