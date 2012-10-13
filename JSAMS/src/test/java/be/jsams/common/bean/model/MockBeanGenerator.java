@@ -261,10 +261,14 @@ public final class MockBeanGenerator {
      */
     public static CommandBean generateMockCommand() {
         CommandBean bean = new CommandBean(generateMockSociety(), generateMockCustomer(), generateMockAgent());
-        bean.setBillingAddress(generateMockAddress());
+        AddressBean address = generateMockAddress();
+        bean.setDeliveryAddress(address);
+        bean.setBillingAddress(address);
         Date today = new Date();
         bean.setCreationDate(today);
-        bean.setDetails(new ArrayList<CommandDetailBean>());
+        List<CommandDetailBean> list = new ArrayList<CommandDetailBean>();
+        list.add(generateMockCommandDetail(bean));
+        bean.setDetails(list);
         bean.setDiscountRate(1D);
         PeriodBean period = new PeriodBean();
         period.setStartDate(today);
@@ -375,12 +379,13 @@ public final class MockBeanGenerator {
     /**
      * Generates mock {@link CommandDetailBean}.
      * 
+     * @param command the {@link CommandBean} to use
      * @return the built {@link CommandDetailBean}
      */
-    public static CommandDetailBean generateMockCommandDetail() {
+    public static CommandDetailBean generateMockCommandDetail(CommandBean command) {
         CommandDetailBean detailBean = new CommandDetailBean();
         detailBean.setDiscountRate(15D);
-        detailBean.setCommand(generateMockCommand());
+        detailBean.setCommand(command);
         detailBean.setPrice(3.5D);
         detailBean.setProduct(generateMockProduct());
         detailBean.setQuantity(2);
