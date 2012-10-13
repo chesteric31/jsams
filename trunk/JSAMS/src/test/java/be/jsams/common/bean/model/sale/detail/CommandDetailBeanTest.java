@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import be.jsams.common.bean.model.MockBeanGenerator;
 import be.jsams.common.bean.model.management.ProductBean;
+import be.jsams.common.bean.model.sale.CommandBean;
 
 /**
  * Test class for {@link CommandDetailBean} class.
@@ -33,7 +34,7 @@ public class CommandDetailBeanTest {
      */
     @Test
     public void testClear() {
-        bean = MockBeanGenerator.generateMockCommandDetail();
+        bean = MockBeanGenerator.generateMockCommandDetail(null);
         bean.clear();
         assertNull(bean.getDiscountRate());
         assertNull(bean.getCommand());
@@ -51,9 +52,10 @@ public class CommandDetailBeanTest {
     public void testRefreshEquals() {
         bean = new CommandDetailBean();
         // we test only the detail here and not the command
-        bean.setCommand(MockBeanGenerator.generateMockCommand());
+        CommandBean command = MockBeanGenerator.generateMockCommand();
+        bean.setCommand(command);
         bean.setProduct(new ProductBean());
-        CommandDetailBean otherBean = MockBeanGenerator.generateMockCommandDetail();
+        CommandDetailBean otherBean = MockBeanGenerator.generateMockCommandDetail(command);
         bean.refresh(otherBean);
         assertTrue(bean.equals(otherBean));
     }
