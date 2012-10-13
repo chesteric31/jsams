@@ -134,6 +134,7 @@ public class TransferBean extends AbstractIdentityBean<AbstractIdentity, Transfe
         setDeliveryOrderDetails(other.getDeliveryOrderDetails());
         setBillDetails(other.getBillDetails());
         setDocuments(other.getDocuments());
+        setSelectableDetails(other.getSelectableDetails());
     }
 
     /**
@@ -157,6 +158,7 @@ public class TransferBean extends AbstractIdentityBean<AbstractIdentity, Transfe
         setDeliveryOrderDetails(null);
         setBillDetails(null);
         setDocuments(null);
+        setSelectableDetails(null);
     }
 
     /**
@@ -264,6 +266,155 @@ public class TransferBean extends AbstractIdentityBean<AbstractIdentity, Transfe
      */
     public void setBillDetails(Map<Long, List<BillDetailBean>> billDetails) {
         this.billDetails = billDetails;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = super.hashCode();
+        result = prime * result;
+        if (billDetails == null) {
+            result += 0;
+        } else {
+            result += billDetails.hashCode();
+        }
+        result = prime * result;
+        if (commandDetails == null) {
+            result += 0;
+        } else {
+            result += commandDetails.hashCode();
+        }
+        result = prime * result;
+        if (deliveryOrderDetails == null) {
+            result += 0;
+        } else {
+            result += deliveryOrderDetails.hashCode();
+        }
+        result = prime * result;
+        result += destinationType;
+        result = prime * result;
+        if (documents == null) {
+            result += 0;
+        } else {
+            result += documents.hashCode();
+        }
+        result = prime * result;
+        if (estimateDetails == null) {
+            result += 0;
+        } else {
+            result += estimateDetails.hashCode();
+        }
+        result = prime * result;
+        if (selectableDetails == null) {
+            result += 0;
+        } else {
+            result += selectableDetails.hashCode();
+        }
+        result = prime * result;
+        result += sourceType;
+        result = prime * result;
+        result += transferMode;
+        return result;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(Object obj) {
+//        if (this == obj) {
+//            return true;
+//        }
+        if (!super.equals(obj)) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        TransferBean other = (TransferBean) obj;
+        if (billDetails == null) {
+            if (other.billDetails != null) {
+                return false;
+            }
+        } else if (!billDetails.equals(other.billDetails)) {
+            return false;
+        }
+        if (commandDetails == null) {
+            if (other.commandDetails != null) {
+                return false;
+            }
+        } else if (!commandDetails.equals(other.commandDetails)) {
+            return false;
+        }
+        if (deliveryOrderDetails == null) {
+            if (other.deliveryOrderDetails != null) {
+                return false;
+            }
+        } else if (!deliveryOrderDetails.equals(other.deliveryOrderDetails)) {
+            return false;
+        }
+        if (destinationType != other.destinationType) {
+            return false;
+        }
+        if (documents == null) {
+            if (other.documents != null) {
+                return false;
+            }
+        } else if (!documents.equals(other.documents)) {
+            return false;
+        }
+        if (estimateDetails == null) {
+            if (other.estimateDetails != null) {
+                return false;
+            }
+        } else if (!estimateDetails.equals(other.estimateDetails)) {
+            return false;
+        }
+        if (selectableDetails == null) {
+            if (other.selectableDetails != null) {
+                return false;
+            }
+        } else if (!selectableDetails.equals(other.selectableDetails)) {
+            return false;
+        }
+        if (sourceType != other.sourceType) {
+            return false;
+        }
+        if (transferMode != other.transferMode) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("TransferBean [transferMode=");
+        builder.append(transferMode);
+        builder.append(", sourceType=");
+        builder.append(sourceType);
+        builder.append(", destinationType=");
+        builder.append(destinationType);
+        builder.append(", documents=");
+        builder.append(documents);
+        builder.append(", selectableDetails=");
+        builder.append(selectableDetails);
+        builder.append(", estimateDetails=");
+        builder.append(estimateDetails);
+        builder.append(", commandDetails=");
+        builder.append(commandDetails);
+        builder.append(", deliveryOrderDetails=");
+        builder.append(deliveryOrderDetails);
+        builder.append(", billDetails=");
+        builder.append(billDetails);
+        builder.append("]");
+        return builder.toString();
     }
 
 }

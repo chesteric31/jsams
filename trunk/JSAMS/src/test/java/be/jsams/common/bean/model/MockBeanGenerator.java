@@ -5,12 +5,15 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import be.jsams.common.bean.model.management.AgentBean;
 import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.management.ProductBean;
 import be.jsams.common.bean.model.management.ProductCategoryBean;
+import be.jsams.common.bean.model.sale.AbstractDocumentBean;
 import be.jsams.common.bean.model.sale.BillBean;
 import be.jsams.common.bean.model.sale.CommandBean;
 import be.jsams.common.bean.model.sale.CreditNoteBean;
@@ -21,6 +24,7 @@ import be.jsams.common.bean.model.sale.detail.CommandDetailBean;
 import be.jsams.common.bean.model.sale.detail.CreditNoteDetailBean;
 import be.jsams.common.bean.model.sale.detail.DeliveryOrderDetailBean;
 import be.jsams.common.bean.model.sale.detail.EstimateDetailBean;
+import be.jsams.common.bean.model.transfer.TransferBean;
 import be.jsams.server.model.MockModelGenerator;
 
 /**
@@ -451,6 +455,53 @@ public final class MockBeanGenerator {
         detailBean.setQuantity(1);
         detailBean.setVatApplicable(21D);
         return detailBean;
+    }
+
+    /**
+     * Generates mock {@link TransferBean}.
+     * 
+     * @return the built {@link TransferBean}
+     */
+    public static TransferBean generateMockTransfer() {
+        TransferBean bean = new TransferBean();
+        bean.setTransferMode(1);
+        bean.setSourceType(2);
+        bean.setDestinationType(3);
+        List<EstimateDetailBean> estimateDetailBeans = new ArrayList<EstimateDetailBean>();
+        estimateDetailBeans.add(generateMockEstimateDetail(null));
+        Map<Long, List<EstimateDetailBean>> estimateDetailBeansMap = new HashMap<Long, List<EstimateDetailBean>>();
+        estimateDetailBeansMap.put(0L, estimateDetailBeans);
+        bean.setEstimateDetails(estimateDetailBeansMap);
+        
+        List<CommandDetailBean> commandDetailBeans = new ArrayList<CommandDetailBean>();
+        commandDetailBeans.add(generateMockCommandDetail(null));
+        Map<Long, List<CommandDetailBean>> commandDetailBeansMap = new HashMap<Long, List<CommandDetailBean>>();
+        commandDetailBeansMap.put(0L, commandDetailBeans);
+        bean.setCommandDetails(commandDetailBeansMap);
+
+        List<DeliveryOrderDetailBean> deliveryOrderDetailBeans = new ArrayList<DeliveryOrderDetailBean>();
+        deliveryOrderDetailBeans.add(generateMockDeliveryOrderDetail(null));
+        Map<Long, List<DeliveryOrderDetailBean>> deliveryOrderDetailBeansMap
+            = new HashMap<Long, List<DeliveryOrderDetailBean>>();
+        deliveryOrderDetailBeansMap.put(0L, deliveryOrderDetailBeans);
+        bean.setDeliveryOrderDetails(deliveryOrderDetailBeansMap);
+
+        List<BillDetailBean> billDetailBeans = new ArrayList<BillDetailBean>();
+        billDetailBeans.add(generateMockBillDetail(null));
+        Map<Long, List<BillDetailBean>> billDetailBeansMap = new HashMap<Long, List<BillDetailBean>>();
+        billDetailBeansMap.put(0L, billDetailBeans);
+        bean.setBillDetails(billDetailBeansMap);
+
+        List<AbstractDocumentBean<?, ?>> documents = new ArrayList<AbstractDocumentBean<?, ?>>();
+        documents.add(generateMockEstimate());
+        documents.add(generateMockCommand());
+        documents.add(generateMockDeliveryOrder());
+        documents.add(generateMockBill());
+        bean.setDocuments(documents);
+        
+        bean.setSelectableDetails(commandDetailBeans);
+        
+        return bean;
     }
 
 }
