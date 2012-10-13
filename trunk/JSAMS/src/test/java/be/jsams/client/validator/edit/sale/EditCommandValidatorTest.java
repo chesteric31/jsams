@@ -49,8 +49,8 @@ public class EditCommandValidatorTest extends AbstractEditValidatorTest {
 
     /**
      * Test method for
-     * {@link be.jsams.client.validator.edit.sale.EditEstimateValidator
-     * #validate(be.jsams.common.bean.model.sale.EstimateBean)}
+     * {@link be.jsams.client.validator.edit.sale.EditCommandValidator
+     * #validate(be.jsams.common.bean.model.sale.CommandBean)}
      * .
      */
     @Test
@@ -64,8 +64,8 @@ public class EditCommandValidatorTest extends AbstractEditValidatorTest {
 
     /**
      * Test method for
-     * {@link be.jsams.client.validator.edit.sale.EditEstimateValidator
-     * #validate(be.jsams.common.bean.model.sale.EstimateBean)}
+     * {@link be.jsams.client.validator.edit.sale.EditCommandValidator
+     * #validate(be.jsams.common.bean.model.sale.CommandBean)}
      * .
      */
     @Test
