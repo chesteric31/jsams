@@ -51,7 +51,7 @@ public class DetailsValidatorTest extends AbstractValidatorTest {
      * #validate(be.jsams.common.bean.model.transfer.TransferBean)}.
      */
     @Test
-    public void testValidateBlankDocuments() {
+    public void testValidateBlankDetails() {
         bean.setEstimateDetails(null);
         bean.setCommandDetails(null);
         bean.setDeliveryOrderDetails(null);
