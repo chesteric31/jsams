@@ -8,7 +8,7 @@ import be.jsams.client.validator.wizard.DestinationValidator;
 import be.jsams.client.validator.wizard.DetailsValidator;
 import be.jsams.client.validator.wizard.DocumentValidator;
 import be.jsams.client.validator.wizard.DocumentsValidator;
-import be.jsams.client.validator.wizard.SourceValidator;
+import be.jsams.client.validator.wizard.SourceTypeValidator;
 import be.jsams.client.validator.wizard.SummaryTransferValidator;
 import be.jsams.client.validator.wizard.TransferModeValidator;
 import be.jsams.common.bean.model.transfer.TransferBean;
@@ -67,7 +67,7 @@ public class TransferWizardDialog extends AbstractWizardDialog<TransferBean, Tra
     @Override
     public void initComponents() {
         SourceChooserWizardPanel sourceChooserPanel = new SourceChooserWizardPanel(this, getComponent(), getModel(),
-                new SourceValidator());
+                new SourceTypeValidator());
         getComponent().addPanel(FIRST_PANEL, sourceChooserPanel);
         DestinationChooserWizardPanel destinationChooserPanel = new DestinationChooserWizardPanel(this, getComponent(),
                 getModel(), new DestinationValidator());

@@ -4,7 +4,7 @@ import javax.swing.JRadioButton;
 
 import be.jsams.client.i18n.JsamsI18nLabelResource;
 import be.jsams.client.swing.component.AbstractJsamsFrame;
-import be.jsams.client.validator.wizard.SourceValidator;
+import be.jsams.client.validator.wizard.SourceTypeValidator;
 import be.jsams.client.wizard.JsamsWizardComponent;
 import be.jsams.client.wizard.JsamsWizardPanel;
 import be.jsams.common.bean.model.transfer.TransferBean;
@@ -19,7 +19,7 @@ import com.jgoodies.forms.layout.FormLayout;
  * @author chesteric31
  * @version $Revision$ $Date::                  $ $Author$
  */
-public class SourceChooserWizardPanel extends JsamsWizardPanel<TransferBean, SourceValidator> {
+public class SourceChooserWizardPanel extends JsamsWizardPanel<TransferBean, SourceTypeValidator> {
 
     /**
      * Serial Version UID
@@ -40,10 +40,10 @@ public class SourceChooserWizardPanel extends JsamsWizardPanel<TransferBean, Sou
      * @param parent the {@link TransferWizardDialog}
      * @param component the {@link JsamsWizardComponent}
      * @param model the model
-     * @param validator the {@link SourceValidator}
+     * @param validator the {@link SourceTypeValidator}
      */
     public SourceChooserWizardPanel(TransferWizardDialog parent, JsamsWizardComponent component, TransferBean model,
-            SourceValidator validator) {
+            SourceTypeValidator validator) {
         super(parent, component, model, JsamsI18nLabelResource.LABEL_TRANSFER_CHOOSE_SOURCE, validator);
         initComponents();
     }
