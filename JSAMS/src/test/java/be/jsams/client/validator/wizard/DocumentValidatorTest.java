@@ -51,7 +51,7 @@ public class DocumentValidatorTest extends AbstractValidatorTest {
      * #validate(be.jsams.common.bean.model.transfer.TransferBean)}.
      */
     @Test
-    public void testValidateBlankDocuments() {
+    public void testValidateBlankDocument() {
         bean.setDocuments(null);
         ValidationResult result = validator.validate(bean);
         String formattedText = retrieveFormattedText(result);

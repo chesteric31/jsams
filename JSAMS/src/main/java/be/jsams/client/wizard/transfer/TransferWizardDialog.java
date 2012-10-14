@@ -4,7 +4,7 @@ import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.desktop.JsamsMainFrame;
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.model.dialog.AbstractWizardDialog;
-import be.jsams.client.validator.wizard.DestinationValidator;
+import be.jsams.client.validator.wizard.DestinationTypeValidator;
 import be.jsams.client.validator.wizard.DetailsValidator;
 import be.jsams.client.validator.wizard.DocumentValidator;
 import be.jsams.client.validator.wizard.DocumentsValidator;
@@ -70,7 +70,7 @@ public class TransferWizardDialog extends AbstractWizardDialog<TransferBean, Tra
                 new SourceTypeValidator());
         getComponent().addPanel(FIRST_PANEL, sourceChooserPanel);
         DestinationChooserWizardPanel destinationChooserPanel = new DestinationChooserWizardPanel(this, getComponent(),
-                getModel(), new DestinationValidator());
+                getModel(), new DestinationTypeValidator());
         getComponent().addPanel(SECOND_PANEL, destinationChooserPanel);
         TransferModeChooserWizardPanel chooserPanel = new TransferModeChooserWizardPanel(this, getComponent(),
                 getModel(), new TransferModeValidator());

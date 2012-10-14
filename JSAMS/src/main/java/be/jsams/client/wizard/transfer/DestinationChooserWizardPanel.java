@@ -4,7 +4,7 @@ import javax.swing.JRadioButton;
 
 import be.jsams.client.i18n.JsamsI18nLabelResource;
 import be.jsams.client.swing.component.AbstractJsamsFrame;
-import be.jsams.client.validator.wizard.DestinationValidator;
+import be.jsams.client.validator.wizard.DestinationTypeValidator;
 import be.jsams.client.wizard.JsamsWizardComponent;
 import be.jsams.client.wizard.JsamsWizardPanel;
 import be.jsams.common.bean.model.transfer.TransferBean;
@@ -19,7 +19,7 @@ import com.jgoodies.forms.layout.FormLayout;
  * @author chesteric31
  * @version $Revision$ $Date::                  $ $Author$
  */
-public class DestinationChooserWizardPanel extends JsamsWizardPanel<TransferBean, DestinationValidator> {
+public class DestinationChooserWizardPanel extends JsamsWizardPanel<TransferBean, DestinationTypeValidator> {
 
     /**
      * Serial Version UID
@@ -40,10 +40,10 @@ public class DestinationChooserWizardPanel extends JsamsWizardPanel<TransferBean
      * @param parent the {@link TransferWizardDialog} parent
      * @param component the {@link JsamsWizardComponent}
      * @param model the model
-     * @param validator the {@link DestinationValidator}
+     * @param validator the {@link DestinationTypeValidator}
      */
     public DestinationChooserWizardPanel(TransferWizardDialog parent,
-            JsamsWizardComponent component, TransferBean model, DestinationValidator validator) {
+            JsamsWizardComponent component, TransferBean model, DestinationTypeValidator validator) {
         super(parent, component, model, JsamsI18nLabelResource.LABEL_TRANSFER_CHOOSE_DESTINATION, validator);
         initComponents();
     }
