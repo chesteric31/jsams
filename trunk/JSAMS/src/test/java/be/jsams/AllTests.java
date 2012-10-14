@@ -63,6 +63,7 @@ import be.jsams.server.dao.sale.impl.CommandDaoImplTest;
 import be.jsams.server.dao.sale.impl.CreditNoteDaoImplTest;
 import be.jsams.server.dao.sale.impl.DeliveryOrderDaoImplTest;
 import be.jsams.server.dao.sale.impl.EstimateDaoImplTest;
+import be.jsams.server.model.AddressTest;
 import be.jsams.server.model.utils.xml.JsamsDateAdapterTest;
 import be.jsams.server.service.rss.impl.RSSFeedParserImplTest;
 import be.jsams.server.service.update.impl.DownloaderServiceImplTest;
@@ -91,7 +92,7 @@ import be.jsams.server.service.update.impl.DownloaderServiceImplTest;
         CivilityDaoImplTest.class, ContactInformationDaoImplTest.class, SocietyDaoImplTest.class,
         AgentDaoImplTest.class, CustomerDaoImplTest.class, ProductCategoryDaoImplTest.class, ProductDaoImplTest.class,
         BillDaoImplTest.class, CommandDaoImplTest.class, CreditNoteDaoImplTest.class, DeliveryOrderDaoImplTest.class,
-        EstimateDaoImplTest.class, JsamsDateAdapterTest.class, RSSFeedParserImplTest.class,
+        EstimateDaoImplTest.class, AddressTest.class, JsamsDateAdapterTest.class, RSSFeedParserImplTest.class,
         DownloaderServiceImplTest.class })
 public class AllTests {
 
