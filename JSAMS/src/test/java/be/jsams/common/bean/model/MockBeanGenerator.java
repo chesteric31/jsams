@@ -49,6 +49,7 @@ public final class MockBeanGenerator {
      */
     public static AddressBean generateMockAddress() {
         AddressBean address = new AddressBean();
+        address.setBox("A");
         address.setCity("Brussels");
         address.setCountry("Belgium");
         address.setNumber("1");
