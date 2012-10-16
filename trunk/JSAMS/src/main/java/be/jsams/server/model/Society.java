@@ -62,7 +62,7 @@ public class Society extends AbstractNamedIdentity {
         this.capital = bean.getCapital();
         this.contactInformation = new ContactInformation(bean.getContactInformation());
         LegalFormBean form = bean.getLegalForm();
-        if (form.getId() != null) {
+        if (form != null) {
             this.legalForm = new LegalForm(form);
         }
         this.responsible = bean.getResponsible();
