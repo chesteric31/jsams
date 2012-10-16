@@ -55,7 +55,7 @@ public class Agent extends AbstractNamedIdentity {
         this.function = bean.getFunction();
         this.address = new Address(bean.getAddress());
         CivilityBean civilityBean = bean.getCivility();
-        if (civilityBean.getId() != null) {
+        if (civilityBean != null) {
             this.civility = new Civility(civilityBean);
         }
         this.contactInformation = new ContactInformation(bean.getContactInformation());
