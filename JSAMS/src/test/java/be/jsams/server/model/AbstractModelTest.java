@@ -6,6 +6,7 @@ import be.jsams.common.bean.model.AddressBean;
 import be.jsams.common.bean.model.CivilityBean;
 import be.jsams.common.bean.model.ContactInformationBean;
 import be.jsams.common.bean.model.LegalFormBean;
+import be.jsams.common.bean.model.PaymentModeBean;
 import be.jsams.common.bean.model.SocietyBean;
 
 /**
@@ -126,6 +127,23 @@ public abstract class AbstractModelTest {
         assertTrue(labelNl.equals(civilityBean.getLabelNl()));
         Long id = civility.getId();
         assertEquals(id, civilityBean.getId());
+    }
+
+    /**
+     * Checks if the data are equals.
+     * 
+     * @param paymentModeBean the {@link paymentModeBean} to check
+     * @param paymentMode the {@link paymentMode} to use
+     */
+    protected void checkPaymentMode(PaymentModeBean paymentModeBean, PaymentMode paymentMode) {
+        String label = paymentMode.getLabel();
+        assertTrue(label.equals(paymentModeBean.getLabel()));
+        String labelFr = paymentMode.getLabelFr();
+        assertTrue(labelFr.equals(paymentModeBean.getLabelFr()));
+        String labelNl = paymentMode.getLabelNl();
+        assertTrue(labelNl.equals(paymentModeBean.getLabelNl()));
+        Long id = paymentMode.getId();
+        assertEquals(id, paymentModeBean.getId());
     }
 
 }
