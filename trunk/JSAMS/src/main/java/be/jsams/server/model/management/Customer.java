@@ -69,7 +69,7 @@ public class Customer extends AbstractNamedIdentity {
         this.bank2 = bean.getBank2();
         this.billingAddress = new Address(bean.getBillingAddress());
         CivilityBean civilityBean = bean.getCivility();
-        if (civilityBean.getId() != null) {
+        if (civilityBean != null) {
             this.civility = new Civility(civilityBean);
         }
         this.contactInformation = new ContactInformation(bean.getContactInformation());
@@ -78,11 +78,11 @@ public class Customer extends AbstractNamedIdentity {
         this.deliveryAddress = new Address(bean.getDeliveryAddress());
         this.description = bean.getDescription();
         LegalFormBean form = bean.getLegalForm();
-        if (form.getId() != null) {
+        if (form != null) {
             this.legalForm = new LegalForm(form);
         }
         PaymentModeBean mode = bean.getPaymentMode();
-        if (mode.getId() != null) {
+        if (mode != null) {
             this.paymentMode = new PaymentMode(mode);
         }
         this.vatApplicable = bean.getVatApplicable();
