@@ -159,7 +159,7 @@ public final class MockBeanGenerator {
         bean.setLabel("label");
         bean.setLabelFr("labelFr");
         bean.setLabelNl("labelNl");
-        // bean.setSociety(generateMockSociety());
+        bean.setSociety(generateMockSociety());
         return bean;
     }
 

@@ -43,7 +43,7 @@ public class Product extends AbstractNamedIdentity {
     public Product(ProductBean bean) {
         super(bean);
         ProductCategoryBean categoryBean = bean.getCategory();
-        if (categoryBean.getId() != null) {
+        if (categoryBean != null) {
             this.category = new ProductCategory(categoryBean);
         }
         this.price = bean.getPrice();

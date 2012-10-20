@@ -1,5 +1,6 @@
 package be.jsams.common.bean.model.management;
 
+import be.jsams.common.bean.model.AbstractIdentityBean;
 import be.jsams.common.bean.model.AbstractTranslatableIdentityBean;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.view.management.ProductCategoryBeanView;
@@ -133,6 +134,16 @@ public class ProductCategoryBean extends AbstractTranslatableIdentityBean<Produc
             return false;
         }
         return true;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void refresh(AbstractIdentityBean<?, ?> bean) {
+        super.refresh(bean);
+        ProductCategoryBean other = (ProductCategoryBean) bean;
+        setSociety(other.getSociety());
     }
 
 }
