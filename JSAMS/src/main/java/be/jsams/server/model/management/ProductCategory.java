@@ -7,6 +7,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.ProductCategoryBean;
 import be.jsams.server.model.AbstractTranslatableIdentity;
 import be.jsams.server.model.Society;
@@ -37,7 +38,10 @@ public class ProductCategory extends AbstractTranslatableIdentity {
      */
     public ProductCategory(ProductCategoryBean bean) {
         super(bean);
-        this.society = new Society(bean.getSociety());
+        SocietyBean societyBean = bean.getSociety();
+        if (societyBean != null) {
+            this.society = new Society(societyBean);
+        }
     }
 
     /**

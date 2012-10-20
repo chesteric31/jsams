@@ -8,6 +8,8 @@ import be.jsams.common.bean.model.ContactInformationBean;
 import be.jsams.common.bean.model.LegalFormBean;
 import be.jsams.common.bean.model.PaymentModeBean;
 import be.jsams.common.bean.model.SocietyBean;
+import be.jsams.common.bean.model.management.ProductCategoryBean;
+import be.jsams.server.model.management.ProductCategory;
 
 /**
  * 
@@ -132,8 +134,8 @@ public abstract class AbstractModelTest {
     /**
      * Checks if the data are equals.
      * 
-     * @param paymentModeBean the {@link paymentModeBean} to check
-     * @param paymentMode the {@link paymentMode} to use
+     * @param paymentModeBean the {@link PaymentModeBean} to check
+     * @param paymentMode the {@link PaymentMode} to use
      */
     protected void checkPaymentMode(PaymentModeBean paymentModeBean, PaymentMode paymentMode) {
         String label = paymentMode.getLabel();
@@ -144,6 +146,25 @@ public abstract class AbstractModelTest {
         assertTrue(labelNl.equals(paymentModeBean.getLabelNl()));
         Long id = paymentMode.getId();
         assertEquals(id, paymentModeBean.getId());
+    }
+
+    /**
+     * Checks if the data are equals.
+     * 
+     * @param productCategoryBean the {@link ProductCategoryBean} to check
+     * @param productCategory the {@link ProductCategory} to use
+     */
+    protected void checkProductCategory(ProductCategoryBean productCategoryBean, ProductCategory productCategory) {
+        String label = productCategory.getLabel();
+        assertTrue(label.equals(productCategoryBean.getLabel()));
+        String labelFr = productCategory.getLabelFr();
+        assertTrue(labelFr.equals(productCategoryBean.getLabelFr()));
+        String labelNl = productCategory.getLabelNl();
+        assertTrue(labelNl.equals(productCategoryBean.getLabelNl()));
+        Society society = productCategory.getSociety();
+        checkSociety(productCategoryBean.getSociety(), society);
+        Long id = productCategory.getId();
+        assertEquals(id, productCategoryBean.getId());
     }
 
 }
