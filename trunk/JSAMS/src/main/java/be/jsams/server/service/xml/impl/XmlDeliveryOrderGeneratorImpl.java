@@ -45,7 +45,7 @@ public class XmlDeliveryOrderGeneratorImpl implements XmlGenerator<DeliveryOrder
         addressXml.setCity(deliveryAddress.getCity());
         addressXml.setNumber(new BigInteger(deliveryAddress.getNumber()));
         addressXml.setStreet(deliveryAddress.getStreet());
-        addressXml.setZip(new BigInteger(deliveryAddress.getZipCode()));
+        addressXml.setZip(deliveryAddress.getZipCode());
         xml.setAddress(addressXml);
         customerXml.setName(customer.getName());
         customerXml.setFirstName(customer.getFirstName());
@@ -72,10 +72,10 @@ public class XmlDeliveryOrderGeneratorImpl implements XmlGenerator<DeliveryOrder
         value.setCity(address.getCity());
         value.setNumber(new BigInteger(address.getNumber()));
         value.setStreet(address.getStreet());
-        value.setZip(new BigInteger(address.getZipCode()));
+        value.setZip(address.getZipCode());
         societyXml.setAddress(value);
         ContactInformationXml contactInfoXml = factory.createContactInformation();
-        contactInfoXml.setPhone(new BigInteger(society.getContactInformation().getPhone()));
+        contactInfoXml.setPhone(society.getContactInformation().getPhone());
         societyXml.setContactInformation(contactInfoXml);
         societyXml.setName(society.getName());
         societyXml.setVatNumber(society.getVatNumber());

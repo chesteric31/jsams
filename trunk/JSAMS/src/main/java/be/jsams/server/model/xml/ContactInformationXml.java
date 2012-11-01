@@ -7,7 +7,6 @@
 
 package be.jsams.server.model.xml;
 
-import java.math.BigInteger;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -46,9 +45,9 @@ import javax.xml.bind.annotation.XmlType;
 public class ContactInformationXml {
 
     @XmlElement(required = true)
-    private BigInteger phone;
+    private String phone;
     @XmlElement(required = true)
-    private BigInteger fax;
+    private String fax;
     @XmlElement(required = true)
     private String mobile;
     @XmlElement(required = true)
@@ -59,40 +58,40 @@ public class ContactInformationXml {
     /**
      * Gets the value of the phone property.
      * 
-     * @return possible object is {@link BigInteger }
+     * @return possible object is {@link String }
      * 
      */
-    public BigInteger getPhone() {
+    public String getPhone() {
         return phone;
     }
 
     /**
      * Sets the value of the phone property.
      * 
-     * @param value allowed object is {@link BigInteger }
+     * @param value allowed object is {@link String }
      * 
      */
-    public void setPhone(BigInteger value) {
+    public void setPhone(String value) {
         this.phone = value;
     }
 
     /**
      * Gets the value of the fax property.
      * 
-     * @return possible object is {@link BigInteger }
+     * @return possible object is {@link String }
      * 
      */
-    public BigInteger getFax() {
+    public String getFax() {
         return fax;
     }
 
     /**
      * Sets the value of the fax property.
      * 
-     * @param value allowed object is {@link BigInteger }
+     * @param value allowed object is {@link String }
      * 
      */
-    public void setFax(BigInteger value) {
+    public void setFax(String value) {
         this.fax = value;
     }
 

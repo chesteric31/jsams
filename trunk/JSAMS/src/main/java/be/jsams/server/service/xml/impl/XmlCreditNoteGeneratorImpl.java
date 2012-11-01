@@ -46,7 +46,7 @@ public class XmlCreditNoteGeneratorImpl implements XmlGenerator<CreditNoteBean, 
         addressXml.setCity(billingAddress.getCity());
         addressXml.setNumber(new BigInteger(billingAddress.getNumber()));
         addressXml.setStreet(billingAddress.getStreet());
-        addressXml.setZip(new BigInteger(billingAddress.getZipCode()));
+        addressXml.setZip(billingAddress.getZipCode());
         xml.setAddress(addressXml);
         customerXml.setName(customer.getName());
         customerXml.setFirstName(customer.getFirstName());
@@ -87,10 +87,10 @@ public class XmlCreditNoteGeneratorImpl implements XmlGenerator<CreditNoteBean, 
         value.setCity(address.getCity());
         value.setNumber(new BigInteger(address.getNumber()));
         value.setStreet(address.getStreet());
-        value.setZip(new BigInteger(address.getZipCode()));
+        value.setZip(address.getZipCode());
         societyXml.setAddress(value);
         ContactInformationXml contactInfoXml = factory.createContactInformation();
-        contactInfoXml.setPhone(new BigInteger(society.getContactInformation().getPhone()));
+        contactInfoXml.setPhone(society.getContactInformation().getPhone());
         societyXml.setContactInformation(contactInfoXml);
         societyXml.setName(society.getName());
         societyXml.setVatNumber(society.getVatNumber());
