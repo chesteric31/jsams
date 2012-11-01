@@ -41,8 +41,8 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="phone" type="xs:integer"/>
-  <xs:element name="fax" type="xs:integer"/>
+  <xs:element name="phone" type="xs:string"/>
+  <xs:element name="fax" type="xs:string"/>
   <xs:element name="mobile" type="xs:string"/>
   <xs:element name="email" type="xs:string"/>
   <xs:element name="website" type="xs:string"/>
@@ -101,7 +101,7 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="street" type="xs:string"/>
-  <xs:element name="zip" type="xs:integer"/>
+  <xs:element name="zip" type="xs:string"/>
   <xs:element name="city" type="xs:string"/>
   <xs:element name="number" type="xs:integer"/>
   <xs:element name="total_et" type="xs:decimal"/>
