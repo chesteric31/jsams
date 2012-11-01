@@ -49,7 +49,7 @@ public class AddressXml {
     @XmlElement(required = true)
     private String street;
     @XmlElement(required = true)
-    private BigInteger zip;
+    private String zip;
     @XmlElement(required = true)
     private String city;
 
@@ -96,20 +96,20 @@ public class AddressXml {
     /**
      * Gets the value of the zip property.
      * 
-     * @return possible object is {@link BigInteger }
+     * @return possible object is {@link String }
      * 
      */
-    public BigInteger getZip() {
+    public String getZip() {
         return zip;
     }
 
     /**
      * Sets the value of the zip property.
      * 
-     * @param value allowed object is {@link BigInteger }
+     * @param value allowed object is {@link String}
      * 
      */
-    public void setZip(BigInteger value) {
+    public void setZip(String value) {
         this.zip = value;
     }
 

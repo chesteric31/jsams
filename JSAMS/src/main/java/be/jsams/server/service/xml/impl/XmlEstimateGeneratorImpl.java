@@ -47,7 +47,7 @@ public class XmlEstimateGeneratorImpl implements XmlGenerator<EstimateBean, Esti
         addressXml.setCity(billingAddress.getCity());
         addressXml.setNumber(new BigInteger(billingAddress.getNumber()));
         addressXml.setStreet(billingAddress.getStreet());
-        addressXml.setZip(new BigInteger(billingAddress.getZipCode()));
+        addressXml.setZip(billingAddress.getZipCode());
 //        customerXml.setAddress(addressXml);
         xml.setAddress(addressXml);
         customerXml.setName(customer.getName());
@@ -64,7 +64,10 @@ public class XmlEstimateGeneratorImpl implements XmlGenerator<EstimateBean, Esti
             ProductXml productXml = factory.createProduct();
             ProductBean product = bean.getProduct();
             productXml.setName(product.getName());
-            productXml.setNumber(new BigInteger(product.getId().toString()));
+            Long id = product.getId();
+            if (id != null) {
+                productXml.setNumber(new BigInteger(id.toString()));
+            }
             detailXml.setProduct(productXml);
             detailXml.setQuantity(BigInteger.valueOf(bean.getQuantity()));
             BigDecimal totalEt = BigDecimal.valueOf(bean.getPrice() * bean.getQuantity());
@@ -81,7 +84,10 @@ public class XmlEstimateGeneratorImpl implements XmlGenerator<EstimateBean, Esti
             List<DetailXml> detail = xml.getDetails().getDetail();
             detail.add(detailXml);
         }
-        xml.setNumber(new BigInteger(object.getId().toString()));
+        Long id = object.getId();
+        if (id != null) {
+            xml.setNumber(new BigInteger(id.toString()));
+        }
         SocietyXml societyXml = factory.createSociety();
         SocietyBean society = object.getSociety();
         AddressXml value = factory.createAddress();
@@ -89,10 +95,10 @@ public class XmlEstimateGeneratorImpl implements XmlGenerator<EstimateBean, Esti
         value.setCity(address.getCity());
         value.setNumber(new BigInteger(address.getNumber()));
         value.setStreet(address.getStreet());
-        value.setZip(new BigInteger(address.getZipCode()));
+        value.setZip(address.getZipCode());
         societyXml.setAddress(value);
         ContactInformationXml contactInfoXml = factory.createContactInformation();
-        contactInfoXml.setPhone(new BigInteger(society.getContactInformation().getPhone()));
+        contactInfoXml.setPhone(society.getContactInformation().getPhone());
         societyXml.setContactInformation(contactInfoXml);
         societyXml.setName(society.getName());
         societyXml.setVatNumber(society.getVatNumber());
