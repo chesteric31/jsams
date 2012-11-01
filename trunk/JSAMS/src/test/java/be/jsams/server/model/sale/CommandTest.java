@@ -28,7 +28,7 @@ public class CommandTest extends AbstractModelTest {
      * .
      */
     @Test
-    public void testEstimateEstimateBean() {
+    public void testCommandCommandBean() {
         CommandBean bean = MockBeanGenerator.generateMockCommand();
         command = new Command(bean);
         checkAgent(bean.getAgent(), command.getAgent());
