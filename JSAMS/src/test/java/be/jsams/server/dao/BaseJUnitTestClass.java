@@ -18,7 +18,6 @@ public class BaseJUnitTestClass extends AbstractTransactionalJUnit4SpringContext
      * Constructor
      */
     protected BaseJUnitTestClass() {
-
     }
 
 }

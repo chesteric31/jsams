@@ -79,6 +79,7 @@ import be.jsams.server.model.sale.CreditNoteTest;
 import be.jsams.server.model.sale.DeliveryOrderTest;
 import be.jsams.server.model.sale.EstimateTest;
 import be.jsams.server.model.utils.xml.JsamsDateAdapterTest;
+import be.jsams.server.service.impl.SocietyServiceImplTest;
 import be.jsams.server.service.rss.impl.RSSFeedParserImplTest;
 import be.jsams.server.service.update.impl.DownloaderServiceImplTest;
 import be.jsams.server.service.xml.impl.XmlBillGeneratorImplTest;
@@ -115,9 +116,9 @@ import be.jsams.server.service.xml.impl.XmlEstimateGeneratorImplTest;
         EstimateDaoImplTest.class, AddressTest.class, ContactInformationTest.class, PaymentModeTest.class,
         SocietyTest.class, AgentTest.class, CustomerTest.class, ProductCategoryTest.class, ProductTest.class,
         EstimateTest.class, CommandTest.class, DeliveryOrderTest.class, BillTest.class, CreditNoteTest.class,
-        JsamsDateAdapterTest.class, RSSFeedParserImplTest.class, DownloaderServiceImplTest.class,
-        XmlEstimateGeneratorImplTest.class, XmlCommandGeneratorImplTest.class, XmlDeliveryOrderGeneratorImplTest.class,
-        XmlBillGeneratorImplTest.class, XmlCreditNoteGeneratorImplTest.class })
+        JsamsDateAdapterTest.class, SocietyServiceImplTest.class, RSSFeedParserImplTest.class,
+        DownloaderServiceImplTest.class, XmlEstimateGeneratorImplTest.class, XmlCommandGeneratorImplTest.class,
+        XmlDeliveryOrderGeneratorImplTest.class, XmlBillGeneratorImplTest.class, XmlCreditNoteGeneratorImplTest.class })
 public class AllTests {
 
 }
