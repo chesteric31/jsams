@@ -61,7 +61,6 @@ public class CustomerBeanTest {
     public void testClear() {
         bean = MockBeanGenerator.generateMockCustomer();
         bean.clear();
-//        assertNull(bean.getAgent());
         assertNull(bean.getBank1());
         assertNull(bean.getBank2());
         AddressBean billingAddress = bean.getBillingAddress();
