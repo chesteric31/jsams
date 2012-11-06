@@ -30,7 +30,7 @@ public class ContactInformation extends AbstractIdentity {
     }
 
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param bean the {@link ContactInformationBean}
      */

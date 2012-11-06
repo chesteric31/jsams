@@ -4,7 +4,7 @@ import org.junit.Test;
 
 import be.jsams.common.bean.model.MockBeanGenerator;
 import be.jsams.common.bean.model.management.AgentBean;
-import be.jsams.server.model.AbstractModelTest;
+import be.jsams.server.model.ModelTestHelper;
 
 /**
  * Test class for {@link Agent} class.
@@ -12,7 +12,7 @@ import be.jsams.server.model.AbstractModelTest;
  * @author chesteric31
  * @version $Revision$ $Date::                  $ $Author$
  */
-public class AgentTest extends AbstractModelTest {
+public class AgentTest {
     
     private Agent agent;
 
@@ -25,7 +25,7 @@ public class AgentTest extends AbstractModelTest {
     public void testAgentAgentBean() {
         AgentBean bean = MockBeanGenerator.generateMockAgent();
         agent = new Agent(bean);
-        checkAgent(bean, agent);
+        ModelTestHelper.checkAgent(bean, agent);
     }
 
 }

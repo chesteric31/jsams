@@ -4,7 +4,7 @@ import org.junit.Test;
 
 import be.jsams.common.bean.model.MockBeanGenerator;
 import be.jsams.common.bean.model.management.ProductBean;
-import be.jsams.server.model.AbstractModelTest;
+import be.jsams.server.model.ModelTestHelper;
 
 /**
  * Test class for {@link Product} class.
@@ -12,7 +12,7 @@ import be.jsams.server.model.AbstractModelTest;
  * @author chesteric31
  * @version $Revision$ $Date::                  $ $Author$
  */
-public class ProductTest extends AbstractModelTest {
+public class ProductTest {
     
     private Product product;
 
@@ -25,7 +25,7 @@ public class ProductTest extends AbstractModelTest {
     public void testProductProductBean() {
         ProductBean bean = MockBeanGenerator.generateMockProduct();
         product = new Product(bean);
-        checkProduct(bean, product);
+        ModelTestHelper.checkProduct(bean, product);
     }
 
 }

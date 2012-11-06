@@ -23,7 +23,7 @@ public class Civility extends AbstractTranslatableIdentity {
     }
 
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param bean the {@link CivilityBean}
      */

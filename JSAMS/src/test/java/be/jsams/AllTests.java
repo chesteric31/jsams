@@ -26,6 +26,8 @@ import be.jsams.client.validator.wizard.DocumentValidatorTest;
 import be.jsams.client.validator.wizard.DocumentsValidatorTest;
 import be.jsams.client.validator.wizard.SourceTypeValidatorTest;
 import be.jsams.client.validator.wizard.TransferModeValidatorTest;
+import be.jsams.common.bean.builder.management.AgentBeanBuilderTest;
+import be.jsams.common.bean.builder.management.CustomerBeanBuilderTest;
 import be.jsams.common.bean.model.AddressBeanTest;
 import be.jsams.common.bean.model.CivilityBeanTest;
 import be.jsams.common.bean.model.ContactInformationBeanTest;
@@ -99,16 +101,17 @@ import be.jsams.server.service.xml.impl.XmlEstimateGeneratorImplTest;
         EditCreditNoteValidatorTest.class, SearchAgentValidatorTest.class, SearchCustomerValidatorTest.class,
         SearchProductValidatorTest.class, DestinationTypeValidatorTest.class, DetailsValidatorTest.class,
         DocumentValidatorTest.class, DocumentsValidatorTest.class, SourceTypeValidatorTest.class,
-        TransferModeValidatorTest.class, AddressBeanTest.class, CivilityBeanTest.class, LegalFormBeanTest.class,
-        ContactInformationBeanTest.class, PaymentModeBeanTest.class, PeriodBeanTest.class, SocietyBeanTest.class,
-        AgentBeanTest.class, CustomerBeanTest.class, ProductBeanTest.class, ProductCategoryBeanTest.class,
-        BillBeanTest.class, CommandBeanTest.class, CreditNoteBeanTest.class, DeliveryOrderBeanTest.class,
-        EstimateBeanTest.class, EstimateDetailBeanTest.class, CommandDetailBeanTest.class,
-        DeliveryOrderDetailBeanTest.class, BillDetailBeanTest.class, CreditNoteDetailBeanTest.class,
-        TransferBeanTest.class, EmailValidatorTest.class, StringValidatorTest.class, AddressDaoImplTest.class,
-        CivilityDaoImplTest.class, ContactInformationDaoImplTest.class, SocietyDaoImplTest.class,
-        AgentDaoImplTest.class, CustomerDaoImplTest.class, ProductCategoryDaoImplTest.class, ProductDaoImplTest.class,
-        BillDaoImplTest.class, CommandDaoImplTest.class, CreditNoteDaoImplTest.class, DeliveryOrderDaoImplTest.class,
+        TransferModeValidatorTest.class, AgentBeanBuilderTest.class, CustomerBeanBuilderTest.class,
+        AddressBeanTest.class, CivilityBeanTest.class, LegalFormBeanTest.class, ContactInformationBeanTest.class,
+        PaymentModeBeanTest.class, PeriodBeanTest.class, SocietyBeanTest.class, AgentBeanTest.class,
+        CustomerBeanTest.class, ProductBeanTest.class, ProductCategoryBeanTest.class, BillBeanTest.class,
+        CommandBeanTest.class, CreditNoteBeanTest.class, DeliveryOrderBeanTest.class, EstimateBeanTest.class,
+        EstimateDetailBeanTest.class, CommandDetailBeanTest.class, DeliveryOrderDetailBeanTest.class,
+        BillDetailBeanTest.class, CreditNoteDetailBeanTest.class, TransferBeanTest.class, EmailValidatorTest.class,
+        StringValidatorTest.class, AddressDaoImplTest.class, CivilityDaoImplTest.class,
+        ContactInformationDaoImplTest.class, SocietyDaoImplTest.class, AgentDaoImplTest.class,
+        CustomerDaoImplTest.class, ProductCategoryDaoImplTest.class, ProductDaoImplTest.class, BillDaoImplTest.class,
+        CommandDaoImplTest.class, CreditNoteDaoImplTest.class, DeliveryOrderDaoImplTest.class,
         EstimateDaoImplTest.class, AddressTest.class, ContactInformationTest.class, PaymentModeTest.class,
         SocietyTest.class, AgentTest.class, CustomerTest.class, ProductCategoryTest.class, ProductTest.class,
         EstimateTest.class, CommandTest.class, DeliveryOrderTest.class, BillTest.class, CreditNoteTest.class,

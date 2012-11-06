@@ -9,7 +9,7 @@ import org.junit.Test;
 import be.jsams.common.bean.model.MockBeanGenerator;
 import be.jsams.common.bean.model.sale.CreditNoteBean;
 import be.jsams.common.bean.model.sale.detail.CreditNoteDetailBean;
-import be.jsams.server.model.AbstractModelTest;
+import be.jsams.server.model.ModelTestHelper;
 import be.jsams.server.model.sale.detail.CreditNoteDetail;
 
 /**
@@ -18,7 +18,7 @@ import be.jsams.server.model.sale.detail.CreditNoteDetail;
  * @author chesteric31
  * @version $Revision$ $Date::                  $ $Author$
  */
-public class CreditNoteTest extends AbstractModelTest {
+public class CreditNoteTest {
 
     private CreditNote creditNote;
 
@@ -31,9 +31,9 @@ public class CreditNoteTest extends AbstractModelTest {
     public void testCreditNoteCreditNoteBean() {
         CreditNoteBean bean = MockBeanGenerator.generateMockCreditNote();
         creditNote = new CreditNote(bean);
-        checkAddress(bean.getBillingAddress(), creditNote.getBillingAddress());
+        ModelTestHelper.checkAddress(bean.getBillingAddress(), creditNote.getBillingAddress());
         assertEquals(bean.getCreationDate(), creditNote.getCreationDate());
-        checkCustomer(bean.getCustomer(), creditNote.getCustomer());
+        ModelTestHelper.checkCustomer(bean.getCustomer(), creditNote.getCustomer());
         assertEquals(bean.getRemark(), creditNote.getRemark());
         List<CreditNoteDetail> details = creditNote.getDetails();
         List<CreditNoteDetailBean> detailsBean = bean.getDetails();
@@ -44,7 +44,7 @@ public class CreditNoteTest extends AbstractModelTest {
                 assertEquals(detailBean.getDiscountRate(), detail.getDiscountRate());
                 assertEquals(detailBean.getId(), detail.getId());
                 assertEquals(detailBean.getPrice(), detail.getPrice());
-                checkProduct(detailBean.getProduct(), detail.getProduct());
+                ModelTestHelper.checkProduct(detailBean.getProduct(), detail.getProduct());
                 assertEquals(detailBean.getQuantity(), detail.getQuantity());
                 assertEquals(detailBean.getVatApplicable(), detail.getVatApplicable());
                 i++;

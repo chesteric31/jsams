@@ -4,7 +4,7 @@ import org.junit.Test;
 
 import be.jsams.common.bean.model.MockBeanGenerator;
 import be.jsams.common.bean.model.management.ProductCategoryBean;
-import be.jsams.server.model.AbstractModelTest;
+import be.jsams.server.model.ModelTestHelper;
 
 /**
  * Test class for {@link ProductCategory} class.
@@ -12,7 +12,7 @@ import be.jsams.server.model.AbstractModelTest;
  * @author chesteric31
  * @version $Revision$ $Date::                  $ $Author$
  */
-public class ProductCategoryTest extends AbstractModelTest {
+public class ProductCategoryTest {
 
     private ProductCategory productCategory;
 
@@ -26,7 +26,7 @@ public class ProductCategoryTest extends AbstractModelTest {
     public void testProductCategoryProductCategoryBean() {
         ProductCategoryBean bean = MockBeanGenerator.generateMockProductCategory();
         productCategory = new ProductCategory(bean);
-        checkProductCategory(bean, productCategory);
+        ModelTestHelper.checkProductCategory(bean, productCategory);
     }
 
 }
