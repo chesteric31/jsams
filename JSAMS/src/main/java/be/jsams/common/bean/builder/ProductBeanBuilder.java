@@ -21,7 +21,7 @@ public class ProductBeanBuilder {
     private SocietyBean society;
 
     /**
-     * Build the {@link ProductBean}.
+     * Builds the {@link ProductBean}.
      * 
      * @param newOne to create a new one {@link ProductBean} from scratch
      * @param categoryCanBeNull indicates if the category can be null
