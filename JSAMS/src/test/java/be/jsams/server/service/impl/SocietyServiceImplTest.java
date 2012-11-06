@@ -73,8 +73,6 @@ public class SocietyServiceImplTest extends BaseJUnitTestClass {
         SocietyBean created = service.create(society);
         String newName = "newName";
         created.setName(newName);
-        // trick to avoid transient object exception
-        created.setLegalForm(null);
         service.update(created);
         SocietyBean found = service.findById(created.getId());
         assertEquals(newName, found.getName());
@@ -98,8 +96,6 @@ public class SocietyServiceImplTest extends BaseJUnitTestClass {
     @Test
     public void testDeleteSocietyBean() {
         SocietyBean created = service.create(society);
-        // trick to avoid transient object exception
-        created.setLegalForm(null);
         service.delete(created);
         SocietyBean found = service.findById(created.getId());
         assertNull(found);
