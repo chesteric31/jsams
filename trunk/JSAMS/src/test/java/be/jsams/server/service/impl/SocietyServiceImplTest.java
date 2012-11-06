@@ -20,7 +20,7 @@ import be.jsams.server.model.LegalForm;
 import be.jsams.server.service.SocietyService;
 
 /**
- * 
+ * Test class for {@link SocietyServiceImpl} class.
  *
  * @author chesteric31
  * @version $Revision$ $Date::                  $ $Author$

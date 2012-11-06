@@ -15,7 +15,7 @@ import be.jsams.server.service.rss.RSSFeedParser;
 import be.jsams.server.service.rss.impl.RSSFeedParserImpl;
 
 /**
- * 
+ * Test class for {@link DownloaderServiceImpl} class.
  * 
  * @author chesteric31
  * @version $Revision$ $Date::                  $ $Author$
