@@ -40,9 +40,11 @@ public class SocietyServiceImpl extends AbstractService implements SocietyServic
     public List<SocietyBean> findAll() {
         List<Society> societies = societyDao.findAll();
         List<SocietyBean> beans = new ArrayList<SocietyBean>();
-        for (Society society : societies) {
-            getSocietyBeanBuilder().setModel(society);
-            beans.add(getSocietyBeanBuilder().build(false));
+        if (societies != null) {
+            for (Society society : societies) {
+                getSocietyBeanBuilder().setModel(society);
+                beans.add(getSocietyBeanBuilder().build(false));
+            }
         }
         return beans;
     }
@@ -52,8 +54,12 @@ public class SocietyServiceImpl extends AbstractService implements SocietyServic
      */
     public SocietyBean findById(final Long id) {
         Society society = societyDao.findById(id);
-        getSocietyBeanBuilder().setModel(society);
-        return getSocietyBeanBuilder().build(false);
+        if (society != null) {
+            getSocietyBeanBuilder().setModel(society);
+            return getSocietyBeanBuilder().build(false);
+        } else {
+            return null;
+        }
     }
 
     /**
