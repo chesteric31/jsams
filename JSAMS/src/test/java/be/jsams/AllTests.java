@@ -89,7 +89,7 @@ import be.jsams.server.service.xml.impl.XmlDeliveryOrderGeneratorImplTest;
 import be.jsams.server.service.xml.impl.XmlEstimateGeneratorImplTest;
 
 /**
- * Test suite for all JUNIT tests. <br />
+ * Test suite for all JUNIT tests.
  * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
