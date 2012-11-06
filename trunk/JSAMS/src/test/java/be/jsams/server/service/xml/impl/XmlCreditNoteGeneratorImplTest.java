@@ -16,12 +16,12 @@ import be.jsams.server.model.xml.creditNote.DetailXml;
 import be.jsams.server.model.xml.creditNote.DetailsXml;
 
 /**
- * 
+ * Test class for {@link XmlCreditNoteGeneratorImpl} class.
  *
  * @author chesteric31
  * @version $Revision$ $Date::                  $ $Author$
  */
-public class XmlCreditNoteGeneratorImplTest extends AbstractXmlTest {
+public class XmlCreditNoteGeneratorImplTest {
 
     private XmlCreditNoteGeneratorImpl generator = new XmlCreditNoteGeneratorImpl();
     
@@ -35,9 +35,9 @@ public class XmlCreditNoteGeneratorImplTest extends AbstractXmlTest {
     public void testGenerateXml() {
         CreditNoteBean bean = MockBeanGenerator.generateMockCreditNote();
         CreditNoteXml xml = generator.generateXml(bean);
-        checkAddress(bean.getBillingAddress(), xml.getAddress());
+        XmlTest.checkAddress(bean.getBillingAddress(), xml.getAddress());
         assertEquals(bean.getCreationDate(), xml.getCreationDate());
-        checkCustomer(bean.getCustomer(), xml.getCustomer());
+        XmlTest.checkCustomer(bean.getCustomer(), xml.getCustomer());
         DetailsXml detailsXml = xml.getDetails();
         List<CreditNoteDetailBean> detailsBean = bean.getDetails();
         List<DetailXml> detail = detailsXml.getDetail();
@@ -45,13 +45,13 @@ public class XmlCreditNoteGeneratorImplTest extends AbstractXmlTest {
             int i = 0;
             for (DetailXml detailXml : detail) {
                 CreditNoteDetailBean detailBean = detailsBean.get(i);
-                checkProduct(detailBean.getProduct(), detailXml.getProduct());
+                XmlTest.checkProduct(detailBean.getProduct(), detailXml.getProduct());
                 assertEquals(BigDecimal.valueOf(detailBean.getPrice()), detailXml.getPrice());
                 assertEquals(BigInteger.valueOf(detailBean.getQuantity()), detailXml.getQuantity());
             }
         }
         assertEquals(bean.getId(), xml.getNumber());
-        checkSociety(bean.getSociety(), xml.getSociety());
+        XmlTest.checkSociety(bean.getSociety(), xml.getSociety());
     }
 
 }

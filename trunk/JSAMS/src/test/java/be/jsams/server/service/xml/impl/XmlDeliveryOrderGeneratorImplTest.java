@@ -15,12 +15,12 @@ import be.jsams.server.model.xml.deliveryOrder.DetailXml;
 import be.jsams.server.model.xml.deliveryOrder.DetailsXml;
 
 /**
- * 
+ * Test class for {@link XmlDeliveryOrderGeneratorImpl} class.
  *
  * @author chesteric31
  * @version $Revision$ $Date::                  $ $Author$
  */
-public class XmlDeliveryOrderGeneratorImplTest extends AbstractXmlTest {
+public class XmlDeliveryOrderGeneratorImplTest {
 
     private XmlDeliveryOrderGeneratorImpl generator = new XmlDeliveryOrderGeneratorImpl();
     
@@ -34,9 +34,9 @@ public class XmlDeliveryOrderGeneratorImplTest extends AbstractXmlTest {
     public void testGenerateXml() {
         DeliveryOrderBean bean = MockBeanGenerator.generateMockDeliveryOrder();
         DeliveryOrderXml xml = generator.generateXml(bean);
-        checkAddress(bean.getDeliveryAddress(), xml.getAddress());
+        XmlTest.checkAddress(bean.getDeliveryAddress(), xml.getAddress());
         assertEquals(bean.getCreationDate(), xml.getCreationDate());
-        checkCustomer(bean.getCustomer(), xml.getCustomer());
+        XmlTest.checkCustomer(bean.getCustomer(), xml.getCustomer());
         DetailsXml detailsXml = xml.getDetails();
         List<DeliveryOrderDetailBean> detailsBean = bean.getDetails();
         List<DetailXml> detail = detailsXml.getDetail();
@@ -44,12 +44,12 @@ public class XmlDeliveryOrderGeneratorImplTest extends AbstractXmlTest {
             int i = 0;
             for (DetailXml detailXml : detail) {
                 DeliveryOrderDetailBean detailBean = detailsBean.get(i);
-                checkProduct(detailBean.getProduct(), detailXml.getProduct());
+                XmlTest.checkProduct(detailBean.getProduct(), detailXml.getProduct());
                 assertEquals(BigInteger.valueOf(detailBean.getQuantity()), detailXml.getQuantity());
             }
         }
         assertEquals(bean.getId(), xml.getNumber());
-        checkSociety(bean.getSociety(), xml.getSociety());
+        XmlTest.checkSociety(bean.getSociety(), xml.getSociety());
     }
 
 }

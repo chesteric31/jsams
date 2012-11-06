@@ -16,12 +16,12 @@ import be.jsams.server.model.xml.command.DetailXml;
 import be.jsams.server.model.xml.command.DetailsXml;
 
 /**
- * 
+ * Test class for {@link XmlCommandGeneratorImpl} class.
  *
  * @author chesteric31
  * @version $Revision$ $Date::                  $ $Author$
  */
-public class XmlCommandGeneratorImplTest extends AbstractXmlTest {
+public class XmlCommandGeneratorImplTest {
 
     private XmlCommandGeneratorImpl generator = new XmlCommandGeneratorImpl();
     
@@ -35,9 +35,9 @@ public class XmlCommandGeneratorImplTest extends AbstractXmlTest {
     public void testGenerateXml() {
         CommandBean bean = MockBeanGenerator.generateMockCommand();
         CommandXml xml = generator.generateXml(bean);
-        checkAddress(bean.getBillingAddress(), xml.getAddress());
+        XmlTest.checkAddress(bean.getBillingAddress(), xml.getAddress());
         assertEquals(bean.getCreationDate(), xml.getCreationDate());
-        checkCustomer(bean.getCustomer(), xml.getCustomer());
+        XmlTest.checkCustomer(bean.getCustomer(), xml.getCustomer());
         DetailsXml detailsXml = xml.getDetails();
         List<CommandDetailBean> detailsBean = bean.getDetails();
         List<DetailXml> detail = detailsXml.getDetail();
@@ -45,13 +45,13 @@ public class XmlCommandGeneratorImplTest extends AbstractXmlTest {
             int i = 0;
             for (DetailXml detailXml : detail) {
                 CommandDetailBean detailBean = detailsBean.get(i);
-                checkProduct(detailBean.getProduct(), detailXml.getProduct());
+                XmlTest.checkProduct(detailBean.getProduct(), detailXml.getProduct());
                 assertEquals(BigDecimal.valueOf(detailBean.getPrice()), detailXml.getPrice());
                 assertEquals(BigInteger.valueOf(detailBean.getQuantity()), detailXml.getQuantity());
             }
         }
         assertEquals(bean.getId(), xml.getNumber());
-        checkSociety(bean.getSociety(), xml.getSociety());
+        XmlTest.checkSociety(bean.getSociety(), xml.getSociety());
     }
 
 }
