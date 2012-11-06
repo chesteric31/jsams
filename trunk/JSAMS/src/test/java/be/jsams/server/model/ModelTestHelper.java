@@ -23,7 +23,13 @@ import be.jsams.server.model.management.ProductCategory;
  * @author chesteric31
  * @version $Revision$ $Date::                  $ $Author$
  */
-public abstract class AbstractModelTest {
+public final class ModelTestHelper {
+
+    /**
+     * Private constructor.
+     */
+    private ModelTestHelper() {
+    }
 
     /**
      * Checks if the data are equals.
@@ -31,7 +37,7 @@ public abstract class AbstractModelTest {
      * @param bean the {@link ProductBean} to use
      * @param product the {@link Product} to check
      */
-    protected void checkProduct(ProductBean bean, Product product) {
+    public static void checkProduct(ProductBean bean, Product product) {
         Double price = product.getPrice();
         assertTrue(price.equals(bean.getPrice()));
         String name = product.getName();
@@ -55,23 +61,23 @@ public abstract class AbstractModelTest {
      * @param bean the {@link CustomerBean} to use
      * @param customer the {@link Customer} to check
      */
-    protected void checkCustomer(CustomerBean bean, Customer customer) {
+    public static void checkCustomer(CustomerBean bean, Customer customer) {
         String bank1 = customer.getBank1();
-        assertTrue(bank1.equals(bean.getBank1()));
+        assertEquals(bean.getBank1(), bank1);
         String bank2 = customer.getBank2();
-        assertTrue(bank2.equals(bean.getBank2()));
+        assertEquals(bean.getBank2(), bank2);
         String description = customer.getDescription();
-        assertTrue(description.equals(bean.getDescription()));
+        assertEquals(bean.getDescription(), description);
         String firstName = customer.getFirstName();
-        assertTrue(firstName.equals(bean.getFirstName()));
+        assertEquals(bean.getFirstName(), firstName);
         String name = customer.getName();
-        assertEquals(name, bean.getName());
+        assertEquals(bean.getName(), name);
         Double creditLimit = customer.getCreditLimit();
-        assertEquals(creditLimit, bean.getCreditLimit());
+        assertEquals(bean.getCreditLimit(), creditLimit);
         Double defaultDiscountRate = customer.getDefaultDiscountRate();
-        assertEquals(defaultDiscountRate, bean.getDefaultDiscountRate());
+        assertEquals(bean.getDefaultDiscountRate(), defaultDiscountRate);
         Double vatApplicable = customer.getVatApplicable();
-        assertEquals(vatApplicable, bean.getVatApplicable());
+        assertEquals(bean.getVatApplicable(), vatApplicable);
         String vatNumber = customer.getVatNumber();
         assertEquals(vatNumber, bean.getVatNumber());
         Address billingAddress = customer.getBillingAddress();
@@ -94,7 +100,7 @@ public abstract class AbstractModelTest {
         SocietyBean societyBean = bean.getSociety();
         checkSociety(societyBean, society);
         Long id = customer.getId();
-        assertEquals(id, bean.getId());
+        assertEquals(bean.getId(), id);
     }
 
     /**
@@ -103,7 +109,7 @@ public abstract class AbstractModelTest {
      * @param bean the {@link AgentBean} to use
      * @param agent the {@link Agent} to check
      */
-    protected void checkAgent(AgentBean bean, Agent agent) {
+    public static void checkAgent(AgentBean bean, Agent agent) {
         String function = agent.getFunction();
         assertTrue(function.equals(bean.getFunction()));
         String name = agent.getName();
@@ -130,7 +136,7 @@ public abstract class AbstractModelTest {
      * @param bean the {@link SocietyBean} to use
      * @param society the {@link Society} to check
      */
-    protected void checkSociety(SocietyBean bean, Society society) {
+    public static void checkSociety(SocietyBean bean, Society society) {
         String activity = society.getActivity();
         assertTrue(activity.equals(bean.getActivity()));
         String name = society.getName();
@@ -162,21 +168,21 @@ public abstract class AbstractModelTest {
      * @param bean the {@link AddressBean} to use
      * @param address the {@link Address} to check
      */
-    protected void checkAddress(AddressBean bean, Address address) {
+    public static void checkAddress(AddressBean bean, Address address) {
         String box = address.getBox();
-        assertTrue(box.equals(bean.getBox()));
+        assertEquals(bean.getBox(), box);
         String city = address.getCity();
-        assertEquals(city, bean.getCity());
+        assertEquals(bean.getCity(), city);
         String country = address.getCountry();
-        assertEquals(country, bean.getCountry());
+        assertEquals(bean.getCountry(), country);
         String number = address.getNumber();
-        assertEquals(number, bean.getNumber());
+        assertEquals(bean.getNumber(), number);
         String street = address.getStreet();
-        assertEquals(street, bean.getStreet());
+        assertEquals(bean.getStreet(), street);
         String zipCode = address.getZipCode();
-        assertEquals(zipCode, bean.getZipCode());
+        assertEquals(bean.getZipCode(), zipCode);
         Long id = address.getId();
-        assertEquals(id, bean.getId());
+        assertEquals(bean.getId(), id);
     }
 
     /**
@@ -185,19 +191,19 @@ public abstract class AbstractModelTest {
      * @param bean the {@link ContactInformationBean} to use
      * @param contactInformation the {@link ContactInformation} to check
      */
-    protected void checkContactInformation(ContactInformationBean bean, ContactInformation contactInformation) {
+    public static void checkContactInformation(ContactInformationBean bean, ContactInformation contactInformation) {
         String email = contactInformation.getEmail();
-        assertTrue(email.equals(bean.getEmail()));
+        assertEquals(bean.getEmail(), email);
         String fax = contactInformation.getFax();
-        assertEquals(fax, bean.getFax());
+        assertEquals(bean.getFax(), fax);
         String mobile = contactInformation.getMobile();
-        assertEquals(mobile, bean.getMobile());
+        assertEquals(bean.getMobile(), mobile);
         String phone = contactInformation.getPhone();
-        assertEquals(phone, bean.getPhone());
+        assertEquals(bean.getPhone(), phone);
         String website = contactInformation.getWebsite();
-        assertEquals(website, bean.getWebsite());
+        assertEquals(bean.getWebsite(), website);
         Long id = contactInformation.getId();
-        assertEquals(id, bean.getId());
+        assertEquals(bean.getId(), id);
     }
 
     /**
@@ -206,15 +212,17 @@ public abstract class AbstractModelTest {
      * @param bean the {@link LegalFormBean} to use
      * @param legalForm the {@link LegalForm} to check
      */
-    protected void checkLegalForm(LegalFormBean bean, LegalForm legalForm) {
-        String label = legalForm.getLabel();
-        assertTrue(label.equals(bean.getLabel()));
-        String labelFr = legalForm.getLabelFr();
-        assertTrue(labelFr.equals(bean.getLabelFr()));
-        String labelNl = legalForm.getLabelNl();
-        assertTrue(labelNl.equals(bean.getLabelNl()));
-        Long id = legalForm.getId();
-        assertEquals(id, bean.getId());
+    public static void checkLegalForm(LegalFormBean bean, LegalForm legalForm) {
+        if (bean != null && legalForm != null) {
+            String label = legalForm.getLabel();
+            assertTrue(label.equals(bean.getLabel()));
+            String labelFr = legalForm.getLabelFr();
+            assertTrue(labelFr.equals(bean.getLabelFr()));
+            String labelNl = legalForm.getLabelNl();
+            assertTrue(labelNl.equals(bean.getLabelNl()));
+            Long id = legalForm.getId();
+            assertEquals(id, bean.getId());
+        }
     }
 
     /**
@@ -223,15 +231,15 @@ public abstract class AbstractModelTest {
      * @param bean the {@link CivilityBean} to use
      * @param civility the {@link Civility} to check
      */
-    protected void checkCivility(CivilityBean bean, Civility civility) {
+    public static void checkCivility(CivilityBean bean, Civility civility) {
         String label = civility.getLabel();
-        assertTrue(label.equals(bean.getLabel()));
+        assertEquals(bean.getLabel(), label);
         String labelFr = civility.getLabelFr();
-        assertTrue(labelFr.equals(bean.getLabelFr()));
+        assertEquals(bean.getLabelFr(), labelFr);
         String labelNl = civility.getLabelNl();
-        assertTrue(labelNl.equals(bean.getLabelNl()));
+        assertEquals(bean.getLabelNl(), labelNl);
         Long id = civility.getId();
-        assertEquals(id, bean.getId());
+        assertEquals(bean.getId(), id);
     }
 
     /**
@@ -240,15 +248,15 @@ public abstract class AbstractModelTest {
      * @param bean the {@link PaymentModeBean} to use
      * @param paymentMode the {@link PaymentMode} to check
      */
-    protected void checkPaymentMode(PaymentModeBean bean, PaymentMode paymentMode) {
+    public static void checkPaymentMode(PaymentModeBean bean, PaymentMode paymentMode) {
         String label = paymentMode.getLabel();
-        assertTrue(label.equals(bean.getLabel()));
+        assertEquals(bean.getLabel(), label);
         String labelFr = paymentMode.getLabelFr();
-        assertTrue(labelFr.equals(bean.getLabelFr()));
+        assertEquals(bean.getLabelFr(), labelFr);
         String labelNl = paymentMode.getLabelNl();
-        assertTrue(labelNl.equals(bean.getLabelNl()));
+        assertEquals(bean.getLabelNl(), labelNl);
         Long id = paymentMode.getId();
-        assertEquals(id, bean.getId());
+        assertEquals(bean.getId(), id);
     }
 
     /**
@@ -257,17 +265,17 @@ public abstract class AbstractModelTest {
      * @param bean the {@link ProductCategoryBean} to use
      * @param productCategory the {@link ProductCategory} to check
      */
-    protected void checkProductCategory(ProductCategoryBean bean, ProductCategory productCategory) {
+    public static void checkProductCategory(ProductCategoryBean bean, ProductCategory productCategory) {
         String label = productCategory.getLabel();
-        assertTrue(label.equals(bean.getLabel()));
+        assertEquals(bean.getLabel(), label);
         String labelFr = productCategory.getLabelFr();
-        assertTrue(labelFr.equals(bean.getLabelFr()));
+        assertEquals(bean.getLabelFr(), labelFr);
         String labelNl = productCategory.getLabelNl();
-        assertTrue(labelNl.equals(bean.getLabelNl()));
+        assertEquals(bean.getLabelNl(), labelNl);
         Society society = productCategory.getSociety();
         checkSociety(bean.getSociety(), society);
         Long id = productCategory.getId();
-        assertEquals(id, bean.getId());
+        assertEquals(bean.getId(), id);
     }
 
 }

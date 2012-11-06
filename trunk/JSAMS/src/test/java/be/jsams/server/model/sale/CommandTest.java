@@ -9,7 +9,7 @@ import org.junit.Test;
 import be.jsams.common.bean.model.MockBeanGenerator;
 import be.jsams.common.bean.model.sale.CommandBean;
 import be.jsams.common.bean.model.sale.detail.CommandDetailBean;
-import be.jsams.server.model.AbstractModelTest;
+import be.jsams.server.model.ModelTestHelper;
 import be.jsams.server.model.sale.detail.CommandDetail;
 
 /**
@@ -18,7 +18,7 @@ import be.jsams.server.model.sale.detail.CommandDetail;
  * @author chesteric31
  * @version $Revision$ $Date::                  $ $Author$
  */
-public class CommandTest extends AbstractModelTest {
+public class CommandTest {
 
     private Command command;
 
@@ -31,11 +31,11 @@ public class CommandTest extends AbstractModelTest {
     public void testCommandCommandBean() {
         CommandBean bean = MockBeanGenerator.generateMockCommand();
         command = new Command(bean);
-        checkAgent(bean.getAgent(), command.getAgent());
-        checkAddress(bean.getBillingAddress(), command.getBillingAddress());
+        ModelTestHelper.checkAgent(bean.getAgent(), command.getAgent());
+        ModelTestHelper.checkAddress(bean.getBillingAddress(), command.getBillingAddress());
         assertEquals(bean.getCreationDate(), command.getCreationDate());
-        checkCustomer(bean.getCustomer(), command.getCustomer());
-        checkAddress(bean.getDeliveryAddress(), command.getDeliveryAddress());
+        ModelTestHelper.checkCustomer(bean.getCustomer(), command.getCustomer());
+        ModelTestHelper.checkAddress(bean.getDeliveryAddress(), command.getDeliveryAddress());
         assertEquals(bean.getDiscountRate(), command.getDiscountRate());
         assertEquals(bean.isTransferred(), command.isTransferred());
         assertEquals(bean.getRemark(), command.getRemark());
@@ -48,7 +48,7 @@ public class CommandTest extends AbstractModelTest {
                 assertEquals(detailBean.getDiscountRate(), detail.getDiscountRate());
                 assertEquals(detailBean.getId(), detail.getId());
                 assertEquals(detailBean.getPrice(), detail.getPrice());
-                checkProduct(detailBean.getProduct(), detail.getProduct());
+                ModelTestHelper.checkProduct(detailBean.getProduct(), detail.getProduct());
                 assertEquals(detailBean.getQuantity(), detail.getQuantity());
                 assertEquals(detailBean.getVatApplicable(), detail.getVatApplicable());
                 assertEquals(detailBean.isTransferred(), detail.isTransferred());

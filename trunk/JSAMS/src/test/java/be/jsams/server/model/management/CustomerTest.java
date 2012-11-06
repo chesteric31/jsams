@@ -4,7 +4,7 @@ import org.junit.Test;
 
 import be.jsams.common.bean.model.MockBeanGenerator;
 import be.jsams.common.bean.model.management.CustomerBean;
-import be.jsams.server.model.AbstractModelTest;
+import be.jsams.server.model.ModelTestHelper;
 
 /**
  * Test class for {@link Customer} class.
@@ -12,7 +12,7 @@ import be.jsams.server.model.AbstractModelTest;
  * @author chesteric31
  * @version $Revision$ $Date::                  $ $Author$
  */
-public class CustomerTest extends AbstractModelTest {
+public class CustomerTest {
     
     private Customer customer;
 
@@ -25,7 +25,7 @@ public class CustomerTest extends AbstractModelTest {
     public void testCustomerCustomerBean() {
         CustomerBean bean = MockBeanGenerator.generateMockCustomer();
         customer = new Customer(bean);
-        checkCustomer(bean, customer);
+        ModelTestHelper.checkCustomer(bean, customer);
     }
 
 }

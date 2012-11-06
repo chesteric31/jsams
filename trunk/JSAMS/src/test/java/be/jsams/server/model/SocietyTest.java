@@ -11,7 +11,7 @@ import be.jsams.common.bean.model.SocietyBean;
  * @author chesteric31
  * @version $Revision$ $Date::                  $ $Author$
  */
-public class SocietyTest extends AbstractModelTest {
+public class SocietyTest {
 
     private Society society;
 
@@ -24,7 +24,7 @@ public class SocietyTest extends AbstractModelTest {
     public void testSocietySocietyBean() {
         SocietyBean bean = MockBeanGenerator.generateMockSociety();
         society = new Society(bean);
-        checkSociety(bean, society);
+        ModelTestHelper.checkSociety(bean, society);
     }
 
 }

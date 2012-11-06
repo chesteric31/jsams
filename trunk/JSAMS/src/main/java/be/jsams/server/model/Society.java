@@ -44,14 +44,14 @@ public class Society extends AbstractNamedIdentity {
     private List<ProductCategory> productCategories;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public Society() {
         super();
     }
 
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param bean the {@link SocietyBean}
      */

@@ -24,7 +24,7 @@ public class AgentBeanBuilder {
     private CivilityBeanBuilder civilityBeanBuilder;
 
     /**
-     * Build the {@link AgentBean}.
+     * Builds the {@link AgentBean}.
      * 
      * @param model the model to use to create the bean, null if this is a new bean from scratch to build
      * @param society the {@link SocietyBean} linked (current society)

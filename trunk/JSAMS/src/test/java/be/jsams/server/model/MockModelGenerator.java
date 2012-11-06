@@ -66,7 +66,11 @@ public final class MockModelGenerator {
      */
     public static ContactInformation generateMockContactInformation() {
         ContactInformation contactInformation = new ContactInformation();
-        contactInformation.setPhone("+3221223456");
+        contactInformation.setPhone("0221223456");
+        contactInformation.setFax("0123456789");
+        contactInformation.setMobile("1234567890");
+        contactInformation.setEmail("mail@mail.com");
+        contactInformation.setWebsite("www.website.com");
         return contactInformation;
     }
 
@@ -77,6 +81,7 @@ public final class MockModelGenerator {
      */
     public static Address generateMockAddress() {
         Address address = new Address();
+        address.setBox("A");
         address.setCity("Brussels");
         address.setCountry("Belgium");
         address.setNumber("1");
@@ -119,9 +124,9 @@ public final class MockModelGenerator {
      */
     public static LegalForm generateMockLegalForm() {
         LegalForm form = new LegalForm();
-        form.setLabel("label");
-        form.setLabelFr("labelFr");
-        form.setLabelNl("labelNl");
+        form.setLabel("Public Limited Company");
+        form.setLabelFr("Entreprise individuelle");
+        form.setLabelNl("Eenmanszaak");
         return form;
     }
 

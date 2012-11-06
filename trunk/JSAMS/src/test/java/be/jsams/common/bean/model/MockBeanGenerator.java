@@ -68,7 +68,7 @@ public final class MockBeanGenerator {
         contactInformation.setEmail("mail@mail.com");
         contactInformation.setFax("0123456789");
         contactInformation.setMobile("1234567890");
-        contactInformation.setPhone("0123456788");
+        contactInformation.setPhone("0221223456");
         contactInformation.setWebsite("www.website.com");
         return contactInformation;
     }
