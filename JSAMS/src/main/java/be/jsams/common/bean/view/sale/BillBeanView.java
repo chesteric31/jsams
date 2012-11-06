@@ -248,8 +248,6 @@ public class BillBeanView extends AbstractDocumentBeanView<BillBean> implements 
                                 ListSelectionModel.SINGLE_SELECTION);
                         dialog.add(searchPanel);
                         dialog.pack();
-                        // DialogUtil.centerComponentOnScreen(((JsamsTable)
-                        // e.getSource()).getRootPane());
                         dialog.setLocationRelativeTo(((JsamsTable) e.getSource()).getRootPane());
                         dialog.setVisible(true);
                     }

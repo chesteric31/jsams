@@ -76,8 +76,6 @@ public abstract class AbstractDocumentChooserWizardPanel<V extends Validator<Tra
      * {@inheritDoc}
      */
     public void update() {
-//        setFinishButtonEnabled(false);
-//        setBackButtonEnabled(true);
         updateContainer();
         super.update();
     }
@@ -123,7 +121,6 @@ public abstract class AbstractDocumentChooserWizardPanel<V extends Validator<Tra
                 FormLayout layout = new FormLayout(
                         "right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow", "p");
                 DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
-//                builder.setDefaultDialogBorder();
                 builder.appendI15d(JsamsI18nLabelResource.LABEL_CUSTOMER_NAME.getKey(), bean.getCustomer().getView()
                         .createCustomView());
                 builder.appendI15d(JsamsI18nLabelResource.LABEL_START_DATE.getKey(), startDate);
@@ -175,7 +172,6 @@ public abstract class AbstractDocumentChooserWizardPanel<V extends Validator<Tra
                 FormLayout layout = new FormLayout(
                         "right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow", "p");
                 DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
-//                builder.setDefaultDialogBorder();
                 builder.appendI15d(JsamsI18nLabelResource.LABEL_CUSTOMER_NAME.getKey(), bean.getCustomer().getView()
                         .createCustomView());
                 builder.appendI15d(JsamsI18nLabelResource.LABEL_START_DATE.getKey(), startDate);
@@ -223,7 +219,6 @@ public abstract class AbstractDocumentChooserWizardPanel<V extends Validator<Tra
                 FormLayout layout = new FormLayout(
                         "right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow", "p");
                 DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
-//                builder.setDefaultDialogBorder();
                 builder.appendI15d(JsamsI18nLabelResource.LABEL_CUSTOMER_NAME.getKey(), bean.getCustomer().getView()
                         .createCustomView());
                 builder.appendI15d(JsamsI18nLabelResource.LABEL_START_DATE.getKey(), startDate);
@@ -272,7 +267,6 @@ public abstract class AbstractDocumentChooserWizardPanel<V extends Validator<Tra
                 FormLayout layout = new FormLayout(
                         "right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow", "p");
                 DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
-//                builder.setDefaultDialogBorder();
                 builder.appendI15d(JsamsI18nLabelResource.LABEL_CUSTOMER_NAME.getKey(), bean.getCustomer().getView()
                         .createCustomView());
                 builder.appendI15d(JsamsI18nLabelResource.LABEL_START_DATE.getKey(), startDate);

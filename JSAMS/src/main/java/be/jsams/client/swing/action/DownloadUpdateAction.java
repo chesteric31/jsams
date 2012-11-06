@@ -78,11 +78,4 @@ public class DownloadUpdateAction extends AbstractAction {
         }
     }
     
-//    public static void main(String... args) {
-//        List<String> list = new ArrayList<String>();
-//        list.add("/home/chesteric31/Dev/workspace-jsams/JSAMS/JSAMS-1.0.2-SNAPSHOT-updater.jar");
-//        list.add("/home/chesteric31/Dev/workspace-jsams/JSAMS/JSAMS-1.0.3-SNAPSHOT-updater.jar");
-//        new DownloadUpdateAction("text", new ImageIcon()).executeUpdates(list);
-//    }
-
 }

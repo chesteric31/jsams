@@ -151,14 +151,6 @@ public abstract class AbstractDetailBean
         this.product = product;
     }
 
-//    /**
-//     * {@inheritDoc}
-//     */
-//    @Override
-//    public AbstractDetailBeanView getView() {
-//        return new DocumentDetailBeanView(this);
-//    }
-
     /**
      * {@inheritDoc}
      */

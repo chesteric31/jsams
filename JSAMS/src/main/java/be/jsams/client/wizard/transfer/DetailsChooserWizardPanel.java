@@ -65,8 +65,6 @@ public class DetailsChooserWizardPanel extends JsamsWizardPanel<TransferBean, De
      * {@inheritDoc}
      */
     public void update() {
-//        setFinishButtonEnabled(false);
-//        setBackButtonEnabled(true);
         updateContainer();
         super.update();
     }

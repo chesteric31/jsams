@@ -141,18 +141,6 @@ public class JsamsStatusBar extends JPanel {
         labelPanel.setLayout(new GridLayout(1, 1));
         labelPanel.add(labelText);
 
-        // The message area is on the right of the status bar and takes
-        // up all available space.
-        // gribBagContraints.anchor = GridBagConstraints.WEST;
-        // gribBagContraints.weightx = 1.0;
-        // gribBagContraints.fill = GridBagConstraints.HORIZONTAL;
-        // gribBagContraints.gridy = 0;
-        // gribBagContraints.gridx = 0;
-        // addComponent(labelPanel);
-        // // Any other components are on the right.
-        // gribBagContraints.weightx = 0.0;
-        // gribBagContraints.anchor = GridBagConstraints.CENTER;
-        // gribBagContraints.gridx = GridBagConstraints.RELATIVE;
         gridBagContraints.anchor = GridBagConstraints.WEST;
         gridBagContraints.weightx = 1.0;
         gridBagContraints.fill = GridBagConstraints.BOTH;
@@ -160,7 +148,7 @@ public class JsamsStatusBar extends JPanel {
     }
 
     /**
-     * Set the text and the icon of the {@link JsamsLabel}.
+     * Sets the text and the icon of the {@link JsamsLabel}.
      * 
      * @param label the {@link JsamsLabel} to use
      */

@@ -202,7 +202,6 @@ public class EstimateBeanView extends AbstractDocumentBeanView<EstimateBean> imp
                 if (e.getClickCount() == 2) {
                     if (selectedColumn == 0 || selectedColumn == 1) {
                         final JsamsDialog dialog = new JsamsDialog(null, JsamsI18nResource.TITLE_SEARCH_PRODUCT);
-                        // dialog.setPreferredSize(new Dimension(800, 600));
                         ProductTableMouseListener customListener = new ProductTableMouseListener() {
                             /**
                              * {@inheritDoc}
@@ -240,8 +239,6 @@ public class EstimateBeanView extends AbstractDocumentBeanView<EstimateBean> imp
                                 ListSelectionModel.SINGLE_SELECTION);
                         dialog.add(searchPanel);
                         dialog.pack();
-                        // DialogUtil.centerComponentOnScreen(((JsamsTable)
-                        // e.getSource()).getRootPane());
                         dialog.setLocationRelativeTo(((JsamsTable) e.getSource()).getRootPane());
                         dialog.setVisible(true);
                     }
@@ -290,7 +287,6 @@ public class EstimateBeanView extends AbstractDocumentBeanView<EstimateBean> imp
                 detail.setListModel(new ArrayListModel<EstimateDetailBean>(details));
                 bean.setDetails(details);
                 ((AbstractJsamsTableModel<?>) getDetailsTable().getModel()).setListModel(detail.getListModel());
-                // getDetailsTable().repaint();
             }
         });
         return buttonAdd;
@@ -313,7 +309,6 @@ public class EstimateBeanView extends AbstractDocumentBeanView<EstimateBean> imp
                     details.remove(model.getRow(selectedRowModel));
                     getBean().setDetails(details);
                     model.setListModel(new ArrayListModel<EstimateDetailBean>(details));
-                    // getDetailsTable().repaint();
                 }
             }
         });

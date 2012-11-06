@@ -134,12 +134,10 @@ public abstract class AbstractWizardDialog<B extends AbstractIdentityBean<?, ?>,
                 setPanelTitle(((JsamsWizardPanel<?, ?>) event.getNewValue()).getPanelTitle());
             }
         });
-//        this.pack();
-//        DialogUtil.centerComponentOnScreen(this);
     }
     
     /**
-     * Perform the finish action.
+     * Performs the finish action.
      */
     protected abstract void performFinish();
 

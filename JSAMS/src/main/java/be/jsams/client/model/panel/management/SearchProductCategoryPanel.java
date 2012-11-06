@@ -91,7 +91,6 @@ public class SearchProductCategoryPanel extends
      */
     private void fillTable(final List<ProductCategoryBean> categories) {
         ProductCategoryTableModel model = new ProductCategoryTableModel(categories);
-        // getResultTable().setModel(model);
         super.setTableModel(model);
         getResultTable().repaint();
     }

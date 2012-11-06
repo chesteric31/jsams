@@ -128,7 +128,6 @@ public abstract class AbstractTranslatableIdentityBean
         if (other.getSelection() != null) {
             setSelection(other.getSelection());
         }
-        // setListModel(other.getListModel());
     }
 
     /**

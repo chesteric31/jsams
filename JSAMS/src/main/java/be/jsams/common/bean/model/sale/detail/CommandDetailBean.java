@@ -24,9 +24,6 @@ public class CommandDetailBean extends AbstractDetailBean<CommandDetail, Command
 
     public static final String TRANSFERRED_PROPERTY = "transferred";
 
-    // private ObservableList<CommandDetailBean> list = new
-    // ArrayListModel<CommandDetailBean>();
-
     /**
      * Default constructor
      */

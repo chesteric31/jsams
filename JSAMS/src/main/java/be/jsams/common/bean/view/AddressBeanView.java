@@ -54,7 +54,6 @@ public class AddressBeanView extends AbstractBeanView<AddressBean> implements Ed
                 "right:p, 3dlu, 70dlu, 3dlu, right:p, 3dlu, 70dlu, 3dlu, right:p, 3dlu, 70dlu", "p");
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
         final int maxColumnSpan = 9;
-        // builder.setDefaultDialogBorder();
         builder.appendSeparator(JsamsI18nLabelResource.LABEL_ADDRESS.getTranslation());
         builder.appendI15d(JsamsI18nLabelResource.LABEL_STREET.getKey(), textFieldStreet, maxColumnSpan);
         builder.nextLine();
