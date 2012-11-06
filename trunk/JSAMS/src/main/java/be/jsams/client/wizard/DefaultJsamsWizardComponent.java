@@ -128,7 +128,6 @@ public class DefaultJsamsWizardComponent implements JsamsWizardComponent {
             for (int i = index + 1; i < panelList.size(); i++) {
                 JsamsWizardPanel<?, ?> panelToMove = panelList.get(i);
                 panelsContainer.add(panelToMove, i);
-//                panelsContainer.add(panelToMove, i + "");
             }
         }
     }
@@ -145,7 +144,6 @@ public class DefaultJsamsWizardComponent implements JsamsWizardComponent {
         for (int i = index; i < panelList.size(); i++) {
             JsamsWizardPanel<?, ?> panelToMove = panelList.get(i);
             panelsContainer.add(panelToMove, i);
-//            panelsContainer.add(panelToMove, i + "");
         }
         return panel;
     }
@@ -160,7 +158,6 @@ public class DefaultJsamsWizardComponent implements JsamsWizardComponent {
         for (int i = index; i < panelList.size(); i++) {
             JsamsWizardPanel<?, ?> panelToMove = panelList.get(i);
             panelsContainer.add(panelToMove, i);
-//            panelsContainer.add(panelToMove, i + "");
         }
         return panel;
     }

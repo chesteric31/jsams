@@ -120,7 +120,6 @@ public class JsamsSalesMenuBuilder extends AbstractMenuBuilder {
                 new TransferWizardDialog(parent,
                         JsamsI18nResource.TITLE_TRANSFER_DOCUMENTS, "actions/media-seek-forward.png",
                         "images/transfer_left_right.png");
-//                transferDialog.display();
             }
         };
         action.putValue(Action.NAME, text);

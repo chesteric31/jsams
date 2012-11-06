@@ -29,14 +29,14 @@ public final class JsamsSplashPanel extends JPanel {
     private static Object classLock = JsamsSplashPanel.class;
 
     /**
-     * Constructor
+     * Constructor.
      */
     private JsamsSplashPanel() {
         this(new ImageIcon("src/main/resources/images/splash.png").getImage());
     }
 
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param image the image to display
      */
@@ -47,7 +47,6 @@ public final class JsamsSplashPanel extends JPanel {
     }
 
     /**
-     * 
      * @return the instance of {@link JsamsSplashPanel}
      */
     public static JsamsSplashPanel getInstance() {
@@ -79,15 +78,6 @@ public final class JsamsSplashPanel extends JPanel {
 
             // Set the composite on the Graphics2D object.
             g2d.setComposite(alphaComp);
-
-            // Invoke arbitrary paint methods, which will paint
-            // with 50% translucency.
-            // int w = getWidth();
-            // int h = getHeight();
-            // int x = (w - image.getWidth(null)) / 2;
-            // int y = (h - image.getHeight(null)) / 2;
-            //
-            // g.drawImage(image, x, y, null);
 
             g2d.translate(this.getWidth() / 2, this.getHeight() / 2);
             g2d.translate(-image.getWidth(null) / 2, -image.getHeight(null) / 2);

@@ -222,7 +222,6 @@ public abstract class JsamsWizardPanel<B extends AbstractIdentityBean<?, ?>, V e
                 } else if (severity == Severity.WARNING) {
                     label.setIcon(ValidationResultViewFactory.getWarningIcon());
                 }
-//                statusBar.addComponent(label);
                 statusBar.setTextWithIcon(label);
             }
             toContinue = false;

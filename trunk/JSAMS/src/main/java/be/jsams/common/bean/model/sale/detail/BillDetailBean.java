@@ -24,9 +24,6 @@ public class BillDetailBean extends AbstractDetailBean<BillDetail, BillDetailBea
 
     public static final String TRANSFERRED_PROPERTY = "transferred";
 
-    // private ObservableList<BillDetailBean> list = new
-    // ArrayListModel<BillDetailBean>();
-
     /**
      * Default constructor
      */

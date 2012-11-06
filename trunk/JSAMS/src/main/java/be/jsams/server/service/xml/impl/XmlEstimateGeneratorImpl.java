@@ -42,13 +42,11 @@ public class XmlEstimateGeneratorImpl implements XmlGenerator<EstimateBean, Esti
         CustomerXml customerXml = factory.createCustomer();
         CustomerBean customer = object.getCustomer();
         AddressXml addressXml = factory.createAddress();
-//        AddressBean billingAddress = customer.getBillingAddress();
         AddressBean billingAddress = object.getBillingAddress();
         addressXml.setCity(billingAddress.getCity());
         addressXml.setNumber(new BigInteger(billingAddress.getNumber()));
         addressXml.setStreet(billingAddress.getStreet());
         addressXml.setZip(billingAddress.getZipCode());
-//        customerXml.setAddress(addressXml);
         xml.setAddress(addressXml);
         customerXml.setName(customer.getName());
         customerXml.setFirstName(customer.getFirstName());
@@ -113,12 +111,5 @@ public class XmlEstimateGeneratorImpl implements XmlGenerator<EstimateBean, Esti
         xml.setVat(fullVat.setScale(2, BigDecimal.ROUND_UP));
         return xml;
     }
-
-    // public static void main(String[] args) {
-    // ObjectFactory factory = new ObjectFactory();
-    // EstimateXml xml = factory.createEstimate();
-    // xml.setCreationDate(new Date());
-    // new XmlEstimateGeneratorImpl().generateXml(EstimateXml.class, xml);
-    // }
 
 }

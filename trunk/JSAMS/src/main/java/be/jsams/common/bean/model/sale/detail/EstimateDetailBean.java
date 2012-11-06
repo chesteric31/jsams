@@ -24,9 +24,6 @@ public class EstimateDetailBean extends AbstractDetailBean<EstimateDetail, Estim
 
     public static final String TRANSFERRED_PROPERTY = "transferred";
 
-    // private ObservableList<EstimateDetailBean> list = new
-    // ArrayListModel<EstimateDetailBean>();
-
     /**
      * Default constructor
      */

@@ -52,7 +52,6 @@ public class ContactInformationBeanView extends AbstractBeanView<ContactInformat
                 "right:p, 3dlu, 70dlu, 3dlu, right:p, 3dlu, 70dlu, 3dlu, right:p, 3dlu, 70dlu", "p");
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
         final int maxColumnSpan = 5;
-        // builder.setDefaultDialogBorder();
         builder.appendSeparator(JsamsI18nLabelResource.LABEL_CONTACT_INFORMATIONS.getTranslation());
         builder.appendI15d(JsamsI18nLabelResource.LABEL_PHONE.getKey(), textFieldPhone);
         builder.appendI15d(JsamsI18nLabelResource.LABEL_FAX.getKey(), textFieldFax);

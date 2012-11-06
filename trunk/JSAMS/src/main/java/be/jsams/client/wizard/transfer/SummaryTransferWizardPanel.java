@@ -58,9 +58,6 @@ public class SummaryTransferWizardPanel extends JsamsWizardPanel<TransferBean, S
      * {@inheritDoc}
      */
     public void update() {
-//        setNextButtonEnabled(false);
-//        setFinishButtonEnabled(true);
-//        setBackButtonEnabled(true);
         updateContainer();
         super.update();
     }

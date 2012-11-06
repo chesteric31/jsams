@@ -109,7 +109,6 @@ public class DocumentsChooserWizardPanel extends AbstractDocumentChooserWizardPa
             PaymentModeBean mode = builder.build();
             BillBean bill = new BillBean(currentSociety, customer, mode);
             bill.setView(buildBillView(bill));
-            // bill.setTransferred(false);
             SearchBillPanel<BillWizardMultipleSelectionTableML> billPanel
                 = new SearchBillPanel<BillWizardMultipleSelectionTableML>(
                     bill, new BillWizardMultipleSelectionTableML(getModel()), JsamsApplicationContext.getBillService(),

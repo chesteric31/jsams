@@ -239,8 +239,6 @@ public class DeliveryOrderBeanView extends AbstractDocumentBeanView<DeliveryOrde
                                 ListSelectionModel.SINGLE_SELECTION);
                         dialog.add(searchPanel);
                         dialog.pack();
-                        // DialogUtil.centerComponentOnScreen(((JsamsTable)
-                        // e.getSource()).getRootPane());
                         dialog.setLocationRelativeTo(((JsamsTable) e.getSource()).getRootPane());
                         dialog.setVisible(true);
                     }
@@ -289,7 +287,6 @@ public class DeliveryOrderBeanView extends AbstractDocumentBeanView<DeliveryOrde
                 detail.setListModel(new ArrayListModel<DeliveryOrderDetailBean>(details));
                 bean.setDetails(details);
                 ((AbstractJsamsTableModel<?>) getDetailsTable().getModel()).setListModel(detail.getListModel());
-                // getDetailsTable().repaint();
             }
         });
         return buttonAdd;
@@ -312,7 +309,6 @@ public class DeliveryOrderBeanView extends AbstractDocumentBeanView<DeliveryOrde
                     details.remove(model.getRow(selectedRowModel));
                     getBean().setDetails(details);
                     model.setListModel(new ArrayListModel<DeliveryOrderDetailBean>(details));
-                    // getDetailsTable().repaint();
                 }
             }
         });

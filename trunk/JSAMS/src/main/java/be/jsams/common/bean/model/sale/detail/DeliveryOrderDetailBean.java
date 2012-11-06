@@ -27,9 +27,6 @@ public class DeliveryOrderDetailBean extends
 
     public static final String TRANSFERRED_PROPERTY = "transferred";
 
-    // private ObservableList<DeliveryOrderDetailBean> list = new
-    // ArrayListModel<DeliveryOrderDetailBean>();
-
     /**
      * Default constructor
      */

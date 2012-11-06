@@ -131,7 +131,6 @@ public class SocietyBeanView extends AbstractBeanView<SocietyBean> implements Ed
             public void actionPerformed(ActionEvent arg0) {
                 bean.setLogo(null);
                 labelLogo.setIcon(null);
-//                labelLogo.updateUI();
             }
         });
 
