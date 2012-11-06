@@ -17,12 +17,18 @@ import be.jsams.server.model.xml.ProductXml;
 import be.jsams.server.model.xml.SocietyXml;
 
 /**
- * 
+ * Helper class for checking if data contains between beans and XMLs are equals.
  *
  * @author chesteric31
  * @version $Revision$ $Date::                  $ $Author$
  */
-public abstract class AbstractXmlTest {
+public final class XmlTest {
+
+    /**
+     * Private constructor.
+     */
+    private XmlTest() {
+    }
 
     /**
      * Checks if the data are equals.
@@ -30,7 +36,7 @@ public abstract class AbstractXmlTest {
      * @param bean the {@link ProductBean} to use
      * @param xml the {@link ProductXml} to check
      */
-    protected void checkProduct(ProductBean bean, ProductXml xml) {
+    public static void checkProduct(ProductBean bean, ProductXml xml) {
         String name = xml.getName();
         assertEquals(name, bean.getName());
     }
@@ -41,7 +47,7 @@ public abstract class AbstractXmlTest {
      * @param bean the {@link SocietyBean} to use
      * @param xml the {@link SocietyXml} to check
      */
-    protected void checkSociety(SocietyBean bean, SocietyXml xml) {
+    public static void checkSociety(SocietyBean bean, SocietyXml xml) {
         String name = xml.getName();
         assertEquals(name, bean.getName());
         AddressXml address = xml.getAddress();
@@ -62,7 +68,7 @@ public abstract class AbstractXmlTest {
      * @param bean the {@link ContactInformationBean} to use
      * @param xml the {@link ContactInformationXml} to check
      */
-    protected void checkContactInformation(ContactInformationBean bean, ContactInformationXml xml) {
+    public static void checkContactInformation(ContactInformationBean bean, ContactInformationXml xml) {
         String phone = xml.getPhone();
         assertEquals(bean.getPhone(), String.valueOf(phone));
     }
@@ -73,7 +79,7 @@ public abstract class AbstractXmlTest {
      * @param bean the {@link AddressBean} to use
      * @param xml the {@link AddressXml} to check
      */
-    protected void checkAddress(AddressBean bean, AddressXml xml) {
+    public static void checkAddress(AddressBean bean, AddressXml xml) {
         String city = xml.getCity();
         assertEquals(city, bean.getCity());
         BigInteger number = xml.getNumber();
@@ -90,7 +96,7 @@ public abstract class AbstractXmlTest {
      * @param bean the {@link CustomerBean} to use
      * @param xml the {@link CustomerXml} to check
      */
-    protected void checkCustomer(CustomerBean bean, CustomerXml xml) {
+    public static void checkCustomer(CustomerBean bean, CustomerXml xml) {
         String firstName = xml.getFirstName();
         assertTrue(firstName.equals(bean.getFirstName()));
         String name = xml.getName();
