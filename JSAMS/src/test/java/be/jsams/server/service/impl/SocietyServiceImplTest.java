@@ -107,8 +107,6 @@ public class SocietyServiceImplTest extends BaseJUnitTestClass {
     @Test
     public void testDeleteLong() {
         SocietyBean created = service.create(society);
-        // trick to avoid transient object exception
-        created.setLegalForm(null);
         Long id = created.getId();
         service.delete(id);
         SocietyBean found = service.findById(id);
