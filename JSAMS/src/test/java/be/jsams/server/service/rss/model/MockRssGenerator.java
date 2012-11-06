@@ -13,7 +13,7 @@ import be.jsams.server.service.rss.RSSFeedWriter;
 import be.jsams.server.service.rss.impl.RSSFeedWriterImpl;
 
 /**
- * Generator of RSS fluxes.
+ * Generator of RSS flows.
  *
  * @author chesteric31
  * @version $Revision$ $Date::                  $ $Author$

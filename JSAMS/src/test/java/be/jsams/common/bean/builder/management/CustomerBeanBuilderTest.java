@@ -14,7 +14,7 @@ import be.jsams.server.model.ModelTestHelper;
 import be.jsams.server.model.management.Customer;
 
 /**
- * 
+ * Test class for {@link CustomerBeanBuilder} class.
  *
  * @author chesteric31
  * @version $Revision$ $Date::                  $ $Author$

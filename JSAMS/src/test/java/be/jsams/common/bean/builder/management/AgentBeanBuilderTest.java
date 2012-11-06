@@ -14,7 +14,7 @@ import be.jsams.server.model.ModelTestHelper;
 import be.jsams.server.model.management.Agent;
 
 /**
- * 
+ * Test class for {@link AgentBeanBuilder} class.
  *
  * @author chesteric31
  * @version $Revision$ $Date::                  $ $Author$
