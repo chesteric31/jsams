@@ -25,7 +25,7 @@ import be.jsams.server.service.xml.XmlGenerator;
 
 /**
  * 
- *
+ * 
  * @author chesteric31
  * @version $Revision$ $Date::                  $ $Author$
  */
@@ -63,7 +63,10 @@ public class XmlBillGeneratorImpl implements XmlGenerator<BillBean, BillXml> {
             ProductXml productXml = factory.createProduct();
             ProductBean product = bean.getProduct();
             productXml.setName(product.getName());
-            productXml.setNumber(new BigInteger(product.getId().toString()));
+            Long productId = product.getId();
+            if (productId != null) {
+                productXml.setNumber(new BigInteger(productId.toString()));
+            }
             detailXml.setProduct(productXml);
             detailXml.setQuantity(BigInteger.valueOf(bean.getQuantity()));
             BigDecimal totalEt = BigDecimal.valueOf(bean.getPrice() * bean.getQuantity());
@@ -80,7 +83,10 @@ public class XmlBillGeneratorImpl implements XmlGenerator<BillBean, BillXml> {
             List<DetailXml> detail = xml.getDetails().getDetail();
             detail.add(detailXml);
         }
-        xml.setNumber(new BigInteger(object.getId().toString()));
+        Long id = object.getId();
+        if (id != null) {
+            xml.setNumber(new BigInteger(id.toString()));
+        }
         SocietyXml societyXml = factory.createSociety();
         SocietyBean society = object.getSociety();
         AddressXml value = factory.createAddress();

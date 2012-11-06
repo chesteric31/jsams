@@ -79,7 +79,9 @@ import be.jsams.server.model.sale.EstimateTest;
 import be.jsams.server.model.utils.xml.JsamsDateAdapterTest;
 import be.jsams.server.service.rss.impl.RSSFeedParserImplTest;
 import be.jsams.server.service.update.impl.DownloaderServiceImplTest;
+import be.jsams.server.service.xml.impl.XmlBillGeneratorImplTest;
 import be.jsams.server.service.xml.impl.XmlCommandGeneratorImplTest;
+import be.jsams.server.service.xml.impl.XmlCreditNoteGeneratorImplTest;
 import be.jsams.server.service.xml.impl.XmlDeliveryOrderGeneratorImplTest;
 import be.jsams.server.service.xml.impl.XmlEstimateGeneratorImplTest;
 
@@ -111,8 +113,8 @@ import be.jsams.server.service.xml.impl.XmlEstimateGeneratorImplTest;
         SocietyTest.class, AgentTest.class, CustomerTest.class, ProductCategoryTest.class, ProductTest.class,
         EstimateTest.class, CommandTest.class, DeliveryOrderTest.class, BillTest.class, CreditNoteTest.class,
         JsamsDateAdapterTest.class, RSSFeedParserImplTest.class, DownloaderServiceImplTest.class,
-        XmlEstimateGeneratorImplTest.class, XmlCommandGeneratorImplTest.class,
-        XmlDeliveryOrderGeneratorImplTest.class })
+        XmlEstimateGeneratorImplTest.class, XmlCommandGeneratorImplTest.class, XmlDeliveryOrderGeneratorImplTest.class,
+        XmlBillGeneratorImplTest.class, XmlCreditNoteGeneratorImplTest.class })
 public class AllTests {
 
 }
