@@ -99,8 +99,10 @@ public class AboutDialog extends JsamsDialog {
         URL aboutUrl = null;
         if (UserContext.isEnglish()) {
             aboutUrl = classLoader.getResource("pages/about.html");
-        } else {
+        } else if (UserContext.isFrench()) {
             aboutUrl = classLoader.getResource("pages/about_fr.html");
+        } else {
+            aboutUrl = classLoader.getResource("pages/about_nl.html");
         }
 
         JEditorPane area = null;
