@@ -12,7 +12,7 @@ import be.jsams.server.model.Address;
 public class AddressDaoImpl extends DaoImpl<Address> implements AddressDao {
 
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param type the class type
      */
