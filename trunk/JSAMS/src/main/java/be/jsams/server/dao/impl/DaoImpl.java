@@ -35,7 +35,7 @@ public class DaoImpl<T> implements Dao<T> {
     protected static final String WHERE = " WHERE ";
 
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param type the class type
      */
@@ -44,7 +44,6 @@ public class DaoImpl<T> implements Dao<T> {
     }
 
     /**
-     * 
      * @return the {@link EntityManager}
      */
     public EntityManager getEntityManager() {
@@ -52,7 +51,6 @@ public class DaoImpl<T> implements Dao<T> {
     }
 
     /**
-     * 
      * @param entityManager the {@link EntityManager} to set
      */
     public void setEntityManager(EntityManager entityManager) {
