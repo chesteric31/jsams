@@ -88,6 +88,12 @@ public class CommandBeanView extends AbstractDocumentBeanView<CommandBean> imple
         JsamsFormattedTextField discountRate = viewFactory.createBindingDecimalComponent(bean,
                 CommandBean.DISCOUNT_RATE_PROPERTY, false, false);
         JsamsTextField remark = viewFactory.createBindingTextComponent(bean, CommandBean.REMARK_PROPERTY, false, false);
+        JsamsFormattedTextField totalEt = viewFactory
+                .createBindingDecimalComponent(bean, CommandBean.TOTAL_ET_PROPERTY, false, true);
+        JsamsFormattedTextField totalVat = viewFactory
+                .createBindingDecimalComponent(bean, CommandBean.TOTAL_VAT_PROPERTY, false, true);
+        JsamsFormattedTextField totalAti = viewFactory
+                .createBindingDecimalComponent(bean, CommandBean.TOTAL_ATI_PROPERTY, false, true);
 
         FormLayout layout = new FormLayout("right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p", "p");
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
@@ -107,18 +113,22 @@ public class CommandBeanView extends AbstractDocumentBeanView<CommandBean> imple
         builder.nextLine();
         builder.appendI15d(JsamsI18nLabelResource.LABEL_DEFAULT_DISCOUNT_RATE.getKey(), discountRate);
         builder.appendI15d(JsamsI18nLabelResource.LABEL_REMARK.getKey(), remark);
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_TOTAL_ET.getKey(), totalEt);
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_TOTAL_VAT.getKey(), totalVat);
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_TOTAL_ATI.getKey(), totalAti);
 
         builder.nextLine();
         List<CommandDetailBean> details = bean.getDetails();
         int maxColumnSpan = builder.getColumnCount();
 
-        CommandDetailTableModel tableModel = new CommandDetailTableModel(details);
+        CommandDetailTableModel tableModel = new CommandDetailTableModel(details, bean.getMediator());
         ViewFactory<CommandDetailBean> detailView = new ViewFactory<CommandDetailBean>();
         setDetailsTable(detailView.createBindingTableComponent(tableModel, false, false));
         getDetailsTable().addMouseListener(handleProductEditing());
         updateDetailsTableRendering();
 
         builder.appendI15dSeparator(JsamsI18nResource.PANEL_COMMAND_DETAILS.getKey());
+        builder.appendRow("60dlu");
         builder.append(new JScrollPane(getDetailsTable()), maxColumnSpan);
 
         JPanel southPanel = new JPanel();
@@ -265,6 +275,7 @@ public class CommandBeanView extends AbstractDocumentBeanView<CommandBean> imple
                 CommandBean bean = getBean();
                 List<CommandDetailBean> details = bean.getDetails();
                 CommandDetailBean detail = new CommandDetailBean();
+                detail.setMediator(bean.getMediator());
                 detail.setCommand(bean);
                 detail.setDiscountRate(bean.getDiscountRate());
                 detail.setQuantity(1);
@@ -295,7 +306,6 @@ public class CommandBeanView extends AbstractDocumentBeanView<CommandBean> imple
                     details.remove(model.getRow(selectedRowModel));
                     getBean().setDetails(details);
                     model.setListModel(new ArrayListModel<CommandDetailBean>(details));
-                    // getDetailsTable().repaint();
                 }
             }
         });

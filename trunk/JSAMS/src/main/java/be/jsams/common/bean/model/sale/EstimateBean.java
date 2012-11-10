@@ -28,7 +28,6 @@ public class EstimateBean extends AbstractDocumentBean<Estimate, EstimateBeanVie
 
     private Double discountRate;
     private boolean transferred;
-    private Double vat;
     private Double totalEt;
     private Double totalVat;
     private Double totalAti;
@@ -39,7 +38,6 @@ public class EstimateBean extends AbstractDocumentBean<Estimate, EstimateBeanVie
 
     public static final String DISCOUNT_RATE_PROPERTY = "discountRate";
     public static final String TRANSFERRED_PROPERTY = "transferred";
-    public static final String VAT_PROPERTY = "vat";
     public static final String TOTAL_ET_PROPERTY = "totalEt";
     public static final String TOTAL_ATI_PROPERTY = "totalAti";
     public static final String TOTAL_VAT_PROPERTY = "totalVat";
@@ -192,23 +190,6 @@ public class EstimateBean extends AbstractDocumentBean<Estimate, EstimateBeanVie
         Double oldValue = this.totalEt;
         this.totalEt = totalEt;
         firePropertyChange(TOTAL_ET_PROPERTY, oldValue, this.totalEt);
-    }
-
-    /**
-     * @return the vat
-     */
-    public Double getVat() {
-        return vat;
-    }
-
-    /**
-     * @param vat the vat to set
-     */
-    public void setVat(Double vat) {
-        Double oldValue = this.vat;
-        this.vat = vat;
-        firePropertyChange(VAT_PROPERTY, oldValue, this.vat);
-        mediator.updateTotals();
     }
 
     /**

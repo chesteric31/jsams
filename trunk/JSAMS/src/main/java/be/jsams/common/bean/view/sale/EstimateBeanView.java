@@ -124,7 +124,7 @@ public class EstimateBeanView extends AbstractDocumentBeanView<EstimateBean> imp
         builder.nextLine();
         List<EstimateDetailBean> details = bean.getDetails();
 
-        EstimateDetailTableModel tableModel = new EstimateDetailTableModel(details, getBean().getMediator());
+        EstimateDetailTableModel tableModel = new EstimateDetailTableModel(details, bean.getMediator());
         ViewFactory<EstimateDetailBean> detailView = new ViewFactory<EstimateDetailBean>();
         setDetailsTable(detailView.createBindingTableComponent(tableModel, false, false));
         getDetailsTable().addMouseListener(handleProductEditing());

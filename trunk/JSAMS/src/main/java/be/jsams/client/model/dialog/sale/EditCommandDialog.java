@@ -41,10 +41,13 @@ public class EditCommandDialog extends AbstractEditDialog<CommandBean, EditComma
      */
     @Override
     public void initComponents() {
-        setOriginalModel(new CommandBean(getModel().getSociety(), getModel().getCustomer(), getModel().getAgent()));
+        CommandBean originalModel = new CommandBean(getModel().getSociety(), getModel().getCustomer(), getModel()
+                .getAgent());
+        setOriginalModel(originalModel);
         getOriginalModel().refresh(getModel());
         CommandBeanView view = getModel().buildView();
         JPanel panel = view.createEditView();
+        getModel().setView(view);
         getContentPane().add(panel);
         ValidationComponentUtils.updateComponentTreeMandatoryBorder(this);
         pack();

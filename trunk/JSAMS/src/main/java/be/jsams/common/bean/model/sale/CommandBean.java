@@ -28,6 +28,9 @@ public class CommandBean extends AbstractDocumentBean<Command, CommandBeanView> 
 
     private Double discountRate;
     private boolean transferred;
+    private Double totalEt;
+    private Double totalVat;
+    private Double totalAti;
 
     private AgentBean agent;
     private AddressBean billingAddress;
@@ -36,6 +39,11 @@ public class CommandBean extends AbstractDocumentBean<Command, CommandBeanView> 
 
     public static final String DISCOUNT_RATE_PROPERTY = "discountRate";
     public static final String TRANSFERRED_PROPERTY = "transferred";
+    public static final String TOTAL_ET_PROPERTY = "totalEt";
+    public static final String TOTAL_ATI_PROPERTY = "totalAti";
+    public static final String TOTAL_VAT_PROPERTY = "totalVat";
+
+    private CommandMediator mediator;
 
     /**
      * Default constructor.
@@ -86,12 +94,28 @@ public class CommandBean extends AbstractDocumentBean<Command, CommandBeanView> 
     }
 
     /**
+     * @return the mediator
+     */
+    public CommandMediator getMediator() {
+        return mediator;
+    }
+
+    /**
+     * @param mediator the mediator to set
+     */
+    public void setMediator(CommandMediator mediator) {
+        this.mediator = mediator;
+    }
+
+    /**
      * @param discountRate the discountRate to set
      */
     public void setDiscountRate(Double discountRate) {
         Double oldValue = this.discountRate;
         this.discountRate = discountRate;
         firePropertyChange(DISCOUNT_RATE_PROPERTY, oldValue, this.discountRate);
+        mediator.updateTotals();
+        mediator.updateDiscountRates();
     }
 
     /**
@@ -164,6 +188,39 @@ public class CommandBean extends AbstractDocumentBean<Command, CommandBeanView> 
      */
     public void setDetails(List<CommandDetailBean> details) {
         this.details = details;
+        mediator.updateTotals();
+    }
+
+    /**
+     * @return the totalEt
+     */
+    public Double getTotalEt() {
+        return totalEt;
+    }
+
+    /**
+     * @param totalEt the totalEt to set
+     */
+    public void setTotalEt(Double totalEt) {
+        Double oldValue = this.totalEt;
+        this.totalEt = totalEt;
+        firePropertyChange(TOTAL_ET_PROPERTY, oldValue, this.totalEt);
+    }
+
+    /**
+     * @return the totalAti
+     */
+    public Double getTotalAti() {
+        return totalAti;
+    }
+
+    /**
+     * @param totalAti the totalAti to set
+     */
+    public void setTotalAti(Double totalAti) {
+        Double oldValue = this.totalAti;
+        this.totalAti = totalAti;
+        firePropertyChange(TOTAL_ATI_PROPERTY, oldValue, this.totalAti);
     }
 
     /**
@@ -190,7 +247,15 @@ public class CommandBean extends AbstractDocumentBean<Command, CommandBeanView> 
         billingAddress.refresh(other.getBillingAddress());
         deliveryAddress.refresh(other.getDeliveryAddress());
         details.clear();
-        details.addAll(other.getDetails());
+        CommandMediator commandMediator = other.getMediator();
+        List<CommandDetailBean> list = other.getDetails();
+        if (list != null && !list.isEmpty()) {
+            for (CommandDetailBean detailBean : list) {
+                detailBean.setMediator(commandMediator);
+            }
+        }
+        details.addAll(list);
+        setMediator(commandMediator);
         setDiscountRate(other.getDiscountRate());
         setTransferred(other.isTransferred());
     }
@@ -254,9 +319,9 @@ public class CommandBean extends AbstractDocumentBean<Command, CommandBeanView> 
      */
     @Override
     public boolean equals(Object obj) {
-//        if (this == obj) {
-//            return true;
-//        }
+        // if (this == obj) {
+        // return true;
+        // }
         if (!super.equals(obj)) {
             return false;
         }
@@ -303,6 +368,22 @@ public class CommandBean extends AbstractDocumentBean<Command, CommandBeanView> 
             return false;
         }
         return true;
+    }
+
+    /**
+     * @return the totalVat
+     */
+    public Double getTotalVat() {
+        return totalVat;
+    }
+
+    /**
+     * @param totalVat the total VAT
+     */
+    public void setTotalVat(Double totalVat) {
+        Double oldValue = this.totalVat;
+        this.totalVat = totalVat;
+        firePropertyChange(TOTAL_VAT_PROPERTY, oldValue, this.totalVat);
     }
 
 }
