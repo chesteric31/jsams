@@ -217,4 +217,8 @@ public final class JsamsI18nLabelResource {
     public static final I18nString LABEL_APPLICATION_VERSION_UP_TO_DATE = new I18nString(
             "label.application.version.up_to_date");
 
+    public static final I18nString LABEL_TOTAL_ET = new I18nString("label.total_et");
+    public static final I18nString LABEL_TOTAL_VAT = new I18nString("label.total_vat");
+    public static final I18nString LABEL_TOTAL_ATI = new I18nString("label.total_ati");
+
 }
