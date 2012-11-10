@@ -53,7 +53,7 @@ public abstract class AbstractDocumentBean<M extends AbstractDocument, V extends
     }
 
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param model the {@link AbstractDocument}
      * @param society the {@link SocietyBean}

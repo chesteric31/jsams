@@ -42,6 +42,7 @@ import be.jsams.common.bean.model.sale.CommandBean;
 import be.jsams.common.bean.model.sale.CreditNoteBean;
 import be.jsams.common.bean.model.sale.DeliveryOrderBean;
 import be.jsams.common.bean.model.sale.EstimateBean;
+import be.jsams.common.bean.model.sale.EstimateMediator;
 
 /**
  * Specific menu builder for sales menu.
@@ -147,6 +148,9 @@ public class JsamsSalesMenuBuilder extends AbstractMenuBuilder {
                 CustomerBean customer = JsamsApplicationContext.getCustomerBeanBuilder().build(null, currentSociety);
                 AgentBean agent = JsamsApplicationContext.getAgentBeanBuilder().build(null, currentSociety);
                 EstimateBean bean = new EstimateBean(currentSociety, customer, agent);
+                EstimateMediator mediator = new EstimateMediator();
+                mediator.setEstimateBean(bean);
+                bean.setMediator(mediator);
                 SearchEstimatePanel<EstimateTableMouseListener> searchPanel
                     = new SearchEstimatePanel<EstimateTableMouseListener>(
                         bean, new EstimateTableMouseListener(), JsamsApplicationContext.getEstimateService(),

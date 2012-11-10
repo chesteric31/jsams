@@ -2,6 +2,7 @@ package be.jsams.common.bean.model.sale.detail;
 
 import be.jsams.common.bean.model.AbstractIdentityBean;
 import be.jsams.common.bean.model.sale.EstimateBean;
+import be.jsams.common.bean.model.sale.EstimateMediator;
 import be.jsams.common.bean.view.sale.detail.EstimateDetailBeanView;
 import be.jsams.server.model.sale.detail.EstimateDetail;
 
@@ -23,9 +24,10 @@ public class EstimateDetailBean extends AbstractDetailBean<EstimateDetail, Estim
     private EstimateBean estimate;
 
     public static final String TRANSFERRED_PROPERTY = "transferred";
+    private EstimateMediator mediator;
 
     /**
-     * Default constructor
+     * Default constructor.
      */
     public EstimateDetailBean() {
         super();
@@ -33,7 +35,7 @@ public class EstimateDetailBean extends AbstractDetailBean<EstimateDetail, Estim
     }
 
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param model the {@link EstimateDetail}
      * @param estimate the {@link EstimateBean}
@@ -43,6 +45,20 @@ public class EstimateDetailBean extends AbstractDetailBean<EstimateDetail, Estim
         this.estimate = estimate;
         this.transferred = model.isTransferred();
         setView(buildView());
+    }
+
+    /**
+     * @return the mediator
+     */
+    public EstimateMediator getMediator() {
+        return mediator;
+    }
+
+    /**
+     * @param mediator the mediator to set
+     */
+    public void setMediator(EstimateMediator mediator) {
+        this.mediator = mediator;
     }
 
     /**
@@ -102,6 +118,42 @@ public class EstimateDetailBean extends AbstractDetailBean<EstimateDetail, Estim
     @Override
     public EstimateDetailBeanView buildView() {
         return null;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setQuantity(int quantity) {
+        super.setQuantity(quantity);
+        mediator.updateTotals();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setPrice(Double price) {
+        super.setPrice(price);
+        mediator.updateTotals();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setVatApplicable(Double vatApplicable) {
+        super.setVatApplicable(vatApplicable);
+        mediator.updateTotals();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setDiscountRate(Double discountRate) {
+        super.setDiscountRate(discountRate);
+        mediator.updateTotals();
     }
 
 }

@@ -28,6 +28,10 @@ public class EstimateBean extends AbstractDocumentBean<Estimate, EstimateBeanVie
 
     private Double discountRate;
     private boolean transferred;
+    private Double vat;
+    private Double totalEt;
+    private Double totalVat;
+    private Double totalAti;
 
     private AgentBean agent;
     private AddressBean billingAddress;
@@ -35,9 +39,16 @@ public class EstimateBean extends AbstractDocumentBean<Estimate, EstimateBeanVie
 
     public static final String DISCOUNT_RATE_PROPERTY = "discountRate";
     public static final String TRANSFERRED_PROPERTY = "transferred";
+    public static final String VAT_PROPERTY = "vat";
+    public static final String TOTAL_ET_PROPERTY = "totalEt";
+    public static final String TOTAL_ATI_PROPERTY = "totalAti";
+    public static final String TOTAL_VAT_PROPERTY = "totalVat";
+    
+    private EstimateMediator mediator;
+
 
     /**
-     * Default constructor
+     * Default constructor.
      * 
      * @param society the {@link SocietyBean}
      * @param customer the {@link CustomerBean}
@@ -54,7 +65,7 @@ public class EstimateBean extends AbstractDocumentBean<Estimate, EstimateBeanVie
     }
 
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param model the {@link Estimate}
      * @param society the {@link SocietyBean}
@@ -74,6 +85,20 @@ public class EstimateBean extends AbstractDocumentBean<Estimate, EstimateBeanVie
         this.transferred = model.isTransferred();
         setView(buildView());
     }
+    
+    /**
+     * @return the mediator
+     */
+    public EstimateMediator getMediator() {
+        return mediator;
+    }
+
+    /**
+     * @param mediator the mediator to set
+     */
+    public void setMediator(EstimateMediator mediator) {
+        this.mediator = mediator;
+    }
 
     /**
      * @return the discountRate
@@ -89,6 +114,8 @@ public class EstimateBean extends AbstractDocumentBean<Estimate, EstimateBeanVie
         Double oldValue = this.discountRate;
         this.discountRate = discountRate;
         firePropertyChange(DISCOUNT_RATE_PROPERTY, oldValue, this.discountRate);
+        mediator.updateTotals();
+        mediator.updateDiscountRates();
     }
 
     /**
@@ -131,6 +158,7 @@ public class EstimateBean extends AbstractDocumentBean<Estimate, EstimateBeanVie
      */
     public void setDetails(List<EstimateDetailBean> details) {
         this.details = details;
+        mediator.updateTotals();
     }
 
     /**
@@ -141,7 +169,6 @@ public class EstimateBean extends AbstractDocumentBean<Estimate, EstimateBeanVie
     }
 
     /**
-     * 
      * @param transferred the boolean to indicate that the estimate is
      *            transferred or not
      */
@@ -149,7 +176,55 @@ public class EstimateBean extends AbstractDocumentBean<Estimate, EstimateBeanVie
         boolean oldValue = this.transferred;
         this.transferred = transferred;
         firePropertyChange(TRANSFERRED_PROPERTY, oldValue, this.transferred);
+    }
 
+    /**
+     * @return the totalEt
+     */
+    public Double getTotalEt() {
+        return totalEt;
+    }
+
+    /**
+     * @param totalEt the totalEt to set
+     */
+    public void setTotalEt(Double totalEt) {
+        Double oldValue = this.totalEt;
+        this.totalEt = totalEt;
+        firePropertyChange(TOTAL_ET_PROPERTY, oldValue, this.totalEt);
+    }
+
+    /**
+     * @return the vat
+     */
+    public Double getVat() {
+        return vat;
+    }
+
+    /**
+     * @param vat the vat to set
+     */
+    public void setVat(Double vat) {
+        Double oldValue = this.vat;
+        this.vat = vat;
+        firePropertyChange(VAT_PROPERTY, oldValue, this.vat);
+        mediator.updateTotals();
+    }
+
+    /**
+     * @return the totalAti
+     */
+    public Double getTotalAti() {
+        return totalAti;
+    }
+
+    /**
+     * @param totalAti the totalAti to set
+     */
+    public void setTotalAti(Double totalAti) {
+        Double oldValue = this.totalAti;
+        this.totalAti = totalAti;
+        firePropertyChange(TOTAL_ATI_PROPERTY, oldValue, this.totalAti);
     }
 
     /**
@@ -174,7 +249,15 @@ public class EstimateBean extends AbstractDocumentBean<Estimate, EstimateBeanVie
         agent.refresh(other.getAgent());
         billingAddress.refresh(other.getBillingAddress());
         details.clear();
-        details.addAll(other.getDetails());
+        EstimateMediator estimateMediator = other.getMediator();
+        List<EstimateDetailBean> list = other.getDetails();
+        if (list != null && !list.isEmpty()) {
+            for (EstimateDetailBean detailBean : list) {
+                detailBean.setMediator(estimateMediator);
+            }
+        }
+        details.addAll(list);
+        setMediator(estimateMediator);
         setDiscountRate(other.getDiscountRate());
         setTransferred(other.isTransferred());
     }
@@ -274,6 +357,22 @@ public class EstimateBean extends AbstractDocumentBean<Estimate, EstimateBeanVie
             return false;
         }
         return true;
+    }
+
+    /**
+     * @return the totalVat
+     */
+    public Double getTotalVat() {
+        return totalVat;
+    }
+
+    /**
+     * @param totalVat the total VAT
+     */
+    public void setTotalVat(Double totalVat) {
+        Double oldValue = this.totalVat;
+        this.totalVat = totalVat;
+        firePropertyChange(TOTAL_VAT_PROPERTY, oldValue, this.totalVat);
     }
 
 }

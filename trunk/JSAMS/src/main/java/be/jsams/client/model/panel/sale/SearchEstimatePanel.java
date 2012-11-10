@@ -16,6 +16,7 @@ import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.AgentBean;
 import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.sale.EstimateBean;
+import be.jsams.common.bean.model.sale.EstimateMediator;
 import be.jsams.server.service.pdf.impl.PdfEstimateServiceImpl;
 import be.jsams.server.service.sale.EstimateService;
 
@@ -79,6 +80,9 @@ public class SearchEstimatePanel<L extends MouseListener> extends
         CustomerBean customer = JsamsApplicationContext.getCustomerBeanBuilder().build(null, currentSociety);
         AgentBean agent = JsamsApplicationContext.getAgentBeanBuilder().build(null, currentSociety);
         EstimateBean bean = new EstimateBean(currentSociety, customer, agent);
+        EstimateMediator mediator = new EstimateMediator();
+        mediator.setEstimateBean(bean);
+        bean.setMediator(mediator);
         new EditEstimateDialog(JsamsI18nResource.TITLE_EDIT_ESTIMATE, bean);
         updateUI();
     }
@@ -93,6 +97,9 @@ public class SearchEstimatePanel<L extends MouseListener> extends
             int selectedRowModel = getResultTable().convertRowIndexToModel(selectedRow);
             EstimateTableModel model = (EstimateTableModel) getResultTable().getModel();
             EstimateBean beanToModify = model.getRow(selectedRowModel);
+            EstimateMediator mediator = new EstimateMediator();
+            mediator.setEstimateBean(beanToModify);
+            beanToModify.setMediator(mediator);
             if (debug) {
                 LOGGER.debug("The estimate to modify: " + beanToModify);
             }
@@ -110,6 +117,13 @@ public class SearchEstimatePanel<L extends MouseListener> extends
         if (super.prePerformOk(criteria)) {
             List<EstimateBean> estimates = ((EstimateService) super.getService()).findByCriteria(criteria);
             fillTable(estimates);
+            if (estimates != null && !estimates.isEmpty()) {
+                for (EstimateBean bean : estimates) {
+                    EstimateMediator mediator = new EstimateMediator();
+                    mediator.setEstimateBean(bean);
+                    bean.setMediator(mediator);
+                }
+            }
             super.postPerformOk();
         }
     }

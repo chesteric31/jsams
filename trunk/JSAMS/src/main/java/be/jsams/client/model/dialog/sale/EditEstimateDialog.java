@@ -41,10 +41,13 @@ public class EditEstimateDialog extends AbstractEditDialog<EstimateBean, EditEst
      */
     @Override
     public void initComponents() {
-        setOriginalModel(new EstimateBean(getModel().getSociety(), getModel().getCustomer(), getModel().getAgent()));
+        EstimateBean originalModel = new EstimateBean(getModel().getSociety(), getModel().getCustomer(), getModel()
+                .getAgent());
+        setOriginalModel(originalModel);
         getOriginalModel().refresh(getModel());
         EstimateBeanView view = getModel().buildView();
         JPanel panel = view.createEditView();
+        getModel().setView(view);
         getContentPane().add(panel);
         ValidationComponentUtils.updateComponentTreeMandatoryBorder(this);
         pack();

@@ -13,9 +13,6 @@ import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.JTableHeader;
-import javax.swing.table.TableCellRenderer;
 
 import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.desktop.JsamsDesktop;
@@ -25,7 +22,6 @@ import be.jsams.client.model.panel.management.SearchProductPanel;
 import be.jsams.client.model.table.AbstractJsamsTableModel;
 import be.jsams.client.model.table.management.ProductTableModel;
 import be.jsams.client.model.table.sale.CreditNoteDetailTableModel;
-import be.jsams.client.renderer.JsamsTableCellRenderer;
 import be.jsams.client.swing.component.AbstractJsamsFrame;
 import be.jsams.client.swing.component.JsamsButton;
 import be.jsams.client.swing.component.JsamsDialog;
@@ -111,17 +107,7 @@ public class CreditNoteBeanView extends AbstractDocumentBeanView<CreditNoteBean>
         ViewFactory<CreditNoteDetailBean> detailView = new ViewFactory<CreditNoteDetailBean>();
         setDetailsTable(detailView.createBindingTableComponent(tableModel, false, false));
         getDetailsTable().addMouseListener(handleProductEditing());
-
-        JTableHeader tableHeader = getDetailsTable().getTableHeader();
-        TableCellRenderer headerRenderer = tableHeader.getDefaultRenderer();
-
-        ((DefaultTableCellRenderer) headerRenderer).setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
-        getDetailsTable().setAutoCreateRowSorter(true);
-        JsamsTableCellRenderer defaultCellRenderer = new JsamsTableCellRenderer();
-        getDetailsTable().setDefaultRenderer(Long.class, defaultCellRenderer);
-        getDetailsTable().setDefaultRenderer(Integer.class, defaultCellRenderer);
-        getDetailsTable().setDefaultRenderer(Double.class, defaultCellRenderer);
-        getDetailsTable().setDefaultRenderer(String.class, defaultCellRenderer);
+        updateDetailsTableRendering();
 
         builder.appendI15dSeparator(JsamsI18nResource.PANEL_CREDIT_NOTE_DETAILS.getKey());
         builder.append(new JScrollPane(getDetailsTable()), maxColumnSpan);

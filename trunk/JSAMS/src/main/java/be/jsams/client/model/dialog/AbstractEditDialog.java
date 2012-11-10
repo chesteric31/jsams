@@ -187,8 +187,9 @@ public abstract class AbstractEditDialog<B extends AbstractIdentityBean<?, ?>, V
      * {@inheritDoc}
      */
     public void performCancel() {
-        getModel().getView().release();
-        getModel().refresh(this.originalModel);
+        B currentModel = getModel();
+        currentModel.getView().release();
+        currentModel.refresh(this.originalModel);
         this.dispose();
     }
 

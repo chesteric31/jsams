@@ -12,6 +12,7 @@ import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.AgentBean;
 import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.sale.EstimateBean;
+import be.jsams.common.bean.model.sale.EstimateMediator;
 
 /**
  * {@link AbstractAction} to launch {@link EditEstimateDialog}.
@@ -34,6 +35,9 @@ public class NewEstimateAction extends AbstractAction {
         CustomerBean customer = JsamsApplicationContext.getCustomerBeanBuilder().build(null, currentSociety);
         AgentBean agent = JsamsApplicationContext.getAgentBeanBuilder().build(null, currentSociety);
         EstimateBean bean = new EstimateBean(currentSociety, customer, agent);
+        EstimateMediator mediator = new EstimateMediator();
+        mediator.setEstimateBean(bean);
+        bean.setMediator(mediator);
         new EditEstimateDialog(JsamsI18nResource.TITLE_EDIT_ESTIMATE, bean);
     }
 
