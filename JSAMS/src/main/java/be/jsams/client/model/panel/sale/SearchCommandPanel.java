@@ -18,6 +18,7 @@ import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.AgentBean;
 import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.sale.CommandBean;
+import be.jsams.common.bean.model.sale.CommandMediator;
 import be.jsams.server.service.pdf.impl.PdfCommandServiceImpl;
 import be.jsams.server.service.sale.CommandService;
 
@@ -80,6 +81,9 @@ public class SearchCommandPanel<L extends MouseListener> extends
         CustomerBean customer = JsamsApplicationContext.getCustomerBeanBuilder().build(null, currentSociety);
         AgentBean agent = JsamsApplicationContext.getAgentBeanBuilder().build(null, currentSociety);
         CommandBean bean = new CommandBean(currentSociety, customer, agent);
+        CommandMediator mediator = new CommandMediator();
+        mediator.setCommandBean(bean);
+        bean.setMediator(mediator);
         new EditCommandDialog(JsamsI18nResource.TITLE_EDIT_COMMAND, bean);
         updateUI();
     }
@@ -94,6 +98,9 @@ public class SearchCommandPanel<L extends MouseListener> extends
             int selectedRowModel = getResultTable().convertRowIndexToModel(selectedRow);
             CommandTableModel model = (CommandTableModel) getResultTable().getModel();
             CommandBean beanToModify = model.getRow(selectedRowModel);
+            CommandMediator mediator = new CommandMediator();
+            mediator.setCommandBean(beanToModify);
+            beanToModify.setMediator(mediator);
             if (debug) {
                 LOGGER.debug("The command to modify: " + beanToModify);
             }
@@ -118,6 +125,13 @@ public class SearchCommandPanel<L extends MouseListener> extends
         if (super.prePerformOk(criteria)) {
             List<CommandBean> commands = ((CommandService) super.getService()).findByCriteria(criteria);
             fillTable(commands);
+            if (commands != null && !commands.isEmpty()) {
+                for (CommandBean bean : commands) {
+                    CommandMediator mediator = new CommandMediator();
+                    mediator.setCommandBean(bean);
+                    bean.setMediator(mediator);
+                }
+            }
             super.postPerformOk();
         }
     }

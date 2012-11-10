@@ -39,6 +39,7 @@ import be.jsams.common.bean.model.management.AgentBean;
 import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.sale.BillBean;
 import be.jsams.common.bean.model.sale.CommandBean;
+import be.jsams.common.bean.model.sale.CommandMediator;
 import be.jsams.common.bean.model.sale.CreditNoteBean;
 import be.jsams.common.bean.model.sale.DeliveryOrderBean;
 import be.jsams.common.bean.model.sale.EstimateBean;
@@ -182,6 +183,9 @@ public class JsamsSalesMenuBuilder extends AbstractMenuBuilder {
                 CustomerBean customer = JsamsApplicationContext.getCustomerBeanBuilder().build(null, currentSociety);
                 AgentBean agent = JsamsApplicationContext.getAgentBeanBuilder().build(null, currentSociety);
                 CommandBean bean = new CommandBean(currentSociety, customer, agent);
+                CommandMediator mediator = new CommandMediator();
+                mediator.setCommandBean(bean);
+                bean.setMediator(mediator);
                 SearchCommandPanel<CommandTableMouseListener> searchPanel
                     = new SearchCommandPanel<CommandTableMouseListener>(
                         bean, new CommandTableMouseListener(), JsamsApplicationContext.getCommandService(),
