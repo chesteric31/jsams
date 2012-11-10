@@ -1,5 +1,11 @@
 package be.jsams.common.bean.view.sale;
 
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableCellRenderer;
+
+import be.jsams.client.renderer.JsamsBooleanTableCellRenderer;
+import be.jsams.client.renderer.JsamsTableCellRenderer;
 import be.jsams.client.swing.component.JsamsTable;
 import be.jsams.common.bean.model.sale.AbstractDocumentBean;
 import be.jsams.common.bean.view.AbstractBeanView;
@@ -49,5 +55,22 @@ public abstract class AbstractDocumentBeanView<B extends AbstractDocumentBean<?,
      * {@inheritDoc}
      */
     public abstract void release();
+
+    /**
+     * Updates details table rendering.
+     */
+    public void updateDetailsTableRendering() {
+        JTableHeader tableHeader = detailsTable.getTableHeader();
+        TableCellRenderer headerRenderer = tableHeader.getDefaultRenderer();
+
+        ((DefaultTableCellRenderer) headerRenderer).setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
+        detailsTable.setAutoCreateRowSorter(true);
+        JsamsTableCellRenderer defaultCellRenderer = new JsamsTableCellRenderer();
+        detailsTable.setDefaultRenderer(Long.class, defaultCellRenderer);
+        detailsTable.setDefaultRenderer(Integer.class, defaultCellRenderer);
+        detailsTable.setDefaultRenderer(Double.class, defaultCellRenderer);
+        detailsTable.setDefaultRenderer(String.class, defaultCellRenderer);
+        detailsTable.setDefaultRenderer(Boolean.class, new JsamsBooleanTableCellRenderer());
+    }
 
 }

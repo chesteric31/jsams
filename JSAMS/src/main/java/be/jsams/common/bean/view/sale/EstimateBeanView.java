@@ -14,9 +14,6 @@ import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.JTableHeader;
-import javax.swing.table.TableCellRenderer;
 
 import be.jsams.client.context.JsamsApplicationContext;
 import be.jsams.client.desktop.JsamsDesktop;
@@ -26,8 +23,6 @@ import be.jsams.client.model.panel.management.SearchProductPanel;
 import be.jsams.client.model.table.AbstractJsamsTableModel;
 import be.jsams.client.model.table.management.ProductTableModel;
 import be.jsams.client.model.table.sale.EstimateDetailTableModel;
-import be.jsams.client.renderer.JsamsBooleanTableCellRenderer;
-import be.jsams.client.renderer.JsamsTableCellRenderer;
 import be.jsams.client.swing.component.AbstractJsamsFrame;
 import be.jsams.client.swing.component.JsamsButton;
 import be.jsams.client.swing.component.JsamsDialog;
@@ -94,6 +89,12 @@ public class EstimateBeanView extends AbstractDocumentBeanView<EstimateBean> imp
                 EstimateBean.DISCOUNT_RATE_PROPERTY, false, false);
         JsamsTextField remark = viewFactory
                 .createBindingTextComponent(bean, EstimateBean.REMARK_PROPERTY, false, false);
+        JsamsFormattedTextField totalEt = viewFactory
+                .createBindingDecimalComponent(bean, EstimateBean.TOTAL_ET_PROPERTY, false, true);
+        JsamsFormattedTextField totalVat = viewFactory
+                .createBindingDecimalComponent(bean, EstimateBean.TOTAL_VAT_PROPERTY, false, true);
+        JsamsFormattedTextField totalAti = viewFactory
+                .createBindingDecimalComponent(bean, EstimateBean.TOTAL_ATI_PROPERTY, false, true);
 
         FormLayout layout = new FormLayout("right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p", "p");
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
@@ -116,27 +117,21 @@ public class EstimateBeanView extends AbstractDocumentBeanView<EstimateBean> imp
         builder.appendI15d(JsamsI18nLabelResource.LABEL_DEFAULT_DISCOUNT_RATE.getKey(), discountRate);
         builder.appendI15d(JsamsI18nLabelResource.LABEL_REMARK.getKey(), remark);
 
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_TOTAL_ET.getKey(), totalEt);
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_TOTAL_VAT.getKey(), totalVat);
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_TOTAL_ATI.getKey(), totalAti);
+
         builder.nextLine();
         List<EstimateDetailBean> details = bean.getDetails();
 
-        EstimateDetailTableModel tableModel = new EstimateDetailTableModel(details);
+        EstimateDetailTableModel tableModel = new EstimateDetailTableModel(details, getBean().getMediator());
         ViewFactory<EstimateDetailBean> detailView = new ViewFactory<EstimateDetailBean>();
         setDetailsTable(detailView.createBindingTableComponent(tableModel, false, false));
         getDetailsTable().addMouseListener(handleProductEditing());
-
-        JTableHeader tableHeader = getDetailsTable().getTableHeader();
-        TableCellRenderer headerRenderer = tableHeader.getDefaultRenderer();
-
-        ((DefaultTableCellRenderer) headerRenderer).setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
-        getDetailsTable().setAutoCreateRowSorter(true);
-        JsamsTableCellRenderer defaultCellRenderer = new JsamsTableCellRenderer();
-        getDetailsTable().setDefaultRenderer(Long.class, defaultCellRenderer);
-        getDetailsTable().setDefaultRenderer(Integer.class, defaultCellRenderer);
-        getDetailsTable().setDefaultRenderer(Double.class, defaultCellRenderer);
-        getDetailsTable().setDefaultRenderer(String.class, defaultCellRenderer);
-        getDetailsTable().setDefaultRenderer(Boolean.class, new JsamsBooleanTableCellRenderer());
+        updateDetailsTableRendering();
 
         builder.appendI15dSeparator(JsamsI18nResource.PANEL_ESTIMATE_DETAILS.getKey());
+        builder.appendRow("60dlu");
         builder.append(new JScrollPane(getDetailsTable()), maxColumnSpan);
 
         JPanel southPanel = new JPanel();
@@ -280,6 +275,7 @@ public class EstimateBeanView extends AbstractDocumentBeanView<EstimateBean> imp
                 EstimateBean bean = getBean();
                 List<EstimateDetailBean> details = bean.getDetails();
                 EstimateDetailBean detail = new EstimateDetailBean();
+                detail.setMediator(bean.getMediator());
                 detail.setEstimate(bean);
                 detail.setDiscountRate(bean.getDiscountRate());
                 detail.setQuantity(1);
@@ -306,7 +302,8 @@ public class EstimateBeanView extends AbstractDocumentBeanView<EstimateBean> imp
                 if (selectedRow > -1) {
                     int selectedRowModel = getDetailsTable().convertRowIndexToModel(selectedRow);
                     EstimateDetailTableModel model = (EstimateDetailTableModel) getDetailsTable().getModel();
-                    details.remove(model.getRow(selectedRowModel));
+                    EstimateDetailBean row = model.getRow(selectedRowModel);
+                    details.remove(row);
                     getBean().setDetails(details);
                     model.setListModel(new ArrayListModel<EstimateDetailBean>(details));
                 }
@@ -372,8 +369,9 @@ public class EstimateBeanView extends AbstractDocumentBeanView<EstimateBean> imp
      */
     @Override
     public void release() {
-        for (PropertyChangeListener listener : getBean().getCustomer().getPropertyChangeListeners()) {
-            getBean().getCustomer().removePropertyChangeListener(listener);
+        CustomerBean customer = getBean().getCustomer();
+        for (PropertyChangeListener listener : customer.getPropertyChangeListeners()) {
+            customer.removePropertyChangeListener(listener);
         }
     }
 

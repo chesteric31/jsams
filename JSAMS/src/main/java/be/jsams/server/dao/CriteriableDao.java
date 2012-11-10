@@ -18,7 +18,7 @@ import be.jsams.server.model.AbstractIdentity;
 public interface CriteriableDao<T extends AbstractIdentity, B extends AbstractIdentityBean<T, ?>> extends Dao<T> {
 
     /**
-     * Findq a list of models following the criteria model.
+     * Finds a list of models following the criteria model.
      * 
      * @param criteria the criteria bean
      * @return a list of models

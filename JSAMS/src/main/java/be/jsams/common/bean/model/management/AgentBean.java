@@ -49,7 +49,7 @@ public class AgentBean extends AbstractNamedIdentityBean<Agent, AgentBeanView> {
     }
 
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param model the {@link Agent} to use
      * @param society the current {@link SocietyBean}
