@@ -128,7 +128,6 @@ public class SearchCreditNotePanel<L extends MouseListener> extends
                 for (CreditNoteBean bean : creditNotes) {
                     CreditNoteMediator mediator = new CreditNoteMediator();
                     mediator.setCreditNoteBean(bean);
-                    mediator.updateTotals();
                     bean.setMediator(mediator);
                 }
             }
