@@ -139,6 +139,7 @@ public class CreditNoteBean extends AbstractDocumentBean<CreditNote, CreditNoteB
             }
         }
         details.addAll(other.getDetails());
+        mediator.updateTotals();
     }
 
     /**

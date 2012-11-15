@@ -132,7 +132,6 @@ public class JsamsButtonsPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent arg0) {
                 parent.performCancel();
-
             }
         };
         buttonCancel.setAction(cancelAction);
