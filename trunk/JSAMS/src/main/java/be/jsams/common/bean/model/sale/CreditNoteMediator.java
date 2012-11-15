@@ -45,7 +45,7 @@ public class CreditNoteMediator {
         List<CreditNoteDetailBean> details = creditNoteBean.getDetails();
         if (details != null && !details.isEmpty()) {
             for (CreditNoteDetailBean detail : details) {
-//                Double discountRate = detail.getDiscountRate();
+                Double discountRate = detail.getDiscountRate();
                 Double price = detail.getPrice();
                 int quantity = detail.getQuantity();
                 Double vatApplicable = detail.getVatApplicable();
@@ -53,10 +53,10 @@ public class CreditNoteMediator {
                 if (price != null) {
                     currentTotalEt = BigDecimal.valueOf(price * quantity);
                 }
-//                if (discountRate != null) {
-//                    double percentage = discountRate / 100;
-//                    currentTotalEt = currentTotalEt.multiply(BigDecimal.valueOf(1 - percentage));
-//                }
+                if (discountRate != null) {
+                    double percentage = discountRate / 100;
+                    currentTotalEt = currentTotalEt.multiply(BigDecimal.valueOf(1 - percentage));
+                }
                 BigDecimal currentVat = new BigDecimal(0D);
                 if (vatApplicable != null) {
                     currentVat = currentTotalEt.multiply(BigDecimal.valueOf(vatApplicable / 100));
