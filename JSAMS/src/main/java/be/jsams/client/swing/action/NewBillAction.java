@@ -12,6 +12,7 @@ import be.jsams.common.bean.model.PaymentModeBean;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.sale.BillBean;
+import be.jsams.common.bean.model.sale.BillMediator;
 
 /**
  * {@link AbstractAction} to launch {@link EditBillDialog}.
@@ -35,6 +36,9 @@ public class NewBillAction extends AbstractAction {
         CustomerBean customer = JsamsApplicationContext.getCustomerBeanBuilder().build(null, currentSociety);
         PaymentModeBean mode = JsamsApplicationContext.getPaymentModeBeanBuilder().build();
         BillBean bean = new BillBean(currentSociety, customer, mode);
+        BillMediator mediator = new BillMediator();
+        mediator.setBillBean(bean);
+        bean.setMediator(mediator);
         new EditBillDialog(JsamsI18nResource.TITLE_EDIT_BILL, bean);
     }
 

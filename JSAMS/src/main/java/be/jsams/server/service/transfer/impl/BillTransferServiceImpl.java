@@ -11,6 +11,7 @@ import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.sale.AbstractDocumentBean;
 import be.jsams.common.bean.model.sale.BillBean;
 import be.jsams.common.bean.model.sale.CreditNoteBean;
+import be.jsams.common.bean.model.sale.CreditNoteMediator;
 import be.jsams.common.bean.model.sale.detail.BillDetailBean;
 import be.jsams.common.bean.model.sale.detail.CreditNoteDetailBean;
 import be.jsams.common.bean.model.transfer.TransferBean;
@@ -87,6 +88,9 @@ public class BillTransferServiceImpl extends AbstractTransferService implements 
         BillBean bill = list.get(0).getBill();
         CustomerBean customer = bill.getCustomer();
         CreditNoteBean newBean = new CreditNoteBean(bill.getSociety(), customer);
+        CreditNoteMediator mediator = new CreditNoteMediator();
+        newBean.setMediator(mediator);
+        mediator.setCreditNoteBean(newBean);
         newBean.setCreationDate(new Date());
         newBean.setBillingAddress(bill.getBillingAddress());
         // to force to create a new billing address
@@ -94,6 +98,7 @@ public class BillTransferServiceImpl extends AbstractTransferService implements 
         List<CreditNoteDetailBean> details = new ArrayList<CreditNoteDetailBean>();
         for (BillDetailBean detail : list) {
             CreditNoteDetailBean bean = new CreditNoteDetailBean();
+            bean.setMediator(newBean.getMediator());
             bean.setCreditNote(newBean);
             bean.setDiscountRate(detail.getDiscountRate());
             bean.setPrice(detail.getPrice());
@@ -118,6 +123,9 @@ public class BillTransferServiceImpl extends AbstractTransferService implements 
     private void toCreditNoteFullTransfer(BillBean bill) {
         CustomerBean customer = bill.getCustomer();
         CreditNoteBean newBean = new CreditNoteBean(bill.getSociety(), customer);
+        CreditNoteMediator mediator = new CreditNoteMediator();
+        newBean.setMediator(mediator);
+        mediator.setCreditNoteBean(newBean);
         newBean.setCreationDate(new Date());
         newBean.setBillingAddress(bill.getBillingAddress());
         // to force to create a new billing address
@@ -125,6 +133,7 @@ public class BillTransferServiceImpl extends AbstractTransferService implements 
         List<CreditNoteDetailBean> details = new ArrayList<CreditNoteDetailBean>();
         for (BillDetailBean detail : bill.getDetails()) {
             CreditNoteDetailBean bean = new CreditNoteDetailBean();
+            bean.setMediator(newBean.getMediator());
             bean.setCreditNote(newBean);
             bean.setDiscountRate(detail.getDiscountRate());
             bean.setPrice(detail.getPrice());

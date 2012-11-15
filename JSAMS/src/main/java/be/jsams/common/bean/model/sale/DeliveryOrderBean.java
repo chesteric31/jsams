@@ -27,12 +27,20 @@ public class DeliveryOrderBean extends AbstractDocumentBean<DeliveryOrder, Deliv
 
     private Double discountRate;
     private boolean transferred;
+    private Double totalEt;
+    private Double totalVat;
+    private Double totalAti;
 
     private AddressBean deliveryAddress;
     private List<DeliveryOrderDetailBean> details;
 
     public static final String DISCOUNT_RATE_PROPERTY = "discountRate";
     public static final String TRANSFERRED_PROPERTY = "transferred";
+    public static final String TOTAL_ET_PROPERTY = "totalEt";
+    public static final String TOTAL_ATI_PROPERTY = "totalAti";
+    public static final String TOTAL_VAT_PROPERTY = "totalVat";
+
+    private DeliveryOrderMediator mediator;
 
     /**
      * Default constructor.
@@ -70,6 +78,68 @@ public class DeliveryOrderBean extends AbstractDocumentBean<DeliveryOrder, Deliv
     }
 
     /**
+     * @return the totalEt
+     */
+    public Double getTotalEt() {
+        return totalEt;
+    }
+
+    /**
+     * @param totalEt the totalEt to set
+     */
+    public void setTotalEt(Double totalEt) {
+        Double oldValue = this.totalEt;
+        this.totalEt = totalEt;
+        firePropertyChange(TOTAL_ET_PROPERTY, oldValue, this.totalEt);
+    }
+
+    /**
+     * @return the totalVat
+     */
+    public Double getTotalVat() {
+        return totalVat;
+    }
+
+    /**
+     * @param totalVat the totalVat to set
+     */
+    public void setTotalVat(Double totalVat) {
+        Double oldValue = this.totalVat;
+        this.totalVat = totalVat;
+        firePropertyChange(TOTAL_VAT_PROPERTY, oldValue, this.totalVat);
+    }
+
+    /**
+     * @return the totalAti
+     */
+    public Double getTotalAti() {
+        return totalAti;
+    }
+
+    /**
+     * @param totalAti the totalAti to set
+     */
+    public void setTotalAti(Double totalAti) {
+        Double oldValue = this.totalAti;
+        this.totalAti = totalAti;
+        firePropertyChange(TOTAL_ATI_PROPERTY, oldValue, this.totalAti);
+    }
+
+    /**
+     * @return the mediator
+     */
+    public DeliveryOrderMediator getMediator() {
+        return mediator;
+    }
+
+    /**
+     * @param mediator the mediator to set
+     */
+    public void setMediator(DeliveryOrderMediator mediator) {
+        this.mediator = mediator;
+    }
+
+    /**
      * @return the discountRate
      */
     public Double getDiscountRate() {
@@ -83,6 +153,8 @@ public class DeliveryOrderBean extends AbstractDocumentBean<DeliveryOrder, Deliv
         Double oldValue = this.discountRate;
         this.discountRate = discountRate;
         firePropertyChange(DISCOUNT_RATE_PROPERTY, oldValue, this.discountRate);
+        mediator.updateTotals();
+        mediator.updateDiscountRates();
     }
 
     /**
@@ -127,6 +199,7 @@ public class DeliveryOrderBean extends AbstractDocumentBean<DeliveryOrder, Deliv
      */
     public void setDetails(List<DeliveryOrderDetailBean> details) {
         this.details = details;
+        mediator.updateTotals();
     }
 
     /**
@@ -149,7 +222,15 @@ public class DeliveryOrderBean extends AbstractDocumentBean<DeliveryOrder, Deliv
         DeliveryOrderBean other = (DeliveryOrderBean) bean;
         deliveryAddress.refresh(other.getDeliveryAddress());
         details.clear();
-        details.addAll(other.getDetails());
+        DeliveryOrderMediator deliveryOrderMediator = other.getMediator();
+        List<DeliveryOrderDetailBean> list = other.getDetails();
+        if (list != null && !list.isEmpty()) {
+            for (DeliveryOrderDetailBean detailBean : list) {
+                detailBean.setMediator(deliveryOrderMediator);
+            }
+        }
+        details.addAll(list);
+        setMediator(deliveryOrderMediator);
         setDiscountRate(other.getDiscountRate());
         setTransferred(other.isTransferred());
     }

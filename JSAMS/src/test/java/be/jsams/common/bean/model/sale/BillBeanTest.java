@@ -37,7 +37,13 @@ public class BillBeanTest {
     public void testRefreshEquals() {
         bean = new BillBean(MockBeanGenerator.generateMockSociety(), MockBeanGenerator.generateMockCustomer(),
                 MockBeanGenerator.generateMockPaymentMode());
+        BillMediator mediator = new BillMediator();
+        bean.setMediator(mediator);
+        mediator.setBillBean(bean);
         BillBean otherBean = MockBeanGenerator.generateMockBill();
+        BillMediator otherMediator = new BillMediator();
+        otherBean.setMediator(otherMediator);
+        otherMediator.setBillBean(otherBean);
         bean.refresh(otherBean);
         assertTrue(bean.equals(otherBean));
     }

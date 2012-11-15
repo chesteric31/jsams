@@ -2,6 +2,7 @@ package be.jsams.common.bean.model.sale.detail;
 
 import be.jsams.common.bean.model.AbstractIdentityBean;
 import be.jsams.common.bean.model.sale.BillBean;
+import be.jsams.common.bean.model.sale.BillMediator;
 import be.jsams.common.bean.view.sale.detail.BillDetailBeanView;
 import be.jsams.server.model.sale.detail.BillDetail;
 
@@ -24,8 +25,10 @@ public class BillDetailBean extends AbstractDetailBean<BillDetail, BillDetailBea
 
     public static final String TRANSFERRED_PROPERTY = "transferred";
 
+    private BillMediator mediator;
+    
     /**
-     * Default constructor
+     * Default constructor.
      */
     public BillDetailBean() {
         super();
@@ -105,5 +108,56 @@ public class BillDetailBean extends AbstractDetailBean<BillDetail, BillDetailBea
     public BillDetailBeanView buildView() {
         return null;
     }
+
+    /**
+     * @return the mediator
+     */
+    public BillMediator getMediator() {
+        return mediator;
+    }
+
+    /**
+     * @param mediator the mediator to set
+     */
+    public void setMediator(BillMediator mediator) {
+        this.mediator = mediator;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setQuantity(int quantity) {
+        super.setQuantity(quantity);
+        mediator.updateTotals();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setPrice(Double price) {
+        super.setPrice(price);
+        mediator.updateTotals();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setVatApplicable(Double vatApplicable) {
+        super.setVatApplicable(vatApplicable);
+        mediator.updateTotals();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setDiscountRate(Double discountRate) {
+        super.setDiscountRate(discountRate);
+        mediator.updateTotals();
+    }
+
 
 }

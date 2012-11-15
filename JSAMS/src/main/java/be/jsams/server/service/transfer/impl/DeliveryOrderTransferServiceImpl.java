@@ -11,6 +11,7 @@ import be.jsams.common.bean.model.PaymentModeBean;
 import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.sale.AbstractDocumentBean;
 import be.jsams.common.bean.model.sale.BillBean;
+import be.jsams.common.bean.model.sale.BillMediator;
 import be.jsams.common.bean.model.sale.DeliveryOrderBean;
 import be.jsams.common.bean.model.sale.detail.BillDetailBean;
 import be.jsams.common.bean.model.sale.detail.DeliveryOrderDetailBean;
@@ -84,6 +85,9 @@ public class DeliveryOrderTransferServiceImpl extends AbstractTransferService im
         CustomerBean customer = deliveryOrder.getCustomer();
         PaymentModeBean paymentMode = customer.getPaymentMode();
         BillBean newBean = new BillBean(deliveryOrder.getSociety(), customer, paymentMode);
+        BillMediator mediator = new BillMediator();
+        newBean.setMediator(mediator);
+        mediator.setBillBean(newBean);
         newBean.setBillingAddress(customer.getBillingAddress());
         newBean.getBillingAddress().setId(null);
         newBean.setClosed(false);
@@ -99,6 +103,7 @@ public class DeliveryOrderTransferServiceImpl extends AbstractTransferService im
         List<BillDetailBean> details = new ArrayList<BillDetailBean>();
         for (DeliveryOrderDetailBean detail : list) {
             BillDetailBean bean = new BillDetailBean();
+            bean.setMediator(newBean.getMediator());
             bean.setBill(newBean);
             bean.setDiscountRate(detail.getDiscountRate());
             bean.setPrice(detail.getPrice());
@@ -140,6 +145,9 @@ public class DeliveryOrderTransferServiceImpl extends AbstractTransferService im
         CustomerBean customer = deliveryOrder.getCustomer();
         PaymentModeBean paymentMode = customer.getPaymentMode();
         BillBean newBean = new BillBean(deliveryOrder.getSociety(), customer, paymentMode);
+        BillMediator mediator = new BillMediator();
+        newBean.setMediator(mediator);
+        mediator.setBillBean(newBean);
         newBean.setBillingAddress(customer.getBillingAddress());
         newBean.getBillingAddress().setId(null);
         newBean.setClosed(false);
@@ -155,6 +163,7 @@ public class DeliveryOrderTransferServiceImpl extends AbstractTransferService im
         List<BillDetailBean> details = new ArrayList<BillDetailBean>();
         for (DeliveryOrderDetailBean detail : deliveryOrder.getDetails()) {
             BillDetailBean bean = new BillDetailBean();
+            bean.setMediator(newBean.getMediator());
             bean.setBill(newBean);
             bean.setDiscountRate(detail.getDiscountRate());
             bean.setPrice(detail.getPrice());

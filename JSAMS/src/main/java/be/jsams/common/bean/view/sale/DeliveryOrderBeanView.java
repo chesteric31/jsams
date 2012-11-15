@@ -90,6 +90,12 @@ public class DeliveryOrderBeanView extends AbstractDocumentBeanView<DeliveryOrde
                 DeliveryOrderBean.DISCOUNT_RATE_PROPERTY, false, false);
         JsamsTextField remark = viewFactory.createBindingTextComponent(bean, DeliveryOrderBean.REMARK_PROPERTY, false,
                 false);
+        JsamsFormattedTextField totalEt = viewFactory
+                .createBindingDecimalComponent(bean, CommandBean.TOTAL_ET_PROPERTY, false, true);
+        JsamsFormattedTextField totalVat = viewFactory
+                .createBindingDecimalComponent(bean, CommandBean.TOTAL_VAT_PROPERTY, false, true);
+        JsamsFormattedTextField totalAti = viewFactory
+                .createBindingDecimalComponent(bean, CommandBean.TOTAL_ATI_PROPERTY, false, true);
 
         FormLayout layout = new FormLayout("right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p", "p");
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
@@ -110,11 +116,14 @@ public class DeliveryOrderBeanView extends AbstractDocumentBeanView<DeliveryOrde
         builder.nextLine();
         builder.appendI15d(JsamsI18nLabelResource.LABEL_DEFAULT_DISCOUNT_RATE.getKey(), discountRate);
         builder.appendI15d(JsamsI18nLabelResource.LABEL_REMARK.getKey(), remark);
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_TOTAL_ET.getKey(), totalEt);
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_TOTAL_VAT.getKey(), totalVat);
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_TOTAL_ATI.getKey(), totalAti);
 
         builder.nextLine();
         List<DeliveryOrderDetailBean> details = bean.getDetails();
 
-        DeliveryOrderDetailTableModel tableModel = new DeliveryOrderDetailTableModel(details);
+        DeliveryOrderDetailTableModel tableModel = new DeliveryOrderDetailTableModel(details, bean.getMediator());
         ViewFactory<DeliveryOrderDetailBean> detailView = new ViewFactory<DeliveryOrderDetailBean>();
         setDetailsTable(detailView.createBindingTableComponent(tableModel, false, false));
         getDetailsTable().addMouseListener(handleProductEditing());
@@ -264,6 +273,7 @@ public class DeliveryOrderBeanView extends AbstractDocumentBeanView<DeliveryOrde
                 DeliveryOrderBean bean = getBean();
                 List<DeliveryOrderDetailBean> details = bean.getDetails();
                 DeliveryOrderDetailBean detail = new DeliveryOrderDetailBean();
+                detail.setMediator(bean.getMediator());
                 detail.setDeliveryOrder(bean);
                 detail.setDiscountRate(bean.getDiscountRate());
                 detail.setQuantity(1);

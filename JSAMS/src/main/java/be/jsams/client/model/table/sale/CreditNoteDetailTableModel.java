@@ -6,6 +6,7 @@ import java.util.List;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.model.table.AbstractJsamsTableModel;
 import be.jsams.common.bean.model.management.ProductBean;
+import be.jsams.common.bean.model.sale.CreditNoteMediator;
 import be.jsams.common.bean.model.sale.detail.CreditNoteDetailBean;
 
 /**
@@ -25,12 +26,18 @@ public class CreditNoteDetailTableModel extends AbstractJsamsTableModel<CreditNo
      * Constructor.
      * 
      * @param listBean a list of {@link CreditNoteDetailBean}
+     * @param mediator the mediator
      */
-    public CreditNoteDetailTableModel(List<CreditNoteDetailBean> listBean) {
+    public CreditNoteDetailTableModel(List<CreditNoteDetailBean> listBean, CreditNoteMediator mediator) {
         super(listBean);
         setColumnNames(Arrays.asList(JsamsI18nResource.COLUMN_PRODUCT_ID, JsamsI18nResource.COLUMN_PRODUCT_NAME,
                 JsamsI18nResource.COLUMN_QUANTITY, JsamsI18nResource.COLUMN_PRICE,
                 JsamsI18nResource.COLUMN_DISCOUNT_RATE, JsamsI18nResource.COLUMN_VAT_APPLICABLE));
+        if (listBean != null && !listBean.isEmpty()) {
+            for (CreditNoteDetailBean bean : listBean) {
+                bean.setMediator(mediator);
+            }
+        }
     }
 
     /**

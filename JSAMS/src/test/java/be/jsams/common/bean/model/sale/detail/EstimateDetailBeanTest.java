@@ -10,6 +10,7 @@ import org.junit.Test;
 import be.jsams.common.bean.model.MockBeanGenerator;
 import be.jsams.common.bean.model.management.ProductBean;
 import be.jsams.common.bean.model.sale.EstimateBean;
+import be.jsams.common.bean.model.sale.EstimateMediator;
 
 /**
  * Test class for {@link EstimateDetailBean} class.
@@ -33,7 +34,11 @@ public class EstimateDetailBeanTest {
      */
     @Test
     public void testClear() {
-        bean = MockBeanGenerator.generateMockEstimateDetail(MockBeanGenerator.generateMockEstimate());
+        EstimateBean estimate = MockBeanGenerator.generateMockEstimate();
+        EstimateMediator mediator = new EstimateMediator();
+        bean = MockBeanGenerator.generateMockEstimateDetail(estimate);
+        bean.setMediator(mediator);
+        mediator.setEstimateBean(estimate);
         bean.clear();
         assertNull(bean.getDiscountRate());
         assertNull(bean.getEstimate());
@@ -52,9 +57,13 @@ public class EstimateDetailBeanTest {
         bean = new EstimateDetailBean();
         // we test only the detail here and not the estimate
         EstimateBean estimate = MockBeanGenerator.generateMockEstimate();
+        EstimateMediator mediator = new EstimateMediator();
+        bean.setMediator(mediator);
         bean.setEstimate(estimate);
         bean.setProduct(new ProductBean());
         EstimateDetailBean otherBean = MockBeanGenerator.generateMockEstimateDetail(estimate);
+        otherBean.setMediator(mediator);
+        mediator.setEstimateBean(estimate);
         bean.refresh(otherBean);
         assertTrue(bean.equals(otherBean));
     }

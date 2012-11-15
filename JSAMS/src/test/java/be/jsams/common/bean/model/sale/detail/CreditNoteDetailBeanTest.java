@@ -10,6 +10,7 @@ import org.junit.Test;
 import be.jsams.common.bean.model.MockBeanGenerator;
 import be.jsams.common.bean.model.management.ProductBean;
 import be.jsams.common.bean.model.sale.CreditNoteBean;
+import be.jsams.common.bean.model.sale.CreditNoteMediator;
 
 /**
  * Test class for {@link CreditNoteDetailBean} class.
@@ -33,7 +34,11 @@ public class CreditNoteDetailBeanTest {
      */
     @Test
     public void testClear() {
-        bean = MockBeanGenerator.generateMockCreditNoteDetail(null);
+        CreditNoteBean creditNote = MockBeanGenerator.generateMockCreditNote();
+        CreditNoteMediator mediator = new CreditNoteMediator();
+        bean = MockBeanGenerator.generateMockCreditNoteDetail(creditNote);
+        bean.setMediator(mediator);
+        mediator.setCreditNoteBean(creditNote);
         bean.clear();
         assertNull(bean.getDiscountRate());
         assertNull(bean.getCreditNote());
@@ -52,9 +57,13 @@ public class CreditNoteDetailBeanTest {
         bean = new CreditNoteDetailBean();
         // we test only the detail here and not the credit note
         CreditNoteBean creditNote = MockBeanGenerator.generateMockCreditNote();
+        CreditNoteMediator mediator = new CreditNoteMediator();
+        bean.setMediator(mediator);
+        mediator.setCreditNoteBean(creditNote);
         bean.setCreditNote(creditNote);
         bean.setProduct(new ProductBean());
         CreditNoteDetailBean otherBean = MockBeanGenerator.generateMockCreditNoteDetail(creditNote);
+        otherBean.setMediator(mediator);
         bean.refresh(otherBean);
         assertTrue(bean.equals(otherBean));
     }

@@ -39,6 +39,7 @@ import be.jsams.common.bean.model.PeriodBean;
 import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.management.ProductBean;
 import be.jsams.common.bean.model.sale.BillBean;
+import be.jsams.common.bean.model.sale.CommandBean;
 import be.jsams.common.bean.model.sale.detail.BillDetailBean;
 import be.jsams.common.bean.view.Editable;
 import be.jsams.common.bean.view.Searchable;
@@ -95,6 +96,12 @@ public class BillBeanView extends AbstractDocumentBeanView<BillBean> implements 
         JsamsFormattedTextField discountRate = viewFactory.createBindingDecimalComponent(bean,
                 BillBean.DISCOUNT_RATE_PROPERTY, false, false);
         JsamsTextField remark = viewFactory.createBindingTextComponent(bean, BillBean.REMARK_PROPERTY, false, false);
+        JsamsFormattedTextField totalEt = viewFactory
+                .createBindingDecimalComponent(bean, CommandBean.TOTAL_ET_PROPERTY, false, true);
+        JsamsFormattedTextField totalVat = viewFactory
+                .createBindingDecimalComponent(bean, CommandBean.TOTAL_VAT_PROPERTY, false, true);
+        JsamsFormattedTextField totalAti = viewFactory
+                .createBindingDecimalComponent(bean, CommandBean.TOTAL_ATI_PROPERTY, false, true);
 
         FormLayout layout = new FormLayout(
                 "right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow, 3dlu", "p");
@@ -120,11 +127,14 @@ public class BillBeanView extends AbstractDocumentBeanView<BillBean> implements 
         builder.appendI15d(JsamsI18nLabelResource.LABEL_FIRST_REMEMBER_DATE.getKey(), firstRememberDate);
         builder.appendI15d(JsamsI18nLabelResource.LABEL_SECOND_REMEMBER_DATE.getKey(), secondRememberDate);
         builder.appendI15d(JsamsI18nLabelResource.LABEL_FORMAL_NOTICE_DATE.getKey(), formalNoticeDate);
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_TOTAL_ET.getKey(), totalEt);
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_TOTAL_VAT.getKey(), totalVat);
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_TOTAL_ATI.getKey(), totalAti);
         builder.nextLine();
 
         List<BillDetailBean> details = bean.getDetails();
 
-        BillDetailTableModel tableModel = new BillDetailTableModel(details);
+        BillDetailTableModel tableModel = new BillDetailTableModel(details, bean.getMediator());
         ViewFactory<BillDetailBean> detailView = new ViewFactory<BillDetailBean>();
         setDetailsTable(detailView.createBindingTableComponent(tableModel, false, false));
         getDetailsTable().addMouseListener(handleProductEditing());
@@ -275,6 +285,7 @@ public class BillBeanView extends AbstractDocumentBeanView<BillBean> implements 
                 BillBean bean = getBean();
                 List<BillDetailBean> details = bean.getDetails();
                 BillDetailBean detail = new BillDetailBean();
+                detail.setMediator(bean.getMediator());
                 detail.setBill(bean);
                 detail.setDiscountRate(bean.getDiscountRate());
                 detail.setQuantity(1);

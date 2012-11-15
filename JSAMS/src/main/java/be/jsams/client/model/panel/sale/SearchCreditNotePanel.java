@@ -17,6 +17,7 @@ import be.jsams.client.validator.search.sale.SearchCreditNoteValidator;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.sale.CreditNoteBean;
+import be.jsams.common.bean.model.sale.CreditNoteMediator;
 import be.jsams.server.service.pdf.impl.PdfCreditNoteServiceImpl;
 import be.jsams.server.service.sale.CreditNoteService;
 
@@ -79,6 +80,9 @@ public class SearchCreditNotePanel<L extends MouseListener> extends
         SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
         CustomerBean customerBean = JsamsApplicationContext.getCustomerBeanBuilder().build(null, currentSociety);
         CreditNoteBean bean = new CreditNoteBean(currentSociety, customerBean);
+        CreditNoteMediator mediator = new CreditNoteMediator();
+        mediator.setCreditNoteBean(bean);
+        bean.setMediator(mediator);
         new EditCreditNoteDialog(JsamsI18nResource.TITLE_EDIT_CREDIT_NOTE, bean);
         updateUI();
     }
@@ -93,6 +97,9 @@ public class SearchCreditNotePanel<L extends MouseListener> extends
             int selectedRowModel = getResultTable().convertRowIndexToModel(selectedRow);
             CreditNoteTableModel model = (CreditNoteTableModel) getResultTable().getModel();
             CreditNoteBean beanToModify = model.getRow(selectedRowModel);
+            CreditNoteMediator mediator = new CreditNoteMediator();
+            mediator.setCreditNoteBean(beanToModify);
+            beanToModify.setMediator(mediator);
             if (debug) {
                 LOGGER.debug("The credit note to modify: " + beanToModify);
             }
@@ -115,8 +122,15 @@ public class SearchCreditNotePanel<L extends MouseListener> extends
     public void performOk() {
         final CreditNoteBean criteria = getModel();
         if (super.prePerformOk(criteria)) {
-            List<CreditNoteBean> commands = ((CreditNoteService) super.getService()).findByCriteria(criteria);
-            fillTable(commands);
+            List<CreditNoteBean> creditNotes = ((CreditNoteService) super.getService()).findByCriteria(criteria);
+            fillTable(creditNotes);
+            if (creditNotes != null && !creditNotes.isEmpty()) {
+                for (CreditNoteBean bean : creditNotes) {
+                    CreditNoteMediator mediator = new CreditNoteMediator();
+                    mediator.setCreditNoteBean(bean);
+                    bean.setMediator(mediator);
+                }
+            }
             super.postPerformOk();
         }
     }

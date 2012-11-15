@@ -10,6 +10,7 @@ import org.junit.Test;
 import be.jsams.common.bean.model.MockBeanGenerator;
 import be.jsams.common.bean.model.management.ProductBean;
 import be.jsams.common.bean.model.sale.BillBean;
+import be.jsams.common.bean.model.sale.BillMediator;
 
 /**
  * Test class for {@link BillDetailBean} class.
@@ -35,7 +36,11 @@ public class BillDetailBeanTest {
      */
     @Test
     public void testClear() {
-        bean = MockBeanGenerator.generateMockBillDetail(null);
+        BillBean bill = MockBeanGenerator.generateMockBill();
+        BillMediator mediator = new BillMediator();
+        bean = MockBeanGenerator.generateMockBillDetail(bill);
+        bean.setMediator(mediator);
+        mediator.setBillBean(bill);
         bean.clear();
         assertNull(bean.getBill());
         assertNull(bean.getDiscountRate());
@@ -54,9 +59,13 @@ public class BillDetailBeanTest {
         bean = new BillDetailBean();
         // we test only the detail here and not the bill
         BillBean bill = MockBeanGenerator.generateMockBill();
+        BillMediator mediator = new BillMediator();
+        bean.setMediator(mediator);
+        mediator.setBillBean(bill);
         bean.setBill(bill);
         bean.setProduct(new ProductBean());
         BillDetailBean otherBean = MockBeanGenerator.generateMockBillDetail(bill);
+        otherBean.setMediator(mediator);
         bean.refresh(otherBean);
         assertTrue(bean.equals(otherBean));
     }

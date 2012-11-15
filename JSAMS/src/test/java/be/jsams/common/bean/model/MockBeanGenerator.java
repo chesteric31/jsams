@@ -15,10 +15,15 @@ import be.jsams.common.bean.model.management.ProductBean;
 import be.jsams.common.bean.model.management.ProductCategoryBean;
 import be.jsams.common.bean.model.sale.AbstractDocumentBean;
 import be.jsams.common.bean.model.sale.BillBean;
+import be.jsams.common.bean.model.sale.BillMediator;
 import be.jsams.common.bean.model.sale.CommandBean;
+import be.jsams.common.bean.model.sale.CommandMediator;
 import be.jsams.common.bean.model.sale.CreditNoteBean;
+import be.jsams.common.bean.model.sale.CreditNoteMediator;
 import be.jsams.common.bean.model.sale.DeliveryOrderBean;
+import be.jsams.common.bean.model.sale.DeliveryOrderMediator;
 import be.jsams.common.bean.model.sale.EstimateBean;
+import be.jsams.common.bean.model.sale.EstimateMediator;
 import be.jsams.common.bean.model.sale.detail.BillDetailBean;
 import be.jsams.common.bean.model.sale.detail.CommandDetailBean;
 import be.jsams.common.bean.model.sale.detail.CreditNoteDetailBean;
@@ -221,6 +226,9 @@ public final class MockBeanGenerator {
      */
     public static EstimateBean generateMockEstimate() {
         EstimateBean bean = new EstimateBean(generateMockSociety(), generateMockCustomer(), generateMockAgent());
+        EstimateMediator mediator = new EstimateMediator();
+        mediator.setEstimateBean(bean);
+        bean.setMediator(mediator);
         bean.setBillingAddress(generateMockAddress());
         Date today = new Date();
         bean.setCreationDate(today);
@@ -249,6 +257,7 @@ public final class MockBeanGenerator {
      */
     public static EstimateDetailBean generateMockEstimateDetail(EstimateBean estimate) {
         EstimateDetailBean detailBean = new EstimateDetailBean();
+        detailBean.setMediator(estimate.getMediator());
         detailBean.setDiscountRate(25D);
         detailBean.setEstimate(estimate);
         detailBean.setPrice(15D);
@@ -266,6 +275,9 @@ public final class MockBeanGenerator {
      */
     public static CommandBean generateMockCommand() {
         CommandBean bean = new CommandBean(generateMockSociety(), generateMockCustomer(), generateMockAgent());
+        CommandMediator mediator = new CommandMediator();
+        bean.setMediator(mediator);
+        mediator.setCommandBean(bean);
         AddressBean address = generateMockAddress();
         bean.setDeliveryAddress(address);
         bean.setBillingAddress(address);
@@ -295,6 +307,9 @@ public final class MockBeanGenerator {
      */
     public static DeliveryOrderBean generateMockDeliveryOrder() {
         DeliveryOrderBean bean = new DeliveryOrderBean(generateMockSociety(), generateMockCustomer());
+        DeliveryOrderMediator mediator = new DeliveryOrderMediator();
+        bean.setMediator(mediator);
+        mediator.setDeliveryOrderBean(bean);
         bean.setDeliveryAddress(generateMockAddress());
         Date today = new Date();
         bean.setCreationDate(today);
@@ -323,6 +338,9 @@ public final class MockBeanGenerator {
     public static BillBean generateMockBill() {
         BillBean bean = new BillBean(generateMockSociety(), generateMockCustomer(), generateMockPaymentMode());
         bean.setBillingAddress(generateMockAddress());
+        BillMediator mediator = new BillMediator();
+        bean.setMediator(mediator);
+        mediator.setBillBean(bean);
         bean.setClosed(false);
         Date today = new Date();
         bean.setCreationDate(today);
@@ -367,6 +385,9 @@ public final class MockBeanGenerator {
      */
     public static CreditNoteBean generateMockCreditNote() {
         CreditNoteBean bean = new CreditNoteBean(generateMockSociety(), generateMockCustomer());
+        CreditNoteMediator mediator = new CreditNoteMediator();
+        bean.setMediator(mediator);
+        mediator.setCreditNoteBean(bean);
         bean.setBillingAddress(generateMockAddress());
         Date today = new Date();
         bean.setCreationDate(today);
@@ -393,6 +414,7 @@ public final class MockBeanGenerator {
      */
     public static CommandDetailBean generateMockCommandDetail(CommandBean command) {
         CommandDetailBean detailBean = new CommandDetailBean();
+        detailBean.setMediator(command.getMediator());
         detailBean.setDiscountRate(15D);
         detailBean.setCommand(command);
         detailBean.setPrice(3.5D);
@@ -411,6 +433,7 @@ public final class MockBeanGenerator {
      */
     public static DeliveryOrderDetailBean generateMockDeliveryOrderDetail(DeliveryOrderBean deliveryOrder) {
         DeliveryOrderDetailBean detailBean = new DeliveryOrderDetailBean();
+        detailBean.setMediator(deliveryOrder.getMediator());
         detailBean.setBillDetail(null);
         detailBean.setCommandDetail(null);
         detailBean.setDeliveryOrder(deliveryOrder);
@@ -431,6 +454,7 @@ public final class MockBeanGenerator {
      */
     public static BillDetailBean generateMockBillDetail(BillBean bill) {
         BillDetailBean detailBean = new BillDetailBean();
+        detailBean.setMediator(bill.getMediator());
         detailBean.setBill(bill);
         detailBean.setDiscountRate(10D);
         detailBean.setPrice(20D);
@@ -449,6 +473,7 @@ public final class MockBeanGenerator {
      */
     public static CreditNoteDetailBean generateMockCreditNoteDetail(CreditNoteBean creditNote) {
         CreditNoteDetailBean detailBean = new CreditNoteDetailBean();
+        detailBean.setMediator(creditNote.getMediator());
         detailBean.setCreditNote(creditNote);
         detailBean.setDiscountRate(12D);
         detailBean.setPrice(21D);
@@ -469,26 +494,26 @@ public final class MockBeanGenerator {
         bean.setSourceType(2);
         bean.setDestinationType(3);
         List<EstimateDetailBean> estimateDetailBeans = new ArrayList<EstimateDetailBean>();
-        estimateDetailBeans.add(generateMockEstimateDetail(null));
+        estimateDetailBeans.add(generateMockEstimateDetail(generateMockEstimate()));
         Map<Long, List<EstimateDetailBean>> estimateDetailBeansMap = new HashMap<Long, List<EstimateDetailBean>>();
         estimateDetailBeansMap.put(0L, estimateDetailBeans);
         bean.setEstimateDetails(estimateDetailBeansMap);
         
         List<CommandDetailBean> commandDetailBeans = new ArrayList<CommandDetailBean>();
-        commandDetailBeans.add(generateMockCommandDetail(null));
+        commandDetailBeans.add(generateMockCommandDetail(generateMockCommand()));
         Map<Long, List<CommandDetailBean>> commandDetailBeansMap = new HashMap<Long, List<CommandDetailBean>>();
         commandDetailBeansMap.put(0L, commandDetailBeans);
         bean.setCommandDetails(commandDetailBeansMap);
 
         List<DeliveryOrderDetailBean> deliveryOrderDetailBeans = new ArrayList<DeliveryOrderDetailBean>();
-        deliveryOrderDetailBeans.add(generateMockDeliveryOrderDetail(null));
+        deliveryOrderDetailBeans.add(generateMockDeliveryOrderDetail(generateMockDeliveryOrder()));
         Map<Long, List<DeliveryOrderDetailBean>> deliveryOrderDetailBeansMap
             = new HashMap<Long, List<DeliveryOrderDetailBean>>();
         deliveryOrderDetailBeansMap.put(0L, deliveryOrderDetailBeans);
         bean.setDeliveryOrderDetails(deliveryOrderDetailBeansMap);
 
         List<BillDetailBean> billDetailBeans = new ArrayList<BillDetailBean>();
-        billDetailBeans.add(generateMockBillDetail(null));
+        billDetailBeans.add(generateMockBillDetail(generateMockBill()));
         Map<Long, List<BillDetailBean>> billDetailBeansMap = new HashMap<Long, List<BillDetailBean>>();
         billDetailBeansMap.put(0L, billDetailBeans);
         bean.setBillDetails(billDetailBeansMap);

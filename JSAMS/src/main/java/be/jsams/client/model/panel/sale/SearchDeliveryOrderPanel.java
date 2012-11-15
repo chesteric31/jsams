@@ -17,6 +17,7 @@ import be.jsams.client.validator.search.sale.SearchDeliveryOrderValidator;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.sale.DeliveryOrderBean;
+import be.jsams.common.bean.model.sale.DeliveryOrderMediator;
 import be.jsams.server.service.pdf.impl.PdfDeliveryOrderServiceImpl;
 import be.jsams.server.service.sale.DeliveryOrderService;
 
@@ -80,6 +81,9 @@ public class SearchDeliveryOrderPanel<L extends MouseListener>
         SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
         CustomerBean customerBean = JsamsApplicationContext.getCustomerBeanBuilder().build(null, currentSociety);
         DeliveryOrderBean bean = new DeliveryOrderBean(currentSociety, customerBean);
+        DeliveryOrderMediator mediator = new DeliveryOrderMediator();
+        mediator.setDeliveryOrderBean(bean);
+        bean.setMediator(mediator);
         new EditDeliveryOrderDialog(JsamsI18nResource.TITLE_EDIT_DELIVERY_ORDER, bean);
         updateUI();
     }
@@ -94,6 +98,9 @@ public class SearchDeliveryOrderPanel<L extends MouseListener>
             int selectedRowModel = getResultTable().convertRowIndexToModel(selectedRow);
             DeliveryOrderTableModel model = (DeliveryOrderTableModel) getResultTable().getModel();
             DeliveryOrderBean beanToModify = model.getRow(selectedRowModel);
+            DeliveryOrderMediator mediator = new DeliveryOrderMediator();
+            mediator.setDeliveryOrderBean(beanToModify);
+            beanToModify.setMediator(mediator);
             if (debug) {
                 LOGGER.debug("The delivery order to modify: " + beanToModify);
             }
@@ -119,6 +126,13 @@ public class SearchDeliveryOrderPanel<L extends MouseListener>
             List<DeliveryOrderBean> deliveryOrders = ((DeliveryOrderService) super.getService())
                     .findByCriteria(criteria);
             fillTable(deliveryOrders);
+            if (deliveryOrders != null && !deliveryOrders.isEmpty()) {
+                for (DeliveryOrderBean bean : deliveryOrders) {
+                    DeliveryOrderMediator mediator = new DeliveryOrderMediator();
+                    mediator.setDeliveryOrderBean(bean);
+                    bean.setMediator(mediator);
+                }
+            }
             super.postPerformOk();
         }
     }

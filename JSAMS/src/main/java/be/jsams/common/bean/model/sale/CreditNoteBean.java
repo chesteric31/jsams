@@ -25,8 +25,17 @@ public class CreditNoteBean extends AbstractDocumentBean<CreditNote, CreditNoteB
      */
     private static final long serialVersionUID = -1611159056426861810L;
 
+    private Double totalEt;
+    private Double totalVat;
+    private Double totalAti;
+
     private AddressBean billingAddress;
     private List<CreditNoteDetailBean> details;
+    public static final String TOTAL_ET_PROPERTY = "totalEt";
+    public static final String TOTAL_ATI_PROPERTY = "totalAti";
+    public static final String TOTAL_VAT_PROPERTY = "totalVat";
+
+    private CreditNoteMediator mediator;
 
     /**
      * Default constructor
@@ -43,7 +52,7 @@ public class CreditNoteBean extends AbstractDocumentBean<CreditNote, CreditNoteB
     }
 
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param model the {@link CreditNote}
      * @param society the {@link SocietyBean}
@@ -58,6 +67,20 @@ public class CreditNoteBean extends AbstractDocumentBean<CreditNote, CreditNoteB
         }
         this.details = beans;
         setView(buildView());
+    }
+
+    /**
+     * @return the mediator
+     */
+    public CreditNoteMediator getMediator() {
+        return mediator;
+    }
+
+    /**
+     * @param mediator the mediator to set
+     */
+    public void setMediator(CreditNoteMediator mediator) {
+        this.mediator = mediator;
     }
 
     /**
@@ -86,6 +109,7 @@ public class CreditNoteBean extends AbstractDocumentBean<CreditNote, CreditNoteB
      */
     public void setDetails(List<CreditNoteDetailBean> details) {
         this.details = details;
+        mediator.updateTotals();
     }
 
     /**
@@ -106,6 +130,14 @@ public class CreditNoteBean extends AbstractDocumentBean<CreditNote, CreditNoteB
         CreditNoteBean other = (CreditNoteBean) bean;
         billingAddress.refresh(other.getBillingAddress());
         details.clear();
+        CreditNoteMediator creditNoteMediator = other.getMediator();
+        setMediator(creditNoteMediator);
+        List<CreditNoteDetailBean> list = other.getDetails();
+        if (list != null && !list.isEmpty()) {
+            for (CreditNoteDetailBean detailBean : list) {
+                detailBean.setMediator(creditNoteMediator);
+            }
+        }
         details.addAll(other.getDetails());
     }
 
@@ -144,9 +176,9 @@ public class CreditNoteBean extends AbstractDocumentBean<CreditNote, CreditNoteB
      */
     @Override
     public boolean equals(Object obj) {
-//        if (this == obj) {
-//            return true;
-//        }
+        // if (this == obj) {
+        // return true;
+        // }
         if (!super.equals(obj)) {
             return false;
         }
@@ -169,6 +201,54 @@ public class CreditNoteBean extends AbstractDocumentBean<CreditNote, CreditNoteB
             return false;
         }
         return true;
+    }
+
+    /**
+     * @return the totalEt
+     */
+    public Double getTotalEt() {
+        return totalEt;
+    }
+
+    /**
+     * @param totalEt the totalEt to set
+     */
+    public void setTotalEt(Double totalEt) {
+        Double oldValue = this.totalEt;
+        this.totalEt = totalEt;
+        firePropertyChange(TOTAL_ET_PROPERTY, oldValue, this.totalEt);
+    }
+
+    /**
+     * @return the totalAti
+     */
+    public Double getTotalAti() {
+        return totalAti;
+    }
+
+    /**
+     * @param totalAti the totalAti to set
+     */
+    public void setTotalAti(Double totalAti) {
+        Double oldValue = this.totalAti;
+        this.totalAti = totalAti;
+        firePropertyChange(TOTAL_ATI_PROPERTY, oldValue, this.totalAti);
+    }
+
+    /**
+     * @return the totalVat
+     */
+    public Double getTotalVat() {
+        return totalVat;
+    }
+
+    /**
+     * @param totalVat the total VAT
+     */
+    public void setTotalVat(Double totalVat) {
+        Double oldValue = this.totalVat;
+        this.totalVat = totalVat;
+        firePropertyChange(TOTAL_VAT_PROPERTY, oldValue, this.totalVat);
     }
 
 }

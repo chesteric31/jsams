@@ -34,6 +34,9 @@ public class BillBean extends AbstractDocumentBean<Bill, BillBeanView> {
     private Date dateSecondRemember;
     private Date dateFormalNotice;
     private boolean closed;
+    private Double totalEt;
+    private Double totalVat;
+    private Double totalAti;
 
     private PaymentModeBean paymentMode;
     private AddressBean billingAddress;
@@ -47,6 +50,11 @@ public class BillBean extends AbstractDocumentBean<Bill, BillBeanView> {
     public static final String DATE_SECOND_REMEMBER_PROPERTY = "dateSecondRemember";
     public static final String DATE_FORMAL_NOTICE_PROPERTY = "dateFormalNotice";
     public static final String CLOSED_PROPERTY = "closed";
+    public static final String TOTAL_ET_PROPERTY = "totalEt";
+    public static final String TOTAL_ATI_PROPERTY = "totalAti";
+    public static final String TOTAL_VAT_PROPERTY = "totalVat";
+
+    private BillMediator mediator;
 
     /**
      * Constructor.
@@ -94,6 +102,20 @@ public class BillBean extends AbstractDocumentBean<Bill, BillBeanView> {
     }
 
     /**
+     * @return the mediator
+     */
+    public BillMediator getMediator() {
+        return mediator;
+    }
+
+    /**
+     * @param mediator the mediator to set
+     */
+    public void setMediator(BillMediator mediator) {
+        this.mediator = mediator;
+    }
+
+    /**
      * @return the discountRate
      */
     public Double getDiscountRate() {
@@ -107,6 +129,8 @@ public class BillBean extends AbstractDocumentBean<Bill, BillBeanView> {
         Double oldValue = this.discountRate;
         this.discountRate = discountRate;
         firePropertyChange(DISCOUNT_RATE_PROPERTY, oldValue, this.discountRate);
+        mediator.updateTotals();
+        mediator.updateDiscountRates();
     }
 
     /**
@@ -245,6 +269,7 @@ public class BillBean extends AbstractDocumentBean<Bill, BillBeanView> {
      */
     public void setDetails(List<BillDetailBean> details) {
         this.details = details;
+        mediator.updateTotals();
     }
 
     /**
@@ -273,7 +298,15 @@ public class BillBean extends AbstractDocumentBean<Bill, BillBeanView> {
         BillBean other = (BillBean) bean;
         billingAddress.refresh(other.getBillingAddress());
         details.clear();
+        BillMediator billMediator = other.getMediator();
+        List<BillDetailBean> list = other.getDetails();
+        if (list != null && !list.isEmpty()) {
+            for (BillDetailBean detailBean : list) {
+                detailBean.setMediator(billMediator);
+            }
+        }
         details.addAll(other.getDetails());
+        setMediator(billMediator);
         setDiscountRate(other.getDiscountRate());
         setClosed(other.isClosed());
         setPaid(other.isPaid());
@@ -367,9 +400,9 @@ public class BillBean extends AbstractDocumentBean<Bill, BillBeanView> {
      */
     @Override
     public boolean equals(Object obj) {
-//        if (this == obj) {
-//            return true;
-//        }
+        // if (this == obj) {
+        // return true;
+        // }
         if (!super.equals(obj)) {
             return false;
         }
@@ -440,6 +473,54 @@ public class BillBean extends AbstractDocumentBean<Bill, BillBeanView> {
             return false;
         }
         return true;
+    }
+
+    /**
+     * @return the totalEt
+     */
+    public Double getTotalEt() {
+        return totalEt;
+    }
+
+    /**
+     * @param totalEt the totalEt to set
+     */
+    public void setTotalEt(Double totalEt) {
+        Double oldValue = this.totalEt;
+        this.totalEt = totalEt;
+        firePropertyChange(TOTAL_ET_PROPERTY, oldValue, this.totalEt);
+    }
+
+    /**
+     * @return the totalAti
+     */
+    public Double getTotalAti() {
+        return totalAti;
+    }
+
+    /**
+     * @param totalAti the totalAti to set
+     */
+    public void setTotalAti(Double totalAti) {
+        Double oldValue = this.totalAti;
+        this.totalAti = totalAti;
+        firePropertyChange(TOTAL_ATI_PROPERTY, oldValue, this.totalAti);
+    }
+
+    /**
+     * @return the totalVat
+     */
+    public Double getTotalVat() {
+        return totalVat;
+    }
+
+    /**
+     * @param totalVat the total VAT
+     */
+    public void setTotalVat(Double totalVat) {
+        Double oldValue = this.totalVat;
+        this.totalVat = totalVat;
+        firePropertyChange(TOTAL_VAT_PROPERTY, oldValue, this.totalVat);
     }
 
 }
