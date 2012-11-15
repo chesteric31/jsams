@@ -130,6 +130,7 @@ public class DeliveryOrderBeanView extends AbstractDocumentBeanView<DeliveryOrde
         updateDetailsTableRendering();
         
         builder.appendI15dSeparator(JsamsI18nResource.PANEL_DELIVERY_ORDER_DETAILS.getKey());
+        builder.appendRow("60dlu");
         builder.append(new JScrollPane(getDetailsTable()), maxColumnSpan);
 
         JPanel southPanel = new JPanel();

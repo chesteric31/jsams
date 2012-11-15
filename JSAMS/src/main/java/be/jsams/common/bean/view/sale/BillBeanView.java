@@ -141,6 +141,7 @@ public class BillBeanView extends AbstractDocumentBeanView<BillBean> implements 
         updateDetailsTableRendering();
         
         builder.appendI15dSeparator(JsamsI18nResource.PANEL_BILL_DETAILS.getKey());
+        builder.appendRow("60dlu");
         builder.append(new JScrollPane(getDetailsTable()), maxColumnSpan);
 
         JPanel southPanel = new JPanel();
