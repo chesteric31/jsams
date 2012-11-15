@@ -11,7 +11,9 @@ import be.jsams.common.bean.model.PaymentModeBean;
 import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.sale.AbstractDocumentBean;
 import be.jsams.common.bean.model.sale.BillBean;
+import be.jsams.common.bean.model.sale.BillMediator;
 import be.jsams.common.bean.model.sale.CommandBean;
+import be.jsams.common.bean.model.sale.CommandMediator;
 import be.jsams.common.bean.model.sale.EstimateBean;
 import be.jsams.common.bean.model.sale.detail.BillDetailBean;
 import be.jsams.common.bean.model.sale.detail.CommandDetailBean;
@@ -95,6 +97,9 @@ public class EstimateTransferServiceImpl extends AbstractTransferService impleme
         EstimateBean estimate = list.get(0).getEstimate();
         CustomerBean customer = estimate.getCustomer();
         CommandBean newBean = new CommandBean(estimate.getSociety(), customer, estimate.getAgent());
+        CommandMediator mediator = new CommandMediator();
+        newBean.setMediator(mediator);
+        mediator.setCommandBean(newBean);
         newBean.setBillingAddress(estimate.getBillingAddress());
         // to force to create a new billing address
         newBean.getBillingAddress().setId(null);
@@ -105,6 +110,7 @@ public class EstimateTransferServiceImpl extends AbstractTransferService impleme
         List<CommandDetailBean> details = new ArrayList<CommandDetailBean>();
         for (EstimateDetailBean detail : list) {
             CommandDetailBean bean = new CommandDetailBean();
+            bean.setMediator(newBean.getMediator());
             bean.setCommand(newBean);
             bean.setDiscountRate(detail.getDiscountRate());
             bean.setPrice(detail.getPrice());
@@ -142,6 +148,9 @@ public class EstimateTransferServiceImpl extends AbstractTransferService impleme
     private void toCommandFullTransfer(EstimateBean estimate) {
         CustomerBean customer = estimate.getCustomer();
         CommandBean newBean = new CommandBean(estimate.getSociety(), customer, estimate.getAgent());
+        CommandMediator mediator = new CommandMediator();
+        newBean.setMediator(mediator);
+        mediator.setCommandBean(newBean);
         newBean.setBillingAddress(estimate.getBillingAddress());
         // to force to create a new billing address
         newBean.getBillingAddress().setId(null);
@@ -152,6 +161,7 @@ public class EstimateTransferServiceImpl extends AbstractTransferService impleme
         List<CommandDetailBean> details = new ArrayList<CommandDetailBean>();
         for (EstimateDetailBean detail : estimate.getDetails()) {
             CommandDetailBean bean = new CommandDetailBean();
+            bean.setMediator(newBean.getMediator());
             bean.setCommand(newBean);
             bean.setDiscountRate(detail.getDiscountRate());
             bean.setPrice(detail.getPrice());
@@ -216,6 +226,9 @@ public class EstimateTransferServiceImpl extends AbstractTransferService impleme
         CustomerBean customer = estimate.getCustomer();
         PaymentModeBean paymentMode = customer.getPaymentMode();
         BillBean newBean = new BillBean(estimate.getSociety(), customer, paymentMode);
+        BillMediator mediator = new BillMediator();
+        newBean.setMediator(mediator);
+        mediator.setBillBean(newBean);
         newBean.setBillingAddress(estimate.getBillingAddress());
         newBean.getBillingAddress().setId(null);
         newBean.setClosed(false);
@@ -231,6 +244,7 @@ public class EstimateTransferServiceImpl extends AbstractTransferService impleme
         List<BillDetailBean> details = new ArrayList<BillDetailBean>();
         for (EstimateDetailBean detail : list) {
             BillDetailBean bean = new BillDetailBean();
+            bean.setMediator(newBean.getMediator());
             bean.setBill(newBean);
             bean.setDiscountRate(detail.getDiscountRate());
             bean.setPrice(detail.getPrice());
@@ -272,6 +286,9 @@ public class EstimateTransferServiceImpl extends AbstractTransferService impleme
         CustomerBean customer = estimate.getCustomer();
         PaymentModeBean paymentMode = customer.getPaymentMode();
         BillBean newBean = new BillBean(estimate.getSociety(), customer, paymentMode);
+        BillMediator mediator = new BillMediator();
+        newBean.setMediator(mediator);
+        mediator.setBillBean(newBean);
         newBean.setBillingAddress(estimate.getBillingAddress());
         newBean.getBillingAddress().setId(null);
         newBean.setClosed(false);
@@ -287,6 +304,7 @@ public class EstimateTransferServiceImpl extends AbstractTransferService impleme
         List<BillDetailBean> details = new ArrayList<BillDetailBean>();
         for (EstimateDetailBean detail : estimate.getDetails()) {
             BillDetailBean bean = new BillDetailBean();
+            bean.setMediator(newBean.getMediator());
             bean.setBill(newBean);
             bean.setDiscountRate(detail.getDiscountRate());
             bean.setPrice(detail.getPrice());

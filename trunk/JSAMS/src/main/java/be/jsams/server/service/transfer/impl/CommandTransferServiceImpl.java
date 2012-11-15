@@ -11,8 +11,10 @@ import be.jsams.common.bean.model.PaymentModeBean;
 import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.sale.AbstractDocumentBean;
 import be.jsams.common.bean.model.sale.BillBean;
+import be.jsams.common.bean.model.sale.BillMediator;
 import be.jsams.common.bean.model.sale.CommandBean;
 import be.jsams.common.bean.model.sale.DeliveryOrderBean;
+import be.jsams.common.bean.model.sale.DeliveryOrderMediator;
 import be.jsams.common.bean.model.sale.detail.BillDetailBean;
 import be.jsams.common.bean.model.sale.detail.CommandDetailBean;
 import be.jsams.common.bean.model.sale.detail.DeliveryOrderDetailBean;
@@ -95,6 +97,9 @@ public class CommandTransferServiceImpl extends AbstractTransferService implemen
         CommandBean command = list.get(0).getCommand();
         CustomerBean customer = command.getCustomer();
         DeliveryOrderBean newBean = new DeliveryOrderBean(command.getSociety(), customer);
+        DeliveryOrderMediator mediator = new DeliveryOrderMediator();
+        newBean.setMediator(mediator);
+        mediator.setDeliveryOrderBean(newBean);
         newBean.setCustomer(customer);
         newBean.setCreationDate(new Date());
         newBean.setDeliveryAddress(command.getDeliveryAddress());
@@ -103,6 +108,7 @@ public class CommandTransferServiceImpl extends AbstractTransferService implemen
         List<DeliveryOrderDetailBean> details = new ArrayList<DeliveryOrderDetailBean>();
         for (CommandDetailBean detail : list) {
             DeliveryOrderDetailBean bean = new DeliveryOrderDetailBean();
+            bean.setMediator(newBean.getMediator());
             bean.setDeliveryOrder(newBean);
             bean.setDiscountRate(detail.getDiscountRate());
             bean.setPrice(detail.getPrice());
@@ -139,6 +145,9 @@ public class CommandTransferServiceImpl extends AbstractTransferService implemen
     private void toDeliveryOrderFullTransfer(CommandBean command) {
         CustomerBean customer = command.getCustomer();
         DeliveryOrderBean newBean = new DeliveryOrderBean(command.getSociety(), customer);
+        DeliveryOrderMediator mediator = new DeliveryOrderMediator();
+        newBean.setMediator(mediator);
+        mediator.setDeliveryOrderBean(newBean);
         newBean.setCreationDate(new Date());
         newBean.setDeliveryAddress(customer.getDeliveryAddress());
         // to force to create a new delivery address
@@ -147,6 +156,7 @@ public class CommandTransferServiceImpl extends AbstractTransferService implemen
         for (CommandDetailBean detail : command.getDetails()) {
             DeliveryOrderDetailBean bean = new DeliveryOrderDetailBean();
             bean.setCommandDetail(detail);
+            bean.setMediator(newBean.getMediator());
             bean.setDeliveryOrder(newBean);
             bean.setDiscountRate(detail.getDiscountRate());
             bean.setPrice(detail.getPrice());
@@ -210,6 +220,9 @@ public class CommandTransferServiceImpl extends AbstractTransferService implemen
         CustomerBean customer = command.getCustomer();
         PaymentModeBean paymentMode = customer.getPaymentMode();
         BillBean newBean = new BillBean(command.getSociety(), customer, paymentMode);
+        BillMediator mediator = new BillMediator();
+        newBean.setMediator(mediator);
+        mediator.setBillBean(newBean);
         newBean.setBillingAddress(command.getBillingAddress());
         newBean.getBillingAddress().setId(null);
         newBean.setClosed(false);
@@ -225,6 +238,7 @@ public class CommandTransferServiceImpl extends AbstractTransferService implemen
         List<BillDetailBean> details = new ArrayList<BillDetailBean>();
         for (CommandDetailBean detail : list) {
             BillDetailBean bean = new BillDetailBean();
+            bean.setMediator(newBean.getMediator());
             bean.setBill(newBean);
             bean.setDiscountRate(detail.getDiscountRate());
             bean.setPrice(detail.getPrice());
@@ -266,6 +280,9 @@ public class CommandTransferServiceImpl extends AbstractTransferService implemen
         CustomerBean customer = command.getCustomer();
         PaymentModeBean paymentMode = customer.getPaymentMode();
         BillBean newBean = new BillBean(command.getSociety(), customer, paymentMode);
+        BillMediator mediator = new BillMediator();
+        newBean.setMediator(mediator);
+        mediator.setBillBean(newBean);
         newBean.setBillingAddress(command.getBillingAddress());
         newBean.getBillingAddress().setId(null);
         newBean.setClosed(false);
@@ -281,6 +298,7 @@ public class CommandTransferServiceImpl extends AbstractTransferService implemen
         List<BillDetailBean> details = new ArrayList<BillDetailBean>();
         for (CommandDetailBean detail : command.getDetails()) {
             BillDetailBean bean = new BillDetailBean();
+            bean.setMediator(newBean.getMediator());
             bean.setBill(newBean);
             bean.setDiscountRate(detail.getDiscountRate());
             bean.setPrice(detail.getPrice());

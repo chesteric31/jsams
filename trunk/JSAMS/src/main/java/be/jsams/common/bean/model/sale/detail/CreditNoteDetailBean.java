@@ -2,6 +2,7 @@ package be.jsams.common.bean.model.sale.detail;
 
 import be.jsams.common.bean.model.AbstractIdentityBean;
 import be.jsams.common.bean.model.sale.CreditNoteBean;
+import be.jsams.common.bean.model.sale.CreditNoteMediator;
 import be.jsams.common.bean.view.sale.detail.CreditNoteDetailBeanView;
 import be.jsams.server.model.sale.detail.CreditNoteDetail;
 
@@ -21,8 +22,10 @@ public class CreditNoteDetailBean extends
 
     private CreditNoteBean creditNote;
 
+    private CreditNoteMediator mediator;
+
     /**
-     * Default constructor
+     * Default constructor.
      */
     public CreditNoteDetailBean() {
         super();
@@ -30,7 +33,7 @@ public class CreditNoteDetailBean extends
     }
 
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param model the {@link CreditNoteDetail}
      * @param creditNote the {@link CreditNoteBean}
@@ -80,6 +83,56 @@ public class CreditNoteDetailBean extends
     @Override
     public CreditNoteDetailBeanView buildView() {
         return null;
+    }
+
+    /**
+     * @return the mediator
+     */
+    public CreditNoteMediator getMediator() {
+        return mediator;
+    }
+
+    /**
+     * @param mediator the mediator to set
+     */
+    public void setMediator(CreditNoteMediator mediator) {
+        this.mediator = mediator;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setQuantity(int quantity) {
+        super.setQuantity(quantity);
+        mediator.updateTotals();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setPrice(Double price) {
+        super.setPrice(price);
+        mediator.updateTotals();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setVatApplicable(Double vatApplicable) {
+        super.setVatApplicable(vatApplicable);
+        mediator.updateTotals();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setDiscountRate(Double discountRate) {
+        super.setDiscountRate(discountRate);
+        mediator.updateTotals();
     }
 
 }

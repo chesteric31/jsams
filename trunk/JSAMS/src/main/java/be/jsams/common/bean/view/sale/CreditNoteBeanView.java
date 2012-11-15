@@ -25,6 +25,7 @@ import be.jsams.client.model.table.sale.CreditNoteDetailTableModel;
 import be.jsams.client.swing.component.AbstractJsamsFrame;
 import be.jsams.client.swing.component.JsamsButton;
 import be.jsams.client.swing.component.JsamsDialog;
+import be.jsams.client.swing.component.JsamsFormattedTextField;
 import be.jsams.client.swing.component.JsamsTable;
 import be.jsams.client.swing.component.JsamsTextField;
 import be.jsams.client.swing.listener.search.management.ProductTableMouseListener;
@@ -35,6 +36,7 @@ import be.jsams.common.bean.model.AddressBean;
 import be.jsams.common.bean.model.PeriodBean;
 import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.management.ProductBean;
+import be.jsams.common.bean.model.sale.CommandBean;
 import be.jsams.common.bean.model.sale.CreditNoteBean;
 import be.jsams.common.bean.model.sale.detail.CreditNoteDetailBean;
 import be.jsams.common.bean.view.Editable;
@@ -83,6 +85,12 @@ public class CreditNoteBeanView extends AbstractDocumentBeanView<CreditNoteBean>
                 false, false);
         JsamsTextField remark = viewFactory.createBindingTextComponent(bean, CreditNoteBean.REMARK_PROPERTY, false,
                 false);
+        JsamsFormattedTextField totalEt = viewFactory.createBindingDecimalComponent(bean,
+                CommandBean.TOTAL_ET_PROPERTY, false, true);
+        JsamsFormattedTextField totalVat = viewFactory.createBindingDecimalComponent(bean,
+                CommandBean.TOTAL_VAT_PROPERTY, false, true);
+        JsamsFormattedTextField totalAti = viewFactory.createBindingDecimalComponent(bean,
+                CommandBean.TOTAL_ATI_PROPERTY, false, true);
 
         FormLayout layout = new FormLayout("right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p", "p");
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
@@ -99,11 +107,14 @@ public class CreditNoteBeanView extends AbstractDocumentBeanView<CreditNoteBean>
                 .createEditView(), maxColumnSpan - 2);
         builder.nextLine();
         builder.appendI15d(JsamsI18nLabelResource.LABEL_REMARK.getKey(), remark, maxColumnSpan - 2);
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_TOTAL_ET.getKey(), totalEt);
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_TOTAL_VAT.getKey(), totalVat);
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_TOTAL_ATI.getKey(), totalAti);
         builder.nextLine();
 
         List<CreditNoteDetailBean> details = bean.getDetails();
 
-        CreditNoteDetailTableModel tableModel = new CreditNoteDetailTableModel(details);
+        CreditNoteDetailTableModel tableModel = new CreditNoteDetailTableModel(details, bean.getMediator());
         ViewFactory<CreditNoteDetailBean> detailView = new ViewFactory<CreditNoteDetailBean>();
         setDetailsTable(detailView.createBindingTableComponent(tableModel, false, false));
         getDetailsTable().addMouseListener(handleProductEditing());
@@ -253,6 +264,7 @@ public class CreditNoteBeanView extends AbstractDocumentBeanView<CreditNoteBean>
                 CreditNoteBean bean = getBean();
                 List<CreditNoteDetailBean> details = bean.getDetails();
                 CreditNoteDetailBean detail = new CreditNoteDetailBean();
+                detail.setMediator(bean.getMediator());
                 detail.setCreditNote(bean);
                 detail.setQuantity(1);
                 details.add(detail);

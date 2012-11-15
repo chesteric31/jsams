@@ -10,6 +10,7 @@ import org.junit.Test;
 import be.jsams.common.bean.model.MockBeanGenerator;
 import be.jsams.common.bean.model.management.ProductBean;
 import be.jsams.common.bean.model.sale.DeliveryOrderBean;
+import be.jsams.common.bean.model.sale.DeliveryOrderMediator;
 
 /**
  * Test class for {@link DeliveryOrderDetailBean} class.
@@ -35,7 +36,11 @@ public class DeliveryOrderDetailBeanTest {
      */
     @Test
     public void testClear() {
-        bean = MockBeanGenerator.generateMockDeliveryOrderDetail(null);
+        DeliveryOrderBean deliveryOrder = MockBeanGenerator.generateMockDeliveryOrder();
+        DeliveryOrderMediator mediator = new DeliveryOrderMediator();
+        bean = MockBeanGenerator.generateMockDeliveryOrderDetail(deliveryOrder);
+        bean.setMediator(mediator);
+        mediator.setDeliveryOrderBean(deliveryOrder);
         bean.clear();
         assertNull(bean.getBillDetail());
         assertNull(bean.getCommandDetail());
@@ -56,9 +61,13 @@ public class DeliveryOrderDetailBeanTest {
         bean = new DeliveryOrderDetailBean();
         // we test only the detail here and not the delivery order
         DeliveryOrderBean deliveryOrder = MockBeanGenerator.generateMockDeliveryOrder();
+        DeliveryOrderMediator mediator = new DeliveryOrderMediator();
+        bean.setMediator(mediator);
         bean.setDeliveryOrder(deliveryOrder);
         bean.setProduct(new ProductBean());
         DeliveryOrderDetailBean otherBean = MockBeanGenerator.generateMockDeliveryOrderDetail(deliveryOrder);
+        otherBean.setMediator(mediator);
+        mediator.setDeliveryOrderBean(deliveryOrder);
         bean.refresh(otherBean);
         assertTrue(bean.equals(otherBean));
     }

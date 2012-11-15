@@ -49,7 +49,8 @@ public class EditBillDialog extends AbstractEditDialog<BillBean, EditBillValidat
         if (getModel().getId() == null) {
             paymentMode.refresh(getModel().getCustomer().getPaymentMode());
         }
-        setOriginalModel(new BillBean(getModel().getSociety(), getModel().getCustomer(), paymentMode));
+        BillBean originalModel = new BillBean(getModel().getSociety(), getModel().getCustomer(), paymentMode);
+        setOriginalModel(originalModel);
         getOriginalModel().refresh(getModel());
         BillBeanView view = getModel().buildView();
         JPanel panel = view.createEditView();

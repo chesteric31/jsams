@@ -6,6 +6,7 @@ import java.util.List;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.model.table.AbstractJsamsTableModel;
 import be.jsams.common.bean.model.management.ProductBean;
+import be.jsams.common.bean.model.sale.DeliveryOrderMediator;
 import be.jsams.common.bean.model.sale.detail.DeliveryOrderDetailBean;
 
 /**
@@ -25,12 +26,18 @@ public class DeliveryOrderDetailTableModel extends AbstractJsamsTableModel<Deliv
      * Constructor.
      * 
      * @param listBean a list of {@link DeliveryOrderDetailBean}
+     * @param mediator the mediator
      */
-    public DeliveryOrderDetailTableModel(List<DeliveryOrderDetailBean> listBean) {
+    public DeliveryOrderDetailTableModel(List<DeliveryOrderDetailBean> listBean, DeliveryOrderMediator mediator) {
         super(listBean);
         setColumnNames(Arrays.asList(JsamsI18nResource.COLUMN_PRODUCT_ID, JsamsI18nResource.COLUMN_PRODUCT_NAME,
                 JsamsI18nResource.COLUMN_QUANTITY, JsamsI18nResource.COLUMN_TRANSFERRED,
                 JsamsI18nResource.COLUMN_DISCOUNT_RATE, JsamsI18nResource.COLUMN_VAT_APPLICABLE));
+        if (listBean != null && !listBean.isEmpty()) {
+            for (DeliveryOrderDetailBean bean : listBean) {
+                bean.setMediator(mediator);
+            }
+        }
     }
 
     /**

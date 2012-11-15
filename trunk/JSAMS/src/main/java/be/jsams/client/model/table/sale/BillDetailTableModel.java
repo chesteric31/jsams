@@ -6,6 +6,7 @@ import java.util.List;
 import be.jsams.client.i18n.JsamsI18nResource;
 import be.jsams.client.model.table.AbstractJsamsTableModel;
 import be.jsams.common.bean.model.management.ProductBean;
+import be.jsams.common.bean.model.sale.BillMediator;
 import be.jsams.common.bean.model.sale.detail.BillDetailBean;
 
 /**
@@ -25,13 +26,19 @@ public class BillDetailTableModel extends AbstractJsamsTableModel<BillDetailBean
      * Constructor.
      * 
      * @param listBean a list of {@link BillDetailBean}
+     * @param mediator the mediator
      */
-    public BillDetailTableModel(List<BillDetailBean> listBean) {
+    public BillDetailTableModel(List<BillDetailBean> listBean, BillMediator mediator) {
         super(listBean);
         setColumnNames(Arrays.asList(JsamsI18nResource.COLUMN_PRODUCT_ID, JsamsI18nResource.COLUMN_PRODUCT_NAME,
                 JsamsI18nResource.COLUMN_QUANTITY, JsamsI18nResource.COLUMN_PRICE,
                 JsamsI18nResource.COLUMN_TRANSFERRED, JsamsI18nResource.COLUMN_DISCOUNT_RATE,
                 JsamsI18nResource.COLUMN_VAT_APPLICABLE));
+        if (listBean != null && !listBean.isEmpty()) {
+            for (BillDetailBean bean : listBean) {
+                bean.setMediator(mediator);
+            }
+        }
     }
 
     /**

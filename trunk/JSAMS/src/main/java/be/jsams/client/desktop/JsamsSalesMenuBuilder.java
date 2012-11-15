@@ -38,10 +38,13 @@ import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.AgentBean;
 import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.sale.BillBean;
+import be.jsams.common.bean.model.sale.BillMediator;
 import be.jsams.common.bean.model.sale.CommandBean;
 import be.jsams.common.bean.model.sale.CommandMediator;
 import be.jsams.common.bean.model.sale.CreditNoteBean;
+import be.jsams.common.bean.model.sale.CreditNoteMediator;
 import be.jsams.common.bean.model.sale.DeliveryOrderBean;
+import be.jsams.common.bean.model.sale.DeliveryOrderMediator;
 import be.jsams.common.bean.model.sale.EstimateBean;
 import be.jsams.common.bean.model.sale.EstimateMediator;
 
@@ -217,6 +220,9 @@ public class JsamsSalesMenuBuilder extends AbstractMenuBuilder {
                 CustomerBean customerBean = JsamsApplicationContext.getCustomerBeanBuilder()
                         .build(null, currentSociety);
                 DeliveryOrderBean bean = new DeliveryOrderBean(currentSociety, customerBean);
+                DeliveryOrderMediator mediator = new DeliveryOrderMediator();
+                mediator.setDeliveryOrderBean(bean);
+                bean.setMediator(mediator);
                 SearchDeliveryOrderPanel<DeliveryOrderTableMouseListener> searchPanel
                     = new SearchDeliveryOrderPanel<DeliveryOrderTableMouseListener>(
                         bean, new DeliveryOrderTableMouseListener(), JsamsApplicationContext.getDeliveryOrderService(),
@@ -249,6 +255,9 @@ public class JsamsSalesMenuBuilder extends AbstractMenuBuilder {
                 PaymentModeBeanBuilder builder = JsamsApplicationContext.getPaymentModeBeanBuilder();
                 PaymentModeBean mode = builder.build();
                 BillBean bean = new BillBean(currentSociety, customer, mode);
+                BillMediator mediator = new BillMediator();
+                mediator.setBillBean(bean);
+                bean.setMediator(mediator);
                 SearchBillPanel<BillTableMouseListener> searchPanel = new SearchBillPanel<BillTableMouseListener>(bean,
                         new BillTableMouseListener(), JsamsApplicationContext.getBillService(),
                         new SearchBillValidator(), new BillTableModel());
@@ -279,6 +288,9 @@ public class JsamsSalesMenuBuilder extends AbstractMenuBuilder {
                 CustomerBean customerBean = JsamsApplicationContext.getCustomerBeanBuilder()
                         .build(null, currentSociety);
                 CreditNoteBean bean = new CreditNoteBean(currentSociety, customerBean);
+                CreditNoteMediator mediator = new CreditNoteMediator();
+                mediator.setCreditNoteBean(bean);
+                bean.setMediator(mediator);
                 SearchCreditNotePanel<CreditNoteTableMouseListener> searchPanel
                     = new SearchCreditNotePanel<CreditNoteTableMouseListener>(
                         bean, new CreditNoteTableMouseListener(), JsamsApplicationContext.getCreditNoteService(),

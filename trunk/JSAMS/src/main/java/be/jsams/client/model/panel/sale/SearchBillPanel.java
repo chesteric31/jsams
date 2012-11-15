@@ -18,6 +18,7 @@ import be.jsams.common.bean.model.PaymentModeBean;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.sale.BillBean;
+import be.jsams.common.bean.model.sale.BillMediator;
 import be.jsams.server.service.pdf.impl.PdfBillServiceImpl;
 import be.jsams.server.service.sale.BillService;
 
@@ -81,6 +82,9 @@ public class SearchBillPanel<L extends MouseListener> extends
         CustomerBean customer = JsamsApplicationContext.getCustomerBeanBuilder().build(null, currentSociety);
         PaymentModeBean mode = JsamsApplicationContext.getPaymentModeBeanBuilder().build();
         BillBean bean = new BillBean(currentSociety, customer, mode);
+        BillMediator mediator = new BillMediator();
+        mediator.setBillBean(bean);
+        bean.setMediator(mediator);
         new EditBillDialog(JsamsI18nResource.TITLE_EDIT_BILL, bean);
         updateUI();
     }
@@ -95,6 +99,9 @@ public class SearchBillPanel<L extends MouseListener> extends
             int selectedRowModel = getResultTable().convertRowIndexToModel(selectedRow);
             BillTableModel model = (BillTableModel) getResultTable().getModel();
             BillBean beanToModify = model.getRow(selectedRowModel);
+            BillMediator mediator = new BillMediator();
+            mediator.setBillBean(beanToModify);
+            beanToModify.setMediator(mediator);
             if (debug) {
                 LOGGER.debug("The bill to modify: " + beanToModify);
             }
@@ -119,6 +126,13 @@ public class SearchBillPanel<L extends MouseListener> extends
         if (super.prePerformOk(criteria)) {
             List<BillBean> bills = ((BillService) super.getService()).findByCriteria(criteria);
             fillTable(bills);
+            if (bills != null && !bills.isEmpty()) {
+                for (BillBean bean : bills) {
+                    BillMediator mediator = new BillMediator();
+                    mediator.setBillBean(bean);
+                    bean.setMediator(mediator);
+                }
+            }
             super.postPerformOk();
         }
     }
