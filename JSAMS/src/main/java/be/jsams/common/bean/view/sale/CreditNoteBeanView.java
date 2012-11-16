@@ -1,5 +1,6 @@
 package be.jsams.common.bean.view.sale;
 
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -223,6 +224,7 @@ public class CreditNoteBeanView extends AbstractDocumentBeanView<CreditNoteBean>
                                 new SearchProductValidator(), new ProductTableModel(), false,
                                 ListSelectionModel.SINGLE_SELECTION);
                         dialog.add(searchPanel);
+                        dialog.setPreferredSize(new Dimension(800, 400));
                         dialog.pack();
                         dialog.setLocationRelativeTo(((JsamsTable) e.getSource()).getRootPane());
                         dialog.setVisible(true);
