@@ -85,8 +85,8 @@ public class ProductBeanView extends AbstractBeanView<ProductBean> implements Ed
                 ProductBean.REORDER_LEVEL_PROPERTY, false, false);
         JsamsFormattedTextField textFieldVatApplicable = helper.createBindingDecimalComponent(bean,
                 ProductBean.VAT_APPLICABLE_PROPERTY, false, false);
-        FormLayout layout = new FormLayout("right:p, 3dlu, p:grow, 3dlu, " + "right:p, 3dlu, p:grow, 3dlu, "
-                + "right:p, 3dlu, p:grow, 3dlu, " + "right:p, 3dlu, p:grow", "p");
+        FormLayout layout = new FormLayout("right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow, 3dlu, "
+                + "right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow", "p");
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
         builder.setDefaultDialogBorder();
         final int maxColumnSpan = 5;
