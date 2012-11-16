@@ -114,14 +114,15 @@ public class AgentBeanView extends AbstractBeanView<AgentBean> implements Editab
         JsamsTextField textFieldPhone = viewContactFactory.createBindingTextComponent(contactInformation,
                 ContactInformationBean.PHONE_PROPERTY, false, false);
         FormLayout layout = new FormLayout(
-                "right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, 50dlu", "p");
+                "right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow", "p");
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
         builder.setDefaultDialogBorder();
         final int maxColumnSpan = 5;
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_NAME.getKey(), textFieldName);
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_FUNCTION.getKey(), textFieldFunction, maxColumnSpan);
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_NAME.getKey(), textFieldName, maxColumnSpan);
         builder.nextLine();
+        builder.appendI15d(JsamsI18nLabelResource.LABEL_FUNCTION.getKey(), textFieldFunction);
         builder.appendI15d(JsamsI18nLabelResource.LABEL_PHONE.getKey(), textFieldPhone);
+        builder.nextLine();
         builder.appendI15d(JsamsI18nLabelResource.LABEL_CITY.getKey(), textFieldCity);
         builder.appendI15d(JsamsI18nLabelResource.LABEL_ZIP_CODE.getKey(), textFieldZipCode);
 
@@ -129,7 +130,7 @@ public class AgentBeanView extends AbstractBeanView<AgentBean> implements Editab
     }
 
     /**
-     * Create a custom view
+     * Creates a custom view.
      * 
      * @return a {@link JPanel}
      */
