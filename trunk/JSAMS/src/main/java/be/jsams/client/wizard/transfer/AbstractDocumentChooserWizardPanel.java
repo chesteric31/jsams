@@ -122,15 +122,16 @@ public abstract class AbstractDocumentChooserWizardPanel<V extends Validator<Tra
                         "right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow", "p");
                 DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
                 builder.appendI15d(JsamsI18nLabelResource.LABEL_CUSTOMER_NAME.getKey(), bean.getCustomer().getView()
-                        .createCustomView());
+                        .createCustomView(), 5);
+                builder.nextLine();
                 builder.appendI15d(JsamsI18nLabelResource.LABEL_START_DATE.getKey(), startDate);
                 builder.appendI15d(JsamsI18nLabelResource.LABEL_END_DATE.getKey(), endDate);
                 builder.nextLine();
                 builder.appendI15d(JsamsI18nLabelResource.LABEL_CITY.getKey(), textFieldCity);
                 builder.appendI15d(JsamsI18nLabelResource.LABEL_ZIP_CODE.getKey(), textFieldZipCode);
+                builder.nextLine();
                 builder.appendI15d(JsamsI18nLabelResource.LABEL_PAYMENT_MODE.getKey(), bean.getPaymentMode().getView()
                         .createEditView());
-                builder.nextLine();
                 builder.appendI15d(JsamsI18nLabelResource.LABEL_PAID.getKey(), paid);
 
                 return builder.getPanel();
@@ -173,7 +174,8 @@ public abstract class AbstractDocumentChooserWizardPanel<V extends Validator<Tra
                         "right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow", "p");
                 DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
                 builder.appendI15d(JsamsI18nLabelResource.LABEL_CUSTOMER_NAME.getKey(), bean.getCustomer().getView()
-                        .createCustomView());
+                        .createCustomView(), 5);
+                builder.nextLine();
                 builder.appendI15d(JsamsI18nLabelResource.LABEL_START_DATE.getKey(), startDate);
                 builder.appendI15d(JsamsI18nLabelResource.LABEL_END_DATE.getKey(), endDate);
                 builder.nextLine();
@@ -220,7 +222,8 @@ public abstract class AbstractDocumentChooserWizardPanel<V extends Validator<Tra
                         "right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow", "p");
                 DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
                 builder.appendI15d(JsamsI18nLabelResource.LABEL_CUSTOMER_NAME.getKey(), bean.getCustomer().getView()
-                        .createCustomView());
+                        .createCustomView(), 5);
+                builder.nextLine();
                 builder.appendI15d(JsamsI18nLabelResource.LABEL_START_DATE.getKey(), startDate);
                 builder.appendI15d(JsamsI18nLabelResource.LABEL_END_DATE.getKey(), endDate);
                 builder.nextLine();
@@ -268,7 +271,8 @@ public abstract class AbstractDocumentChooserWizardPanel<V extends Validator<Tra
                         "right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow", "p");
                 DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
                 builder.appendI15d(JsamsI18nLabelResource.LABEL_CUSTOMER_NAME.getKey(), bean.getCustomer().getView()
-                        .createCustomView());
+                        .createCustomView(), 5);
+                builder.nextLine();
                 builder.appendI15d(JsamsI18nLabelResource.LABEL_START_DATE.getKey(), startDate);
                 builder.appendI15d(JsamsI18nLabelResource.LABEL_END_DATE.getKey(), endDate);
                 builder.nextLine();
