@@ -8,6 +8,7 @@ import be.jsams.client.swing.action.NewBillAction;
 import be.jsams.client.swing.action.NewCustomerAction;
 import be.jsams.client.swing.action.NewEstimateAction;
 import be.jsams.client.swing.action.NewProductAction;
+import be.jsams.client.swing.action.StatisticsAction;
 
 /**
  * A customized {@link JPanel} to have some shortcuts for more used functions.
@@ -55,6 +56,7 @@ public class JsamsShortcutToolBar extends JPanel {
         newProductButton.addActionListener(new NewProductAction());
         newProductButton.setEnabled(false);
         statisticsButton = new JsamsButton(JsamsI18nResource.BUTTON_STATISTICS);
+        statisticsButton.addActionListener(new StatisticsAction());
         statisticsButton.setEnabled(false);
         panel.add(newCustomerButton);
         panel.add(newEstimateButton);

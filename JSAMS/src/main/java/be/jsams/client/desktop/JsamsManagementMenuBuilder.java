@@ -52,7 +52,7 @@ public class JsamsManagementMenuBuilder extends AbstractMenuBuilder {
     private JsamsMainFrame parent;
 
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param parent the {@link JsamsMainFrame} parent
      */

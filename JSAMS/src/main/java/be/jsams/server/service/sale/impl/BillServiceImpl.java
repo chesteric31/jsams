@@ -1,5 +1,6 @@
 package be.jsams.server.service.sale.impl;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +12,7 @@ import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.sale.BillBean;
 import be.jsams.server.dao.sale.BillDao;
 import be.jsams.server.model.sale.Bill;
+import be.jsams.server.model.sale.detail.BillDetail;
 import be.jsams.server.service.AbstractService;
 import be.jsams.server.service.sale.BillService;
 
@@ -110,6 +112,35 @@ public class BillServiceImpl extends AbstractService implements BillService {
             beans.add(new BillBean(bill, currentSociety, customer, mode));
         }
         return beans;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public BigDecimal findGlobalTurnover(SocietyBean society) {
+        BigDecimal globalTurnover = new BigDecimal(0D);
+        billDao.setCurrentSociety(society);
+        List<Bill> bills = billDao.findAll();
+        if (bills != null && !bills.isEmpty()) {
+            for (Bill bill : bills) {
+                List<BillDetail> details = bill.getDetails();
+                if (details != null && !details.isEmpty()) {
+                    for (BillDetail detail : details) {
+                        Double discountRate = detail.getDiscountRate();
+                        Double price = detail.getPrice();
+                        int quantity = detail.getQuantity();
+                        BigDecimal totalEt = BigDecimal.valueOf(price * quantity);
+                        if (discountRate != null) {
+                            double percentage = discountRate / 100;
+                            totalEt = totalEt.multiply(BigDecimal.valueOf(1 - percentage));
+                        }
+                        globalTurnover = globalTurnover.add(totalEt);
+                    }
+                }
+            }
+        }
+        return globalTurnover;
     }
 
     /**

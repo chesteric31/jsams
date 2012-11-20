@@ -289,5 +289,7 @@ public final class JsamsI18nResource {
 
     public static final I18nString BUTTON_APPLICATION_VERSION_TO_UPDATE = new I18nString(
             "button.application.version.to_update");
+
+    public static final I18nString TITLE_STATISTICS = new I18nString("title.statistics");
     
 }
