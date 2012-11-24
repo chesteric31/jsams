@@ -6,7 +6,7 @@ import java.util.GregorianCalendar;
 import java.util.prefs.Preferences;
 
 /**
- * 
+ * Abstract class to gather all common methods for the children services.
  *
  * @author chesteric31
  * @version $Revision$ $Date::                  $ $Author$
@@ -57,8 +57,9 @@ public abstract class AbstractTransferService {
     }
 
     /**
+     * Retrieves the days number from the preferences with the key parameter.
      * 
-     * @param key the key to use, firstRememberDays, secondRememberDays or
+     * @param key the key to use, that can be firstRememberDays, secondRememberDays or
      *            formalNoticeDays
      * @return the number of days for the first remember, second remember &
      *         formal notice following the stored preferences
