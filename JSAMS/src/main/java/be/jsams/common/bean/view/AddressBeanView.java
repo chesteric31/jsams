@@ -51,7 +51,7 @@ public class AddressBeanView extends AbstractBeanView<AddressBean> implements Ed
         JsamsTextField textFieldCountry = viewFactory.createBindingTextComponent(bean, AddressBean.COUNTRY_PROPERTY,
                 true, false);
         FormLayout layout = new FormLayout(
-                "right:p, 3dlu, 45dlu, 3dlu, right:p, 3dlu, 45dlu, 3dlu, right:p, 3dlu, 45dlu", "p");
+                "right:p, 3dlu, 45dlu, 3dlu, right:p, 3dlu, 45dlu, 3dlu, right:p, 3dlu, 45dlu:grow", "p");
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
         final int maxColumnSpan = 9;
         builder.appendSeparator(JsamsI18nLabelResource.LABEL_ADDRESS.getTranslation());
