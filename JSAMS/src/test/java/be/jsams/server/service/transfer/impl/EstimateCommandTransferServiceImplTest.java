@@ -1,14 +1,24 @@
 package be.jsams.server.service.transfer.impl;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import be.jsams.common.bean.model.MockBeanGenerator;
+import be.jsams.common.bean.model.sale.CommandBean;
+import be.jsams.common.bean.model.sale.EstimateBean;
+import be.jsams.common.bean.model.transfer.TransferBean;
 import be.jsams.server.dao.BaseJUnitTestClass;
 
 /**
- * 
+ * Test class for {@link EstimateCommandTransferServiceImpl} class.
  *
  * @author chesteric31
  * @version $Revision$ $Date::                  $ $Author$
@@ -17,17 +27,39 @@ public class EstimateCommandTransferServiceImplTest extends BaseJUnitTestClass {
     
     @Autowired
     private EstimateCommandTransferServiceImpl service;
-
+    
+    private TransferBean model;
+    
     /**
-     * Test method for {@link be.jsams.server.service.transfer.impl.EstimateCommandTransferServiceImpl#createNewDocuments(be.jsams.common.bean.model.transfer.TransferBean)}.
+     * @throws java.lang.Exception a possible {@link Exception}
      */
-    @Test
-    public void testCreateNewDocumentsTransferBean() {
-        fail("Not yet implemented");
+    @Before
+    public void setUp() throws Exception {
+        model = new TransferBean();
     }
 
     /**
-     * Test method for {@link be.jsams.server.service.transfer.impl.EstimateCommandTransferServiceImpl#persistNewDocuments(java.util.List)}.
+     * Test method for {@link be.jsams.server.service.transfer.impl.EstimateCommandTransferServiceImpl
+     * #createNewDocuments(be.jsams.common.bean.model.transfer.TransferBean)}.
+     */
+    @Test
+    public void testCreateNewDocumentsTransferBean() {
+        model.setSourceType(1);
+        model.setDestinationType(1);
+        model.setTransferMode(1);
+        EstimateBean originalDocument = MockBeanGenerator.generateMockEstimate();
+        List<EstimateBean> documents = new ArrayList<EstimateBean>();
+        documents.add(originalDocument);
+        model.setDocuments(documents);
+        List<CommandBean> newDocuments = service.createNewDocuments(model);
+        assertTrue(newDocuments != null && !newDocuments.isEmpty() && newDocuments.size() == 1);
+        CommandBean newDocument = newDocuments.get(0);
+        assertEquals(originalDocument.getAgent(), newDocument.getAgent());
+    }
+
+    /**
+     * Test method for {@link be.jsams.server.service.transfer.impl.EstimateCommandTransferServiceImpl
+     * #persistNewDocuments(java.util.List)}.
      */
     @Test
     public void testPersistNewDocumentsListOfCommandBean() {
@@ -35,7 +67,8 @@ public class EstimateCommandTransferServiceImplTest extends BaseJUnitTestClass {
     }
 
     /**
-     * Test method for {@link be.jsams.server.service.transfer.impl.EstimateCommandTransferServiceImpl#updateOriginalDocuments(java.util.List)}.
+     * Test method for {@link be.jsams.server.service.transfer.impl.EstimateCommandTransferServiceImpl
+     * #updateOriginalDocuments(java.util.List)}.
      */
     @Test
     public void testUpdateOriginalDocumentsListOfEstimateBean() {
