@@ -179,17 +179,19 @@ public class EstimateBillTransferServiceImpl extends AbstractTransferService<Est
         newBean.setDateFormalNotice(formalNotice);
         List<BillDetailBean> details = new ArrayList<BillDetailBean>();
         for (EstimateDetailBean detail : estimate.getDetails()) {
-            BillDetailBean bean = new BillDetailBean();
-            bean.setMediator(newBean.getMediator());
-            bean.setBill(newBean);
-            bean.setDiscountRate(detail.getDiscountRate());
-            bean.setPrice(detail.getPrice());
-            bean.setProduct(detail.getProduct());
-            bean.setQuantity(detail.getQuantity());
-            bean.setTransferred(false);
-            bean.setVatApplicable(detail.getVatApplicable());
-            details.add(bean);
-            detail.setTransferred(true);
+            if (!detail.isTransferred()) {
+                BillDetailBean bean = new BillDetailBean();
+                bean.setMediator(newBean.getMediator());
+                bean.setBill(newBean);
+                bean.setDiscountRate(detail.getDiscountRate());
+                bean.setPrice(detail.getPrice());
+                bean.setProduct(detail.getProduct());
+                bean.setQuantity(detail.getQuantity());
+                bean.setTransferred(false);
+                bean.setVatApplicable(detail.getVatApplicable());
+                details.add(bean);
+                detail.setTransferred(true);
+            }
         }
         newBean.setDetails(details);
         newBean.setDiscountRate(estimate.getDiscountRate());
