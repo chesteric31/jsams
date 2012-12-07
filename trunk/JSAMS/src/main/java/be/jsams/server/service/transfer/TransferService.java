@@ -11,7 +11,7 @@ import be.jsams.common.bean.model.transfer.TransferBean;
 public interface TransferService {
 
     /**
-     * Perform the transfer process.
+     * Performs the transfer process.
      * 
      * @param model the wrapper contains all the beans to be transferred
      */

@@ -178,4 +178,31 @@ public class BillTransferServiceImpl extends AbstractTransferService implements 
         this.creditNoteService = creditNoteService;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected List createNewDocuments(TransferBean model) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void persistNewDocuments(List newDocuments) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void updateOriginalDocuments(List list) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException();
+    }
+
 }

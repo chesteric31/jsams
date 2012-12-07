@@ -3,7 +3,10 @@ package be.jsams.server.service.transfer;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.prefs.Preferences;
+
+import be.jsams.common.bean.model.transfer.TransferBean;
 
 /**
  * Abstract class to gather all common methods for the children services.
@@ -11,8 +14,26 @@ import java.util.prefs.Preferences;
  * @author chesteric31
  * @version $Revision$ $Date::                  $ $Author$
  */
-public abstract class AbstractTransferService {
+public abstract class AbstractTransferService<O, T> implements TransferService {
 
+
+    /**
+     * {@inheritDoc}
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public void transfer(TransferBean model) {
+        List<T> newDocuments = createNewDocuments(model);
+        persistNewDocuments(newDocuments);
+        updateOriginalDocuments((List<O>) model.getDocuments());
+    }
+
+    protected abstract List<T> createNewDocuments(TransferBean model);
+
+    protected abstract void persistNewDocuments(List<T> newDocuments);
+
+    protected abstract void updateOriginalDocuments(List<O> list);
+    
     /**
      * Calculates due date following the creation date of the bill,
      * the days number, the boolean endMonth and the additional days.
@@ -38,7 +59,7 @@ public abstract class AbstractTransferService {
         dueDate = instance.getTime();
         return dueDate;
     }
-
+    
     /**
      * Calculates a date following the initial date of the bill, the
      * days number, the boolean endMonth and the additional days.
@@ -55,7 +76,7 @@ public abstract class AbstractTransferService {
         dueDate = instance.getTime();
         return dueDate;
     }
-
+    
     /**
      * Retrieves the days number from the preferences with the key parameter.
      * 
