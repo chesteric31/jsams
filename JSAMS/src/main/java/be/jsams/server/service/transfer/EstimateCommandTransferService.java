@@ -6,6 +6,6 @@ package be.jsams.server.service.transfer;
  * @author chesteric31
  * @version $Revision$ $Date::                  $ $Author$
  */
-public interface EstimateTransferService extends TransferService {
+public interface EstimateCommandTransferService extends TransferService {
 
 }

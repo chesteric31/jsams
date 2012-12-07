@@ -365,4 +365,31 @@ public class CommandTransferServiceImpl extends AbstractTransferService implemen
         this.billService = billService;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected List createNewDocuments(TransferBean model) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void persistNewDocuments(List newDocuments) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void updateOriginalDocuments(List list) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException();
+    }
+
 }
