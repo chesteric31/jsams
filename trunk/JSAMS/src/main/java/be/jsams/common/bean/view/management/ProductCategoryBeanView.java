@@ -31,7 +31,7 @@ public class ProductCategoryBeanView extends AbstractBeanView<ProductCategoryBea
     private static final long serialVersionUID = 6523573947459795801L;
 
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param bean the {@link ProductCategoryBean}
      */

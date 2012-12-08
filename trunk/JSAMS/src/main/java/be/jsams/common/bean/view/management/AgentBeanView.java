@@ -40,7 +40,7 @@ public class AgentBeanView extends AbstractBeanView<AgentBean> implements Editab
             + "categories/applications-development.png");
 
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param bean the {@link AgentBean}
      */
