@@ -4,7 +4,6 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.List;
@@ -86,12 +85,12 @@ public class EstimateBeanView extends AbstractDocumentBeanView<EstimateBean> imp
                 EstimateBean.DISCOUNT_RATE_PROPERTY, false, false);
         JsamsTextField remark = viewFactory
                 .createBindingTextComponent(bean, EstimateBean.REMARK_PROPERTY, false, false);
-        JsamsFormattedTextField totalEt = viewFactory
-                .createBindingDecimalComponent(bean, EstimateBean.TOTAL_ET_PROPERTY, false, true);
-        JsamsFormattedTextField totalVat = viewFactory
-                .createBindingDecimalComponent(bean, EstimateBean.TOTAL_VAT_PROPERTY, false, true);
-        JsamsFormattedTextField totalAti = viewFactory
-                .createBindingDecimalComponent(bean, EstimateBean.TOTAL_ATI_PROPERTY, false, true);
+        JsamsFormattedTextField totalEt = viewFactory.createBindingDecimalComponent(bean,
+                EstimateBean.TOTAL_ET_PROPERTY, false, true);
+        JsamsFormattedTextField totalVat = viewFactory.createBindingDecimalComponent(bean,
+                EstimateBean.TOTAL_VAT_PROPERTY, false, true);
+        JsamsFormattedTextField totalAti = viewFactory.createBindingDecimalComponent(bean,
+                EstimateBean.TOTAL_ATI_PROPERTY, false, true);
 
         FormLayout layout = new FormLayout("right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p", "p");
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
@@ -124,7 +123,7 @@ public class EstimateBeanView extends AbstractDocumentBeanView<EstimateBean> imp
         EstimateDetailTableModel tableModel = new EstimateDetailTableModel(details, bean.getMediator());
         ViewFactory<EstimateDetailBean> detailView = new ViewFactory<EstimateDetailBean>();
         setDetailsTable(detailView.createBindingTableComponent(tableModel, false, false));
-        getDetailsTable().addMouseListener(handleProductEditing());
+        getDetailsTable().addMouseListener(productListener());
         updateDetailsTableRendering();
 
         builder.appendI15dSeparator(JsamsI18nResource.PANEL_ESTIMATE_DETAILS.getKey());
@@ -138,95 +137,46 @@ public class EstimateBeanView extends AbstractDocumentBeanView<EstimateBean> imp
     }
 
     /**
-     * Handler for editing of {@link EstimateDetailBean} table.
-     * 
-     * @return a {@link MouseListener}
+     * {@inheritDoc}
      */
-    private MouseListener handleProductEditing() {
-        return new MouseListener() {
-
-            /**
-             * {@inheritDoc}
-             */
-            @Override
-            public void mouseReleased(MouseEvent e) {
-            }
-
-            /**
-             * {@inheritDoc}
-             */
-            @Override
-            public void mousePressed(MouseEvent e) {
-            }
-
-            /**
-             * {@inheritDoc}
-             */
-            @Override
-            public void mouseExited(MouseEvent e) {
-            }
-
-            /**
-             * {@inheritDoc}
-             */
-            @Override
-            public void mouseEntered(MouseEvent e) {
-            }
-
+    protected void editProduct(MouseEvent e) {
+        final JsamsDialog dialog = new JsamsDialog(null, JsamsI18nResource.TITLE_SEARCH_PRODUCT);
+        ProductTableMouseListener customListener = new ProductTableMouseListener() {
             /**
              * {@inheritDoc}
              */
             @Override
             public void mouseClicked(MouseEvent e) {
-                int selectedColumn = getDetailsTable().getSelectedColumn();
-                // only edit dialog for product editing
+                JsamsTable productTable = (JsamsTable) e.getSource();
                 if (e.getClickCount() == 2) {
-                    if (selectedColumn == 0 || selectedColumn == 1) {
-                        final JsamsDialog dialog = new JsamsDialog(null, JsamsI18nResource.TITLE_SEARCH_PRODUCT);
-                        ProductTableMouseListener customListener = new ProductTableMouseListener() {
-                            /**
-                             * {@inheritDoc}
-                             */
-                            @Override
-                            public void mouseClicked(MouseEvent e) {
-                                JsamsTable productTable = (JsamsTable) e.getSource();
-                                if (e.getClickCount() == 2) {
-                                    int selectedRow = productTable.getSelectedRow();
-                                    if (selectedRow > -1) {
-                                        int selectedRowModel = productTable.convertRowIndexToModel(selectedRow);
-                                        ProductTableModel model = (ProductTableModel) productTable.getModel();
-                                        ProductBean selectedBean = model.getRow(selectedRowModel);
-                                        int detailSelectedRow = getDetailsTable().getSelectedRow();
-                                        int detailSelectedRowModel = getDetailsTable().convertRowIndexToModel(
-                                                detailSelectedRow);
-                                        EstimateDetailTableModel detailModel
-                                            = (EstimateDetailTableModel) getDetailsTable().getModel();
-                                        EstimateDetailBean selectedDetailBean = detailModel
-                                                .getRow(detailSelectedRowModel);
-                                        selectedDetailBean.setPrice(selectedBean.getPrice());
-                                        selectedDetailBean.setProduct(selectedBean);
-                                        selectedDetailBean.setVatApplicable(selectedBean.getVatApplicable());
-                                        getDetailsTable().repaint();
-                                        dialog.dispose();
-                                    }
-                                }
-                            }
-                        };
-                        ProductBeanBuilder builder = new ProductBeanBuilder();
-                        builder.setSociety(JsamsDesktop.getInstance().getCurrentSociety());
-                        SearchProductPanel searchPanel = new SearchProductPanel(builder.build(true, true),
-                                customListener, JsamsApplicationContext.getProductService(),
-                                new SearchProductValidator(), new ProductTableModel(), false,
-                                ListSelectionModel.SINGLE_SELECTION);
-                        dialog.add(searchPanel);
-                        dialog.setPreferredSize(new Dimension(800, 400));
-                        dialog.pack();
-                        dialog.setLocationRelativeTo(((JsamsTable) e.getSource()).getRootPane());
-                        dialog.setVisible(true);
+                    int selectedRow = productTable.getSelectedRow();
+                    if (selectedRow > -1) {
+                        int selectedRowModel = productTable.convertRowIndexToModel(selectedRow);
+                        ProductTableModel model = (ProductTableModel) productTable.getModel();
+                        ProductBean selectedBean = model.getRow(selectedRowModel);
+                        int detailSelectedRow = getDetailsTable().getSelectedRow();
+                        int detailSelectedRowModel = getDetailsTable().convertRowIndexToModel(detailSelectedRow);
+                        EstimateDetailTableModel detailModel = (EstimateDetailTableModel) getDetailsTable().getModel();
+                        EstimateDetailBean selectedDetailBean = detailModel.getRow(detailSelectedRowModel);
+                        selectedDetailBean.setPrice(selectedBean.getPrice());
+                        selectedDetailBean.setProduct(selectedBean);
+                        selectedDetailBean.setVatApplicable(selectedBean.getVatApplicable());
+                        getDetailsTable().repaint();
+                        dialog.dispose();
                     }
                 }
             }
         };
+        ProductBeanBuilder builder = new ProductBeanBuilder();
+        builder.setSociety(JsamsDesktop.getInstance().getCurrentSociety());
+        SearchProductPanel searchPanel = new SearchProductPanel(builder.build(true, true), customListener,
+                JsamsApplicationContext.getProductService(), new SearchProductValidator(), new ProductTableModel(),
+                false, ListSelectionModel.SINGLE_SELECTION);
+        dialog.add(searchPanel);
+        dialog.setPreferredSize(new Dimension(800, 400));
+        dialog.pack();
+        dialog.setLocationRelativeTo(((JsamsTable) e.getSource()).getRootPane());
+        dialog.setVisible(true);
     }
 
     /**

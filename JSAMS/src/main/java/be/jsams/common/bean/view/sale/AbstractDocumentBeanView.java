@@ -1,5 +1,8 @@
 package be.jsams.common.bean.view.sale;
 
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
@@ -7,14 +10,14 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellRenderer;
 
-import com.jgoodies.forms.factories.ButtonBarFactory;
-
 import be.jsams.client.renderer.JsamsBooleanTableCellRenderer;
 import be.jsams.client.renderer.JsamsTableCellRenderer;
 import be.jsams.client.swing.component.JsamsButton;
 import be.jsams.client.swing.component.JsamsTable;
 import be.jsams.common.bean.model.sale.AbstractDocumentBean;
 import be.jsams.common.bean.view.AbstractBeanView;
+
+import com.jgoodies.forms.factories.ButtonBarFactory;
 
 /**
  * Abstract class for the viewing of the sale beans: estimate, command, delivery
@@ -111,5 +114,64 @@ public abstract class AbstractDocumentBeanView<B extends AbstractDocumentBean<?,
         southPanel.add(ButtonBarFactory.buildCenteredBar(buttons));
         return southPanel;
     }
+    
+    /**
+     * Handler for editing of table.
+     * 
+     * @return a {@link MouseListener}
+     */
+    protected MouseListener productListener() {
+        return new MouseListener() {
+
+            /**
+             * {@inheritDoc}
+             */
+            @Override
+            public void mouseReleased(MouseEvent e) {
+            }
+
+            /**
+             * {@inheritDoc}
+             */
+            @Override
+            public void mousePressed(MouseEvent e) {
+            }
+
+            /**
+             * {@inheritDoc}
+             */
+            @Override
+            public void mouseExited(MouseEvent e) {
+            }
+
+            /**
+             * {@inheritDoc}
+             */
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+
+            /**
+             * {@inheritDoc}
+             */
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int selectedColumn = getDetailsTable().getSelectedColumn();
+                // only edit dialog for product editing
+                if (e.getClickCount() == 2) {
+                    if (selectedColumn == 0 || selectedColumn == 1) {
+                        editProduct(e);
+                    }
+                }
+            }
+        };
+    }
+
+    /**
+     * Edit the product to use.
+     * 
+     * @param e the {@link MouseEvent} to use
+     */
+    protected abstract void editProduct(MouseEvent e);
 
 }
