@@ -1,8 +1,10 @@
 package be.jsams.server.service.transfer.impl;
 
 import be.jsams.common.bean.model.transfer.TransferBean;
+import be.jsams.server.service.transfer.BillCreditNoteTransferService;
 import be.jsams.server.service.transfer.CommandBillTransferService;
 import be.jsams.server.service.transfer.CommandDeliveryOrderTransferService;
+import be.jsams.server.service.transfer.DeliveryOrderBillTransferService;
 import be.jsams.server.service.transfer.EstimateBillTransferService;
 import be.jsams.server.service.transfer.EstimateCommandTransferService;
 import be.jsams.server.service.transfer.TransferService;
@@ -19,7 +21,9 @@ public class TransferServiceImpl implements TransferService {
     private EstimateBillTransferService estimateBillTransferService;
     private CommandDeliveryOrderTransferService commandDeliveryOrderTransferService;
     private CommandBillTransferService commandBillTransferService;
-    
+    private DeliveryOrderBillTransferService deliveryOrderBillTransferService;
+    private BillCreditNoteTransferService billCreditNoteTransferService;
+
     /**
      * {@inheritDoc}
      */
@@ -43,18 +47,14 @@ public class TransferServiceImpl implements TransferService {
             }
             break;
         case 3:
-//            if (destinationType == 1) {
-//                estimateCommandTransferService.transfer(model);
-//            } else if (destinationType == 3) {
-//                estimateBillTransferService.transfer(model);
-//            }
+            if (destinationType == 3) {
+                deliveryOrderBillTransferService.transfer(model);
+            }
             break;
         case 4:
-//            if (destinationType == 1) {
-//                estimateCommandTransferService.transfer(model);
-//            } else if (destinationType == 3) {
-//                estimateBillTransferService.transfer(model);
-//            }
+            if (destinationType == 4) {
+                billCreditNoteTransferService.transfer(model);
+            }
             break;
         default:
             break;
@@ -69,7 +69,8 @@ public class TransferServiceImpl implements TransferService {
     }
 
     /**
-     * @param estimateCommandTransferService the estimateCommandTransferService to set
+     * @param estimateCommandTransferService the estimateCommandTransferService
+     *            to set
      */
     public void setEstimateCommandTransferService(EstimateCommandTransferService estimateCommandTransferService) {
         this.estimateCommandTransferService = estimateCommandTransferService;
@@ -97,7 +98,8 @@ public class TransferServiceImpl implements TransferService {
     }
 
     /**
-     * @param commandDeliveryOrderTransferService the commandDeliveryOrderTransferService to set
+     * @param commandDeliveryOrderTransferService the
+     *            commandDeliveryOrderTransferService to set
      */
     public void setCommandDeliveryOrderTransferService(
             CommandDeliveryOrderTransferService commandDeliveryOrderTransferService) {
@@ -116,6 +118,36 @@ public class TransferServiceImpl implements TransferService {
      */
     public void setCommandBillTransferService(CommandBillTransferService commandBillTransferService) {
         this.commandBillTransferService = commandBillTransferService;
+    }
+
+    /**
+     * @return the deliveryOrderBillTransferService
+     */
+    public DeliveryOrderBillTransferService getDeliveryOrderBillTransferService() {
+        return deliveryOrderBillTransferService;
+    }
+
+    /**
+     * @param deliveryOrderBillTransferService the
+     *            deliveryOrderBillTransferService to set
+     */
+    public void setDeliveryOrderBillTransferService(DeliveryOrderBillTransferService deliveryOrderBillTransferService) {
+        this.deliveryOrderBillTransferService = deliveryOrderBillTransferService;
+    }
+
+    /**
+     * @return the billCreditNoteTransferService
+     */
+    public BillCreditNoteTransferService getBillCreditNoteTransferService() {
+        return billCreditNoteTransferService;
+    }
+
+    /**
+     * @param billCreditNoteTransferService the billCreditNoteTransferService to
+     *            set
+     */
+    public void setBillCreditNoteTransferService(BillCreditNoteTransferService billCreditNoteTransferService) {
+        this.billCreditNoteTransferService = billCreditNoteTransferService;
     }
 
 }

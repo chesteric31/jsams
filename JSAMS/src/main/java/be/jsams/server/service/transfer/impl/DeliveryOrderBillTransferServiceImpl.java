@@ -19,58 +19,79 @@ import be.jsams.common.bean.model.transfer.TransferBean;
 import be.jsams.server.service.sale.BillService;
 import be.jsams.server.service.sale.DeliveryOrderService;
 import be.jsams.server.service.transfer.AbstractTransferService;
-import be.jsams.server.service.transfer.DeliveryOrderTransferService;
+import be.jsams.server.service.transfer.DeliveryOrderBillTransferService;
 
 /**
+ * Service to transfer an {@link DeliveryOrderBean} to a {@link BillBean}.
  * 
- *
  * @author chesteric31
  * @version $Revision$ $Date::                  $ $Author$
  */
-public class DeliveryOrderTransferServiceImpl extends AbstractTransferService implements DeliveryOrderTransferService {
+public class DeliveryOrderBillTransferServiceImpl extends AbstractTransferService<DeliveryOrderBean, BillBean>
+        implements DeliveryOrderBillTransferService {
 
     private DeliveryOrderService deliveryOrderService;
     private BillService billService;
-    
+
     /**
      * {@inheritDoc}
      */
-    @Override
-    public void transfer(TransferBean model) {
-        int destinationType = model.getDestinationType();
-        if (destinationType == 3) {
-            toBillTransfer(model);
-        }
-    }
-    /**
-     * @param model the wrapper contains all the beans to be transferred
-     */
     @SuppressWarnings("unchecked")
-    private void toBillTransfer(TransferBean model) {
+    @Override
+    protected List<BillBean> createNewDocuments(TransferBean model) {
+        List<BillBean> newDocuments = new ArrayList<BillBean>();
         int transferMode = model.getTransferMode();
         List<? extends AbstractDocumentBean<?, ?>> documents = model.getDocuments();
         Map<Long, List<DeliveryOrderDetailBean>> details = model.getDeliveryOrderDetails();
         switch (transferMode) {
         case 1:
-            DeliveryOrderBean deliveryOrder = (DeliveryOrderBean) documents.get(0);
-            toBillFullTransfer(deliveryOrder);
+        case 3:
+            List<DeliveryOrderBean> deliveryOrders = new ArrayList<DeliveryOrderBean>();
+            deliveryOrders.addAll((List<DeliveryOrderBean>) documents);
+            for (DeliveryOrderBean bean : deliveryOrders) {
+                newDocuments.add(fullTransfer(bean));
+            }
             break;
         case 2:
         case 4:
             Set<Entry<Long, List<DeliveryOrderDetailBean>>> set = details.entrySet();
             for (Entry<Long, List<DeliveryOrderDetailBean>> item : set) {
-                toBillPartialTransfer(details.get(item.getKey()));
-            }
-            break;
-        case 3:
-            List<DeliveryOrderBean> deliveryOrders = new ArrayList<DeliveryOrderBean>();
-            deliveryOrders.addAll((List<DeliveryOrderBean>) documents);
-            for (DeliveryOrderBean bean : deliveryOrders) {
-                toBillFullTransfer(bean);
+                newDocuments.add(partialTransfer(details.get(item.getKey())));
             }
             break;
         default:
             break;
+        }
+        return newDocuments;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void persistNewDocuments(List<BillBean> newDocuments) {
+        for (BillBean document : newDocuments) {
+            billService.create(document);
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void updateOriginalDocuments(List<DeliveryOrderBean> list) {
+        for (DeliveryOrderBean document : list) {
+            boolean allDetailsTransferred = true;
+            for (DeliveryOrderDetailBean detail : document.getDetails()) {
+                if (!detail.isTransferred()) {
+                    allDetailsTransferred = false;
+                    break;
+                }
+            }
+            if (allDetailsTransferred) {
+                document.setTransferred(true);
+            }
+            deliveryOrderService.update(document);
         }
     }
 
@@ -79,8 +100,9 @@ public class DeliveryOrderTransferServiceImpl extends AbstractTransferService im
      * transfer.
      * 
      * @param list the list of {@link DeliveryOrderDetailBean} to transfer
+     * @return the built new {@link BillBean}
      */
-    private void toBillPartialTransfer(List<DeliveryOrderDetailBean> list) {
+    private BillBean partialTransfer(List<DeliveryOrderDetailBean> list) {
         DeliveryOrderBean deliveryOrder = list.get(0).getDeliveryOrder();
         CustomerBean customer = deliveryOrder.getCustomer();
         PaymentModeBean paymentMode = customer.getPaymentMode();
@@ -111,8 +133,8 @@ public class DeliveryOrderTransferServiceImpl extends AbstractTransferService im
             bean.setQuantity(detail.getQuantity());
             bean.setTransferred(false);
             bean.setVatApplicable(detail.getVatApplicable());
-            detail.setTransferred(true);
             details.add(bean);
+            detail.setTransferred(true);
         }
         newBean.setDetails(details);
         newBean.setDiscountRate(deliveryOrder.getDiscountRate());
@@ -121,27 +143,16 @@ public class DeliveryOrderTransferServiceImpl extends AbstractTransferService im
         newBean.setDueDate(dueDate);
         newBean.setPaid(false);
         newBean.setRemark(deliveryOrder.getRemark());
-        billService.create(newBean);
-        // TODO review
-        boolean allDetailTransferred = true;
-        for (DeliveryOrderDetailBean detailBean : deliveryOrder.getDetails()) {
-            if (!detailBean.isTransferred()) {
-                allDetailTransferred = false;
-                break;
-            }
-        }
-        if (allDetailTransferred) {
-            deliveryOrder.setTransferred(true);
-        }
-        deliveryOrderService.update(deliveryOrder);
+        return newBean;
     }
 
     /**
      * Transfers a delivery order to bill in full transfer.
      * 
      * @param deliveryOrder the {@link DeliveryOrderBean} to transfer
+     * @return the built new {@link BillBean}
      */
-    private void toBillFullTransfer(DeliveryOrderBean deliveryOrder) {
+    private BillBean fullTransfer(DeliveryOrderBean deliveryOrder) {
         CustomerBean customer = deliveryOrder.getCustomer();
         PaymentModeBean paymentMode = customer.getPaymentMode();
         BillBean newBean = new BillBean(deliveryOrder.getSociety(), customer, paymentMode);
@@ -162,17 +173,19 @@ public class DeliveryOrderTransferServiceImpl extends AbstractTransferService im
         newBean.setDateFormalNotice(formalNotice);
         List<BillDetailBean> details = new ArrayList<BillDetailBean>();
         for (DeliveryOrderDetailBean detail : deliveryOrder.getDetails()) {
-            BillDetailBean bean = new BillDetailBean();
-            bean.setMediator(newBean.getMediator());
-            bean.setBill(newBean);
-            bean.setDiscountRate(detail.getDiscountRate());
-            bean.setPrice(detail.getPrice());
-            bean.setProduct(detail.getProduct());
-            bean.setQuantity(detail.getQuantity());
-            bean.setTransferred(false);
-            bean.setVatApplicable(detail.getVatApplicable());
-            detail.setTransferred(true);
-            details.add(bean);
+            if (!detail.isTransferred()) {
+                BillDetailBean bean = new BillDetailBean();
+                bean.setMediator(newBean.getMediator());
+                bean.setBill(newBean);
+                bean.setDiscountRate(detail.getDiscountRate());
+                bean.setPrice(detail.getPrice());
+                bean.setProduct(detail.getProduct());
+                bean.setQuantity(detail.getQuantity());
+                bean.setTransferred(false);
+                bean.setVatApplicable(detail.getVatApplicable());
+                details.add(bean);
+                detail.setTransferred(true);
+            }
         }
         newBean.setDetails(details);
         newBean.setDiscountRate(deliveryOrder.getDiscountRate());
@@ -181,56 +194,35 @@ public class DeliveryOrderTransferServiceImpl extends AbstractTransferService im
         newBean.setDueDate(dueDate);
         newBean.setPaid(false);
         newBean.setRemark(deliveryOrder.getRemark());
-        billService.create(newBean);
-        deliveryOrderService.update(deliveryOrder);
+        return newBean;
     }
+
     /**
      * @return the deliveryOrderService
      */
     public DeliveryOrderService getDeliveryOrderService() {
         return deliveryOrderService;
     }
+
     /**
      * @param deliveryOrderService the deliveryOrderService to set
      */
     public void setDeliveryOrderService(DeliveryOrderService deliveryOrderService) {
         this.deliveryOrderService = deliveryOrderService;
     }
+
     /**
      * @return the billService
      */
     public BillService getBillService() {
         return billService;
     }
+
     /**
      * @param billService the billService to set
      */
     public void setBillService(BillService billService) {
         this.billService = billService;
-    }
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected List createNewDocuments(TransferBean model) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException();
-    }
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void persistNewDocuments(List newDocuments) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException();
-    }
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void updateOriginalDocuments(List list) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException();
     }
 
 }

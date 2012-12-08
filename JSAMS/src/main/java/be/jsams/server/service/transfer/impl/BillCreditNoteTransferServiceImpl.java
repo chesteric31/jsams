@@ -18,64 +18,67 @@ import be.jsams.common.bean.model.transfer.TransferBean;
 import be.jsams.server.service.sale.BillService;
 import be.jsams.server.service.sale.CreditNoteService;
 import be.jsams.server.service.transfer.AbstractTransferService;
-import be.jsams.server.service.transfer.BillTransferService;
+import be.jsams.server.service.transfer.BillCreditNoteTransferService;
 
 /**
+ * Service to transfer an {@link BillBean} to a {@link CreditNoteBean}.
  * 
- *
  * @author chesteric31
  * @version $Revision$ $Date::                  $ $Author$
  */
-public class BillTransferServiceImpl extends AbstractTransferService implements BillTransferService {
+public class BillCreditNoteTransferServiceImpl extends AbstractTransferService<BillBean, CreditNoteBean> implements
+        BillCreditNoteTransferService {
 
     private BillService billService;
     private CreditNoteService creditNoteService;
-    
+
     /**
      * {@inheritDoc}
      */
-    @Override
-    public void transfer(TransferBean model) {
-        int destinationType = model.getDestinationType();
-        switch (destinationType) {
-        case 4:
-            toCreditNoteTransfer(model);
-            break;
-        default:
-            break;
-        }
-    }
-
-    /**
-     * @param model the wrapper contains all the beans to be transferred
-     */
     @SuppressWarnings("unchecked")
-    private void toCreditNoteTransfer(TransferBean model) {
+    @Override
+    protected List<CreditNoteBean> createNewDocuments(TransferBean model) {
+        List<CreditNoteBean> newDocuments = new ArrayList<CreditNoteBean>();
         int transferMode = model.getTransferMode();
         List<? extends AbstractDocumentBean<?, ?>> documents = model.getDocuments();
         Map<Long, List<BillDetailBean>> details = model.getBillDetails();
         switch (transferMode) {
         case 1:
-            BillBean bill = (BillBean) documents.get(0);
-            toCreditNoteFullTransfer(bill);
+        case 3:
+            List<BillBean> bills = new ArrayList<BillBean>();
+            bills.addAll((List<BillBean>) documents);
+            for (BillBean bean : bills) {
+                newDocuments.add(fullTransfer(bean));
+            }
             break;
         case 2:
         case 4:
             Set<Entry<Long, List<BillDetailBean>>> set = details.entrySet();
             for (Entry<Long, List<BillDetailBean>> item : set) {
-                toCreditNotePartialTransfer(details.get(item.getKey()));
-            }
-            break;
-        case 3:
-            List<BillBean> bills = new ArrayList<BillBean>();
-            bills.addAll((List<BillBean>) documents);
-            for (BillBean bean : bills) {
-                toCreditNoteFullTransfer(bean);
+                newDocuments.add(partialTransfer(details.get(item.getKey())));
             }
             break;
         default:
             break;
         }
+        return newDocuments;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void persistNewDocuments(List<CreditNoteBean> newDocuments) {
+        for (CreditNoteBean document : newDocuments) {
+            creditNoteService.create(document);
+        }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void updateOriginalDocuments(List<BillBean> list) {
     }
 
     /**
@@ -83,8 +86,9 @@ public class BillTransferServiceImpl extends AbstractTransferService implements 
      * transfer.
      * 
      * @param list the list of {@link BillDetailBean} to transfer
+     * @return the built new {@link CreditNoteBean}
      */
-    private void toCreditNotePartialTransfer(List<BillDetailBean> list) {
+    private CreditNoteBean partialTransfer(List<BillDetailBean> list) {
         BillBean bill = list.get(0).getBill();
         CustomerBean customer = bill.getCustomer();
         CreditNoteBean newBean = new CreditNoteBean(bill.getSociety(), customer);
@@ -97,30 +101,31 @@ public class BillTransferServiceImpl extends AbstractTransferService implements 
         newBean.getBillingAddress().setId(null);
         List<CreditNoteDetailBean> details = new ArrayList<CreditNoteDetailBean>();
         for (BillDetailBean detail : list) {
-            CreditNoteDetailBean bean = new CreditNoteDetailBean();
-            bean.setMediator(newBean.getMediator());
-            bean.setCreditNote(newBean);
-            bean.setDiscountRate(detail.getDiscountRate());
-            bean.setPrice(detail.getPrice());
-            bean.setProduct(detail.getProduct());
-            bean.setQuantity(detail.getQuantity());
-            bean.setVatApplicable(detail.getVatApplicable());
-            detail.setTransferred(true);
-            details.add(bean);
+            if (!detail.isTransferred()) {
+                CreditNoteDetailBean bean = new CreditNoteDetailBean();
+                bean.setMediator(newBean.getMediator());
+                bean.setCreditNote(newBean);
+                bean.setDiscountRate(detail.getDiscountRate());
+                bean.setPrice(detail.getPrice());
+                bean.setProduct(detail.getProduct());
+                bean.setQuantity(detail.getQuantity());
+                bean.setVatApplicable(detail.getVatApplicable());
+                details.add(bean);
+                detail.setTransferred(true);
+            }
         }
         newBean.setDetails(details);
         newBean.setRemark(bill.getRemark());
-        creditNoteService.create(newBean);
-        // bill.setClosed(true);
-        billService.update(bill);
+        return newBean;
     }
 
     /**
      * Transfers a bill to credit note in full transfer.
      * 
      * @param bill the {@link BillBean} to transfer
+     * @return the built new {@link CreditNoteBean}
      */
-    private void toCreditNoteFullTransfer(BillBean bill) {
+    private CreditNoteBean fullTransfer(BillBean bill) {
         CustomerBean customer = bill.getCustomer();
         CreditNoteBean newBean = new CreditNoteBean(bill.getSociety(), customer);
         CreditNoteMediator mediator = new CreditNoteMediator();
@@ -145,9 +150,7 @@ public class BillTransferServiceImpl extends AbstractTransferService implements 
         }
         newBean.setDetails(details);
         newBean.setRemark(bill.getRemark());
-        creditNoteService.create(newBean);
-        // bill.setClosed(true);
-        billService.update(bill);
+        return newBean;
     }
 
     /**
@@ -176,33 +179,6 @@ public class BillTransferServiceImpl extends AbstractTransferService implements 
      */
     public void setCreditNoteService(CreditNoteService creditNoteService) {
         this.creditNoteService = creditNoteService;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected List createNewDocuments(TransferBean model) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void persistNewDocuments(List newDocuments) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void updateOriginalDocuments(List list) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException();
     }
 
 }

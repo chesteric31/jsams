@@ -460,7 +460,7 @@ public final class MockBeanGenerator {
         detailBean.setPrice(20D);
         detailBean.setProduct(generateMockProduct());
         detailBean.setQuantity(3);
-        detailBean.setTransferred(true);
+        detailBean.setTransferred(false);
         detailBean.setVatApplicable(21D);
         return detailBean;
     }

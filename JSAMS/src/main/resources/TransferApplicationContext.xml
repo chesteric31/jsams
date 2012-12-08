@@ -43,22 +43,22 @@
 		<property name="target" ref="commandBillTransferServiceTarget" />
 	</bean>
 
-	<bean id="deliveryOrderTransferServiceTarget"
-		class="be.jsams.server.service.transfer.impl.DeliveryOrderTransferServiceImpl">
+	<bean id="deliveryOrderBillTransferServiceTarget"
+		class="be.jsams.server.service.transfer.impl.DeliveryOrderBillTransferServiceImpl">
 		<property name="deliveryOrderService" ref="deliveryOrderService" />
 		<property name="billService" ref="billService" />
 	</bean>
-	<bean id="deliveryOrderTransferService" parent="baseTransactionProxy">
-		<property name="target" ref="deliveryOrderTransferServiceTarget" />
+	<bean id="deliveryOrderBillTransferService" parent="baseTransactionProxy">
+		<property name="target" ref="deliveryOrderBillTransferServiceTarget" />
 	</bean>
 
-	<bean id="billTransferServiceTarget"
-		class="be.jsams.server.service.transfer.impl.BillTransferServiceImpl">
+	<bean id="billCreditNoteTransferServiceTarget"
+		class="be.jsams.server.service.transfer.impl.BillCreditNoteTransferServiceImpl">
 		<property name="billService" ref="billService" />
 		<property name="creditNoteService" ref="creditNoteService" />
 	</bean>
-	<bean id="billTransferService" parent="baseTransactionProxy">
-		<property name="target" ref="billTransferServiceTarget" />
+	<bean id="billCreditNoteTransferService" parent="baseTransactionProxy">
+		<property name="target" ref="billCreditNoteTransferServiceTarget" />
 	</bean>
 
 	<bean id="transferService"
@@ -67,6 +67,8 @@
 		<property name="estimateBillTransferService" ref="estimateBillTransferService" />
 		<property name="commandDeliveryOrderTransferService" ref="commandDeliveryOrderTransferService" />
 		<property name="commandBillTransferService" ref="commandBillTransferService" />
+		<property name="deliveryOrderBillTransferService" ref="deliveryOrderBillTransferService" />
+		<property name="billCreditNoteTransferService" ref="billCreditNoteTransferService" />
 	</bean>
 
 </beans>
