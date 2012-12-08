@@ -44,21 +44,18 @@ public class EstimateCommandTransferServiceImpl extends AbstractTransferService<
         Map<Long, List<EstimateDetailBean>> details = model.getEstimateDetails();
         switch (transferMode) {
         case 1:
-            EstimateBean estimate = (EstimateBean) documents.get(0);
-            newDocuments.add(fullTransfer(estimate));
+        case 3:
+            List<EstimateBean> estimates = new ArrayList<EstimateBean>();
+            estimates.addAll((List<EstimateBean>) documents);
+            for (EstimateBean bean : estimates) {
+                newDocuments.add(fullTransfer(bean));
+            }
             break;
         case 2:
         case 4:
             Set<Entry<Long, List<EstimateDetailBean>>> set = details.entrySet();
             for (Entry<Long, List<EstimateDetailBean>> item : set) {
                 newDocuments.add(partialTransfer(details.get(item.getKey())));
-            }
-            break;
-        case 3:
-            List<EstimateBean> estimates = new ArrayList<EstimateBean>();
-            estimates.addAll((List<EstimateBean>) documents);
-            for (EstimateBean bean : estimates) {
-                newDocuments.add(fullTransfer(bean));
             }
             break;
         default:
