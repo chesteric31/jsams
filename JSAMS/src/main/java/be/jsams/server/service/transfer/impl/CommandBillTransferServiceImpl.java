@@ -12,25 +12,25 @@ import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.sale.AbstractDocumentBean;
 import be.jsams.common.bean.model.sale.BillBean;
 import be.jsams.common.bean.model.sale.BillMediator;
-import be.jsams.common.bean.model.sale.EstimateBean;
+import be.jsams.common.bean.model.sale.CommandBean;
 import be.jsams.common.bean.model.sale.detail.BillDetailBean;
-import be.jsams.common.bean.model.sale.detail.EstimateDetailBean;
+import be.jsams.common.bean.model.sale.detail.CommandDetailBean;
 import be.jsams.common.bean.model.transfer.TransferBean;
 import be.jsams.server.service.sale.BillService;
-import be.jsams.server.service.sale.EstimateService;
+import be.jsams.server.service.sale.CommandService;
 import be.jsams.server.service.transfer.AbstractTransferService;
-import be.jsams.server.service.transfer.EstimateBillTransferService;
+import be.jsams.server.service.transfer.CommandBillTransferService;
 
 /**
- * Service to transfer an {@link EstimateBean} to a {@link BillBean}.
+ * Service to transfer an {@link CommandBean} to a {@link BillBean}.
  * 
  * @author chesteric31
  * @version $Revision$ $Date::                  $ $Author$
  */
-public class EstimateBillTransferServiceImpl extends AbstractTransferService<EstimateBean, BillBean> implements
-        EstimateBillTransferService {
+public class CommandBillTransferServiceImpl extends AbstractTransferService<CommandBean, BillBean> implements
+        CommandBillTransferService {
 
-    private EstimateService estimateService;
+    private CommandService commandService;
     private BillService billService;
 
     /**
@@ -42,20 +42,20 @@ public class EstimateBillTransferServiceImpl extends AbstractTransferService<Est
         List<BillBean> newDocuments = new ArrayList<BillBean>();
         int transferMode = model.getTransferMode();
         List<? extends AbstractDocumentBean<?, ?>> documents = model.getDocuments();
-        Map<Long, List<EstimateDetailBean>> details = model.getEstimateDetails();
+        Map<Long, List<CommandDetailBean>> details = model.getCommandDetails();
         switch (transferMode) {
         case 1:
         case 3:
-            List<EstimateBean> estimates = new ArrayList<EstimateBean>();
-            estimates.addAll((List<EstimateBean>) documents);
-            for (EstimateBean bean : estimates) {
+            List<CommandBean> commands = new ArrayList<CommandBean>();
+            commands.addAll((List<CommandBean>) documents);
+            for (CommandBean bean : commands) {
                 newDocuments.add(fullTransfer(bean));
             }
             break;
         case 2:
         case 4:
-            Set<Entry<Long, List<EstimateDetailBean>>> set = details.entrySet();
-            for (Entry<Long, List<EstimateDetailBean>> item : set) {
+            Set<Entry<Long, List<CommandDetailBean>>> set = details.entrySet();
+            for (Entry<Long, List<CommandDetailBean>> item : set) {
                 newDocuments.add(partialTransfer(details.get(item.getKey())));
             }
             break;
@@ -63,7 +63,6 @@ public class EstimateBillTransferServiceImpl extends AbstractTransferService<Est
             break;
         }
         return newDocuments;
-
     }
 
     /**
@@ -80,10 +79,10 @@ public class EstimateBillTransferServiceImpl extends AbstractTransferService<Est
      * {@inheritDoc}
      */
     @Override
-    protected void updateOriginalDocuments(List<EstimateBean> list) {
-        for (EstimateBean document : list) {
+    protected void updateOriginalDocuments(List<CommandBean> list) {
+        for (CommandBean document : list) {
             boolean allDetailsTransferred = true;
-            for (EstimateDetailBean detail : document.getDetails()) {
+            for (CommandDetailBean detail : document.getDetails()) {
                 if (!detail.isTransferred()) {
                     allDetailsTransferred = false;
                     break;
@@ -92,26 +91,26 @@ public class EstimateBillTransferServiceImpl extends AbstractTransferService<Est
             if (allDetailsTransferred) {
                 document.setTransferred(true);
             }
-            estimateService.update(document);
+            commandService.update(document);
         }
     }
 
     /**
-     * Transfers a list of {@link EstimateDetailBean} to bill in partial
+     * Transfers a list of {@link CommandDetailBean} to bill in partial
      * transfer.
      * 
-     * @param list a list of {@link EstimateDetailBean} to transfer
+     * @param list a list of {@link CommandDetailBean} to transfer
      * @return the built new {@link BillBean}
      */
-    private BillBean partialTransfer(List<EstimateDetailBean> list) {
-        EstimateBean estimate = list.get(0).getEstimate();
-        CustomerBean customer = estimate.getCustomer();
+    private BillBean partialTransfer(List<CommandDetailBean> list) {
+        CommandBean command = list.get(0).getCommand();
+        CustomerBean customer = command.getCustomer();
         PaymentModeBean paymentMode = customer.getPaymentMode();
-        BillBean newBean = new BillBean(estimate.getSociety(), customer, paymentMode);
+        BillBean newBean = new BillBean(command.getSociety(), customer, paymentMode);
         BillMediator mediator = new BillMediator();
         newBean.setMediator(mediator);
         mediator.setBillBean(newBean);
-        newBean.setBillingAddress(estimate.getBillingAddress());
+        newBean.setBillingAddress(command.getBillingAddress());
         newBean.getBillingAddress().setId(null);
         newBean.setClosed(false);
         Date creationDate = new Date();
@@ -124,7 +123,7 @@ public class EstimateBillTransferServiceImpl extends AbstractTransferService<Est
                 + getDays("formalNoticeDays"));
         newBean.setDateFormalNotice(formalNotice);
         List<BillDetailBean> details = new ArrayList<BillDetailBean>();
-        for (EstimateDetailBean detail : list) {
+        for (CommandDetailBean detail : list) {
             BillDetailBean bean = new BillDetailBean();
             bean.setMediator(newBean.getMediator());
             bean.setBill(newBean);
@@ -134,33 +133,33 @@ public class EstimateBillTransferServiceImpl extends AbstractTransferService<Est
             bean.setQuantity(detail.getQuantity());
             bean.setTransferred(false);
             bean.setVatApplicable(detail.getVatApplicable());
-            details.add(bean);
             detail.setTransferred(true);
+            details.add(bean);
         }
         newBean.setDetails(details);
-        newBean.setDiscountRate(estimate.getDiscountRate());
+        newBean.setDiscountRate(command.getDiscountRate());
         Date dueDate = calculateDueDate(newBean.getCreationDate(), paymentMode.getDaysNumber(),
                 paymentMode.isMonthEnd(), paymentMode.getAdditionalDays());
         newBean.setDueDate(dueDate);
         newBean.setPaid(false);
-        newBean.setRemark(estimate.getRemark());
+        newBean.setRemark(command.getRemark());
         return newBean;
     }
 
     /**
-     * Transfers an estimate to bill in full transfer.
+     * Transfers a command to bill in full transfer.
      * 
-     * @param estimate the {@link EstimateBean} to transfer
+     * @param command the {@link CommandBean} to transfer
      * @return the built new {@link BillBean}
      */
-    private BillBean fullTransfer(EstimateBean estimate) {
-        CustomerBean customer = estimate.getCustomer();
+    private BillBean fullTransfer(CommandBean command) {
+        CustomerBean customer = command.getCustomer();
         PaymentModeBean paymentMode = customer.getPaymentMode();
-        BillBean newBean = new BillBean(estimate.getSociety(), customer, paymentMode);
+        BillBean newBean = new BillBean(command.getSociety(), customer, paymentMode);
         BillMediator mediator = new BillMediator();
         newBean.setMediator(mediator);
         mediator.setBillBean(newBean);
-        newBean.setBillingAddress(estimate.getBillingAddress());
+        newBean.setBillingAddress(command.getBillingAddress());
         newBean.getBillingAddress().setId(null);
         newBean.setClosed(false);
         Date creationDate = new Date();
@@ -173,7 +172,7 @@ public class EstimateBillTransferServiceImpl extends AbstractTransferService<Est
                 + getDays("formalNoticeDays"));
         newBean.setDateFormalNotice(formalNotice);
         List<BillDetailBean> details = new ArrayList<BillDetailBean>();
-        for (EstimateDetailBean detail : estimate.getDetails()) {
+        for (CommandDetailBean detail : command.getDetails()) {
             if (!detail.isTransferred()) {
                 BillDetailBean bean = new BillDetailBean();
                 bean.setMediator(newBean.getMediator());
@@ -189,27 +188,27 @@ public class EstimateBillTransferServiceImpl extends AbstractTransferService<Est
             }
         }
         newBean.setDetails(details);
-        newBean.setDiscountRate(estimate.getDiscountRate());
+        newBean.setDiscountRate(command.getDiscountRate());
         Date dueDate = calculateDueDate(newBean.getCreationDate(), paymentMode.getDaysNumber(),
                 paymentMode.isMonthEnd(), paymentMode.getAdditionalDays());
         newBean.setDueDate(dueDate);
         newBean.setPaid(false);
-        newBean.setRemark(estimate.getRemark());
+        newBean.setRemark(command.getRemark());
         return newBean;
     }
 
     /**
-     * @return the estimateService
+     * @return the commandService
      */
-    public EstimateService getEstimateService() {
-        return estimateService;
+    public CommandService getCommandService() {
+        return commandService;
     }
 
     /**
-     * @param estimateService the estimateService to set
+     * @param commandService the commandService to set
      */
-    public void setEstimateService(EstimateService estimateService) {
-        this.estimateService = estimateService;
+    public void setCommandService(CommandService commandService) {
+        this.commandService = commandService;
     }
 
     /**

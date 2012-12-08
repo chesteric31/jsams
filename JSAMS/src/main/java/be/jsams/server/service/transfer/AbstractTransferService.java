@@ -9,13 +9,16 @@ import java.util.prefs.Preferences;
 import be.jsams.common.bean.model.transfer.TransferBean;
 
 /**
- * Abstract class to gather all common methods for the children services.
- *
+ * Abstract class to gather all common methods for the children services and for
+ * the templates methods chaining.
+ * 
+ * @param <O> the original document to transfer
+ * @param <T> the target document transferred
+ * 
  * @author chesteric31
  * @version $Revision$ $Date::                  $ $Author$
  */
 public abstract class AbstractTransferService<O, T> implements TransferService {
-
 
     /**
      * {@inheritDoc}
@@ -28,15 +31,31 @@ public abstract class AbstractTransferService<O, T> implements TransferService {
         updateOriginalDocuments((List<O>) model.getDocuments());
     }
 
+    /**
+     * Creates a list of new target documents.
+     * 
+     * @param model the {@link TransferBean} to use
+     * @return the built list of new target documents
+     */
     protected abstract List<T> createNewDocuments(TransferBean model);
 
+    /**
+     * Persists in database the new target documents.
+     * 
+     * @param newDocuments the list of new documents to persist
+     */
     protected abstract void persistNewDocuments(List<T> newDocuments);
 
-    protected abstract void updateOriginalDocuments(List<O> list);
-    
     /**
-     * Calculates due date following the creation date of the bill,
-     * the days number, the boolean endMonth and the additional days.
+     * Updates the status of the original documents.
+     * 
+     * @param list the list of the original documents to update
+     */
+    protected abstract void updateOriginalDocuments(List<O> list);
+
+    /**
+     * Calculates due date following the creation date of the bill, the days
+     * number, the boolean endMonth and the additional days.
      * 
      * @param creationDate the creation date of the bill
      * @param daysNumber the days number
@@ -59,10 +78,10 @@ public abstract class AbstractTransferService<O, T> implements TransferService {
         dueDate = instance.getTime();
         return dueDate;
     }
-    
+
     /**
-     * Calculates a date following the initial date of the bill, the
-     * days number, the boolean endMonth and the additional days.
+     * Calculates a date following the initial date of the bill, the days
+     * number, the boolean endMonth and the additional days.
      * 
      * @param initialDate the initial date to use
      * @param daysNumber the days number
@@ -76,12 +95,12 @@ public abstract class AbstractTransferService<O, T> implements TransferService {
         dueDate = instance.getTime();
         return dueDate;
     }
-    
+
     /**
      * Retrieves the days number from the preferences with the key parameter.
      * 
-     * @param key the key to use, that can be firstRememberDays, secondRememberDays or
-     *            formalNoticeDays
+     * @param key the key to use, that can be firstRememberDays,
+     *            secondRememberDays or formalNoticeDays
      * @return the number of days for the first remember, second remember &
      *         formal notice following the stored preferences
      */

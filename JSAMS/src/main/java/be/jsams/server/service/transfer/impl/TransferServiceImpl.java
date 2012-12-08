@@ -1,6 +1,8 @@
 package be.jsams.server.service.transfer.impl;
 
 import be.jsams.common.bean.model.transfer.TransferBean;
+import be.jsams.server.service.transfer.CommandBillTransferService;
+import be.jsams.server.service.transfer.CommandDeliveryOrderTransferService;
 import be.jsams.server.service.transfer.EstimateBillTransferService;
 import be.jsams.server.service.transfer.EstimateCommandTransferService;
 import be.jsams.server.service.transfer.TransferService;
@@ -15,6 +17,8 @@ public class TransferServiceImpl implements TransferService {
 
     private EstimateCommandTransferService estimateCommandTransferService;
     private EstimateBillTransferService estimateBillTransferService;
+    private CommandDeliveryOrderTransferService commandDeliveryOrderTransferService;
+    private CommandBillTransferService commandBillTransferService;
     
     /**
      * {@inheritDoc}
@@ -32,11 +36,11 @@ public class TransferServiceImpl implements TransferService {
             }
             break;
         case 2:
-//            if (destinationType == 1) {
-//                estimateCommandTransferService.transfer(model);
-//            } else if (destinationType == 3) {
-//                estimateBillTransferService.transfer(model);
-//            }
+            if (destinationType == 2) {
+                commandDeliveryOrderTransferService.transfer(model);
+            } else if (destinationType == 3) {
+                commandBillTransferService.transfer(model);
+            }
             break;
         case 3:
 //            if (destinationType == 1) {
@@ -83,6 +87,35 @@ public class TransferServiceImpl implements TransferService {
      */
     public void setEstimateBillTransferService(EstimateBillTransferService estimateBillTransferService) {
         this.estimateBillTransferService = estimateBillTransferService;
+    }
+
+    /**
+     * @return the commandDeliveryOrderTransferService
+     */
+    public CommandDeliveryOrderTransferService getCommandDeliveryOrderTransferService() {
+        return commandDeliveryOrderTransferService;
+    }
+
+    /**
+     * @param commandDeliveryOrderTransferService the commandDeliveryOrderTransferService to set
+     */
+    public void setCommandDeliveryOrderTransferService(
+            CommandDeliveryOrderTransferService commandDeliveryOrderTransferService) {
+        this.commandDeliveryOrderTransferService = commandDeliveryOrderTransferService;
+    }
+
+    /**
+     * @return the commandBillTransferService
+     */
+    public CommandBillTransferService getCommandBillTransferService() {
+        return commandBillTransferService;
+    }
+
+    /**
+     * @param commandBillTransferService the commandBillTransferService to set
+     */
+    public void setCommandBillTransferService(CommandBillTransferService commandBillTransferService) {
+        this.commandBillTransferService = commandBillTransferService;
     }
 
 }
