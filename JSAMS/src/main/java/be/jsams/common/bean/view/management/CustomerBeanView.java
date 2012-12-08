@@ -48,7 +48,7 @@ public class CustomerBeanView extends AbstractBeanView<CustomerBean> implements 
     private JsamsButton buttonSearchCustomer = new JsamsButton(IconUtil.MENU_ICON_PREFIX + "apps/system-users.png");
 
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param bean the {@link CustomerBean}
      */
@@ -252,7 +252,7 @@ public class CustomerBeanView extends AbstractBeanView<CustomerBean> implements 
     }
 
     /**
-     * Creates a custom view
+     * Creates a custom view.
      * 
      * @return a {@link JPanel}
      */

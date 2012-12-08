@@ -30,7 +30,7 @@ public class ProductBeanView extends AbstractBeanView<ProductBean> implements Ed
     private static final long serialVersionUID = -6271701607970284767L;
 
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param bean the {@link ProductBean}
      */
