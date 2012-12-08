@@ -2,10 +2,11 @@ package be.jsams.server.service.transfer.impl;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -14,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import be.jsams.common.bean.model.MockBeanGenerator;
 import be.jsams.common.bean.model.sale.CommandBean;
 import be.jsams.common.bean.model.sale.EstimateBean;
+import be.jsams.common.bean.model.sale.detail.EstimateDetailBean;
 import be.jsams.common.bean.model.transfer.TransferBean;
 import be.jsams.server.dao.BaseJUnitTestClass;
 
@@ -43,7 +45,7 @@ public class EstimateCommandTransferServiceImplTest extends BaseJUnitTestClass {
      * #createNewDocuments(be.jsams.common.bean.model.transfer.TransferBean)}.
      */
     @Test
-    public void testCreateNewDocumentsTransferBean() {
+    public void testCreateNewDocumentsFullTransferBean() {
         model.setSourceType(1);
         model.setDestinationType(1);
         model.setTransferMode(1);
@@ -56,23 +58,29 @@ public class EstimateCommandTransferServiceImplTest extends BaseJUnitTestClass {
         CommandBean newDocument = newDocuments.get(0);
         assertEquals(originalDocument.getAgent(), newDocument.getAgent());
     }
-
+    
     /**
      * Test method for {@link be.jsams.server.service.transfer.impl.EstimateCommandTransferServiceImpl
-     * #persistNewDocuments(java.util.List)}.
+     * #createNewDocuments(be.jsams.common.bean.model.transfer.TransferBean)}.
      */
     @Test
-    public void testPersistNewDocumentsListOfCommandBean() {
-        fail("Not yet implemented");
-    }
-
-    /**
-     * Test method for {@link be.jsams.server.service.transfer.impl.EstimateCommandTransferServiceImpl
-     * #updateOriginalDocuments(java.util.List)}.
-     */
-    @Test
-    public void testUpdateOriginalDocumentsListOfEstimateBean() {
-        fail("Not yet implemented");
+    public void testCreateNewDocumentsPartialTransferBean() {
+        model.setSourceType(1);
+        model.setDestinationType(1);
+        model.setTransferMode(2);
+        EstimateBean originalDocument = MockBeanGenerator.generateMockEstimate();
+        List<EstimateBean> documents = new ArrayList<EstimateBean>();
+        documents.add(originalDocument);
+        Map<Long, List<EstimateDetailBean>> map = new HashMap<Long, List<EstimateDetailBean>>();
+        List<EstimateDetailBean> list = new ArrayList<EstimateDetailBean>();
+        list.addAll(originalDocument.getDetails());
+        map.put(originalDocument.getId(), list);
+        model.setEstimateDetails(map);
+        List<CommandBean> newDocuments = service.createNewDocuments(model);
+        assertTrue(newDocuments != null && !newDocuments.isEmpty() && newDocuments.size() == 1);
+        CommandBean newDocument = newDocuments.get(0);
+        assertEquals(originalDocument.getAgent(), newDocument.getAgent());
+        assertEquals(originalDocument.getDetails().get(0).getProduct(), newDocument.getDetails().get(0).getProduct());
     }
 
 }
