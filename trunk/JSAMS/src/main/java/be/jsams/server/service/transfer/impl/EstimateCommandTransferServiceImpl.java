@@ -21,7 +21,7 @@ import be.jsams.server.service.transfer.AbstractTransferService;
 import be.jsams.server.service.transfer.EstimateCommandTransferService;
 
 /**
- * 
+ * Service to transfer an {@link EstimateBean} to a {@link CommandBean}.
  * 
  * @author chesteric31
  * @version $Revision$ $Date::                  $ $Author$
@@ -99,7 +99,6 @@ public class EstimateCommandTransferServiceImpl extends AbstractTransferService<
      * transfer.
      * 
      * @param list a list of {@link EstimateDetailBean} to transfer
-     * 
      * @return the built new {@link CommandBean}
      */
     private CommandBean partialTransfer(List<EstimateDetailBean> list) {
@@ -141,7 +140,6 @@ public class EstimateCommandTransferServiceImpl extends AbstractTransferService<
      * Transfers an estimate to command in full transfer.
      * 
      * @param estimate the {@link EstimateBean} to transfer
-     * 
      * @return the built new {@link CommandBean}
      */
     private CommandBean fullTransfer(EstimateBean estimate) {
