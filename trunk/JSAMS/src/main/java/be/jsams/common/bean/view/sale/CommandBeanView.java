@@ -97,7 +97,7 @@ public class CommandBeanView extends AbstractDocumentBeanView<CommandBean> imple
         CustomerBean customer = bean.getCustomer();
         CustomerBeanView customerView = customer.getView();
         JPanel customerPanel = customerView.createCustomView();
-        customer.addPropertyChangeListener(handleCustomerChangeListener());
+        customer.addPropertyChangeListener(customerListener());
         builder.appendI15d(JsamsI18nLabelResource.LABEL_CUSTOMER_NAME.getKey(), customerPanel);
         builder.appendI15d(JsamsI18nLabelResource.LABEL_CREATION_DATE.getKey(), creationDate);
         builder.appendI15d(JsamsI18nLabelResource.LABEL_DELIVERY_ADDRESS.getKey(), bean.getDeliveryAddress().getView()
@@ -174,30 +174,6 @@ public class CommandBeanView extends AbstractDocumentBeanView<CommandBean> imple
         dialog.pack();
         dialog.setLocationRelativeTo(((JsamsTable) e.getSource()).getRootPane());
         dialog.setVisible(true);
-    }
-
-    /**
-     * Handler for customer changing.
-     * 
-     * @return the {@link PropertyChangeListener}
-     */
-    private PropertyChangeListener handleCustomerChangeListener() {
-        return new PropertyChangeListener() {
-
-            /**
-             * {@inheritDoc}
-             */
-            @Override
-            public void propertyChange(PropertyChangeEvent evt) {
-                CustomerBean source = (CustomerBean) evt.getSource();
-                AddressBean billingAddress = getBean().getBillingAddress();
-                AddressBean customerBillingAddress = source.getBillingAddress();
-                billingAddress.refresh(customerBillingAddress);
-                AddressBean deliveryAddress = getBean().getDeliveryAddress();
-                AddressBean customerDeliveryAddress = source.getDeliveryAddress();
-                deliveryAddress.refresh(customerDeliveryAddress);
-            }
-        };
     }
 
     /**
@@ -289,6 +265,20 @@ public class CommandBeanView extends AbstractDocumentBeanView<CommandBean> imple
         for (PropertyChangeListener listener : getBean().getCustomer().getPropertyChangeListeners()) {
             getBean().getCustomer().removePropertyChangeListener(listener);
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void changeCustomer(PropertyChangeEvent evt) {
+        CustomerBean source = (CustomerBean) evt.getSource();
+        AddressBean billingAddress = getBean().getBillingAddress();
+        AddressBean customerBillingAddress = source.getBillingAddress();
+        billingAddress.refresh(customerBillingAddress);
+        AddressBean deliveryAddress = getBean().getDeliveryAddress();
+        AddressBean customerDeliveryAddress = source.getDeliveryAddress();
+        deliveryAddress.refresh(customerDeliveryAddress);
     }
 
 }

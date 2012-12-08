@@ -100,7 +100,7 @@ public class DeliveryOrderBeanView extends AbstractDocumentBeanView<DeliveryOrde
         CustomerBean customer = bean.getCustomer();
         CustomerBeanView customerView = customer.getView();
         JPanel customerPanel = customerView.createCustomView();
-        customer.addPropertyChangeListener(handleCustomerChangeListener());
+        customer.addPropertyChangeListener(customerListener());
         builder.appendI15d(JsamsI18nLabelResource.LABEL_CUSTOMER_NAME.getKey(), customerPanel);
         builder.appendI15d(JsamsI18nLabelResource.LABEL_CREATION_DATE.getKey(), creationDate);
         builder.nextLine();
@@ -177,27 +177,6 @@ public class DeliveryOrderBeanView extends AbstractDocumentBeanView<DeliveryOrde
         dialog.pack();
         dialog.setLocationRelativeTo(((JsamsTable) e.getSource()).getRootPane());
         dialog.setVisible(true);
-    }
-
-    /**
-     * Handler for customer changing.
-     * 
-     * @return the {@link PropertyChangeListener}
-     */
-    private PropertyChangeListener handleCustomerChangeListener() {
-        return new PropertyChangeListener() {
-
-            /**
-             * {@inheritDoc}
-             */
-            @Override
-            public void propertyChange(PropertyChangeEvent evt) {
-                CustomerBean source = (CustomerBean) evt.getSource();
-                AddressBean deliveryAddress = getBean().getDeliveryAddress();
-                AddressBean customerDeliveryAddress = source.getDeliveryAddress();
-                deliveryAddress.refresh(customerDeliveryAddress);
-            }
-        };
     }
 
     /**
@@ -289,6 +268,17 @@ public class DeliveryOrderBeanView extends AbstractDocumentBeanView<DeliveryOrde
         for (PropertyChangeListener listener : getBean().getCustomer().getPropertyChangeListeners()) {
             getBean().getCustomer().removePropertyChangeListener(listener);
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void changeCustomer(PropertyChangeEvent evt) {
+        CustomerBean source = (CustomerBean) evt.getSource();
+        AddressBean deliveryAddress = getBean().getDeliveryAddress();
+        AddressBean customerDeliveryAddress = source.getDeliveryAddress();
+        deliveryAddress.refresh(customerDeliveryAddress);
     }
 
 }

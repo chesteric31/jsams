@@ -92,12 +92,12 @@ public class BillBeanView extends AbstractDocumentBeanView<BillBean> implements 
         JsamsFormattedTextField discountRate = viewFactory.createBindingDecimalComponent(bean,
                 BillBean.DISCOUNT_RATE_PROPERTY, false, false);
         JsamsTextField remark = viewFactory.createBindingTextComponent(bean, BillBean.REMARK_PROPERTY, false, false);
-        JsamsFormattedTextField totalEt = viewFactory
-                .createBindingDecimalComponent(bean, CommandBean.TOTAL_ET_PROPERTY, false, true);
-        JsamsFormattedTextField totalVat = viewFactory
-                .createBindingDecimalComponent(bean, CommandBean.TOTAL_VAT_PROPERTY, false, true);
-        JsamsFormattedTextField totalAti = viewFactory
-                .createBindingDecimalComponent(bean, CommandBean.TOTAL_ATI_PROPERTY, false, true);
+        JsamsFormattedTextField totalEt = viewFactory.createBindingDecimalComponent(bean,
+                CommandBean.TOTAL_ET_PROPERTY, false, true);
+        JsamsFormattedTextField totalVat = viewFactory.createBindingDecimalComponent(bean,
+                CommandBean.TOTAL_VAT_PROPERTY, false, true);
+        JsamsFormattedTextField totalAti = viewFactory.createBindingDecimalComponent(bean,
+                CommandBean.TOTAL_ATI_PROPERTY, false, true);
 
         FormLayout layout = new FormLayout(
                 "right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow, 3dlu", "p");
@@ -107,7 +107,7 @@ public class BillBeanView extends AbstractDocumentBeanView<BillBean> implements 
         CustomerBean customer = bean.getCustomer();
         CustomerBeanView customerView = customer.getView();
         JPanel customerPanel = customerView.createCustomView();
-        customer.addPropertyChangeListener(handleCustomerChangeListener());
+        customer.addPropertyChangeListener(customerListener());
         builder.appendI15d(JsamsI18nLabelResource.LABEL_CUSTOMER_NAME.getKey(), customerPanel);
         builder.appendI15d(JsamsI18nLabelResource.LABEL_CREATION_DATE.getKey(), creationDate);
         builder.appendI15d(JsamsI18nLabelResource.LABEL_PAYMENT_MODE.getKey(), bean.getPaymentMode().buildView()
@@ -135,7 +135,7 @@ public class BillBeanView extends AbstractDocumentBeanView<BillBean> implements 
         setDetailsTable(detailView.createBindingTableComponent(tableModel, false, false));
         getDetailsTable().addMouseListener(productListener());
         updateDetailsTableRendering();
-        
+
         builder.appendI15dSeparator(JsamsI18nResource.PANEL_BILL_DETAILS.getKey());
         builder.appendRow("60dlu");
         builder.append(new JScrollPane(getDetailsTable()), maxColumnSpan);
@@ -187,29 +187,6 @@ public class BillBeanView extends AbstractDocumentBeanView<BillBean> implements 
         dialog.pack();
         dialog.setLocationRelativeTo(((JsamsTable) e.getSource()).getRootPane());
         dialog.setVisible(true);
-    }
-
-    /**
-     * Handler for customer changing.
-     * 
-     * @return the {@link PropertyChangeListener}
-     */
-    private PropertyChangeListener handleCustomerChangeListener() {
-        return new PropertyChangeListener() {
-
-            /**
-             * {@inheritDoc}
-             */
-            @Override
-            public void propertyChange(PropertyChangeEvent evt) {
-                CustomerBean source = (CustomerBean) evt.getSource();
-                AddressBean billingAddress = getBean().getBillingAddress();
-                AddressBean customerBillingAddress = source.getBillingAddress();
-                billingAddress.refresh(customerBillingAddress);
-                PaymentModeBean paymentMode = getBean().getPaymentMode();
-                paymentMode.refresh(source.getPaymentMode());
-            }
-        };
     }
 
     /**
@@ -306,6 +283,19 @@ public class BillBeanView extends AbstractDocumentBeanView<BillBean> implements 
         for (PropertyChangeListener listener : getBean().getCustomer().getPropertyChangeListeners()) {
             getBean().getCustomer().removePropertyChangeListener(listener);
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void changeCustomer(PropertyChangeEvent evt) {
+        CustomerBean source = (CustomerBean) evt.getSource();
+        AddressBean billingAddress = getBean().getBillingAddress();
+        AddressBean customerBillingAddress = source.getBillingAddress();
+        billingAddress.refresh(customerBillingAddress);
+        PaymentModeBean paymentMode = getBean().getPaymentMode();
+        paymentMode.refresh(source.getPaymentMode());
     }
 
 }
