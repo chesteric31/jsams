@@ -9,8 +9,6 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.List;
 
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
 import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -47,7 +45,6 @@ import be.jsams.common.bean.view.management.CustomerBeanView;
 
 import com.jgoodies.common.collect.ArrayListModel;
 import com.jgoodies.forms.builder.DefaultFormBuilder;
-import com.jgoodies.forms.factories.ButtonBarFactory;
 import com.jgoodies.forms.layout.FormLayout;
 import com.toedter.calendar.JDateChooser;
 
@@ -79,7 +76,6 @@ public class EstimateBeanView extends AbstractDocumentBeanView<EstimateBean> imp
      */
     public JPanel createEditView() {
         EstimateBean bean = getBean();
-        final int three = 3;
         ViewFactory<EstimateBean> viewFactory = getViewFactory();
 
         JCheckBox transferred = viewFactory.createBindingBooleanComponent(bean, EstimateBean.TRANSFERRED_PROPERTY,
@@ -135,19 +131,8 @@ public class EstimateBeanView extends AbstractDocumentBeanView<EstimateBean> imp
         builder.appendRow("60dlu");
         builder.append(new JScrollPane(getDetailsTable()), maxColumnSpan);
 
-        JPanel southPanel = new JPanel();
-        southPanel.setLayout(new BoxLayout(southPanel, BoxLayout.PAGE_AXIS));
-        southPanel.setBorder(BorderFactory.createEtchedBorder());
-
-        JsamsButton buttonAdd = buildButtonAdd();
-        JsamsButton buttonRemove = buildButtonRemove();
-        JsamsButton buttonModify = buildButtonModify();
-        JsamsButton[] buttons = new JsamsButton[three];
-        buttons[0] = buttonAdd;
-        buttons[1] = buttonRemove;
-        buttons[2] = buttonModify;
-        southPanel.add(ButtonBarFactory.buildCenteredBar(buttons));
-        builder.append(southPanel, maxColumnSpan);
+        JPanel buttonsPanel = buildButtonsPanel();
+        builder.append(buttonsPanel, maxColumnSpan);
 
         return builder.getPanel();
     }
@@ -266,11 +251,9 @@ public class EstimateBeanView extends AbstractDocumentBeanView<EstimateBean> imp
     }
 
     /**
-     * Builds the adding button.
-     * 
-     * @return the adding {@link JsamsButton}
+     * {@inheritDoc}
      */
-    private JsamsButton buildButtonAdd() {
+    protected JsamsButton buildButtonAdd() {
         JsamsButton buttonAdd = new JsamsButton(IconUtil.MENU_ICON_PREFIX + "actions/list-add.png");
         buttonAdd.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -291,11 +274,9 @@ public class EstimateBeanView extends AbstractDocumentBeanView<EstimateBean> imp
     }
 
     /**
-     * Builds the removing button.
-     * 
-     * @return the removing {@link JsamsButton}
+     * {@inheritDoc}
      */
-    private JsamsButton buildButtonRemove() {
+    protected JsamsButton buildButtonRemove() {
         JsamsButton buttonRemove = new JsamsButton(IconUtil.MENU_ICON_PREFIX + "actions/list-remove.png");
         buttonRemove.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -312,21 +293,6 @@ public class EstimateBeanView extends AbstractDocumentBeanView<EstimateBean> imp
             }
         });
         return buttonRemove;
-    }
-
-    /**
-     * Builds the modifying button.
-     * 
-     * @return the modifying {@link JsamsButton}
-     */
-    private JsamsButton buildButtonModify() {
-        JsamsButton buttonModify = new JsamsButton(IconUtil.MENU_ICON_PREFIX + "apps/accessories-text-editor.png");
-        buttonModify.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // TODO
-            }
-        });
-        return buttonModify;
     }
 
     /**
