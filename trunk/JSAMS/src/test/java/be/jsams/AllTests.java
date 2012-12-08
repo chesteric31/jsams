@@ -81,6 +81,7 @@ import be.jsams.server.model.sale.EstimateTest;
 import be.jsams.server.model.utils.xml.JsamsDateAdapterTest;
 import be.jsams.server.service.impl.SocietyServiceImplTest;
 import be.jsams.server.service.rss.impl.RSSFeedParserImplTest;
+import be.jsams.server.service.transfer.impl.EstimateBillTransferServiceImplTest;
 import be.jsams.server.service.transfer.impl.EstimateCommandTransferServiceImplTest;
 import be.jsams.server.service.update.impl.DownloaderServiceImplTest;
 import be.jsams.server.service.xml.impl.XmlBillGeneratorImplTest;
@@ -90,7 +91,7 @@ import be.jsams.server.service.xml.impl.XmlDeliveryOrderGeneratorImplTest;
 import be.jsams.server.service.xml.impl.XmlEstimateGeneratorImplTest;
 
 /**
- * Test suite for all JUNIT tests.
+ * Test suite for all JUnit tests.
  * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
@@ -118,9 +119,9 @@ import be.jsams.server.service.xml.impl.XmlEstimateGeneratorImplTest;
         SocietyTest.class, AgentTest.class, CustomerTest.class, ProductCategoryTest.class, ProductTest.class,
         EstimateTest.class, CommandTest.class, DeliveryOrderTest.class, BillTest.class, CreditNoteTest.class,
         JsamsDateAdapterTest.class, SocietyServiceImplTest.class, RSSFeedParserImplTest.class,
-        EstimateCommandTransferServiceImplTest.class, DownloaderServiceImplTest.class,
-        XmlEstimateGeneratorImplTest.class, XmlCommandGeneratorImplTest.class, XmlDeliveryOrderGeneratorImplTest.class,
-        XmlBillGeneratorImplTest.class, XmlCreditNoteGeneratorImplTest.class })
+        EstimateCommandTransferServiceImplTest.class, EstimateBillTransferServiceImplTest.class,
+        DownloaderServiceImplTest.class, XmlEstimateGeneratorImplTest.class, XmlCommandGeneratorImplTest.class,
+        XmlDeliveryOrderGeneratorImplTest.class, XmlBillGeneratorImplTest.class, XmlCreditNoteGeneratorImplTest.class })
 public class AllTests {
 
 }
