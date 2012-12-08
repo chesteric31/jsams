@@ -4,8 +4,8 @@ import javax.swing.SwingUtilities;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import be.jsams.client.context.JsamsApplicationContext;
-import be.jsams.client.desktop.JsamsDesktop;
+import be.jsams.client.context.ApplicationContext;
+import be.jsams.client.desktop.Desktop;
 import be.jsams.client.i18n.I18nApplicationContext;
 
 /**
@@ -34,11 +34,11 @@ public final class JsamsStart {
      */
     public static void main(final String[] args) {
         System.setProperty("application.context", JSAMS_APPLICATION_CONTEXT);
-        JsamsApplicationContext.setContext(new ClassPathXmlApplicationContext(JsamsApplicationContext.CONFIG));
+        ApplicationContext.setContext(new ClassPathXmlApplicationContext(ApplicationContext.CONFIG));
         I18nApplicationContext.setContext(new ClassPathXmlApplicationContext(I18nApplicationContext.CONFIG));
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                final JsamsDesktop application = new JsamsDesktop();
+                final Desktop application = new Desktop();
                 application.start();
             }
         });

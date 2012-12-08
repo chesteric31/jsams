@@ -7,7 +7,7 @@ import javax.swing.Action;
 import javax.swing.Icon;
 import javax.swing.JSeparator;
 
-import be.jsams.client.i18n.JsamsI18nResource;
+import be.jsams.client.i18n.I18nResource;
 import be.jsams.client.model.dialog.AboutDialog;
 import be.jsams.client.model.dialog.UpdateDialog;
 import be.jsams.client.swing.component.JsamsMenu;
@@ -19,22 +19,22 @@ import be.jsams.client.swing.component.JsamsMenuItem;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class JsamsHelpMenuBuilder extends AbstractMenuBuilder {
+public class HelpMenuBuilder extends AbstractMenuBuilder {
 
     /**
      * {@inheritDoc}
      */
     @Override
     public JsamsMenu build() {
-        JsamsMenu helpMenu = new JsamsMenu(JsamsI18nResource.MENU_HELP);
-        JsamsMenuItem helpMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_HELP, "apps/help-browser.png");
+        JsamsMenu helpMenu = new JsamsMenu(I18nResource.MENU_HELP);
+        JsamsMenuItem helpMI = new JsamsMenuItem(I18nResource.MENU_ITEM_HELP, "apps/help-browser.png");
         helpMenu.add(helpMI);
-        JsamsMenuItem updateMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_UPDATE,
+        JsamsMenuItem updateMI = new JsamsMenuItem(I18nResource.MENU_ITEM_UPDATE,
                 "status/software-update-available.png");
         updateMI.setAction(updateAction(updateMI.getText(), updateMI.getIcon()));
         helpMenu.add(updateMI);
         helpMenu.add(new JSeparator());
-        JsamsMenuItem aboutMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_ABOUT,
+        JsamsMenuItem aboutMI = new JsamsMenuItem(I18nResource.MENU_ITEM_ABOUT,
                 "categories/applications-office.png");
         aboutMI.setAction(aboutAction(aboutMI.getText(), aboutMI.getIcon()));
         helpMenu.add(aboutMI);
@@ -57,7 +57,7 @@ public class JsamsHelpMenuBuilder extends AbstractMenuBuilder {
             private static final long serialVersionUID = 6621546191772229680L;
 
             public void actionPerformed(ActionEvent event) {
-                new AboutDialog(JsamsDesktop.getInstance().getMainWindow(), JsamsI18nResource.TITLE_ABOUT);
+                new AboutDialog(Desktop.getInstance().getMainWindow(), I18nResource.TITLE_ABOUT);
             }
         };
         action.putValue(Action.NAME, text);
@@ -81,7 +81,7 @@ public class JsamsHelpMenuBuilder extends AbstractMenuBuilder {
             private static final long serialVersionUID = -7362274053727193013L;
 
             public void actionPerformed(ActionEvent event) {
-                new UpdateDialog(JsamsDesktop.getInstance().getMainWindow(), JsamsI18nResource.TITLE_UPDATE);
+                new UpdateDialog(Desktop.getInstance().getMainWindow(), I18nResource.TITLE_UPDATE);
             }
         };
         action.putValue(Action.NAME, text);

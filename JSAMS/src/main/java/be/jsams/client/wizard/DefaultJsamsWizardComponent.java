@@ -12,7 +12,7 @@ import java.util.List;
 import javax.swing.JPanel;
 
 import be.jsams.client.i18n.I18nString;
-import be.jsams.client.i18n.JsamsI18nResource;
+import be.jsams.client.i18n.I18nResource;
 import be.jsams.client.swing.component.JsamsButton;
 import be.jsams.client.wizard.action.CancelAction;
 import be.jsams.client.wizard.action.FinishAction;
@@ -50,16 +50,16 @@ public class DefaultJsamsWizardComponent implements JsamsWizardComponent {
      */
     private void initComponents() {
         this.propertyChangeListeners = new PropertyChangeSupport(this);
-        I18nString wizardButtonBack = JsamsI18nResource.WIZARD_BUTTON_BACK;
+        I18nString wizardButtonBack = I18nResource.WIZARD_BUTTON_BACK;
         backButton = new JsamsButton(wizardButtonBack);
         backButton.setMnemonic(wizardButtonBack.getTranslation().charAt(2)); 
-        I18nString wizardButtonNext = JsamsI18nResource.WIZARD_BUTTON_NEXT;
+        I18nString wizardButtonNext = I18nResource.WIZARD_BUTTON_NEXT;
         nextButton = new JsamsButton(wizardButtonNext);
         nextButton.setMnemonic(wizardButtonNext.getTranslation().charAt(0)); 
-        I18nString wizardButtonCancel = JsamsI18nResource.WIZARD_BUTTON_CANCEL;
+        I18nString wizardButtonCancel = I18nResource.WIZARD_BUTTON_CANCEL;
         cancelButton = new JsamsButton(wizardButtonCancel);
         cancelButton.setMnemonic(wizardButtonCancel.getTranslation().charAt(0)); 
-        I18nString wizardButtonFinish = JsamsI18nResource.WIZARD_BUTTON_FINISH;
+        I18nString wizardButtonFinish = I18nResource.WIZARD_BUTTON_FINISH;
         finishButton = new JsamsButton(wizardButtonFinish);
         finishButton.setMnemonic(wizardButtonFinish.getTranslation().charAt(0)); 
         

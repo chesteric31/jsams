@@ -7,9 +7,9 @@ import javax.swing.ListSelectionModel;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import be.jsams.client.context.JsamsApplicationContext;
-import be.jsams.client.desktop.JsamsDesktop;
-import be.jsams.client.i18n.JsamsI18nResource;
+import be.jsams.client.context.ApplicationContext;
+import be.jsams.client.desktop.Desktop;
+import be.jsams.client.i18n.I18nResource;
 import be.jsams.client.model.dialog.management.EditProductCategoryDialog;
 import be.jsams.client.model.panel.AbstractSearchPanel;
 import be.jsams.client.model.table.management.ProductCategoryTableModel;
@@ -100,11 +100,11 @@ public class SearchProductCategoryPanel extends
      */
     @Override
     protected void performButtonAdd() {
-        SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
+        SocietyBean currentSociety = Desktop.getInstance().getCurrentSociety();
         ProductCategoryBeanBuilder builder = new ProductCategoryBeanBuilder(false, currentSociety);
-        builder.setDao(JsamsApplicationContext.getProductCategoryDao());
+        builder.setDao(ApplicationContext.getProductCategoryDao());
         ProductCategoryBean categoryBean = builder.build();
-        new EditProductCategoryDialog(JsamsI18nResource.TITLE_EDIT_PRODUCT_CATEGORY, categoryBean);
+        new EditProductCategoryDialog(I18nResource.TITLE_EDIT_PRODUCT_CATEGORY, categoryBean);
         updateUI();
     }
 
@@ -121,7 +121,7 @@ public class SearchProductCategoryPanel extends
             if (debug) {
                 LOGGER.debug("The product category to modify: " + beanToModify);
             }
-            new EditProductCategoryDialog(JsamsI18nResource.TITLE_EDIT_PRODUCT_CATEGORY, beanToModify);
+            new EditProductCategoryDialog(I18nResource.TITLE_EDIT_PRODUCT_CATEGORY, beanToModify);
             updateUI();
         }
     }

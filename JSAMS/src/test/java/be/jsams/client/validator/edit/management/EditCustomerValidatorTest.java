@@ -7,8 +7,8 @@ import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import be.jsams.client.i18n.I18nApplicationContext;
-import be.jsams.client.i18n.JsamsI18nLabelResource;
-import be.jsams.client.i18n.JsamsI18nResource;
+import be.jsams.client.i18n.I18nLabelResource;
+import be.jsams.client.i18n.I18nResource;
 import be.jsams.client.validator.AbstractValidatorTest;
 import be.jsams.common.bean.model.MockBeanGenerator;
 import be.jsams.common.bean.model.management.CustomerBean;
@@ -59,8 +59,8 @@ public class EditCustomerValidatorTest extends AbstractValidatorTest {
         bean.setName("#");
         ValidationResult result = validator.validate(bean);
         String formattedText = retrieveFormattedText(result);
-        assertTrue(formattedText.contains(JsamsI18nResource.ERROR_IS_ALPHANUMERIC.getTranslation()));
-        assertTrue(formattedText.contains(JsamsI18nLabelResource.LABEL_NAME.getTranslation()));
+        assertTrue(formattedText.contains(I18nResource.ERROR_IS_ALPHANUMERIC.getTranslation()));
+        assertTrue(formattedText.contains(I18nLabelResource.LABEL_NAME.getTranslation()));
     }
 
     /**
@@ -74,8 +74,8 @@ public class EditCustomerValidatorTest extends AbstractValidatorTest {
         bean.setName(null);
         ValidationResult result = validator.validate(bean);
         String formattedText = retrieveFormattedText(result);
-        assertTrue(formattedText.contains(JsamsI18nResource.ERROR_IS_MANDATORY.getTranslation()));
-        assertTrue(formattedText.contains(JsamsI18nLabelResource.LABEL_NAME.getTranslation()));
+        assertTrue(formattedText.contains(I18nResource.ERROR_IS_MANDATORY.getTranslation()));
+        assertTrue(formattedText.contains(I18nLabelResource.LABEL_NAME.getTranslation()));
     }
 
 
@@ -90,8 +90,8 @@ public class EditCustomerValidatorTest extends AbstractValidatorTest {
         bean.getPaymentMode().setLabel(null);
         ValidationResult result = validator.validate(bean);
         String formattedText = retrieveFormattedText(result);
-        assertTrue(formattedText.contains(JsamsI18nResource.ERROR_IS_MANDATORY.getTranslation()));
-        assertTrue(formattedText.contains(JsamsI18nLabelResource.LABEL_PAYMENT_MODE.getTranslation()));
+        assertTrue(formattedText.contains(I18nResource.ERROR_IS_MANDATORY.getTranslation()));
+        assertTrue(formattedText.contains(I18nLabelResource.LABEL_PAYMENT_MODE.getTranslation()));
     }
 
     /**
@@ -105,8 +105,8 @@ public class EditCustomerValidatorTest extends AbstractValidatorTest {
         bean.getContactInformation().setPhone(null);
         ValidationResult result = validator.validate(bean);
         String formattedText = retrieveFormattedText(result);
-        assertTrue(formattedText.contains(JsamsI18nResource.ERROR_IS_MANDATORY.getTranslation()));
-        assertTrue(formattedText.contains(JsamsI18nLabelResource.LABEL_PHONE.getTranslation()));
+        assertTrue(formattedText.contains(I18nResource.ERROR_IS_MANDATORY.getTranslation()));
+        assertTrue(formattedText.contains(I18nLabelResource.LABEL_PHONE.getTranslation()));
     }
 
     /**
@@ -120,8 +120,8 @@ public class EditCustomerValidatorTest extends AbstractValidatorTest {
         bean.setVatApplicable(null);
         ValidationResult result = validator.validate(bean);
         String formattedText = retrieveFormattedText(result);
-        assertTrue(formattedText.contains(JsamsI18nResource.ERROR_IS_MANDATORY.getTranslation()));
-        assertTrue(formattedText.contains(JsamsI18nLabelResource.LABEL_VAT_APPLICABLE.getTranslation()));
+        assertTrue(formattedText.contains(I18nResource.ERROR_IS_MANDATORY.getTranslation()));
+        assertTrue(formattedText.contains(I18nLabelResource.LABEL_VAT_APPLICABLE.getTranslation()));
     }
 
     /**
@@ -135,8 +135,8 @@ public class EditCustomerValidatorTest extends AbstractValidatorTest {
         bean.setAgent(null);
         ValidationResult result = validator.validate(bean);
         String formattedText = retrieveFormattedText(result);
-        assertTrue(formattedText.contains(JsamsI18nResource.ERROR_IS_MANDATORY.getTranslation()));
-        assertTrue(formattedText.contains(JsamsI18nLabelResource.LABEL_AGENT.getTranslation()));
+        assertTrue(formattedText.contains(I18nResource.ERROR_IS_MANDATORY.getTranslation()));
+        assertTrue(formattedText.contains(I18nLabelResource.LABEL_AGENT.getTranslation()));
     }
 
     /**
@@ -150,8 +150,8 @@ public class EditCustomerValidatorTest extends AbstractValidatorTest {
         bean.getContactInformation().setPhone("!");
         ValidationResult result = validator.validate(bean);
         String formattedText = retrieveFormattedText(result);
-        assertTrue(formattedText.contains(JsamsI18nResource.ERROR_IS_ALPHANUMERIC.getTranslation()));
-        assertTrue(formattedText.contains(JsamsI18nLabelResource.LABEL_PHONE.getTranslation()));
+        assertTrue(formattedText.contains(I18nResource.ERROR_IS_ALPHANUMERIC.getTranslation()));
+        assertTrue(formattedText.contains(I18nLabelResource.LABEL_PHONE.getTranslation()));
     }
 
     /**
@@ -165,8 +165,8 @@ public class EditCustomerValidatorTest extends AbstractValidatorTest {
         bean.getContactInformation().setEmail("not a good email!!!");
         ValidationResult result = validator.validate(bean);
         String formattedText = retrieveFormattedText(result);
-        assertTrue(formattedText.contains(JsamsI18nResource.ERROR_IS_INVALID.getTranslation()));
-        assertTrue(formattedText.contains(JsamsI18nLabelResource.LABEL_EMAIL.getTranslation()));
+        assertTrue(formattedText.contains(I18nResource.ERROR_IS_INVALID.getTranslation()));
+        assertTrue(formattedText.contains(I18nLabelResource.LABEL_EMAIL.getTranslation()));
     }
 
 }

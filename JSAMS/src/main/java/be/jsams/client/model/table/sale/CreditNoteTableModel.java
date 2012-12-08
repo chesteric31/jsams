@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import be.jsams.client.i18n.JsamsI18nResource;
+import be.jsams.client.i18n.I18nResource;
 import be.jsams.client.model.table.AbstractJsamsTableModel;
 import be.jsams.common.bean.model.sale.CreditNoteBean;
 
@@ -35,8 +35,8 @@ public class CreditNoteTableModel extends AbstractJsamsTableModel<CreditNoteBean
      */
     public CreditNoteTableModel(List<CreditNoteBean> listBean) {
         super(listBean);
-        setColumnNames(Arrays.asList(JsamsI18nResource.COLUMN_ID, JsamsI18nResource.COLUMN_CREATION_DATE,
-                JsamsI18nResource.COLUMN_REMARK));
+        setColumnNames(Arrays.asList(I18nResource.COLUMN_ID, I18nResource.COLUMN_CREATION_DATE,
+                I18nResource.COLUMN_REMARK));
     }
 
     /**

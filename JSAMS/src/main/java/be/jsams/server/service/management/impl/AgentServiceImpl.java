@@ -3,7 +3,7 @@ package be.jsams.server.service.management.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import be.jsams.client.desktop.JsamsDesktop;
+import be.jsams.client.desktop.Desktop;
 import be.jsams.common.bean.builder.management.AgentBeanBuilder;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.AgentBean;
@@ -51,7 +51,7 @@ public class AgentServiceImpl extends AbstractService implements AgentService {
      * {@inheritDoc}
      */
     public List<AgentBean> findAll() {
-        SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
+        SocietyBean currentSociety = Desktop.getInstance().getCurrentSociety();
         agentDao.setCurrentSociety(currentSociety);
         List<Agent> agents = agentDao.findAll();
         List<AgentBean> beans = new ArrayList<AgentBean>();
@@ -66,7 +66,7 @@ public class AgentServiceImpl extends AbstractService implements AgentService {
      */
     public AgentBean findById(Long id) {
         Agent agent = agentDao.findById(id);
-        return getAgentBeanBuilder().build(agent, JsamsDesktop.getInstance().getCurrentSociety());
+        return getAgentBeanBuilder().build(agent, Desktop.getInstance().getCurrentSociety());
     }
 
     /**
@@ -81,7 +81,7 @@ public class AgentServiceImpl extends AbstractService implements AgentService {
      * {@inheritDoc}
      */
     public List<AgentBean> findByCriteria(AgentBean criteria) {
-        SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
+        SocietyBean currentSociety = Desktop.getInstance().getCurrentSociety();
         agentDao.setCurrentSociety(currentSociety);
         List<Agent> agents = agentDao.findByCriteria(criteria);
         List<AgentBean> beans = new ArrayList<AgentBean>();

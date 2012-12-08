@@ -13,12 +13,12 @@ import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 import javax.swing.plaf.FontUIResource;
 
-import be.jsams.client.context.JsamsApplicationContext;
-import be.jsams.client.desktop.JsamsDesktop;
-import be.jsams.client.desktop.JsamsMainFrame;
+import be.jsams.client.context.ApplicationContext;
+import be.jsams.client.desktop.Desktop;
+import be.jsams.client.desktop.MainFrame;
 import be.jsams.client.i18n.I18nString;
-import be.jsams.client.i18n.JsamsI18nLabelResource;
-import be.jsams.client.i18n.JsamsI18nResource;
+import be.jsams.client.i18n.I18nLabelResource;
+import be.jsams.client.i18n.I18nResource;
 import be.jsams.client.renderer.NamedComboBoxRenderer;
 import be.jsams.client.swing.component.AbstractJsamsFrame;
 import be.jsams.client.swing.component.JsamsButton;
@@ -78,7 +78,7 @@ public class OpenSocietyDialog extends JsamsDialog implements JsamsButtonsInterf
         FormLayout layout = new FormLayout("right:pref, 3dlu, pref, 3dlu, pref", "pref, 5dlu");
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
         builder.setDefaultDialogBorder();
-        JsamsLabel label = new JsamsLabel(JsamsI18nLabelResource.LABEL_OPEN_SOCIETY);
+        JsamsLabel label = new JsamsLabel(I18nLabelResource.LABEL_OPEN_SOCIETY);
         label.setFont(new FontUIResource(Font.SANS_SERIF, Font.BOLD, 12));
         builder.append(label);
         builder.nextLine();
@@ -87,7 +87,7 @@ public class OpenSocietyDialog extends JsamsDialog implements JsamsButtonsInterf
         SocietyBeanBuilder societyBuilder = getSocietyBeanBuilder();
         bean = societyBuilder.build(false);
         comboBox = helper.createBindingComboComponent(bean, true, false, new NamedComboBoxRenderer());
-        builder.append(JsamsI18nLabelResource.LABEL_AVAILABLES_SOCIETIES.getTranslation(), comboBox);
+        builder.append(I18nLabelResource.LABEL_AVAILABLES_SOCIETIES.getTranslation(), comboBox);
         JsamsButton buttonNewSociety = buildButtonNewSociety();
         builder.append(buttonNewSociety);
         builder.nextLine();
@@ -107,12 +107,12 @@ public class OpenSocietyDialog extends JsamsDialog implements JsamsButtonsInterf
     public void performOk() {
         SocietyBean selectedSociety = (SocietyBean) bean.getSelection();
         if (selectedSociety != null) {
-            JsamsDesktop jsamsDesktop = JsamsDesktop.getInstance();
+            Desktop jsamsDesktop = Desktop.getInstance();
             jsamsDesktop.setCurrentSociety(selectedSociety);
             Object[] parameters = new Object[1];
             parameters[0] = selectedSociety.getName();
             I18nString newTitle = new I18nString("title.application", parameters);
-            JsamsMainFrame mainWindow = jsamsDesktop.getMainWindow();
+            MainFrame mainWindow = jsamsDesktop.getMainWindow();
             mainWindow.setTitle(newTitle);
             mainWindow.enableAllMenuItems(true);
             mainWindow.enableTabbedPane(true);
@@ -121,7 +121,7 @@ public class OpenSocietyDialog extends JsamsDialog implements JsamsButtonsInterf
         } else {
             statusBar.removeAll();
             statusBar.repaint();
-            JsamsLabel label = new JsamsLabel(JsamsI18nLabelResource.LABEL_ERROR_MANDATORY_SOCIETY,
+            JsamsLabel label = new JsamsLabel(I18nLabelResource.LABEL_ERROR_MANDATORY_SOCIETY,
                     ValidationResultViewFactory.getErrorIcon());
             statusBar.addComponent(label);
             statusBar.validate();
@@ -148,14 +148,14 @@ public class OpenSocietyDialog extends JsamsDialog implements JsamsButtonsInterf
      * @return the new society button
      */
     private JsamsButton buildButtonNewSociety() {
-        JsamsButton buttonNewSociety = new JsamsButton(JsamsI18nResource.BUTTON_OPEN_SOCIETIES_NEW,
+        JsamsButton buttonNewSociety = new JsamsButton(I18nResource.BUTTON_OPEN_SOCIETIES_NEW,
                 IconUtil.MENU_ICON_PREFIX + "actions/folder-new.png");
         buttonNewSociety.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent e) {
                 SocietyBeanBuilder builder = getSocietyBeanBuilder();
                 SocietyBean societyBean = builder.build(true);
-                EditSocietyDialog dialog = new EditSocietyDialog(JsamsI18nResource.TITLE_EDIT_SOCIETY, societyBean);
+                EditSocietyDialog dialog = new EditSocietyDialog(I18nResource.TITLE_EDIT_SOCIETY, societyBean);
                 if (dialog.isSuccess()) {
                     dispose();
                 }
@@ -169,7 +169,7 @@ public class OpenSocietyDialog extends JsamsDialog implements JsamsButtonsInterf
      * @return the {@link SocietyBeanBuilder}
      */
     public SocietyBeanBuilder getSocietyBeanBuilder() {
-        return JsamsApplicationContext.getSocietyBeanBuilder();
+        return ApplicationContext.getSocietyBeanBuilder();
     }
 
     /**

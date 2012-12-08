@@ -8,9 +8,9 @@ import javax.swing.ListSelectionModel;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import be.jsams.client.context.JsamsApplicationContext;
-import be.jsams.client.desktop.JsamsDesktop;
-import be.jsams.client.i18n.JsamsI18nResource;
+import be.jsams.client.context.ApplicationContext;
+import be.jsams.client.desktop.Desktop;
+import be.jsams.client.i18n.I18nResource;
 import be.jsams.client.model.dialog.sale.EditBillDialog;
 import be.jsams.client.model.table.sale.BillTableModel;
 import be.jsams.client.validator.search.sale.SearchBillValidator;
@@ -78,14 +78,14 @@ public class SearchBillPanel<L extends MouseListener> extends
      */
     @Override
     protected void performButtonAdd() {
-        SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
-        CustomerBean customer = JsamsApplicationContext.getCustomerBeanBuilder().build(null, currentSociety);
-        PaymentModeBean mode = JsamsApplicationContext.getPaymentModeBeanBuilder().build();
+        SocietyBean currentSociety = Desktop.getInstance().getCurrentSociety();
+        CustomerBean customer = ApplicationContext.getCustomerBeanBuilder().build(null, currentSociety);
+        PaymentModeBean mode = ApplicationContext.getPaymentModeBeanBuilder().build();
         BillBean bean = new BillBean(currentSociety, customer, mode);
         BillMediator mediator = new BillMediator();
         mediator.setBillBean(bean);
         bean.setMediator(mediator);
-        new EditBillDialog(JsamsI18nResource.TITLE_EDIT_BILL, bean);
+        new EditBillDialog(I18nResource.TITLE_EDIT_BILL, bean);
         updateUI();
     }
 
@@ -105,7 +105,7 @@ public class SearchBillPanel<L extends MouseListener> extends
             if (debug) {
                 LOGGER.debug("The bill to modify: " + beanToModify);
             }
-            new EditBillDialog(JsamsI18nResource.TITLE_EDIT_BILL, beanToModify);
+            new EditBillDialog(I18nResource.TITLE_EDIT_BILL, beanToModify);
             updateUI();
         }
     }
@@ -158,7 +158,7 @@ public class SearchBillPanel<L extends MouseListener> extends
             int selectedRowModel = getResultTable().convertRowIndexToModel(selectedRow);
             BillTableModel model = (BillTableModel) getResultTable().getModel();
             BillBean beanToPdf = model.getRow(selectedRowModel);
-            PdfBillServiceImpl pdfService = JsamsApplicationContext.getPdfBillService();
+            PdfBillServiceImpl pdfService = ApplicationContext.getPdfBillService();
             pdfService.generatePdf(beanToPdf);
         }
     }

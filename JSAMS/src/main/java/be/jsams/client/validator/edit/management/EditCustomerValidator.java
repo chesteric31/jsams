@@ -1,7 +1,7 @@
 package be.jsams.client.validator.edit.management;
 
-import be.jsams.client.i18n.JsamsI18nLabelResource;
-import be.jsams.client.i18n.JsamsI18nResource;
+import be.jsams.client.i18n.I18nLabelResource;
+import be.jsams.client.i18n.I18nResource;
 import be.jsams.client.validator.edit.EditAddressValidator;
 import be.jsams.common.bean.model.AddressBean;
 import be.jsams.common.bean.model.ContactInformationBean;
@@ -31,45 +31,45 @@ public class EditCustomerValidator implements Validator<CustomerBean> {
 
         String name = customer.getName();
         if (ValidationUtils.isBlank(name)) {
-            support.addError(JsamsI18nLabelResource.LABEL_NAME.getTranslation(),
-                    JsamsI18nResource.ERROR_IS_MANDATORY.getTranslation());
+            support.addError(I18nLabelResource.LABEL_NAME.getTranslation(),
+                    I18nResource.ERROR_IS_MANDATORY.getTranslation());
         } else if (!ValidationUtils.isAlphanumericSpace(name) && !StringValidator.validate(name)) {
-            support.addError(JsamsI18nLabelResource.LABEL_NAME.getTranslation(),
-                    JsamsI18nResource.ERROR_IS_ALPHANUMERIC.getTranslation());
+            support.addError(I18nLabelResource.LABEL_NAME.getTranslation(),
+                    I18nResource.ERROR_IS_ALPHANUMERIC.getTranslation());
         }
 
         if (customer.getPaymentMode().getLabel() == null) {
-            support.addError(JsamsI18nLabelResource.LABEL_PAYMENT_MODE.getTranslation(),
-                    JsamsI18nResource.ERROR_IS_MANDATORY.getTranslation());
+            support.addError(I18nLabelResource.LABEL_PAYMENT_MODE.getTranslation(),
+                    I18nResource.ERROR_IS_MANDATORY.getTranslation());
         }
 
         ContactInformationBean contactInformation = customer.getContactInformation();
         String phone = contactInformation.getPhone();
         if (ValidationUtils.isBlank(phone)) {
-            support.addError(JsamsI18nLabelResource.LABEL_PHONE.getTranslation(),
-                    JsamsI18nResource.ERROR_IS_MANDATORY.getTranslation());
+            support.addError(I18nLabelResource.LABEL_PHONE.getTranslation(),
+                    I18nResource.ERROR_IS_MANDATORY.getTranslation());
         } else if (!ValidationUtils.isAlphanumericSpace(phone)) {
-            support.addError(JsamsI18nLabelResource.LABEL_PHONE.getTranslation(),
-                    JsamsI18nResource.ERROR_IS_ALPHANUMERIC.getTranslation());
+            support.addError(I18nLabelResource.LABEL_PHONE.getTranslation(),
+                    I18nResource.ERROR_IS_ALPHANUMERIC.getTranslation());
         }
         String email = contactInformation.getEmail();
         if (!ValidationUtils.isBlank(email)) {
             if (!EmailValidator.validate(email)) {
-                support.addError(JsamsI18nLabelResource.LABEL_EMAIL.getTranslation(),
-                        JsamsI18nResource.ERROR_IS_INVALID.getTranslation());
+                support.addError(I18nLabelResource.LABEL_EMAIL.getTranslation(),
+                        I18nResource.ERROR_IS_INVALID.getTranslation());
             }
         }
 
         Double vatApplicable = customer.getVatApplicable();
         if (vatApplicable == null || ValidationUtils.isBlank(vatApplicable.toString())) {
-            support.addError(JsamsI18nLabelResource.LABEL_VAT_APPLICABLE.getTranslation(),
-                    JsamsI18nResource.ERROR_IS_MANDATORY.getTranslation());
+            support.addError(I18nLabelResource.LABEL_VAT_APPLICABLE.getTranslation(),
+                    I18nResource.ERROR_IS_MANDATORY.getTranslation());
         }
 
         AgentBean agent = customer.getAgent();
         if (agent == null || ValidationUtils.isBlank(agent.getName())) {
-            support.addError(JsamsI18nLabelResource.LABEL_AGENT.getTranslation(),
-                    JsamsI18nResource.ERROR_IS_MANDATORY.getTranslation());
+            support.addError(I18nLabelResource.LABEL_AGENT.getTranslation(),
+                    I18nResource.ERROR_IS_MANDATORY.getTranslation());
         }
 
         Validator<AddressBean> billingAddressValidator = new EditAddressValidator();

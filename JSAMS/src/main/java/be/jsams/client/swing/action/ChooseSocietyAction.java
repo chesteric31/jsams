@@ -5,7 +5,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import javax.swing.Icon;
 
-import be.jsams.client.i18n.JsamsI18nResource;
+import be.jsams.client.i18n.I18nResource;
 import be.jsams.client.model.dialog.OpenSocietyDialog;
 
 /**
@@ -36,7 +36,7 @@ public class ChooseSocietyAction extends AbstractAction {
      */
     @Override
     public void actionPerformed(ActionEvent arg0) {
-        new OpenSocietyDialog(JsamsI18nResource.TITLE_OPEN_SOCIETY);
+        new OpenSocietyDialog(I18nResource.TITLE_OPEN_SOCIETY);
     }
 
 }

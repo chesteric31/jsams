@@ -2,7 +2,7 @@ package be.jsams.client.model.dialog.sale;
 
 import javax.swing.JPanel;
 
-import be.jsams.client.context.JsamsApplicationContext;
+import be.jsams.client.context.ApplicationContext;
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.model.dialog.AbstractEditDialog;
 import be.jsams.client.validator.edit.sale.EditBillValidator;
@@ -37,7 +37,7 @@ public class EditBillDialog extends AbstractEditDialog<BillBean, EditBillValidat
      * @param model the {@link BillBean} model
      */
     public EditBillDialog(final I18nString title, BillBean model) {
-        super(null, title, model, new EditBillValidator(), JsamsApplicationContext.getBillService());
+        super(null, title, model, new EditBillValidator(), ApplicationContext.getBillService());
     }
 
     /**
@@ -45,7 +45,7 @@ public class EditBillDialog extends AbstractEditDialog<BillBean, EditBillValidat
      */
     @Override
     public void initComponents() {
-        PaymentModeBean paymentMode = JsamsApplicationContext.getPaymentModeBeanBuilder().build();
+        PaymentModeBean paymentMode = ApplicationContext.getPaymentModeBeanBuilder().build();
         if (getModel().getId() == null) {
             paymentMode.refresh(getModel().getCustomer().getPaymentMode());
         }

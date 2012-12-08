@@ -2,7 +2,7 @@ package be.jsams.client.model.dialog.sale;
 
 import javax.swing.JPanel;
 
-import be.jsams.client.context.JsamsApplicationContext;
+import be.jsams.client.context.ApplicationContext;
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.model.dialog.AbstractEditDialog;
 import be.jsams.client.validator.edit.sale.EditCommandValidator;
@@ -33,7 +33,7 @@ public class EditCommandDialog extends AbstractEditDialog<CommandBean, EditComma
      * @param model the {@link CommandBean} model
      */
     public EditCommandDialog(final I18nString title, CommandBean model) {
-        super(null, title, model, new EditCommandValidator(), JsamsApplicationContext.getCommandService());
+        super(null, title, model, new EditCommandValidator(), ApplicationContext.getCommandService());
     }
 
     /**

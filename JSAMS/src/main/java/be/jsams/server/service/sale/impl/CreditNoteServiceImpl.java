@@ -3,7 +3,7 @@ package be.jsams.server.service.sale.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import be.jsams.client.desktop.JsamsDesktop;
+import be.jsams.client.desktop.Desktop;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.sale.CreditNoteBean;
@@ -29,7 +29,7 @@ public class CreditNoteServiceImpl extends AbstractService implements CreditNote
     public CreditNoteBean create(CreditNoteBean bean) {
         CreditNote creditNote = new CreditNote(bean);
         CreditNote persistedCreditNote = creditNoteDao.add(creditNote);
-        SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
+        SocietyBean currentSociety = Desktop.getInstance().getCurrentSociety();
         return new CreditNoteBean(persistedCreditNote, currentSociety, bean.getCustomer());
     }
 
@@ -65,7 +65,7 @@ public class CreditNoteServiceImpl extends AbstractService implements CreditNote
      */
     @Override
     public CreditNoteBean findById(Long id) {
-        SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
+        SocietyBean currentSociety = Desktop.getInstance().getCurrentSociety();
         CreditNote creditNote = creditNoteDao.findById(id);
         CustomerBean customer = getCustomerBeanBuilder().build(creditNote.getCustomer(), currentSociety);
         return new CreditNoteBean(creditNote, currentSociety, customer);
@@ -76,7 +76,7 @@ public class CreditNoteServiceImpl extends AbstractService implements CreditNote
      */
     @Override
     public List<CreditNoteBean> findAll() {
-        SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
+        SocietyBean currentSociety = Desktop.getInstance().getCurrentSociety();
         creditNoteDao.setCurrentSociety(currentSociety);
         List<CreditNote> creditNotes = creditNoteDao.findAll();
         List<CreditNoteBean> beans = new ArrayList<CreditNoteBean>();
@@ -92,7 +92,7 @@ public class CreditNoteServiceImpl extends AbstractService implements CreditNote
      */
     @Override
     public List<CreditNoteBean> findByCriteria(CreditNoteBean criteria) {
-        SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
+        SocietyBean currentSociety = Desktop.getInstance().getCurrentSociety();
         creditNoteDao.setCurrentSociety(currentSociety);
         List<CreditNote> creditNotes = creditNoteDao.findByCriteria(criteria);
         List<CreditNoteBean> beans = new ArrayList<CreditNoteBean>();

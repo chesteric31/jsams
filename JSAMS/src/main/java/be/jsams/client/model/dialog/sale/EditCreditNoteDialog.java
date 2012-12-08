@@ -2,7 +2,7 @@ package be.jsams.client.model.dialog.sale;
 
 import javax.swing.JPanel;
 
-import be.jsams.client.context.JsamsApplicationContext;
+import be.jsams.client.context.ApplicationContext;
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.model.dialog.AbstractEditDialog;
 import be.jsams.client.validator.edit.sale.EditCreditNoteValidator;
@@ -34,7 +34,7 @@ public class EditCreditNoteDialog extends
      * @param model the {@link CreditNoteBean} model
      */
     public EditCreditNoteDialog(final I18nString title, CreditNoteBean model) {
-        super(null, title, model, new EditCreditNoteValidator(), JsamsApplicationContext.getCreditNoteService());
+        super(null, title, model, new EditCreditNoteValidator(), ApplicationContext.getCreditNoteService());
     }
 
     /**

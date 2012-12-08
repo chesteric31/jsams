@@ -1,7 +1,7 @@
 package be.jsams.client.validator.edit.management;
 
-import be.jsams.client.i18n.JsamsI18nLabelResource;
-import be.jsams.client.i18n.JsamsI18nResource;
+import be.jsams.client.i18n.I18nLabelResource;
+import be.jsams.client.i18n.I18nResource;
 import be.jsams.client.validator.edit.EditAddressValidator;
 import be.jsams.common.bean.model.AddressBean;
 import be.jsams.common.bean.model.ContactInformationBean;
@@ -29,35 +29,35 @@ public class EditAgentValidator implements Validator<AgentBean> {
 
         String name = agent.getName();
         if (ValidationUtils.isBlank(name)) {
-            support.addError(JsamsI18nLabelResource.LABEL_NAME.getTranslation(), JsamsI18nResource.ERROR_IS_MANDATORY
+            support.addError(I18nLabelResource.LABEL_NAME.getTranslation(), I18nResource.ERROR_IS_MANDATORY
                     .getTranslation());
         } else if (!ValidationUtils.isAlphanumericSpace(name) && !StringValidator.validate(name)) {
-            support.addError(JsamsI18nLabelResource.LABEL_NAME.getTranslation(),
-                    JsamsI18nResource.ERROR_IS_ALPHANUMERIC.getTranslation());
+            support.addError(I18nLabelResource.LABEL_NAME.getTranslation(),
+                    I18nResource.ERROR_IS_ALPHANUMERIC.getTranslation());
         }
 
         String function = agent.getFunction();
         if (ValidationUtils.isBlank(function)) {
-            support.addError(JsamsI18nLabelResource.LABEL_FUNCTION.getTranslation(),
-                    JsamsI18nResource.ERROR_IS_MANDATORY.getTranslation());
+            support.addError(I18nLabelResource.LABEL_FUNCTION.getTranslation(),
+                    I18nResource.ERROR_IS_MANDATORY.getTranslation());
         } else if (!ValidationUtils.isAlphanumericSpace(function) && !StringValidator.validate(function)) {
-            support.addError(JsamsI18nLabelResource.LABEL_FUNCTION.getTranslation(),
-                    JsamsI18nResource.ERROR_IS_ALPHANUMERIC.getTranslation());
+            support.addError(I18nLabelResource.LABEL_FUNCTION.getTranslation(),
+                    I18nResource.ERROR_IS_ALPHANUMERIC.getTranslation());
         }
         ContactInformationBean contactInformation = agent.getContactInformation();
         String phone = contactInformation.getPhone();
         if (ValidationUtils.isBlank(phone)) {
-            support.addError(JsamsI18nLabelResource.LABEL_PHONE.getTranslation(), JsamsI18nResource.ERROR_IS_MANDATORY
+            support.addError(I18nLabelResource.LABEL_PHONE.getTranslation(), I18nResource.ERROR_IS_MANDATORY
                     .getTranslation());
         } else if (!ValidationUtils.isAlphanumericSpace(phone)) {
-            support.addError(JsamsI18nLabelResource.LABEL_PHONE.getTranslation(),
-                    JsamsI18nResource.ERROR_IS_ALPHANUMERIC.getTranslation());
+            support.addError(I18nLabelResource.LABEL_PHONE.getTranslation(),
+                    I18nResource.ERROR_IS_ALPHANUMERIC.getTranslation());
         }
         String email = contactInformation.getEmail();
         if (!ValidationUtils.isBlank(email)) {
             if (!be.jsams.common.bean.validator.EmailValidator.validate(email)) {
-                support.addError(JsamsI18nLabelResource.LABEL_EMAIL.getTranslation(),
-                        JsamsI18nResource.ERROR_IS_INVALID.getTranslation());
+                support.addError(I18nLabelResource.LABEL_EMAIL.getTranslation(),
+                        I18nResource.ERROR_IS_INVALID.getTranslation());
             }
         }
 

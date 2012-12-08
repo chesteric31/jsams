@@ -6,9 +6,9 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import be.jsams.client.context.JsamsApplicationContext;
-import be.jsams.client.desktop.JsamsDesktop;
-import be.jsams.client.i18n.JsamsI18nResource;
+import be.jsams.client.context.ApplicationContext;
+import be.jsams.client.desktop.Desktop;
+import be.jsams.client.i18n.I18nResource;
 import be.jsams.client.model.dialog.sale.EditEstimateDialog;
 import be.jsams.client.model.table.sale.EstimateTableModel;
 import be.jsams.client.validator.search.sale.SearchEstimateValidator;
@@ -76,14 +76,14 @@ public class SearchEstimatePanel<L extends MouseListener> extends
      */
     @Override
     protected void performButtonAdd() {
-        SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
-        CustomerBean customer = JsamsApplicationContext.getCustomerBeanBuilder().build(null, currentSociety);
-        AgentBean agent = JsamsApplicationContext.getAgentBeanBuilder().build(null, currentSociety);
+        SocietyBean currentSociety = Desktop.getInstance().getCurrentSociety();
+        CustomerBean customer = ApplicationContext.getCustomerBeanBuilder().build(null, currentSociety);
+        AgentBean agent = ApplicationContext.getAgentBeanBuilder().build(null, currentSociety);
         EstimateBean bean = new EstimateBean(currentSociety, customer, agent);
         EstimateMediator mediator = new EstimateMediator();
         mediator.setEstimateBean(bean);
         bean.setMediator(mediator);
-        new EditEstimateDialog(JsamsI18nResource.TITLE_EDIT_ESTIMATE, bean);
+        new EditEstimateDialog(I18nResource.TITLE_EDIT_ESTIMATE, bean);
         updateUI();
     }
 
@@ -103,7 +103,7 @@ public class SearchEstimatePanel<L extends MouseListener> extends
             if (debug) {
                 LOGGER.debug("The estimate to modify: " + beanToModify);
             }
-            new EditEstimateDialog(JsamsI18nResource.TITLE_EDIT_ESTIMATE, beanToModify);
+            new EditEstimateDialog(I18nResource.TITLE_EDIT_ESTIMATE, beanToModify);
             updateUI();
         }
     }
@@ -156,7 +156,7 @@ public class SearchEstimatePanel<L extends MouseListener> extends
             int selectedRowModel = getResultTable().convertRowIndexToModel(selectedRow);
             EstimateTableModel model = (EstimateTableModel) getResultTable().getModel();
             EstimateBean beanToPdf = model.getRow(selectedRowModel);
-            PdfEstimateServiceImpl pdfService = JsamsApplicationContext.getPdfEstimateService();
+            PdfEstimateServiceImpl pdfService = ApplicationContext.getPdfEstimateService();
             pdfService.generatePdf(beanToPdf);
         }
     }

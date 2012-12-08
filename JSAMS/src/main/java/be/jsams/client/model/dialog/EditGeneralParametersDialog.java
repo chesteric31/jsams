@@ -16,8 +16,8 @@ import javax.swing.JSpinner;
 import javax.swing.KeyStroke;
 import javax.swing.SpinnerNumberModel;
 
-import be.jsams.client.i18n.JsamsI18nLabelResource;
-import be.jsams.client.i18n.JsamsI18nResource;
+import be.jsams.client.i18n.I18nLabelResource;
+import be.jsams.client.i18n.I18nResource;
 import be.jsams.client.swing.component.AbstractJsamsFrame;
 import be.jsams.client.swing.component.JsamsButtonsInterface;
 import be.jsams.client.swing.component.JsamsButtonsPanel;
@@ -76,7 +76,7 @@ public class EditGeneralParametersDialog extends JsamsDialog implements JsamsBut
      * Constructor
      */
     public EditGeneralParametersDialog() {
-        super(null, JsamsI18nResource.TITLE_EDIT_GENERAL_PARAMETERS, IconUtil.TITLE_ICON_PREFIX
+        super(null, I18nResource.TITLE_EDIT_GENERAL_PARAMETERS, IconUtil.TITLE_ICON_PREFIX
                 + "actions/system-shutdown.png");
         buttonsPanel = new JsamsButtonsPanel(this, true, false, true);
         setDefaultKeyActions();
@@ -110,35 +110,35 @@ public class EditGeneralParametersDialog extends JsamsDialog implements JsamsBut
         spinnerModelFirst = new SpinnerNumberModel(firstRememberDays, 0, null, 1);
         spinnerModelSecond = new SpinnerNumberModel(secondRememberDays, 0, null, 1);
         spinnerModelNotice = new SpinnerNumberModel(formalNoticeDays, 0, null, 1);
-        builder.appendSeparator(JsamsI18nLabelResource.LABEL_SETTINGS_PROXY.getTranslation());
+        builder.appendSeparator(I18nLabelResource.LABEL_SETTINGS_PROXY.getTranslation());
         proxyToSet.setSelected(proxyToSetProp);
         proxyToSet.addItemListener(this);
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_SETTINGS_PROXY_TO_SET.getKey(), proxyToSet);
+        builder.appendI15d(I18nLabelResource.LABEL_SETTINGS_PROXY_TO_SET.getKey(), proxyToSet);
         builder.nextLine();
         proxyHost.setEnabled(proxyToSetProp);
         proxyHost.setText(proxyHostProp);
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_SETTINGS_PROXY_HOST.getKey(), proxyHost);
+        builder.appendI15d(I18nLabelResource.LABEL_SETTINGS_PROXY_HOST.getKey(), proxyHost);
         proxyPort.setEnabled(proxyToSetProp);
         proxyPort.setText(proxyPortProp);
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_SETTINGS_PROXY_PORT.getKey(), proxyPort);
+        builder.appendI15d(I18nLabelResource.LABEL_SETTINGS_PROXY_PORT.getKey(), proxyPort);
         proxyToAuthenticate.setSelected(proxyToAuthenticateProp);
         proxyToAuthenticate.addItemListener(this);
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_SETTINGS_PROXY_TO_AUTHENTICATE.getKey(), proxyToAuthenticate);
+        builder.appendI15d(I18nLabelResource.LABEL_SETTINGS_PROXY_TO_AUTHENTICATE.getKey(), proxyToAuthenticate);
         builder.nextLine();
         proxyUser.setEnabled(proxyToAuthenticateProp);
         proxyUser.setText(proxyUserProp);
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_SETTINGS_PROXY_USER.getKey(), proxyUser);
+        builder.appendI15d(I18nLabelResource.LABEL_SETTINGS_PROXY_USER.getKey(), proxyUser);
         proxyPass.setEnabled(proxyToAuthenticateProp);
         proxyPass.setText(proxyPassProp);
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_SETTINGS_PROXY_PASS.getKey(), proxyPass);
-        builder.appendSeparator(JsamsI18nLabelResource.LABEL_SETTINGS_BILL.getTranslation());
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_FIRST_REMEMBER_DAYS.getKey(), new JSpinner(spinnerModelFirst));
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_FIRST_REMEMBER_DAYS.getKey(), new JSpinner(spinnerModelFirst));
+        builder.appendI15d(I18nLabelResource.LABEL_SETTINGS_PROXY_PASS.getKey(), proxyPass);
+        builder.appendSeparator(I18nLabelResource.LABEL_SETTINGS_BILL.getTranslation());
+        builder.appendI15d(I18nLabelResource.LABEL_FIRST_REMEMBER_DAYS.getKey(), new JSpinner(spinnerModelFirst));
+        builder.appendI15d(I18nLabelResource.LABEL_FIRST_REMEMBER_DAYS.getKey(), new JSpinner(spinnerModelFirst));
         builder.nextLine();
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_SECOND_REMEMBER_DAYS.getKey(),
+        builder.appendI15d(I18nLabelResource.LABEL_SECOND_REMEMBER_DAYS.getKey(),
                 new JSpinner(spinnerModelSecond));
         builder.nextLine();
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_FORMAL_NOTICE_DAYS.getKey(), new JSpinner(spinnerModelNotice));
+        builder.appendI15d(I18nLabelResource.LABEL_FORMAL_NOTICE_DAYS.getKey(), new JSpinner(spinnerModelNotice));
         builder.nextLine();
         JPanel panel = builder.getPanel();
         JPanel mainPanel = new JPanel(new BorderLayout());

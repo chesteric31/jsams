@@ -4,7 +4,7 @@ import java.awt.Image;
 
 import javax.swing.JDialog;
 
-import be.jsams.client.desktop.JsamsMainFrame;
+import be.jsams.client.desktop.MainFrame;
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.swing.utils.IconUtil;
 
@@ -24,21 +24,21 @@ public class JsamsDialog extends JDialog {
     /**
      * Constructor.
      * 
-     * @param parent the {@link JsamsMainFrame} parent
+     * @param parent the {@link MainFrame} parent
      * @param title the {@link I18nString} translatable String
      */
-    public JsamsDialog(final JsamsMainFrame parent, final I18nString title) {
+    public JsamsDialog(final MainFrame parent, final I18nString title) {
         super(parent, title.getTranslation(), true);
     }
 
     /**
      * Constructor.
      * 
-     * @param parent the {@link JsamsMainFrame} parent
+     * @param parent the {@link MainFrame} parent
      * @param title the {@link I18nString} translatable String
      * @param iconFileName the icon path name
      */
-    public JsamsDialog(final JsamsMainFrame parent, final I18nString title, final String iconFileName) {
+    public JsamsDialog(final MainFrame parent, final I18nString title, final String iconFileName) {
         super(parent, title.getTranslation(), true);
         Image defaultIcon = IconUtil.buildIcon(iconFileName);
         setIconImage(defaultIcon);

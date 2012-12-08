@@ -3,7 +3,7 @@ package be.jsams.server.service.sale.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import be.jsams.client.desktop.JsamsDesktop;
+import be.jsams.client.desktop.Desktop;
 import be.jsams.common.bean.builder.management.AgentBeanBuilder;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.AgentBean;
@@ -31,7 +31,7 @@ public class EstimateServiceImpl extends AbstractService implements EstimateServ
     public EstimateBean create(final EstimateBean bean) {
         Estimate estimate = new Estimate(bean);
         Estimate persistedEstimate = estimateDao.add(estimate);
-        SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
+        SocietyBean currentSociety = Desktop.getInstance().getCurrentSociety();
         AgentBean agent = agentBeanBuilder.build(persistedEstimate.getAgent(), currentSociety);
         return new EstimateBean(persistedEstimate, currentSociety, bean.getCustomer(), agent);
     }
@@ -65,7 +65,7 @@ public class EstimateServiceImpl extends AbstractService implements EstimateServ
      * {@inheritDoc}
      */
     public List<EstimateBean> findAll() {
-        SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
+        SocietyBean currentSociety = Desktop.getInstance().getCurrentSociety();
         estimateDao.setCurrentSociety(currentSociety);
         List<Estimate> estimates = estimateDao.findAll();
         List<EstimateBean> beans = new ArrayList<EstimateBean>();
@@ -81,7 +81,7 @@ public class EstimateServiceImpl extends AbstractService implements EstimateServ
      * {@inheritDoc}
      */
     public EstimateBean findById(final Long id) {
-        SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
+        SocietyBean currentSociety = Desktop.getInstance().getCurrentSociety();
         Estimate estimate = estimateDao.findById(id);
         CustomerBean customer = getCustomerBeanBuilder().build(estimate.getCustomer(), currentSociety);
         AgentBean agent = agentBeanBuilder.build(estimate.getAgent(), currentSociety);
@@ -102,7 +102,7 @@ public class EstimateServiceImpl extends AbstractService implements EstimateServ
     @Override
     public List<EstimateBean> findByCriteria(final EstimateBean criteria) {
         // necessary to have the current society in the criteria
-        SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
+        SocietyBean currentSociety = Desktop.getInstance().getCurrentSociety();
         estimateDao.setCurrentSociety(currentSociety);
         List<Estimate> estimates = estimateDao.findByCriteria(criteria);
         List<EstimateBean> beans = new ArrayList<EstimateBean>();

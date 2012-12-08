@@ -3,7 +3,7 @@ package be.jsams.server.service.sale.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import be.jsams.client.desktop.JsamsDesktop;
+import be.jsams.client.desktop.Desktop;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.sale.DeliveryOrderBean;
@@ -29,7 +29,7 @@ public class DeliveryOrderServiceImpl extends AbstractService implements Deliver
     public DeliveryOrderBean create(DeliveryOrderBean bean) {
         DeliveryOrder deliveryOrder = new DeliveryOrder(bean);
         DeliveryOrder addingDeliveryOrder = deliveryOrderDao.add(deliveryOrder);
-        return new DeliveryOrderBean(addingDeliveryOrder, JsamsDesktop.getInstance().getCurrentSociety(), bean
+        return new DeliveryOrderBean(addingDeliveryOrder, Desktop.getInstance().getCurrentSociety(), bean
                 .getCustomer());
     }
 
@@ -65,7 +65,7 @@ public class DeliveryOrderServiceImpl extends AbstractService implements Deliver
      */
     @Override
     public DeliveryOrderBean findById(Long id) {
-        SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
+        SocietyBean currentSociety = Desktop.getInstance().getCurrentSociety();
         DeliveryOrder deliveryOrder = deliveryOrderDao.findById(id);
         CustomerBean customer = getCustomerBeanBuilder().build(deliveryOrder.getCustomer(), currentSociety);
         return new DeliveryOrderBean(deliveryOrder, currentSociety, customer);
@@ -76,7 +76,7 @@ public class DeliveryOrderServiceImpl extends AbstractService implements Deliver
      */
     @Override
     public List<DeliveryOrderBean> findAll() {
-        SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
+        SocietyBean currentSociety = Desktop.getInstance().getCurrentSociety();
         deliveryOrderDao.setCurrentSociety(currentSociety);
         List<DeliveryOrder> deliveryOrders = deliveryOrderDao.findAll();
         List<DeliveryOrderBean> beans = new ArrayList<DeliveryOrderBean>();
@@ -92,7 +92,7 @@ public class DeliveryOrderServiceImpl extends AbstractService implements Deliver
      */
     @Override
     public List<DeliveryOrderBean> findByCriteria(DeliveryOrderBean criteria) {
-        SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
+        SocietyBean currentSociety = Desktop.getInstance().getCurrentSociety();
         deliveryOrderDao.setCurrentSociety(currentSociety);
         List<DeliveryOrder> deliveryOrders = deliveryOrderDao.findByCriteria(criteria);
         List<DeliveryOrderBean> beans = new ArrayList<DeliveryOrderBean>();

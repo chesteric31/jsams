@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.plaf.FontUIResource;
 
-import be.jsams.client.desktop.JsamsMainFrame;
+import be.jsams.client.desktop.MainFrame;
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.swing.component.JsamsDialog;
 import be.jsams.client.swing.component.JsamsLabel;
@@ -59,14 +59,14 @@ public abstract class AbstractWizardDialog<B extends AbstractIdentityBean<?, ?>,
     /**
      * Constructor.
      * 
-     * @param parent the {@link JsamsMainFrame} parent
+     * @param parent the {@link MainFrame} parent
      * @param title the {@link I18nString} translatable String
      * @param iconFileName the icon path name of the dialog
      * @param logoFileName the file name to the logo to display
      * @param model the {@link AbstractIdentityBean} to use as wrapper
      * @param service the {@link TransferService} to use to persist/update entities
      */
-    public AbstractWizardDialog(final JsamsMainFrame parent, I18nString title, String iconFileName,
+    public AbstractWizardDialog(final MainFrame parent, I18nString title, String iconFileName,
             String logoFileName, B model, TransferService service) {
         super(parent, title, IconUtil.TITLE_ICON_PREFIX + iconFileName);
         this.model = model;

@@ -2,7 +2,7 @@ package be.jsams.common.bean.view.sale.detail;
 
 import javax.swing.JPanel;
 
-import be.jsams.client.i18n.JsamsI18nLabelResource;
+import be.jsams.client.i18n.I18nLabelResource;
 import be.jsams.client.swing.component.AbstractJsamsFrame;
 import be.jsams.client.swing.component.JsamsTextField;
 import be.jsams.common.bean.model.AddressBean;
@@ -61,13 +61,13 @@ public class EstimateDetailBeanView extends AbstractDetailBeanView<EstimateDetai
                 "right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow", "p");
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
         builder.setDefaultDialogBorder();
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_CUSTOMER_NAME.getKey(), estimate.getCustomer().getView()
+        builder.appendI15d(I18nLabelResource.LABEL_CUSTOMER_NAME.getKey(), estimate.getCustomer().getView()
                 .createCustomView());
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_START_DATE.getKey(), startDate);
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_END_DATE.getKey(), endDate);
+        builder.appendI15d(I18nLabelResource.LABEL_START_DATE.getKey(), startDate);
+        builder.appendI15d(I18nLabelResource.LABEL_END_DATE.getKey(), endDate);
         builder.nextLine();
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_CITY.getKey(), textFieldCity);
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_ZIP_CODE.getKey(), textFieldZipCode);
+        builder.appendI15d(I18nLabelResource.LABEL_CITY.getKey(), textFieldCity);
+        builder.appendI15d(I18nLabelResource.LABEL_ZIP_CODE.getKey(), textFieldZipCode);
 
         return builder.getPanel();
     }

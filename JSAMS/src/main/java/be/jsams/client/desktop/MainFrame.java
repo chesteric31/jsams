@@ -20,38 +20,38 @@ import be.jsams.client.swing.component.JsamsShortcutToolBar;
 import be.jsams.client.swing.utils.DialogUtil;
 
 /**
- * {@link JsamsMainFrame} that contains all the components.
+ * {@link MainFrame} that contains all the components.
  * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class JsamsMainFrame extends AbstractJsamsFrame {
+public class MainFrame extends AbstractJsamsFrame {
 
     /**
      * Serial Version UID
      */
     private static final long serialVersionUID = 8570689474653666931L;
 
-    private static final Log LOGGER = LogFactory.getLog(JsamsMainFrame.class);
+    private static final Log LOGGER = LogFactory.getLog(MainFrame.class);
 
     private JMenuBar mainMenuBar;
     
-    private JsamsFileMenuBuilder fileMenuBuilder;
-    private JsamsManagementMenuBuilder managementMenuBuilder;
-    private JsamsSalesMenuBuilder salesMenuBuilder;
-    private JsamsWindowsMenuBuilder windowsMenuBuilder;
-    private JsamsHelpMenuBuilder helpMenuBuilder;
+    private FileMenuBuilder fileMenuBuilder;
+    private ManagementMenuBuilder managementMenuBuilder;
+    private SalesMenuBuilder salesMenuBuilder;
+    private WindowsMenuBuilder windowsMenuBuilder;
+    private HelpMenuBuilder helpMenuBuilder;
 
     private JsamsShortcutToolBar shortcutToolBar;
 
-    private JsamsMainPanel mainPanel = new JsamsMainPanel();
+    private MainPanel mainPanel = new MainPanel();
 
     /**
      * Constructor.
      * 
      * @param title the {@link I18nString} title
      */
-    public JsamsMainFrame(final I18nString title) {
+    public MainFrame(final I18nString title) {
         super(title, "categories/applications-office.png");
         initComponents();
     }
@@ -64,19 +64,19 @@ public class JsamsMainFrame extends AbstractJsamsFrame {
         try {
             mainMenuBar = new JMenuBar();
 
-            fileMenuBuilder = new JsamsFileMenuBuilder();
+            fileMenuBuilder = new FileMenuBuilder();
             mainMenuBar.add(fileMenuBuilder.build());
 
-            managementMenuBuilder = new JsamsManagementMenuBuilder(this);
+            managementMenuBuilder = new ManagementMenuBuilder(this);
             mainMenuBar.add(managementMenuBuilder.build());
 
-            salesMenuBuilder = new JsamsSalesMenuBuilder(this);
+            salesMenuBuilder = new SalesMenuBuilder(this);
             mainMenuBar.add(salesMenuBuilder.build());
 
-            windowsMenuBuilder = new JsamsWindowsMenuBuilder();
+            windowsMenuBuilder = new WindowsMenuBuilder();
             mainMenuBar.add(windowsMenuBuilder.build());
 
-            helpMenuBuilder = new JsamsHelpMenuBuilder();
+            helpMenuBuilder = new HelpMenuBuilder();
             mainMenuBar.add(helpMenuBuilder.build());
 
             add(buildSouthPanel(), BorderLayout.SOUTH);

@@ -5,9 +5,9 @@ import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import javax.swing.Icon;
 
-import be.jsams.client.context.JsamsApplicationContext;
-import be.jsams.client.desktop.JsamsDesktop;
-import be.jsams.client.i18n.JsamsI18nResource;
+import be.jsams.client.context.ApplicationContext;
+import be.jsams.client.desktop.Desktop;
+import be.jsams.client.i18n.I18nResource;
 import be.jsams.client.model.dialog.EditSocietyDialog;
 import be.jsams.common.bean.builder.SocietyBeanBuilder;
 
@@ -49,10 +49,10 @@ public class EditSocietyAction extends AbstractAction {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (editionMode == NEW_ONE_MODE) {
-            SocietyBeanBuilder builder = JsamsApplicationContext.getSocietyBeanBuilder();
-            new EditSocietyDialog(JsamsI18nResource.TITLE_EDIT_SOCIETY, builder.build(true));
+            SocietyBeanBuilder builder = ApplicationContext.getSocietyBeanBuilder();
+            new EditSocietyDialog(I18nResource.TITLE_EDIT_SOCIETY, builder.build(true));
         } else {
-            new EditSocietyDialog(JsamsI18nResource.TITLE_EDIT_SOCIETY, JsamsDesktop.getInstance().getCurrentSociety());
+            new EditSocietyDialog(I18nResource.TITLE_EDIT_SOCIETY, Desktop.getInstance().getCurrentSociety());
         }
     }
 }

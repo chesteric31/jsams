@@ -1,6 +1,6 @@
 package be.jsams.client.swing.listener.search.management;
 
-import be.jsams.client.i18n.JsamsI18nResource;
+import be.jsams.client.i18n.I18nResource;
 import be.jsams.client.model.dialog.management.EditAgentDialog;
 import be.jsams.client.model.table.management.AgentTableModel;
 import be.jsams.client.swing.component.JsamsTable;
@@ -20,7 +20,7 @@ public class AgentTableMouseListener extends AbstractTableMouseListener {
     @Override
     protected void handleDoubleClicking(JsamsTable table, int selectedRowModel) {
         AgentTableModel model = (AgentTableModel) table.getModel();
-        new EditAgentDialog(JsamsI18nResource.TITLE_EDIT_AGENT, model.getRow(selectedRowModel));
+        new EditAgentDialog(I18nResource.TITLE_EDIT_AGENT, model.getRow(selectedRowModel));
     }
 
 }

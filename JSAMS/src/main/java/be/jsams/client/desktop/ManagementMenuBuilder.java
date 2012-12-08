@@ -7,8 +7,8 @@ import javax.swing.Action;
 import javax.swing.Icon;
 import javax.swing.JSeparator;
 
-import be.jsams.client.context.JsamsApplicationContext;
-import be.jsams.client.i18n.JsamsI18nResource;
+import be.jsams.client.context.ApplicationContext;
+import be.jsams.client.i18n.I18nResource;
 import be.jsams.client.model.panel.management.SearchAgentPanel;
 import be.jsams.client.model.panel.management.SearchCustomerPanel;
 import be.jsams.client.model.panel.management.SearchProductCategoryPanel;
@@ -41,7 +41,7 @@ import be.jsams.common.bean.model.management.ProductCategoryBean;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class JsamsManagementMenuBuilder extends AbstractMenuBuilder {
+public class ManagementMenuBuilder extends AbstractMenuBuilder {
 
     private JsamsMenu managementMenu;
     private JsamsMenuItem customersMI;
@@ -49,14 +49,14 @@ public class JsamsManagementMenuBuilder extends AbstractMenuBuilder {
     private JsamsMenuItem productsCategoryMI;
     private JsamsMenuItem productsMI;
 
-    private JsamsMainFrame parent;
+    private MainFrame parent;
 
     /**
      * Constructor.
      * 
-     * @param parent the {@link JsamsMainFrame} parent
+     * @param parent the {@link MainFrame} parent
      */
-    public JsamsManagementMenuBuilder(final JsamsMainFrame parent) {
+    public ManagementMenuBuilder(final MainFrame parent) {
         this.parent = parent;
     }
 
@@ -65,19 +65,19 @@ public class JsamsManagementMenuBuilder extends AbstractMenuBuilder {
      */
     @Override
     public JsamsMenu build() {
-        managementMenu = new JsamsMenu(JsamsI18nResource.MENU_MANAGEMENT);
-        customersMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_CUSTOMERS, "apps/system-users.png");
+        managementMenu = new JsamsMenu(I18nResource.MENU_MANAGEMENT);
+        customersMI = new JsamsMenuItem(I18nResource.MENU_ITEM_CUSTOMERS, "apps/system-users.png");
         customersMI.setAction(customersAction(customersMI.getText(), customersMI.getIcon()));
         managementMenu.add(customersMI);
-        agentsMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_AGENTS, "categories/applications-development.png");
+        agentsMI = new JsamsMenuItem(I18nResource.MENU_ITEM_AGENTS, "categories/applications-development.png");
         agentsMI.setAction(agentsAction(agentsMI.getText(), agentsMI.getIcon()));
         managementMenu.add(agentsMI);
         managementMenu.add(new JSeparator());
-        productsCategoryMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_PRODUCTS_CATEGORY);
+        productsCategoryMI = new JsamsMenuItem(I18nResource.MENU_ITEM_PRODUCTS_CATEGORY);
         productsCategoryMI
                 .setAction(productsCategoryAction(productsCategoryMI.getText(), productsCategoryMI.getIcon()));
         managementMenu.add(productsCategoryMI);
-        productsMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_PRODUCTS, "apps/preferences-desktop-theme.png");
+        productsMI = new JsamsMenuItem(I18nResource.MENU_ITEM_PRODUCTS, "apps/preferences-desktop-theme.png");
         productsMI.setAction(productsAction(productsMI.getText(), productsMI.getIcon()));
         managementMenu.add(productsMI);
         
@@ -101,12 +101,12 @@ public class JsamsManagementMenuBuilder extends AbstractMenuBuilder {
             private static final long serialVersionUID = -8367998985097440307L;
 
             public void actionPerformed(ActionEvent event) {
-                CustomerBean customerBean = JsamsApplicationContext.getCustomerBeanBuilder().build(null,
-                        JsamsDesktop.getInstance().getCurrentSociety());
+                CustomerBean customerBean = ApplicationContext.getCustomerBeanBuilder().build(null,
+                        Desktop.getInstance().getCurrentSociety());
                 SearchCustomerPanel searchPanel = new SearchCustomerPanel(customerBean,
-                        new CustomerTableMouseListener(), JsamsApplicationContext.getCustomerService(),
+                        new CustomerTableMouseListener(), ApplicationContext.getCustomerService(),
                         new SearchCustomerValidator(), new CustomerTableModel());
-                parent.getTabbedPane().addTab(JsamsI18nResource.TITLE_SEARCH_CUSTOMER, "apps/system-users.png",
+                parent.getTabbedPane().addTab(I18nResource.TITLE_SEARCH_CUSTOMER, "apps/system-users.png",
                         searchPanel);
             }
         };
@@ -130,11 +130,11 @@ public class JsamsManagementMenuBuilder extends AbstractMenuBuilder {
             private static final long serialVersionUID = 3233472575375812337L;
 
             public void actionPerformed(ActionEvent event) {
-                AgentBeanBuilder builder = JsamsApplicationContext.getAgentBeanBuilder();
-                AgentBean bean = builder.build(null, JsamsDesktop.getInstance().getCurrentSociety());
+                AgentBeanBuilder builder = ApplicationContext.getAgentBeanBuilder();
+                AgentBean bean = builder.build(null, Desktop.getInstance().getCurrentSociety());
                 SearchAgentPanel searchPanel = new SearchAgentPanel(bean, new AgentTableMouseListener(),
-                        JsamsApplicationContext.getAgentService(), new SearchAgentValidator(), new AgentTableModel());
-                parent.getTabbedPane().addTab(JsamsI18nResource.TITLE_SEARCH_AGENT,
+                        ApplicationContext.getAgentService(), new SearchAgentValidator(), new AgentTableModel());
+                parent.getTabbedPane().addTab(I18nResource.TITLE_SEARCH_AGENT,
                         "categories/applications-development.png", searchPanel);
             }
         };
@@ -159,11 +159,11 @@ public class JsamsManagementMenuBuilder extends AbstractMenuBuilder {
 
             public void actionPerformed(ActionEvent event) {
                 ProductBeanBuilder builder = new ProductBeanBuilder();
-                builder.setSociety(JsamsDesktop.getInstance().getCurrentSociety());
+                builder.setSociety(Desktop.getInstance().getCurrentSociety());
                 SearchProductPanel searchPanel = new SearchProductPanel(builder.build(true, true),
-                        new ProductTableMouseListener(), JsamsApplicationContext.getProductService(),
+                        new ProductTableMouseListener(), ApplicationContext.getProductService(),
                         new SearchProductValidator(), new ProductTableModel());
-                parent.getTabbedPane().addTab(JsamsI18nResource.TITLE_SEARCH_PRODUCT,
+                parent.getTabbedPane().addTab(I18nResource.TITLE_SEARCH_PRODUCT,
                         "apps/preferences-desktop-theme.png", searchPanel);
             }
         };
@@ -187,14 +187,14 @@ public class JsamsManagementMenuBuilder extends AbstractMenuBuilder {
             private static final long serialVersionUID = -1558165346800183997L;
 
             public void actionPerformed(ActionEvent event) {
-                SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
+                SocietyBean currentSociety = Desktop.getInstance().getCurrentSociety();
                 ProductCategoryBeanBuilder builder = new ProductCategoryBeanBuilder(false, currentSociety);
-                builder.setDao(JsamsApplicationContext.getProductCategoryDao());
+                builder.setDao(ApplicationContext.getProductCategoryDao());
                 ProductCategoryBean categoryBean = builder.build();
                 SearchProductCategoryPanel searchPanel = new SearchProductCategoryPanel(categoryBean,
-                        new ProductCategoryTableMouseListener(), JsamsApplicationContext.getProductCategoryService(),
+                        new ProductCategoryTableMouseListener(), ApplicationContext.getProductCategoryService(),
                         new SearchProductCategoryValidator(), new ProductCategoryTableModel());
-                parent.getTabbedPane().addTab(JsamsI18nResource.TITLE_SEARCH_PRODUCT_CATEGORY, null, searchPanel);
+                parent.getTabbedPane().addTab(I18nResource.TITLE_SEARCH_PRODUCT_CATEGORY, null, searchPanel);
             }
         };
         action.putValue(Action.NAME, text);

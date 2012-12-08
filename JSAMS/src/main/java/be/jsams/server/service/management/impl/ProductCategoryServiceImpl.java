@@ -3,7 +3,7 @@ package be.jsams.server.service.management.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import be.jsams.client.desktop.JsamsDesktop;
+import be.jsams.client.desktop.Desktop;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.ProductCategoryBean;
 import be.jsams.server.dao.management.ProductCategoryDao;
@@ -43,7 +43,7 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
     public ProductCategoryBean create(final ProductCategoryBean bean) {
         ProductCategory category = new ProductCategory(bean);
         productCategoryDao.add(category);
-        return new ProductCategoryBean(category, JsamsDesktop.getInstance().getCurrentSociety());
+        return new ProductCategoryBean(category, Desktop.getInstance().getCurrentSociety());
     }
 
     /**
@@ -65,7 +65,7 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
      * {@inheritDoc}
      */
     public List<ProductCategoryBean> findAll() {
-        SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
+        SocietyBean currentSociety = Desktop.getInstance().getCurrentSociety();
         productCategoryDao.setCurrentSociety(currentSociety);
         List<ProductCategory> categories = productCategoryDao.findAll();
         List<ProductCategoryBean> beans = new ArrayList<ProductCategoryBean>();
@@ -80,7 +80,7 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
      */
     public ProductCategoryBean findById(final Long id) {
         ProductCategory category = productCategoryDao.findById(id);
-        return new ProductCategoryBean(category, JsamsDesktop.getInstance().getCurrentSociety());
+        return new ProductCategoryBean(category, Desktop.getInstance().getCurrentSociety());
     }
 
     /**
@@ -95,7 +95,7 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
      * {@inheritDoc}
      */
     public List<ProductCategoryBean> findByCriteria(final ProductCategoryBean criteria) {
-        SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
+        SocietyBean currentSociety = Desktop.getInstance().getCurrentSociety();
         productCategoryDao.setCurrentSociety(currentSociety);
         List<ProductCategory> categories = productCategoryDao.findByCriteria(criteria);
         List<ProductCategoryBean> beans = new ArrayList<ProductCategoryBean>();

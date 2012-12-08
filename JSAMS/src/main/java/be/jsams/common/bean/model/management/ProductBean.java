@@ -1,6 +1,6 @@
 package be.jsams.common.bean.model.management;
 
-import be.jsams.client.context.JsamsApplicationContext;
+import be.jsams.client.context.ApplicationContext;
 import be.jsams.common.bean.builder.ProductCategoryBeanBuilder;
 import be.jsams.common.bean.model.AbstractIdentityBean;
 import be.jsams.common.bean.model.AbstractNamedIdentityBean;
@@ -55,7 +55,7 @@ public class ProductBean extends AbstractNamedIdentityBean<Product, ProductBeanV
     public ProductBean(boolean categoryCanBeNull, SocietyBean society) {
         super();
         productCategoryBuilder = new ProductCategoryBeanBuilder(categoryCanBeNull, society);
-        productCategoryBuilder.setDao(JsamsApplicationContext.getProductCategoryDao());
+        productCategoryBuilder.setDao(ApplicationContext.getProductCategoryDao());
         ProductCategoryBean categoryBean = productCategoryBuilder.build();
         this.category = categoryBean;
         setView(buildView());
@@ -196,7 +196,7 @@ public class ProductBean extends AbstractNamedIdentityBean<Product, ProductBeanV
      * @return the {@link ProductCategoryDao}
      */
     public ProductCategoryDao getProductCategoryDao() {
-        return JsamsApplicationContext.getProductCategoryDao();
+        return ApplicationContext.getProductCategoryDao();
     }
 
     /**

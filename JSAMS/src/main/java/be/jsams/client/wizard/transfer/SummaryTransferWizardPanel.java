@@ -9,7 +9,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.plaf.FontUIResource;
 
-import be.jsams.client.i18n.JsamsI18nLabelResource;
+import be.jsams.client.i18n.I18nLabelResource;
 import be.jsams.client.model.dialog.AbstractWizardDialog;
 import be.jsams.client.validator.wizard.SummaryTransferValidator;
 import be.jsams.client.wizard.JsamsWizardComponent;
@@ -44,7 +44,7 @@ public class SummaryTransferWizardPanel extends JsamsWizardPanel<TransferBean, S
      */
     public SummaryTransferWizardPanel(AbstractWizardDialog<?, ?> parent, JsamsWizardComponent component,
             TransferBean model, SummaryTransferValidator validator) {
-        super(parent, component, model, JsamsI18nLabelResource.LABEL_TRANSFER_SUMMARY, validator);
+        super(parent, component, model, I18nLabelResource.LABEL_TRANSFER_SUMMARY, validator);
         initComponents();
     }
 
@@ -69,20 +69,20 @@ public class SummaryTransferWizardPanel extends JsamsWizardPanel<TransferBean, S
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         JTextArea area = new JTextArea();
         area.setFont(new FontUIResource(Font.SANS_SERIF, Font.BOLD, 12));
-        area.append(JsamsI18nLabelResource.LABEL_SOURCE_TYPE.getTranslation());
+        area.append(I18nLabelResource.LABEL_SOURCE_TYPE.getTranslation());
         String doublePointSeparator = " : ";
         area.append(doublePointSeparator);
         String newLine = "\n";
         String tab = "\t";
         String sourceTypeTranslation = getSourceTypeTranslation(getModel().getSourceType());
-        String detailsTypeTranslation = JsamsI18nLabelResource.LABEL_DETAILS.getTranslation();
+        String detailsTypeTranslation = I18nLabelResource.LABEL_DETAILS.getTranslation();
         area.append(sourceTypeTranslation + newLine);
 
-        area.append(JsamsI18nLabelResource.LABEL_DESTINATION_TYPE.getTranslation());
+        area.append(I18nLabelResource.LABEL_DESTINATION_TYPE.getTranslation());
         area.append(doublePointSeparator);
         area.append(getDestinationTypeTranslation(getModel().getDestinationType()) + newLine);
 
-        area.append(JsamsI18nLabelResource.LABEL_TRANSFER_MODE.getTranslation());
+        area.append(I18nLabelResource.LABEL_TRANSFER_MODE.getTranslation());
         area.append(doublePointSeparator);
         area.append(getTransferModeTranslation(getModel().getTransferMode()) + newLine);
 
@@ -163,16 +163,16 @@ public class SummaryTransferWizardPanel extends JsamsWizardPanel<TransferBean, S
         String sourceTypeTranslation = "";
         switch (sourceType) {
         case 1:
-            sourceTypeTranslation = JsamsI18nLabelResource.LABEL_ESTIMATE.getTranslation();
+            sourceTypeTranslation = I18nLabelResource.LABEL_ESTIMATE.getTranslation();
             break;
         case 2:
-            sourceTypeTranslation = JsamsI18nLabelResource.LABEL_COMMAND.getTranslation();
+            sourceTypeTranslation = I18nLabelResource.LABEL_COMMAND.getTranslation();
             break;
         case 3:
-            sourceTypeTranslation = JsamsI18nLabelResource.LABEL_DELIVERY_ORDER.getTranslation();
+            sourceTypeTranslation = I18nLabelResource.LABEL_DELIVERY_ORDER.getTranslation();
             break;
         case 4:
-            sourceTypeTranslation = JsamsI18nLabelResource.LABEL_BILL.getTranslation();
+            sourceTypeTranslation = I18nLabelResource.LABEL_BILL.getTranslation();
             break;
         default:
             break;
@@ -190,16 +190,16 @@ public class SummaryTransferWizardPanel extends JsamsWizardPanel<TransferBean, S
         String destinationTypeTranslation = "";
         switch (destinationType) {
         case 1:
-            destinationTypeTranslation = JsamsI18nLabelResource.LABEL_COMMAND.getTranslation();
+            destinationTypeTranslation = I18nLabelResource.LABEL_COMMAND.getTranslation();
             break;
         case 2:
-            destinationTypeTranslation = JsamsI18nLabelResource.LABEL_DELIVERY_ORDER.getTranslation();
+            destinationTypeTranslation = I18nLabelResource.LABEL_DELIVERY_ORDER.getTranslation();
             break;
         case 3:
-            destinationTypeTranslation = JsamsI18nLabelResource.LABEL_BILL.getTranslation();
+            destinationTypeTranslation = I18nLabelResource.LABEL_BILL.getTranslation();
             break;
         case 4:
-            destinationTypeTranslation = JsamsI18nLabelResource.LABEL_CREDIT_NOTE.getTranslation();
+            destinationTypeTranslation = I18nLabelResource.LABEL_CREDIT_NOTE.getTranslation();
             break;
         default:
             break;
@@ -217,16 +217,16 @@ public class SummaryTransferWizardPanel extends JsamsWizardPanel<TransferBean, S
         String transferModeTranslation = "";
         switch (transferMode) {
         case 1:
-            transferModeTranslation = JsamsI18nLabelResource.LABEL_FULL_TRANSFER.getTranslation();
+            transferModeTranslation = I18nLabelResource.LABEL_FULL_TRANSFER.getTranslation();
             break;
         case 2:
-            transferModeTranslation = JsamsI18nLabelResource.LABEL_PARTIAL_TRANSFER.getTranslation();
+            transferModeTranslation = I18nLabelResource.LABEL_PARTIAL_TRANSFER.getTranslation();
             break;
         case 3:
-            transferModeTranslation = JsamsI18nLabelResource.LABEL_FULL_GROUPED_TRANSFER.getTranslation();
+            transferModeTranslation = I18nLabelResource.LABEL_FULL_GROUPED_TRANSFER.getTranslation();
             break;
         case 4:
-            transferModeTranslation = JsamsI18nLabelResource.LABEL_PARTIAL_GROUPED_TRANSFER.getTranslation();
+            transferModeTranslation = I18nLabelResource.LABEL_PARTIAL_GROUPED_TRANSFER.getTranslation();
             break;
         default:
             break;

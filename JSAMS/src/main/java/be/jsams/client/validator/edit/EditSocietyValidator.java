@@ -1,7 +1,7 @@
 package be.jsams.client.validator.edit;
 
-import be.jsams.client.i18n.JsamsI18nLabelResource;
-import be.jsams.client.i18n.JsamsI18nResource;
+import be.jsams.client.i18n.I18nLabelResource;
+import be.jsams.client.i18n.I18nResource;
 import be.jsams.common.bean.model.AddressBean;
 import be.jsams.common.bean.model.ContactInformationBean;
 import be.jsams.common.bean.model.SocietyBean;
@@ -29,44 +29,44 @@ public class EditSocietyValidator implements Validator<SocietyBean> {
 
         String name = society.getName();
         if (ValidationUtils.isBlank(name)) {
-            support.addError(JsamsI18nLabelResource.LABEL_NAME.getTranslation(), JsamsI18nResource.ERROR_IS_MANDATORY
+            support.addError(I18nLabelResource.LABEL_NAME.getTranslation(), I18nResource.ERROR_IS_MANDATORY
                     .getTranslation());
         } else if (!ValidationUtils.isAlphanumericSpace(name) && !StringValidator.validate(name)) {
-            support.addError(JsamsI18nLabelResource.LABEL_NAME.getTranslation(),
-                    JsamsI18nResource.ERROR_IS_ALPHANUMERIC.getTranslation());
+            support.addError(I18nLabelResource.LABEL_NAME.getTranslation(),
+                    I18nResource.ERROR_IS_ALPHANUMERIC.getTranslation());
         }
         String activity = society.getActivity();
         if (ValidationUtils.isBlank(activity)) {
-            support.addError(JsamsI18nLabelResource.LABEL_ACTIVITY.getTranslation(),
-                    JsamsI18nResource.ERROR_IS_MANDATORY.getTranslation());
+            support.addError(I18nLabelResource.LABEL_ACTIVITY.getTranslation(),
+                    I18nResource.ERROR_IS_MANDATORY.getTranslation());
         } else if (!ValidationUtils.isAlphanumericSpace(activity)) {
-            support.addError(JsamsI18nLabelResource.LABEL_ACTIVITY.getTranslation(),
-                    JsamsI18nResource.ERROR_IS_ALPHANUMERIC.getTranslation());
+            support.addError(I18nLabelResource.LABEL_ACTIVITY.getTranslation(),
+                    I18nResource.ERROR_IS_ALPHANUMERIC.getTranslation());
         }
         Double capital = society.getCapital();
         if (capital == null || ValidationUtils.isBlank(capital.toString())) {
-            support.addError(JsamsI18nLabelResource.LABEL_CAPITAL.getTranslation(),
-                    JsamsI18nResource.ERROR_IS_MANDATORY.getTranslation());
+            support.addError(I18nLabelResource.LABEL_CAPITAL.getTranslation(),
+                    I18nResource.ERROR_IS_MANDATORY.getTranslation());
         }
         String vatNumber = society.getVatNumber();
         if (ValidationUtils.isBlank(vatNumber)) {
-            support.addError(JsamsI18nLabelResource.LABEL_VAT_NUMBER.getTranslation(),
-                    JsamsI18nResource.ERROR_IS_MANDATORY.getTranslation());
+            support.addError(I18nLabelResource.LABEL_VAT_NUMBER.getTranslation(),
+                    I18nResource.ERROR_IS_MANDATORY.getTranslation());
         }
         ContactInformationBean contactInformation = society.getContactInformation();
         String phone = contactInformation.getPhone();
         if (ValidationUtils.isBlank(phone)) {
-            support.addError(JsamsI18nLabelResource.LABEL_PHONE.getTranslation(), JsamsI18nResource.ERROR_IS_MANDATORY
+            support.addError(I18nLabelResource.LABEL_PHONE.getTranslation(), I18nResource.ERROR_IS_MANDATORY
                     .getTranslation());
         } else if (!ValidationUtils.isAlphanumericSpace(phone)) {
-            support.addError(JsamsI18nLabelResource.LABEL_PHONE.getTranslation(),
-                    JsamsI18nResource.ERROR_IS_ALPHANUMERIC.getTranslation());
+            support.addError(I18nLabelResource.LABEL_PHONE.getTranslation(),
+                    I18nResource.ERROR_IS_ALPHANUMERIC.getTranslation());
         }
         String email = contactInformation.getEmail();
         if (!ValidationUtils.isBlank(email)) {
             if (!EmailValidator.validate(email)) {
-                support.addError(JsamsI18nLabelResource.LABEL_EMAIL.getTranslation(),
-                        JsamsI18nResource.ERROR_IS_INVALID.getTranslation());
+                support.addError(I18nLabelResource.LABEL_EMAIL.getTranslation(),
+                        I18nResource.ERROR_IS_INVALID.getTranslation());
             }
         }
 

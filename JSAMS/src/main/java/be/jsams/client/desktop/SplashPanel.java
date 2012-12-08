@@ -15,7 +15,7 @@ import javax.swing.JPanel;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public final class JsamsSplashPanel extends JPanel {
+public final class SplashPanel extends JPanel {
 
     /**
      * Serial Version UID
@@ -24,14 +24,14 @@ public final class JsamsSplashPanel extends JPanel {
 
     private Image image;
 
-    private static JsamsSplashPanel instance = null;
+    private static SplashPanel instance = null;
 
-    private static Object classLock = JsamsSplashPanel.class;
+    private static Object classLock = SplashPanel.class;
 
     /**
      * Constructor.
      */
-    private JsamsSplashPanel() {
+    private SplashPanel() {
         this(new ImageIcon("src/main/resources/images/splash.png").getImage());
     }
 
@@ -40,19 +40,19 @@ public final class JsamsSplashPanel extends JPanel {
      * 
      * @param image the image to display
      */
-    private JsamsSplashPanel(Image image) {
+    private SplashPanel(Image image) {
         super();
         this.image = image;
         setLayout(null);
     }
 
     /**
-     * @return the instance of {@link JsamsSplashPanel}
+     * @return the instance of {@link SplashPanel}
      */
-    public static JsamsSplashPanel getInstance() {
+    public static SplashPanel getInstance() {
         synchronized (classLock) {
             if (instance == null) {
-                instance = new JsamsSplashPanel();
+                instance = new SplashPanel();
             }
             return instance;
         }

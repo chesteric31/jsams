@@ -11,9 +11,9 @@ import javax.swing.JOptionPane;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import be.jsams.client.context.JsamsApplicationContext;
-import be.jsams.client.desktop.JsamsDesktop;
-import be.jsams.client.i18n.JsamsI18nResource;
+import be.jsams.client.context.ApplicationContext;
+import be.jsams.client.desktop.Desktop;
+import be.jsams.client.i18n.I18nResource;
 
 /**
  * Download update action to download an update from the net.
@@ -46,11 +46,11 @@ public class DownloadUpdateAction extends AbstractAction {
      */
     @Override
     public void actionPerformed(ActionEvent arg0) {
-        int confirm = JOptionPane.showConfirmDialog(null, JsamsI18nResource.CONFIRMATION_UPDATE);
+        int confirm = JOptionPane.showConfirmDialog(null, I18nResource.CONFIRMATION_UPDATE);
         if (confirm == 0) {
-            List<String> updateJars = JsamsApplicationContext.getDownloaderService().downloadUpdate();
+            List<String> updateJars = ApplicationContext.getDownloaderService().downloadUpdate();
             executeUpdates(updateJars);
-            JsamsDesktop.getInstance().stopNow();
+            Desktop.getInstance().stopNow();
         }
     }
 

@@ -4,9 +4,9 @@ import java.util.List;
 
 import javax.swing.ListSelectionModel;
 
-import be.jsams.client.context.JsamsApplicationContext;
-import be.jsams.client.desktop.JsamsDesktop;
-import be.jsams.client.i18n.JsamsI18nResource;
+import be.jsams.client.context.ApplicationContext;
+import be.jsams.client.desktop.Desktop;
+import be.jsams.client.i18n.I18nResource;
 import be.jsams.client.model.dialog.management.EditAgentDialog;
 import be.jsams.client.model.panel.AbstractSearchPanel;
 import be.jsams.client.model.table.management.AgentTableModel;
@@ -67,9 +67,9 @@ public class SearchAgentPanel extends
      */
     @Override
     protected void performButtonAdd() {
-        AgentBeanBuilder builder = JsamsApplicationContext.getAgentBeanBuilder();
-        AgentBean bean = builder.build(null, JsamsDesktop.getInstance().getCurrentSociety());
-        new EditAgentDialog(JsamsI18nResource.TITLE_EDIT_AGENT, bean);
+        AgentBeanBuilder builder = ApplicationContext.getAgentBeanBuilder();
+        AgentBean bean = builder.build(null, Desktop.getInstance().getCurrentSociety());
+        new EditAgentDialog(I18nResource.TITLE_EDIT_AGENT, bean);
         updateUI();
     }
 
@@ -83,7 +83,7 @@ public class SearchAgentPanel extends
             int selectedRowModel = getResultTable().convertRowIndexToModel(selectedRow);
             AgentTableModel model = (AgentTableModel) getResultTable().getModel();
             AgentBean beanToModify = model.getRow(selectedRowModel);
-            new EditAgentDialog(JsamsI18nResource.TITLE_EDIT_AGENT, beanToModify);
+            new EditAgentDialog(I18nResource.TITLE_EDIT_AGENT, beanToModify);
             updateUI();
         }
     }

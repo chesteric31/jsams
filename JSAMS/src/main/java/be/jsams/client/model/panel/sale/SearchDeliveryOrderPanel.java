@@ -8,9 +8,9 @@ import javax.swing.ListSelectionModel;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import be.jsams.client.context.JsamsApplicationContext;
-import be.jsams.client.desktop.JsamsDesktop;
-import be.jsams.client.i18n.JsamsI18nResource;
+import be.jsams.client.context.ApplicationContext;
+import be.jsams.client.desktop.Desktop;
+import be.jsams.client.i18n.I18nResource;
 import be.jsams.client.model.dialog.sale.EditDeliveryOrderDialog;
 import be.jsams.client.model.table.sale.DeliveryOrderTableModel;
 import be.jsams.client.validator.search.sale.SearchDeliveryOrderValidator;
@@ -78,13 +78,13 @@ public class SearchDeliveryOrderPanel<L extends MouseListener>
      */
     @Override
     protected void performButtonAdd() {
-        SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
-        CustomerBean customerBean = JsamsApplicationContext.getCustomerBeanBuilder().build(null, currentSociety);
+        SocietyBean currentSociety = Desktop.getInstance().getCurrentSociety();
+        CustomerBean customerBean = ApplicationContext.getCustomerBeanBuilder().build(null, currentSociety);
         DeliveryOrderBean bean = new DeliveryOrderBean(currentSociety, customerBean);
         DeliveryOrderMediator mediator = new DeliveryOrderMediator();
         mediator.setDeliveryOrderBean(bean);
         bean.setMediator(mediator);
-        new EditDeliveryOrderDialog(JsamsI18nResource.TITLE_EDIT_DELIVERY_ORDER, bean);
+        new EditDeliveryOrderDialog(I18nResource.TITLE_EDIT_DELIVERY_ORDER, bean);
         updateUI();
     }
 
@@ -104,7 +104,7 @@ public class SearchDeliveryOrderPanel<L extends MouseListener>
             if (debug) {
                 LOGGER.debug("The delivery order to modify: " + beanToModify);
             }
-            new EditDeliveryOrderDialog(JsamsI18nResource.TITLE_EDIT_DELIVERY_ORDER, beanToModify);
+            new EditDeliveryOrderDialog(I18nResource.TITLE_EDIT_DELIVERY_ORDER, beanToModify);
             updateUI();
         }
     }
@@ -158,7 +158,7 @@ public class SearchDeliveryOrderPanel<L extends MouseListener>
             int selectedRowModel = getResultTable().convertRowIndexToModel(selectedRow);
             DeliveryOrderTableModel model = (DeliveryOrderTableModel) getResultTable().getModel();
             DeliveryOrderBean beanToPdf = model.getRow(selectedRowModel);
-            PdfDeliveryOrderServiceImpl pdfService = JsamsApplicationContext.getPdfDeliveryOrderService();
+            PdfDeliveryOrderServiceImpl pdfService = ApplicationContext.getPdfDeliveryOrderService();
             pdfService.generatePdf(beanToPdf);
         }
     }

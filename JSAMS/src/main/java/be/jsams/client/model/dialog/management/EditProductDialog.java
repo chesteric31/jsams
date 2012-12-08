@@ -2,7 +2,7 @@ package be.jsams.client.model.dialog.management;
 
 import javax.swing.JPanel;
 
-import be.jsams.client.context.JsamsApplicationContext;
+import be.jsams.client.context.ApplicationContext;
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.model.dialog.AbstractEditDialog;
 import be.jsams.client.validator.edit.management.EditProductValidator;
@@ -35,7 +35,7 @@ public class EditProductDialog extends AbstractEditDialog<ProductBean, EditProdu
      * @param model the {@link ProductBean} model
      */
     public EditProductDialog(final I18nString title, ProductBean model) {
-        super(null, title, model, new EditProductValidator(), JsamsApplicationContext.getProductService());
+        super(null, title, model, new EditProductValidator(), ApplicationContext.getProductService());
     }
 
     /**

@@ -16,7 +16,7 @@ public class BillDetailBeanView extends AbstractDetailBeanView<BillDetailBean> {
     private static final long serialVersionUID = -6480141753894999568L;
 
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param bean the {@link BillDetailBean}
      */

@@ -13,10 +13,10 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 
-import be.jsams.client.context.JsamsApplicationContext;
-import be.jsams.client.desktop.JsamsDesktop;
-import be.jsams.client.i18n.JsamsI18nLabelResource;
-import be.jsams.client.i18n.JsamsI18nResource;
+import be.jsams.client.context.ApplicationContext;
+import be.jsams.client.desktop.Desktop;
+import be.jsams.client.i18n.I18nLabelResource;
+import be.jsams.client.i18n.I18nResource;
 import be.jsams.client.model.panel.management.SearchProductPanel;
 import be.jsams.client.model.table.AbstractJsamsTableModel;
 import be.jsams.client.model.table.management.ProductTableModel;
@@ -101,20 +101,20 @@ public class DeliveryOrderBeanView extends AbstractDocumentBeanView<DeliveryOrde
         CustomerBeanView customerView = customer.getView();
         JPanel customerPanel = customerView.createCustomView();
         customer.addPropertyChangeListener(customerListener());
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_CUSTOMER_NAME.getKey(), customerPanel);
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_CREATION_DATE.getKey(), creationDate);
+        builder.appendI15d(I18nLabelResource.LABEL_CUSTOMER_NAME.getKey(), customerPanel);
+        builder.appendI15d(I18nLabelResource.LABEL_CREATION_DATE.getKey(), creationDate);
         builder.nextLine();
         // - 2 for the label and the space
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_DELIVERY_ADDRESS.getKey(), bean.getDeliveryAddress().getView()
+        builder.appendI15d(I18nLabelResource.LABEL_DELIVERY_ADDRESS.getKey(), bean.getDeliveryAddress().getView()
                 .createEditView(), maxColumnSpan - 2);
         builder.nextLine();
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_TRANSFERRED.getKey(), transferred);
+        builder.appendI15d(I18nLabelResource.LABEL_TRANSFERRED.getKey(), transferred);
         builder.nextLine();
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_DEFAULT_DISCOUNT_RATE.getKey(), discountRate);
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_REMARK.getKey(), remark);
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_TOTAL_ET.getKey(), totalEt);
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_TOTAL_VAT.getKey(), totalVat);
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_TOTAL_ATI.getKey(), totalAti);
+        builder.appendI15d(I18nLabelResource.LABEL_DEFAULT_DISCOUNT_RATE.getKey(), discountRate);
+        builder.appendI15d(I18nLabelResource.LABEL_REMARK.getKey(), remark);
+        builder.appendI15d(I18nLabelResource.LABEL_TOTAL_ET.getKey(), totalEt);
+        builder.appendI15d(I18nLabelResource.LABEL_TOTAL_VAT.getKey(), totalVat);
+        builder.appendI15d(I18nLabelResource.LABEL_TOTAL_ATI.getKey(), totalAti);
 
         builder.nextLine();
         List<DeliveryOrderDetailBean> details = bean.getDetails();
@@ -125,7 +125,7 @@ public class DeliveryOrderBeanView extends AbstractDocumentBeanView<DeliveryOrde
         getDetailsTable().addMouseListener(productListener());
         updateDetailsTableRendering();
 
-        builder.appendI15dSeparator(JsamsI18nResource.PANEL_DELIVERY_ORDER_DETAILS.getKey());
+        builder.appendI15dSeparator(I18nResource.PANEL_DELIVERY_ORDER_DETAILS.getKey());
         builder.appendRow("60dlu");
         builder.append(new JScrollPane(getDetailsTable()), maxColumnSpan);
 
@@ -139,7 +139,7 @@ public class DeliveryOrderBeanView extends AbstractDocumentBeanView<DeliveryOrde
      * {@inheritDoc}
      */
     protected void editProduct(MouseEvent e) {
-        final JsamsDialog dialog = new JsamsDialog(null, JsamsI18nResource.TITLE_SEARCH_PRODUCT);
+        final JsamsDialog dialog = new JsamsDialog(null, I18nResource.TITLE_SEARCH_PRODUCT);
         ProductTableMouseListener customListener = new ProductTableMouseListener() {
             /**
              * {@inheritDoc}
@@ -168,9 +168,9 @@ public class DeliveryOrderBeanView extends AbstractDocumentBeanView<DeliveryOrde
             }
         };
         ProductBeanBuilder builder = new ProductBeanBuilder();
-        builder.setSociety(JsamsDesktop.getInstance().getCurrentSociety());
+        builder.setSociety(Desktop.getInstance().getCurrentSociety());
         SearchProductPanel searchPanel = new SearchProductPanel(builder.build(true, true), customListener,
-                JsamsApplicationContext.getProductService(), new SearchProductValidator(), new ProductTableModel(),
+                ApplicationContext.getProductService(), new SearchProductValidator(), new ProductTableModel(),
                 false, ListSelectionModel.SINGLE_SELECTION);
         dialog.add(searchPanel);
         dialog.setPreferredSize(new Dimension(800, 400));
@@ -248,14 +248,14 @@ public class DeliveryOrderBeanView extends AbstractDocumentBeanView<DeliveryOrde
                 "right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow", "p");
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
         builder.setDefaultDialogBorder();
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_CUSTOMER_NAME.getKey(), bean.getCustomer().getView()
+        builder.appendI15d(I18nLabelResource.LABEL_CUSTOMER_NAME.getKey(), bean.getCustomer().getView()
                 .createCustomView());
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_START_DATE.getKey(), startDate);
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_END_DATE.getKey(), endDate);
+        builder.appendI15d(I18nLabelResource.LABEL_START_DATE.getKey(), startDate);
+        builder.appendI15d(I18nLabelResource.LABEL_END_DATE.getKey(), endDate);
         builder.nextLine();
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_CITY.getKey(), textFieldCity);
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_ZIP_CODE.getKey(), textFieldZipCode);
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_TRANSFERRED.getKey(), transferred);
+        builder.appendI15d(I18nLabelResource.LABEL_CITY.getKey(), textFieldCity);
+        builder.appendI15d(I18nLabelResource.LABEL_ZIP_CODE.getKey(), textFieldZipCode);
+        builder.appendI15d(I18nLabelResource.LABEL_TRANSFERRED.getKey(), transferred);
 
         return builder.getPanel();
     }

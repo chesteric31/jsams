@@ -3,8 +3,8 @@ package be.jsams.client.validator.wizard;
 import java.util.List;
 import java.util.Map;
 
-import be.jsams.client.i18n.JsamsI18nLabelResource;
-import be.jsams.client.i18n.JsamsI18nResource;
+import be.jsams.client.i18n.I18nLabelResource;
+import be.jsams.client.i18n.I18nResource;
 import be.jsams.common.bean.model.sale.detail.BillDetailBean;
 import be.jsams.common.bean.model.sale.detail.CommandDetailBean;
 import be.jsams.common.bean.model.sale.detail.DeliveryOrderDetailBean;
@@ -36,8 +36,8 @@ public class DetailsValidator implements Validator<TransferBean> {
         Map<Long, List<BillDetailBean>> bills = bean.getBillDetails();
         if ((estimates == null || estimates.isEmpty()) && (commands == null || commands.isEmpty())
                 && (orders == null || orders.isEmpty()) && (bills == null || bills.isEmpty())) {
-            support.addError(JsamsI18nLabelResource.LABEL_DOCUMENT_DETAILS.getTranslation(),
-                    JsamsI18nResource.ERROR_IS_MANDATORY_TO_SELECT.getTranslation());
+            support.addError(I18nLabelResource.LABEL_DOCUMENT_DETAILS.getTranslation(),
+                    I18nResource.ERROR_IS_MANDATORY_TO_SELECT.getTranslation());
         }
         return support.getResult();
     }

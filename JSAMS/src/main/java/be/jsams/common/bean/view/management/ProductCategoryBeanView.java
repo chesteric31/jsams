@@ -2,7 +2,7 @@ package be.jsams.common.bean.view.management;
 
 import javax.swing.JPanel;
 
-import be.jsams.client.i18n.JsamsI18nLabelResource;
+import be.jsams.client.i18n.I18nLabelResource;
 import be.jsams.client.renderer.TranslatableComboBoxRenderer;
 import be.jsams.client.swing.component.AbstractJsamsFrame;
 import be.jsams.client.swing.component.JsamsComboBox;
@@ -66,11 +66,11 @@ public class ProductCategoryBeanView extends AbstractBeanView<ProductCategoryBea
         FormLayout layout = new FormLayout("right:p, 3dlu, p:grow", "p");
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
         builder.setDefaultDialogBorder();
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_PRODUCT_CATEGORY_EN.getKey(), textFieldLabel);
+        builder.appendI15d(I18nLabelResource.LABEL_PRODUCT_CATEGORY_EN.getKey(), textFieldLabel);
         builder.nextLine();
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_PRODUCT_CATEGORY_FR.getKey(), textFieldLabelFr);
+        builder.appendI15d(I18nLabelResource.LABEL_PRODUCT_CATEGORY_FR.getKey(), textFieldLabelFr);
         builder.nextLine();
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_PRODUCT_CATEGORY_NL.getKey(), textFieldLabelNl);
+        builder.appendI15d(I18nLabelResource.LABEL_PRODUCT_CATEGORY_NL.getKey(), textFieldLabelNl);
         builder.nextLine();
         return builder.getPanel();
     }
@@ -91,11 +91,11 @@ public class ProductCategoryBeanView extends AbstractBeanView<ProductCategoryBea
         FormLayout layout = new FormLayout("right:p, 3dlu, p:grow, 3dlu", "p");
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
         builder.setDefaultDialogBorder();
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_PRODUCT_CATEGORY_EN.getKey(), textFieldLabel);
+        builder.appendI15d(I18nLabelResource.LABEL_PRODUCT_CATEGORY_EN.getKey(), textFieldLabel);
         builder.nextLine();
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_PRODUCT_CATEGORY_FR.getKey(), textFieldLabelFr);
+        builder.appendI15d(I18nLabelResource.LABEL_PRODUCT_CATEGORY_FR.getKey(), textFieldLabelFr);
         builder.nextLine();
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_PRODUCT_CATEGORY_NL.getKey(), textFieldLabelNl);
+        builder.appendI15d(I18nLabelResource.LABEL_PRODUCT_CATEGORY_NL.getKey(), textFieldLabelNl);
         return builder.getPanel();
     }
 

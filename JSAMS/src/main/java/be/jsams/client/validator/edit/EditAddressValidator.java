@@ -1,7 +1,7 @@
 package be.jsams.client.validator.edit;
 
-import be.jsams.client.i18n.JsamsI18nLabelResource;
-import be.jsams.client.i18n.JsamsI18nResource;
+import be.jsams.client.i18n.I18nLabelResource;
+import be.jsams.client.i18n.I18nResource;
 import be.jsams.common.bean.model.AddressBean;
 import be.jsams.common.bean.validator.StringValidator;
 
@@ -26,43 +26,43 @@ public class EditAddressValidator implements Validator<AddressBean> {
 
         String city = address.getCity();
         if (ValidationUtils.isBlank(city)) {
-            support.addError(JsamsI18nLabelResource.LABEL_CITY.getTranslation(), JsamsI18nResource.ERROR_IS_MANDATORY
+            support.addError(I18nLabelResource.LABEL_CITY.getTranslation(), I18nResource.ERROR_IS_MANDATORY
                     .getTranslation());
         } else if (!ValidationUtils.isAlphanumericSpace(city) && !StringValidator.validate(city)) {
-            support.addError(JsamsI18nLabelResource.LABEL_CITY.getTranslation(),
-                    JsamsI18nResource.ERROR_IS_ALPHANUMERIC.getTranslation());
+            support.addError(I18nLabelResource.LABEL_CITY.getTranslation(),
+                    I18nResource.ERROR_IS_ALPHANUMERIC.getTranslation());
         }
         String country = address.getCountry();
         if (ValidationUtils.isBlank(country)) {
-            support.addError(JsamsI18nLabelResource.LABEL_COUNTRY.getTranslation(),
-                    JsamsI18nResource.ERROR_IS_MANDATORY.getTranslation());
+            support.addError(I18nLabelResource.LABEL_COUNTRY.getTranslation(),
+                    I18nResource.ERROR_IS_MANDATORY.getTranslation());
         } else if (!ValidationUtils.isAlphanumeric(country)) {
-            support.addError(JsamsI18nLabelResource.LABEL_COUNTRY.getTranslation(),
-                    JsamsI18nResource.ERROR_IS_ALPHANUMERIC.getTranslation());
+            support.addError(I18nLabelResource.LABEL_COUNTRY.getTranslation(),
+                    I18nResource.ERROR_IS_ALPHANUMERIC.getTranslation());
         }
         String number = address.getNumber();
         if (ValidationUtils.isBlank(number)) {
-            support.addError(JsamsI18nLabelResource.LABEL_NUMBER.getTranslation(), JsamsI18nResource.ERROR_IS_MANDATORY
+            support.addError(I18nLabelResource.LABEL_NUMBER.getTranslation(), I18nResource.ERROR_IS_MANDATORY
                     .getTranslation());
         } else if (!ValidationUtils.isNumeric(number)) {
-            support.addError(JsamsI18nLabelResource.LABEL_NUMBER.getTranslation(), JsamsI18nResource.ERROR_IS_NUMERIC
+            support.addError(I18nLabelResource.LABEL_NUMBER.getTranslation(), I18nResource.ERROR_IS_NUMERIC
                     .getTranslation());
         }
         String street = address.getStreet();
         if (ValidationUtils.isBlank(street)) {
-            support.addError(JsamsI18nLabelResource.LABEL_STREET.getTranslation(), JsamsI18nResource.ERROR_IS_MANDATORY
+            support.addError(I18nLabelResource.LABEL_STREET.getTranslation(), I18nResource.ERROR_IS_MANDATORY
                     .getTranslation());
         } else if (!ValidationUtils.isAlphanumericSpace(street) && !StringValidator.validate(street)) {
-            support.addError(JsamsI18nLabelResource.LABEL_STREET.getTranslation(),
-                    JsamsI18nResource.ERROR_IS_ALPHANUMERIC.getTranslation());
+            support.addError(I18nLabelResource.LABEL_STREET.getTranslation(),
+                    I18nResource.ERROR_IS_ALPHANUMERIC.getTranslation());
         }
         String zipCode = address.getZipCode();
         if (ValidationUtils.isBlank(zipCode)) {
-            support.addError(JsamsI18nLabelResource.LABEL_ZIP_CODE.getTranslation(),
-                    JsamsI18nResource.ERROR_IS_MANDATORY.getTranslation());
+            support.addError(I18nLabelResource.LABEL_ZIP_CODE.getTranslation(),
+                    I18nResource.ERROR_IS_MANDATORY.getTranslation());
         } else if (!ValidationUtils.isNumeric(zipCode)) {
-            support.addError(JsamsI18nLabelResource.LABEL_ZIP_CODE.getTranslation(),
-                    JsamsI18nResource.ERROR_IS_ALPHANUMERIC.getTranslation());
+            support.addError(I18nLabelResource.LABEL_ZIP_CODE.getTranslation(),
+                    I18nResource.ERROR_IS_ALPHANUMERIC.getTranslation());
         }
         return support.getResult();
     }

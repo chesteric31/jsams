@@ -2,7 +2,7 @@ package be.jsams.common.bean.view;
 
 import javax.swing.JPanel;
 
-import be.jsams.client.i18n.JsamsI18nLabelResource;
+import be.jsams.client.i18n.I18nLabelResource;
 import be.jsams.client.swing.component.AbstractJsamsFrame;
 import be.jsams.client.swing.component.JsamsTextField;
 import be.jsams.common.bean.model.ContactInformationBean;
@@ -52,13 +52,13 @@ public class ContactInformationBeanView extends AbstractBeanView<ContactInformat
                 "right:p, 3dlu, 70dlu, 3dlu, right:p, 3dlu, 70dlu, 3dlu, right:p, 3dlu, 70dlu", "p");
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
         final int maxColumnSpan = 5;
-        builder.appendSeparator(JsamsI18nLabelResource.LABEL_CONTACT_INFORMATIONS.getTranslation());
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_PHONE.getKey(), textFieldPhone);
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_FAX.getKey(), textFieldFax);
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_MOBILE.getKey(), textFieldMobile);
+        builder.appendSeparator(I18nLabelResource.LABEL_CONTACT_INFORMATIONS.getTranslation());
+        builder.appendI15d(I18nLabelResource.LABEL_PHONE.getKey(), textFieldPhone);
+        builder.appendI15d(I18nLabelResource.LABEL_FAX.getKey(), textFieldFax);
+        builder.appendI15d(I18nLabelResource.LABEL_MOBILE.getKey(), textFieldMobile);
         builder.nextLine();
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_EMAIL.getKey(), textFieldEmail);
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_WEBSITE.getKey(), textFieldWebsite, maxColumnSpan);
+        builder.appendI15d(I18nLabelResource.LABEL_EMAIL.getKey(), textFieldEmail);
+        builder.appendI15d(I18nLabelResource.LABEL_WEBSITE.getKey(), textFieldWebsite, maxColumnSpan);
         return builder.getPanel();
     }
     

@@ -4,9 +4,9 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
 
-import be.jsams.client.context.JsamsApplicationContext;
-import be.jsams.client.desktop.JsamsDesktop;
-import be.jsams.client.i18n.JsamsI18nResource;
+import be.jsams.client.context.ApplicationContext;
+import be.jsams.client.desktop.Desktop;
+import be.jsams.client.i18n.I18nResource;
 import be.jsams.client.model.dialog.sale.EditEstimateDialog;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.AgentBean;
@@ -31,14 +31,14 @@ public class NewEstimateAction extends AbstractAction {
      * {@inheritDoc}
      */
     public void actionPerformed(ActionEvent arg0) {
-        SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
-        CustomerBean customer = JsamsApplicationContext.getCustomerBeanBuilder().build(null, currentSociety);
-        AgentBean agent = JsamsApplicationContext.getAgentBeanBuilder().build(null, currentSociety);
+        SocietyBean currentSociety = Desktop.getInstance().getCurrentSociety();
+        CustomerBean customer = ApplicationContext.getCustomerBeanBuilder().build(null, currentSociety);
+        AgentBean agent = ApplicationContext.getAgentBeanBuilder().build(null, currentSociety);
         EstimateBean bean = new EstimateBean(currentSociety, customer, agent);
         EstimateMediator mediator = new EstimateMediator();
         mediator.setEstimateBean(bean);
         bean.setMediator(mediator);
-        new EditEstimateDialog(JsamsI18nResource.TITLE_EDIT_ESTIMATE, bean);
+        new EditEstimateDialog(I18nResource.TITLE_EDIT_ESTIMATE, bean);
     }
 
 }

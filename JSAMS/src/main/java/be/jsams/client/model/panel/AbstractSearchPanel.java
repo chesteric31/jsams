@@ -21,7 +21,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.border.TitledBorder;
 
 import be.jsams.client.i18n.I18nString;
-import be.jsams.client.i18n.JsamsI18nResource;
+import be.jsams.client.i18n.I18nResource;
 import be.jsams.client.model.table.AbstractJsamsTableModel;
 import be.jsams.client.swing.component.JsamsButton;
 import be.jsams.client.swing.component.JsamsButtonsInterface;
@@ -337,7 +337,7 @@ public abstract class AbstractSearchPanel<B extends AbstractIdentityBean<?, ?>,
         if (selectedRow > -1) {
             int selectedRowModel = resultTable.convertRowIndexToModel(selectedRow);
             B beanToDelete = tableModel.getRow(selectedRowModel);
-            int confirm = JOptionPane.showConfirmDialog(this, JsamsI18nResource.CONFIRMATION_DELETE);
+            int confirm = JOptionPane.showConfirmDialog(this, I18nResource.CONFIRMATION_DELETE);
             if (confirm == 0) {
                 service.delete(beanToDelete);
                 tableModel.remove(selectedRowModel);
@@ -406,7 +406,7 @@ public abstract class AbstractSearchPanel<B extends AbstractIdentityBean<?, ?>,
         resultTable = new JsamsTable(selectionMode);
         resultTable.addMouseListener(mouseListener);
         JScrollPane scrollPane = new JScrollPane(resultTable);
-        scrollPane.setBorder(new TitledBorder(JsamsI18nResource.SEARCH_RESULTS.getTranslation()));
+        scrollPane.setBorder(new TitledBorder(I18nResource.SEARCH_RESULTS.getTranslation()));
         return scrollPane;
     }
 
@@ -487,7 +487,7 @@ public abstract class AbstractSearchPanel<B extends AbstractIdentityBean<?, ?>,
         if (size > 0) {
             JsamsLabel label = null;
             if (size == 1) {
-                label = new JsamsLabel(JsamsI18nResource.TABLE_ONE_RESULT);
+                label = new JsamsLabel(I18nResource.TABLE_ONE_RESULT);
                 label.setIcon(ValidationResultViewFactory.getInfoIcon());
             } else if (size > 1) {
                 Object[] parameters = new Object[1];

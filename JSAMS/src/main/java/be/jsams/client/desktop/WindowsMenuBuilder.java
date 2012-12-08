@@ -7,7 +7,7 @@ import javax.swing.Action;
 import javax.swing.Icon;
 import javax.swing.JSeparator;
 
-import be.jsams.client.i18n.JsamsI18nResource;
+import be.jsams.client.i18n.I18nResource;
 import be.jsams.client.swing.component.JsamsCloseableTabbedPane;
 import be.jsams.client.swing.component.JsamsMenu;
 import be.jsams.client.swing.component.JsamsMenuItem;
@@ -18,26 +18,26 @@ import be.jsams.client.swing.component.JsamsMenuItem;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class JsamsWindowsMenuBuilder extends AbstractMenuBuilder {
+public class WindowsMenuBuilder extends AbstractMenuBuilder {
 
     /**
      * {@inheritDoc}
      */
     @Override
     public JsamsMenu build() {
-        JsamsMenu windowsMenu = new JsamsMenu(JsamsI18nResource.MENU_WINDOWS);
-        JsamsMenuItem closeWindowMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_CLOSE_WINDOW,
+        JsamsMenu windowsMenu = new JsamsMenu(I18nResource.MENU_WINDOWS);
+        JsamsMenuItem closeWindowMI = new JsamsMenuItem(I18nResource.MENU_ITEM_CLOSE_WINDOW,
                 "emblems/emblem-unreadable.png");
         closeWindowMI.setAction(closeWindowAction(closeWindowMI.getText(), closeWindowMI.getIcon()));
         windowsMenu.add(closeWindowMI);
-        JsamsMenuItem closeAllWindowsMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_CLOSE_ALL_WINDOWS);
+        JsamsMenuItem closeAllWindowsMI = new JsamsMenuItem(I18nResource.MENU_ITEM_CLOSE_ALL_WINDOWS);
         closeAllWindowsMI.setAction(closeAllWindowsAction(closeAllWindowsMI.getText(), closeAllWindowsMI.getIcon()));
         windowsMenu.add(closeAllWindowsMI);
         windowsMenu.add(new JSeparator());
-        JsamsMenuItem nextMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_NEXT, "actions/go-next.png");
+        JsamsMenuItem nextMI = new JsamsMenuItem(I18nResource.MENU_ITEM_NEXT, "actions/go-next.png");
         nextMI.setAction(nextAction(nextMI.getText(), nextMI.getIcon()));
         windowsMenu.add(nextMI);
-        JsamsMenuItem previousMI = new JsamsMenuItem(JsamsI18nResource.MENU_ITEM_PREVIOUS, "actions/go-previous.png");
+        JsamsMenuItem previousMI = new JsamsMenuItem(I18nResource.MENU_ITEM_PREVIOUS, "actions/go-previous.png");
         previousMI.setAction(previousAction(previousMI.getText(), previousMI.getIcon()));
         windowsMenu.add(previousMI);
         return windowsMenu;
@@ -59,7 +59,7 @@ public class JsamsWindowsMenuBuilder extends AbstractMenuBuilder {
             private static final long serialVersionUID = -42102511813270510L;
 
             public void actionPerformed(ActionEvent event) {
-                JsamsCloseableTabbedPane tabbedPane = JsamsDesktop.getInstance().getMainWindow().getTabbedPane();
+                JsamsCloseableTabbedPane tabbedPane = Desktop.getInstance().getMainWindow().getTabbedPane();
                 int selectedIndex = tabbedPane.getSelectedIndex();
                 if (selectedIndex > -1) {
                     tabbedPane.remove(selectedIndex);
@@ -87,7 +87,7 @@ public class JsamsWindowsMenuBuilder extends AbstractMenuBuilder {
             private static final long serialVersionUID = -6678049688631891662L;
 
             public void actionPerformed(ActionEvent event) {
-                JsamsMainFrame mainFrame = JsamsDesktop.getInstance().getMainWindow();
+                MainFrame mainFrame = Desktop.getInstance().getMainWindow();
                 mainFrame.getTabbedPane().removeAll();
                 mainFrame.enableTabbedPane(false);
             }
@@ -113,7 +113,7 @@ public class JsamsWindowsMenuBuilder extends AbstractMenuBuilder {
             private static final long serialVersionUID = 8627300338079311297L;
 
             public void actionPerformed(ActionEvent event) {
-                JsamsCloseableTabbedPane tabbedPane = JsamsDesktop.getInstance().getMainWindow().getTabbedPane();
+                JsamsCloseableTabbedPane tabbedPane = Desktop.getInstance().getMainWindow().getTabbedPane();
                 int tabCount = tabbedPane.getTabCount();
                 if (tabCount > 1) {
                     int selectedIndex = tabbedPane.getSelectedIndex();
@@ -144,7 +144,7 @@ public class JsamsWindowsMenuBuilder extends AbstractMenuBuilder {
             private static final long serialVersionUID = -338592317588159864L;
 
             public void actionPerformed(ActionEvent event) {
-                JsamsCloseableTabbedPane tabbedPane = JsamsDesktop.getInstance().getMainWindow().getTabbedPane();
+                JsamsCloseableTabbedPane tabbedPane = Desktop.getInstance().getMainWindow().getTabbedPane();
                 int tabCount = tabbedPane.getTabCount();
                 if (tabCount > 1) {
                     int selectedIndex = tabbedPane.getSelectedIndex();

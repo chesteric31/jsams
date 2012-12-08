@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import be.jsams.client.i18n.JsamsI18nResource;
+import be.jsams.client.i18n.I18nResource;
 import be.jsams.client.model.table.AbstractJsamsTableModel;
 import be.jsams.common.bean.model.sale.DeliveryOrderBean;
 
@@ -35,9 +35,9 @@ public class DeliveryOrderTableModel extends AbstractJsamsTableModel<DeliveryOrd
      */
     public DeliveryOrderTableModel(List<DeliveryOrderBean> listBean) {
         super(listBean);
-        setColumnNames(Arrays.asList(JsamsI18nResource.COLUMN_ID, JsamsI18nResource.COLUMN_CREATION_DATE,
-                JsamsI18nResource.COLUMN_TRANSFERRED, JsamsI18nResource.COLUMN_REMARK,
-                JsamsI18nResource.COLUMN_DISCOUNT_RATE));
+        setColumnNames(Arrays.asList(I18nResource.COLUMN_ID, I18nResource.COLUMN_CREATION_DATE,
+                I18nResource.COLUMN_TRANSFERRED, I18nResource.COLUMN_REMARK,
+                I18nResource.COLUMN_DISCOUNT_RATE));
     }
 
     /**

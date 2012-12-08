@@ -7,7 +7,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 
 import be.jsams.client.i18n.I18nString;
-import be.jsams.client.i18n.JsamsI18nLabelResource;
+import be.jsams.client.i18n.I18nLabelResource;
 import be.jsams.client.swing.component.AbstractJsamsFrame;
 import be.jsams.client.swing.component.JsamsTextField;
 import be.jsams.client.wizard.JsamsWizardComponent;
@@ -121,18 +121,18 @@ public abstract class AbstractDocumentChooserWizardPanel<V extends Validator<Tra
                 FormLayout layout = new FormLayout(
                         "right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow", "p");
                 DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
-                builder.appendI15d(JsamsI18nLabelResource.LABEL_CUSTOMER_NAME.getKey(), bean.getCustomer().getView()
+                builder.appendI15d(I18nLabelResource.LABEL_CUSTOMER_NAME.getKey(), bean.getCustomer().getView()
                         .createCustomView(), 5);
                 builder.nextLine();
-                builder.appendI15d(JsamsI18nLabelResource.LABEL_START_DATE.getKey(), startDate);
-                builder.appendI15d(JsamsI18nLabelResource.LABEL_END_DATE.getKey(), endDate);
+                builder.appendI15d(I18nLabelResource.LABEL_START_DATE.getKey(), startDate);
+                builder.appendI15d(I18nLabelResource.LABEL_END_DATE.getKey(), endDate);
                 builder.nextLine();
-                builder.appendI15d(JsamsI18nLabelResource.LABEL_CITY.getKey(), textFieldCity);
-                builder.appendI15d(JsamsI18nLabelResource.LABEL_ZIP_CODE.getKey(), textFieldZipCode);
+                builder.appendI15d(I18nLabelResource.LABEL_CITY.getKey(), textFieldCity);
+                builder.appendI15d(I18nLabelResource.LABEL_ZIP_CODE.getKey(), textFieldZipCode);
                 builder.nextLine();
-                builder.appendI15d(JsamsI18nLabelResource.LABEL_PAYMENT_MODE.getKey(), bean.getPaymentMode().getView()
+                builder.appendI15d(I18nLabelResource.LABEL_PAYMENT_MODE.getKey(), bean.getPaymentMode().getView()
                         .createEditView());
-                builder.appendI15d(JsamsI18nLabelResource.LABEL_PAID.getKey(), paid);
+                builder.appendI15d(I18nLabelResource.LABEL_PAID.getKey(), paid);
 
                 return builder.getPanel();
             }
@@ -173,14 +173,14 @@ public abstract class AbstractDocumentChooserWizardPanel<V extends Validator<Tra
                 FormLayout layout = new FormLayout(
                         "right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow", "p");
                 DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
-                builder.appendI15d(JsamsI18nLabelResource.LABEL_CUSTOMER_NAME.getKey(), bean.getCustomer().getView()
+                builder.appendI15d(I18nLabelResource.LABEL_CUSTOMER_NAME.getKey(), bean.getCustomer().getView()
                         .createCustomView(), 5);
                 builder.nextLine();
-                builder.appendI15d(JsamsI18nLabelResource.LABEL_START_DATE.getKey(), startDate);
-                builder.appendI15d(JsamsI18nLabelResource.LABEL_END_DATE.getKey(), endDate);
+                builder.appendI15d(I18nLabelResource.LABEL_START_DATE.getKey(), startDate);
+                builder.appendI15d(I18nLabelResource.LABEL_END_DATE.getKey(), endDate);
                 builder.nextLine();
-                builder.appendI15d(JsamsI18nLabelResource.LABEL_CITY.getKey(), textFieldCity);
-                builder.appendI15d(JsamsI18nLabelResource.LABEL_ZIP_CODE.getKey(), textFieldZipCode);
+                builder.appendI15d(I18nLabelResource.LABEL_CITY.getKey(), textFieldCity);
+                builder.appendI15d(I18nLabelResource.LABEL_ZIP_CODE.getKey(), textFieldZipCode);
 
                 return builder.getPanel();
             }
@@ -221,14 +221,14 @@ public abstract class AbstractDocumentChooserWizardPanel<V extends Validator<Tra
                 FormLayout layout = new FormLayout(
                         "right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow", "p");
                 DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
-                builder.appendI15d(JsamsI18nLabelResource.LABEL_CUSTOMER_NAME.getKey(), bean.getCustomer().getView()
+                builder.appendI15d(I18nLabelResource.LABEL_CUSTOMER_NAME.getKey(), bean.getCustomer().getView()
                         .createCustomView(), 5);
                 builder.nextLine();
-                builder.appendI15d(JsamsI18nLabelResource.LABEL_START_DATE.getKey(), startDate);
-                builder.appendI15d(JsamsI18nLabelResource.LABEL_END_DATE.getKey(), endDate);
+                builder.appendI15d(I18nLabelResource.LABEL_START_DATE.getKey(), startDate);
+                builder.appendI15d(I18nLabelResource.LABEL_END_DATE.getKey(), endDate);
                 builder.nextLine();
-                builder.appendI15d(JsamsI18nLabelResource.LABEL_CITY.getKey(), textFieldCity);
-                builder.appendI15d(JsamsI18nLabelResource.LABEL_ZIP_CODE.getKey(), textFieldZipCode);
+                builder.appendI15d(I18nLabelResource.LABEL_CITY.getKey(), textFieldCity);
+                builder.appendI15d(I18nLabelResource.LABEL_ZIP_CODE.getKey(), textFieldZipCode);
 
                 return builder.getPanel();
             }
@@ -270,14 +270,14 @@ public abstract class AbstractDocumentChooserWizardPanel<V extends Validator<Tra
                 FormLayout layout = new FormLayout(
                         "right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow", "p");
                 DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
-                builder.appendI15d(JsamsI18nLabelResource.LABEL_CUSTOMER_NAME.getKey(), bean.getCustomer().getView()
+                builder.appendI15d(I18nLabelResource.LABEL_CUSTOMER_NAME.getKey(), bean.getCustomer().getView()
                         .createCustomView(), 5);
                 builder.nextLine();
-                builder.appendI15d(JsamsI18nLabelResource.LABEL_START_DATE.getKey(), startDate);
-                builder.appendI15d(JsamsI18nLabelResource.LABEL_END_DATE.getKey(), endDate);
+                builder.appendI15d(I18nLabelResource.LABEL_START_DATE.getKey(), startDate);
+                builder.appendI15d(I18nLabelResource.LABEL_END_DATE.getKey(), endDate);
                 builder.nextLine();
-                builder.appendI15d(JsamsI18nLabelResource.LABEL_CITY.getKey(), textFieldCity);
-                builder.appendI15d(JsamsI18nLabelResource.LABEL_ZIP_CODE.getKey(), textFieldZipCode);
+                builder.appendI15d(I18nLabelResource.LABEL_CITY.getKey(), textFieldCity);
+                builder.appendI15d(I18nLabelResource.LABEL_ZIP_CODE.getKey(), textFieldZipCode);
 
                 return builder.getPanel();
             }

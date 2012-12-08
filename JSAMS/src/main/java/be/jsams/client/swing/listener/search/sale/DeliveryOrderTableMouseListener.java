@@ -1,6 +1,6 @@
 package be.jsams.client.swing.listener.search.sale;
 
-import be.jsams.client.i18n.JsamsI18nResource;
+import be.jsams.client.i18n.I18nResource;
 import be.jsams.client.model.dialog.sale.EditDeliveryOrderDialog;
 import be.jsams.client.model.table.sale.DeliveryOrderTableModel;
 import be.jsams.client.swing.component.JsamsTable;
@@ -20,7 +20,7 @@ public class DeliveryOrderTableMouseListener extends AbstractTableMouseListener 
     @Override
     protected void handleDoubleClicking(JsamsTable table, int selectedRowModel) {
         DeliveryOrderTableModel model = (DeliveryOrderTableModel) table.getModel();
-        new EditDeliveryOrderDialog(JsamsI18nResource.TITLE_EDIT_DELIVERY_ORDER, model.getRow(selectedRowModel));
+        new EditDeliveryOrderDialog(I18nResource.TITLE_EDIT_DELIVERY_ORDER, model.getRow(selectedRowModel));
     }
 
 }

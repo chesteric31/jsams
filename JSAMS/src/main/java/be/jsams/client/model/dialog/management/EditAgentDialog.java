@@ -2,7 +2,7 @@ package be.jsams.client.model.dialog.management;
 
 import javax.swing.JPanel;
 
-import be.jsams.client.context.JsamsApplicationContext;
+import be.jsams.client.context.ApplicationContext;
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.model.dialog.AbstractEditDialog;
 import be.jsams.client.validator.edit.management.EditAgentValidator;
@@ -37,7 +37,7 @@ public class EditAgentDialog extends AbstractEditDialog<AgentBean, EditAgentVali
      * @param model the {@link AgentBean} model
      */
     public EditAgentDialog(final I18nString title, AgentBean model) {
-        super(null, title, model, new EditAgentValidator(), JsamsApplicationContext.getAgentService());
+        super(null, title, model, new EditAgentValidator(), ApplicationContext.getAgentService());
     }
 
     /**
@@ -45,7 +45,7 @@ public class EditAgentDialog extends AbstractEditDialog<AgentBean, EditAgentVali
      */
     @Override
     public void initComponents() {
-        setOriginalModel(JsamsApplicationContext.getAgentBeanBuilder().build(null, getModel().getSociety()));
+        setOriginalModel(ApplicationContext.getAgentBeanBuilder().build(null, getModel().getSociety()));
         getOriginalModel().refresh(getModel());
         AgentBeanView view = getModel().buildView();
         JPanel panel = view.createEditView();

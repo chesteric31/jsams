@@ -3,7 +3,7 @@ package be.jsams.server.service.sale.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import be.jsams.client.desktop.JsamsDesktop;
+import be.jsams.client.desktop.Desktop;
 import be.jsams.common.bean.builder.management.AgentBeanBuilder;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.AgentBean;
@@ -31,7 +31,7 @@ public class CommandServiceImpl extends AbstractService implements CommandServic
     public CommandBean create(final CommandBean bean) {
         Command command = new Command(bean);
         Command persistedCommand = commandDao.add(command);
-        SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
+        SocietyBean currentSociety = Desktop.getInstance().getCurrentSociety();
         return new CommandBean(persistedCommand, currentSociety, bean.getCustomer(), bean.getAgent());
     }
 
@@ -55,7 +55,7 @@ public class CommandServiceImpl extends AbstractService implements CommandServic
      * {@inheritDoc}
      */
     public List<CommandBean> findAll() {
-        SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
+        SocietyBean currentSociety = Desktop.getInstance().getCurrentSociety();
         commandDao.setCurrentSociety(currentSociety);
         List<Command> commands = commandDao.findAll();
         List<CommandBean> beans = new ArrayList<CommandBean>();
@@ -71,7 +71,7 @@ public class CommandServiceImpl extends AbstractService implements CommandServic
      * {@inheritDoc}
      */
     public CommandBean findById(final Long id) {
-        SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
+        SocietyBean currentSociety = Desktop.getInstance().getCurrentSociety();
         Command command = commandDao.findById(id);
         CustomerBean customer = getCustomerBeanBuilder().build(command.getCustomer(), currentSociety);
         AgentBean agent = agentBeanBuilder.build(command.getAgent(), currentSociety);
@@ -91,7 +91,7 @@ public class CommandServiceImpl extends AbstractService implements CommandServic
      */
     @Override
     public List<CommandBean> findByCriteria(final CommandBean criteria) {
-        SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
+        SocietyBean currentSociety = Desktop.getInstance().getCurrentSociety();
         commandDao.setCurrentSociety(currentSociety);
         List<Command> commands = commandDao.findByCriteria(criteria);
         List<CommandBean> beans = new ArrayList<CommandBean>();
