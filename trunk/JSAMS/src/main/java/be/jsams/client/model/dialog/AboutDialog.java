@@ -16,13 +16,14 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import be.jsams.client.desktop.MainFrame;
-import be.jsams.client.i18n.I18nString;
 import be.jsams.client.i18n.I18nLabelResource;
+import be.jsams.client.i18n.I18nString;
 import be.jsams.client.i18n.UserContext;
 import be.jsams.client.swing.component.AbstractJsamsFrame;
 import be.jsams.client.swing.component.JsamsDialog;
 import be.jsams.client.swing.component.JsamsLabel;
 import be.jsams.client.swing.utils.DialogUtil;
+import be.jsams.client.swing.utils.IconResource;
 import be.jsams.client.swing.utils.IconUtil;
 
 import com.jgoodies.forms.builder.DefaultFormBuilder;
@@ -60,7 +61,7 @@ public class AboutDialog extends JsamsDialog {
      * @param title the title
      */
     public AboutDialog(MainFrame parent, I18nString title) {
-        super(parent, title, IconUtil.TITLE_ICON_PREFIX + "categories/applications-office.png");
+        super(parent, title, IconUtil.TITLE_ICON_PREFIX + IconResource.JSAMS);
         initComponents();
     }
 
@@ -118,7 +119,7 @@ public class AboutDialog extends JsamsDialog {
         JPanel panel = builder.getPanel();
         JPanel mainPanel = new JPanel(new BorderLayout());
         ImageIcon icon = new ImageIcon(IconUtil.buildIcon(IconUtil.TITLE_ICON_PREFIX
-                + "categories/applications-office.png"));
+                + IconResource.JSAMS));
         mainPanel.add(new JsamsLabel(icon), BorderLayout.WEST);
         mainPanel.add(panel, BorderLayout.CENTER);
         add(mainPanel);

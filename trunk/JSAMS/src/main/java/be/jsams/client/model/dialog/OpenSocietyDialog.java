@@ -16,9 +16,9 @@ import javax.swing.plaf.FontUIResource;
 import be.jsams.client.context.ApplicationContext;
 import be.jsams.client.desktop.Desktop;
 import be.jsams.client.desktop.MainFrame;
-import be.jsams.client.i18n.I18nString;
 import be.jsams.client.i18n.I18nLabelResource;
 import be.jsams.client.i18n.I18nResource;
+import be.jsams.client.i18n.I18nString;
 import be.jsams.client.renderer.NamedComboBoxRenderer;
 import be.jsams.client.swing.component.AbstractJsamsFrame;
 import be.jsams.client.swing.component.JsamsButton;
@@ -29,6 +29,7 @@ import be.jsams.client.swing.component.JsamsDialog;
 import be.jsams.client.swing.component.JsamsLabel;
 import be.jsams.client.swing.component.JsamsStatusBar;
 import be.jsams.client.swing.utils.DialogUtil;
+import be.jsams.client.swing.utils.IconResource;
 import be.jsams.client.swing.utils.IconUtil;
 import be.jsams.common.bean.builder.SocietyBeanBuilder;
 import be.jsams.common.bean.model.SocietyBean;
@@ -63,7 +64,7 @@ public class OpenSocietyDialog extends JsamsDialog implements JsamsButtonsInterf
      * @param title the {@link I18nString} title
      */
     public OpenSocietyDialog(final I18nString title) {
-        super(null, title, IconUtil.TITLE_ICON_PREFIX + "categories/applications-office.png");
+        super(null, title, IconUtil.TITLE_ICON_PREFIX + IconResource.JSAMS);
         buttonsPanel = new JsamsButtonsPanel(this, true, false, false);
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         setDefaultKeyActions();

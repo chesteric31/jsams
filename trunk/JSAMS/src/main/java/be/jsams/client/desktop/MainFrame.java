@@ -18,6 +18,7 @@ import be.jsams.client.swing.component.JsamsMenu;
 import be.jsams.client.swing.component.JsamsMenuItem;
 import be.jsams.client.swing.component.JsamsShortcutToolBar;
 import be.jsams.client.swing.utils.DialogUtil;
+import be.jsams.client.swing.utils.IconResource;
 
 /**
  * {@link MainFrame} that contains all the components.
@@ -52,7 +53,7 @@ public class MainFrame extends AbstractJsamsFrame {
      * @param title the {@link I18nString} title
      */
     public MainFrame(final I18nString title) {
-        super(title, "categories/applications-office.png");
+        super(title, IconResource.JSAMS);
         initComponents();
     }
 
