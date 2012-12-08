@@ -1,11 +1,17 @@
 package be.jsams.common.bean.view.sale;
 
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellRenderer;
 
+import com.jgoodies.forms.factories.ButtonBarFactory;
+
 import be.jsams.client.renderer.JsamsBooleanTableCellRenderer;
 import be.jsams.client.renderer.JsamsTableCellRenderer;
+import be.jsams.client.swing.component.JsamsButton;
 import be.jsams.client.swing.component.JsamsTable;
 import be.jsams.common.bean.model.sale.AbstractDocumentBean;
 import be.jsams.common.bean.view.AbstractBeanView;
@@ -52,6 +58,20 @@ public abstract class AbstractDocumentBeanView<B extends AbstractDocumentBean<?,
     }
 
     /**
+     * Builds the adding button.
+     * 
+     * @return the adding {@link JsamsButton}
+     */
+    protected abstract JsamsButton buildButtonAdd();
+
+    /**
+     * Builds the removing button.
+     * 
+     * @return the removing {@link JsamsButton}
+     */
+    protected abstract JsamsButton buildButtonRemove();
+
+    /**
      * {@inheritDoc}
      */
     public abstract void release();
@@ -71,6 +91,25 @@ public abstract class AbstractDocumentBeanView<B extends AbstractDocumentBean<?,
         detailsTable.setDefaultRenderer(Double.class, defaultCellRenderer);
         detailsTable.setDefaultRenderer(String.class, defaultCellRenderer);
         detailsTable.setDefaultRenderer(Boolean.class, new JsamsBooleanTableCellRenderer());
+    }
+    
+    /**
+     * Builds the buttons panel for the editing views.
+     * 
+     * @return the built button {@link JPanel}
+     */
+    protected JPanel buildButtonsPanel() {
+        JPanel southPanel = new JPanel();
+        southPanel.setLayout(new BoxLayout(southPanel, BoxLayout.PAGE_AXIS));
+        southPanel.setBorder(BorderFactory.createEtchedBorder());
+
+        JsamsButton buttonAdd = buildButtonAdd();
+        JsamsButton buttonRemove = buildButtonRemove();
+        JsamsButton[] buttons = new JsamsButton[2];
+        buttons[0] = buttonAdd;
+        buttons[1] = buttonRemove;
+        southPanel.add(ButtonBarFactory.buildCenteredBar(buttons));
+        return southPanel;
     }
 
 }

@@ -9,8 +9,6 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.List;
 
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
 import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -47,7 +45,6 @@ import be.jsams.common.bean.view.management.CustomerBeanView;
 
 import com.jgoodies.common.collect.ArrayListModel;
 import com.jgoodies.forms.builder.DefaultFormBuilder;
-import com.jgoodies.forms.factories.ButtonBarFactory;
 import com.jgoodies.forms.layout.FormLayout;
 import com.toedter.calendar.JDateChooser;
 
@@ -79,7 +76,6 @@ public class CommandBeanView extends AbstractDocumentBeanView<CommandBean> imple
      */
     public JPanel createEditView() {
         CommandBean bean = getBean();
-        final int three = 3;
         ViewFactory<CommandBean> viewFactory = getViewFactory();
 
         JCheckBox transferred = viewFactory.createBindingBooleanComponent(bean, CommandBean.TRANSFERRED_PROPERTY,
@@ -132,19 +128,8 @@ public class CommandBeanView extends AbstractDocumentBeanView<CommandBean> imple
         builder.appendRow("60dlu");
         builder.append(new JScrollPane(getDetailsTable()), maxColumnSpan);
 
-        JPanel southPanel = new JPanel();
-        southPanel.setLayout(new BoxLayout(southPanel, BoxLayout.PAGE_AXIS));
-        southPanel.setBorder(BorderFactory.createEtchedBorder());
-
-        JsamsButton buttonAdd = buildButtonAdd();
-        JsamsButton buttonRemove = buildButtonRemove();
-        JsamsButton buttonModify = buildButtonModify();
-        JsamsButton[] buttons = new JsamsButton[three];
-        buttons[0] = buttonAdd;
-        buttons[1] = buttonRemove;
-        buttons[2] = buttonModify;
-        southPanel.add(ButtonBarFactory.buildCenteredBar(buttons));
-        builder.append(southPanel, maxColumnSpan);
+        JPanel buttonsPanel = buildButtonsPanel();
+        builder.append(buttonsPanel, maxColumnSpan);
 
         return builder.getPanel();
     }
@@ -266,11 +251,9 @@ public class CommandBeanView extends AbstractDocumentBeanView<CommandBean> imple
     }
 
     /**
-     * Builds the adding button.
-     * 
-     * @return the adding {@link JsamsButton}
+     * {@inheritDoc}
      */
-    private JsamsButton buildButtonAdd() {
+    protected JsamsButton buildButtonAdd() {
         JsamsButton buttonAdd = new JsamsButton(IconUtil.MENU_ICON_PREFIX + "actions/list-add.png");
         buttonAdd.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -285,18 +268,15 @@ public class CommandBeanView extends AbstractDocumentBeanView<CommandBean> imple
                 detail.setListModel(new ArrayListModel<CommandDetailBean>(details));
                 bean.setDetails(details);
                 ((AbstractJsamsTableModel<?>) getDetailsTable().getModel()).setListModel(detail.getListModel());
-                // getDetailsTable().repaint();
             }
         });
         return buttonAdd;
     }
 
     /**
-     * Builds the removing button.
-     * 
-     * @return the removing {@link JsamsButton}
+     * {@inheritDoc}
      */
-    private JsamsButton buildButtonRemove() {
+    protected JsamsButton buildButtonRemove() {
         JsamsButton buttonRemove = new JsamsButton(IconUtil.MENU_ICON_PREFIX + "actions/list-remove.png");
         buttonRemove.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -312,21 +292,6 @@ public class CommandBeanView extends AbstractDocumentBeanView<CommandBean> imple
             }
         });
         return buttonRemove;
-    }
-
-    /**
-     * Builds the modifying button.
-     * 
-     * @return the modifying {@link JsamsButton}
-     */
-    private JsamsButton buildButtonModify() {
-        JsamsButton buttonModify = new JsamsButton(IconUtil.MENU_ICON_PREFIX + "apps/accessories-text-editor.png");
-        buttonModify.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // TODO
-            }
-        });
-        return buttonModify;
     }
 
     /**
