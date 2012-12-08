@@ -12,6 +12,7 @@ import be.jsams.client.model.dialog.AboutDialog;
 import be.jsams.client.model.dialog.UpdateDialog;
 import be.jsams.client.swing.component.JsamsMenu;
 import be.jsams.client.swing.component.JsamsMenuItem;
+import be.jsams.client.swing.utils.IconResource;
 
 /**
  * Specific menu builder for help menu.
@@ -35,7 +36,7 @@ public class HelpMenuBuilder extends AbstractMenuBuilder {
         helpMenu.add(updateMI);
         helpMenu.add(new JSeparator());
         JsamsMenuItem aboutMI = new JsamsMenuItem(I18nResource.MENU_ITEM_ABOUT,
-                "categories/applications-office.png");
+                IconResource.JSAMS);
         aboutMI.setAction(aboutAction(aboutMI.getText(), aboutMI.getIcon()));
         helpMenu.add(aboutMI);
         return helpMenu;
