@@ -2,6 +2,8 @@ package be.jsams.common.bean.view.sale;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -168,10 +170,35 @@ public abstract class AbstractDocumentBeanView<B extends AbstractDocumentBean<?,
     }
 
     /**
-     * Edit the product to use.
+     * Edits the product to use.
      * 
      * @param e the {@link MouseEvent} to use
      */
     protected abstract void editProduct(MouseEvent e);
+    
+    /**
+     * Handler for customer changing.
+     * 
+     * @return the {@link PropertyChangeListener}
+     */
+    protected PropertyChangeListener customerListener() {
+        return new PropertyChangeListener() {
+
+            /**
+             * {@inheritDoc}
+             */
+            @Override
+            public void propertyChange(PropertyChangeEvent evt) {
+                changeCustomer(evt);
+            }
+        };
+    }
+
+    /**
+     * Changes the customer to use.
+     * 
+     * @param evt the {@link PropertyChangeEvent} to use
+     */
+    protected abstract void changeCustomer(PropertyChangeEvent evt);
 
 }

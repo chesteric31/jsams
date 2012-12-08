@@ -95,7 +95,7 @@ public class CreditNoteBeanView extends AbstractDocumentBeanView<CreditNoteBean>
         CustomerBean customer = bean.getCustomer();
         CustomerBeanView customerView = customer.getView();
         JPanel customerPanel = customerView.createCustomView();
-        customer.addPropertyChangeListener(handleCustomerChangeListener());
+        customer.addPropertyChangeListener(customerListener());
         builder.appendI15d(JsamsI18nLabelResource.LABEL_CUSTOMER_NAME.getKey(), customerPanel);
         builder.appendI15d(JsamsI18nLabelResource.LABEL_CREATION_DATE.getKey(), creationDate);
         builder.nextLine();
@@ -168,27 +168,6 @@ public class CreditNoteBeanView extends AbstractDocumentBeanView<CreditNoteBean>
         dialog.pack();
         dialog.setLocationRelativeTo(((JsamsTable) e.getSource()).getRootPane());
         dialog.setVisible(true);
-    }
-
-    /**
-     * Handler for customer changing.
-     * 
-     * @return the {@link PropertyChangeListener}
-     */
-    private PropertyChangeListener handleCustomerChangeListener() {
-        return new PropertyChangeListener() {
-
-            /**
-             * {@inheritDoc}
-             */
-            @Override
-            public void propertyChange(PropertyChangeEvent evt) {
-                CustomerBean source = (CustomerBean) evt.getSource();
-                AddressBean billingAddress = getBean().getBillingAddress();
-                AddressBean customerBillingAddress = source.getBillingAddress();
-                billingAddress.refresh(customerBillingAddress);
-            }
-        };
     }
 
     /**
@@ -274,6 +253,17 @@ public class CreditNoteBeanView extends AbstractDocumentBeanView<CreditNoteBean>
         for (PropertyChangeListener listener : getBean().getCustomer().getPropertyChangeListeners()) {
             getBean().getCustomer().removePropertyChangeListener(listener);
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void changeCustomer(PropertyChangeEvent evt) {
+        CustomerBean source = (CustomerBean) evt.getSource();
+        AddressBean billingAddress = getBean().getBillingAddress();
+        AddressBean customerBillingAddress = source.getBillingAddress();
+        billingAddress.refresh(customerBillingAddress);
     }
 
 }
