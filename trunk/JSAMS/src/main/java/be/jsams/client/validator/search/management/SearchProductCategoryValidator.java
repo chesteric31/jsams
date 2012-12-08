@@ -1,7 +1,7 @@
 package be.jsams.client.validator.search.management;
 
-import be.jsams.client.i18n.JsamsI18nLabelResource;
-import be.jsams.client.i18n.JsamsI18nResource;
+import be.jsams.client.i18n.I18nLabelResource;
+import be.jsams.client.i18n.I18nResource;
 import be.jsams.common.bean.model.management.ProductCategoryBean;
 import be.jsams.common.bean.validator.StringValidator;
 
@@ -29,16 +29,16 @@ public class SearchProductCategoryValidator implements Validator<ProductCategory
         String labelNl = category.getLabelNl();
 
         if (label != null && !ValidationUtils.isAlphanumericSpace(label) && !StringValidator.validate(label)) {
-            support.addError(JsamsI18nLabelResource.LABEL_PRODUCT_CATEGORY_EN.getTranslation(),
-                    JsamsI18nResource.ERROR_IS_ALPHANUMERIC.getTranslation());
+            support.addError(I18nLabelResource.LABEL_PRODUCT_CATEGORY_EN.getTranslation(),
+                    I18nResource.ERROR_IS_ALPHANUMERIC.getTranslation());
         }
         if (labelFr != null && !ValidationUtils.isAlphanumericSpace(labelFr) && !StringValidator.validate(labelFr)) {
-            support.addError(JsamsI18nLabelResource.LABEL_PRODUCT_CATEGORY_FR.getTranslation(),
-                    JsamsI18nResource.ERROR_IS_ALPHANUMERIC.getTranslation());
+            support.addError(I18nLabelResource.LABEL_PRODUCT_CATEGORY_FR.getTranslation(),
+                    I18nResource.ERROR_IS_ALPHANUMERIC.getTranslation());
         }
         if (labelNl != null && !ValidationUtils.isAlphanumericSpace(labelNl) && !StringValidator.validate(labelNl)) {
-            support.addError(JsamsI18nLabelResource.LABEL_PRODUCT_CATEGORY_NL.getTranslation(),
-                    JsamsI18nResource.ERROR_IS_ALPHANUMERIC.getTranslation());
+            support.addError(I18nLabelResource.LABEL_PRODUCT_CATEGORY_NL.getTranslation(),
+                    I18nResource.ERROR_IS_ALPHANUMERIC.getTranslation());
         }
 
         return support.getResult();

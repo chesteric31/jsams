@@ -3,7 +3,7 @@ package be.jsams.client.model.table.management;
 import java.util.Arrays;
 import java.util.List;
 
-import be.jsams.client.i18n.JsamsI18nResource;
+import be.jsams.client.i18n.I18nResource;
 import be.jsams.client.model.table.AbstractJsamsTableModel;
 import be.jsams.common.bean.model.AddressBean;
 import be.jsams.common.bean.model.ContactInformationBean;
@@ -36,9 +36,9 @@ public class AgentTableModel extends AbstractJsamsTableModel<AgentBean> {
      */
     public AgentTableModel(List<AgentBean> listModel) {
         super(listModel);
-        setColumnNames(Arrays.asList(JsamsI18nResource.COLUMN_ID, JsamsI18nResource.COLUMN_NAME,
-            JsamsI18nResource.COLUMN_FUNCTION, JsamsI18nResource.COLUMN_PHONE, JsamsI18nResource.COLUMN_ZIP_CODE,
-            JsamsI18nResource.COLUMN_CITY));
+        setColumnNames(Arrays.asList(I18nResource.COLUMN_ID, I18nResource.COLUMN_NAME,
+            I18nResource.COLUMN_FUNCTION, I18nResource.COLUMN_PHONE, I18nResource.COLUMN_ZIP_CODE,
+            I18nResource.COLUMN_CITY));
     }
 
 

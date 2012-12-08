@@ -13,10 +13,10 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 
-import be.jsams.client.context.JsamsApplicationContext;
-import be.jsams.client.desktop.JsamsDesktop;
-import be.jsams.client.i18n.JsamsI18nLabelResource;
-import be.jsams.client.i18n.JsamsI18nResource;
+import be.jsams.client.context.ApplicationContext;
+import be.jsams.client.desktop.Desktop;
+import be.jsams.client.i18n.I18nLabelResource;
+import be.jsams.client.i18n.I18nResource;
 import be.jsams.client.model.panel.management.SearchProductPanel;
 import be.jsams.client.model.table.AbstractJsamsTableModel;
 import be.jsams.client.model.table.management.ProductTableModel;
@@ -108,24 +108,24 @@ public class BillBeanView extends AbstractDocumentBeanView<BillBean> implements 
         CustomerBeanView customerView = customer.getView();
         JPanel customerPanel = customerView.createCustomView();
         customer.addPropertyChangeListener(customerListener());
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_CUSTOMER_NAME.getKey(), customerPanel);
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_CREATION_DATE.getKey(), creationDate);
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_PAYMENT_MODE.getKey(), bean.getPaymentMode().buildView()
+        builder.appendI15d(I18nLabelResource.LABEL_CUSTOMER_NAME.getKey(), customerPanel);
+        builder.appendI15d(I18nLabelResource.LABEL_CREATION_DATE.getKey(), creationDate);
+        builder.appendI15d(I18nLabelResource.LABEL_PAYMENT_MODE.getKey(), bean.getPaymentMode().buildView()
                 .createEditView());
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_BILLING_ADDRESS.getKey(), bean.getBillingAddress().buildView()
+        builder.appendI15d(I18nLabelResource.LABEL_BILLING_ADDRESS.getKey(), bean.getBillingAddress().buildView()
                 .createEditView());
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_PAID.getKey(), paid);
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_CLOSED.getKey(), closed);
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_REMARK.getKey(), remark);
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_DEFAULT_DISCOUNT_RATE.getKey(), discountRate);
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_DUE_DATE.getKey(), dueDate);
+        builder.appendI15d(I18nLabelResource.LABEL_PAID.getKey(), paid);
+        builder.appendI15d(I18nLabelResource.LABEL_CLOSED.getKey(), closed);
+        builder.appendI15d(I18nLabelResource.LABEL_REMARK.getKey(), remark);
+        builder.appendI15d(I18nLabelResource.LABEL_DEFAULT_DISCOUNT_RATE.getKey(), discountRate);
+        builder.appendI15d(I18nLabelResource.LABEL_DUE_DATE.getKey(), dueDate);
         builder.nextLine();
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_FIRST_REMEMBER_DATE.getKey(), firstRememberDate);
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_SECOND_REMEMBER_DATE.getKey(), secondRememberDate);
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_FORMAL_NOTICE_DATE.getKey(), formalNoticeDate);
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_TOTAL_ET.getKey(), totalEt);
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_TOTAL_VAT.getKey(), totalVat);
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_TOTAL_ATI.getKey(), totalAti);
+        builder.appendI15d(I18nLabelResource.LABEL_FIRST_REMEMBER_DATE.getKey(), firstRememberDate);
+        builder.appendI15d(I18nLabelResource.LABEL_SECOND_REMEMBER_DATE.getKey(), secondRememberDate);
+        builder.appendI15d(I18nLabelResource.LABEL_FORMAL_NOTICE_DATE.getKey(), formalNoticeDate);
+        builder.appendI15d(I18nLabelResource.LABEL_TOTAL_ET.getKey(), totalEt);
+        builder.appendI15d(I18nLabelResource.LABEL_TOTAL_VAT.getKey(), totalVat);
+        builder.appendI15d(I18nLabelResource.LABEL_TOTAL_ATI.getKey(), totalAti);
         builder.nextLine();
 
         List<BillDetailBean> details = bean.getDetails();
@@ -136,7 +136,7 @@ public class BillBeanView extends AbstractDocumentBeanView<BillBean> implements 
         getDetailsTable().addMouseListener(productListener());
         updateDetailsTableRendering();
 
-        builder.appendI15dSeparator(JsamsI18nResource.PANEL_BILL_DETAILS.getKey());
+        builder.appendI15dSeparator(I18nResource.PANEL_BILL_DETAILS.getKey());
         builder.appendRow("60dlu");
         builder.append(new JScrollPane(getDetailsTable()), maxColumnSpan);
 
@@ -150,7 +150,7 @@ public class BillBeanView extends AbstractDocumentBeanView<BillBean> implements 
      * {@inheritDoc}
      */
     protected void editProduct(MouseEvent e) {
-        final JsamsDialog dialog = new JsamsDialog(null, JsamsI18nResource.TITLE_SEARCH_PRODUCT);
+        final JsamsDialog dialog = new JsamsDialog(null, I18nResource.TITLE_SEARCH_PRODUCT);
         ProductTableMouseListener customListener = new ProductTableMouseListener() {
             /**
              * {@inheritDoc}
@@ -178,9 +178,9 @@ public class BillBeanView extends AbstractDocumentBeanView<BillBean> implements 
             }
         };
         ProductBeanBuilder builder = new ProductBeanBuilder();
-        builder.setSociety(JsamsDesktop.getInstance().getCurrentSociety());
+        builder.setSociety(Desktop.getInstance().getCurrentSociety());
         SearchProductPanel searchPanel = new SearchProductPanel(builder.build(true, true), customListener,
-                JsamsApplicationContext.getProductService(), new SearchProductValidator(), new ProductTableModel(),
+                ApplicationContext.getProductService(), new SearchProductValidator(), new ProductTableModel(),
                 false, ListSelectionModel.SINGLE_SELECTION);
         dialog.add(searchPanel);
         dialog.setPreferredSize(new Dimension(800, 400));
@@ -259,18 +259,18 @@ public class BillBeanView extends AbstractDocumentBeanView<BillBean> implements 
                 "right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow", "p");
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
         builder.setDefaultDialogBorder();
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_CUSTOMER_NAME.getKey(), bean.getCustomer().getView()
+        builder.appendI15d(I18nLabelResource.LABEL_CUSTOMER_NAME.getKey(), bean.getCustomer().getView()
                 .createCustomView());
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_START_DATE.getKey(), startDate);
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_END_DATE.getKey(), endDate);
+        builder.appendI15d(I18nLabelResource.LABEL_START_DATE.getKey(), startDate);
+        builder.appendI15d(I18nLabelResource.LABEL_END_DATE.getKey(), endDate);
         builder.nextLine();
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_CITY.getKey(), textFieldCity);
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_ZIP_CODE.getKey(), textFieldZipCode);
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_PAYMENT_MODE.getKey(), bean.getPaymentMode().buildView()
+        builder.appendI15d(I18nLabelResource.LABEL_CITY.getKey(), textFieldCity);
+        builder.appendI15d(I18nLabelResource.LABEL_ZIP_CODE.getKey(), textFieldZipCode);
+        builder.appendI15d(I18nLabelResource.LABEL_PAYMENT_MODE.getKey(), bean.getPaymentMode().buildView()
                 .createEditView());
         builder.nextLine();
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_CLOSED.getKey(), closed);
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_PAID.getKey(), paid);
+        builder.appendI15d(I18nLabelResource.LABEL_CLOSED.getKey(), closed);
+        builder.appendI15d(I18nLabelResource.LABEL_PAID.getKey(), paid);
 
         return builder.getPanel();
     }

@@ -1,7 +1,7 @@
 package be.jsams.client.wizard.transfer;
 
-import be.jsams.client.context.JsamsApplicationContext;
-import be.jsams.client.desktop.JsamsMainFrame;
+import be.jsams.client.context.ApplicationContext;
+import be.jsams.client.desktop.MainFrame;
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.model.dialog.AbstractWizardDialog;
 import be.jsams.client.validator.wizard.DestinationTypeValidator;
@@ -51,13 +51,13 @@ public class TransferWizardDialog extends AbstractWizardDialog<TransferBean, Tra
     /**
      * Constructor.
      * 
-     * @param parent the {@link JsamsMainFrame} parent
+     * @param parent the {@link MainFrame} parent
      * @param title the {@link I18nString} title
      * @param iconFileName the icon file name for the frame
      * @param logoFileName the logo file name for the wizard panel
      */
-    public TransferWizardDialog(JsamsMainFrame parent, I18nString title, String iconFileName, String logoFileName) {
-        super(parent, title, iconFileName, logoFileName, new TransferBean(), JsamsApplicationContext
+    public TransferWizardDialog(MainFrame parent, I18nString title, String iconFileName, String logoFileName) {
+        super(parent, title, iconFileName, logoFileName, new TransferBean(), ApplicationContext
                 .getTransferService());
     }
 

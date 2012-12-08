@@ -3,7 +3,7 @@ package be.jsams.client.model.table.management;
 import java.util.Arrays;
 import java.util.List;
 
-import be.jsams.client.i18n.JsamsI18nResource;
+import be.jsams.client.i18n.I18nResource;
 import be.jsams.client.i18n.UserContext;
 import be.jsams.client.model.table.AbstractJsamsTableModel;
 import be.jsams.common.bean.model.management.ProductBean;
@@ -36,10 +36,10 @@ public class ProductTableModel extends AbstractJsamsTableModel<ProductBean> {
      */
     public ProductTableModel(List<ProductBean> listModel) {
         super(listModel);
-        setColumnNames(Arrays.asList(JsamsI18nResource.COLUMN_ID, JsamsI18nResource.COLUMN_NAME,
-                JsamsI18nResource.COLUMN_PRICE, JsamsI18nResource.COLUMN_STOCK_QUANTITY,
-                JsamsI18nResource.COLUMN_REORDER_LEVEL, JsamsI18nResource.COLUMN_VAT_APPLICABLE,
-                JsamsI18nResource.COLUMN_PRODUCT_CATEGORY));
+        setColumnNames(Arrays.asList(I18nResource.COLUMN_ID, I18nResource.COLUMN_NAME,
+                I18nResource.COLUMN_PRICE, I18nResource.COLUMN_STOCK_QUANTITY,
+                I18nResource.COLUMN_REORDER_LEVEL, I18nResource.COLUMN_VAT_APPLICABLE,
+                I18nResource.COLUMN_PRODUCT_CATEGORY));
     }
 
     /**

@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import be.jsams.client.desktop.JsamsDesktop;
+import be.jsams.client.desktop.Desktop;
 import be.jsams.common.bean.builder.PaymentModeBeanBuilder;
 import be.jsams.common.bean.model.PaymentModeBean;
 import be.jsams.common.bean.model.SocietyBean;
@@ -71,7 +71,7 @@ public class BillServiceImpl extends AbstractService implements BillService {
     @Override
     public BillBean findById(Long id) {
         Bill bill = billDao.findById(id);
-        SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
+        SocietyBean currentSociety = Desktop.getInstance().getCurrentSociety();
         CustomerBean customer = getCustomerBeanBuilder().build(bill.getCustomer(), currentSociety);
         paymentModeBeanBuilder.setModel(bill.getPaymentMode());
         PaymentModeBean mode = paymentModeBeanBuilder.build();
@@ -83,7 +83,7 @@ public class BillServiceImpl extends AbstractService implements BillService {
      */
     @Override
     public List<BillBean> findAll() {
-        SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
+        SocietyBean currentSociety = Desktop.getInstance().getCurrentSociety();
         billDao.setCurrentSociety(currentSociety);
         List<Bill> bills = billDao.findAll();
         List<BillBean> beans = new ArrayList<BillBean>();
@@ -101,7 +101,7 @@ public class BillServiceImpl extends AbstractService implements BillService {
      */
     @Override
     public List<BillBean> findByCriteria(BillBean criteria) {
-        SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
+        SocietyBean currentSociety = Desktop.getInstance().getCurrentSociety();
         billDao.setCurrentSociety(currentSociety);
         List<Bill> bills = billDao.findByCriteria(criteria);
         List<BillBean> beans = new ArrayList<BillBean>();

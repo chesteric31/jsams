@@ -38,7 +38,7 @@ import be.jsams.server.service.update.DownloaderService;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public final class JsamsApplicationContext {
+public final class ApplicationContext {
 
     public static final String CONFIG = "ApplicationContext.xml";
 
@@ -47,14 +47,14 @@ public final class JsamsApplicationContext {
     /**
      * Constructor to avoid to instance this utility class.
      */
-    private JsamsApplicationContext() {
+    private ApplicationContext() {
     }
 
     /**
      * @param context the {@link ClassPathXmlApplicationContext} to set
      */
     public static void setContext(final ClassPathXmlApplicationContext context) {
-        JsamsApplicationContext.context = context;
+        ApplicationContext.context = context;
     }
 
     /**

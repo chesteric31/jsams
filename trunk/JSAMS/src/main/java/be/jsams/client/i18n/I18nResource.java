@@ -6,12 +6,12 @@ package be.jsams.client.i18n;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public final class JsamsI18nResource {
+public final class I18nResource {
 
     /**
      * Constructor to avoid to instance this utility class.
      */
-    private JsamsI18nResource() {
+    private I18nResource() {
     }
 
     public static final I18nString TITLE_APPLICATION_NO_ARGUMENTS = new I18nString("title.application_no_arguments");

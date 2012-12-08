@@ -1,6 +1,6 @@
 package be.jsams.client.swing.listener.search.sale;
 
-import be.jsams.client.i18n.JsamsI18nResource;
+import be.jsams.client.i18n.I18nResource;
 import be.jsams.client.model.dialog.sale.EditEstimateDialog;
 import be.jsams.client.model.table.sale.EstimateTableModel;
 import be.jsams.client.swing.component.JsamsTable;
@@ -20,7 +20,7 @@ public class EstimateTableMouseListener extends AbstractTableMouseListener {
     @Override
     protected void handleDoubleClicking(JsamsTable table, int selectedRowModel) {
         EstimateTableModel model = (EstimateTableModel) table.getModel();
-        new EditEstimateDialog(JsamsI18nResource.TITLE_EDIT_ESTIMATE, model.getRow(selectedRowModel));
+        new EditEstimateDialog(I18nResource.TITLE_EDIT_ESTIMATE, model.getRow(selectedRowModel));
     }
 
 }

@@ -3,7 +3,7 @@ package be.jsams.server.service.management.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import be.jsams.client.desktop.JsamsDesktop;
+import be.jsams.client.desktop.Desktop;
 import be.jsams.common.bean.builder.SocietyBeanBuilder;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.CustomerBean;
@@ -50,7 +50,7 @@ public class CustomerServiceImpl extends AbstractService implements CustomerServ
      * {@inheritDoc}
      */
     public List<CustomerBean> findAll() {
-        SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
+        SocietyBean currentSociety = Desktop.getInstance().getCurrentSociety();
         customerDao.setCurrentSociety(currentSociety);
         List<Customer> customers = customerDao.findAll();
         List<CustomerBean> beans = new ArrayList<CustomerBean>();
@@ -83,7 +83,7 @@ public class CustomerServiceImpl extends AbstractService implements CustomerServ
      * {@inheritDoc}
      */
     public List<CustomerBean> findByCriteria(final CustomerBean criteria) {
-        SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
+        SocietyBean currentSociety = Desktop.getInstance().getCurrentSociety();
         customerDao.setCurrentSociety(currentSociety);
         List<Customer> customers = customerDao.findByCriteria(criteria);
         List<CustomerBean> beans = new ArrayList<CustomerBean>();

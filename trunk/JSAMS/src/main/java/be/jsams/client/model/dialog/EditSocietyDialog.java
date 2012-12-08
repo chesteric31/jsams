@@ -2,8 +2,8 @@ package be.jsams.client.model.dialog;
 
 import javax.swing.JPanel;
 
-import be.jsams.client.context.JsamsApplicationContext;
-import be.jsams.client.desktop.JsamsDesktop;
+import be.jsams.client.context.ApplicationContext;
+import be.jsams.client.desktop.Desktop;
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.validator.edit.EditSocietyValidator;
 import be.jsams.common.bean.model.LegalFormBean;
@@ -36,14 +36,14 @@ public class EditSocietyDialog extends AbstractEditDialog<SocietyBean, EditSocie
      * @param model the {@link SocietyBean} model
      */
     public EditSocietyDialog(final I18nString title, SocietyBean model) {
-        super(null, title, model, new EditSocietyValidator(), JsamsApplicationContext.getSocietyService());
+        super(null, title, model, new EditSocietyValidator(), ApplicationContext.getSocietyService());
     }
 
     /**
      * {@inheritDoc}
      */
     public void initComponents() {
-        setOriginalModel(JsamsApplicationContext.getSocietyBeanBuilder().build(false));
+        setOriginalModel(ApplicationContext.getSocietyBeanBuilder().build(false));
         getOriginalModel().refresh(getModel());
         SocietyBeanView view = getModel().buildView();
         JPanel panel = view.createEditView();
@@ -64,7 +64,7 @@ public class EditSocietyDialog extends AbstractEditDialog<SocietyBean, EditSocie
         }
         SocietyBean persistedSociety = postPerformOk(society);
         if (persistedSociety != null) {
-            JsamsDesktop.getInstance().setCurrentSociety(persistedSociety);
+            Desktop.getInstance().setCurrentSociety(persistedSociety);
             success = true;
         }
     }

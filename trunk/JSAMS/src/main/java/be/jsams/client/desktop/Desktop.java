@@ -15,52 +15,52 @@ import javax.swing.plaf.FontUIResource;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import be.jsams.client.i18n.JsamsI18nResource;
+import be.jsams.client.i18n.I18nResource;
 import be.jsams.client.swing.action.EditSocietyAction;
 import be.jsams.client.swing.component.JsamsMenuItem;
 import be.jsams.common.bean.model.SocietyBean;
 
 /**
- * JSAMS desktop that creates the {@link JsamsMainFrame} and contains the
+ * JSAMS desktop that creates the {@link MainFrame} and contains the
  * current Society.
  * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class JsamsDesktop {
+public class Desktop {
 
-    private static final Log LOGGER = LogFactory.getLog(JsamsDesktop.class);
+    private static final Log LOGGER = LogFactory.getLog(Desktop.class);
     private final boolean debug = LOGGER.isDebugEnabled();
 
     private SocietyBean currentSociety = null;
 
-    private JsamsMainFrame frame = null;
+    private MainFrame frame = null;
 
-    private static JsamsDesktop instance = null;
+    private static Desktop instance = null;
 
     private static final int DEFAULT_FONT_SIZE = 13;
 
     /**
      * Default constructor
      */
-    public JsamsDesktop() {
+    public Desktop() {
         setInstance(this);
         try {
             initComponents();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e.getCause(), JsamsI18nResource.ERROR_TITLE.getTranslation(),
+            JOptionPane.showMessageDialog(null, e.getCause(), I18nResource.ERROR_TITLE.getTranslation(),
                     JOptionPane.ERROR_MESSAGE);
             System.exit(0);
         }
     }
 
     /**
-     * Initializes the {@link JsamsMainFrame}
+     * Initializes the {@link MainFrame}
      */
     private void initComponents() {
         setNativeLookAndFeel();
         setUIFont(new FontUIResource(Font.SANS_SERIF, Font.PLAIN, DEFAULT_FONT_SIZE));
-        frame = new JsamsMainFrame(JsamsI18nResource.TITLE_APPLICATION_NO_ARGUMENTS);
+        frame = new MainFrame(I18nResource.TITLE_APPLICATION_NO_ARGUMENTS);
         frame.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent we) {
                 stopNow();
@@ -69,7 +69,7 @@ public class JsamsDesktop {
     }
 
     /**
-     * Sets visible the {@link JsamsMainFrame}
+     * Sets visible the {@link MainFrame}
      */
     public void start() {
         showSplash();
@@ -98,12 +98,12 @@ public class JsamsDesktop {
     }
 
     /**
-     * Gets the {@link JsamsMainFrame}
+     * Gets the {@link MainFrame}
      * 
      * @return the frame in which the application appears (in MDI-mode), or the
      *         central container (in SDI-mode).
      */
-    public JsamsMainFrame getMainWindow() {
+    public MainFrame getMainWindow() {
         return frame;
     }
 
@@ -111,7 +111,7 @@ public class JsamsDesktop {
      * Exits the application after having shown a confirmation dialog
      */
     public void stopNow() {
-        int confirm = JOptionPane.showConfirmDialog(getMainWindow(), JsamsI18nResource.CONFIRMATION_EXIT);
+        int confirm = JOptionPane.showConfirmDialog(getMainWindow(), I18nResource.CONFIRMATION_EXIT);
         if (confirm == 0) {
             frame.dispose();
             System.exit(0);
@@ -124,7 +124,7 @@ public class JsamsDesktop {
     public void restart() {
         frame.getTabbedPane().removeAll();
         frame.enableTabbedPane(false);
-        frame.setTitle(JsamsI18nResource.TITLE_APPLICATION_NO_ARGUMENTS);
+        frame.setTitle(I18nResource.TITLE_APPLICATION_NO_ARGUMENTS);
         frame.enableAllMenuItems(false);
         frame.getShortcutToolBar().enableButtons(false);
     }
@@ -188,17 +188,17 @@ public class JsamsDesktop {
 
     /**
      * 
-     * @param instance the {@link JsamsDesktop} instance to set
+     * @param instance the {@link Desktop} instance to set
      */
-    public static void setInstance(JsamsDesktop instance) {
-        JsamsDesktop.instance = instance;
+    public static void setInstance(Desktop instance) {
+        Desktop.instance = instance;
     }
 
     /**
      * 
-     * @return the {@link JsamsDesktop} instance
+     * @return the {@link Desktop} instance
      */
-    public static JsamsDesktop getInstance() {
+    public static Desktop getInstance() {
         return instance;
     }
 

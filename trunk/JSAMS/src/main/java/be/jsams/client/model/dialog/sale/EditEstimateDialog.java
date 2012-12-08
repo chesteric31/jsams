@@ -2,7 +2,7 @@ package be.jsams.client.model.dialog.sale;
 
 import javax.swing.JPanel;
 
-import be.jsams.client.context.JsamsApplicationContext;
+import be.jsams.client.context.ApplicationContext;
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.model.dialog.AbstractEditDialog;
 import be.jsams.client.validator.edit.sale.EditEstimateValidator;
@@ -33,7 +33,7 @@ public class EditEstimateDialog extends AbstractEditDialog<EstimateBean, EditEst
      * @param model the {@link EstimateBean} model
      */
     public EditEstimateDialog(final I18nString title, EstimateBean model) {
-        super(null, title, model, new EditEstimateValidator(), JsamsApplicationContext.getEstimateService());
+        super(null, title, model, new EditEstimateValidator(), ApplicationContext.getEstimateService());
     }
 
     /**

@@ -7,8 +7,8 @@ import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.TitledBorder;
 
-import be.jsams.client.i18n.JsamsI18nLabelResource;
-import be.jsams.client.i18n.JsamsI18nResource;
+import be.jsams.client.i18n.I18nLabelResource;
+import be.jsams.client.i18n.I18nResource;
 import be.jsams.client.model.table.sale.BillDetailWizardTableModel;
 import be.jsams.client.model.table.sale.CommandDetailWizardTableModel;
 import be.jsams.client.model.table.sale.DeliveryOrderDetailWizardTableModel;
@@ -51,7 +51,7 @@ public class DetailsChooserWizardPanel extends JsamsWizardPanel<TransferBean, De
      */
     public DetailsChooserWizardPanel(TransferWizardDialog parent, JsamsWizardComponent component,
             TransferBean model, DetailsValidator validator) {
-        super(parent, component, model, JsamsI18nLabelResource.LABEL_TRANSFER_CHOOSE_DOCUMENT_DETAILS, validator);
+        super(parent, component, model, I18nLabelResource.LABEL_TRANSFER_CHOOSE_DOCUMENT_DETAILS, validator);
         initComponents();
     }
 
@@ -112,7 +112,7 @@ public class DetailsChooserWizardPanel extends JsamsWizardPanel<TransferBean, De
             break;
         }
         scrollPane.setViewportView(table);
-        scrollPane.setBorder(new TitledBorder(JsamsI18nResource.SEARCH_RESULTS.getTranslation()));
+        scrollPane.setBorder(new TitledBorder(I18nResource.SEARCH_RESULTS.getTranslation()));
         this.add(scrollPane, BorderLayout.CENTER);
     }
 

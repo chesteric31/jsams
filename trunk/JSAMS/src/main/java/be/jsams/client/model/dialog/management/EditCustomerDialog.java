@@ -2,7 +2,7 @@ package be.jsams.client.model.dialog.management;
 
 import javax.swing.JPanel;
 
-import be.jsams.client.context.JsamsApplicationContext;
+import be.jsams.client.context.ApplicationContext;
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.model.dialog.AbstractEditDialog;
 import be.jsams.client.validator.edit.management.EditCustomerValidator;
@@ -40,14 +40,14 @@ public class EditCustomerDialog extends AbstractEditDialog<CustomerBean, EditCus
      * @param model the {@link CustomerBean} model
      */
     public EditCustomerDialog(final I18nString title, CustomerBean model) {
-        super(null, title, model, new EditCustomerValidator(), JsamsApplicationContext.getCustomerService());
+        super(null, title, model, new EditCustomerValidator(), ApplicationContext.getCustomerService());
     }
 
     /**
      * {@inheritDoc}
      */
     public void initComponents() {
-        setOriginalModel(JsamsApplicationContext.getCustomerBeanBuilder().build(null, getModel().getSociety()));
+        setOriginalModel(ApplicationContext.getCustomerBeanBuilder().build(null, getModel().getSociety()));
         getOriginalModel().refresh(getModel());
         CustomerBeanView view = getModel().getView();
         JPanel panel = view.createEditView();

@@ -4,7 +4,7 @@ import java.util.Date;
 
 import javax.swing.JPanel;
 
-import be.jsams.client.i18n.JsamsI18nLabelResource;
+import be.jsams.client.i18n.I18nLabelResource;
 
 import com.jgoodies.forms.builder.DefaultFormBuilder;
 import com.jgoodies.forms.layout.FormLayout;
@@ -41,8 +41,8 @@ public class JsamsPeriodField extends JPanel {
         FormLayout layout = new FormLayout("right:p, 3dlu, 75dlu, 3dlu, right:p, 3dlu, p:grow", "p");
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
         builder.setDefaultDialogBorder();
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_START_DATE.getKey(), startDateChooser);
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_END_DATE.getKey(), endDateChooser);
+        builder.appendI15d(I18nLabelResource.LABEL_START_DATE.getKey(), startDateChooser);
+        builder.appendI15d(I18nLabelResource.LABEL_END_DATE.getKey(), endDateChooser);
         add(builder.getPanel());
     }
 

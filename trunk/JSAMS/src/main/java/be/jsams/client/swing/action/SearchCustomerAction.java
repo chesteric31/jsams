@@ -7,8 +7,8 @@ import javax.swing.AbstractAction;
 import javax.swing.Icon;
 import javax.swing.ListSelectionModel;
 
-import be.jsams.client.context.JsamsApplicationContext;
-import be.jsams.client.desktop.JsamsDesktop;
+import be.jsams.client.context.ApplicationContext;
+import be.jsams.client.desktop.Desktop;
 import be.jsams.client.model.panel.management.SearchCustomerPanel;
 import be.jsams.client.model.table.management.CustomerTableModel;
 import be.jsams.client.swing.component.JsamsButton;
@@ -73,10 +73,10 @@ public class SearchCustomerAction extends AbstractAction {
                 }
             }
         };
-        CustomerBean customerBean = JsamsApplicationContext.getCustomerBeanBuilder().build(null,
-                JsamsDesktop.getInstance().getCurrentSociety());
+        CustomerBean customerBean = ApplicationContext.getCustomerBeanBuilder().build(null,
+                Desktop.getInstance().getCurrentSociety());
         SearchCustomerPanel searchCustomerPanel = new SearchCustomerPanel(customerBean, customListener,
-                JsamsApplicationContext.getCustomerService(), new SearchCustomerValidator(), new CustomerTableModel(),
+                ApplicationContext.getCustomerService(), new SearchCustomerValidator(), new CustomerTableModel(),
                 false, ListSelectionModel.SINGLE_SELECTION);
         dialog.add(searchCustomerPanel);
         dialog.pack();

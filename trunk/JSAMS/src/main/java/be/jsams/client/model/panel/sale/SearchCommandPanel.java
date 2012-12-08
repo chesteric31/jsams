@@ -8,9 +8,9 @@ import javax.swing.ListSelectionModel;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import be.jsams.client.context.JsamsApplicationContext;
-import be.jsams.client.desktop.JsamsDesktop;
-import be.jsams.client.i18n.JsamsI18nResource;
+import be.jsams.client.context.ApplicationContext;
+import be.jsams.client.desktop.Desktop;
+import be.jsams.client.i18n.I18nResource;
 import be.jsams.client.model.dialog.sale.EditCommandDialog;
 import be.jsams.client.model.table.sale.CommandTableModel;
 import be.jsams.client.validator.search.sale.SearchCommandValidator;
@@ -77,14 +77,14 @@ public class SearchCommandPanel<L extends MouseListener> extends
      */
     @Override
     protected void performButtonAdd() {
-        SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
-        CustomerBean customer = JsamsApplicationContext.getCustomerBeanBuilder().build(null, currentSociety);
-        AgentBean agent = JsamsApplicationContext.getAgentBeanBuilder().build(null, currentSociety);
+        SocietyBean currentSociety = Desktop.getInstance().getCurrentSociety();
+        CustomerBean customer = ApplicationContext.getCustomerBeanBuilder().build(null, currentSociety);
+        AgentBean agent = ApplicationContext.getAgentBeanBuilder().build(null, currentSociety);
         CommandBean bean = new CommandBean(currentSociety, customer, agent);
         CommandMediator mediator = new CommandMediator();
         mediator.setCommandBean(bean);
         bean.setMediator(mediator);
-        new EditCommandDialog(JsamsI18nResource.TITLE_EDIT_COMMAND, bean);
+        new EditCommandDialog(I18nResource.TITLE_EDIT_COMMAND, bean);
         updateUI();
     }
 
@@ -104,7 +104,7 @@ public class SearchCommandPanel<L extends MouseListener> extends
             if (debug) {
                 LOGGER.debug("The command to modify: " + beanToModify);
             }
-            new EditCommandDialog(JsamsI18nResource.TITLE_EDIT_COMMAND, beanToModify);
+            new EditCommandDialog(I18nResource.TITLE_EDIT_COMMAND, beanToModify);
             updateUI();
         }
     }
@@ -157,7 +157,7 @@ public class SearchCommandPanel<L extends MouseListener> extends
             int selectedRowModel = getResultTable().convertRowIndexToModel(selectedRow);
             CommandTableModel model = (CommandTableModel) getResultTable().getModel();
             CommandBean beanToPdf = model.getRow(selectedRowModel);
-            PdfCommandServiceImpl pdfService = JsamsApplicationContext.getPdfCommandService();
+            PdfCommandServiceImpl pdfService = ApplicationContext.getPdfCommandService();
             pdfService.generatePdf(beanToPdf);
         }
     }

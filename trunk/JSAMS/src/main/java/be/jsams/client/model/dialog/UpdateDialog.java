@@ -6,11 +6,11 @@ import java.awt.Font;
 import javax.swing.JPanel;
 import javax.swing.plaf.FontUIResource;
 
-import be.jsams.client.context.JsamsApplicationContext;
-import be.jsams.client.desktop.JsamsMainFrame;
+import be.jsams.client.context.ApplicationContext;
+import be.jsams.client.desktop.MainFrame;
 import be.jsams.client.i18n.I18nString;
-import be.jsams.client.i18n.JsamsI18nLabelResource;
-import be.jsams.client.i18n.JsamsI18nResource;
+import be.jsams.client.i18n.I18nLabelResource;
+import be.jsams.client.i18n.I18nResource;
 import be.jsams.client.swing.action.DownloadUpdateAction;
 import be.jsams.client.swing.component.AbstractJsamsFrame;
 import be.jsams.client.swing.component.JsamsButton;
@@ -39,10 +39,10 @@ public class UpdateDialog extends JsamsDialog {
     /**
      * Constructor.
      * 
-     * @param parent the parent {@link JsamsMainFrame}
+     * @param parent the parent {@link MainFrame}
      * @param title the title
      */
-    public UpdateDialog(JsamsMainFrame parent, I18nString title) {
+    public UpdateDialog(MainFrame parent, I18nString title) {
         super(parent, title, IconUtil.TITLE_ICON_PREFIX + "status/software-update-available.png");
         initComponents();
     }
@@ -55,21 +55,21 @@ public class UpdateDialog extends JsamsDialog {
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
         builder.setDefaultDialogBorder();
 
-        String installedVersion = JsamsApplicationContext.getPropertyHolder().retrieveInstalledVersion();
-        String availableVersion = JsamsApplicationContext.getDownloaderService().retrieveAvailableUpdateVersion();
+        String installedVersion = ApplicationContext.getPropertyHolder().retrieveInstalledVersion();
+        String availableVersion = ApplicationContext.getDownloaderService().retrieveAvailableUpdateVersion();
         JsamsLabel labelInstalled = new JsamsLabel(installedVersion);
         FontUIResource font = new FontUIResource(Font.SANS_SERIF, Font.BOLD, 13);
         labelInstalled.setFont(font);
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_APPLICATION_VERSION_INSTALLED.getKey(), labelInstalled);
+        builder.appendI15d(I18nLabelResource.LABEL_APPLICATION_VERSION_INSTALLED.getKey(), labelInstalled);
         JsamsLabel labelAvailable = new JsamsLabel(availableVersion);
         labelAvailable.setFont(font);
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_APPLICATION_VERSION_AVAILABLE.getKey(), labelAvailable);
+        builder.appendI15d(I18nLabelResource.LABEL_APPLICATION_VERSION_AVAILABLE.getKey(), labelAvailable);
         builder.nextLine();
         boolean updateAvailable = !installedVersion.equalsIgnoreCase(availableVersion);
         if (!updateAvailable) {
-            builder.appendI15d(JsamsI18nLabelResource.LABEL_APPLICATION_VERSION_UP_TO_DATE.getKey());
+            builder.appendI15d(I18nLabelResource.LABEL_APPLICATION_VERSION_UP_TO_DATE.getKey());
         } else {
-            JsamsButton updateButton = new JsamsButton(JsamsI18nResource.BUTTON_APPLICATION_VERSION_TO_UPDATE);
+            JsamsButton updateButton = new JsamsButton(I18nResource.BUTTON_APPLICATION_VERSION_TO_UPDATE);
             updateButton.setAction(new DownloadUpdateAction(updateButton.getText(), updateButton.getIcon()));
             builder.appendI15d("", updateButton);
         }

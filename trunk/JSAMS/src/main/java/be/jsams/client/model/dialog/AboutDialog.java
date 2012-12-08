@@ -15,9 +15,9 @@ import javax.swing.plaf.FontUIResource;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import be.jsams.client.desktop.JsamsMainFrame;
+import be.jsams.client.desktop.MainFrame;
 import be.jsams.client.i18n.I18nString;
-import be.jsams.client.i18n.JsamsI18nLabelResource;
+import be.jsams.client.i18n.I18nLabelResource;
 import be.jsams.client.i18n.UserContext;
 import be.jsams.client.swing.component.AbstractJsamsFrame;
 import be.jsams.client.swing.component.JsamsDialog;
@@ -59,7 +59,7 @@ public class AboutDialog extends JsamsDialog {
      * @param parent the parent frame
      * @param title the title
      */
-    public AboutDialog(JsamsMainFrame parent, I18nString title) {
+    public AboutDialog(MainFrame parent, I18nString title) {
         super(parent, title, IconUtil.TITLE_ICON_PREFIX + "categories/applications-office.png");
         initComponents();
     }
@@ -71,7 +71,7 @@ public class AboutDialog extends JsamsDialog {
         FormLayout layout = new FormLayout("left:pref, 3dlu", "pref, 5dlu");
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
         builder.setDefaultDialogBorder();
-        JsamsLabel applicationLabel = new JsamsLabel(JsamsI18nLabelResource.LABEL_APPLICATION);
+        JsamsLabel applicationLabel = new JsamsLabel(I18nLabelResource.LABEL_APPLICATION);
         applicationLabel.setFont(new FontUIResource(Font.SANS_SERIF, Font.BOLD, 12));
         builder.append(applicationLabel);
         builder.nextLine();
@@ -79,7 +79,7 @@ public class AboutDialog extends JsamsDialog {
         builder.nextLine();
         
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-        I18nString translation = JsamsI18nLabelResource.LABEL_VERSION;
+        I18nString translation = I18nLabelResource.LABEL_VERSION;
         Properties properties = new Properties();
         try {
             properties.load(classLoader.getResourceAsStream(JSAMS_APPLICATION_VERSION_PROPERTIES));

@@ -2,7 +2,7 @@ package be.jsams.client.wizard.transfer;
 
 import javax.swing.JRadioButton;
 
-import be.jsams.client.i18n.JsamsI18nLabelResource;
+import be.jsams.client.i18n.I18nLabelResource;
 import be.jsams.client.swing.component.AbstractJsamsFrame;
 import be.jsams.client.validator.wizard.SourceTypeValidator;
 import be.jsams.client.wizard.JsamsWizardComponent;
@@ -44,7 +44,7 @@ public class SourceChooserWizardPanel extends JsamsWizardPanel<TransferBean, Sou
      */
     public SourceChooserWizardPanel(TransferWizardDialog parent, JsamsWizardComponent component, TransferBean model,
             SourceTypeValidator validator) {
-        super(parent, component, model, JsamsI18nLabelResource.LABEL_TRANSFER_CHOOSE_SOURCE, validator);
+        super(parent, component, model, I18nLabelResource.LABEL_TRANSFER_CHOOSE_SOURCE, validator);
         initComponents();
     }
 
@@ -67,10 +67,10 @@ public class SourceChooserWizardPanel extends JsamsWizardPanel<TransferBean, Sou
 
         FormLayout layout = new FormLayout("left:p, 3dlu, p", "p");
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_ESTIMATE.getKey(), estimateRadioButton);
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_COMMAND.getKey(), commandRadioButton);
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_DELIVERY_ORDER.getKey(), deliveryOrderRadioButton);
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_BILL.getKey(), billRadioButton);
+        builder.appendI15d(I18nLabelResource.LABEL_ESTIMATE.getKey(), estimateRadioButton);
+        builder.appendI15d(I18nLabelResource.LABEL_COMMAND.getKey(), commandRadioButton);
+        builder.appendI15d(I18nLabelResource.LABEL_DELIVERY_ORDER.getKey(), deliveryOrderRadioButton);
+        builder.appendI15d(I18nLabelResource.LABEL_BILL.getKey(), billRadioButton);
         this.add(builder.getPanel());
         super.update();
     }

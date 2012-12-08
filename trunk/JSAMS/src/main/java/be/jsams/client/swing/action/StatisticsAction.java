@@ -4,8 +4,8 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
 
-import be.jsams.client.desktop.JsamsDesktop;
-import be.jsams.client.i18n.JsamsI18nResource;
+import be.jsams.client.desktop.Desktop;
+import be.jsams.client.i18n.I18nResource;
 import be.jsams.client.model.panel.StatisticsPanel;
 
 /**
@@ -26,8 +26,8 @@ public class StatisticsAction extends AbstractAction {
      */
     public void actionPerformed(ActionEvent e) {
         StatisticsPanel panel = new StatisticsPanel();
-        JsamsDesktop.getInstance().getMainWindow().getTabbedPane()
-                .addTab(JsamsI18nResource.TITLE_STATISTICS, "apps/accessories-calculator.png", panel);
+        Desktop.getInstance().getMainWindow().getTabbedPane()
+                .addTab(I18nResource.TITLE_STATISTICS, "apps/accessories-calculator.png", panel);
     }
 
 }

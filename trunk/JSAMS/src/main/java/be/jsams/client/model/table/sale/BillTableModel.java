@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import be.jsams.client.i18n.JsamsI18nResource;
+import be.jsams.client.i18n.I18nResource;
 import be.jsams.client.i18n.UserContext;
 import be.jsams.client.model.table.AbstractJsamsTableModel;
 import be.jsams.common.bean.model.PaymentModeBean;
@@ -37,9 +37,9 @@ public class BillTableModel extends AbstractJsamsTableModel<BillBean> {
      */
     public BillTableModel(List<BillBean> listBean) {
         super(listBean);
-        setColumnNames(Arrays.asList(JsamsI18nResource.COLUMN_ID, JsamsI18nResource.COLUMN_CREATION_DATE,
-                JsamsI18nResource.COLUMN_PAID, JsamsI18nResource.COLUMN_CLOSED, JsamsI18nResource.COLUMN_PAYMENT_MODE,
-                JsamsI18nResource.COLUMN_DISCOUNT_RATE));
+        setColumnNames(Arrays.asList(I18nResource.COLUMN_ID, I18nResource.COLUMN_CREATION_DATE,
+                I18nResource.COLUMN_PAID, I18nResource.COLUMN_CLOSED, I18nResource.COLUMN_PAYMENT_MODE,
+                I18nResource.COLUMN_DISCOUNT_RATE));
     }
 
     /**

@@ -3,7 +3,7 @@ package be.jsams.client.model.table.management;
 import java.util.Arrays;
 import java.util.List;
 
-import be.jsams.client.i18n.JsamsI18nResource;
+import be.jsams.client.i18n.I18nResource;
 import be.jsams.client.model.table.AbstractJsamsTableModel;
 import be.jsams.common.bean.model.management.ProductCategoryBean;
 
@@ -34,8 +34,8 @@ public class ProductCategoryTableModel extends AbstractJsamsTableModel<ProductCa
      */
     public ProductCategoryTableModel(List<ProductCategoryBean> listModel) {
         super(listModel);
-        setColumnNames(Arrays.asList(JsamsI18nResource.COLUMN_ID, JsamsI18nResource.COLUMN_LABEL_EN,
-                JsamsI18nResource.COLUMN_LABEL_FR, JsamsI18nResource.COLUMN_LABEL_NL));
+        setColumnNames(Arrays.asList(I18nResource.COLUMN_ID, I18nResource.COLUMN_LABEL_EN,
+                I18nResource.COLUMN_LABEL_FR, I18nResource.COLUMN_LABEL_NL));
     }
 
     /**

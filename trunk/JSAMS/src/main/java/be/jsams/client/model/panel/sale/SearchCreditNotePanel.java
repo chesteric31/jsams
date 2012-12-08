@@ -8,9 +8,9 @@ import javax.swing.ListSelectionModel;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import be.jsams.client.context.JsamsApplicationContext;
-import be.jsams.client.desktop.JsamsDesktop;
-import be.jsams.client.i18n.JsamsI18nResource;
+import be.jsams.client.context.ApplicationContext;
+import be.jsams.client.desktop.Desktop;
+import be.jsams.client.i18n.I18nResource;
 import be.jsams.client.model.dialog.sale.EditCreditNoteDialog;
 import be.jsams.client.model.table.sale.CreditNoteTableModel;
 import be.jsams.client.validator.search.sale.SearchCreditNoteValidator;
@@ -77,13 +77,13 @@ public class SearchCreditNotePanel<L extends MouseListener> extends
      */
     @Override
     protected void performButtonAdd() {
-        SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
-        CustomerBean customerBean = JsamsApplicationContext.getCustomerBeanBuilder().build(null, currentSociety);
+        SocietyBean currentSociety = Desktop.getInstance().getCurrentSociety();
+        CustomerBean customerBean = ApplicationContext.getCustomerBeanBuilder().build(null, currentSociety);
         CreditNoteBean bean = new CreditNoteBean(currentSociety, customerBean);
         CreditNoteMediator mediator = new CreditNoteMediator();
         mediator.setCreditNoteBean(bean);
         bean.setMediator(mediator);
-        new EditCreditNoteDialog(JsamsI18nResource.TITLE_EDIT_CREDIT_NOTE, bean);
+        new EditCreditNoteDialog(I18nResource.TITLE_EDIT_CREDIT_NOTE, bean);
         updateUI();
     }
 
@@ -103,7 +103,7 @@ public class SearchCreditNotePanel<L extends MouseListener> extends
             if (debug) {
                 LOGGER.debug("The credit note to modify: " + beanToModify);
             }
-            new EditCreditNoteDialog(JsamsI18nResource.TITLE_EDIT_CREDIT_NOTE, beanToModify);
+            new EditCreditNoteDialog(I18nResource.TITLE_EDIT_CREDIT_NOTE, beanToModify);
             updateUI();
         }
     }
@@ -156,7 +156,7 @@ public class SearchCreditNotePanel<L extends MouseListener> extends
             int selectedRowModel = getResultTable().convertRowIndexToModel(selectedRow);
             CreditNoteTableModel model = (CreditNoteTableModel) getResultTable().getModel();
             CreditNoteBean beanToPdf = model.getRow(selectedRowModel);
-            PdfCreditNoteServiceImpl pdfService = JsamsApplicationContext.getPdfCreditNoteService();
+            PdfCreditNoteServiceImpl pdfService = ApplicationContext.getPdfCreditNoteService();
             pdfService.generatePdf(beanToPdf);
         }
     }

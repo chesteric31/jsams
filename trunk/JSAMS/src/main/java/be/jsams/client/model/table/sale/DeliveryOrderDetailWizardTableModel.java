@@ -3,7 +3,7 @@ package be.jsams.client.model.table.sale;
 import java.util.Arrays;
 import java.util.List;
 
-import be.jsams.client.i18n.JsamsI18nResource;
+import be.jsams.client.i18n.I18nResource;
 import be.jsams.client.model.table.AbstractJsamsTableModel;
 import be.jsams.common.bean.model.management.ProductBean;
 import be.jsams.common.bean.model.sale.detail.DeliveryOrderDetailBean;
@@ -28,9 +28,9 @@ public class DeliveryOrderDetailWizardTableModel extends AbstractJsamsTableModel
      */
     public DeliveryOrderDetailWizardTableModel(List<DeliveryOrderDetailBean> listBean) {
         super(listBean);
-        setColumnNames(Arrays.asList(JsamsI18nResource.COLUMN_DELIVERY_ORDER_ID, JsamsI18nResource.COLUMN_PRODUCT_ID,
-                JsamsI18nResource.COLUMN_PRODUCT_NAME, JsamsI18nResource.COLUMN_QUANTITY,
-                JsamsI18nResource.COLUMN_DISCOUNT_RATE, JsamsI18nResource.COLUMN_VAT_APPLICABLE));
+        setColumnNames(Arrays.asList(I18nResource.COLUMN_DELIVERY_ORDER_ID, I18nResource.COLUMN_PRODUCT_ID,
+                I18nResource.COLUMN_PRODUCT_NAME, I18nResource.COLUMN_QUANTITY,
+                I18nResource.COLUMN_DISCOUNT_RATE, I18nResource.COLUMN_VAT_APPLICABLE));
     }
 
     /**

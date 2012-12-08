@@ -4,8 +4,8 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
 
-import be.jsams.client.desktop.JsamsDesktop;
-import be.jsams.client.i18n.JsamsI18nResource;
+import be.jsams.client.desktop.Desktop;
+import be.jsams.client.i18n.I18nResource;
 import be.jsams.client.model.dialog.management.EditProductDialog;
 import be.jsams.common.bean.builder.ProductBeanBuilder;
 
@@ -27,8 +27,8 @@ public class NewProductAction extends AbstractAction {
      */
     public void actionPerformed(ActionEvent e) {
         ProductBeanBuilder builder = new ProductBeanBuilder();
-        builder.setSociety(JsamsDesktop.getInstance().getCurrentSociety());
-        new EditProductDialog(JsamsI18nResource.TITLE_EDIT_PRODUCT, builder.build(true, false));
+        builder.setSociety(Desktop.getInstance().getCurrentSociety());
+        new EditProductDialog(I18nResource.TITLE_EDIT_PRODUCT, builder.build(true, false));
     }
 
 }

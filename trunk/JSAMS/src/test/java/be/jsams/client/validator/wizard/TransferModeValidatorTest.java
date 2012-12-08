@@ -7,8 +7,8 @@ import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import be.jsams.client.i18n.I18nApplicationContext;
-import be.jsams.client.i18n.JsamsI18nLabelResource;
-import be.jsams.client.i18n.JsamsI18nResource;
+import be.jsams.client.i18n.I18nLabelResource;
+import be.jsams.client.i18n.I18nResource;
 import be.jsams.client.validator.AbstractValidatorTest;
 import be.jsams.common.bean.model.MockBeanGenerator;
 import be.jsams.common.bean.model.transfer.TransferBean;
@@ -55,8 +55,8 @@ public class TransferModeValidatorTest extends AbstractValidatorTest {
         bean.setTransferMode(0);
         ValidationResult result = validator.validate(bean);
         String formattedText = retrieveFormattedText(result);
-        assertTrue(formattedText.contains(JsamsI18nResource.ERROR_IS_MANDATORY.getTranslation()));
-        assertTrue(formattedText.contains(JsamsI18nLabelResource.LABEL_TRANSFER_MODE.getTranslation()));
+        assertTrue(formattedText.contains(I18nResource.ERROR_IS_MANDATORY.getTranslation()));
+        assertTrue(formattedText.contains(I18nLabelResource.LABEL_TRANSFER_MODE.getTranslation()));
     }
 
 }

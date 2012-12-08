@@ -13,12 +13,12 @@ import be.jsams.client.swing.listener.TabbedPaneKeyListener;
 
 /**
  * {@link JPanel} that contains the {@link JLayeredPane}
- *  with {@link JsamsSplashPanel} and {@link JsamsCloseableTabbedPane}.
+ *  with {@link SplashPanel} and {@link JsamsCloseableTabbedPane}.
  *
  * @author chesteric31
  * @version $Revision$ $Date::                  $ $Author$
  */
-public class JsamsMainPanel extends JPanel {
+public class MainPanel extends JPanel {
 
     /**
      * Serial
@@ -26,13 +26,13 @@ public class JsamsMainPanel extends JPanel {
     private static final long serialVersionUID = 4422624883682080583L;
     
     private JLayeredPane layeredPane;
-    private JsamsSplashPanel splashPanel;
+    private SplashPanel splashPanel;
     private JsamsCloseableTabbedPane tabbedPane;
     
     /**
      * Default constructor.
      */
-    public JsamsMainPanel() {
+    public MainPanel() {
         initComponents();
     }
 
@@ -43,7 +43,7 @@ public class JsamsMainPanel extends JPanel {
         setLayout(new BorderLayout());
         layeredPane = new JLayeredPane();
         layeredPane.setLayout(new BorderLayout());
-        splashPanel = JsamsSplashPanel.getInstance();
+        splashPanel = SplashPanel.getInstance();
         tabbedPane = new JsamsCloseableTabbedPane();
         tabbedPane.addKeyListener(new TabbedPaneKeyListener());
         Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();

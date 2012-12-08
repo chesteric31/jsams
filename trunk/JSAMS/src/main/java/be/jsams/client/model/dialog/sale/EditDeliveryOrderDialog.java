@@ -2,7 +2,7 @@ package be.jsams.client.model.dialog.sale;
 
 import javax.swing.JPanel;
 
-import be.jsams.client.context.JsamsApplicationContext;
+import be.jsams.client.context.ApplicationContext;
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.model.dialog.AbstractEditDialog;
 import be.jsams.client.validator.edit.sale.EditDeliveryOrderValidator;
@@ -34,7 +34,7 @@ public class EditDeliveryOrderDialog extends
      * @param model the {@link DeliveryOrderBean} model
      */
     public EditDeliveryOrderDialog(final I18nString title, DeliveryOrderBean model) {
-        super(null, title, model, new EditDeliveryOrderValidator(), JsamsApplicationContext.getDeliveryOrderService());
+        super(null, title, model, new EditDeliveryOrderValidator(), ApplicationContext.getDeliveryOrderService());
     }
 
     /**

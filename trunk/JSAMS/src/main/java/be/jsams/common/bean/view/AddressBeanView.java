@@ -2,7 +2,7 @@ package be.jsams.common.bean.view;
 
 import javax.swing.JPanel;
 
-import be.jsams.client.i18n.JsamsI18nLabelResource;
+import be.jsams.client.i18n.I18nLabelResource;
 import be.jsams.client.swing.component.AbstractJsamsFrame;
 import be.jsams.client.swing.component.JsamsTextField;
 import be.jsams.common.bean.model.AddressBean;
@@ -54,16 +54,16 @@ public class AddressBeanView extends AbstractBeanView<AddressBean> implements Ed
                 "right:p, 3dlu, 45dlu, 3dlu, right:p, 3dlu, 45dlu, 3dlu, right:p, 3dlu, 45dlu:grow", "p");
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
         final int maxColumnSpan = 9;
-        builder.appendSeparator(JsamsI18nLabelResource.LABEL_ADDRESS.getTranslation());
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_STREET.getKey(), textFieldStreet, maxColumnSpan);
+        builder.appendSeparator(I18nLabelResource.LABEL_ADDRESS.getTranslation());
+        builder.appendI15d(I18nLabelResource.LABEL_STREET.getKey(), textFieldStreet, maxColumnSpan);
         builder.nextLine();
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_NUMBER.getKey(), textFieldNumber);
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_BOX.getKey(), textFieldBox);
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_ZIP_CODE.getKey(), textFieldZipCode);
+        builder.appendI15d(I18nLabelResource.LABEL_NUMBER.getKey(), textFieldNumber);
+        builder.appendI15d(I18nLabelResource.LABEL_BOX.getKey(), textFieldBox);
+        builder.appendI15d(I18nLabelResource.LABEL_ZIP_CODE.getKey(), textFieldZipCode);
         builder.nextLine();
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_CITY.getKey(), textFieldCity, maxColumnSpan);
+        builder.appendI15d(I18nLabelResource.LABEL_CITY.getKey(), textFieldCity, maxColumnSpan);
         builder.nextLine();
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_COUNTRY.getKey(), textFieldCountry, maxColumnSpan);
+        builder.appendI15d(I18nLabelResource.LABEL_COUNTRY.getKey(), textFieldCountry, maxColumnSpan);
         return builder.getPanel();
     }
 

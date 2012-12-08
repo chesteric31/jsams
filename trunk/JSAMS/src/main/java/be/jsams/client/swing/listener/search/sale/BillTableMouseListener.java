@@ -1,6 +1,6 @@
 package be.jsams.client.swing.listener.search.sale;
 
-import be.jsams.client.i18n.JsamsI18nResource;
+import be.jsams.client.i18n.I18nResource;
 import be.jsams.client.model.dialog.sale.EditBillDialog;
 import be.jsams.client.model.table.sale.BillTableModel;
 import be.jsams.client.swing.component.JsamsTable;
@@ -20,7 +20,7 @@ public class BillTableMouseListener extends AbstractTableMouseListener {
     @Override
     protected void handleDoubleClicking(JsamsTable table, int selectedRowModel) {
         BillTableModel model = (BillTableModel) table.getModel();
-        new EditBillDialog(JsamsI18nResource.TITLE_EDIT_BILL, model.getRow(selectedRowModel));
+        new EditBillDialog(I18nResource.TITLE_EDIT_BILL, model.getRow(selectedRowModel));
     }
     
 }

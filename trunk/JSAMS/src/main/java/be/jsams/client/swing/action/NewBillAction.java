@@ -4,9 +4,9 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
 
-import be.jsams.client.context.JsamsApplicationContext;
-import be.jsams.client.desktop.JsamsDesktop;
-import be.jsams.client.i18n.JsamsI18nResource;
+import be.jsams.client.context.ApplicationContext;
+import be.jsams.client.desktop.Desktop;
+import be.jsams.client.i18n.I18nResource;
 import be.jsams.client.model.dialog.sale.EditBillDialog;
 import be.jsams.common.bean.model.PaymentModeBean;
 import be.jsams.common.bean.model.SocietyBean;
@@ -32,14 +32,14 @@ public class NewBillAction extends AbstractAction {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
-        CustomerBean customer = JsamsApplicationContext.getCustomerBeanBuilder().build(null, currentSociety);
-        PaymentModeBean mode = JsamsApplicationContext.getPaymentModeBeanBuilder().build();
+        SocietyBean currentSociety = Desktop.getInstance().getCurrentSociety();
+        CustomerBean customer = ApplicationContext.getCustomerBeanBuilder().build(null, currentSociety);
+        PaymentModeBean mode = ApplicationContext.getPaymentModeBeanBuilder().build();
         BillBean bean = new BillBean(currentSociety, customer, mode);
         BillMediator mediator = new BillMediator();
         mediator.setBillBean(bean);
         bean.setMediator(mediator);
-        new EditBillDialog(JsamsI18nResource.TITLE_EDIT_BILL, bean);
+        new EditBillDialog(I18nResource.TITLE_EDIT_BILL, bean);
     }
 
 }

@@ -4,9 +4,9 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
 
-import be.jsams.client.context.JsamsApplicationContext;
-import be.jsams.client.desktop.JsamsDesktop;
-import be.jsams.client.i18n.JsamsI18nResource;
+import be.jsams.client.context.ApplicationContext;
+import be.jsams.client.desktop.Desktop;
+import be.jsams.client.i18n.I18nResource;
 import be.jsams.client.model.dialog.management.EditCustomerDialog;
 import be.jsams.common.bean.model.management.CustomerBean;
 
@@ -27,9 +27,9 @@ public class NewCustomerAction extends AbstractAction {
      * {@inheritDoc}
      */
     public void actionPerformed(ActionEvent e) {
-        CustomerBean customerBean = JsamsApplicationContext.getCustomerBeanBuilder().build(null,
-                JsamsDesktop.getInstance().getCurrentSociety());
-        new EditCustomerDialog(JsamsI18nResource.TITLE_EDIT_CUSTOMER, customerBean);
+        CustomerBean customerBean = ApplicationContext.getCustomerBeanBuilder().build(null,
+                Desktop.getInstance().getCurrentSociety());
+        new EditCustomerDialog(I18nResource.TITLE_EDIT_CUSTOMER, customerBean);
     }
 
 }

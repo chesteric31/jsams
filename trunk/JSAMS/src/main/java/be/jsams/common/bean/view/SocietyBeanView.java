@@ -13,8 +13,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 
-import be.jsams.client.i18n.JsamsI18nLabelResource;
-import be.jsams.client.i18n.JsamsI18nResource;
+import be.jsams.client.i18n.I18nLabelResource;
+import be.jsams.client.i18n.I18nResource;
 import be.jsams.client.swing.component.AbstractJsamsFrame;
 import be.jsams.client.swing.component.JsamsButton;
 import be.jsams.client.swing.component.JsamsFormattedTextField;
@@ -71,7 +71,7 @@ public class SocietyBeanView extends AbstractBeanView<SocietyBean> implements Ed
             ImageIcon imageIcon = new ImageIcon(file.getAbsolutePath());
             labelLogo.setIcon(imageIcon);
         }
-        JsamsButton buttonBrowseLogo = new JsamsButton(JsamsI18nResource.BUTTON_BROWSE_LOGO);
+        JsamsButton buttonBrowseLogo = new JsamsButton(I18nResource.BUTTON_BROWSE_LOGO);
         buttonBrowseLogo.addActionListener(new ActionListener() {
             
             /**
@@ -121,7 +121,7 @@ public class SocietyBeanView extends AbstractBeanView<SocietyBean> implements Ed
             }
         });
 
-        JsamsButton buttonResetLogo = new JsamsButton(JsamsI18nResource.BUTTON_RESET_LOGO);
+        JsamsButton buttonResetLogo = new JsamsButton(I18nResource.BUTTON_RESET_LOGO);
         buttonResetLogo.addActionListener(new ActionListener() {
 
             /**
@@ -138,28 +138,28 @@ public class SocietyBeanView extends AbstractBeanView<SocietyBean> implements Ed
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
         builder.setDefaultDialogBorder();
         final int maxColumnSpan = 3;
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_NAME.getKey(), textFieldName);
+        builder.appendI15d(I18nLabelResource.LABEL_NAME.getKey(), textFieldName);
         builder.nextLine();
         builder.append(bean.getAddress().buildView().createEditView(), maxColumnSpan);
         builder.nextLine();
         builder.append(bean.getContactInformation().buildView().createEditView(), maxColumnSpan);
         builder.nextLine();
-        builder.appendSeparator(JsamsI18nLabelResource.LABEL_MISC.getTranslation());
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_LEGAL_FORM.getKey(), bean.getLegalForm().buildView()
+        builder.appendSeparator(I18nLabelResource.LABEL_MISC.getTranslation());
+        builder.appendI15d(I18nLabelResource.LABEL_LEGAL_FORM.getKey(), bean.getLegalForm().buildView()
                 .createEditView(), 1);
         builder.nextLine();
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_CAPITAL.getKey(), textFieldCapital);
+        builder.appendI15d(I18nLabelResource.LABEL_CAPITAL.getKey(), textFieldCapital);
         builder.nextLine();
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_ACTIVITY.getKey(), textFieldActivity);
+        builder.appendI15d(I18nLabelResource.LABEL_ACTIVITY.getKey(), textFieldActivity);
         builder.nextLine();
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_RESPONSIBLE.getKey(), textFieldResponsible);
+        builder.appendI15d(I18nLabelResource.LABEL_RESPONSIBLE.getKey(), textFieldResponsible);
         builder.nextLine();
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_VAT_NUMBER.getKey(), textFieldVatNumber);
+        builder.appendI15d(I18nLabelResource.LABEL_VAT_NUMBER.getKey(), textFieldVatNumber);
         builder.nextLine();
         ButtonBarBuilder2 barBuilder = new ButtonBarBuilder2();
         barBuilder.addButton(buttonBrowseLogo);
         barBuilder.addButton(buttonResetLogo);
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_LOGO.getKey(), labelLogo);
+        builder.appendI15d(I18nLabelResource.LABEL_LOGO.getKey(), labelLogo);
         builder.nextLine();
         builder.append(barBuilder.getPanel(), 3);
         return builder.getPanel();

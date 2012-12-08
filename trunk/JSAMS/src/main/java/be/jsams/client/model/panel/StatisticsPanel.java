@@ -7,8 +7,8 @@ import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
-import be.jsams.client.context.JsamsApplicationContext;
-import be.jsams.client.desktop.JsamsDesktop;
+import be.jsams.client.context.ApplicationContext;
+import be.jsams.client.desktop.Desktop;
 import be.jsams.client.swing.component.JsamsLabel;
 import be.jsams.client.swing.component.JsamsStatusBar;
 
@@ -54,8 +54,8 @@ public class StatisticsPanel extends JPanel {
      * Builds the main panel contained all the components.
      */
     protected void buildMainPanel() {
-        BigDecimal globalTurnover = JsamsApplicationContext.getBillService().findGlobalTurnover(
-                JsamsDesktop.getInstance().getCurrentSociety());
+        BigDecimal globalTurnover = ApplicationContext.getBillService().findGlobalTurnover(
+                Desktop.getInstance().getCurrentSociety());
         this.add(new JsamsLabel(globalTurnover.toPlainString()));
         // JPanel searchCriteriaPanel = buildCriteriaPanel();
         // this.add(searchCriteriaPanel, BorderLayout.NORTH);

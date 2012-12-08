@@ -1,6 +1,6 @@
 package be.jsams.client.swing.listener.search.sale;
 
-import be.jsams.client.i18n.JsamsI18nResource;
+import be.jsams.client.i18n.I18nResource;
 import be.jsams.client.model.dialog.sale.EditCommandDialog;
 import be.jsams.client.model.table.sale.CommandTableModel;
 import be.jsams.client.swing.component.JsamsTable;
@@ -20,7 +20,7 @@ public class CommandTableMouseListener extends AbstractTableMouseListener {
     @Override
     protected void handleDoubleClicking(JsamsTable table, int selectedRowModel) {
         CommandTableModel model = (CommandTableModel) table.getModel();
-        new EditCommandDialog(JsamsI18nResource.TITLE_EDIT_COMMAND, model.getRow(selectedRowModel));
+        new EditCommandDialog(I18nResource.TITLE_EDIT_COMMAND, model.getRow(selectedRowModel));
     }
 
 }

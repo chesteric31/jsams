@@ -8,9 +8,9 @@ import javax.swing.table.TableRowSorter;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import be.jsams.client.context.JsamsApplicationContext;
-import be.jsams.client.desktop.JsamsDesktop;
-import be.jsams.client.i18n.JsamsI18nResource;
+import be.jsams.client.context.ApplicationContext;
+import be.jsams.client.desktop.Desktop;
+import be.jsams.client.i18n.I18nResource;
 import be.jsams.client.model.dialog.management.EditCustomerDialog;
 import be.jsams.client.model.panel.AbstractSearchPanel;
 import be.jsams.client.model.table.management.CustomerTableModel;
@@ -74,9 +74,9 @@ public class SearchCustomerPanel
      */
     @Override
     protected void performButtonAdd() {
-        CustomerBean customerBean = JsamsApplicationContext.getCustomerBeanBuilder().build(null,
-                JsamsDesktop.getInstance().getCurrentSociety());
-        new EditCustomerDialog(JsamsI18nResource.TITLE_EDIT_CUSTOMER, customerBean);
+        CustomerBean customerBean = ApplicationContext.getCustomerBeanBuilder().build(null,
+                Desktop.getInstance().getCurrentSociety());
+        new EditCustomerDialog(I18nResource.TITLE_EDIT_CUSTOMER, customerBean);
         updateUI();
     }
 
@@ -93,7 +93,7 @@ public class SearchCustomerPanel
             if (debug) {
                 LOGGER.debug("The customer to modify: " + beanToModify);
             }
-            new EditCustomerDialog(JsamsI18nResource.TITLE_EDIT_CUSTOMER, beanToModify);
+            new EditCustomerDialog(I18nResource.TITLE_EDIT_CUSTOMER, beanToModify);
             updateUI();
         }
     }

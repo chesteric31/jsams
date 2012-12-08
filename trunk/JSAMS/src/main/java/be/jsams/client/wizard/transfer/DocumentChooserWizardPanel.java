@@ -2,9 +2,9 @@ package be.jsams.client.wizard.transfer;
 
 import javax.swing.ListSelectionModel;
 
-import be.jsams.client.context.JsamsApplicationContext;
-import be.jsams.client.desktop.JsamsDesktop;
-import be.jsams.client.i18n.JsamsI18nLabelResource;
+import be.jsams.client.context.ApplicationContext;
+import be.jsams.client.desktop.Desktop;
+import be.jsams.client.i18n.I18nLabelResource;
 import be.jsams.client.model.panel.sale.SearchBillPanel;
 import be.jsams.client.model.panel.sale.SearchCommandPanel;
 import be.jsams.client.model.panel.sale.SearchDeliveryOrderPanel;
@@ -57,7 +57,7 @@ public class DocumentChooserWizardPanel extends AbstractDocumentChooserWizardPan
      */
     public DocumentChooserWizardPanel(TransferWizardDialog parent, JsamsWizardComponent component,
             TransferBean model, DocumentValidator validator) {
-        super(parent, component, model, validator, JsamsI18nLabelResource.LABEL_TRANSFER_CHOOSE_DOCUMENT);
+        super(parent, component, model, validator, I18nLabelResource.LABEL_TRANSFER_CHOOSE_DOCUMENT);
     }
 
     /**
@@ -66,9 +66,9 @@ public class DocumentChooserWizardPanel extends AbstractDocumentChooserWizardPan
     @Override
     public void updateContainer() {
         int source = getModel().getSourceType();
-        SocietyBean currentSociety = JsamsDesktop.getInstance().getCurrentSociety();
-        CustomerBean customer = JsamsApplicationContext.getCustomerBeanBuilder().build(null, currentSociety);
-        AgentBean agent = JsamsApplicationContext.getAgentBeanBuilder().build(null, currentSociety);
+        SocietyBean currentSociety = Desktop.getInstance().getCurrentSociety();
+        CustomerBean customer = ApplicationContext.getCustomerBeanBuilder().build(null, currentSociety);
+        AgentBean agent = ApplicationContext.getAgentBeanBuilder().build(null, currentSociety);
 
         switch (source) {
         case 1:
@@ -78,7 +78,7 @@ public class DocumentChooserWizardPanel extends AbstractDocumentChooserWizardPan
             SearchEstimatePanel<EstimateWizardSingleSelectionTableML> estimatePanel
                 = new SearchEstimatePanel<EstimateWizardSingleSelectionTableML>(
                     estimate, new EstimateWizardSingleSelectionTableML(getModel()),
-                    JsamsApplicationContext.getEstimateService(), new SearchEstimateValidator(),
+                    ApplicationContext.getEstimateService(), new SearchEstimateValidator(),
                     new EstimateTableModel(), false, ListSelectionModel.SINGLE_SELECTION);
             this.add(estimatePanel);
             break;
@@ -89,7 +89,7 @@ public class DocumentChooserWizardPanel extends AbstractDocumentChooserWizardPan
             SearchCommandPanel<CommandWizardSingleSelectionTableML> commandPanel
                 = new SearchCommandPanel<CommandWizardSingleSelectionTableML>(
                     command, new CommandWizardSingleSelectionTableML(getModel()),
-                    JsamsApplicationContext.getCommandService(), new SearchCommandValidator(), new CommandTableModel(),
+                    ApplicationContext.getCommandService(), new SearchCommandValidator(), new CommandTableModel(),
                     false, ListSelectionModel.SINGLE_SELECTION);
             this.add(commandPanel);
             break;
@@ -100,18 +100,18 @@ public class DocumentChooserWizardPanel extends AbstractDocumentChooserWizardPan
             SearchDeliveryOrderPanel<DeliveryOrderWizardSingleSelectionTableML> deliveryOrderPanel
                 = new SearchDeliveryOrderPanel<DeliveryOrderWizardSingleSelectionTableML>(
                     deliveryOrder, new DeliveryOrderWizardSingleSelectionTableML(getModel()),
-                    JsamsApplicationContext.getDeliveryOrderService(), new SearchDeliveryOrderValidator(),
+                    ApplicationContext.getDeliveryOrderService(), new SearchDeliveryOrderValidator(),
                     new DeliveryOrderTableModel(), false, ListSelectionModel.SINGLE_SELECTION);
             this.add(deliveryOrderPanel);
             break;
         case 4:
-            PaymentModeBeanBuilder builder = JsamsApplicationContext.getPaymentModeBeanBuilder();
+            PaymentModeBeanBuilder builder = ApplicationContext.getPaymentModeBeanBuilder();
             PaymentModeBean mode = builder.build();
             BillBean bill = new BillBean(currentSociety, customer, mode);
             bill.setView(buildBillView(bill));
             SearchBillPanel<BillWizardSingleSelectionTableML> billPanel
                 = new SearchBillPanel<BillWizardSingleSelectionTableML>(
-                    bill, new BillWizardSingleSelectionTableML(getModel()), JsamsApplicationContext.getBillService(),
+                    bill, new BillWizardSingleSelectionTableML(getModel()), ApplicationContext.getBillService(),
                     new SearchBillValidator(), new BillTableModel(), false, ListSelectionModel.SINGLE_SELECTION);
             this.add(billPanel);
             break;

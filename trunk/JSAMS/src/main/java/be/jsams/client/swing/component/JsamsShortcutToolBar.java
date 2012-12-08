@@ -3,7 +3,7 @@ package be.jsams.client.swing.component;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
-import be.jsams.client.i18n.JsamsI18nResource;
+import be.jsams.client.i18n.I18nResource;
 import be.jsams.client.swing.action.NewBillAction;
 import be.jsams.client.swing.action.NewCustomerAction;
 import be.jsams.client.swing.action.NewEstimateAction;
@@ -42,20 +42,20 @@ public class JsamsShortcutToolBar extends JPanel {
      */
     private void initComponents() {
         JPanel panel = new JPanel();
-        panel.setBorder(new TitledBorder(JsamsI18nResource.PANEL_SHORTCUT_TOOLBAR.getTranslation()));
-        newCustomerButton = new JsamsButton(JsamsI18nResource.BUTTON_NEW_CUSTOMER);
+        panel.setBorder(new TitledBorder(I18nResource.PANEL_SHORTCUT_TOOLBAR.getTranslation()));
+        newCustomerButton = new JsamsButton(I18nResource.BUTTON_NEW_CUSTOMER);
         newCustomerButton.addActionListener(new NewCustomerAction());
         newCustomerButton.setEnabled(false);
-        newEstimateButton = new JsamsButton(JsamsI18nResource.BUTTON_NEW_ESTIMATE);
+        newEstimateButton = new JsamsButton(I18nResource.BUTTON_NEW_ESTIMATE);
         newEstimateButton.addActionListener(new NewEstimateAction());
         newEstimateButton.setEnabled(false);
-        newBillButton = new JsamsButton(JsamsI18nResource.BUTTON_NEW_BILL);
+        newBillButton = new JsamsButton(I18nResource.BUTTON_NEW_BILL);
         newBillButton.addActionListener(new NewBillAction());
         newBillButton.setEnabled(false);
-        newProductButton = new JsamsButton(JsamsI18nResource.BUTTON_NEW_PRODUCT);
+        newProductButton = new JsamsButton(I18nResource.BUTTON_NEW_PRODUCT);
         newProductButton.addActionListener(new NewProductAction());
         newProductButton.setEnabled(false);
-        statisticsButton = new JsamsButton(JsamsI18nResource.BUTTON_STATISTICS);
+        statisticsButton = new JsamsButton(I18nResource.BUTTON_STATISTICS);
         statisticsButton.addActionListener(new StatisticsAction());
         statisticsButton.setEnabled(false);
         panel.add(newCustomerButton);

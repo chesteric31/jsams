@@ -16,7 +16,7 @@ public class CommandDetailBeanView extends AbstractDetailBeanView<CommandDetailB
     private static final long serialVersionUID = -2106918618904840995L;
 
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param bean the {@link CommandDetailBean}
      */

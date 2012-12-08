@@ -1,7 +1,7 @@
 package be.jsams.client.validator.wizard;
 
-import be.jsams.client.i18n.JsamsI18nLabelResource;
-import be.jsams.client.i18n.JsamsI18nResource;
+import be.jsams.client.i18n.I18nLabelResource;
+import be.jsams.client.i18n.I18nResource;
 import be.jsams.common.bean.model.transfer.TransferBean;
 
 import com.jgoodies.validation.ValidationResult;
@@ -25,8 +25,8 @@ public class SourceTypeValidator implements Validator<TransferBean> {
         PropertyValidationSupport support = new PropertyValidationSupport(bean, "");
         int sourceType = bean.getSourceType();
         if (sourceType == 0) {
-            support.addError(JsamsI18nLabelResource.LABEL_SOURCE_TYPE.getTranslation(),
-                    JsamsI18nResource.ERROR_IS_MANDATORY.getTranslation());
+            support.addError(I18nLabelResource.LABEL_SOURCE_TYPE.getTranslation(),
+                    I18nResource.ERROR_IS_MANDATORY.getTranslation());
         }
         return support.getResult();
     }

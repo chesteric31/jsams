@@ -11,7 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 
-import be.jsams.client.i18n.JsamsI18nResource;
+import be.jsams.client.i18n.I18nResource;
 
 import com.jgoodies.forms.factories.ButtonBarFactory;
 
@@ -98,7 +98,7 @@ public class JsamsButtonsPanel extends JPanel {
      * @return the OK {@link JsamsButton}
      */
     private JsamsButton buildButtonOk() {
-        buttonOk = new JsamsButton(JsamsI18nResource.BUTTON_OK);
+        buttonOk = new JsamsButton(I18nResource.BUTTON_OK);
         okAction = new AbstractAction(buttonOk.getText()) {
 
             /**
@@ -121,7 +121,7 @@ public class JsamsButtonsPanel extends JPanel {
      * @return the cancel {@link JsamsButton}
      */
     private JsamsButton buildButtonCancel() {
-        buttonCancel = new JsamsButton(JsamsI18nResource.BUTTON_CANCEL);
+        buttonCancel = new JsamsButton(I18nResource.BUTTON_CANCEL);
         cancelAction = new AbstractAction(buttonCancel.getText()) {
 
             /**
@@ -144,7 +144,7 @@ public class JsamsButtonsPanel extends JPanel {
      * @return the reset {@link JsamsButton}
      */
     private JsamsButton buildButtonReset() {
-        buttonReset = new JsamsButton(JsamsI18nResource.BUTTON_RESET);
+        buttonReset = new JsamsButton(I18nResource.BUTTON_RESET);
         resetAction = new AbstractAction(buttonReset.getText()) {
 
             /**

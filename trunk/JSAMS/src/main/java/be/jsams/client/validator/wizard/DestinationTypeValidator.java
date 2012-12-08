@@ -1,7 +1,7 @@
 package be.jsams.client.validator.wizard;
 
-import be.jsams.client.i18n.JsamsI18nLabelResource;
-import be.jsams.client.i18n.JsamsI18nResource;
+import be.jsams.client.i18n.I18nLabelResource;
+import be.jsams.client.i18n.I18nResource;
 import be.jsams.common.bean.model.transfer.TransferBean;
 
 import com.jgoodies.validation.ValidationResult;
@@ -43,8 +43,8 @@ public class DestinationTypeValidator implements Validator<TransferBean> {
                 break;
             }
         } else {
-            support.addError(JsamsI18nLabelResource.LABEL_DESTINATION_TYPE.getTranslation(),
-                    JsamsI18nResource.ERROR_IS_MANDATORY.getTranslation());
+            support.addError(I18nLabelResource.LABEL_DESTINATION_TYPE.getTranslation(),
+                    I18nResource.ERROR_IS_MANDATORY.getTranslation());
         }
         return support.getResult();
     }
@@ -57,8 +57,8 @@ public class DestinationTypeValidator implements Validator<TransferBean> {
      */
     private void checkEstimate(int destinationType, PropertyValidationSupport support) {
         if (destinationType == 2 || destinationType == 4) {
-            support.addError(JsamsI18nLabelResource.LABEL_DESTINATION_TYPE.getTranslation(),
-                    JsamsI18nResource.ERROR_SOURCE_DESTINATION.getTranslation());
+            support.addError(I18nLabelResource.LABEL_DESTINATION_TYPE.getTranslation(),
+                    I18nResource.ERROR_SOURCE_DESTINATION.getTranslation());
         }
     }
     
@@ -70,8 +70,8 @@ public class DestinationTypeValidator implements Validator<TransferBean> {
      */
     private void checkCommand(int destinationType, PropertyValidationSupport support) {
         if (destinationType == 1 || destinationType == 4) {
-            support.addError(JsamsI18nLabelResource.LABEL_DESTINATION_TYPE.getTranslation(),
-                    JsamsI18nResource.ERROR_SOURCE_DESTINATION.getTranslation());
+            support.addError(I18nLabelResource.LABEL_DESTINATION_TYPE.getTranslation(),
+                    I18nResource.ERROR_SOURCE_DESTINATION.getTranslation());
         }
     }
 
@@ -83,8 +83,8 @@ public class DestinationTypeValidator implements Validator<TransferBean> {
      */
     private void checkDeliveryOrder(int destinationType, PropertyValidationSupport support) {
         if (destinationType != 3) {
-            support.addError(JsamsI18nLabelResource.LABEL_DESTINATION_TYPE.getTranslation(),
-                    JsamsI18nResource.ERROR_SOURCE_DESTINATION.getTranslation());
+            support.addError(I18nLabelResource.LABEL_DESTINATION_TYPE.getTranslation(),
+                    I18nResource.ERROR_SOURCE_DESTINATION.getTranslation());
         }
     }
 
@@ -96,8 +96,8 @@ public class DestinationTypeValidator implements Validator<TransferBean> {
      */
     private void checkBill(int destinationType, PropertyValidationSupport support) {
         if (destinationType != 4) {
-            support.addError(JsamsI18nLabelResource.LABEL_DESTINATION_TYPE.getTranslation(),
-                    JsamsI18nResource.ERROR_SOURCE_DESTINATION.getTranslation());
+            support.addError(I18nLabelResource.LABEL_DESTINATION_TYPE.getTranslation(),
+                    I18nResource.ERROR_SOURCE_DESTINATION.getTranslation());
         }
     }
 

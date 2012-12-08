@@ -3,8 +3,8 @@ package be.jsams.common.bean.view.management;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
-import be.jsams.client.i18n.JsamsI18nLabelResource;
-import be.jsams.client.i18n.JsamsI18nResource;
+import be.jsams.client.i18n.I18nLabelResource;
+import be.jsams.client.i18n.I18nResource;
 import be.jsams.client.swing.action.SearchAgentAction;
 import be.jsams.client.swing.component.JsamsButton;
 import be.jsams.client.swing.component.JsamsDialog;
@@ -55,13 +55,13 @@ public class AgentBeanView extends AbstractBeanView<AgentBean> implements Editab
         JPanel panel = new JPanel();
         JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.LEFT);
         JPanel generalPanel = buildGeneralTab();
-        tabbedPane.add(JsamsI18nResource.PANEL_GENERAL.getTranslation(), generalPanel);
+        tabbedPane.add(I18nResource.PANEL_GENERAL.getTranslation(), generalPanel);
         JPanel addressPanel = getBean().getAddress().buildView().createEditView();
         addressPanel.setBorder(Borders.DIALOG_BORDER);
-        tabbedPane.add(JsamsI18nResource.PANEL_ADDRESS.getTranslation(), addressPanel);
+        tabbedPane.add(I18nResource.PANEL_ADDRESS.getTranslation(), addressPanel);
         JPanel contactPanel = getBean().getContactInformation().buildView().createEditView();
         contactPanel.setBorder(Borders.DIALOG_BORDER);
-        tabbedPane.add(JsamsI18nResource.PANEL_CONTACT_INFORMATIONS.getTranslation(), contactPanel);
+        tabbedPane.add(I18nResource.PANEL_CONTACT_INFORMATIONS.getTranslation(), contactPanel);
 
         panel.add(tabbedPane);
 
@@ -84,12 +84,12 @@ public class AgentBeanView extends AbstractBeanView<AgentBean> implements Editab
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
         final int maxColumnSpan = 5;
         builder.setDefaultDialogBorder();
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_CIVILITY.getKey(), bean.getCivility().buildView()
+        builder.appendI15d(I18nLabelResource.LABEL_CIVILITY.getKey(), bean.getCivility().buildView()
                 .createEditView());
         builder.nextLine();
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_NAME.getKey(), textFieldName, maxColumnSpan);
+        builder.appendI15d(I18nLabelResource.LABEL_NAME.getKey(), textFieldName, maxColumnSpan);
         builder.nextLine();
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_FUNCTION.getKey(), textFieldFunction, maxColumnSpan);
+        builder.appendI15d(I18nLabelResource.LABEL_FUNCTION.getKey(), textFieldFunction, maxColumnSpan);
         return builder.getPanel();
     }
 
@@ -118,13 +118,13 @@ public class AgentBeanView extends AbstractBeanView<AgentBean> implements Editab
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
         builder.setDefaultDialogBorder();
         final int maxColumnSpan = 5;
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_NAME.getKey(), textFieldName, maxColumnSpan);
+        builder.appendI15d(I18nLabelResource.LABEL_NAME.getKey(), textFieldName, maxColumnSpan);
         builder.nextLine();
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_FUNCTION.getKey(), textFieldFunction);
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_PHONE.getKey(), textFieldPhone);
+        builder.appendI15d(I18nLabelResource.LABEL_FUNCTION.getKey(), textFieldFunction);
+        builder.appendI15d(I18nLabelResource.LABEL_PHONE.getKey(), textFieldPhone);
         builder.nextLine();
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_CITY.getKey(), textFieldCity);
-        builder.appendI15d(JsamsI18nLabelResource.LABEL_ZIP_CODE.getKey(), textFieldZipCode);
+        builder.appendI15d(I18nLabelResource.LABEL_CITY.getKey(), textFieldCity);
+        builder.appendI15d(I18nLabelResource.LABEL_ZIP_CODE.getKey(), textFieldZipCode);
 
         return builder.getPanel();
     }
@@ -136,7 +136,7 @@ public class AgentBeanView extends AbstractBeanView<AgentBean> implements Editab
      */
     public JPanel createCustomView() {
         final AgentBean bean = getBean();
-        final JsamsDialog dialog = new JsamsDialog(null, JsamsI18nResource.TITLE_SEARCH_AGENT,
+        final JsamsDialog dialog = new JsamsDialog(null, I18nResource.TITLE_SEARCH_AGENT,
                 IconUtil.TITLE_ICON_PREFIX + "categories/applications-development.png");
         ViewFactory<AgentBean> helper = new ViewFactory<AgentBean>();
         buttonSearchAgent.setAction(new SearchAgentAction("", buttonSearchAgent.getIcon(), bean, dialog));

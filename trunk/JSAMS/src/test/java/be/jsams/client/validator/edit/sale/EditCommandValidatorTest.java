@@ -6,8 +6,8 @@ import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import be.jsams.client.i18n.I18nApplicationContext;
-import be.jsams.client.i18n.JsamsI18nLabelResource;
-import be.jsams.client.i18n.JsamsI18nResource;
+import be.jsams.client.i18n.I18nLabelResource;
+import be.jsams.client.i18n.I18nResource;
 import be.jsams.client.validator.AbstractValidatorTest;
 import be.jsams.common.bean.model.MockBeanGenerator;
 import be.jsams.common.bean.model.sale.CommandBean;
@@ -58,8 +58,8 @@ public class EditCommandValidatorTest extends AbstractValidatorTest {
         bean.setCreationDate(null);
         ValidationResult result = validator.validate(bean);
         String formattedText = retrieveFormattedText(result);
-        assertTrue(formattedText.contains(JsamsI18nResource.ERROR_IS_MANDATORY.getTranslation()));
-        assertTrue(formattedText.contains(JsamsI18nLabelResource.LABEL_CREATION_DATE.getTranslation()));
+        assertTrue(formattedText.contains(I18nResource.ERROR_IS_MANDATORY.getTranslation()));
+        assertTrue(formattedText.contains(I18nLabelResource.LABEL_CREATION_DATE.getTranslation()));
     }
 
     /**
@@ -73,8 +73,8 @@ public class EditCommandValidatorTest extends AbstractValidatorTest {
         bean.getCustomer().setName("");
         ValidationResult result = validator.validate(bean);
         String formattedText = retrieveFormattedText(result);
-        assertTrue(formattedText.contains(JsamsI18nResource.ERROR_IS_MANDATORY.getTranslation()));
-        assertTrue(formattedText.contains(JsamsI18nLabelResource.LABEL_CUSTOMER.getTranslation()));
+        assertTrue(formattedText.contains(I18nResource.ERROR_IS_MANDATORY.getTranslation()));
+        assertTrue(formattedText.contains(I18nLabelResource.LABEL_CUSTOMER.getTranslation()));
     }
 
 }

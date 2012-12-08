@@ -10,7 +10,7 @@ import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.KeyStroke;
 
-import be.jsams.client.desktop.JsamsMainFrame;
+import be.jsams.client.desktop.MainFrame;
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.swing.component.JsamsButtonsInterface;
 import be.jsams.client.swing.component.JsamsButtonsPanel;
@@ -59,11 +59,11 @@ public abstract class AbstractEditDialog<B extends AbstractIdentityBean<?, ?>, V
     /**
      * Constructor
      * 
-     * @param parent the {@link JsamsMainFrame} parent
+     * @param parent the {@link MainFrame} parent
      * @param title the {@link I18nString} translatable String
      * @param iconFileName the icon path file name
      */
-    public AbstractEditDialog(final JsamsMainFrame parent, final I18nString title, final String iconFileName) {
+    public AbstractEditDialog(final MainFrame parent, final I18nString title, final String iconFileName) {
         super(parent, title, IconUtil.TITLE_ICON_PREFIX + iconFileName);
         buttonsPanel = new JsamsButtonsPanel(this, true, true, true);
         setDefaultKeyActions();
@@ -73,23 +73,23 @@ public abstract class AbstractEditDialog<B extends AbstractIdentityBean<?, ?>, V
     /**
      * Constructor
      * 
-     * @param parent the {@link JsamsMainFrame} parent
+     * @param parent the {@link MainFrame} parent
      * @param title the {@link I18nString} translatable String
      */
-    public AbstractEditDialog(final JsamsMainFrame parent, final I18nString title) {
+    public AbstractEditDialog(final MainFrame parent, final I18nString title) {
         this(parent, title, "actions/document-new.png");
     }
 
     /**
      * Constructor
      * 
-     * @param parent the {@link JsamsMainFrame} parent
+     * @param parent the {@link MainFrame} parent
      * @param title the {@link I18nString} translatable String
      * @param model the {@link AbstractIdentityBean}
      * @param validator the {@link Validator}
      * @param service the {@link Service}
      */
-    public AbstractEditDialog(final JsamsMainFrame parent, I18nString title, B model, V validator, S service) {
+    public AbstractEditDialog(final MainFrame parent, I18nString title, B model, V validator, S service) {
         this(parent, title);
         this.model = model;
         this.validator = validator;

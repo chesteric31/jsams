@@ -7,8 +7,8 @@ import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import be.jsams.client.i18n.I18nApplicationContext;
-import be.jsams.client.i18n.JsamsI18nLabelResource;
-import be.jsams.client.i18n.JsamsI18nResource;
+import be.jsams.client.i18n.I18nLabelResource;
+import be.jsams.client.i18n.I18nResource;
 import be.jsams.client.validator.AbstractValidatorTest;
 import be.jsams.common.bean.model.MockBeanGenerator;
 import be.jsams.common.bean.model.management.AgentBean;
@@ -57,8 +57,8 @@ public class SearchAgentValidatorTest extends AbstractValidatorTest {
         bean.setName("#");
         ValidationResult result = validator.validate(bean);
         String formattedText = retrieveFormattedText(result);
-        assertTrue(formattedText.contains(JsamsI18nResource.ERROR_IS_ALPHANUMERIC.getTranslation()));
-        assertTrue(formattedText.contains(JsamsI18nLabelResource.LABEL_NAME.getTranslation()));
+        assertTrue(formattedText.contains(I18nResource.ERROR_IS_ALPHANUMERIC.getTranslation()));
+        assertTrue(formattedText.contains(I18nLabelResource.LABEL_NAME.getTranslation()));
     }
 
     /**
@@ -72,8 +72,8 @@ public class SearchAgentValidatorTest extends AbstractValidatorTest {
         bean.setFunction("#");
         ValidationResult result = validator.validate(bean);
         String formattedText = retrieveFormattedText(result);
-        assertTrue(formattedText.contains(JsamsI18nResource.ERROR_IS_ALPHANUMERIC.getTranslation()));
-        assertTrue(formattedText.contains(JsamsI18nLabelResource.LABEL_FUNCTION.getTranslation()));
+        assertTrue(formattedText.contains(I18nResource.ERROR_IS_ALPHANUMERIC.getTranslation()));
+        assertTrue(formattedText.contains(I18nLabelResource.LABEL_FUNCTION.getTranslation()));
     }
     
     /**
@@ -87,8 +87,8 @@ public class SearchAgentValidatorTest extends AbstractValidatorTest {
         bean.getContactInformation().setPhone("!");
         ValidationResult result = validator.validate(bean);
         String formattedText = retrieveFormattedText(result);
-        assertTrue(formattedText.contains(JsamsI18nResource.ERROR_IS_ALPHANUMERIC.getTranslation()));
-        assertTrue(formattedText.contains(JsamsI18nLabelResource.LABEL_PHONE.getTranslation()));
+        assertTrue(formattedText.contains(I18nResource.ERROR_IS_ALPHANUMERIC.getTranslation()));
+        assertTrue(formattedText.contains(I18nLabelResource.LABEL_PHONE.getTranslation()));
     }
 
     /**
@@ -102,8 +102,8 @@ public class SearchAgentValidatorTest extends AbstractValidatorTest {
         bean.getAddress().setZipCode("!");
         ValidationResult result = validator.validate(bean);
         String formattedText = retrieveFormattedText(result);
-        assertTrue(formattedText.contains(JsamsI18nResource.ERROR_IS_ALPHANUMERIC.getTranslation()));
-        assertTrue(formattedText.contains(JsamsI18nLabelResource.LABEL_ZIP_CODE.getTranslation()));
+        assertTrue(formattedText.contains(I18nResource.ERROR_IS_ALPHANUMERIC.getTranslation()));
+        assertTrue(formattedText.contains(I18nLabelResource.LABEL_ZIP_CODE.getTranslation()));
     }
 
     /**
@@ -117,8 +117,8 @@ public class SearchAgentValidatorTest extends AbstractValidatorTest {
         bean.getAddress().setCity("#");
         ValidationResult result = validator.validate(bean);
         String formattedText = retrieveFormattedText(result);
-        assertTrue(formattedText.contains(JsamsI18nResource.ERROR_IS_ALPHANUMERIC.getTranslation()));
-        assertTrue(formattedText.contains(JsamsI18nLabelResource.LABEL_CITY.getTranslation()));
+        assertTrue(formattedText.contains(I18nResource.ERROR_IS_ALPHANUMERIC.getTranslation()));
+        assertTrue(formattedText.contains(I18nLabelResource.LABEL_CITY.getTranslation()));
     }
 
 
