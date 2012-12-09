@@ -11,8 +11,8 @@ import java.awt.Toolkit;
  */
 public final class IconUtil {
 
-    public static final String MENU_ICON_PREFIX = "org/freedesktop/tango/16x16/";
-    public static final String TITLE_ICON_PREFIX = "org/freedesktop/tango/32x32/";
+    public static final String MENU_ICON_PREFIX =  IconResource.TANGO + "16x16/";
+    public static final String TITLE_ICON_PREFIX = IconResource.TANGO + "32x32/";
 
     /**
      * Constructor to avoid to instance this utility class.

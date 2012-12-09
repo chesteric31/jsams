@@ -11,6 +11,7 @@ import be.jsams.client.i18n.I18nResource;
 import be.jsams.client.swing.component.JsamsCloseableTabbedPane;
 import be.jsams.client.swing.component.JsamsMenu;
 import be.jsams.client.swing.component.JsamsMenuItem;
+import be.jsams.client.swing.utils.IconResource;
 
 /**
  * Specific menu builder for windows menu.
@@ -27,17 +28,17 @@ public class WindowsMenuBuilder extends AbstractMenuBuilder {
     public JsamsMenu build() {
         JsamsMenu windowsMenu = new JsamsMenu(I18nResource.MENU_WINDOWS);
         JsamsMenuItem closeWindowMI = new JsamsMenuItem(I18nResource.MENU_ITEM_CLOSE_WINDOW,
-                "emblems/emblem-unreadable.png");
+                IconResource.CLOSE_WINDOW);
         closeWindowMI.setAction(closeWindowAction(closeWindowMI.getText(), closeWindowMI.getIcon()));
         windowsMenu.add(closeWindowMI);
         JsamsMenuItem closeAllWindowsMI = new JsamsMenuItem(I18nResource.MENU_ITEM_CLOSE_ALL_WINDOWS);
         closeAllWindowsMI.setAction(closeAllWindowsAction(closeAllWindowsMI.getText(), closeAllWindowsMI.getIcon()));
         windowsMenu.add(closeAllWindowsMI);
         windowsMenu.add(new JSeparator());
-        JsamsMenuItem nextMI = new JsamsMenuItem(I18nResource.MENU_ITEM_NEXT, "actions/go-next.png");
+        JsamsMenuItem nextMI = new JsamsMenuItem(I18nResource.MENU_ITEM_NEXT, IconResource.NEXT);
         nextMI.setAction(nextAction(nextMI.getText(), nextMI.getIcon()));
         windowsMenu.add(nextMI);
-        JsamsMenuItem previousMI = new JsamsMenuItem(I18nResource.MENU_ITEM_PREVIOUS, "actions/go-previous.png");
+        JsamsMenuItem previousMI = new JsamsMenuItem(I18nResource.MENU_ITEM_PREVIOUS, IconResource.PREVIOUS);
         previousMI.setAction(previousAction(previousMI.getText(), previousMI.getIcon()));
         windowsMenu.add(previousMI);
         return windowsMenu;
