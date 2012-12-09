@@ -150,7 +150,7 @@ public class OpenSocietyDialog extends JsamsDialog implements JsamsButtonsInterf
      */
     private JsamsButton buildButtonNewSociety() {
         JsamsButton buttonNewSociety = new JsamsButton(I18nResource.BUTTON_OPEN_SOCIETIES_NEW,
-                IconUtil.MENU_ICON_PREFIX + "actions/folder-new.png");
+                IconUtil.MENU_ICON_PREFIX + IconResource.NEW);
         buttonNewSociety.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent e) {
@@ -164,9 +164,8 @@ public class OpenSocietyDialog extends JsamsDialog implements JsamsButtonsInterf
         });
         return buttonNewSociety;
     }
-    
+
     /**
-     * 
      * @return the {@link SocietyBeanBuilder}
      */
     public SocietyBeanBuilder getSocietyBeanBuilder() {
@@ -174,7 +173,8 @@ public class OpenSocietyDialog extends JsamsDialog implements JsamsButtonsInterf
     }
 
     /**
-     * Builds the 'south panel' composed by a {@link JsamsButtonsPanel} {@link JsamsStatusBar}.
+     * Builds the 'south panel' composed by a {@link JsamsButtonsPanel}
+     * {@link JsamsStatusBar}.
      * 
      * @return the 'south panel'
      */
@@ -198,5 +198,5 @@ public class OpenSocietyDialog extends JsamsDialog implements JsamsButtonsInterf
         inputMap.put(okKey, JsamsButtonsPanel.OK_ACTION_KEY);
         rootPane.getActionMap().put(JsamsButtonsPanel.OK_ACTION_KEY, buttonsPanel.getButtonOk().getAction());
     }
-    
+
 }

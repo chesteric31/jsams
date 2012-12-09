@@ -25,6 +25,7 @@ import be.jsams.client.swing.component.JsamsDialog;
 import be.jsams.client.swing.component.JsamsStatusBar;
 import be.jsams.client.swing.component.JsamsTextField;
 import be.jsams.client.swing.utils.DialogUtil;
+import be.jsams.client.swing.utils.IconResource;
 import be.jsams.client.swing.utils.IconUtil;
 import be.jsams.common.util.JsamsConstants;
 
@@ -73,11 +74,11 @@ public class EditGeneralParametersDialog extends JsamsDialog implements JsamsBut
     private JPasswordField proxyPass = new JPasswordField();
 
     /**
-     * Constructor
+     * Constructor.
      */
     public EditGeneralParametersDialog() {
         super(null, I18nResource.TITLE_EDIT_GENERAL_PARAMETERS, IconUtil.TITLE_ICON_PREFIX
-                + "actions/system-shutdown.png");
+                + IconResource.GENERAL_PARAMETERS);
         buttonsPanel = new JsamsButtonsPanel(this, true, false, true);
         setDefaultKeyActions();
         add(buildSouthPanel(), BorderLayout.SOUTH);
@@ -135,8 +136,7 @@ public class EditGeneralParametersDialog extends JsamsDialog implements JsamsBut
         builder.appendI15d(I18nLabelResource.LABEL_FIRST_REMEMBER_DAYS.getKey(), new JSpinner(spinnerModelFirst));
         builder.appendI15d(I18nLabelResource.LABEL_FIRST_REMEMBER_DAYS.getKey(), new JSpinner(spinnerModelFirst));
         builder.nextLine();
-        builder.appendI15d(I18nLabelResource.LABEL_SECOND_REMEMBER_DAYS.getKey(),
-                new JSpinner(spinnerModelSecond));
+        builder.appendI15d(I18nLabelResource.LABEL_SECOND_REMEMBER_DAYS.getKey(), new JSpinner(spinnerModelSecond));
         builder.nextLine();
         builder.appendI15d(I18nLabelResource.LABEL_FORMAL_NOTICE_DAYS.getKey(), new JSpinner(spinnerModelNotice));
         builder.nextLine();
@@ -226,7 +226,6 @@ public class EditGeneralParametersDialog extends JsamsDialog implements JsamsBut
     @Override
     public void itemStateChanged(ItemEvent e) {
         Object source = e.getItemSelectable();
-
         if (source == proxyToSet) {
             proxyHost.setEnabled(proxyToSet.isSelected());
             proxyPort.setEnabled(proxyToSet.isSelected());

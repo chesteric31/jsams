@@ -28,6 +28,7 @@ import be.jsams.client.swing.component.JsamsFormattedTextField;
 import be.jsams.client.swing.component.JsamsTable;
 import be.jsams.client.swing.component.JsamsTextField;
 import be.jsams.client.swing.listener.search.management.ProductTableMouseListener;
+import be.jsams.client.swing.utils.IconResource;
 import be.jsams.client.swing.utils.IconUtil;
 import be.jsams.client.validator.search.management.SearchProductValidator;
 import be.jsams.common.bean.builder.ProductBeanBuilder;
@@ -183,7 +184,7 @@ public class EstimateBeanView extends AbstractDocumentBeanView<EstimateBean> imp
      * {@inheritDoc}
      */
     protected JsamsButton buildButtonAdd() {
-        JsamsButton buttonAdd = new JsamsButton(IconUtil.MENU_ICON_PREFIX + "actions/list-add.png");
+        JsamsButton buttonAdd = new JsamsButton(IconUtil.MENU_ICON_PREFIX + IconResource.ADD);
         buttonAdd.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 EstimateBean bean = getBean();
@@ -206,7 +207,7 @@ public class EstimateBeanView extends AbstractDocumentBeanView<EstimateBean> imp
      * {@inheritDoc}
      */
     protected JsamsButton buildButtonRemove() {
-        JsamsButton buttonRemove = new JsamsButton(IconUtil.MENU_ICON_PREFIX + "actions/list-remove.png");
+        JsamsButton buttonRemove = new JsamsButton(IconUtil.MENU_ICON_PREFIX + IconResource.REMOVE);
         buttonRemove.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 int selectedRow = getDetailsTable().getSelectedRow();

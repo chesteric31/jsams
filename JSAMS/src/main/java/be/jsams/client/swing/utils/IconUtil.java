@@ -11,7 +11,7 @@ import java.awt.Toolkit;
  */
 public final class IconUtil {
 
-    public static final String MENU_ICON_PREFIX =  IconResource.TANGO + "16x16/";
+    public static final String MENU_ICON_PREFIX = IconResource.TANGO + "16x16/";
     public static final String TITLE_ICON_PREFIX = IconResource.TANGO + "32x32/";
 
     /**
