@@ -17,6 +17,7 @@ import be.jsams.client.swing.component.JsamsButton;
 import be.jsams.client.swing.component.JsamsDialog;
 import be.jsams.client.swing.component.JsamsLabel;
 import be.jsams.client.swing.utils.DialogUtil;
+import be.jsams.client.swing.utils.IconResource;
 import be.jsams.client.swing.utils.IconUtil;
 
 import com.jgoodies.forms.builder.DefaultFormBuilder;
@@ -43,7 +44,7 @@ public class UpdateDialog extends JsamsDialog {
      * @param title the title
      */
     public UpdateDialog(MainFrame parent, I18nString title) {
-        super(parent, title, IconUtil.TITLE_ICON_PREFIX + "status/software-update-available.png");
+        super(parent, title, IconUtil.TITLE_ICON_PREFIX + IconResource.UPDATE_AVAILABLE);
         initComponents();
     }
 

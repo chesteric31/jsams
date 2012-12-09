@@ -107,7 +107,7 @@ public class ManagementMenuBuilder extends AbstractMenuBuilder {
                 SearchCustomerPanel searchPanel = new SearchCustomerPanel(customerBean,
                         new CustomerTableMouseListener(), ApplicationContext.getCustomerService(),
                         new SearchCustomerValidator(), new CustomerTableModel());
-                parent.getTabbedPane().addTab(I18nResource.TITLE_SEARCH_CUSTOMER, "apps/system-users.png", searchPanel);
+                parent.getTabbedPane().addTab(I18nResource.TITLE_SEARCH_CUSTOMER, IconResource.CUSTOMER, searchPanel);
             }
         };
         action.putValue(Action.NAME, text);
@@ -162,8 +162,7 @@ public class ManagementMenuBuilder extends AbstractMenuBuilder {
                 SearchProductPanel searchPanel = new SearchProductPanel(builder.build(true, true),
                         new ProductTableMouseListener(), ApplicationContext.getProductService(),
                         new SearchProductValidator(), new ProductTableModel());
-                parent.getTabbedPane().addTab(I18nResource.TITLE_SEARCH_PRODUCT, IconResource.PRODUCT,
-                        searchPanel);
+                parent.getTabbedPane().addTab(I18nResource.TITLE_SEARCH_PRODUCT, IconResource.PRODUCT, searchPanel);
             }
         };
         action.putValue(Action.NAME, text);

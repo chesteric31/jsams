@@ -18,6 +18,7 @@ import be.jsams.client.swing.component.JsamsDialog;
 import be.jsams.client.swing.component.JsamsLabel;
 import be.jsams.client.swing.component.JsamsStatusBar;
 import be.jsams.client.swing.utils.DialogUtil;
+import be.jsams.client.swing.utils.IconResource;
 import be.jsams.client.swing.utils.IconUtil;
 import be.jsams.common.bean.model.AbstractIdentityBean;
 import be.jsams.server.service.Service;
@@ -57,7 +58,7 @@ public abstract class AbstractEditDialog<B extends AbstractIdentityBean<?, ?>, V
     private Service<B> service;
 
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param parent the {@link MainFrame} parent
      * @param title the {@link I18nString} translatable String
@@ -71,17 +72,17 @@ public abstract class AbstractEditDialog<B extends AbstractIdentityBean<?, ?>, V
     }
 
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param parent the {@link MainFrame} parent
      * @param title the {@link I18nString} translatable String
      */
     public AbstractEditDialog(final MainFrame parent, final I18nString title) {
-        this(parent, title, "actions/document-new.png");
+        this(parent, title, IconResource.EDIT);
     }
 
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param parent the {@link MainFrame} parent
      * @param title the {@link I18nString} translatable String
@@ -106,7 +107,6 @@ public abstract class AbstractEditDialog<B extends AbstractIdentityBean<?, ?>, V
     public abstract void initComponents();
 
     /**
-     * 
      * @return the service
      */
     public Service<B> getService() {
@@ -114,7 +114,6 @@ public abstract class AbstractEditDialog<B extends AbstractIdentityBean<?, ?>, V
     }
 
     /**
-     * 
      * @param service the service to set
      */
     public void setService(Service<B> service) {
@@ -122,7 +121,6 @@ public abstract class AbstractEditDialog<B extends AbstractIdentityBean<?, ?>, V
     }
 
     /**
-     * 
      * @return the model
      */
     public B getModel() {
@@ -130,7 +128,6 @@ public abstract class AbstractEditDialog<B extends AbstractIdentityBean<?, ?>, V
     }
 
     /**
-     * 
      * @param model the model to set
      */
     public void setModel(B model) {
@@ -138,7 +135,6 @@ public abstract class AbstractEditDialog<B extends AbstractIdentityBean<?, ?>, V
     }
 
     /**
-     * 
      * @return the {@link ValidationResultModel}
      */
     public ValidationResultModel getValidationResultModel() {
@@ -146,7 +142,6 @@ public abstract class AbstractEditDialog<B extends AbstractIdentityBean<?, ?>, V
     }
 
     /**
-     * 
      * @param validationResultModel the {@link ValidationResultModel} to set
      */
     public void setValidationResultModel(ValidationResultModel validationResultModel) {
@@ -154,7 +149,6 @@ public abstract class AbstractEditDialog<B extends AbstractIdentityBean<?, ?>, V
     }
 
     /**
-     * 
      * @return the {@link Validator}
      */
     public Validator<B> getValidator() {
@@ -162,7 +156,6 @@ public abstract class AbstractEditDialog<B extends AbstractIdentityBean<?, ?>, V
     }
 
     /**
-     * 
      * @param validator the {@link Validator} to set
      */
     public void setValidator(Validator<B> validator) {
@@ -170,7 +163,7 @@ public abstract class AbstractEditDialog<B extends AbstractIdentityBean<?, ?>, V
     }
 
     /**
-     * Build the 'south panel' composed by a {@link JsamsButtonsPanel} {@link JsamsStatusBar}
+     * Builds the 'south panel' composed by a {@link JsamsButtonsPanel} {@link JsamsStatusBar}
      * 
      * @return the 'south panel'
      */
@@ -246,7 +239,7 @@ public abstract class AbstractEditDialog<B extends AbstractIdentityBean<?, ?>, V
     }
 
     /**
-     * Set the default keys actions.
+     * Sets the default keys actions.
      */
     private void setDefaultKeyActions() {
         // Automatically choose OK when Enter Key is pressed
@@ -262,7 +255,6 @@ public abstract class AbstractEditDialog<B extends AbstractIdentityBean<?, ?>, V
     }
 
     /**
-     * 
      * @return the {@link JsamsStatusBar}
      */
     public JsamsStatusBar getStatusBar() {
@@ -270,7 +262,6 @@ public abstract class AbstractEditDialog<B extends AbstractIdentityBean<?, ?>, V
     }
 
     /**
-     * 
      * @param statusBar the {@link JsamsStatusBar} to set
      */
     public void setStatusBar(JsamsStatusBar statusBar) {

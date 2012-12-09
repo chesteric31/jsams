@@ -12,6 +12,7 @@ import javax.swing.JTabbedPane;
 
 import be.jsams.client.desktop.Desktop;
 import be.jsams.client.i18n.I18nString;
+import be.jsams.client.swing.utils.IconResource;
 import be.jsams.client.swing.utils.IconUtil;
 
 /**
@@ -48,7 +49,7 @@ public class JsamsCloseableTabbedPane extends JTabbedPane {
             tabTitle = new JsamsLabel(title, tabIcon);
         }
 
-        JsamsButton tabCloseButton = new JsamsButton(IconUtil.MENU_ICON_PREFIX + "emblems/emblem-unreadable.png");
+        JsamsButton tabCloseButton = new JsamsButton(IconUtil.MENU_ICON_PREFIX + IconResource.CLOSE_WINDOW);
         Icon icon = tabCloseButton.getIcon();
         tabCloseButton.setPreferredSize(new Dimension(icon.getIconWidth(), icon.getIconHeight()));
         tabCloseButton.addActionListener(new ActionListener() {

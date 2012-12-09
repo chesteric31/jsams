@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import be.jsams.client.model.panel.AbstractSearchPanel;
 import be.jsams.client.model.table.AbstractJsamsTableModel;
 import be.jsams.client.swing.component.JsamsButton;
+import be.jsams.client.swing.utils.IconResource;
 import be.jsams.client.swing.utils.IconUtil;
 import be.jsams.common.bean.model.sale.AbstractDocumentBean;
 import be.jsams.server.service.Service;
@@ -77,7 +78,7 @@ public abstract class AbstractSaleSearchPanel<B extends AbstractDocumentBean<?, 
      * @return the PDF generation {@link JsamsButton}
      */
     private JsamsButton buildButtonPdf() {
-        JsamsButton buttonPdf = new JsamsButton(IconUtil.MENU_ICON_PREFIX + "mimetypes/x-office-spreadsheet.png");
+        JsamsButton buttonPdf = new JsamsButton(IconUtil.MENU_ICON_PREFIX + IconResource.DO_PDF);
         buttonPdf.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 performButtonPdf();

@@ -82,8 +82,7 @@ public class SalesMenuBuilder extends AbstractMenuBuilder {
     @Override
     public JsamsMenu build() {
         salesMenu = new JsamsMenu(I18nResource.MENU_SALES);
-        transferDocumentsMI = new JsamsMenuItem(I18nResource.MENU_ITEM_TRANSFER_DOCUMENTS,
-                "actions/media-seek-forward.png");
+        transferDocumentsMI = new JsamsMenuItem(I18nResource.MENU_ITEM_TRANSFER_DOCUMENTS, IconResource.TRANSFER);
         transferDocumentsMI.setAction(transferAction(transferDocumentsMI.getText(), transferDocumentsMI.getIcon()));
         salesMenu.add(transferDocumentsMI);
         salesMenu.add(new JSeparator());
@@ -102,9 +101,9 @@ public class SalesMenuBuilder extends AbstractMenuBuilder {
         creditNoteMI = new JsamsMenuItem(I18nResource.MENU_ITEM_CREDIT_NOTE);
         creditNoteMI.setAction(creditNotesAction(creditNoteMI.getText(), creditNoteMI.getIcon()));
         salesMenu.add(creditNoteMI);
-        
+
         enableMenuItems(false);
-        
+
         return salesMenu;
     }
 
@@ -217,8 +216,7 @@ public class SalesMenuBuilder extends AbstractMenuBuilder {
 
             public void actionPerformed(ActionEvent event) {
                 SocietyBean currentSociety = Desktop.getInstance().getCurrentSociety();
-                CustomerBean customerBean = ApplicationContext.getCustomerBeanBuilder()
-                        .build(null, currentSociety);
+                CustomerBean customerBean = ApplicationContext.getCustomerBeanBuilder().build(null, currentSociety);
                 DeliveryOrderBean bean = new DeliveryOrderBean(currentSociety, customerBean);
                 DeliveryOrderMediator mediator = new DeliveryOrderMediator();
                 mediator.setDeliveryOrderBean(bean);
@@ -259,8 +257,8 @@ public class SalesMenuBuilder extends AbstractMenuBuilder {
                 mediator.setBillBean(bean);
                 bean.setMediator(mediator);
                 SearchBillPanel<BillTableMouseListener> searchPanel = new SearchBillPanel<BillTableMouseListener>(bean,
-                        new BillTableMouseListener(), ApplicationContext.getBillService(),
-                        new SearchBillValidator(), new BillTableModel());
+                        new BillTableMouseListener(), ApplicationContext.getBillService(), new SearchBillValidator(),
+                        new BillTableModel());
                 parent.getTabbedPane().addTab(I18nResource.TITLE_SEARCH_BILL, null, searchPanel);
             }
         };
@@ -285,8 +283,7 @@ public class SalesMenuBuilder extends AbstractMenuBuilder {
 
             public void actionPerformed(ActionEvent event) {
                 SocietyBean currentSociety = Desktop.getInstance().getCurrentSociety();
-                CustomerBean customerBean = ApplicationContext.getCustomerBeanBuilder()
-                        .build(null, currentSociety);
+                CustomerBean customerBean = ApplicationContext.getCustomerBeanBuilder().build(null, currentSociety);
                 CreditNoteBean bean = new CreditNoteBean(currentSociety, customerBean);
                 CreditNoteMediator mediator = new CreditNoteMediator();
                 mediator.setCreditNoteBean(bean);

@@ -29,6 +29,7 @@ import be.jsams.client.swing.component.JsamsButtonsPanel;
 import be.jsams.client.swing.component.JsamsLabel;
 import be.jsams.client.swing.component.JsamsStatusBar;
 import be.jsams.client.swing.component.JsamsTable;
+import be.jsams.client.swing.utils.IconResource;
 import be.jsams.client.swing.utils.IconUtil;
 import be.jsams.common.bean.model.AbstractIdentityBean;
 import be.jsams.common.bean.view.Searchable;
@@ -295,7 +296,7 @@ public abstract class AbstractSearchPanel<B extends AbstractIdentityBean<?, ?>,
      * @return the adding {@link JsamsButton}
      */
     protected JsamsButton buildButtonAdd() {
-        JsamsButton buttonAdd = new JsamsButton(IconUtil.MENU_ICON_PREFIX + "actions/list-add.png");
+        JsamsButton buttonAdd = new JsamsButton(IconUtil.MENU_ICON_PREFIX + IconResource.ADD);
         buttonAdd.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 performButtonAdd();
@@ -320,7 +321,7 @@ public abstract class AbstractSearchPanel<B extends AbstractIdentityBean<?, ?>,
      * @return the removing {@link JsamsButton}
      */
     protected JsamsButton buildButtonRemove() {
-        JsamsButton buttonRemove = new JsamsButton(IconUtil.MENU_ICON_PREFIX + "actions/list-remove.png");
+        JsamsButton buttonRemove = new JsamsButton(IconUtil.MENU_ICON_PREFIX + IconResource.REMOVE);
         buttonRemove.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 performButtonRemove();
@@ -352,7 +353,7 @@ public abstract class AbstractSearchPanel<B extends AbstractIdentityBean<?, ?>,
      * @return the modifying {@link JsamsButton}
      */
     protected JsamsButton buildButtonModify() {
-        JsamsButton buttonModify = new JsamsButton(IconUtil.MENU_ICON_PREFIX + "apps/accessories-text-editor.png");
+        JsamsButton buttonModify = new JsamsButton(IconUtil.MENU_ICON_PREFIX + IconResource.MODIFY);
         buttonModify.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 performButtonModify();
