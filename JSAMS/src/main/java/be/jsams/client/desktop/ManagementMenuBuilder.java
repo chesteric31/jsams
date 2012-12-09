@@ -23,6 +23,7 @@ import be.jsams.client.swing.listener.search.management.AgentTableMouseListener;
 import be.jsams.client.swing.listener.search.management.CustomerTableMouseListener;
 import be.jsams.client.swing.listener.search.management.ProductCategoryTableMouseListener;
 import be.jsams.client.swing.listener.search.management.ProductTableMouseListener;
+import be.jsams.client.swing.utils.IconResource;
 import be.jsams.client.validator.search.management.SearchAgentValidator;
 import be.jsams.client.validator.search.management.SearchCustomerValidator;
 import be.jsams.client.validator.search.management.SearchProductCategoryValidator;
@@ -66,10 +67,10 @@ public class ManagementMenuBuilder extends AbstractMenuBuilder {
     @Override
     public JsamsMenu build() {
         managementMenu = new JsamsMenu(I18nResource.MENU_MANAGEMENT);
-        customersMI = new JsamsMenuItem(I18nResource.MENU_ITEM_CUSTOMERS, "apps/system-users.png");
+        customersMI = new JsamsMenuItem(I18nResource.MENU_ITEM_CUSTOMERS, IconResource.CUSTOMER);
         customersMI.setAction(customersAction(customersMI.getText(), customersMI.getIcon()));
         managementMenu.add(customersMI);
-        agentsMI = new JsamsMenuItem(I18nResource.MENU_ITEM_AGENTS, "categories/applications-development.png");
+        agentsMI = new JsamsMenuItem(I18nResource.MENU_ITEM_AGENTS, IconResource.AGENT);
         agentsMI.setAction(agentsAction(agentsMI.getText(), agentsMI.getIcon()));
         managementMenu.add(agentsMI);
         managementMenu.add(new JSeparator());
@@ -77,12 +78,12 @@ public class ManagementMenuBuilder extends AbstractMenuBuilder {
         productsCategoryMI
                 .setAction(productsCategoryAction(productsCategoryMI.getText(), productsCategoryMI.getIcon()));
         managementMenu.add(productsCategoryMI);
-        productsMI = new JsamsMenuItem(I18nResource.MENU_ITEM_PRODUCTS, "apps/preferences-desktop-theme.png");
+        productsMI = new JsamsMenuItem(I18nResource.MENU_ITEM_PRODUCTS, IconResource.PRODUCT);
         productsMI.setAction(productsAction(productsMI.getText(), productsMI.getIcon()));
         managementMenu.add(productsMI);
-        
+
         enableMenuItems(false);
-        
+
         return managementMenu;
     }
 
@@ -106,8 +107,7 @@ public class ManagementMenuBuilder extends AbstractMenuBuilder {
                 SearchCustomerPanel searchPanel = new SearchCustomerPanel(customerBean,
                         new CustomerTableMouseListener(), ApplicationContext.getCustomerService(),
                         new SearchCustomerValidator(), new CustomerTableModel());
-                parent.getTabbedPane().addTab(I18nResource.TITLE_SEARCH_CUSTOMER, "apps/system-users.png",
-                        searchPanel);
+                parent.getTabbedPane().addTab(I18nResource.TITLE_SEARCH_CUSTOMER, "apps/system-users.png", searchPanel);
             }
         };
         action.putValue(Action.NAME, text);
@@ -134,8 +134,7 @@ public class ManagementMenuBuilder extends AbstractMenuBuilder {
                 AgentBean bean = builder.build(null, Desktop.getInstance().getCurrentSociety());
                 SearchAgentPanel searchPanel = new SearchAgentPanel(bean, new AgentTableMouseListener(),
                         ApplicationContext.getAgentService(), new SearchAgentValidator(), new AgentTableModel());
-                parent.getTabbedPane().addTab(I18nResource.TITLE_SEARCH_AGENT,
-                        "categories/applications-development.png", searchPanel);
+                parent.getTabbedPane().addTab(I18nResource.TITLE_SEARCH_AGENT, IconResource.AGENT, searchPanel);
             }
         };
         action.putValue(Action.NAME, text);
@@ -163,8 +162,8 @@ public class ManagementMenuBuilder extends AbstractMenuBuilder {
                 SearchProductPanel searchPanel = new SearchProductPanel(builder.build(true, true),
                         new ProductTableMouseListener(), ApplicationContext.getProductService(),
                         new SearchProductValidator(), new ProductTableModel());
-                parent.getTabbedPane().addTab(I18nResource.TITLE_SEARCH_PRODUCT,
-                        "apps/preferences-desktop-theme.png", searchPanel);
+                parent.getTabbedPane().addTab(I18nResource.TITLE_SEARCH_PRODUCT, IconResource.PRODUCT,
+                        searchPanel);
             }
         };
         action.putValue(Action.NAME, text);

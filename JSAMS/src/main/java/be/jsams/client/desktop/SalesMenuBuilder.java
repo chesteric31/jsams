@@ -26,6 +26,7 @@ import be.jsams.client.swing.listener.search.sale.CommandTableMouseListener;
 import be.jsams.client.swing.listener.search.sale.CreditNoteTableMouseListener;
 import be.jsams.client.swing.listener.search.sale.DeliveryOrderTableMouseListener;
 import be.jsams.client.swing.listener.search.sale.EstimateTableMouseListener;
+import be.jsams.client.swing.utils.IconResource;
 import be.jsams.client.validator.search.sale.SearchBillValidator;
 import be.jsams.client.validator.search.sale.SearchCommandValidator;
 import be.jsams.client.validator.search.sale.SearchCreditNoteValidator;
@@ -122,9 +123,8 @@ public class SalesMenuBuilder extends AbstractMenuBuilder {
             private static final long serialVersionUID = 6779073820658986370L;
 
             public void actionPerformed(ActionEvent event) {
-                new TransferWizardDialog(parent,
-                        I18nResource.TITLE_TRANSFER_DOCUMENTS, "actions/media-seek-forward.png",
-                        "images/transfer_left_right.png");
+                new TransferWizardDialog(parent, I18nResource.TITLE_TRANSFER_DOCUMENTS, IconResource.TRANSFER,
+                        IconResource.TRANSFER_LOGO);
             }
         };
         action.putValue(Action.NAME, text);

@@ -16,7 +16,7 @@ import be.jsams.client.swing.utils.IconResource;
 
 /**
  * Specific menu builder for help menu.
- *
+ * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
@@ -28,15 +28,13 @@ public class HelpMenuBuilder extends AbstractMenuBuilder {
     @Override
     public JsamsMenu build() {
         JsamsMenu helpMenu = new JsamsMenu(I18nResource.MENU_HELP);
-        JsamsMenuItem helpMI = new JsamsMenuItem(I18nResource.MENU_ITEM_HELP, "apps/help-browser.png");
+        JsamsMenuItem helpMI = new JsamsMenuItem(I18nResource.MENU_ITEM_HELP, IconResource.HELP);
         helpMenu.add(helpMI);
-        JsamsMenuItem updateMI = new JsamsMenuItem(I18nResource.MENU_ITEM_UPDATE,
-                "status/software-update-available.png");
+        JsamsMenuItem updateMI = new JsamsMenuItem(I18nResource.MENU_ITEM_UPDATE, IconResource.UPDATE_AVAILABLE);
         updateMI.setAction(updateAction(updateMI.getText(), updateMI.getIcon()));
         helpMenu.add(updateMI);
         helpMenu.add(new JSeparator());
-        JsamsMenuItem aboutMI = new JsamsMenuItem(I18nResource.MENU_ITEM_ABOUT,
-                IconResource.JSAMS);
+        JsamsMenuItem aboutMI = new JsamsMenuItem(I18nResource.MENU_ITEM_ABOUT, IconResource.JSAMS);
         aboutMI.setAction(aboutAction(aboutMI.getText(), aboutMI.getIcon()));
         helpMenu.add(aboutMI);
         return helpMenu;
