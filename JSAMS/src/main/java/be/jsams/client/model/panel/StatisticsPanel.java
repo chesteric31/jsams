@@ -57,12 +57,6 @@ public class StatisticsPanel extends JPanel {
         BigDecimal globalTurnover = ApplicationContext.getBillService().findGlobalTurnover(
                 Desktop.getInstance().getCurrentSociety());
         this.add(new JsamsLabel(globalTurnover.toPlainString()));
-        // JPanel searchCriteriaPanel = buildCriteriaPanel();
-        // this.add(searchCriteriaPanel, BorderLayout.NORTH);
-        // JScrollPane scrollPane = buildResultPanel();
-        // this.add(scrollPane, BorderLayout.CENTER);
-        // JPanel southPanel = buildSouthPanel();
-        // this.add(southPanel, BorderLayout.SOUTH);
     }
 
     /**
