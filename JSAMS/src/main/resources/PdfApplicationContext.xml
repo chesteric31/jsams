@@ -3,7 +3,14 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-	<bean id="pdfEstimateServiceImpl" class="be.jsams.server.service.pdf.impl.PdfEstimateServiceImpl">
+	<bean id="abstractPdfService" class="be.jsams.server.service.pdf.AbstractPdfService"
+		abstract="true">
+		<property name="xmlFileGenerator" ref="xmlFileGenerator" />
+		<property name="merger" ref="pdfMerger" />
+	</bean>
+
+	<bean id="pdfEstimateServiceImpl" class="be.jsams.server.service.pdf.impl.PdfEstimateServiceImpl"
+		parent="abstractPdfService">
 		<property name="xmlGenerator" ref="xmlEstimateGenerator" />
 		<property name="xmlFileGenerator" ref="xmlFileGenerator" />
 		<property name="merger" ref="pdfMerger" />
@@ -12,8 +19,9 @@
 	</bean>
 	<bean id="xmlEstimateGenerator"
 		class="be.jsams.server.service.xml.impl.XmlEstimateGeneratorImpl" />
-		
-	<bean id="pdfCommandServiceImpl" class="be.jsams.server.service.pdf.impl.PdfCommandServiceImpl">
+
+	<bean id="pdfCommandServiceImpl" class="be.jsams.server.service.pdf.impl.PdfCommandServiceImpl"
+		parent="abstractPdfService">
 		<property name="xmlGenerator" ref="xmlCommandGenerator" />
 		<property name="xmlFileGenerator" ref="xmlFileGenerator" />
 		<property name="merger" ref="pdfMerger" />
@@ -22,28 +30,30 @@
 	</bean>
 	<bean id="xmlCommandGenerator"
 		class="be.jsams.server.service.xml.impl.XmlCommandGeneratorImpl" />
-		
-	<bean id="pdfDeliveryOrderServiceImpl" class="be.jsams.server.service.pdf.impl.PdfDeliveryOrderServiceImpl">
+
+	<bean id="pdfDeliveryOrderServiceImpl"
+		class="be.jsams.server.service.pdf.impl.PdfDeliveryOrderServiceImpl"
+		parent="abstractPdfService">
 		<property name="xmlGenerator" ref="xmlDeliveryOrderGenerator" />
-		<property name="xmlFileGenerator" ref="xmlFileGenerator" />
-		<property name="merger" ref="pdfMerger" />
 		<property name="rootReportsPath" value="reports/deliveryOrder/" />
 		<property name="recordPath" value="delivery_order" />
 	</bean>
 	<bean id="xmlDeliveryOrderGenerator"
 		class="be.jsams.server.service.xml.impl.XmlDeliveryOrderGeneratorImpl" />
-		
-	<bean id="pdfBillServiceImpl" class="be.jsams.server.service.pdf.impl.PdfBillServiceImpl">
+
+	<bean id="pdfBillServiceImpl" class="be.jsams.server.service.pdf.impl.PdfBillServiceImpl"
+		parent="abstractPdfService">
 		<property name="xmlGenerator" ref="xmlBillGenerator" />
 		<property name="xmlFileGenerator" ref="xmlFileGenerator" />
 		<property name="merger" ref="pdfMerger" />
 		<property name="rootReportsPath" value="reports/bill/" />
 		<property name="recordPath" value="bill" />
 	</bean>
-	<bean id="xmlBillGenerator"
-		class="be.jsams.server.service.xml.impl.XmlBillGeneratorImpl" />
-		
-	<bean id="pdfCreditNoteServiceImpl" class="be.jsams.server.service.pdf.impl.PdfCreditNoteServiceImpl">
+	<bean id="xmlBillGenerator" class="be.jsams.server.service.xml.impl.XmlBillGeneratorImpl" />
+
+	<bean id="pdfCreditNoteServiceImpl"
+		class="be.jsams.server.service.pdf.impl.PdfCreditNoteServiceImpl"
+		parent="abstractPdfService">
 		<property name="xmlGenerator" ref="xmlCreditNoteGenerator" />
 		<property name="xmlFileGenerator" ref="xmlFileGenerator" />
 		<property name="merger" ref="pdfMerger" />
@@ -52,8 +62,8 @@
 	</bean>
 	<bean id="xmlCreditNoteGenerator"
 		class="be.jsams.server.service.xml.impl.XmlCreditNoteGeneratorImpl" />
-	
-	
+
+
 	<bean id="xmlFileGenerator" class="be.jsams.server.service.xml.XmlFileGenerator" />
 	<bean id="pdfMerger" class="be.jsams.server.service.pdf.PdfMerger" />
 
