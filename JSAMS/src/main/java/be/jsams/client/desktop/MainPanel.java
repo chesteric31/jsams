@@ -12,9 +12,9 @@ import be.jsams.client.swing.component.JsamsCloseableTabbedPane;
 import be.jsams.client.swing.listener.TabbedPaneKeyListener;
 
 /**
- * {@link JPanel} that contains the {@link JLayeredPane}
- *  with {@link SplashPanel} and {@link JsamsCloseableTabbedPane}.
- *
+ * {@link JPanel} that contains the {@link JLayeredPane} with
+ * {@link SplashPanel} and {@link JsamsCloseableTabbedPane}.
+ * 
  * @author chesteric31
  * @version $Revision$ $Date::                  $ $Author$
  */
@@ -24,11 +24,11 @@ public class MainPanel extends JPanel {
      * Serial
      */
     private static final long serialVersionUID = 4422624883682080583L;
-    
+
     private JLayeredPane layeredPane;
     private SplashPanel splashPanel;
     private JsamsCloseableTabbedPane tabbedPane;
-    
+
     /**
      * Default constructor.
      */
