@@ -23,25 +23,20 @@ import be.jsams.client.swing.utils.IconResource;
  */
 public class FileMenuBuilder extends AbstractMenuBuilder {
 
-    private JsamsMenu fileMenu;
-    private JsamsMenuItem newMI;
-    private JsamsMenuItem openMI;
     private JsamsMenuItem closeMI;
     private JsamsMenuItem societyParametersMI;
-    private JsamsMenuItem generalParametersMI;
-    private JsamsMenuItem exitMI;
 
     /**
      * {@inheritDoc}
      */
     @Override
     public JsamsMenu build() {
-        fileMenu = new JsamsMenu(I18nResource.MENU_FILE);
-        newMI = new JsamsMenuItem(I18nResource.MENU_ITEM_NEW, IconResource.NEW);
+        JsamsMenu fileMenu = new JsamsMenu(I18nResource.MENU_FILE);
+        JsamsMenuItem newMI = new JsamsMenuItem(I18nResource.MENU_ITEM_NEW, IconResource.NEW);
         newMI.setAction(new EditSocietyAction(newMI.getText(), newMI.getIcon(), EditSocietyAction.NEW_ONE_MODE));
         newMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, KeyEvent.CTRL_MASK));
         fileMenu.add(newMI);
-        openMI = new JsamsMenuItem(I18nResource.MENU_ITEM_OPEN, IconResource.OPEN);
+        JsamsMenuItem openMI = new JsamsMenuItem(I18nResource.MENU_ITEM_OPEN, IconResource.OPEN);
         openMI.setAction(new ChooseSocietyAction(openMI.getText(), openMI.getIcon()));
         openMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, KeyEvent.CTRL_MASK));
         fileMenu.add(openMI);
@@ -54,13 +49,13 @@ public class FileMenuBuilder extends AbstractMenuBuilder {
         societyParametersMI.setAction(new EditSocietyAction(societyParametersMI.getText(), societyParametersMI
                 .getIcon(), EditSocietyAction.CURRENT_SOCIETY_MODE));
         fileMenu.add(societyParametersMI);
-        generalParametersMI = new JsamsMenuItem(I18nResource.MENU_ITEM_GENERAL_PARAMETERS,
+        JsamsMenuItem generalParametersMI = new JsamsMenuItem(I18nResource.MENU_ITEM_GENERAL_PARAMETERS,
                 IconResource.GENERAL_PARAMETERS);
         generalParametersMI.setAction(new GeneralParametersAction(generalParametersMI.getText(), generalParametersMI
                 .getIcon()));
         fileMenu.add(generalParametersMI);
         fileMenu.add(new JSeparator());
-        exitMI = new JsamsMenuItem(I18nResource.MENU_ITEM_EXIT_APPLICATION, IconResource.EXIT);
+        JsamsMenuItem exitMI = new JsamsMenuItem(I18nResource.MENU_ITEM_EXIT_APPLICATION, IconResource.EXIT);
         exitMI.setAction(new ExitAction(exitMI.getText(), exitMI.getIcon()));
         fileMenu.add(exitMI);
 
