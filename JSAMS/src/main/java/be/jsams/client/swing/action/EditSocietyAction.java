@@ -25,9 +25,7 @@ public class EditSocietyAction extends AbstractAction {
     private static final long serialVersionUID = 3692819655583374043L;
 
     public static final int NEW_ONE_MODE = 0;
-
     public static final int CURRENT_SOCIETY_MODE = 1;
-
     private int editionMode;
 
     /**
@@ -55,4 +53,5 @@ public class EditSocietyAction extends AbstractAction {
             new EditSocietyDialog(I18nResource.TITLE_EDIT_SOCIETY, Desktop.getInstance().getCurrentSociety());
         }
     }
+
 }

@@ -69,7 +69,7 @@ public class Desktop {
     }
 
     /**
-     * Sets visible the {@link MainFrame}
+     * Sets visible the {@link MainFrame}.
      */
     public void start() {
         showSplash();
@@ -78,7 +78,7 @@ public class Desktop {
     }
 
     /**
-     * Shows the splash screen
+     * Shows the splash screen.
      */
     private void showSplash() {
         final SplashScreen splash = SplashScreen.getSplashScreen();
@@ -98,7 +98,7 @@ public class Desktop {
     }
 
     /**
-     * Gets the {@link MainFrame}
+     * Gets the {@link MainFrame}.
      * 
      * @return the frame in which the application appears (in MDI-mode), or the
      *         central container (in SDI-mode).
@@ -108,7 +108,7 @@ public class Desktop {
     }
 
     /**
-     * Exits the application after having shown a confirmation dialog
+     * Exits the application after having shown a confirmation dialog.
      */
     public void stopNow() {
         int confirm = JOptionPane.showConfirmDialog(getMainWindow(), I18nResource.CONFIRMATION_EXIT);
@@ -130,7 +130,6 @@ public class Desktop {
     }
 
     /**
-     * 
      * @return the current {@link SocietyBean}
      */
     public SocietyBean getCurrentSociety() {
@@ -142,17 +141,15 @@ public class Desktop {
      */
     public void setCurrentSociety(final SocietyBean currentSociety) {
         this.currentSociety = currentSociety;
-
-        // TODO review this if
         if (frame != null) {
             JsamsMenuItem societyParametersMI = frame.getSocietyParametersMI();
             societyParametersMI.setAction(new EditSocietyAction(societyParametersMI.getText(), societyParametersMI
-                    .getIcon(), 1));
+                    .getIcon(), EditSocietyAction.CURRENT_SOCIETY_MODE));
         }
     }
 
     /**
-     * Sets the native look and feel.
+     * Sets the native look and feel i.e. Nimbus.
      */
     private void setNativeLookAndFeel() {
         try {
@@ -168,7 +165,7 @@ public class Desktop {
     }
 
     /**
-     * Set the default font for all swing components.
+     * Sets the default font for all swing components.
      * 
      * ex. setUIFont (new javax.swing.plaf.FontUIResource
      * ("Serif",Font.ITALIC,12));
@@ -187,7 +184,6 @@ public class Desktop {
     }
 
     /**
-     * 
      * @param instance the {@link Desktop} instance to set
      */
     public static void setInstance(Desktop instance) {
@@ -195,7 +191,6 @@ public class Desktop {
     }
 
     /**
-     * 
      * @return the {@link Desktop} instance
      */
     public static Desktop getInstance() {
