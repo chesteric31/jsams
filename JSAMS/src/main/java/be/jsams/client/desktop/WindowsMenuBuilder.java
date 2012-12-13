@@ -52,7 +52,7 @@ public class WindowsMenuBuilder extends AbstractMenuBuilder {
      * @return an {@link Action} to close the current selected tab
      */
     private Action closeWindowAction(String text, Icon icon) {
-        AbstractAction action = new AbstractAction() {
+        AbstractAction action = new AbstractAction(text, icon) {
 
             /**
              * Serial Version UID
@@ -67,8 +67,6 @@ public class WindowsMenuBuilder extends AbstractMenuBuilder {
                 }
             }
         };
-        action.putValue(Action.NAME, text);
-        action.putValue(Action.SMALL_ICON, icon);
         return action;
     }
 
@@ -80,7 +78,7 @@ public class WindowsMenuBuilder extends AbstractMenuBuilder {
      * @return an {@link Action} to close all tabs.
      */
     private Action closeAllWindowsAction(String text, Icon icon) {
-        AbstractAction action = new AbstractAction() {
+        AbstractAction action = new AbstractAction(text, icon) {
 
             /**
              * Serial Version UID
@@ -93,8 +91,6 @@ public class WindowsMenuBuilder extends AbstractMenuBuilder {
                 mainFrame.enableTabbedPane(false);
             }
         };
-        action.putValue(Action.NAME, text);
-        action.putValue(Action.SMALL_ICON, icon);
         return action;
     }
 
@@ -106,7 +102,7 @@ public class WindowsMenuBuilder extends AbstractMenuBuilder {
      * @return an {@link Action} to switch to the next tab.
      */
     private Action nextAction(String text, Icon icon) {
-        AbstractAction action = new AbstractAction() {
+        AbstractAction action = new AbstractAction(text, icon) {
 
             /**
              * Serial Version UID
@@ -124,8 +120,6 @@ public class WindowsMenuBuilder extends AbstractMenuBuilder {
                 }
             }
         };
-        action.putValue(Action.NAME, text);
-        action.putValue(Action.SMALL_ICON, icon);
         return action;
     }
 
@@ -137,7 +131,7 @@ public class WindowsMenuBuilder extends AbstractMenuBuilder {
      * @return an {@link Action} to switch to the previous tab.
      */
     private Action previousAction(String text, Icon icon) {
-        AbstractAction action = new AbstractAction() {
+        AbstractAction action = new AbstractAction(text, icon) {
 
             /**
              * Serial Version UID
@@ -155,8 +149,6 @@ public class WindowsMenuBuilder extends AbstractMenuBuilder {
                 }
             }
         };
-        action.putValue(Action.NAME, text);
-        action.putValue(Action.SMALL_ICON, icon);
         return action;
     }
 
