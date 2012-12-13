@@ -48,7 +48,7 @@ public class HelpMenuBuilder extends AbstractMenuBuilder {
      * @return an {@link Action} to open the about dialog
      */
     private Action aboutAction(String text, Icon icon) {
-        AbstractAction action = new AbstractAction() {
+        AbstractAction action = new AbstractAction(text, icon) {
 
             /**
              * Serial Version UID
@@ -59,8 +59,6 @@ public class HelpMenuBuilder extends AbstractMenuBuilder {
                 new AboutDialog(Desktop.getInstance().getMainWindow(), I18nResource.TITLE_ABOUT);
             }
         };
-        action.putValue(Action.NAME, text);
-        action.putValue(Action.SMALL_ICON, icon);
         return action;
     }
 
@@ -72,7 +70,7 @@ public class HelpMenuBuilder extends AbstractMenuBuilder {
      * @return an {@link Action} to open the update dialog
      */
     private Action updateAction(String text, Icon icon) {
-        AbstractAction action = new AbstractAction() {
+        AbstractAction action = new AbstractAction(text, icon) {
 
             /**
              * Serial Version UID
@@ -83,8 +81,6 @@ public class HelpMenuBuilder extends AbstractMenuBuilder {
                 new UpdateDialog(Desktop.getInstance().getMainWindow(), I18nResource.TITLE_UPDATE);
             }
         };
-        action.putValue(Action.NAME, text);
-        action.putValue(Action.SMALL_ICON, icon);
         return action;
     }
 
