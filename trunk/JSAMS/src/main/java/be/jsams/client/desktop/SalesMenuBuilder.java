@@ -115,7 +115,7 @@ public class SalesMenuBuilder extends AbstractMenuBuilder {
      * @return an {@link Action} for the transfer of documents
      */
     private Action transferAction(String text, Icon icon) {
-        AbstractAction action = new AbstractAction() {
+        AbstractAction action = new AbstractAction(text, icon) {
             /**
              * Serial Version UID
              */
@@ -126,8 +126,6 @@ public class SalesMenuBuilder extends AbstractMenuBuilder {
                         IconResource.TRANSFER_LOGO);
             }
         };
-        action.putValue(Action.NAME, text);
-        action.putValue(Action.SMALL_ICON, icon);
         return action;
 
     }
@@ -140,7 +138,7 @@ public class SalesMenuBuilder extends AbstractMenuBuilder {
      * @return an {@link Action} for the searching of estimates
      */
     private Action estimatesAction(String text, Icon icon) {
-        AbstractAction action = new AbstractAction() {
+        AbstractAction action = new AbstractAction(text, icon) {
             /**
              * Serial Version UID
              */
@@ -161,8 +159,6 @@ public class SalesMenuBuilder extends AbstractMenuBuilder {
                 parent.getTabbedPane().addTab(I18nResource.TITLE_SEARCH_ESTIMATE, null, searchPanel);
             }
         };
-        action.putValue(Action.NAME, text);
-        action.putValue(Action.SMALL_ICON, icon);
         return action;
     }
 
@@ -174,7 +170,7 @@ public class SalesMenuBuilder extends AbstractMenuBuilder {
      * @return an {@link Action} for the searching of commands
      */
     private Action commandsAction(String text, Icon icon) {
-        AbstractAction action = new AbstractAction() {
+        AbstractAction action = new AbstractAction(text, icon) {
             /**
              * Serial Version UID
              */
@@ -195,8 +191,6 @@ public class SalesMenuBuilder extends AbstractMenuBuilder {
                 parent.getTabbedPane().addTab(I18nResource.TITLE_SEARCH_COMMAND, null, searchPanel);
             }
         };
-        action.putValue(Action.NAME, text);
-        action.putValue(Action.SMALL_ICON, icon);
         return action;
     }
 
@@ -208,7 +202,7 @@ public class SalesMenuBuilder extends AbstractMenuBuilder {
      * @return an {@link Action} for the searching of delivery orders
      */
     private Action deliveryOrdersAction(String text, Icon icon) {
-        AbstractAction action = new AbstractAction() {
+        AbstractAction action = new AbstractAction(text, icon) {
             /**
              * Serial Version UID
              */
@@ -228,8 +222,6 @@ public class SalesMenuBuilder extends AbstractMenuBuilder {
                 parent.getTabbedPane().addTab(I18nResource.TITLE_SEARCH_DELIVERY_ORDER, null, searchPanel);
             }
         };
-        action.putValue(Action.NAME, text);
-        action.putValue(Action.SMALL_ICON, icon);
         return action;
     }
 
@@ -241,7 +233,7 @@ public class SalesMenuBuilder extends AbstractMenuBuilder {
      * @return an {@link Action} for the searching of bills
      */
     private Action billsAction(String text, Icon icon) {
-        AbstractAction action = new AbstractAction() {
+        AbstractAction action = new AbstractAction(text, icon) {
             /**
              * Serial Version UID
              */
@@ -262,8 +254,6 @@ public class SalesMenuBuilder extends AbstractMenuBuilder {
                 parent.getTabbedPane().addTab(I18nResource.TITLE_SEARCH_BILL, null, searchPanel);
             }
         };
-        action.putValue(Action.NAME, text);
-        action.putValue(Action.SMALL_ICON, icon);
         return action;
     }
 
@@ -275,7 +265,7 @@ public class SalesMenuBuilder extends AbstractMenuBuilder {
      * @return an {@link Action} for the searching of credit notes
      */
     private Action creditNotesAction(String text, Icon icon) {
-        AbstractAction action = new AbstractAction() {
+        AbstractAction action = new AbstractAction(text, icon) {
             /**
              * Serial Version UID
              */
@@ -295,8 +285,6 @@ public class SalesMenuBuilder extends AbstractMenuBuilder {
                 parent.getTabbedPane().addTab(I18nResource.TITLE_SEARCH_CREDIT_NOTE, null, searchPanel);
             }
         };
-        action.putValue(Action.NAME, text);
-        action.putValue(Action.SMALL_ICON, icon);
         return action;
     }
 

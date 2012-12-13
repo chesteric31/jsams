@@ -95,7 +95,7 @@ public class ManagementMenuBuilder extends AbstractMenuBuilder {
      * @return an {@link Action} for the searching of customers
      */
     private Action customersAction(String text, Icon icon) {
-        AbstractAction action = new AbstractAction() {
+        AbstractAction action = new AbstractAction(text, icon) {
             /**
              * Serial Version UID
              */
@@ -110,8 +110,6 @@ public class ManagementMenuBuilder extends AbstractMenuBuilder {
                 parent.getTabbedPane().addTab(I18nResource.TITLE_SEARCH_CUSTOMER, IconResource.CUSTOMER, searchPanel);
             }
         };
-        action.putValue(Action.NAME, text);
-        action.putValue(Action.SMALL_ICON, icon);
         return action;
     }
 
@@ -123,7 +121,7 @@ public class ManagementMenuBuilder extends AbstractMenuBuilder {
      * @return an {@link Action} for the searching of agents
      */
     private Action agentsAction(String text, Icon icon) {
-        AbstractAction action = new AbstractAction() {
+        AbstractAction action = new AbstractAction(text, icon) {
             /**
              * Serial Version UID
              */
@@ -137,8 +135,6 @@ public class ManagementMenuBuilder extends AbstractMenuBuilder {
                 parent.getTabbedPane().addTab(I18nResource.TITLE_SEARCH_AGENT, IconResource.AGENT, searchPanel);
             }
         };
-        action.putValue(Action.NAME, text);
-        action.putValue(Action.SMALL_ICON, icon);
         return action;
     }
 
@@ -150,7 +146,7 @@ public class ManagementMenuBuilder extends AbstractMenuBuilder {
      * @return a {@link Action} for the searching of products
      */
     private Action productsAction(String text, Icon icon) {
-        AbstractAction action = new AbstractAction() {
+        AbstractAction action = new AbstractAction(text, icon) {
             /**
              * Serial
              */
@@ -165,8 +161,6 @@ public class ManagementMenuBuilder extends AbstractMenuBuilder {
                 parent.getTabbedPane().addTab(I18nResource.TITLE_SEARCH_PRODUCT, IconResource.PRODUCT, searchPanel);
             }
         };
-        action.putValue(Action.NAME, text);
-        action.putValue(Action.SMALL_ICON, icon);
         return action;
     }
 
@@ -178,7 +172,7 @@ public class ManagementMenuBuilder extends AbstractMenuBuilder {
      * @return a {@link Action} for the searching of product categories
      */
     private Action productsCategoryAction(String text, Icon icon) {
-        AbstractAction action = new AbstractAction() {
+        AbstractAction action = new AbstractAction(text, icon) {
             /**
              * Serial Version UID
              */
@@ -195,8 +189,6 @@ public class ManagementMenuBuilder extends AbstractMenuBuilder {
                 parent.getTabbedPane().addTab(I18nResource.TITLE_SEARCH_PRODUCT_CATEGORY, null, searchPanel);
             }
         };
-        action.putValue(Action.NAME, text);
-        action.putValue(Action.SMALL_ICON, icon);
         return action;
     }
 
