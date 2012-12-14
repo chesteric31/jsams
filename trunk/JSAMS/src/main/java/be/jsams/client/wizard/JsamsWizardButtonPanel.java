@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 import be.jsams.client.swing.component.JsamsLabel;
 
 /**
- * 
+ * Button panel for the wizard.
  *
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
