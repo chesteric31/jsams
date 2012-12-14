@@ -17,7 +17,7 @@ import be.jsams.common.bean.model.sale.BillBean;
 import be.jsams.common.bean.model.sale.DeliveryOrderBean;
 import be.jsams.common.bean.model.sale.detail.DeliveryOrderDetailBean;
 import be.jsams.common.bean.model.transfer.TransferBean;
-import be.jsams.server.dao.BaseJUnitTestClass;
+import be.jsams.server.BaseJUnitTestClass;
 
 /**
  * Test class for {@link DeliveryOrderBillTransferServiceImpl} class.

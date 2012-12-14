@@ -12,8 +12,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import be.jsams.server.BaseJUnitTestClass;
 import be.jsams.server.dao.AddressDao;
-import be.jsams.server.dao.BaseJUnitTestClass;
 import be.jsams.server.model.Address;
 import be.jsams.server.model.MockModelGenerator;
 

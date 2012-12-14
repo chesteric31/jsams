@@ -13,7 +13,7 @@ import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.AgentBean;
 import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.sale.CommandBean;
-import be.jsams.server.dao.BaseJUnitTestClass;
+import be.jsams.server.BaseJUnitTestClass;
 import be.jsams.server.dao.CivilityDao;
 import be.jsams.server.dao.LegalFormDao;
 import be.jsams.server.dao.PaymentModeDao;
