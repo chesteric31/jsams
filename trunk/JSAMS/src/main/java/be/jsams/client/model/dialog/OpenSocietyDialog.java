@@ -65,7 +65,7 @@ public class OpenSocietyDialog extends JsamsDialog implements JsamsButtonsInterf
      */
     public OpenSocietyDialog(final I18nString title) {
         super(null, title, IconUtil.TITLE_ICON_PREFIX + IconResource.JSAMS);
-        buttonsPanel = new JsamsButtonsPanel(this, true, false, false);
+        buttonsPanel = new JsamsButtonsPanel(this, true, true, false);
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         setDefaultKeyActions();
         add(buildSouthPanel(), BorderLayout.SOUTH);
@@ -197,6 +197,10 @@ public class OpenSocietyDialog extends JsamsDialog implements JsamsButtonsInterf
         InputMap inputMap = rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
         inputMap.put(okKey, JsamsButtonsPanel.OK_ACTION_KEY);
         rootPane.getActionMap().put(JsamsButtonsPanel.OK_ACTION_KEY, buttonsPanel.getButtonOk().getAction());
+
+        KeyStroke cancelKey = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, noModifiers, false);
+        inputMap.put(cancelKey, JsamsButtonsPanel.CANCEL_ACTION_KEY);
+        rootPane.getActionMap().put(JsamsButtonsPanel.CANCEL_ACTION_KEY, buttonsPanel.getButtonCancel().getAction());
     }
 
 }

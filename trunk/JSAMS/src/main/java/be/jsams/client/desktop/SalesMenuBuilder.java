@@ -68,7 +68,7 @@ public class SalesMenuBuilder extends AbstractMenuBuilder {
     private MainFrame parent;
 
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param parent the {@link MainFrame} parent
      */
