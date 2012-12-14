@@ -1,4 +1,4 @@
-package be.jsams.client.swing.listener.wizard.selection.single;
+package be.jsams.client.swing.listener.wizard.selection.document.single;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +29,7 @@ public class EstimateWizardSingleSelectionTableML extends AbstractWizardSingleSe
      * {@inheritDoc}
      */
     @Override
-    protected void handleSingleClick(JsamsTable table, int selectedRowModel) {
+    protected void handleSelection(JsamsTable table, int selectedRowModel) {
         EstimateTableModel model = (EstimateTableModel) table.getModel();
         List<EstimateBean> beans = new ArrayList<EstimateBean>();
         beans.add(model.getRow(selectedRowModel));

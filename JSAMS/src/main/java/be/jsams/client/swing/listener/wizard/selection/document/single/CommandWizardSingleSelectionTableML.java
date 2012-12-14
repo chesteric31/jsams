@@ -1,4 +1,4 @@
-package be.jsams.client.swing.listener.wizard.selection.single;
+package be.jsams.client.swing.listener.wizard.selection.document.single;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +29,7 @@ public class CommandWizardSingleSelectionTableML extends AbstractWizardSingleSel
      * {@inheritDoc}
      */
     @Override
-    protected void handleSingleClick(JsamsTable table, int selectedRowModel) {
+    protected void handleSelection(JsamsTable table, int selectedRowModel) {
         CommandTableModel model = (CommandTableModel) table.getModel();
         List<CommandBean> beans = new ArrayList<CommandBean>();
         beans.add(model.getRow(selectedRowModel));
