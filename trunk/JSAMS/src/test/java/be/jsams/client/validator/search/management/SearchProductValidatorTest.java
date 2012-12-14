@@ -22,7 +22,7 @@ import com.jgoodies.validation.ValidationResult;
  * @version $Revision$ $Date::                  $ $Author$
  */
 public class SearchProductValidatorTest extends AbstractValidatorTest {
-     
+
     private SearchProductValidator validator;
     private ProductBean bean;
 
@@ -68,7 +68,7 @@ public class SearchProductValidatorTest extends AbstractValidatorTest {
      * .
      */
     @Test
-    public void testValidateBlankCtegory() {
+    public void testValidateBlankCategory() {
         bean.setCategory(null);
         ValidationResult result = validator.validate(bean);
         String formattedText = retrieveFormattedText(result);
