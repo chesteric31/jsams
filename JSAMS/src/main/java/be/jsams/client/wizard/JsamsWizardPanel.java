@@ -130,7 +130,7 @@ public abstract class JsamsWizardPanel<B extends AbstractIdentityBean<?, ?>, V e
     }
 
     /**
-     * Change the current index with the panel index.
+     * Changes the current index with the panel index.
      * 
      * @param panelIndex the panel index
      */
@@ -140,7 +140,7 @@ public abstract class JsamsWizardPanel<B extends AbstractIdentityBean<?, ?>, V e
     }
 
     /**
-     * Set the back button to enabled/disabled.
+     * Sets the back button to enabled/disabled.
      * 
      * @param set the boolean to apply
      */
@@ -149,7 +149,7 @@ public abstract class JsamsWizardPanel<B extends AbstractIdentityBean<?, ?>, V e
     }
 
     /**
-     * Set the next button to enabled/disabled.
+     * Sets the next button to enabled/disabled.
      * 
      * @param set the boolean to apply
      */
@@ -158,7 +158,7 @@ public abstract class JsamsWizardPanel<B extends AbstractIdentityBean<?, ?>, V e
     }
 
     /**
-     * Set the finish button to enabled/disabled.
+     * Sets the finish button to enabled/disabled.
      * 
      * @param set the boolean to apply
      */
