@@ -10,8 +10,6 @@ import be.jsams.common.bean.model.sale.DeliveryOrderBean;
 import be.jsams.common.bean.view.sale.DeliveryOrderBeanView;
 import be.jsams.server.service.sale.DeliveryOrderService;
 
-import com.jgoodies.validation.view.ValidationComponentUtils;
-
 /**
  * Edit Delivery Order {@link AbstractEditDialog}, to create or update a
  * {@link DeliveryOrderBean} object.
@@ -41,14 +39,17 @@ public class EditDeliveryOrderDialog extends
      * {@inheritDoc}
      */
     @Override
-    public void initComponents() {
+    public void saveOriginalModel() {
         setOriginalModel(new DeliveryOrderBean(getModel().getSociety(), getModel().getCustomer()));
         getOriginalModel().refresh(getModel());
+    }
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public JPanel initComponents() {
         DeliveryOrderBeanView view = getModel().buildView();
-        JPanel panel = view.createEditView();
-        getContentPane().add(panel);
-        ValidationComponentUtils.updateComponentTreeMandatoryBorder(this);
-        pack();
+        return view.createEditView();
     }
 
     /**

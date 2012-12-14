@@ -10,8 +10,6 @@ import be.jsams.common.bean.model.sale.CommandBean;
 import be.jsams.common.bean.view.sale.CommandBeanView;
 import be.jsams.server.service.sale.CommandService;
 
-import com.jgoodies.validation.view.ValidationComponentUtils;
-
 /**
  * Edit Command {@link AbstractEditDialog}, to create or update a
  * {@link CommandBean} object.
@@ -40,17 +38,20 @@ public class EditCommandDialog extends AbstractEditDialog<CommandBean, EditComma
      * {@inheritDoc}
      */
     @Override
-    public void initComponents() {
+    public void saveOriginalModel() {
         CommandBean originalModel = new CommandBean(getModel().getSociety(), getModel().getCustomer(), getModel()
                 .getAgent());
         setOriginalModel(originalModel);
         getOriginalModel().refresh(getModel());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public JPanel initComponents() {
         CommandBeanView view = getModel().buildView();
-        JPanel panel = view.createEditView();
-        getModel().setView(view);
-        getContentPane().add(panel);
-        ValidationComponentUtils.updateComponentTreeMandatoryBorder(this);
-        pack();
+        return view.createEditView();
     }
 
     /**

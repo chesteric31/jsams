@@ -14,8 +14,6 @@ import be.jsams.common.bean.view.management.AgentBeanView;
 import be.jsams.server.model.Civility;
 import be.jsams.server.service.management.AgentService;
 
-import com.jgoodies.validation.view.ValidationComponentUtils;
-
 /**
  * Edit Agent {@link AbstractEditDialog}, to create or update a
  * {@link AgentBean} object.
@@ -44,14 +42,18 @@ public class EditAgentDialog extends AbstractEditDialog<AgentBean, EditAgentVali
      * {@inheritDoc}
      */
     @Override
-    public void initComponents() {
+    public void saveOriginalModel() {
         setOriginalModel(ApplicationContext.getAgentBeanBuilder().build(null, getModel().getSociety()));
         getOriginalModel().refresh(getModel());
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public JPanel initComponents() {
         AgentBeanView view = getModel().buildView();
-        JPanel panel = view.createEditView();
-        getContentPane().add(panel);
-        ValidationComponentUtils.updateComponentTreeMandatoryBorder(this);
-        pack();
+        return view.createEditView();
     }
 
     /**

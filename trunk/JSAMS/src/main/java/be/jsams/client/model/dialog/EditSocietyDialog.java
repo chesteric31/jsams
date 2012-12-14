@@ -11,8 +11,6 @@ import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.view.SocietyBeanView;
 import be.jsams.server.service.SocietyService;
 
-import com.jgoodies.validation.view.ValidationComponentUtils;
-
 /**
  * Edit society {@link AbstractEditDialog}, to create or update a
  * {@link SocietyBean} object.
@@ -42,14 +40,18 @@ public class EditSocietyDialog extends AbstractEditDialog<SocietyBean, EditSocie
     /**
      * {@inheritDoc}
      */
-    public void initComponents() {
+    @Override
+    public void saveOriginalModel() {
         setOriginalModel(ApplicationContext.getSocietyBeanBuilder().build(false));
         getOriginalModel().refresh(getModel());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public JPanel initComponents() {
         SocietyBeanView view = getModel().buildView();
-        JPanel panel = view.createEditView();
-        getContentPane().add(panel);
-        ValidationComponentUtils.updateComponentTreeMandatoryBorder(this);
-        pack();
+        return view.createEditView();
     }
 
     /**

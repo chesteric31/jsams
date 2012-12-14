@@ -29,6 +29,7 @@ import com.jgoodies.validation.ValidationResult;
 import com.jgoodies.validation.ValidationResultModel;
 import com.jgoodies.validation.Validator;
 import com.jgoodies.validation.util.DefaultValidationResultModel;
+import com.jgoodies.validation.view.ValidationComponentUtils;
 import com.jgoodies.validation.view.ValidationResultViewFactory;
 
 /**
@@ -95,7 +96,11 @@ public abstract class AbstractEditDialog<B extends AbstractIdentityBean<?, ?>, V
         this.model = model;
         this.validator = validator;
         this.service = service;
-        initComponents();
+        saveOriginalModel();
+        JPanel panel = initComponents();
+        getContentPane().add(panel);
+        ValidationComponentUtils.updateComponentTreeMandatoryBorder(this);
+        pack();
         DialogUtil.centerComponentOnScreen(this);
         setResizable(true);
         setVisible(true);
@@ -103,8 +108,15 @@ public abstract class AbstractEditDialog<B extends AbstractIdentityBean<?, ?>, V
 
     /**
      * Initializes all the components.
+     * 
+     * @return the built content panel
      */
-    public abstract void initComponents();
+    public abstract JPanel initComponents();
+    
+    /**
+     * Saves the original model without any modifications.
+     */
+    public abstract void saveOriginalModel();
 
     /**
      * @return the service
