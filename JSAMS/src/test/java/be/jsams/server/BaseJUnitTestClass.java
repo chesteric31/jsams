@@ -1,4 +1,4 @@
-package be.jsams.server.dao;
+package be.jsams.server;
 
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;

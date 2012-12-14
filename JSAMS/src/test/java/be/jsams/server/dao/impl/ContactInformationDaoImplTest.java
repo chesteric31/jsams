@@ -12,7 +12,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import be.jsams.server.dao.BaseJUnitTestClass;
+import be.jsams.server.BaseJUnitTestClass;
 import be.jsams.server.dao.ContactInformationDao;
 import be.jsams.server.model.ContactInformation;
 import be.jsams.server.model.MockModelGenerator;

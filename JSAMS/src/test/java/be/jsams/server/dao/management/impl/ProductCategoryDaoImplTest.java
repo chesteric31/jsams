@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import be.jsams.common.bean.builder.SocietyBeanBuilder;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.ProductCategoryBean;
-import be.jsams.server.dao.BaseJUnitTestClass;
+import be.jsams.server.BaseJUnitTestClass;
 import be.jsams.server.dao.SocietyDao;
 import be.jsams.server.dao.management.ProductCategoryDao;
 import be.jsams.server.model.MockModelGenerator;

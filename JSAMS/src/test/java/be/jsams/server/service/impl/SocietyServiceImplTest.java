@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import be.jsams.common.bean.model.LegalFormBean;
 import be.jsams.common.bean.model.MockBeanGenerator;
 import be.jsams.common.bean.model.SocietyBean;
-import be.jsams.server.dao.BaseJUnitTestClass;
+import be.jsams.server.BaseJUnitTestClass;
 import be.jsams.server.dao.LegalFormDao;
 import be.jsams.server.model.LegalForm;
 import be.jsams.server.service.SocietyService;
