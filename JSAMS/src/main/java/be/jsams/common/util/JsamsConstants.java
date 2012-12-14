@@ -12,7 +12,6 @@ public final class JsamsConstants {
      * Constructor.
      */
     private JsamsConstants() {
-        
     }
 
     public static final String EMPTY_STRING = "";
