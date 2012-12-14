@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 public interface Searchable<S extends JPanel> {
 
     /**
-     * Create a {@link JPanel} searching view of the current bean.
+     * Creates a {@link JPanel} searching view of the current bean.
      * 
      * @return the {@link JPanel}
      */

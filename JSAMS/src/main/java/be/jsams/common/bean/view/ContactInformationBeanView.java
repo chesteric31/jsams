@@ -24,7 +24,7 @@ public class ContactInformationBeanView extends AbstractBeanView<ContactInformat
     private static final long serialVersionUID = 5063759475826319119L;
 
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param bean the {@link ContactInformationBean}
      */

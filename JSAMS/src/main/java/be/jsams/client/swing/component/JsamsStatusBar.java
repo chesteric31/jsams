@@ -26,14 +26,6 @@ public class JsamsStatusBar extends JPanel {
     private final GridBagConstraints gridBagContraints = new GridBagConstraints();
 
     /**
-     * Default constructor.
-     */
-    public JsamsStatusBar() {
-        super(new GridBagLayout());
-        initComponents();
-    }
-
-    /**
      * Message to display if there is no message to display. Default to a blank
      * string.
      */
@@ -43,6 +35,14 @@ public class JsamsStatusBar extends JPanel {
     private final JsamsLabel labelText = new JsamsLabel();
 
     private final JPanel labelPanel = new JPanel();
+
+    /**
+     * Default constructor.
+     */
+    public JsamsStatusBar() {
+        super(new GridBagLayout());
+        initComponents();
+    }
 
     /**
      * Sets the text to display in the message label.
@@ -156,5 +156,5 @@ public class JsamsStatusBar extends JPanel {
         this.setText(label.getText());
         labelText.setIcon(label.getIcon());
     }
-    
+
 }

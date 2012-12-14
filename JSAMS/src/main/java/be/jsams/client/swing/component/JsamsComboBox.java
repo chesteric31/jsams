@@ -16,12 +16,10 @@ public class JsamsComboBox extends JComboBox {
     private static final long serialVersionUID = -3766796444886863963L;
 
     /**
-     * Default constructor
+     * Default constructor.
      */
     public JsamsComboBox() {
         super();
-        // TODO
-        //setKeySelectionManager(new ComboBoxKeySelectionManager());
     }
 
 }

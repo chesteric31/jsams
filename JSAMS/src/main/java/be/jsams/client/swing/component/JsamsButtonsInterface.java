@@ -22,5 +22,5 @@ public interface JsamsButtonsInterface {
      * Performs the reset process.
      */
     void performReset();
-    
+
 }

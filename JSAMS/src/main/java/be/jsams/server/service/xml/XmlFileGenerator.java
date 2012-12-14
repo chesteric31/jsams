@@ -6,6 +6,8 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 
+import org.apache.log4j.Logger;
+
 /**
  * Generator of XML physical file from a XML JAXB object, a class type.
  *
@@ -13,6 +15,8 @@ import javax.xml.bind.Marshaller;
  * @version $Revision$ $Date::                  $ $Author$
  */
 public class XmlFileGenerator {
+    
+    private static final Logger LOGGER = Logger.getLogger(XmlFileGenerator.class);
 
     /**
      * Generates a file with the XML and class type input.
@@ -31,7 +35,7 @@ public class XmlFileGenerator {
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
             marshaller.marshal(xml, output);
         } catch (JAXBException ex) {
-            ex.printStackTrace();
+            LOGGER.error(ex);
         }
         return output;
     }
