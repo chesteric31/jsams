@@ -62,9 +62,9 @@ public class XmlEstimateGeneratorImpl implements XmlGenerator<EstimateBean, Esti
             ProductXml productXml = factory.createProduct();
             ProductBean product = bean.getProduct();
             productXml.setName(product.getName());
-            Long id = product.getId();
-            if (id != null) {
-                productXml.setNumber(new BigInteger(id.toString()));
+            Long productId = product.getId();
+            if (productId != null) {
+                productXml.setNumber(new BigInteger(productId.toString()));
             }
             detailXml.setProduct(productXml);
             detailXml.setQuantity(BigInteger.valueOf(bean.getQuantity()));
