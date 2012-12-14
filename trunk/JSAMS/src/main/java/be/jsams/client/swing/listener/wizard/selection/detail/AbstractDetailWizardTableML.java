@@ -1,31 +1,27 @@
-package be.jsams.client.swing.listener.wizard;
+package be.jsams.client.swing.listener.wizard.selection.detail;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.ArrayList;
-import java.util.List;
 
-import be.jsams.client.model.table.sale.DeliveryOrderTableModel;
 import be.jsams.client.swing.component.JsamsTable;
-import be.jsams.common.bean.model.sale.DeliveryOrderBean;
 import be.jsams.common.bean.model.transfer.TransferBean;
 
 /**
- * 
+ * Abstract detail wizard table mouse listener.
  *
  * @author chesteric31
- * @version $Rev$ $Date::                  $ $Author$
+ * @version $Revision$ $Date::                  $ $Author$
  */
-public class DeliveryOrderWizardMultipleSelectionTableML implements MouseListener {
+public abstract class AbstractDetailWizardTableML implements MouseListener {
 
     private TransferBean bean;
 
     /**
-     * Constructor
+     * Constructor.
      * 
-     * @param bean the {@link TransferBean}
+     * @param bean the {@link TransferBean} to use
      */
-    public DeliveryOrderWizardMultipleSelectionTableML(TransferBean bean) {
+    public AbstractDetailWizardTableML(TransferBean bean) {
         this.bean = bean;
     }
 
@@ -38,18 +34,18 @@ public class DeliveryOrderWizardMultipleSelectionTableML implements MouseListene
         if (e.getClickCount() == 1) {
             int[] selectedRows = table.getSelectedRows();
             if (selectedRows != null && selectedRows.length > 0) {
-                List<DeliveryOrderBean> beans = new ArrayList<DeliveryOrderBean>();
-                for (int selectedRow : selectedRows) {
-                    if (selectedRow > -1) {
-                        int selectedRowModel = table.convertRowIndexToModel(selectedRow);
-                        DeliveryOrderTableModel model = (DeliveryOrderTableModel) table.getModel();
-                        beans.add(model.getRow(selectedRowModel));
-                    }
-                }
-                bean.setDocuments(beans);
+                handleSelection(table, selectedRows);
             }
         }
     }
+
+    /**
+     * Handling of single mouse click selection.
+     * 
+     * @param table the {@link JsamsTable} to use
+     * @param selectedRows the selected rows
+     */
+    protected abstract void handleSelection(JsamsTable table, int[] selectedRows);
 
     /**
      * {@inheritDoc}
@@ -77,6 +73,20 @@ public class DeliveryOrderWizardMultipleSelectionTableML implements MouseListene
      */
     @Override
     public void mouseExited(MouseEvent e) {
+    }
+
+    /**
+     * @return the bean
+     */
+    public TransferBean getBean() {
+        return bean;
+    }
+
+    /**
+     * @param bean the bean to set
+     */
+    public void setBean(TransferBean bean) {
+        this.bean = bean;
     }
 
 }

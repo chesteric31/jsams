@@ -1,4 +1,4 @@
-package be.jsams.client.swing.listener.wizard.selection.single;
+package be.jsams.client.swing.listener.wizard.selection.document.single;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -35,18 +35,18 @@ public abstract class AbstractWizardSingleSelectionTableML implements MouseListe
             int selectedRow = table.getSelectedRow();
             if (selectedRow > -1) {
                 int selectedRowModel = table.convertRowIndexToModel(selectedRow);
-                handleSingleClick(table, selectedRowModel);
+                handleSelection(table, selectedRowModel);
             }
         }
     }
 
     /**
-     * Handling of single mouse click.
+     * Handling of single mouse click selection.
      * 
      * @param table the {@link JsamsTable} to use
      * @param selectedRowModel the selected row into model
      */
-    protected abstract void handleSingleClick(JsamsTable table, int selectedRowModel);
+    protected abstract void handleSelection(JsamsTable table, int selectedRowModel);
 
     /**
      * {@inheritDoc}

@@ -1,4 +1,4 @@
-package be.jsams.client.swing.listener.wizard.selection.single;
+package be.jsams.client.swing.listener.wizard.selection.document.single;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +29,7 @@ public class BillWizardSingleSelectionTableML extends AbstractWizardSingleSelect
      * {@inheritDoc}
      */
     @Override
-    protected void handleSingleClick(JsamsTable table, int selectedRowModel) {
+    protected void handleSelection(JsamsTable table, int selectedRowModel) {
         BillTableModel model = (BillTableModel) table.getModel();
         List<BillBean> beans = new ArrayList<BillBean>();
         beans.add(model.getRow(selectedRowModel));

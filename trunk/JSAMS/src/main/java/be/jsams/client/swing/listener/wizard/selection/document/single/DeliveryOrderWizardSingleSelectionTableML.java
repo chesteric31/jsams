@@ -1,4 +1,4 @@
-package be.jsams.client.swing.listener.wizard.selection.single;
+package be.jsams.client.swing.listener.wizard.selection.document.single;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +29,7 @@ public class DeliveryOrderWizardSingleSelectionTableML extends AbstractWizardSin
      * {@inheritDoc}
      */
     @Override
-    protected void handleSingleClick(JsamsTable table, int selectedRowModel) {
+    protected void handleSelection(JsamsTable table, int selectedRowModel) {
         DeliveryOrderTableModel model = (DeliveryOrderTableModel) table.getModel();
         List<DeliveryOrderBean> beans = new ArrayList<DeliveryOrderBean>();
         beans.add(model.getRow(selectedRowModel));
