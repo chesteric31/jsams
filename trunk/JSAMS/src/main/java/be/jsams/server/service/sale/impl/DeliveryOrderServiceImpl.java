@@ -75,8 +75,7 @@ public class DeliveryOrderServiceImpl extends AbstractService implements Deliver
      * {@inheritDoc}
      */
     @Override
-    public List<DeliveryOrderBean> findAll() {
-        SocietyBean currentSociety = Desktop.getInstance().getCurrentSociety();
+    public List<DeliveryOrderBean> findAll(SocietyBean currentSociety) {
         deliveryOrderDao.setCurrentSociety(currentSociety);
         List<DeliveryOrder> deliveryOrders = deliveryOrderDao.findAll();
         List<DeliveryOrderBean> beans = new ArrayList<DeliveryOrderBean>();
@@ -115,6 +114,15 @@ public class DeliveryOrderServiceImpl extends AbstractService implements Deliver
      */
     public void setDeliveryOrderDao(DeliveryOrderDao deliveryOrderDao) {
         this.deliveryOrderDao = deliveryOrderDao;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<DeliveryOrderBean> findAll() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException();
     }
 
 }

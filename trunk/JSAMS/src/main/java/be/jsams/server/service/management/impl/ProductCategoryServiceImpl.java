@@ -43,7 +43,7 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
     public ProductCategoryBean create(final ProductCategoryBean bean) {
         ProductCategory category = new ProductCategory(bean);
         productCategoryDao.add(category);
-        return new ProductCategoryBean(category, Desktop.getInstance().getCurrentSociety());
+        return new ProductCategoryBean(category, bean.getSociety());
     }
 
     /**
@@ -64,8 +64,7 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
     /**
      * {@inheritDoc}
      */
-    public List<ProductCategoryBean> findAll() {
-        SocietyBean currentSociety = Desktop.getInstance().getCurrentSociety();
+    public List<ProductCategoryBean> findAll(SocietyBean currentSociety) {
         productCategoryDao.setCurrentSociety(currentSociety);
         List<ProductCategory> categories = productCategoryDao.findAll();
         List<ProductCategoryBean> beans = new ArrayList<ProductCategoryBean>();
@@ -103,6 +102,15 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
             beans.add(new ProductCategoryBean(category, currentSociety));
         }
         return beans;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<ProductCategoryBean> findAll() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException();
     }
 
 }

@@ -54,8 +54,7 @@ public class CommandServiceImpl extends AbstractService implements CommandServic
     /**
      * {@inheritDoc}
      */
-    public List<CommandBean> findAll() {
-        SocietyBean currentSociety = Desktop.getInstance().getCurrentSociety();
+    public List<CommandBean> findAll(SocietyBean currentSociety) {
         commandDao.setCurrentSociety(currentSociety);
         List<Command> commands = commandDao.findAll();
         List<CommandBean> beans = new ArrayList<CommandBean>();
@@ -129,6 +128,15 @@ public class CommandServiceImpl extends AbstractService implements CommandServic
      */
     public void setAgentBeanBuilder(AgentBeanBuilder agentBeanBuilder) {
         this.agentBeanBuilder = agentBeanBuilder;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<CommandBean> findAll() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException();
     }
     
 }
