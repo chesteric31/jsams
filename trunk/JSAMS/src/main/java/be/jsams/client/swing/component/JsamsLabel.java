@@ -64,7 +64,6 @@ public class JsamsLabel extends JLabel {
     }
 
     /**
-     * 
      * @param text set the text label
      */
     public void setText(I18nString text) {

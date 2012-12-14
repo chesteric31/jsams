@@ -13,6 +13,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 
+import org.apache.log4j.Logger;
+
 import be.jsams.client.i18n.I18nLabelResource;
 import be.jsams.client.i18n.I18nResource;
 import be.jsams.client.swing.component.AbstractJsamsFrame;
@@ -38,9 +40,11 @@ public class SocietyBeanView extends AbstractBeanView<SocietyBean> implements Ed
      * Serial Version UID
      */
     private static final long serialVersionUID = -6050081974816301545L;
+    
+    private static final Logger LOGGER = Logger.getLogger(SocietyBeanView.class);
 
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param bean the {@link SocietyBean}
      */
@@ -115,7 +119,7 @@ public class SocietyBeanView extends AbstractBeanView<SocietyBean> implements Ed
                     output.close();
                     input.close();
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    LOGGER.error(e);
                 }
                 return bytes;
             }
@@ -189,12 +193,12 @@ public class SocietyBeanView extends AbstractBeanView<SocietyBean> implements Ed
             outputStream.flush();
             outputStream.close();
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            LOGGER.error(e);
         } finally {
             try {
                 outputStream.close();
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                LOGGER.error(e);
             }
         }
         return fileOut;

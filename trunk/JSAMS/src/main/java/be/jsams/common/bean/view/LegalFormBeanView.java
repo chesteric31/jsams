@@ -18,7 +18,7 @@ public class LegalFormBeanView extends AbstractBeanView<LegalFormBean> implement
     private static final long serialVersionUID = -1884652505559007185L;
 
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param bean the {@link LegalFormBean}
      */

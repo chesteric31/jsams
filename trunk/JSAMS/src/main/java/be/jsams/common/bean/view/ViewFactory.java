@@ -35,7 +35,7 @@ import com.toedter.calendar.JDateChooser;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class ViewFactory<B extends AbstractIdentityBean<?, ?>> {
+public final class ViewFactory<B extends AbstractIdentityBean<?, ?>> {
 
     /**
      * Creates {@link JsamsTextField} and binds this component to the bean

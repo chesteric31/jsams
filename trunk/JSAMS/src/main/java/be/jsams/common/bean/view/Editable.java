@@ -13,7 +13,7 @@ import javax.swing.JComponent;
 public interface Editable<E extends JComponent> {
 
     /**
-     * Create a {@link JComponent} editing view of the current bean.
+     * Creates a {@link JComponent} editing view of the current bean.
      * 
      * @return the {@link JComponent}
      */

@@ -24,7 +24,7 @@ public class AddressBeanView extends AbstractBeanView<AddressBean> implements Ed
     private static final long serialVersionUID = -7792116284599504350L;
 
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param bean the {@link AddressBean}
      */

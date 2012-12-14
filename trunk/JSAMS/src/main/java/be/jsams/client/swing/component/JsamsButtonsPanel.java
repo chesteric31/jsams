@@ -163,7 +163,6 @@ public class JsamsButtonsPanel extends JPanel {
     }
 
     /**
-     * 
      * @return the {@link JsamsButton} OK
      */
     public JsamsButton getButtonOk() {
@@ -171,7 +170,6 @@ public class JsamsButtonsPanel extends JPanel {
     }
 
     /**
-     * 
      * @param buttonOk the {@link JsamsButton} OK to set
      */
     public void setButtonOk(JsamsButton buttonOk) {
@@ -179,7 +177,6 @@ public class JsamsButtonsPanel extends JPanel {
     }
 
     /**
-     * 
      * @return the {@link JsamsButton} cancel
      */
     public JsamsButton getButtonCancel() {
@@ -187,7 +184,6 @@ public class JsamsButtonsPanel extends JPanel {
     }
 
     /**
-     * 
      * @param buttonCancel the {@link JsamsButton} cancel to set
      */
     public void setButtonCancel(JsamsButton buttonCancel) {
@@ -195,7 +191,6 @@ public class JsamsButtonsPanel extends JPanel {
     }
 
     /**
-     * 
      * @return the {@link JsamsButton} reset
      */
     public JsamsButton getButtonReset() {
@@ -203,7 +198,6 @@ public class JsamsButtonsPanel extends JPanel {
     }
 
     /**
-     * 
      * @param buttonReset the {@link JsamsButton} reset
      */
     public void setButtonReset(JsamsButton buttonReset) {

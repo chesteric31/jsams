@@ -24,7 +24,7 @@ public class PeriodBeanView extends AbstractBeanView<PeriodBean> implements Edit
     private static final long serialVersionUID = 7336587793387011579L;
 
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param bean the {@link PeriodBean}
      */

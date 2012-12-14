@@ -18,7 +18,7 @@ public class CivilityBeanView extends AbstractBeanView<CivilityBean> implements 
     private static final long serialVersionUID = 5777589355870087599L;
 
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param bean the {@link CivilityBean}
      */

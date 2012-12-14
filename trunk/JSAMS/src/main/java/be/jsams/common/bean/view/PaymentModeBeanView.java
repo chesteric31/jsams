@@ -18,7 +18,7 @@ public class PaymentModeBeanView extends AbstractBeanView<PaymentModeBean> imple
     private static final long serialVersionUID = 3753335078032689398L;
 
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param bean the {@link PaymentModeBean}
      */
