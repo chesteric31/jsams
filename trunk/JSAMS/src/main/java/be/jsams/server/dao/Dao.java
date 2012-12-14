@@ -13,7 +13,7 @@ import java.util.List;
 public interface Dao<T> {
 
     /**
-     * Add new object in the database
+     * Adds new object in the database
      * 
      * @param newInstance the object to persist
      * @return the newInstance with the id provided
@@ -21,7 +21,7 @@ public interface Dao<T> {
     T add(T newInstance);
 
     /**
-     * Find an object following the id
+     * Finds an object following the id
      * 
      * @param id the object id
      * @return the object
@@ -29,7 +29,7 @@ public interface Dao<T> {
     T findById(Long id);
 
     /**
-     * Find all the object of this type
+     * Finds all the object of this type
      * 
      * @return a list of object of this type
      */
@@ -41,21 +41,21 @@ public interface Dao<T> {
     void flush();
 
     /**
-     * Update the object in the database
+     * Updates the object in the database
      * 
      * @param transientObject the object to update
      */
     void update(T transientObject);
 
     /**
-     * Delete the object from the database
+     * Deletes the object from the database
      * 
      * @param persistentObject the object to remove
      */
     void delete(T persistentObject);
 
     /**
-     * Delete the object from the database following the id
+     * Deletes the object from the database following the id
      * 
      * @param id the object id
      */
