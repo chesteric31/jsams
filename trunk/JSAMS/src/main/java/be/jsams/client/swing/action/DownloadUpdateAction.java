@@ -71,8 +71,10 @@ public class DownloadUpdateAction extends AbstractAction {
                 Process process = Runtime.getRuntime().exec("java -jar " + updateJar);
                 process.waitFor();
             } catch (IOException e) {
+                LOGGER.error(e);
                 throw new RuntimeException(e);
             } catch (InterruptedException e) {
+                LOGGER.error(e);
                 throw new RuntimeException(e);
             }
         }
