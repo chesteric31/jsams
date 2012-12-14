@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.prefs.Preferences;
 
 import be.jsams.common.bean.model.transfer.TransferBean;
+import be.jsams.common.util.JsamsConstants;
 
 /**
  * Abstract class to gather all common methods for the children services and for
@@ -106,7 +107,7 @@ public abstract class AbstractTransferService<O, T> implements TransferService {
      */
     protected int getDays(final String key) {
         Preferences prefsRoot = Preferences.userRoot();
-        Preferences jsamsPrefs = prefsRoot.node("be.jsams");
+        Preferences jsamsPrefs = prefsRoot.node(JsamsConstants.PACKAGE_ROOT_NAME);
         return Integer.valueOf(jsamsPrefs.get(key, "0"));
     }
 
