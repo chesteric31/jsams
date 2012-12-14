@@ -12,8 +12,6 @@ import be.jsams.common.bean.model.management.ProductCategoryBean;
 import be.jsams.common.bean.view.management.ProductBeanView;
 import be.jsams.server.service.management.ProductService;
 
-import com.jgoodies.validation.view.ValidationComponentUtils;
-
 /**
  * Edit Product {@link AbstractEditDialog}, to create or update a Product
  * object.
@@ -41,14 +39,18 @@ public class EditProductDialog extends AbstractEditDialog<ProductBean, EditProdu
     /**
      * {@inheritDoc}
      */
-    public void initComponents() {
+    @Override
+    public void saveOriginalModel() {
         setOriginalModel(new ProductBean());
         getOriginalModel().refresh(getModel());
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    public JPanel initComponents() {
         ProductBeanView view = getModel().buildView();
-        JPanel panel = view.createEditView();
-        getContentPane().add(panel);
-        ValidationComponentUtils.updateComponentTreeMandatoryBorder(this);
-        pack();
+        return view.createEditView();
     }
 
     /**

@@ -14,11 +14,9 @@ import be.jsams.common.bean.view.sale.BillBeanView;
 import be.jsams.server.model.PaymentMode;
 import be.jsams.server.service.sale.BillService;
 
-import com.jgoodies.validation.view.ValidationComponentUtils;
-
 /**
- * Edit Bill {@link AbstractEditDialog}, to create or update a
- * {@link BillBean} object.
+ * Edit Bill {@link AbstractEditDialog}, to create or update a {@link BillBean}
+ * object.
  * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
@@ -44,7 +42,7 @@ public class EditBillDialog extends AbstractEditDialog<BillBean, EditBillValidat
      * {@inheritDoc}
      */
     @Override
-    public void initComponents() {
+    public void saveOriginalModel() {
         PaymentModeBean paymentMode = ApplicationContext.getPaymentModeBeanBuilder().build();
         if (getModel().getId() == null) {
             paymentMode.refresh(getModel().getCustomer().getPaymentMode());
@@ -52,11 +50,15 @@ public class EditBillDialog extends AbstractEditDialog<BillBean, EditBillValidat
         BillBean originalModel = new BillBean(getModel().getSociety(), getModel().getCustomer(), paymentMode);
         setOriginalModel(originalModel);
         getOriginalModel().refresh(getModel());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public JPanel initComponents() {
         BillBeanView view = getModel().buildView();
-        JPanel panel = view.createEditView();
-        getContentPane().add(panel);
-        ValidationComponentUtils.updateComponentTreeMandatoryBorder(this);
-        pack();
+        return view.createEditView();
     }
 
     /**

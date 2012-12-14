@@ -17,8 +17,6 @@ import be.jsams.server.model.LegalForm;
 import be.jsams.server.model.PaymentMode;
 import be.jsams.server.service.management.CustomerService;
 
-import com.jgoodies.validation.view.ValidationComponentUtils;
-
 /**
  * Edit Customer {@link AbstractEditDialog}, to create or update a
  * {@link CustomerBean} object.
@@ -46,14 +44,18 @@ public class EditCustomerDialog extends AbstractEditDialog<CustomerBean, EditCus
     /**
      * {@inheritDoc}
      */
-    public void initComponents() {
+    @Override
+    public void saveOriginalModel() {
         setOriginalModel(ApplicationContext.getCustomerBeanBuilder().build(null, getModel().getSociety()));
         getOriginalModel().refresh(getModel());
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    public JPanel initComponents() {
         CustomerBeanView view = getModel().getView();
-        JPanel panel = view.createEditView();
-        getContentPane().add(panel);
-        ValidationComponentUtils.updateComponentTreeMandatoryBorder(this);
-        pack();
+        return view.createEditView();
     }
 
     /**

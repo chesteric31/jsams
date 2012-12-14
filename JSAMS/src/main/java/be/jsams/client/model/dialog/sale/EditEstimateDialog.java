@@ -10,8 +10,6 @@ import be.jsams.common.bean.model.sale.EstimateBean;
 import be.jsams.common.bean.view.sale.EstimateBeanView;
 import be.jsams.server.service.sale.EstimateService;
 
-import com.jgoodies.validation.view.ValidationComponentUtils;
-
 /**
  * Edit Estimate {@link AbstractEditDialog}, to create or update a
  * {@link EstimateBean} object.
@@ -40,17 +38,20 @@ public class EditEstimateDialog extends AbstractEditDialog<EstimateBean, EditEst
      * {@inheritDoc}
      */
     @Override
-    public void initComponents() {
+    public void saveOriginalModel() {
         EstimateBean originalModel = new EstimateBean(getModel().getSociety(), getModel().getCustomer(), getModel()
                 .getAgent());
         setOriginalModel(originalModel);
         getOriginalModel().refresh(getModel());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public JPanel initComponents() {
         EstimateBeanView view = getModel().buildView();
-        JPanel panel = view.createEditView();
-        getModel().setView(view);
-        getContentPane().add(panel);
-        ValidationComponentUtils.updateComponentTreeMandatoryBorder(this);
-        pack();
+        return view.createEditView();
     }
 
     /**

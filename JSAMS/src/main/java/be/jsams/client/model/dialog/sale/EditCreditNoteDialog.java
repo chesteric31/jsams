@@ -10,8 +10,6 @@ import be.jsams.common.bean.model.sale.CreditNoteBean;
 import be.jsams.common.bean.view.sale.CreditNoteBeanView;
 import be.jsams.server.service.sale.CreditNoteService;
 
-import com.jgoodies.validation.view.ValidationComponentUtils;
-
 /**
  * Edit Credit Note {@link AbstractEditDialog}, to create or update a
  * {@link CreditNoteBean} object.
@@ -41,14 +39,18 @@ public class EditCreditNoteDialog extends
      * {@inheritDoc}
      */
     @Override
-    public void initComponents() {
+    public void saveOriginalModel() {
         setOriginalModel(new CreditNoteBean(getModel().getSociety(), getModel().getCustomer()));
         getOriginalModel().refresh(getModel());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public JPanel initComponents() {
         CreditNoteBeanView view = getModel().buildView();
-        JPanel panel = view.createEditView();
-        getContentPane().add(panel);
-        ValidationComponentUtils.updateComponentTreeMandatoryBorder(this);
-        pack();
+        return view.createEditView();
     }
 
     /**
