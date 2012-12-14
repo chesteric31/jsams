@@ -68,14 +68,13 @@ public class ProductServiceImpl implements ProductService {
     /**
      * {@inheritDoc}
      */
-    public List<ProductBean> findAll() {
-        SocietyBean society = Desktop.getInstance().getCurrentSociety();
-        dao.setCurrentSociety(society);
+    public List<ProductBean> findAll(SocietyBean currentSociety) {
+        dao.setCurrentSociety(currentSociety);
         List<Product> products = dao.findAll();
         List<ProductBean> beans = new ArrayList<ProductBean>();
         for (Product product : products) {
             builder.setModel(product);
-            builder.setSociety(society);
+            builder.setSociety(currentSociety);
             ProductBean productBean = builder.build(false, false);
             beans.add(productBean);
         }
@@ -142,6 +141,15 @@ public class ProductServiceImpl implements ProductService {
      */
     public void setDao(ProductDao dao) {
         this.dao = dao;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<ProductBean> findAll() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException();
     }
 
 }

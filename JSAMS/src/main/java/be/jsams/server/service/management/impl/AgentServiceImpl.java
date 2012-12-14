@@ -50,8 +50,7 @@ public class AgentServiceImpl extends AbstractService implements AgentService {
     /**
      * {@inheritDoc}
      */
-    public List<AgentBean> findAll() {
-        SocietyBean currentSociety = Desktop.getInstance().getCurrentSociety();
+    public List<AgentBean> findAll(SocietyBean currentSociety) {
         agentDao.setCurrentSociety(currentSociety);
         List<Agent> agents = agentDao.findAll();
         List<AgentBean> beans = new ArrayList<AgentBean>();
@@ -119,6 +118,15 @@ public class AgentServiceImpl extends AbstractService implements AgentService {
      */
     public void setAgentBeanBuilder(AgentBeanBuilder agentBeanBuilder) {
         this.agentBeanBuilder = agentBeanBuilder;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<AgentBean> findAll() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException();
     }
     
 }

@@ -13,7 +13,7 @@ import be.jsams.server.service.AbstractService;
 import be.jsams.server.service.sale.CreditNoteService;
 
 /**
- * Credit note service implementation
+ * Credit note service implementation.
  *
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
@@ -75,8 +75,7 @@ public class CreditNoteServiceImpl extends AbstractService implements CreditNote
      * {@inheritDoc}
      */
     @Override
-    public List<CreditNoteBean> findAll() {
-        SocietyBean currentSociety = Desktop.getInstance().getCurrentSociety();
+    public List<CreditNoteBean> findAll(SocietyBean currentSociety) {
         creditNoteDao.setCurrentSociety(currentSociety);
         List<CreditNote> creditNotes = creditNoteDao.findAll();
         List<CreditNoteBean> beans = new ArrayList<CreditNoteBean>();
@@ -115,6 +114,15 @@ public class CreditNoteServiceImpl extends AbstractService implements CreditNote
      */
     public void setCreditNoteDao(CreditNoteDao creditNoteDao) {
         this.creditNoteDao = creditNoteDao;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<CreditNoteBean> findAll() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException();
     }
 
 }

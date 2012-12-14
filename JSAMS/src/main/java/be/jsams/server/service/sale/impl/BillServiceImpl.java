@@ -17,7 +17,7 @@ import be.jsams.server.service.AbstractService;
 import be.jsams.server.service.sale.BillService;
 
 /**
- * Bill service implementation
+ * Bill service implementation.
  *
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
@@ -82,8 +82,7 @@ public class BillServiceImpl extends AbstractService implements BillService {
      * {@inheritDoc}
      */
     @Override
-    public List<BillBean> findAll() {
-        SocietyBean currentSociety = Desktop.getInstance().getCurrentSociety();
+    public List<BillBean> findAll(SocietyBean currentSociety) {
         billDao.setCurrentSociety(currentSociety);
         List<Bill> bills = billDao.findAll();
         List<BillBean> beans = new ArrayList<BillBean>();
@@ -169,6 +168,15 @@ public class BillServiceImpl extends AbstractService implements BillService {
      */
     public void setPaymentModeBeanBuilder(PaymentModeBeanBuilder paymentModeBeanBuilder) {
         this.paymentModeBeanBuilder = paymentModeBeanBuilder;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<BillBean> findAll() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException();
     }
 
 }

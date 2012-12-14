@@ -49,8 +49,7 @@ public class CustomerServiceImpl extends AbstractService implements CustomerServ
     /**
      * {@inheritDoc}
      */
-    public List<CustomerBean> findAll() {
-        SocietyBean currentSociety = Desktop.getInstance().getCurrentSociety();
+    public List<CustomerBean> findAll(SocietyBean currentSociety) {
         customerDao.setCurrentSociety(currentSociety);
         List<Customer> customers = customerDao.findAll();
         List<CustomerBean> beans = new ArrayList<CustomerBean>();
@@ -107,6 +106,15 @@ public class CustomerServiceImpl extends AbstractService implements CustomerServ
      */
     public void setCustomerDao(CustomerDao customerDao) {
         this.customerDao = customerDao;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<CustomerBean> findAll() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException();
     }
 
 }

@@ -64,8 +64,7 @@ public class EstimateServiceImpl extends AbstractService implements EstimateServ
     /**
      * {@inheritDoc}
      */
-    public List<EstimateBean> findAll() {
-        SocietyBean currentSociety = Desktop.getInstance().getCurrentSociety();
+    public List<EstimateBean> findAll(SocietyBean currentSociety) {
         estimateDao.setCurrentSociety(currentSociety);
         List<Estimate> estimates = estimateDao.findAll();
         List<EstimateBean> beans = new ArrayList<EstimateBean>();
@@ -140,6 +139,15 @@ public class EstimateServiceImpl extends AbstractService implements EstimateServ
      */
     public void setAgentBeanBuilder(AgentBeanBuilder agentBeanBuilder) {
         this.agentBeanBuilder = agentBeanBuilder;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<EstimateBean> findAll() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException();
     }
 
 }
