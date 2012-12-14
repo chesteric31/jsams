@@ -26,27 +26,13 @@ public final class I18nResource {
 
     public static final I18nString MENU_FILE = new I18nString("menu.file");
 
-    public static final I18nString MENU_EDIT = new I18nString("menu.edit");
-
     public static final I18nString MENU_SALES = new I18nString("menu.sales");
 
     public static final I18nString MENU_HELP = new I18nString("menu.help");
 
     public static final I18nString MENU_ITEM_SOCIETY_PARAMETERS = new I18nString("menu.item.society_parameters");
 
-    public static final I18nString MENU_ITEM_PRINTER_PARAMETERS = new I18nString("menu.item.printer_parameters");
-
     public static final I18nString MENU_ITEM_EXIT_APPLICATION = new I18nString("menu.item.exit");
-
-    public static final I18nString MENU_ITEM_CANCEL = new I18nString("menu.item.cancel");
-
-    public static final I18nString MENU_ITEM_CUT = new I18nString("menu.item.cut");
-
-    public static final I18nString MENU_ITEM_COPY = new I18nString("menu.item.copy");
-
-    public static final I18nString MENU_ITEM_PASTE = new I18nString("menu.item.paste");
-
-    public static final I18nString MENU_ITEM_REFRESH = new I18nString("menu.item.refresh");
 
     public static final I18nString MENU_ITEM_CLOSE_WINDOW = new I18nString("menu.item.close_window");
 
@@ -66,22 +52,15 @@ public final class I18nResource {
 
     public static final I18nString MENU_ITEM_CREDIT_NOTE = new I18nString("menu.item.credit_note");
 
-    public static final I18nString TITLE_EDIT_SOCIETY_PARAMETERS = new I18nString("title.edit.society_parameters");
-
     public static final I18nString BUTTON_OK = new I18nString("button.ok");
 
     public static final I18nString BUTTON_CANCEL = new I18nString("button.cancel");
-
-    public static final I18nString PANEL_CONTACT_INFORMATIONS_TITLE
-        = new I18nString("panel.contact_informations.title");
 
     public static final I18nString BUTTON_RESET = new I18nString("button.reset");
 
     public static final I18nString TITLE_EDIT_SOCIETY = new I18nString("title.edit.society");
 
     public static final I18nString MENU_ITEM_CLOSE = new I18nString("menu.item.close");
-
-    public static final I18nString MENU_ITEM_CREATE_DOCUMENTS = new I18nString("menu.item.create_documents");
 
     public static final I18nString MENU_MANAGEMENT = new I18nString("menu.management");
 
@@ -91,8 +70,6 @@ public final class I18nResource {
 
     public static final I18nString MENU_ITEM_PRODUCTS = new I18nString("menu.item.products");
 
-    public static final I18nString MENU_ITEM_LIST_DOCUMENTS = new I18nString("menu.item.list_documents");
-
     public static final I18nString MENU_ITEM_NEW = new I18nString("menu.item.new");
 
     public static final I18nString MENU_ITEM_OPEN = new I18nString("menu.item.open");
@@ -100,8 +77,6 @@ public final class I18nResource {
     public static final I18nString MENU_ITEM_NEXT = new I18nString("menu.item.next");
 
     public static final I18nString MENU_ITEM_PREVIOUS = new I18nString("menu.item.previous");
-
-    public static final I18nString MENU_ITEM_SELECT_ALL = new I18nString("menu.item.select_all");
 
     public static final I18nString MENU_ITEM_TRANSFER_DOCUMENTS = new I18nString("menu.item.transfer_documents");
 
@@ -132,8 +107,6 @@ public final class I18nResource {
     public static final I18nString PANEL_CONTACT_INFORMATIONS = new I18nString("panel.contact_informations");
 
     public static final I18nString PANEL_MISC = new I18nString("panel.misc");
-
-    public static final I18nString SEARCH_CRITERIA = new I18nString("search.criteria");
 
     public static final I18nString SEARCH_RESULTS = new I18nString("search.results");
 

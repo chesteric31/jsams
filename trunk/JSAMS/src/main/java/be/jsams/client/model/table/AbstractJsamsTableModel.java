@@ -37,12 +37,6 @@ public abstract class AbstractJsamsTableModel<D extends AbstractIdentityBean<?, 
     protected static final int FIVE = 5;
     /** Column number six for switch purpose */
     protected static final int SIX = 6;
-    /** Column number seven for switch purpose */
-    protected static final int SEVEN = 7;
-    /** Column number eight for switch purpose */
-    protected static final int EIGHT = 8;
-    /** Column number nine for switch purpose */
-    protected static final int NINE = 9;
 
     private List<I18nString> columnNames;
 

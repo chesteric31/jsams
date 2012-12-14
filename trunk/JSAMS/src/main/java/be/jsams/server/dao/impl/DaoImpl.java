@@ -6,9 +6,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import be.jsams.server.dao.Dao;
 
 /**
@@ -20,9 +17,6 @@ import be.jsams.server.dao.Dao;
  * @version $Rev$ $Date::                  $ $Author$
  */
 public class DaoImpl<T> implements Dao<T> {
-
-    /** The Logger */
-    protected static final Log LOGGER = LogFactory.getLog(DaoImpl.class);
 
     /** The {@link EntityManager} */
     @PersistenceContext
