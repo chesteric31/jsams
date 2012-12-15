@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import be.jsams.client.desktop.Desktop;
 import be.jsams.common.bean.builder.PaymentModeBeanBuilder;
 import be.jsams.common.bean.model.PaymentModeBean;
 import be.jsams.common.bean.model.SocietyBean;
@@ -71,11 +70,11 @@ public class BillServiceImpl extends AbstractService implements BillService {
     @Override
     public BillBean findById(Long id) {
         Bill bill = billDao.findById(id);
-        SocietyBean currentSociety = Desktop.getInstance().getCurrentSociety();
-        CustomerBean customer = getCustomerBeanBuilder().build(bill.getCustomer(), currentSociety);
+        SocietyBean society = new SocietyBean(bill.getCustomer().getSociety());
+        CustomerBean customer = getCustomerBeanBuilder().build(bill.getCustomer(), society);
         paymentModeBeanBuilder.setModel(bill.getPaymentMode());
         PaymentModeBean mode = paymentModeBeanBuilder.build();
-        return new BillBean(bill, currentSociety, customer, mode);
+        return new BillBean(bill, society, customer, mode);
     }
 
     /**

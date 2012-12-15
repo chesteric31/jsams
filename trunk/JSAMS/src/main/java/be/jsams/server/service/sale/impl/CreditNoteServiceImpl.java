@@ -3,7 +3,6 @@ package be.jsams.server.service.sale.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import be.jsams.client.desktop.Desktop;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.sale.CreditNoteBean;
@@ -64,10 +63,10 @@ public class CreditNoteServiceImpl extends AbstractService implements CreditNote
      */
     @Override
     public CreditNoteBean findById(Long id) {
-        SocietyBean currentSociety = Desktop.getInstance().getCurrentSociety();
         CreditNote creditNote = creditNoteDao.findById(id);
-        CustomerBean customer = getCustomerBeanBuilder().build(creditNote.getCustomer(), currentSociety);
-        return new CreditNoteBean(creditNote, currentSociety, customer);
+        SocietyBean society = new SocietyBean(creditNote.getCustomer().getSociety());
+        CustomerBean customer = getCustomerBeanBuilder().build(creditNote.getCustomer(), society);
+        return new CreditNoteBean(creditNote, society, customer);
     }
 
     /**
