@@ -31,8 +31,7 @@ public class CommandServiceImpl extends AbstractService implements CommandServic
     public CommandBean create(final CommandBean bean) {
         Command command = new Command(bean);
         Command persistedCommand = commandDao.add(command);
-        SocietyBean currentSociety = Desktop.getInstance().getCurrentSociety();
-        return new CommandBean(persistedCommand, currentSociety, bean.getCustomer(), bean.getAgent());
+        return new CommandBean(persistedCommand, bean.getSociety(), bean.getCustomer(), bean.getAgent());
     }
 
     /**
