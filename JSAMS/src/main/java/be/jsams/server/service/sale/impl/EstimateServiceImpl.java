@@ -3,7 +3,6 @@ package be.jsams.server.service.sale.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import be.jsams.client.desktop.Desktop;
 import be.jsams.common.bean.builder.management.AgentBeanBuilder;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.AgentBean;
@@ -78,11 +77,11 @@ public class EstimateServiceImpl extends AbstractService implements EstimateServ
      * {@inheritDoc}
      */
     public EstimateBean findById(final Long id) {
-        SocietyBean currentSociety = Desktop.getInstance().getCurrentSociety();
         Estimate estimate = estimateDao.findById(id);
-        CustomerBean customer = getCustomerBeanBuilder().build(estimate.getCustomer(), currentSociety);
-        AgentBean agent = agentBeanBuilder.build(estimate.getAgent(), currentSociety);
-        return new EstimateBean(estimate, currentSociety, customer, agent);
+        SocietyBean society = new SocietyBean(estimate.getCustomer().getSociety());
+        CustomerBean customer = getCustomerBeanBuilder().build(estimate.getCustomer(), society);
+        AgentBean agent = agentBeanBuilder.build(estimate.getAgent(), society);
+        return new EstimateBean(estimate, society, customer, agent);
     }
 
     /**

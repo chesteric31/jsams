@@ -3,7 +3,6 @@ package be.jsams.server.service.sale.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import be.jsams.client.desktop.Desktop;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.sale.DeliveryOrderBean;
@@ -64,10 +63,10 @@ public class DeliveryOrderServiceImpl extends AbstractService implements Deliver
      */
     @Override
     public DeliveryOrderBean findById(Long id) {
-        SocietyBean currentSociety = Desktop.getInstance().getCurrentSociety();
         DeliveryOrder deliveryOrder = deliveryOrderDao.findById(id);
-        CustomerBean customer = getCustomerBeanBuilder().build(deliveryOrder.getCustomer(), currentSociety);
-        return new DeliveryOrderBean(deliveryOrder, currentSociety, customer);
+        SocietyBean society = new SocietyBean(deliveryOrder.getCustomer().getSociety());
+        CustomerBean customer = getCustomerBeanBuilder().build(deliveryOrder.getCustomer(), society);
+        return new DeliveryOrderBean(deliveryOrder, society, customer);
     }
 
     /**

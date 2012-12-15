@@ -3,7 +3,6 @@ package be.jsams.server.service.sale.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import be.jsams.client.desktop.Desktop;
 import be.jsams.common.bean.builder.management.AgentBeanBuilder;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.AgentBean;
@@ -68,11 +67,11 @@ public class CommandServiceImpl extends AbstractService implements CommandServic
      * {@inheritDoc}
      */
     public CommandBean findById(final Long id) {
-        SocietyBean currentSociety = Desktop.getInstance().getCurrentSociety();
         Command command = commandDao.findById(id);
-        CustomerBean customer = getCustomerBeanBuilder().build(command.getCustomer(), currentSociety);
-        AgentBean agent = agentBeanBuilder.build(command.getAgent(), currentSociety);
-        return new CommandBean(command, currentSociety, customer, agent);
+        SocietyBean society = new SocietyBean(command.getCustomer().getSociety());
+        CustomerBean customer = getCustomerBeanBuilder().build(command.getCustomer(), society);
+        AgentBean agent = agentBeanBuilder.build(command.getAgent(), society);
+        return new CommandBean(command, society, customer, agent);
     }
 
     /**
