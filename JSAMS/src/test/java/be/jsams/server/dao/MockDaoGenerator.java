@@ -3,7 +3,6 @@ package be.jsams.server.dao;
 import java.util.ArrayList;
 import java.util.List;
 
-import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.ProductCategoryBean;
 import be.jsams.server.dao.management.ProductCategoryDao;
 import be.jsams.server.model.Civility;
@@ -16,12 +15,13 @@ import be.jsams.server.model.management.ProductCategory;
  * Generator of Mock DAOs.
  * 
  * @author chesteric31
- * @version $Revision$ $Date$ $Author$
+ * @version $Revision$ $Date: 2012-10-07 16:28:07 +0200 (dim., 07 oct.
+ *          2012) $ $Author$
  */
 public final class MockDaoGenerator {
-    
+
     /**
-     * Default private constructor for utility class. 
+     * Default private constructor for utility class.
      */
     private MockDaoGenerator() {
     }
@@ -81,20 +81,20 @@ public final class MockDaoGenerator {
      */
     public static CivilityDao generateMockCivilityDao(final Agent agent) {
         return new CivilityDao() {
-            
+
             @Override
             public void update(Civility transientObject) {
             }
-            
+
             @Override
             public void flush() {
             }
-            
+
             @Override
             public Civility findById(Long id) {
                 return null;
             }
-            
+
             @Override
             public List<Civility> findAll() {
                 List<Civility> civilities = new ArrayList<Civility>();
@@ -104,15 +104,15 @@ public final class MockDaoGenerator {
                 }
                 return civilities;
             }
-            
+
             @Override
             public void delete(Long id) {
             }
-            
+
             @Override
             public void delete(Civility persistentObject) {
             }
-            
+
             @Override
             public Civility add(Civility newInstance) {
                 return null;
@@ -143,7 +143,7 @@ public final class MockDaoGenerator {
             }
 
             @Override
-            public List<ProductCategory> findAll() {
+            public List<ProductCategory> findAll(Long currentSocietyId) {
                 List<ProductCategory> categories = new ArrayList<ProductCategory>();
                 categories.add(category);
                 return categories;
@@ -163,17 +163,8 @@ public final class MockDaoGenerator {
             }
 
             @Override
-            public List<ProductCategory> findByCriteria(ProductCategoryBean criteria) {
+            public List<ProductCategory> findByCriteria(Long currentSocietyId, ProductCategoryBean criteria) {
                 return null;
-            }
-
-            @Override
-            public SocietyBean getCurrentSociety() {
-                return null;
-            }
-
-            @Override
-            public void setCurrentSociety(SocietyBean currentSociety) {
             }
         };
     }

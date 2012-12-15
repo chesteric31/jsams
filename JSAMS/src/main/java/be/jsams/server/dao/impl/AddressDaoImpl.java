@@ -9,7 +9,7 @@ import be.jsams.server.model.Address;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class AddressDaoImpl extends DaoImpl<Address> implements AddressDao {
+public class AddressDaoImpl extends ReferenceDaoImpl<Address> implements AddressDao {
 
     /**
      * Constructor.

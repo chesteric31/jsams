@@ -1,10 +1,7 @@
 package be.jsams.server.dao.impl;
 
-import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 
 import be.jsams.server.dao.Dao;
 
@@ -62,19 +59,8 @@ public class DaoImpl<T> implements Dao<T> {
     /**
      * {@inheritDoc}
      */
-    @SuppressWarnings("unchecked")
-    public List<T> findAll() {
-        List<T> ts = null;
-        Query query = entityManager.createQuery("FROM " + type.getSimpleName());
-        ts = query.getResultList();
-        return ts;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     public T findById(final Long id) {
-        return entityManager.find(type, id);
+        return entityManager.find(getType(), id);
     }
 
     /**
@@ -105,6 +91,13 @@ public class DaoImpl<T> implements Dao<T> {
      */
     public void delete(final Long id) {
         this.delete(this.findById(id));
+    }
+
+    /**
+     * @return the type
+     */
+    public Class<T> getType() {
+        return type;
     }
 
 }

@@ -14,7 +14,7 @@ import be.jsams.server.service.management.AgentService;
 
 /**
  * Agent service implementation.
- *
+ * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
@@ -51,8 +51,7 @@ public class AgentServiceImpl extends AbstractService implements AgentService {
      * {@inheritDoc}
      */
     public List<AgentBean> findAll(SocietyBean currentSociety) {
-        agentDao.setCurrentSociety(currentSociety);
-        List<Agent> agents = agentDao.findAll();
+        List<Agent> agents = agentDao.findAll(currentSociety.getId());
         List<AgentBean> beans = new ArrayList<AgentBean>();
         for (Agent agent : agents) {
             beans.add(getAgentBeanBuilder().build(agent, currentSociety));
@@ -80,12 +79,11 @@ public class AgentServiceImpl extends AbstractService implements AgentService {
      * {@inheritDoc}
      */
     public List<AgentBean> findByCriteria(AgentBean criteria) {
-        SocietyBean currentSociety = Desktop.getInstance().getCurrentSociety();
-        agentDao.setCurrentSociety(currentSociety);
-        List<Agent> agents = agentDao.findByCriteria(criteria);
+        SocietyBean society = criteria.getSociety();
+        List<Agent> agents = agentDao.findByCriteria(society.getId(), criteria);
         List<AgentBean> beans = new ArrayList<AgentBean>();
         for (Agent agent : agents) {
-            beans.add(getAgentBeanBuilder().build(agent, currentSociety));
+            beans.add(getAgentBeanBuilder().build(agent, society));
         }
         return beans;
     }
@@ -120,13 +118,4 @@ public class AgentServiceImpl extends AbstractService implements AgentService {
         this.agentBeanBuilder = agentBeanBuilder;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public List<AgentBean> findAll() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException();
-    }
-    
 }

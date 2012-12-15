@@ -8,7 +8,6 @@ import javax.persistence.Query;
 
 import be.jsams.common.bean.model.AddressBean;
 import be.jsams.common.bean.model.PeriodBean;
-import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.sale.CommandBean;
 import be.jsams.server.dao.impl.DaoImpl;
 import be.jsams.server.dao.sale.CommandDao;
@@ -24,10 +23,8 @@ import com.mysql.jdbc.StringUtils;
  */
 public class CommandDaoImpl extends DaoImpl<Command> implements CommandDao {
 
-    private SocietyBean currentSociety;
-    
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param type the class type
      */
@@ -40,7 +37,7 @@ public class CommandDaoImpl extends DaoImpl<Command> implements CommandDao {
      */
     @SuppressWarnings("unchecked")
     @Override
-    public List<Command> findByCriteria(final CommandBean criteria) {
+    public List<Command> findByCriteria(Long currentSocietyId, final CommandBean criteria) {
         StringBuilder queryBuilder = new StringBuilder("FROM Command c");
 
         PeriodBean period = criteria.getPeriod();
@@ -50,17 +47,15 @@ public class CommandDaoImpl extends DaoImpl<Command> implements CommandDao {
             startDate = period.getStartDate();
             endDate = period.getEndDate();
         }
-        
+
         AddressBean billingAddress = criteria.getBillingAddress();
         String zipCode = billingAddress.getZipCode();
         String city = billingAddress.getCity();
 
         boolean transferred = criteria.isTransferred();
 
-        Long societyId = getCurrentSociety().getId();
-
-        queryBuilder.append(" WHERE ");
-        queryBuilder.append("c.customer.society.id = " + societyId);
+        queryBuilder.append(WHERE);
+        queryBuilder.append("c.customer.society.id = " + currentSocietyId);
 
         if (!StringUtils.isNullOrEmpty(zipCode)) {
             queryBuilder.append(" AND c.billingAddress.zipCode = " + zipCode);
@@ -93,28 +88,14 @@ public class CommandDaoImpl extends DaoImpl<Command> implements CommandDao {
      * {@inheritDoc}
      */
     @SuppressWarnings("unchecked")
-    public List<Command> findAll() {
+    public List<Command> findAll(Long currentSocietyId) {
         StringBuilder queryBuilder = new StringBuilder("FROM Command c");
 
-        queryBuilder.append(" WHERE ");
-        queryBuilder.append("c.customer.society.id = " + getCurrentSociety().getId());
+        queryBuilder.append(WHERE);
+        queryBuilder.append("c.customer.society.id = " + currentSocietyId);
 
         Query query = getEntityManager().createQuery(queryBuilder.toString());
         return query.getResultList();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public SocietyBean getCurrentSociety() {
-        return currentSociety;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public void setCurrentSociety(SocietyBean currentSociety) {
-        this.currentSociety = currentSociety;
     }
 
 }

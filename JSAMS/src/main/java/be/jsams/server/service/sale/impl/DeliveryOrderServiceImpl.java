@@ -76,8 +76,7 @@ public class DeliveryOrderServiceImpl extends AbstractService implements Deliver
      */
     @Override
     public List<DeliveryOrderBean> findAll(SocietyBean currentSociety) {
-        deliveryOrderDao.setCurrentSociety(currentSociety);
-        List<DeliveryOrder> deliveryOrders = deliveryOrderDao.findAll();
+        List<DeliveryOrder> deliveryOrders = deliveryOrderDao.findAll(currentSociety.getId());
         List<DeliveryOrderBean> beans = new ArrayList<DeliveryOrderBean>();
         for (DeliveryOrder deliveryOrder : deliveryOrders) {
             CustomerBean customer = getCustomerBeanBuilder().build(deliveryOrder.getCustomer(), currentSociety);
@@ -91,13 +90,12 @@ public class DeliveryOrderServiceImpl extends AbstractService implements Deliver
      */
     @Override
     public List<DeliveryOrderBean> findByCriteria(DeliveryOrderBean criteria) {
-        SocietyBean currentSociety = Desktop.getInstance().getCurrentSociety();
-        deliveryOrderDao.setCurrentSociety(currentSociety);
-        List<DeliveryOrder> deliveryOrders = deliveryOrderDao.findByCriteria(criteria);
+        SocietyBean society = criteria.getSociety();
+        List<DeliveryOrder> deliveryOrders = deliveryOrderDao.findByCriteria(society.getId(), criteria);
         List<DeliveryOrderBean> beans = new ArrayList<DeliveryOrderBean>();
         for (DeliveryOrder deliveryOrder : deliveryOrders) {
-            CustomerBean customer = getCustomerBeanBuilder().build(deliveryOrder.getCustomer(), currentSociety);
-            beans.add(new DeliveryOrderBean(deliveryOrder, currentSociety, customer));
+            CustomerBean customer = getCustomerBeanBuilder().build(deliveryOrder.getCustomer(), society);
+            beans.add(new DeliveryOrderBean(deliveryOrder, society, customer));
         }
         return beans;
     }
@@ -114,15 +112,6 @@ public class DeliveryOrderServiceImpl extends AbstractService implements Deliver
      */
     public void setDeliveryOrderDao(DeliveryOrderDao deliveryOrderDao) {
         this.deliveryOrderDao = deliveryOrderDao;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public List<DeliveryOrderBean> findAll() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException();
     }
 
 }

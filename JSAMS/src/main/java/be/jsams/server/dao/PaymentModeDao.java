@@ -8,6 +8,6 @@ import be.jsams.server.model.PaymentMode;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public interface PaymentModeDao extends Dao<PaymentMode> {
+public interface PaymentModeDao extends ReferenceDao<PaymentMode> {
 
 }

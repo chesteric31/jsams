@@ -108,30 +108,29 @@ public class BillDaoImplTest extends BaseJUnitTestClass {
         paymentModeBean = new PaymentModeBean(persistedBillPaymentMode);
         
         persistedBill = dao.add(bill);
-        dao.setCurrentSociety(societyBean);
         // necessary to avoid to have the details, not interesting here
         persistedBill.setDetails(new ArrayList<BillDetail>());
     }
 
     /**
      * Test method for
-     * {@link be.jsams.server.dao.sale.impl.BillDaoImpl#findByCriteria(
+     * {@link be.jsams.server.dao.sale.impl.BillDaoImpl#findByCriteria(Long,
      * be.jsams.common.bean.model.sale.BillBean)}
      * .
      */
     @Test
     public void testFindByCriteria() {
         BillBean criteria = new BillBean(persistedBill, societyBean, customerBean, paymentModeBean);
-        List<Bill> founds = dao.findByCriteria(criteria);
+        List<Bill> founds = dao.findByCriteria(criteria.getSociety().getId(), criteria);
         assertTrue(founds.contains(persistedBill));
     }
 
     /**
-     * Test method for {@link be.jsams.server.dao.sale.impl.BillDaoImpl#findAll()}.
+     * Test method for {@link be.jsams.server.dao.sale.impl.BillDaoImpl#findAll(Long)}.
      */
     @Test
     public void testFindAll() {
-        List<Bill> founds = dao.findAll();
+        List<Bill> founds = dao.findAll(persistedBill.getCustomer().getSociety().getId());
         assertTrue(founds.contains(persistedBill));
     }
 

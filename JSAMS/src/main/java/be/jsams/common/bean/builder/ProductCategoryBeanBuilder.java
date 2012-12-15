@@ -48,8 +48,7 @@ public class ProductCategoryBeanBuilder {
      */
     public ProductCategoryBean build() {
         ProductCategoryBean bean = null;
-        dao.setCurrentSociety(society);
-        List<ProductCategory> categories = dao.findAll();
+        List<ProductCategory> categories = dao.findAll(society.getId());
         listModel = new ArrayListModel<ProductCategoryBean>();
         for (ProductCategory category : categories) {
             listModel.add(new ProductCategoryBean(category, society));

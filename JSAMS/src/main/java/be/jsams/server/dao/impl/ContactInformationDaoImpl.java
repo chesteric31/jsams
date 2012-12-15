@@ -9,10 +9,10 @@ import be.jsams.server.model.ContactInformation;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class ContactInformationDaoImpl extends DaoImpl<ContactInformation> implements ContactInformationDao {
+public class ContactInformationDaoImpl extends ReferenceDaoImpl<ContactInformation> implements ContactInformationDao {
 
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param type the class type
      */

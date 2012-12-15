@@ -6,8 +6,8 @@ import java.util.List;
 
 import javax.persistence.Query;
 
+import be.jsams.common.bean.model.AddressBean;
 import be.jsams.common.bean.model.PeriodBean;
-import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.sale.EstimateBean;
 import be.jsams.server.dao.impl.DaoImpl;
 import be.jsams.server.dao.sale.EstimateDao;
@@ -23,10 +23,8 @@ import com.mysql.jdbc.StringUtils;
  */
 public class EstimateDaoImpl extends DaoImpl<Estimate> implements EstimateDao {
 
-    private SocietyBean currentSociety;
-    
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param type the class type
      */
@@ -39,7 +37,7 @@ public class EstimateDaoImpl extends DaoImpl<Estimate> implements EstimateDao {
      */
     @SuppressWarnings("unchecked")
     @Override
-    public List<Estimate> findByCriteria(final EstimateBean criteria) {
+    public List<Estimate> findByCriteria(Long currentSocietyId, final EstimateBean criteria) {
         StringBuilder queryBuilder = new StringBuilder("FROM Estimate e");
 
         PeriodBean period = criteria.getPeriod();
@@ -50,15 +48,14 @@ public class EstimateDaoImpl extends DaoImpl<Estimate> implements EstimateDao {
             endDate = period.getEndDate();
         }
 
-        String zipCode = criteria.getBillingAddress().getZipCode();
-        String city = criteria.getBillingAddress().getCity();
+        AddressBean billingAddress = criteria.getBillingAddress();
+        String zipCode = billingAddress.getZipCode();
+        String city = billingAddress.getCity();
 
         boolean transferred = criteria.isTransferred();
 
-        Long societyId = getCurrentSociety().getId();
-
-        queryBuilder.append(" WHERE ");
-        queryBuilder.append("e.customer.society.id = " + societyId);
+        queryBuilder.append(WHERE);
+        queryBuilder.append("e.customer.society.id = " + currentSocietyId);
 
         if (!StringUtils.isNullOrEmpty(zipCode)) {
             queryBuilder.append(" AND e.billingAddress.zipCode = " + zipCode);
@@ -91,28 +88,14 @@ public class EstimateDaoImpl extends DaoImpl<Estimate> implements EstimateDao {
      * {@inheritDoc}
      */
     @SuppressWarnings("unchecked")
-    public List<Estimate> findAll() {
+    public List<Estimate> findAll(Long currentSocietyId) {
         StringBuilder queryBuilder = new StringBuilder("FROM Estimate e");
 
-        queryBuilder.append(" WHERE ");
-        queryBuilder.append("e.customer.society.id = " + getCurrentSociety().getId());
+        queryBuilder.append(WHERE);
+        queryBuilder.append("e.customer.society.id = " + currentSocietyId);
 
         Query query = getEntityManager().createQuery(queryBuilder.toString());
         return query.getResultList();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public SocietyBean getCurrentSociety() {
-        return currentSociety;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public void setCurrentSociety(SocietyBean currentSociety) {
-        this.currentSociety = currentSociety;
     }
 
 }

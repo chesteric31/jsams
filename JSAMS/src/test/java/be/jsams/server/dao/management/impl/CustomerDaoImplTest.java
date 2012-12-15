@@ -34,7 +34,7 @@ import be.jsams.server.model.management.Customer;
 
 /**
  * Test class for {@link CustomerDao}.
- *
+ * 
  * @author chesteric31
  * @version $Revision$ $Date::                  $ $Author$
  */
@@ -58,7 +58,7 @@ public class CustomerDaoImplTest extends BaseJUnitTestClass {
     private LegalFormDao legalFormDao;
     @Autowired
     private PaymentModeDao paymentModeDao;
-    
+
     @Autowired
     private ContactInformationDao contactInformationDao;
 
@@ -68,21 +68,21 @@ public class CustomerDaoImplTest extends BaseJUnitTestClass {
     private Customer persistedCustomer;
     private Civility persistedCivility;
     private LegalForm persistedLegalForm;
-    
+
     /**
      * @throws java.lang.Exception a possible {@link Exception}
      */
     @Before
     public void setUp() throws Exception {
         customer = MockModelGenerator.generateMockCustomer();
-        
+
         Agent agent = customer.getAgent();
         // persist all necessary for agent
         civilityDao.add(agent.getCivility());
         societyDao.add(agent.getSociety());
-        
+
         agentDao.add(agent);
-        
+
         final Society persistedSociety = societyDao.add(customer.getSociety());
         societyBean = new SocietyBean(persistedSociety) {
 
@@ -91,7 +91,7 @@ public class CustomerDaoImplTest extends BaseJUnitTestClass {
              */
             private static final long serialVersionUID = -3620916072968284788L;
         };
-        
+
         final PaymentMode persistedPaymentMode = paymentModeDao.add(customer.getPaymentMode());
         paymentModeBean = new PaymentModeBean(persistedPaymentMode) {
 
@@ -101,14 +101,14 @@ public class CustomerDaoImplTest extends BaseJUnitTestClass {
             private static final long serialVersionUID = 8548843895361137546L;
 
         };
-        
+
         persistedCivility = civilityDao.add(customer.getCivility());
         customer.setCivility(persistedCivility);
-        
+
         final ContactInformation persistedContactInformation = contactInformationDao.add(customer
                 .getContactInformation());
         customer.setContactInformation(persistedContactInformation);
-        
+
         final Address persistedAddress = addressDao.add(customer.getBillingAddress());
         customer.setBillingAddress(persistedAddress);
         customer.setDeliveryAddress(persistedAddress);
@@ -125,13 +125,12 @@ public class CustomerDaoImplTest extends BaseJUnitTestClass {
         customer.setLegalForm(persistedLegalForm);
 
         persistedCustomer = dao.add(customer);
-        dao.setCurrentSociety(societyBean);
     }
-    
+
     /**
      * Test method for
-     * {@link be.jsams.server.dao.management.impl.CustomerDaoImpl#findByCriteria(
-     * be.jsams.common.bean.model.management.CustomerBean)}
+     * {@link be.jsams.server.dao.management.impl.CustomerDaoImpl
+     * #findByCriteria(Long, be.jsams.common.bean.model.management.CustomerBean)}
      * .
      */
     @Test
@@ -159,17 +158,17 @@ public class CustomerDaoImplTest extends BaseJUnitTestClass {
         criteria.setName(persistedCustomer.getName());
         criteria.setPaymentMode(paymentModeBean);
         criteria.setLegalForm(legalFormBean);
-        List<Customer> founds = dao.findByCriteria(criteria);
+        List<Customer> founds = dao.findByCriteria(criteria.getSociety().getId(), criteria);
         assertTrue(founds.contains(persistedCustomer));
     }
 
     /**
      * Test method for
-     * {@link be.jsams.server.dao.management.impl.CustomerDaoImpl#findAll()}.
+     * {@link be.jsams.server.dao.management.impl.CustomerDaoImpl#findAll(Long)}.
      */
     @Test
     public void testFindAll() {
-        List<Customer> founds = dao.findAll();
+        List<Customer> founds = dao.findAll(persistedCustomer.getSociety().getId());
         assertTrue(founds.contains(persistedCustomer));
     }
 

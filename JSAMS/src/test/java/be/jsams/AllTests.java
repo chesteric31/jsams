@@ -81,6 +81,7 @@ import be.jsams.server.model.sale.DeliveryOrderTest;
 import be.jsams.server.model.sale.EstimateTest;
 import be.jsams.server.model.utils.xml.JsamsDateAdapterTest;
 import be.jsams.server.service.impl.SocietyServiceImplTest;
+import be.jsams.server.service.management.impl.ProductCategoryServiceImplTest;
 import be.jsams.server.service.rss.impl.RSSFeedParserImplTest;
 import be.jsams.server.service.transfer.impl.BillCreditNoteTransferServiceImplTest;
 import be.jsams.server.service.transfer.impl.CommandBillTransferServiceImplTest;
@@ -123,12 +124,13 @@ import be.jsams.server.service.xml.impl.XmlEstimateGeneratorImplTest;
         EstimateDaoImplTest.class, AddressTest.class, ContactInformationTest.class, PaymentModeTest.class,
         SocietyTest.class, AgentTest.class, CustomerTest.class, ProductCategoryTest.class, ProductTest.class,
         EstimateTest.class, CommandTest.class, DeliveryOrderTest.class, BillTest.class, CreditNoteTest.class,
-        JsamsDateAdapterTest.class, SocietyServiceImplTest.class, RSSFeedParserImplTest.class,
-        EstimateCommandTransferServiceImplTest.class, EstimateBillTransferServiceImplTest.class,
-        CommandDeliveryOrderTransferServiceImplTest.class, CommandBillTransferServiceImplTest.class,
-        DeliveryOrderBillTransferServiceImplTest.class, BillCreditNoteTransferServiceImplTest.class,
-        DownloaderServiceImplTest.class, XmlEstimateGeneratorImplTest.class, XmlCommandGeneratorImplTest.class,
-        XmlDeliveryOrderGeneratorImplTest.class, XmlBillGeneratorImplTest.class, XmlCreditNoteGeneratorImplTest.class })
+        JsamsDateAdapterTest.class, ProductCategoryServiceImplTest.class, SocietyServiceImplTest.class,
+        RSSFeedParserImplTest.class, EstimateCommandTransferServiceImplTest.class,
+        EstimateBillTransferServiceImplTest.class, CommandDeliveryOrderTransferServiceImplTest.class,
+        CommandBillTransferServiceImplTest.class, DeliveryOrderBillTransferServiceImplTest.class,
+        BillCreditNoteTransferServiceImplTest.class, DownloaderServiceImplTest.class,
+        XmlEstimateGeneratorImplTest.class, XmlCommandGeneratorImplTest.class, XmlDeliveryOrderGeneratorImplTest.class,
+        XmlBillGeneratorImplTest.class, XmlCreditNoteGeneratorImplTest.class })
 public class AllTests {
 
 }

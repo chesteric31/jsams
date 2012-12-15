@@ -18,16 +18,16 @@ import be.jsams.server.service.sale.BillService;
 
 /**
  * Bill service implementation.
- *
+ * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
 public class BillServiceImpl extends AbstractService implements BillService {
 
     private BillDao billDao;
-    
+
     private PaymentModeBeanBuilder paymentModeBeanBuilder;
-    
+
     /**
      * {@inheritDoc}
      */
@@ -83,8 +83,7 @@ public class BillServiceImpl extends AbstractService implements BillService {
      */
     @Override
     public List<BillBean> findAll(SocietyBean currentSociety) {
-        billDao.setCurrentSociety(currentSociety);
-        List<Bill> bills = billDao.findAll();
+        List<Bill> bills = billDao.findAll(currentSociety.getId());
         List<BillBean> beans = new ArrayList<BillBean>();
         for (Bill bill : bills) {
             CustomerBean customer = getCustomerBeanBuilder().build(bill.getCustomer(), currentSociety);
@@ -100,15 +99,14 @@ public class BillServiceImpl extends AbstractService implements BillService {
      */
     @Override
     public List<BillBean> findByCriteria(BillBean criteria) {
-        SocietyBean currentSociety = Desktop.getInstance().getCurrentSociety();
-        billDao.setCurrentSociety(currentSociety);
-        List<Bill> bills = billDao.findByCriteria(criteria);
+        SocietyBean society = criteria.getSociety();
+        List<Bill> bills = billDao.findByCriteria(society.getId(), criteria);
         List<BillBean> beans = new ArrayList<BillBean>();
         for (Bill bill : bills) {
-            CustomerBean customer = getCustomerBeanBuilder().build(bill.getCustomer(), currentSociety);
+            CustomerBean customer = getCustomerBeanBuilder().build(bill.getCustomer(), society);
             paymentModeBeanBuilder.setModel(bill.getPaymentMode());
             PaymentModeBean mode = paymentModeBeanBuilder.build();
-            beans.add(new BillBean(bill, currentSociety, customer, mode));
+            beans.add(new BillBean(bill, society, customer, mode));
         }
         return beans;
     }
@@ -119,8 +117,7 @@ public class BillServiceImpl extends AbstractService implements BillService {
     @Override
     public BigDecimal findGlobalTurnover(SocietyBean society) {
         BigDecimal globalTurnover = new BigDecimal(0D);
-        billDao.setCurrentSociety(society);
-        List<Bill> bills = billDao.findAll();
+        List<Bill> bills = billDao.findAll(society.getId());
         if (bills != null && !bills.isEmpty()) {
             for (Bill bill : bills) {
                 List<BillDetail> details = bill.getDetails();
@@ -168,15 +165,6 @@ public class BillServiceImpl extends AbstractService implements BillService {
      */
     public void setPaymentModeBeanBuilder(PaymentModeBeanBuilder paymentModeBeanBuilder) {
         this.paymentModeBeanBuilder = paymentModeBeanBuilder;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public List<BillBean> findAll() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException();
     }
 
 }

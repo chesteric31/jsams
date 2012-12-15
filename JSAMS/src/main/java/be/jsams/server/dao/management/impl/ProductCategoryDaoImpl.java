@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.persistence.Query;
 
-import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.ProductCategoryBean;
 import be.jsams.server.dao.impl.DaoImpl;
 import be.jsams.server.dao.management.ProductCategoryDao;
@@ -20,10 +19,8 @@ import com.mysql.jdbc.StringUtils;
  */
 public class ProductCategoryDaoImpl extends DaoImpl<ProductCategory> implements ProductCategoryDao {
 
-    private SocietyBean currentSociety;
-
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param type the class type
      */
@@ -35,7 +32,7 @@ public class ProductCategoryDaoImpl extends DaoImpl<ProductCategory> implements 
      * {@inheritDoc}
      */
     @SuppressWarnings("unchecked")
-    public List<ProductCategory> findByCriteria(final ProductCategoryBean criteria) {
+    public List<ProductCategory> findByCriteria(Long currentSocietyId, final ProductCategoryBean criteria) {
         StringBuilder queryBuilder = new StringBuilder("FROM ProductCategory c");
 
         String name = criteria.getLabel();
@@ -43,7 +40,7 @@ public class ProductCategoryDaoImpl extends DaoImpl<ProductCategory> implements 
         String nameNl = criteria.getLabelNl();
 
         queryBuilder.append(WHERE);
-        queryBuilder.append("c.society.id = " + getCurrentSociety().getId());
+        queryBuilder.append("c.society.id = " + currentSocietyId);
 
         if (!StringUtils.isNullOrEmpty(name)) {
             queryBuilder.append(AND + "c.label LIKE '%" + name + "%'");
@@ -62,28 +59,14 @@ public class ProductCategoryDaoImpl extends DaoImpl<ProductCategory> implements 
      * {@inheritDoc}
      */
     @SuppressWarnings("unchecked")
-    public List<ProductCategory> findAll() {
+    public List<ProductCategory> findAll(Long currentSocietyId) {
         StringBuilder queryBuilder = new StringBuilder("FROM ProductCategory c");
 
         queryBuilder.append(WHERE);
-        queryBuilder.append("c.society.id = " + getCurrentSociety().getId());
+        queryBuilder.append("c.society.id = " + currentSocietyId);
 
         Query query = getEntityManager().createQuery(queryBuilder.toString());
         return query.getResultList();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public SocietyBean getCurrentSociety() {
-        return currentSociety;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public void setCurrentSociety(SocietyBean currentSociety) {
-        this.currentSociety = currentSociety;
     }
 
 }

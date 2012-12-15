@@ -55,8 +55,7 @@ public class CommandServiceImpl extends AbstractService implements CommandServic
      * {@inheritDoc}
      */
     public List<CommandBean> findAll(SocietyBean currentSociety) {
-        commandDao.setCurrentSociety(currentSociety);
-        List<Command> commands = commandDao.findAll();
+        List<Command> commands = commandDao.findAll(currentSociety.getId());
         List<CommandBean> beans = new ArrayList<CommandBean>();
         for (Command command : commands) {
             CustomerBean customer = getCustomerBeanBuilder().build(command.getCustomer(), currentSociety);
@@ -90,14 +89,13 @@ public class CommandServiceImpl extends AbstractService implements CommandServic
      */
     @Override
     public List<CommandBean> findByCriteria(final CommandBean criteria) {
-        SocietyBean currentSociety = Desktop.getInstance().getCurrentSociety();
-        commandDao.setCurrentSociety(currentSociety);
-        List<Command> commands = commandDao.findByCriteria(criteria);
+        SocietyBean society = criteria.getSociety();
+        List<Command> commands = commandDao.findByCriteria(society.getId(), criteria);
         List<CommandBean> beans = new ArrayList<CommandBean>();
         for (Command command : commands) {
-            CustomerBean customer = getCustomerBeanBuilder().build(command.getCustomer(), currentSociety);
-            AgentBean agent = agentBeanBuilder.build(command.getAgent(), currentSociety);
-            beans.add(new CommandBean(command, currentSociety, customer, agent));
+            CustomerBean customer = getCustomerBeanBuilder().build(command.getCustomer(), society);
+            AgentBean agent = agentBeanBuilder.build(command.getAgent(), society);
+            beans.add(new CommandBean(command, society, customer, agent));
         }
         return beans;
     }
@@ -130,13 +128,4 @@ public class CommandServiceImpl extends AbstractService implements CommandServic
         this.agentBeanBuilder = agentBeanBuilder;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public List<CommandBean> findAll() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException();
-    }
-    
 }

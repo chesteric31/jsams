@@ -3,7 +3,6 @@ package be.jsams.server.service.management.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import be.jsams.client.desktop.Desktop;
 import be.jsams.common.bean.builder.SocietyBeanBuilder;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.CustomerBean;
@@ -50,8 +49,7 @@ public class CustomerServiceImpl extends AbstractService implements CustomerServ
      * {@inheritDoc}
      */
     public List<CustomerBean> findAll(SocietyBean currentSociety) {
-        customerDao.setCurrentSociety(currentSociety);
-        List<Customer> customers = customerDao.findAll();
+        List<Customer> customers = customerDao.findAll(currentSociety.getId());
         List<CustomerBean> beans = new ArrayList<CustomerBean>();
         for (Customer customer : customers) {
             beans.add(getCustomerBeanBuilder().build(customer, currentSociety));
@@ -82,13 +80,12 @@ public class CustomerServiceImpl extends AbstractService implements CustomerServ
      * {@inheritDoc}
      */
     public List<CustomerBean> findByCriteria(final CustomerBean criteria) {
-        SocietyBean currentSociety = Desktop.getInstance().getCurrentSociety();
-        customerDao.setCurrentSociety(currentSociety);
-        List<Customer> customers = customerDao.findByCriteria(criteria);
+        SocietyBean society = criteria.getSociety();
+        List<Customer> customers = customerDao.findByCriteria(society.getId(), criteria);
         List<CustomerBean> beans = new ArrayList<CustomerBean>();
         if (customers != null && !customers.isEmpty()) {
             for (Customer customer : customers) {
-                beans.add(getCustomerBeanBuilder().build(customer, currentSociety));
+                beans.add(getCustomerBeanBuilder().build(customer, society));
             }
         }
         return beans;
@@ -106,15 +103,6 @@ public class CustomerServiceImpl extends AbstractService implements CustomerServ
      */
     public void setCustomerDao(CustomerDao customerDao) {
         this.customerDao = customerDao;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public List<CustomerBean> findAll() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException();
     }
 
 }

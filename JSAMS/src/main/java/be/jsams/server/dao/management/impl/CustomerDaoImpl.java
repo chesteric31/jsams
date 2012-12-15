@@ -8,7 +8,6 @@ import be.jsams.common.bean.model.AddressBean;
 import be.jsams.common.bean.model.ContactInformationBean;
 import be.jsams.common.bean.model.LegalFormBean;
 import be.jsams.common.bean.model.PaymentModeBean;
-import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.server.dao.impl.DaoImpl;
 import be.jsams.server.dao.management.CustomerDao;
@@ -24,10 +23,8 @@ import com.mysql.jdbc.StringUtils;
  */
 public class CustomerDaoImpl extends DaoImpl<Customer> implements CustomerDao {
 
-    private SocietyBean currentSociety;
-
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param type the class type
      */
@@ -39,7 +36,7 @@ public class CustomerDaoImpl extends DaoImpl<Customer> implements CustomerDao {
      * {@inheritDoc}
      */
     @SuppressWarnings("unchecked")
-    public List<Customer> findByCriteria(final CustomerBean criteria) {
+    public List<Customer> findByCriteria(Long currentSocietyId, final CustomerBean criteria) {
         StringBuilder queryBuilder = new StringBuilder("FROM Customer c");
 
         String name = criteria.getName();
@@ -51,7 +48,7 @@ public class CustomerDaoImpl extends DaoImpl<Customer> implements CustomerDao {
         LegalFormBean legalForm = (LegalFormBean) criteria.getLegalForm().getSelection();
 
         queryBuilder.append(WHERE);
-        queryBuilder.append("c.society.id = " + getCurrentSociety().getId());
+        queryBuilder.append("c.society.id = " + currentSocietyId);
 
         if (!StringUtils.isNullOrEmpty(name)) {
             queryBuilder.append(AND + "c.name LIKE '%" + name + "%'");
@@ -77,28 +74,14 @@ public class CustomerDaoImpl extends DaoImpl<Customer> implements CustomerDao {
      * {@inheritDoc}
      */
     @SuppressWarnings("unchecked")
-    public List<Customer> findAll() {
+    public List<Customer> findAll(Long currentSocietyId) {
         StringBuilder queryBuilder = new StringBuilder("FROM Customer c");
 
         queryBuilder.append(WHERE);
-        queryBuilder.append("c.society.id = " + getCurrentSociety().getId());
+        queryBuilder.append("c.society.id = " + currentSocietyId);
 
         Query query = getEntityManager().createQuery(queryBuilder.toString());
         return query.getResultList();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public SocietyBean getCurrentSociety() {
-        return currentSociety;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public void setCurrentSociety(SocietyBean currentSociety) {
-        this.currentSociety = currentSociety;
     }
 
 }

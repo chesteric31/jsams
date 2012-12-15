@@ -112,30 +112,30 @@ public class CommandDaoImplTest extends BaseJUnitTestClass {
         agentBean = new AgentBean(persistedAgent, societyBean);
         
         persistedCommand = dao.add(command);
-        dao.setCurrentSociety(societyBean);
         // necessary to avoid to have the details, not interesting here
         persistedCommand.setDetails(new ArrayList<CommandDetail>());
     }
 
     /**
      * Test method for
-     * {@link be.jsams.server.dao.sale.impl.CommandDaoImpl#findByCriteria(be.jsams.common.bean.model.sale.CommandBean)}
+     * {@link be.jsams.server.dao.sale.impl.CommandDaoImpl#findByCriteria(Long,
+     * be.jsams.common.bean.model.sale.CommandBean)}
      * .
      */
     @Test
     public void testFindByCriteria() {
         CommandBean criteria = new CommandBean(persistedCommand, societyBean, customerBean, agentBean);
-        List<Command> founds = dao.findByCriteria(criteria);
+        List<Command> founds = dao.findByCriteria(criteria.getCustomer().getSociety().getId(), criteria);
         assertTrue(founds.contains(persistedCommand));
     }
 
     /**
      * Test method for
-     * {@link be.jsams.server.dao.sale.impl.CommandDaoImpl#findAll()}.
+     * {@link be.jsams.server.dao.sale.impl.CommandDaoImpl#findAll(Long)}.
      */
     @Test
     public void testFindAll() {
-        List<Command> founds = dao.findAll();
+        List<Command> founds = dao.findAll(persistedCommand.getCustomer().getSociety().getId());
         assertTrue(founds.contains(persistedCommand));
     }
 
