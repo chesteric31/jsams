@@ -3,7 +3,6 @@ package be.jsams.server.service.management.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import be.jsams.client.desktop.Desktop;
 import be.jsams.common.bean.builder.management.AgentBeanBuilder;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.AgentBean;
@@ -64,7 +63,7 @@ public class AgentServiceImpl extends AbstractService implements AgentService {
      */
     public AgentBean findById(Long id) {
         Agent agent = agentDao.findById(id);
-        return getAgentBeanBuilder().build(agent, Desktop.getInstance().getCurrentSociety());
+        return getAgentBeanBuilder().build(agent, new SocietyBean(agent.getSociety()));
     }
 
     /**
