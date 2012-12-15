@@ -8,6 +8,6 @@ import be.jsams.server.model.Address;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public interface AddressDao extends Dao<Address> {
+public interface AddressDao extends ReferenceDao<Address> {
 
 }

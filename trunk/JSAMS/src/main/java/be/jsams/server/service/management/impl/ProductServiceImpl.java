@@ -3,7 +3,6 @@ package be.jsams.server.service.management.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import be.jsams.client.desktop.Desktop;
 import be.jsams.common.bean.builder.ProductBeanBuilder;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.ProductBean;
@@ -32,8 +31,7 @@ public class ProductServiceImpl implements ProductService {
 
     /**
      * 
-     * @param productDao
-     *            the {@link ProductDao} to set
+     * @param productDao the {@link ProductDao} to set
      */
     public void setProductDao(ProductDao productDao) {
         this.dao = productDao;
@@ -69,8 +67,7 @@ public class ProductServiceImpl implements ProductService {
      * {@inheritDoc}
      */
     public List<ProductBean> findAll(SocietyBean currentSociety) {
-        dao.setCurrentSociety(currentSociety);
-        List<Product> products = dao.findAll();
+        List<Product> products = dao.findAll(currentSociety.getId());
         List<ProductBean> beans = new ArrayList<ProductBean>();
         for (Product product : products) {
             builder.setModel(product);
@@ -85,9 +82,8 @@ public class ProductServiceImpl implements ProductService {
      * {@inheritDoc}
      */
     public List<ProductBean> findByCriteria(final ProductBean criteria) {
-        SocietyBean society = Desktop.getInstance().getCurrentSociety();
-        dao.setCurrentSociety(society);
-        List<Product> products = dao.findByCriteria(criteria);
+        SocietyBean society = criteria.getCategory().getSociety();
+        List<Product> products = dao.findByCriteria(society.getId(), criteria);
         List<ProductBean> beans = new ArrayList<ProductBean>();
         for (Product product : products) {
             builder.setModel(product);
@@ -141,15 +137,6 @@ public class ProductServiceImpl implements ProductService {
      */
     public void setDao(ProductDao dao) {
         this.dao = dao;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public List<ProductBean> findAll() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException();
     }
 
 }

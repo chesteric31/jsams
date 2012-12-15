@@ -76,8 +76,7 @@ public class CreditNoteServiceImpl extends AbstractService implements CreditNote
      */
     @Override
     public List<CreditNoteBean> findAll(SocietyBean currentSociety) {
-        creditNoteDao.setCurrentSociety(currentSociety);
-        List<CreditNote> creditNotes = creditNoteDao.findAll();
+        List<CreditNote> creditNotes = creditNoteDao.findAll(currentSociety.getId());
         List<CreditNoteBean> beans = new ArrayList<CreditNoteBean>();
         for (CreditNote creditNote : creditNotes) {
             CustomerBean customer = getCustomerBeanBuilder().build(creditNote.getCustomer(), currentSociety);
@@ -91,13 +90,12 @@ public class CreditNoteServiceImpl extends AbstractService implements CreditNote
      */
     @Override
     public List<CreditNoteBean> findByCriteria(CreditNoteBean criteria) {
-        SocietyBean currentSociety = Desktop.getInstance().getCurrentSociety();
-        creditNoteDao.setCurrentSociety(currentSociety);
-        List<CreditNote> creditNotes = creditNoteDao.findByCriteria(criteria);
+        SocietyBean society = criteria.getSociety();
+        List<CreditNote> creditNotes = creditNoteDao.findByCriteria(society.getId(), criteria);
         List<CreditNoteBean> beans = new ArrayList<CreditNoteBean>();
         for (CreditNote creditNote : creditNotes) {
-            CustomerBean customer = getCustomerBeanBuilder().build(creditNote.getCustomer(), currentSociety);
-            beans.add(new CreditNoteBean(creditNote, currentSociety, customer));
+            CustomerBean customer = getCustomerBeanBuilder().build(creditNote.getCustomer(), society);
+            beans.add(new CreditNoteBean(creditNote, society, customer));
         }
         return beans;
     }
@@ -114,15 +112,6 @@ public class CreditNoteServiceImpl extends AbstractService implements CreditNote
      */
     public void setCreditNoteDao(CreditNoteDao creditNoteDao) {
         this.creditNoteDao = creditNoteDao;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public List<CreditNoteBean> findAll() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException();
     }
 
 }

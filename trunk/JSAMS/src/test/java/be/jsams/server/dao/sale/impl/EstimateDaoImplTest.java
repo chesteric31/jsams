@@ -112,30 +112,29 @@ public class EstimateDaoImplTest extends BaseJUnitTestClass {
         agentBean = new AgentBean(persistedAgent, societyBean);
         
         persistedEstimate = dao.add(estimate);
-        dao.setCurrentSociety(societyBean);
         // necessary to avoid to have the details, not interesting here
         persistedEstimate.setDetails(new ArrayList<EstimateDetail>());
     }
     
     /**
      * Test method for
-     * {@link be.jsams.server.dao.sale.impl.EstimateDaoImpl#findByCriteria(
+     * {@link be.jsams.server.dao.sale.impl.EstimateDaoImpl#findByCriteria(Long,
      * be.jsams.common.bean.model.sale.EstimateBean)}
      * .
      */
     @Test
     public void testFindByCriteria() {
         EstimateBean criteria = new EstimateBean(persistedEstimate, societyBean, customerBean, agentBean);
-        List<Estimate> founds = dao.findByCriteria(criteria);
+        List<Estimate> founds = dao.findByCriteria(criteria.getSociety().getId(), criteria);
         assertTrue(founds.contains(persistedEstimate));
     }
 
     /**
-     * Test method for {@link be.jsams.server.dao.sale.impl.EstimateDaoImpl#findAll()}.
+     * Test method for {@link be.jsams.server.dao.sale.impl.EstimateDaoImpl#findAll(Long)}.
      */
     @Test
     public void testFindAll() {
-        List<Estimate> founds = dao.findAll();
+        List<Estimate> founds = dao.findAll(persistedEstimate.getCustomer().getSociety().getId());
         assertTrue(founds.contains(persistedEstimate));
     }
 

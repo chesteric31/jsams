@@ -8,7 +8,6 @@ import javax.persistence.Query;
 
 import be.jsams.common.bean.model.AddressBean;
 import be.jsams.common.bean.model.PeriodBean;
-import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.sale.CreditNoteBean;
 import be.jsams.server.dao.impl.DaoImpl;
 import be.jsams.server.dao.sale.CreditNoteDao;
@@ -24,10 +23,8 @@ import com.mysql.jdbc.StringUtils;
  */
 public class CreditNoteDaoImpl extends DaoImpl<CreditNote> implements CreditNoteDao {
 
-    private SocietyBean currentSociety;
-    
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param type the class type
      */
@@ -40,7 +37,7 @@ public class CreditNoteDaoImpl extends DaoImpl<CreditNote> implements CreditNote
      */
     @SuppressWarnings("unchecked")
     @Override
-    public List<CreditNote> findByCriteria(CreditNoteBean criteria) {
+    public List<CreditNote> findByCriteria(Long currentSocietyId, CreditNoteBean criteria) {
         StringBuilder queryBuilder = new StringBuilder("FROM CreditNote c");
 
         PeriodBean period = criteria.getPeriod();
@@ -55,10 +52,8 @@ public class CreditNoteDaoImpl extends DaoImpl<CreditNote> implements CreditNote
         String zipCode = billingAddress.getZipCode();
         String city = billingAddress.getCity();
 
-        Long societyId = getCurrentSociety().getId();
-
-        queryBuilder.append(" WHERE ");
-        queryBuilder.append("c.customer.society.id = " + societyId);
+        queryBuilder.append(WHERE);
+        queryBuilder.append("c.customer.society.id = " + currentSocietyId);
 
         if (!StringUtils.isNullOrEmpty(zipCode)) {
             queryBuilder.append(" AND c.billingAddress.zipCode = " + zipCode);
@@ -90,28 +85,14 @@ public class CreditNoteDaoImpl extends DaoImpl<CreditNote> implements CreditNote
      * {@inheritDoc}
      */
     @SuppressWarnings("unchecked")
-    public List<CreditNote> findAll() {
+    public List<CreditNote> findAll(Long currentSocietyId) {
         StringBuilder queryBuilder = new StringBuilder("FROM CreditNote c");
 
-        queryBuilder.append(" WHERE ");
-        queryBuilder.append("c.customer.society.id = " + getCurrentSociety().getId());
+        queryBuilder.append(WHERE);
+        queryBuilder.append("c.customer.society.id = " + currentSocietyId);
 
         Query query = getEntityManager().createQuery(queryBuilder.toString());
         return query.getResultList();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public SocietyBean getCurrentSociety() {
-        return currentSociety;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public void setCurrentSociety(SocietyBean currentSociety) {
-        this.currentSociety = currentSociety;
     }
 
 }

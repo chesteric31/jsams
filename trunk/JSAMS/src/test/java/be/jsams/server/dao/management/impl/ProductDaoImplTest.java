@@ -55,7 +55,7 @@ public class ProductDaoImplTest extends BaseJUnitTestClass {
     }
 
     /**
-     * Test method for {@link be.jsams.server.dao.impl.DaoImpl#findAll()}.
+     * Test method for {@link be.jsams.server.dao.impl.ProductDaoImpl#findAll(Long)}.
      */
     @Test
     public void testFindAll() {
@@ -69,18 +69,16 @@ public class ProductDaoImplTest extends BaseJUnitTestClass {
             private static final long serialVersionUID = -4652699508139431069L;
 
         };
-        ((ProductCategoryDaoImpl) categoryDao).setCurrentSociety(societyBean);
         ProductCategory persistedCategory = categoryDao.add(category);
         product.setCategory(persistedCategory);
         Product persistedProduct = dao.add(product);
-        ((ProductDaoImpl) dao).setCurrentSociety(societyBean);
-        List<Product> founds = dao.findAll();
+        List<Product> founds = dao.findAll(societyBean.getId());
         assertTrue(founds.contains(persistedProduct));
     }
 
     /**
      * Test method for
-     * {@link be.jsams.server.dao.management.impl.ProductDaoImpl#findByCriteria(
+     * {@link be.jsams.server.dao.management.impl.ProductDaoImpl#findByCriteria(Long,
      * be.jsams.common.bean.model.management.ProductBean)}
      * .
      */
@@ -96,7 +94,6 @@ public class ProductDaoImplTest extends BaseJUnitTestClass {
             private static final long serialVersionUID = 8623360287537334295L;
 
         };
-        categoryDao.setCurrentSociety(societyBean);
         ProductCategory persistedCategory = categoryDao.add(category);
         product.setCategory(persistedCategory);
         final Product persistedProduct = dao.add(product);
@@ -124,8 +121,7 @@ public class ProductDaoImplTest extends BaseJUnitTestClass {
                 return categoryBean;
             }
         };
-        dao.setCurrentSociety(societyBean);
-        List<Product> founds = dao.findByCriteria(criteria);
+        List<Product> founds = dao.findByCriteria(criteria.getCategory().getSociety().getId(), criteria);
         assertTrue(founds.contains(persistedProduct));
     }
 

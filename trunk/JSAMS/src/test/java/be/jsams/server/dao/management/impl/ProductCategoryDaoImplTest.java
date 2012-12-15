@@ -50,7 +50,7 @@ public class ProductCategoryDaoImplTest extends BaseJUnitTestClass {
     }
 
     /**
-     * Test method for {@link be.jsams.server.dao.management.impl.ProductCategoryDaoImpl#findAll()}.
+     * Test method for {@link be.jsams.server.dao.management.impl.ProductCategoryDaoImpl#findAll(Long)}.
      */
     @Test
     public void testFindAll() {
@@ -58,15 +58,14 @@ public class ProductCategoryDaoImplTest extends BaseJUnitTestClass {
         productCategory.setSociety(persistedSociety);
         societyBeanBuilder.setModel(persistedSociety);
         SocietyBean societyBean = societyBeanBuilder.build(false);
-        dao.setCurrentSociety(societyBean);
         ProductCategory category = dao.add(productCategory);
-        List<ProductCategory> founds = dao.findAll();
+        List<ProductCategory> founds = dao.findAll(societyBean.getId());
         assertTrue(founds.contains(category));
     }
 
     /**
      * Test method for
-     * {@link be.jsams.server.dao.management.impl.ProductCategoryDaoImpl#findByCriteria(
+     * {@link be.jsams.server.dao.management.impl.ProductCategoryDaoImpl#findByCriteria(Long,
      * be.jsams.common.bean.model.management.ProductCategoryBean)}
      * .
      */
@@ -76,9 +75,8 @@ public class ProductCategoryDaoImplTest extends BaseJUnitTestClass {
         societyBeanBuilder.setModel(persistedSociety);
         SocietyBean societyBean = societyBeanBuilder.build(false);
         ProductCategory category = dao.add(productCategory);
-        dao.setCurrentSociety(societyBean);
         ProductCategoryBean criteria = new ProductCategoryBean(category, societyBean);
-        List<ProductCategory> founds = dao.findByCriteria(criteria);
+        List<ProductCategory> founds = dao.findByCriteria(criteria.getSociety().getId(), criteria);
         assertTrue(founds.contains(category));
     }
 

@@ -5,7 +5,7 @@ import be.jsams.server.dao.CriteriableDao;
 import be.jsams.server.model.management.Agent;
 
 /**
- * Contact DAO interface.
+ * Agent DAO interface.
  * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$

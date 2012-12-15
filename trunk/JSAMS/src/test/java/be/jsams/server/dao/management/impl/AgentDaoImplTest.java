@@ -75,12 +75,11 @@ public class AgentDaoImplTest extends BaseJUnitTestClass {
         final Address persistedAddress = addressDao.add(agent.getAddress());
         agent.setAddress(persistedAddress);
         persistedAgent = dao.add(agent);
-        dao.setCurrentSociety(societyBean);
     }
 
     /**
      * Test method for
-     * {@link be.jsams.server.dao.management.impl.AgentDaoImpl#findByCriteria(
+     * {@link be.jsams.server.dao.management.impl.AgentDaoImpl#findByCriteria(Long,
      * be.jsams.common.bean.model.management.AgentBean)}
      * .
      */
@@ -107,17 +106,17 @@ public class AgentDaoImplTest extends BaseJUnitTestClass {
         criteria.setCivility(civilityBean);
         criteria.setFunction(persistedAgent.getFunction());
         criteria.setName(persistedAgent.getName());
-        List<Agent> founds = dao.findByCriteria(criteria);
+        List<Agent> founds = dao.findByCriteria(criteria.getSociety().getId(), criteria);
         assertTrue(founds.contains(persistedAgent));
     }
 
     /**
      * Test method for
-     * {@link be.jsams.server.dao.management.impl.AgentDaoImpl#findAll()}.
+     * {@link be.jsams.server.dao.management.impl.AgentDaoImpl#findAll(Long))}.
      */
     @Test
     public void testFindAll() {
-        List<Agent> founds = dao.findAll();
+        List<Agent> founds = dao.findAll(persistedAgent.getSociety().getId());
         assertTrue(founds.contains(persistedAgent));
     }
 

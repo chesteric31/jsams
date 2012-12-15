@@ -8,6 +8,6 @@ import be.jsams.common.bean.model.SocietyBean;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public interface SocietyService extends Service<SocietyBean> {
+public interface SocietyService extends ReferenceService<SocietyBean> {
 
 }

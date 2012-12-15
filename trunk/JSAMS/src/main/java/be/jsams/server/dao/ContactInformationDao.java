@@ -8,6 +8,6 @@ import be.jsams.server.model.ContactInformation;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public interface ContactInformationDao extends Dao<ContactInformation> {
+public interface ContactInformationDao extends ReferenceDao<ContactInformation> {
 
 }

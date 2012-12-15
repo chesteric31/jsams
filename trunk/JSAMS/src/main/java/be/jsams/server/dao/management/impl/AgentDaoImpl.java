@@ -4,8 +4,8 @@ import java.util.List;
 
 import javax.persistence.Query;
 
+import be.jsams.common.bean.model.AddressBean;
 import be.jsams.common.bean.model.CivilityBean;
-import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.AgentBean;
 import be.jsams.server.dao.impl.DaoImpl;
 import be.jsams.server.dao.management.AgentDao;
@@ -19,10 +19,8 @@ import be.jsams.server.model.management.Agent;
  */
 public class AgentDaoImpl extends DaoImpl<Agent> implements AgentDao {
 
-    private SocietyBean currentSociety;
-
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param type the class type
      */
@@ -34,21 +32,22 @@ public class AgentDaoImpl extends DaoImpl<Agent> implements AgentDao {
      * {@inheritDoc}
      */
     @SuppressWarnings("unchecked")
-    public List<Agent> findByCriteria(final AgentBean criteria) {
+    public List<Agent> findByCriteria(Long currentSocietyId, final AgentBean criteria) {
         StringBuilder queryBuilder = new StringBuilder("FROM Agent a");
 
         String name = criteria.getName();
 
         String function = criteria.getFunction();
 
-        String zipCode = criteria.getAddress().getZipCode();
-        String city = criteria.getAddress().getCity();
+        AddressBean address = criteria.getAddress();
+        String zipCode = address.getZipCode();
+        String city = address.getCity();
 
         String phone = criteria.getContactInformation().getPhone();
         CivilityBean civility = (CivilityBean) criteria.getCivility().getSelection();
 
         queryBuilder.append(WHERE);
-        queryBuilder.append("a.society.id = " + getCurrentSociety().getId());
+        queryBuilder.append("a.society.id = " + currentSocietyId);
 
         if (name != null) {
             queryBuilder.append(AND + "a.name LIKE '%" + name + "%'");
@@ -77,28 +76,14 @@ public class AgentDaoImpl extends DaoImpl<Agent> implements AgentDao {
      * {@inheritDoc}
      */
     @SuppressWarnings("unchecked")
-    public List<Agent> findAll() {
+    public List<Agent> findAll(Long currentSocietyId) {
         StringBuilder queryBuilder = new StringBuilder("FROM Agent a");
 
         queryBuilder.append(WHERE);
-        queryBuilder.append("a.society.id = " + getCurrentSociety().getId());
+        queryBuilder.append("a.society.id = " + currentSocietyId);
 
         Query query = getEntityManager().createQuery(queryBuilder.toString());
         return query.getResultList();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public SocietyBean getCurrentSociety() {
-        return currentSociety;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public void setCurrentSociety(SocietyBean currentSociety) {
-        this.currentSociety = currentSociety;
     }
 
 }

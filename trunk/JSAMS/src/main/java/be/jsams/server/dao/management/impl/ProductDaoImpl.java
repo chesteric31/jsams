@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.persistence.Query;
 
-import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.ProductBean;
 import be.jsams.common.bean.model.management.ProductCategoryBean;
 import be.jsams.server.dao.impl.DaoImpl;
@@ -21,10 +20,8 @@ import com.mysql.jdbc.StringUtils;
  */
 public class ProductDaoImpl extends DaoImpl<Product> implements ProductDao {
 
-    private SocietyBean currentSociety;
-
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param type the class type
      */
@@ -36,11 +33,11 @@ public class ProductDaoImpl extends DaoImpl<Product> implements ProductDao {
      * {@inheritDoc}
      */
     @SuppressWarnings("unchecked")
-    public List<Product> findAll() {
+    public List<Product> findAll(Long currentSocietyId) {
         StringBuilder queryBuilder = new StringBuilder("FROM Product p");
 
         queryBuilder.append(WHERE);
-        queryBuilder.append("p.category.society.id = " + getCurrentSociety().getId());
+        queryBuilder.append("p.category.society.id = " + currentSocietyId);
 
         Query query = getEntityManager().createQuery(queryBuilder.toString());
         return query.getResultList();
@@ -50,7 +47,7 @@ public class ProductDaoImpl extends DaoImpl<Product> implements ProductDao {
      * {@inheritDoc}
      */
     @SuppressWarnings("unchecked")
-    public List<Product> findByCriteria(final ProductBean criteria) {
+    public List<Product> findByCriteria(Long currentSocietyId, final ProductBean criteria) {
         StringBuilder queryBuilder = new StringBuilder("FROM Product p");
 
         boolean isFirst = true;
@@ -119,25 +116,11 @@ public class ProductDaoImpl extends DaoImpl<Product> implements ProductDao {
             } else {
                 queryBuilder.append(AND);
             }
-            queryBuilder.append(" p.category.society.id = " + getCurrentSociety().getId());
+            queryBuilder.append(" p.category.society.id = " + currentSocietyId);
         }
 
         Query query = getEntityManager().createQuery(queryBuilder.toString());
         return query.getResultList();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public SocietyBean getCurrentSociety() {
-        return currentSociety;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public void setCurrentSociety(SocietyBean currentSociety) {
-        this.currentSociety = currentSociety;
     }
 
 }

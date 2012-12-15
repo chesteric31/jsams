@@ -1,7 +1,5 @@
 package be.jsams.server.service;
 
-import java.util.List;
-
 import be.jsams.common.bean.model.AbstractIdentityBean;
 
 /**
@@ -15,7 +13,7 @@ import be.jsams.common.bean.model.AbstractIdentityBean;
 public interface Service<B extends AbstractIdentityBean<?, ?>> {
     
     /**
-     * Create and persist a new B object.
+     * Creates and persists a new B object.
      * 
      * @param bean the B object to persist
      * @return the B object persisted with id
@@ -23,39 +21,32 @@ public interface Service<B extends AbstractIdentityBean<?, ?>> {
     B create(B bean);
 
     /**
-     * Delete a B object.
+     * Deletes a B object.
      * 
      * @param bean the B object to delete
      */
     void delete(B bean);
 
     /**
-     * Delete a B object.
+     * Deletes a B object.
      * 
      * @param id the id of the B object to delete
      */
     void delete(Long id);
 
     /**
-     * Update a B object.
+     * Updates a B object.
      * 
      * @param bean the B object to update
      */
     void update(B bean);
 
     /**
-     * Find a B object.
+     * Finds a B object.
      * 
      * @param id the if of the B object to find
      * @return the found object
      */
     B findById(Long id);
-
-    /**
-     * Find all the B object of the database.
-     * 
-     * @return a list of B objects
-     */
-    List<B> findAll();
     
 }

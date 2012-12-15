@@ -8,7 +8,6 @@ import javax.persistence.Query;
 
 import be.jsams.common.bean.model.AddressBean;
 import be.jsams.common.bean.model.PeriodBean;
-import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.sale.DeliveryOrderBean;
 import be.jsams.server.dao.impl.DaoImpl;
 import be.jsams.server.dao.sale.DeliveryOrderDao;
@@ -24,10 +23,8 @@ import com.mysql.jdbc.StringUtils;
  */
 public class DeliveryOrderDaoImpl extends DaoImpl<DeliveryOrder> implements DeliveryOrderDao {
 
-    private SocietyBean currentSociety;
-    
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param type the class type
      */
@@ -40,7 +37,7 @@ public class DeliveryOrderDaoImpl extends DaoImpl<DeliveryOrder> implements Deli
      */
     @SuppressWarnings("unchecked")
     @Override
-    public List<DeliveryOrder> findByCriteria(DeliveryOrderBean criteria) {
+    public List<DeliveryOrder> findByCriteria(Long currentSocietyId, DeliveryOrderBean criteria) {
         StringBuilder queryBuilder = new StringBuilder("FROM DeliveryOrder d");
 
         PeriodBean period = criteria.getPeriod();
@@ -50,17 +47,15 @@ public class DeliveryOrderDaoImpl extends DaoImpl<DeliveryOrder> implements Deli
             startDate = period.getStartDate();
             endDate = period.getEndDate();
         }
-        
+
         AddressBean deliveryAddress = criteria.getDeliveryAddress();
         String zipCode = deliveryAddress.getZipCode();
         String city = deliveryAddress.getCity();
 
         boolean transferred = criteria.isTransferred();
 
-        Long societyId = getCurrentSociety().getId();
-
-        queryBuilder.append(" WHERE ");
-        queryBuilder.append("d.customer.society.id = " + societyId);
+        queryBuilder.append(WHERE);
+        queryBuilder.append("d.customer.society.id = " + currentSocietyId);
 
         if (!StringUtils.isNullOrEmpty(zipCode)) {
             queryBuilder.append(" AND d.deliveryAddress.zipCode = " + zipCode);
@@ -93,28 +88,14 @@ public class DeliveryOrderDaoImpl extends DaoImpl<DeliveryOrder> implements Deli
      * {@inheritDoc}
      */
     @SuppressWarnings("unchecked")
-    public List<DeliveryOrder> findAll() {
+    public List<DeliveryOrder> findAll(Long currentSocietyId) {
         StringBuilder queryBuilder = new StringBuilder("FROM DeliveryOrder d");
 
-        queryBuilder.append(" WHERE ");
-        queryBuilder.append("d.customer.society.id = " + getCurrentSociety().getId());
+        queryBuilder.append(WHERE);
+        queryBuilder.append("d.customer.society.id = " + currentSocietyId);
 
         Query query = getEntityManager().createQuery(queryBuilder.toString());
         return query.getResultList();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public SocietyBean getCurrentSociety() {
-        return currentSociety;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public void setCurrentSociety(SocietyBean currentSociety) {
-        this.currentSociety = currentSociety;
     }
 
 }

@@ -9,10 +9,10 @@ import be.jsams.server.model.LegalForm;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public class LegalFormDaoImpl extends DaoImpl<LegalForm> implements LegalFormDao {
+public class LegalFormDaoImpl extends ReferenceDaoImpl<LegalForm> implements LegalFormDao {
 
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param type the class type
      */

@@ -65,8 +65,7 @@ public class EstimateServiceImpl extends AbstractService implements EstimateServ
      * {@inheritDoc}
      */
     public List<EstimateBean> findAll(SocietyBean currentSociety) {
-        estimateDao.setCurrentSociety(currentSociety);
-        List<Estimate> estimates = estimateDao.findAll();
+        List<Estimate> estimates = estimateDao.findAll(currentSociety.getId());
         List<EstimateBean> beans = new ArrayList<EstimateBean>();
         for (Estimate estimate : estimates) {
             CustomerBean customer = getCustomerBeanBuilder().build(estimate.getCustomer(), currentSociety);
@@ -101,14 +100,13 @@ public class EstimateServiceImpl extends AbstractService implements EstimateServ
     @Override
     public List<EstimateBean> findByCriteria(final EstimateBean criteria) {
         // necessary to have the current society in the criteria
-        SocietyBean currentSociety = Desktop.getInstance().getCurrentSociety();
-        estimateDao.setCurrentSociety(currentSociety);
-        List<Estimate> estimates = estimateDao.findByCriteria(criteria);
+        SocietyBean society = criteria.getSociety();
+        List<Estimate> estimates = estimateDao.findByCriteria(society.getId(), criteria);
         List<EstimateBean> beans = new ArrayList<EstimateBean>();
         for (Estimate estimate : estimates) {
-            CustomerBean customer = getCustomerBeanBuilder().build(estimate.getCustomer(), currentSociety);
-            AgentBean agent = agentBeanBuilder.build(estimate.getAgent(), currentSociety);
-            beans.add(new EstimateBean(estimate, currentSociety, customer, agent));
+            CustomerBean customer = getCustomerBeanBuilder().build(estimate.getCustomer(), society);
+            AgentBean agent = agentBeanBuilder.build(estimate.getAgent(), society);
+            beans.add(new EstimateBean(estimate, society, customer, agent));
         }
         return beans;
     }
@@ -139,15 +137,6 @@ public class EstimateServiceImpl extends AbstractService implements EstimateServ
      */
     public void setAgentBeanBuilder(AgentBeanBuilder agentBeanBuilder) {
         this.agentBeanBuilder = agentBeanBuilder;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public List<EstimateBean> findAll() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException();
     }
 
 }

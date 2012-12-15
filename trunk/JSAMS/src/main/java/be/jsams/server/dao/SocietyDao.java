@@ -8,6 +8,6 @@ import be.jsams.server.model.Society;
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public interface SocietyDao extends Dao<Society> {
+public interface SocietyDao extends ReferenceDao<Society> {
 
 }

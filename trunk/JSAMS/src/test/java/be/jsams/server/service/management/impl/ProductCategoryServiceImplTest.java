@@ -1,7 +1,8 @@
 package be.jsams.server.service.management.impl;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import java.util.List;
 
@@ -68,7 +69,10 @@ public class ProductCategoryServiceImplTest extends BaseJUnitTestClass {
      */
     @Test
     public void testDeleteProductCategoryBean() {
-        fail("Not yet implemented");
+        ProductCategoryBean created = service.create(productCategory);
+        service.delete(created);
+        ProductCategoryBean found = service.findById(created.getId());
+        assertNull(found);
     }
 
     /**
@@ -77,15 +81,21 @@ public class ProductCategoryServiceImplTest extends BaseJUnitTestClass {
      */
     @Test
     public void testDeleteLong() {
-        fail("Not yet implemented");
+        ProductCategoryBean created = service.create(productCategory);
+        Long id = created.getId();
+        service.delete(id);
+        ProductCategoryBean found = service.findById(id);
+        assertNull(found);
     }
 
     /**
-     * Test method for {@link be.jsams.server.service.management.impl.ProductCategoryServiceImpl#findAll()}.
+     * Test method for {@link be.jsams.server.service.management.impl.ProductCategoryServiceImpl#findAll(SocietyBean))}.
      */
     @Test
     public void testFindAll() {
-        fail("Not yet implemented");
+        ProductCategoryBean created = service.create(productCategory);
+        List<ProductCategoryBean> founds = service.findAll(created.getSociety());
+        assertTrue(founds.contains(created));
     }
 
     /**
@@ -94,7 +104,9 @@ public class ProductCategoryServiceImplTest extends BaseJUnitTestClass {
      */
     @Test
     public void testFindById() {
-        fail("Not yet implemented");
+        ProductCategoryBean created = service.create(productCategory);
+        ProductCategoryBean found = service.findById(created.getId());
+        assertEquals(created, found);
     }
 
     /**
@@ -103,7 +115,12 @@ public class ProductCategoryServiceImplTest extends BaseJUnitTestClass {
      */
     @Test
     public void testUpdate() {
-        fail("Not yet implemented");
+        ProductCategoryBean created = service.create(productCategory);
+        String newLabel = "newLabel";
+        created.setLabel(newLabel);
+        service.update(created);
+        ProductCategoryBean found = service.findById(created.getId());
+        assertEquals(newLabel, found.getLabel());
     }
 
     /**
@@ -112,7 +129,12 @@ public class ProductCategoryServiceImplTest extends BaseJUnitTestClass {
      */
     @Test
     public void testFindByCriteria() {
-        fail("Not yet implemented");
+        ProductCategoryBean created = service.create(productCategory);
+        ProductCategoryBean criteria = new ProductCategoryBean();
+        criteria.setLabel(created.getLabel());
+        criteria.setSociety(created.getSociety());
+        List<ProductCategoryBean> founds = service.findByCriteria(criteria);
+        assertTrue(founds.contains(created));
     }
 
 }

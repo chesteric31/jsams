@@ -104,30 +104,29 @@ public class DeliveryOrderDaoImplTest extends BaseJUnitTestClass {
         customerBean = new CustomerBean(persistedCustomer, societyBean);
         
         persistedDeliveryOrder = dao.add(deliveryOrder);
-        dao.setCurrentSociety(societyBean);
         // necessary to avoid to have the details, not interesting here
         persistedDeliveryOrder.setDetails(new ArrayList<DeliveryOrderDetail>());
     }
 
     /**
      * Test method for
-     * {@link be.jsams.server.dao.sale.impl.DeliveryOrderDaoImpl#findByCriteria(
+     * {@link be.jsams.server.dao.sale.impl.DeliveryOrderDaoImpl#findByCriteria(Long
      * be.jsams.common.bean.model.sale.DeliveryOrderBean)}
      * .
      */
     @Test
     public void testFindByCriteria() {
         DeliveryOrderBean criteria = new DeliveryOrderBean(persistedDeliveryOrder, societyBean, customerBean);
-        List<DeliveryOrder> founds = dao.findByCriteria(criteria);
+        List<DeliveryOrder> founds = dao.findByCriteria(criteria.getSociety().getId(), criteria);
         assertTrue(founds.contains(persistedDeliveryOrder));
     }
 
     /**
-     * Test method for {@link be.jsams.server.dao.sale.impl.DeliveryOrderDaoImpl#findAll()}.
+     * Test method for {@link be.jsams.server.dao.sale.impl.DeliveryOrderDaoImpl#findAll(Long)}.
      */
     @Test
     public void testFindAll() {
-        List<DeliveryOrder> founds = dao.findAll();
+        List<DeliveryOrder> founds = dao.findAll(persistedDeliveryOrder.getCustomer().getSociety().getId());
         assertTrue(founds.contains(persistedDeliveryOrder));
     }
 

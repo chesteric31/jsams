@@ -104,30 +104,29 @@ public class CreditNoteDaoImplTest extends BaseJUnitTestClass {
         customerBean = new CustomerBean(persistedCustomer, societyBean);
         
         persistedCreditNote = dao.add(creditNote);
-        dao.setCurrentSociety(societyBean);
         // necessary to avoid to have the details, not interesting here
         persistedCreditNote.setDetails(new ArrayList<CreditNoteDetail>());
     }
 
     /**
      * Test method for
-     * {@link be.jsams.server.dao.sale.impl.CreditNoteDaoImpl#findByCriteria(
+     * {@link be.jsams.server.dao.sale.impl.CreditNoteDaoImpl#findByCriteria(Long,
      * be.jsams.common.bean.model.sale.CreditNoteBean)}
      * .
      */
     @Test
     public void testFindByCriteria() {
         CreditNoteBean criteria = new CreditNoteBean(persistedCreditNote, societyBean, customerBean);
-        List<CreditNote> founds = dao.findByCriteria(criteria);
+        List<CreditNote> founds = dao.findByCriteria(criteria.getCustomer().getSociety().getId(), criteria);
         assertTrue(founds.contains(persistedCreditNote));
     }
 
     /**
-     * Test method for {@link be.jsams.server.dao.sale.impl.CreditNoteDaoImpl#findAll()}.
+     * Test method for {@link be.jsams.server.dao.sale.impl.CreditNoteDaoImpl#findAll(Long)}.
      */
     @Test
     public void testFindAll() {
-        List<CreditNote> founds = dao.findAll();
+        List<CreditNote> founds = dao.findAll(persistedCreditNote.getCustomer().getSociety().getId());
         assertTrue(founds.contains(persistedCreditNote));
     }
 
