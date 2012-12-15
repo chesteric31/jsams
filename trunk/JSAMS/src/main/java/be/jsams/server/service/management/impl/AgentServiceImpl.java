@@ -88,7 +88,6 @@ public class AgentServiceImpl extends AbstractService implements AgentService {
     }
 
     /**
-     * 
      * @return the {@link AgentDao}
      */
     public AgentDao getAgentDao() {
@@ -96,7 +95,6 @@ public class AgentServiceImpl extends AbstractService implements AgentService {
     }
 
     /**
-     * 
      * @param agentDao the {@link AgentDao} to set
      */
     public void setAgentDao(AgentDao agentDao) {
