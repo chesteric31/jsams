@@ -14,7 +14,7 @@ import be.jsams.server.service.sale.DeliveryOrderService;
 
 /**
  * Delivery Order service implementation.
- *
+ * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
@@ -29,8 +29,7 @@ public class DeliveryOrderServiceImpl extends AbstractService implements Deliver
     public DeliveryOrderBean create(DeliveryOrderBean bean) {
         DeliveryOrder deliveryOrder = new DeliveryOrder(bean);
         DeliveryOrder addingDeliveryOrder = deliveryOrderDao.add(deliveryOrder);
-        return new DeliveryOrderBean(addingDeliveryOrder, Desktop.getInstance().getCurrentSociety(), bean
-                .getCustomer());
+        return new DeliveryOrderBean(addingDeliveryOrder, bean.getSociety(), bean.getCustomer());
     }
 
     /**

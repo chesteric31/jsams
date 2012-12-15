@@ -29,8 +29,7 @@ public class CreditNoteServiceImpl extends AbstractService implements CreditNote
     public CreditNoteBean create(CreditNoteBean bean) {
         CreditNote creditNote = new CreditNote(bean);
         CreditNote persistedCreditNote = creditNoteDao.add(creditNote);
-        SocietyBean currentSociety = Desktop.getInstance().getCurrentSociety();
-        return new CreditNoteBean(persistedCreditNote, currentSociety, bean.getCustomer());
+        return new CreditNoteBean(persistedCreditNote, bean.getSociety(), bean.getCustomer());
     }
 
     /**

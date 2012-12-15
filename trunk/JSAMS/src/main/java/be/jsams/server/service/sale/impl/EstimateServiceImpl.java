@@ -31,9 +31,8 @@ public class EstimateServiceImpl extends AbstractService implements EstimateServ
     public EstimateBean create(final EstimateBean bean) {
         Estimate estimate = new Estimate(bean);
         Estimate persistedEstimate = estimateDao.add(estimate);
-        SocietyBean currentSociety = Desktop.getInstance().getCurrentSociety();
-        AgentBean agent = agentBeanBuilder.build(persistedEstimate.getAgent(), currentSociety);
-        return new EstimateBean(persistedEstimate, currentSociety, bean.getCustomer(), agent);
+        AgentBean agent = agentBeanBuilder.build(persistedEstimate.getAgent(), bean.getSociety());
+        return new EstimateBean(persistedEstimate, bean.getSociety(), bean.getCustomer(), agent);
     }
 
     /**
