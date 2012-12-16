@@ -99,8 +99,12 @@ public class ProductServiceImpl implements ProductService {
      */
     public ProductBean findById(final Long id) {
         Product product = dao.findById(id);
-        builder.setModel(product);
-        return builder.build(false, false);
+        if (product != null) {
+            builder.setModel(product);
+            return builder.build(false, false);
+        } else {
+            return null;
+        }
     }
 
     /**

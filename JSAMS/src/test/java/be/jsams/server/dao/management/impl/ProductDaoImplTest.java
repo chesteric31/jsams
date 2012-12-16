@@ -12,7 +12,6 @@ import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.ProductBean;
 import be.jsams.common.bean.model.management.ProductCategoryBean;
 import be.jsams.server.BaseJUnitTestClass;
-import be.jsams.server.dao.MockDaoGenerator;
 import be.jsams.server.dao.SocietyDao;
 import be.jsams.server.dao.management.ProductCategoryDao;
 import be.jsams.server.dao.management.ProductDao;
@@ -55,7 +54,8 @@ public class ProductDaoImplTest extends BaseJUnitTestClass {
     }
 
     /**
-     * Test method for {@link be.jsams.server.dao.impl.ProductDaoImpl#findAll(Long)}.
+     * Test method for
+     * {@link be.jsams.server.dao.impl.ProductDaoImpl#findAll(Long)}.
      */
     @Test
     public void testFindAll() {
@@ -78,8 +78,8 @@ public class ProductDaoImplTest extends BaseJUnitTestClass {
 
     /**
      * Test method for
-     * {@link be.jsams.server.dao.management.impl.ProductDaoImpl#findByCriteria(Long,
-     * be.jsams.common.bean.model.management.ProductBean)}
+     * {@link be.jsams.server.dao.management.impl.ProductDaoImpl
+     * #findByCriteria(Long, be.jsams.common.bean.model.management.ProductBean)}
      * .
      */
     @Test
@@ -104,14 +104,6 @@ public class ProductDaoImplTest extends BaseJUnitTestClass {
              * Serial Version UID
              */
             private static final long serialVersionUID = -4399264563287934694L;
-
-            /**
-             * {@inheritDoc}
-             */
-            @Override
-            public ProductCategoryDao getProductCategoryDao() {
-                return MockDaoGenerator.generateMockProductCategoryDao(category);
-            }
 
             /**
              * @return the category

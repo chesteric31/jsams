@@ -101,7 +101,9 @@ public class SearchProductCategoryPanel extends
     @Override
     protected void performButtonAdd() {
         SocietyBean currentSociety = Desktop.getInstance().getCurrentSociety();
-        ProductCategoryBeanBuilder builder = new ProductCategoryBeanBuilder(false, currentSociety);
+        ProductCategoryBeanBuilder builder = ApplicationContext.getProductCategoryBeanBuilder();
+        builder.setCanBeNull(false);
+        builder.setSociety(currentSociety);
         builder.setDao(ApplicationContext.getProductCategoryDao());
         ProductCategoryBean categoryBean = builder.build();
         new EditProductCategoryDialog(I18nResource.TITLE_EDIT_PRODUCT_CATEGORY, categoryBean);

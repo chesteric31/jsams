@@ -1,14 +1,10 @@
 package be.jsams.common.bean.model.management;
 
-import be.jsams.client.context.ApplicationContext;
-import be.jsams.common.bean.builder.ProductCategoryBeanBuilder;
 import be.jsams.common.bean.model.AbstractIdentityBean;
 import be.jsams.common.bean.model.AbstractNamedIdentityBean;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.view.management.ProductBeanView;
-import be.jsams.server.dao.management.ProductCategoryDao;
 import be.jsams.server.model.management.Product;
-import be.jsams.server.model.management.ProductCategory;
 
 /**
  * Bean model for {@link Product} object.
@@ -30,8 +26,6 @@ public class ProductBean extends AbstractNamedIdentityBean<Product, ProductBeanV
 
     private ProductCategoryBean category;
 
-    private ProductCategoryBeanBuilder productCategoryBuilder;
-
     public static final String PRICE_PROPERTY = "price";
     public static final String QUANTITY_STOCK_PROPERTY = "quantityStock";
     public static final String REORDER_LEVEL_PROPERTY = "reorderLevel";
@@ -46,7 +40,7 @@ public class ProductBean extends AbstractNamedIdentityBean<Product, ProductBeanV
     }
 
     /**
-     * Default constructor
+     * Default constructor.
      * 
      * @param categoryCanBeNull to specify if the category can be null in the
      *            combo box
@@ -54,10 +48,6 @@ public class ProductBean extends AbstractNamedIdentityBean<Product, ProductBeanV
      */
     public ProductBean(boolean categoryCanBeNull, SocietyBean society) {
         super();
-        productCategoryBuilder = new ProductCategoryBeanBuilder(categoryCanBeNull, society);
-        productCategoryBuilder.setDao(ApplicationContext.getProductCategoryDao());
-        ProductCategoryBean categoryBean = productCategoryBuilder.build();
-        this.category = categoryBean;
         setView(buildView());
     }
 
@@ -69,14 +59,6 @@ public class ProductBean extends AbstractNamedIdentityBean<Product, ProductBeanV
      */
     public ProductBean(Product model, SocietyBean society) {
         super(model);
-        ProductCategory productCategory = model.getCategory();
-        productCategoryBuilder = new ProductCategoryBeanBuilder(false, society);
-        productCategoryBuilder.setModel(productCategory);
-        productCategoryBuilder.setDao(getProductCategoryDao());
-        productCategoryBuilder.setSociety(society);
-        ProductCategoryBean categoryBean = productCategoryBuilder.build();
-        this.category = categoryBean;
-
         this.price = model.getPrice();
         this.quantityStock = model.getQuantityStock();
         this.reorderLevel = model.getReorderLevel();
@@ -189,14 +171,6 @@ public class ProductBean extends AbstractNamedIdentityBean<Product, ProductBeanV
         setQuantityStock(0);
         setReorderLevel(0);
         setVatApplicable(null);
-    }
-
-    /**
-     * 
-     * @return the {@link ProductCategoryDao}
-     */
-    public ProductCategoryDao getProductCategoryDao() {
-        return ApplicationContext.getProductCategoryDao();
     }
 
     /**
