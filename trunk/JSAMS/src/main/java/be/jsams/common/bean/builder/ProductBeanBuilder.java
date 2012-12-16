@@ -2,8 +2,10 @@ package be.jsams.common.bean.builder;
 
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.ProductBean;
+import be.jsams.common.bean.model.management.ProductCategoryBean;
 import be.jsams.server.dao.management.ProductDao;
 import be.jsams.server.model.management.Product;
+import be.jsams.server.model.management.ProductCategory;
 
 /**
  * Builder that makes a {@link ProductBean} from DAO list model and entity
@@ -20,6 +22,8 @@ public class ProductBeanBuilder {
 
     private SocietyBean society;
 
+    private ProductCategoryBeanBuilder productCategoryBeanBuilder;
+
     /**
      * Builds the {@link ProductBean}.
      * 
@@ -32,10 +36,29 @@ public class ProductBeanBuilder {
         ProductBean bean = null;
         if (newOne) {
             bean = new ProductBean(categoryCanBeNull, society);
+            bean.setCategory(buildCategory(categoryCanBeNull, society, null));
         } else {
             bean = new ProductBean(model, society);
+            ProductCategory productCategory = model.getCategory();
+            bean.setCategory(buildCategory(false, society, productCategory));
         }
         return bean;
+    }
+
+    /**
+     * Builds a {@link ProductCategoryBean}.
+     * 
+     * @param categoryCanBeNull to specify if the category can be null in the
+     *            combo box
+     * @param society the {@link SocietyBean} to use
+     * @param productCategory the {@link ProductCategory} to use
+     * @return the built {@link ProductCategoryBean}
+     */
+    private ProductCategoryBean buildCategory(boolean categoryCanBeNull, SocietyBean society,
+            ProductCategory productCategory) {
+        productCategoryBeanBuilder.setModel(productCategory);
+        productCategoryBeanBuilder.setSociety(society);
+        return productCategoryBeanBuilder.build();
     }
 
     /**
@@ -78,6 +101,20 @@ public class ProductBeanBuilder {
      */
     public void setSociety(SocietyBean society) {
         this.society = society;
+    }
+
+    /**
+     * @return the productCategoryBeanBuilder
+     */
+    public ProductCategoryBeanBuilder getProductCategoryBeanBuilder() {
+        return productCategoryBeanBuilder;
+    }
+
+    /**
+     * @param productCategoryBeanBuilder the productCategoryBeanBuilder to set
+     */
+    public void setProductCategoryBeanBuilder(ProductCategoryBeanBuilder productCategoryBeanBuilder) {
+        this.productCategoryBeanBuilder = productCategoryBeanBuilder;
     }
 
 }

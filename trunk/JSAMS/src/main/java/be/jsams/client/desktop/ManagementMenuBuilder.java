@@ -153,7 +153,7 @@ public class ManagementMenuBuilder extends AbstractMenuBuilder {
             private static final long serialVersionUID = 3233472575375812337L;
 
             public void actionPerformed(ActionEvent event) {
-                ProductBeanBuilder builder = new ProductBeanBuilder();
+                ProductBeanBuilder builder = ApplicationContext.getProductBeanBuilder();
                 builder.setSociety(Desktop.getInstance().getCurrentSociety());
                 SearchProductPanel searchPanel = new SearchProductPanel(builder.build(true, true),
                         new ProductTableMouseListener(), ApplicationContext.getProductService(),
@@ -180,7 +180,9 @@ public class ManagementMenuBuilder extends AbstractMenuBuilder {
 
             public void actionPerformed(ActionEvent event) {
                 SocietyBean currentSociety = Desktop.getInstance().getCurrentSociety();
-                ProductCategoryBeanBuilder builder = new ProductCategoryBeanBuilder(false, currentSociety);
+                ProductCategoryBeanBuilder builder = ApplicationContext.getProductCategoryBeanBuilder();
+                builder.setCanBeNull(false);
+                builder.setSociety(currentSociety);
                 builder.setDao(ApplicationContext.getProductCategoryDao());
                 ProductCategoryBean categoryBean = builder.build();
                 SearchProductCategoryPanel searchPanel = new SearchProductCategoryPanel(categoryBean,

@@ -6,6 +6,10 @@
 	<!-- Bean builders -->
 	<bean id="productBeanBuilder" class="be.jsams.common.bean.builder.ProductBeanBuilder">
 		<property name="dao" ref="productDao" />
+		<property name="productCategoryBeanBuilder" ref="productCategoryBeanBuilder" />
+	</bean>
+	<bean id="productCategoryBeanBuilder" class="be.jsams.common.bean.builder.ProductCategoryBeanBuilder">
+		<property name="dao" ref="productCategoryDao" />
 	</bean>
 
 	<bean id="customerBeanBuilder"

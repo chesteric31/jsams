@@ -4,6 +4,8 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import be.jsams.common.bean.builder.LegalFormBeanBuilder;
 import be.jsams.common.bean.builder.PaymentModeBeanBuilder;
+import be.jsams.common.bean.builder.ProductBeanBuilder;
+import be.jsams.common.bean.builder.ProductCategoryBeanBuilder;
 import be.jsams.common.bean.builder.SocietyBeanBuilder;
 import be.jsams.common.bean.builder.management.AgentBeanBuilder;
 import be.jsams.common.bean.builder.management.CustomerBeanBuilder;
@@ -132,6 +134,20 @@ public final class ApplicationContext {
      */
     public static SocietyBeanBuilder getSocietyBeanBuilder() {
         return (SocietyBeanBuilder) context.getBean("societyBeanBuilder");
+    }
+
+    /**
+     * @return the {@link ProductBeanBuilder}
+     */
+    public static ProductBeanBuilder getProductBeanBuilder() {
+        return (ProductBeanBuilder) context.getBean("productBeanBuilder");
+    }
+
+    /**
+     * @return the {@link ProductCategoryBeanBuilder}
+     */
+    public static ProductCategoryBeanBuilder getProductCategoryBeanBuilder() {
+        return (ProductCategoryBeanBuilder) context.getBean("productCategoryBeanBuilder");
     }
 
     /**

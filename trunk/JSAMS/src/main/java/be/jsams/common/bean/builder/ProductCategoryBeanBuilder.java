@@ -31,18 +31,12 @@ public class ProductCategoryBeanBuilder {
 
     /**
      * Constructor.
-     * 
-     * @param categoryCanBeNull to specify if the category can be null in the
-     *            combo box
-     * @param currentSociety to specify the current {@link SocietyBean}
      */
-    public ProductCategoryBeanBuilder(boolean categoryCanBeNull, final SocietyBean currentSociety) {
-        this.canBeNull = categoryCanBeNull;
-        this.society = currentSociety;
+    public ProductCategoryBeanBuilder() {
     }
 
     /**
-     * Build the {@link ProductCategoryBean}.
+     * Builds the {@link ProductCategoryBean}.
      * 
      * @return the built {@link ProductCategoryBean}
      */
