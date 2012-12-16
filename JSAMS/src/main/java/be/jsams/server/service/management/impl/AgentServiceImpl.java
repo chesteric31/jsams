@@ -63,7 +63,11 @@ public class AgentServiceImpl extends AbstractService implements AgentService {
      */
     public AgentBean findById(Long id) {
         Agent agent = agentDao.findById(id);
-        return getAgentBeanBuilder().build(agent, new SocietyBean(agent.getSociety()));
+        if (agent != null) {
+            return getAgentBeanBuilder().build(agent, new SocietyBean(agent.getSociety()));
+        } else {
+            return null;
+        }
     }
 
     /**
