@@ -62,10 +62,14 @@ public class CustomerServiceImpl extends AbstractService implements CustomerServ
      */
     public CustomerBean findById(final Long id) {
         Customer customer = customerDao.findById(id);
-        SocietyBeanBuilder builder = getSocietyBeanBuilder();
-        builder.setModel(customer.getSociety());
-        SocietyBean societyBean = builder.build(false);
-        return getCustomerBeanBuilder().build(customer, societyBean);
+        if (customer != null) {
+            SocietyBeanBuilder builder = getSocietyBeanBuilder();
+            builder.setModel(customer.getSociety());
+            SocietyBean societyBean = builder.build(false);
+            return getCustomerBeanBuilder().build(customer, societyBean);
+        } else {
+            return null;
+        }
     }
 
     /**
