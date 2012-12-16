@@ -47,7 +47,7 @@ public class SocietyBean extends AbstractNamedIdentityBean<Society, SocietyBeanV
     }
 
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param model the {@link Society}
      */

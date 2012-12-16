@@ -62,7 +62,7 @@ public class ProductBean extends AbstractNamedIdentityBean<Product, ProductBeanV
     }
 
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param model the {@link Product}
      * @param society the current {@link SocietyBean}
