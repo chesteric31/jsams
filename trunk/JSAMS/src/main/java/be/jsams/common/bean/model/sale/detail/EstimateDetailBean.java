@@ -1,5 +1,6 @@
 package be.jsams.common.bean.model.sale.detail;
 
+import be.jsams.common.bean.builder.ProductBeanBuilder;
 import be.jsams.common.bean.model.AbstractIdentityBean;
 import be.jsams.common.bean.model.sale.EstimateBean;
 import be.jsams.common.bean.model.sale.EstimateMediator;
@@ -39,9 +40,10 @@ public class EstimateDetailBean extends AbstractDetailBean<EstimateDetail, Estim
      * 
      * @param model the {@link EstimateDetail}
      * @param estimate the {@link EstimateBean}
+     * @param productBeanBuilder the {@link ProductBeanBuilder}
      */
-    public EstimateDetailBean(EstimateDetail model, EstimateBean estimate) {
-        super(model, estimate);
+    public EstimateDetailBean(EstimateDetail model, EstimateBean estimate, ProductBeanBuilder productBeanBuilder) {
+        super(model, estimate, productBeanBuilder);
         this.estimate = estimate;
         this.transferred = model.isTransferred();
         setView(buildView());

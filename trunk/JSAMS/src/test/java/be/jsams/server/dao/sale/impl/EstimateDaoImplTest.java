@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import be.jsams.common.bean.builder.ProductBeanBuilder;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.AgentBean;
 import be.jsams.common.bean.model.management.CustomerBean;
@@ -73,6 +74,9 @@ public class EstimateDaoImplTest extends BaseJUnitTestClass {
     private CustomerBean customerBean;
     private AgentBean agentBean;
 
+    @Autowired
+    private ProductBeanBuilder productBeanBuilder;
+
     /**
      * Setup method.
      */
@@ -124,7 +128,8 @@ public class EstimateDaoImplTest extends BaseJUnitTestClass {
      */
     @Test
     public void testFindByCriteria() {
-        EstimateBean criteria = new EstimateBean(persistedEstimate, societyBean, customerBean, agentBean);
+        EstimateBean criteria = new EstimateBean(persistedEstimate, societyBean, customerBean, agentBean,
+                productBeanBuilder);
         List<Estimate> founds = dao.findByCriteria(criteria.getSociety().getId(), criteria);
         assertTrue(founds.contains(persistedEstimate));
     }

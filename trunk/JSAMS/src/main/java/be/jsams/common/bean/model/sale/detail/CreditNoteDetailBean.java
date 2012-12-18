@@ -1,5 +1,6 @@
 package be.jsams.common.bean.model.sale.detail;
 
+import be.jsams.common.bean.builder.ProductBeanBuilder;
 import be.jsams.common.bean.model.AbstractIdentityBean;
 import be.jsams.common.bean.model.sale.CreditNoteBean;
 import be.jsams.common.bean.model.sale.CreditNoteMediator;
@@ -37,9 +38,11 @@ public class CreditNoteDetailBean extends
      * 
      * @param model the {@link CreditNoteDetail}
      * @param creditNote the {@link CreditNoteBean}
+     * @param productBeanBuilder the {@link ProductBeanBuilder}
      */
-    public CreditNoteDetailBean(CreditNoteDetail model, CreditNoteBean creditNote) {
-        super(model, creditNote);
+    public CreditNoteDetailBean(CreditNoteDetail model, CreditNoteBean creditNote,
+            ProductBeanBuilder productBeanBuilder) {
+        super(model, creditNote, productBeanBuilder);
         this.creditNote = creditNote;
         setView(buildView());
     }

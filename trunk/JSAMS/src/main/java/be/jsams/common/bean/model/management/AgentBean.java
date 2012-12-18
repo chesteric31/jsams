@@ -36,7 +36,7 @@ public class AgentBean extends AbstractNamedIdentityBean<Agent, AgentBeanView> {
     public static final String FUNCTION_PROPERTY = "function";
 
     /**
-     * Default constructor
+     * Default constructor.
      * 
      * @param society the {@link SocietyBean} to use
      */

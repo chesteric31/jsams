@@ -3,6 +3,7 @@ package be.jsams.common.bean.model.sale;
 import java.util.ArrayList;
 import java.util.List;
 
+import be.jsams.common.bean.builder.ProductBeanBuilder;
 import be.jsams.common.bean.model.AbstractIdentityBean;
 import be.jsams.common.bean.model.AddressBean;
 import be.jsams.common.bean.model.SocietyBean;
@@ -70,15 +71,17 @@ public class CommandBean extends AbstractDocumentBean<Command, CommandBeanView> 
      * @param society the {@link SocietyBean}
      * @param customer the {@link CustomerBean}
      * @param agent the {@link AgentBean}
+     * @param productBeanBuilder the {@link ProductBeanBuilder}
      */
-    public CommandBean(Command model, SocietyBean society, CustomerBean customer, AgentBean agent) {
-        super(model, society, customer);
+    public CommandBean(Command model, SocietyBean society, CustomerBean customer, AgentBean agent,
+            ProductBeanBuilder productBeanBuilder) {
+        super(model, society, customer, productBeanBuilder);
         this.agent = agent;
         this.billingAddress = new AddressBean(model.getBillingAddress());
         this.deliveryAddress = new AddressBean(model.getDeliveryAddress());
         List<CommandDetailBean> beans = new ArrayList<CommandDetailBean>();
         for (CommandDetail detail : model.getDetails()) {
-            beans.add(new CommandDetailBean(detail, this));
+            beans.add(new CommandDetailBean(detail, this, getProductBeanBuilder()));
         }
         this.details = beans;
         this.discountRate = model.getDiscountRate();

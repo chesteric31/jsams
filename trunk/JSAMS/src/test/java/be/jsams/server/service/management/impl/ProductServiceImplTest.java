@@ -76,7 +76,7 @@ public class ProductServiceImplTest extends BaseJUnitTestClass {
      * #delete(be.jsams.common.bean.model.management.ProductBean)}.
      */
     @Test
-    public void testDeleteProductCategoryBean() {
+    public void testDeleteProductBean() {
         ProductBean created = service.create(product);
         service.delete(created);
         ProductBean found = service.findById(created.getId());

@@ -159,7 +159,7 @@ public class CreditNoteBeanView extends AbstractDocumentBeanView<CreditNoteBean>
                 }
             }
         };
-        ProductBeanBuilder builder = new ProductBeanBuilder();
+        ProductBeanBuilder builder = ApplicationContext.getProductBeanBuilder();
         builder.setSociety(Desktop.getInstance().getCurrentSociety());
         SearchProductPanel searchPanel = new SearchProductPanel(builder.build(true, true), customListener,
                 ApplicationContext.getProductService(), new SearchProductValidator(), new ProductTableModel(),

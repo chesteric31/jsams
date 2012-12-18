@@ -122,7 +122,7 @@ public class CustomerServiceImplTest extends BaseJUnitTestClass {
      * #delete(be.jsams.common.bean.model.management.CustomerBean)}.
      */
     @Test
-    public void testDeleteProductCategoryBean() {
+    public void testDeleteCustomerBean() {
         CustomerBean created = service.create(customer);
         service.delete(created);
         CustomerBean found = service.findById(created.getId());
@@ -143,7 +143,7 @@ public class CustomerServiceImplTest extends BaseJUnitTestClass {
     }
 
     /**
-     * Test method for {@link be.jsams.server.service.management.impl.CustomerServiceImpl#findAll(CustomerBean))}.
+     * Test method for {@link be.jsams.server.service.management.impl.CustomerServiceImpl#findAll(SocietyBean))}.
      */
     @Test
     public void testFindAll() {

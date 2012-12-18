@@ -1,5 +1,6 @@
 package be.jsams.common.bean.model.sale.detail;
 
+import be.jsams.common.bean.builder.ProductBeanBuilder;
 import be.jsams.common.bean.model.AbstractIdentityBean;
 import be.jsams.common.bean.model.sale.BillBean;
 import be.jsams.common.bean.model.sale.BillMediator;
@@ -40,9 +41,10 @@ public class BillDetailBean extends AbstractDetailBean<BillDetail, BillDetailBea
      * 
      * @param model the {@link BillDetail}
      * @param bill the {@link BillBean}
+     * @param productBeanBuilder the {@link ProductBeanBuilder}
      */
-    public BillDetailBean(BillDetail model, BillBean bill) {
-        super(model, bill);
+    public BillDetailBean(BillDetail model, BillBean bill, ProductBeanBuilder productBeanBuilder) {
+        super(model, bill, productBeanBuilder);
         this.bill = bill;
         this.transferred = model.isTransferred();
         setView(buildView());
