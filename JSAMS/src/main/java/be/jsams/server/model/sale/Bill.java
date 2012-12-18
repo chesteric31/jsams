@@ -54,7 +54,7 @@ public class Bill extends AbstractDocument {
     }
 
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param bean the {@link BillBean}
      */

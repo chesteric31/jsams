@@ -76,7 +76,7 @@ public class AgentServiceImplTest extends BaseJUnitTestClass {
      * #delete(be.jsams.common.bean.model.management.AgentBean)}.
      */
     @Test
-    public void testDeleteProductCategoryBean() {
+    public void testDeleteAgentBean() {
         AgentBean created = service.create(agent);
         service.delete(created);
         AgentBean found = service.findById(created.getId());
@@ -97,7 +97,7 @@ public class AgentServiceImplTest extends BaseJUnitTestClass {
     }
 
     /**
-     * Test method for {@link be.jsams.server.service.management.impl.AgentServiceImpl#findAll(AgentBean))}.
+     * Test method for {@link be.jsams.server.service.management.impl.AgentServiceImpl#findAll(SocietyBean))}.
      */
     @Test
     public void testFindAll() {

@@ -30,7 +30,8 @@ public class CommandServiceImpl extends AbstractService implements CommandServic
     public CommandBean create(final CommandBean bean) {
         Command command = new Command(bean);
         Command persistedCommand = commandDao.add(command);
-        return new CommandBean(persistedCommand, bean.getSociety(), bean.getCustomer(), bean.getAgent());
+        return new CommandBean(persistedCommand, bean.getSociety(), bean.getCustomer(), bean.getAgent(),
+                getProductBeanBuilder());
     }
 
     /**
@@ -58,7 +59,7 @@ public class CommandServiceImpl extends AbstractService implements CommandServic
         for (Command command : commands) {
             CustomerBean customer = getCustomerBeanBuilder().build(command.getCustomer(), currentSociety);
             AgentBean agent = agentBeanBuilder.build(command.getAgent(), currentSociety);
-            beans.add(new CommandBean(command, currentSociety, customer, agent));
+            beans.add(new CommandBean(command, currentSociety, customer, agent, getProductBeanBuilder()));
         }
         return beans;
     }
@@ -71,7 +72,7 @@ public class CommandServiceImpl extends AbstractService implements CommandServic
         SocietyBean society = new SocietyBean(command.getCustomer().getSociety());
         CustomerBean customer = getCustomerBeanBuilder().build(command.getCustomer(), society);
         AgentBean agent = agentBeanBuilder.build(command.getAgent(), society);
-        return new CommandBean(command, society, customer, agent);
+        return new CommandBean(command, society, customer, agent, getProductBeanBuilder());
     }
 
     /**
@@ -93,7 +94,7 @@ public class CommandServiceImpl extends AbstractService implements CommandServic
         for (Command command : commands) {
             CustomerBean customer = getCustomerBeanBuilder().build(command.getCustomer(), society);
             AgentBean agent = agentBeanBuilder.build(command.getAgent(), society);
-            beans.add(new CommandBean(command, society, customer, agent));
+            beans.add(new CommandBean(command, society, customer, agent, getProductBeanBuilder()));
         }
         return beans;
     }

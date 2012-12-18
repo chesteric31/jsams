@@ -13,7 +13,7 @@ import be.jsams.server.service.sale.CreditNoteService;
 
 /**
  * Credit note service implementation.
- *
+ * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
@@ -28,7 +28,7 @@ public class CreditNoteServiceImpl extends AbstractService implements CreditNote
     public CreditNoteBean create(CreditNoteBean bean) {
         CreditNote creditNote = new CreditNote(bean);
         CreditNote persistedCreditNote = creditNoteDao.add(creditNote);
-        return new CreditNoteBean(persistedCreditNote, bean.getSociety(), bean.getCustomer());
+        return new CreditNoteBean(persistedCreditNote, bean.getSociety(), bean.getCustomer(), getProductBeanBuilder());
     }
 
     /**
@@ -66,7 +66,7 @@ public class CreditNoteServiceImpl extends AbstractService implements CreditNote
         CreditNote creditNote = creditNoteDao.findById(id);
         SocietyBean society = new SocietyBean(creditNote.getCustomer().getSociety());
         CustomerBean customer = getCustomerBeanBuilder().build(creditNote.getCustomer(), society);
-        return new CreditNoteBean(creditNote, society, customer);
+        return new CreditNoteBean(creditNote, society, customer, getProductBeanBuilder());
     }
 
     /**
@@ -78,7 +78,7 @@ public class CreditNoteServiceImpl extends AbstractService implements CreditNote
         List<CreditNoteBean> beans = new ArrayList<CreditNoteBean>();
         for (CreditNote creditNote : creditNotes) {
             CustomerBean customer = getCustomerBeanBuilder().build(creditNote.getCustomer(), currentSociety);
-            beans.add(new CreditNoteBean(creditNote, currentSociety, customer));
+            beans.add(new CreditNoteBean(creditNote, currentSociety, customer, getProductBeanBuilder()));
         }
         return beans;
     }
@@ -93,7 +93,7 @@ public class CreditNoteServiceImpl extends AbstractService implements CreditNote
         List<CreditNoteBean> beans = new ArrayList<CreditNoteBean>();
         for (CreditNote creditNote : creditNotes) {
             CustomerBean customer = getCustomerBeanBuilder().build(creditNote.getCustomer(), society);
-            beans.add(new CreditNoteBean(creditNote, society, customer));
+            beans.add(new CreditNoteBean(creditNote, society, customer, getProductBeanBuilder()));
         }
         return beans;
     }

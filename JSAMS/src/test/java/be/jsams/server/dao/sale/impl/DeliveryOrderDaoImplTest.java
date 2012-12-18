@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import be.jsams.common.bean.builder.ProductBeanBuilder;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.sale.DeliveryOrderBean;
@@ -71,6 +72,9 @@ public class DeliveryOrderDaoImplTest extends BaseJUnitTestClass {
     private SocietyBean societyBean;
     private CustomerBean customerBean;
 
+    @Autowired
+    private ProductBeanBuilder productBeanBuilder;
+
     /**
      * Setup method.
      */
@@ -116,7 +120,8 @@ public class DeliveryOrderDaoImplTest extends BaseJUnitTestClass {
      */
     @Test
     public void testFindByCriteria() {
-        DeliveryOrderBean criteria = new DeliveryOrderBean(persistedDeliveryOrder, societyBean, customerBean);
+        DeliveryOrderBean criteria = new DeliveryOrderBean(persistedDeliveryOrder, societyBean, customerBean,
+                productBeanBuilder);
         List<DeliveryOrder> founds = dao.findByCriteria(criteria.getSociety().getId(), criteria);
         assertTrue(founds.contains(persistedDeliveryOrder));
     }

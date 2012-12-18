@@ -7,6 +7,7 @@ import javax.swing.ListSelectionModel;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import be.jsams.client.context.ApplicationContext;
 import be.jsams.client.desktop.Desktop;
 import be.jsams.client.i18n.I18nResource;
 import be.jsams.client.model.dialog.management.EditProductDialog;
@@ -96,7 +97,7 @@ public class SearchProductPanel extends
      */
     @Override
     protected void performButtonAdd() {
-        ProductBeanBuilder builder = new ProductBeanBuilder();
+        ProductBeanBuilder builder = ApplicationContext.getProductBeanBuilder();
         builder.setSociety(Desktop.getInstance().getCurrentSociety());
         new EditProductDialog(I18nResource.TITLE_EDIT_PRODUCT, builder.build(true, false));
         updateUI();

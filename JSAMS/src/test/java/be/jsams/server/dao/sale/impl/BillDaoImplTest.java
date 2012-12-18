@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import be.jsams.common.bean.builder.ProductBeanBuilder;
 import be.jsams.common.bean.model.PaymentModeBean;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.CustomerBean;
@@ -73,6 +74,9 @@ public class BillDaoImplTest extends BaseJUnitTestClass {
     private CustomerBean customerBean;
     private PaymentModeBean paymentModeBean;
     
+    @Autowired
+    private ProductBeanBuilder productBeanBuilder;
+    
     /**
      * Setup method.
      */
@@ -120,7 +124,7 @@ public class BillDaoImplTest extends BaseJUnitTestClass {
      */
     @Test
     public void testFindByCriteria() {
-        BillBean criteria = new BillBean(persistedBill, societyBean, customerBean, paymentModeBean);
+        BillBean criteria = new BillBean(persistedBill, societyBean, customerBean, paymentModeBean, productBeanBuilder);
         List<Bill> founds = dao.findByCriteria(criteria.getSociety().getId(), criteria);
         assertTrue(founds.contains(persistedBill));
     }

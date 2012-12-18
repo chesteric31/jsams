@@ -3,6 +3,7 @@ package be.jsams.common.bean.model.sale;
 import java.util.ArrayList;
 import java.util.List;
 
+import be.jsams.common.bean.builder.ProductBeanBuilder;
 import be.jsams.common.bean.model.AbstractIdentityBean;
 import be.jsams.common.bean.model.AddressBean;
 import be.jsams.common.bean.model.SocietyBean;
@@ -57,13 +58,15 @@ public class CreditNoteBean extends AbstractDocumentBean<CreditNote, CreditNoteB
      * @param model the {@link CreditNote}
      * @param society the {@link SocietyBean}
      * @param customer the {@link CustomerBean}
+     * @param productBeanBuilder the {@link ProductBeanBuilder}
      */
-    public CreditNoteBean(CreditNote model, SocietyBean society, CustomerBean customer) {
-        super(model, society, customer);
+    public CreditNoteBean(CreditNote model, SocietyBean society, CustomerBean customer,
+            ProductBeanBuilder productBeanBuilder) {
+        super(model, society, customer, productBeanBuilder);
         this.billingAddress = new AddressBean(model.getBillingAddress());
         List<CreditNoteDetailBean> beans = new ArrayList<CreditNoteDetailBean>();
         for (CreditNoteDetail detail : model.getDetails()) {
-            beans.add(new CreditNoteDetailBean(detail, this));
+            beans.add(new CreditNoteDetailBean(detail, this, getProductBeanBuilder()));
         }
         this.details = beans;
         setView(buildView());

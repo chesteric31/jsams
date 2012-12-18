@@ -1,5 +1,6 @@
 package be.jsams.common.bean.model.sale.detail;
 
+import be.jsams.common.bean.builder.ProductBeanBuilder;
 import be.jsams.common.bean.model.AbstractIdentityBean;
 import be.jsams.common.bean.model.sale.CommandBean;
 import be.jsams.common.bean.model.sale.CommandMediator;
@@ -40,9 +41,10 @@ public class CommandDetailBean extends AbstractDetailBean<CommandDetail, Command
      * 
      * @param model the {@link CommandDetail}
      * @param command the {@link CommandBean}
+     * @param productBeanBuilder the {@link ProductBeanBuilder}
      */
-    public CommandDetailBean(CommandDetail model, CommandBean command) {
-        super(model, command);
+    public CommandDetailBean(CommandDetail model, CommandBean command, ProductBeanBuilder productBeanBuilder) {
+        super(model, command, productBeanBuilder);
         this.command = command;
         this.transferred = model.isTransferred();
         setView(buildView());

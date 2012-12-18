@@ -8,7 +8,7 @@ import be.jsams.server.model.management.Product;
 import be.jsams.server.model.management.ProductCategory;
 
 /**
- * Builder that makes a {@link ProductBean} from DAO list model and entity
+ * Builder that builds a {@link ProductBean} from DAO list model and entity
  * model.
  * 
  * @author chesteric31

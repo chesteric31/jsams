@@ -46,7 +46,7 @@ public class Estimate extends AbstractDocument {
     }
 
     /**
-     * Constructor
+     * Constructor.
      * 
      * @param bean the {@link EstimateBean}
      */

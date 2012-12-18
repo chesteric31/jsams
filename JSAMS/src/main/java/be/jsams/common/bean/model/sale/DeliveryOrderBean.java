@@ -3,6 +3,7 @@ package be.jsams.common.bean.model.sale;
 import java.util.ArrayList;
 import java.util.List;
 
+import be.jsams.common.bean.builder.ProductBeanBuilder;
 import be.jsams.common.bean.model.AbstractIdentityBean;
 import be.jsams.common.bean.model.AddressBean;
 import be.jsams.common.bean.model.SocietyBean;
@@ -63,13 +64,15 @@ public class DeliveryOrderBean extends AbstractDocumentBean<DeliveryOrder, Deliv
      * @param model the {@link DeliveryOrder}
      * @param society the {@link SocietyBean}
      * @param customer the {@link CustomerBean}
+     * @param productBeanBuilder the {@link ProductBeanBuilder}
      */
-    public DeliveryOrderBean(DeliveryOrder model, SocietyBean society, CustomerBean customer) {
-        super(model, society, customer);
+    public DeliveryOrderBean(DeliveryOrder model, SocietyBean society, CustomerBean customer,
+            ProductBeanBuilder productBeanBuilder) {
+        super(model, society, customer, productBeanBuilder);
         this.deliveryAddress = new AddressBean(model.getDeliveryAddress());
         List<DeliveryOrderDetailBean> beans = new ArrayList<DeliveryOrderDetailBean>();
         for (DeliveryOrderDetail detail : model.getDetails()) {
-            beans.add(new DeliveryOrderDetailBean(detail, this));
+            beans.add(new DeliveryOrderDetailBean(detail, this, getProductBeanBuilder()));
         }
         this.details = beans;
         this.discountRate = model.getDiscountRate();
@@ -282,9 +285,9 @@ public class DeliveryOrderBean extends AbstractDocumentBean<DeliveryOrder, Deliv
      */
     @Override
     public boolean equals(Object obj) {
-//        if (this == obj) {
-//            return true;
-//        }
+        // if (this == obj) {
+        // return true;
+        // }
         if (!super.equals(obj)) {
             return false;
         }

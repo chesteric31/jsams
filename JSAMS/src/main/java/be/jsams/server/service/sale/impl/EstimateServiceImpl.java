@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import be.jsams.common.bean.builder.management.AgentBeanBuilder;
+import be.jsams.common.bean.model.LegalFormBean;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.AgentBean;
 import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.sale.EstimateBean;
 import be.jsams.server.dao.sale.EstimateDao;
+import be.jsams.server.model.Society;
 import be.jsams.server.model.sale.Estimate;
 import be.jsams.server.service.AbstractService;
 import be.jsams.server.service.sale.EstimateService;
@@ -31,7 +33,8 @@ public class EstimateServiceImpl extends AbstractService implements EstimateServ
         Estimate estimate = new Estimate(bean);
         Estimate persistedEstimate = estimateDao.add(estimate);
         AgentBean agent = agentBeanBuilder.build(persistedEstimate.getAgent(), bean.getSociety());
-        return new EstimateBean(persistedEstimate, bean.getSociety(), bean.getCustomer(), agent);
+        return new EstimateBean(persistedEstimate, bean.getSociety(), bean.getCustomer(), agent,
+                getProductBeanBuilder());
     }
 
     /**
@@ -68,7 +71,7 @@ public class EstimateServiceImpl extends AbstractService implements EstimateServ
         for (Estimate estimate : estimates) {
             CustomerBean customer = getCustomerBeanBuilder().build(estimate.getCustomer(), currentSociety);
             AgentBean agent = agentBeanBuilder.build(estimate.getAgent(), currentSociety);
-            beans.add(new EstimateBean(estimate, currentSociety, customer, agent));
+            beans.add(new EstimateBean(estimate, currentSociety, customer, agent, getProductBeanBuilder()));
         }
         return beans;
     }
@@ -78,10 +81,16 @@ public class EstimateServiceImpl extends AbstractService implements EstimateServ
      */
     public EstimateBean findById(final Long id) {
         Estimate estimate = estimateDao.findById(id);
-        SocietyBean society = new SocietyBean(estimate.getCustomer().getSociety());
-        CustomerBean customer = getCustomerBeanBuilder().build(estimate.getCustomer(), society);
-        AgentBean agent = agentBeanBuilder.build(estimate.getAgent(), society);
-        return new EstimateBean(estimate, society, customer, agent);
+        if (estimate != null) {
+            Society model = estimate.getCustomer().getSociety();
+            SocietyBean society = new SocietyBean(model);
+            society.setLegalForm(new LegalFormBean(model.getLegalForm()));
+            CustomerBean customer = getCustomerBeanBuilder().build(estimate.getCustomer(), society);
+            AgentBean agent = agentBeanBuilder.build(estimate.getAgent(), society);
+            return new EstimateBean(estimate, society, customer, agent, getProductBeanBuilder());
+        } else {
+            return null;
+        }
     }
 
     /**
@@ -104,7 +113,7 @@ public class EstimateServiceImpl extends AbstractService implements EstimateServ
         for (Estimate estimate : estimates) {
             CustomerBean customer = getCustomerBeanBuilder().build(estimate.getCustomer(), society);
             AgentBean agent = agentBeanBuilder.build(estimate.getAgent(), society);
-            beans.add(new EstimateBean(estimate, society, customer, agent));
+            beans.add(new EstimateBean(estimate, society, customer, agent, getProductBeanBuilder()));
         }
         return beans;
     }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import be.jsams.common.bean.builder.ProductBeanBuilder;
 import be.jsams.common.bean.model.AbstractIdentityBean;
 import be.jsams.common.bean.model.AddressBean;
 import be.jsams.common.bean.model.PaymentModeBean;
@@ -81,13 +82,15 @@ public class BillBean extends AbstractDocumentBean<Bill, BillBeanView> {
      * @param society the {@link SocietyBean}
      * @param customer the {@link CustomerBean}
      * @param mode the {@link PaymentModeBean}
+     * @param productBeanBuilder the {@link ProductBeanBuilder}
      */
-    public BillBean(Bill model, SocietyBean society, CustomerBean customer, PaymentModeBean mode) {
-        super(model, society, customer);
+    public BillBean(Bill model, SocietyBean society, CustomerBean customer, PaymentModeBean mode,
+            ProductBeanBuilder productBeanBuilder) {
+        super(model, society, customer, productBeanBuilder);
         this.billingAddress = new AddressBean(model.getBillingAddress());
         List<BillDetailBean> beans = new ArrayList<BillDetailBean>();
         for (BillDetail detail : model.getDetails()) {
-            beans.add(new BillDetailBean(detail, this));
+            beans.add(new BillDetailBean(detail, this, productBeanBuilder));
         }
         this.details = beans;
         this.discountRate = model.getDiscountRate();

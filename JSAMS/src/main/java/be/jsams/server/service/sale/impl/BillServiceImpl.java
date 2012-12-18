@@ -34,7 +34,10 @@ public class BillServiceImpl extends AbstractService implements BillService {
     public BillBean create(BillBean bean) {
         Bill bill = new Bill(bean);
         Bill persistedBill = billDao.add(bill);
-        return new BillBean(persistedBill, bean.getSociety(), bean.getCustomer(), bean.getPaymentMode());
+        BillBean billBean = new BillBean(persistedBill, bean.getSociety(), bean.getCustomer(), bean.getPaymentMode(),
+                getProductBeanBuilder());
+        billBean.setProductBeanBuilder(getProductBeanBuilder());
+        return billBean;
     }
 
     /**
@@ -74,7 +77,7 @@ public class BillServiceImpl extends AbstractService implements BillService {
         CustomerBean customer = getCustomerBeanBuilder().build(bill.getCustomer(), society);
         paymentModeBeanBuilder.setModel(bill.getPaymentMode());
         PaymentModeBean mode = paymentModeBeanBuilder.build();
-        return new BillBean(bill, society, customer, mode);
+        return new BillBean(bill, society, customer, mode, getProductBeanBuilder());
     }
 
     /**
@@ -88,7 +91,7 @@ public class BillServiceImpl extends AbstractService implements BillService {
             CustomerBean customer = getCustomerBeanBuilder().build(bill.getCustomer(), currentSociety);
             paymentModeBeanBuilder.setModel(bill.getPaymentMode());
             PaymentModeBean mode = paymentModeBeanBuilder.build();
-            beans.add(new BillBean(bill, currentSociety, customer, mode));
+            beans.add(new BillBean(bill, currentSociety, customer, mode, getProductBeanBuilder()));
         }
         return beans;
     }
@@ -105,7 +108,7 @@ public class BillServiceImpl extends AbstractService implements BillService {
             CustomerBean customer = getCustomerBeanBuilder().build(bill.getCustomer(), society);
             paymentModeBeanBuilder.setModel(bill.getPaymentMode());
             PaymentModeBean mode = paymentModeBeanBuilder.build();
-            beans.add(new BillBean(bill, society, customer, mode));
+            beans.add(new BillBean(bill, society, customer, mode, getProductBeanBuilder()));
         }
         return beans;
     }

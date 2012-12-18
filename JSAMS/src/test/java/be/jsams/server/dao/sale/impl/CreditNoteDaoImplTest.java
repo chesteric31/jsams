@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import be.jsams.common.bean.builder.ProductBeanBuilder;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.sale.CreditNoteBean;
@@ -70,6 +71,9 @@ public class CreditNoteDaoImplTest extends BaseJUnitTestClass {
     
     private SocietyBean societyBean;
     private CustomerBean customerBean;
+
+    @Autowired
+    private ProductBeanBuilder productBeanBuilder;
     
     /**
      * Setup method.
@@ -116,7 +120,8 @@ public class CreditNoteDaoImplTest extends BaseJUnitTestClass {
      */
     @Test
     public void testFindByCriteria() {
-        CreditNoteBean criteria = new CreditNoteBean(persistedCreditNote, societyBean, customerBean);
+        CreditNoteBean criteria = new CreditNoteBean(persistedCreditNote, societyBean, customerBean,
+                productBeanBuilder);
         List<CreditNote> founds = dao.findByCriteria(criteria.getCustomer().getSociety().getId(), criteria);
         assertTrue(founds.contains(persistedCreditNote));
     }

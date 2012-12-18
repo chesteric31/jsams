@@ -16,13 +16,12 @@ import com.jgoodies.common.collect.ObservableList;
  * @param <M> an extension of {@link AbstractDetail}
  * @param <V> an extension of {@link AbstractDetailBeanView}
  * @param <D> an extension of {@link AbstractDocumentBean}
- *
+ * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */
-public abstract class AbstractDetailBean
-        <M extends AbstractDetail, V extends AbstractDetailBeanView<?>, D extends AbstractDocumentBean<?, ?>>
-        extends AbstractIdentityBean<M, V> {
+public abstract class AbstractDetailBean<M extends AbstractDetail, V extends AbstractDetailBeanView<?>, 
+        D extends AbstractDocumentBean<?, ?>> extends AbstractIdentityBean<M, V> {
 
     /**
      * Serial Version UID
@@ -43,29 +42,32 @@ public abstract class AbstractDetailBean
 
     private ObservableList<AbstractDetailBean<M, V, D>> list = new ArrayListModel<AbstractDetailBean<M, V, D>>();
 
+    private ProductBeanBuilder productBeanBuilder;
+
     /**
-     * Default constructor
+     * Default constructor.
      */
     public AbstractDetailBean() {
         super();
         setListModel(list);
         setSelection(this);
     }
-    
+
     /**
      * Constructor.
      * 
      * @param model the {@link AbstractDetail}
      * @param document the {@link AbstractDocumentBean}
+     * @param productBeanBuilder the {@link ProductBeanBuilder}
      */
-    public AbstractDetailBean(M model, D document) {
+    public AbstractDetailBean(M model, D document, ProductBeanBuilder productBeanBuilder) {
         super(model);
         this.discountRate = model.getDiscountRate();
         this.price = model.getPrice();
-        ProductBeanBuilder builder = new ProductBeanBuilder();
-        builder.setSociety(document.getSociety());
-        builder.setModel(model.getProduct());
-        this.product = builder.build(false, false);
+        this.productBeanBuilder = productBeanBuilder;
+        this.productBeanBuilder.setSociety(document.getSociety());
+        this.productBeanBuilder.setModel(model.getProduct());
+        this.product = this.productBeanBuilder.build(false, false);
         this.quantity = model.getQuantity();
         this.vatApplicable = model.getVatApplicable();
         list.add(this);
@@ -183,5 +185,19 @@ public abstract class AbstractDetailBean
             setVatApplicable(other.getVatApplicable());
         }
     }
-    
+
+    /**
+     * @return the productBeanBuilder
+     */
+    public ProductBeanBuilder getProductBeanBuilder() {
+        return productBeanBuilder;
+    }
+
+    /**
+     * @param productBeanBuilder the productBeanBuilder to set
+     */
+    public void setProductBeanBuilder(ProductBeanBuilder productBeanBuilder) {
+        this.productBeanBuilder = productBeanBuilder;
+    }
+
 }

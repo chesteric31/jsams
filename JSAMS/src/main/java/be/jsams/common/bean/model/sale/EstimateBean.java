@@ -3,6 +3,7 @@ package be.jsams.common.bean.model.sale;
 import java.util.ArrayList;
 import java.util.List;
 
+import be.jsams.common.bean.builder.ProductBeanBuilder;
 import be.jsams.common.bean.model.AbstractIdentityBean;
 import be.jsams.common.bean.model.AddressBean;
 import be.jsams.common.bean.model.SocietyBean;
@@ -41,9 +42,8 @@ public class EstimateBean extends AbstractDocumentBean<Estimate, EstimateBeanVie
     public static final String TOTAL_ET_PROPERTY = "totalEt";
     public static final String TOTAL_ATI_PROPERTY = "totalAti";
     public static final String TOTAL_VAT_PROPERTY = "totalVat";
-    
-    private EstimateMediator mediator;
 
+    private EstimateMediator mediator;
 
     /**
      * Default constructor.
@@ -69,21 +69,23 @@ public class EstimateBean extends AbstractDocumentBean<Estimate, EstimateBeanVie
      * @param society the {@link SocietyBean}
      * @param customer the {@link CustomerBean}
      * @param agent the {@link AgentBean}
+     * @param productBeanBuilder the {@link ProductBeanBuilder}
      */
-    public EstimateBean(Estimate model, SocietyBean society, CustomerBean customer, AgentBean agent) {
-        super(model, society, customer);
+    public EstimateBean(Estimate model, SocietyBean society, CustomerBean customer, AgentBean agent,
+            ProductBeanBuilder productBeanBuilder) {
+        super(model, society, customer, productBeanBuilder);
         this.agent = agent;
         this.billingAddress = new AddressBean(model.getBillingAddress());
         List<EstimateDetailBean> beans = new ArrayList<EstimateDetailBean>();
         for (EstimateDetail detail : model.getDetails()) {
-            beans.add(new EstimateDetailBean(detail, this));
+            beans.add(new EstimateDetailBean(detail, this, getProductBeanBuilder()));
         }
         this.details = beans;
         this.discountRate = model.getDiscountRate();
         this.transferred = model.isTransferred();
         setView(buildView());
     }
-    
+
     /**
      * @return the mediator
      */
@@ -296,9 +298,9 @@ public class EstimateBean extends AbstractDocumentBean<Estimate, EstimateBeanVie
      */
     @Override
     public boolean equals(Object obj) {
-//        if (this == obj) {
-//            return true;
-//        }
+        // if (this == obj) {
+        // return true;
+        // }
         if (!super.equals(obj)) {
             return false;
         }

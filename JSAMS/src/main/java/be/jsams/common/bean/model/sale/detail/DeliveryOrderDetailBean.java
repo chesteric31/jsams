@@ -1,5 +1,6 @@
 package be.jsams.common.bean.model.sale.detail;
 
+import be.jsams.common.bean.builder.ProductBeanBuilder;
 import be.jsams.common.bean.model.AbstractIdentityBean;
 import be.jsams.common.bean.model.sale.DeliveryOrderBean;
 import be.jsams.common.bean.model.sale.DeliveryOrderMediator;
@@ -43,9 +44,11 @@ public class DeliveryOrderDetailBean extends
      * 
      * @param model the {@link DeliveryOrderDetail}
      * @param deliveryOrder the {@link DeliveryOrderBean}
+     * @param productBeanBuilder the {@link ProductBeanBuilder}
      */
-    public DeliveryOrderDetailBean(DeliveryOrderDetail model, DeliveryOrderBean deliveryOrder) {
-        super(model, deliveryOrder);
+    public DeliveryOrderDetailBean(DeliveryOrderDetail model, DeliveryOrderBean deliveryOrder,
+            ProductBeanBuilder productBeanBuilder) {
+        super(model, deliveryOrder, productBeanBuilder);
         this.deliveryOrder = deliveryOrder;
         this.transferred = model.isTransferred();
         setView(buildView());

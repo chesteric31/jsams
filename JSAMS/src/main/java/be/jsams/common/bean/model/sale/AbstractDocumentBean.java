@@ -3,6 +3,7 @@ package be.jsams.common.bean.model.sale;
 import java.util.Date;
 
 import be.jsams.client.swing.component.JsamsTable;
+import be.jsams.common.bean.builder.ProductBeanBuilder;
 import be.jsams.common.bean.model.AbstractIdentityBean;
 import be.jsams.common.bean.model.PeriodBean;
 import be.jsams.common.bean.model.SocietyBean;
@@ -38,6 +39,8 @@ public abstract class AbstractDocumentBean<M extends AbstractDocument, V extends
     public static final String CREATION_DATE_PROPERTY = "creationDate";
     public static final String REMARK_PROPERTY = "remark";
 
+    private ProductBeanBuilder productBeanBuilder;
+
     /**
      * Default constructor.
      * 
@@ -58,13 +61,16 @@ public abstract class AbstractDocumentBean<M extends AbstractDocument, V extends
      * @param model the {@link AbstractDocument}
      * @param society the {@link SocietyBean}
      * @param customer the {@link CustomerBean}
+     * @param productBeanBuilder the {@link ProductBeanBuilder}
      */
-    public AbstractDocumentBean(M model, SocietyBean society, CustomerBean customer) {
+    public AbstractDocumentBean(M model, SocietyBean society, CustomerBean customer,
+            ProductBeanBuilder productBeanBuilder) {
         super(model);
         this.creationDate = model.getCreationDate();
         this.society = society;
         this.customer = customer;
         this.remark = model.getRemark();
+        this.productBeanBuilder = productBeanBuilder;
     }
 
     /**
@@ -273,6 +279,20 @@ public abstract class AbstractDocumentBean<M extends AbstractDocument, V extends
             return false;
         }
         return true;
+    }
+
+    /**
+     * @return the productBeanBuilder
+     */
+    public ProductBeanBuilder getProductBeanBuilder() {
+        return productBeanBuilder;
+    }
+
+    /**
+     * @param productBeanBuilder the productBeanBuilder to set
+     */
+    public void setProductBeanBuilder(ProductBeanBuilder productBeanBuilder) {
+        this.productBeanBuilder = productBeanBuilder;
     }
 
 }

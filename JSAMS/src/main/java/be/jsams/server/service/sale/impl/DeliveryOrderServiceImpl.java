@@ -28,7 +28,8 @@ public class DeliveryOrderServiceImpl extends AbstractService implements Deliver
     public DeliveryOrderBean create(DeliveryOrderBean bean) {
         DeliveryOrder deliveryOrder = new DeliveryOrder(bean);
         DeliveryOrder addingDeliveryOrder = deliveryOrderDao.add(deliveryOrder);
-        return new DeliveryOrderBean(addingDeliveryOrder, bean.getSociety(), bean.getCustomer());
+        return new DeliveryOrderBean(addingDeliveryOrder, bean.getSociety(), bean.getCustomer(),
+                getProductBeanBuilder());
     }
 
     /**
@@ -66,7 +67,7 @@ public class DeliveryOrderServiceImpl extends AbstractService implements Deliver
         DeliveryOrder deliveryOrder = deliveryOrderDao.findById(id);
         SocietyBean society = new SocietyBean(deliveryOrder.getCustomer().getSociety());
         CustomerBean customer = getCustomerBeanBuilder().build(deliveryOrder.getCustomer(), society);
-        return new DeliveryOrderBean(deliveryOrder, society, customer);
+        return new DeliveryOrderBean(deliveryOrder, society, customer, getProductBeanBuilder());
     }
 
     /**
@@ -78,7 +79,7 @@ public class DeliveryOrderServiceImpl extends AbstractService implements Deliver
         List<DeliveryOrderBean> beans = new ArrayList<DeliveryOrderBean>();
         for (DeliveryOrder deliveryOrder : deliveryOrders) {
             CustomerBean customer = getCustomerBeanBuilder().build(deliveryOrder.getCustomer(), currentSociety);
-            beans.add(new DeliveryOrderBean(deliveryOrder, currentSociety, customer));
+            beans.add(new DeliveryOrderBean(deliveryOrder, currentSociety, customer, getProductBeanBuilder()));
         }
         return beans;
     }
@@ -93,7 +94,7 @@ public class DeliveryOrderServiceImpl extends AbstractService implements Deliver
         List<DeliveryOrderBean> beans = new ArrayList<DeliveryOrderBean>();
         for (DeliveryOrder deliveryOrder : deliveryOrders) {
             CustomerBean customer = getCustomerBeanBuilder().build(deliveryOrder.getCustomer(), society);
-            beans.add(new DeliveryOrderBean(deliveryOrder, society, customer));
+            beans.add(new DeliveryOrderBean(deliveryOrder, society, customer, getProductBeanBuilder()));
         }
         return beans;
     }
