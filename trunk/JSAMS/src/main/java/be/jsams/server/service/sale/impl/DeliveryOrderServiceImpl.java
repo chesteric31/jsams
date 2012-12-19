@@ -3,10 +3,12 @@ package be.jsams.server.service.sale.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import be.jsams.common.bean.model.LegalFormBean;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.sale.DeliveryOrderBean;
 import be.jsams.server.dao.sale.DeliveryOrderDao;
+import be.jsams.server.model.Society;
 import be.jsams.server.model.sale.DeliveryOrder;
 import be.jsams.server.service.AbstractService;
 import be.jsams.server.service.sale.DeliveryOrderService;
@@ -65,9 +67,15 @@ public class DeliveryOrderServiceImpl extends AbstractService implements Deliver
     @Override
     public DeliveryOrderBean findById(Long id) {
         DeliveryOrder deliveryOrder = deliveryOrderDao.findById(id);
-        SocietyBean society = new SocietyBean(deliveryOrder.getCustomer().getSociety());
-        CustomerBean customer = getCustomerBeanBuilder().build(deliveryOrder.getCustomer(), society);
-        return new DeliveryOrderBean(deliveryOrder, society, customer, getProductBeanBuilder());
+        if (deliveryOrder != null) {
+            Society model = deliveryOrder.getCustomer().getSociety();
+            SocietyBean society = new SocietyBean(model);
+            society.setLegalForm(new LegalFormBean(model.getLegalForm()));
+            CustomerBean customer = getCustomerBeanBuilder().build(deliveryOrder.getCustomer(), society);
+            return new DeliveryOrderBean(deliveryOrder, society, customer, getProductBeanBuilder());
+        } else {
+            return null;
+        }
     }
 
     /**
