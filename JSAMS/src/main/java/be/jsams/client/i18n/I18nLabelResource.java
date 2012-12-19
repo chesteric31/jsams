@@ -221,4 +221,7 @@ public final class I18nLabelResource {
     public static final I18nString LABEL_TOTAL_VAT = new I18nString("label.total_vat");
     public static final I18nString LABEL_TOTAL_ATI = new I18nString("label.total_ati");
 
+    public static final I18nString LABEL_BILL_OPENED = new I18nString("label.bill.opened");
+    public static final I18nString LABEL_BILL_CLOSED = new I18nString("label.bill.closed");
+
 }

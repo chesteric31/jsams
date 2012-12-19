@@ -150,6 +150,27 @@ public class BillServiceImpl extends AbstractService implements BillService {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<BillBean> findOpenedBills(SocietyBean society) {
+        BillBean criteria = new BillBean(society, null, null);
+        criteria.setClosed(false);
+        return findByCriteria(criteria);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<BillBean> findClosedBills(SocietyBean society) {
+        BillBean criteria = new BillBean(society, null, null);
+        criteria.setClosed(true);
+        return findByCriteria(criteria);
+    }
+
+
+    /**
      * @return the billDao
      */
     public BillDao getBillDao() {

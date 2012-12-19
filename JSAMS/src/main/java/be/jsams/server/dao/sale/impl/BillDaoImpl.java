@@ -80,9 +80,12 @@ public class BillDaoImpl extends DaoImpl<Bill> implements BillDao {
             String formattedEndDate = format.format(endDate);
             queryBuilder.append(" AND b.creationDate <= '" + formattedEndDate + "'");
         }
-        PaymentModeBean paymentMode = (PaymentModeBean) criteria.getPaymentMode().getSelection();
-        if (paymentMode != null) {
-            queryBuilder.append(" AND b.paymentMode.id = " + paymentMode.getId());
+        PaymentModeBean paymentModeBean = criteria.getPaymentMode();
+        if (paymentModeBean != null) {
+            PaymentModeBean paymentMode = (PaymentModeBean) paymentModeBean.getSelection();
+            if (paymentMode != null) {
+                queryBuilder.append(" AND b.paymentMode.id = " + paymentMode.getId());
+            }
         }
         queryBuilder.append(" AND b.closed = " + closed);
         queryBuilder.append(" AND b.paid = " + paid);
