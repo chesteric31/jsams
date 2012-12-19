@@ -49,7 +49,7 @@ public class EditCreditNoteDialog extends
      */
     @Override
     public JPanel initComponents() {
-        CreditNoteBeanView view = getModel().buildView();
+        CreditNoteBeanView view = getModel().getView();
         return view.createEditView();
     }
 

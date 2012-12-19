@@ -50,7 +50,7 @@ public class EditEstimateDialog extends AbstractEditDialog<EstimateBean, EditEst
      */
     @Override
     public JPanel initComponents() {
-        EstimateBeanView view = getModel().buildView();
+        EstimateBeanView view = getModel().getView();
         return view.createEditView();
     }
 

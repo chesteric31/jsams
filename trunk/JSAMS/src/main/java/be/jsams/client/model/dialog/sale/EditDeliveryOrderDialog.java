@@ -48,7 +48,7 @@ public class EditDeliveryOrderDialog extends
      */
     @Override
     public JPanel initComponents() {
-        DeliveryOrderBeanView view = getModel().buildView();
+        DeliveryOrderBeanView view = getModel().getView();
         return view.createEditView();
     }
 
