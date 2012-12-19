@@ -86,6 +86,7 @@ import be.jsams.server.service.management.impl.CustomerServiceImplTest;
 import be.jsams.server.service.management.impl.ProductCategoryServiceImplTest;
 import be.jsams.server.service.management.impl.ProductServiceImplTest;
 import be.jsams.server.service.rss.impl.RSSFeedParserImplTest;
+import be.jsams.server.service.sale.impl.BillServiceImplTest;
 import be.jsams.server.service.sale.impl.CommandServiceImplTest;
 import be.jsams.server.service.sale.impl.DeliveryOrderServiceImplTest;
 import be.jsams.server.service.sale.impl.EstimateServiceImplTest;
@@ -133,7 +134,7 @@ import be.jsams.server.service.xml.impl.XmlEstimateGeneratorImplTest;
         JsamsDateAdapterTest.class, CustomerServiceImplTest.class, ProductCategoryServiceImplTest.class,
         ProductServiceImplTest.class, SocietyServiceImplTest.class, AgentServiceImplTest.class,
         EstimateServiceImplTest.class, CommandServiceImplTest.class, DeliveryOrderServiceImplTest.class,
-        RSSFeedParserImplTest.class, EstimateCommandTransferServiceImplTest.class,
+        BillServiceImplTest.class, RSSFeedParserImplTest.class, EstimateCommandTransferServiceImplTest.class,
         EstimateBillTransferServiceImplTest.class, CommandDeliveryOrderTransferServiceImplTest.class,
         CommandBillTransferServiceImplTest.class, DeliveryOrderBillTransferServiceImplTest.class,
         BillCreditNoteTransferServiceImplTest.class, DownloaderServiceImplTest.class,
