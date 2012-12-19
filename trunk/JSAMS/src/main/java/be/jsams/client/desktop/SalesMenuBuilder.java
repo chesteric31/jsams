@@ -19,6 +19,7 @@ import be.jsams.client.model.table.sale.CommandTableModel;
 import be.jsams.client.model.table.sale.CreditNoteTableModel;
 import be.jsams.client.model.table.sale.DeliveryOrderTableModel;
 import be.jsams.client.model.table.sale.EstimateTableModel;
+import be.jsams.client.swing.action.StatisticsAction;
 import be.jsams.client.swing.component.JsamsMenu;
 import be.jsams.client.swing.component.JsamsMenuItem;
 import be.jsams.client.swing.listener.search.sale.BillTableMouseListener;
@@ -64,6 +65,7 @@ public class SalesMenuBuilder extends AbstractMenuBuilder {
     private JsamsMenuItem deliveryOrderMI;
     private JsamsMenuItem billMI;
     private JsamsMenuItem creditNoteMI;
+    private JsamsMenuItem statisticsMI;
 
     private MainFrame parent;
 
@@ -101,6 +103,10 @@ public class SalesMenuBuilder extends AbstractMenuBuilder {
         creditNoteMI = new JsamsMenuItem(I18nResource.MENU_ITEM_CREDIT_NOTE);
         creditNoteMI.setAction(creditNotesAction(creditNoteMI.getText(), creditNoteMI.getIcon()));
         salesMenu.add(creditNoteMI);
+        salesMenu.add(new JSeparator());
+        statisticsMI = new JsamsMenuItem(I18nResource.MENU_ITEM_STATISTICS, IconResource.STATISTICS);
+        statisticsMI.setAction(new StatisticsAction(statisticsMI.getText(), statisticsMI.getIcon()));
+        salesMenu.add(statisticsMI);
 
         enableMenuItems(false);
 
@@ -306,6 +312,7 @@ public class SalesMenuBuilder extends AbstractMenuBuilder {
         deliveryOrderMI.setEnabled(value);
         billMI.setEnabled(value);
         creditNoteMI.setEnabled(value);
+        statisticsMI.setEnabled(value);
     }
 
 }
