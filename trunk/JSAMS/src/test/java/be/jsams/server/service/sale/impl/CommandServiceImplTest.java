@@ -20,9 +20,9 @@ import be.jsams.common.bean.model.management.AgentBean;
 import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.management.ProductBean;
 import be.jsams.common.bean.model.management.ProductCategoryBean;
-import be.jsams.common.bean.model.sale.EstimateBean;
-import be.jsams.common.bean.model.sale.EstimateMediator;
-import be.jsams.common.bean.model.sale.detail.EstimateDetailBean;
+import be.jsams.common.bean.model.sale.CommandBean;
+import be.jsams.common.bean.model.sale.CommandMediator;
+import be.jsams.common.bean.model.sale.detail.CommandDetailBean;
 import be.jsams.server.BaseJUnitTestClass;
 import be.jsams.server.dao.CivilityDao;
 import be.jsams.server.dao.LegalFormDao;
@@ -40,24 +40,24 @@ import be.jsams.server.model.management.Agent;
 import be.jsams.server.model.management.Customer;
 import be.jsams.server.model.management.Product;
 import be.jsams.server.model.management.ProductCategory;
-import be.jsams.server.service.sale.EstimateService;
+import be.jsams.server.service.sale.CommandService;
 
 /**
- * Test class for {@link EstimateServiceImpl} class.
+ * Test class for {@link CommandServiceImpl} class.
  *
  * @author chesteric31
  * @version $Revision$ $Date::                  $ $Author$
  */
-public class EstimateServiceImplTest extends BaseJUnitTestClass {
+public class CommandServiceImplTest extends BaseJUnitTestClass {
 
     @Autowired
-    @Qualifier(value = "estimateServiceTarget")
-    private EstimateService service;
+    @Qualifier(value = "commandServiceTarget")
+    private CommandService service;
     @Autowired
     private LegalFormDao legalFormDao;
     @Autowired
     private SocietyDao societyDao;
-    private EstimateBean estimate;
+    private CommandBean command;
     @Autowired
     private CivilityDao civilityDao;
     @Autowired
@@ -76,29 +76,29 @@ public class EstimateServiceImplTest extends BaseJUnitTestClass {
      */
     @Before
     public void setUp() throws Exception {
-        estimate = MockBeanGenerator.generateMockEstimate();
+        command = MockBeanGenerator.generateMockCommand();
         Society persistedSociety = persistSociety();
         SocietyBean society = new SocietyBean(persistedSociety);
         society.setLegalForm(new LegalFormBean(persistedSociety.getLegalForm()));
-        estimate.setSociety(society);
-        Agent persistedAgent = persistAgent(estimate.getAgent(), persistedSociety);
+        command.setSociety(society);
+        Agent persistedAgent = persistAgent(command.getAgent(), persistedSociety);
         AgentBean agent = new AgentBean(persistedAgent, society);
         agent.setCivility(new CivilityBean(persistedAgent.getCivility()));
-        estimate.setAgent(agent);
+        command.setAgent(agent);
         Customer persistedCustomer = persistCustomer(persistedSociety);
-        estimate.setCustomer(createCustomerWithAgent(society, agent, persistedCustomer));
-        List<EstimateDetailBean> details = estimate.getDetails();
+        command.setCustomer(createCustomerWithAgent(society, agent, persistedCustomer));
+        List<CommandDetailBean> details = command.getDetails();
         updateDetail(society, details);
     }
 
     /**
-     * Updates the {@link EstimateDetailBean}s with the products.
+     * Updates the {@link CommandDetailBean}s with the products.
      * 
      * @param society the {@link SocietyBean} to use
-     * @param details the list of {@link EstimateDetailBean} to use
+     * @param details the list of {@link CommandDetailBean} to use
      */
-    private void updateDetail(SocietyBean society, List<EstimateDetailBean> details) {
-        for (EstimateDetailBean detail : details) {
+    private void updateDetail(SocietyBean society, List<CommandDetailBean> details) {
+        for (CommandDetailBean detail : details) {
             ProductBean product = detail.getProduct();
             ProductCategoryBean category = product.getCategory();
             category.setSociety(society);
@@ -133,7 +133,7 @@ public class EstimateServiceImplTest extends BaseJUnitTestClass {
      * @return the persisted customer
      */
     private Customer persistCustomer(Society persistedSociety) {
-        CustomerBean customer = estimate.getCustomer();
+        CustomerBean customer = command.getCustomer();
         SocietyBean society = new SocietyBean(persistedSociety);
         society.setLegalForm(new LegalFormBean(persistedSociety.getLegalForm()));
         customer.setSociety(society);
@@ -156,7 +156,7 @@ public class EstimateServiceImplTest extends BaseJUnitTestClass {
      * @return the persisted society
      */
     private Society persistSociety() {
-        SocietyBean society = estimate.getSociety();
+        SocietyBean society = command.getSociety();
         LegalForm legalForm = legalFormDao.add(new LegalForm(society.getLegalForm()));
         society.setLegalForm(new LegalFormBean(legalForm));
         Society persistedSociety = societyDao.add(new Society(society));
@@ -184,91 +184,91 @@ public class EstimateServiceImplTest extends BaseJUnitTestClass {
     }
 
     /**
-     * Test method for {@link be.jsams.server.service.sale.impl.EstimateServiceImpl
-     * #create(be.jsams.common.bean.model.sale.EstimateBean)}.
+     * Test method for {@link be.jsams.server.service.sale.impl.CommandServiceImpl
+     * #create(be.jsams.common.bean.model.management.CommandBean)}.
      */
     @Test
     public void testCreate() {
-        EstimateBean created = service.create(estimate);
-        List<EstimateBean> founds = service.findAll(estimate.getSociety());
+        CommandBean created = service.create(command);
+        List<CommandBean> founds = service.findAll(command.getSociety());
         assertTrue(founds.contains(created));
     }
 
     /**
-     * Test method for {@link be.jsams.server.service.sale.impl.EstimateServiceImpl
-     * #delete(be.jsams.common.bean.model.sale.EstimateBean)}.
+     * Test method for {@link be.jsams.server.service.sale.impl.CommandServiceImpl
+     * #delete(be.jsams.common.bean.model.sale.CommandBean)}.
      */
     @Test
-    public void testDeleteEstimateBean() {
-        EstimateBean created = service.create(estimate);
+    public void testDeleteCommandBean() {
+        CommandBean created = service.create(command);
         service.delete(created);
-        EstimateBean found = service.findById(created.getId());
+        CommandBean found = service.findById(created.getId());
         assertNull(found);
     }
 
     /**
-     * Test method for {@link be.jsams.server.service.sale.impl.EstimateServiceImpl
+     * Test method for {@link be.jsams.server.service.sale.impl.CommandServiceImpl
      * #delete(java.lang.Long)}.
      */
     @Test
     public void testDeleteLong() {
-        EstimateBean created = service.create(estimate);
+        CommandBean created = service.create(command);
         Long id = created.getId();
         service.delete(id);
-        EstimateBean found = service.findById(id);
+        CommandBean found = service.findById(id);
         assertNull(found);
     }
 
     /**
-     * Test method for {@link be.jsams.server.service.sale.impl.EstimateServiceImpl#findAll(SocietyBean))}.
+     * Test method for {@link be.jsams.server.service.sale.impl.CommandServiceImpl#findAll(SocietyBean))}.
      */
     @Test
     public void testFindAll() {
-        EstimateBean created = service.create(estimate);
-        List<EstimateBean> founds = service.findAll(created.getSociety());
+        CommandBean created = service.create(command);
+        List<CommandBean> founds = service.findAll(created.getSociety());
         assertTrue(founds.contains(created));
     }
 
     /**
-     * Test method for {@link be.jsams.server.service.sale.impl.EstimateServiceImpl
+     * Test method for {@link be.jsams.server.service.sale.impl.CommandServiceImpl
      * #findById(java.lang.Long)}.
      */
     @Test
     public void testFindById() {
-        EstimateBean created = service.create(estimate);
-        EstimateBean found = service.findById(created.getId());
+        CommandBean created = service.create(command);
+        CommandBean found = service.findById(created.getId());
         assertEquals(created, found);
     }
 
     /**
-     * Test method for {@link be.jsams.server.service.sale.impl.EstimateServiceImpl
-     * #update(be.jsams.common.bean.model.sale.EstimateBean)}.
+     * Test method for {@link be.jsams.server.service.sale.impl.CommandServiceImpl
+     * #update(be.jsams.common.bean.model.sale.CommandBean)}.
      */
     @Test
     public void testUpdate() {
-        EstimateBean created = service.create(estimate);
-        EstimateMediator mediator = new EstimateMediator();
-        mediator.setEstimateBean(created);
+        CommandBean created = service.create(command);
+        CommandMediator mediator = new CommandMediator();
+        mediator.setCommandBean(created);
         created.setMediator(mediator);
-        for (EstimateDetailBean detail : created.getDetails()) {
+        for (CommandDetailBean detail : created.getDetails()) {
             detail.setMediator(mediator);
         }
         Double discountRate = 12D;
         created.setDiscountRate(discountRate);
         service.update(created);
-        EstimateBean found = service.findById(created.getId());
+        CommandBean found = service.findById(created.getId());
         assertEquals(discountRate, found.getDiscountRate());
     }
 
     /**
-     * Test method for {@link be.jsams.server.service.sale.impl.EstimateServiceImpl
-     * #findByCriteria(be.jsams.common.bean.model.sale.EstimateBean)}.
+     * Test method for {@link be.jsams.server.service.sale.impl.CommandServiceImpl
+     * #findByCriteria(be.jsams.common.bean.model.sale.CommandBean)}.
      */
     @Test
     public void testFindByCriteria() {
-        EstimateBean created = service.create(estimate);
-        EstimateBean criteria = new EstimateBean(created.getSociety(), created.getCustomer(), created.getAgent());
-        List<EstimateBean> founds = service.findByCriteria(criteria);
+        CommandBean created = service.create(command);
+        CommandBean criteria = new CommandBean(created.getSociety(), created.getCustomer(), created.getAgent());
+        List<CommandBean> founds = service.findByCriteria(criteria);
         assertTrue(founds.contains(created));
     }
 

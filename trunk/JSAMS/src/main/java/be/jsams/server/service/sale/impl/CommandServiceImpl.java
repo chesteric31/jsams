@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import be.jsams.common.bean.builder.management.AgentBeanBuilder;
+import be.jsams.common.bean.model.LegalFormBean;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.AgentBean;
 import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.sale.CommandBean;
 import be.jsams.server.dao.sale.CommandDao;
+import be.jsams.server.model.Society;
 import be.jsams.server.model.sale.Command;
 import be.jsams.server.service.AbstractService;
 import be.jsams.server.service.sale.CommandService;
@@ -69,10 +71,16 @@ public class CommandServiceImpl extends AbstractService implements CommandServic
      */
     public CommandBean findById(final Long id) {
         Command command = commandDao.findById(id);
-        SocietyBean society = new SocietyBean(command.getCustomer().getSociety());
-        CustomerBean customer = getCustomerBeanBuilder().build(command.getCustomer(), society);
-        AgentBean agent = agentBeanBuilder.build(command.getAgent(), society);
-        return new CommandBean(command, society, customer, agent, getProductBeanBuilder());
+        if (command != null) {
+            Society model = command.getCustomer().getSociety();
+            SocietyBean society = new SocietyBean(model);
+            society.setLegalForm(new LegalFormBean(model.getLegalForm()));
+            CustomerBean customer = getCustomerBeanBuilder().build(command.getCustomer(), society);
+            AgentBean agent = agentBeanBuilder.build(command.getAgent(), society);
+            return new CommandBean(command, society, customer, agent, getProductBeanBuilder());
+        } else {
+            return null;
+        }
     }
 
     /**
