@@ -77,6 +77,8 @@ public abstract class AbstractSaleSearchPanel<B extends AbstractDocumentBean<?, 
      */
     private JsamsButton buildButtonPdf() {
         JsamsButton buttonPdf = new JsamsButton(IconUtil.MENU_ICON_PREFIX + IconResource.DO_PDF);
+        //TODO
+//        buttonPdf.setToolTipText(I18nResource.BUTTON_DO_PDF);
         buttonPdf.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 performButtonPdf();
@@ -97,6 +99,8 @@ public abstract class AbstractSaleSearchPanel<B extends AbstractDocumentBean<?, 
      */
     private JsamsButton buildButtonEmail() {
         JsamsButton buttonEmail = new JsamsButton(IconUtil.MENU_ICON_PREFIX + IconResource.SEND_EMAIL);
+        //TODO
+//        buttonEmail.setToolTipText(I18nResource.BUTTON_SEND_EMAIL);
         buttonEmail.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 performButtonEmail();
