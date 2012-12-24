@@ -24,4 +24,10 @@ public final class JsamsConstants {
     public static final String PROXY_PASS = "proxyPass";
     public static final String PACKAGE_ROOT_NAME = "be.jsams";
 
+    public static final String EMAIL_SMTP = "emailSmtp";
+    public static final String EMAIL_PORT = "emailPort";
+    public static final String EMAIL_USER = "emailUser";
+    public static final String EMAIL_PASS = "emailPass";
+    public static final String EMAIL_DEFAULT_SUBJECT = "emailDefaultSubject";
+
 }

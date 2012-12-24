@@ -226,4 +226,12 @@ public final class I18nLabelResource {
     public static final I18nString LABEL_BILL_OPENED = new I18nString("label.bill.opened");
     public static final I18nString LABEL_BILL_CLOSED = new I18nString("label.bill.closed");
 
+    public static final I18nString LABEL_SETTINGS_EMAIL = new I18nString("label.settings.email");
+    public static final I18nString LABEL_SETTINGS_EMAIL_SMTP = new I18nString("label.settings.email.smtp");
+    public static final I18nString LABEL_SETTINGS_EMAIL_PORT = new I18nString("label.settings.email.port");
+    public static final I18nString LABEL_SETTINGS_EMAIL_USER = new I18nString("label.settings.email.user");
+    public static final I18nString LABEL_SETTINGS_EMAIL_PASS = new I18nString("label.settings.email.pass");
+    public static final I18nString LABEL_SETTINGS_EMAIL_DEFAULT_SUBJECT = new I18nString(
+            "label.settings.email.default_subject");
+
 }

@@ -73,7 +73,12 @@ public class EditGeneralParametersDialog extends JsamsDialog implements JsamsBut
     private JCheckBox proxyToAuthenticate = new JCheckBox();
     private JsamsTextField proxyUser = new JsamsTextField();
     private JPasswordField proxyPass = new JPasswordField();
-
+    private JsamsTextField emailSmtp = new JsamsTextField();
+    private JsamsTextField emailPort = new JsamsTextField();
+    private JsamsTextField emailUser = new JsamsTextField();
+    private JPasswordField emailPass = new JPasswordField();
+    private JsamsTextField emailDefaultSubject = new JsamsTextField();
+    
     /**
      * Constructor.
      */
@@ -120,6 +125,24 @@ public class EditGeneralParametersDialog extends JsamsDialog implements JsamsBut
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
         builder.setDefaultDialogBorder();
 
+        String emailSmtpProp = String.valueOf(preferences.get(JsamsConstants.EMAIL_SMTP, ""));
+        String emailPortProp = String.valueOf(preferences.get(JsamsConstants.EMAIL_PORT, ""));
+        String emailUserProp = String.valueOf(preferences.get(JsamsConstants.EMAIL_USER, ""));
+        String emailPassProp = String.valueOf(preferences.get(JsamsConstants.EMAIL_PASS, ""));
+        String emailDefaultSubjectProp = String.valueOf(preferences.get(JsamsConstants.EMAIL_DEFAULT_SUBJECT, ""));
+
+        builder.appendSeparator(I18nLabelResource.LABEL_SETTINGS_EMAIL.getTranslation());
+        emailSmtp.setText(emailSmtpProp);
+        builder.appendI15d(I18nLabelResource.LABEL_SETTINGS_EMAIL_SMTP.getKey(), emailSmtp);
+        emailPort.setText(emailPortProp);
+        builder.appendI15d(I18nLabelResource.LABEL_SETTINGS_EMAIL_PORT.getKey(), emailPort);
+        emailUser.setText(emailUserProp);
+        builder.appendI15d(I18nLabelResource.LABEL_SETTINGS_EMAIL_USER.getKey(), emailUser);
+        emailPass.setText(emailPassProp);
+        builder.appendI15d(I18nLabelResource.LABEL_SETTINGS_EMAIL_PASS.getKey(), emailPass);
+        emailDefaultSubject.setText(emailDefaultSubjectProp);
+        builder.appendI15d(I18nLabelResource.LABEL_SETTINGS_EMAIL_DEFAULT_SUBJECT.getKey(), emailDefaultSubject);
+        
         Boolean proxyToSetProp = Boolean.valueOf(preferences.get(JsamsConstants.PROXY_TO_SET, "false"));
         String proxyHostProp = String.valueOf(preferences.get(JsamsConstants.PROXY_HOST, ""));
         String proxyPortProp = String.valueOf(preferences.get(JsamsConstants.PROXY_PORT, ""));
@@ -215,6 +238,11 @@ public class EditGeneralParametersDialog extends JsamsDialog implements JsamsBut
     public void performOk() {
         Preferences prefsRoot = Preferences.userRoot();
         Preferences jsamsPrefs = prefsRoot.node(JsamsConstants.PACKAGE_ROOT_NAME);
+        jsamsPrefs.put(JsamsConstants.EMAIL_SMTP, emailSmtp.getText());
+        jsamsPrefs.put(JsamsConstants.EMAIL_PORT, emailPort.getText());
+        jsamsPrefs.put(JsamsConstants.EMAIL_USER, emailUser.getText());
+        jsamsPrefs.put(JsamsConstants.EMAIL_PASS, emailPass.getPassword().toString());
+        jsamsPrefs.put(JsamsConstants.EMAIL_DEFAULT_SUBJECT, emailDefaultSubject.getText());
         jsamsPrefs.putBoolean(JsamsConstants.PROXY_TO_SET, proxyToSet.isSelected());
         jsamsPrefs.put(JsamsConstants.PROXY_HOST, proxyHost.getText());
         jsamsPrefs.put(JsamsConstants.PROXY_PORT, proxyPort.getText());
@@ -243,6 +271,11 @@ public class EditGeneralParametersDialog extends JsamsDialog implements JsamsBut
         spinnerModelFirst.setValue(0);
         spinnerModelSecond.setValue(0);
         spinnerModelNotice.setValue(0);
+        emailSmtp.setText("");
+        emailPort.setText("");
+        emailUser.setText("");
+        emailPass.setText("");
+        emailDefaultSubject.setText("");
         proxyToSet.setSelected(false);
         proxyHost.setText("");
         proxyPort.setText("");
