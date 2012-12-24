@@ -30,10 +30,10 @@ public class BillBean extends AbstractDocumentBean<Bill, BillBeanView> {
 
     private Double discountRate;
     private Date dueDate;
-    private boolean paid;
-    private Date dateFirstRemember;
-    private Date dateSecondRemember;
-    private Date dateFormalNotice;
+    private Date paymentDate;
+    private Date firstRememberDate;
+    private Date secondRememberDate;
+    private Date formalNoticeDate;
     private boolean closed;
     private Double totalEt;
     private Double totalVat;
@@ -46,10 +46,10 @@ public class BillBean extends AbstractDocumentBean<Bill, BillBeanView> {
 
     public static final String DISCOUNT_RATE_PROPERTY = "discountRate";
     public static final String DUE_DATE_PROPERTY = "dueDate";
-    public static final String PAID_PROPERTY = "paid";
-    public static final String DATE_FIRST_REMEMBER_PROPERTY = "dateFirstRemember";
-    public static final String DATE_SECOND_REMEMBER_PROPERTY = "dateSecondRemember";
-    public static final String DATE_FORMAL_NOTICE_PROPERTY = "dateFormalNotice";
+    public static final String PAYMENT_DATE_PROPERTY = "paymentDate";
+    public static final String DATE_FIRST_REMEMBER_PROPERTY = "firstRememberDate";
+    public static final String DATE_SECOND_REMEMBER_PROPERTY = "secondRememberDate";
+    public static final String DATE_FORMAL_NOTICE_PROPERTY = "formalNoticeDate";
     public static final String CLOSED_PROPERTY = "closed";
     public static final String TOTAL_ET_PROPERTY = "totalEt";
     public static final String TOTAL_ATI_PROPERTY = "totalAti";
@@ -69,7 +69,6 @@ public class BillBean extends AbstractDocumentBean<Bill, BillBeanView> {
         this.paymentMode = mode;
         this.billingAddress = new AddressBean();
         this.closed = false;
-        this.paid = false;
         List<BillDetailBean> details = new ArrayList<BillDetailBean>();
         this.details = details;
         setView(buildView());
@@ -95,10 +94,10 @@ public class BillBean extends AbstractDocumentBean<Bill, BillBeanView> {
         this.details = beans;
         this.discountRate = model.getDiscountRate();
         this.closed = model.isClosed();
-        this.paid = model.isPaid();
-        this.dateFirstRemember = model.getDateFirstRemember();
-        this.dateSecondRemember = model.getDateSecondRemember();
-        this.dateFormalNotice = model.getDateFormalNotice();
+        this.paymentDate = model.getPaymentDate();
+        this.firstRememberDate = model.getFirstRememberDate();
+        this.secondRememberDate = model.getSecondRememberDate();
+        this.formalNoticeDate = model.getFormalNoticeDate();
         this.dueDate = model.getDueDate();
         this.paymentMode = mode;
         setView(buildView());
@@ -153,67 +152,67 @@ public class BillBean extends AbstractDocumentBean<Bill, BillBeanView> {
     }
 
     /**
-     * @return the paid
+     * @return the payment date
      */
-    public boolean isPaid() {
-        return paid;
+    public Date getPaymentDate() {
+        return paymentDate;
     }
 
     /**
-     * @param paid the paid to set
+     * @param paymentDate the payment date to set
      */
-    public void setPaid(boolean paid) {
-        boolean oldValue = this.paid;
-        this.paid = paid;
-        firePropertyChange(PAID_PROPERTY, oldValue, this.paid);
+    public void setPaymentDate(Date paymentDate) {
+        Date oldValue = this.paymentDate;
+        this.paymentDate = paymentDate;
+        firePropertyChange(PAYMENT_DATE_PROPERTY, oldValue, this.paymentDate);
     }
 
     /**
-     * @return the dateFirstRemember
+     * @return the firstRememberDate
      */
-    public Date getDateFirstRemember() {
-        return dateFirstRemember;
+    public Date getFirstRememberDate() {
+        return firstRememberDate;
     }
 
     /**
-     * @param dateFirstRemember the dateFirstRemember to set
+     * @param firstRememberDate the firstRememberDate to set
      */
-    public void setDateFirstRemember(Date dateFirstRemember) {
-        Date oldValue = this.dateFirstRemember;
-        this.dateFirstRemember = dateFirstRemember;
-        firePropertyChange(DATE_FIRST_REMEMBER_PROPERTY, oldValue, this.dateFirstRemember);
+    public void setFirstRememberDate(Date firstRememberDate) {
+        Date oldValue = this.firstRememberDate;
+        this.firstRememberDate = firstRememberDate;
+        firePropertyChange(DATE_FIRST_REMEMBER_PROPERTY, oldValue, this.firstRememberDate);
     }
 
     /**
-     * @return the dateSecondRemember
+     * @return the secondRememberDate
      */
-    public Date getDateSecondRemember() {
-        return dateSecondRemember;
+    public Date getSecondRememberDate() {
+        return secondRememberDate;
     }
 
     /**
-     * @param dateSecondRemember the dateSecondRemember to set
+     * @param secondRememberDate the secondRememberDate to set
      */
-    public void setDateSecondRemember(Date dateSecondRemember) {
-        Date oldValue = this.dateSecondRemember;
-        this.dateSecondRemember = dateSecondRemember;
-        firePropertyChange(DATE_SECOND_REMEMBER_PROPERTY, oldValue, this.dateSecondRemember);
+    public void setSecondRememberDate(Date secondRememberDate) {
+        Date oldValue = this.secondRememberDate;
+        this.secondRememberDate = secondRememberDate;
+        firePropertyChange(DATE_SECOND_REMEMBER_PROPERTY, oldValue, this.secondRememberDate);
     }
 
     /**
-     * @return the dateFormalNotice
+     * @return the formalNoticeDate
      */
-    public Date getDateFormalNotice() {
-        return dateFormalNotice;
+    public Date getFormalNoticeDate() {
+        return formalNoticeDate;
     }
 
     /**
      * @param dateFormalNotice the dateFormalNotice to set
      */
-    public void setDateFormalNotice(Date dateFormalNotice) {
-        Date oldValue = this.dateFormalNotice;
-        this.dateFormalNotice = dateFormalNotice;
-        firePropertyChange(DATE_FORMAL_NOTICE_PROPERTY, oldValue, this.dateFormalNotice);
+    public void setFormalNoticeDate(Date dateFormalNotice) {
+        Date oldValue = this.formalNoticeDate;
+        this.formalNoticeDate = dateFormalNotice;
+        firePropertyChange(DATE_FORMAL_NOTICE_PROPERTY, oldValue, this.formalNoticeDate);
     }
 
     /**
@@ -284,11 +283,11 @@ public class BillBean extends AbstractDocumentBean<Bill, BillBeanView> {
         billingAddress.clear();
         setDiscountRate(null);
         setClosed(false);
-        setPaid(false);
+        setPaymentDate(null);
         setDueDate(null);
-        setDateFirstRemember(null);
-        setDateSecondRemember(null);
-        setDateFormalNotice(null);
+        setFirstRememberDate(null);
+        setSecondRememberDate(null);
+        setFormalNoticeDate(null);
         paymentMode.clear();
     }
 
@@ -312,11 +311,11 @@ public class BillBean extends AbstractDocumentBean<Bill, BillBeanView> {
         setMediator(billMediator);
         setDiscountRate(other.getDiscountRate());
         setClosed(other.isClosed());
-        setPaid(other.isPaid());
+        setPaymentDate(other.getPaymentDate());
         setDueDate(other.getDueDate());
-        setDateFirstRemember(other.getDateFirstRemember());
-        setDateSecondRemember(other.getDateSecondRemember());
-        setDateFormalNotice(other.getDateFormalNotice());
+        setFirstRememberDate(other.getFirstRememberDate());
+        setSecondRememberDate(other.getSecondRememberDate());
+        setFormalNoticeDate(other.getFormalNoticeDate());
         paymentMode.refresh(other.getPaymentMode());
     }
 
@@ -348,22 +347,22 @@ public class BillBean extends AbstractDocumentBean<Bill, BillBeanView> {
             result += 1237;
         }
         result = prime * result;
-        if (dateFirstRemember == null) {
+        if (firstRememberDate == null) {
             result += 0;
         } else {
-            result += dateFirstRemember.hashCode();
+            result += firstRememberDate.hashCode();
         }
         result = prime * result;
-        if (dateFormalNotice == null) {
+        if (formalNoticeDate == null) {
             result += 0;
         } else {
-            result += dateFormalNotice.hashCode();
+            result += formalNoticeDate.hashCode();
         }
         result = prime * result;
-        if (dateSecondRemember == null) {
+        if (secondRememberDate == null) {
             result += 0;
         } else {
-            result += dateSecondRemember.hashCode();
+            result += secondRememberDate.hashCode();
         }
         result = prime * result;
         if (details == null) {
@@ -384,10 +383,10 @@ public class BillBean extends AbstractDocumentBean<Bill, BillBeanView> {
             result += dueDate.hashCode();
         }
         result = prime * result;
-        if (paid) {
-            result += 1231;
+        if (paymentDate == null) {
+            result += 0;
         } else {
-            result += 1237;
+            result += paymentDate.hashCode();
         }
         result = prime * result;
         if (paymentMode == null) {
@@ -423,25 +422,25 @@ public class BillBean extends AbstractDocumentBean<Bill, BillBeanView> {
         if (closed != other.closed) {
             return false;
         }
-        if (dateFirstRemember == null) {
-            if (other.dateFirstRemember != null) {
+        if (firstRememberDate == null) {
+            if (other.firstRememberDate != null) {
                 return false;
             }
-        } else if (!dateFirstRemember.equals(other.dateFirstRemember)) {
+        } else if (!firstRememberDate.equals(other.firstRememberDate)) {
             return false;
         }
-        if (dateFormalNotice == null) {
-            if (other.dateFormalNotice != null) {
+        if (formalNoticeDate == null) {
+            if (other.formalNoticeDate != null) {
                 return false;
             }
-        } else if (!dateFormalNotice.equals(other.dateFormalNotice)) {
+        } else if (!formalNoticeDate.equals(other.formalNoticeDate)) {
             return false;
         }
-        if (dateSecondRemember == null) {
-            if (other.dateSecondRemember != null) {
+        if (secondRememberDate == null) {
+            if (other.secondRememberDate != null) {
                 return false;
             }
-        } else if (!dateSecondRemember.equals(other.dateSecondRemember)) {
+        } else if (!secondRememberDate.equals(other.secondRememberDate)) {
             return false;
         }
         if (details == null) {
@@ -465,7 +464,11 @@ public class BillBean extends AbstractDocumentBean<Bill, BillBeanView> {
         } else if (!dueDate.equals(other.dueDate)) {
             return false;
         }
-        if (paid != other.paid) {
+        if (paymentDate == null) {
+            if (other.paymentDate != null) {
+                return false;
+            }
+        } else if (!paymentDate.equals(other.paymentDate)) {
             return false;
         }
         if (paymentMode == null) {

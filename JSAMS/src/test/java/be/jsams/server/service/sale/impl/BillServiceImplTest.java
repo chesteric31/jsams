@@ -270,7 +270,6 @@ public class BillServiceImplTest extends BaseJUnitTestClass {
     public void testFindByCriteria() {
         BillBean created = service.create(bill);
         BillBean criteria = new BillBean(created.getSociety(), created.getCustomer(), created.getPaymentMode());
-        criteria.setPaid(true);
         List<BillBean> founds = service.findByCriteria(criteria);
         assertTrue(founds.contains(created));
     }

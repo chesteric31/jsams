@@ -117,12 +117,12 @@ public class EstimateBillTransferServiceImpl extends AbstractTransferService<Est
         Date creationDate = new Date();
         newBean.setCreationDate(creationDate);
         Date firstRemember = calculateDate(creationDate, getDays("firstRememberDays"));
-        newBean.setDateFirstRemember(firstRemember);
+        newBean.setFirstRememberDate(firstRemember);
         Date secondRemember = calculateDate(creationDate, getDays("firstRememberDays") + getDays("secondRememberDays"));
-        newBean.setDateSecondRemember(secondRemember);
+        newBean.setSecondRememberDate(secondRemember);
         Date formalNotice = calculateDate(creationDate, getDays("firstRememberDays") + getDays("secondRememberDays")
                 + getDays("formalNoticeDays"));
-        newBean.setDateFormalNotice(formalNotice);
+        newBean.setFormalNoticeDate(formalNotice);
         List<BillDetailBean> details = new ArrayList<BillDetailBean>();
         for (EstimateDetailBean detail : list) {
             BillDetailBean bean = new BillDetailBean();
@@ -142,7 +142,6 @@ public class EstimateBillTransferServiceImpl extends AbstractTransferService<Est
         Date dueDate = calculateDueDate(newBean.getCreationDate(), paymentMode.getDaysNumber(),
                 paymentMode.isMonthEnd(), paymentMode.getAdditionalDays());
         newBean.setDueDate(dueDate);
-        newBean.setPaid(false);
         newBean.setRemark(estimate.getRemark());
         return newBean;
     }
@@ -166,12 +165,12 @@ public class EstimateBillTransferServiceImpl extends AbstractTransferService<Est
         Date creationDate = new Date();
         newBean.setCreationDate(creationDate);
         Date firstRemember = calculateDate(creationDate, getDays("firstRememberDays"));
-        newBean.setDateFirstRemember(firstRemember);
+        newBean.setFirstRememberDate(firstRemember);
         Date secondRemember = calculateDate(creationDate, getDays("firstRememberDays") + getDays("secondRememberDays"));
-        newBean.setDateSecondRemember(secondRemember);
+        newBean.setSecondRememberDate(secondRemember);
         Date formalNotice = calculateDate(creationDate, getDays("firstRememberDays") + getDays("secondRememberDays")
                 + getDays("formalNoticeDays"));
-        newBean.setDateFormalNotice(formalNotice);
+        newBean.setFormalNoticeDate(formalNotice);
         List<BillDetailBean> details = new ArrayList<BillDetailBean>();
         for (EstimateDetailBean detail : estimate.getDetails()) {
             if (!detail.isTransferred()) {
@@ -193,7 +192,6 @@ public class EstimateBillTransferServiceImpl extends AbstractTransferService<Est
         Date dueDate = calculateDueDate(newBean.getCreationDate(), paymentMode.getDaysNumber(),
                 paymentMode.isMonthEnd(), paymentMode.getAdditionalDays());
         newBean.setDueDate(dueDate);
-        newBean.setPaid(false);
         newBean.setRemark(estimate.getRemark());
         return newBean;
     }

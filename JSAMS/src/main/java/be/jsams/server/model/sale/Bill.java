@@ -35,10 +35,10 @@ public class Bill extends AbstractDocument {
 
     private Double discountRate;
     private Date dueDate;
-    private boolean paid;
-    private Date dateFirstRemember;
-    private Date dateSecondRemember;
-    private Date dateFormalNotice;
+    private Date paymentDate;;
+    private Date firstRememberDate;
+    private Date secondRememberDate;
+    private Date formalNoticeDate;
     private boolean closed;
 
     private PaymentMode paymentMode;
@@ -62,11 +62,11 @@ public class Bill extends AbstractDocument {
         super(bean);
         this.billingAddress = new Address(bean.getBillingAddress());
         this.discountRate = bean.getDiscountRate();
-        this.paid = bean.isPaid();
+        this.paymentDate = bean.getPaymentDate();
         this.closed = bean.isClosed();
-        this.dateFirstRemember = bean.getDateFirstRemember();
-        this.dateSecondRemember = bean.getDateSecondRemember();
-        this.dateFormalNotice = bean.getDateFormalNotice();
+        this.firstRememberDate = bean.getFirstRememberDate();
+        this.secondRememberDate = bean.getSecondRememberDate();
+        this.formalNoticeDate = bean.getFormalNoticeDate();
         this.dueDate = bean.getDueDate();
         this.paymentMode = new PaymentMode(bean.getPaymentMode());
         List<BillDetailBean> list = bean.getDetails();
@@ -80,7 +80,6 @@ public class Bill extends AbstractDocument {
     }
 
     /**
-     * 
      * @return a discount rate
      */
     @Column(name = "DISCOUNT_RATE")
@@ -89,7 +88,6 @@ public class Bill extends AbstractDocument {
     }
 
     /**
-     * 
      * @param discountRate a discount rate to set
      */
     public void setDiscountRate(Double discountRate) {
@@ -107,7 +105,6 @@ public class Bill extends AbstractDocument {
     }
 
     /**
-     * 
      * @param dueDate the due date to set
      */
     public void setDueDate(Date dueDate) {
@@ -115,78 +112,70 @@ public class Bill extends AbstractDocument {
     }
 
     /**
-     * 
-     * @return true if the {@link Bill} is paid, false otherwise
+     * @return the payment date
      */
-    @Column(name = "PAID")
-    public boolean isPaid() {
-        return paid;
+    @Column(name = "PAYMENT_DATE")
+    @Temporal(TemporalType.DATE)
+    public Date getPaymentDate() {
+        return this.paymentDate;
     }
 
     /**
-     * 
-     * @param paid true if the {@link Bill} was paid, false otherwise
+     * @param paymentDate the payment date
      */
-    public void setPaid(boolean paid) {
-        this.paid = paid;
+    public void setPaymentDate(Date paymentDate) {
+        this.paymentDate = paymentDate;
     }
 
     /**
-     * 
      * @return the date of the first reminder
      */
     @Column(name = "DATE_FIRST_REMINDER")
     @Temporal(TemporalType.DATE)
-    public Date getDateFirstRemember() {
-        return dateFirstRemember;
+    public Date getFirstRememberDate() {
+        return firstRememberDate;
     }
 
     /**
-     * 
-     * @param dateFirstRemember the date of the first reminder to set
+     * @param firstRememberDate the date of the first reminder to set
      */
-    public void setDateFirstRemember(Date dateFirstRemember) {
-        this.dateFirstRemember = dateFirstRemember;
+    public void setFirstRememberDate(Date firstRememberDate) {
+        this.firstRememberDate = firstRememberDate;
     }
 
     /**
-     * 
      * @return the date of the second reminder
      */
     @Column(name = "DATE_SECOND_REMINDER")
     @Temporal(TemporalType.DATE)
-    public Date getDateSecondRemember() {
-        return dateSecondRemember;
+    public Date getSecondRememberDate() {
+        return secondRememberDate;
     }
 
     /**
-     * 
-     * @param dateSecondRemember the date of the second reminder
+     * @param secondRememberDate the date of the second reminder
      */
-    public void setDateSecondRemember(Date dateSecondRemember) {
-        this.dateSecondRemember = dateSecondRemember;
+    public void setSecondRememberDate(Date secondRememberDate) {
+        this.secondRememberDate = secondRememberDate;
     }
 
     /**
-     * 
      * @return the date of the formal notice
      */
     @Column(name = "DATE_FORMAL_NOTICE")
     @Temporal(TemporalType.DATE)
-    public Date getDateFormalNotice() {
-        return dateFormalNotice;
+    public Date getFormalNoticeDate() {
+        return formalNoticeDate;
     }
 
     /**
-     * 
-     * @param dateFormalNotice the date of the formal notice to set
+     * @param formalNoticeDate the date of the formal notice to set
      */
-    public void setDateFormalNotice(Date dateFormalNotice) {
-        this.dateFormalNotice = dateFormalNotice;
+    public void setFormalNoticeDate(Date formalNoticeDate) {
+        this.formalNoticeDate = formalNoticeDate;
     }
 
     /**
-     * 
      * @return true if the {@link Bill} is closed, false otherwise
      */
     @Column(name = "CLOSED")
@@ -195,7 +184,6 @@ public class Bill extends AbstractDocument {
     }
 
     /**
-     * 
      * @param closed true if the {@link Bill} was closed, false otherwise
      */
     public void setClosed(boolean closed) {
@@ -203,7 +191,6 @@ public class Bill extends AbstractDocument {
     }
 
     /**
-     * 
      * @return the {@link PaymentMode}
      */
     @ManyToOne(cascade = CascadeType.REFRESH)
@@ -213,7 +200,6 @@ public class Bill extends AbstractDocument {
     }
 
     /**
-     * 
      * @param paymentMode the {@link PaymentMode} to set
      */
     public void setPaymentMode(PaymentMode paymentMode) {
@@ -221,7 +207,6 @@ public class Bill extends AbstractDocument {
     }
 
     /**
-     * 
      * @return the billing {@link Address}
      */
     @ManyToOne(cascade = CascadeType.ALL)
@@ -231,7 +216,6 @@ public class Bill extends AbstractDocument {
     }
 
     /**
-     * 
      * @param billingAddress the billing {@link Address} to set
      */
     public void setBillingAddress(Address billingAddress) {
@@ -239,7 +223,6 @@ public class Bill extends AbstractDocument {
     }
 
     /**
-     * 
      * @return a list of {@link BillDetail}
      */
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "bill")
@@ -249,7 +232,6 @@ public class Bill extends AbstractDocument {
     }
 
     /**
-     * 
      * @param details a list of {@link BillDetail} to set
      */
     public void setDetails(List<BillDetail> details) {
@@ -267,18 +249,18 @@ public class Bill extends AbstractDocument {
         builder.append(billingAddress);
         builder.append(", closed=");
         builder.append(closed);
-        builder.append(", dateFirstRemember=");
-        builder.append(dateFirstRemember);
-        builder.append(", dateFormalNotice=");
-        builder.append(dateFormalNotice);
-        builder.append(", dateSecondRemember=");
-        builder.append(dateSecondRemember);
+        builder.append(", firstRememberDate=");
+        builder.append(firstRememberDate);
+        builder.append(", formalNoticeDate=");
+        builder.append(formalNoticeDate);
+        builder.append(", secondRememberDate=");
+        builder.append(secondRememberDate);
         builder.append(", discountRate=");
         builder.append(discountRate);
         builder.append(", dueDate=");
         builder.append(dueDate);
-        builder.append(", paid=");
-        builder.append(paid);
+        builder.append(", paymentDate=");
+        builder.append(paymentDate);
         builder.append(", paymentMode=");
         builder.append(paymentMode);
         builder.append("]");
