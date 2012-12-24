@@ -80,7 +80,8 @@ public class BillBeanView extends AbstractDocumentBeanView<BillBean> implements 
         ViewFactory<BillBean> viewFactory = getViewFactory();
 
         JCheckBox closed = viewFactory.createBindingBooleanComponent(bean, BillBean.CLOSED_PROPERTY, false, false);
-        JCheckBox paid = viewFactory.createBindingBooleanComponent(bean, BillBean.PAID_PROPERTY, false, false);
+        JDateChooser paymentDate = viewFactory.createBindingDateComponent(bean, BillBean.PAYMENT_DATE_PROPERTY, false,
+                false);
         JDateChooser creationDate = viewFactory.createBindingDateComponent(bean, BillBean.CREATION_DATE_PROPERTY,
                 false, false);
         JDateChooser dueDate = viewFactory.createBindingDateComponent(bean, BillBean.DUE_DATE_PROPERTY, false, false);
@@ -115,7 +116,7 @@ public class BillBeanView extends AbstractDocumentBeanView<BillBean> implements 
                 .createEditView());
         builder.appendI15d(I18nLabelResource.LABEL_BILLING_ADDRESS.getKey(), bean.getBillingAddress().buildView()
                 .createEditView());
-        builder.appendI15d(I18nLabelResource.LABEL_PAID.getKey(), paid);
+        builder.appendI15d(I18nLabelResource.LABEL_PAYMENT_DATE.getKey(), paymentDate);
         builder.appendI15d(I18nLabelResource.LABEL_CLOSED.getKey(), closed);
         builder.appendI15d(I18nLabelResource.LABEL_REMARK.getKey(), remark);
         builder.appendI15d(I18nLabelResource.LABEL_DEFAULT_DISCOUNT_RATE.getKey(), discountRate);
@@ -242,7 +243,8 @@ public class BillBeanView extends AbstractDocumentBeanView<BillBean> implements 
         ViewFactory<BillBean> viewFactory = getViewFactory();
 
         JCheckBox closed = viewFactory.createBindingBooleanComponent(bean, BillBean.CLOSED_PROPERTY, false, false);
-        JCheckBox paid = viewFactory.createBindingBooleanComponent(bean, BillBean.PAID_PROPERTY, false, false);
+        JDateChooser paymentDate = viewFactory.createBindingDateComponent(bean, BillBean.PAYMENT_DATE_PROPERTY, false,
+                false);
 
         PeriodBean period = bean.getPeriod();
         ViewFactory<PeriodBean> viewPeriodFactory = period.buildView().getViewFactory();
@@ -271,7 +273,7 @@ public class BillBeanView extends AbstractDocumentBeanView<BillBean> implements 
                 .createEditView());
         builder.nextLine();
         builder.appendI15d(I18nLabelResource.LABEL_CLOSED.getKey(), closed);
-        builder.appendI15d(I18nLabelResource.LABEL_PAID.getKey(), paid);
+        builder.appendI15d(I18nLabelResource.LABEL_PAYMENT_DATE.getKey(), paymentDate);
 
         return builder.getPanel();
     }

@@ -3,11 +3,10 @@ package be.jsams.client.wizard.transfer;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 
-import be.jsams.client.i18n.I18nString;
 import be.jsams.client.i18n.I18nLabelResource;
+import be.jsams.client.i18n.I18nString;
 import be.jsams.client.swing.component.AbstractJsamsFrame;
 import be.jsams.client.swing.component.JsamsTextField;
 import be.jsams.client.wizard.JsamsWizardComponent;
@@ -105,7 +104,8 @@ public abstract class AbstractDocumentChooserWizardPanel<V extends Validator<Tra
             public JPanel createSearchView() {
                 BillBean bean = getBean();
                 ViewFactory<BillBean> viewFactory = getViewFactory();
-                JCheckBox paid = viewFactory.createBindingBooleanComponent(bean, BillBean.PAID_PROPERTY, false, false);
+                JDateChooser paymentDate = viewFactory.createBindingDateComponent(bean, BillBean.PAYMENT_DATE_PROPERTY,
+                        false, false);
                 PeriodBean period = bean.getPeriod();
                 ViewFactory<PeriodBean> viewPeriodFactory = period.getView().getViewFactory();
                 JDateChooser startDate = viewPeriodFactory.createBindingDateComponent(period,
@@ -132,7 +132,7 @@ public abstract class AbstractDocumentChooserWizardPanel<V extends Validator<Tra
                 builder.nextLine();
                 builder.appendI15d(I18nLabelResource.LABEL_PAYMENT_MODE.getKey(), bean.getPaymentMode().getView()
                         .createEditView());
-                builder.appendI15d(I18nLabelResource.LABEL_PAID.getKey(), paid);
+                builder.appendI15d(I18nLabelResource.LABEL_PAYMENT_DATE.getKey(), paymentDate);
 
                 return builder.getPanel();
             }

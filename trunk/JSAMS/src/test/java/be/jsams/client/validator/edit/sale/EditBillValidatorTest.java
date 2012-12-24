@@ -115,7 +115,7 @@ public class EditBillValidatorTest extends AbstractValidatorTest {
      */
     @Test
     public void testValidateBlankDateFirstRemember() {
-        bean.setDateFirstRemember(null);
+        bean.setFirstRememberDate(null);
         ValidationResult result = validator.validate(bean);
         String formattedText = retrieveFormattedText(result);
         assertTrue(formattedText.contains(I18nResource.ERROR_IS_MANDATORY.getTranslation()));
@@ -130,7 +130,7 @@ public class EditBillValidatorTest extends AbstractValidatorTest {
      */
     @Test
     public void testValidateBlankDateSecondRemember() {
-        bean.setDateSecondRemember(null);
+        bean.setSecondRememberDate(null);
         ValidationResult result = validator.validate(bean);
         String formattedText = retrieveFormattedText(result);
         assertTrue(formattedText.contains(I18nResource.ERROR_IS_MANDATORY.getTranslation()));
@@ -145,7 +145,7 @@ public class EditBillValidatorTest extends AbstractValidatorTest {
      */
     @Test
     public void testValidateBlankDateFormalNotice() {
-        bean.setDateFormalNotice(null);
+        bean.setFormalNoticeDate(null);
         ValidationResult result = validator.validate(bean);
         String formattedText = retrieveFormattedText(result);
         assertTrue(formattedText.contains(I18nResource.ERROR_IS_MANDATORY.getTranslation()));

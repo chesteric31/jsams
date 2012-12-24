@@ -52,10 +52,9 @@ public class BillDaoImpl extends DaoImpl<Bill> implements BillDao {
         AddressBean billingAddress = criteria.getBillingAddress();
         String zipCode = billingAddress.getZipCode();
         String city = billingAddress.getCity();
-
+        
         boolean closed = criteria.isClosed();
-        boolean paid = criteria.isPaid();
-
+        
         queryBuilder.append(WHERE);
         queryBuilder.append("b.customer.society.id = " + currentSocietyId);
 
@@ -88,8 +87,14 @@ public class BillDaoImpl extends DaoImpl<Bill> implements BillDao {
             }
         }
         queryBuilder.append(" AND b.closed = " + closed);
-        queryBuilder.append(" AND b.paid = " + paid);
 
+        Date paymentDate = criteria.getPaymentDate();
+        if (paymentDate != null) {
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            String formattedPaymentDate = format.format(paymentDate);
+            queryBuilder.append(" AND b.paymentDate = '" + formattedPaymentDate + "'");
+        }
+        
         Query query = getEntityManager().createQuery(queryBuilder.toString());
         return query.getResultList();
     }

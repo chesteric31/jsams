@@ -119,6 +119,8 @@ public final class I18nLabelResource {
     public static final I18nString LABEL_CUSTOMER = new I18nString("label.customer");
 
     public static final I18nString LABEL_PAID = new I18nString("label.paid");
+
+    public static final I18nString LABEL_PAYMENT_DATE = new I18nString("label.payment_date");
     
     public static final I18nString LABEL_CLOSED = new I18nString("label.closed");
 

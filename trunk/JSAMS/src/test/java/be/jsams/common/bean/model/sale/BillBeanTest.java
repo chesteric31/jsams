@@ -63,9 +63,9 @@ public class BillBeanTest {
         assertNull(billingAddress.getStreet());
         assertNull(billingAddress.getZipCode());
         assertNull(bean.getCreationDate());
-        assertNull(bean.getDateFirstRemember());
-        assertNull(bean.getDateFormalNotice());
-        assertNull(bean.getDateSecondRemember());
+        assertNull(bean.getFirstRememberDate());
+        assertNull(bean.getFormalNoticeDate());
+        assertNull(bean.getSecondRememberDate());
         assertNull(bean.getDiscountRate());
         assertNull(bean.getDueDate());
         PaymentModeBean paymentMode = bean.getPaymentMode();

@@ -54,9 +54,9 @@ public class EditBillValidator implements Validator<BillBean> {
         }
         
         Date dueDate = bean.getDueDate();
-        Date firstRememberDate = bean.getDateFirstRemember();
-        Date secondRememberDate = bean.getDateSecondRemember();
-        Date formalNoticeDate = bean.getDateFormalNotice();
+        Date firstRememberDate = bean.getFirstRememberDate();
+        Date secondRememberDate = bean.getSecondRememberDate();
+        Date formalNoticeDate = bean.getFormalNoticeDate();
         if (dueDate == null) {
             support.addError(I18nLabelResource.LABEL_DUE_DATE.getTranslation(),
                     I18nResource.ERROR_IS_MANDATORY.getTranslation());

@@ -348,15 +348,15 @@ public final class MockBeanGenerator {
         calendar.setTime(today);
         calendar.add(Calendar.DAY_OF_MONTH, 30);
         Date dateFirstRemember = calendar.getTime();
-        bean.setDateFirstRemember(dateFirstRemember);
+        bean.setFirstRememberDate(dateFirstRemember);
         calendar.setTime(dateFirstRemember);
         calendar.add(Calendar.DAY_OF_MONTH, 30);
         Date dateSecondRemember = calendar.getTime();
-        bean.setDateSecondRemember(dateSecondRemember);
+        bean.setSecondRememberDate(dateSecondRemember);
         calendar.setTime(dateSecondRemember);
         calendar.add(Calendar.DAY_OF_MONTH, 15);
         Date dateFormalNotice = calendar.getTime();
-        bean.setDateFormalNotice(dateFormalNotice);
+        bean.setFormalNoticeDate(dateFormalNotice);
         List<BillDetailBean> details = new ArrayList<BillDetailBean>();
         details.add(generateMockBillDetail(bean));
         bean.setDetails(details);
@@ -365,7 +365,6 @@ public final class MockBeanGenerator {
         calendar.add(Calendar.DAY_OF_MONTH, 1);
         Date dueDate = calendar.getTime();
         bean.setDueDate(dueDate);
-        bean.setPaid(true);
         PeriodBean period = new PeriodBean();
         period.setStartDate(today);
         Calendar periodCalendar = Calendar.getInstance();

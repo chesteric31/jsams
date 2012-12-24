@@ -34,15 +34,15 @@ public class BillTest {
         ModelTestHelper.checkAddress(bean.getBillingAddress(), bill.getBillingAddress());
         assertEquals(bean.getCreationDate(), bill.getCreationDate());
         ModelTestHelper.checkCustomer(bean.getCustomer(), bill.getCustomer());
-        assertEquals(bean.getDateFirstRemember(), bill.getDateFirstRemember());
-        assertEquals(bean.getDateSecondRemember(), bill.getDateSecondRemember());
-        assertEquals(bean.getDateFormalNotice(), bill.getDateFormalNotice());
+        assertEquals(bean.getFirstRememberDate(), bill.getFirstRememberDate());
+        assertEquals(bean.getSecondRememberDate(), bill.getSecondRememberDate());
+        assertEquals(bean.getFormalNoticeDate(), bill.getFormalNoticeDate());
         assertEquals(bean.getDueDate(), bill.getDueDate());
         assertEquals(bean.getDiscountRate(), bill.getDiscountRate());
         ModelTestHelper.checkPaymentMode(bean.getPaymentMode(), bill.getPaymentMode());
         assertEquals(bean.getRemark(), bill.getRemark());
         assertEquals(bean.isClosed(), bill.isClosed());
-        assertEquals(bean.isPaid(), bill.isPaid());
+        assertEquals(bean.getPaymentDate(), bill.getPaymentDate());
         List<BillDetail> details = bill.getDetails();
         List<BillDetailBean> detailsBean = bean.getDetails();
         if (details != null && !details.isEmpty()) {
