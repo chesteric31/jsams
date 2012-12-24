@@ -57,6 +57,7 @@ public class FileMenuBuilder extends AbstractMenuBuilder {
         fileMenu.add(new JSeparator());
         JsamsMenuItem exitMI = new JsamsMenuItem(I18nResource.MENU_ITEM_EXIT_APPLICATION, IconResource.EXIT);
         exitMI.setAction(new ExitAction(exitMI.getText(), exitMI.getIcon()));
+        exitMI.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, KeyEvent.CTRL_MASK));
         fileMenu.add(exitMI);
 
         enableMenuItems(false);
