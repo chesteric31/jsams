@@ -134,7 +134,6 @@ public class EditGeneralParametersDialog extends JsamsDialog implements JsamsBut
         builder.appendI15d(I18nLabelResource.LABEL_SETTINGS_PROXY_PASS.getKey(), proxyPass);
         builder.appendSeparator(I18nLabelResource.LABEL_SETTINGS_BILL.getTranslation());
         builder.appendI15d(I18nLabelResource.LABEL_FIRST_REMEMBER_DAYS.getKey(), new JSpinner(spinnerModelFirst));
-        builder.appendI15d(I18nLabelResource.LABEL_FIRST_REMEMBER_DAYS.getKey(), new JSpinner(spinnerModelFirst));
         builder.nextLine();
         builder.appendI15d(I18nLabelResource.LABEL_SECOND_REMEMBER_DAYS.getKey(), new JSpinner(spinnerModelSecond));
         builder.nextLine();
