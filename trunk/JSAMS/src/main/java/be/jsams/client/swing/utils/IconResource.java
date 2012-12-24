@@ -49,4 +49,6 @@ public final class IconResource {
     public static final String TRANSFER = "actions/media-seek-forward.png";
     public static final String TRANSFER_LOGO = "images/transfer_left_right.png";
 
+    public static final String SEND_EMAIL = "actions/mail-forward.png";
+
 }
