@@ -40,8 +40,6 @@ public abstract class AbstractSaleSearchPanel<B extends AbstractDocumentBean<?, 
      */
     private static final long serialVersionUID = 7834431441679608267L;
 
-    private JsamsButton buttonPdf = null;
-    
     /**
      * Constructor.
      * 
@@ -91,6 +89,26 @@ public abstract class AbstractSaleSearchPanel<B extends AbstractDocumentBean<?, 
      * The action to perform when click onto PDF generation button.
      */
     protected abstract void performButtonPdf();
+
+    /**
+     * Builds the Email sending button.
+     * 
+     * @return the Email sending {@link JsamsButton}
+     */
+    private JsamsButton buildButtonEmail() {
+        JsamsButton buttonEmail = new JsamsButton(IconUtil.MENU_ICON_PREFIX + IconResource.SEND_EMAIL);
+        buttonEmail.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                performButtonEmail();
+            }
+        });
+        return buttonEmail;
+    }
+
+    /**
+     * The action to perform when click onto Email sending button.
+     */
+    protected abstract void performButtonEmail();
     
     /**
      * {@inheritDoc}
@@ -105,12 +123,12 @@ public abstract class AbstractSaleSearchPanel<B extends AbstractDocumentBean<?, 
             setButtonAdd(buildButtonAdd());
             setButtonRemove(buildButtonRemove());
             setButtonModify(buildButtonModify());
-            buttonPdf = buildButtonPdf();
-            JsamsButton[] buttons = new JsamsButton[4];
+            JsamsButton[] buttons = new JsamsButton[5];
             buttons[0] = getButtonAdd();
             buttons[1] = getButtonRemove();
             buttons[2] = getButtonModify();
-            buttons[3] = buttonPdf;
+            buttons[3] = buildButtonPdf();
+            buttons[4] = buildButtonEmail();
             southPanel.add(ButtonBarFactory.buildCenteredBar(buttons));
         }
         southPanel.add(getStatusBar());

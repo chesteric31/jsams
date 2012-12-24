@@ -162,4 +162,13 @@ public class SearchCommandPanel<L extends MouseListener> extends
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void performButtonEmail() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException();
+    }
+
 }
