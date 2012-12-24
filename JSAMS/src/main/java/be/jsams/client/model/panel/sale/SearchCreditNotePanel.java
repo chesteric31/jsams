@@ -150,22 +150,24 @@ public class SearchCreditNotePanel<L extends MouseListener> extends
      * {@inheritDoc}
      */
     @Override
-    protected void performButtonPdf() {
+    protected String performButtonPdf(boolean viewReport) {
+        String pdf = "";
         int selectedRow = getResultTable().getSelectedRow();
         if (selectedRow > -1) {
             int selectedRowModel = getResultTable().convertRowIndexToModel(selectedRow);
             CreditNoteTableModel model = (CreditNoteTableModel) getResultTable().getModel();
             CreditNoteBean beanToPdf = model.getRow(selectedRowModel);
             PdfCreditNoteServiceImpl pdfService = ApplicationContext.getPdfCreditNoteService();
-            pdfService.generatePdf(beanToPdf);
+            pdf = pdfService.generatePdf(beanToPdf, viewReport);
         }
+        return pdf;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    protected void performButtonEmail() {
+    protected void performButtonEmail(String pdf) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException();
     }

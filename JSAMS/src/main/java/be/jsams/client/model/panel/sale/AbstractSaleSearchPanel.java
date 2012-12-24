@@ -81,7 +81,7 @@ public abstract class AbstractSaleSearchPanel<B extends AbstractDocumentBean<?, 
 //        buttonPdf.setToolTipText(I18nResource.BUTTON_DO_PDF);
         buttonPdf.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                performButtonPdf();
+                performButtonPdf(true);
             }
         });
         return buttonPdf;
@@ -89,8 +89,12 @@ public abstract class AbstractSaleSearchPanel<B extends AbstractDocumentBean<?, 
 
     /**
      * The action to perform when click onto PDF generation button.
+     * 
+     * @param viewReport true if we will to see the report, false otherwise
+     * 
+     * @return the filename where the PDF was created
      */
-    protected abstract void performButtonPdf();
+    protected abstract String performButtonPdf(boolean viewReport);
 
     /**
      * Builds the Email sending button.
@@ -103,7 +107,8 @@ public abstract class AbstractSaleSearchPanel<B extends AbstractDocumentBean<?, 
 //        buttonEmail.setToolTipText(I18nResource.BUTTON_SEND_EMAIL);
         buttonEmail.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                performButtonEmail();
+                String pdf = performButtonPdf(false);
+                performButtonEmail(pdf);
             }
         });
         return buttonEmail;
@@ -111,8 +116,10 @@ public abstract class AbstractSaleSearchPanel<B extends AbstractDocumentBean<?, 
 
     /**
      * The action to perform when click onto Email sending button.
+     * 
+     * @param pdf the PDF file to attach to the new mail to send
      */
-    protected abstract void performButtonEmail();
+    protected abstract void performButtonEmail(String pdf);
     
     /**
      * {@inheritDoc}

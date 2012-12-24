@@ -22,7 +22,7 @@ public class PdfCreditNoteServiceImpl extends AbstractPdfService implements PdfS
      * {@inheritDoc}
      */
     @Override
-    public void generatePdf(CreditNoteBean object) {
+    public String generatePdf(CreditNoteBean object, boolean viewReport) {
         CreditNoteXml creditNoteXml = xmlGenerator.generateXml(object);
         String path = getRootReportsPath() + getRecordPath();
         File generatedXmlFile = getXmlFileGenerator()
@@ -31,7 +31,7 @@ public class PdfCreditNoteServiceImpl extends AbstractPdfService implements PdfS
         String reportFileName = path + ".jasper";
         String outFileName = path + ".pdf";
 
-        getMerger().merge(generatedXmlFile, getRecordPath(), reportFileName, outFileName);
+        return getMerger().merge(generatedXmlFile, getRecordPath(), reportFileName, outFileName, viewReport);
     }
 
     /**

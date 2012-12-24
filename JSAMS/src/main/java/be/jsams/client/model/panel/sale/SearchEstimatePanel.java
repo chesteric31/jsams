@@ -150,22 +150,24 @@ public class SearchEstimatePanel<L extends MouseListener> extends
      * {@inheritDoc}
      */
     @Override
-    protected void performButtonPdf() {
+    protected String performButtonPdf(boolean viewReport) {
+        String pdf = "";
         int selectedRow = getResultTable().getSelectedRow();
         if (selectedRow > -1) {
             int selectedRowModel = getResultTable().convertRowIndexToModel(selectedRow);
             EstimateTableModel model = (EstimateTableModel) getResultTable().getModel();
             EstimateBean beanToPdf = model.getRow(selectedRowModel);
             PdfEstimateServiceImpl pdfService = ApplicationContext.getPdfEstimateService();
-            pdfService.generatePdf(beanToPdf);
+            pdf = pdfService.generatePdf(beanToPdf, viewReport);
         }
+        return pdf;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    protected void performButtonEmail() {
+    protected void performButtonEmail(String pdf) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException();
     }

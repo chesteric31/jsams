@@ -13,7 +13,9 @@ public interface PdfService<M> {
      * Generates a PDF view from an object.
      * 
      * @param object the object to generate in PDF
+     * @param viewReport true if we will to see the report, false otherwise
+     * @return the filename where the PDF was created
      */
-    void generatePdf(M object);
+    String generatePdf(M object, boolean viewReport);
 
 }

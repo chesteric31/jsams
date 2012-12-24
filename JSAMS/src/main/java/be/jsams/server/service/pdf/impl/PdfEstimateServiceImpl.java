@@ -22,7 +22,7 @@ public class PdfEstimateServiceImpl extends AbstractPdfService implements PdfSer
      * {@inheritDoc}
      */
     @Override
-    public void generatePdf(EstimateBean object) {
+    public String generatePdf(EstimateBean object, boolean viewReport) {
         EstimateXml estimateXml = xmlGenerator.generateXml(object);
         String path = getRootReportsPath() + getRecordPath();
         File generatedXmlFile = getXmlFileGenerator().generateXmlFile(estimateXml, path + ".xml", EstimateXml.class);
@@ -30,7 +30,7 @@ public class PdfEstimateServiceImpl extends AbstractPdfService implements PdfSer
         String reportFileName = path + ".jasper";
         String outFileName = path + ".pdf";
 
-        getMerger().merge(generatedXmlFile, getRecordPath(), reportFileName, outFileName);
+        return getMerger().merge(generatedXmlFile, getRecordPath(), reportFileName, outFileName, viewReport);
     }
 
     /**

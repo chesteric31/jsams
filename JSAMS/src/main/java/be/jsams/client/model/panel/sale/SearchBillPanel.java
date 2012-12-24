@@ -1,8 +1,22 @@
 package be.jsams.client.model.panel.sale;
 
 import java.awt.event.MouseListener;
+import java.io.IOException;
 import java.util.List;
+import java.util.Properties;
+import java.util.prefs.Preferences;
 
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 import javax.swing.ListSelectionModel;
 
 import org.apache.commons.logging.Log;
@@ -19,6 +33,7 @@ import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.sale.BillBean;
 import be.jsams.common.bean.model.sale.BillMediator;
+import be.jsams.common.util.JsamsConstants;
 import be.jsams.server.service.pdf.impl.PdfBillServiceImpl;
 import be.jsams.server.service.sale.BillService;
 
@@ -152,24 +167,93 @@ public class SearchBillPanel<L extends MouseListener> extends
      * {@inheritDoc}
      */
     @Override
-    protected void performButtonPdf() {
+    protected String performButtonPdf(boolean viewReport) {
+        String pdf = "";
         int selectedRow = getResultTable().getSelectedRow();
         if (selectedRow > -1) {
             int selectedRowModel = getResultTable().convertRowIndexToModel(selectedRow);
             BillTableModel model = (BillTableModel) getResultTable().getModel();
             BillBean beanToPdf = model.getRow(selectedRowModel);
             PdfBillServiceImpl pdfService = ApplicationContext.getPdfBillService();
-            pdfService.generatePdf(beanToPdf);
+            pdf = pdfService.generatePdf(beanToPdf, viewReport);
         }
+        return pdf;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    protected void performButtonEmail() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException();
+    protected void performButtonEmail(String pdf) {
+        Properties props = new Properties();
+        props.setProperty("mail.from", "chesteric31@gmail.com");
+        Preferences rootPreferences = Preferences.userRoot();
+        Preferences preferences = rootPreferences.node(JsamsConstants.PACKAGE_ROOT_NAME);
+        props.setProperty("mail.smtp.host", String.valueOf(preferences.get(JsamsConstants.EMAIL_SMTP, "")));
+        props.setProperty("mail.smtp.port", String.valueOf(preferences.get(JsamsConstants.EMAIL_PORT, "")));
+        String pass = String.valueOf(preferences.get(JsamsConstants.EMAIL_PASS, ""));
+        props.setProperty("mail.smtp.user", String.valueOf(preferences.get(JsamsConstants.EMAIL_USER, "")));
+        props.setProperty("mail.smtp.password", pass);
+        props.setProperty("mail.smtp.auth", "true");
+        props.setProperty("mail.smtp.socketFactory.port", "465");
+        props.setProperty("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+        Session session = Session.getDefaultInstance(props, new SmtpAuthenticator("chesteric31@gmail.com", pass, true));
+
+        Message message = new MimeMessage(session);
+        InternetAddress recipient;
+        Transport transport = null;
+        try {
+            recipient = new InternetAddress("eric.binard@gmail.com");
+            message.setRecipient(Message.RecipientType.TO, recipient);
+            message.setSubject("Hello JavaMail");
+
+            MimeBodyPart mbp1 = new MimeBodyPart();
+            mbp1.setText("JavaMail vous dit bonjour!");
+            MimeBodyPart mbp2 = new MimeBodyPart();
+            mbp2.attachFile(pdf);
+            MimeMultipart mp = new MimeMultipart();
+            mp.addBodyPart(mbp1);
+            mp.addBodyPart(mbp2);
+            message.setContent(mp);
+            transport = session.getTransport("smtp");
+            transport.connect();
+            Transport.send(message);
+        } catch (AddressException e) {
+            // TODO Auto-generated catch block
+            throw new RuntimeException(e);
+        } catch (MessagingException e) {
+            // TODO Auto-generated catch block
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                transport.close();
+            } catch (MessagingException ex) {
+                // TODO Auto-generated catch block
+                throw new RuntimeException(ex);
+            }
+        }
     }
 
+    private class SmtpAuthenticator extends Authenticator {
+        private String username;
+        private String password;
+        private boolean needAuth;
+
+        public SmtpAuthenticator(String username, String password, boolean needAuth) {
+            this.username = username;
+            this.password = password;
+            this.needAuth = needAuth;
+        }
+
+        @Override
+        protected PasswordAuthentication getPasswordAuthentication() {
+            if (needAuth)
+                return new PasswordAuthentication(username, password);
+            else
+                return null;
+        }
+    }
 }

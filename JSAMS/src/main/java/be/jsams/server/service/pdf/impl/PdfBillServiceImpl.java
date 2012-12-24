@@ -22,7 +22,7 @@ public class PdfBillServiceImpl extends AbstractPdfService implements PdfService
      * {@inheritDoc}
      */
     @Override
-    public void generatePdf(BillBean object) {
+    public String generatePdf(BillBean object, boolean viewReport) {
         BillXml billXml = xmlGenerator.generateXml(object);
         String path = getRootReportsPath() + getRecordPath();
         File generatedXmlFile = getXmlFileGenerator().generateXmlFile(billXml, path + ".xml", BillXml.class);
@@ -30,7 +30,7 @@ public class PdfBillServiceImpl extends AbstractPdfService implements PdfService
         String reportFileName = path + ".jasper";
         String outFileName = path + ".pdf";
 
-        getMerger().merge(generatedXmlFile, getRecordPath(), reportFileName, outFileName);
+        return getMerger().merge(generatedXmlFile, getRecordPath(), reportFileName, outFileName, viewReport);
     }
 
     /**

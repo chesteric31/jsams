@@ -22,7 +22,7 @@ public class PdfDeliveryOrderServiceImpl extends AbstractPdfService implements P
      * {@inheritDoc}
      */
     @Override
-    public void generatePdf(DeliveryOrderBean object) {
+    public String generatePdf(DeliveryOrderBean object, boolean viewReport) {
         DeliveryOrderXml deliveryOrderXml = xmlGenerator.generateXml(object);
         String path = getRootReportsPath() + getRecordPath();
         File generatedXmlFile = getXmlFileGenerator().generateXmlFile(deliveryOrderXml, path + ".xml",
@@ -31,7 +31,7 @@ public class PdfDeliveryOrderServiceImpl extends AbstractPdfService implements P
         String reportFileName = path + ".jasper";
         String outFileName = path + ".pdf";
 
-        getMerger().merge(generatedXmlFile, getRecordPath(), reportFileName, outFileName);
+        return getMerger().merge(generatedXmlFile, getRecordPath(), reportFileName, outFileName, viewReport);
     }
 
     /**

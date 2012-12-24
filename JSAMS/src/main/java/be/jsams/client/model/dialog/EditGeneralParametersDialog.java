@@ -241,14 +241,14 @@ public class EditGeneralParametersDialog extends JsamsDialog implements JsamsBut
         jsamsPrefs.put(JsamsConstants.EMAIL_SMTP, emailSmtp.getText());
         jsamsPrefs.put(JsamsConstants.EMAIL_PORT, emailPort.getText());
         jsamsPrefs.put(JsamsConstants.EMAIL_USER, emailUser.getText());
-        jsamsPrefs.put(JsamsConstants.EMAIL_PASS, emailPass.getPassword().toString());
+        jsamsPrefs.put(JsamsConstants.EMAIL_PASS, String.valueOf(emailPass.getPassword()));
         jsamsPrefs.put(JsamsConstants.EMAIL_DEFAULT_SUBJECT, emailDefaultSubject.getText());
         jsamsPrefs.putBoolean(JsamsConstants.PROXY_TO_SET, proxyToSet.isSelected());
         jsamsPrefs.put(JsamsConstants.PROXY_HOST, proxyHost.getText());
         jsamsPrefs.put(JsamsConstants.PROXY_PORT, proxyPort.getText());
         jsamsPrefs.putBoolean(JsamsConstants.PROXY_TO_AUTHENTICATE, proxyToAuthenticate.isSelected());
         jsamsPrefs.put(JsamsConstants.PROXY_USER, proxyUser.getText());
-        jsamsPrefs.put(JsamsConstants.PROXY_PASS, proxyPass.getPassword().toString());
+        jsamsPrefs.put(JsamsConstants.PROXY_PASS, String.valueOf(proxyPass.getPassword()));
         jsamsPrefs.put(FIRST_REMEMBER_DAYS, spinnerModelFirst.getValue().toString());
         jsamsPrefs.put(SECOND_REMEMBER_DAYS, spinnerModelSecond.getValue().toString());
         jsamsPrefs.put(FORMAL_NOTICE_DAYS, spinnerModelNotice.getValue().toString());

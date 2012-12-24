@@ -22,7 +22,7 @@ public class PdfCommandServiceImpl extends AbstractPdfService implements PdfServ
      * {@inheritDoc}
      */
     @Override
-    public void generatePdf(CommandBean object) {
+    public String generatePdf(CommandBean object, boolean viewReport) {
         CommandXml commandXml = xmlGenerator.generateXml(object);
         String path = getRootReportsPath() + getRecordPath();
         File generatedXmlFile = getXmlFileGenerator().generateXmlFile(commandXml, path + ".xml", CommandXml.class);
@@ -30,7 +30,7 @@ public class PdfCommandServiceImpl extends AbstractPdfService implements PdfServ
         String reportFileName = path + ".jasper";
         String outFileName = path + ".pdf";
 
-        getMerger().merge(generatedXmlFile, getRecordPath(), reportFileName, outFileName);
+        return getMerger().merge(generatedXmlFile, getRecordPath(), reportFileName, outFileName, viewReport);
     }
 
     /**
