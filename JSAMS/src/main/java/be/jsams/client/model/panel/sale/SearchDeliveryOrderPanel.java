@@ -163,4 +163,13 @@ public class SearchDeliveryOrderPanel<L extends MouseListener>
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void performButtonEmail() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException();
+    }
+
 }
