@@ -30,8 +30,11 @@ public class PdfMerger {
      * @param recordPath the record path
      * @param reportFileName the report file name
      * @param outFileName the output file name
+     * @param viewReport true if we will to see the report, false otherwise
+     * @return the filename where the exported PDF was created
      */
-    public void merge(File generatedXmlFile, String recordPath, String reportFileName, String outFileName) {
+    public String merge(File generatedXmlFile, String recordPath, String reportFileName, String outFileName,
+            boolean viewReport) {
         try {
             JRXmlDataSource jrxmlds = new JRXmlDataSource(generatedXmlFile.getAbsolutePath(), recordPath);
             jrxmlds.setDatePattern("yyyy-MM-dd");
@@ -45,12 +48,14 @@ public class PdfMerger {
             JasperPrint print = JasperFillManager.fillReport(reportFileName, params, jrxmlds);
 
             JRExporter exporter = new JRPdfExporter();
-
             exporter.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outFileName);
             exporter.setParameter(JRExporterParameter.JASPER_PRINT, print);
-
             exporter.exportReport();
-            JasperViewer.viewReport(print, false);
+
+            if (viewReport) {
+                JasperViewer.viewReport(print, false);
+            }
+            return outFileName;
         } catch (JRException e) {
             throw new RuntimeException(e);
         } catch (Exception e) {
