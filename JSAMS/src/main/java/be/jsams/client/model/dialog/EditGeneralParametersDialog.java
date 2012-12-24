@@ -13,6 +13,7 @@ import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JSpinner;
+import javax.swing.JTabbedPane;
 import javax.swing.KeyStroke;
 import javax.swing.SpinnerNumberModel;
 
@@ -89,28 +90,44 @@ public class EditGeneralParametersDialog extends JsamsDialog implements JsamsBut
      * Initializes all the components
      */
     private void initComponents() {
+        JPanel mainPanel = new JPanel(new BorderLayout());
+
+        Preferences rootPreferences = Preferences.userRoot();
+        Preferences preferences = rootPreferences.node(JsamsConstants.PACKAGE_ROOT_NAME);
+
+        JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.LEFT);
+        JPanel networkPanel = buildNetworkTab(preferences);
+        tabbedPane.add(I18nResource.PANEL_NETWORK.getTranslation(), networkPanel);
+        JPanel billPanel = buildBillTab(preferences);
+        tabbedPane.add(I18nResource.PANEL_BILL.getTranslation(), billPanel);
+
+        mainPanel.add(tabbedPane, BorderLayout.CENTER);
+        add(mainPanel);
+        pack();
+        DialogUtil.centerComponentOnScreen(this);
+        setVisible(true);
+        setResizable(false);
+    }
+
+    /**
+     * Builds the network panel with proxy, email settings.
+     * 
+     * @param preferences the {@link Preferences} to use
+     * @return the built panel
+     */
+    private JPanel buildNetworkTab(Preferences preferences) {
         FormLayout layout = new FormLayout("right:pref, 3dlu, 60dlu:grow", "pref");
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
         builder.setDefaultDialogBorder();
-        Preferences prefsRoot = Preferences.userRoot();
-        Preferences jsamsPrefs = prefsRoot.node(JsamsConstants.PACKAGE_ROOT_NAME);
 
-        Boolean proxyToSetProp = Boolean.valueOf(jsamsPrefs.get(JsamsConstants.PROXY_TO_SET, "false"));
-        String proxyHostProp = String.valueOf(jsamsPrefs.get(JsamsConstants.PROXY_HOST, ""));
-        String proxyPortProp = String.valueOf(jsamsPrefs.get(JsamsConstants.PROXY_PORT, ""));
+        Boolean proxyToSetProp = Boolean.valueOf(preferences.get(JsamsConstants.PROXY_TO_SET, "false"));
+        String proxyHostProp = String.valueOf(preferences.get(JsamsConstants.PROXY_HOST, ""));
+        String proxyPortProp = String.valueOf(preferences.get(JsamsConstants.PROXY_PORT, ""));
 
-        Boolean proxyToAuthenticateProp = Boolean
-                .valueOf(jsamsPrefs.get(JsamsConstants.PROXY_TO_AUTHENTICATE, "false"));
-        String proxyUserProp = String.valueOf(jsamsPrefs.get(JsamsConstants.PROXY_USER, ""));
-        String proxyPassProp = String.valueOf(jsamsPrefs.get(JsamsConstants.PROXY_PASS, ""));
-
-        int firstRememberDays = Integer.valueOf(jsamsPrefs.get(FIRST_REMEMBER_DAYS, "0"));
-        int secondRememberDays = Integer.valueOf(jsamsPrefs.get(SECOND_REMEMBER_DAYS, "0"));
-        int formalNoticeDays = Integer.valueOf(jsamsPrefs.get(FORMAL_NOTICE_DAYS, "0"));
-
-        spinnerModelFirst = new SpinnerNumberModel(firstRememberDays, 0, null, 1);
-        spinnerModelSecond = new SpinnerNumberModel(secondRememberDays, 0, null, 1);
-        spinnerModelNotice = new SpinnerNumberModel(formalNoticeDays, 0, null, 1);
+        Boolean proxyToAuthenticateProp = Boolean.valueOf(preferences
+                .get(JsamsConstants.PROXY_TO_AUTHENTICATE, "false"));
+        String proxyUserProp = String.valueOf(preferences.get(JsamsConstants.PROXY_USER, ""));
+        String proxyPassProp = String.valueOf(preferences.get(JsamsConstants.PROXY_PASS, ""));
         builder.appendSeparator(I18nLabelResource.LABEL_SETTINGS_PROXY.getTranslation());
         proxyToSet.setSelected(proxyToSetProp);
         proxyToSet.addItemListener(this);
@@ -132,21 +149,36 @@ public class EditGeneralParametersDialog extends JsamsDialog implements JsamsBut
         proxyPass.setEnabled(proxyToAuthenticateProp);
         proxyPass.setText(proxyPassProp);
         builder.appendI15d(I18nLabelResource.LABEL_SETTINGS_PROXY_PASS.getKey(), proxyPass);
+
+        return builder.getPanel();
+    }
+    
+    /**
+     * Builds the bill settings panel.
+     * 
+     * @param preferences the {@link Preferences} to use
+     * @return the built panel
+     */
+    private JPanel buildBillTab(Preferences preferences) {
+        FormLayout layout = new FormLayout("right:pref, 3dlu, 60dlu:grow", "pref");
+        DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
+        builder.setDefaultDialogBorder();
+
+        int firstRememberDays = Integer.valueOf(preferences.get(FIRST_REMEMBER_DAYS, "0"));
+        int secondRememberDays = Integer.valueOf(preferences.get(SECOND_REMEMBER_DAYS, "0"));
+        int formalNoticeDays = Integer.valueOf(preferences.get(FORMAL_NOTICE_DAYS, "0"));
+
+        spinnerModelFirst = new SpinnerNumberModel(firstRememberDays, 0, null, 1);
+        spinnerModelSecond = new SpinnerNumberModel(secondRememberDays, 0, null, 1);
+        spinnerModelNotice = new SpinnerNumberModel(formalNoticeDays, 0, null, 1);
+
         builder.appendSeparator(I18nLabelResource.LABEL_SETTINGS_BILL.getTranslation());
         builder.appendI15d(I18nLabelResource.LABEL_FIRST_REMEMBER_DAYS.getKey(), new JSpinner(spinnerModelFirst));
         builder.nextLine();
         builder.appendI15d(I18nLabelResource.LABEL_SECOND_REMEMBER_DAYS.getKey(), new JSpinner(spinnerModelSecond));
         builder.nextLine();
         builder.appendI15d(I18nLabelResource.LABEL_FORMAL_NOTICE_DAYS.getKey(), new JSpinner(spinnerModelNotice));
-        builder.nextLine();
-        JPanel panel = builder.getPanel();
-        JPanel mainPanel = new JPanel(new BorderLayout());
-        mainPanel.add(panel, BorderLayout.CENTER);
-        add(mainPanel);
-        pack();
-        DialogUtil.centerComponentOnScreen(this);
-        setVisible(true);
-        setResizable(false);
+        return builder.getPanel();
     }
 
     /**

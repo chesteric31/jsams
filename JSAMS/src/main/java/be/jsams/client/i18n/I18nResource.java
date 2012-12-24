@@ -268,5 +268,9 @@ public final class I18nResource {
     public static final I18nString MENU_ITEM_STATISTICS = new I18nString("menu.item.statistics");
 
     public static final I18nString TITLE_STATISTICS_RATIO_BILLS = new I18nString("title.statistics.ratio_bills");
+
+    public static final I18nString PANEL_NETWORK = new I18nString("panel.network");
+
+    public static final I18nString PANEL_BILL = new I18nString("panel.bill");
     
 }
