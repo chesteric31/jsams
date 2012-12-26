@@ -146,30 +146,17 @@ public class SearchEstimatePanel<L extends MouseListener> extends
     public void performCancel() {
     }
 
+
     /**
      * {@inheritDoc}
      */
     @Override
-    protected String performButtonPdf(boolean viewReport) {
+    protected String performButtonPdf(boolean viewReport, EstimateBean bean) {
         String pdf = "";
-        int selectedRow = getResultTable().getSelectedRow();
-        if (selectedRow > -1) {
-            int selectedRowModel = getResultTable().convertRowIndexToModel(selectedRow);
-            EstimateTableModel model = (EstimateTableModel) getResultTable().getModel();
-            EstimateBean beanToPdf = model.getRow(selectedRowModel);
+        if (bean != null) {
             PdfEstimateServiceImpl pdfService = ApplicationContext.getPdfEstimateService();
-            pdf = pdfService.generatePdf(beanToPdf, viewReport);
+            pdf = pdfService.generatePdf(bean, viewReport);
         }
         return pdf;
     }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    protected void performButtonEmail(String pdf) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException();
-    }
-
 }
