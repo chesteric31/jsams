@@ -6,6 +6,8 @@ import java.beans.PropertyVetoException;
 import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.List;
+import java.util.Map;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -29,10 +31,14 @@ import org.jfree.data.xy.XYDataset;
 
 import be.jsams.client.context.ApplicationContext;
 import be.jsams.client.desktop.Desktop;
+import be.jsams.client.i18n.I18nLabelResource;
+import be.jsams.client.swing.component.AbstractJsamsFrame;
 import be.jsams.client.swing.component.JsamsFormattedTextField;
 import be.jsams.client.swing.component.JsamsLabel;
 import be.jsams.client.swing.component.JsamsStatusBar;
+import be.jsams.client.swing.component.JsamsTextField;
 import be.jsams.common.bean.model.SocietyBean;
+import be.jsams.common.bean.model.sale.BillBean;
 import be.jsams.server.service.statistics.StatisticsService;
 
 import com.jgoodies.forms.builder.DefaultFormBuilder;
@@ -84,21 +90,6 @@ public class StatisticsPanel extends JPanel {
 
         SocietyBean society = Desktop.getInstance().getCurrentSociety();
         Double globalTurnover = getService().findGlobalTurnover(society);
-//        this.add(new JsamsLabel(globalTurnover.toPlainString()));
-//        final DefaultPieDataset pieDataset = new DefaultPieDataset();
-
-//        List<BillBean> openedBills = getService().findOpenedBills(society);
-//        pieDataset.setValue(I18nLabelResource.LABEL_BILL_OPENED.getTranslation(), openedBills.size());
-//        List<BillBean> closedBills = getService().findClosedBills(society);
-//        pieDataset.setValue(I18nLabelResource.LABEL_BILL_CLOSED.getTranslation(), closedBills.size());
-
-//        final JFreeChart pieChart = ChartFactory.createPieChart3D(
-//                I18nResource.TITLE_STATISTICS_RATIO_BILLS.getTranslation(), pieDataset, true, true, false);
-//        PiePlot3D plot = (PiePlot3D) pieChart.getPlot();
-//        plot.setStartAngle(290);
-//        plot.setDirection(Rotation.CLOCKWISE);
-//        plot.setForegroundAlpha(0.5f);
-//        final ChartPanel cPanel = new ChartPanel(pieChart);
 
         final XYDataset data1 = createDataset();
         final XYItemRenderer renderer1 = new XYBarRenderer();
@@ -113,7 +104,7 @@ public class StatisticsPanel extends JPanel {
 
         JInternalFrame billsFrame = new JInternalFrame("Bills", true, false, true, true);
         FormLayout layout = new FormLayout("left:p, 3dlu, p, 5dlu, left:p, 3dlu, p, 5dlu, left:p, 3dlu, p:grow");
-        DefaultFormBuilder builder = new DefaultFormBuilder(layout);
+        DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
         builder.setDefaultDialogBorder();
         builder.appendSeparator("not paid bills");
         builder.append(new JsamsLabel("nbr"));
@@ -133,10 +124,17 @@ public class StatisticsPanel extends JPanel {
         builder.append(new JsamsLabel("sum"));
         builder.append(new JsamsLabel("99"));
         builder.nextLine();
-        builder.appendSeparator("not closed bills");
-        builder.append(new JsamsLabel("nbr"));
-        builder.append(new JsamsLabel("1"));
-        builder.append(new JsamsLabel("sum"));
+        builder.appendI15dSeparator(I18nLabelResource.LABEL_BILL_OPENED.getKey());
+        Map<Double, List<BillBean>> openedBills = getService().findOpenedBills(society);
+        JsamsTextField openedBillsNumber = new JsamsTextField();
+        openedBillsNumber.setEnabled(false);
+        openedBillsNumber.setText(String.valueOf(openedBills.size()));
+        builder.appendI15d(I18nLabelResource.LABEL_QUANTITY.getKey(), openedBillsNumber);
+        JsamsFormattedTextField openedBillsAmount = new JsamsFormattedTextField(DecimalFormat.getCurrencyInstance());
+        openedBillsAmount.setEnabled(false);
+        double doubleValue = openedBills.keySet().iterator().next();
+        openedBillsAmount.setValue(doubleValue);
+        builder.appendI15d(I18nLabelResource.LABEL_AMOUNT.getKey(), openedBillsAmount);
         builder.append(new JsamsLabel("100"));
         builder.append(new JsamsLabel("avg"));
         builder.append(new JsamsLabel("100"));

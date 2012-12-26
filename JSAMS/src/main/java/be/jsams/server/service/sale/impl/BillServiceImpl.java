@@ -2,7 +2,9 @@ package be.jsams.server.service.sale.impl;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import be.jsams.common.bean.builder.PaymentModeBeanBuilder;
 import be.jsams.common.bean.model.LegalFormBean;
@@ -94,13 +96,7 @@ public class BillServiceImpl extends AbstractService implements BillService {
     @Override
     public List<BillBean> findAll(SocietyBean currentSociety) {
         List<Bill> bills = billDao.findAll(currentSociety.getId());
-        List<BillBean> beans = new ArrayList<BillBean>();
-        for (Bill bill : bills) {
-            CustomerBean customer = getCustomerBeanBuilder().build(bill.getCustomer(), currentSociety);
-            paymentModeBeanBuilder.setModel(bill.getPaymentMode());
-            PaymentModeBean mode = paymentModeBeanBuilder.build();
-            beans.add(new BillBean(bill, currentSociety, customer, mode, getProductBeanBuilder()));
-        }
+        List<BillBean> beans = mapModelToBean(currentSociety, bills);
         return beans;
     }
 
@@ -111,6 +107,18 @@ public class BillServiceImpl extends AbstractService implements BillService {
     public List<BillBean> findByCriteria(BillBean criteria) {
         SocietyBean society = criteria.getSociety();
         List<Bill> bills = billDao.findByCriteria(society.getId(), criteria);
+        List<BillBean> beans = mapModelToBean(society, bills);
+        return beans;
+    }
+
+    /**
+     * Maps the bills to the billBeans.
+     * 
+     * @param society the {@link SocietyBean} to use
+     * @param bills the bills to map
+     * @return the mapped billBeans.
+     */
+    private List<BillBean> mapModelToBean(SocietyBean society, List<Bill> bills) {
         List<BillBean> beans = new ArrayList<BillBean>();
         for (Bill bill : bills) {
             CustomerBean customer = getCustomerBeanBuilder().build(bill.getCustomer(), society);
@@ -126,8 +134,19 @@ public class BillServiceImpl extends AbstractService implements BillService {
      */
     @Override
     public BigDecimal findGlobalTurnover(SocietyBean society) {
-        BigDecimal globalTurnover = new BigDecimal(0D);
         List<Bill> bills = billDao.findAll(society.getId());
+        BigDecimal globalTurnover = calculateSum(bills);
+        return globalTurnover;
+    }
+
+    /**
+     * Calculates sum of the bills specified.
+     * 
+     * @param bills the list of bills to use
+     * @return the {@link BigDecimal} for the sum of all the bills
+     */
+    public BigDecimal calculateSum(List<Bill> bills) {
+        BigDecimal globalTurnover = new BigDecimal(0D);
         if (bills != null && !bills.isEmpty()) {
             for (Bill bill : bills) {
                 List<BillDetail> details = bill.getDetails();
@@ -153,10 +172,15 @@ public class BillServiceImpl extends AbstractService implements BillService {
      * {@inheritDoc}
      */
     @Override
-    public List<BillBean> findOpenedBills(SocietyBean society) {
+    public Map<Double, List<BillBean>> findOpenedBills(SocietyBean society) {
         BillBean criteria = new BillBean(society, null, null);
         criteria.setClosed(false);
-        return findByCriteria(criteria);
+        List<Bill> bills = billDao.findByCriteria(society.getId(), criteria);
+        BigDecimal sum = calculateSum(bills);
+        List<BillBean> list = mapModelToBean(society, bills);
+        Map<Double, List<BillBean>> map = new HashMap<Double, List<BillBean>>();
+        map.put(sum.doubleValue(), list);
+        return map;
     }
 
     /**
