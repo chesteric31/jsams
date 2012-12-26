@@ -82,15 +82,15 @@ public class EstimateBeanView extends AbstractDocumentBeanView<EstimateBean> imp
                 false, false);
         JDateChooser creationDate = viewFactory.createBindingDateComponent(bean, EstimateBean.CREATION_DATE_PROPERTY,
                 false, false);
-        JsamsFormattedTextField discountRate = viewFactory.createBindingDecimalComponent(bean,
+        JsamsFormattedTextField discountRate = viewFactory.createBindingPercentageComponent(bean,
                 EstimateBean.DISCOUNT_RATE_PROPERTY, false, false);
         JsamsTextField remark = viewFactory
                 .createBindingTextComponent(bean, EstimateBean.REMARK_PROPERTY, false, false);
-        JsamsFormattedTextField totalEt = viewFactory.createBindingDecimalComponent(bean,
+        JsamsFormattedTextField totalEt = viewFactory.createBindingCurrencyComponent(bean,
                 EstimateBean.TOTAL_ET_PROPERTY, false, true);
-        JsamsFormattedTextField totalVat = viewFactory.createBindingDecimalComponent(bean,
+        JsamsFormattedTextField totalVat = viewFactory.createBindingCurrencyComponent(bean,
                 EstimateBean.TOTAL_VAT_PROPERTY, false, true);
-        JsamsFormattedTextField totalAti = viewFactory.createBindingDecimalComponent(bean,
+        JsamsFormattedTextField totalAti = viewFactory.createBindingCurrencyComponent(bean,
                 EstimateBean.TOTAL_ATI_PROPERTY, false, true);
 
         FormLayout layout = new FormLayout("right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p", "p");

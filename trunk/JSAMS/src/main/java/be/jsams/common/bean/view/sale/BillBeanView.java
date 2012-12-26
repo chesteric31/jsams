@@ -91,14 +91,14 @@ public class BillBeanView extends AbstractDocumentBeanView<BillBean> implements 
                 BillBean.DATE_SECOND_REMEMBER_PROPERTY, false, false);
         JDateChooser formalNoticeDate = viewFactory.createBindingDateComponent(bean,
                 BillBean.DATE_FORMAL_NOTICE_PROPERTY, false, false);
-        JsamsFormattedTextField discountRate = viewFactory.createBindingDecimalComponent(bean,
+        JsamsFormattedTextField discountRate = viewFactory.createBindingPercentageComponent(bean,
                 BillBean.DISCOUNT_RATE_PROPERTY, false, false);
         JsamsTextField remark = viewFactory.createBindingTextComponent(bean, BillBean.REMARK_PROPERTY, false, false);
-        JsamsFormattedTextField totalEt = viewFactory.createBindingDecimalComponent(bean,
+        JsamsFormattedTextField totalEt = viewFactory.createBindingCurrencyComponent(bean,
                 CommandBean.TOTAL_ET_PROPERTY, false, true);
-        JsamsFormattedTextField totalVat = viewFactory.createBindingDecimalComponent(bean,
+        JsamsFormattedTextField totalVat = viewFactory.createBindingCurrencyComponent(bean,
                 CommandBean.TOTAL_VAT_PROPERTY, false, true);
-        JsamsFormattedTextField totalAti = viewFactory.createBindingDecimalComponent(bean,
+        JsamsFormattedTextField totalAti = viewFactory.createBindingCurrencyComponent(bean,
                 CommandBean.TOTAL_ATI_PROPERTY, false, true);
 
         FormLayout layout = new FormLayout(

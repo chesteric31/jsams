@@ -60,7 +60,7 @@ public class SocietyBeanView extends AbstractBeanView<SocietyBean> implements Ed
         ViewFactory<SocietyBean> viewFactory = getViewFactory();
         JsamsTextField textFieldName = viewFactory.createBindingTextComponent(bean, SocietyBean.NAME_PROPERTY, true,
                 false);
-        JsamsFormattedTextField textFieldCapital = viewFactory.createBindingDecimalComponent(bean,
+        JsamsFormattedTextField textFieldCapital = viewFactory.createBindingCurrencyComponent(bean,
                 SocietyBean.CAPITAL_PROPERTY, true, false);
         JsamsTextField textFieldActivity = viewFactory.createBindingTextComponent(bean, SocietyBean.ACTIVITY_PROPERTY,
                 true, false);
