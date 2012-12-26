@@ -46,13 +46,13 @@ public class ProductBeanView extends AbstractBeanView<ProductBean> implements Ed
         ViewFactory<ProductBean> viewFactory = getViewFactory();
         JsamsTextField textFieldName = viewFactory.createBindingTextComponent(bean, ProductBean.NAME_PROPERTY, true,
                 false);
-        JsamsFormattedTextField textFieldPrice = viewFactory.createBindingDecimalComponent(bean,
+        JsamsFormattedTextField textFieldPrice = viewFactory.createBindingCurrencyComponent(bean,
                 ProductBean.PRICE_PROPERTY, true, false);
         JsamsFormattedTextField textFieldStockQuantity = viewFactory.createBindingIntComponent(bean,
                 ProductBean.QUANTITY_STOCK_PROPERTY, true, false);
         JsamsFormattedTextField textFieldReorderLevel = viewFactory.createBindingIntComponent(bean,
                 ProductBean.REORDER_LEVEL_PROPERTY, false, false);
-        JsamsFormattedTextField textFieldVatApplicable = viewFactory.createBindingDecimalComponent(bean,
+        JsamsFormattedTextField textFieldVatApplicable = viewFactory.createBindingPercentageComponent(bean,
                 CustomerBean.VAT_APPLICABLE_PROPERTY, true, false);
         FormLayout layout = new FormLayout("right:p, 3dlu, 50dlu, 3dlu, right:p, 3dlu, 50dlu", "p");
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
@@ -77,13 +77,13 @@ public class ProductBeanView extends AbstractBeanView<ProductBean> implements Ed
         ProductBean bean = getBean();
         ViewFactory<ProductBean> helper = new ViewFactory<ProductBean>();
         JsamsTextField textFieldName = helper.createBindingTextComponent(bean, ProductBean.NAME_PROPERTY, false, false);
-        JsamsFormattedTextField textFieldPrice = helper.createBindingDecimalComponent(bean, ProductBean.PRICE_PROPERTY,
+        JsamsFormattedTextField textFieldPrice = helper.createBindingCurrencyComponent(bean, ProductBean.PRICE_PROPERTY,
                 false, false);
         JsamsFormattedTextField textFieldStockQuantity = helper.createBindingIntComponent(bean,
                 ProductBean.QUANTITY_STOCK_PROPERTY, false, false);
         JsamsFormattedTextField textFieldReorderLevel = helper.createBindingIntComponent(bean,
                 ProductBean.REORDER_LEVEL_PROPERTY, false, false);
-        JsamsFormattedTextField textFieldVatApplicable = helper.createBindingDecimalComponent(bean,
+        JsamsFormattedTextField textFieldVatApplicable = helper.createBindingPercentageComponent(bean,
                 ProductBean.VAT_APPLICABLE_PROPERTY, false, false);
         FormLayout layout = new FormLayout("right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow, 3dlu, "
                 + "right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p:grow", "p");

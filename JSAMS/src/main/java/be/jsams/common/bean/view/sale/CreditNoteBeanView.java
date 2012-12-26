@@ -82,11 +82,11 @@ public class CreditNoteBeanView extends AbstractDocumentBeanView<CreditNoteBean>
                 false, false);
         JsamsTextField remark = viewFactory.createBindingTextComponent(bean, CreditNoteBean.REMARK_PROPERTY, false,
                 false);
-        JsamsFormattedTextField totalEt = viewFactory.createBindingDecimalComponent(bean,
+        JsamsFormattedTextField totalEt = viewFactory.createBindingCurrencyComponent(bean,
                 CommandBean.TOTAL_ET_PROPERTY, false, true);
-        JsamsFormattedTextField totalVat = viewFactory.createBindingDecimalComponent(bean,
+        JsamsFormattedTextField totalVat = viewFactory.createBindingCurrencyComponent(bean,
                 CommandBean.TOTAL_VAT_PROPERTY, false, true);
-        JsamsFormattedTextField totalAti = viewFactory.createBindingDecimalComponent(bean,
+        JsamsFormattedTextField totalAti = viewFactory.createBindingCurrencyComponent(bean,
                 CommandBean.TOTAL_ATI_PROPERTY, false, true);
 
         FormLayout layout = new FormLayout("right:p, 3dlu, p:grow, 3dlu, right:p, 3dlu, p", "p");

@@ -2,6 +2,7 @@ package be.jsams.common.bean.view;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.text.ParseException;
 
 import javax.swing.JCheckBox;
 import javax.swing.JComponent;
@@ -132,22 +133,85 @@ public final class ViewFactory<B extends AbstractIdentityBean<?, ?>> {
      * @param readOnly read only boolean
      * @return the {@link JsamsFormattedTextField}
      */
-    public JsamsFormattedTextField createBindingDecimalComponent(final B bean, final String property,
+    public JsamsFormattedTextField createBindingCurrencyComponent(final B bean, final String property,
             final boolean mandatory, final boolean readOnly) {
-        PropertyAdapter<B> adapter = new PropertyAdapter<B>(bean, property, true);
         // Definition of the default/display formatter
-        NumberFormat numberFormat = DecimalFormat.getInstance();
+        NumberFormat numberFormat = DecimalFormat.getCurrencyInstance();
+        JsamsFormattedTextField textField = buildFormattedTextField(bean, property, mandatory, readOnly, numberFormat,
+                null);
+        return textField;
+    }
+
+    /**
+     * Builds the {@link JsamsFormattedTextField} from the parameters
+     * 
+     * @param bean the bean
+     * @param property the property
+     * @param mandatory the mandatory boolean
+     * @param readOnly the read only boolean
+     * @param numberFormat the number format
+     * @param displayFormatter the display formatter
+     * @return the built {@link JsamsFormattedTextField}
+     */
+    private JsamsFormattedTextField buildFormattedTextField(final B bean, final String property,
+            final boolean mandatory, final boolean readOnly, NumberFormat numberFormat,
+            NumberFormatter displayFormatter) {
+        PropertyAdapter<B> adapter = new PropertyAdapter<B>(bean, property, true);
         numberFormat.setMinimumFractionDigits(2);
         numberFormat.setMaximumFractionDigits(2);
         NumberFormatter defaultFormatter = new NumberFormatter(numberFormat);
-        // Definition of the double customized formatter
-        DoubleFormatter doubleFormatter = new DoubleFormatter();
-        DefaultFormatterFactory factory = new DefaultFormatterFactory(defaultFormatter, defaultFormatter,
+        NumberFormatter doubleFormatter = new DoubleFormatter();
+        if (displayFormatter == null) {
+            displayFormatter = defaultFormatter;
+        }
+        DefaultFormatterFactory factory = new DefaultFormatterFactory(defaultFormatter, displayFormatter,
                 doubleFormatter);
         JsamsFormattedTextField textField = new JsamsFormattedTextField(factory);
         Bindings.bind(textField, adapter);
         ValidationComponentUtils.setMandatory(textField, mandatory);
         textField.setEnabled(!readOnly);
+        return textField;
+    }
+
+    /**
+     * Creates {@link JsamsFormattedTextField} and binds this component to the
+     * bean parameter.
+     * 
+     * @param bean the bean
+     * @param property the property to bind
+     * @param mandatory mandatory boolean
+     * @param readOnly read only boolean
+     * @return the {@link JsamsFormattedTextField}
+     */
+    public JsamsFormattedTextField createBindingPercentageComponent(final B bean, final String property,
+            final boolean mandatory, final boolean readOnly) {
+        NumberFormat numberFormat = DecimalFormat.getPercentInstance();
+        NumberFormatter displayFormatter = new NumberFormatter(numberFormat) {
+            /**
+             * Serial
+             */
+            private static final long serialVersionUID = -6935064680616634906L;
+
+            public String valueToString(Object o) throws ParseException {
+                Number number = (Number) o;
+                if (number != null) {
+                    double d = number.doubleValue() / 100.0;
+                    number = new Double(d);
+                }
+                return super.valueToString(number);
+            }
+
+            public Object stringToValue(String s) throws ParseException {
+                Number number = (Number) super.stringToValue(s);
+                if (number != null) {
+                    double d = number.doubleValue() * 100.0;
+                    number = new Double(d);
+                }
+                return number;
+            }
+        };
+        JsamsFormattedTextField textField = buildFormattedTextField(bean, property, mandatory, readOnly, numberFormat,
+                displayFormatter);
         return textField;
     }
 

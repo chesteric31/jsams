@@ -127,9 +127,9 @@ public class CustomerBeanView extends AbstractBeanView<CustomerBean> implements 
                 false);
         JsamsTextField textFieldBank2 = helper.createBindingTextComponent(bean, CustomerBean.BANK2_PROPERTY, false,
                 false);
-        JsamsFormattedTextField textFieldCreditLimit = helper.createBindingDecimalComponent(bean,
+        JsamsFormattedTextField textFieldCreditLimit = helper.createBindingCurrencyComponent(bean,
                 CustomerBean.CREDIT_LIMIT_PROPERTY, false, false);
-        JsamsFormattedTextField textFieldVatApplicable = helper.createBindingDecimalComponent(bean,
+        JsamsFormattedTextField textFieldVatApplicable = helper.createBindingPercentageComponent(bean,
                 CustomerBean.VAT_APPLICABLE_PROPERTY, true, false);
         FormLayout layout = new FormLayout("right:p, 3dlu, 75dlu, 3dlu, right:p, 3dlu, 75dlu", "p");
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
@@ -231,7 +231,7 @@ public class CustomerBeanView extends AbstractBeanView<CustomerBean> implements 
     private JPanel buildMiscTab() {
         CustomerBean bean = getBean();
         ViewFactory<CustomerBean> helper = new ViewFactory<CustomerBean>();
-        JsamsFormattedTextField textFieldDefaultDiscountRate = helper.createBindingDecimalComponent(bean,
+        JsamsFormattedTextField textFieldDefaultDiscountRate = helper.createBindingPercentageComponent(bean,
                 CustomerBean.DEFAULT_DISCOUNT_RATE_PROPERTY, false, false);
         JTextArea textAreaDescription = helper.createBindingTextAreaComponent(bean, CustomerBean.DESCRIPTION_PROPERTY,
                 false, false);
