@@ -113,4 +113,48 @@ public class BillDaoImpl extends DaoImpl<Bill> implements BillDao {
         return query.getResultList();
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public List<Bill> findToThrowBack(Long societyId) {
+        StringBuilder queryBuilder = new StringBuilder("FROM Bill b");
+
+        queryBuilder.append(WHERE);
+        queryBuilder.append("b.customer.society.id = " + societyId);
+        queryBuilder.append(AND);
+        queryBuilder.append("b.paymentDate is null");
+        queryBuilder.append(AND);
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date today = new Date();
+        String formattedToday = format.format(today);
+        queryBuilder.append("b.firstRememberDate <= '" + formattedToday + "'");
+        
+        Query query = getEntityManager().createQuery(queryBuilder.toString());
+        return query.getResultList();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public List<Bill> findExpired(Long societyId) {
+        StringBuilder queryBuilder = new StringBuilder("FROM Bill b");
+
+        queryBuilder.append(WHERE);
+        queryBuilder.append("b.customer.society.id = " + societyId);
+        queryBuilder.append(AND);
+        queryBuilder.append("b.paymentDate is null");
+        queryBuilder.append(AND);
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date today = new Date();
+        String formattedToday = format.format(today);
+        queryBuilder.append("b.dueDate <= '" + formattedToday + "'");
+        
+        Query query = getEntityManager().createQuery(queryBuilder.toString());
+        return query.getResultList();
+    }
+
 }

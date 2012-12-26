@@ -39,7 +39,9 @@ import be.jsams.client.swing.component.JsamsLabel;
 import be.jsams.client.swing.component.JsamsStatusBar;
 import be.jsams.client.swing.component.JsamsTextField;
 import be.jsams.common.bean.model.SocietyBean;
+import be.jsams.common.bean.model.sale.AbstractDocumentBean;
 import be.jsams.common.bean.model.sale.BillBean;
+import be.jsams.common.bean.model.sale.EstimateBean;
 import be.jsams.server.service.statistics.StatisticsService;
 
 import com.jgoodies.forms.builder.DefaultFormBuilder;
@@ -94,7 +96,7 @@ public class StatisticsPanel extends JPanel {
         JInternalFrame billsFrame = buildBillsFrame(society);
         pane.add(billsFrame);
 
-        JInternalFrame estimatesFrame = buildEstimatesFrame();
+        JInternalFrame estimatesFrame = buildEstimatesFrame(society);
         pane.add(estimatesFrame);
         
         JInternalFrame customersFrame = buildCustomersFrame();
@@ -195,19 +197,22 @@ public class StatisticsPanel extends JPanel {
         return customersFrame;
     }
 
-    private JInternalFrame buildEstimatesFrame() {
-        JInternalFrame estimatesFrame = new JInternalFrame("Estimates", true, false, true, true);
-        FormLayout layout1 = new FormLayout("left:p, 3dlu, p:grow");
-        DefaultFormBuilder builder1 = new DefaultFormBuilder(layout1);
-        builder1.setDefaultDialogBorder();
-        builder1.appendSeparator("not transferred estimates");
-        builder1.append(new JsamsLabel("nbr"));
-        builder1.append(new JsamsLabel("3"));
-        builder1.append(new JsamsLabel("sum"));
-        builder1.append(new JsamsLabel("1505"));
-        builder1.append(new JsamsLabel("avg"));
-        builder1.append(new JsamsLabel("100"));
-        estimatesFrame.add(builder1.getPanel());
+    /**
+     * Builds the {@link JInternalFrame} for the statistics of the estimates.
+     * 
+     * @param society the {@link SocietyBean} to use
+     * @return the built {@link JInternalFrame}
+     */
+    private JInternalFrame buildEstimatesFrame(SocietyBean society) {
+        JInternalFrame estimatesFrame = new JInternalFrame(I18nResource.MENU_ITEM_ESTIMATE.getTranslation(), true,
+                false, true, true);
+        FormLayout layout = new FormLayout("left:p, 3dlu, p:grow");
+        DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
+        builder.setDefaultDialogBorder();
+        builder.appendI15dSeparator(I18nLabelResource.LABEL_ESTIMATE_NOT_TRANSFERRED.getKey());
+        Map<Double, List<EstimateBean>> notTransferredEstimates = getService().findNotTransferredEstimates(society);
+        updateFrame(builder, notTransferredEstimates);
+        estimatesFrame.add(builder.getPanel());
         estimatesFrame.pack();
         estimatesFrame.setVisible(true);
         return estimatesFrame;
@@ -222,24 +227,18 @@ public class StatisticsPanel extends JPanel {
     private JInternalFrame buildBillsFrame(SocietyBean society) {
         JInternalFrame billsFrame = new JInternalFrame(I18nResource.MENU_ITEM_BILL.getTranslation(), true, false, true,
                 true);
-        FormLayout layout = new FormLayout("left:p, 3dlu, p, 5dlu, left:p, 3dlu, p, 5dlu, left:p, 3dlu, p:grow");
+        FormLayout layout = new FormLayout("left:p, 3dlu, p, 5dlu, left:p, 3dlu, p");
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
         builder.setDefaultDialogBorder();
         builder.appendI15dSeparator(I18nLabelResource.LABEL_BILL_NOT_PAID.getKey());
         Map<Double, List<BillBean>> notPaidBills = getService().findNotPaidBills(society);
         updateFrame(builder, notPaidBills);
-        builder.appendSeparator("bills to throw back");
-        builder.append(new JsamsLabel("nbr"));
-        builder.append(new JsamsLabel("1"));
-        builder.append(new JsamsLabel("sum"));
-        builder.append(new JsamsLabel("100"));
-        builder.nextLine();
-        builder.appendSeparator("bills expired");
-        builder.append(new JsamsLabel("date"));
-        builder.append(new JsamsLabel("01/01/1970"));
-        builder.append(new JsamsLabel("sum"));
-        builder.append(new JsamsLabel("99"));
-        builder.nextLine();
+        builder.appendI15dSeparator(I18nLabelResource.LABEL_BILL_TO_THROW_BACK.getKey());
+        Map<Double, List<BillBean>> toThrowBackBills = getService().findToThrowBackBills(society);
+        updateFrame(builder, toThrowBackBills);
+        builder.appendI15dSeparator(I18nLabelResource.LABEL_BILL_EXPIRED.getKey());
+        Map<Double, List<BillBean>> expiredBills = getService().findExpiredBills(society);
+        updateFrame(builder, expiredBills);
         builder.appendI15dSeparator(I18nLabelResource.LABEL_BILL_OPENED.getKey());
         Map<Double, List<BillBean>> openedBills = getService().findOpenedBills(society);
         updateFrame(builder, openedBills);
@@ -249,19 +248,30 @@ public class StatisticsPanel extends JPanel {
         return billsFrame;
     }
 
-    private void updateFrame(DefaultFormBuilder builder, Map<Double, List<BillBean>> notPaidBills) {
+    /**
+     * Updates the current {@link DefaultFormBuilder} with the documents.
+     * 
+     * @param <D> the document type
+     * @param builder the {@link DefaultFormBuilder} to update
+     * @param documents the documents to use
+     */
+    private <D extends AbstractDocumentBean<?, ?>> void updateFrame(DefaultFormBuilder builder,
+            Map<Double, List<D>> documents) {
         JsamsTextField number = new JsamsTextField();
         number.setEnabled(false);
-        int size = notPaidBills.size();
+        double doubleValue = documents.keySet().iterator().next();
+        int size = documents.get(doubleValue).size();
         number.setText(String.valueOf(size));
         builder.appendI15d(I18nLabelResource.LABEL_QUANTITY.getKey(), number);
         JsamsFormattedTextField amount = new JsamsFormattedTextField(DecimalFormat.getCurrencyInstance());
         amount.setEnabled(false);
-        double doubleValue = notPaidBills.keySet().iterator().next();
         amount.setValue(doubleValue);
         builder.appendI15d(I18nLabelResource.LABEL_AMOUNT.getKey(), amount);
         builder.nextLine();
-        double average = doubleValue / size;
+        double average = 0D;
+        if (size != 0) {
+            average = doubleValue / size;
+        }
         JsamsFormattedTextField averageAmount = new JsamsFormattedTextField(DecimalFormat.getCurrencyInstance());
         averageAmount.setEnabled(false);
         averageAmount.setValue(average);

@@ -146,7 +146,7 @@ public class BillServiceImpl extends AbstractService implements BillService {
      * @return the {@link BigDecimal} for the sum of all the bills
      */
     public BigDecimal calculateSum(List<Bill> bills) {
-        BigDecimal globalTurnover = new BigDecimal(0D);
+        BigDecimal sum = new BigDecimal(0D);
         if (bills != null && !bills.isEmpty()) {
             for (Bill bill : bills) {
                 List<BillDetail> details = bill.getDetails();
@@ -160,12 +160,12 @@ public class BillServiceImpl extends AbstractService implements BillService {
                             double percentage = discountRate / 100;
                             totalEt = totalEt.multiply(BigDecimal.valueOf(1 - percentage));
                         }
-                        globalTurnover = globalTurnover.add(totalEt);
+                        sum = sum.add(totalEt);
                     }
                 }
             }
         }
-        return globalTurnover;
+        return sum;
     }
 
     /**
@@ -175,8 +175,7 @@ public class BillServiceImpl extends AbstractService implements BillService {
     public Map<Double, List<BillBean>> findOpenedBills(SocietyBean society) {
         BillBean criteria = new BillBean(society, null, null);
         criteria.setClosed(false);
-        Map<Double, List<BillBean>> map = findByCriteriaWithSum(society, criteria);
-        return map;
+        return findByCriteriaWithSum(society, criteria);
     }
 
     /**
@@ -186,8 +185,25 @@ public class BillServiceImpl extends AbstractService implements BillService {
     public Map<Double, List<BillBean>> findNotPaidBills(SocietyBean society) {
         BillBean criteria = new BillBean(society, null, null);
         criteria.setPaymentDate(null);
-        Map<Double, List<BillBean>> map = findByCriteriaWithSum(society, criteria);
-        return map;
+        return findByCriteriaWithSum(society, criteria);
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Map<Double, List<BillBean>> findToThrowBackBills(SocietyBean society) {
+        List<Bill> bills = billDao.findToThrowBack(society.getId());
+        return buildMap(society, bills);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Map<Double, List<BillBean>> findExpiredBills(SocietyBean society) {
+        List<Bill> bills = billDao.findExpired(society.getId());
+        return buildMap(society, bills);
     }
 
     /**
@@ -199,13 +215,23 @@ public class BillServiceImpl extends AbstractService implements BillService {
      */
     private Map<Double, List<BillBean>> findByCriteriaWithSum(SocietyBean society, BillBean criteria) {
         List<Bill> bills = billDao.findByCriteria(society.getId(), criteria);
+        return buildMap(society, bills);
+    }
+
+    /**
+     * Builds the map with sum and the bills list.
+     * 
+     * @param society the {@link SocietyBean} to use
+     * @param bills the bills list to use
+     * @return the built map with sum and the bills list
+     */
+    private Map<Double, List<BillBean>> buildMap(SocietyBean society, List<Bill> bills) {
         BigDecimal sum = calculateSum(bills);
         List<BillBean> list = mapModelToBean(society, bills);
         Map<Double, List<BillBean>> map = new HashMap<Double, List<BillBean>>();
         map.put(sum.doubleValue(), list);
         return map;
     }
-
 
     /**
      * @return the billDao
