@@ -15,7 +15,7 @@ import be.jsams.server.service.CriteriableService;
  * @version $Rev$ $Date::                  $ $Author$
  */
 public interface BillService extends CriteriableService<BillBean> {
-    
+
     /**
      * Calculates the global turnover for a {@link SocietyBean}.
      * 
@@ -23,7 +23,7 @@ public interface BillService extends CriteriableService<BillBean> {
      * @return the calculated global turnover
      */
     BigDecimal findGlobalTurnover(SocietyBean society);
-    
+
     /**
      * Finds all opened bills.
      * 
@@ -33,11 +33,11 @@ public interface BillService extends CriteriableService<BillBean> {
     Map<Double, List<BillBean>> findOpenedBills(SocietyBean society);
 
     /**
-     * Finds all closed bills.
+     * Finds all not paid bills.
      * 
      * @param society the {@link SocietyBean} to use
-     * @return a list of closed bills
+     * @return a list of not paid bills with the sum as key
      */
-    List<BillBean> findClosedBills(SocietyBean society);
+    Map<Double, List<BillBean>> findNotPaidBills(SocietyBean society);
 
 }

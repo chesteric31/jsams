@@ -49,9 +49,8 @@ public class StatisticsServiceImpl implements StatisticsService {
      * {@inheritDoc}
      */
     @Override
-    public List<BillBean> findNotPaidBills(SocietyBean society) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException();
+    public Map<Double, List<BillBean>> findNotPaidBills(SocietyBean society) {
+        return billService.findNotPaidBills(society);
     }
 
     /**

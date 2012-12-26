@@ -175,11 +175,7 @@ public class BillServiceImpl extends AbstractService implements BillService {
     public Map<Double, List<BillBean>> findOpenedBills(SocietyBean society) {
         BillBean criteria = new BillBean(society, null, null);
         criteria.setClosed(false);
-        List<Bill> bills = billDao.findByCriteria(society.getId(), criteria);
-        BigDecimal sum = calculateSum(bills);
-        List<BillBean> list = mapModelToBean(society, bills);
-        Map<Double, List<BillBean>> map = new HashMap<Double, List<BillBean>>();
-        map.put(sum.doubleValue(), list);
+        Map<Double, List<BillBean>> map = findByCriteriaWithSum(society, criteria);
         return map;
     }
 
@@ -187,10 +183,27 @@ public class BillServiceImpl extends AbstractService implements BillService {
      * {@inheritDoc}
      */
     @Override
-    public List<BillBean> findClosedBills(SocietyBean society) {
+    public Map<Double, List<BillBean>> findNotPaidBills(SocietyBean society) {
         BillBean criteria = new BillBean(society, null, null);
-        criteria.setClosed(true);
-        return findByCriteria(criteria);
+        criteria.setPaymentDate(null);
+        Map<Double, List<BillBean>> map = findByCriteriaWithSum(society, criteria);
+        return map;
+    }
+
+    /**
+     * Builds the map with sum and result of criteria query.
+     * 
+     * @param society the {@link SocietyBean} to use
+     * @param criteria the criteria to use
+     * @return the built map with sum and result of criteria query
+     */
+    private Map<Double, List<BillBean>> findByCriteriaWithSum(SocietyBean society, BillBean criteria) {
+        List<Bill> bills = billDao.findByCriteria(society.getId(), criteria);
+        BigDecimal sum = calculateSum(bills);
+        List<BillBean> list = mapModelToBean(society, bills);
+        Map<Double, List<BillBean>> map = new HashMap<Double, List<BillBean>>();
+        map.put(sum.doubleValue(), list);
+        return map;
     }
 
 

@@ -135,7 +135,6 @@ public final class ViewFactory<B extends AbstractIdentityBean<?, ?>> {
      */
     public JsamsFormattedTextField createBindingCurrencyComponent(final B bean, final String property,
             final boolean mandatory, final boolean readOnly) {
-        // Definition of the default/display formatter
         NumberFormat numberFormat = DecimalFormat.getCurrencyInstance();
         JsamsFormattedTextField textField = buildFormattedTextField(bean, property, mandatory, readOnly, numberFormat,
                 null);

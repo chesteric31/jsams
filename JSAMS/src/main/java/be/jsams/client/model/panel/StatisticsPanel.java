@@ -32,6 +32,7 @@ import org.jfree.data.xy.XYDataset;
 import be.jsams.client.context.ApplicationContext;
 import be.jsams.client.desktop.Desktop;
 import be.jsams.client.i18n.I18nLabelResource;
+import be.jsams.client.i18n.I18nResource;
 import be.jsams.client.swing.component.AbstractJsamsFrame;
 import be.jsams.client.swing.component.JsamsFormattedTextField;
 import be.jsams.client.swing.component.JsamsLabel;
@@ -89,8 +90,26 @@ public class StatisticsPanel extends JPanel {
         pane.setLayout(new GridLayout(0, 4));
 
         SocietyBean society = Desktop.getInstance().getCurrentSociety();
-        Double globalTurnover = getService().findGlobalTurnover(society);
 
+        JInternalFrame billsFrame = buildBillsFrame(society);
+        pane.add(billsFrame);
+
+        JInternalFrame estimatesFrame = buildEstimatesFrame();
+        pane.add(estimatesFrame);
+        
+        JInternalFrame customersFrame = buildCustomersFrame();
+        pane.add(customersFrame);
+
+        JInternalFrame productsFrame = buildProductsFrame();
+        pane.add(productsFrame);
+
+        add(pane, BorderLayout.NORTH);
+
+        JDesktopPane turnoverPane = buildTurnoverPane(society);
+        add(turnoverPane, BorderLayout.CENTER);
+    }
+
+    private JDesktopPane buildTurnoverPane(SocietyBean society) {
         final XYDataset data1 = createDataset();
         final XYItemRenderer renderer1 = new XYBarRenderer();
         
@@ -101,64 +120,55 @@ public class StatisticsPanel extends JPanel {
 
         final JFreeChart chart = new JFreeChart(plot);
         final ChartPanel chartPanel = new ChartPanel(chart);
+        Double globalTurnover = getService().findGlobalTurnover(society);
+        JDesktopPane pane1 = new JDesktopPane();
+        JInternalFrame globalTurnoverFrame = new JInternalFrame("Global turnover evolution", true, false, true, true);
+        JPanel globalTurnoverPanel = new JPanel();
+        globalTurnoverPanel.add(new JsamsLabel(I18nLabelResource.LABEL_GLOBAL_TURNOVER));
+        JsamsFormattedTextField textField = new JsamsFormattedTextField(DecimalFormat.getCurrencyInstance());
+        textField.setEnabled(false);
+        textField.setValue(globalTurnover);
+        globalTurnoverPanel.add(textField);
+        globalTurnoverFrame.add(globalTurnoverPanel, BorderLayout.WEST);
+        globalTurnoverFrame.add(chartPanel, BorderLayout.CENTER);
+        globalTurnoverFrame.pack();
+        globalTurnoverFrame.setVisible(true);
+        pane1.add(globalTurnoverFrame);
+        try {
+            globalTurnoverFrame.setMaximum(true);
+        } catch (PropertyVetoException e) {
+            throw new RuntimeException(e);
+        }
+        return pane1;
+    }
 
-        JInternalFrame billsFrame = new JInternalFrame("Bills", true, false, true, true);
-        FormLayout layout = new FormLayout("left:p, 3dlu, p, 5dlu, left:p, 3dlu, p, 5dlu, left:p, 3dlu, p:grow");
-        DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
-        builder.setDefaultDialogBorder();
-        builder.appendSeparator("not paid bills");
-        builder.append(new JsamsLabel("nbr"));
-        builder.append(new JsamsLabel("3"));
-        builder.append(new JsamsLabel("sum"));
-        builder.append(new JsamsLabel("1505"));
-        builder.nextLine();
-        builder.appendSeparator("bills to throw back");
-        builder.append(new JsamsLabel("nbr"));
-        builder.append(new JsamsLabel("1"));
-        builder.append(new JsamsLabel("sum"));
-        builder.append(new JsamsLabel("100"));
-        builder.nextLine();
-        builder.appendSeparator("bills expired");
-        builder.append(new JsamsLabel("date"));
-        builder.append(new JsamsLabel("01/01/1970"));
-        builder.append(new JsamsLabel("sum"));
-        builder.append(new JsamsLabel("99"));
-        builder.nextLine();
-        builder.appendI15dSeparator(I18nLabelResource.LABEL_BILL_OPENED.getKey());
-        Map<Double, List<BillBean>> openedBills = getService().findOpenedBills(society);
-        JsamsTextField openedBillsNumber = new JsamsTextField();
-        openedBillsNumber.setEnabled(false);
-        openedBillsNumber.setText(String.valueOf(openedBills.size()));
-        builder.appendI15d(I18nLabelResource.LABEL_QUANTITY.getKey(), openedBillsNumber);
-        JsamsFormattedTextField openedBillsAmount = new JsamsFormattedTextField(DecimalFormat.getCurrencyInstance());
-        openedBillsAmount.setEnabled(false);
-        double doubleValue = openedBills.keySet().iterator().next();
-        openedBillsAmount.setValue(doubleValue);
-        builder.appendI15d(I18nLabelResource.LABEL_AMOUNT.getKey(), openedBillsAmount);
-        builder.append(new JsamsLabel("100"));
-        builder.append(new JsamsLabel("avg"));
-        builder.append(new JsamsLabel("100"));
-        billsFrame.add(builder.getPanel());
-        billsFrame.pack();
-        billsFrame.setVisible(true);
-        pane.add(billsFrame);
+    private JInternalFrame buildProductsFrame() {
+        JInternalFrame productsFrame = new JInternalFrame("Products", true, false, true, true);
+        FormLayout layout111 = new FormLayout("left:p, 3dlu, p:grow");
+        DefaultFormBuilder builder111 = new DefaultFormBuilder(layout111);
+        builder111.setDefaultDialogBorder();
+        builder111.appendSeparator("top 5");
+        builder111.append(new JsamsLabel("1"));
+        builder111.append(new JsamsLabel("123"));
+        builder111.nextLine();
+        builder111.append(new JsamsLabel("2"));
+        builder111.append(new JsamsLabel("123"));
+        builder111.nextLine();
+        builder111.append(new JsamsLabel("3"));
+        builder111.append(new JsamsLabel("123"));
+        builder111.nextLine();
+        builder111.append(new JsamsLabel("4"));
+        builder111.append(new JsamsLabel("123"));
+        builder111.nextLine();
+        builder111.append(new JsamsLabel("5"));
+        builder111.append(new JsamsLabel("123"));
+        productsFrame.add(builder111.getPanel());
+        productsFrame.pack();
+        productsFrame.setVisible(true);
+        return productsFrame;
+    }
 
-        JInternalFrame estimatesFrame = new JInternalFrame("Estimates", true, false, true, true);
-        FormLayout layout1 = new FormLayout("left:p, 3dlu, p:grow");
-        DefaultFormBuilder builder1 = new DefaultFormBuilder(layout1);
-        builder1.setDefaultDialogBorder();
-        builder1.appendSeparator("not transferred estimates");
-        builder1.append(new JsamsLabel("nbr"));
-        builder1.append(new JsamsLabel("3"));
-        builder1.append(new JsamsLabel("sum"));
-        builder1.append(new JsamsLabel("1505"));
-        builder1.append(new JsamsLabel("avg"));
-        builder1.append(new JsamsLabel("100"));
-        estimatesFrame.add(builder1.getPanel());
-        estimatesFrame.pack();
-        estimatesFrame.setVisible(true);
-        pane.add(estimatesFrame);
-        
+    private JInternalFrame buildCustomersFrame() {
         JInternalFrame customersFrame = new JInternalFrame("Customers", true, false, true, true);
         FormLayout layout11 = new FormLayout("left:p, 3dlu, p:grow");
         DefaultFormBuilder builder11 = new DefaultFormBuilder(layout11);
@@ -182,54 +192,81 @@ public class StatisticsPanel extends JPanel {
         customersFrame.add(builder11.getPanel());
         customersFrame.pack();
         customersFrame.setVisible(true);
-        pane.add(customersFrame);
+        return customersFrame;
+    }
 
-        JInternalFrame productsFrame = new JInternalFrame("Products", true, false, true, true);
-        FormLayout layout111 = new FormLayout("left:p, 3dlu, p:grow");
-        DefaultFormBuilder builder111 = new DefaultFormBuilder(layout111);
-        builder111.setDefaultDialogBorder();
-        builder111.appendSeparator("top 5");
-        builder111.append(new JsamsLabel("1"));
-        builder111.append(new JsamsLabel("123"));
-        builder111.nextLine();
-        builder111.append(new JsamsLabel("2"));
-        builder111.append(new JsamsLabel("123"));
-        builder111.nextLine();
-        builder111.append(new JsamsLabel("3"));
-        builder111.append(new JsamsLabel("123"));
-        builder111.nextLine();
-        builder111.append(new JsamsLabel("4"));
-        builder111.append(new JsamsLabel("123"));
-        builder111.nextLine();
-        builder111.append(new JsamsLabel("5"));
-        builder111.append(new JsamsLabel("123"));
-        productsFrame.add(builder111.getPanel());
-        productsFrame.pack();
-        productsFrame.setVisible(true);
-        pane.add(productsFrame);
+    private JInternalFrame buildEstimatesFrame() {
+        JInternalFrame estimatesFrame = new JInternalFrame("Estimates", true, false, true, true);
+        FormLayout layout1 = new FormLayout("left:p, 3dlu, p:grow");
+        DefaultFormBuilder builder1 = new DefaultFormBuilder(layout1);
+        builder1.setDefaultDialogBorder();
+        builder1.appendSeparator("not transferred estimates");
+        builder1.append(new JsamsLabel("nbr"));
+        builder1.append(new JsamsLabel("3"));
+        builder1.append(new JsamsLabel("sum"));
+        builder1.append(new JsamsLabel("1505"));
+        builder1.append(new JsamsLabel("avg"));
+        builder1.append(new JsamsLabel("100"));
+        estimatesFrame.add(builder1.getPanel());
+        estimatesFrame.pack();
+        estimatesFrame.setVisible(true);
+        return estimatesFrame;
+    }
 
-        add(pane, BorderLayout.NORTH);
+    /**
+     * Builds the {@link JInternalFrame} for the statistics of the bills.
+     * 
+     * @param society the {@link SocietyBean} to use
+     * @return the built {@link JInternalFrame}
+     */
+    private JInternalFrame buildBillsFrame(SocietyBean society) {
+        JInternalFrame billsFrame = new JInternalFrame(I18nResource.MENU_ITEM_BILL.getTranslation(), true, false, true,
+                true);
+        FormLayout layout = new FormLayout("left:p, 3dlu, p, 5dlu, left:p, 3dlu, p, 5dlu, left:p, 3dlu, p:grow");
+        DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
+        builder.setDefaultDialogBorder();
+        builder.appendI15dSeparator(I18nLabelResource.LABEL_BILL_NOT_PAID.getKey());
+        Map<Double, List<BillBean>> notPaidBills = getService().findNotPaidBills(society);
+        updateFrame(builder, notPaidBills);
+        builder.appendSeparator("bills to throw back");
+        builder.append(new JsamsLabel("nbr"));
+        builder.append(new JsamsLabel("1"));
+        builder.append(new JsamsLabel("sum"));
+        builder.append(new JsamsLabel("100"));
+        builder.nextLine();
+        builder.appendSeparator("bills expired");
+        builder.append(new JsamsLabel("date"));
+        builder.append(new JsamsLabel("01/01/1970"));
+        builder.append(new JsamsLabel("sum"));
+        builder.append(new JsamsLabel("99"));
+        builder.nextLine();
+        builder.appendI15dSeparator(I18nLabelResource.LABEL_BILL_OPENED.getKey());
+        Map<Double, List<BillBean>> openedBills = getService().findOpenedBills(society);
+        updateFrame(builder, openedBills);
+        billsFrame.add(builder.getPanel());
+        billsFrame.pack();
+        billsFrame.setVisible(true);
+        return billsFrame;
+    }
 
-        JDesktopPane pane1 = new JDesktopPane();
-        JInternalFrame globalTurnoverFrame = new JInternalFrame("Global turnover evolution", true, false, true, true);
-        JPanel globalTurnoverPanel = new JPanel();
-        globalTurnoverPanel.add(new JsamsLabel("Global turnover"));
-        JsamsFormattedTextField textField = new JsamsFormattedTextField(DecimalFormat.getCurrencyInstance());
-        textField.setEnabled(false);
-        textField.setValue(globalTurnover);
-        globalTurnoverPanel.add(textField);
-        globalTurnoverFrame.add(globalTurnoverPanel, BorderLayout.WEST);
-        globalTurnoverFrame.add(chartPanel, BorderLayout.CENTER);
-        globalTurnoverFrame.pack();
-        globalTurnoverFrame.setVisible(true);
-        pane1.add(globalTurnoverFrame);
-        try {
-            globalTurnoverFrame.setMaximum(true);
-        } catch (PropertyVetoException e) {
-            // TODO Auto-generated catch block
-            throw new RuntimeException(e);
-        }
-        add(pane1, BorderLayout.CENTER);
+    private void updateFrame(DefaultFormBuilder builder, Map<Double, List<BillBean>> notPaidBills) {
+        JsamsTextField number = new JsamsTextField();
+        number.setEnabled(false);
+        int size = notPaidBills.size();
+        number.setText(String.valueOf(size));
+        builder.appendI15d(I18nLabelResource.LABEL_QUANTITY.getKey(), number);
+        JsamsFormattedTextField amount = new JsamsFormattedTextField(DecimalFormat.getCurrencyInstance());
+        amount.setEnabled(false);
+        double doubleValue = notPaidBills.keySet().iterator().next();
+        amount.setValue(doubleValue);
+        builder.appendI15d(I18nLabelResource.LABEL_AMOUNT.getKey(), amount);
+        builder.nextLine();
+        double average = doubleValue / size;
+        JsamsFormattedTextField averageAmount = new JsamsFormattedTextField(DecimalFormat.getCurrencyInstance());
+        averageAmount.setEnabled(false);
+        averageAmount.setValue(average);
+        builder.appendI15d(I18nLabelResource.LABEL_AVERAGE_AMOUNT.getKey(), averageAmount);
+        builder.nextLine();
     }
 
     /**

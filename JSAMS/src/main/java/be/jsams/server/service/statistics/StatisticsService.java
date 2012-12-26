@@ -40,9 +40,9 @@ public interface StatisticsService {
      * 
      * @param society the {@link SocietyBean} to use
      * 
-     * @return a list of not paid bills
+     * @return a list of not paid bills with sum
      */
-    List<BillBean> findNotPaidBills(SocietyBean society);
+    Map<Double, List<BillBean>> findNotPaidBills(SocietyBean society);
 
     /**
      * Finds all the bills to throw back from the start of the program.
