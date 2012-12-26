@@ -8,16 +8,20 @@ import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
+import be.jsams.client.i18n.I18nString;
 import be.jsams.client.model.panel.AbstractSearchPanel;
 import be.jsams.client.model.table.AbstractJsamsTableModel;
 import be.jsams.client.swing.component.JsamsButton;
+import be.jsams.client.swing.component.JsamsLabel;
 import be.jsams.client.swing.utils.IconResource;
 import be.jsams.client.swing.utils.IconUtil;
 import be.jsams.common.bean.model.sale.AbstractDocumentBean;
 import be.jsams.server.service.Service;
+import be.jsams.server.service.mail.MailSender;
 
 import com.jgoodies.forms.factories.ButtonBarFactory;
 import com.jgoodies.validation.Validator;
+import com.jgoodies.validation.view.ValidationResultViewFactory;
 
 /**
  * Search generic panel for all documents.
@@ -81,7 +85,8 @@ public abstract class AbstractSaleSearchPanel<B extends AbstractDocumentBean<?, 
 //        buttonPdf.setToolTipText(I18nResource.BUTTON_DO_PDF);
         buttonPdf.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                performButtonPdf(true);
+                B bean = retrieveSelectedBean();
+                performButtonPdf(true, bean);
             }
         });
         return buttonPdf;
@@ -91,10 +96,11 @@ public abstract class AbstractSaleSearchPanel<B extends AbstractDocumentBean<?, 
      * The action to perform when click onto PDF generation button.
      * 
      * @param viewReport true if we will to see the report, false otherwise
+     * @param bean the selected bean
      * 
      * @return the filename where the PDF was created
      */
-    protected abstract String performButtonPdf(boolean viewReport);
+    protected abstract String performButtonPdf(boolean viewReport, B bean);
 
     /**
      * Builds the Email sending button.
@@ -107,20 +113,49 @@ public abstract class AbstractSaleSearchPanel<B extends AbstractDocumentBean<?, 
 //        buttonEmail.setToolTipText(I18nResource.BUTTON_SEND_EMAIL);
         buttonEmail.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String pdf = performButtonPdf(false);
-                performButtonEmail(pdf);
+                B bean = retrieveSelectedBean();
+                String pdf = performButtonPdf(false, bean);
+                MailSender<B> sender = new MailSender<B>(pdf, bean);
+                boolean success = sender.send();
+                if (success) {
+                    postSend(bean.getCustomer().getContactInformation().getEmail());
+                }
+            }
+            /**
+             * Post treatment if the email was successfully sent.
+             * 
+             * @param email the recipient address of the email
+             */
+            private void postSend(String email) {
+                I18nString success = new I18nString("label.email.success");
+                success.setArguments(new Object[] {email});
+                JsamsLabel label = new JsamsLabel(success);
+                label.setIcon(ValidationResultViewFactory.getInfoIcon());
+                getStatusBar().removeAll();
+                getStatusBar().repaint();
+                getStatusBar().addComponent(label);
+                getStatusBar().validate();
             }
         });
         return buttonEmail;
     }
-
-    /**
-     * The action to perform when click onto Email sending button.
-     * 
-     * @param pdf the PDF file to attach to the new mail to send
-     */
-    protected abstract void performButtonEmail(String pdf);
     
+    /**
+     * Retrieves the selected bean.
+     * 
+     * @return the selected bean
+     */
+    protected B retrieveSelectedBean() {
+        int selectedRow = getResultTable().getSelectedRow();
+        if (selectedRow > -1) {
+            int selectedRowModel = getResultTable().convertRowIndexToModel(selectedRow);
+            @SuppressWarnings("unchecked")
+            TM model = (TM) getResultTable().getModel();
+            return model.getRow(selectedRowModel);
+        }
+        return null;
+    }
+
     /**
      * {@inheritDoc}
      */
