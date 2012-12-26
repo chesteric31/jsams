@@ -3,7 +3,7 @@ package be.jsams.client.model.panel;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.beans.PropertyVetoException;
-import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -29,10 +29,11 @@ import org.jfree.data.xy.XYDataset;
 
 import be.jsams.client.context.ApplicationContext;
 import be.jsams.client.desktop.Desktop;
+import be.jsams.client.swing.component.JsamsFormattedTextField;
 import be.jsams.client.swing.component.JsamsLabel;
 import be.jsams.client.swing.component.JsamsStatusBar;
 import be.jsams.common.bean.model.SocietyBean;
-import be.jsams.server.service.sale.BillService;
+import be.jsams.server.service.statistics.StatisticsService;
 
 import com.jgoodies.forms.builder.DefaultFormBuilder;
 import com.jgoodies.forms.layout.FormLayout;
@@ -82,7 +83,7 @@ public class StatisticsPanel extends JPanel {
         pane.setLayout(new GridLayout(0, 4));
 
         SocietyBean society = Desktop.getInstance().getCurrentSociety();
-        BigDecimal globalTurnover = getService().findGlobalTurnover(society);
+        Double globalTurnover = getService().findGlobalTurnover(society);
 //        this.add(new JsamsLabel(globalTurnover.toPlainString()));
 //        final DefaultPieDataset pieDataset = new DefaultPieDataset();
 
@@ -215,7 +216,10 @@ public class StatisticsPanel extends JPanel {
         JInternalFrame globalTurnoverFrame = new JInternalFrame("Global turnover evolution", true, false, true, true);
         JPanel globalTurnoverPanel = new JPanel();
         globalTurnoverPanel.add(new JsamsLabel("Global turnover"));
-        globalTurnoverPanel.add(new JsamsLabel(globalTurnover.toEngineeringString()));
+        JsamsFormattedTextField textField = new JsamsFormattedTextField(DecimalFormat.getCurrencyInstance());
+        textField.setEnabled(false);
+        textField.setValue(globalTurnover);
+        globalTurnoverPanel.add(textField);
         globalTurnoverFrame.add(globalTurnoverPanel, BorderLayout.WEST);
         globalTurnoverFrame.add(chartPanel, BorderLayout.CENTER);
         globalTurnoverFrame.pack();
@@ -260,10 +264,10 @@ public class StatisticsPanel extends JPanel {
     }
 
     /**
-     * @return the {@link BillService}
+     * @return the {@link StatisticsService}
      */
-    private BillService getService() {
-        return ApplicationContext.getBillService();
+    private StatisticsService getService() {
+        return ApplicationContext.getStatisticsService();
     }
 
     /**

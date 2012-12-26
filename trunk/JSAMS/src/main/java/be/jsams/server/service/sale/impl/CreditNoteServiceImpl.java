@@ -1,5 +1,6 @@
 package be.jsams.server.service.sale.impl;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +11,7 @@ import be.jsams.common.bean.model.sale.CreditNoteBean;
 import be.jsams.server.dao.sale.CreditNoteDao;
 import be.jsams.server.model.Society;
 import be.jsams.server.model.sale.CreditNote;
+import be.jsams.server.model.sale.detail.CreditNoteDetail;
 import be.jsams.server.service.AbstractService;
 import be.jsams.server.service.sale.CreditNoteService;
 
@@ -104,6 +106,34 @@ public class CreditNoteServiceImpl extends AbstractService implements CreditNote
             beans.add(new CreditNoteBean(creditNote, society, customer, getProductBeanBuilder()));
         }
         return beans;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public BigDecimal findGlobalTurnover(SocietyBean society) {
+        BigDecimal globalTurnover = new BigDecimal(0D);
+        List<CreditNote> creditNotes = creditNoteDao.findAll(society.getId());
+        if (creditNotes != null && !creditNotes.isEmpty()) {
+            for (CreditNote creditNote : creditNotes) {
+                List<CreditNoteDetail> details = creditNote.getDetails();
+                if (details != null && !details.isEmpty()) {
+                    for (CreditNoteDetail detail : details) {
+                        Double discountRate = detail.getDiscountRate();
+                        Double price = detail.getPrice();
+                        int quantity = detail.getQuantity();
+                        BigDecimal totalEt = BigDecimal.valueOf(price * quantity);
+                        if (discountRate != null) {
+                            double percentage = discountRate / 100;
+                            totalEt = totalEt.multiply(BigDecimal.valueOf(1 - percentage));
+                        }
+                        globalTurnover = globalTurnover.add(totalEt);
+                    }
+                }
+            }
+        }
+        return globalTurnover;
     }
 
     /**
