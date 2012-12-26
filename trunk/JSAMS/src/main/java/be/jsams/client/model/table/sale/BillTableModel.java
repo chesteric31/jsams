@@ -53,7 +53,10 @@ public class BillTableModel extends AbstractJsamsTableModel<BillBean> {
         case ONE:
             return bean.getCreationDate();
         case TWO:
-            return bean.getPaymentDate();
+            if (bean.getPaymentDate() == null) {
+                return false;
+            }
+            return true;
         case THREE:
             return bean.isClosed();
         case FOUR:
