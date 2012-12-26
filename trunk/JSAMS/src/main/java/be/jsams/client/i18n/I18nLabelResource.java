@@ -233,5 +233,8 @@ public final class I18nLabelResource {
     public static final I18nString LABEL_SETTINGS_EMAIL_PASS = new I18nString("label.settings.email.pass");
     public static final I18nString LABEL_SETTINGS_EMAIL_DEFAULT_SUBJECT = new I18nString(
             "label.settings.email.default_subject");
-
+    
+    public static final I18nString LABEL_QUANTITY = new I18nString("label.quantity");
+    public static final I18nString LABEL_AMOUNT = new I18nString("label.amount");
+    
 }

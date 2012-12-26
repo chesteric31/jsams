@@ -1,6 +1,7 @@
 package be.jsams.server.service.statistics;
 
 import java.util.List;
+import java.util.Map;
 
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.CustomerBean;
@@ -66,9 +67,9 @@ public interface StatisticsService {
      * 
      * @param society the {@link SocietyBean} to use
      * 
-     * @return a list of opened bills
+     * @return a list of opened bills with the sum
      */
-    List<BillBean> findOpenedBills(SocietyBean society);
+    Map<Double, List<BillBean>> findOpenedBills(SocietyBean society);
 
     /**
      * Finds all the not transferred estimates from the start of the program.

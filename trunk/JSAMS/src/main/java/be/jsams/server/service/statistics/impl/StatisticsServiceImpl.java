@@ -2,6 +2,7 @@ package be.jsams.server.service.statistics.impl;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.CustomerBean;
@@ -75,9 +76,8 @@ public class StatisticsServiceImpl implements StatisticsService {
      * {@inheritDoc}
      */
     @Override
-    public List<BillBean> findOpenedBills(SocietyBean society) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException();
+    public Map<Double, List<BillBean>> findOpenedBills(SocietyBean society) {
+        return billService.findOpenedBills(society);
     }
 
     /**

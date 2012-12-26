@@ -2,6 +2,7 @@ package be.jsams.server.service.sale;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.sale.BillBean;
@@ -27,9 +28,9 @@ public interface BillService extends CriteriableService<BillBean> {
      * Finds all opened bills.
      * 
      * @param society the {@link SocietyBean} to use
-     * @return a list of opened bills
+     * @return a list of opened bills with the sum as key
      */
-    List<BillBean> findOpenedBills(SocietyBean society);
+    Map<Double, List<BillBean>> findOpenedBills(SocietyBean society);
 
     /**
      * Finds all closed bills.
