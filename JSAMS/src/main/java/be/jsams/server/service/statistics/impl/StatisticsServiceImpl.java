@@ -57,18 +57,16 @@ public class StatisticsServiceImpl implements StatisticsService {
      * {@inheritDoc}
      */
     @Override
-    public List<BillBean> findToThrowBackBills(SocietyBean society) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException();
+    public Map<Double, List<BillBean>> findToThrowBackBills(SocietyBean society) {
+        return billService.findToThrowBackBills(society);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public List<BillBean> findExpiredBills(SocietyBean society) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException();
+    public Map<Double, List<BillBean>> findExpiredBills(SocietyBean society) {
+        return billService.findExpiredBills(society);
     }
 
     /**
@@ -83,9 +81,8 @@ public class StatisticsServiceImpl implements StatisticsService {
      * {@inheritDoc}
      */
     @Override
-    public List<EstimateBean> findNotTransferredEstimates(SocietyBean society) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException();
+    public Map<Double, List<EstimateBean>> findNotTransferredEstimates(SocietyBean society) {
+        return estimateService.findNotTransferredEstimates(society);
     }
 
     /**

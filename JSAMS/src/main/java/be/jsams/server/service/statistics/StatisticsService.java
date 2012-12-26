@@ -49,18 +49,18 @@ public interface StatisticsService {
      * 
      * @param society the {@link SocietyBean} to use
      * 
-     * @return a list of bills to throw back
+     * @return a list of bills to throw back with sum
      */
-    List<BillBean> findToThrowBackBills(SocietyBean society);
+    Map<Double, List<BillBean>> findToThrowBackBills(SocietyBean society);
 
     /**
      * Finds all the expired bills from the start of the program.
      * 
      * @param society the {@link SocietyBean} to use
      * 
-     * @return a list of expired bills
+     * @return a list of expired bills with sum
      */
-    List<BillBean> findExpiredBills(SocietyBean society);
+    Map<Double, List<BillBean>> findExpiredBills(SocietyBean society);
 
     /**
      * Finds all the opened bills from the start of the program.
@@ -76,9 +76,9 @@ public interface StatisticsService {
      * 
      * @param society the {@link SocietyBean} to use
      * 
-     * @return a list of not transferred estimates
+     * @return a list of not transferred estimates with sum
      */
-    List<EstimateBean> findNotTransferredEstimates(SocietyBean society);
+    Map<Double, List<EstimateBean>> findNotTransferredEstimates(SocietyBean society);
 
     /**
      * Finds a top 5 of customers with the most turnover from the start of the program.

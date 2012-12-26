@@ -238,5 +238,9 @@ public final class I18nLabelResource {
     public static final I18nString LABEL_AVERAGE_AMOUNT = new I18nString("label.amount.average");
     public static final I18nString LABEL_GLOBAL_TURNOVER = new I18nString("label.turnover.global");
     public static final I18nString LABEL_BILL_NOT_PAID = new I18nString("label.bill.not_paid");
+    public static final I18nString LABEL_BILL_TO_THROW_BACK = new I18nString("label.bill.to_throw_back");
+    public static final I18nString LABEL_BILL_EXPIRED = new I18nString("label.bill.expired");
+
+    public static final I18nString LABEL_ESTIMATE_NOT_TRANSFERRED = new I18nString("label.estimate.not_transferred");
     
 }
