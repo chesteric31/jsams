@@ -30,6 +30,7 @@ import be.jsams.server.service.sale.CommandService;
 import be.jsams.server.service.sale.CreditNoteService;
 import be.jsams.server.service.sale.DeliveryOrderService;
 import be.jsams.server.service.sale.EstimateService;
+import be.jsams.server.service.statistics.StatisticsService;
 import be.jsams.server.service.transfer.TransferService;
 import be.jsams.server.service.update.DownloaderService;
 
@@ -267,6 +268,13 @@ public final class ApplicationContext {
      */
     public static DownloaderService getDownloaderService() {
         return (DownloaderService) context.getBean("downloaderService");
+    }
+
+    /**
+     * @return the {@link StatisticsService}
+     */
+    public static StatisticsService getStatisticsService() {
+        return (StatisticsService) context.getBean("statisticsService");
     }
 
 }

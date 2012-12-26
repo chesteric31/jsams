@@ -135,5 +135,6 @@
 	<import resource="SaleApplicationContext.xml" />
 	<import resource="TransferApplicationContext.xml" />
 	<import resource="PdfApplicationContext.xml" />
+	<import resource="StatisticsApplicationContext.xml" />
 
 </beans>
