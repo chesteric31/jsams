@@ -10,6 +10,7 @@ import be.jsams.common.bean.model.management.ProductBean;
 import be.jsams.common.bean.model.sale.BillBean;
 import be.jsams.common.bean.model.sale.EstimateBean;
 import be.jsams.server.service.management.CustomerService;
+import be.jsams.server.service.management.ProductService;
 import be.jsams.server.service.sale.BillService;
 import be.jsams.server.service.sale.CreditNoteService;
 import be.jsams.server.service.sale.EstimateService;
@@ -27,6 +28,7 @@ public class StatisticsServiceImpl implements StatisticsService {
     private BillService billService;
     private CreditNoteService creditNoteService;
     private CustomerService customerService;
+    private ProductService productService;
 
     /**
      * {@inheritDoc}
@@ -115,9 +117,8 @@ public class StatisticsServiceImpl implements StatisticsService {
      * {@inheritDoc}
      */
     @Override
-    public List<ProductBean> findTop5Products(SocietyBean society) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException();
+    public Map<Double, ProductBean> findTop5Products(SocietyBean society) {
+        return productService.findTop5Products(society);
     }
 
     /**
@@ -174,6 +175,20 @@ public class StatisticsServiceImpl implements StatisticsService {
      */
     public void setCustomerService(CustomerService customerService) {
         this.customerService = customerService;
+    }
+
+    /**
+     * @return the productService
+     */
+    public ProductService getProductService() {
+        return productService;
+    }
+
+    /**
+     * @param productService the productService to set
+     */
+    public void setProductService(ProductService productService) {
+        this.productService = productService;
     }
 
 }

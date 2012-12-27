@@ -42,6 +42,7 @@ import be.jsams.client.swing.component.JsamsStatusBar;
 import be.jsams.client.swing.component.JsamsTextField;
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.CustomerBean;
+import be.jsams.common.bean.model.management.ProductBean;
 import be.jsams.common.bean.model.sale.AbstractDocumentBean;
 import be.jsams.common.bean.model.sale.BillBean;
 import be.jsams.common.bean.model.sale.EstimateBean;
@@ -114,6 +115,12 @@ public class StatisticsPanel extends JPanel {
         add(turnoverPane, BorderLayout.CENTER);
     }
 
+    /**
+     * Builds the {@link JDesktopPane} with turnover statistics.
+     * 
+     * @param society the {@link SocietyBean} to use
+     * @return the built {@link JDesktopPane}
+     */
     private JDesktopPane buildTurnoverPane(SocietyBean society) {
         final XYDataset data1 = createDataset();
         final XYItemRenderer renderer1 = new XYBarRenderer();
@@ -127,7 +134,8 @@ public class StatisticsPanel extends JPanel {
         final ChartPanel chartPanel = new ChartPanel(chart);
         Double globalTurnover = getService().findGlobalTurnover(society);
         JDesktopPane pane1 = new JDesktopPane();
-        JInternalFrame globalTurnoverFrame = new JInternalFrame("Global turnover evolution", true, false, true, true);
+        JInternalFrame globalTurnoverFrame = new JInternalFrame(
+                I18nResource.TITLE_GLOBAL_TURNOVER_EVOLUTION.getTranslation(), true, false, true, true);
         JPanel globalTurnoverPanel = new JPanel();
         globalTurnoverPanel.add(new JsamsLabel(I18nLabelResource.LABEL_GLOBAL_TURNOVER));
         JsamsFormattedTextField textField = new JsamsFormattedTextField(DecimalFormat.getCurrencyInstance());
@@ -147,27 +155,39 @@ public class StatisticsPanel extends JPanel {
         return pane1;
     }
 
+    /**
+     * Builds the {@link JInternalFrame} for the statistics of the products.
+     * 
+     * @param society the {@link SocietyBean} to use
+     * @return the built {@link JInternalFrame}
+     */
     private JInternalFrame buildProductsFrame(SocietyBean society) {
-        JInternalFrame productsFrame = new JInternalFrame("Products", true, false, true, true);
-        FormLayout layout111 = new FormLayout("left:p, 3dlu, p:grow");
-        DefaultFormBuilder builder111 = new DefaultFormBuilder(layout111);
-        builder111.setDefaultDialogBorder();
-        builder111.appendSeparator("top 5");
-        builder111.append(new JsamsLabel("1"));
-        builder111.append(new JsamsLabel("123"));
-        builder111.nextLine();
-        builder111.append(new JsamsLabel("2"));
-        builder111.append(new JsamsLabel("123"));
-        builder111.nextLine();
-        builder111.append(new JsamsLabel("3"));
-        builder111.append(new JsamsLabel("123"));
-        builder111.nextLine();
-        builder111.append(new JsamsLabel("4"));
-        builder111.append(new JsamsLabel("123"));
-        builder111.nextLine();
-        builder111.append(new JsamsLabel("5"));
-        builder111.append(new JsamsLabel("123"));
-        productsFrame.add(builder111.getPanel());
+        JInternalFrame productsFrame = new JInternalFrame(I18nResource.MENU_ITEM_PRODUCTS.getTranslation(), true,
+                false, true, true);
+        FormLayout layout = new FormLayout("left:p, 3dlu, p, 5dlu, left:p, 3dlu, p:grow");
+        DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
+        builder.setDefaultDialogBorder();
+        builder.appendI15dSeparator(I18nLabelResource.LABEL_PRODUCTS_TOP_5.getKey());
+        Map<Double, ProductBean> products = getService().findTop5Products(society);
+        if (products != null) {
+            Iterator<Entry<Double, ProductBean>> iterator = products.entrySet().iterator();
+            for (int i = 0; i < 5; i++) {
+                int j = i + 1;
+                builder.append(new JsamsLabel("" + j));
+                JsamsTextField textField = new JsamsTextField(15);
+                textField.setEnabled(false);
+                JsamsFormattedTextField amount = new JsamsFormattedTextField(DecimalFormat.getCurrencyInstance());
+                amount.setEnabled(false);
+                if (products != null && products.size() > i) {
+                    Entry<Double, ProductBean> next = iterator.next();
+                    textField.setText(next.getValue().getName());
+                    amount.setValue(next.getKey());
+                }
+                builder.append(textField);
+                builder.appendI15d(I18nLabelResource.LABEL_AMOUNT.getKey(), amount);
+            }
+        }
+        productsFrame.add(builder.getPanel());
         productsFrame.pack();
         productsFrame.setVisible(true);
         return productsFrame;

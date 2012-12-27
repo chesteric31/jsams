@@ -246,5 +246,7 @@ public final class I18nLabelResource {
     public static final I18nString LABEL_CUSTOMERS_TOP_5 = new I18nString("label.customer.top_5");
     public static final I18nString LABEL_CUSTOMERS_WITH_ESTIMATE = new I18nString("label.customer.with_estimate");
     public static final I18nString LABEL_CUSTOMERS_WITH_BILL = new I18nString("label.customer.with_bill");
+
+    public static final I18nString LABEL_PRODUCTS_TOP_5 = new I18nString("label.product.top_5");
     
 }

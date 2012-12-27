@@ -272,5 +272,7 @@ public final class I18nResource {
     public static final I18nString PANEL_NETWORK = new I18nString("panel.network");
 
     public static final I18nString PANEL_BILL = new I18nString("panel.bill");
+
+    public static final I18nString TITLE_GLOBAL_TURNOVER_EVOLUTION = new I18nString("title.global_turnover_evolution");
     
 }
