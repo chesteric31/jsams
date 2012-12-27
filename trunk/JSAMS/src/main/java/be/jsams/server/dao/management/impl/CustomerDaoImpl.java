@@ -83,5 +83,56 @@ public class CustomerDaoImpl extends DaoImpl<Customer> implements CustomerDao {
         Query query = getEntityManager().createQuery(queryBuilder.toString());
         return query.getResultList();
     }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public List<Object[]> findTop5Customers(Long societyId) {
+        StringBuilder queryBuilder = new StringBuilder(
+                "select c, sum(bd.quantity* bd.price*(1-(coalesce(bd.discountRate, 0)/100))) "
+                        + "from Bill b, BillDetail bd, Customer c "
+                        + "WHERE b.id = bd.bill.id and b.customer.id = c.id and c.society.id = " + societyId
+                        + " group by c.id "
+                        + "ORDER BY sum(bd.quantity* bd.price*(1-(coalesce(bd.discountRate, 0)/100))) DESC");
+
+        Query query = getEntityManager().createQuery(queryBuilder.toString());
+        return query.getResultList();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public List<Customer> findWithEstimates(Long societyId) {
+        StringBuilder queryBuilder = new StringBuilder("SELECT c FROM Customer c, Estimate e");
+
+        queryBuilder.append(WHERE);
+        queryBuilder.append("c.society.id = " + societyId);
+        queryBuilder.append(AND);
+        queryBuilder.append("e.customer.id = c.id");
+
+        Query query = getEntityManager().createQuery(queryBuilder.toString());
+        return query.getResultList();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public List<Customer> findWithBills(Long societyId) {
+        StringBuilder queryBuilder = new StringBuilder("SELECT c FROM Customer c, Bill b");
+
+        queryBuilder.append(WHERE);
+        queryBuilder.append("c.society.id = " + societyId);
+        queryBuilder.append(AND);
+        queryBuilder.append("b.customer.id = c.id");
+
+        Query query = getEntityManager().createQuery(queryBuilder.toString());
+        return query.getResultList();
+    }
 
 }

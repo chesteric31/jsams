@@ -9,6 +9,7 @@ import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.management.ProductBean;
 import be.jsams.common.bean.model.sale.BillBean;
 import be.jsams.common.bean.model.sale.EstimateBean;
+import be.jsams.server.service.management.CustomerService;
 import be.jsams.server.service.sale.BillService;
 import be.jsams.server.service.sale.CreditNoteService;
 import be.jsams.server.service.sale.EstimateService;
@@ -25,6 +26,7 @@ public class StatisticsServiceImpl implements StatisticsService {
     private EstimateService estimateService;
     private BillService billService;
     private CreditNoteService creditNoteService;
+    private CustomerService customerService;
 
     /**
      * {@inheritDoc}
@@ -89,9 +91,8 @@ public class StatisticsServiceImpl implements StatisticsService {
      * {@inheritDoc}
      */
     @Override
-    public List<CustomerBean> findTop5Customers(SocietyBean society) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException();
+    public Map<Double, CustomerBean> findTop5Customers(SocietyBean society) {
+        return customerService.findTop5Customers(society);
     }
 
     /**
@@ -99,8 +100,7 @@ public class StatisticsServiceImpl implements StatisticsService {
      */
     @Override
     public List<CustomerBean> findCustomersWithEstimates(SocietyBean society) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException();
+        return customerService.findWithEstimates(society);
     }
 
     /**
@@ -108,8 +108,7 @@ public class StatisticsServiceImpl implements StatisticsService {
      */
     @Override
     public List<CustomerBean> findCustomersWithBills(SocietyBean society) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException();
+        return customerService.findWithBills(society);
     }
 
     /**
@@ -161,6 +160,20 @@ public class StatisticsServiceImpl implements StatisticsService {
      */
     public void setCreditNoteService(CreditNoteService creditNoteService) {
         this.creditNoteService = creditNoteService;
+    }
+
+    /**
+     * @return the customerService
+     */
+    public CustomerService getCustomerService() {
+        return customerService;
+    }
+
+    /**
+     * @param customerService the customerService to set
+     */
+    public void setCustomerService(CustomerService customerService) {
+        this.customerService = customerService;
     }
 
 }

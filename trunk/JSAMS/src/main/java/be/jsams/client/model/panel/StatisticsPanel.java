@@ -6,8 +6,10 @@ import java.beans.PropertyVetoException;
 import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -39,6 +41,7 @@ import be.jsams.client.swing.component.JsamsLabel;
 import be.jsams.client.swing.component.JsamsStatusBar;
 import be.jsams.client.swing.component.JsamsTextField;
 import be.jsams.common.bean.model.SocietyBean;
+import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.sale.AbstractDocumentBean;
 import be.jsams.common.bean.model.sale.BillBean;
 import be.jsams.common.bean.model.sale.EstimateBean;
@@ -99,10 +102,10 @@ public class StatisticsPanel extends JPanel {
         JInternalFrame estimatesFrame = buildEstimatesFrame(society);
         pane.add(estimatesFrame);
         
-        JInternalFrame customersFrame = buildCustomersFrame();
+        JInternalFrame customersFrame = buildCustomersFrame(society);
         pane.add(customersFrame);
 
-        JInternalFrame productsFrame = buildProductsFrame();
+        JInternalFrame productsFrame = buildProductsFrame(society);
         pane.add(productsFrame);
 
         add(pane, BorderLayout.NORTH);
@@ -144,7 +147,7 @@ public class StatisticsPanel extends JPanel {
         return pane1;
     }
 
-    private JInternalFrame buildProductsFrame() {
+    private JInternalFrame buildProductsFrame(SocietyBean society) {
         JInternalFrame productsFrame = new JInternalFrame("Products", true, false, true, true);
         FormLayout layout111 = new FormLayout("left:p, 3dlu, p:grow");
         DefaultFormBuilder builder111 = new DefaultFormBuilder(layout111);
@@ -170,28 +173,52 @@ public class StatisticsPanel extends JPanel {
         return productsFrame;
     }
 
-    private JInternalFrame buildCustomersFrame() {
-        JInternalFrame customersFrame = new JInternalFrame("Customers", true, false, true, true);
-        FormLayout layout11 = new FormLayout("left:p, 3dlu, p:grow");
-        DefaultFormBuilder builder11 = new DefaultFormBuilder(layout11);
-        builder11.setDefaultDialogBorder();
-        builder11.appendSeparator("top 5");
-        builder11.append(new JsamsLabel("1"));
-        builder11.nextLine();
-        builder11.append(new JsamsLabel("2"));
-        builder11.nextLine();
-        builder11.append(new JsamsLabel("3"));
-        builder11.nextLine();
-        builder11.append(new JsamsLabel("4"));
-        builder11.nextLine();
-        builder11.append(new JsamsLabel("5"));
-        builder11.nextLine();
-        builder11.appendSeparator("customer with estimates");
-        builder11.append(new JsamsLabel("12"));
-        builder11.nextLine();
-        builder11.appendSeparator("customer with bills");
-        builder11.append(new JsamsLabel("16"));
-        customersFrame.add(builder11.getPanel());
+    /**
+     * Builds the {@link JInternalFrame} for the statistics of the customers.
+     * 
+     * @param society the {@link SocietyBean} to use
+     * @return the built {@link JInternalFrame}
+     */
+    private JInternalFrame buildCustomersFrame(SocietyBean society) {
+        JInternalFrame customersFrame = new JInternalFrame(I18nResource.MENU_ITEM_CUSTOMERS.getTranslation(), true,
+                false, true, true);
+        FormLayout layout = new FormLayout("left:p, 3dlu, p, 5dlu, left:p, 3dlu, p:grow");
+        DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
+        builder.setDefaultDialogBorder();
+        builder.appendI15dSeparator(I18nLabelResource.LABEL_CUSTOMERS_TOP_5.getKey());
+        Map<Double, CustomerBean> customers = getService().findTop5Customers(society);
+        if (customers != null) {
+            Iterator<Entry<Double, CustomerBean>> iterator = customers.entrySet().iterator();
+            for (int i = 0; i < 5; i++) {
+                int j = i + 1;
+                builder.append(new JsamsLabel("" + j));
+                JsamsTextField textField = new JsamsTextField();
+                textField.setEnabled(false);
+                JsamsFormattedTextField amount = new JsamsFormattedTextField(DecimalFormat.getCurrencyInstance());
+                amount.setEnabled(false);
+                if (customers != null && customers.size() > i) {
+                    Entry<Double, CustomerBean> next = iterator.next();
+                    textField.setText(next.getValue().getName());
+                    amount.setValue(next.getKey());
+                }
+                builder.append(textField);
+                builder.appendI15d(I18nLabelResource.LABEL_AMOUNT.getKey(), amount);
+            }
+        }
+        builder.appendI15dSeparator(I18nLabelResource.LABEL_CUSTOMERS_WITH_ESTIMATE.getKey());
+        List<CustomerBean> withEstimates = getService().findCustomersWithEstimates(society);
+        JsamsTextField withEstimatesNumber = new JsamsTextField();
+        withEstimatesNumber.setEnabled(false);
+        withEstimatesNumber.setText(String.valueOf(withEstimates.size()));
+        builder.appendI15d(I18nLabelResource.LABEL_QUANTITY.getKey(), withEstimatesNumber);
+        builder.nextLine();
+        builder.appendI15dSeparator(I18nLabelResource.LABEL_CUSTOMERS_WITH_BILL.getKey());
+        List<CustomerBean> withBills = getService().findCustomersWithBills(society);
+        JsamsTextField withBillsNumber = new JsamsTextField();
+        withBillsNumber.setEnabled(false);
+        withBillsNumber.setText(String.valueOf(withBills.size()));
+        builder.appendI15d(I18nLabelResource.LABEL_QUANTITY.getKey(), withBillsNumber);
+        customersFrame.add(builder.getPanel());
         customersFrame.pack();
         customersFrame.setVisible(true);
         return customersFrame;
