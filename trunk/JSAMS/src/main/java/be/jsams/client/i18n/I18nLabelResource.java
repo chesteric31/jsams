@@ -250,5 +250,7 @@ public final class I18nLabelResource {
     public static final I18nString LABEL_PRODUCTS_TOP_5 = new I18nString("label.product.top_5");
     
     public static final I18nString LABEL_TURNOVER = new I18nString("label.turnover");
+
+    public static final I18nString LABEL_DATE = new I18nString("label.date");
     
 }

@@ -125,7 +125,7 @@ public class StatisticsPanel extends JPanel {
         final XYDataset data1 = createDataset();
         final XYItemRenderer renderer1 = new XYBarRenderer();
         
-        final DateAxis domainAxis = new DateAxis("Date");
+        final DateAxis domainAxis = new DateAxis(I18nLabelResource.LABEL_DATE.getTranslation());
         final ValueAxis rangeAxis = new NumberAxis(I18nLabelResource.LABEL_TURNOVER.getTranslation());
         
         final XYPlot plot = new XYPlot(data1, domainAxis, rangeAxis, renderer1);
@@ -348,18 +348,10 @@ public class StatisticsPanel extends JPanel {
             month = nextMonth;
         }
 
-        // s1.add(new SimpleTimePeriod(june.getStart(), june.getEnd()), 74.95);
-        // s1.add(new SimpleTimePeriod(january.getStart(), february.getEnd()),
-        // 55.75);
-        // s1.add(new SimpleTimePeriod(july.getStart(), july.getEnd()), 90.45);
-        // s1.add(new SimpleTimePeriod(march.getStart(), may.getEnd()), 105.75);
-
         final TimePeriodValuesCollection dataset = new TimePeriodValuesCollection();
         dataset.addSeries(series);
-        // dataset.setDomainIsPointsInTime(false);
 
         return dataset;
-
     }
 
     /**
