@@ -7,10 +7,8 @@ import java.util.Map;
 
 import be.jsams.common.bean.builder.ProductBeanBuilder;
 import be.jsams.common.bean.model.SocietyBean;
-import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.management.ProductBean;
 import be.jsams.server.dao.management.ProductDao;
-import be.jsams.server.model.management.Customer;
 import be.jsams.server.model.management.Product;
 import be.jsams.server.service.management.ProductService;
 
