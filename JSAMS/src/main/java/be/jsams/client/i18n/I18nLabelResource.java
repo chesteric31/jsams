@@ -242,5 +242,9 @@ public final class I18nLabelResource {
     public static final I18nString LABEL_BILL_EXPIRED = new I18nString("label.bill.expired");
 
     public static final I18nString LABEL_ESTIMATE_NOT_TRANSFERRED = new I18nString("label.estimate.not_transferred");
+
+    public static final I18nString LABEL_CUSTOMERS_TOP_5 = new I18nString("label.customer.top_5");
+    public static final I18nString LABEL_CUSTOMERS_WITH_ESTIMATE = new I18nString("label.customer.with_estimate");
+    public static final I18nString LABEL_CUSTOMERS_WITH_BILL = new I18nString("label.customer.with_bill");
     
 }

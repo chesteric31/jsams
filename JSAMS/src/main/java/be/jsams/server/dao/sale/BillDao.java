@@ -8,7 +8,7 @@ import be.jsams.server.model.sale.Bill;
 
 /**
  * Bill DAO interface.
- *
+ * 
  * @author chesteric31
  * @version $Rev$ $Date::                  $ $Author$
  */

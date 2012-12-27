@@ -187,7 +187,7 @@ public class BillServiceImpl extends AbstractService implements BillService {
         criteria.setPaymentDate(null);
         return findByCriteriaWithSum(society, criteria);
     }
-    
+
     /**
      * {@inheritDoc}
      */

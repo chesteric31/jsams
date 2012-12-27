@@ -1,7 +1,9 @@
 package be.jsams.server.service.management.impl;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import be.jsams.common.bean.builder.SocietyBeanBuilder;
 import be.jsams.common.bean.model.SocietyBean;
@@ -86,6 +88,18 @@ public class CustomerServiceImpl extends AbstractService implements CustomerServ
     public List<CustomerBean> findByCriteria(final CustomerBean criteria) {
         SocietyBean society = criteria.getSociety();
         List<Customer> customers = customerDao.findByCriteria(society.getId(), criteria);
+        List<CustomerBean> beans = mapModelToBean(society, customers);
+        return beans;
+    }
+
+    /**
+     * Maps the customers to the customerBeans.
+     * 
+     * @param society the {@link SocietyBean} to use
+     * @param customers the customers to map
+     * @return the mapped customerBeans.
+     */
+    private List<CustomerBean> mapModelToBean(SocietyBean society, List<Customer> customers) {
         List<CustomerBean> beans = new ArrayList<CustomerBean>();
         if (customers != null && !customers.isEmpty()) {
             for (Customer customer : customers) {
@@ -93,6 +107,42 @@ public class CustomerServiceImpl extends AbstractService implements CustomerServ
             }
         }
         return beans;
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Map<Double, CustomerBean> findTop5Customers(SocietyBean society) {
+        List<Object[]> customers = customerDao.findTop5Customers(society.getId());
+        Map<Double, CustomerBean> map = new LinkedHashMap<Double, CustomerBean>();
+        if (customers != null && !customers.isEmpty()) {
+            for (Object[] object : customers) {
+                Double amount = (Double) object[1];
+                Customer customer = (Customer) object[0];
+                CustomerBean customerBean = getCustomerBeanBuilder().build(customer, society);
+                map.put(amount, customerBean);
+            }
+        }
+        return map;
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<CustomerBean> findWithEstimates(SocietyBean society) {
+        List<Customer> customers = customerDao.findWithEstimates(society.getId());
+        return mapModelToBean(society, customers);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<CustomerBean> findWithBills(SocietyBean society) {
+        List<Customer> customers = customerDao.findWithBills(society.getId());
+        return mapModelToBean(society, customers);
     }
 
     /**
@@ -108,5 +158,6 @@ public class CustomerServiceImpl extends AbstractService implements CustomerServ
     public void setCustomerDao(CustomerDao customerDao) {
         this.customerDao = customerDao;
     }
+
 
 }
