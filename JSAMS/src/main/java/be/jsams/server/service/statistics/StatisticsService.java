@@ -103,6 +103,6 @@ public interface StatisticsService {
      * @param society the {@link SocietyBean} to use
      * @return a list of a top 5 of products with the most turnover
      */    
-    List<ProductBean> findTop5Products(SocietyBean society);
+    Map<Double, ProductBean> findTop5Products(SocietyBean society);
     
 }

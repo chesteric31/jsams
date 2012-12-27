@@ -123,4 +123,21 @@ public class ProductDaoImpl extends DaoImpl<Product> implements ProductDao {
         return query.getResultList();
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public List<Object[]> findTop5Products(Long societyId) {
+        StringBuilder queryBuilder = new StringBuilder(
+                "select p, sum(bd.quantity* bd.price*(1-(coalesce(bd.discountRate, 0)/100))) "
+                        + "from Bill b, BillDetail bd, Customer c, Product p "
+                        + "WHERE b.id = bd.bill.id and bd.product.id = p.id and c.society.id = " + societyId
+                        + " group by p.id "
+                        + "ORDER BY sum(bd.quantity* bd.price*(1-(coalesce(bd.discountRate, 0)/100))) DESC");
+
+        Query query = getEntityManager().createQuery(queryBuilder.toString());
+        return query.getResultList();
+    }
+
 }

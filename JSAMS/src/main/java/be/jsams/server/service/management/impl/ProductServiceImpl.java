@@ -1,12 +1,16 @@
 package be.jsams.server.service.management.impl;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import be.jsams.common.bean.builder.ProductBeanBuilder;
 import be.jsams.common.bean.model.SocietyBean;
+import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.management.ProductBean;
 import be.jsams.server.dao.management.ProductDao;
+import be.jsams.server.model.management.Customer;
 import be.jsams.server.model.management.Product;
 import be.jsams.server.service.management.ProductService;
 
@@ -114,6 +118,26 @@ public class ProductServiceImpl implements ProductService {
         Product product = new Product(bean);
         dao.update(product);
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Map<Double, ProductBean> findTop5Products(SocietyBean society) {
+        List<Object[]> products = dao.findTop5Products(society.getId());
+        Map<Double, ProductBean> map = new LinkedHashMap<Double, ProductBean>();
+        if (products != null && !products.isEmpty()) {
+            for (Object[] object : products) {
+                Double amount = (Double) object[1];
+                Product product = (Product) object[0];
+                builder.setModel(product);
+                ProductBean productBean = builder.build(false, false);
+                map.put(amount, productBean);
+            }
+        }
+        return map;
+    }
+
 
     /**
      * @return the builder
