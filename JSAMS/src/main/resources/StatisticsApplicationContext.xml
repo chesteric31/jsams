@@ -9,6 +9,7 @@
 		<property name="billService" ref="billService" />
 		<property name="creditNoteService" ref="creditNoteService" />
 		<property name="customerService" ref="customerService" />
+		<property name="productService" ref="productService" />
 	</bean>
 	<bean id="statisticsService" parent="baseTransactionProxy">
 		<property name="target" ref="statisticsServiceTarget" />
