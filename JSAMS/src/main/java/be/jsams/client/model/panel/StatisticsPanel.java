@@ -126,7 +126,7 @@ public class StatisticsPanel extends JPanel {
         final XYItemRenderer renderer1 = new XYBarRenderer();
         
         final DateAxis domainAxis = new DateAxis("Date");
-        final ValueAxis rangeAxis = new NumberAxis("Value");
+        final ValueAxis rangeAxis = new NumberAxis(I18nLabelResource.LABEL_TURNOVER.getTranslation());
         
         final XYPlot plot = new XYPlot(data1, domainAxis, rangeAxis, renderer1);
 
@@ -331,10 +331,17 @@ public class StatisticsPanel extends JPanel {
      * 
      * @return the dataset.
      */
-    public XYDataset createDataset() {
-
-        final TimePeriodValues series = new TimePeriodValues("Series 1");
-        Month month = new Month(1, GregorianCalendar.getInstance().get(Calendar.YEAR));
+    private XYDataset createDataset() {
+        final TimePeriodValues series = new TimePeriodValues(I18nLabelResource.LABEL_TURNOVER.getTranslation());
+        Calendar calendar = GregorianCalendar.getInstance();
+        int monthNumber = calendar.get(Calendar.MONTH) + 1;
+        int year = calendar.get(Calendar.YEAR);
+        monthNumber = monthNumber - 12;
+        if (monthNumber < 0) {
+            monthNumber += 12;
+            year--;
+        }
+        Month month = new Month(monthNumber + 1, year);
         for (int i = 1; i < 12; i++) {
             series.add(new SimpleTimePeriod(month.getStart(), month.getEnd()), i);
             final Month nextMonth = (Month) month.next();
