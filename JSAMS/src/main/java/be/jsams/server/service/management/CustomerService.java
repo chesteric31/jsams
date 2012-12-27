@@ -17,12 +17,21 @@ public interface CustomerService extends CriteriableService<CustomerBean> {
 
     /**
      * Finds a top 5 of customers with the most turnover from the start of the
-     * program.
+     * program for the bills.
      * 
      * @param society the {@link SocietyBean} to use
      * @return a list of a top 5 of customers with the most turnover
      */
-    Map<Double, CustomerBean> findTop5Customers(SocietyBean society);
+    Map<Long, Double> findTop5CustomersWithBills(SocietyBean society);
+
+    /**
+     * Finds a top 5 of customers with the most turnover from the start of the
+     * program for the credit notes.
+     * 
+     * @param society the {@link SocietyBean} to use
+     * @return a list of a top 5 of customers with the most turnover
+     */
+    Map<Long, Double> findTop5CustomersWithCreditNotes(SocietyBean society);
 
     /**
      * Finds all customers with at least one estimate.

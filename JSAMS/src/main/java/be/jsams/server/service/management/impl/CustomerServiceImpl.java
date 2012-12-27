@@ -113,15 +113,33 @@ public class CustomerServiceImpl extends AbstractService implements CustomerServ
      * {@inheritDoc}
      */
     @Override
-    public Map<Double, CustomerBean> findTop5Customers(SocietyBean society) {
-        List<Object[]> customers = customerDao.findTop5Customers(society.getId());
-        Map<Double, CustomerBean> map = new LinkedHashMap<Double, CustomerBean>();
+    public Map<Long, Double> findTop5CustomersWithBills(SocietyBean society) {
+        List<Object[]> customers = customerDao.findTop5CustomersWithBills(society.getId());
+        return buildCustomersMap(customers);
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Map<Long, Double> findTop5CustomersWithCreditNotes(SocietyBean society) {
+        List<Object[]> customers = customerDao.findTop5CustomersWithCreditNotes(society.getId());
+        return buildCustomersMap(customers);
+    }
+
+    /**
+     * Builds customers map.
+     * 
+     * @param customers the list of amount and id to use
+     * @return the built map
+     */
+    private Map<Long, Double> buildCustomersMap(List<Object[]> customers) {
+        Map<Long, Double> map = new LinkedHashMap<Long, Double>();
         if (customers != null && !customers.isEmpty()) {
             for (Object[] object : customers) {
+                Long id = (Long) object[0];
                 Double amount = (Double) object[1];
-                Customer customer = (Customer) object[0];
-                CustomerBean customerBean = getCustomerBeanBuilder().build(customer, society);
-                map.put(amount, customerBean);
+                map.put(id, amount);
             }
         }
         return map;
@@ -158,6 +176,5 @@ public class CustomerServiceImpl extends AbstractService implements CustomerServ
     public void setCustomerDao(CustomerDao customerDao) {
         this.customerDao = customerDao;
     }
-
 
 }

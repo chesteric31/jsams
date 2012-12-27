@@ -3,6 +3,8 @@ package be.jsams.server.service.statistics.impl;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
 
 import be.jsams.common.bean.model.SocietyBean;
 import be.jsams.common.bean.model.management.CustomerBean;
@@ -94,7 +96,19 @@ public class StatisticsServiceImpl implements StatisticsService {
      */
     @Override
     public Map<Double, CustomerBean> findTop5Customers(SocietyBean society) {
-        return customerService.findTop5Customers(society);
+        TreeMap<Double, CustomerBean> map = new TreeMap<Double, CustomerBean>();
+        Map<Long, Double> withBills = customerService.findTop5CustomersWithBills(society);
+        Map<Long, Double> withCreditNotes = customerService.findTop5CustomersWithCreditNotes(society);
+        Set<Long> keySet = withBills.keySet();
+        for (Long id : keySet) {
+            Double creditAmount = withCreditNotes.get(id);
+            BigDecimal amount = BigDecimal.valueOf(withBills.get(id));
+            if (creditAmount != null) {
+                amount = amount.subtract(BigDecimal.valueOf(creditAmount));
+            }
+            map.put(amount.doubleValue(), customerService.findById(id));
+        }
+        return map.descendingMap();
     }
 
     /**
@@ -118,7 +132,19 @@ public class StatisticsServiceImpl implements StatisticsService {
      */
     @Override
     public Map<Double, ProductBean> findTop5Products(SocietyBean society) {
-        return productService.findTop5Products(society);
+        TreeMap<Double, ProductBean> map = new TreeMap<Double, ProductBean>();
+        Map<Long, Double> withBills = productService.findTop5ProductsWithBills(society);
+        Map<Long, Double> withCreditNotes = productService.findTop5ProductsWithCreditNotes(society);
+        Set<Long> keySet = withBills.keySet();
+        for (Long id : keySet) {
+            Double creditAmount = withCreditNotes.get(id);
+            BigDecimal amount = BigDecimal.valueOf(withBills.get(id));
+            if (creditAmount != null) {
+                amount = amount.subtract(BigDecimal.valueOf(creditAmount));
+            }
+            map.put(amount.doubleValue(), productService.findById(id));
+        }
+        return map.descendingMap();
     }
 
     /**

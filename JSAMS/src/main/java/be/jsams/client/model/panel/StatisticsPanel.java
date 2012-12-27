@@ -174,7 +174,7 @@ public class StatisticsPanel extends JPanel {
             for (int i = 0; i < 5; i++) {
                 int j = i + 1;
                 builder.append(new JsamsLabel("" + j));
-                JsamsTextField textField = new JsamsTextField(15);
+                JsamsTextField textField = new JsamsTextField(10);
                 textField.setEnabled(false);
                 JsamsFormattedTextField amount = new JsamsFormattedTextField(DecimalFormat.getCurrencyInstance());
                 amount.setEnabled(false);

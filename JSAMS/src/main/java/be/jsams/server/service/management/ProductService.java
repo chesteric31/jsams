@@ -16,11 +16,20 @@ public interface ProductService extends CriteriableService<ProductBean> {
 
     /**
      * Finds a top 5 of products with the most turnover from the start of the
-     * program.
+     * program with bills.
      * 
      * @param society the {@link SocietyBean} to use
      * @return a list of a top 5 of products with the most turnover
      */
-    Map<Double, ProductBean> findTop5Products(SocietyBean society);
+    Map<Long, Double> findTop5ProductsWithBills(SocietyBean society);
+
+    /**
+     * Finds a top 5 of products with the most turnover from the start of the
+     * program with credit notes.
+     * 
+     * @param society the {@link SocietyBean} to use
+     * @return a list of a top 5 of products with the most turnover
+     */
+    Map<Long, Double> findTop5ProductsWithCreditNotes(SocietyBean society);
 
 }
