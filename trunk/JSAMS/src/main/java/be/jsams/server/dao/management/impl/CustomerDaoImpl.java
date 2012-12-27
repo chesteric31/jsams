@@ -89,9 +89,9 @@ public class CustomerDaoImpl extends DaoImpl<Customer> implements CustomerDao {
      */
     @SuppressWarnings("unchecked")
     @Override
-    public List<Object[]> findTop5Customers(Long societyId) {
+    public List<Object[]> findTop5CustomersWithBills(Long societyId) {
         StringBuilder queryBuilder = new StringBuilder(
-                "select c, sum(bd.quantity* bd.price*(1-(coalesce(bd.discountRate, 0)/100))) "
+                "select c.id, sum(bd.quantity* bd.price*(1-(coalesce(bd.discountRate, 0)/100))) "
                         + "from Bill b, BillDetail bd, Customer c "
                         + "WHERE b.id = bd.bill.id and b.customer.id = c.id and c.society.id = " + societyId
                         + " group by c.id "
@@ -100,6 +100,24 @@ public class CustomerDaoImpl extends DaoImpl<Customer> implements CustomerDao {
         Query query = getEntityManager().createQuery(queryBuilder.toString());
         return query.getResultList();
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public List<Object[]> findTop5CustomersWithCreditNotes(Long societyId) {
+        StringBuilder queryBuilder = new StringBuilder(
+                "select c.id, sum(cnd.quantity* cnd.price) "
+                        + "from CreditNote cn, CreditNoteDetail cnd, Customer c "
+                        + "WHERE cn.id = cnd.creditNote.id and cn.customer.id = c.id and c.society.id = " + societyId
+                        + " group by c.id "
+                        + "ORDER BY sum(cnd.quantity* cnd.price) DESC");
+
+        Query query = getEntityManager().createQuery(queryBuilder.toString());
+        return query.getResultList();
+    }
+
 
     /**
      * {@inheritDoc}

@@ -16,11 +16,20 @@ public interface ProductDao extends CriteriableDao<Product, ProductBean> {
 
     /**
      * Finds a top 5 of products with the most turnover from the start of the
-     * program.
+     * program with bills.
      * 
      * @param societyId the society id to use
      * @return a list of a top 5 of products with the most turnover
      */
-    List<Object[]> findTop5Products(Long societyId);
+    List<Object[]> findTop5ProductsWithBills(Long societyId);
+
+    /**
+     * Finds a top 5 of products with the most turnover from the start of the
+     * program with credit notes.
+     * 
+     * @param societyId the society id to use
+     * @return a list of a top 5 of products with the most turnover
+     */
+    List<Object[]> findTop5ProductsWithCreditNotes(Long societyId);
 
 }

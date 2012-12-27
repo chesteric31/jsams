@@ -121,21 +121,37 @@ public class ProductServiceImpl implements ProductService {
      * {@inheritDoc}
      */
     @Override
-    public Map<Double, ProductBean> findTop5Products(SocietyBean society) {
-        List<Object[]> products = dao.findTop5Products(society.getId());
-        Map<Double, ProductBean> map = new LinkedHashMap<Double, ProductBean>();
+    public Map<Long, Double> findTop5ProductsWithBills(SocietyBean society) {
+        List<Object[]> products = dao.findTop5ProductsWithBills(society.getId());
+        return buildProductsMap(products);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Map<Long, Double> findTop5ProductsWithCreditNotes(SocietyBean society) {
+        List<Object[]> products = dao.findTop5ProductsWithCreditNotes(society.getId());
+        return buildProductsMap(products);
+    }
+
+    /**
+     * Builds products map.
+     * 
+     * @param products the list of amount and id to use
+     * @return the built map
+     */
+    private Map<Long, Double> buildProductsMap(List<Object[]> products) {
+        Map<Long, Double> map = new LinkedHashMap<Long, Double>();
         if (products != null && !products.isEmpty()) {
             for (Object[] object : products) {
+                Long id = (Long) object[0];
                 Double amount = (Double) object[1];
-                Product product = (Product) object[0];
-                builder.setModel(product);
-                ProductBean productBean = builder.build(false, false);
-                map.put(amount, productBean);
+                map.put(id, amount);
             }
         }
         return map;
     }
-
 
     /**
      * @return the builder
