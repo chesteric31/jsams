@@ -103,6 +103,7 @@ import be.jsams.server.service.xml.impl.XmlCommandGeneratorImplTest;
 import be.jsams.server.service.xml.impl.XmlCreditNoteGeneratorImplTest;
 import be.jsams.server.service.xml.impl.XmlDeliveryOrderGeneratorImplTest;
 import be.jsams.server.service.xml.impl.XmlEstimateGeneratorImplTest;
+import be.jsams.server.utils.DateUtilTest;
 
 /**
  * Test suite for all JUnit tests.
@@ -140,7 +141,8 @@ import be.jsams.server.service.xml.impl.XmlEstimateGeneratorImplTest;
         CommandDeliveryOrderTransferServiceImplTest.class, CommandBillTransferServiceImplTest.class,
         DeliveryOrderBillTransferServiceImplTest.class, BillCreditNoteTransferServiceImplTest.class,
         DownloaderServiceImplTest.class, XmlEstimateGeneratorImplTest.class, XmlCommandGeneratorImplTest.class,
-        XmlDeliveryOrderGeneratorImplTest.class, XmlBillGeneratorImplTest.class, XmlCreditNoteGeneratorImplTest.class })
+        XmlDeliveryOrderGeneratorImplTest.class, XmlBillGeneratorImplTest.class, XmlCreditNoteGeneratorImplTest.class,
+        DateUtilTest.class })
 public class AllTests {
 
 }
