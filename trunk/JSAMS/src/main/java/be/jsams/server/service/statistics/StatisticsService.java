@@ -26,12 +26,14 @@ public interface StatisticsService {
     Double findGlobalTurnover(SocietyBean society);
 
     /**
-     * Finds the turnover evolution from the start of the current year.
+     * Finds the turnover evolution from the start of the current year to month-12.
      * 
-     * @param society the {@link SocietyBean} to use
-     * @return a list of turnover for each month
+     * @param societyId the society id to use
+     * @param startYear the year starting
+     * @param startMonth the month number starting
+     * @return an array of turnover for each month
      */
-    List<Double> findTurnoverEvolution(SocietyBean society);
+    Double[] findTurnoverEvolution(Long societyId, int startMonth, int startYear);
 
     /**
      * Finds all not paid bills from the start of the program.

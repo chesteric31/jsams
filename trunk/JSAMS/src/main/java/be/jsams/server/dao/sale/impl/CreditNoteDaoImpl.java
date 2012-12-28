@@ -1,6 +1,7 @@
 package be.jsams.server.dao.sale.impl;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -12,6 +13,7 @@ import be.jsams.common.bean.model.sale.CreditNoteBean;
 import be.jsams.server.dao.impl.DaoImpl;
 import be.jsams.server.dao.sale.CreditNoteDao;
 import be.jsams.server.model.sale.CreditNote;
+import be.jsams.server.utils.DateUtil;
 
 import com.mysql.jdbc.StringUtils;
 
@@ -62,17 +64,17 @@ public class CreditNoteDaoImpl extends DaoImpl<CreditNote> implements CreditNote
             queryBuilder.append(" AND c.billingAddress.city LIKE '%" + city + "%'");
         }
         if (startDate != null && endDate != null) {
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat format = getDateFormat();
             String formattedStartDate = format.format(startDate);
             String formattedEndDate = format.format(endDate);
             queryBuilder.append(" AND c.creationDate BETWEEN '" + formattedStartDate + "' AND '" + formattedEndDate
                     + "'");
         } else if (startDate != null && endDate == null) {
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat format = getDateFormat();
             String formattedStartDate = format.format(startDate);
             queryBuilder.append(" AND c.creationDate >= '" + formattedStartDate + "'");
         } else if (startDate == null && endDate != null) {
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat format = getDateFormat();
             String formattedEndDate = format.format(endDate);
             queryBuilder.append(" AND c.creationDate <= '" + formattedEndDate + "'");
         }
@@ -93,6 +95,30 @@ public class CreditNoteDaoImpl extends DaoImpl<CreditNote> implements CreditNote
 
         Query query = getEntityManager().createQuery(queryBuilder.toString());
         return query.getResultList();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Double findTurnoverByMonth(Long societyId, int month, int year) {
+        SimpleDateFormat format = getDateFormat();
+        Calendar instance = Calendar.getInstance();
+        Date[] startEndDates = DateUtil.getStartEndDates(instance.get(Calendar.DATE), month, year);
+        Date startDate = startEndDates[0];
+        Date endDate = startEndDates[1];
+        instance.setTime(endDate);
+        instance.add(Calendar.DATE, 1);
+        Date endDayPlusOneDay = instance.getTime();
+        String formattedStartDate = format.format(startDate);
+        String formattedEndDate = format.format(endDayPlusOneDay);
+        StringBuilder queryBuilder = new StringBuilder("SELECT sum(cnd.quantity* cnd.price) "
+                + "from CreditNote cn, CreditNoteDetail cnd, Customer c "
+                + "WHERE cn.id = cnd.creditNote.id and cn.customer.id = c.id and c.society.id = " + societyId
+                + " AND cn.creationDate BETWEEN '" + formattedStartDate + "' AND '" + formattedEndDate + "'");
+
+        Query query = getEntityManager().createQuery(queryBuilder.toString());
+        return (Double) query.getSingleResult();
     }
 
 }

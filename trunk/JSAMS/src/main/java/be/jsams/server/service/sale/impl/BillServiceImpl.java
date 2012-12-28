@@ -207,6 +207,21 @@ public class BillServiceImpl extends AbstractService implements BillService {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Double[] findTurnoverByMonth(Long societyId, int startMonth, int startYear) {
+        Double[] evolution = new Double[12];
+        for (int i = startMonth, j = 0, year = startYear; i < startMonth + 12; i++, j++) {
+            if (i > 12) {
+                year++;
+            }
+            evolution[j] = billDao.findTurnoverByMonth(societyId, i, year);
+        }
+        return evolution;
+    }
+
+    /**
      * Builds the map with sum and result of criteria query.
      * 
      * @param society the {@link SocietyBean} to use

@@ -30,4 +30,14 @@ public interface BillDao extends CriteriableDao<Bill, BillBean> {
      */
     List<Bill> findExpired(Long societyId);
 
+    /**
+     * Finds the turnover by month.
+     * 
+     * @param societyId the society id
+     * @param month the month
+     * @param year the year
+     * @return the built turnover
+     */
+    Double findTurnoverByMonth(Long societyId, int month, int year);
+
 }

@@ -22,6 +22,7 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.DateAxis;
 import org.jfree.chart.axis.NumberAxis;
 import org.jfree.chart.axis.ValueAxis;
+import org.jfree.chart.labels.StandardXYToolTipGenerator;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.XYBarRenderer;
 import org.jfree.chart.renderer.xy.XYItemRenderer;
@@ -122,15 +123,14 @@ public class StatisticsPanel extends JPanel {
      * @return the built {@link JDesktopPane}
      */
     private JDesktopPane buildTurnoverPane(SocietyBean society) {
-        final XYDataset data1 = createDataset();
-        final XYItemRenderer renderer1 = new XYBarRenderer();
-        
+        final XYDataset data = createTurnoverEvolutionDataset(society);
+        StandardXYToolTipGenerator toolTipGenerator = StandardXYToolTipGenerator.getTimeSeriesInstance();
+        final XYItemRenderer renderer = new XYBarRenderer();
+        renderer.setBaseToolTipGenerator(toolTipGenerator);
         final DateAxis domainAxis = new DateAxis(I18nLabelResource.LABEL_DATE.getTranslation());
-        final ValueAxis rangeAxis = new NumberAxis(I18nLabelResource.LABEL_TURNOVER.getTranslation());
-        
-        final XYPlot plot = new XYPlot(data1, domainAxis, rangeAxis, renderer1);
-
-        final JFreeChart chart = new JFreeChart(plot);
+        final ValueAxis rangeAxis = new NumberAxis(I18nLabelResource.LABEL_AMOUNT.getTranslation());
+        final XYPlot plot = new XYPlot(data, domainAxis, rangeAxis, renderer);
+        JFreeChart chart = new JFreeChart(plot);
         final ChartPanel chartPanel = new ChartPanel(chart);
         Double globalTurnover = getService().findGlobalTurnover(society);
         JDesktopPane pane1 = new JDesktopPane();
@@ -329,9 +329,10 @@ public class StatisticsPanel extends JPanel {
     /**
      * Creates a dataset, consisting of two series of monthly data.
      * 
+     * @param society the {@link SocietyBean} to use
      * @return the dataset.
      */
-    private XYDataset createDataset() {
+    private XYDataset createTurnoverEvolutionDataset(SocietyBean society) {
         final TimePeriodValues series = new TimePeriodValues(I18nLabelResource.LABEL_TURNOVER.getTranslation());
         Calendar calendar = GregorianCalendar.getInstance();
         int monthNumber = calendar.get(Calendar.MONTH) + 1;
@@ -341,17 +342,15 @@ public class StatisticsPanel extends JPanel {
             monthNumber += 12;
             year--;
         }
+        Double[] evolution = getService().findTurnoverEvolution(society.getId(), monthNumber, year);
         Month month = new Month(monthNumber + 1, year);
-        for (int i = 1; i < 12; i++) {
-            series.add(new SimpleTimePeriod(month.getStart(), month.getEnd()), i);
+        for (int i = 1; i < 13; i++) {
+            int j = i - 1;
+            series.add(new SimpleTimePeriod(month.getStart(), month.getEnd()), evolution[j]);
             final Month nextMonth = (Month) month.next();
             month = nextMonth;
         }
-
-        final TimePeriodValuesCollection dataset = new TimePeriodValuesCollection();
-        dataset.addSeries(series);
-
-        return dataset;
+        return new TimePeriodValuesCollection(series);
     }
 
     /**

@@ -12,4 +12,14 @@ import be.jsams.server.model.sale.CreditNote;
  */
 public interface CreditNoteDao extends CriteriableDao<CreditNote, CreditNoteBean> {
 
+    /**
+     * Finds the turnover by month.
+     * 
+     * @param societyId the society id
+     * @param month the month
+     * @param year the year
+     * @return the built turnover
+     */
+    Double findTurnoverByMonth(Long societyId, int month, int year);
+
 }

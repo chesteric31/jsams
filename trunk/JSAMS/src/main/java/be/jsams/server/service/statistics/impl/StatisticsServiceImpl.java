@@ -20,12 +20,12 @@ import be.jsams.server.service.statistics.StatisticsService;
 
 /**
  * Statistics service implementation.
- *
+ * 
  * @author chesteric31
  * @version $Revision$ $Date::                  $ $Author$
  */
 public class StatisticsServiceImpl implements StatisticsService {
-    
+
     private EstimateService estimateService;
     private BillService billService;
     private CreditNoteService creditNoteService;
@@ -46,9 +46,22 @@ public class StatisticsServiceImpl implements StatisticsService {
      * {@inheritDoc}
      */
     @Override
-    public List<Double> findTurnoverEvolution(SocietyBean society) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException();
+    public Double[] findTurnoverEvolution(Long societyId, int startMonth, int startYear) {
+        Double[] evolution = new Double[12];
+        Double[] billTurnover = billService.findTurnoverByMonth(societyId, startMonth, startYear);
+        Double[] creditNoteTurnover = creditNoteService.findTurnoverByMonth(societyId, startMonth, startYear);
+        for (int i = 0; i < 12; i++) {
+            BigDecimal bill = new BigDecimal(0D);
+            BigDecimal creditNote = new BigDecimal(0D);
+            if (billTurnover[i] != null) {
+                bill = BigDecimal.valueOf(billTurnover[i]);
+            }
+            if (creditNoteTurnover[i] != null) {
+                creditNote = BigDecimal.valueOf(creditNoteTurnover[i]);
+            }
+            evolution[i] = bill.subtract(creditNote).doubleValue();
+        }
+        return billTurnover;
     }
 
     /**
