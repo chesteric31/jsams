@@ -64,17 +64,17 @@ public class EstimateDaoImpl extends DaoImpl<Estimate> implements EstimateDao {
             queryBuilder.append(" AND e.billingAddress.city LIKE '%" + city + "%'");
         }
         if (startDate != null && endDate != null) {
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat format = getDateFormat();
             String formattedStartDate = format.format(startDate);
             String formattedEndDate = format.format(endDate);
             queryBuilder.append(" AND e.creationDate BETWEEN '" + formattedStartDate + "' AND '" + formattedEndDate
                     + "'");
         } else if (startDate != null && endDate == null) {
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat format = getDateFormat();
             String formattedStartDate = format.format(startDate);
             queryBuilder.append(" AND e.creationDate >= '" + formattedStartDate + "'");
         } else if (startDate == null && endDate != null) {
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat format = getDateFormat();
             String formattedEndDate = format.format(endDate);
             queryBuilder.append(" AND e.creationDate <= '" + formattedEndDate + "'");
         }

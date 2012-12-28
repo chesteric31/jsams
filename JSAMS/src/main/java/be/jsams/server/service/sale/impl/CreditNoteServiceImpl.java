@@ -137,6 +137,21 @@ public class CreditNoteServiceImpl extends AbstractService implements CreditNote
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Double[] findTurnoverByMonth(Long societyId, int startMonth, int startYear) {
+        Double[] evolution = new Double[12];
+        for (int i = startMonth, j = 0, year = startYear; i < startMonth + 12; i++, j++) {
+            if (i > 12) {
+                year++;
+            }
+            evolution[j] = creditNoteDao.findTurnoverByMonth(societyId, i, year);
+        }
+        return evolution;
+    }
+
+    /**
      * @return the creditNoteDao
      */
     public CreditNoteDao getCreditNoteDao() {

@@ -1,5 +1,7 @@
 package be.jsams.server.dao.impl;
 
+import java.text.SimpleDateFormat;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -98,6 +100,13 @@ public class DaoImpl<T> implements Dao<T> {
      */
     public Class<T> getType() {
         return type;
+    }
+
+    /**
+     * @return the date format
+     */
+    protected SimpleDateFormat getDateFormat() {
+        return new SimpleDateFormat("yyyy-MM-dd");
     }
 
 }

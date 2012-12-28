@@ -1,6 +1,7 @@
 package be.jsams.server.dao.sale.impl;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -13,6 +14,7 @@ import be.jsams.common.bean.model.sale.BillBean;
 import be.jsams.server.dao.impl.DaoImpl;
 import be.jsams.server.dao.sale.BillDao;
 import be.jsams.server.model.sale.Bill;
+import be.jsams.server.utils.DateUtil;
 
 import com.mysql.jdbc.StringUtils;
 
@@ -65,17 +67,17 @@ public class BillDaoImpl extends DaoImpl<Bill> implements BillDao {
             queryBuilder.append(" AND b.billingAddress.city LIKE '%" + city + "%'");
         }
         if (startDate != null && endDate != null) {
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat format = getDateFormat();
             String formattedStartDate = format.format(startDate);
             String formattedEndDate = format.format(endDate);
             queryBuilder.append(" AND b.creationDate BETWEEN '" + formattedStartDate + "' AND '" + formattedEndDate
                     + "'");
         } else if (startDate != null && endDate == null) {
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat format = getDateFormat();
             String formattedStartDate = format.format(startDate);
             queryBuilder.append(" AND b.creationDate >= '" + formattedStartDate + "'");
         } else if (startDate == null && endDate != null) {
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat format = getDateFormat();
             String formattedEndDate = format.format(endDate);
             queryBuilder.append(" AND b.creationDate <= '" + formattedEndDate + "'");
         }
@@ -90,7 +92,7 @@ public class BillDaoImpl extends DaoImpl<Bill> implements BillDao {
 
         Date paymentDate = criteria.getPaymentDate();
         if (paymentDate != null) {
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat format = getDateFormat();
             String formattedPaymentDate = format.format(paymentDate);
             queryBuilder.append(" AND b.paymentDate = '" + formattedPaymentDate + "'");
         }
@@ -126,7 +128,7 @@ public class BillDaoImpl extends DaoImpl<Bill> implements BillDao {
         queryBuilder.append(AND);
         queryBuilder.append("b.paymentDate is null");
         queryBuilder.append(AND);
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat format = getDateFormat();
         Date today = new Date();
         String formattedToday = format.format(today);
         queryBuilder.append("b.firstRememberDate <= '" + formattedToday + "'");
@@ -148,13 +150,38 @@ public class BillDaoImpl extends DaoImpl<Bill> implements BillDao {
         queryBuilder.append(AND);
         queryBuilder.append("b.paymentDate is null");
         queryBuilder.append(AND);
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat format = getDateFormat();
         Date today = new Date();
         String formattedToday = format.format(today);
         queryBuilder.append("b.dueDate <= '" + formattedToday + "'");
         
         Query query = getEntityManager().createQuery(queryBuilder.toString());
         return query.getResultList();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Double findTurnoverByMonth(Long societyId, int month, int year) {
+        SimpleDateFormat format = getDateFormat();
+        Calendar instance = Calendar.getInstance();
+        Date[] startEndDates = DateUtil.getStartEndDates(instance.get(Calendar.DATE), month, year);
+        Date startDate = startEndDates[0];
+        Date endDate = startEndDates[1];
+        instance.setTime(endDate);
+        instance.add(Calendar.DATE, 1);
+        Date endDayPlusOneDay = instance.getTime();
+        String formattedStartDate = format.format(startDate);
+        String formattedEndDate = format.format(endDayPlusOneDay);
+        StringBuilder queryBuilder = new StringBuilder(
+                "SELECT sum(bd.quantity* bd.price*(1-(coalesce(bd.discountRate, 0)/100))) "
+                        + "from Bill b, BillDetail bd, Customer c "
+                        + "WHERE b.id = bd.bill.id and b.customer.id = c.id and c.society.id = " + societyId
+                        + " AND b.creationDate BETWEEN '" + formattedStartDate + "' AND '" + formattedEndDate + "'");
+
+        Query query = getEntityManager().createQuery(queryBuilder.toString());
+        return (Double) query.getSingleResult();
     }
 
 }

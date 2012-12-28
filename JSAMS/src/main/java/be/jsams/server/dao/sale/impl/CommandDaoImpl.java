@@ -64,17 +64,17 @@ public class CommandDaoImpl extends DaoImpl<Command> implements CommandDao {
             queryBuilder.append(" AND c.billingAddress.city LIKE '%" + city + "%'");
         }
         if (startDate != null && endDate != null) {
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat format = getDateFormat();
             String formattedStartDate = format.format(startDate);
             String formattedEndDate = format.format(endDate);
             queryBuilder.append(" AND c.creationDate BETWEEN '" + formattedStartDate + "' AND '" + formattedEndDate
                     + "'");
         } else if (startDate != null && endDate == null) {
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat format = getDateFormat();
             String formattedStartDate = format.format(startDate);
             queryBuilder.append(" AND c.creationDate >= '" + formattedStartDate + "'");
         } else if (startDate == null && endDate != null) {
-            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat format = getDateFormat();
             String formattedEndDate = format.format(endDate);
             queryBuilder.append(" AND c.creationDate <= '" + formattedEndDate + "'");
         }

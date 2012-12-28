@@ -56,4 +56,14 @@ public interface BillService extends CriteriableService<BillBean> {
      */
     Map<Double, List<BillBean>> findExpiredBills(SocietyBean society);
 
+    /**
+     * Finds the turnover by month.
+
+     * @param societyId the society id
+     * @param startMonth the start month number
+     * @param startYear the start year
+     * @return the built array of turnover
+     */
+    Double[] findTurnoverByMonth(Long societyId, int startMonth, int startYear);
+
 }
