@@ -160,9 +160,9 @@ public abstract class AbstractDocumentBean<M extends AbstractDocument, V extends
         if (period != null) {
             period.clear();
         }
-        if (society != null) {
-            society.clear();
-        }
+//        if (society != null) {
+//            society.clear();
+//        }
         JsamsTable detailsTable = getView().getDetailsTable();
         if (detailsTable != null) {
             detailsTable.clear();
