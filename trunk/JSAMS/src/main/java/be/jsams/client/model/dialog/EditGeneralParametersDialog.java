@@ -121,7 +121,7 @@ public class EditGeneralParametersDialog extends JsamsDialog implements JsamsBut
      * @return the built panel
      */
     private JPanel buildNetworkTab(Preferences preferences) {
-        FormLayout layout = new FormLayout("right:pref, 3dlu, 60dlu:grow", "pref");
+        FormLayout layout = new FormLayout("right:p, 3dlu, p", "p");
         DefaultFormBuilder builder = new DefaultFormBuilder(layout, AbstractJsamsFrame.RESOURCE_BUNDLE);
         builder.setDefaultDialogBorder();
 
