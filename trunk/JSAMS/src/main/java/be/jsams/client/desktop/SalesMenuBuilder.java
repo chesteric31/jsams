@@ -84,10 +84,6 @@ public class SalesMenuBuilder extends AbstractMenuBuilder {
     @Override
     public JsamsMenu build() {
         salesMenu = new JsamsMenu(I18nResource.MENU_SALES);
-        transferDocumentsMI = new JsamsMenuItem(I18nResource.MENU_ITEM_TRANSFER_DOCUMENTS, IconResource.TRANSFER);
-        transferDocumentsMI.setAction(transferAction(transferDocumentsMI.getText(), transferDocumentsMI.getIcon()));
-        salesMenu.add(transferDocumentsMI);
-        salesMenu.add(new JSeparator());
         estimateMI = new JsamsMenuItem(I18nResource.MENU_ITEM_ESTIMATE);
         estimateMI.setAction(estimatesAction(estimateMI.getText(), estimateMI.getIcon()));
         salesMenu.add(estimateMI);
@@ -103,6 +99,10 @@ public class SalesMenuBuilder extends AbstractMenuBuilder {
         creditNoteMI = new JsamsMenuItem(I18nResource.MENU_ITEM_CREDIT_NOTE);
         creditNoteMI.setAction(creditNotesAction(creditNoteMI.getText(), creditNoteMI.getIcon()));
         salesMenu.add(creditNoteMI);
+        salesMenu.add(new JSeparator());
+        transferDocumentsMI = new JsamsMenuItem(I18nResource.MENU_ITEM_TRANSFER_DOCUMENTS, IconResource.TRANSFER);
+        transferDocumentsMI.setAction(transferAction(transferDocumentsMI.getText(), transferDocumentsMI.getIcon()));
+        salesMenu.add(transferDocumentsMI);
         salesMenu.add(new JSeparator());
         statisticsMI = new JsamsMenuItem(I18nResource.MENU_ITEM_STATISTICS, IconResource.STATISTICS);
         statisticsMI.setAction(new StatisticsAction(statisticsMI.getText(), statisticsMI.getIcon()));
