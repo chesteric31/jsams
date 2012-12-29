@@ -58,6 +58,7 @@ public class ProductBeanBuilder {
             ProductCategory productCategory) {
         productCategoryBeanBuilder.setModel(productCategory);
         productCategoryBeanBuilder.setSociety(society);
+        productCategoryBeanBuilder.setCanBeNull(categoryCanBeNull);
         return productCategoryBeanBuilder.build();
     }
 
