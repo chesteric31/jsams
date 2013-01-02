@@ -6,8 +6,13 @@ import be.jsams.client.context.ApplicationContext;
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.model.dialog.AbstractEditDialog;
 import be.jsams.client.validator.edit.sale.EditCommandValidator;
+import be.jsams.common.bean.model.SocietyBean;
+import be.jsams.common.bean.model.management.AgentBean;
+import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.sale.CommandBean;
 import be.jsams.common.bean.view.sale.CommandBeanView;
+import be.jsams.server.model.management.Agent;
+import be.jsams.server.model.management.Customer;
 import be.jsams.server.service.sale.CommandService;
 
 /**
@@ -39,8 +44,14 @@ public class EditCommandDialog extends AbstractEditDialog<CommandBean, EditComma
      */
     @Override
     public void saveOriginalModel() {
-        CommandBean originalModel = new CommandBean(getModel().getSociety(), getModel().getCustomer(), getModel()
-                .getAgent());
+        SocietyBean society = getModel().getSociety();
+        CustomerBean customer = getModel().getCustomer();
+        AgentBean agent = getModel().getAgent();
+        CommandBean originalModel = new CommandBean(society, customer, agent);
+        CustomerBean customerBean = ApplicationContext.getCustomerBeanBuilder().build(new Customer(customer), society);
+        originalModel.setCustomer(customerBean);
+        AgentBean agentBean = ApplicationContext.getAgentBeanBuilder().build(new Agent(agent), society);
+        originalModel.setAgent(agentBean);
         setOriginalModel(originalModel);
         getOriginalModel().refresh(getModel());
     }

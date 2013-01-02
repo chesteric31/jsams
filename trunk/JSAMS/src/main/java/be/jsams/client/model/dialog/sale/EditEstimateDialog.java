@@ -6,8 +6,13 @@ import be.jsams.client.context.ApplicationContext;
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.model.dialog.AbstractEditDialog;
 import be.jsams.client.validator.edit.sale.EditEstimateValidator;
+import be.jsams.common.bean.model.SocietyBean;
+import be.jsams.common.bean.model.management.AgentBean;
+import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.sale.EstimateBean;
 import be.jsams.common.bean.view.sale.EstimateBeanView;
+import be.jsams.server.model.management.Agent;
+import be.jsams.server.model.management.Customer;
 import be.jsams.server.service.sale.EstimateService;
 
 /**
@@ -39,8 +44,14 @@ public class EditEstimateDialog extends AbstractEditDialog<EstimateBean, EditEst
      */
     @Override
     public void saveOriginalModel() {
-        EstimateBean originalModel = new EstimateBean(getModel().getSociety(), getModel().getCustomer(), getModel()
-                .getAgent());
+        SocietyBean society = getModel().getSociety();
+        CustomerBean customer = getModel().getCustomer();
+        AgentBean agent = getModel().getAgent();
+        EstimateBean originalModel = new EstimateBean(society, customer, agent);
+        CustomerBean customerBean = ApplicationContext.getCustomerBeanBuilder().build(new Customer(customer), society);
+        originalModel.setCustomer(customerBean);
+        AgentBean agentBean = ApplicationContext.getAgentBeanBuilder().build(new Agent(agent), society);
+        originalModel.setAgent(agentBean);
         setOriginalModel(originalModel);
         getOriginalModel().refresh(getModel());
     }

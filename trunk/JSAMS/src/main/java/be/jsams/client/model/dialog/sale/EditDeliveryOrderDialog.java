@@ -6,8 +6,11 @@ import be.jsams.client.context.ApplicationContext;
 import be.jsams.client.i18n.I18nString;
 import be.jsams.client.model.dialog.AbstractEditDialog;
 import be.jsams.client.validator.edit.sale.EditDeliveryOrderValidator;
+import be.jsams.common.bean.model.SocietyBean;
+import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.sale.DeliveryOrderBean;
 import be.jsams.common.bean.view.sale.DeliveryOrderBeanView;
+import be.jsams.server.model.management.Customer;
 import be.jsams.server.service.sale.DeliveryOrderService;
 
 /**
@@ -40,7 +43,12 @@ public class EditDeliveryOrderDialog extends
      */
     @Override
     public void saveOriginalModel() {
-        setOriginalModel(new DeliveryOrderBean(getModel().getSociety(), getModel().getCustomer()));
+        SocietyBean society = getModel().getSociety();
+        CustomerBean customer = getModel().getCustomer();
+        DeliveryOrderBean originalModel = new DeliveryOrderBean(society, customer);
+        CustomerBean customerBean = ApplicationContext.getCustomerBeanBuilder().build(new Customer(customer), society);
+        originalModel.setCustomer(customerBean);
+        setOriginalModel(originalModel);
         getOriginalModel().refresh(getModel());
     }
     /**

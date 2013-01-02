@@ -8,10 +8,13 @@ import be.jsams.client.model.dialog.AbstractEditDialog;
 import be.jsams.client.validator.edit.sale.EditBillValidator;
 import be.jsams.common.bean.model.AbstractIdentityBean;
 import be.jsams.common.bean.model.PaymentModeBean;
+import be.jsams.common.bean.model.SocietyBean;
+import be.jsams.common.bean.model.management.CustomerBean;
 import be.jsams.common.bean.model.sale.BillBean;
 import be.jsams.common.bean.view.PaymentModeBeanView;
 import be.jsams.common.bean.view.sale.BillBeanView;
 import be.jsams.server.model.PaymentMode;
+import be.jsams.server.model.management.Customer;
 import be.jsams.server.service.sale.BillService;
 
 /**
@@ -47,7 +50,11 @@ public class EditBillDialog extends AbstractEditDialog<BillBean, EditBillValidat
         if (getModel().getId() == null) {
             paymentMode.refresh(getModel().getCustomer().getPaymentMode());
         }
-        BillBean originalModel = new BillBean(getModel().getSociety(), getModel().getCustomer(), paymentMode);
+        SocietyBean society = getModel().getSociety();
+        CustomerBean customer = getModel().getCustomer();
+        BillBean originalModel = new BillBean(society, customer, paymentMode);
+        CustomerBean customerBean = ApplicationContext.getCustomerBeanBuilder().build(new Customer(customer), society);
+        originalModel.setCustomer(customerBean);
         setOriginalModel(originalModel);
         getOriginalModel().refresh(getModel());
     }
