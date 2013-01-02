@@ -132,7 +132,8 @@ public class ProductDaoImpl extends DaoImpl<Product> implements ProductDao {
         StringBuilder queryBuilder = new StringBuilder(
                 "select p.id, sum(bd.quantity* bd.price*(1-(coalesce(bd.discountRate, 0)/100))) "
                         + "from Bill b, BillDetail bd, Customer c, Product p "
-                        + "WHERE b.id = bd.bill.id and bd.product.id = p.id and c.society.id = " + societyId
+                        + "WHERE b.customer.id = c.id and b.id = bd.bill.id and "
+                        + "bd.product.id = p.id and c.society.id = " + societyId
                         + " group by p.id "
                         + "ORDER BY sum(bd.quantity* bd.price*(1-(coalesce(bd.discountRate, 0)/100))) DESC");
 
@@ -146,12 +147,11 @@ public class ProductDaoImpl extends DaoImpl<Product> implements ProductDao {
     @SuppressWarnings("unchecked")
     @Override
     public List<Object[]> findTop5ProductsWithCreditNotes(Long societyId) {
-        StringBuilder queryBuilder = new StringBuilder(
-                "select p.id, sum(cnd.quantity* cnd.price) "
-                        + "from CreditNote cn, CreditNoteDetail cnd, Customer c, Product p "
-                        + "WHERE cn.id = cnd.creditNote.id and cnd.product.id = p.id and c.society.id = " + societyId
-                        + " group by p.id "
-                        + "ORDER BY sum(cnd.quantity* cnd.price) DESC");
+        StringBuilder queryBuilder = new StringBuilder("select p.id, sum(cnd.quantity* cnd.price) "
+                + "from CreditNote cn, CreditNoteDetail cnd, Customer c, Product p "
+                + "WHERE cn.customer.id = c.id and cn.id = cnd.creditNote.id "
+                + "and cnd.product.id = p.id and c.society.id = " + societyId + " group by p.id "
+                + "ORDER BY sum(cnd.quantity* cnd.price) DESC");
 
         Query query = getEntityManager().createQuery(queryBuilder.toString());
         return query.getResultList();
