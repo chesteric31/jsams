@@ -108,16 +108,14 @@ public class HelpMenuBuilder extends AbstractMenuBuilder {
                 URI uri;
                 try {
                     uri = new URI("http://jsams.googlecode.com/files/JSAMS%20-%20User%20Guide.pdf");
+                    if (UserContext.isFrench()) {
+                        uri = new URI("http://jsams.googlecode.com/files/JSAMS%20-%20User%20Guide%20FR.pdf");
+                    } else if (UserContext.isDutch()) {
+                        
+                    }
+                    java.awt.Desktop.getDesktop().browse(uri);
                 } catch (URISyntaxException e1) {
                     throw new RuntimeException(e1);
-                }
-                if (UserContext.isFrench()) {
-                    
-                } else if (UserContext.isDutch()) {
-                    
-                }
-                try {
-                    java.awt.Desktop.getDesktop().browse(uri);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
