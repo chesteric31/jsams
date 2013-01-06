@@ -75,12 +75,12 @@
 			installGroups="Update existing install">
 			<description>New sql scripts updates for the version 1.0.3</description>
 			<fileset dir="scripts/1.0.3" targetdir="$INSTALL_PATH/scripts/1.0.3/" />
-			<fileset dir="win/1.0.2" targetdir="$INSTALL_PATH/win/1.0.2/" os="windows" />
-			<parsable targetfile="$INSTALL_PATH/win/1.0.2/update_db_scripts.bat" />
-			<parsable targetfile="$INSTALL_PATH/win/1.0.2/uninstall_db_service.bat" />
-			<executable targetfile="$INSTALL_PATH/win/1.0.2/update_db_scripts.bat"
+			<fileset dir="win/1.0.3" targetdir="$INSTALL_PATH/win/1.0.3/" os="windows" />
+			<parsable targetfile="$INSTALL_PATH/win/1.0.3/update_db_scripts.bat" />
+			<parsable targetfile="$INSTALL_PATH/win/1.0.3/uninstall_db_service.bat" />
+			<executable targetfile="$INSTALL_PATH/win/1.0.3/update_db_scripts.bat"
 				type="shell" stage="postinstall" os="windows" keep="false" failure="abort" />
-			<executable targetfile="$INSTALL_PATH/win/1.0.2/uninstall_db_service.bat"
+			<executable targetfile="$INSTALL_PATH/win/1.0.3/uninstall_db_service.bat"
 				type="shell" stage="uninstall" os="windows" keep="false" failure="abort" />
 		</pack>
 		<pack name="JSAMS" required="yes" installGroups="Update existing install">
