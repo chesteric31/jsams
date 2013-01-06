@@ -65,11 +65,20 @@ public final class MockRssGenerator {
             feed.setTitle("JSAMS update");
             feed.setDescription("This is a description");
             feed.setAuthor("chesteric31");
-            String guidLink = "http://jsams.googlecode.com/files/JSAMS-1.0." + i + "-SNAPSHOT-updater.jar";
+            String guidLink = "http://jsams.googlecode.com/files/JSAMS-1.0." + i;
+            if (i < 3) {
+                guidLink += "-SNAPSHOT-updater.jar";
+            } else {
+                guidLink += "-updater.jar";
+            }
             feed.setGuid(guidLink);
             feed.setLink(guidLink);
             feed.setReleaseDate(releaseDate);
-            feed.setVersion("1.0." + i + "-SNAPSHOT");
+            if (i < 3) {
+                feed.setVersion("1.0." + i + "-SNAPSHOT");
+            } else {
+                feed.setVersion("1.0." + i);
+            }
             rssFeeder.getMessages().add(feed);
         }
 
