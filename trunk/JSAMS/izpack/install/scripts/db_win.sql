@@ -650,7 +650,7 @@ VALUES ("Limited Company Starter", "SPRL Starter (SPRL-S)", "Personenvennootscha
 INSERT INTO BTS.LEGAL_FORM (LABEL, LABEL_FR, LABEL_NL)
 VALUES ("Private Limited Company (LTD)", "Société Anonyme (SA)", "Naamloze vennootschap (NV)");
 INSERT INTO BTS.LEGAL_FORM (LABEL, LABEL_FR, LABEL_NL)
-VALUES ("Partnership Limited By Shares", "Société en Commandite par Actions (SCA)", "Commanditaire Vennootschap op Aandelen (CVA)");
+VALUES ("Partnership Limited By Shares", "Société en Commandité par Actions (SCA)", "Commanditaire Vennootschap op Aandelen (CVA)");
 INSERT INTO BTS.LEGAL_FORM (LABEL, LABEL_FR, LABEL_NL)
 VALUES ("Limited Liability Partnership (LLP)", "Société Coopérative à Responsabilité Limitée (SCRL)", "Coöperatieve Vennootschap met Beperkte Aansprakelijkheid (CVBA)");
 INSERT INTO BTS.LEGAL_FORM (LABEL, LABEL_FR, LABEL_NL)
@@ -658,7 +658,7 @@ VALUES ("Illimited Liability Partnership", "Société Coopérative à Responsabi
 INSERT INTO BTS.LEGAL_FORM (LABEL, LABEL_FR, LABEL_NL)
 VALUES ("General Partnership", "Société en Nom Collectif (SNC)", "Vennootschap onder Firma (VOF)");
 INSERT INTO BTS.LEGAL_FORM (LABEL, LABEL_FR, LABEL_NL)
-VALUES ("Limited Partnership", "Société en Commandite Simple (SCS)", "Commanditaire Vennootschap (CV)");
+VALUES ("Limited Partnership", "Société en Commandité Simple (SCS)", "Commanditaire Vennootschap (CV)");
 
 INSERT INTO BTS.PAYMENT_MODE (LABEL, LABEL_FR, LABEL_NL, DAYS_NUMBER, MONTH_END, ADDITIONAL_DAYS)
 VALUES ("CASH", "COMPTANT", "CONTANT", 0, 0, 0);
