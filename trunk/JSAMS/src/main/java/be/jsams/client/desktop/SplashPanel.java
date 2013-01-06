@@ -32,7 +32,7 @@ public final class SplashPanel extends JPanel {
      * Constructor.
      */
     private SplashPanel() {
-        this(new ImageIcon("src/main/resources/images/splash.png").getImage());
+        this(new ImageIcon(SplashPanel.class.getResource("/images/splash.png")).getImage());
     }
 
     /**
