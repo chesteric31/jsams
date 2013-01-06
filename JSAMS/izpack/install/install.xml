@@ -10,7 +10,7 @@
 	<info>
 		<appname>JSAMS - Java Simplified Accounting Management System
 		</appname>
-		<appversion>1.0.2-SNAPSHOT</appversion>
+		<appversion>1.0.3</appversion>
 		<authors>
 			<author name="Eric Binard" email="chesteric31@gmail.com" />
 		</authors>
@@ -34,10 +34,11 @@
 		<modifier key="headingPanelCounterPos" value="inNavigationPanel" />
 	</guiprefs>
 
-	<!-- The locale section. Asks here to include the English and French langpacks. -->
+	<!-- The locale section. Asks here to include the English, French and Dutch langpacks. -->
 	<locale>
 		<langpack iso3="eng" />
 		<langpack iso3="fra" />
+		<langpack iso3="ned" />
 	</locale>
 
 	<!-- The resources section. The ids must be these ones if you want to use 
