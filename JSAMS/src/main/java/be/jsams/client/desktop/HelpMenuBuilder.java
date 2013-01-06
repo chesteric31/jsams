@@ -111,7 +111,7 @@ public class HelpMenuBuilder extends AbstractMenuBuilder {
                     if (UserContext.isFrench()) {
                         uri = new URI("http://jsams.googlecode.com/files/JSAMS%20-%20User%20Guide%20FR.pdf");
                     } else if (UserContext.isDutch()) {
-                        
+                        uri = new URI("http://jsams.googlecode.com/files/JSAMS%20-%20User%20Guide%20NL.pdf");
                     }
                     java.awt.Desktop.getDesktop().browse(uri);
                 } catch (URISyntaxException e1) {
